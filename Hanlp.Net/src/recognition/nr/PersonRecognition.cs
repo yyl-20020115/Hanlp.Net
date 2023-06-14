@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.recognition.nr;
  */
 public class PersonRecognition
 {
-    public static boolean recognition(List<Vertex> pWordSegResult, WordNet wordNetOptimum, WordNet wordNetAll)
+    public static bool recognition(List<Vertex> pWordSegResult, WordNet wordNetOptimum, WordNet wordNetAll)
     {
         List<EnumItem<NR>> roleTagList = roleObserve(pWordSegResult);
         if (HanLP.Config.DEBUG)

@@ -1,5 +1,6 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.interval;
 
+using System.Collections.Generic;
 
 /**
  * 线段树，用于检查区间重叠

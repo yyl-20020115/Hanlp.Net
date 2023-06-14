@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
  * 用MutableDoubleArrayTrie实现的ImmutableFeatureMap
  * @author hankcs
  */
-public class ImmutableFeatureMDatMap extends FeatureMap
+public class ImmutableFeatureMDatMap : FeatureMap
 {
     MutableDoubleArrayTrieInteger dat;
 
@@ -73,14 +73,14 @@ public class ImmutableFeatureMDatMap extends FeatureMap
     }
 
     //@Override
-    public void save(DataOutputStream out) throws IOException
+    public void save(DataOutputStream out) 
     {
         tagSet.save(out);
         dat.save(out);
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         loadTagSet(byteArray);
         return dat.load(byteArray);

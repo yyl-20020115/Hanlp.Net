@@ -82,7 +82,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
      *
      * @return true-新增了节点 false-修改了现有节点
      */
-    protected abstract boolean addChild(BaseNode node);
+    protected abstract bool addChild(BaseNode node);
 
     /**
      * 是否含有子节点
@@ -90,7 +90,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
      * @param c 子节点的char
      * @return 是否含有
      */
-    protected boolean hasChild(char c)
+    protected bool hasChild(char c)
     {
         return getChild(c) != null;
     }
@@ -176,7 +176,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         }
     }
 
-    protected void walkToSave(DataOutputStream out) throws IOException
+    protected void walkToSave(DataOutputStream out) 
     {
         out.writeChar(c);
         out.writeInt(status.ordinal());
@@ -190,7 +190,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         }
     }
 
-    protected void walkToSave(ObjectOutput out) throws IOException
+    protected void walkToSave(ObjectOutput out) 
     {
         out.writeChar(c);
         out.writeInt(status.ordinal());
@@ -225,7 +225,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         }
     }
 
-    protected void walkToLoad(ObjectInput byteArray) throws IOException, ClassNotFoundException
+    protected void walkToLoad(ObjectInput byteArray) , ClassNotFoundException
     {
         c = byteArray.readChar();
         status = ARRAY_STATUS[byteArray.readInt()];
@@ -262,7 +262,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         WORD_END_3,
     }
 
-    public class TrieEntry extends AbstractMap.SimpleEntry<String, V> : Comparable<TrieEntry>
+    public class TrieEntry : AbstractMap.SimpleEntry<String, V> : Comparable<TrieEntry>
     {
         public TrieEntry(String key, V value)
         {

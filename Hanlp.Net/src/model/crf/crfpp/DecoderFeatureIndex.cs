@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 /**
  * @author zhifac
  */
-public class DecoderFeatureIndex extends FeatureIndex
+public class DecoderFeatureIndex : FeatureIndex
 {
     private MutableDoubleArrayTrieInteger dat;
 
@@ -19,7 +19,7 @@ public class DecoderFeatureIndex extends FeatureIndex
         return dat.get(key);
     }
 
-    public boolean open(InputStream stream)
+    public bool open(InputStream stream)
     {
         try
         {
@@ -43,7 +43,7 @@ public class DecoderFeatureIndex extends FeatureIndex
         }
     }
 
-    public boolean convert(String binarymodel, String textmodel)
+    public bool convert(String binarymodel, String textmodel)
     {
         try
         {
@@ -95,7 +95,7 @@ public class DecoderFeatureIndex extends FeatureIndex
         }
     }
 
-    public boolean openTextModel(String filename1, boolean cacheBinModel)
+    public bool openTextModel(String filename1, bool cacheBinModel)
     {
         InputStreamReader isr = null;
         try

@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.classification.corpus;
  *
  * @author hankcs
  */
-public class Document extends BagOfWordsDocument
+public class Document : BagOfWordsDocument
 {
     /**
      * 文档所属类目
@@ -80,7 +80,7 @@ public class Document extends BagOfWordsDocument
         this.category = id;
     }
 
-    public Document(DataInputStream in) throws IOException
+    public Document(DataInputStream in) 
     {
         category = in.readInt();
         int size = in.readInt();

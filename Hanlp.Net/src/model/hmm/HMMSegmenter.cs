@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.hmm;
 /**
  * @author hankcs
  */
-public class HMMSegmenter extends HMMTrainer : Segmenter
+public class HMMSegmenter : HMMTrainer : Segmenter
 {
     CWSTagSet tagSet;
 

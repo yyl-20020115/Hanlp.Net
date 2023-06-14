@@ -6,24 +6,24 @@ namespace com.hankcs.hanlp.mining.word2vec;
  *
  * @author hankcs
  */
-public class CacheCorpus extends Corpus
+public class CacheCorpus : Corpus
 {
     private RandomAccessFile raf;
 
-    public CacheCorpus(Corpus cloneSrc) throws IOException
+    public CacheCorpus(Corpus cloneSrc) 
     {
         super(cloneSrc);
         raf = new RandomAccessFile(((TextFileCorpus) cloneSrc).cacheFile, "r");
     }
 
     //@Override
-    public String nextWord() throws IOException
+    public String nextWord() 
     {
         return null;
     }
 
     //@Override
-    public int readWordIndex() throws IOException
+    public int readWordIndex() 
     {
         int id = nextId();
         while (id == -4)
@@ -33,7 +33,7 @@ public class CacheCorpus extends Corpus
         return id;
     }
 
-    private int nextId() throws IOException
+    private int nextId() 
     {
         if (raf.length() - raf.getFilePointer() >= 4)
         {
@@ -45,7 +45,7 @@ public class CacheCorpus extends Corpus
     }
 
     //@Override
-    public void rewind(int numThreads, int id) throws IOException
+    public void rewind(int numThreads, int id) 
     {
         super.rewind(numThreads, id);
         raf.seek(raf.length() / 4 / numThreads * id * 4);   // spilt by id, not by bytes

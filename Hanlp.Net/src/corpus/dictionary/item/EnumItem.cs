@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.dictionary.item;
  * 对标签-频次的封装
  * @author hankcs
  */
-public class EnumItem<E extends Enum<E>>
+public class EnumItem<E : Enum<E>>
 {
     public Map<E, Integer> labelMap;
 
@@ -79,7 +79,7 @@ public class EnumItem<E extends Enum<E>>
         labelMap.put(label, innerFrequency);
     }
 
-    public boolean containsLabel(E label)
+    public bool containsLabel(E label)
     {
         return labelMap.containsKey(label);
     }
@@ -121,7 +121,7 @@ public class EnumItem<E extends Enum<E>>
         return create(array);
     }
 
-    @SuppressWarnings("unchecked")
+    
     public static Map.Entry<String, Map.Entry<String, Integer>[]> create(String param[])
     {
         if (param.length % 2 == 0) return null;

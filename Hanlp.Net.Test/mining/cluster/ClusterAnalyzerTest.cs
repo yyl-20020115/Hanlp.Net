@@ -1,11 +1,9 @@
-package com.hankcs.hanlp.mining.cluster;
+namespace com.hankcs.hanlp.mining.cluster;
 
-import com.hankcs.demo.DemoTextClustering;
-import junit.framework.TestCase;
 
-public class ClusterAnalyzerTest extends TestCase
+public class ClusterAnalyzerTest : TestCase
 {
-    public void testAddDocument() throws Exception
+    public void testAddDocument() 
     {
         DemoTextClustering.main(null);
     }

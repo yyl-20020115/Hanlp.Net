@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
  *
  * @author hankcs
  */
-public class LockableFeatureMap extends ImmutableFeatureMDatMap
+public class LockableFeatureMap : ImmutableFeatureMDatMap
 {
     public LockableFeatureMap(TagSet tagSet)
     {

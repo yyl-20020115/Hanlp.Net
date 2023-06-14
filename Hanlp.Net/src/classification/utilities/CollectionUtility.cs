@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.classification.utilities;
  */
 public class CollectionUtility
 {
-    public static <K, V extends Comparable<V>> Map<K, V> sortMapByValue(Map<K, V> input, final boolean desc)
+    public static <K, V : Comparable<V>> Map<K, V> sortMapByValue(Map<K, V> input, final bool desc)
     {
         LinkedHashMap<K, V> output = new LinkedHashMap<K, V>(input.size());
         ArrayList<Map.Entry<K, V>> entryList = new ArrayList<Map.Entry<K, V>>(input.size());
@@ -37,7 +37,7 @@ public class CollectionUtility
         return output;
     }
 
-    public static <K, V extends Comparable<V>> Map<K, V> sortMapByValue(Map<K, V> input)
+    public static <K, V : Comparable<V>> Map<K, V> sortMapByValue(Map<K, V> input)
     {
         return sortMapByValue(input, true);
     }

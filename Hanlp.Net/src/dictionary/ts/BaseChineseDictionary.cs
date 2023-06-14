@@ -39,7 +39,7 @@ public class BaseChineseDictionary
         }
     }
 
-    static void combineReverseChain(TreeMap<String, String> t2s, TreeMap<String, String> tw2t, boolean convert)
+    static void combineReverseChain(TreeMap<String, String> t2s, TreeMap<String, String> tw2t, bool convert)
     {
         for (Map.Entry<String, String> entry : tw2t.entrySet())
         {
@@ -58,7 +58,7 @@ public class BaseChineseDictionary
      * @param pathArray 路径
      * @return 是否加载成功
      */
-    static boolean load(Map<String, String> storage, boolean reverse, String... pathArray)
+    static bool load(Map<String, String> storage, bool reverse, String... pathArray)
     {
         StringDictionary dictionary = new StringDictionary("=");
         for (String path : pathArray)
@@ -80,7 +80,7 @@ public class BaseChineseDictionary
      * @param trie
      * @return
      */
-    static boolean load(String path, AhoCorasickDoubleArrayTrie<String> trie)
+    static bool load(String path, AhoCorasickDoubleArrayTrie<String> trie)
     {
         return load(path, trie, false);
     }
@@ -92,7 +92,7 @@ public class BaseChineseDictionary
      * @param reverse 是否将其翻转
      * @return
      */
-    static boolean load(String path, AhoCorasickDoubleArrayTrie<String> trie, boolean reverse)
+    static bool load(String path, AhoCorasickDoubleArrayTrie<String> trie, bool reverse)
     {
         String datPath = path;
         if (reverse)
@@ -110,7 +110,7 @@ public class BaseChineseDictionary
         return true;
     }
 
-    static boolean loadDat(String path, AhoCorasickDoubleArrayTrie<String> trie)
+    static bool loadDat(String path, AhoCorasickDoubleArrayTrie<String> trie)
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
@@ -124,7 +124,7 @@ public class BaseChineseDictionary
         return true;
     }
 
-    static boolean saveDat(String path, AhoCorasickDoubleArrayTrie<String> trie, Set<Map.Entry<String, String>> entrySet)
+    static bool saveDat(String path, AhoCorasickDoubleArrayTrie<String> trie, Set<Map.Entry<String, String>> entrySet)
     {
         if (trie.size() != entrySet.size())
         {
@@ -224,7 +224,7 @@ public class BaseChineseDictionary
     /**
      * 最长分词
      */
-    public static class Searcher extends BaseSearcher<String>
+    public static class Searcher : BaseSearcher<String>
     {
         /**
          * 分词从何处开始，这是一个状态

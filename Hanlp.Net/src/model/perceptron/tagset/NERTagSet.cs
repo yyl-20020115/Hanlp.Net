@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
 /**
  * @author hankcs
  */
-public class NERTagSet extends TagSet
+public class NERTagSet : TagSet
 {
     public final String O_TAG = "O";
     public final char O_TAG_CHAR = 'O';
@@ -63,7 +63,7 @@ public class NERTagSet extends TagSet
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         super.load(byteArray);
         nerLabels.clear();

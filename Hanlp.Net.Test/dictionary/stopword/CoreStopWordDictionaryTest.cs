@@ -1,28 +1,20 @@
-package com.hankcs.hanlp.dictionary.stopword;
+namespace com.hankcs.hanlp.dictionary.stopword;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.collection.MDAG.MDAGSet;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import junit.framework.TestCase;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 
-public class CoreStopWordDictionaryTest extends TestCase
+public class CoreStopWordDictionaryTest : TestCase
 {
-    public void testContains() throws Exception
+    public void testContains() 
     {
         assertTrue(CoreStopWordDictionary.contains("这就是说"));
     }
 
-    public void testContainsSomeWords() throws Exception
+    public void testContainsSomeWords() 
     {
         assertEquals(true, CoreStopWordDictionary.contains("可以"));
     }
 
-    public void testMDAG() throws Exception
+    public void testMDAG() 
     {
         List<String> wordList = new LinkedList<String>();
         wordList.add("zoo");
@@ -35,7 +27,7 @@ public class CoreStopWordDictionaryTest extends TestCase
         assertEquals(false, set.contains("bee"));
     }
 
-//    public void testRemoveDuplicateEntries() throws Exception
+//    public void testRemoveDuplicateEntries() 
 //    {
 //        StopWordDictionary dictionary = new StopWordDictionary(new File(HanLP.Config.CoreStopWordDictionaryPath));
 //        BufferedWriter bw = IOUtil.newBufferedWriter(HanLP.Config.CoreStopWordDictionaryPath);

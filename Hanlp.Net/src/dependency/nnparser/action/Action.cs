@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.action;
 /**
  * @author hankcs
  */
-public class Action extends AbstractInexactAction : ActionType
+public class Action : AbstractInexactAction : ActionType
 {
     public Action()
     {

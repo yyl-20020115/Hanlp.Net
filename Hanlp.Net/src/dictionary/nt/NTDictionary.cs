@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dictionary.nt;
  *
  * @author hankcs
  */
-public class NTDictionary extends EnumItemDictionary<NT>
+public class NTDictionary : EnumItemDictionary<NT>
 {
     //@Override
     protected NT valueOf(String name)

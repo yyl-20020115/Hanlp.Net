@@ -1,18 +1,13 @@
-package com.hankcs.hanlp.collection.trie.datrie;
+namespace com.hankcs.hanlp.collection.trie.datrie;
 
-import com.hankcs.hanlp.corpus.io.ByteArray;
-import junit.framework.TestCase;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 
-public class IntArrayListTest extends TestCase
+public class IntArrayListTest : TestCase
 {
     IntArrayList array = new IntArrayList();
 
-    @Override
-    public void setUp() throws Exception
+    //@Override
+    public void setUp() 
     {
         for (int i = 0; i < 64; ++i)
         {
@@ -20,7 +15,7 @@ public class IntArrayListTest extends TestCase
         }
     }
 
-    public void testSaveLoad() throws Exception
+    public void testSaveLoad() 
     {
         File tempFile = File.createTempFile("hanlp", ".intarray");
         array.save(new DataOutputStream(new FileOutputStream(tempFile.getAbsolutePath())));

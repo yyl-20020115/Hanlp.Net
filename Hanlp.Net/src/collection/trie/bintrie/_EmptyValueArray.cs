@@ -13,7 +13,7 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
 /**
  * @author hankcs
  */
-public class _EmptyValueArray<V> extends _ValueArray<V>
+public class _EmptyValueArray<V> : _ValueArray<V>
 {
     public _EmptyValueArray()
     {

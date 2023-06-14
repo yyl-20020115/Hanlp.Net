@@ -17,9 +17,9 @@ namespace com.hankcs.hanlp.mining.word;
  *
  * @author hankcs
  */
-public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFrequency>
+public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
 {
-    boolean filterStopWord;
+    bool filterStopWord;
     Map<String, TermFrequency> termFrequencyMap;
 
     /**
@@ -28,7 +28,7 @@ public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFreq
      * @param filterStopWord 是否过滤停用词
      * @param segment        分词器
      */
-    public TermFrequencyCounter(Segment segment, boolean filterStopWord)
+    public TermFrequencyCounter(Segment segment, bool filterStopWord)
     {
         this.filterStopWord = filterStopWord;
         this.defaultSegment = segment;
@@ -106,13 +106,13 @@ public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFreq
     }
 
     //@Override
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return termFrequencyMap.isEmpty();
     }
 
     //@Override
-    public boolean contains(Object o)
+    public bool contains(Object o)
     {
         if (o instanceof String)
             return termFrequencyMap.containsKey(o);
@@ -140,7 +140,7 @@ public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFreq
     }
 
     //@Override
-    public boolean add(TermFrequency termFrequency)
+    public bool add(TermFrequency termFrequency)
     {
         TermFrequency tf = termFrequencyMap.get(termFrequency.getTerm());
         if (tf == null)
@@ -153,13 +153,13 @@ public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFreq
     }
 
     //@Override
-    public boolean remove(Object o)
+    public bool remove(Object o)
     {
         return termFrequencyMap.remove(o) != null;
     }
 
     //@Override
-    public boolean containsAll(Collection<?> c)
+    public bool containsAll(Collection<?> c)
     {
         for (Object o : c)
         {
@@ -170,7 +170,7 @@ public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFreq
     }
 
     //@Override
-    public boolean addAll(Collection<? extends TermFrequency> c)
+    public bool addAll(Collection<? : TermFrequency> c)
     {
         for (TermFrequency termFrequency : c)
         {
@@ -180,7 +180,7 @@ public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFreq
     }
 
     //@Override
-    public boolean removeAll(Collection<?> c)
+    public bool removeAll(Collection<?> c)
     {
         for (Object o : c)
         {
@@ -191,7 +191,7 @@ public class TermFrequencyCounter extends KeywordExtractor : Collection<TermFreq
     }
 
     //@Override
-    public boolean retainAll(Collection<?> c)
+    public bool retainAll(Collection<?> c)
     {
         return termFrequencyMap.values().retainAll(c);
     }

@@ -15,17 +15,17 @@ namespace com.hankcs.hanlp.model.crf;
 /**
  * @author hankcs
  */
-public class CRFSegmenter extends CRFTagger : Segmenter
+public class CRFSegmenter : CRFTagger : Segmenter
 {
 
     private PerceptronSegmenter perceptronSegmenter;
 
-    public CRFSegmenter() throws IOException
+    public CRFSegmenter() 
     {
         this(HanLP.Config.CRFCWSModelPath);
     }
 
-    public CRFSegmenter(String modelPath) throws IOException
+    public CRFSegmenter(String modelPath) 
     {
         super(modelPath);
         if (modelPath != null)
@@ -35,7 +35,7 @@ public class CRFSegmenter extends CRFTagger : Segmenter
     }
 
     //@Override
-    protected void convertCorpus(Sentence sentence, BufferedWriter bw) throws IOException
+    protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
         for (Word w : sentence.toSimpleWordList())
         {

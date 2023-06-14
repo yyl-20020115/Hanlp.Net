@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  * nr词典（词典+ngram转移+词性转移矩阵）制作工具
  * @author hankcs
  */
-public class NRDictionaryMaker extends CommonDictionaryMaker
+public class NRDictionaryMaker : CommonDictionaryMaker
 {
 
     public NRDictionaryMaker(EasyDictionary dictionary)

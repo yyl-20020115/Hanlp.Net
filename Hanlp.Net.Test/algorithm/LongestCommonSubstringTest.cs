@@ -1,21 +1,19 @@
-package com.hankcs.hanlp.algorithm;
+namespace com.hankcs.hanlp.algorithm;
 
-import com.hankcs.hanlp.algorithm.LongestCommonSubstring;
-import junit.framework.TestCase;
 
-public class LongestCommonSubstringTest extends TestCase
+public class LongestCommonSubstringTest : TestCase
 {
     String a = "www.hankcs.com";
     String b = "hankcs";
-    public void testCompute() throws Exception
+    public void testCompute() 
     {
-//        System.out.println(LongestCommonSubstring.compute(a.toCharArray(), b.toCharArray()));
+//        Console.WriteLine(LongestCommonSubstring.compute(a.toCharArray(), b.toCharArray()));
         assertEquals(6, LongestCommonSubstring.compute(a.toCharArray(), b.toCharArray()));
     }
 
-    public void testLongestCommonSubstring() throws Exception
+    public void testLongestCommonSubstring() 
     {
-//        System.out.println(LongestCommonSubstring.compute(a, b));
+//        Console.WriteLine(LongestCommonSubstring.compute(a, b));
         assertEquals(6, LongestCommonSubstring.compute(a, b));
     }
 }

@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class PerceptronPOSTagger extends PerceptronTagger : POSTagger
+public class PerceptronPOSTagger : PerceptronTagger : POSTagger
 {
     public PerceptronPOSTagger(LinearModel model)
     {
@@ -28,16 +28,16 @@ public class PerceptronPOSTagger extends PerceptronTagger : POSTagger
         }
     }
 
-    public PerceptronPOSTagger(String modelPath) throws IOException
+    public PerceptronPOSTagger(String modelPath) 
     {
         this(new LinearModel(modelPath));
     }
 
     /**
      * 加载配置文件指定的模型
-     * @throws IOException
+     * @
      */
-    public PerceptronPOSTagger() throws IOException
+    public PerceptronPOSTagger() 
     {
         this(HanLP.Config.PerceptronPOSModelPath);
     }
@@ -83,7 +83,7 @@ public class PerceptronPOSTagger extends PerceptronTagger : POSTagger
      * @param segmentedTaggedSentence 人民日报2014格式的句子
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public boolean learn(String segmentedTaggedSentence)
+    public bool learn(String segmentedTaggedSentence)
     {
         return learn(POSInstance.create(segmentedTaggedSentence, model.featureMap));
     }
@@ -94,7 +94,7 @@ public class PerceptronPOSTagger extends PerceptronTagger : POSTagger
      * @param wordTags [单词]/[词性]数组
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public boolean learn(String... wordTags)
+    public bool learn(String... wordTags)
     {
         String[] words = new String[wordTags.length];
         String[] tags = new String[wordTags.length];

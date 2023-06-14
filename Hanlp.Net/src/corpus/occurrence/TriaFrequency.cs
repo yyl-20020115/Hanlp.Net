@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.occurrence;
  *
  * @author hankcs
  */
-public class TriaFrequency extends PairFrequency
+public class TriaFrequency : PairFrequency
 {
     public String third;
 

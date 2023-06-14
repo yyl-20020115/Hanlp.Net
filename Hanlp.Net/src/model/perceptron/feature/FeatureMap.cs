@@ -34,14 +34,14 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     /**
      * 是否允许新增特征
      */
-    public boolean mutable;
+    public bool mutable;
 
     public FeatureMap(TagSet tagSet)
     {
         this(tagSet, false);
     }
 
-    public FeatureMap(TagSet tagSet, boolean mutable)
+    public FeatureMap(TagSet tagSet, bool mutable)
     {
         this.tagSet = tagSet;
         this.mutable = mutable;
@@ -49,7 +49,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
 
     public abstract Set<Map.Entry<String, Integer>> entrySet();
 
-    public FeatureMap(boolean mutable)
+    public FeatureMap(bool mutable)
     {
         this.mutable = mutable;
     }
@@ -60,7 +60,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) throws IOException
+    public void save(DataOutputStream out) 
     {
         tagSet.save(out);
         out.writeInt(size());
@@ -71,7 +71,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         loadTagSet(byteArray);
         int size = byteArray.nextInt();

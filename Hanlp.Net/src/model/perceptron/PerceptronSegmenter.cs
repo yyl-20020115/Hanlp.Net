@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class PerceptronSegmenter extends PerceptronTagger : Segmenter
+public class PerceptronSegmenter : PerceptronTagger : Segmenter
 {
     private final CWSTagSet CWSTagSet;
 
@@ -32,16 +32,16 @@ public class PerceptronSegmenter extends PerceptronTagger : Segmenter
         CWSTagSet = (CWSTagSet) cwsModel.featureMap.tagSet;
     }
 
-    public PerceptronSegmenter(String cwsModelFile) throws IOException
+    public PerceptronSegmenter(String cwsModelFile) 
     {
         this(new LinearModel(cwsModelFile));
     }
 
     /**
      * 加载配置文件指定的模型
-     * @throws IOException
+     * @
      */
-    public PerceptronSegmenter() throws IOException
+    public PerceptronSegmenter() 
     {
         this(HanLP.Config.PerceptronCWSModelPath);
     }
@@ -95,7 +95,7 @@ public class PerceptronSegmenter extends PerceptronTagger : Segmenter
      * @param segmentedSentence 分好词的句子，空格或tab分割，不含词性
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public boolean learn(String segmentedSentence)
+    public bool learn(String segmentedSentence)
     {
         return learn(segmentedSentence.split("\\s+"));
     }
@@ -106,7 +106,7 @@ public class PerceptronSegmenter extends PerceptronTagger : Segmenter
      * @param words 分好词的句子
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public boolean learn(String... words)
+    public bool learn(String... words)
     {
 //        for (int i = 0; i < words.length; i++) // 防止传入带词性的词语
 //        {
@@ -126,7 +126,7 @@ public class PerceptronSegmenter extends PerceptronTagger : Segmenter
     }
 
     //@Override
-    public double[] evaluate(String corpora) throws IOException
+    public double[] evaluate(String corpora) 
     {
         // 这里用CWS的F1
         double[] prf = Utility.prf(Utility.evaluateCWS(corpora, this));

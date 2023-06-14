@@ -45,7 +45,7 @@ public class Interval : Intervalable
      * @param other
      * @return
      */
-    public boolean overlapsWith(Interval other)
+    public bool overlapsWith(Interval other)
     {
         return this.start <= other.getEnd() &&
                 this.end >= other.getStart();
@@ -56,45 +56,44 @@ public class Interval : Intervalable
      * @param point
      * @return
      */
-    public boolean overlapsWith(int point)
+    public bool overlapsWith(int point)
     {
         return this.start <= point && point <= this.end;
     }
 
     ////@Override
-    public boolean equals(Object o)
+    public override bool Equals(object o)
     {
-        if (!(o instanceof Intervalable))
+        if (!(o is Intervalable))
         {
             return false;
         }
-        Intervalable other = (Intervalable) o;
+        Intervalable other = (Intervalable)o;
         return this.start == other.getStart() &&
                 this.end == other.getEnd();
     }
 
     ////@Override
-    public int hashCode()
+    public override int GetHashCode()
     {
         return this.start % 100 + this.end % 100;
     }
 
     ////@Override
-    public int compareTo(Object o)
+    public int CompareTo(object o)
     {
-        if (!(o instanceof Intervalable))
+        if (!(o is Intervalable))
         {
             return -1;
         }
-        Intervalable other = (Intervalable) o;
+        Intervalable other = (Intervalable)o;
         int comparison = this.start - other.getStart();
         return comparison != 0 ? comparison : this.end - other.getEnd();
     }
 
     ////@Override
-    public String toString()
+    public override string ToString()
     {
         return this.start + ":" + this.end;
     }
-
 }

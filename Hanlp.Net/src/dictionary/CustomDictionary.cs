@@ -50,7 +50,7 @@ public class CustomDictionary
      * @param path 自定义词典
      * @param isCache 是否缓存结果
      */
-    public static boolean loadMainDictionary(String mainPath, String path[], DoubleArrayTrie<CoreDictionary.Attribute> dat, boolean isCache)
+    public static bool loadMainDictionary(String mainPath, String path[], DoubleArrayTrie<CoreDictionary.Attribute> dat, bool isCache)
     {
         logger.info("自定义词典开始加载:" + mainPath);
         if (loadDat(mainPath, dat)) return true;
@@ -81,7 +81,7 @@ public class CustomDictionary
                     }
                 }
                 logger.info("以默认词性[" + defaultNature + "]加载自定义词典" + p + "中……");
-                boolean success = load(p, defaultNature, map, customNatureCollector);
+                bool success = load(p, defaultNature, map, customNatureCollector);
                 if (!success) logger.warning("失败：" + p);
             }
             if (map.size() == 0)
@@ -138,7 +138,7 @@ public class CustomDictionary
         return true;
     }
 
-    private static boolean loadMainDictionary(String mainPath)
+    private static bool loadMainDictionary(String mainPath)
     {
         return loadMainDictionary(mainPath, HanLP.Config.CustomDictionaryPath, CustomDictionary.dat, true);
     }
@@ -152,7 +152,7 @@ public class CustomDictionary
      * @param customNatureCollector 收集用户词性
      * @return
      */
-    public static boolean load(String path, Nature defaultNature, TreeMap<String, CoreDictionary.Attribute> map, LinkedHashSet<Nature> customNatureCollector)
+    public static bool load(String path, Nature defaultNature, TreeMap<String, CoreDictionary.Attribute> map, LinkedHashSet<Nature> customNatureCollector)
     {
         try
         {
@@ -163,7 +163,7 @@ public class CustomDictionary
             }
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             String line;
-            boolean firstLine = true;
+            bool firstLine = true;
             while ((line = br.readLine()) != null)
             {
                 if (firstLine)
@@ -213,7 +213,7 @@ public class CustomDictionary
      * @param rewriteTable
      * @return 是否更新了
      */
-    private static boolean updateAttributeIfExist(String key, CoreDictionary.Attribute attribute, TreeMap<String, CoreDictionary.Attribute> map, TreeMap<Integer, CoreDictionary.Attribute> rewriteTable)
+    private static bool updateAttributeIfExist(String key, CoreDictionary.Attribute attribute, TreeMap<String, CoreDictionary.Attribute> map, TreeMap<Integer, CoreDictionary.Attribute> rewriteTable)
     {
         int wordID = CoreDictionary.getWordID(key);
         CoreDictionary.Attribute attributeExisted;
@@ -248,7 +248,7 @@ public class CustomDictionary
      * @param natureWithFrequency 词性和其对应的频次，比如“nz 1 v 2”，null时表示“nz 1”
      * @return 是否插入成功（失败的原因可能是不覆盖、natureWithFrequency有问题等，后者可以通过调试模式了解原因）
      */
-    public static boolean add(String word, String natureWithFrequency)
+    public static bool add(String word, String natureWithFrequency)
     {
         if (contains(word)) return false;
         return insert(word, natureWithFrequency);
@@ -261,7 +261,7 @@ public class CustomDictionary
      * @param word                新词 如“裸婚”
      * @return 是否插入成功（失败的原因可能是不覆盖等，可以通过调试模式了解原因）
      */
-    public static boolean add(String word)
+    public static bool add(String word)
     {
         if (HanLP.Config.Normalization) word = CharTable.convert(word);
         if (contains(word)) return false;
@@ -276,7 +276,7 @@ public class CustomDictionary
      * @param natureWithFrequency 词性和其对应的频次，比如“nz 1 v 2”，null时表示“nz 1”。
      * @return 是否插入成功（失败的原因可能是natureWithFrequency问题，可以通过调试模式了解原因）
      */
-    public static boolean insert(String word, String natureWithFrequency)
+    public static bool insert(String word, String natureWithFrequency)
     {
         if (word == null) return false;
         if (HanLP.Config.Normalization) word = CharTable.convert(word);
@@ -295,12 +295,12 @@ public class CustomDictionary
      * @param word
      * @return
      */
-    public static boolean insert(String word)
+    public static bool insert(String word)
     {
         return insert(word, null);
     }
 
-    public static boolean loadDat(String path, DoubleArrayTrie<CoreDictionary.Attribute> dat)
+    public static bool loadDat(String path, DoubleArrayTrie<CoreDictionary.Attribute> dat)
     {
         return loadDat(path, HanLP.Config.CustomDictionaryPath, dat);
     }
@@ -312,7 +312,7 @@ public class CustomDictionary
      * @param customDicPath 用户词典路径
      * @return
      */
-    public static boolean loadDat(String path, String customDicPath[], DoubleArrayTrie<CoreDictionary.Attribute> dat)
+    public static bool loadDat(String path, String customDicPath[], DoubleArrayTrie<CoreDictionary.Attribute> dat)
     {
         try
         {
@@ -360,7 +360,7 @@ public class CustomDictionary
      * 获取本地词典更新状态
      * @return true 表示本地词典比缓存文件新，需要删除缓存
      */
-    private static boolean isDicNeedUpdate(String mainPath, String path[])
+    private static bool isDicNeedUpdate(String mainPath, String path[])
     {
         if (HanLP.Config.IOAdapter != null &&
             !HanLP.Config.IOAdapter.getClass().getName().contains("com.hankcs.hanlp.corpus.io.FileIOAdapter"))
@@ -464,7 +464,7 @@ public class CustomDictionary
      * @param key 词语
      * @return 是否包含
      */
-    public static boolean contains(String key)
+    public static bool contains(String key)
     {
         if (dat.exactMatchSearch(key) >= 0) return true;
         return trie != null && trie.containsKey(key);
@@ -480,7 +480,7 @@ public class CustomDictionary
         return new Searcher(charArray);
     }
 
-    static class Searcher extends BaseSearcher<CoreDictionary.Attribute>
+    static class Searcher : BaseSearcher<CoreDictionary.Attribute>
     {
         /**
          * 分词从何处开始，这是一个状态
@@ -635,7 +635,7 @@ public class CustomDictionary
      * 集群环境（或其他IOAdapter）需要自行删除缓存文件（路径 = HanLP.Config.CustomDictionaryPath[0] + Predefine.BIN_EXT）
      * @return 是否加载成功
      */
-    public static boolean reload()
+    public static bool reload()
     {
         String path[] = HanLP.Config.CustomDictionaryPath;
         if (path == null || path.length == 0) return false;

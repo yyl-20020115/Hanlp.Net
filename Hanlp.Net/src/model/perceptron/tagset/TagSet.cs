@@ -106,7 +106,7 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, Int
         return allTags;
     }
 
-    public void save(DataOutputStream out) throws IOException
+    public void save(DataOutputStream out) 
     {
         out.writeInt(type.ordinal());
         out.writeInt(size());
@@ -117,7 +117,7 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, Int
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         idStringMap.clear();
         stringIdMap.clear();
@@ -132,7 +132,7 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, Int
         return true;
     }
 
-    public void load(DataInputStream in) throws IOException
+    public void load(DataInputStream in) 
     {
         idStringMap.clear();
         stringIdMap.clear();

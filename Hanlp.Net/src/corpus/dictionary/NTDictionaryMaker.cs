@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
 /**
  * @author hankcs
  */
-public class NTDictionaryMaker extends CommonDictionaryMaker
+public class NTDictionaryMaker : CommonDictionaryMaker
 {
     TFDictionary tfDictionary = new TFDictionary();
 
@@ -244,7 +244,7 @@ public class NTDictionaryMaker extends CommonDictionaryMaker
 }
 
     //@Override
-    public boolean saveTxtTo(String path)
+    public bool saveTxtTo(String path)
     {
         if (!super.saveTxtTo(path)) return false;
         return tfDictionary.saveKeyTo(path + ".pattern.txt");

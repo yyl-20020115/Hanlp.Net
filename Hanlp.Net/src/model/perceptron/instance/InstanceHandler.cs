@@ -16,5 +16,5 @@ namespace com.hankcs.hanlp.model.perceptron.instance;
  */
 public interface InstanceHandler
 {
-    boolean process(Sentence instance);
+    bool process(Sentence instance);
 }

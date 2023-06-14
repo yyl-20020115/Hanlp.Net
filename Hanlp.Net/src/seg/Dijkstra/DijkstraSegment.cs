@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.seg.Dijkstra;
  * 最短路径分词
  * @author hankcs
  */
-public class DijkstraSegment extends WordBasedSegment
+public class DijkstraSegment : WordBasedSegment
 {
     //@Override
     public List<Term> segSentence(char[] sentence)

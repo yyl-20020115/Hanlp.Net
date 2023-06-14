@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
 /**
  * @author hankcs
  */
-public class MutableFeatureMap extends FeatureMap
+public class MutableFeatureMap : FeatureMap
 {
     public Map<String, Integer> featureIdMap;
     // TreeMap 5136

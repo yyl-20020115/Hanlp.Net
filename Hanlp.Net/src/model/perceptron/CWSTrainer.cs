@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class CWSTrainer extends PerceptronTrainer
+public class CWSTrainer : PerceptronTrainer
 {
     //@Override
     protected TagSet createTagSet()
@@ -36,7 +36,7 @@ public class CWSTrainer extends PerceptronTrainer
     }
 
     //@Override
-    public double[] evaluate(String developFile, LinearModel model) throws IOException
+    public double[] evaluate(String developFile, LinearModel model) 
     {
         PerceptronSegmenter segmenter = new PerceptronSegmenter(model);
         double[] prf = Utility.prf(Utility.evaluateCWS(developFile, segmenter));

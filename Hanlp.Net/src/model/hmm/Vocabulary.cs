@@ -17,10 +17,10 @@ namespace com.hankcs.hanlp.model.hmm;
 public class Vocabulary : IStringIdMap
 {
     private BinTrie<Integer> trie;
-    boolean mutable;
+    bool mutable;
     private static final int UNK = 0;
 
-    public Vocabulary(BinTrie<Integer> trie, boolean mutable)
+    public Vocabulary(BinTrie<Integer> trie, bool mutable)
     {
         this.trie = trie;
         this.mutable = mutable;

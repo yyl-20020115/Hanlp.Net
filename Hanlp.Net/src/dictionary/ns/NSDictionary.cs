@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dictionary.ns;
  *
  * @author hankcs
  */
-public class NSDictionary extends EnumItemDictionary<NS>
+public class NSDictionary : EnumItemDictionary<NS>
 {
     //@Override
     protected NS valueOf(String name)

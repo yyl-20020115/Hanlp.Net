@@ -11,6 +11,7 @@
  */
 namespace com.hankcs.hanlp.algorithm;
 
+using System.Collections.Generic;
 
 /**
  * 求两个集合中最相近的两个数
@@ -19,18 +20,18 @@ namespace com.hankcs.hanlp.algorithm;
  */
 public class ArrayDistance
 {
-    public static Long computeMinimumDistance(TreeSet<Long> setA, TreeSet<Long> setB)
+    public static long computeMinimumDistance(HashSet<long> setA, HashSet<long> setB)
     {
-        Long[] arrayA = setA.toArray(new Long[0]);
-        Long[] arrayB = setB.toArray(new Long[0]);
+        long[] arrayA = setA.ToArray();
+        long[] arrayB = setB.ToArray();
        return computeMinimumDistance(arrayA, arrayB);
     }
 
-    public static Long computeMinimumDistance(Long[] arrayA, Long[] arrayB)
+    public static long computeMinimumDistance(long[] arrayA, long[] arrayB)
     {
         int aIndex = 0;
         int bIndex = 0;
-        long min = Math.abs(arrayA[0] - arrayB[0]);
+        long min = Math.Abs(arrayA[0] - arrayB[0]);
         while (true)
         {
             if (arrayA[aIndex] > arrayB[bIndex])
@@ -41,26 +42,26 @@ public class ArrayDistance
             {
                 aIndex++;
             }
-            if (aIndex >= arrayA.length || bIndex >= arrayB.length)
+            if (aIndex >= arrayA.Length || bIndex >= arrayB.Length)
             {
                 break;
             }
-            if (Math.abs(arrayA[aIndex] - arrayB[bIndex]) < min)
+            if (Math.Abs(arrayA[aIndex] - arrayB[bIndex]) < min)
             {
-                min = Math.abs(arrayA[aIndex] - arrayB[bIndex]);
+                min = Math.Abs(arrayA[aIndex] - arrayB[bIndex]);
             }
         }
 
         return min;
     }
 
-    public static Long computeAverageDistance(Long[] arrayA, Long[] arrayB)
+    public static long computeAverageDistance(long[] arrayA, long[] arrayB)
     {
-        Long totalA = 0L;
-        Long totalB = 0L;
-        for (Long a : arrayA) totalA += a;
-        for (Long b : arrayB) totalB += b;
+        long totalA = 0L;
+        long totalB = 0L;
+        foreach (long a in arrayA) totalA += a;
+        foreach (long b in arrayB) totalB += b;
 
-        return Math.abs(totalA / arrayA.length - totalB / arrayB.length);
+        return Math.Abs(totalA / arrayA.Length - totalB / arrayB.Length);
     }
 }

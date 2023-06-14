@@ -62,7 +62,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     protected V[] v;
     private int progress;
     private int nextCheckPos;
-    // boolean no_delete_;
+    // bool no_delete_;
     int error_;
 
     // int (*progressfunc_) (size_t, size_t);
@@ -415,7 +415,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return error_;
     }
 
-    public void open(String fileName) throws IOException
+    public void open(String fileName) 
     {
         File file = new File(fileName);
         size = (int) file.length() / UNIT_SIZE;
@@ -440,7 +440,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         }
     }
 
-    public boolean save(String fileName)
+    public bool save(String fileName)
     {
         DataOutputStream out;
         try
@@ -468,7 +468,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param out
      * @return
      */
-    public boolean save(DataOutputStream out)
+    public bool save(DataOutputStream out)
     {
         try
         {
@@ -487,7 +487,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    public void save(ObjectOutputStream out) throws IOException
+    public void save(ObjectOutputStream out) 
     {
         out.writeObject(base);
         out.writeObject(check);
@@ -500,7 +500,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param value
      * @return
      */
-    public boolean load(String path, List<V> value)
+    public bool load(String path, List<V> value)
     {
         if (!loadBaseAndCheck(path)) return false;
         v = (V[]) value.toArray();
@@ -514,7 +514,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param value
      * @return
      */
-    public boolean load(String path, V[] value)
+    public bool load(String path, V[] value)
     {
         if (!(IOAdapter == null ? loadBaseAndCheckByFileChannel(path) :
         load(ByteArrayStream.createByteArrayStream(path), value)
@@ -523,7 +523,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    public boolean load(ByteArray byteArray, V[] value)
+    public bool load(ByteArray byteArray, V[] value)
     {
         if (byteArray == null) return false;
         size = byteArray.nextInt();
@@ -546,7 +546,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param value
      * @return
      */
-    public boolean load(byte[] bytes, int offset, V[] value)
+    public bool load(byte[] bytes, int offset, V[] value)
     {
         if (bytes == null) return false;
         size = ByteUtil.bytesHighFirstToInt(bytes, offset);
@@ -571,7 +571,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param path
      * @return
      */
-    public boolean load(String path)
+    public bool load(String path)
     {
         return loadBaseAndCheckByFileChannel(path);
     }
@@ -582,7 +582,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param path
      * @return
      */
-    private boolean loadBaseAndCheck(String path)
+    private bool loadBaseAndCheck(String path)
     {
         try
         {
@@ -606,7 +606,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    private boolean loadBaseAndCheckByFileChannel(String path)
+    private bool loadBaseAndCheckByFileChannel(String path)
     {
         try
         {
@@ -657,7 +657,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param path
      * @return
      */
-    public boolean serializeTo(String path)
+    public bool serializeTo(String path)
     {
         ObjectOutputStream out = null;
         try
@@ -1014,7 +1014,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return a;
     }
 
-    public boolean containsKey(String key)
+    public bool containsKey(String key)
     {
         return exactMatchSearch(key) >= 0;
     }
@@ -1178,7 +1178,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
          *
          * @return 是否命中，当返回false表示搜索结束，否则使用公开的成员读取命中的详细信息
          */
-        public boolean next()
+        public bool next()
         {
             int b = last;
             int n;
@@ -1289,7 +1289,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
          *
          * @return 是否命中，当返回false表示搜索结束，否则使用公开的成员读取命中的详细信息
          */
-        public boolean next()
+        public bool next()
         {
             value = null;
             begin = i;
@@ -1402,7 +1402,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param value 值
      * @return 是否成功（失败的原因是没有这个键）
      */
-    public boolean set(String key, V value)
+    public bool set(String key, V value)
     {
         int index = exactMatchSearch(key);
         if (index >= 0)

@@ -78,7 +78,7 @@ public class NeuralNetworkClassifier
 
     int batch_size;
     int nr_threads;
-    boolean fix_embeddings;
+    bool fix_embeddings;
 
     double dropout_probability;
     double lambda;
@@ -90,7 +90,7 @@ public class NeuralNetworkClassifier
      */
     Map<Integer, Integer> precomputation_id_encoder;
 
-    boolean initialized;
+    bool initialized;
 
     void initialize(
             int _nr_objects,

@@ -2,7 +2,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 
 
 
-public class Distance extends AbstractClosestVectors
+public class Distance : AbstractClosestVectors
 {
 
     public Distance(String file)
@@ -17,7 +17,7 @@ public class Distance extends AbstractClosestVectors
         System.exit(0);
     }
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) 
     {
         if (args.length < 1) usage();
         new Distance(args[0]).execute();

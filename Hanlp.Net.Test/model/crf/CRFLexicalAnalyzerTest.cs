@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.model.crf;
+namespace com.hankcs.hanlp.model.crf;
 
-import junit.framework.TestCase;
 
-public class CRFLexicalAnalyzerTest extends TestCase
+public class CRFLexicalAnalyzerTest : TestCase
 {
-    public void testLoad() throws Exception
+    public void testLoad() 
     {
         CRFLexicalAnalyzer analyzer = new CRFLexicalAnalyzer();
         String[] tests = new String[]{
@@ -14,8 +13,8 @@ public class CRFLexicalAnalyzerTest extends TestCase
         };
 //        for (String sentence : tests)
 //        {
-//            System.out.println(analyzer.analyze(sentence));
-//            System.out.println(analyzer.seg(sentence));
+//            Console.WriteLine(analyzer.analyze(sentence));
+//            Console.WriteLine(analyzer.seg(sentence));
 //        }
     }
 }

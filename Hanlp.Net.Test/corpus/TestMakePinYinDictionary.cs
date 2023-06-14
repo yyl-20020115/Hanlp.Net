@@ -9,25 +9,16 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.dictionary.SimpleDictionary;
-import com.hankcs.hanlp.corpus.dictionary.StringDictionary;
-import com.hankcs.hanlp.corpus.dictionary.StringDictionaryMaker;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.dictionary.py.*;
-import com.hankcs.hanlp.utility.TextUtility;
-import junit.framework.TestCase;
 
-import java.util.*;
 
 /**
  * @author hankcs
  */
-public class TestMakePinYinDictionary extends TestCase
+public class TestMakePinYinDictionary : TestCase
 {
-//    public void testCombine() throws Exception
+//    public void testCombine() 
 //    {
 //        HanLP.Config.enableDebug();
 //        StringDictionary dictionaryPY = new StringDictionary();
@@ -35,9 +26,9 @@ public class TestMakePinYinDictionary extends TestCase
 //
 ////        StringDictionary dictionaryAnsj = new StringDictionary();
 ////        dictionaryAnsj.load("D:\\JavaProjects\\jpinyin\\data\\ansj.txt");
-////        System.out.println(dictionaryAnsj.remove(new SimpleDictionary.Filter()
+////        Console.WriteLine(dictionaryAnsj.remove(new SimpleDictionary.Filter()
 ////        {
-////            @Override
+////            //@Override
 ////            public boolean remove(Map.Entry entry)
 ////            {
 ////                return entry.getValue().toString().endsWith("0");
@@ -54,20 +45,20 @@ public class TestMakePinYinDictionary extends TestCase
 //        main.save("data/dictionary/pinyin/pinyin.txt");
 //    }
 //
-//    public void testCombineSingle() throws Exception
+//    public void testCombineSingle() 
 //    {
 //        HanLP.Config.enableDebug();
 //        StringDictionary main = StringDictionaryMaker.combine("data/dictionary/pinyin/pinyin.txt", "data/dictionary/pinyin/single.txt");
 //        main.save("data/dictionary/pinyin/pinyin.txt");
 //    }
 //
-//    public void testSpeed() throws Exception
+//    public void testSpeed() 
 //    {
 //
 //    }
 //
 //
-//    public void testMakeSingle() throws Exception
+//    public void testMakeSingle() 
 //    {
 //        LinkedList<String[]> csv = IOUtil.readCsv("D:\\JavaProjects\\jpinyin\\data\\words.csv");
 //        StringDictionary dictionarySingle = new StringDictionary();
@@ -88,7 +79,7 @@ public class TestMakePinYinDictionary extends TestCase
 //        dictionarySingle.save("data/dictionary/pinyin/single.txt");
 //    }
 //
-//    public void testMakeTable() throws Exception
+//    public void testMakeTable() 
 //    {
 //        LinkedList<String[]> csv = IOUtil.readCsv("D:\\JavaProjects\\jpinyin\\data\\words.csv");
 //        StringDictionary dictionarySingle = new StringDictionary();
@@ -109,7 +100,7 @@ public class TestMakePinYinDictionary extends TestCase
 //        dictionarySingle.save("data/dictionary/pinyin/sm-ym-table.txt");
 //    }
 //
-//    public void testConvert() throws Exception
+//    public void testConvert() 
 //    {
 //        String text = "重载不是重担，" + HanLP.convertToTraditionalChinese("以后爱皇后");
 //        List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text);
@@ -118,59 +109,59 @@ public class TestMakePinYinDictionary extends TestCase
 //        {
 //            System.out.printf("%c,", c);
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //
 //        System.out.print("拼音（数字音调）,");
 //        for (Pinyin pinyin : pinyinList)
 //        {
 //            System.out.printf("%s,", pinyin);
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //
 //        System.out.print("拼音（符号音调）,");
 //        for (Pinyin pinyin : pinyinList)
 //        {
 //            System.out.printf("%s,", pinyin.getPinyinWithToneMark());
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //
 //        System.out.print("拼音（无音调）,");
 //        for (Pinyin pinyin : pinyinList)
 //        {
 //            System.out.printf("%s,", pinyin.getPinyinWithoutTone());
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //
 //        System.out.print("声调,");
 //        for (Pinyin pinyin : pinyinList)
 //        {
 //            System.out.printf("%s,", pinyin.getTone());
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //
 //        System.out.print("声母,");
 //        for (Pinyin pinyin : pinyinList)
 //        {
 //            System.out.printf("%s,", pinyin.getShengmu());
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //
 //        System.out.print("韵母,");
 //        for (Pinyin pinyin : pinyinList)
 //        {
 //            System.out.printf("%s,", pinyin.getYunmu());
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //
 //        System.out.print("输入法头,");
 //        for (Pinyin pinyin : pinyinList)
 //        {
 //            System.out.printf("%s,", pinyin.getHeadString());
 //        }
-//        System.out.println();
+//        Console.WriteLine();
 //    }
 //
-//    public void testMakePinyinEnum() throws Exception
+//    public void testMakePinyinEnum() 
 //    {
 //        StringDictionary dictionary = new StringDictionary();
 //        dictionary.load("data/dictionary/pinyin/pinyin.txt");
@@ -199,9 +190,9 @@ public class TestMakePinYinDictionary extends TestCase
 //
 //    /**
 //     * 有些拼音没有声母和韵母，尝试根据上文拓展它们
-//     * @throws Exception
+//     * @
 //     */
-//    public void testExtendTable() throws Exception
+//    public void testExtendTable() 
 //    {
 //        StringDictionary dictionary = new StringDictionary();
 //        dictionary.load("data/dictionary/pinyin/pinyin.txt");
@@ -238,7 +229,7 @@ public class TestMakePinYinDictionary extends TestCase
 //                }
 //                else
 //                {
-//                    System.out.println(currentPy + currentYd);
+//                    Console.WriteLine(currentPy + currentYd);
 //                }
 //            }
 //            // end
@@ -249,26 +240,26 @@ public class TestMakePinYinDictionary extends TestCase
 //        table.save("data/dictionary/pinyin/sm-ym-yd-table.txt");
 //    }
 //
-//    public void testDumpSMT() throws Exception
+//    public void testDumpSMT() 
 //    {
 //        HanLP.Config.enableDebug();
 //        SYTDictionary.dumpEnum("data/dictionary/pinyin/");
 //    }
 //
-//    public void testPinyinDictionary() throws Exception
+//    public void testPinyinDictionary() 
 //    {
 //        HanLP.Config.enableDebug();
 //        Pinyin[] pinyins = PinyinDictionary.get("中");
-//        System.out.println(Arrays.toString(pinyins));
+//        Console.WriteLine(Arrays.toString(pinyins));
 //    }
 //
-//    public void testCombineAnsjWithPinyinTxt() throws Exception
+//    public void testCombineAnsjWithPinyinTxt() 
 //    {
 //        StringDictionary dictionaryAnsj = new StringDictionary();
 //        dictionaryAnsj.load("D:\\JavaProjects\\jpinyin\\data\\ansj.txt");
-//        System.out.println(dictionaryAnsj.remove(new SimpleDictionary.Filter<String>()
+//        Console.WriteLine(dictionaryAnsj.remove(new SimpleDictionary.Filter<String>()
 //        {
-//            @Override
+//            //@Override
 //            public boolean remove(Map.Entry<String, String> entry)
 //            {
 //                String word = entry.getKey();
@@ -276,7 +267,7 @@ public class TestMakePinYinDictionary extends TestCase
 //                String[] pinyinStringArray = entry.getValue().split("[,\\s　]");
 //                if (word.length() != pinyinStringArray.length || !TonePinyinString2PinyinConverter.valid(pinyinStringArray))
 //                {
-//                    System.out.println(entry);
+//                    Console.WriteLine(entry);
 //                    return false;
 //                }
 //
@@ -286,7 +277,7 @@ public class TestMakePinYinDictionary extends TestCase
 //
 //    }
 //
-//    public void testMakePinyinJavaCode() throws Exception
+//    public void testMakePinyinJavaCode() 
 //    {
 //        StringBuilder sb = new StringBuilder();
 //        for (Pinyin pinyin : PinyinDictionary.pinyins)
@@ -297,7 +288,7 @@ public class TestMakePinYinDictionary extends TestCase
 //        IOUtil.saveTxt("data/dictionary/pinyin/py.txt", sb.toString());
 //    }
 //
-//    public void testConvertUnicodeTable() throws Exception
+//    public void testConvertUnicodeTable() 
 //    {
 //        StringDictionary dictionary = new StringDictionary("=");
 //        for (String line : IOUtil.readLineList("D:\\Doc\\语料库\\Uni2Pinyin.txt"))
@@ -316,7 +307,7 @@ public class TestMakePinYinDictionary extends TestCase
 //        dictionary.save("D:\\Doc\\语料库\\Hanzi2Pinyin.txt");
 //    }
 //
-//    public void testCombineUnicodeTableWithMainDictionary() throws Exception
+//    public void testCombineUnicodeTableWithMainDictionary() 
 //    {
 //        StringDictionary mainDictionary = new StringDictionary("=");
 //        mainDictionary.load("data/dictionary/pinyin/pinyin.txt");

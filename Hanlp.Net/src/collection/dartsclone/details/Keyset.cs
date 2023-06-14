@@ -59,7 +59,7 @@ public class Keyset
      * 是否含有值
      * @return
      */
-    boolean hasValues()
+    bool hasValues()
     {
         return _values != null;
     }

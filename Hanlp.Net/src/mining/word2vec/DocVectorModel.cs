@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
  *
  * @author hankcs
  */
-public class DocVectorModel extends AbstractVectorModel<Integer>
+public class DocVectorModel : AbstractVectorModel<Integer>
 {
     private final WordVectorModel wordVectorModel;
 

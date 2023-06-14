@@ -101,12 +101,12 @@ public class ByteArray
      * 读取一个布尔值
      * @return
      */
-    public boolean nextBoolean()
+    public bool nextBoolean()
     {
         return nextByte() == 1;
     }
 
-    public boolean hasMore()
+    public bool hasMore()
     {
         return offset < bytes.length;
     }

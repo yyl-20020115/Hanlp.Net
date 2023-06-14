@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.occurrence;
  * 词与词频的简单封装
  * @author hankcs
  */
-public class TermFrequency extends AbstractMap.SimpleEntry<String, Integer> : Comparable<TermFrequency>
+public class TermFrequency : AbstractMap.SimpleEntry<String, Integer> : Comparable<TermFrequency>
 {
     public TermFrequency(String term, Integer frequency)
     {

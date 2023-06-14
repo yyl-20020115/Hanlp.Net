@@ -283,7 +283,7 @@ public class DictionaryMaker : ISaveAble
     }
 
     //@Override
-    public boolean saveTxtTo(String path)
+    public bool saveTxtTo(String path)
     {
         if (trie.size() == 0) return true;  // 如果没有词条，那也算成功了
         try
@@ -319,7 +319,7 @@ public class DictionaryMaker : ISaveAble
          * @param item
          * @return true表示保存
          */
-        boolean onSave(Item item);
+        bool onSave(Item item);
     }
 
     /**
@@ -329,7 +329,7 @@ public class DictionaryMaker : ISaveAble
      * @param filter
      * @return
      */
-    public boolean saveTxtTo(String path, Filter filter)
+    public bool saveTxtTo(String path, Filter filter)
     {
         try
         {

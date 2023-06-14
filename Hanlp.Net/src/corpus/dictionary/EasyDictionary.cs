@@ -38,7 +38,7 @@ public class EasyDictionary
         return null;
     }
 
-    private boolean load(String path)
+    private bool load(String path)
     {
         logger.info("通用词典开始加载:" + path);
         TreeMap<String, Attribute> map = new TreeMap<String, Attribute>();
@@ -84,7 +84,7 @@ public class EasyDictionary
         return trie.get(key);
     }
 
-    public boolean contains(String key)
+    public bool contains(String key)
     {
         return GetWordInfo(key) != null;
     }
@@ -94,7 +94,7 @@ public class EasyDictionary
         return new Searcher(text);
     }
 
-    public class Searcher extends BaseSearcher<Attribute>
+    public class Searcher : BaseSearcher<Attribute>
     {
         /**
          * 分词从何处开始，这是一个状态

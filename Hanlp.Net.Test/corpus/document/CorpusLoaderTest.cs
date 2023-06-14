@@ -1,23 +1,17 @@
-package com.hankcs.hanlp.corpus.document;
+namespace com.hankcs.hanlp.corpus.document;
 
-import com.hankcs.hanlp.corpus.dictionary.DictionaryMaker;
-import com.hankcs.hanlp.corpus.document.sentence.word.IWord;
-import com.hankcs.hanlp.corpus.document.sentence.word.Word;
-import junit.framework.TestCase;
 
-import java.io.*;
-import java.util.List;
 
-public class CorpusLoaderTest extends TestCase
+public class CorpusLoaderTest : TestCase
 {
-//    public void testMultiThread() throws Exception
+//    public void testMultiThread() 
 //    {
 //        CorpusLoader.HandlerThread[] handlerThreadArray = new CorpusLoader.HandlerThread[4];
 //        for (int i = 0; i < handlerThreadArray.length; ++i)
 //        {
 //            handlerThreadArray[i] = new CorpusLoader.HandlerThread(String.valueOf(i))
 //            {
-//                @Override
+//                //@Override
 //                public void handle(Document document)
 //                {
 //
@@ -27,11 +21,11 @@ public class CorpusLoaderTest extends TestCase
 //        CorpusLoader.walk("data/2014", handlerThreadArray);
 //    }
 //
-//    public void testSingleThread() throws Exception
+//    public void testSingleThread() 
 //    {
 //        CorpusLoader.walk("data/2014", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //
@@ -39,12 +33,12 @@ public class CorpusLoaderTest extends TestCase
 //        });
 //    }
 //
-//    public void testCombineToTxt() throws Exception
+//    public void testCombineToTxt() 
 //    {
 //        final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Doc\\语料库\\2014_cn.txt"), "UTF-8"));
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                try
@@ -69,18 +63,18 @@ public class CorpusLoaderTest extends TestCase
 //        bw.close();
 //    }
 //
-//    public void testConvert2SimpleSentenceList() throws Exception
+//    public void testConvert2SimpleSentenceList() 
 //    {
 //        List<List<Word>> simpleSentenceList = CorpusLoader.convert2SimpleSentenceList("data/2014");
-//        System.out.println(simpleSentenceList.get(0));
+//        Console.WriteLine(simpleSentenceList.get(0));
 //    }
 //
-//    public void testMakePersonCustomDictionary() throws Exception
+//    public void testMakePersonCustomDictionary() 
 //    {
 //        final DictionaryMaker dictionaryMaker = new DictionaryMaker();
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                List<List<IWord>> complexSentenceList = document.getComplexSentenceList();
@@ -99,12 +93,12 @@ public class CorpusLoaderTest extends TestCase
 //        dictionaryMaker.saveTxtTo("data/dictionary/custom/人名词典.txt");
 //    }
 //
-//    public void testMakeOrganizationCustomDictionary() throws Exception
+//    public void testMakeOrganizationCustomDictionary() 
 //    {
 //        final DictionaryMaker dictionaryMaker = new DictionaryMaker();
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                List<List<IWord>> complexSentenceList = document.getComplexSentenceList();
@@ -126,14 +120,14 @@ public class CorpusLoaderTest extends TestCase
 //    /**
 //     * 语料库中有很多句号标注得不对，尝试纠正它们
 //     * 比如“方言/n 版/n [新年/t 祝福/vn]/nz 。你/rr 的/ude1 一段/mq 话/n ”
-//     * @throws Exception
+//     * @
 //     */
-//    public void testAdjustDot() throws Exception
+//    public void testAdjustDot() 
 //    {
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
 //            int id = 0;
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                try
@@ -176,16 +170,16 @@ public class CorpusLoaderTest extends TestCase
 //        });
 //    }
 //
-//    public void testLoadMyCorpus() throws Exception
+//    public void testLoadMyCorpus() 
 //    {
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs\\", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                for (List<IWord> wordList : document.getComplexSentenceList())
 //                {
-//                    System.out.println(wordList);
+//                    Console.WriteLine(wordList);
 //                }
 //            }
 //        });
@@ -194,13 +188,13 @@ public class CorpusLoaderTest extends TestCase
 //
 //    /**
 //     * 有些引号不对
-//     * @throws Exception
+//     * @
 //     */
-//    public void testFindQuote() throws Exception
+//    public void testFindQuote() 
 //    {
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs\\", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                for (List<Word> wordList : document.getSimpleSentenceList())
@@ -209,7 +203,7 @@ public class CorpusLoaderTest extends TestCase
 //                    {
 //                        if(word.value.length() > 1 && word.value.endsWith("\""))
 //                        {
-//                            System.out.println(word);
+//                            Console.WriteLine(word);
 //                        }
 //                    }
 //                }

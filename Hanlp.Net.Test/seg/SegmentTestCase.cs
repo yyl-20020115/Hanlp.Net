@@ -8,19 +8,14 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.seg;
+namespace com.hankcs.hanlp.seg;
 
-import com.hankcs.hanlp.corpus.tag.Nature;
-import com.hankcs.hanlp.seg.common.Term;
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
-import java.util.List;
 
 /**
  * @author hankcs
  */
-public class SegmentTestCase extends TestCase
+public class SegmentTestCase : TestCase
 {
     @SuppressWarnings("deprecation")
     public static void assertNoNature(List<Term> termList, Nature nature)

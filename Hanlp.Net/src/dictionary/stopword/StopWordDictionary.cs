@@ -17,9 +17,9 @@ namespace com.hankcs.hanlp.dictionary.stopword;
 /**
  * @author hankcs
  */
-public class StopWordDictionary extends MDAGSet : Filter
+public class StopWordDictionary : MDAGSet : Filter
 {
-    public StopWordDictionary(File file) throws IOException
+    public StopWordDictionary(File file) 
     {
         super(file);
     }
@@ -33,13 +33,13 @@ public class StopWordDictionary extends MDAGSet : Filter
     {
     }
 
-    public StopWordDictionary(String stopWordDictionaryPath) throws IOException
+    public StopWordDictionary(String stopWordDictionaryPath) 
     {
         super(stopWordDictionaryPath);
     }
 
     //@Override
-    public boolean shouldInclude(Term term)
+    public bool shouldInclude(Term term)
     {
         return contains(term.word);
     }

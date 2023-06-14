@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.suggest;
+namespace com.hankcs.hanlp.suggest;
 
-import junit.framework.TestCase;
 
-public class ISuggesterTest extends TestCase
+public class ISuggesterTest : TestCase
 {
-    public void testRemoveAllSentences() throws Exception
+    public void testRemoveAllSentences() 
     {
         ISuggester suggester = new Suggester();
         String[] titleArray =

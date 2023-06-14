@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dependency;
  *
  * @author hankcs
  */
-public class WordNatureDependencyParser extends MinimumSpanningTreeParser
+public class WordNatureDependencyParser : MinimumSpanningTreeParser
 {
     private WordNatureDependencyModel model;
 

@@ -8,12 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.model.perceptron;
+namespace com.hankcs.hanlp.model.perceptron;
 
-import com.hankcs.hanlp.model.perceptron.tagset.NERTagSet;
-import com.hankcs.hanlp.model.perceptron.tagset.TagSet;
 
-import java.io.IOException;
 
 /**
  * @author hankcs
@@ -30,7 +27,7 @@ public class DemoTrainNER
     {
         PerceptronTrainer trainer = new NERTrainer()
         {
-            @Override
+            //@Override
             protected TagSet createTagSet()
             {
                 NERTagSet tagSet = new NERTagSet();

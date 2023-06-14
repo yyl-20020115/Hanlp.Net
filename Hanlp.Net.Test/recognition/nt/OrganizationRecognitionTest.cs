@@ -1,31 +1,20 @@
-package com.hankcs.hanlp.recognition.nt;
+namespace com.hankcs.hanlp.recognition.nt;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.dictionary.DictionaryMaker;
-import com.hankcs.hanlp.corpus.dictionary.item.Item;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.dictionary.CoreDictionary;
-import com.hankcs.hanlp.dictionary.common.CommonStringDictionary;
-import com.hankcs.hanlp.seg.Dijkstra.DijkstraSegment;
-import com.hankcs.hanlp.utility.LexiconUtility;
-import junit.framework.TestCase;
 
-import java.util.Map;
-import java.util.Set;
 
-public class OrganizationRecognitionTest extends TestCase
+public class OrganizationRecognitionTest : TestCase
 {
-//    public void testSeg() throws Exception
+//    public void testSeg() 
 //    {
 //        HanLP.Config.enableDebug();
 //        DijkstraSegment segment = new DijkstraSegment();
 //        segment.enableCustomDictionary(false);
 //
 //        segment.enableOrganizationRecognize(true);
-//        System.out.println(segment.seg("东欧的球队"));
+//        Console.WriteLine(segment.seg("东欧的球队"));
 //    }
 //
-//    public void testGeneratePatternJavaCode() throws Exception
+//    public void testGeneratePatternJavaCode() 
 //    {
 //        CommonStringDictionary commonStringDictionary = new CommonStringDictionary();
 //        commonStringDictionary.load("data/dictionary/organization/nt.pattern.txt");
@@ -41,7 +30,7 @@ public class OrganizationRecognitionTest extends TestCase
 //        IOUtil.saveTxt("data/dictionary/organization/code.txt", sb.toString());
 //    }
 //
-//    public void testRemoveP() throws Exception
+//    public void testRemoveP() 
 //    {
 //        DictionaryMaker maker = DictionaryMaker.load(HanLP.Config.OrganizationDictionaryPath);
 //        for (Map.Entry<String, Item> entry : maker.entrySet())
@@ -52,7 +41,7 @@ public class OrganizationRecognitionTest extends TestCase
 //            if (attribute == null) continue;
 //            if (item.containsLabel("P") && attribute.hasNatureStartsWith("u"))
 //            {
-//                System.out.println(item + "\t" + attribute);
+//                Console.WriteLine(item + "\t" + attribute);
 //                item.removeLabel("P");
 //            }
 //        }

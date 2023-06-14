@@ -16,7 +16,7 @@ public final class VectorsReader
         this.file = file;
     }
 
-    public void readVectorFile() throws IOException
+    public void readVectorFile() 
     {
         logger.info(String.format("reading %s file. please wait...\n", file));
 

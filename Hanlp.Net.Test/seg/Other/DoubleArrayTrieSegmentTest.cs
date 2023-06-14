@@ -1,18 +1,16 @@
-package com.hankcs.hanlp.seg.Other;
+namespace com.hankcs.hanlp.seg.Other;
 
-import com.hankcs.hanlp.HanLP;
-import junit.framework.TestCase;
 
-public class DoubleArrayTrieSegmentTest extends TestCase
+public class DoubleArrayTrieSegmentTest : TestCase
 {
-    public void testLoadMyDictionary() throws Exception
+    public void testLoadMyDictionary() 
     {
         DoubleArrayTrieSegment segment = new DoubleArrayTrieSegment("data/dictionary/CoreNatureDictionary.mini.txt");
         HanLP.Config.ShowTermNature = false;
         assertEquals("[江西, 鄱阳湖, 干枯]", segment.seg("江西鄱阳湖干枯").toString());
     }
 
-    public void testLoadMyDictionaryWithNature() throws Exception
+    public void testLoadMyDictionaryWithNature() 
     {
         DoubleArrayTrieSegment segment = new DoubleArrayTrieSegment("data/dictionary/CoreNatureDictionary.mini.txt",
                                                                     "data/dictionary/custom/上海地名.txt ns");

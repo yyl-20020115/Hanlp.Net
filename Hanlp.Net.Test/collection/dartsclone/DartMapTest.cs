@@ -1,21 +1,14 @@
-package com.hankcs.hanlp.collection.dartsclone;
+namespace com.hankcs.hanlp.collection.dartsclone;
 
-import com.hankcs.hanlp.collection.trie.DoubleArrayTrie;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import junit.framework.TestCase;
 
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
-public class DartMapTest extends TestCase
+public class DartMapTest : TestCase
 {
     Set<String> validKeySet;
     Set<String> invalidKeySet;
     private DartMap<Integer> dartMap;
 
-    public void setUp() throws Exception
+    public void setUp() 
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.ngram.txt");
         validKeySet = new TreeSet<String>();
@@ -31,7 +24,7 @@ public class DartMapTest extends TestCase
         dartMap = new DartMap<Integer>(map);
     }
 
-    public void testGenerateInvalidKeySet() throws Exception
+    public void testGenerateInvalidKeySet() 
     {
         invalidKeySet = new TreeSet<String>();
         Random random = new Random(System.currentTimeMillis());
@@ -48,11 +41,11 @@ public class DartMapTest extends TestCase
         }
     }
 
-    public void testBuild() throws Exception
+    public void testBuild() 
     {
     }
 
-    public void testContainsAndNoteContains() throws Exception
+    public void testContainsAndNoteContains() 
     {
         testBuild();
         for (String key : validKeySet)
@@ -67,13 +60,13 @@ public class DartMapTest extends TestCase
         }
     }
 
-//    public void testCommPrefixSearch() throws Exception
+//    public void testCommPrefixSearch() 
 //    {
 //        testBuild();
 //        assertEquals(true, dartMap.commonPrefixSearch("一举一动"));
 //    }
 
-//    public void testBenchmark() throws Exception
+//    public void testBenchmark() 
 //    {
 //        testBuild();
 //        long start;

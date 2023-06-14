@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.hmm;
  *
  * @author hankcs
  */
-public class FirstOrderHiddenMarkovModel extends HiddenMarkovModel
+public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
 {
 
     /**

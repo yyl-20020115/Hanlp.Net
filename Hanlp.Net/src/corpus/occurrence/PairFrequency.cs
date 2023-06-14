@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.corpus.occurrence;
  * 一个二元的词串的频度
  * @author hankcs
  */
-public class PairFrequency extends TermFrequency
+public class PairFrequency : TermFrequency
 {
     /**
      * 互信息值
@@ -67,7 +67,7 @@ public class PairFrequency extends TermFrequency
      * 该共现是否统计的是否是从左到右的顺序
      * @return
      */
-    public boolean isRight()
+    public bool isRight()
     {
         return delimiter == Occurrence.RIGHT;
     }

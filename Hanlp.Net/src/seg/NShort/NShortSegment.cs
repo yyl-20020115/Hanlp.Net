@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.seg.NShort;
  *
  * @author hankcs
  */
-public class NShortSegment extends WordBasedSegment
+public class NShortSegment : WordBasedSegment
 {
 
     //@Override
@@ -29,7 +29,7 @@ public class NShortSegment extends WordBasedSegment
 //        char[] charArray = text.toCharArray();
         // 粗分
         List<List<Vertex>> coarseResult = biSegment(sentence, 2, wordNetOptimum, wordNetAll);
-        boolean NERexists = false;
+        bool NERexists = false;
         for (List<Vertex> vertexList : coarseResult)
         {
             if (HanLP.Config.DEBUG)
@@ -171,7 +171,7 @@ public class NShortSegment extends WordBasedSegment
      * @param enable
      * @return
      */
-    public NShortSegment enablePartOfSpeechTagging(boolean enable)
+    public NShortSegment enablePartOfSpeechTagging(bool enable)
     {
         config.speechTagging = enable;
         return this;
@@ -182,7 +182,7 @@ public class NShortSegment extends WordBasedSegment
      * @param enable
      * @return
      */
-    public NShortSegment enablePlaceRecognize(boolean enable)
+    public NShortSegment enablePlaceRecognize(bool enable)
     {
         config.placeRecognize = enable;
         config.updateNerConfig();
@@ -194,7 +194,7 @@ public class NShortSegment extends WordBasedSegment
      * @param enable
      * @return
      */
-    public NShortSegment enableOrganizationRecognize(boolean enable)
+    public NShortSegment enableOrganizationRecognize(bool enable)
     {
         config.organizationRecognize = enable;
         config.updateNerConfig();
@@ -206,7 +206,7 @@ public class NShortSegment extends WordBasedSegment
      *
      * @param enable
      */
-    public NShortSegment enableTranslatedNameRecognize(boolean enable)
+    public NShortSegment enableTranslatedNameRecognize(bool enable)
     {
         config.translatedNameRecognize = enable;
         config.updateNerConfig();
@@ -218,7 +218,7 @@ public class NShortSegment extends WordBasedSegment
      *
      * @param enable
      */
-    public NShortSegment enableJapaneseNameRecognize(boolean enable)
+    public NShortSegment enableJapaneseNameRecognize(bool enable)
     {
         config.japaneseNameRecognize = enable;
         config.updateNerConfig();
@@ -230,13 +230,13 @@ public class NShortSegment extends WordBasedSegment
      * @param enable
      * @return
      */
-    public NShortSegment enableOffset(boolean enable)
+    public NShortSegment enableOffset(bool enable)
     {
         config.offset = enable;
         return this;
     }
 
-    public NShortSegment enableAllNamedEntityRecognize(boolean enable)
+    public NShortSegment enableAllNamedEntityRecognize(bool enable)
     {
         config.nameRecognize = enable;
         config.japaneseNameRecognize = enable;

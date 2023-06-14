@@ -18,12 +18,12 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  *
  * @author He Han
  */
-public class Node<V> extends BaseNode
+public class Node<V> : BaseNode
 {
     //@Override
-    protected boolean addChild(BaseNode node)
+    protected bool addChild(BaseNode node)
     {
-        boolean add = false;
+        bool add = false;
         if (child == null)
         {
             child = new BaseNode[0];

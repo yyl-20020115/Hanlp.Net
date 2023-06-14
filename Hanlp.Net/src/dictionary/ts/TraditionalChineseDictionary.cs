@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.dictionary.ts;
  * 繁简词典，提供简繁转换
  * @author hankcs
  */
-public class TraditionalChineseDictionary extends BaseChineseDictionary
+public class TraditionalChineseDictionary : BaseChineseDictionary
 {
     /**
      * 繁体=简体

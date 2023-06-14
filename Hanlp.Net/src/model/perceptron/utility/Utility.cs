@@ -77,9 +77,9 @@ public class Utility
      * @param outputFile  输出一整个CRF训练格式的语料
      * @param begin       取多少个文档之后
      * @param end
-     * @throws IOException 转换过程中的IO异常
+     * @ 转换过程中的IO异常
      */
-    public static void convertPKUtoCWS(String inputFolder, String outputFile, final int begin, final int end) throws IOException
+    public static void convertPKUtoCWS(String inputFolder, String outputFile, final int begin, final int end) 
     {
         final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
         CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
@@ -129,9 +129,9 @@ public class Utility
      * @param outputFile  输出一整个CRF训练格式的语料
      * @param begin       取多少个文档之后
      * @param end
-     * @throws IOException 转换过程中的IO异常
+     * @ 转换过程中的IO异常
      */
-    public static void convertPKUtoPOS(String inputFolder, String outputFile, final int begin, final int end) throws IOException
+    public static void convertPKUtoPOS(String inputFolder, String outputFile, final int begin, final int end) 
     {
         final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
         CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
@@ -205,7 +205,7 @@ public class Utility
         return output;
     }
 
-    private static boolean isNer(IWord word, String nerTag[])
+    private static bool isNer(IWord word, String nerTag[])
     {
         for (String tag : nerTag)
         {
@@ -231,7 +231,7 @@ public class Utility
         return wordArray;
     }
 
-    public static int[] evaluateCWS(String developFile, final PerceptronSegmenter segmenter) throws IOException
+    public static int[] evaluateCWS(String developFile, final PerceptronSegmenter segmenter) 
     {
         // int goldTotal = 0, predTotal = 0, correct = 0;
         final int[] stat = new int[3];
@@ -239,7 +239,7 @@ public class Utility
         IOUtility.loadInstance(developFile, new InstanceHandler()
         {
             //@Override
-            public boolean process(Sentence sentence)
+            public bool process(Sentence sentence)
             {
                 List<Word> wordList = sentence.toSimpleWordList();
                 String[] wordArray = toWordArray(wordList);

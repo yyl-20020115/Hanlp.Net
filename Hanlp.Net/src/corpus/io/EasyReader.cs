@@ -25,7 +25,7 @@ public class EasyReader
     /**
      * 是否输出进度
      */
-    boolean verbose = true;
+    bool verbose = true;
 
     /**
      * 构造
@@ -41,7 +41,7 @@ public class EasyReader
      * @param root 根目录
      * @param verbose 是否输出进度
      */
-    public EasyReader(String root, boolean verbose)
+    public EasyReader(String root, bool verbose)
     {
         this.root = root;
         this.verbose = verbose;
@@ -62,7 +62,7 @@ public class EasyReader
             files = rootFile.listFiles(new FileFilter()
             {
                 //@Override
-                public boolean accept(File pathname)
+                public bool accept(File pathname)
                 {
                     return pathname.isFile() && !pathname.getName().endsWith(".bin");
                 }

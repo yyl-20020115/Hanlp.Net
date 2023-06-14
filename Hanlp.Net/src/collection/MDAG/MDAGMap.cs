@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.collection.MDAG;
  * 最好不要把MDAG当map用，现在的实现在key后面放一个int，导致右语言全部不同，退化为bintrie
  * @author hankcs
  */
-public class MDAGMap<V> extends AbstractMap<String, V>
+public class MDAGMap<V> : AbstractMap<String, V>
 {
     ArrayList<V> valueList = new ArrayList<V>();
     MDAGForMap mdag = new MDAGForMap();
@@ -119,7 +119,7 @@ public class MDAGMap<V> extends AbstractMap<String, V>
         mdag.unSimplify();
     }
 
-    static class MDAGForMap extends MDAG
+    static class MDAGForMap : MDAG
     {
         static final char DELIMITER = Character.MIN_VALUE;
 

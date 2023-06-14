@@ -1,13 +1,12 @@
-package com.hankcs.hanlp.model.hmm;
+namespace com.hankcs.hanlp.model.hmm;
 
-import junit.framework.TestCase;
 
-public class HMMLexicalAnalyzerTest extends TestCase
+public class HMMLexicalAnalyzerTest : TestCase
 {
 
     public static final String CORPUS_PATH = "data/test/pku98/199801.txt";
 
-    public void testTrain() throws Exception
+    public void testTrain() 
     {
         HMMSegmenter segmenter = new HMMSegmenter();
         segmenter.train(CORPUS_PATH);
@@ -16,6 +15,6 @@ public class HMMLexicalAnalyzerTest extends TestCase
         HMMNERecognizer recognizer = new HMMNERecognizer();
         recognizer.train(CORPUS_PATH);
         HMMLexicalAnalyzer analyzer = new HMMLexicalAnalyzer(segmenter, tagger, recognizer);
-        System.out.println(analyzer.analyze("我的希望是希望人们幸福"));
+        Console.WriteLine(analyzer.analyze("我的希望是希望人们幸福"));
     }
 }

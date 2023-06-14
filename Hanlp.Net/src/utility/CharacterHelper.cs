@@ -6,25 +6,25 @@ namespace com.hankcs.hanlp.utility;
 public class CharacterHelper
 {
 
-    public static boolean isSpaceLetter(char input)
+    public static bool isSpaceLetter(char input)
     {
         return input == 8 || input == 9
                 || input == 10 || input == 13
                 || input == 32 || input == 160;
     }
 
-    public static boolean isEnglishLetter(char input)
+    public static bool isEnglishLetter(char input)
     {
         return (input >= 'a' && input <= 'z')
                 || (input >= 'A' && input <= 'Z');
     }
 
-    public static boolean isArabicNumber(char input)
+    public static bool isArabicNumber(char input)
     {
         return input >= '0' && input <= '9';
     }
 
-    public static boolean isCJKCharacter(char input)
+    public static bool isCJKCharacter(char input)
     {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(input);
         if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS

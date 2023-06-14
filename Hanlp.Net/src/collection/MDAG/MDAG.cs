@@ -89,7 +89,7 @@ public class MDAG : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         int length = byteArray.nextInt();
         for (int i = 0; i < length; ++i)
@@ -126,9 +126,9 @@ public class MDAG : ICacheAble
          * @param str2 字符串2
          * @return 是否满足自己这种关系
          */
-        public boolean satisfiesCondition(String str1, String str2)
+        public bool satisfiesCondition(String str1, String str2)
         {
-            boolean satisfiesSearchCondition;
+            bool satisfiesSearchCondition;
 
             switch (this)
             {
@@ -154,9 +154,9 @@ public class MDAG : ICacheAble
     /**
      * 从文件路径构造
      * @param path
-     * @throws IOException
+     * @
      */
-    public MDAG(String path) throws IOException
+    public MDAG(String path) 
     {
         this(IOUtil.newBufferedReader(path));
     }
@@ -170,7 +170,7 @@ public class MDAG : ICacheAble
      *                 containing the Strings that the MDAG will contain
      * @throws java.io.IOException if {@code datafile} cannot be opened, or a read operation on it cannot be carried out
      */
-    public MDAG(File dataFile) throws IOException
+    public MDAG(File dataFile) 
     {
         this(IOUtil.newBufferedReader(dataFile.getPath()));
     }
@@ -178,9 +178,9 @@ public class MDAG : ICacheAble
     /**
      * 从一个打开的BufferedReader构造
      * @param dataFileBufferedReader
-     * @throws IOException
+     * @
      */
-    public MDAG(BufferedReader dataFileBufferedReader) throws IOException
+    public MDAG(BufferedReader dataFileBufferedReader) 
     {
         String currentString = "";
         String previousString = "";
@@ -436,7 +436,7 @@ public class MDAG : ICacheAble
             /////
         }
         else
-            mpsIndex = -1;    //If the prevStr is a prefix of currStr, then currStr simply extends the right language of the _transition path of prevStr.
+            mpsIndex = -1;    //If the prevStr is a prefix of currStr, then currStr simply : the right language of the _transition path of prevStr.
 
         return mpsIndex;
     }
@@ -503,7 +503,7 @@ public class MDAG : ICacheAble
         }
         /////
 
-        boolean noConfluenceNode = (currentNode == originNode || currentIndex == charCount);
+        bool noConfluenceNode = (currentNode == originNode || currentIndex == charCount);
 
         //Create a HashMap containing the index of the last char in the substring corresponding
         //to the transitoin path to the confluence node, as well as the actual confluence node
@@ -574,7 +574,7 @@ public class MDAG : ICacheAble
             for (int i = 0; i < charCount; i++, transitionCount++)
             {
                 char currentChar = str.charAt(i);
-                boolean isLastChar = (i == charCount - 1);
+                bool isLastChar = (i == charCount - 1);
                 currentNode = currentNode.addOutgoingTransition(currentChar, isLastChar);
 
                 charTreeSet.add(currentChar);
@@ -822,7 +822,7 @@ public class MDAG : ICacheAble
      * @param str the String to be searched for
      * @return true if {@code str} is present in the MDAG, and false otherwise
      */
-    public boolean contains(String str)
+    public bool contains(String str)
     {
         if (sourceNode != null)      //if the MDAG hasn't been simplified
         {
@@ -1042,7 +1042,7 @@ public class MDAG : ICacheAble
      * true if the node is accepting, false otherwise
      * throws IllegalArgumentException      if {@code nodeObj} is not an MDAGNode or SimplifiedMDAGNode
      */
-    private static boolean isAcceptNode(Object nodeObj)
+    private static bool isAcceptNode(Object nodeObj)
     {
         if (nodeObj != null)
         {

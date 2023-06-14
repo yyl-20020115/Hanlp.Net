@@ -787,7 +787,7 @@ public class Nature
      * @param prefix 前缀
      * @return 是否以该前缀开头
      */
-    public boolean startsWith(String prefix)
+    public bool startsWith(String prefix)
     {
         return name.startsWith(prefix);
     }
@@ -799,7 +799,7 @@ public class Nature
      * @param prefix 前缀
      * @return 是否以该前缀开头
      */
-    public boolean startsWith(char prefix)
+    public bool startsWith(char prefix)
     {
         return name.charAt(0) == prefix;
     }

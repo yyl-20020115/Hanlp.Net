@@ -49,7 +49,7 @@ public class SegmentWrapper
         index = 0;
     }
 
-    public Term next() throws IOException
+    public Term next() 
     {
         if (termArray != null && index < termArray.length) return termArray[index++];
         String line = br.readLine();

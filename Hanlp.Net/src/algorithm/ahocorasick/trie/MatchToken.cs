@@ -3,25 +3,23 @@ namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 /**
  * 匹配到的片段
  */
-public class MatchToken extends Token
+public class MatchToken : Token
 {
 
     private Emit emit;
 
     public MatchToken(String fragment, Emit emit)
+        : base(fragment)
     {
-        super(fragment);
         this.emit = emit;
     }
 
-    //@Override
-    public boolean isMatch()
+    public override bool isMatch()
     {
         return true;
     }
 
-    //@Override
-    public Emit getEmit()
+    public override Emit getEmit()
     {
         return this.emit;
     }

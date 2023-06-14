@@ -38,7 +38,7 @@ class Word2VecTraining
         return config;
     }
 
-    static class TrainModelThread extends Thread
+    static class TrainModelThread : Thread
     {
         final Word2VecTraining vec;
         final Corpus corpus;
@@ -74,8 +74,8 @@ class Word2VecTraining
             final int numThreads = config.getNumThreads();
             final int window = config.getWindow();
             final int negative = config.getNegative();
-            final boolean cbow = config.useContinuousBagOfWords();
-            final boolean hs = config.useHierarchicalSoftmax();
+            final bool cbow = config.useContinuousBagOfWords();
+            final bool hs = config.useHierarchicalSoftmax();
             final float sample = config.getSample();
 
             try
@@ -313,7 +313,7 @@ class Word2VecTraining
 
     int threadCount;
 
-    public void trainModel() throws IOException
+    public void trainModel() 
     {
         final int layer1Size = config.getLayer1Size();
         TextFileCorpus corpus = new TextFileCorpus(config);

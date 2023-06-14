@@ -52,7 +52,7 @@ public class String2PinyinConverter
      * @param complexText
      * @return
      */
-    public static Pinyin[] convert2Array(String complexText, boolean removeTone)
+    public static Pinyin[] convert2Array(String complexText, bool removeTone)
     {
         return PinyinUtil.convertList2Array(convert(complexText, removeTone));
     }
@@ -90,7 +90,7 @@ public class String2PinyinConverter
      * @param removeTone 是否将所有的音调都同一化
      * @return
      */
-    public static List<Pinyin> convert(String complexText, boolean removeTone)
+    public static List<Pinyin> convert(String complexText, bool removeTone)
     {
         List<Pinyin> pinyinList = convert(complexText);
         if (removeTone)
@@ -106,7 +106,7 @@ public class String2PinyinConverter
      * @param removeTone
      * @return 一个键值对，键为拼音列表，值为类型（true表示这是一个拼音，false表示这是一个输入法头）
      */
-    public static Pair<List<Pinyin>, List<Boolean>> convert2Pair(String complexText, boolean removeTone)
+    public static Pair<List<Pinyin>, List<Boolean>> convert2Pair(String complexText, bool removeTone)
     {
         List<Pinyin> pinyinList = new LinkedList<Pinyin>();
         List<Boolean> booleanList = new LinkedList<Boolean>();

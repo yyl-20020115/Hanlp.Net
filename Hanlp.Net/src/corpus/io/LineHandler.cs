@@ -42,10 +42,10 @@ public abstract class LineHandler
         handle(tokenList.toArray(new String[0]));
     }
 
-    public void done() throws IOException
+    public void done() 
     {
         // do noting
     }
 
-    public abstract void handle(String[] params) throws IOException;
+    public abstract void handle(String[] params) ;
 }

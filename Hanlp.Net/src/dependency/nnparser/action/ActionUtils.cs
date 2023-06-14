@@ -18,12 +18,12 @@ namespace com.hankcs.hanlp.dependency.nnparser.action;
  */
 public class ActionUtils : ActionType
 {
-    public static boolean is_shift(final Action act)
+    public static bool is_shift(final Action act)
     {
         return (act.name() == kShift);
     }
 
-    public static boolean is_left_arc(final Action act, int[] deprel)
+    public static bool is_left_arc(final Action act, int[] deprel)
     {
         if (act.name() == kLeftArc)
         {
@@ -34,7 +34,7 @@ public class ActionUtils : ActionType
         return false;
     }
 
-    public static boolean is_right_arc(final Action act, int[] deprel)
+    public static bool is_right_arc(final Action act, int[] deprel)
     {
         if (act.name() == kRightArc)
         {
@@ -142,7 +142,7 @@ public class ActionUtils : ActionType
         int top0 = (sigma.size() > 0 ? sigma.get(sigma.size() - 1) : -1);
         int top1 = (sigma.size() > 1 ? sigma.get(sigma.size() - 2) : -1);
 
-        boolean all_descendents_reduced = true;
+        bool all_descendents_reduced = true;
         if (top0 >= 0)
         {
             for (int i = 0; i < heads.size(); ++i)

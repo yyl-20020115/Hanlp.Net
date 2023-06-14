@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.seg.Viterbi;
  *
  * @author hankcs
  */
-public class ViterbiSegment extends WordBasedSegment
+public class ViterbiSegment : WordBasedSegment
 {
     private DoubleArrayTrie<CoreDictionary.Attribute> dat = new DoubleArrayTrie<CoreDictionary.Attribute>();
 
@@ -41,7 +41,7 @@ public class ViterbiSegment extends WordBasedSegment
      * @param customPath customPath 自定义字典路径（绝对路径，多词典使用英文分号隔开）
      * @param cache      是否缓存词典
      */
-    public ViterbiSegment(String customPath, boolean cache)
+    public ViterbiSegment(String customPath, bool cache)
     {
         loadCustomDic(customPath, cache);
     }
@@ -178,7 +178,7 @@ public class ViterbiSegment extends WordBasedSegment
         return vertexList;
     }
 
-    private void loadCustomDic(String customPath, boolean isCache)
+    private void loadCustomDic(String customPath, bool isCache)
     {
         if (TextUtility.isBlank(customPath))
         {

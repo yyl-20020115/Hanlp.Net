@@ -23,47 +23,47 @@ public class Config
     /**
      * 是否识别中国人名
      */
-    public boolean nameRecognize = true;
+    public bool nameRecognize = true;
     /**
      * 是否识别音译人名
      */
-    public boolean translatedNameRecognize = true;
+    public bool translatedNameRecognize = true;
     /**
      * 是否识别日本人名
      */
-    public boolean japaneseNameRecognize = false;
+    public bool japaneseNameRecognize = false;
     /**
      * 是否识别地名
      */
-    public boolean placeRecognize = false;
+    public bool placeRecognize = false;
     /**
      * 是否识别机构
      */
-    public boolean organizationRecognize = false;
+    public bool organizationRecognize = false;
     /**
      * 是否加载用户词典
      */
-    public boolean useCustomDictionary = true;
+    public bool useCustomDictionary = true;
     /**
      * 用户词典高优先级
      */
-    public boolean forceCustomDictionary = false;
+    public bool forceCustomDictionary = false;
     /**
      * 词性标注
      */
-    public boolean speechTagging = false;
+    public bool speechTagging = false;
     /**
      * 命名实体识别是否至少有一项被激活
      */
-    public boolean ner = true;
+    public bool ner = true;
     /**
      * 是否计算偏移量
      */
-    public boolean offset = false;
+    public bool offset = false;
     /**
      * 是否识别数字和量词
      */
-    public boolean numberQuantifierRecognize = false;
+    public bool numberQuantifierRecognize = false;
     /**
      * 并行分词的线程数
      */
@@ -82,7 +82,7 @@ public class Config
      *
      * @return
      */
-    public boolean isIndexMode()
+    public bool isIndexMode()
     {
         return indexMode > 0;
     }

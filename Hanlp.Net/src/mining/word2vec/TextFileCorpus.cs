@@ -1,7 +1,7 @@
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
-public class TextFileCorpus extends Corpus
+public class TextFileCorpus : Corpus
 {
 
     private static final int VOCAB_MAX_SIZE = 30000000;
@@ -10,26 +10,26 @@ public class TextFileCorpus extends Corpus
     private BufferedReader raf = null;
     private DataOutputStream cache;
 
-    public TextFileCorpus(Config config) throws IOException
+    public TextFileCorpus(Config config) 
     {
         super(config);
     }
 
     //@Override
-    public void shutdown() throws IOException
+    public void shutdown() 
     {
         Utility.closeQuietly(raf);
         wordsBuffer = null;
     }
 
     //@Override
-    public void rewind(int numThreads, int id) throws IOException
+    public void rewind(int numThreads, int id) 
     {
         super.rewind(numThreads, id);
     }
 
     //@Override
-    public String nextWord() throws IOException
+    public String nextWord() 
     {
         return readWord(raf);
     }
@@ -96,7 +96,7 @@ public class TextFileCorpus extends Corpus
         minReduce++;
     }
 
-    public void learnVocab() throws IOException
+    public void learnVocab() 
     {
         vocab = new VocabWord[vocabMaxSize];
         vocabIndexMap = new TreeMap<String, Integer>();
@@ -177,9 +177,9 @@ public class TextFileCorpus extends Corpus
      *
      * @param raf
      * @return null if EOF
-     * @throws IOException
+     * @
      */
-    String readWord(BufferedReader raf) throws IOException
+    String readWord(BufferedReader raf) 
     {
         while (true)
         {

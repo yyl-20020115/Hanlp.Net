@@ -49,7 +49,7 @@ public abstract class TransformMatrix
      */
     int totalFrequency;
 
-    public boolean load(String path)
+    public bool load(String path)
     {
         try
         {

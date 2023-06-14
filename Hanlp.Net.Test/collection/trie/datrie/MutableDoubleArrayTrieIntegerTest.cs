@@ -1,19 +1,14 @@
-package com.hankcs.hanlp.collection.trie.datrie;
+namespace com.hankcs.hanlp.collection.trie.datrie;
 
-import com.hankcs.hanlp.corpus.io.ByteArray;
-import junit.framework.TestCase;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 
-public class MutableDoubleArrayTrieIntegerTest extends TestCase
+public class MutableDoubleArrayTrieIntegerTest : TestCase
 {
     MutableDoubleArrayTrieInteger mdat;
     private int size;
 
-    @Override
-    public void setUp() throws Exception
+    //@Override
+    public void setUp() 
     {
         mdat = new MutableDoubleArrayTrieInteger();
         size = 64;
@@ -23,7 +18,7 @@ public class MutableDoubleArrayTrieIntegerTest extends TestCase
         }
     }
 
-    public void testSaveLoad() throws Exception
+    public void testSaveLoad() 
     {
         File tempFile = File.createTempFile("hanlp", ".mdat");
         mdat.save(new DataOutputStream(new FileOutputStream(tempFile)));

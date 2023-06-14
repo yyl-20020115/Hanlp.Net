@@ -1,20 +1,16 @@
-package com.hankcs.hanlp.corpus.io;
+namespace com.hankcs.hanlp.corpus.io;
 
-import junit.framework.TestCase;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.util.Random;
 
-public class IOUtilTest extends TestCase
+public class IOUtilTest : TestCase
 {
-    public void testReadBytesFromOtherInputStream() throws Exception
+    public void testReadBytesFromOtherInputStream() 
     {
         Random random = new Random(System.currentTimeMillis());
         byte[] originalData = new byte[1024 * 1024]; // 1MB
         random.nextBytes(originalData);
         ByteArrayInputStream is = new ByteArrayInputStream(originalData){
-            @Override
+            //@Override
             public synchronized int available()
             {
                 int realAvailable = super.available();
@@ -33,7 +29,7 @@ public class IOUtilTest extends TestCase
         }
     }
 
-    public void testUTF8BOM() throws Exception
+    public void testUTF8BOM() 
     {
         File tempFile = File.createTempFile("hanlp-", ".txt");
         tempFile.deleteOnExit();

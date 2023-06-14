@@ -1,12 +1,11 @@
-package com.hankcs.hanlp.algorithm;
+namespace com.hankcs.hanlp.algorithm;
 
-import junit.framework.TestCase;
 
-public class LongestCommonSubsequenceTest extends TestCase
+public class LongestCommonSubsequenceTest : TestCase
 {
     String a = "Tom Hanks";
     String b = "Hankcs";
-    public void testCompute() throws Exception
+    public void testCompute() 
     {
         assertEquals(5, LongestCommonSubsequence.compute(a, b));
     }

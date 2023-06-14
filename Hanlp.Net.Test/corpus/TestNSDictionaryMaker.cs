@@ -1,9 +1,5 @@
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.corpus.dictionary.EasyDictionary;
-import com.hankcs.hanlp.corpus.dictionary.NSDictionaryMaker;
-import com.hankcs.hanlp.corpus.document.CorpusLoader;
-import com.hankcs.hanlp.corpus.document.Document;
 
 public class TestNSDictionaryMaker {
 
@@ -13,7 +9,7 @@ public class TestNSDictionaryMaker {
         final NSDictionaryMaker nsDictionaryMaker = new NSDictionaryMaker(dictionary);
         CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", new CorpusLoader.Handler()
         {
-            @Override
+            //@Override
             public void handle(Document document)
             {
                 nsDictionaryMaker.compute(document.getComplexSentenceList());

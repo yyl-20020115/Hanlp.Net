@@ -21,7 +21,7 @@ public class ComputeAccuracy
     final static int N = 1;                   // number of closest words
     final static int max_w = 50;              // max length of vocabulary entries
 
-    public static void main(String[] argv) throws IOException
+    public static void main(String[] argv) 
     {
         BufferedReader f;
         String st1 = null, st2, st3, st4;

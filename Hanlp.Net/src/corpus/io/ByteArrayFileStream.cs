@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.io;
  * 流式的字节数组，降低读取时的内存峰值
  * @author hankcs
  */
-public class ByteArrayFileStream extends ByteArrayStream
+public class ByteArrayFileStream : ByteArrayStream
 {
     private FileChannel fileChannel;
 
@@ -40,7 +40,7 @@ public class ByteArrayFileStream extends ByteArrayStream
         }
     }
 
-    public static ByteArrayFileStream createByteArrayFileStream(FileInputStream fileInputStream) throws IOException
+    public static ByteArrayFileStream createByteArrayFileStream(FileInputStream fileInputStream) 
     {
         FileChannel channel = fileInputStream.getChannel();
         long size = channel.size();
@@ -57,7 +57,7 @@ public class ByteArrayFileStream extends ByteArrayStream
     }
 
     //@Override
-    public boolean hasMore()
+    public bool hasMore()
     {
         return offset < bufferSize || fileChannel != null;
     }

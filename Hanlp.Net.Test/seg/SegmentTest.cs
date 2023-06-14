@@ -9,64 +9,42 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.seg;
+namespace com.hankcs.hanlp.seg;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.collection.AhoCorasick.AhoCorasickDoubleArrayTrie;
-import com.hankcs.hanlp.dictionary.CoreDictionary;
-import com.hankcs.hanlp.dictionary.CustomDictionary;
-import com.hankcs.hanlp.dictionary.other.CharTable;
-import com.hankcs.hanlp.dictionary.other.CharType;
-import com.hankcs.hanlp.seg.Dijkstra.DijkstraSegment;
-import com.hankcs.hanlp.seg.Other.CommonAhoCorasickSegmentUtil;
-import com.hankcs.hanlp.seg.Other.DoubleArrayTrieSegment;
-import com.hankcs.hanlp.seg.Viterbi.ViterbiSegment;
-import com.hankcs.hanlp.seg.common.ResultTerm;
-import com.hankcs.hanlp.seg.common.Term;
-import com.hankcs.hanlp.seg.common.wrapper.SegmentWrapper;
-import com.hankcs.hanlp.tokenizer.IndexTokenizer;
-import com.hankcs.hanlp.tokenizer.StandardTokenizer;
-import com.hankcs.hanlp.tokenizer.TraditionalChineseTokenizer;
-import junit.framework.TestCase;
 
-import java.io.BufferedReader;
-import java.io.StringReader;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.TreeMap;
 
 /**
  * @author hankcs
  */
-public class SegmentTest extends TestCase
+public class SegmentTest : TestCase
 {
-    public void testSeg() throws Exception
+    public void testSeg() 
     {
 //        HanLP.Config.enableDebug();
         Segment segment = new DijkstraSegment();
-//        System.out.println(segment.seg(
+//        Console.WriteLine(segment.seg(
 //                "我遗忘我的密码了"
 //        ));
     }
 
-    public void testIssue880() throws Exception
+    public void testIssue880() 
     {
 //        HanLP.Config.enableDebug();
         Segment segment = new DijkstraSegment();
-        System.out.println(segment.seg("龚学平等表示会保证金云鹏的安全"));
-        System.out.println(segment.seg("王中军代表蓝队发言"));
+        Console.WriteLine(segment.seg("龚学平等表示会保证金云鹏的安全"));
+        Console.WriteLine(segment.seg("王中军代表蓝队发言"));
     }
 
-    public void testViterbi() throws Exception
+    public void testViterbi() 
     {
 //        HanLP.Config.enableDebug(true);
         CustomDictionary.add("网剧");
         Segment seg = new DijkstraSegment();
         List<Term> termList = seg.seg("优酷总裁魏明介绍了优酷2015年的内容战略，表示要以“大电影、大网剧、大综艺”为关键词");
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
     }
 
-    public void testExtendViterbi() throws Exception
+    public void testExtendViterbi() 
     {
         HanLP.Config.enableDebug(false);
         String path = System.getProperty("user.dir") + "/" + "data/dictionary/custom/CustomDictionary.txt;" +
@@ -75,43 +53,43 @@ public class SegmentTest extends TestCase
         String text = "一半天帕克斯曼是走不出丁字桥镇的";
         Segment segment = HanLP.newSegment().enableCustomDictionary(false);
         Segment seg = new ViterbiSegment(path);
-        System.out.println("不启用字典的分词结果：" + segment.seg(text));
-        System.out.println("默认分词结果：" + HanLP.segment(text));
+        Console.WriteLine("不启用字典的分词结果：" + segment.seg(text));
+        Console.WriteLine("默认分词结果：" + HanLP.segment(text));
         seg.enableCustomDictionaryForcing(true).enableCustomDictionary(true);
         List<Term> termList = seg.seg(text);
-        System.out.println("自定义字典的分词结果：" + termList);
+        Console.WriteLine("自定义字典的分词结果：" + termList);
     }
 
-    public void testNotional() throws Exception
+    public void testNotional() 
     {
-//        System.out.println(NotionalTokenizer.segment("算法可以宽泛的分为三类"));
+//        Console.WriteLine(NotionalTokenizer.segment("算法可以宽泛的分为三类"));
     }
 
-    public void testNGram() throws Exception
+    public void testNGram() 
     {
-//        System.out.println(CoreBiGramTableDictionary.getBiFrequency("牺", "牲"));
+//        Console.WriteLine(CoreBiGramTableDictionary.getBiFrequency("牺", "牲"));
     }
 
-    public void testShortest() throws Exception
+    public void testShortest() 
     {
 //        HanLP.Config.enableDebug();
 //        Segment segment = new ViterbiSegment().enableAllNamedEntityRecognize(true);
-//        System.out.println(segment.seg("把市场经济奉行的等价交换原则引入党的生活和国家机关政务活动中"));
+//        Console.WriteLine(segment.seg("把市场经济奉行的等价交换原则引入党的生活和国家机关政务活动中"));
     }
 
-    public void testIndexSeg() throws Exception
+    public void testIndexSeg() 
     {
-//        System.out.println(IndexTokenizer.segment("中科院预测科学研究中心学术委员会"));
+//        Console.WriteLine(IndexTokenizer.segment("中科院预测科学研究中心学术委员会"));
     }
 
-    public void testOffset() throws Exception
+    public void testOffset() 
     {
         String text = "中华人民共和国在哪里";
 //        for (int i = 0; i < text.length(); ++i)
 //        {
 //            System.out.print(text.charAt(i) + "" + i + " ");
 //        }
-//        System.out.println();
+//        Console.WriteLine();
         List<Term> termList = IndexTokenizer.segment(text);
         for (Term term : termList)
         {
@@ -119,95 +97,95 @@ public class SegmentTest extends TestCase
         }
     }
 
-    public void testWrapper() throws Exception
+    public void testWrapper() 
     {
         SegmentWrapper wrapper = new SegmentWrapper(new BufferedReader(new StringReader("中科院预测科学研究中心学术委员会\nhaha")), StandardTokenizer.SEGMENT);
         Term fullTerm;
         while ((fullTerm = wrapper.next()) != null)
         {
-//            System.out.println(fullTerm);
+//            Console.WriteLine(fullTerm);
         }
     }
 
-    public void testSpeechTagging() throws Exception
+    public void testSpeechTagging() 
     {
 //        HanLP.Config.enableDebug();
         String text = "教授正在教授自然语言处理课程";
         DijkstraSegment segment = new DijkstraSegment();
 
-//        System.out.println("未标注：" + segment.seg(text));
+//        Console.WriteLine("未标注：" + segment.seg(text));
         segment.enablePartOfSpeechTagging(true);
-//        System.out.println("标注后：" + segment.seg(text));
+//        Console.WriteLine("标注后：" + segment.seg(text));
     }
 
-    public void testFactory() throws Exception
+    public void testFactory() 
     {
         Segment segment = HanLP.newSegment();
     }
 
-    public void testCustomDictionary() throws Exception
+    public void testCustomDictionary() 
     {
         CustomDictionary.insert("肯德基", "ns 1000");
         Segment segment = new ViterbiSegment();
-//        System.out.println(segment.seg("肯德基"));
+//        Console.WriteLine(segment.seg("肯德基"));
     }
 
-    public void testNT() throws Exception
+    public void testNT() 
     {
 //        HanLP.Config.enableDebug();
         Segment segment = new DijkstraSegment().enableOrganizationRecognize(true);
-//        System.out.println(segment.seg("张克智与潍坊地铁建设工程公司"));
+//        Console.WriteLine(segment.seg("张克智与潍坊地铁建设工程公司"));
     }
 
-    public void testACSegment() throws Exception
+    public void testACSegment() 
     {
         Segment segment = new DoubleArrayTrieSegment();
         segment.enablePartOfSpeechTagging(true);
-//        System.out.println(segment.seg("江西鄱阳湖干枯，中国最大淡水湖变成大草原"));
+//        Console.WriteLine(segment.seg("江西鄱阳湖干枯，中国最大淡水湖变成大草原"));
     }
 
-    public void testIssue2() throws Exception
+    public void testIssue2() 
     {
 //        HanLP.Config.enableDebug();
         String text = "BENQphone";
-//        System.out.println(HanLP.segment(text));
+//        Console.WriteLine(HanLP.segment(text));
         CustomDictionary.insert("BENQ");
-//        System.out.println(HanLP.segment(text));
+//        Console.WriteLine(HanLP.segment(text));
     }
 
-    public void testIssue3() throws Exception
+    public void testIssue3() 
     {
         assertEquals(CharType.CT_DELIMITER, CharType.get('*'));
-//        System.out.println(HanLP.segment("300g*2"));
-//        System.out.println(HanLP.segment("３００ｇ＊２"));
-//        System.out.println(HanLP.segment("鱼300克*2/组"));
+//        Console.WriteLine(HanLP.segment("300g*2"));
+//        Console.WriteLine(HanLP.segment("３００ｇ＊２"));
+//        Console.WriteLine(HanLP.segment("鱼300克*2/组"));
     }
 
-    public void testIssue313() throws Exception
+    public void testIssue313() 
     {
-//        System.out.println(HanLP.segment("hello\n" + "world"));
+//        Console.WriteLine(HanLP.segment("hello\n" + "world"));
     }
 
-    public void testQuickAtomSegment() throws Exception
+    public void testQuickAtomSegment() 
     {
         String text = "你好1234abc Good一二三四3.14";
-//        System.out.println(Segment.quickAtomSegment(text.toCharArray(), 0, text.length()));
+//        Console.WriteLine(Segment.quickAtomSegment(text.toCharArray(), 0, text.length()));
     }
 
-    public void testJP() throws Exception
+    public void testJP() 
     {
         String text = "明天8.9你好abc对了";
         Segment segment = new ViterbiSegment().enableCustomDictionary(false).enableAllNamedEntityRecognize(false);
-//        System.out.println(segment.seg(text));
+//        Console.WriteLine(segment.seg(text));
     }
 
-//    public void testSpeedOfSecondViterbi() throws Exception
+//    public void testSpeedOfSecondViterbi() 
 //    {
 //        String text = "王总和小丽结婚了";
 //        Segment segment = new ViterbiSegment().enableAllNamedEntityRecognize(false)
 //                .enableNameRecognize(false) // 人名识别需要二次维特比，比较慢
 //                .enableCustomDictionary(false);
-//        System.out.println(segment.seg(text));
+//        Console.WriteLine(segment.seg(text));
 //        long start = System.currentTimeMillis();
 //        int pressure = 1000000;
 //        for (int i = 0; i < pressure; ++i)
@@ -218,7 +196,7 @@ public class SegmentTest extends TestCase
 //        System.out.printf("分词速度：%.2f字每秒", text.length() * pressure / costTime);
 //    }
 
-    public void testNumberAndQuantifier() throws Exception
+    public void testNumberAndQuantifier() 
     {
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
         String[] testCase = new String[]
@@ -230,46 +208,46 @@ public class SegmentTest extends TestCase
             };
         for (String sentence : testCase)
         {
-//            System.out.println(StandardTokenizer.segment(sentence));
+//            Console.WriteLine(StandardTokenizer.segment(sentence));
         }
     }
 
-    public void testIssue10() throws Exception
+    public void testIssue10() 
     {
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
         IndexTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
         List termList = StandardTokenizer.segment("此帐号有欠费业务是什么");
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
         termList = IndexTokenizer.segment("此帐号有欠费业务是什么");
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
         termList = StandardTokenizer.segment("15307971214话费还有多少");
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
         termList = IndexTokenizer.segment("15307971214话费还有多少");
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
     }
 
-//    public void testIssue199() throws Exception
+//    public void testIssue199() 
 //    {
 //        Segment segment = new CRFSegment();
 //        segment.enableCustomDictionary(false);// 开启自定义词典
 //        segment.enablePartOfSpeechTagging(true);
 //        List<Term> termList = segment.seg("更多采购");
-////        System.out.println(termList);
+////        Console.WriteLine(termList);
 //        for (Term term : termList)
 //        {
 //            if (term.nature == null)
 //            {
-////                System.out.println("识别到新词：" + term.word);
+////                Console.WriteLine("识别到新词：" + term.word);
 //            }
 //        }
 //    }
 
-//    public void testMultiThreading() throws Exception
+//    public void testMultiThreading() 
 //    {
 //        Segment segment = BasicTokenizer.SEGMENT;
 //        // 测个速度
 //        String text = "江西鄱阳湖干枯，中国最大淡水湖变成大草原。";
-//        System.out.println(segment.seg(text));
+//        Console.WriteLine(segment.seg(text));
 //        int pressure = 100000;
 //        StringBuilder sbBigText = new StringBuilder(text.length() * pressure);
 //        for (int i = 0; i < pressure; i++)
@@ -301,64 +279,64 @@ public class SegmentTest extends TestCase
 //        }
 //    }
 
-//    public void testTryToCrashSegment() throws Exception
+//    public void testTryToCrashSegment() 
 //    {
 //        String text = "尝试玩坏分词器";
 //        Segment segment = new ViterbiSegment().enableMultithreading(100);
-//        System.out.println(segment.seg(text));
+//        Console.WriteLine(segment.seg(text));
 //    }
 
-//    public void testCRFSegment() throws Exception
+//    public void testCRFSegment() 
 //    {
 //        HanLP.Config.enableDebug();
 ////        HanLP.Config.ShowTermNature = false;
 //        Segment segment = new CRFSegment();
-//        System.out.println(segment.seg("有句谚语叫做一个萝卜一个坑儿"));
+//        Console.WriteLine(segment.seg("有句谚语叫做一个萝卜一个坑儿"));
 //    }
 
-    public void testIssue16() throws Exception
+    public void testIssue16() 
     {
         CustomDictionary.insert("爱听4g", "nz 1000");
         Segment segment = new ViterbiSegment();
-//        System.out.println(segment.seg("爱听4g"));
-//        System.out.println(segment.seg("爱听4G"));
-//        System.out.println(segment.seg("爱听４G"));
-//        System.out.println(segment.seg("爱听４Ｇ"));
-//        System.out.println(segment.seg("愛聽４Ｇ"));
+//        Console.WriteLine(segment.seg("爱听4g"));
+//        Console.WriteLine(segment.seg("爱听4G"));
+//        Console.WriteLine(segment.seg("爱听４G"));
+//        Console.WriteLine(segment.seg("爱听４Ｇ"));
+//        Console.WriteLine(segment.seg("愛聽４Ｇ"));
     }
 
-    public void testIssuse17() throws Exception
+    public void testIssuse17() 
     {
-//        System.out.println(CharType.get('\u0000'));
-//        System.out.println(CharType.get(' '));
+//        Console.WriteLine(CharType.get('\u0000'));
+//        Console.WriteLine(CharType.get(' '));
         assertEquals(CharTable.convert(' '), ' ');
-//        System.out.println(CharTable.convert('﹗'));
+//        Console.WriteLine(CharTable.convert('﹗'));
         HanLP.Config.Normalization = true;
-//        System.out.println(StandardTokenizer.segment("号 "));
+//        Console.WriteLine(StandardTokenizer.segment("号 "));
     }
 
-    public void testIssue22() throws Exception
+    public void testIssue22() 
     {
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(false);
         CoreDictionary.Attribute attribute = CoreDictionary.get("年");
-//        System.out.println(attribute);
+//        Console.WriteLine(attribute);
         List<Term> termList = StandardTokenizer.segment("三年");
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
         assertEquals(attribute.nature[0], termList.get(1).nature);
-//        System.out.println(StandardTokenizer.segment("三元"));
+//        Console.WriteLine(StandardTokenizer.segment("三元"));
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
-//        System.out.println(StandardTokenizer.segment("三年"));
+//        Console.WriteLine(StandardTokenizer.segment("三年"));
     }
 
-    public void testIssue71() throws Exception
+    public void testIssue71() 
     {
         Segment segment = HanLP.newSegment();
         segment = segment.enableAllNamedEntityRecognize(true);
         segment = segment.enableNumberQuantifierRecognize(true);
-//        System.out.println(segment.seg("曾幻想过，若干年后的我就是这个样子的吗"));
+//        Console.WriteLine(segment.seg("曾幻想过，若干年后的我就是这个样子的吗"));
     }
 
-    public void testIssue193() throws Exception
+    public void testIssue193() 
     {
         String[] testCase = new String[]{
             "以每台约200元的价格送到苹果售后维修中心换新机（苹果的保修基本是免费换新机）",
@@ -376,16 +354,16 @@ public class SegmentTest extends TestCase
         for (String sentence : testCase)
         {
             List<Term> termList = segment.seg(sentence);
-//            System.out.println(termList);
+//            Console.WriteLine(termList);
         }
     }
 
-    public void testTime() throws Exception
+    public void testTime() 
     {
         TraditionalChineseTokenizer.segment("认可程度");
     }
 
-    public void testBuildASimpleSegment() throws Exception
+    public void testBuildASimpleSegment() 
     {
         TreeMap<String, String> dictionary = new TreeMap<String, String>();
         dictionary.put("HanLP", "名词");
@@ -395,38 +373,38 @@ public class SegmentTest extends TestCase
         acdat.build(dictionary);
         LinkedList<ResultTerm<String>> termList =
             CommonAhoCorasickSegmentUtil.segment("HanLP是不是特别方便？", acdat);
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
     }
 
-    public void testNLPSegment() throws Exception
+    public void testNLPSegment() 
     {
         String text = "2013年4月27日11时54分";
-//        System.out.println(NLPTokenizer.segment(text));
+//        Console.WriteLine(NLPTokenizer.segment(text));
     }
 
-    public void testTraditionalSegment() throws Exception
+    public void testTraditionalSegment() 
     {
         String text = "吵架吵到快取消結婚了";
-//        System.out.println(TraditionalChineseTokenizer.segment(text));
+//        Console.WriteLine(TraditionalChineseTokenizer.segment(text));
     }
 
-    public void testIssue290() throws Exception
+    public void testIssue290() 
     {
 //        HanLP.Config.enableDebug();
         String txt = "而其他肢解出去的七个贝尔公司如西南贝尔、太平洋贝尔、大西洋贝尔。";
         Segment seg_viterbi = new ViterbiSegment().enablePartOfSpeechTagging(true).enableOffset(true).enableNameRecognize(true).enablePlaceRecognize(true).enableOrganizationRecognize(true).enableNumberQuantifierRecognize(true);
-//        System.out.println(seg_viterbi.seg(txt));
+//        Console.WriteLine(seg_viterbi.seg(txt));
     }
 
-    public void testIssue343() throws Exception
+    public void testIssue343() 
     {
         CustomDictionary.insert("酷我");
         CustomDictionary.insert("酷我音乐");
         Segment segment = HanLP.newSegment().enableIndexMode(true);
-//        System.out.println(segment.seg("1酷我音乐2酷我音乐3酷我4酷我音乐6酷7酷我音乐"));
+//        Console.WriteLine(segment.seg("1酷我音乐2酷我音乐3酷我4酷我音乐6酷7酷我音乐"));
     }
 
-    public void testIssue358() throws Exception
+    public void testIssue358() 
     {
 //        HanLP.Config.enableDebug();
         String text = "受约束，需要遵守心理学会所定的道德原则，所需要时须说明该实验与所能得到的知识的关系";
@@ -434,26 +412,26 @@ public class SegmentTest extends TestCase
         Segment segment = StandardTokenizer.SEGMENT.enableAllNamedEntityRecognize(false).enableCustomDictionary(false)
             .enableOrganizationRecognize(true);
 
-//        System.out.println(segment.seg(text));
+//        Console.WriteLine(segment.seg(text));
     }
 
-    public void testIssue496() throws Exception
+    public void testIssue496() 
     {
         Segment segment = HanLP.newSegment().enableIndexMode(true);
-//        System.out.println(segment.seg("中医药"));
-//        System.out.println(segment.seg("中医药大学"));
+//        Console.WriteLine(segment.seg("中医药"));
+//        Console.WriteLine(segment.seg("中医药大学"));
     }
 
-    public void testIssue513() throws Exception
+    public void testIssue513() 
     {
         List<Term> termList = IndexTokenizer.segment("南京市长江大桥");
         for (Term term : termList)
         {
-//            System.out.println(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
+//            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
         }
     }
 
-    public void testIssue519() throws Exception
+    public void testIssue519() 
     {
         String[] testCase = new String[]{
             "评审委员会",
@@ -463,39 +441,39 @@ public class SegmentTest extends TestCase
         };
         for (String sentence : testCase)
         {
-//            System.out.println(sentence);
+//            Console.WriteLine(sentence);
             List<Term> termList = IndexTokenizer.segment(sentence);
             for (Term term : termList)
             {
-//                System.out.println(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
+//                Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
             }
-//            System.out.println();
+//            Console.WriteLine();
         }
     }
 
-    public void testIssue542() throws Exception
+    public void testIssue542() 
     {
         Segment seg = HanLP.newSegment();
         seg.enableAllNamedEntityRecognize(true);
         seg.enableNumberQuantifierRecognize(true);
-//        System.out.println(seg.seg("一分钟就累了"));
+//        Console.WriteLine(seg.seg("一分钟就累了"));
     }
 
-    public void testIssue623() throws Exception
+    public void testIssue623() 
     {
         StandardTokenizer.SEGMENT.enableCustomDictionary(false);
-//        System.out.println(HanLP.segment("赵四158开头的号码"));
-//        System.out.println(HanLP.segment("上周四18:00召开股东大会"));
+//        Console.WriteLine(HanLP.segment("赵四158开头的号码"));
+//        Console.WriteLine(HanLP.segment("上周四18:00召开股东大会"));
     }
 
-    public void testIssue633() throws Exception
+    public void testIssue633() 
     {
         CustomDictionary.add("钱管家");
         StandardTokenizer.SEGMENT.enableCustomDictionaryForcing(true);
-//        System.out.println(HanLP.segment("钱管家中怎么绑定网银"));
+//        Console.WriteLine(HanLP.segment("钱管家中怎么绑定网银"));
     }
 
-    public void testIssue784() throws Exception
+    public void testIssue784() 
     {
         String s = "苏苏中级会计什么时候更新";
         CustomDictionary.add("苏苏");
@@ -503,26 +481,26 @@ public class SegmentTest extends TestCase
         assertTrue(HanLP.segment(s).toString().contains("苏苏"));
     }
 
-    public void testIssue790() throws Exception
+    public void testIssue790() 
     {
         Segment seg = HanLP.newSegment();
         seg.enableOrganizationRecognize(true);
         seg.enableNumberQuantifierRecognize(true);
 
         String raw = "1名卫技人员资源和社会保障局余姚市";
-//        System.out.println(seg.seg(raw));
+//        Console.WriteLine(seg.seg(raw));
         seg.seg(raw);
     }
 
-    public void testTimeIssue() throws Exception
+    public void testTimeIssue() 
     {
         assertTrue(HanLP.segment("1月中旬应该会发生什么").toString().contains("1月"));
     }
 
-    public void testIssue932() throws Exception
+    public void testIssue932() 
     {
         Segment segment = new DijkstraSegment().enableOrganizationRecognize(true);
         HanLP.Config.enableDebug();
-        System.out.println(segment.seg("福哈生态工程有限公司"));
+        Console.WriteLine(segment.seg("福哈生态工程有限公司"));
     }
 }

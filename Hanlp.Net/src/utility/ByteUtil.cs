@@ -271,12 +271,12 @@ public class ByteUtil
      * 无符号整型输出
      * @param out
      * @param uint
-     * @throws IOException
+     * @
      */
-    public static void writeUnsignedInt(DataOutputStream out, int uint) throws IOException
+    public static void writeUnsignedInt(DataOutputStream _out, int uint) 
     {
-        out.writeByte((byte) ((uint >>> 8) & 0xFF));
-        out.writeByte((byte) ((uint >>> 0) & 0xFF));
+        _out.writeByte((byte) ((uint >>> 8) & 0xFF));
+        _out.writeByte((byte) ((uint >>> 0) & 0xFF));
     }
 
     public static int convertTwoCharToInt(char high, char low)

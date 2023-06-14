@@ -201,9 +201,9 @@ public class AhoCorasickDoubleArrayTrie<V>
      * 持久化
      *
      * @param out 一个ObjectOutputStream
-     * @throws IOException 可能的IO异常
+     * @ 可能的IO异常
      */
-    public void save(ObjectOutputStream out) throws IOException
+    public void save(ObjectOutputStream out) 
     {
         out.writeObject(base);
         out.writeObject(check);
@@ -217,10 +217,10 @@ public class AhoCorasickDoubleArrayTrie<V>
      *
      * @param in    一个ObjectInputStream
      * @param value 值（持久化的时候并没有持久化值，现在需要额外提供）
-     * @throws IOException
+     * @
      * @throws ClassNotFoundException
      */
-    public void load(ObjectInputStream in, V[] value) throws IOException, ClassNotFoundException
+    public void load(ObjectInputStream in, V[] value) , ClassNotFoundException
     {
         base = (int[]) in.readObject();
         check = (int[]) in.readObject();
@@ -237,7 +237,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param value     值数组
      * @return 成功与否
      */
-    public boolean load(ByteArray byteArray, V[] value)
+    public bool load(ByteArray byteArray, V[] value)
     {
         if (byteArray == null) return false;
         size = byteArray.nextInt();
@@ -293,7 +293,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param value 值
      * @return 是否成功（失败的原因是没有这个键）
      */
-    public boolean set(String key, V value)
+    public bool set(String key, V value)
     {
         int index = exactMatchSearch(key);
         if (index >= 0)
@@ -734,7 +734,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         /**
          * 是否占用，仅仅用于构建
          */
-        private boolean used[];
+        private bool used[];
         /**
          * 已分配在内存中的大小
          */
@@ -755,7 +755,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         /**
          * 由一个排序好的map创建
          */
-        @SuppressWarnings("unchecked")
+        
         public void build(TreeMap<String, V> map)
         {
             // 把值保存下来
@@ -887,7 +887,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         {
             int[] base2 = new int[newSize];
             int[] check2 = new int[newSize];
-            boolean used2[] = new boolean[newSize];
+            bool used2[] = new bool[newSize];
             if (allocSize > 0)
             {
                 System.arraycopy(base, 0, base2, 0, allocSize);

@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.suggest.scorer.pinyin;
  * 拼音打分器
  * @author hankcs
  */
-public class PinyinScorer extends BaseScorer<PinyinKey>
+public class PinyinScorer : BaseScorer<PinyinKey>
 {
     //@Override
     protected PinyinKey generateKey(String sentence)

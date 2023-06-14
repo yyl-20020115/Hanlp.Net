@@ -17,20 +17,20 @@ namespace com.hankcs.hanlp.mining.word2vec;
  *
  * @author hankcs
  */
-public class WordVectorModel extends AbstractVectorModel<String>
+public class WordVectorModel : AbstractVectorModel<String>
 {
     /**
      * 加载模型<br>
      *
      * @param modelFileName 模型路径
-     * @throws IOException 加载错误
+     * @ 加载错误
      */
-    public WordVectorModel(String modelFileName) throws IOException
+    public WordVectorModel(String modelFileName) 
     {
         super(loadVectorMap(modelFileName));
     }
 
-    private static TreeMap<String, Vector> loadVectorMap(String modelFileName) throws IOException
+    private static TreeMap<String, Vector> loadVectorMap(String modelFileName) 
     {
         VectorsReader reader = new VectorsReader(modelFileName);
         reader.readVectorFile();

@@ -24,7 +24,7 @@ public class State
     /**
      * 模式串的长度，也是这个状态的深度
      */
-    protected final int depth;
+    protected readonly int depth;
 
     /**
      * fail 函数，如果没有匹配到，则跳转到此状态。
@@ -34,11 +34,11 @@ public class State
     /**
      * 只要这个状态可达，则记录模式串
      */
-    private Set<String> emits = null;
+    private HashSet<String> emits = null;
     /**
      * goto 表，也称转移函数。根据字符串的下一个字符转移到下一个状态
      */
-    private Map<Character, State> success = new TreeMap<Character, State>();
+    private Dictionary<char, State> success = new ();
 
     /**
      * 构造深度为0的节点
@@ -124,7 +124,7 @@ public class State
      * @param ignoreRootState 是否忽略根节点，如果是根节点自己调用则应该是true，否则为false
      * @return 转移结果
      */
-    private State nextState(Character character, boolean ignoreRootState)
+    private State nextState(char character, bool ignoreRootState)
     {
         State nextState = this.success.get(character);
         if (!ignoreRootState && nextState == null && this.depth == 0)
@@ -139,7 +139,7 @@ public class State
      * @param character
      * @return
      */
-    public State nextState(Character character)
+    public State nextState(char character)
     {
         return nextState(character, false);
     }
@@ -149,12 +149,12 @@ public class State
      * @param character
      * @return
      */
-    public State nextStateIgnoreRootState(Character character)
+    public State nextStateIgnoreRootState(char character)
     {
         return nextState(character, true);
     }
 
-    public State addState(Character character)
+    public State addState(char character)
     {
         State nextState = nextStateIgnoreRootState(character);
         if (nextState == null)
@@ -170,7 +170,7 @@ public class State
         return this.success.values();
     }
 
-    public Collection<Character> getTransitions()
+    public Collection<char> getTransitions()
     {
         return this.success.keySet();
     }

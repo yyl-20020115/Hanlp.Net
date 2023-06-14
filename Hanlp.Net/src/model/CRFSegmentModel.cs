@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.model;
  * @author hankcs
  */
 //  * @deprecated 已废弃，请使用功能更丰富、设计更优雅的{@link com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer}。
-public final class CRFSegmentModel extends CRFModel
+public final class CRFSegmentModel : CRFModel
 {
     private int idM;
     private int idE;
@@ -53,9 +53,9 @@ public final class CRFSegmentModel extends CRFModel
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
-        boolean result = super.load(byteArray);
+        bool result = super.load(byteArray);
         if (result)
         {
             initTagSet();

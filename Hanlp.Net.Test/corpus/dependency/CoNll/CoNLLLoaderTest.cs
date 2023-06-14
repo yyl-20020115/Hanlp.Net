@@ -1,20 +1,10 @@
-package com.hankcs.hanlp.corpus.dependency.CoNll;
+namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
-import com.hankcs.hanlp.corpus.dictionary.DictionaryMaker;
-import com.hankcs.hanlp.corpus.dictionary.item.Item;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import junit.framework.TestCase;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.Set;
 
-public class CoNLLLoaderTest extends TestCase
+public class CoNLLLoaderTest : TestCase
 {
-//    public void testConvert() throws Exception
+//    public void testConvert() 
 //    {
 //        LinkedList<CoNLLSentence> coNLLSentences = CoNLLLoader.loadSentenceList("D:\\Doc\\语料库\\依存分析训练数据\\THU\\dev.conll.fixed.txt");
 //    }
@@ -22,9 +12,9 @@ public class CoNLLLoaderTest extends TestCase
 //    /**
 //     * 细粒度转粗粒度
 //     *
-//     * @throws Exception
+//     * @
 //     */
-//    public void testPosTag() throws Exception
+//    public void testPosTag() 
 //    {
 //        DictionaryMaker dictionaryMaker = new DictionaryMaker();
 //        LinkedList<CoNLLSentence> coNLLSentences = CoNLLLoader.loadSentenceList("D:\\Doc\\语料库\\依存分析训练数据\\THU\\dev.conll.fixed.txt");
@@ -35,15 +25,15 @@ public class CoNLLLoaderTest extends TestCase
 //                dictionaryMaker.add(new Item(coNLLWord.POSTAG, coNLLWord.CPOSTAG));
 //            }
 //        }
-//        System.out.println(dictionaryMaker.entrySet());
+//        Console.WriteLine(dictionaryMaker.entrySet());
 //    }
 //
 //    /**
 //     * 导出CRF训练语料
 //     *
-//     * @throws Exception
+//     * @
 //     */
-//    public void testMakeCRF() throws Exception
+//    public void testMakeCRF() 
 //    {
 //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Tools\\CRF++-0.58\\example\\dependency\\dev.txt")));
 //        LinkedList<CoNLLSentence> coNLLSentences = CoNLLLoader.loadSentenceList("D:\\Doc\\语料库\\依存分析训练数据\\THU\\dev.conll.fixed.txt");
@@ -92,9 +82,9 @@ public class CoNLLLoaderTest extends TestCase
 //    /**
 //     * 生成CRF模板
 //     *
-//     * @throws Exception
+//     * @
 //     */
-//    public void testMakeCRFTemplate() throws Exception
+//    public void testMakeCRFTemplate() 
 //    {
 //        Set<String> templateList = new LinkedHashSet<String>();
 //        int maxDistance = 4;
@@ -168,11 +158,11 @@ public class CoNLLLoaderTest extends TestCase
 //            sb.append(String.format("U%d:%s\n", id, template));
 //            ++id;
 //        }
-//        System.out.println(sb.toString());
+//        Console.WriteLine(sb.toString());
 //        IOUtil.saveTxt("D:\\Tools\\CRF++-0.58\\example\\dependency\\template.txt", sb);
 //    }
 //
-//    public void testMakeSimpleCRFTemplate() throws Exception
+//    public void testMakeSimpleCRFTemplate() 
 //    {
 //        Set<String> templateList = new LinkedHashSet<String>();
 //        int maxDistance = 4;
@@ -211,7 +201,7 @@ public class CoNLLLoaderTest extends TestCase
 //            sb.append(String.format("U%d:%s\n", id, template));
 //            ++id;
 //        }
-//        System.out.println(sb.toString());
+//        Console.WriteLine(sb.toString());
 //        IOUtil.saveTxt("D:\\Tools\\CRF++-0.58\\example\\dependency\\template.txt", sb);
 //    }
 }

@@ -4,12 +4,12 @@ namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 /**
  * 一个模式串匹配结果
  */
-public class Emit extends Interval : Intervalable
+public class Emit : Interval , Intervalable
 {
     /**
      * 匹配到的模式串
      */
-    private final String keyword;
+    private readonly string keyword;
 
     /**
      * 构造一个模式串匹配结果
@@ -17,9 +17,9 @@ public class Emit extends Interval : Intervalable
      * @param end 重点
      * @param keyword 模式串
      */
-    public Emit(final int start, final int end, final String keyword)
+    public Emit(int start, int end, String keyword)
+        :base(start, end)
     {
-        super(start, end);
         this.keyword = keyword;
     }
 
@@ -33,7 +33,7 @@ public class Emit extends Interval : Intervalable
     }
 
     //@Override
-    public String toString()
+    public override String ToString()
     {
         return super.toString() + "=" + this.keyword;
     }

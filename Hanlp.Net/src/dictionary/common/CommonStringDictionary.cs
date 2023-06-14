@@ -22,7 +22,7 @@ namespace com.hankcs.hanlp.dictionary.common;
 public class CommonStringDictionary
 {
     BinTrie<Byte> trie;
-    public boolean load(String path)
+    public bool load(String path)
     {
         trie = new BinTrie<Byte>();
         if (loadDat(path + Predefine.TRIE_EXT)) return true;
@@ -44,7 +44,7 @@ public class CommonStringDictionary
         return true;
     }
 
-    boolean loadDat(String path)
+    bool loadDat(String path)
     {
         return trie.load(path);
     }

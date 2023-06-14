@@ -82,7 +82,7 @@ public class CoreSynonymDictionary
     {
         CommonSynonymDictionary.SynonymItem itemA = get(A);
         CommonSynonymDictionary.SynonymItem itemB = get(B);
-        if (itemA == null || itemB == null) return Long.MAX_VALUE;
+        if (itemA == null || itemB == null) return long.MAX_VALUE;
 
         return distance(itemA, itemB);
     }
@@ -107,7 +107,7 @@ public class CoreSynonymDictionary
      * @param withUndefinedItem 是否保留词典中没有的词语
      * @return
      */
-    public static List<CommonSynonymDictionary.SynonymItem> convert(List<Term> sentence, boolean withUndefinedItem)
+    public static List<CommonSynonymDictionary.SynonymItem> convert(List<Term> sentence, bool withUndefinedItem)
     {
         List<CommonSynonymDictionary.SynonymItem> synonymItemList = new ArrayList<CommonSynonymDictionary.SynonymItem>(sentence.size());
         for (Term term : sentence)

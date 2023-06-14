@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.suggest.scorer.editdistance;
  * 编辑距离打分器
  * @author hankcs
  */
-public class EditDistanceScorer extends BaseScorer<CharArray>
+public class EditDistanceScorer : BaseScorer<CharArray>
 {
     //@Override
     protected CharArray generateKey(String sentence)

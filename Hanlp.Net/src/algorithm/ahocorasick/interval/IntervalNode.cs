@@ -1,5 +1,6 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.interval;
 
+using System.Collections.Generic;
 
 /**
  * 线段树上面的节点，实际上是一些区间的集合，并且按中点维护了两个节点
@@ -9,7 +10,7 @@ public class IntervalNode
     /**
      * 方向
      */
-    private enum Direction
+    private enum Direction : int
     {
         LEFT, RIGHT
     }
@@ -29,7 +30,7 @@ public class IntervalNode
     /**
      * 区间集合
      */
-    private List<Intervalable> intervals = new ArrayList<Intervalable>();
+    private List<Intervalable> intervals = new List<Intervalable>();
 
     /**
      * 构造一个节点
@@ -39,7 +40,7 @@ public class IntervalNode
     {
         this.point = determineMedian(intervals);
 
-        List<Intervalable> toLeft = new ArrayList<Intervalable>();  // 以中点为界靠左的区间
+        List<Intervalable> toLeft = new List<Intervalable>();  // 以中点为界靠左的区间
         List<Intervalable> toRight = new ArrayList<Intervalable>(); // 靠右的区间
 
         for (Intervalable interval : intervals)

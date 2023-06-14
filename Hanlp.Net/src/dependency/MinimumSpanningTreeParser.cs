@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.dependency;
 /**
  * @author hankcs
  */
-public abstract class MinimumSpanningTreeParser extends AbstractDependencyParser
+public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
 {
     //@Override
     public CoNLLSentence parse(List<Term> termList)
@@ -44,7 +44,7 @@ public abstract class MinimumSpanningTreeParser extends AbstractDependencyParser
         int max_v = nodeArray.length * (nodeArray.length - 1);
         float[] mincost = new float[max_v];
         Arrays.fill(mincost, Float.MAX_VALUE / 3);
-        boolean[] used = new boolean[max_v];
+        bool[] used = new bool[max_v];
         Arrays.fill(used, false);
         used[0] = true;
         PriorityQueue<State> que = new PriorityQueue<State>();

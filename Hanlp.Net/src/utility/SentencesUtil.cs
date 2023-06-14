@@ -25,7 +25,7 @@ public class SentencesUtil
      * @param shortest 是否切割为最细的单位（将逗号也视作分隔符）
      * @return
      */
-    public static List<String> toSentenceList(String content, boolean shortest)
+    public static List<String> toSentenceList(String content, bool shortest)
     {
         return toSentenceList(content.toCharArray(), shortest);
     }
@@ -35,7 +35,7 @@ public class SentencesUtil
         return toSentenceList(chars, true);
     }
 
-    public static List<String> toSentenceList(char[] chars, boolean shortest)
+    public static List<String> toSentenceList(char[] chars, bool shortest)
     {
 
         StringBuilder sb = new StringBuilder();
@@ -118,7 +118,7 @@ public class SentencesUtil
      * @param nature
      * @return
      */
-    public static boolean hasNature(List<Term> sentence, Nature nature)
+    public static bool hasNature(List<Term> sentence, Nature nature)
     {
         for (Term term : sentence)
         {

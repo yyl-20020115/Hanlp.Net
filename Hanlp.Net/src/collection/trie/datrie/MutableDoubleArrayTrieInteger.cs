@@ -49,7 +49,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      *
      * @param exponentialExpanding
      */
-    public void setExponentialExpanding(boolean exponentialExpanding)
+    public void setExponentialExpanding(bool exponentialExpanding)
     {
         check.setExponentialExpanding(exponentialExpanding);
         base.setExponentialExpanding(exponentialExpanding);
@@ -119,7 +119,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return count;
     }
 
-    private boolean isLeafValue(int value)
+    private bool isLeafValue(int value)
     {
         return (value > 0) && ((value & LEAF_BIT) != 0);
     }
@@ -171,7 +171,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         this.check.set(index, value);
     }
 
-    protected boolean isEmpty(int index)
+    protected bool isEmpty(int index)
     {
         return getCheck(index) <= 0;
     }
@@ -243,7 +243,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param overwrite 是否覆盖
      * @return
      */
-    public boolean insert(String key, int value, boolean overwrite)
+    public bool insert(String key, int value, bool overwrite)
     {
         if ((null == key) || key.length() == 0 || (key.indexOf(UNUSED_CHAR) != -1))
         {
@@ -314,7 +314,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             if (current > minChild + 1)
             {
                 int base = current - minChild;
-                boolean ok = true;
+                bool ok = true;
                 for (Iterator<Integer> it = children.iterator(); it.hasNext(); ) // 检查是否每个子节点的位置都空闲（“连续”区间）
                 {
                     int to = base + it.next();
@@ -408,7 +408,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return this.size;
     }
 
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return size == 0;
     }
@@ -420,7 +420,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return
      */
-    public boolean insert(String key, int value)
+    public bool insert(String key, int value)
     {
         return insert(key, value, true);
     }
@@ -432,7 +432,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return
      */
-    public boolean add(String key, int value)
+    public bool add(String key, int value)
     {
         return insert(key, value, false);
     }
@@ -443,7 +443,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param key
      * @return
      */
-    public boolean add(String key)
+    public bool add(String key)
     {
         return add(key, size);
     }
@@ -567,7 +567,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         for (int i = start; i < query.length(); i += charCount)
         {
             int codePoint = query.codePointAt(i);
-            charCount = Character.charCount(codePoint);
+            charCount = char.charCount(codePoint);
             int[] res = transferValues(curState, codePoint);
             if (res[0] == -1)
             {
@@ -596,7 +596,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         for (int i = start; i < query.length(); i += charCount)
         {
             int codePoint = query.codePointAt(i);
-            charCount = Character.charCount(codePoint);
+            charCount = char.charCount(codePoint);
             int[] res = transferValues(curState, codePoint);
             if (res[0] == -1)
             {
@@ -814,7 +814,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return 是否设置成功（失败的原因是键值不合法）
      */
-    public boolean set(String key, int value)
+    public bool set(String key, int value)
     {
         return insert(key, value, true);
     }
@@ -826,7 +826,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return 是否设置成功（失败的原因是键值不合法）
      */
-    public boolean put(String key, int value)
+    public bool put(String key, int value)
     {
         return insert(key, value, true);
     }
@@ -880,7 +880,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                 path[(path.length - 1)] = (getBase(curState) + UNUSED_CHAR_VALUE);
                 for (int j = path.length - 1; j >= 0; --j)
                 {
-                    boolean isLeaf = true;
+                    bool isLeaf = true;
                     int state = path[j];
                     for (int k = 0; k < this.charMap.getCharsetSize(); k++)
                     {
@@ -945,13 +945,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public boolean isEmpty()
+            public bool isEmpty()
             {
                 return MutableDoubleArrayTrieInteger.this.isEmpty();
             }
 
             //@Override
-            public boolean contains(Object o)
+            public bool contains(Object o)
             {
                 throw new UnsupportedOperationException();
             }
@@ -964,7 +964,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                     KeyValuePair iterator = MutableDoubleArrayTrieInteger.this.iterator();
 
                     //@Override
-                    public boolean hasNext()
+                    public bool hasNext()
                     {
                         return iterator.hasNext();
                     }
@@ -1002,37 +1002,37 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public boolean add(Map.Entry<String, Integer> stringIntegerEntry)
+            public bool add(Map.Entry<String, Integer> stringIntegerEntry)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean remove(Object o)
+            public bool remove(Object o)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean containsAll(Collection<?> c)
+            public bool containsAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean addAll(Collection<? extends Map.Entry<String, Integer>> c)
+            public bool addAll(Collection<? : Map.Entry<String, Integer>> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean retainAll(Collection<?> c)
+            public bool retainAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean removeAll(Collection<?> c)
+            public bool removeAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1051,7 +1051,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return new KeyValuePair();
     }
 
-    public boolean containsKey(String key)
+    public bool containsKey(String key)
     {
         return get(key) != -1;
     }
@@ -1067,13 +1067,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public boolean isEmpty()
+            public bool isEmpty()
             {
                 return MutableDoubleArrayTrieInteger.this.isEmpty();
             }
 
             //@Override
-            public boolean contains(Object o)
+            public bool contains(Object o)
             {
                 return MutableDoubleArrayTrieInteger.this.containsKey((String) o);
             }
@@ -1092,7 +1092,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                     }
 
                     //@Override
-                    public boolean hasNext()
+                    public bool hasNext()
                     {
                         return iterator.hasNext();
                     }
@@ -1118,37 +1118,37 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public boolean add(String s)
+            public bool add(String s)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean remove(Object o)
+            public bool remove(Object o)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean containsAll(Collection<?> c)
+            public bool containsAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean addAll(Collection<? extends String> c)
+            public bool addAll(Collection<? : String> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean retainAll(Collection<?> c)
+            public bool retainAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean removeAll(Collection<?> c)
+            public bool removeAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1162,7 +1162,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
     }
 
     //@Override
-    public void save(DataOutputStream out) throws IOException
+    public void save(DataOutputStream out) 
     {
         if (!(charMap instanceof Utf8CharacterMapping))
         {
@@ -1174,7 +1174,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         size = byteArray.nextInt();
         if (!base.load(byteArray)) return false;
@@ -1182,14 +1182,14 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return true;
     }
 
-    private void writeObject(ObjectOutputStream out) throws IOException
+    private void writeObject(ObjectOutputStream out) 
     {
         out.writeInt(size);
         out.writeObject(base);
         out.writeObject(check);
     }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+    private void readObject(ObjectInputStream in) , ClassNotFoundException
     {
         size = in.readInt();
         base = (IntArrayList) in.readObject();
@@ -1289,7 +1289,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         }
 
         //@Override
-        public boolean hasNext()
+        public bool hasNext()
         {
             return index < size;
         }

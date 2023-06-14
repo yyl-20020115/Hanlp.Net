@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.classification.corpus;
  *
  * @author hankcs
  */
-public interface IDataSet extends Iterable<Document>
+public interface IDataSet : Iterable<Document>
 {
     /**
      * 加载数据集
@@ -36,7 +36,7 @@ public interface IDataSet extends Iterable<Document>
      *                   文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
      * @return
      * @throws IllegalArgumentException
-     * @throws IOException
+     * @
      */
     IDataSet load(String folderPath) throws IllegalArgumentException, IOException;
     IDataSet load(String folderPath, double rate) throws IllegalArgumentException, IOException;
@@ -58,7 +58,7 @@ public interface IDataSet extends Iterable<Document>
      * @param charsetName 文件编码
      * @return
      * @throws IllegalArgumentException
-     * @throws IOException
+     * @
      */
     IDataSet load(String folderPath, String charsetName) throws IllegalArgumentException, IOException;
     IDataSet load(String folderPath, String charsetName, double percentage) throws IllegalArgumentException, IOException;
@@ -127,7 +127,7 @@ public interface IDataSet extends Iterable<Document>
      *
      * @return
      */
-    boolean isTestingDataSet();
+    bool isTestingDataSet();
 
     IDataSet add(Map<String, String[]> testingDataSet);
 

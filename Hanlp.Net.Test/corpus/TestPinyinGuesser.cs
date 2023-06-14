@@ -9,34 +9,27 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.dictionary.py.Pinyin;
-import com.hankcs.hanlp.dictionary.py.PinyinDictionary;
-import com.hankcs.hanlp.dictionary.py.PinyinUtil;
-import com.hankcs.hanlp.dictionary.py.String2PinyinConverter;
-import com.hankcs.hanlp.utility.TextUtility;
-import junit.framework.TestCase;
 
 /**
  * @author hankcs
  */
-public class TestPinyinGuesser extends TestCase
+public class TestPinyinGuesser : TestCase
 {
-//    public void testGuess() throws Exception
+//    public void testGuess() 
 //    {
-//        System.out.println(String2PinyinConverter.convert2Pair("飞流zh下sqianch！", true));
+//        Console.WriteLine(String2PinyinConverter.convert2Pair("飞流zh下sqianch！", true));
 //    }
 //
-//    public void testTextUtil() throws Exception
+//    public void testTextUtil() 
 //    {
-//        System.out.println(TextUtility.isAllLetter(Pinyin.ai1.toString()));
-//        System.out.println(TextUtility.isAllLetterOrNum(Pinyin.ai1.toString()));
-//        System.out.println(TextUtility.isAllLetter(Pinyin.ai1.getPinyinWithoutTone()));
+//        Console.WriteLine(TextUtility.isAllLetter(Pinyin.ai1.toString()));
+//        Console.WriteLine(TextUtility.isAllLetterOrNum(Pinyin.ai1.toString()));
+//        Console.WriteLine(TextUtility.isAllLetter(Pinyin.ai1.getPinyinWithoutTone()));
 //    }
 //
-//    public void testGenerateJavaCode() throws Exception
+//    public void testGenerateJavaCode() 
 //    {
 //        //case ni2:
 //        //return Pinyin.ni1;
@@ -49,10 +42,10 @@ public class TestPinyinGuesser extends TestCase
 //        }
 //    }
 //
-//    public void testPinyin() throws Exception
+//    public void testPinyin() 
 //    {
-//        System.out.println(HanLP.convertToPinyinString("截至2012年，", " ", true));
-//        System.out.println(HanLP.convertToPinyinString("截至2012年，", " ", false));
+//        Console.WriteLine(HanLP.convertToPinyinString("截至2012年，", " ", true));
+//        Console.WriteLine(HanLP.convertToPinyinString("截至2012年，", " ", false));
 //    }
 //
 //    private Pinyin convert(Pinyin p)

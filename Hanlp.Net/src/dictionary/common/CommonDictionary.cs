@@ -37,7 +37,7 @@ public abstract class CommonDictionary<V>
      * @param path
      * @return
      */
-    public boolean load(String path)
+    public bool load(String path)
     {
         trie = new DoubleArrayTrie<V>();
         long start = System.currentTimeMillis();
@@ -88,7 +88,7 @@ public abstract class CommonDictionary<V>
      * @param byteArray
      * @return
      */
-    protected boolean loadDat(ByteArray byteArray)
+    protected bool loadDat(ByteArray byteArray)
     {
         V[] valueArray = loadValueArray(byteArray);
         if (valueArray == null)
@@ -105,7 +105,7 @@ public abstract class CommonDictionary<V>
      * @param valueArray
      * @return
      */
-    protected boolean saveDat(String path, List<V> valueArray)
+    protected bool saveDat(String path, List<V> valueArray)
     {
         try
         {
@@ -131,9 +131,9 @@ public abstract class CommonDictionary<V>
      *
      * @param value
      * @param out
-     * @throws IOException
+     * @
      */
-    protected abstract void saveValue(V value, DataOutputStream out) throws IOException;
+    protected abstract void saveValue(V value, DataOutputStream out) ;
 
     /**
      * 查询一个单词
@@ -152,7 +152,7 @@ public abstract class CommonDictionary<V>
      * @param key
      * @return
      */
-    public boolean contains(String key)
+    public bool contains(String key)
     {
         return get(key) != null;
     }

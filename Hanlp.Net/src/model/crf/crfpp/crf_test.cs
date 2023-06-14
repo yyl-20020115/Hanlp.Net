@@ -26,7 +26,7 @@ public class crf_test
         Boolean help = false;
     }
 
-    public static boolean run(String[] args)
+    public static bool run(String[] args)
     {
         Option cmd = new Option();
         List<String> unkownArgs = null;

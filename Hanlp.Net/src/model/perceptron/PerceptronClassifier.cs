@@ -32,7 +32,7 @@ public abstract class PerceptronClassifier
         this.model = model;
     }
 
-    public PerceptronClassifier(String modelPath) throws IOException
+    public PerceptronClassifier(String modelPath) 
     {
         this(new LinearModel(modelPath));
     }
@@ -108,7 +108,7 @@ public abstract class PerceptronClassifier
      * @param averagePerceptron 是否使用平均感知机算法
      * @return 模型在训练集上的准确率
      */
-    public BinaryClassificationFMeasure train(String corpus, int maxIteration, boolean averagePerceptron)
+    public BinaryClassificationFMeasure train(String corpus, int maxIteration, bool averagePerceptron)
     {
         FeatureMap featureMap = new LockableFeatureMap(new TagSet(TaskType.CLASSIFICATION));
         featureMap.mutable = true; // 训练时特征映射可拓充

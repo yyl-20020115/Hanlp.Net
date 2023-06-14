@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
 /**
  * @author hankcs
  */
-public class NatureDictionaryMaker extends CommonDictionaryMaker
+public class NatureDictionaryMaker : CommonDictionaryMaker
 {
     public NatureDictionaryMaker()
     {
@@ -66,7 +66,7 @@ public class NatureDictionaryMaker extends CommonDictionaryMaker
      * 指定语料库文件夹，制作一份词频词典
      * @return
      */
-    static boolean makeCoreDictionary(String inPath, String outPath)
+    static bool makeCoreDictionary(String inPath, String outPath)
     {
         final DictionaryMaker dictionaryMaker = new DictionaryMaker();
         final TreeSet<String> labelSet = new TreeSet<String>();
@@ -99,7 +99,7 @@ public class NatureDictionaryMaker extends CommonDictionaryMaker
              * @param word
              * @return
              */
-            boolean shouldInclude(Word word)
+            bool shouldInclude(Word word)
             {
                 if ("m".equals(word.label) || "mq".equals(word.label) || "w".equals(word.label) || "t".equals(word.label))
                 {

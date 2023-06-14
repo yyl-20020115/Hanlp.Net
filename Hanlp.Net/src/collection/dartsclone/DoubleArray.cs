@@ -50,7 +50,7 @@ public class DoubleArray : Serializable
      * @param stream
      * @throws java.io.IOException
      */
-    public void open(InputStream stream) throws IOException
+    public void open(InputStream stream) 
     {
 
         int size = (int) (stream.available() / UNIT_SIZE);
@@ -81,7 +81,7 @@ public class DoubleArray : Serializable
      * @param stream
      * @throws java.io.IOException
      */
-    public void save(OutputStream stream) throws IOException
+    public void save(OutputStream stream) 
     {
         DataOutputStream out = null;
         try
@@ -102,12 +102,12 @@ public class DoubleArray : Serializable
         }
     }
 
-    private void writeObject(ObjectOutputStream out) throws IOException
+    private void writeObject(ObjectOutputStream out) 
     {
         out.writeObject(_array);
     }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+    private void readObject(ObjectInputStream in) , ClassNotFoundException
     {
         _array = (int[]) in.readObject();
     }

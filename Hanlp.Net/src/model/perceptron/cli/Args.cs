@@ -45,7 +45,7 @@ public class Args
      * @param failOnExtraFlags Throw an IllegalArgumentException if extra flags are present
      * @return The list of arguments that were not consumed
      */
-    public static List<String> parse(Object target, String[] args, boolean failOnExtraFlags)
+    public static List<String> parse(Object target, String[] args, bool failOnExtraFlags)
     {
         List<String> arguments = new ArrayList<String>();
         arguments.addAll(Arrays.asList(args));
@@ -98,7 +98,7 @@ public class Args
         Argument argument = field.getAnnotation(Argument.class);
         if (argument != null)
         {
-            boolean set = false;
+            bool set = false;
             for (Iterator<String> i = arguments.iterator(); i.hasNext(); )
             {
                 String arg = i.next();
@@ -190,7 +190,7 @@ public class Args
             Argument argument = writeMethod.getAnnotation(Argument.class);
             if (argument != null)
             {
-                boolean set = false;
+                bool set = false;
                 for (Iterator<String> i = arguments.iterator(); i.hasNext(); )
                 {
                     String arg = i.next();

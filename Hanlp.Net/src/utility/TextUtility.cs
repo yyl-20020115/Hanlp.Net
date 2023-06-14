@@ -72,7 +72,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static boolean isAllChinese(String str)
+    public static bool isAllChinese(String str)
     {
         return str.matches("[\\u4E00-\\u9FA5]+");
     }
@@ -81,7 +81,7 @@ public class TextUtility
      * @param sString
      * @return
      */
-    public static boolean isAllNonChinese(byte[] sString)
+    public static bool isAllNonChinese(byte[] sString)
     {
         int nLen = sString.length;
         int i = 0;
@@ -103,7 +103,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static boolean isAllSingleByte(String str)
+    public static bool isAllSingleByte(String str)
     {
         assert str != null;
         for (int i = 0; i < str.length(); i++)
@@ -142,7 +142,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static boolean isAllNum(String str)
+    public static bool isAllNum(String str)
     {
         if (str == null)
             return false;
@@ -199,7 +199,7 @@ public class TextUtility
      * @param sString
      * @return
      */
-    public static boolean isAllIndex(byte[] sString)
+    public static bool isAllIndex(byte[] sString)
     {
         int nLen = sString.length;
         int i = 0;
@@ -231,7 +231,7 @@ public class TextUtility
      * @param text
      * @return
      */
-    public static boolean isAllLetter(String text)
+    public static bool isAllLetter(String text)
     {
         for (int i = 0; i < text.length(); ++i)
         {
@@ -251,7 +251,7 @@ public class TextUtility
      * @param text
      * @return
      */
-    public static boolean isAllLetterOrNum(String text)
+    public static bool isAllLetterOrNum(String text)
     {
         for (int i = 0; i < text.length(); ++i)
         {
@@ -270,7 +270,7 @@ public class TextUtility
      * @param sString
      * @return
      */
-    public static boolean isAllDelimiter(byte[] sString)
+    public static bool isAllDelimiter(byte[] sString)
     {
         int nLen = sString.length;
         int i = 0;
@@ -289,13 +289,13 @@ public class TextUtility
      * @param word
      * @return
      */
-    public static boolean isAllChineseNum(String word)
+    public static bool isAllChineseNum(String word)
     {// 百分之五点六的人早上八点十八分起床
 
         String chineseNum = "零○一二两三四五六七八九十廿百千万亿壹贰叁肆伍陆柒捌玖拾佰仟∶·．／点";//
         String prefix = "几数上第";
         String surfix = "几多余来成倍";
-        boolean round = false;
+        bool round = false;
 
         if (word == null)
             return false;
@@ -370,7 +370,7 @@ public class TextUtility
      * @param snum
      * @return
      */
-    public static boolean isYearTime(String snum)
+    public static bool isYearTime(String snum)
     {
         if (snum != null)
         {
@@ -403,7 +403,7 @@ public class TextUtility
      * @param str  需要判断的字符串
      * @return
      */
-    public static boolean isInAggregate(String aggr, String str)
+    public static bool isInAggregate(String aggr, String str)
     {
         if (aggr != null && str != null)
         {
@@ -426,7 +426,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static boolean isDBCCase(String str)
+    public static bool isDBCCase(String str)
     {
         if (str != null)
         {
@@ -460,7 +460,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static boolean isSBCCase(String str)
+    public static bool isSBCCase(String str)
     {
         if (str != null)
         {
@@ -494,7 +494,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static boolean isDelimiter(String str)
+    public static bool isDelimiter(String str)
     {
         if (str != null && ("-".equals(str) || "－".equals(str)))
             return true;
@@ -502,7 +502,7 @@ public class TextUtility
             return false;
     }
 
-    public static boolean isUnknownWord(String word)
+    public static bool isUnknownWord(String word)
     {
         if (word != null && word.indexOf("未##") == 0)
             return true;
@@ -575,7 +575,7 @@ public class TextUtility
      * @param c 需要判断的字符
      * @return 是汉字返回true，否则返回false
      */
-    public static boolean isChinese(char c)
+    public static bool isChinese(char c)
     {
         String regex = "[\\u4e00-\\u9fa5]";
         return String.valueOf(c).matches(regex);
@@ -619,9 +619,9 @@ public class TextUtility
      *
      * @param s
      * @param out
-     * @throws IOException
+     * @
      */
-    public static void writeString(String s, DataOutputStream out) throws IOException
+    public static void writeString(String s, DataOutputStream out) 
     {
         out.writeInt(s.length());
         for (char c : s.toCharArray())
@@ -636,7 +636,7 @@ public class TextUtility
      * @param cs
      * @return
      */
-    public static boolean isBlank(CharSequence cs)
+    public static bool isBlank(CharSequence cs)
     {
         int strLen;
         if (cs == null || (strLen = cs.length()) == 0)
@@ -674,9 +674,9 @@ public class TextUtility
         return sbSentence.toString();
     }
 
-    public static String join(Iterable<? extends CharSequence> s, String delimiter)
+    public static String join(Iterable<? : CharSequence> s, String delimiter)
     {
-        Iterator<? extends CharSequence> iter = s.iterator();
+        Iterator<? : CharSequence> iter = s.iterator();
         if (!iter.hasNext()) return "";
         StringBuilder buffer = new StringBuilder(iter.next());
         while (iter.hasNext()) buffer.append(delimiter).append(iter.next());

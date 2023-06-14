@@ -1,14 +1,10 @@
-package com.hankcs.hanlp.utility;
+namespace com.hankcs.hanlp.utility;
 
-import com.hankcs.hanlp.dictionary.other.CharType;
-import junit.framework.TestCase;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 
-public class TextUtilityTest extends TestCase
+public class TextUtilityTest : TestCase
 {
-    public void testIsAllSingleByte() throws Exception
+    public void testIsAllSingleByte() 
     {
         assertEquals(false, TextUtility.isAllSingleByte("中文a"));
         assertEquals(true, TextUtility.isAllSingleByte("abcABC!@#"));

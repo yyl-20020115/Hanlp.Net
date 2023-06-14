@@ -1,26 +1,15 @@
-package com.hankcs.hanlp.model.trigram;
+namespace com.hankcs.hanlp.model.trigram;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.document.CorpusLoader;
-import com.hankcs.hanlp.corpus.document.Document;
-import com.hankcs.hanlp.corpus.document.sentence.word.Word;
-import com.hankcs.hanlp.corpus.io.ByteArray;
-import com.hankcs.hanlp.seg.HMM.HMMSegment;
-import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
-import junit.framework.TestCase;
 
-import java.util.LinkedList;
-import java.util.List;
 
-public class CharacterBasedGenerativeModelTest extends TestCase
+public class CharacterBasedGenerativeModelTest : TestCase
 {
-//    public void testTrainAndSegment() throws Exception
+//    public void testTrainAndSegment() 
 //    {
 //        final CharacterBasedGenerativeModel model = new CharacterBasedGenerativeModel();
 //        CorpusLoader.walk("D:\\JavaProjects\\HanLP\\data\\test\\cbgm", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                for (List<Word> sentence : document.getSimpleSentenceList())
@@ -37,10 +26,10 @@ public class CharacterBasedGenerativeModelTest extends TestCase
 //        String text = "中国领土";
 //        char[] charArray = text.toCharArray();
 //        char[] tag = model.tag(charArray);
-//        System.out.println(tag);
+//        Console.WriteLine(tag);
 //    }
 //
-//    public void testLoad() throws Exception
+//    public void testLoad() 
 //    {
 //        CharacterBasedGenerativeModel model = new CharacterBasedGenerativeModel();
 //        model.load(ByteArray.createByteArray(HanLP.Config.HMMSegmentModelPath));
@@ -81,16 +70,16 @@ public class CharacterBasedGenerativeModelTest extends TestCase
 //                break;
 //            }
 //        }
-//        System.out.println(tag);
-//        System.out.println(termList);
+//        Console.WriteLine(tag);
+//        Console.WriteLine(termList);
 //    }
 //
-//    public void testSegment() throws Exception
+//    public void testSegment() 
 //    {
 //        HanLP.Config.ShowTermNature = false;
 //        String text = "我实现了一个基于Character Based TriGram的分词器";
 //        Segment segment = new HMMSegment();
 //        List<Term> termList = segment.seg(text);
-//        System.out.println(termList);
+//        Console.WriteLine(termList);
 //    }
 }

@@ -1,11 +1,9 @@
-package com.hankcs.hanlp.seg.Other;
+namespace com.hankcs.hanlp.seg.Other;
 
-import com.hankcs.hanlp.HanLP;
-import junit.framework.TestCase;
 
-public class AhoCorasickDoubleArrayTrieSegmentTest extends TestCase
+public class AhoCorasickDoubleArrayTrieSegmentTest : TestCase
 {
-    public void testLoadMyDictionary() throws Exception
+    public void testLoadMyDictionary() 
     {
         AhoCorasickDoubleArrayTrieSegment segment
             = new AhoCorasickDoubleArrayTrieSegment("data/dictionary/CoreNatureDictionary.mini.txt");

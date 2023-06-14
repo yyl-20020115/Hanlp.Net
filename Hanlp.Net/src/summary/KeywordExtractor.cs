@@ -41,7 +41,7 @@ public abstract class KeywordExtractor
      * @param term
      * @return 是否应当
      */
-    protected boolean shouldInclude(Term term)
+    protected bool shouldInclude(Term term)
     {
         // 除掉停用词
         return CoreStopWordDictionary.shouldInclude(term);

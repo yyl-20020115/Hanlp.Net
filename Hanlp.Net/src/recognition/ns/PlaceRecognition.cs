@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.recognition.ns;
  */
 public class PlaceRecognition
 {
-    public static boolean recognition(List<Vertex> pWordSegResult, WordNet wordNetOptimum, WordNet wordNetAll)
+    public static bool recognition(List<Vertex> pWordSegResult, WordNet wordNetOptimum, WordNet wordNetAll)
     {
         List<EnumItem<NS>> roleTagList = roleTag(pWordSegResult, wordNetAll);
         if (HanLP.Config.DEBUG)

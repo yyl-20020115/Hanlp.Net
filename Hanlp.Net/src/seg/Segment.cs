@@ -86,7 +86,7 @@ public abstract class Segment
                 sb.delete(0, sb.length());
                 sb.append(charArray[pCur]);
 
-                boolean reachEnd = true;
+                bool reachEnd = true;
                 while (pCur < end - 1)
                 {
                     nNextType = charTypeArray[++pCur - start];
@@ -337,7 +337,7 @@ public abstract class Segment
      * @param offsetEnabled 是否计算offset
      * @return
      */
-    protected static List<Term> convert(List<Vertex> vertexList, boolean offsetEnabled)
+    protected static List<Term> convert(List<Vertex> vertexList, bool offsetEnabled)
     {
         assert vertexList != null;
         assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.toString();
@@ -595,7 +595,7 @@ public abstract class Segment
      * @param shortest 是否断句为最细的子句（将逗号也视作分隔符）
      * @return 句子列表，每个句子由一个单词列表组成
      */
-    public List<List<Term>> seg2sentence(String text, boolean shortest)
+    public List<List<Term>> seg2sentence(String text, bool shortest)
     {
         List<List<Term>> resultList = new LinkedList<List<Term>>();
         {
@@ -621,7 +621,7 @@ public abstract class Segment
      *
      * @return
      */
-    public Segment enableIndexMode(boolean enable)
+    public Segment enableIndexMode(bool enable)
     {
         config.indexMode = enable ? 2 : 0;
         return this;
@@ -647,7 +647,7 @@ public abstract class Segment
      * @param enable
      * @return
      */
-    public Segment enablePartOfSpeechTagging(boolean enable)
+    public Segment enablePartOfSpeechTagging(bool enable)
     {
         config.speechTagging = enable;
         return this;
@@ -659,7 +659,7 @@ public abstract class Segment
      * @param enable
      * @return
      */
-    public Segment enableNameRecognize(boolean enable)
+    public Segment enableNameRecognize(bool enable)
     {
         config.nameRecognize = enable;
         config.updateNerConfig();
@@ -672,7 +672,7 @@ public abstract class Segment
      * @param enable
      * @return
      */
-    public Segment enablePlaceRecognize(boolean enable)
+    public Segment enablePlaceRecognize(bool enable)
     {
         config.placeRecognize = enable;
         config.updateNerConfig();
@@ -685,7 +685,7 @@ public abstract class Segment
      * @param enable
      * @return
      */
-    public Segment enableOrganizationRecognize(boolean enable)
+    public Segment enableOrganizationRecognize(bool enable)
     {
         config.organizationRecognize = enable;
         config.updateNerConfig();
@@ -697,7 +697,7 @@ public abstract class Segment
      *
      * @param enable
      */
-    public Segment enableCustomDictionary(boolean enable)
+    public Segment enableCustomDictionary(bool enable)
     {
         config.useCustomDictionary = enable;
         return this;
@@ -712,7 +712,7 @@ public abstract class Segment
      *
      * @since 1.3.5
      */
-    public Segment enableCustomDictionaryForcing(boolean enable)
+    public Segment enableCustomDictionaryForcing(bool enable)
     {
         if (enable)
         {
@@ -727,7 +727,7 @@ public abstract class Segment
      *
      * @param enable
      */
-    public Segment enableTranslatedNameRecognize(boolean enable)
+    public Segment enableTranslatedNameRecognize(bool enable)
     {
         config.translatedNameRecognize = enable;
         config.updateNerConfig();
@@ -739,7 +739,7 @@ public abstract class Segment
      *
      * @param enable
      */
-    public Segment enableJapaneseNameRecognize(boolean enable)
+    public Segment enableJapaneseNameRecognize(bool enable)
     {
         config.japaneseNameRecognize = enable;
         config.updateNerConfig();
@@ -752,7 +752,7 @@ public abstract class Segment
      * @param enable
      * @return
      */
-    public Segment enableOffset(boolean enable)
+    public Segment enableOffset(bool enable)
     {
         config.offset = enable;
         return this;
@@ -764,7 +764,7 @@ public abstract class Segment
      * @param enable
      * @return
      */
-    public Segment enableNumberQuantifierRecognize(boolean enable)
+    public Segment enableNumberQuantifierRecognize(bool enable)
     {
         config.numberQuantifierRecognize = enable;
         return this;
@@ -776,7 +776,7 @@ public abstract class Segment
      * @param enable
      * @return
      */
-    public Segment enableAllNamedEntityRecognize(boolean enable)
+    public Segment enableAllNamedEntityRecognize(bool enable)
     {
         config.nameRecognize = enable;
         config.japaneseNameRecognize = enable;
@@ -787,7 +787,7 @@ public abstract class Segment
         return this;
     }
 
-    class WorkThread extends Thread
+    class WorkThread : Thread
     {
         String[] sentenceArray;
         List<Term>[] termListArray;
@@ -817,7 +817,7 @@ public abstract class Segment
      * @param enable true表示开启[系统CPU核心数]个线程，false表示单线程
      * @return
      */
-    public Segment enableMultithreading(boolean enable)
+    public Segment enableMultithreading(bool enable)
     {
         if (enable) config.threadNumber = Runtime.getRuntime().availableProcessors();
         else config.threadNumber = 1;

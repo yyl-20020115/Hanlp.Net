@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.mining.cluster;
 /**
  * @author hankcs
  */
-public class SparseVector extends TreeMap<Integer, Double>
+public class SparseVector : TreeMap<Integer, Double>
 {
     //@Override
     public Double get(Object key)

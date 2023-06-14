@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public abstract class PerceptronTrainer extends InstanceConsumer
+public abstract class PerceptronTrainer : InstanceConsumer
 {
 
     /**
@@ -84,11 +84,11 @@ public abstract class PerceptronTrainer extends InstanceConsumer
      * @param maxIteration  最大迭代次数
      * @param threadNum     线程数
      * @return 一个包含模型和精度的结构
-     * @throws IOException
+     * @
      */
     public Result train(String trainingFile, String developFile,
                         String modelFile, final double compressRatio,
-                        final int maxIteration, final int threadNum) throws IOException
+                        final int maxIteration, final int threadNum) 
     {
         if (developFile == null)
         {
@@ -229,7 +229,7 @@ public abstract class PerceptronTrainer extends InstanceConsumer
         }
     }
 
-    private static class TrainingWorker extends Thread
+    private static class TrainingWorker : Thread
     {
         private Instance[] instances;
         private int start;
@@ -256,13 +256,13 @@ public abstract class PerceptronTrainer extends InstanceConsumer
         }
     }
 
-    protected Instance[] loadTrainInstances(String trainingFile, final MutableFeatureMap mutableFeatureMap) throws IOException
+    protected Instance[] loadTrainInstances(String trainingFile, final MutableFeatureMap mutableFeatureMap) 
     {
         final List<Instance> instanceList = new LinkedList<Instance>();
         IOUtility.loadInstance(trainingFile, new InstanceHandler()
         {
             //@Override
-            public boolean process(Sentence sentence)
+            public bool process(Sentence sentence)
             {
                 Utility.normalize(sentence);
                 instanceList.add(PerceptronTrainer.this.createInstance(sentence, mutableFeatureMap));
@@ -275,7 +275,7 @@ public abstract class PerceptronTrainer extends InstanceConsumer
     }
 
 
-    private static DoubleArrayTrie<Integer> loadDictionary(String trainingFile, String dictionaryFile) throws IOException
+    private static DoubleArrayTrie<Integer> loadDictionary(String trainingFile, String dictionaryFile) 
     {
         FrequencyMap dictionaryMap = new FrequencyMap();
         if (dictionaryFile == null)
@@ -295,17 +295,17 @@ public abstract class PerceptronTrainer extends InstanceConsumer
         return dat;
     }
 
-    public Result train(String trainingFile, String modelFile) throws IOException
+    public Result train(String trainingFile, String modelFile) 
     {
         return train(trainingFile, trainingFile, modelFile);
     }
 
-    public Result train(String trainingFile, String developFile, String modelFile) throws IOException
+    public Result train(String trainingFile, String developFile, String modelFile) 
     {
         return train(trainingFile, developFile, modelFile, 0.1, 50, Runtime.getRuntime().availableProcessors());
     }
 
-    private static void loadWordFromFile(String path, FrequencyMap storage, boolean segmented) throws IOException
+    private static void loadWordFromFile(String path, FrequencyMap storage, bool segmented) 
     {
         BufferedReader br = IOUtility.newBufferedReader(path);
         String line;

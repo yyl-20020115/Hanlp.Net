@@ -75,7 +75,7 @@ public class Term
      * 判断Term是否相等
      */
     //@Override
-    public boolean equals(Object obj) {
+    public bool equals(Object obj) {
         if (obj instanceof Term)
         {
             Term term = (Term)obj;

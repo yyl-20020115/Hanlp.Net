@@ -8,9 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.model.perceptron;
+namespace com.hankcs.hanlp.model.perceptron;
 
-import java.io.IOException;
 
 /**
  * @author hankcs

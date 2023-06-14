@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
 /**
  * @author hankcs
  */
-public class ImmutableFeatureMap extends FeatureMap
+public class ImmutableFeatureMap : FeatureMap
 {
     public Map<String, Integer> featureIdMap;
 

@@ -71,7 +71,7 @@ public class CorpusLoader
      * @param verbose
      * @return
      */
-    public static List<Document> convert2DocumentList(String folderPath, boolean verbose)
+    public static List<Document> convert2DocumentList(String folderPath, bool verbose)
     {
         long start = System.currentTimeMillis();
         List<File> fileList = IOUtil.fileList(folderPath);
@@ -97,7 +97,7 @@ public class CorpusLoader
         return (List<Document>) IOUtil.readObjectFrom(path);
     }
 
-    public static boolean saveCorpus(List<Document> documentList, String path)
+    public static bool saveCorpus(List<Document> documentList, String path)
     {
         return IOUtil.saveObjectTo(documentList, path);
     }
@@ -107,7 +107,7 @@ public class CorpusLoader
         return (List<List<IWord>>) IOUtil.readObjectFrom(path);
     }
 
-    public static boolean saveSentenceList(List<List<IWord>> sentenceList, String path)
+    public static bool saveSentenceList(List<List<IWord>> sentenceList, String path)
     {
         return IOUtil.saveObjectTo(sentenceList, path);
     }
@@ -168,7 +168,7 @@ public class CorpusLoader
     /**
      * 多线程任务
      */
-    public static abstract class HandlerThread extends Thread : Handler
+    public static abstract class HandlerThread : Thread : Handler
     {
         /**
          * 这个线程负责处理这些事情

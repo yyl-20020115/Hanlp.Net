@@ -9,25 +9,18 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.dictionary;
+namespace com.hankcs.hanlp.dictionary;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.dictionary.TFDictionary;
-import com.hankcs.hanlp.corpus.occurrence.TermFrequency;
-import com.hankcs.hanlp.dictionary.CoreDictionary;
-import junit.framework.TestCase;
 
-import java.io.*;
-import java.util.*;
 
 /**
  * 有一些类似于 工程@学 1 的条目会干扰 工程学家 的识别，这类@后接短字符的可以过滤掉
  * @author hankcs
  */
-public class SimplifyNGramDictionary extends TestCase
+public class SimplifyNGramDictionary : TestCase
 {
 //    String path = "data/dictionary/CoreNatureDictionary.ngram.txt";
-//    public void testSimplify() throws Exception
+//    public void testSimplify() 
 //    {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
 //        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
@@ -47,7 +40,7 @@ public class SimplifyNGramDictionary extends TestCase
 ////            Map.Entry<String, Integer> current = iterator.next();
 ////            if (current.getKey().length() - current.getKey().indexOf('@') == 2 && pre.getKey().indexOf(current.getKey()) == 0 && current.getValue() <= 2)
 ////            {
-////                System.out.println("应当删除 " + current + " 保留 " + pre);
+////                Console.WriteLine("应当删除 " + current + " 保留 " + pre);
 ////                iterator.remove();
 ////            }
 ////            pre = current;
@@ -59,7 +52,7 @@ public class SimplifyNGramDictionary extends TestCase
 ////            Map.Entry<String, Integer> current = iterator.next();
 ////            if (current.getKey().length() == 3)
 ////            {
-////                System.out.println("应当删除 " + current);
+////                Console.WriteLine("应当删除 " + current);
 ////            }
 ////        }
 //        // 第三步，对某些@后面的词语太短了，也移除
@@ -70,7 +63,7 @@ public class SimplifyNGramDictionary extends TestCase
 ////            String[] termArray = current.getKey().split("@", 2);
 ////            if (termArray[0].equals("未##人") && termArray[1].length() < 2)
 ////            {
-////                System.out.println("删除 " + current.getKey());
+////                Console.WriteLine("删除 " + current.getKey());
 ////                iterator.remove();
 ////            }
 ////        }
@@ -81,7 +74,7 @@ public class SimplifyNGramDictionary extends TestCase
 ////            Map.Entry<String, Integer> current = iterator.next();
 ////            if (current.getKey().contains("未##人") && current.getValue() < 10)
 ////            {
-////                System.out.println("删除 " + current.getKey());
+////                Console.WriteLine("删除 " + current.getKey());
 ////                iterator.remove();
 ////            }
 ////        }
@@ -94,7 +87,7 @@ public class SimplifyNGramDictionary extends TestCase
 //            Map.Entry<String, Integer> current = iterator.next();
 //            if (current.getKey().contains("未##人") && dictionary.getFrequency(current.getKey()) < 10)
 //            {
-//                System.out.println("删除 " + current.getKey());
+//                Console.WriteLine("删除 " + current.getKey());
 //                iterator.remove();
 //            }
 //        }
@@ -112,9 +105,9 @@ public class SimplifyNGramDictionary extends TestCase
 //
 //    /**
 //     * 有些词条不在CoreDictionary里面，那就把它们删掉
-//     * @throws Exception
+//     * @
 //     */
-//    public void testLoseWeight() throws Exception
+//    public void testLoseWeight() 
 //    {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 //        TreeMap<String, Integer> map = new TreeMap<String, Integer>();

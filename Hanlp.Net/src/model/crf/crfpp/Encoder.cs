@@ -54,7 +54,7 @@ public class Encoder
      * @param algorithm     训练算法
      * @return
      */
-    public boolean learn(String templFile, String trainFile, String modelFile, boolean textModelFile,
+    public bool learn(String templFile, String trainFile, String modelFile, bool textModelFile,
                          int maxitr, int freq, double eta, double C, int threadNum, int shrinkingSize,
                          Algorithm algorithm)
     {
@@ -199,7 +199,7 @@ public class Encoder
      * @param orthant       是否使用L1范数
      * @return 是否成功
      */
-    private boolean runCRF(List<TaggerImpl> x,
+    private bool runCRF(List<TaggerImpl> x,
                            EncoderFeatureIndex featureIndex,
                            double[] alpha,
                            int maxItr,
@@ -207,7 +207,7 @@ public class Encoder
                            double eta,
                            int shrinkingSize,
                            int threadNum,
-                           boolean orthant)
+                           bool orthant)
     {
         double oldObj = 1e+37;
         int converge = 0;
@@ -330,7 +330,7 @@ public class Encoder
         return true;
     }
 
-    public boolean runMIRA(List<TaggerImpl> x,
+    public bool runMIRA(List<TaggerImpl> x,
                            EncoderFeatureIndex featureIndex,
                            double[] alpha,
                            int maxItr,

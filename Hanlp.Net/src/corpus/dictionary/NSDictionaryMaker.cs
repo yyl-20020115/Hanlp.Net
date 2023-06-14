@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
 /**
  * @author hankcs
  */
-public class NSDictionaryMaker extends CommonDictionaryMaker
+public class NSDictionaryMaker : CommonDictionaryMaker
 {
     public NSDictionaryMaker(EasyDictionary dictionary)
     {

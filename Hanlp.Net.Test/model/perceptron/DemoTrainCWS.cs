@@ -1,6 +1,5 @@
-package com.hankcs.hanlp.model.perceptron;
+namespace com.hankcs.hanlp.model.perceptron;
 
-import java.io.IOException;
 
 public class DemoTrainCWS
 {
@@ -15,6 +14,6 @@ public class DemoTrainCWS
         PerceptronSegmenter segment = new PerceptronSegmenter(result.getModel());
         // 也可以用
 //        Segment segment = new AveragedPerceptronSegment(POS_MODEL_FILE);
-        System.out.println(segment.segment("商品与服务"));
+        Console.WriteLine(segment.segment("商品与服务"));
     }
 }

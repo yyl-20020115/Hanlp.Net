@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.document.sentence.word;
  * 词语接口
  * @author hankcs
  */
-public interface IWord extends Serializable
+public interface IWord : Serializable
 {
     /**
      * 获取单词

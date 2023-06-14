@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron.instance;
 /**
  * @author hankcs
  */
-public class NERInstance extends Instance
+public class NERInstance : Instance
 {
     public NERInstance(String[] wordArray, String[] posArray, String[] nerArray, NERTagSet tagSet, FeatureMap featureMap)
     {

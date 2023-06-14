@@ -1,30 +1,28 @@
-package com.hankcs.hanlp.model.crf;
+namespace com.hankcs.hanlp.model.crf;
 
-import com.hankcs.hanlp.HanLP;
-import junit.framework.TestCase;
 
-public class CRFNERecognizerTest extends TestCase
+public class CRFNERecognizerTest : TestCase
 {
     public static final String CORPUS = "data/test/pku98/199801.txt";
     public static String NER_MODEL_PATH = "data/model/crf/pku199801/ner.txt";
-    public void testTrain() throws Exception
+    public void testTrain() 
     {
         CRFTagger tagger = new CRFNERecognizer(null);
         tagger.train(CORPUS, NER_MODEL_PATH);
     }
 
-    public void testLoad() throws Exception
+    public void testLoad() 
     {
         CRFTagger tagger = new CRFNERecognizer(NER_MODEL_PATH);
     }
 
-    public void testConvert() throws Exception
+    public void testConvert() 
     {
         CRFTagger tagger = new CRFNERecognizer(null);
         tagger.convertCorpus(CORPUS, "data/test/crf/ner-corpus.tsv");
     }
 
-    public void testDumpTemplate() throws Exception
+    public void testDumpTemplate() 
     {
         CRFTagger tagger = new CRFNERecognizer(null);
         tagger.dumpTemplate("data/test/crf/ner-template.txt");

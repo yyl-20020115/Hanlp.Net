@@ -15,7 +15,7 @@ public final class KMeansClustering
         this.outFile = outFile;
     }
 
-    public void clustering() throws IOException
+    public void clustering() 
     {
         final int vocabSize = reader.getNumWords();
         final int layer1Size = reader.getSize();

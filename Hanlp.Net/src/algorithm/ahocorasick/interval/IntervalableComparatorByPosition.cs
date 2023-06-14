@@ -1,12 +1,12 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.interval;
 
+using System.Collections.Generic;
 /**
  * 按起点比较区间
  */
-public class IntervalableComparatorByPosition : Comparator<Intervalable>
+public class IntervalableComparatorByPosition : IComparer<Intervalable>
 {
-    ////@Override
-    public int compare(Intervalable intervalable, Intervalable intervalable2)
+    public int Compare(Intervalable intervalable, Intervalable intervalable2)
     {
         return intervalable.getStart() - intervalable2.getStart();
     }

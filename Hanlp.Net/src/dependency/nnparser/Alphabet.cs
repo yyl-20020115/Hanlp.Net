@@ -86,7 +86,7 @@ public class Alphabet : ICacheAble
         }
     }
 
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         idToLabelMap = new String[byteArray.nextInt()];
         TreeMap<String, Integer> map = new TreeMap<String, Integer>();

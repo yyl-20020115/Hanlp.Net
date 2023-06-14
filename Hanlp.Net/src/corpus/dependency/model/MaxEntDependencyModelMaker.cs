@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.corpus.dependency.model;
  */
 public class MaxEntDependencyModelMaker
 {
-    public static boolean makeModel(String corpusLoadPath, String modelSavePath) throws IOException
+    public static bool makeModel(String corpusLoadPath, String modelSavePath) 
     {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(modelSavePath)));
         LinkedList<CoNLLSentence> sentenceList = CoNLLLoader.loadSentenceList(corpusLoadPath);

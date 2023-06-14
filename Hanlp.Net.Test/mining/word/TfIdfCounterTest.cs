@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.mining.word;
+namespace com.hankcs.hanlp.mining.word;
 
-import junit.framework.TestCase;
 
-public class TfIdfCounterTest extends TestCase
+public class TfIdfCounterTest : TestCase
 {
-    public void testGetKeywords() throws Exception
+    public void testGetKeywords() 
     {
         TfIdfCounter counter = new TfIdfCounter();
         counter.add("《女排夺冠》", "女排北京奥运会夺冠");
@@ -14,9 +13,9 @@ public class TfIdfCounterTest extends TestCase
 
         for (Object id : counter.documents())
         {
-            System.out.println(id + " : " + counter.getKeywordsOf(id, 3));
+            Console.WriteLine(id + " : " + counter.getKeywordsOf(id, 3));
         }
 
-        System.out.println(counter.getKeywords("奥运会反兴奋剂", 2));
+        Console.WriteLine(counter.getKeywords("奥运会反兴奋剂", 2));
     }
 }

@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dictionary.ts;
  * 简体转台湾繁体
  * @author hankcs
  */
-public class SimplifiedToTaiwanChineseDictionary extends BaseChineseDictionary
+public class SimplifiedToTaiwanChineseDictionary : BaseChineseDictionary
 {
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
     static

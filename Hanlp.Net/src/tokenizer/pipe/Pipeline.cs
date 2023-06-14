@@ -56,13 +56,13 @@ public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
     }
 
     //@Override
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return pipeList.isEmpty();
     }
 
     //@Override
-    public boolean contains(Object o)
+    public bool contains(Object o)
     {
         return pipeList.contains(o);
     }
@@ -86,43 +86,43 @@ public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
     }
 
     //@Override
-    public boolean add(Pipe<M, M> pipe)
+    public bool add(Pipe<M, M> pipe)
     {
         return pipeList.add(pipe);
     }
 
     //@Override
-    public boolean remove(Object o)
+    public bool remove(Object o)
     {
         return pipeList.remove(o);
     }
 
     //@Override
-    public boolean containsAll(Collection<?> c)
+    public bool containsAll(Collection<?> c)
     {
         return pipeList.containsAll(c);
     }
 
     //@Override
-    public boolean addAll(Collection<? extends Pipe<M, M>> c)
+    public bool addAll(Collection<? : Pipe<M, M>> c)
     {
         return pipeList.addAll(c);
     }
 
     //@Override
-    public boolean addAll(int index, Collection<? extends Pipe<M, M>> c)
+    public bool addAll(int index, Collection<? : Pipe<M, M>> c)
     {
         return pipeList.addAll(c);
     }
 
     //@Override
-    public boolean removeAll(Collection<?> c)
+    public bool removeAll(Collection<?> c)
     {
         return pipeList.removeAll(c);
     }
 
     //@Override
-    public boolean retainAll(Collection<?> c)
+    public bool retainAll(Collection<?> c)
     {
         return pipeList.retainAll(c);
     }
@@ -134,7 +134,7 @@ public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
     }
 
     //@Override
-    public boolean equals(Object o)
+    public bool equals(Object o)
     {
         return pipeList.equals(o);
     }

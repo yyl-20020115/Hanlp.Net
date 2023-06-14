@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.dictionary.other;
+namespace com.hankcs.hanlp.dictionary.other;
 
-import junit.framework.TestCase;
 
-public class PartOfSpeechTagDictionaryTest extends TestCase
+public class PartOfSpeechTagDictionaryTest : TestCase
 {
-    public void testTranslate() throws Exception
+    public void testTranslate() 
     {
         assertEquals("名词", PartOfSpeechTagDictionary.translate("n"));
     }

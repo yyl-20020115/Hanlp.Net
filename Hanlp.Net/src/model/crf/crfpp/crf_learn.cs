@@ -36,12 +36,12 @@ public class crf_learn
         public  Integer thread = Runtime.getRuntime().availableProcessors();
     }
 
-    public static boolean run(String args)
+    public static bool run(String args)
     {
         return run(args.split("\\s"));
     }
 
-    public static boolean run(String[] args)
+    public static bool run(String[] args)
     {
         Option option = new Option();
         List<String> unkownArgs = null;
@@ -56,8 +56,8 @@ public class crf_learn
             return false;
         }
 
-        boolean convert = option.convert;
-        boolean convertToText = option.convert_to_text;
+        bool convert = option.convert;
+        bool convertToText = option.convert_to_text;
         String[] restArgs = unkownArgs.toArray(new String[0]);
         if (option.help || ((convertToText || convert) && restArgs.length != 2) ||
             (!convert && !convertToText && restArgs.length != 3))
@@ -69,7 +69,7 @@ public class crf_learn
         int maxiter = option.maxiter;
         double C = option.cost;
         double eta = option.eta;
-        boolean textmodel = option.textmodel;
+        bool textmodel = option.textmodel;
         int threadNum = option.thread;
         if (threadNum <= 0)
         {

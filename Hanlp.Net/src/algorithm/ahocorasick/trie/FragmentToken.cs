@@ -1,21 +1,19 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 
-public class FragmentToken extends Token
+public class FragmentToken : Token
 {
 
     public FragmentToken(String fragment)
+        :base(fragment)
     {
-        super(fragment);
     }
 
-    //@Override
-    public boolean isMatch()
+    public override bool isMatch()
     {
         return false;
     }
 
-    //@Override
-    public Emit getEmit()
+    public override Emit getEmit()
     {
         return null;
     }

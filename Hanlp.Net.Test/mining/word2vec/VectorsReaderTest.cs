@@ -1,14 +1,10 @@
-package com.hankcs.hanlp.mining.word2vec;
+namespace com.hankcs.hanlp.mining.word2vec;
 
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import junit.framework.TestCase;
 
-import java.io.BufferedWriter;
-import java.io.File;
 
-public class VectorsReaderTest extends TestCase
+public class VectorsReaderTest : TestCase
 {
-    public void testReadVectorFile() throws Exception
+    public void testReadVectorFile() 
     {
         File tempFile = File.createTempFile("hanlp-vector", ".txt");
         tempFile.deleteOnExit();

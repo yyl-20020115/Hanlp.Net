@@ -19,11 +19,11 @@ namespace com.hankcs.hanlp.seg.Other;
  *
  * @author hankcs
  */
-public class AhoCorasickDoubleArrayTrieSegment extends DictionaryBasedSegment
+public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
 {
     AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute> trie;
 
-    public AhoCorasickDoubleArrayTrieSegment() throws IOException
+    public AhoCorasickDoubleArrayTrieSegment() 
     {
         this(HanLP.Config.CoreDictionaryPath);
     }
@@ -44,9 +44,9 @@ public class AhoCorasickDoubleArrayTrieSegment extends DictionaryBasedSegment
      * 加载自己的词典，构造分词器
      * @param dictionaryPaths 任意数量个词典
      *
-     * @throws IOException 加载过程中的IO异常
+     * @ 加载过程中的IO异常
      */
-    public AhoCorasickDoubleArrayTrieSegment(String... dictionaryPaths) throws IOException
+    public AhoCorasickDoubleArrayTrieSegment(String... dictionaryPaths) 
     {
         this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(IOUtil.loadDictionary(dictionaryPaths)));
     }
@@ -91,7 +91,7 @@ public class AhoCorasickDoubleArrayTrieSegment extends DictionaryBasedSegment
     }
 
     //@Override
-    public Segment enableCustomDictionary(boolean enable)
+    public Segment enableCustomDictionary(bool enable)
     {
         throw new UnsupportedOperationException("AhoCorasickDoubleArrayTrieSegment暂时不支持用户词典。");
     }

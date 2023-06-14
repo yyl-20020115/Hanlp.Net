@@ -97,15 +97,15 @@ public class NeuralNetworkParser : ICacheAble
     /**
      * 指定使用距离特征，具体参考Zhang and Nivre (2011)
      */
-    boolean use_distance;
+    bool use_distance;
     /**
      * 指定使用valency特征，具体参考Zhang and Nivre (2011)
      */
-    boolean use_valency;
+    bool use_valency;
     /**
      * 指定使用词聚类特征，具体参考Guo et. al, (2015)
      */
-    boolean use_cluster;
+    bool use_cluster;
 
     static String model_header;
 
@@ -114,7 +114,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param path
      * @return
      */
-    public boolean load(String path)
+    public bool load(String path)
     {
         String binPath = path + Predefine.BIN_EXT;
         if (load(ByteArrayStream.createByteArrayStream(binPath))) return true;
@@ -139,7 +139,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param path
      * @return
      */
-    public boolean loadTxt(String path)
+    public bool loadTxt(String path)
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(path);
         model_header = lineIterator.next();
@@ -223,7 +223,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param byteArray
      * @return
      */
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         if (byteArray == null) return false;
         model_header = byteArray.nextString();
@@ -347,7 +347,7 @@ public class NeuralNetworkParser : ICacheAble
         return map;
     }
 
-    private static void save_map(Map<Integer, Integer> map, DataOutputStream out) throws IOException
+    private static void save_map(Map<Integer, Integer> map, DataOutputStream out) 
     {
         out.writeInt(map.size());
         for (Map.Entry<Integer, Integer> entry : map.entrySet())
@@ -434,7 +434,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param with_dependencies 是否输出依存关系（仅在解析后才有意义）
      */
     void transduce_instance_to_dependency(final Instance data,
-                                          Dependency dependency, boolean with_dependencies)
+                                          Dependency dependency, bool with_dependencies)
     {
         int L = data.forms.size();
         for (int i = 0; i < L; ++i)

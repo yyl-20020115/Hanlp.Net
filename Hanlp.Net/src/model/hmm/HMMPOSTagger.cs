@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.hmm;
 /**
  * @author hankcs
  */
-public class HMMPOSTagger extends HMMTrainer : POSTagger
+public class HMMPOSTagger : HMMTrainer : POSTagger
 {
     POSTagSet tagSet;
 

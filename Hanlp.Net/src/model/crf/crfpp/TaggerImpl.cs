@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 /**
  * @author zhifac
  */
-public class TaggerImpl extends Tagger
+public class TaggerImpl : Tagger
 {
     class QueueElement
     {
@@ -200,7 +200,7 @@ public class TaggerImpl extends Tagger
         }
     }
 
-    public boolean initNbest()
+    public bool initNbest()
     {
         if (agenda_ == null)
         {
@@ -377,7 +377,7 @@ public class TaggerImpl extends Tagger
         return -s;
     }
 
-    public boolean shrink()
+    public bool shrink()
     {
         if (!feature_index_.buildFeatures(this))
         {
@@ -493,7 +493,7 @@ public class TaggerImpl extends Tagger
         return sb.toString();
     }
 
-    public boolean open(FeatureIndex featureIndex)
+    public bool open(FeatureIndex featureIndex)
     {
         mode_ = Mode.LEARN;
         feature_index_ = featureIndex;
@@ -501,12 +501,12 @@ public class TaggerImpl extends Tagger
         return true;
     }
 
-    public boolean open(String filename)
+    public bool open(String filename)
     {
         return true;
     }
 
-    public boolean setModel(ModelImpl model)
+    public bool setModel(ModelImpl model)
     {
         mode_ = Mode.TEST;
         feature_index_ = model.getFeatureIndex_();
@@ -520,14 +520,14 @@ public class TaggerImpl extends Tagger
     {
     }
 
-    public boolean add(String line)
+    public bool add(String line)
     {
         String[] cols = line.split("[\t ]", -1);
         return add(cols);
     }
 
     //@Override
-    public boolean add(String[] cols)
+    public bool add(String[] cols)
     {
         int xsize = feature_index_.getXsize_();
         if ((mode_ == Mode.LEARN && cols.length < xsize + 1) ||
@@ -592,7 +592,7 @@ public class TaggerImpl extends Tagger
         return feature_index_.getAlphaFloat_();
     }
 
-    public boolean empty()
+    public bool empty()
     {
         return x_.isEmpty();
     }
@@ -707,7 +707,7 @@ public class TaggerImpl extends Tagger
         return "";
     }
 
-    public boolean parse()
+    public bool parse()
     {
         if (!feature_index_.buildFeatures(this))
         {
@@ -732,7 +732,7 @@ public class TaggerImpl extends Tagger
     }
 
 
-    public boolean clear()
+    public bool clear()
     {
         if (mode_ == Mode.TEST)
         {
@@ -748,7 +748,7 @@ public class TaggerImpl extends Tagger
         return true;
     }
 
-    public boolean next()
+    public bool next()
     {
         while (!agenda_.isEmpty())
         {
@@ -799,12 +799,12 @@ public class TaggerImpl extends Tagger
         return Math.exp(n.alpha + n.beta - n.cost - Z);
     }
 
-    public boolean open(FeatureIndex featureIndex, int nbest, int vlevel)
+    public bool open(FeatureIndex featureIndex, int nbest, int vlevel)
     {
         return open(featureIndex, nbest, vlevel, 1.0);
     }
 
-    public boolean open(FeatureIndex featureIndex, int nbest, int vlevel, double costFactor)
+    public bool open(FeatureIndex featureIndex, int nbest, int vlevel, double costFactor)
     {
         if (costFactor <= 0.0)
         {
@@ -819,7 +819,7 @@ public class TaggerImpl extends Tagger
         return true;
     }
 
-    public boolean open(InputStream stream, int nbest, int vlevel, double costFactor)
+    public bool open(InputStream stream, int nbest, int vlevel, double costFactor)
     {
         if (costFactor <= 0.0)
         {

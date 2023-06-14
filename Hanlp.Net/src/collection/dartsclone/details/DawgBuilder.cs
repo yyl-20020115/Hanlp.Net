@@ -58,7 +58,7 @@ class DawgBuilder
      * @param id 节点id
      * @return 是否是叶子节点
      */
-    boolean isLeaf(int id)
+    bool isLeaf(int id)
     {
         return label(id) == 0;
     }
@@ -78,7 +78,7 @@ class DawgBuilder
      * @param id 节点id
      * @return
      */
-    boolean isIntersection(int id)
+    bool isIntersection(int id)
     {
         return _isIntersections.get(id);
     }
@@ -219,8 +219,8 @@ class DawgBuilder
         int child;
         int sibling;
         byte label;
-        boolean isState;
-        boolean hasSibling;
+        bool isState;
+        bool hasSibling;
 
         void reset()
         {
@@ -376,7 +376,7 @@ class DawgBuilder
         return ret;
     }
 
-    private boolean areEqual(int nodeId, int unitId)
+    private bool areEqual(int nodeId, int unitId)
     {
         for (int i = _nodes.get(nodeId).sibling; i != 0;
              i = _nodes.get(i).sibling)

@@ -42,7 +42,7 @@ public class BagOfWordsDocument : ITermFrequencyHolder
      * 是否为空(文档中没有任何词)
      * @return
      */
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return tfMap.isEmpty();
     }

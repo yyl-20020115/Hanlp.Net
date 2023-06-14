@@ -29,7 +29,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     /**
      * 是否自动转换依存关系
      */
-    private boolean enableDeprelTranslater;
+    private bool enableDeprelTranslater;
 
     public AbstractDependencyParser(Segment segment)
     {
@@ -110,7 +110,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     }
 
     //@Override
-    public IDependencyParser enableDeprelTranslator(boolean enable)
+    public IDependencyParser enableDeprelTranslator(bool enable)
     {
         enableDeprelTranslater = enable;
         return this;

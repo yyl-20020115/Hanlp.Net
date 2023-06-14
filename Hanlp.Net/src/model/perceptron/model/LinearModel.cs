@@ -43,7 +43,7 @@ public class LinearModel : ICacheAble
         parameter = new float[featureMap.size() * featureMap.tagSet.size()];
     }
 
-    public LinearModel(String modelFile) throws IOException
+    public LinearModel(String modelFile) 
     {
         load(modelFile);
     }
@@ -138,9 +138,9 @@ public class LinearModel : ICacheAble
      * 保存到路径
      *
      * @param modelFile
-     * @throws IOException
+     * @
      */
-    public void save(String modelFile) throws IOException
+    public void save(String modelFile) 
     {
         DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
         save(out);
@@ -152,14 +152,14 @@ public class LinearModel : ICacheAble
      *
      * @param modelFile 路径
      * @param ratio     压缩比c（压缩掉的体积，压缩后体积变为1-c）
-     * @throws IOException
+     * @
      */
-    public void save(String modelFile, final double ratio) throws IOException
+    public void save(String modelFile, final double ratio) 
     {
         save(modelFile, featureMap.entrySet(), ratio);
     }
 
-    public void save(String modelFile, Set<Map.Entry<String, Integer>> featureIdSet, final double ratio) throws IOException
+    public void save(String modelFile, Set<Map.Entry<String, Integer>> featureIdSet, final double ratio) 
     {
         save(modelFile, featureIdSet, ratio, false);
     }
@@ -171,9 +171,9 @@ public class LinearModel : ICacheAble
      * @param featureIdSet 特征集（有些数据结构不支持遍历，可以提供构造时用到的特征集来规避这个缺陷）
      * @param ratio        压缩比
      * @param text         是否输出文本以供调试
-     * @throws IOException
+     * @
      */
-    public void save(String modelFile, Set<Map.Entry<String, Integer>> featureIdSet, final double ratio, boolean text) throws IOException
+    public void save(String modelFile, Set<Map.Entry<String, Integer>> featureIdSet, final double ratio, bool text) 
     {
         float[] parameter = this.parameter;
         this.compress(ratio, 1e-3f);
@@ -361,9 +361,9 @@ public class LinearModel : ICacheAble
      * 加载模型
      *
      * @param modelFile
-     * @throws IOException
+     * @
      */
-    public void load(String modelFile) throws IOException
+    public void load(String modelFile) 
     {
         if (HanLP.Config.DEBUG)
             logger.start("加载 %s ... ", modelFile);
@@ -382,7 +382,7 @@ public class LinearModel : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) throws IOException
+    public void save(DataOutputStream out) 
     {
         if (!(featureMap instanceof ImmutableFeatureMDatMap))
         {
@@ -396,7 +396,7 @@ public class LinearModel : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         if (byteArray == null)
             return false;

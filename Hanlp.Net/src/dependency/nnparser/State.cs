@@ -99,17 +99,17 @@ public class State
         std.fill(right_2nd_most_child, -1);
     }
 
-    boolean can_shift()
+    bool can_shift()
     {
         return !buffer_empty();
     }
 
-    boolean can_left_arc()
+    bool can_left_arc()
     {
         return stack_size() >= 2;
     }
 
-    boolean can_right_arc()
+    bool can_right_arc()
     {
         return stack_size() >= 2;
     }
@@ -166,7 +166,7 @@ public class State
      * @param source 右焦点词
      * @return 是否shift成功
      */
-    boolean shift(State source)
+    bool shift(State source)
     {
         if (!source.can_shift())
         {
@@ -183,7 +183,7 @@ public class State
         return true;
     }
 
-    boolean left_arc(State source, int deprel)
+    bool left_arc(State source, int deprel)
     {
         if (!source.can_left_arc())
         {
@@ -221,7 +221,7 @@ public class State
         return true;
     }
 
-    boolean right_arc(State source, int deprel)
+    bool right_arc(State source, int deprel)
     {
         if (!source.can_right_arc())
         {
@@ -271,8 +271,8 @@ public class State
         List<Integer> sigma_r = new ArrayList<Integer>();
         sigma_r.add(stack.get(stack.size() - 1));
 
-        boolean[] sigma_l_mask = new boolean[gold_heads.size()];
-        boolean[] sigma_r_mask = new boolean[gold_heads.size()];
+        bool[] sigma_l_mask = new bool[gold_heads.size()];
+        bool[] sigma_r_mask = new bool[gold_heads.size()];
         for (int s = 0; s < sigma_l.size(); ++s)
         {
             sigma_l_mask[sigma_l.get(s)] = true;
@@ -393,7 +393,7 @@ public class State
      * 队列是否为空
      * @return
      */
-    boolean buffer_empty()
+    bool buffer_empty()
     {
         return (this.buffer == this.ref.size());
     }

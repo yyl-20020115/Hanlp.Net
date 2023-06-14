@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron;
 /**
  * @author hankcs
  */
-public class POSTrainer extends PerceptronTrainer
+public class POSTrainer : PerceptronTrainer
 {
     //@Override
     protected TagSet createTagSet()
@@ -30,7 +30,7 @@ public class POSTrainer extends PerceptronTrainer
     }
 
     //@Override
-    public Result train(String trainingFile, String developFile, String modelFile) throws IOException
+    public Result train(String trainingFile, String developFile, String modelFile) 
     {
         // 词性标注模型压缩会显著降低效果
         return train(trainingFile, developFile, modelFile, 0, 10, Runtime.getRuntime().availableProcessors());

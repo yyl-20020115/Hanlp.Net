@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.crf;
 /**
  * @author hankcs
  */
-public class CRFNERecognizer extends CRFTagger : NERecognizer
+public class CRFNERecognizer : CRFTagger : NERecognizer
 {
     private NERTagSet tagSet;
     /**
@@ -23,12 +23,12 @@ public class CRFNERecognizer extends CRFTagger : NERecognizer
      */
     private PerceptronNERecognizer perceptronNERecognizer;
 
-    public CRFNERecognizer() throws IOException
+    public CRFNERecognizer() 
     {
         this(HanLP.Config.CRFNERModelPath);
     }
 
-    public CRFNERecognizer(String modelPath) throws IOException
+    public CRFNERecognizer(String modelPath) 
     {
         super(modelPath);
         if (model == null)
@@ -51,7 +51,7 @@ public class CRFNERecognizer extends CRFTagger : NERecognizer
     }
 
     //@Override
-    protected void convertCorpus(Sentence sentence, BufferedWriter bw) throws IOException
+    protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
         List<String[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
         for (String[] tuple : collector)
@@ -96,7 +96,7 @@ public class CRFNERecognizer extends CRFTagger : NERecognizer
                     {
                         int[] offset = offsetIterator.next();
                         int t = offset[0] + position;
-                        boolean first = offset[1] == 0;
+                        bool first = offset[1] == 0;
                         if (t < 0)
                             sbFeature.append(FeatureIndex.BOS[-(t + 1)]);
                         else if (t >= wordArray.length)

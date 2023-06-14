@@ -4,7 +4,7 @@ namespace com.hankcs.hanlp.classification.models;
 /**
  * 储存学习过程中的数据
  */
-public class NaiveBayesModel extends AbstractModel
+public class NaiveBayesModel : AbstractModel
 {
 
     /**

@@ -23,7 +23,7 @@ public abstract class SimpleDictionary<V>
 {
     BinTrie<V> trie = new BinTrie<V>();
 
-    public boolean load(String path)
+    public bool load(String path)
     {
         try
         {
@@ -127,7 +127,7 @@ public abstract class SimpleDictionary<V>
 
     public interface Filter<V>
     {
-        boolean remove(Map.Entry<String, V> entry);
+        bool remove(Map.Entry<String, V> entry);
     }
     /**
      * 向中加入单词

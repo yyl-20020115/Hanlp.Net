@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.corpus.io;
 /**
  * @author hankcs
  */
-public class ByteArrayOtherStream extends ByteArrayStream
+public class ByteArrayOtherStream : ByteArrayStream
 {
     InputStream is;
 
@@ -46,7 +46,7 @@ public class ByteArrayOtherStream extends ByteArrayStream
         }
     }
 
-    public static ByteArrayOtherStream createByteArrayOtherStream(InputStream is) throws IOException
+    public static ByteArrayOtherStream createByteArrayOtherStream(InputStream is) 
     {
         if (is == null) return null;
         int size = is.available();

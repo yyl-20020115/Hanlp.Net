@@ -3776,7 +3776,7 @@ public class OrganizationDictionary
      * @param name
      * @return
      */
-    static boolean isBadCase(String name)
+    static bool isBadCase(String name)
     {
         EnumItem<NT> nrEnumItem = dictionary.get(name);
         if (nrEnumItem == null) return false;

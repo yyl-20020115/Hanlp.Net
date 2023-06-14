@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.seg.Other;
  *
  * @author hankcs
  */
-public class DoubleArrayTrieSegment extends DictionaryBasedSegment
+public class DoubleArrayTrieSegment : DictionaryBasedSegment
 {
     /**
      * 分词用到的trie树，可以直接赋值为自己的trie树（赋值操作不保证线程安全）
@@ -49,9 +49,9 @@ public class DoubleArrayTrieSegment extends DictionaryBasedSegment
      * 加载自己的词典，构造分词器
      * @param dictionaryPaths 任意数量个词典
      *
-     * @throws IOException 加载过程中的IO异常
+     * @ 加载过程中的IO异常
      */
-    public DoubleArrayTrieSegment(String... dictionaryPaths) throws IOException
+    public DoubleArrayTrieSegment(String... dictionaryPaths) 
     {
         this(new DoubleArrayTrie<CoreDictionary.Attribute>(IOUtil.loadDictionary(dictionaryPaths)));
     }

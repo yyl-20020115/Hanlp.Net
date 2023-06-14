@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.corpus.io;
 /**
  * @author hankcs
  */
-public abstract class ByteArrayStream extends ByteArray
+public abstract class ByteArrayStream : ByteArray
 {
     /**
      * 每次读取1mb

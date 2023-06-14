@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.classification.classifiers;
 public abstract class AbstractClassifier : IClassifier
 {
     //@Override
-    public IClassifier enableProbability(boolean enable)
+    public IClassifier enableProbability(bool enable)
     {
         return this;
     }
@@ -28,7 +28,7 @@ public abstract class AbstractClassifier : IClassifier
     /**
      * 是否计算概率
      */
-    boolean configProbabilityEnabled = true;
+    bool configProbabilityEnabled = true;
 
     /**
      * 使用一个训练出来的分类器来预测分类
@@ -55,7 +55,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(String folderPath, String charsetName) throws IOException
+    public void train(String folderPath, String charsetName) 
     {
         IDataSet dataSet = new MemoryDataSet();
         dataSet.load(folderPath, charsetName);
@@ -85,7 +85,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(String folderPath) throws IOException
+    public void train(String folderPath) 
     {
         train(folderPath, "UTF-8");
     }

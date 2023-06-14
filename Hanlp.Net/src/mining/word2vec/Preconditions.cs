@@ -10,10 +10,10 @@ class Preconditions
     /**
      * Ensures the truth of an expression involving one or more parameters to the calling method.
      *
-     * @param expression a boolean expression
+     * @param expression a bool expression
      * @throws IllegalArgumentException if {@code expression} is false
      */
-    public static void checkArgument(boolean expression)
+    public static void checkArgument(bool expression)
     {
         if (!expression)
         {
@@ -24,12 +24,12 @@ class Preconditions
     /**
      * Ensures the truth of an expression involving one or more parameters to the calling method.
      *
-     * @param expression   a boolean expression
+     * @param expression   a bool expression
      * @param errorMessage the exception message to use if the check fails; will be converted to a
      *                     string using {@link String#valueOf(Object)}
      * @throws IllegalArgumentException if {@code expression} is false
      */
-    public static void checkArgument(boolean expression, Object errorMessage)
+    public static void checkArgument(bool expression, Object errorMessage)
     {
         if (!expression)
         {
@@ -40,7 +40,7 @@ class Preconditions
     /**
      * Ensures the truth of an expression involving one or more parameters to the calling method.
      *
-     * @param expression           a boolean expression
+     * @param expression           a bool expression
      * @param errorMessageTemplate a template for the exception message should the check fail. The
      *                             message is formed by replacing each {@code %s} placeholder in the template with an
      *                             argument. These are matched by position - the first {@code %s} gets {@code
@@ -52,7 +52,7 @@ class Preconditions
      * @throws NullPointerException     if the check fails and either {@code errorMessageTemplate} or
      *                                  {@code errorMessageArgs} is null (don't let this happen)
      */
-    public static void checkArgument(boolean expression,
+    public static void checkArgument(bool expression,
                                      String errorMessageTemplate,
                                      Object... errorMessageArgs)
     {
@@ -66,10 +66,10 @@ class Preconditions
      * Ensures the truth of an expression involving the state of the calling instance, but not
      * involving any parameters to the calling method.
      *
-     * @param expression a boolean expression
+     * @param expression a bool expression
      * @throws IllegalStateException if {@code expression} is false
      */
-    public static void checkState(boolean expression)
+    public static void checkState(bool expression)
     {
         if (!expression)
         {
@@ -81,12 +81,12 @@ class Preconditions
      * Ensures the truth of an expression involving the state of the calling instance, but not
      * involving any parameters to the calling method.
      *
-     * @param expression   a boolean expression
+     * @param expression   a bool expression
      * @param errorMessage the exception message to use if the check fails; will be converted to a
      *                     string using {@link String#valueOf(Object)}
      * @throws IllegalStateException if {@code expression} is false
      */
-    public static void checkState(boolean expression, Object errorMessage)
+    public static void checkState(bool expression, Object errorMessage)
     {
         if (!expression)
         {
@@ -98,7 +98,7 @@ class Preconditions
      * Ensures the truth of an expression involving the state of the calling instance, but not
      * involving any parameters to the calling method.
      *
-     * @param expression           a boolean expression
+     * @param expression           a bool expression
      * @param errorMessageTemplate a template for the exception message should the check fail. The
      *                             message is formed by replacing each {@code %s} placeholder in the template with an
      *                             argument. These are matched by position - the first {@code %s} gets {@code
@@ -110,7 +110,7 @@ class Preconditions
      * @throws NullPointerException  if the check fails and either {@code errorMessageTemplate} or
      *                               {@code errorMessageArgs} is null (don't let this happen)
      */
-    public static void checkState(boolean expression,
+    public static void checkState(bool expression,
                                   String errorMessageTemplate,
                                   Object... errorMessageArgs)
     {

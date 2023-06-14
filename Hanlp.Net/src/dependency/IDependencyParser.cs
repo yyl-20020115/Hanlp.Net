@@ -68,5 +68,5 @@ public interface IDependencyParser
      * 依存关系自动转换开关
      * @param enable
      */
-    IDependencyParser enableDeprelTranslator(boolean enable);
+    IDependencyParser enableDeprelTranslator(bool enable);
 }

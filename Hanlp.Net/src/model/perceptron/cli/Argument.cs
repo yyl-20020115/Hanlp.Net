@@ -18,7 +18,7 @@ public @interface Argument
     /**
      * If this is true, then the argument must be set or the parse will fail
      */
-    boolean required() default false;
+    bool required() default false;
 
     /**
      * This is the prefix expected for the argument

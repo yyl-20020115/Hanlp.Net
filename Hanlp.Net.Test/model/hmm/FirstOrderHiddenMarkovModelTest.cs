@@ -1,16 +1,9 @@
-package com.hankcs.hanlp.model.hmm;
+namespace com.hankcs.hanlp.model.hmm;
 
-import junit.framework.TestCase;
 
-import java.util.Arrays;
 
-import static com.hankcs.hanlp.model.hmm.FirstOrderHiddenMarkovModelTest.Feel.cold;
-import static com.hankcs.hanlp.model.hmm.FirstOrderHiddenMarkovModelTest.Feel.dizzy;
-import static com.hankcs.hanlp.model.hmm.FirstOrderHiddenMarkovModelTest.Feel.normal;
-import static com.hankcs.hanlp.model.hmm.FirstOrderHiddenMarkovModelTest.Status.Fever;
-import static com.hankcs.hanlp.model.hmm.FirstOrderHiddenMarkovModelTest.Status.Healthy;
 
-public class FirstOrderHiddenMarkovModelTest extends TestCase
+public class FirstOrderHiddenMarkovModelTest : TestCase
 {
 
     /**
@@ -54,18 +47,18 @@ public class FirstOrderHiddenMarkovModelTest extends TestCase
      */
     static int[] observations = new int[]{normal.ordinal(), cold.ordinal(), dizzy.ordinal()};
 
-    public void testGenerate() throws Exception
+    public void testGenerate() 
     {
         FirstOrderHiddenMarkovModel givenModel = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
         for (int[][] sample : givenModel.generate(3, 5, 2))
         {
             for (int t = 0; t < sample[0].length; t++)
                 System.out.printf("%s/%s ", Feel.values()[sample[0][t]], Status.values()[sample[1][t]]);
-            System.out.println();
+            Console.WriteLine();
         }
     }
 
-    public void testTrain() throws Exception
+    public void testTrain() 
     {
         FirstOrderHiddenMarkovModel givenModel = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
         FirstOrderHiddenMarkovModel trainedModel = new FirstOrderHiddenMarkovModel();
@@ -73,7 +66,7 @@ public class FirstOrderHiddenMarkovModelTest extends TestCase
         assertTrue(trainedModel.similar(givenModel));
     }
 
-    public void testPredict() throws Exception
+    public void testPredict() 
     {
         FirstOrderHiddenMarkovModel model = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
         evaluateModel(model);

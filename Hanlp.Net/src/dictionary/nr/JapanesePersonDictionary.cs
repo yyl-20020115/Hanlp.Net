@@ -45,7 +45,7 @@ public class JapanesePersonDictionary
         logger.info("日本人名词典" + HanLP.Config.PinyinDictionaryPath + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
     }
 
-    static boolean load()
+    static bool load()
     {
         trie = new DoubleArrayTrie<Character>();
         if (loadDat()) return true;
@@ -79,7 +79,7 @@ public class JapanesePersonDictionary
      * @param map
      * @return
      */
-    static boolean saveDat(TreeMap<String, Character> map)
+    static bool saveDat(TreeMap<String, Character> map)
     {
         try
         {
@@ -99,7 +99,7 @@ public class JapanesePersonDictionary
         return trie.save(path + Predefine.TRIE_EXT);
     }
 
-    static boolean loadDat()
+    static bool loadDat()
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.VALUE_EXT);
         if (byteArray == null) return false;
@@ -117,7 +117,7 @@ public class JapanesePersonDictionary
      * @param key
      * @return
      */
-    public static boolean containsKey(String key)
+    public static bool containsKey(String key)
     {
         return trie.containsKey(key);
     }
@@ -128,7 +128,7 @@ public class JapanesePersonDictionary
      * @param length
      * @return
      */
-    public static boolean containsKey(String key, int length)
+    public static bool containsKey(String key, int length)
     {
         if (!trie.containsKey(key)) return false;
         return key.length() >= length;
@@ -147,7 +147,7 @@ public class JapanesePersonDictionary
     /**
      * 最长分词
      */
-    public static class Searcher extends BaseSearcher<Character>
+    public static class Searcher : BaseSearcher<Character>
     {
         /**
          * 分词从何处开始，这是一个状态

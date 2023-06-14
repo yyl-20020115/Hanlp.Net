@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.seg.CRF;
  * @author hankcs
  * @deprecated 已废弃，请使用{@link com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer}
  */
-public class CRFSegment extends CharacterBasedSegment
+public class CRFSegment : CharacterBasedSegment
 {
     private CRFModel crfModel;
 
@@ -283,7 +283,7 @@ public class CRFSegment extends CharacterBasedSegment
     }
 
     //@Override
-    public Segment enableNumberQuantifierRecognize(boolean enable)
+    public Segment enableNumberQuantifierRecognize(bool enable)
     {
         throw new UnsupportedOperationException("暂不支持");
 //        enablePartOfSpeechTagging(enable);

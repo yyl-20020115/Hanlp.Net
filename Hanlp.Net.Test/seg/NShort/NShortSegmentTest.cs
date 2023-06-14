@@ -1,17 +1,10 @@
-package com.hankcs.hanlp.seg.NShort;
+namespace com.hankcs.hanlp.seg.NShort;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
-import com.hankcs.hanlp.tokenizer.StandardTokenizer;
-import junit.framework.TestCase;
 
-import java.util.LinkedList;
-import java.util.List;
 
-public class NShortSegmentTest extends TestCase
+public class NShortSegmentTest : TestCase
 {
-    public void testParse() throws Exception
+    public void testParse() 
     {
         List<List<Term>> wordResults = new LinkedList<List<Term>>();
         wordResults.add(NShortSegment.parse("3-4月"));
@@ -26,16 +19,16 @@ public class NShortSegmentTest extends TestCase
 
 //        for (List<Term> result : wordResults)
 //        {
-//            System.out.println(result);
+//            Console.WriteLine(result);
 //        }
     }
 
-    public void testIssue691() throws Exception
+    public void testIssue691() 
     {
 //        HanLP.Config.enableDebug();
         StandardTokenizer.SEGMENT.enableCustomDictionary(false);
         Segment nShortSegment = new NShortSegment().enableCustomDictionary(false).enablePlaceRecognize(true).enableOrganizationRecognize(true);
-//        System.out.println(nShortSegment.seg("今天，刘志军案的关键人物,山西女商人丁书苗在市二中院出庭受审。"));
-//        System.out.println(nShortSegment.seg("今日消费5,513.58元"));
+//        Console.WriteLine(nShortSegment.seg("今天，刘志军案的关键人物,山西女商人丁书苗在市二中院出庭受审。"));
+//        Console.WriteLine(nShortSegment.seg("今日消费5,513.58元"));
     }
 }

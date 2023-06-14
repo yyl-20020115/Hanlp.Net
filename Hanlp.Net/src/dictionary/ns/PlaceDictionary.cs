@@ -116,7 +116,7 @@ public class PlaceDictionary
      * @param name
      * @return
      */
-    static boolean isBadCase(String name)
+    static bool isBadCase(String name)
     {
         EnumItem<NS> nrEnumItem = dictionary.get(name);
         if (nrEnumItem == null) return false;

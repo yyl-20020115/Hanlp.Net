@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.crf;
  * @author hankcs
  * @since 1.6.2
  */
-public class CRFLexicalAnalyzer extends AbstractLexicalAnalyzer
+public class CRFLexicalAnalyzer : AbstractLexicalAnalyzer
 {
     /**
      * 构造CRF词法分析器
@@ -64,7 +64,7 @@ public class CRFLexicalAnalyzer extends AbstractLexicalAnalyzer
      *
      * @param cwsModelPath CRF分词器模型路径
      */
-    public CRFLexicalAnalyzer(String cwsModelPath) throws IOException
+    public CRFLexicalAnalyzer(String cwsModelPath) 
     {
         this(new CRFSegmenter(cwsModelPath));
     }
@@ -75,7 +75,7 @@ public class CRFLexicalAnalyzer extends AbstractLexicalAnalyzer
      * @param cwsModelPath CRF分词器模型路径
      * @param posModelPath CRF词性标注器模型路径
      */
-    public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath) throws IOException
+    public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath) 
     {
         this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath));
     }
@@ -87,7 +87,7 @@ public class CRFLexicalAnalyzer extends AbstractLexicalAnalyzer
      * @param posModelPath CRF词性标注器模型路径
      * @param nerModelPath CRF命名实体识别器模型路径
      */
-    public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath, String nerModelPath) throws IOException
+    public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath, String nerModelPath) 
     {
         this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath), new CRFNERecognizer(nerModelPath));
     }
@@ -95,9 +95,9 @@ public class CRFLexicalAnalyzer extends AbstractLexicalAnalyzer
     /**
      * 加载配置文件指定的模型
      *
-     * @throws IOException
+     * @
      */
-    public CRFLexicalAnalyzer() throws IOException
+    public CRFLexicalAnalyzer() 
     {
         this(new CRFSegmenter(), new CRFPOSTagger(), new CRFNERecognizer());
     }

@@ -92,7 +92,7 @@ public class JapanesePersonRecognition
      * @param name
      * @return
      */
-    public static boolean isBadCase(String name)
+    public static bool isBadCase(String name)
     {
         Character label = JapanesePersonDictionary.get(name);
         if (label == null) return false;

@@ -38,7 +38,7 @@ public class LexiconUtility
      * @param word
      * @return
      */
-    public static boolean contains(String word)
+    public static bool contains(String word)
     {
         return getAttribute(word) != null;
     }
@@ -72,7 +72,7 @@ public class LexiconUtility
      * @param attribute
      * @return
      */
-    public static boolean setAttribute(String word, CoreDictionary.Attribute attribute)
+    public static bool setAttribute(String word, CoreDictionary.Attribute attribute)
     {
         if (attribute == null) return false;
 
@@ -92,7 +92,7 @@ public class LexiconUtility
      * @param natures
      * @return
      */
-    public static boolean setAttribute(String word, Nature... natures)
+    public static bool setAttribute(String word, Nature... natures)
     {
         if (natures == null) return false;
 
@@ -108,7 +108,7 @@ public class LexiconUtility
      * @param natures
      * @return
      */
-    public static boolean setAttribute(String word, String... natures)
+    public static bool setAttribute(String word, String... natures)
     {
         if (natures == null) return false;
 
@@ -128,7 +128,7 @@ public class LexiconUtility
      * @param natureWithFrequency
      * @return
      */
-    public static boolean setAttribute(String word, String natureWithFrequency)
+    public static bool setAttribute(String word, String natureWithFrequency)
     {
         CoreDictionary.Attribute attribute = CoreDictionary.Attribute.create(natureWithFrequency);
         return setAttribute(word, attribute);

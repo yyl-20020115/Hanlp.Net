@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  * 词频词典
  * @author hankcs
  */
-public class TFDictionary extends SimpleDictionary<TermFrequency> : ISaveAble
+public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
 {
     String delimeter;
 
@@ -45,7 +45,7 @@ public class TFDictionary extends SimpleDictionary<TermFrequency> : ISaveAble
      * @param add 设为true则是词频叠加模式，否则是词频覆盖模式
      * @return 词条的增量
      */
-    public int combine(TFDictionary dictionary, int limit, boolean add)
+    public int combine(TFDictionary dictionary, int limit, bool add)
     {
         int preSize = trie.size();
         for (Map.Entry<String, TermFrequency> entry : dictionary.trie.entrySet())
@@ -68,7 +68,7 @@ public class TFDictionary extends SimpleDictionary<TermFrequency> : ISaveAble
 
     /**
      * 合并多个词典
-     * @param path 多个词典的路径，第一个是主词典。主词典与其他词典的区别详见com.hankcs.hanlp.corpus.dictionary.TFDictionary#combine(com.hankcs.hanlp.corpus.dictionary.TFDictionary, int, boolean)
+     * @param path 多个词典的路径，第一个是主词典。主词典与其他词典的区别详见com.hankcs.hanlp.corpus.dictionary.TFDictionary#combine(com.hankcs.hanlp.corpus.dictionary.TFDictionary, int, bool)
      * @return 词条的增量
      */
     public static int combine(String... path)
@@ -130,7 +130,7 @@ public class TFDictionary extends SimpleDictionary<TermFrequency> : ISaveAble
     }
 
     //@Override
-    public boolean saveTxtTo(String path)
+    public bool saveTxtTo(String path)
     {
         if ("=".equals(delimeter))
         {
@@ -157,7 +157,7 @@ public class TFDictionary extends SimpleDictionary<TermFrequency> : ISaveAble
      * @param path
      * @return
      */
-    public boolean saveKeyTo(String path)
+    public bool saveKeyTo(String path)
     {
         LinkedList<String> keyList = new LinkedList<String>();
         for (Map.Entry<String, TermFrequency> entry : trie.entrySet())

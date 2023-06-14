@@ -2,7 +2,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 
 
 
-public class Train extends AbstractTrainer
+public class Train : AbstractTrainer
 {
 
     //@Override
@@ -14,7 +14,7 @@ public class Train extends AbstractTrainer
                           Train.class.getName());
     }
 
-    void execute(String[] args) throws IOException
+    void execute(String[] args) 
     {
         if (args.length <= 1) usage();
 
@@ -32,7 +32,7 @@ public class Train extends AbstractTrainer
         w2v.trainModel();
     }
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) 
     {
         new Train().execute(args);
     }

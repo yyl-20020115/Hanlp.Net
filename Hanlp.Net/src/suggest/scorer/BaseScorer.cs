@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.suggest.scorer;
  * @param <T> 这是储存器map中key的类型，具有相同key的句子会存入同一个entry
  * @author hankcs
  */
-public abstract class BaseScorer<T extends ISentenceKey> : IScorer
+public abstract class BaseScorer<T : ISentenceKey> : IScorer
 {
     public BaseScorer()
     {

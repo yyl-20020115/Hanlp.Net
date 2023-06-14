@@ -106,13 +106,13 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
     }
 
     //@Override
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return trie.isEmpty();
     }
 
     //@Override
-    public boolean containsKey(Object key)
+    public bool containsKey(Object key)
     {
         if (key == null || !(key instanceof String))
             return false;
@@ -120,7 +120,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
     }
 
     //@Override
-    public boolean containsValue(Object value)
+    public bool containsValue(Object value)
     {
         return values.contains(value);
     }
@@ -174,9 +174,9 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
     }
 
     //@Override
-    public void putAll(Map<? extends String, ? extends V> m)
+    public void putAll(Map<? : String, ? : V> m)
     {
-        for (Entry<? extends String, ? extends V> entry : m.entrySet())
+        for (Entry<? : String, ? : V> entry : m.entrySet())
         {
             put(entry.getKey(), entry.getValue());
         }
@@ -203,13 +203,13 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
             }
 
             //@Override
-            public boolean isEmpty()
+            public bool isEmpty()
             {
                 return trie.isEmpty();
             }
 
             //@Override
-            public boolean contains(Object o)
+            public bool contains(Object o)
             {
                 throw new UnsupportedOperationException();
             }
@@ -220,7 +220,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
                 return new Iterator<String>()
                 {
                     //@Override
-                    public boolean hasNext()
+                    public bool hasNext()
                     {
                         return iterator.hasNext();
                     }
@@ -252,19 +252,19 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
             }
 
             //@Override
-            public boolean add(String s)
+            public bool add(String s)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean remove(Object o)
+            public bool remove(Object o)
             {
                 return trie.remove((String) o) != -1;
             }
 
             //@Override
-            public boolean containsAll(Collection<?> c)
+            public bool containsAll(Collection<?> c)
             {
                 for (Object o : c)
                 {
@@ -275,21 +275,21 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
             }
 
             //@Override
-            public boolean addAll(Collection<? extends String> c)
+            public bool addAll(Collection<? : String> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean retainAll(Collection<?> c)
+            public bool retainAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean removeAll(Collection<?> c)
+            public bool removeAll(Collection<?> c)
             {
-                boolean changed = false;
+                bool changed = false;
                 for (Object o : c)
                 {
                     if (!changed)
@@ -324,13 +324,13 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
             }
 
             //@Override
-            public boolean isEmpty()
+            public bool isEmpty()
             {
                 return trie.isEmpty();
             }
 
             //@Override
-            public boolean contains(Object o)
+            public bool contains(Object o)
             {
                 throw new UnsupportedOperationException();
             }
@@ -343,7 +343,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
                     MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
 
                     //@Override
-                    public boolean hasNext()
+                    public bool hasNext()
                     {
                         return iterator.hasNext();
                     }
@@ -376,37 +376,37 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
             }
 
             //@Override
-            public boolean add(Entry<String, V> stringVEntry)
+            public bool add(Entry<String, V> stringVEntry)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean remove(Object o)
+            public bool remove(Object o)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean containsAll(Collection<?> c)
+            public bool containsAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean addAll(Collection<? extends Entry<String, V>> c)
+            public bool addAll(Collection<? : Entry<String, V>> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean retainAll(Collection<?> c)
+            public bool retainAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public boolean removeAll(Collection<?> c)
+            public bool removeAll(Collection<?> c)
             {
                 throw new UnsupportedOperationException();
             }

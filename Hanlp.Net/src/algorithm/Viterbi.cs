@@ -166,7 +166,7 @@ public class Viterbi
      * @param <E>                       EnumItem的具体类型
      * @return 预测结果
      */
-    public static <E extends Enum<E>> List<E> computeEnum(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
+    public static <E : Enum<E>> List<E> computeEnum(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
         int length = roleTagList.size() - 1;
         List<E> tagList = new ArrayList<E>(roleTagList.size());
@@ -234,7 +234,7 @@ public class Viterbi
      * @param <E>                       EnumItem的具体类型
      * @return 预测结果
      */
-    public static <E extends Enum<E>> List<E> computeEnumSimply(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
+    public static <E : Enum<E>> List<E> computeEnumSimply(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
         int length = roleTagList.size() - 1;
         List<E> tagList = new LinkedList<E>();

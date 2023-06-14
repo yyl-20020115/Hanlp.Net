@@ -1,14 +1,8 @@
-package com.hankcs.hanlp.algorithm;
+namespace com.hankcs.hanlp.algorithm;
 
-import junit.framework.TestCase;
 
-import static com.hankcs.hanlp.algorithm.ViterbiTest.Activity.clean;
-import static com.hankcs.hanlp.algorithm.ViterbiTest.Activity.shop;
-import static com.hankcs.hanlp.algorithm.ViterbiTest.Activity.walk;
-import static com.hankcs.hanlp.algorithm.ViterbiTest.Weather.Rainy;
-import static com.hankcs.hanlp.algorithm.ViterbiTest.Weather.Sunny;
 
-public class ViterbiTest extends TestCase
+public class ViterbiTest : TestCase
 {
     static enum Weather
     {
@@ -32,7 +26,7 @@ public class ViterbiTest extends TestCase
         {0.1, 0.4, 0.5},
         {0.6, 0.3, 0.1},
     };
-    public void testCompute() throws Exception
+    public void testCompute() 
     {
         for (int i = 0; i < start_probability.length; ++i)
         {
@@ -57,6 +51,6 @@ public class ViterbiTest extends TestCase
         {
 //            System.out.print(Weather.values()[r] + " ");
         }
-//        System.out.println();
+//        Console.WriteLine();
     }
 }

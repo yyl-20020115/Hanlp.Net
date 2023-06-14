@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dependency;
  *
  * @author hankcs
  */
-public class MaxEntDependencyParser extends MinimumSpanningTreeParser
+public class MaxEntDependencyParser : MinimumSpanningTreeParser
 {
     private MaxEntModel model;
 

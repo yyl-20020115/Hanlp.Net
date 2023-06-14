@@ -1,22 +1,11 @@
-package com.hankcs.hanlp.collection.MDAG;
+namespace com.hankcs.hanlp.collection.MDAG;
 
-import com.hankcs.hanlp.collection.MDAG.MDAGNode;
-import com.hankcs.hanlp.collection.MDAG.MDAGSet;
-import com.hankcs.hanlp.collection.trie.bintrie.BinTrie;
-import com.hankcs.hanlp.corpus.io.ByteArray;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.utility.TestUtility;
-import junit.framework.TestCase;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.*;
 
 /**
  * 测试MDAG
  */
-public class MDAGSetTest extends TestCase
+public class MDAGSetTest : TestCase
 {
     Set<String> validKeySet;
     Set<String> invalidKeySet;
@@ -26,7 +15,7 @@ public class MDAGSetTest extends TestCase
     private File tempFile;
 
 
-    public void setUp() throws Exception
+    public void setUp() 
     {
         TestUtility.ensureFullData();
         tempFile = File.createTempFile("hanlp-", ".bin");
@@ -40,12 +29,12 @@ public class MDAGSetTest extends TestCase
         mdagSet = new MDAGSet(validKeySet);
     }
 
-    public void testSize() throws Exception
+    public void testSize() 
     {
         assertEquals(validKeySet.size(), mdagSet.size());
     }
 
-    public void testContains() throws Exception
+    public void testContains() 
     {
         for (String key : validKeySet)
         {
@@ -54,7 +43,7 @@ public class MDAGSetTest extends TestCase
         }
     }
 
-    public void testNotContains() throws Exception
+    public void testNotContains() 
     {
         invalidKeySet = new TreeSet<String>();
         Random random = new Random(System.currentTimeMillis());
@@ -78,7 +67,7 @@ public class MDAGSetTest extends TestCase
         }
     }
 
-    public void testToArray() throws Exception
+    public void testToArray() 
     {
         String[] keyArray = mdagSet.toArray(new String[0]);
         assertEquals(validKeySet.size(), keyArray.length);
@@ -88,7 +77,7 @@ public class MDAGSetTest extends TestCase
         }
     }
 
-    public void testRemove() throws Exception
+    public void testRemove() 
     {
         String[] keyArray = mdagSet.toArray(new String[0]);
         for (String key : keyArray)
@@ -98,13 +87,13 @@ public class MDAGSetTest extends TestCase
         }
     }
 
-    public void testAdd() throws Exception
+    public void testAdd() 
     {
         assertEquals(true, mdagSet.add("成功啦"));
         assertEquals(true, mdagSet.contains("成功啦"));
     }
 
-    public void testSimplify() throws Exception
+    public void testSimplify() 
     {
         HashMap<MDAGNode, MDAGNode> equivalenceClassMDAGNodeHashMapBefore = mdagSet._getEquivalenceClassMDAGNodeHashMap();
         mdagSet.simplify();
@@ -113,14 +102,14 @@ public class MDAGSetTest extends TestCase
         assertEquals(equivalenceClassMDAGNodeHashMapBefore, equivalenceClassMDAGNodeHashMapAfter);
     }
 
-    public void testSimplifyAndContains() throws Exception
+    public void testSimplifyAndContains() 
     {
         mdagSet.simplify();
         testContains();
         testNotContains();
     }
 
-    public void testSaveAndLoad() throws Exception
+    public void testSaveAndLoad() 
     {
         DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         mdagSet.save(out);
@@ -132,13 +121,13 @@ public class MDAGSetTest extends TestCase
         testNotContains();
     }
 
-    public void testSingle() throws Exception
+    public void testSingle() 
     {
         mdagSet.simplify();
         assertTrue(mdagSet.contains("hankcs"));
     }
 
-//    public void testBenchmark() throws Exception
+//    public void testBenchmark() 
 //    {
 //        BinTrie<Boolean> binTrie = new BinTrie<Boolean>();
 //        for (String key : validKeySet)
@@ -161,7 +150,7 @@ public class MDAGSetTest extends TestCase
 //        System.out.printf("mdagSet用时 %d ms\n", System.currentTimeMillis() - start);
 //    }
 
-    public void testCommPrefix() throws Exception
+    public void testCommPrefix() 
     {
         MDAGSet setTwo = new MDAGSet(validKeySet);
         setTwo.simplify();
@@ -172,7 +161,7 @@ public class MDAGSetTest extends TestCase
     }
 
 
-    public void testSimplifyWithoutSave() throws Exception
+    public void testSimplifyWithoutSave() 
     {
         MDAG mdag = new MDAG();
         mdag.addString("hers");
@@ -184,7 +173,7 @@ public class MDAGSetTest extends TestCase
         assertTrue(mdag.contains("hers"));
     }
 
-    public void testSimplifyMap() throws Exception
+    public void testSimplifyMap() 
     {
         MDAGMap<String> mdagMap = new MDAGMap<String>();
         List<String> validKeySet = new ArrayList<String>();

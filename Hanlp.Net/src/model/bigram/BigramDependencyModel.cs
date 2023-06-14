@@ -35,7 +35,7 @@ public class BigramDependencyModel
         }
     }
 
-    static boolean load(String path)
+    static bool load(String path)
     {
         trie = new DoubleArrayTrie<String>();
         if (loadDat(path + ".bi" + Predefine.BIN_EXT)) return true;
@@ -56,7 +56,7 @@ public class BigramDependencyModel
         return true;
     }
 
-    private static boolean loadDat(String path)
+    private static bool loadDat(String path)
     {
         ByteArray byteArray = ByteArray.createByteArray(path);
         if (byteArray == null) return false;
@@ -69,7 +69,7 @@ public class BigramDependencyModel
         return trie.load(byteArray, valueArray);
     }
 
-    static boolean saveDat(String path, TreeMap<String, String> map)
+    static bool saveDat(String path, TreeMap<String, String> map)
     {
         Collection<String> dependencyList = map.values();
         // 缓存值文件

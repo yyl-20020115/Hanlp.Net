@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron.common;
 /**
  * @author hankcs
  */
-public class FrequencyMap extends TreeMap<String, Integer>
+public class FrequencyMap : TreeMap<String, Integer>
 {
     public int totalFrequency;
 

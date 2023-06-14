@@ -8,7 +8,7 @@ namespace com.hankcs.hanlp.summary;
  *
  * @author hankcs
  */
-public class TextRankKeyword extends KeywordExtractor
+public class TextRankKeyword : KeywordExtractor
 {
     /**
      * 阻尼系数（ＤａｍｐｉｎｇＦａｃｔｏｒ），一般取值为0.85

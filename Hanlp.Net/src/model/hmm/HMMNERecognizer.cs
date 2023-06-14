@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.hmm;
 /**
  * @author hankcs
  */
-public class HMMNERecognizer extends HMMTrainer : NERecognizer
+public class HMMNERecognizer : HMMTrainer : NERecognizer
 {
     NERTagSet tagSet;
 

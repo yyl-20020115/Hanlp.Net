@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.dictionary;
 public class CoreDictionary
 {
     public static DoubleArrayTrie<Attribute> trie = new DoubleArrayTrie<Attribute>();
-    public final static String path = HanLP.Config.CoreDictionaryPath;
+    public readonly static String path = HanLP.Config.CoreDictionaryPath;
     public static final int totalFrequency = 221894;
 
     // 自动加载词典
@@ -47,7 +47,7 @@ public class CoreDictionary
     public static final int M_WORD_ID = getWordID(Predefine.TAG_NUMBER);
     public static final int NX_WORD_ID = getWordID(Predefine.TAG_PROPER);
 
-    private static boolean load(String path)
+    private static bool load(String path)
     {
         logger.info("核心词典开始加载:" + path);
         if (loadDat(path)) return true;
@@ -121,7 +121,7 @@ public class CoreDictionary
      * @param path
      * @return
      */
-    static boolean loadDat(String path)
+    static bool loadDat(String path)
     {
         try
         {
@@ -191,7 +191,7 @@ public class CoreDictionary
      * @param key
      * @return
      */
-    public static boolean contains(String key)
+    public static bool contains(String key)
     {
         return trie.get(key) != null;
     }
@@ -345,7 +345,7 @@ public class CoreDictionary
          * @param nature
          * @return
          */
-        public boolean hasNature(Nature nature)
+        public bool hasNature(Nature nature)
         {
             return getNatureFrequency(nature) > 0;
         }
@@ -355,7 +355,7 @@ public class CoreDictionary
          * @param prefix 词性前缀，比如u会查询是否有ude, uzhe等等
          * @return
          */
-        public boolean hasNatureStartsWith(String prefix)
+        public bool hasNatureStartsWith(String prefix)
         {
             for (Nature n : nature)
             {
@@ -375,7 +375,7 @@ public class CoreDictionary
             return sb.toString();
         }
 
-        public void save(DataOutputStream out) throws IOException
+        public void save(DataOutputStream out) 
         {
             out.writeInt(totalFrequency);
             out.writeInt(nature.length);

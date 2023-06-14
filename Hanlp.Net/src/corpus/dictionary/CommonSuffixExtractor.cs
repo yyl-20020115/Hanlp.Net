@@ -43,7 +43,7 @@ public class CommonSuffixExtractor
      * @param extend 长度是否拓展为从1到length为止的后缀
      * @return 公共后缀列表
      */
-    public List<String> extractSuffix(int length, int size, boolean extend)
+    public List<String> extractSuffix(int length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
         for (String key : tfDictionary.keySet())
@@ -88,7 +88,7 @@ public class CommonSuffixExtractor
      * @param extend
      * @return
      */
-    public List<String> extractSuffixByWords(int length, int size, boolean extend)
+    public List<String> extractSuffixByWords(int length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
         for (String key : tfDictionary.keySet())

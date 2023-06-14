@@ -1,16 +1,11 @@
 /**
  * 
  */
-package com.hankcs.hanlp.summary;
+namespace com.hankcs.hanlp.summary;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 
-import org.junit.Test;
 
-import com.hankcs.hanlp.HanLP;
 
 /**
  * @author gonggawang
@@ -30,8 +25,8 @@ public class TextRankSentenceTest
 	{
 		List<String> oldSum = HanLP.extractSummary(str, 2);
 		List<String> newSum = HanLP.extractSummary(str, 2, separator);
-//		System.out.println("exctractSummay old:" + oldSum);
-//		System.out.println("exctractSummay new:" + newSum);
+//		Console.WriteLine("exctractSummay old:" + oldSum);
+//		Console.WriteLine("exctractSummay new:" + newSum);
 		
 		assertTrue(oldSum.toString().length() < newSum.toString().length());
 		assertFalse(oldSum.toString().contains("，"));
@@ -45,8 +40,8 @@ public class TextRankSentenceTest
 		String oldSum = HanLP.getSummary(str, 100);
 		String newSum = HanLP.getSummary(str, 100, separator);
 		
-//		System.out.println("getSummay old:" + oldSum);
-//		System.out.println("getSummay new:" + newSum);
+//		Console.WriteLine("getSummay old:" + oldSum);
+//		Console.WriteLine("getSummay new:" + newSum);
 		
 		assertFalse(oldSum.contains("，"));
 		assertTrue(newSum.contains("，"));

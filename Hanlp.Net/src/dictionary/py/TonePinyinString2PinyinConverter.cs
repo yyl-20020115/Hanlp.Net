@@ -50,7 +50,7 @@ public class TonePinyinString2PinyinConverter
      * @param singlePinyin
      * @return
      */
-    public static boolean valid(String singlePinyin)
+    public static bool valid(String singlePinyin)
     {
         if (mapNumberKey.containsKey(singlePinyin)) return true;
 
@@ -83,7 +83,7 @@ public class TonePinyinString2PinyinConverter
      * @param tonePinyinText
      * @return
      */
-    public static List<Pinyin> convert(String tonePinyinText, boolean removeNull)
+    public static List<Pinyin> convert(String tonePinyinText, bool removeNull)
     {
         List<Pinyin> pinyinList = new LinkedList<Pinyin>();
         Collection<Token> tokenize = trie.tokenize(tonePinyinText);
@@ -102,7 +102,7 @@ public class TonePinyinString2PinyinConverter
      * @param pinyinStringArray
      * @return
      */
-    public static boolean valid(String[] pinyinStringArray)
+    public static bool valid(String[] pinyinStringArray)
     {
         for (String p : pinyinStringArray)
         {

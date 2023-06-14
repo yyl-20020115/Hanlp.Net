@@ -17,9 +17,9 @@ namespace com.hankcs.hanlp.mining.word;
  *
  * @author hankcs
  */
-public class TfIdfCounter extends KeywordExtractor
+public class TfIdfCounter : KeywordExtractor
 {
-    private boolean filterStopWord;
+    private bool filterStopWord;
     private Map<Object, Map<String, Double>> tfMap;
     private Map<Object, Map<String, Double>> tfidfMap;
     private Map<String, Double> idf;
@@ -29,12 +29,12 @@ public class TfIdfCounter extends KeywordExtractor
         this(true);
     }
 
-    public TfIdfCounter(boolean filterStopWord)
+    public TfIdfCounter(bool filterStopWord)
     {
         this(StandardTokenizer.SEGMENT, filterStopWord);
     }
 
-    public TfIdfCounter(Segment defaultSegment, boolean filterStopWord)
+    public TfIdfCounter(Segment defaultSegment, bool filterStopWord)
     {
         super(defaultSegment);
         this.filterStopWord = filterStopWord;

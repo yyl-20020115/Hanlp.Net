@@ -50,7 +50,7 @@ public class LbfgsOptimizer
                        double f,
                        double[] g,
                        double[] diag,
-                       double[] w, boolean orthant, double C,
+                       double[] w, bool orthant, double C,
                        double[] v, double[] xi, int iflag)
     {
         double yy = 0.0;
@@ -68,7 +68,7 @@ public class LbfgsOptimizer
             mcsrch_ = new Mcsrch();
         }
 
-        boolean firstLoop = true;
+        bool firstLoop = true;
 
         // initialization
         if (iflag == 0)
@@ -281,7 +281,7 @@ public class LbfgsOptimizer
         return optimize(diag_.length, x, f, g, false, 1.0);
     }
 
-    public int optimize(int size, double[] x, double f, double[] g, boolean orthant, double C)
+    public int optimize(int size, double[] x, double f, double[] g, bool orthant, double C)
     {
         int msize = 5;
         if (w_ == null)

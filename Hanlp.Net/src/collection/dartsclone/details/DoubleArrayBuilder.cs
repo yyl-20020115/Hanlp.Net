@@ -59,8 +59,8 @@ public class DoubleArrayBuilder
     {
         int prev;
         int next;
-        boolean isFixed;
-        boolean isUsed;
+        bool isFixed;
+        bool isUsed;
     }
 
     private int numBlocks()
@@ -390,7 +390,7 @@ public class DoubleArrayBuilder
         return _units.size() | (id & LOWER_MASK);
     }
 
-    boolean isValidOffset(int id, int offset)
+    bool isValidOffset(int id, int offset)
     {
         if (extras(offset).isUsed)
         {

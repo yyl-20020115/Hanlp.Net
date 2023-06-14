@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.classification.tokenizers;
 /**
  * @author hankcs
  */
-public interface ITokenizer extends Serializable
+public interface ITokenizer : Serializable
 {
     String[] segment(String text);
 }

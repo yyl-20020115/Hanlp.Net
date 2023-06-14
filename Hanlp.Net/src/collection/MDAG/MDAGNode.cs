@@ -32,11 +32,11 @@ namespace com.hankcs.hanlp.collection.MDAG;
  */
 public class MDAGNode
 {
-    //The boolean denoting the accept state status of this node
+    //The bool denoting the accept state status of this node
     /**
      * 是否是终止状态
      */
-    private boolean isAcceptNode;
+    private bool isAcceptNode;
     
     //The TreeMap to contain entries that represent a _transition (label and target node)
     /**
@@ -68,9 +68,9 @@ public class MDAGNode
      * 建立一个节点<br>
      * Constructs an MDAGNode.
      
-     * @param isAcceptNode     是否是终止状态 a boolean denoting the accept state status of this node
+     * @param isAcceptNode     是否是终止状态 a bool denoting the accept state status of this node
      */
-    public MDAGNode(boolean isAcceptNode)
+    public MDAGNode(bool isAcceptNode)
     {
         this.isAcceptNode = isAcceptNode;     
         outgoingTransitionTreeMap = new TreeMap<Character, MDAGNode>();
@@ -176,7 +176,7 @@ public class MDAGNode
      
      * @return      true if this node has two or more incoming transitions, false otherwise
      */
-    public boolean isConfluenceNode()
+    public bool isConfluenceNode()
     {
         return (incomingTransitionCount > 1);
     }
@@ -188,7 +188,7 @@ public class MDAGNode
      
      * @return      true if this node is an accept state, false otherwise
      */
-    public boolean isAcceptNode()
+    public bool isAcceptNode()
     {
         return isAcceptNode;
     }
@@ -198,9 +198,9 @@ public class MDAGNode
     /**
      * Sets this node's accept state status.
      * 
-     * @param isAcceptNode     a boolean representing the desired accept state status 
+     * @param isAcceptNode     a bool representing the desired accept state status 
      */
-    public void setAcceptStateStatus(boolean isAcceptNode)
+    public void setAcceptStateStatus(bool isAcceptNode)
     {
         this.isAcceptNode = isAcceptNode;
     }
@@ -228,7 +228,7 @@ public class MDAGNode
      * @return              true if this node possesses a _transition labeled with
      *                      {@code letter}, and false otherwise
      */
-    public boolean hasOutgoingTransition(char letter)
+    public bool hasOutgoingTransition(char letter)
     {
         return outgoingTransitionTreeMap.containsKey(letter);
     }
@@ -240,7 +240,7 @@ public class MDAGNode
      
      * @return      true if this node has at least one outgoing _transition, false otherwise
      */
-    public boolean hasTransitions()
+    public bool hasTransitions()
     {
         return !outgoingTransitionTreeMap.isEmpty();
     }
@@ -397,10 +397,10 @@ public class MDAGNode
      * given char that has a new node as its target.
      
      * @param letter                        a char representing the desired label of the _transition
-     * @param targetAcceptStateStatus       a boolean representing to-be-created _transition target node's accept status
+     * @param targetAcceptStateStatus       a bool representing to-be-created _transition target node's accept status
      * @return                              the (newly created) MDAGNode that is the target of the created _transition
      */
-    public MDAGNode addOutgoingTransition(char letter, boolean targetAcceptStateStatus)
+    public MDAGNode addOutgoingTransition(char letter, bool targetAcceptStateStatus)
     {
         MDAGNode newTargetNode = new MDAGNode(targetAcceptStateStatus);
         newTargetNode.incomingTransitionCount++;
@@ -445,7 +445,7 @@ public class MDAGNode
      * @param node2
      * @return
      */
-    public static boolean haveSameTransitions(MDAGNode node1, MDAGNode node2)
+    public static bool haveSameTransitions(MDAGNode node1, MDAGNode node2)
     {
         TreeMap<Character, MDAGNode> outgoingTransitionTreeMap1 = node1.outgoingTransitionTreeMap;
         TreeMap<Character, MDAGNode> outgoingTransitionTreeMap2 = node2.outgoingTransitionTreeMap;
@@ -493,9 +493,9 @@ public class MDAGNode
      *                  _transition paths from this node and obj are equivalent
      */
     //@Override
-    public boolean equals(Object obj)
+    public bool equals(Object obj)
     {
-        boolean areEqual = (this == obj);
+        bool areEqual = (this == obj);
         
         if(!areEqual && obj != null && obj.getClass().equals(MDAGNode.class))
         {

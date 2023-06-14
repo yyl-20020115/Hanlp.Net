@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.classification.collections;
  * 统计词频的Map
  * @author hankcs
  */
-public class FrequencyMap<K> extends TreeMap<K, int[]>
+public class FrequencyMap<K> : TreeMap<K, int[]>
 {
     /**
      * 增加一个词的词频

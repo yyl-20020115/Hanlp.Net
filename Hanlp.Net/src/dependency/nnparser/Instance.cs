@@ -41,7 +41,7 @@ public class Instance
         return forms.size();
     }
 
-    boolean is_tree()
+    bool is_tree()
     {
         List<List<Integer>> tree = new ArrayList<List<Integer>>(heads.size());
         int root = -1;
@@ -57,14 +57,14 @@ public class Instance
                 tree.get(head).add(modifier);
             }
         }
-        boolean visited[] = new boolean[heads.size()];
+        bool visited[] = new bool[heads.size()];
         if (!is_tree_travel(root, tree, visited))
         {
             return false;
         }
         for (int i = 0; i < visited.length; ++i)
         {
-            boolean visit = visited[i];
+            bool visit = visited[i];
             if (!visit)
             {
                 return false;
@@ -73,7 +73,7 @@ public class Instance
         return true;
     }
 
-    boolean is_tree_travel(int now, List<List<Integer>> tree, boolean visited[])
+    bool is_tree_travel(int now, List<List<Integer>> tree, bool visited[])
     {
         if (visited[now])
         {
@@ -91,12 +91,12 @@ public class Instance
         return true;
     }
 
-    boolean is_projective()
+    bool is_projective()
     {
         return !is_non_projective();
     }
 
-    boolean is_non_projective()
+    bool is_non_projective()
     {
         for (int modifier = 0; modifier < heads.size(); ++modifier)
         {

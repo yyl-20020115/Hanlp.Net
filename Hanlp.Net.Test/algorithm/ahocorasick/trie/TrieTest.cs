@@ -1,15 +1,10 @@
-package com.hankcs.hanlp.algorithm.ahocorasick.trie;
+namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 
-import com.hankcs.hanlp.collection.AhoCorasick.AhoCorasickDoubleArrayTrie;
-import com.hankcs.hanlp.collection.trie.DoubleArrayTrie;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import junit.framework.TestCase;
 
-import java.util.TreeMap;
 
-public class TrieTest extends TestCase
+public class TrieTest : TestCase
 {
-    public void testHasKeyword() throws Exception
+    public void testHasKeyword() 
     {
         TreeMap<String, String> map = new TreeMap<String, String>();
         String[] keyArray = new String[]
@@ -33,7 +28,7 @@ public class TrieTest extends TestCase
         assertFalse(trie.hasKeyword("构建耗时"));
     }
 
-    public void testParseText() throws Exception
+    public void testParseText() 
     {
         TreeMap<String, String> map = new TreeMap<String, String>();
         String[] keyArray = new String[]
@@ -53,7 +48,7 @@ public class TrieTest extends TestCase
         final String text = "uhers";
         act.parseText(text, new AhoCorasickDoubleArrayTrie.IHit<String>()
         {
-            @Override
+            //@Override
             public void hit(int begin, int end, String value)
             {
 //                System.out.printf("[%d:%d]=%s\n", begin, end, value);

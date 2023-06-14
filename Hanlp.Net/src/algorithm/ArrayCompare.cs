@@ -23,17 +23,17 @@ public class ArrayCompare
      * @param arrayB
      * @return
      */
-    public static int compare(Long[] arrayA, Long[] arrayB)
+    public static int compare(long[] arrayA, long[] arrayB)
     {
-        int len1 = arrayA.length;
-        int len2 = arrayB.length;
-        int lim = Math.min(len1, len2);
+        int len1 = arrayA.Length;
+        int len2 = arrayB.Length;
+        int lim = Math.Min(len1, len2);
 
         int k = 0;
         while (k < lim)
         {
-            Long c1 = arrayA[k];
-            Long c2 = arrayB[k];
+            long c1 = arrayA[k];
+            long c2 = arrayB[k];
             if (!c1.equals(c2))
             {
                 return c1.compareTo(c2);

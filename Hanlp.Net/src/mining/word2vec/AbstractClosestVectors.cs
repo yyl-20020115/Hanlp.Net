@@ -36,7 +36,7 @@ public abstract class AbstractClosestVectors
 
     protected abstract Result getTargetVector();
 
-    final protected void execute() throws IOException
+    final protected void execute() 
     {
         vectorsReader.readVectorFile();
         final int words = vectorsReader.getNumWords();

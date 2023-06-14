@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.classification.classifiers;
 /**
  * 实现一个基于多项式贝叶斯模型的文本分类器
  */
-public class NaiveBayesClassifier extends AbstractClassifier
+public class NaiveBayesClassifier : AbstractClassifier
 {
 
     private NaiveBayesModel model;

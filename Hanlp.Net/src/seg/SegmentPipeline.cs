@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.seg;
 /**
  * @author hankcs
  */
-public class SegmentPipeline extends Segment : Pipe<String, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
+public class SegmentPipeline : Segment : Pipe<String, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
 {
     Pipe<String, List<IWord>> first;
     Pipe<List<IWord>, List<Term>> last;
@@ -94,13 +94,13 @@ public class SegmentPipeline extends Segment : Pipe<String, List<Term>>, List<Pi
     }
 
     //@Override
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return pipeList.isEmpty();
     }
 
     //@Override
-    public boolean contains(Object o)
+    public bool contains(Object o)
     {
         return pipeList.contains(o);
     }
@@ -124,43 +124,43 @@ public class SegmentPipeline extends Segment : Pipe<String, List<Term>>, List<Pi
     }
 
     //@Override
-    public boolean add(Pipe<List<IWord>, List<IWord>> pipe)
+    public bool add(Pipe<List<IWord>, List<IWord>> pipe)
     {
         return pipeList.add(pipe);
     }
 
     //@Override
-    public boolean remove(Object o)
+    public bool remove(Object o)
     {
         return pipeList.remove(o);
     }
 
     //@Override
-    public boolean containsAll(Collection<?> c)
+    public bool containsAll(Collection<?> c)
     {
         return pipeList.containsAll(c);
     }
 
     //@Override
-    public boolean addAll(Collection<? extends Pipe<List<IWord>, List<IWord>>> c)
+    public bool addAll(Collection<? : Pipe<List<IWord>, List<IWord>>> c)
     {
         return pipeList.addAll(c);
     }
 
     //@Override
-    public boolean addAll(int index, Collection<? extends Pipe<List<IWord>, List<IWord>>> c)
+    public bool addAll(int index, Collection<? : Pipe<List<IWord>, List<IWord>>> c)
     {
         return pipeList.addAll(c);
     }
 
     //@Override
-    public boolean removeAll(Collection<?> c)
+    public bool removeAll(Collection<?> c)
     {
         return pipeList.removeAll(c);
     }
 
     //@Override
-    public boolean retainAll(Collection<?> c)
+    public bool retainAll(Collection<?> c)
     {
         return pipeList.retainAll(c);
     }
@@ -172,7 +172,7 @@ public class SegmentPipeline extends Segment : Pipe<String, List<Term>>, List<Pi
     }
 
     //@Override
-    public boolean equals(Object o)
+    public bool equals(Object o)
     {
         return pipeList.equals(o);
     }

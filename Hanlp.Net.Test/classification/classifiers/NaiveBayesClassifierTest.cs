@@ -1,22 +1,16 @@
-package com.hankcs.hanlp.classification.classifiers;
-
-import com.hankcs.hanlp.classification.models.NaiveBayesModel;
-import com.hankcs.hanlp.classification.utilities.TextProcessUtility;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import junit.framework.TestCase;
-
-import java.util.Map;
-
-import static com.hankcs.demo.DemoTextClassification.CORPUS_FOLDER;
+namespace com.hankcs.hanlp.classification.classifiers;
 
 
-public class NaiveBayesClassifierTest extends TestCase
+
+
+
+public class NaiveBayesClassifierTest : TestCase
 {
     private static final String MODEL_PATH = "data/test/classification.ser";
     private Map<String, String[]> trainingDataSet;
 
-    @Override
-    public void setUp() throws Exception
+    //@Override
+    public void setUp() 
     {
         super.setUp();
     }
@@ -32,19 +26,19 @@ public class NaiveBayesClassifierTest extends TestCase
         }
     }
 
-    public void testTrain() throws Exception
+    public void testTrain() 
     {
         loadDataSet();
         NaiveBayesClassifier naiveBayesClassifier = new NaiveBayesClassifier();
         long start = System.currentTimeMillis();
-        System.out.println("开始训练...");
+        Console.WriteLine("开始训练...");
         naiveBayesClassifier.train(trainingDataSet);
         System.out.printf("训练耗时：%d ms\n", System.currentTimeMillis() - start);
         // 将模型保存
         IOUtil.saveObjectTo(naiveBayesClassifier.getNaiveBayesModel(), MODEL_PATH);
     }
 
-    public void testPredictAndAccuracy() throws Exception
+    public void testPredictAndAccuracy() 
     {
         // 加载模型
         NaiveBayesModel model = (NaiveBayesModel) IOUtil.readObjectFrom(MODEL_PATH);
@@ -73,7 +67,7 @@ public class NaiveBayesClassifierTest extends TestCase
         int rightDocuments = 0;
         loadDataSet();
         long start = System.currentTimeMillis();
-        System.out.println("开始评测...");
+        Console.WriteLine("开始评测...");
         for (Map.Entry<String, String[]> entry : trainingDataSet.entrySet())
         {
             String category = entry.getKey();
@@ -91,7 +85,7 @@ public class NaiveBayesClassifierTest extends TestCase
         );
     }
 
-    public void testPredict() throws Exception
+    public void testPredict() 
     {
         // 加载模型
         NaiveBayesModel model = (NaiveBayesModel) IOUtil.readObjectFrom(MODEL_PATH);
@@ -104,7 +98,7 @@ public class NaiveBayesClassifierTest extends TestCase
         Map<String, Double> pMap = naiveBayesClassifier.predict("国安2016赛季年票开售比赛场次减少套票却上涨");
         for (Map.Entry<String, Double> entry : pMap.entrySet())
         {
-            System.out.println(entry);
+            Console.WriteLine(entry);
         }
     }
 }

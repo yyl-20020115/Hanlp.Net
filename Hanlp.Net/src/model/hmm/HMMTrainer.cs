@@ -36,13 +36,13 @@ public abstract class HMMTrainer
         this(new FirstOrderHiddenMarkovModel());
     }
 
-    public void train(String corpus) throws IOException
+    public void train(String corpus) 
     {
         final List<List<String[]>> sequenceList = new LinkedList<List<String[]>>();
         IOUtility.loadInstance(corpus, new InstanceHandler()
         {
             //@Override
-            public boolean process(Sentence sentence)
+            public bool process(Sentence sentence)
             {
                 sequenceList.add(convertToSequence(sentence));
                 return false;

@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  * 满足 key=value 格式的词典，其中“=”可以自定义
  * @author hankcs
  */
-public class StringDictionary extends SimpleDictionary<String>
+public class StringDictionary : SimpleDictionary<String>
 {
     /**
      * key value之间的分隔符
@@ -51,7 +51,7 @@ public class StringDictionary extends SimpleDictionary<String>
      * @param path
      * @return 是否成功
      */
-    public boolean save(String path)
+    public bool save(String path)
     {
         try
         {

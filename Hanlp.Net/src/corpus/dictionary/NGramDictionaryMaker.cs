@@ -49,7 +49,7 @@ public class NGramDictionaryMaker
      * @param path
      * @return
      */
-    public boolean saveTxtTo(String path)
+    public bool saveTxtTo(String path)
     {
         saveNGramToTxt(path + ".ngram.txt");
         saveTransformMatrixToTxt(path + ".tr.txt");
@@ -62,7 +62,7 @@ public class NGramDictionaryMaker
      * @param path
      * @return
      */
-    public boolean saveNGramToTxt(String path)
+    public bool saveNGramToTxt(String path)
     {
         try
         {
@@ -89,7 +89,7 @@ public class NGramDictionaryMaker
      * @param path
      * @return
      */
-    public boolean saveTransformMatrixToTxt(String path)
+    public bool saveTransformMatrixToTxt(String path)
     {
         return tmDictionaryMaker.saveTxtTo(path);
     }

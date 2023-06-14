@@ -24,13 +24,13 @@ public class Main
         TaskType task = TaskType.CWS;
 
         @Argument(description = "执行训练任务")
-        boolean train;
+        bool train;
 
         @Argument(description = "执行预测任务")
-        boolean test;
+        bool test;
 
         @Argument(description = "执行评估任务")
-        boolean evaluate;
+        bool evaluate;
 
         @Argument(description = "模型文件路径")
         String[] model = new String[]{HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath};

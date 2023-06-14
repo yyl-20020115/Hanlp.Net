@@ -43,7 +43,7 @@ public class CommonSynonymDictionary
         return null;
     }
 
-    public boolean load(InputStream inputStream)
+    public bool load(InputStream inputStream)
     {
         trie = new DoubleArrayTrie<SynonymItem>();
         TreeMap<String, SynonymItem> treeMap = new TreeMap<String, SynonymItem>();
@@ -109,9 +109,9 @@ public class CommonSynonymDictionary
     public long distance(String a, String b)
     {
         SynonymItem itemA = get(a);
-        if (itemA == null) return Long.MAX_VALUE / 3;
+        if (itemA == null) return long.MAX_VALUE / 3;
         SynonymItem itemB = get(b);
-        if (itemB == null) return Long.MAX_VALUE / 3;
+        if (itemB == null) return long.MAX_VALUE / 3;
 
         return itemA.distance(itemB);
     }
@@ -290,7 +290,7 @@ public class CommonSynonymDictionary
          */
         public static SynonymItem createUndefined(String word)
         {
-            SynonymItem item = new SynonymItem(new Synonym(word, word.hashCode() * 1000000 + Long.MAX_VALUE / 3), null, Type.UNDEFINED);
+            SynonymItem item = new SynonymItem(new Synonym(word, word.hashCode() * 1000000 + long.MAX_VALUE / 3), null, Type.UNDEFINED);
             return item;
         }
     }

@@ -35,7 +35,7 @@ public class WordNatureDependencyModel
         }
     }
 
-    boolean load(String path)
+    bool load(String path)
     {
         trie = new DoubleArrayTrie<Attribute>();
         if (loadDat(path)) return true;
@@ -89,7 +89,7 @@ public class WordNatureDependencyModel
         return true;
     }
 
-    boolean saveDat(String path, TreeMap<String, Attribute> map)
+    bool saveDat(String path, TreeMap<String, Attribute> map)
     {
         Collection<Attribute> attributeList = map.values();
         // 缓存值文件
@@ -122,7 +122,7 @@ public class WordNatureDependencyModel
         return true;
     }
 
-    boolean loadDat(String path)
+    bool loadDat(String path)
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;

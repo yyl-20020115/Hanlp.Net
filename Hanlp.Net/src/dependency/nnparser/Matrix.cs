@@ -1288,7 +1288,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         }
     }
 
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         m = byteArray.nextInt();
         n = byteArray.nextInt();

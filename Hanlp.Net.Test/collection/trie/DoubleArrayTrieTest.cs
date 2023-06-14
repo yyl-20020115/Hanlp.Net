@@ -1,15 +1,10 @@
-package com.hankcs.hanlp.collection.trie;
+namespace com.hankcs.hanlp.collection.trie;
 
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.dictionary.CoreDictionary;
-import com.hankcs.hanlp.dictionary.CustomDictionary;
-import junit.framework.TestCase;
 
-import java.util.TreeMap;
 
-public class DoubleArrayTrieTest extends TestCase
+public class DoubleArrayTrieTest : TestCase
 {
-    public void testDatFromFile() throws Exception
+    public void testDatFromFile() 
     {
         TreeMap<String, String> map = new TreeMap<String, String>();
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.mini.txt");
@@ -26,11 +21,11 @@ public class DoubleArrayTrieTest extends TestCase
         }
     }
 
-    public void testGet() throws Exception
+    public void testGet() 
     {
     }
 
-    public void testLongestSearcher() throws Exception
+    public void testLongestSearcher() 
     {
         TreeMap<String, String> buildFrom = new TreeMap<String, String>();
         String[] keys = new String[]{"he", "her", "his"};
@@ -48,7 +43,7 @@ public class DoubleArrayTrieTest extends TestCase
         }
     }
 
-    public void testTransmit() throws Exception
+    public void testTransmit() 
     {
         DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
         int index = dat.transition("龙", 1);
@@ -57,7 +52,7 @@ public class DoubleArrayTrieTest extends TestCase
         assertEquals("nz 183 ", dat.output(index).toString());
     }
 
-//    public void testCombine() throws Exception
+//    public void testCombine() 
 //    {
 //        DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
 //        String[] wordNet = new String[]
@@ -99,14 +94,14 @@ public class DoubleArrayTrieTest extends TestCase
 //                    {
 //                        sbTerm.append(wordNet[j]);
 //                    }
-//                    System.out.println(sbTerm.toString() + "/" + value);
+//                    Console.WriteLine(sbTerm.toString() + "/" + value);
 //                    i = end - 1;
 //                }
 //            }
 //        }
 //    }
 
-    public void testHandleEmptyString() throws Exception
+    public void testHandleEmptyString() 
     {
         String emptyString = "";
         DoubleArrayTrie<String> dat = new DoubleArrayTrie<String>();
@@ -119,7 +114,7 @@ public class DoubleArrayTrieTest extends TestCase
         }
     }
 
-    public void testIssue966() throws Exception
+    public void testIssue966() 
     {
         TreeMap<String, String> map = new TreeMap<String, String>();
         for (String word : "001乡道, 北京, 北京市通信公司, 来广营乡, 通州区".split(", "))

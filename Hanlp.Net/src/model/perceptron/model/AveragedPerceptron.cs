@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.perceptron.model;
  *
  * @author hankcs
  */
-public class AveragedPerceptron extends LinearModel
+public class AveragedPerceptron : LinearModel
 {
     public AveragedPerceptron(FeatureMap featureMap, float[] parameter)
     {

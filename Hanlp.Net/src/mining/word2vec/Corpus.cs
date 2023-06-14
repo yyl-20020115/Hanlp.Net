@@ -11,16 +11,16 @@ public abstract class Corpus
     protected int vocabMaxSize = 1000;
     protected VocabWord[] vocab;
     protected Map<String, Integer> vocabIndexMap;
-    protected boolean eoc = true;    // end of corpus
+    protected bool eoc = true;    // end of corpus
     protected Charset encoding = Charset.forName("UTF-8");
     protected int[] table;
 
-    public Corpus(Config config) throws IOException
+    public Corpus(Config config) 
     {
         this.config = config;
     }
 
-    public Corpus(Corpus cloneSrc) throws IOException
+    public Corpus(Corpus cloneSrc) 
     {
         trainWords = cloneSrc.trainWords;
         vocabSize = cloneSrc.vocabSize;
@@ -29,7 +29,7 @@ public abstract class Corpus
         table = cloneSrc.table;
     }
 
-    public boolean endOfCorpus()
+    public bool endOfCorpus()
     {
         return eoc;
     }
@@ -80,16 +80,16 @@ public abstract class Corpus
     /**
      * reset current corpus to initial status
      */
-    public void rewind(int numThreads, int id) throws IOException
+    public void rewind(int numThreads, int id) 
     {
         eoc = false;
     }
 
     /**
      * @return -4 if is dropped, -3 if end of sentence, -2 if end of corpus, -1 if word not found or index value of the word
-     * @throws IOException
+     * @
      */
-    public int readWordIndex() throws IOException
+    public int readWordIndex() 
     {
         String word = nextWord();
         if (word == null)
@@ -107,20 +107,20 @@ public abstract class Corpus
      * Read the next word from the corpus
      *
      * @return next word that is read from the corpus. null will be returned
-     * @throws IOException
+     * @
      */
-    public abstract String nextWord() throws IOException;
+    public abstract String nextWord() ;
 
     /**
      * Close the corpus and it cannot be read any more.
      */
-    public void close() throws IOException
+    public void close() 
     {
         shutdown();
         cacheFile.delete(); // remove rubbish
     }
 
-    public void shutdown() throws IOException
+    public void shutdown() 
     {
         table = null;
     }

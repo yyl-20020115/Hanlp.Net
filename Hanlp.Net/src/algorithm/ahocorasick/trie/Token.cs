@@ -20,12 +20,11 @@ public abstract class Token
         return this.fragment;
     }
 
-    public abstract boolean isMatch();
+    public abstract bool isMatch();
 
     public abstract Emit getEmit();
 
-    //@Override
-    public String toString()
+    public override String ToString()
     {
         return fragment + "/" + isMatch();
     }

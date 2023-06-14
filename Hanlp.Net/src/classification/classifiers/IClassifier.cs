@@ -26,7 +26,7 @@ public interface IClassifier
      * @param enable
      * @return
      */
-    IClassifier enableProbability(boolean enable);
+    IClassifier enableProbability(bool enable);
 
     /**
      * 预测分类
@@ -103,9 +103,9 @@ public interface IClassifier
      *                    └── ...<br>
      *                    文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
      * @param charsetName 文件编码
-     * @throws IOException 任何可能的IO异常
+     * @ 任何可能的IO异常
      */
-    void train(String folderPath, String charsetName) throws IOException;
+    void train(String folderPath, String charsetName) ;
 
     /**
      * 用UTF-8编码的语料训练模型
@@ -121,9 +121,9 @@ public interface IClassifier
      *                    │   └── ...<br>
      *                    └── ...<br>
      *                    文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
-     * @throws IOException 任何可能的IO异常
+     * @ 任何可能的IO异常
      */
-    void train(String folderPath) throws IOException;
+    void train(String folderPath) ;
 
     /**
      * 训练模型

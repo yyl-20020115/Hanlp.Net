@@ -64,7 +64,7 @@ public class FeatureFunction : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         int size = byteArray.nextInt();
         o = new char[size];

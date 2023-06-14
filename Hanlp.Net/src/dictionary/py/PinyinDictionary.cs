@@ -38,7 +38,7 @@ public class PinyinDictionary
      * @param path
      * @return
      */
-    static boolean load(String path)
+    static bool load(String path)
     {
         if (loadDat(path)) return true;
         // 从文本中载入并且尝试生成dat
@@ -70,7 +70,7 @@ public class PinyinDictionary
         return true;
     }
 
-    static boolean loadDat(String path)
+    static bool loadDat(String path)
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
@@ -89,7 +89,7 @@ public class PinyinDictionary
         return true;
     }
 
-    static boolean saveDat(String path, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, Set<Map.Entry<String, Pinyin[]>> entrySet)
+    static bool saveDat(String path, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, Set<Map.Entry<String, Pinyin[]>> entrySet)
     {
         try
         {
@@ -131,7 +131,7 @@ public class PinyinDictionary
         return segLongest(text.toCharArray(), trie);
     }
 
-    public static List<Pinyin> convertToPinyin(String text, boolean remainNone)
+    public static List<Pinyin> convertToPinyin(String text, bool remainNone)
     {
         return segLongest(text.toCharArray(), trie, remainNone);
     }
@@ -162,7 +162,7 @@ public class PinyinDictionary
         return segLongest(charArray, trie, true);
     }
 
-    protected static List<Pinyin> segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, boolean remainNone)
+    protected static List<Pinyin> segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, bool remainNone)
     {
         final Pinyin[][] wordNet = new Pinyin[charArray.length][];
         trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<Pinyin[]>()
@@ -198,7 +198,7 @@ public class PinyinDictionary
         return pinyinList;
     }
 
-    public static class Searcher extends BaseSearcher<Pinyin[]>
+    public static class Searcher : BaseSearcher<Pinyin[]>
     {
         /**
          * 分词从何处开始，这是一个状态

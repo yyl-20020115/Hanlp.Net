@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.dictionary.nr;
  *
  * @author hankcs
  */
-public class NRDictionary extends EnumItemDictionary<NR>
+public class NRDictionary : EnumItemDictionary<NR>
 {
 
     //@Override

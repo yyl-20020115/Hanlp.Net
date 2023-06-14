@@ -13,7 +13,7 @@ public abstract class FeatureIndex
     protected float[] alphaFloat_;
     protected double costFactor_;
     protected int xsize_;
-    protected boolean checkMaxXsize_;
+    protected bool checkMaxXsize_;
     protected int max_xsize_;
     protected int threadNum_;
     protected List<String> unigramTempls_;
@@ -172,7 +172,7 @@ public abstract class FeatureIndex
         return sb.toString();
     }
 
-    private boolean buildFeatureFromTempl(List<Integer> feature, List<String> templs, int curPos, TaggerImpl tagger)
+    private bool buildFeatureFromTempl(List<Integer> feature, List<String> templs, int curPos, TaggerImpl tagger)
     {
         for (String tmpl : templs)
         {
@@ -191,7 +191,7 @@ public abstract class FeatureIndex
         return true;
     }
 
-    public boolean buildFeatures(TaggerImpl tagger)
+    public bool buildFeatures(TaggerImpl tagger)
     {
         List<Integer> feature = new ArrayList<Integer>();
         List<List<Integer>> featureCache = tagger.getFeatureCache_();
@@ -253,12 +253,12 @@ public abstract class FeatureIndex
         }
     }
 
-    public boolean open(String file)
+    public bool open(String file)
     {
         return true;
     }
 
-    public boolean open(InputStream stream)
+    public bool open(InputStream stream)
     {
         return true;
     }

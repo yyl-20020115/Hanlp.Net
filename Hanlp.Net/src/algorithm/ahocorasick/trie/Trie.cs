@@ -17,7 +17,7 @@ public class Trie
     /**
      * 是否建立了failure表
      */
-    private boolean failureStatesConstructed = false;
+    private bool failureStatesConstructed = false;
 
     /**
      * 构造一棵trie树
@@ -62,7 +62,7 @@ public class Trie
             return;
         }
         State currentState = this.rootState;
-        for (Character character : keyword.toCharArray())
+        for (char character : keyword.toCharArray())
         {
             currentState = currentState.addState(character);
         }
@@ -128,7 +128,7 @@ public class Trie
      * @param text 待匹配的文本
      * @return 匹配到的模式串
      */
-    @SuppressWarnings("unchecked")
+    
     public Collection<Emit> parseText(String text)
     {
         checkForConstructedFailureStates();
@@ -201,7 +201,7 @@ public class Trie
      * @param character    接受字符
      * @return 跳转结果
      */
-    private static State getState(State currentState, Character character)
+    private static State getState(State currentState, char character)
     {
         State newCurrentState = currentState.nextState(character);  // 先按success跳转
         while (newCurrentState == null) // 跳转失败的话，按failure跳转
@@ -243,7 +243,7 @@ public class Trie
         {
             State currentState = queue.remove();
 
-            for (Character transition : currentState.getTransitions())
+            for (char transition : currentState.getTransitions())
             {
                 State targetState = currentState.nextState(transition);
                 queue.add(targetState);
@@ -269,7 +269,7 @@ public class Trie
     private void dfs(State currentState, String path, IWalker walker)
     {
         walker.meet(path, currentState);
-        for (Character transition : currentState.getTransitions())
+        for (char transition : currentState.getTransitions())
         {
             State targetState = currentState.nextState(transition);
             dfs(targetState, path + transition, walker);
@@ -312,7 +312,7 @@ public class Trie
      * @param text 待匹配的文本
      * @return 文本包含模式時回傳true
      */
-    public boolean hasKeyword(String text)
+    public bool hasKeyword(String text)
     {
         checkForConstructedFailureStates();
 

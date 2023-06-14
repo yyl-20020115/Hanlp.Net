@@ -94,7 +94,7 @@ public class TextProcessUtility
      * @param folderPath
      * @return
      */
-    public static Map<String, String[]> loadCorpusWithException(String folderPath, String charsetName) throws IOException
+    public static Map<String, String[]> loadCorpusWithException(String folderPath, String charsetName) 
     {
         if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
@@ -121,7 +121,7 @@ public class TextProcessUtility
         return dataSet;
     }
 
-    public static String readTxt(File file, String charsetName) throws IOException
+    public static String readTxt(File file, String charsetName) 
     {
         FileInputStream is = new FileInputStream(file);
         byte[] targetArray = new byte[is.available()];
@@ -136,7 +136,7 @@ public class TextProcessUtility
         return new String(targetArray, charsetName);
     }
 
-    public static Map<String, String[]> loadCorpusWithException(String corpusPath) throws IOException
+    public static Map<String, String[]> loadCorpusWithException(String corpusPath) 
     {
         return loadCorpusWithException(corpusPath, "UTF-8");
     }

@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.tokenizer.lexical;
  *
  * @author hankcs
  */
-public class AbstractLexicalAnalyzer extends CharacterBasedSegment : LexicalAnalyzer
+public class AbstractLexicalAnalyzer : CharacterBasedSegment , LexicalAnalyzer
 {
     protected Segmenter segmenter;
     protected POSTagger posTagger;
@@ -29,9 +29,9 @@ public class AbstractLexicalAnalyzer extends CharacterBasedSegment : LexicalAnal
     /**
      * 是否执行规则分词（英文数字标点等的规则预处理）。规则永远是丑陋的，默认关闭。
      */
-    protected boolean enableRuleBasedSegment = false;
+    protected bool enableRuleBasedSegment = false;
 
-    static
+    static AbstractLexicalAnalyzer()
     {
         typeTable = new byte[CharType.type.length];
         System.arraycopy(CharType.type, 0, typeTable, 0, typeTable.length);
@@ -296,7 +296,7 @@ public class AbstractLexicalAnalyzer extends CharacterBasedSegment : LexicalAnal
      * @return true 表示接受
      * @deprecated 自1.6.7起废弃，强制模式下为最长匹配，否则按分词结果合并
      */
-    protected boolean acceptCustomWord(int begin, int end, CoreDictionary.Attribute value)
+    protected bool acceptCustomWord(int begin, int end, CoreDictionary.Attribute value)
     {
         return config.forceCustomDictionary || (end - begin >= 4 && !value.hasNatureStartsWith("nr") && !value.hasNatureStartsWith("ns") && !value.hasNatureStartsWith("nt"));
     }
@@ -678,7 +678,7 @@ public class AbstractLexicalAnalyzer extends CharacterBasedSegment : LexicalAnal
      * @param enableRuleBasedSegment 是否激活
      * @return 词法分析器对象
      */
-    public AbstractLexicalAnalyzer enableRuleBasedSegment(boolean enableRuleBasedSegment)
+    public AbstractLexicalAnalyzer enableRuleBasedSegment(bool enableRuleBasedSegment)
     {
         this.enableRuleBasedSegment = enableRuleBasedSegment;
         return this;

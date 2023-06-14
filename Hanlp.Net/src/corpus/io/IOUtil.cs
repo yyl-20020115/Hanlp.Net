@@ -29,7 +29,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static boolean saveObjectTo(Object o, String path)
+    public static bool saveObjectTo(Object o, String path)
     {
         try
         {
@@ -121,7 +121,7 @@ public class IOUtil
      * @param content
      * @return
      */
-    public static boolean saveTxt(String path, String content)
+    public static bool saveTxt(String path, String content)
     {
         try
         {
@@ -138,12 +138,12 @@ public class IOUtil
         return true;
     }
 
-    public static boolean saveTxt(String path, StringBuilder content)
+    public static bool saveTxt(String path, StringBuilder content)
     {
         return saveTxt(path, content.toString());
     }
 
-    public static <T> boolean saveCollectionToTxt(Collection<T> collection, String path)
+    public static <T> bool saveCollectionToTxt(Collection<T> collection, String path)
     {
         StringBuilder sb = new StringBuilder();
         for (Object o : collection)
@@ -180,7 +180,7 @@ public class IOUtil
         return null;
     }
 
-    public static String readTxt(String file, String charsetName) throws IOException
+    public static String readTxt(String file, String charsetName) 
     {
         InputStream is = IOAdapter.open(file);
         byte[] targetArray = new byte[is.available()];
@@ -233,7 +233,7 @@ public class IOUtil
         return "";
     }
 
-    private static byte[] readBytesFromFileInputStream(FileInputStream fis) throws IOException
+    private static byte[] readBytesFromFileInputStream(FileInputStream fis) 
     {
         FileChannel channel = fis.getChannel();
         int fileSize = (int) channel.size();
@@ -252,9 +252,9 @@ public class IOUtil
      *
      * @param is
      * @return
-     * @throws IOException
+     * @
      */
-    public static byte[] readBytesFromOtherInputStream(InputStream is) throws IOException
+    public static byte[] readBytesFromOtherInputStream(InputStream is) 
     {
         ByteArrayOutputStream data = new ByteArrayOutputStream();
 
@@ -276,9 +276,9 @@ public class IOUtil
      * @param is 流
      * @param targetArray output
      * @return 实际读取了多少字节，返回0表示遇到了文件尾部
-     * @throws IOException
+     * @
      */
-    public static int readBytesFromOtherInputStream(InputStream is, byte[] targetArray) throws IOException
+    public static int readBytesFromOtherInputStream(InputStream is, byte[] targetArray) 
     {
         assert targetArray != null;
         if (targetArray.length == 0) return 0;
@@ -315,7 +315,7 @@ public class IOUtil
     {
         LinkedList<String> result = new LinkedList<String>();
         String line = null;
-        boolean first = true;
+        bool first = true;
         try
         {
             BufferedReader bw = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
@@ -339,18 +339,18 @@ public class IOUtil
         return result;
     }
 
-    public static boolean saveMapToTxt(Map<Object, Object> map, String path)
+    public static bool saveMapToTxt(Map<Object, Object> map, String path)
     {
         return saveMapToTxt(map, path, "=");
     }
 
-    public static boolean saveMapToTxt(Map<Object, Object> map, String path, String separator)
+    public static bool saveMapToTxt(Map<Object, Object> map, String path, String separator)
     {
         map = new TreeMap<Object, Object>(map);
         return saveEntrySetToTxt(map.entrySet(), path, separator);
     }
 
-    public static boolean saveEntrySetToTxt(Set<Map.Entry<Object, Object>> entrySet, String path, String separator)
+    public static bool saveEntrySetToTxt(Set<Map.Entry<Object, Object>> entrySet, String path, String separator)
     {
         StringBuilder sbOut = new StringBuilder();
         for (Map.Entry<Object, Object> entry : entrySet)
@@ -385,7 +385,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static boolean deleteFile(String path)
+    public static bool deleteFile(String path)
     {
         return new File(path).delete();
     }
@@ -506,7 +506,7 @@ public class IOUtil
         }
 
         //@Override
-        public boolean hasNext()
+        public bool hasNext()
         {
             if (bw == null) return false;
             if (line == null)
@@ -581,7 +581,7 @@ public class IOUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedWriter newBufferedWriter(String path) throws IOException
+    public static BufferedWriter newBufferedWriter(String path) 
     {
         return new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
     }
@@ -593,12 +593,12 @@ public class IOUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedReader newBufferedReader(String path) throws IOException
+    public static BufferedReader newBufferedReader(String path) 
     {
         return new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
     }
 
-    public static BufferedWriter newBufferedWriter(String path, boolean append) throws FileNotFoundException, UnsupportedEncodingException
+    public static BufferedWriter newBufferedWriter(String path, bool append) throws FileNotFoundException, UnsupportedEncodingException
     {
         return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, append), "UTF-8"));
     }
@@ -607,9 +607,9 @@ public class IOUtil
      * 创建输入流（经过IO适配器创建）
      * @param path
      * @return
-     * @throws IOException
+     * @
      */
-    public static InputStream newInputStream(String path) throws IOException
+    public static InputStream newInputStream(String path) 
     {
         if (IOAdapter == null) return new FileInputStream(path);
         return IOAdapter.open(path);
@@ -619,9 +619,9 @@ public class IOUtil
      * 创建输出流（经过IO适配器创建）
      * @param path
      * @return
-     * @throws IOException
+     * @
      */
-    public static OutputStream newOutputStream(String path) throws IOException
+    public static OutputStream newOutputStream(String path) 
     {
         if (IOAdapter == null) return new FileOutputStream(path);
         return IOAdapter.create(path);
@@ -642,9 +642,9 @@ public class IOUtil
      * 写数组，用制表符分割
      * @param bw
      * @param params
-     * @throws IOException
+     * @
      */
-    public static void writeLine(BufferedWriter bw, String... params) throws IOException
+    public static void writeLine(BufferedWriter bw, String... params) 
     {
         for (int i = 0; i < params.length - 1; i++)
         {
@@ -658,9 +658,9 @@ public class IOUtil
      * 加载词典，词典必须遵守HanLP核心词典格式
      * @param pathArray 词典路径，可以有任意个。每个路径支持用空格表示默认词性，比如“全国地名大全.txt ns”
      * @return 一个储存了词条的map
-     * @throws IOException 异常表示加载失败
+     * @ 异常表示加载失败
      */
-    public static TreeMap<String, CoreDictionary.Attribute> loadDictionary(String... pathArray) throws IOException
+    public static TreeMap<String, CoreDictionary.Attribute> loadDictionary(String... pathArray) 
     {
         TreeMap<String, CoreDictionary.Attribute> map = new TreeMap<String, CoreDictionary.Attribute>();
         for (String path : pathArray)
@@ -689,9 +689,9 @@ public class IOUtil
      * 将一个BufferedReader中的词条加载到词典
      * @param br 源
      * @param storage 储存位置
-     * @throws IOException 异常表示加载失败
+     * @ 异常表示加载失败
      */
-    public static void loadDictionary(BufferedReader br, TreeMap<String, CoreDictionary.Attribute> storage, boolean isCSV, Nature defaultNature) throws IOException
+    public static void loadDictionary(BufferedReader br, TreeMap<String, CoreDictionary.Attribute> storage, bool isCSV, Nature defaultNature) 
     {
         String splitter = "\\s";
         if (isCSV)
@@ -699,7 +699,7 @@ public class IOUtil
             splitter = ",";
         }
         String line;
-        boolean firstLine = true;
+        bool firstLine = true;
         while ((line = br.readLine()) != null)
         {
             if (firstLine)
@@ -730,7 +730,7 @@ public class IOUtil
         br.close();
     }
 
-    public static void writeCustomNature(DataOutputStream out, LinkedHashSet<Nature> customNatureCollector) throws IOException
+    public static void writeCustomNature(DataOutputStream out, LinkedHashSet<Nature> customNatureCollector) 
     {
         if (customNatureCollector.size() == 0) return;
         out.writeInt(-customNatureCollector.size());
@@ -745,7 +745,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static boolean isFileExisted(String path)
+    public static bool isFileExisted(String path)
     {
         File file = new File(path);
         return file.isFile() && file.exists();

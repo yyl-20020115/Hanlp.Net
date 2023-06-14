@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class PerceptronNameGenderClassifier extends PerceptronClassifier
+public class PerceptronNameGenderClassifier : PerceptronClassifier
 {
     public PerceptronNameGenderClassifier()
     {
@@ -28,7 +28,7 @@ public class PerceptronNameGenderClassifier extends PerceptronClassifier
         super(model);
     }
 
-    public PerceptronNameGenderClassifier(String modelPath) throws IOException
+    public PerceptronNameGenderClassifier(String modelPath) 
     {
         super(modelPath);
     }

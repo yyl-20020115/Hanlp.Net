@@ -17,10 +17,10 @@ namespace com.hankcs.hanlp.classification.corpus;
 /**
  * @author hankcs
  */
-public class MemoryDataSet extends AbstractDataSet
+public class MemoryDataSet : AbstractDataSet
 {
     List<Document> documentList;
-    boolean editMode;
+    bool editMode;
 
     public MemoryDataSet()
     {

@@ -23,7 +23,7 @@ public class DictionaryUtil
      * @param path
      * @return
      */
-    public static boolean sortDictionary(String path)
+    public static bool sortDictionary(String path)
     {
         try
         {

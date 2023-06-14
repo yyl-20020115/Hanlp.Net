@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 /**
  * @author zhifac
  */
-public class EncoderFeatureIndex extends FeatureIndex
+public class EncoderFeatureIndex : FeatureIndex
 {
     private MutableDoubleArrayTrieInteger dic_;
     private IntArrayList frequency;
@@ -64,7 +64,7 @@ public class EncoderFeatureIndex extends FeatureIndex
      * @param filename
      * @return
      */
-    private boolean openTemplate(String filename)
+    private bool openTemplate(String filename)
     {
         InputStreamReader isr = null;
         try
@@ -119,7 +119,7 @@ public class EncoderFeatureIndex extends FeatureIndex
      * @param filename
      * @return
      */
-    private boolean openTagSet(String filename)
+    private bool openTagSet(String filename)
     {
         int max_size = 0;
         InputStreamReader isr = null;
@@ -179,13 +179,13 @@ public class EncoderFeatureIndex extends FeatureIndex
         return true;
     }
 
-    public boolean open(String filename1, String filename2)
+    public bool open(String filename1, String filename2)
     {
         checkMaxXsize_ = true;
         return openTemplate(filename1) && openTagSet(filename2);
     }
 
-    public boolean save(String filename, boolean textModelFile)
+    public bool save(String filename, bool textModelFile)
     {
         try
         {
@@ -325,7 +325,7 @@ public class EncoderFeatureIndex extends FeatureIndex
         maxid_ = newMaxId;
     }
 
-    public boolean convert(String textmodel, String binarymodel)
+    public bool convert(String textmodel, String binarymodel)
     {
         try
         {

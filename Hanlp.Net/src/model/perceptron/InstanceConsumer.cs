@@ -22,18 +22,18 @@ public abstract class InstanceConsumer
 
     protected abstract Instance createInstance(Sentence sentence, final FeatureMap featureMap);
 
-    protected double[] evaluate(String developFile, String modelFile) throws IOException
+    protected double[] evaluate(String developFile, String modelFile) 
     {
         return evaluate(developFile, new LinearModel(modelFile));
     }
 
-    protected double[] evaluate(String developFile, final LinearModel model) throws IOException
+    protected double[] evaluate(String developFile, final LinearModel model) 
     {
         final int[] stat = new int[2];
         IOUtility.loadInstance(developFile, new InstanceHandler()
         {
             //@Override
-            public boolean process(Sentence sentence)
+            public bool process(Sentence sentence)
             {
                 Utility.normalize(sentence);
                 Instance instance = createInstance(sentence, model.featureMap);

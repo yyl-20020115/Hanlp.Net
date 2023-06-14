@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.model.hmm;
 /**
  * @author hankcs
  */
-public class SecondOrderHiddenMarkovModel extends HiddenMarkovModel
+public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
 {
     /**
      * 状态转移概率矩阵
@@ -238,7 +238,7 @@ public class SecondOrderHiddenMarkovModel extends HiddenMarkovModel
     }
 
     //@Override
-    public boolean similar(HiddenMarkovModel model)
+    public bool similar(HiddenMarkovModel model)
     {
         if (!(model instanceof SecondOrderHiddenMarkovModel)) return false;
         SecondOrderHiddenMarkovModel hmm2 = (SecondOrderHiddenMarkovModel) model;

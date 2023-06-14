@@ -25,7 +25,7 @@ public abstract class AbstractDataSet : IDataSet
     /**
      * 是否属于测试集
      */
-    protected boolean testingDataSet;
+    protected bool testingDataSet;
 
     /**
      * 构造测试集
@@ -88,7 +88,7 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public boolean isTestingDataSet()
+    public bool isTestingDataSet()
     {
         return testingDataSet;
     }

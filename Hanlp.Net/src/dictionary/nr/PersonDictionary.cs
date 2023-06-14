@@ -70,7 +70,7 @@ public class PersonDictionary
         ListIterator<Vertex> listIterator = vertexList.listIterator();
         StringBuilder sbPattern = new StringBuilder(nrList.size());
         NR preNR = NR.A;
-        boolean backUp = false;
+        bool backUp = false;
         int index = 0;
         for (NR nr : nrList)
         {
@@ -187,7 +187,7 @@ public class PersonDictionary
      * @param name
      * @return
      */
-    static boolean isBadCase(String name)
+    static bool isBadCase(String name)
     {
         EnumItem<NR> nrEnumItem = dictionary.get(name);
         if (nrEnumItem == null) return false;

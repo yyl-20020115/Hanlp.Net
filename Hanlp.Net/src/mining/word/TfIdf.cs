@@ -129,7 +129,7 @@ public class TfIdf
      * @return 一个词语->倒排文档的Map
      */
     public static <TERM> Map<TERM, Double> idf(Iterable<Iterable<TERM>> documentVocabularies,
-                                               boolean smooth, boolean addOne)
+                                               bool smooth, bool addOne)
     {
         Map<TERM, Integer> df = new HashMap<TERM, Integer>();
         int d = smooth ? 1 : 0;
@@ -227,7 +227,7 @@ public class TfIdf
      * @param <TERM> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Map<TERM, Double> idfFromTfs(Iterable<Map<TERM, Double>> tfs, boolean smooth, boolean addOne)
+    public static <TERM> Map<TERM, Double> idfFromTfs(Iterable<Map<TERM, Double>> tfs, bool smooth, bool addOne)
     {
         return idf(new KeySetIterable<TERM, Double>(tfs), smooth, addOne);
     }
@@ -265,7 +265,7 @@ public class TfIdf
             return new Iterator<Iterable<KEY>>()
             {
                 //@Override
-                public boolean hasNext()
+                public bool hasNext()
                 {
                     return maps.hasNext();
                 }

@@ -1,19 +1,13 @@
-package com.hankcs.hanlp.collection.MDAG;
+namespace com.hankcs.hanlp.collection.MDAG;
 
-import com.hankcs.hanlp.collection.MDAG.MDAGMap;
-import com.hankcs.hanlp.collection.trie.bintrie.BinTrie;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import junit.framework.TestCase;
 
-import java.util.Set;
-import java.util.TreeSet;
 
-public class MDAGMapTest extends TestCase
+public class MDAGMapTest : TestCase
 {
     MDAGMap<Integer> mdagMap = new MDAGMap<Integer>();
     Set<String> validKeySet;
 
-    public void setUp() throws Exception
+    public void setUp() 
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/custom/CustomDictionary.txt");
         validKeySet = new TreeSet<String>();
@@ -27,11 +21,11 @@ public class MDAGMapTest extends TestCase
         }
     }
 
-    public void testPut() throws Exception
+    public void testPut() 
     {
     }
 
-    public void testGet() throws Exception
+    public void testGet() 
     {
         testPut();
         mdagMap.simplify();
@@ -42,20 +36,20 @@ public class MDAGMapTest extends TestCase
         }
     }
 
-    public void testSingle() throws Exception
+    public void testSingle() 
     {
         testPut();
         mdagMap.simplify();
         assertEquals(null, mdagMap.get("齿轮厂"));
     }
 
-    public void testCommonPrefixSearch() throws Exception
+    public void testCommonPrefixSearch() 
     {
         testPut();
         assertEquals("[hankcs=6]", mdagMap.commonPrefixSearchWithValue("hankcs").toString());
     }
 
-//    public void testBenchmark() throws Exception
+//    public void testBenchmark() 
 //    {
 //        testPut();
 //        BinTrie<Integer> binTrie = new BinTrie<Integer>();

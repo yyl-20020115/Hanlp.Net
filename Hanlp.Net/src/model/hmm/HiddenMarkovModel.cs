@@ -275,7 +275,7 @@ public abstract class HiddenMarkovModel
         return p;
     }
 
-    public boolean similar(HiddenMarkovModel model)
+    public bool similar(HiddenMarkovModel model)
     {
         if (!similar(start_probability, model.start_probability)) return false;
         for (int i = 0; i < transition_probability.length; i++)
@@ -286,7 +286,7 @@ public abstract class HiddenMarkovModel
         return true;
     }
 
-    protected static boolean similar(float[] A, float[] B)
+    protected static bool similar(float[] A, float[] B)
     {
         final float eta = 1e-2f;
         for (int i = 0; i < A.length; i++)

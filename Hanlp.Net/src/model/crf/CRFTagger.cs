@@ -23,7 +23,7 @@ public abstract class CRFTagger
     {
     }
 
-    public CRFTagger(String modelPath) throws IOException
+    public CRFTagger(String modelPath) 
     {
         if (modelPath == null) return; // 训练模式
         model = new LogLinearModel(modelPath);
@@ -46,7 +46,7 @@ public abstract class CRFTagger
      */
     public void train(String templFile, String trainFile, String modelFile,
                       int maxitr, int freq, double eta, double C, int threadNum, int shrinkingSize,
-                      Encoder.Algorithm algorithm) throws IOException
+                      Encoder.Algorithm algorithm) 
     {
         Encoder encoder = new Encoder();
         if (!encoder.learn(templFile, trainFile, modelFile,
@@ -61,14 +61,14 @@ public abstract class CRFTagger
      * 将CRF++格式转为HanLP格式
      *
      * @param modelFile
-     * @throws IOException
+     * @
      */
-    private void convert(String modelFile) throws IOException
+    private void convert(String modelFile) 
     {
         this.model = new LogLinearModel(modelFile + ".txt", modelFile);
     }
 
-    public void train(String trainCorpusPath, String modelPath) throws IOException
+    public void train(String trainCorpusPath, String modelPath) 
     {
         crf_learn.Option option = new crf_learn.Option();
         train(trainCorpusPath, modelPath, option.maxiter, option.freq, option.eta, option.cost,
@@ -77,7 +77,7 @@ public abstract class CRFTagger
 
     public void train(String trainFile, String modelFile,
                       int maxitr, int freq, double eta, double C, int threadNum, int shrinkingSize,
-                      Encoder.Algorithm algorithm) throws IOException
+                      Encoder.Algorithm algorithm) 
     {
         String templFile = null;
         File tmpTemplate = File.createTempFile("crfpp-template-" + new Date().getTime(), ".txt");
@@ -103,17 +103,17 @@ public abstract class CRFTagger
         convert(modelFile);
     }
 
-    protected abstract void convertCorpus(Sentence sentence, BufferedWriter bw) throws IOException;
+    protected abstract void convertCorpus(Sentence sentence, BufferedWriter bw) ;
 
     protected abstract String getDefaultFeatureTemplate();
 
-    public void convertCorpus(String pkuPath, String tsvPath) throws IOException
+    public void convertCorpus(String pkuPath, String tsvPath) 
     {
         final BufferedWriter bw = IOUtil.newBufferedWriter(tsvPath);
         IOUtility.loadInstance(pkuPath, new InstanceHandler()
         {
             //@Override
-            public boolean process(Sentence sentence)
+            public bool process(Sentence sentence)
             {
                 Utility.normalize(sentence);
                 try
@@ -135,9 +135,9 @@ public abstract class CRFTagger
      * 导出特征模板
      *
      * @param templatePath
-     * @throws IOException
+     * @
      */
-    public void dumpTemplate(String templatePath) throws IOException
+    public void dumpTemplate(String templatePath) 
     {
         BufferedWriter bw = IOUtil.newBufferedWriter(templatePath);
         String template = getTemplate();

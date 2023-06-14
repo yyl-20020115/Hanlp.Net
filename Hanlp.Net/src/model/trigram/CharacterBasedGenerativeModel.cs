@@ -280,7 +280,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         l1 = byteArray.nextDouble();
         l2 = byteArray.nextDouble();

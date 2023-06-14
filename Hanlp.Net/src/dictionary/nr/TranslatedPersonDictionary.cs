@@ -34,7 +34,7 @@ public class TranslatedPersonDictionary
         logger.info("音译人名词典" + path + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
     }
 
-    static boolean load()
+    static bool load()
     {
         trie = new DoubleArrayTrie<Boolean>();
         if (loadDat()) return true;
@@ -85,12 +85,12 @@ public class TranslatedPersonDictionary
      * 保存dat到磁盘
      * @return
      */
-    static boolean saveDat()
+    static bool saveDat()
     {
         return trie.save(path + Predefine.TRIE_EXT);
     }
 
-    static boolean loadDat()
+    static bool loadDat()
     {
         return trie.load(path + Predefine.TRIE_EXT);
     }
@@ -100,7 +100,7 @@ public class TranslatedPersonDictionary
      * @param key
      * @return
      */
-    public static boolean containsKey(String key)
+    public static bool containsKey(String key)
     {
         return trie.containsKey(key);
     }
@@ -111,7 +111,7 @@ public class TranslatedPersonDictionary
      * @param length
      * @return
      */
-    public static boolean containsKey(String key, int length)
+    public static bool containsKey(String key, int length)
     {
         if (!trie.containsKey(key)) return false;
         return key.length() >= length;

@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public abstract class PerceptronTagger extends InstanceConsumer
+public abstract class PerceptronTagger : InstanceConsumer
 {
     /**
      * 用StructurePerceptron实现在线学习
@@ -47,7 +47,7 @@ public abstract class PerceptronTagger extends InstanceConsumer
      * @param instance
      * @return
      */
-    public boolean learn(Instance instance)
+    public bool learn(Instance instance)
     {
         if (instance == null) return false;
         model.update(instance);
@@ -60,7 +60,7 @@ public abstract class PerceptronTagger extends InstanceConsumer
      * @param sentence
      * @return
      */
-    public boolean learn(Sentence sentence)
+    public bool learn(Sentence sentence)
     {
         return learn(createInstance(sentence, model.featureMap));
     }
@@ -70,9 +70,9 @@ public abstract class PerceptronTagger extends InstanceConsumer
      *
      * @param corpora 数据集
      * @return 默认返回accuracy，有些子类可能返回P,R,F1
-     * @throws IOException
+     * @
      */
-    public double[] evaluate(String corpora) throws IOException
+    public double[] evaluate(String corpora) 
     {
         return evaluate(corpora, this.getModel());
     }

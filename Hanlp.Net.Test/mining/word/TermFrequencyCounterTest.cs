@@ -1,14 +1,13 @@
-package com.hankcs.hanlp.mining.word;
+namespace com.hankcs.hanlp.mining.word;
 
-import junit.framework.TestCase;
 
-public class TermFrequencyCounterTest extends TestCase
+public class TermFrequencyCounterTest : TestCase
 {
-    public void testGetKeywords() throws Exception
+    public void testGetKeywords() 
     {
         TermFrequencyCounter counter = new TermFrequencyCounter();
         counter.add("加油加油中国队！");
-        System.out.println(counter);
-        System.out.println(counter.getKeywords("女排夺冠，观众欢呼女排女排女排！"));
+        Console.WriteLine(counter);
+        Console.WriteLine(counter.getKeywords("女排夺冠，观众欢呼女排女排女排！"));
     }
 }

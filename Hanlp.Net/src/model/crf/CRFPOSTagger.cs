@@ -15,16 +15,16 @@ namespace com.hankcs.hanlp.model.crf;
 /**
  * @author hankcs
  */
-public class CRFPOSTagger extends CRFTagger : POSTagger
+public class CRFPOSTagger : CRFTagger : POSTagger
 {
     private PerceptronPOSTagger perceptronPOSTagger;
 
-    public CRFPOSTagger() throws IOException
+    public CRFPOSTagger() 
     {
         this(HanLP.Config.CRFPOSModelPath);
     }
 
-    public CRFPOSTagger(String modelPath) throws IOException
+    public CRFPOSTagger(String modelPath) 
     {
         super(modelPath);
         if (modelPath != null)
@@ -34,7 +34,7 @@ public class CRFPOSTagger extends CRFTagger : POSTagger
     }
 
     //@Override
-    public void train(String trainCorpusPath, String modelPath) throws IOException
+    public void train(String trainCorpusPath, String modelPath) 
     {
         crf_learn.Option option = new crf_learn.Option();
         train(trainCorpusPath, modelPath, option.maxiter, 10, option.eta, option.cost,
@@ -42,7 +42,7 @@ public class CRFPOSTagger extends CRFTagger : POSTagger
     }
 
     //@Override
-    protected void convertCorpus(Sentence sentence, BufferedWriter bw) throws IOException
+    protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
         List<Word> simpleWordList = sentence.toSimpleWordList();
         List<String> wordList = new ArrayList<String>(simpleWordList.size());
@@ -68,7 +68,7 @@ public class CRFPOSTagger extends CRFTagger : POSTagger
         }
     }
 
-    private String[] createCells(boolean withTag)
+    private String[] createCells(bool withTag)
     {
         return withTag ? new String[6] : new String[5];
     }

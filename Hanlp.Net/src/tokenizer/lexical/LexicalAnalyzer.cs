@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.tokenizer.lexical;
 /**
  * @author hankcs
  */
-public interface LexicalAnalyzer extends Segmenter, POSTagger, NERecognizer
+public interface LexicalAnalyzer : Segmenter, POSTagger, NERecognizer
 {
     /**
      * 对句子进行词法分析

@@ -27,7 +27,7 @@ class AutoIntPool
         _buf[id] = value;
     }
 
-    boolean empty()
+    bool empty()
     {
         return (_size == 0);
     }

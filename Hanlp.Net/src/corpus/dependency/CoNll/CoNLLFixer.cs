@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.corpus.dependency.CoNll;
  */
 public class CoNLLFixer
 {
-    public static boolean fix(String path)
+    public static bool fix(String path)
     {
         StringBuilder sbOut = new StringBuilder();
         for (String line : IOUtil.readLineListWithLessMemory(path))

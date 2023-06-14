@@ -40,7 +40,7 @@ public abstract class AbstractTrainer
         return argPos(param, args, true);
     }
 
-    protected int argPos(String param, String[] args, boolean checkArgNum)
+    protected int argPos(String param, String[] args, bool checkArgNum)
     {
         for (int i = 0; i < args.length; i++)
         {

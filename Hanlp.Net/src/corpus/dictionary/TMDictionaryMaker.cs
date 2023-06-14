@@ -79,7 +79,7 @@ public class TMDictionaryMaker : ISaveAble
     }
 
     //@Override
-    public boolean saveTxtTo(String path)
+    public bool saveTxtTo(String path)
     {
         try
         {

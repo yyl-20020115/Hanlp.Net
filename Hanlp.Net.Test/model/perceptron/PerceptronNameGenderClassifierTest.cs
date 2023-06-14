@@ -1,25 +1,23 @@
-package com.hankcs.hanlp.model.perceptron;
+namespace com.hankcs.hanlp.model.perceptron;
 
-import com.hankcs.hanlp.utility.TestUtility;
-import junit.framework.TestCase;
 
-public class PerceptronNameGenderClassifierTest extends TestCase
+public class PerceptronNameGenderClassifierTest : TestCase
 {
     public static String TRAINING_SET = "data/test/cnname/train.csv";
     public static String TESTING_SET = "data/test/cnname/test.csv";
     public static String MODEL = "data/test/cnname.bin";
 
-    @Override
-    public void setUp() throws Exception
+    //@Override
+    public void setUp() 
     {
         super.setUp();
         TestUtility.ensureTestData("cnname", "http://file.hankcs.com/corpus/cnname.zip");
     }
 
-    public void testTrain() throws Exception
+    public void testTrain() 
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier();
-        System.out.println(classifier.train(TRAINING_SET, 10, false));
+        Console.WriteLine(classifier.train(TRAINING_SET, 10, false));
         classifier.model.save(MODEL, classifier.model.featureMap.entrySet(), 0, true);
         predictNames(classifier);
     }
@@ -34,13 +32,13 @@ public class PerceptronNameGenderClassifierTest extends TestCase
     }
 
 
-    public void testEvaluate() throws Exception
+    public void testEvaluate() 
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier(MODEL);
-        System.out.println(classifier.evaluate(TESTING_SET));
+        Console.WriteLine(classifier.evaluate(TESTING_SET));
     }
 
-    public void testPrediction() throws Exception
+    public void testPrediction() 
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier(MODEL);
         predictNames(classifier);

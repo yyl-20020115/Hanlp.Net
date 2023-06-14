@@ -71,7 +71,7 @@ public class SimpleItem
         labelMap.remove(label);
     }
 
-    public boolean containsLabel(String label)
+    public bool containsLabel(String label)
     {
         return labelMap.containsKey(label);
     }

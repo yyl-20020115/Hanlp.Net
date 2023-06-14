@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 /**
  * @author zhifac
  */
-public class ModelImpl extends Model
+public class ModelImpl : Model
 {
     private int nbest_;
     private int vlevel_;
@@ -29,7 +29,7 @@ public class ModelImpl extends Model
         return tagger;
     }
 
-    public boolean open(String arg)
+    public bool open(String arg)
     {
         return open(arg.split(" ", -1));
     }
@@ -46,7 +46,7 @@ public class ModelImpl extends Model
         Double cost_factor = 1.0;
     }
 
-    public boolean open(String[] args)
+    public bool open(String[] args)
     {
         Option cmd = new Option();
         try
@@ -65,7 +65,7 @@ public class ModelImpl extends Model
         return open(model, nbest, vlevel, costFactor);
     }
 
-    public boolean open(InputStream stream, int nbest, int vlevel, double costFactor)
+    public bool open(InputStream stream, int nbest, int vlevel, double costFactor)
     {
         featureIndex_ = new DecoderFeatureIndex();
         nbest_ = nbest;
@@ -77,7 +77,7 @@ public class ModelImpl extends Model
         return featureIndex_.open(stream);
     }
 
-    public boolean open(String model, int nbest, int vlevel, double costFactor)
+    public bool open(String model, int nbest, int vlevel, double costFactor)
     {
         try
         {

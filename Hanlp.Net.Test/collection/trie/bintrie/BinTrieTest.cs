@@ -1,28 +1,20 @@
-package com.hankcs.hanlp.collection.trie.bintrie;
+namespace com.hankcs.hanlp.collection.trie.bintrie;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.collection.AhoCorasick.AhoCorasickDoubleArrayTrie;
-import com.hankcs.hanlp.corpus.util.DictionaryUtil;
-import com.hankcs.hanlp.dictionary.CustomDictionary;
-import junit.framework.TestCase;
 
-import java.io.File;
-import java.util.Map;
-import java.util.Set;
 
-public class BinTrieTest extends TestCase
+public class BinTrieTest : TestCase
 {
     static String DATA_TEST_OUT_BIN;
     private File tempFile;
 
-    @Override
-    public void setUp() throws Exception
+    //@Override
+    public void setUp() 
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
     }
 
-    public void testParseText() throws Exception
+    public void testParseText() 
     {
         BinTrie<String> trie = new BinTrie<String>();
         String[] keys = new String[]{"he", "her", "his"};
@@ -33,7 +25,7 @@ public class BinTrieTest extends TestCase
         final String text = " her4he7his ";
         AhoCorasickDoubleArrayTrie.IHit<String> processor = new AhoCorasickDoubleArrayTrie.IHit<String>()
         {
-            @Override
+            //@Override
             public void hit(int begin, int end, String value)
             {
 //                System.out.printf("[%d, %d)=%s\n", begin, end, value);
@@ -44,7 +36,7 @@ public class BinTrieTest extends TestCase
         trie.parseText(text, processor);
     }
 
-    public void testPut() throws Exception
+    public void testPut() 
     {
         BinTrie<Boolean> trie = new BinTrie<Boolean>();
         trie.put("加入", true);
@@ -53,13 +45,13 @@ public class BinTrieTest extends TestCase
         assertEquals(new Boolean(false), trie.get("加入"));
     }
 
-    public void testArrayIndexOutOfBoundsException() throws Exception
+    public void testArrayIndexOutOfBoundsException() 
     {
         BinTrie<Boolean> trie = new BinTrie<Boolean>();
         trie.put(new char[]{'\uffff'}, true);
     }
 
-    public void testSaveAndLoad() throws Exception
+    public void testSaveAndLoad() 
     {
         BinTrie<Integer> trie = new BinTrie<Integer>();
         trie.put("haha", 0);
@@ -80,13 +72,13 @@ public class BinTrieTest extends TestCase
         assertEquals("[haha=0, hankcs=1, hello=2, za=3, zb=4, zzz=5]", entrySet.toString());
     }
 
-//    public void testCustomDictionary() throws Exception
+//    public void testCustomDictionary() 
 //    {
 //        HanLP.Config.enableDebug(true);
-//        System.out.println(CustomDictionary.get("龟兔赛跑"));
+//        Console.WriteLine(CustomDictionary.get("龟兔赛跑"));
 //    }
 //
-//    public void testSortCustomDictionary() throws Exception
+//    public void testSortCustomDictionary() 
 //    {
 //        DictionaryUtil.sortDictionary(HanLP.Config.CustomDictionaryPath[0]);
 //    }

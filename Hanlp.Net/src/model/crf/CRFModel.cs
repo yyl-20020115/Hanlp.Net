@@ -331,7 +331,7 @@ public class CRFModel : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         if (byteArray == null) return false;
         try

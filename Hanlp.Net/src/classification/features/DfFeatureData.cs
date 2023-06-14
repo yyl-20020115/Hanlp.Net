@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.classification.features;
  * 包含倒排文档频次的特征数据
  * @author hankcs
  */
-public class DfFeatureData extends BaseFeatureData
+public class DfFeatureData : BaseFeatureData
 {
     public int[] df;
     /**

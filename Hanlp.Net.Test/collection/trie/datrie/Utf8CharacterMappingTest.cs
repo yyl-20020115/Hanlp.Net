@@ -1,15 +1,14 @@
-package com.hankcs.hanlp.collection.trie.datrie;
+namespace com.hankcs.hanlp.collection.trie.datrie;
 
-import junit.framework.TestCase;
 
-public class Utf8CharacterMappingTest extends TestCase
+public class Utf8CharacterMappingTest : TestCase
 {
-    public void testToIdList() throws Exception
+    public void testToIdList() 
     {
         Utf8CharacterMapping ucm = new Utf8CharacterMapping();
         String s = "汉字\uD801\uDC00\uD801\uDC00ab\uD801\uDC00\uD801\uDC00cd";
         int[] bytes1 = ucm.toIdList(s);
-        System.out.println("UTF-8: " + bytes1.length);
+        Console.WriteLine("UTF-8: " + bytes1.length);
         {
             int charCount = 1;
             int start = 0;
@@ -23,14 +22,14 @@ public class Utf8CharacterMappingTest extends TestCase
                 {
                     if (bytes1[start] != arr[j])
                     {
-                        System.out.println("error: " + start + "," + j);
+                        Console.WriteLine("error: " + start + "," + j);
                         System.exit(-1);
                     }
                 }
             }
             if (start != bytes1.length)
             {
-                System.out.println("error: " + start + "," + bytes1.length);
+                Console.WriteLine("error: " + start + "," + bytes1.length);
             }
         }
     }

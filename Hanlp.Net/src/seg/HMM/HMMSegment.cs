@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.seg.HMM;
  *
  * @author hankcs
  */
-public class HMMSegment extends CharacterBasedSegment
+public class HMMSegment : CharacterBasedSegment
 {
     CharacterBasedGenerativeModel model;
 

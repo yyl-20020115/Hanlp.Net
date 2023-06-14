@@ -46,7 +46,7 @@ public class CoreBiGramTableDictionary
         }
     }
 
-    static boolean load(String path)
+    static bool load(String path)
     {
         String datPath = HanLP.Config.BiGramDictionaryPath + ".table" + Predefine.BIN_EXT;
         if (loadDat(datPath)) return true;
@@ -129,7 +129,7 @@ public class CoreBiGramTableDictionary
         return true;
     }
 
-    static boolean saveDat(String path)
+    static bool saveDat(String path)
     {
         try
         {
@@ -159,7 +159,7 @@ public class CoreBiGramTableDictionary
         return true;
     }
 
-    static boolean loadDat(String path)
+    static bool loadDat(String path)
     {
 //        ByteArray byteArray = ByteArray.createByteArray(path);
 //        if (byteArray == null) return false;
@@ -290,7 +290,7 @@ public class CoreBiGramTableDictionary
      *     集群环境（或其他IOAdapter）需要自行删除缓存文件
      * @return 是否成功
      */
-    public static boolean reload()
+    public static bool reload()
     {
         String biGramDictionaryPath = HanLP.Config.BiGramDictionaryPath;
         IOUtil.deleteFile(biGramDictionaryPath + ".table" + Predefine.BIN_EXT);

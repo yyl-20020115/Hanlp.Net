@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.seg;
  *
  * @author hankcs
  */
-public abstract class DictionaryBasedSegment extends Segment
+public abstract class DictionaryBasedSegment : Segment
 {
     /**
      * 开启数词和英文识别（与标准意义上的词性标注不同，只是借用这个配置方法，不是真的开启了词性标注。
@@ -27,7 +27,7 @@ public abstract class DictionaryBasedSegment extends Segment
      * @param enable
      * @return
      */
-    public Segment enablePartOfSpeechTagging(boolean enable)
+    public Segment enablePartOfSpeechTagging(bool enable)
     {
         return super.enablePartOfSpeechTagging(enable);
     }
@@ -73,7 +73,7 @@ public abstract class DictionaryBasedSegment extends Segment
     }
 
     //@Override
-    public Segment enableCustomDictionary(boolean enable)
+    public Segment enableCustomDictionary(bool enable)
     {
         if (enable)
         {

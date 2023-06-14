@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron.instance;
 /**
  * @author hankcs
  */
-public class CWSInstance extends Instance
+public class CWSInstance : Instance
 {
     private static final char CHAR_BEGIN = '\u0001';
     private static final char CHAR_END = '\u0002';

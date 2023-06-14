@@ -40,7 +40,7 @@ public class DoubleArrayTrieInteger : Serializable
     private int check[];
     private int base[];
 
-    private boolean used[];
+    private bool used[];
     private int size;
     private int allocSize;
     private List<String> key;
@@ -49,14 +49,14 @@ public class DoubleArrayTrieInteger : Serializable
     private int value[];
     private int progress;
     private int nextCheckPos;
-    // boolean no_delete_;
+    // bool no_delete_;
     int error_;
 
     private int resize(int newSize)
     {
         int[] base2 = new int[newSize];
         int[] check2 = new int[newSize];
-        boolean used2[] = new boolean[newSize];
+        bool used2[] = new bool[newSize];
         if (allocSize > 0)
         {
             System.arraycopy(base, 0, base2, 0, allocSize);
@@ -381,7 +381,7 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public void open(String fileName) throws IOException
+    public void open(String fileName) 
     {
         File file = new File(fileName);
         size = (int) file.length() / UNIT_SIZE;
@@ -406,7 +406,7 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public void save(String fileName) throws IOException
+    public void save(String fileName) 
     {
         DataOutputStream out = null;
         try

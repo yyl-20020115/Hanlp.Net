@@ -120,7 +120,7 @@ public class State
      * 是否是终止状态
      * @return
      */
-    public boolean isAcceptable()
+    public bool isAcceptable()
     {
         return this.depth > 0 && this.emits != null;
     }
@@ -150,7 +150,7 @@ public class State
      * @param ignoreRootState 是否忽略根节点，如果是根节点自己调用则应该是true，否则为false
      * @return 转移结果
      */
-    private State nextState(Character character, boolean ignoreRootState)
+    private State nextState(Character character, bool ignoreRootState)
     {
         State nextState = this.success.get(character);
         if (!ignoreRootState && nextState == null && this.depth == 0)

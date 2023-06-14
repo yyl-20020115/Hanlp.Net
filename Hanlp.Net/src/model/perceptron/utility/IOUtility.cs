@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.model.perceptron.utility;
 /**
  * @author hankcs
  */
-public class IOUtility extends IOUtil
+public class IOUtility : IOUtil
 {
     private static Pattern PATTERN_SPACE = Pattern.compile("\\s+");
 
@@ -28,7 +28,7 @@ public class IOUtility extends IOUtil
         return PATTERN_SPACE.split(line);
     }
 
-    public static int loadInstance(final String path, InstanceHandler handler) throws IOException
+    public static int loadInstance(final String path, InstanceHandler handler) 
     {
         ConsoleLogger logger = new ConsoleLogger();
         int size = 0;
@@ -39,7 +39,7 @@ public class IOUtility extends IOUtil
             allFiles = root.listFiles(new FileFilter()
             {
                 //@Override
-                public boolean accept(File pathname)
+                public bool accept(File pathname)
                 {
                     return pathname.isFile() && pathname.getName().endsWith(".txt");
                 }

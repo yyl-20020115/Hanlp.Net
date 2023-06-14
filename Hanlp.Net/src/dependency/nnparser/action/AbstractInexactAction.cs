@@ -41,7 +41,7 @@ public class AbstractInexactAction : Comparable<AbstractInexactAction>
     }
 
     //@Override
-    public boolean equals(Object obj)
+    public bool equals(Object obj)
     {
         if (!(obj instanceof AbstractInexactAction)) return false;
         AbstractInexactAction o = (AbstractInexactAction) obj;

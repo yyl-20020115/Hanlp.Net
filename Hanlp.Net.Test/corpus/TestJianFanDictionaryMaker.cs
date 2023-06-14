@@ -9,27 +9,20 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.dictionary.StringDictionary;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.dictionary.other.CharTable;
-import junit.framework.TestCase;
 
-import java.io.*;
-import java.util.*;
 
 /**
  * @author hankcs
  */
-public class TestJianFanDictionaryMaker extends TestCase
+public class TestJianFanDictionaryMaker : TestCase
 {
 
     private String cc = "/Users/hankcs/CppProjects/OpenCC/data/dictionary/";
     private String root = "data/dictionary/tc/";
 
-    public void testCombine() throws Exception
+    public void testCombine() 
     {
 //        StringDictionary dictionaryHanLP = new StringDictionary("=");
 //        dictionaryHanLP.load(HanLP.Config.t2sDictionaryPath);
@@ -49,18 +42,18 @@ public class TestJianFanDictionaryMaker extends TestCase
 //        dictionaryHanLP.save(HanLP.Config.t2sDictionaryPath);
     }
 
-//    public void testConvertSingle() throws Exception
+//    public void testConvertSingle() 
 //    {
-//        System.out.println(HanLP.convertToTraditionalChinese("一个劲"));
+//        Console.WriteLine(HanLP.convertToTraditionalChinese("一个劲"));
 //    }
 //
-//    public void testIssue() throws Exception
+//    public void testIssue() 
 //    {
-//        System.out.println(HanLP.convertToSimplifiedChinese("缐"));
-//        System.out.println(CharTable.convert("缐"));
+//        Console.WriteLine(HanLP.convertToSimplifiedChinese("缐"));
+//        Console.WriteLine(CharTable.convert("缐"));
 //    }
 //
-//    public void testImportOpenCC() throws Exception
+//    public void testImportOpenCC() 
 //    {
 //        // 转换OpenCC的词库
 //        Map<String, String> s2t = new TreeMap<String, String>();
@@ -76,7 +69,7 @@ public class TestJianFanDictionaryMaker extends TestCase
 //        save(t2s, "data/dictionary/tc/t2s.txt");
 //    }
 //
-//    public void testMakeHK() throws Exception
+//    public void testMakeHK() 
 //    {
 //        Map<String, String> t2hk = new TreeMap<String, String>();
 //        combine("\t", t2hk,
@@ -86,7 +79,7 @@ public class TestJianFanDictionaryMaker extends TestCase
 //        save(t2hk, "data/dictionary/tc/t2hk.txt");
 //    }
 //
-//    public void testMakeTW() throws Exception
+//    public void testMakeTW() 
 //    {
 //        Map<String, String> t2tw = new TreeMap<String, String>();
 //        combine("\t", t2tw,
@@ -180,9 +173,9 @@ public class TestJianFanDictionaryMaker extends TestCase
 //        return storage;
 //    }
 //
-//    public void testChar() throws Exception
+//    public void testChar() 
 //    {
 //        String line = "㐹\t㑶 㐹";
-//        System.out.println('㐹' == '㐹');
+//        Console.WriteLine('㐹' == '㐹');
 //    }
 }

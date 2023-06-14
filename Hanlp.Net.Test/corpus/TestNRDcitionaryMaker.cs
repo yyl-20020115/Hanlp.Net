@@ -1,14 +1,6 @@
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import java.util.LinkedList;
-import java.util.List;
 
-import com.hankcs.hanlp.corpus.dictionary.EasyDictionary;
-import com.hankcs.hanlp.corpus.dictionary.NRDictionaryMaker;
-import com.hankcs.hanlp.corpus.document.CorpusLoader;
-import com.hankcs.hanlp.corpus.document.Document;
-import com.hankcs.hanlp.corpus.document.sentence.word.IWord;
-import com.hankcs.hanlp.corpus.document.sentence.word.Word;
 
 public class TestNRDcitionaryMaker
 {
@@ -19,7 +11,7 @@ public class TestNRDcitionaryMaker
         final NRDictionaryMaker nrDictionaryMaker = new NRDictionaryMaker(dictionary);
         CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", new CorpusLoader.Handler()
         {
-            @Override
+            //@Override
             public void handle(Document document)
             {
                 List<List<Word>> simpleSentenceList = document.getSimpleSentenceList();

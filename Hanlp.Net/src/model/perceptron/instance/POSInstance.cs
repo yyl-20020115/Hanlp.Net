@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron.instance;
 /**
  * @author hankcs
  */
-public class POSInstance extends Instance
+public class POSInstance : Instance
 {
     /**
      * 构建词性标注实例
@@ -175,7 +175,7 @@ public class POSInstance extends Instance
 //            }
 //        }
 
-//        boolean isDigit = true;
+//        bool isDigit = true;
 //        for (int i = 0; i < curWord.length(); i++)
 //        {
 //            if (CharType.get(curWord.charAt(i)) != CharType.CT_NUM)
@@ -189,7 +189,7 @@ public class POSInstance extends Instance
 //            addFeature("wT=d", featVec, featureMap);
 //        }
 
-//        boolean isPunt = true;
+//        bool isPunt = true;
 //        for (int i = 0; i < curWord.length(); i++)
 //        {
 //            if (!CharType.punctSet.contains(curWord.charAt(i) + ""))
@@ -203,7 +203,7 @@ public class POSInstance extends Instance
 //            featVec.add("wT=p");
 //        }
 
-//        boolean isLetter = true;
+//        bool isLetter = true;
 //        for (int i = 0; i < curWord.length(); i++)
 //        {
 //            if (CharType.get(curWord.charAt(i)) != CharType.CT_LETTER)

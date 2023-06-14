@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.collection.dartsclone;
  * 双数组trie树map，更省内存，原本希望代替DoubleArrayTrie，后来发现效率不够
  * @author hankcs
  */
-public class DartMap<V> extends DoubleArray : Map<String, V>, ITrie<V>
+public class DartMap<V> : DoubleArray : Map<String, V>, ITrie<V>
 {
     V[] valueArray;
 
@@ -42,13 +42,13 @@ public class DartMap<V> extends DoubleArray : Map<String, V>, ITrie<V>
     }
 
     //@Override
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return size() == 0;
     }
 
     //@Override
-    public boolean containsKey(Object key)
+    public bool containsKey(Object key)
     {
         return containsKey(key.toString());
     }
@@ -59,13 +59,13 @@ public class DartMap<V> extends DoubleArray : Map<String, V>, ITrie<V>
      * @param key
      * @return
      */
-    public boolean containsKey(String key)
+    public bool containsKey(String key)
     {
         return exactMatchSearch(key) != -1;
     }
 
     //@Override
-    public boolean containsValue(Object value)
+    public bool containsValue(Object value)
     {
         return false;
     }
@@ -96,13 +96,13 @@ public class DartMap<V> extends DoubleArray : Map<String, V>, ITrie<V>
     }
 
     //@Override
-    public boolean save(DataOutputStream out)
+    public bool save(DataOutputStream out)
     {
         return false;
     }
 
     //@Override
-    public boolean load(ByteArray byteArray, V[] value)
+    public bool load(ByteArray byteArray, V[] value)
     {
         return false;
     }
@@ -163,7 +163,7 @@ public class DartMap<V> extends DoubleArray : Map<String, V>, ITrie<V>
     }
 
     //@Override
-    public void putAll(Map<? extends String, ? extends V> m)
+    public void putAll(Map<? : String, ? : V> m)
     {
         throw new UnsupportedOperationException("双数组不支持增量式插入");
     }

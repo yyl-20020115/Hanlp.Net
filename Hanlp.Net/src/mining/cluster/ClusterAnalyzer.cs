@@ -266,7 +266,7 @@ public class ClusterAnalyzer<K>
             }
             Collections.shuffle(items);
 
-            boolean changed = false;
+            bool changed = false;
             for (int[] item : items)
             {
                 int cluster_id = item[0];
@@ -349,7 +349,7 @@ public class ClusterAnalyzer<K>
      *                   └── ...<br>
      *                   文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
      * @param algorithm  kmeans 或 repeated bisection
-     * @throws IOException 任何可能的IO异常
+     * @ 任何可能的IO异常
      */
     public static double evaluate(String folderPath, String algorithm)
     {

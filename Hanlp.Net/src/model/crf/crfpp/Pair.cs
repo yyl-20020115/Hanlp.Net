@@ -86,7 +86,7 @@ public class Pair<K,V> : Serializable {
      * equal to this <code>Pair</code> else <code>false</code>
      */
     //@Override
-    public boolean equals(Object o) {
+    public bool equals(Object o) {
         if (this == o) return true;
         if (o instanceof Pair) {
             Pair pair = (Pair) o;

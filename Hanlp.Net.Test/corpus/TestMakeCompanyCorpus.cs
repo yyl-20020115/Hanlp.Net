@@ -9,29 +9,17 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.dictionary.DictionaryMaker;
-import com.hankcs.hanlp.corpus.dictionary.EasyDictionary;
-import com.hankcs.hanlp.corpus.dictionary.NTDictionaryMaker;
-import com.hankcs.hanlp.corpus.document.CorpusLoader;
-import com.hankcs.hanlp.corpus.document.Document;
-import com.hankcs.hanlp.corpus.tag.Nature;
-import com.hankcs.hanlp.seg.Dijkstra.DijkstraSegment;
-import com.hankcs.hanlp.seg.common.Term;
-import junit.framework.TestCase;
 
-import java.io.*;
-import java.util.List;
 
 
 /**
  * @author hankcs
  */
-public class TestMakeCompanyCorpus extends TestCase
+public class TestMakeCompanyCorpus : TestCase
 {
-//    public void testMake() throws Exception
+//    public void testMake() 
 //    {
 //        DijkstraSegment segment = new DijkstraSegment();
 //        String line = null;
@@ -64,14 +52,14 @@ public class TestMakeCompanyCorpus extends TestCase
 //        br.close();
 //    }
 //
-//    public void testParse() throws Exception
+//    public void testParse() 
 //    {
 //        EasyDictionary dictionary = EasyDictionary.create("data/dictionary/2014_dictionary.txt");
 //        final NTDictionaryMaker nsDictionaryMaker = new NTDictionaryMaker(dictionary);
 //        // CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", new CorpusLoader.Handler()
 //        CorpusLoader.walk("data/test/nt/part/", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                nsDictionaryMaker.compute(document.getComplexSentenceList());
@@ -80,7 +68,7 @@ public class TestMakeCompanyCorpus extends TestCase
 //        nsDictionaryMaker.saveTxtTo("D:\\JavaProjects\\HanLP\\data\\dictionary\\organization\\outerNT");
 //    }
 //
-//    public void testSplitLargeFile() throws Exception
+//    public void testSplitLargeFile() 
 //    {
 //        String line = null;
 //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("data/test/nt/company.txt")));
@@ -103,15 +91,15 @@ public class TestMakeCompanyCorpus extends TestCase
 //        br.close();
 //    }
 //
-//    public void testCase() throws Exception
+//    public void testCase() 
 //    {
 //        HanLP.Config.enableDebug();
 //        DijkstraSegment segment = new DijkstraSegment();
 //        segment.enableOrganizationRecognize(true);
-//        System.out.println(segment.seg("黑龙江建筑职业技术学院近百学生发生冲突"));
+//        Console.WriteLine(segment.seg("黑龙江建筑职业技术学院近百学生发生冲突"));
 //    }
 //
-//    public void testCombine() throws Exception
+//    public void testCombine() 
 //    {
 //        DictionaryMaker.combine("data/dictionary/organization/nt.txt", "data/dictionary/organization/outerNT.txt").saveTxtTo("data/dictionary/organization/nt.txt");
 //    }

@@ -8,19 +8,19 @@ public class TrieConfig
     /**
      * 允许重叠
      */
-    private boolean allowOverlaps = true;
+    private bool allowOverlaps = true;
 
     /**
      * 只保留最长匹配
      */
-    public boolean remainLongest = false;
+    public bool remainLongest = false;
 
     /**
      * 是否允许重叠
      *
      * @return
      */
-    public boolean isAllowOverlaps()
+    public bool isAllowOverlaps()
     {
         return allowOverlaps;
     }
@@ -30,7 +30,7 @@ public class TrieConfig
      *
      * @param allowOverlaps
      */
-    public void setAllowOverlaps(boolean allowOverlaps)
+    public void setAllowOverlaps(bool allowOverlaps)
     {
         this.allowOverlaps = allowOverlaps;
     }

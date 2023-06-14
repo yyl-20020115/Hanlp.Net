@@ -14,7 +14,7 @@ public class NewWordDiscover
     private float min_freq;
     private float min_entropy;
     private float min_aggregation;
-    private boolean filter;
+    private bool filter;
 
     public NewWordDiscover()
     {
@@ -30,7 +30,7 @@ public class NewWordDiscover
      * @param min_aggregation 词语最低互信息
      * @param filter          是否过滤掉HanLP中的词库中已存在的词语
      */
-    public NewWordDiscover(int max_word_len, float min_freq, float min_entropy, float min_aggregation, boolean filter)
+    public NewWordDiscover(int max_word_len, float min_freq, float min_entropy, float min_aggregation, bool filter)
     {
         this.max_word_len = max_word_len;
         this.min_freq = min_freq;
@@ -46,7 +46,7 @@ public class NewWordDiscover
      * @param size   需要提取词语的数量
      * @return 一个词语列表
      */
-    public List<WordInfo> discover(BufferedReader reader, int size) throws IOException
+    public List<WordInfo> discover(BufferedReader reader, int size) 
     {
         String doc;
         Map<String, WordInfo> word_cands = new TreeMap<String, WordInfo>();

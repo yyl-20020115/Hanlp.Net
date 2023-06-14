@@ -15,7 +15,7 @@ class BitVector
      * @param id 位
      * @return 比特是1还是0
      */
-    boolean get(int id)
+    bool get(int id)
     {
         return (_units.get(id / UNIT_SIZE) >>> (id % UNIT_SIZE) & 1) == 1;
     }
@@ -25,7 +25,7 @@ class BitVector
      * @param id 位
      * @param bit 比特
      */
-    void set(int id, boolean bit)
+    void set(int id, bool bit)
     {
         if (bit)
         {
@@ -50,7 +50,7 @@ class BitVector
      * 是否为空
      * @return
      */
-    boolean empty()
+    bool empty()
     {
         return _units.empty();
     }

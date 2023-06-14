@@ -9,32 +9,16 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.corpus.tag.Nature;
-import com.hankcs.hanlp.dictionary.CoreDictionary;
-import com.hankcs.hanlp.dictionary.CustomDictionary;
-import com.hankcs.hanlp.dictionary.nr.TranslatedPersonDictionary;
-import com.hankcs.hanlp.seg.Dijkstra.DijkstraSegment;
-import com.hankcs.hanlp.seg.common.Term;
-import com.hankcs.hanlp.tokenizer.StandardTokenizer;
-import junit.framework.TestCase;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author hankcs
  */
-public class TestMakeTranslateName extends TestCase
+public class TestMakeTranslateName : TestCase
 {
-//    public void testCombineOuterDictionary() throws Exception
+//    public void testCombineOuterDictionary() 
 //    {
 //        String root = "D:\\JavaProjects\\SougouDownload\\data\\";
 //        String[] pathArray = new String[]{"常用外国人名.txt", "外国人名", "外国姓名大全.txt", "外国诗人名.txt", "英语姓名词典.txt", "俄罗斯人名.txt"};
@@ -52,7 +36,7 @@ public class TestMakeTranslateName extends TestCase
 //        IOUtil.saveCollectionToTxt(wordSet, "data/dictionary/person/nrf.txt");
 //    }
 //
-//    public void testSpiltToChar() throws Exception
+//    public void testSpiltToChar() 
 //    {
 //        String commonChar = "·-—阿埃艾爱安昂敖奥澳笆芭巴白拜班邦保堡鲍北贝本比毕彼别波玻博勃伯泊卜布才采仓查差柴彻川茨慈次达大戴代丹旦但当道德得登迪狄蒂帝丁东杜敦多额俄厄鄂恩尔伐法范菲芬费佛夫福弗甫噶盖干冈哥戈革葛格各根古瓜哈海罕翰汗汉豪合河赫亨侯呼胡华霍基吉及加贾坚简杰金京久居君喀卡凯坎康考柯科可克肯库奎拉喇莱来兰郎朗劳勒雷累楞黎理李里莉丽历利立力连廉良列烈林隆卢虏鲁路伦仑罗洛玛马买麦迈曼茅茂梅门蒙盟米蜜密敏明摩莫墨默姆木穆那娜纳乃奈南内尼年涅宁纽努诺欧帕潘畔庞培佩彭皮平泼普其契恰强乔切钦沁泉让热荣肉儒瑞若萨塞赛桑瑟森莎沙山善绍舍圣施诗石什史士守斯司丝苏素索塔泰坦汤唐陶特提汀图土吐托陀瓦万王旺威韦维魏温文翁沃乌吾武伍西锡希喜夏相香歇谢辛新牙雅亚彦尧叶依伊衣宜义因音英雍尤于约宰泽增詹珍治中仲朱诸卓孜祖佐伽娅尕腓滕济嘉津赖莲琳律略慕妮聂裴浦奇齐琴茹珊卫欣逊札哲智兹芙汶迦珀琪梵斐胥黛" +
 //                "·-阿安奥巴比彼波布察茨大德得丁杜尔法夫伏甫盖格哈基加坚捷金卡科可克库拉莱兰勒雷里历利连列卢鲁罗洛马梅蒙米姆娜涅宁诺帕泼普奇齐乔切日萨色山申什斯索塔坦特托娃维文乌西希谢亚耶叶依伊以扎佐柴达登蒂戈果海赫华霍吉季津柯理琳玛曼穆纳尼契钦丘桑沙舍泰图瓦万雅卓兹" +
@@ -73,32 +57,32 @@ public class TestMakeTranslateName extends TestCase
 //        IOUtil.saveCollectionToTxt(wordSet, "data/dictionary/person/音译用字.txt");
 //    }
 //
-    public void testQuery() throws Exception
+    public void testQuery() 
     {
         assertTrue(TranslatedPersonDictionary.containsKey("汤姆"));
 //        HanLP.Config.enableDebug();
-//        System.out.println(TranslatedPersonDictionary.containsKey("汤姆"));
-//        System.out.println(TranslatedPersonDictionary.containsKey("汤"));
-//        System.out.println(TranslatedPersonDictionary.containsKey("姆"));
-//        System.out.println(TranslatedPersonDictionary.containsKey("点"));
-//        System.out.println(TranslatedPersonDictionary.containsKey("·"));
+//        Console.WriteLine(TranslatedPersonDictionary.containsKey("汤姆"));
+//        Console.WriteLine(TranslatedPersonDictionary.containsKey("汤"));
+//        Console.WriteLine(TranslatedPersonDictionary.containsKey("姆"));
+//        Console.WriteLine(TranslatedPersonDictionary.containsKey("点"));
+//        Console.WriteLine(TranslatedPersonDictionary.containsKey("·"));
     }
 //
-//    public void testSeg() throws Exception
+//    public void testSeg() 
 //    {
 //        HanLP.Config.enableDebug();
-//        System.out.println(StandardTokenizer.segment("齐格林斯基"));
+//        Console.WriteLine(StandardTokenizer.segment("齐格林斯基"));
 //    }
 //
-//    public void testNonRec() throws Exception
+//    public void testNonRec() 
 //    {
 //        HanLP.Config.enableDebug();
 //        DijkstraSegment segment = new DijkstraSegment();
 //        segment.enableTranslatedNameRecognize(true);
-//        System.out.println(segment.seg("汤姆和杰克逊"));
+//        Console.WriteLine(segment.seg("汤姆和杰克逊"));
 //    }
 //
-//    public void testHeadNRF() throws Exception
+//    public void testHeadNRF() 
 //    {
 //        DijkstraSegment segment = new DijkstraSegment();
 //        segment.enableTranslatedNameRecognize(false);
@@ -107,19 +91,19 @@ public class TestMakeTranslateName extends TestCase
 //            List<Term> termList = segment.seg(name);
 //            if (termList.get(0).nature != Nature.nrf)
 //            {
-//                System.out.println(name + " : " + termList);
+//                Console.WriteLine(name + " : " + termList);
 //            }
 //        }
 //    }
 //
-//    public void testDot() throws Exception
+//    public void testDot() 
 //    {
 //        char c1 = '·';
 //        char c2 = '·';
-//        System.out.println(c1 == c2);
+//        Console.WriteLine(c1 == c2);
 //    }
 //
-//    public void testMakeDictionary() throws Exception
+//    public void testMakeDictionary() 
 //    {
 //        Set<String> wordSet = new TreeSet<String>();
 //        Pattern pattern = Pattern.compile("^[a-zA-Z]+ *(\\[.*?])? *([\\u4E00-\\u9FA5]+) ?[:：。]");
@@ -133,11 +117,11 @@ public class TestMakeTranslateName extends TestCase
 //                ++found;
 //            }
 //        }
-//        System.out.println("一共找到" + found + "条");
+//        Console.WriteLine("一共找到" + found + "条");
 //        IOUtil.saveCollectionToTxt(wordSet, "data/dictionary/person/英语姓名词典.txt");
 //    }
 //
-//    public void testRegex() throws Exception
+//    public void testRegex() 
 //    {
 //        Pattern pattern = Pattern.compile("^[a-zA-Z]+ (\\[.*?])? ?([\\u4E00-\\u9FA5]+) ?[:：。]");
 //        String text = "Adey 阿迪：Adam的昵称，英格兰人姓氏 \n" +
@@ -155,11 +139,11 @@ public class TestMakeTranslateName extends TestCase
 //        Matcher matcher = pattern.matcher(text);
 //        if (matcher.find())
 //        {
-//            System.out.println(matcher.group(2));
+//            Console.WriteLine(matcher.group(2));
 //        }
 //    }
 //
-//    public void testCombineCharAndName() throws Exception
+//    public void testCombineCharAndName() 
 //    {
 //        TreeSet<String> wordSet = new TreeSet<String>();
 //        wordSet.addAll(IOUtil.readLineList("data/dictionary/person/音译用字.txt"));

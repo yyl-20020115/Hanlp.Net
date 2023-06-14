@@ -34,7 +34,7 @@ public class CharTable
         logger.info("字符正规化表加载成功：" + (System.currentTimeMillis() - start) + " ms");
     }
 
-    private static boolean load(String path)
+    private static bool load(String path)
     {
         String binPath = path + Predefine.BIN_EXT;
         if (loadBin(binPath)) return true;
@@ -66,7 +66,7 @@ public class CharTable
         }
     }
 
-    private static boolean loadBin(String path)
+    private static bool loadBin(String path)
     {
         try
         {

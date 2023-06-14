@@ -1,9 +1,5 @@
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.corpus.dictionary.NatureDictionaryMaker;
-import com.hankcs.hanlp.corpus.document.CorpusLoader;
-import com.hankcs.hanlp.corpus.document.Document;
-import com.hankcs.hanlp.corpus.util.CorpusUtil;
 
 public class TestNatureDictionaryMaker
 {
@@ -15,7 +11,7 @@ public class TestNatureDictionaryMaker
         final NatureDictionaryMaker dictionaryMaker = new NatureDictionaryMaker();
         CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
         {
-            @Override
+            //@Override
             public void handle(Document document)
             {
                 dictionaryMaker.compute(CorpusUtil.convert2CompatibleList(document.getSimpleSentenceList(false))); // 再打一遍不拆分的

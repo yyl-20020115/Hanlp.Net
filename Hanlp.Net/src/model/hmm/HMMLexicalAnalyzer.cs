@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.hmm;
  *
  * @author hankcs
  */
-public class HMMLexicalAnalyzer extends AbstractLexicalAnalyzer
+public class HMMLexicalAnalyzer : AbstractLexicalAnalyzer
 {
     private HMMLexicalAnalyzer()
     {

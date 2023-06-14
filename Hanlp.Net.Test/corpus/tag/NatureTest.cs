@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.corpus.tag;
+namespace com.hankcs.hanlp.corpus.tag;
 
-import junit.framework.TestCase;
 
-public class NatureTest extends TestCase
+public class NatureTest : TestCase
 {
-    public void testFromString() throws Exception
+    public void testFromString() 
     {
         Nature one = Nature.create("新词性1");
         Nature two = Nature.create("新词性2");

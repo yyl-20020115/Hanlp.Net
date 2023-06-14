@@ -1,11 +1,10 @@
-package com.hankcs.hanlp.corpus.dictionary;
+namespace com.hankcs.hanlp.corpus.dictionary;
 
-import junit.framework.TestCase;
 
-public class DictionaryMakerTest extends TestCase
+public class DictionaryMakerTest : TestCase
 {
     // 部分标注有问题，比如逗号缺少标注等等，尝试修复它
-//    public void testAdjust() throws Exception
+//    public void testAdjust() 
 //    {
 //        List<File> fileList = FolderWalker.open("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\");
 //        for (File file : fileList)
@@ -44,7 +43,7 @@ public class DictionaryMakerTest extends TestCase
 //                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
 //                bw.write(text);
 //                bw.close();
-//                System.out.println("修正了" + file);
+//                Console.WriteLine("修正了" + file);
 //            }
 //        }
 //        catch (Exception e)
@@ -59,12 +58,12 @@ public class DictionaryMakerTest extends TestCase
 //        return text.replaceAll("\\" + c, c + "/w ");
 //    }
 //
-//    public void testPlay() throws Exception
+//    public void testPlay() 
 //    {
 //        final TFDictionary tfDictionary = new TFDictionary();
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                for (List<IWord> wordList : document.getComplexSentenceList())
@@ -82,7 +81,7 @@ public class DictionaryMakerTest extends TestCase
 //        tfDictionary.saveTxtTo("data/test/complex_ns.txt");
 //    }
 //
-//    public void testAdjustNGram() throws Exception
+//    public void testAdjustNGram() 
 //    {
 //        IOUtil.LineIterator iterator = new IOUtil.LineIterator(HanLP.Config.BiGramDictionaryPath);
 //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(HanLP.Config.BiGramDictionaryPath + "adjust.txt"), "UTF-8"));
@@ -98,7 +97,7 @@ public class DictionaryMakerTest extends TestCase
 //            CoreDictionary.Attribute attribute = CoreDictionary.get(first + second);
 //            if (attribute != null && (first.length() == 1 || second.length() == 1))
 //            {
-//                System.out.println(line);
+//                Console.WriteLine(line);
 //                continue;
 //            }
 //            bw.write(line);
@@ -107,7 +106,7 @@ public class DictionaryMakerTest extends TestCase
 //        bw.close();
 //    }
 //
-//    public void testRemoveLabelD() throws Exception
+//    public void testRemoveLabelD() 
 //    {
 //        Set<String> nameFollowers = new TreeSet<String>();
 //        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(HanLP.Config.BiGramDictionaryPath);
@@ -132,7 +131,7 @@ public class DictionaryMakerTest extends TestCase
 //                    || (attribute != null && attribute.hasNatureStartsWith("v") && attribute.totalFrequency > 1000)
 //                    )
 //                {
-//                    System.out.println(key);
+//                    Console.WriteLine(key);
 //                    entry.getValue().removeLabel("D");
 //                }
 //            }
@@ -141,11 +140,11 @@ public class DictionaryMakerTest extends TestCase
 //        dictionary.saveTxtTo(HanLP.Config.PersonDictionaryPath);
 //    }
 
-//    public void testSingleDocument() throws Exception
+//    public void testSingleDocument() 
 //    {
 //        Document document = CorpusLoader.convert2Document(new File("data/2014/0101/c1002-23996898.txt"));
 //        DictionaryMaker dictionaryMaker = new DictionaryMaker();
-//        System.out.println(document);
+//        Console.WriteLine(document);
 //        addToDictionary(document, dictionaryMaker);
 //        dictionaryMaker.saveTxtTo("data/dictionaryTest.txt");
 //    }
@@ -177,12 +176,12 @@ public class DictionaryMakerTest extends TestCase
 //        }
 //    }
 //
-//    public void testMakeDictionary() throws Exception
+//    public void testMakeDictionary() 
 //    {
 //        final DictionaryMaker dictionaryMaker = new DictionaryMaker();
 //        CorpusLoader.walk("data/2014", new CorpusLoader.Handler()
 //        {
-//            @Override
+//            //@Override
 //            public void handle(Document document)
 //            {
 //                addToDictionary(document, dictionaryMaker);
@@ -191,7 +190,7 @@ public class DictionaryMakerTest extends TestCase
 //        dictionaryMaker.saveTxtTo("data/2014_dictionary.txt");
 //    }
 //
-//    public void testLoadItemList() throws Exception
+//    public void testLoadItemList() 
 //    {
 //        List<Item> itemList = DictionaryMaker.loadAsItemList("data/2014_dictionary.txt");
 //        Map<String, Integer> labelMap = new TreeMap<String, Integer>();
@@ -206,14 +205,14 @@ public class DictionaryMakerTest extends TestCase
 //        }
 //        for (String label : labelMap.keySet())
 //        {
-//            System.out.println(label);
+//            Console.WriteLine(label);
 //        }
-//        System.out.println(labelMap.size());
+//        Console.WriteLine(labelMap.size());
 //    }
 //
-//    public void testLoadEasyDictionary() throws Exception
+//    public void testLoadEasyDictionary() 
 //    {
 //        EasyDictionary dictionary = EasyDictionary.create("data/2014_dictionary.txt");
-//        System.out.println(dictionary.GetWordInfo("高峰"));
+//        Console.WriteLine(dictionary.GetWordInfo("高峰"));
 //    }
 }

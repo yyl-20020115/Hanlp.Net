@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.dictionary.ts;
  * 简体=繁体词典
  * @author hankcs
  */
-public class SimplifiedChineseDictionary extends BaseChineseDictionary
+public class SimplifiedChineseDictionary : BaseChineseDictionary
 {
     /**
      * 简体=繁体

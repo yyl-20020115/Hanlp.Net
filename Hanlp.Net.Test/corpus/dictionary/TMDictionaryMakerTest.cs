@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.corpus.dictionary;
+namespace com.hankcs.hanlp.corpus.dictionary;
 
-import junit.framework.TestCase;
 
-public class TMDictionaryMakerTest extends TestCase
+public class TMDictionaryMakerTest : TestCase
 {
-    public void testCreate() throws Exception
+    public void testCreate() 
     {
         TMDictionaryMaker tmDictionaryMaker = new TMDictionaryMaker();
         tmDictionaryMaker.addPair("ab", "cd");
@@ -15,6 +14,6 @@ public class TMDictionaryMakerTest extends TestCase
         tmDictionaryMaker.addPair("ij", "kl");
         tmDictionaryMaker.addPair("ij", "kl");
         tmDictionaryMaker.addPair("X", "Y");
-//        System.out.println(tmDictionaryMaker);
+//        Console.WriteLine(tmDictionaryMaker);
     }
 }

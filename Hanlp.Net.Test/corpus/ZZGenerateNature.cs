@@ -9,17 +9,15 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package com.hankcs.hanlp.corpus;
+namespace com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.corpus.tag.Nature;
-import junit.framework.TestCase;
 
 /**
  * @author hankcs
  */
-public class ZZGenerateNature extends TestCase
+public class ZZGenerateNature : TestCase
 {
-//    public void testGenerate() throws Exception
+//    public void testGenerate() 
 //    {
 //        String text = "n 名词\n" +
 //                "nr 人名\n" +
@@ -155,17 +153,17 @@ public class ZZGenerateNature extends TestCase
 //            p = p.trim();
 //            if (p.length() == 0) continue;
 //            System.out.print(++i + " ");
-//            System.out.println(p);
+//            Console.WriteLine(p);
 ////            int cut = p.indexOf(' ');
-////            System.out.println("/**\n" +
+////            Console.WriteLine("/**\n" +
 ////                                       "* " + p.substring(cut + 1) + "\n" +
 ////                                       "*/\n" +
 ////                                       p.substring(0, cut) +",\n");
 //        }
 //    }
 //
-//    public void testSize() throws Exception
+//    public void testSize() 
 //    {
-//            System.out.println(Nature.values().length);
+//            Console.WriteLine(Nature.values().length);
 //    }
 }

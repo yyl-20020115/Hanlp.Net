@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.dictionary.common;
  *
  * @author hankcs
  */
-public abstract class EnumItemDictionary<E extends Enum<E>> extends CommonDictionary<EnumItem<E>>
+public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumItem<E>>
 {
     //@Override
     protected EnumItem<E> createValue(String[] params)
@@ -79,7 +79,7 @@ public abstract class EnumItemDictionary<E extends Enum<E>> extends CommonDictio
     }
 
     //@Override
-    protected void saveValue(EnumItem<E> item, DataOutputStream out) throws IOException
+    protected void saveValue(EnumItem<E> item, DataOutputStream out) 
     {
         out.writeInt(item.labelMap.size());
         for (Map.Entry<E, Integer> entry : item.labelMap.entrySet())

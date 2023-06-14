@@ -1,5 +1,6 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.interval;
 
+using System;
 /**
  * 区间接口
  */

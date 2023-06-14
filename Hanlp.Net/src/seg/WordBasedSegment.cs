@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.seg;
  *
  * @author hankcs
  */
-public abstract class WordBasedSegment extends Segment
+public abstract class WordBasedSegment : Segment
 {
 
     public WordBasedSegment()
@@ -295,7 +295,7 @@ public abstract class WordBasedSegment extends Segment
                 sb.delete(0, sb.length());
                 sb.append(charArray[pCur]);
 
-                boolean reachEnd = true;
+                bool reachEnd = true;
                 while (pCur < charArray.length - 1)
                 {
                     nNextType = charTypeArray[++pCur];

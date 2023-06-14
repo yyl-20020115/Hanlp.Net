@@ -40,7 +40,7 @@ public class EditDistance
     {
         final int m = arrayA.length;
         final int n = arrayB.length;
-        if (m == 0 || n == 0) return Long.MAX_VALUE / 3;
+        if (m == 0 || n == 0) return long.MAX_VALUE / 3;
 
         long[][] d = new long[m + 1][n + 1];
         for (int j = 0; j <= n; ++j)

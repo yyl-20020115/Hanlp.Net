@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.model.perceptron;
 /**
  * @author hankcs
  */
-public class NERTrainer extends PerceptronTrainer
+public class NERTrainer : PerceptronTrainer
 {
     /**
      * 支持任意自定义NER类型，例如：<br>

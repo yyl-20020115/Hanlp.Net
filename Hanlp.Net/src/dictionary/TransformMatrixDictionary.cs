@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dictionary;
  * @param <E> 标签的枚举类型
  * @author hankcs
  */
-public class TransformMatrixDictionary<E extends Enum<E>> extends TransformMatrix
+public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
 {
     Class<E> enumType;
 

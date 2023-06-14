@@ -26,7 +26,7 @@ public class Probability : ICacheAble
     {
         d = new BinTrie<Integer>(){
             //@Override
-            public boolean load(ByteArray byteArray, _ValueArray valueArray)
+            public bool load(ByteArray byteArray, _ValueArray valueArray)
             {
                 BaseNode<Integer>[] nchild = new BaseNode[child.length - 1];    // 兼容旧模型
                 System.arraycopy(child, 0, nchild, 0, nchild.length);
@@ -36,7 +36,7 @@ public class Probability : ICacheAble
         };
     }
 
-    public boolean exists(String key)
+    public bool exists(String key)
     {
         return d.containsKey(key);
     }
@@ -153,7 +153,7 @@ public class Probability : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         total = byteArray.nextInt();
         int size = byteArray.nextInt();

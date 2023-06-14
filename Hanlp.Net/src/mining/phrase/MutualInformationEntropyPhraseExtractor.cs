@@ -31,7 +31,7 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
                         new Filter()
                         {
                             //@Override
-                            public boolean shouldInclude(Term term)
+                            public bool shouldInclude(Term term)
                             {
                                 if (term.nature == t || term.nature == nx)
                                     return false;

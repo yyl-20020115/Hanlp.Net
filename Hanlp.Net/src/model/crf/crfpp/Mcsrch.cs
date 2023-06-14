@@ -15,7 +15,7 @@ public class Mcsrch
     public static final int lb3_1_lp = 6;
 
     int infoc;
-    boolean stage1, brackt;
+    bool stage1, brackt;
     double finit, dginit, dgtest, width, width1;
     double stx, fx, dgx, sty, fy, dgy, stmin, stmax;
 
@@ -58,11 +58,11 @@ public class Mcsrch
     public static void mcstep(double[] stx, double[] fx, double[] dx,
                               double[] sty, double[] fy, double[] dy,
                               double[] stp, double fp, double dp,
-                              boolean[] brackt,
+                              bool[] brackt,
                               double stpmin, double stpmax,
                               int[] info)
     {
-        boolean bound = true;
+        bool bound = true;
         double p, q, s, d1, d2, d3, r, gamma, theta, stpq, stpc, stpf;
         info[0] = 0;
 
@@ -319,7 +319,7 @@ public class Mcsrch
             dgy = dginit;
         }
 
-        boolean firstLoop = true;
+        bool firstLoop = true;
         while (true)
         {
             if (!firstLoop || (firstLoop && info[0] != -1))
@@ -407,7 +407,7 @@ public class Mcsrch
                 double[] styArr = {sty};
                 double[] fymArr = {fym};
                 double[] dgymArr = {dgym};
-                boolean[] bracktArr = {brackt};
+                bool[] bracktArr = {brackt};
                 int[] infocArr = {infoc};
                 mcstep(stxArr, fxmArr, dgxmArr, styArr, fymArr, dgymArr, stp, fm, dgm, bracktArr,
                        stmin, stmax, infocArr);
@@ -433,7 +433,7 @@ public class Mcsrch
                 double[] styArr = {sty};
                 double[] fyArr = {fy};
                 double[] dgyArr = {dgy};
-                boolean[] bracktArr = {brackt};
+                bool[] bracktArr = {brackt};
                 int[] infocArr = {infoc};
                 mcstep(stxArr, fxArr, dgxArr, styArr, fyArr, dgyArr, stp, f, dg, bracktArr,
                        stmin, stmax, infocArr);

@@ -45,7 +45,7 @@ class AutoBytePool
      * 是否为空
      * @return true表示为空
      */
-    boolean empty()
+    bool empty()
     {
         return (_size == 0);
     }

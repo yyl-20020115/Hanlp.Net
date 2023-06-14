@@ -232,13 +232,13 @@ public class Vertex
      * @param nature 词性
      * @return 如果锁定词性在词性列表中，返回真，否则返回假
      */
-    public boolean confirmNature(Nature nature)
+    public bool confirmNature(Nature nature)
     {
         if (attribute.nature.length == 1 && attribute.nature[0] == nature)
         {
             return true;
         }
-        boolean result = true;
+        bool result = true;
         int frequency = attribute.getNatureFrequency(nature);
         if (frequency == 0)
         {
@@ -256,7 +256,7 @@ public class Vertex
      * @param updateWord 是否更新预编译字串
      * @return 如果锁定词性在词性列表中，返回真，否则返回假
      */
-    public boolean confirmNature(Nature nature, boolean updateWord)
+    public bool confirmNature(Nature nature, bool updateWord)
     {
         switch (nature.firstChar())
         {
@@ -300,7 +300,7 @@ public class Vertex
         return attribute.nature[0];
     }
 
-    public boolean hasNature(Nature nature)
+    public bool hasNature(Nature nature)
     {
         return attribute.getNatureFrequency(nature) > 0;
     }

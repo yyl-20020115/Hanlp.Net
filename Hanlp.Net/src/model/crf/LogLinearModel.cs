@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.crf;
  *
  * @author hankcs
  */
-public class LogLinearModel extends LinearModel
+public class LogLinearModel : LinearModel
 {
     /**
      * 特征模板
@@ -36,7 +36,7 @@ public class LogLinearModel extends LinearModel
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         if (!super.load(byteArray)) return false;
         int size = byteArray.nextInt();
@@ -56,9 +56,9 @@ public class LogLinearModel extends LinearModel
      * 加载CRF模型
      *
      * @param modelFile HanLP的.bin格式，或CRF++的.txt格式（将会自动转换为model.txt.bin，下次会直接加载.txt.bin）
-     * @throws IOException
+     * @
      */
-    public LogLinearModel(String modelFile) throws IOException
+    public LogLinearModel(String modelFile) 
     {
         super(null, null);
         if (modelFile.endsWith(BIN_EXT))
@@ -89,15 +89,15 @@ public class LogLinearModel extends LinearModel
      *
      * @param txtFile txt
      * @param binFile bin
-     * @throws IOException
+     * @
      */
-    public LogLinearModel(String txtFile, String binFile) throws IOException
+    public LogLinearModel(String txtFile, String binFile) 
     {
         super(null, null);
         convert(txtFile, binFile);
     }
 
-    private void convert(String txtFile, String binFile) throws IOException
+    private void convert(String txtFile, String binFile) 
     {
         TagSet tagSet = new TagSet(TaskType.CLASSIFICATION);
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(txtFile);

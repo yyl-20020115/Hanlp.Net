@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.dictionary.ts;
  *
  * @author hankcs
  */
-public class HongKongToTaiwanChineseDictionary extends BaseChineseDictionary
+public class HongKongToTaiwanChineseDictionary : BaseChineseDictionary
 {
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
 

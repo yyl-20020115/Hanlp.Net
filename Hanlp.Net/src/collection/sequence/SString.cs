@@ -51,7 +51,7 @@ public class SString : Comparable<SString>, CharSequence
     }
 
     //@Override
-    public boolean equals(Object anObject)
+    public bool equals(Object anObject)
     {
         if (this == anObject)
         {

@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
 /**
  * @author hankcs
  */
-public class ImmutableFeatureDatMap extends FeatureMap
+public class ImmutableFeatureDatMap : FeatureMap
 {
     DoubleArrayTrie<Integer> dat;
 

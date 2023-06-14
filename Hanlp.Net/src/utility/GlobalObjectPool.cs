@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.utility;
  *
  * @author hankcs
  */
-@SuppressWarnings("unchecked")
+
 public class GlobalObjectPool
 {
     /**

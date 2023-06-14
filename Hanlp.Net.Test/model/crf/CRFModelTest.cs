@@ -1,23 +1,10 @@
-package com.hankcs.hanlp.model.crf;
+namespace com.hankcs.hanlp.model.crf;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.collection.trie.bintrie.BinTrie;
-import com.hankcs.hanlp.corpus.document.CorpusLoader;
-import com.hankcs.hanlp.corpus.document.Document;
-import com.hankcs.hanlp.corpus.document.sentence.word.IWord;
-import com.hankcs.hanlp.corpus.document.sentence.word.Word;
-import com.hankcs.hanlp.corpus.io.ByteArray;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.seg.CRF.CRFSegment;
-import com.hankcs.hanlp.utility.Predefine;
-import junit.framework.TestCase;
 
-import java.io.*;
-import java.util.List;
 
-public class CRFModelTest extends TestCase
+public class CRFModelTest : TestCase
 {
-//    public void testTemplate() throws Exception
+//    public void testTemplate() 
 //    {
 //        FeatureTemplate featureTemplate = FeatureTemplate.create("U05:%x[-2,0]/%x[-1,0]/%x[0,0]");
 //        Table table = new Table();
@@ -26,20 +13,20 @@ public class CRFModelTest extends TestCase
 //            {"音", "B"},
 //            {"韵", "E"},};
 //        char[] parameter = featureTemplate.generateParameter(table, 0);
-//        System.out.println(parameter);
+//        Console.WriteLine(parameter);
 //    }
 
-//    public void testTestLoadTemplate() throws Exception
+//    public void testTestLoadTemplate() 
 //    {
 //        DataOutputStream out = new DataOutputStream(new FileOutputStream("data/test/out.bin"));
 //        FeatureTemplate featureTemplate = FeatureTemplate.create("U05:%x[-2,0]/%x[-1,0]/%x[0,0]");
 //        featureTemplate.save(out);
 //        featureTemplate = new FeatureTemplate();
 //        featureTemplate.load(ByteArray.createByteArray("data/test/out.bin"));
-//        System.out.println(featureTemplate);
+//        Console.WriteLine(featureTemplate);
 //    }
 
-//    public void testLoadFromTxt() throws Exception
+//    public void testLoadFromTxt() 
 //    {
 //        CRFModel model = CRFModel.loadTxt("D:\\Tools\\CRF++-0.58\\example\\seg_cn\\model.txt");
 //        Table table = new Table();
@@ -51,28 +38,28 @@ public class CRFModelTest extends TestCase
 //            {"务", "?"},
 //        };
 //        model.tag(table);
-//        System.out.println(table);
+//        Console.WriteLine(table);
 //    }
 
-//    public void testSegment() throws Exception
+//    public void testSegment() 
 //    {
 //        HanLP.Config.enableDebug();
 //        CRFSegment segment = new CRFSegment();
 ////        segment.enablePartOfSpeechTagging(true);
-//        System.out.println(segment.seg("乐视超级手机能否承载贾布斯的生态梦"));
+//        Console.WriteLine(segment.seg("乐视超级手机能否承载贾布斯的生态梦"));
 //    }
 
     /**
      * 现有的CRF效果不满意，重新制作一份以供训练
      *
-     * @throws Exception
+     * @
      */
-//    public void testPrepareCRFTrainingCorpus() throws Exception
+//    public void testPrepareCRFTrainingCorpus() 
 //    {
 //        final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("e:\\2014.txt"), "UTF-8"));
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs", new CorpusLoader.Handler()
 //                          {
-//                              @Override
+//                              //@Override
 //                              public void handle(Document document)
 //                              {
 //                                  try
@@ -131,13 +118,13 @@ public class CRFModelTest extends TestCase
 //        bw.close();
 //    }
 
-//    public void testEnglishAndNumber() throws Exception
+//    public void testEnglishAndNumber() 
 //    {
 //        String text = "2.34米";
-////        System.out.println(CRFSegment.atomSegment(text.toCharArray()));
+////        Console.WriteLine(CRFSegment.atomSegment(text.toCharArray()));
 //        HanLP.Config.enableDebug();
 //        CRFSegment segment = new CRFSegment();
-//        System.out.println(segment.seg(text));
+//        Console.WriteLine(segment.seg(text));
 //    }
 
     public static String compile(String tag)
@@ -148,7 +135,7 @@ public class CRFModelTest extends TestCase
         return null;
     }
 
-    public void testLoadModelWithBiGramFeature() throws Exception
+    public void testLoadModelWithBiGramFeature() 
     {
         String path = HanLP.Config.CRFSegmentModelPath + Predefine.BIN_EXT;
         CRFModel model = new CRFModel(new BinTrie<FeatureFunction>());
@@ -163,10 +150,10 @@ public class CRFModelTest extends TestCase
         }
 
         model.tag(table);
-//        System.out.println(table);
+//        Console.WriteLine(table);
     }
 
-//    public void testRemoveSpace() throws Exception
+//    public void testRemoveSpace() 
 //    {
 //        String inputPath = "E:\\2014.txt";
 //        String outputPath = "E:\\2014f.txt";

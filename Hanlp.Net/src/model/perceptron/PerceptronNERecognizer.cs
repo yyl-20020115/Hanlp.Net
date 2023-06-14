@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class PerceptronNERecognizer extends PerceptronTagger : NERecognizer
+public class PerceptronNERecognizer : PerceptronTagger : NERecognizer
 {
     final NERTagSet tagSet;
 
@@ -31,7 +31,7 @@ public class PerceptronNERecognizer extends PerceptronTagger : NERecognizer
         this.tagSet = (NERTagSet) model.tagSet();
     }
 
-    public PerceptronNERecognizer(String nerModelPath) throws IOException
+    public PerceptronNERecognizer(String nerModelPath) 
     {
         this(new LinearModel(nerModelPath));
     }
@@ -39,9 +39,9 @@ public class PerceptronNERecognizer extends PerceptronTagger : NERecognizer
     /**
      * 加载配置文件指定的模型
      *
-     * @throws IOException
+     * @
      */
-    public PerceptronNERecognizer() throws IOException
+    public PerceptronNERecognizer() 
     {
         this(HanLP.Config.PerceptronNERModelPath);
     }
@@ -72,7 +72,7 @@ public class PerceptronNERecognizer extends PerceptronTagger : NERecognizer
      * @param segmentedTaggedNERSentence 人民日报2014格式的句子
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public boolean learn(String segmentedTaggedNERSentence)
+    public bool learn(String segmentedTaggedNERSentence)
     {
         return learn(NERInstance.create(segmentedTaggedNERSentence, model.featureMap));
     }

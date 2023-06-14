@@ -132,7 +132,7 @@ public class Document : Serializable
      * @param spilt 如果为真，其中复合词会被拆分为简单词
      * @return
      */
-    public List<List<Word>> getSimpleSentenceList(boolean spilt)
+    public List<List<Word>> getSimpleSentenceList(bool spilt)
     {
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
         for (Sentence sentence : sentenceList)

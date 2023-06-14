@@ -92,7 +92,7 @@ public class Sentence : Serializable, Iterable<IWord>
      * @param withComment
      * @return
      */
-    public String toStandoff(boolean withComment)
+    public String toStandoff(bool withComment)
     {
         StringBuilder sb = new StringBuilder(size() * 4);
         String delimiter = " ";
@@ -167,7 +167,7 @@ public class Sentence : Serializable, Iterable<IWord>
         printWord(word, sb, id, offset, false);
     }
 
-    private void printWord(IWord word, StringBuilder sb, int id, int offset, boolean withComment)
+    private void printWord(IWord word, StringBuilder sb, int id, int offset, bool withComment)
     {
         char delimiter = '\t';
         char endLine = '\n';
@@ -367,7 +367,7 @@ public class Sentence : Serializable, Iterable<IWord>
      * @param label
      * @return
      */
-    public boolean containsWordWithLabel(String label)
+    public bool containsWordWithLabel(String label)
     {
         return findFirstWordByLabel(label) != null;
     }
@@ -468,7 +468,7 @@ public class Sentence : Serializable, Iterable<IWord>
     }
 
     //@Override
-    public boolean equals(Object o)
+    public bool equals(Object o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

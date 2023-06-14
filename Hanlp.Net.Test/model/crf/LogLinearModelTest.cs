@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.model.crf;
+namespace com.hankcs.hanlp.model.crf;
 
-import junit.framework.TestCase;
 
-public class LogLinearModelTest extends TestCase
+public class LogLinearModelTest : TestCase
 {
-    public void testLoad() throws Exception
+    public void testLoad() 
     {
         LogLinearModel model = new LogLinearModel("/Users/hankcs/Downloads/crfpp-msr-cws-model.txt");
     }

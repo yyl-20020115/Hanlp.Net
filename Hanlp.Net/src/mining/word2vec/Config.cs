@@ -14,7 +14,7 @@ public class Config
     protected String outputFile;
     protected int iter = DEF_ITER, window = DEF_WINDOW, minCount = DEF_MIN_COUNT, negative = DEF_NEGATIVE,
             layer1Size = DEF_LAYER1_SIZE, numThreads = DEF_NUM_THREADS;
-    protected boolean hs, cbow;
+    protected bool hs, cbow;
     protected float sample = DEF_SAMPLE, alpha = 0.025f;
     private String inputFile;
     private TrainingCallback callback;
@@ -96,24 +96,24 @@ public class Config
         return numThreads;
     }
 
-    public Config setUseHierarchicalSoftmax(boolean hs)
+    public Config setUseHierarchicalSoftmax(bool hs)
     {
         this.hs = hs;
         return this;
     }
 
-    public boolean useHierarchicalSoftmax()
+    public bool useHierarchicalSoftmax()
     {
         return hs;
     }
 
-    public Config setUseContinuousBagOfWords(boolean cbow)
+    public Config setUseContinuousBagOfWords(bool cbow)
     {
         this.cbow = cbow;
         return this;
     }
 
-    public boolean useContinuousBagOfWords()
+    public bool useContinuousBagOfWords()
     {
         return cbow;
     }

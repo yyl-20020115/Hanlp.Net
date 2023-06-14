@@ -84,7 +84,7 @@ public class CQueue
      * 是否仍然有下一个元素可供读取
      * @return
      */
-    public boolean CanGetNext()
+    public bool CanGetNext()
     {
         return (pLastAccess.next != null);
     }

@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.model.perceptron.model;
  *
  * @author hankcs
  */
-public class StructuredPerceptron extends LinearModel
+public class StructuredPerceptron : LinearModel
 {
     public StructuredPerceptron(FeatureMap featureMap, float[] parameter)
     {

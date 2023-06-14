@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.seg;
  * 基于“由字构词”方法分词器基类
  * @author hankcs
  */
-public abstract class CharacterBasedSegment extends Segment
+public abstract class CharacterBasedSegment : Segment
 {
 
     /**
@@ -94,7 +94,7 @@ public abstract class CharacterBasedSegment extends Segment
      * @param appendStart
      * @return
      */
-    protected List<Vertex> toVertexList(List<Term> wordList, boolean appendStart)
+    protected List<Vertex> toVertexList(List<Term> wordList, bool appendStart)
     {
         ArrayList<Vertex> vertexList = new ArrayList<Vertex>(wordList.size() + 2);
         if (appendStart) vertexList.add(Vertex.newB());

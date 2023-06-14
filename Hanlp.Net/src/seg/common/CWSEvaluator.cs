@@ -31,7 +31,7 @@ public class CWSEvaluator
         this.dic = dic;
     }
 
-    public CWSEvaluator(String dictPath) throws IOException
+    public CWSEvaluator(String dictPath) 
     {
         this(new TreeSet<String>());
         if (dictPath == null) return;
@@ -57,7 +57,7 @@ public class CWSEvaluator
      * @param percentage 百分制
      * @return
      */
-    public Result getResult(boolean percentage)
+    public Result getResult(bool percentage)
     {
         float p = A_cap_B_size / (float) B_size;
         float r = A_cap_B_size / (float) A_size;
@@ -168,7 +168,7 @@ public class CWSEvaluator
      * @param predFile
      * @return
      */
-    public static Result evaluate(String goldFile, String predFile) throws IOException
+    public static Result evaluate(String goldFile, String predFile) 
     {
         return evaluate(goldFile, predFile, null);
     }
@@ -181,9 +181,9 @@ public class CWSEvaluator
      * @param goldFile   测试集segmented file
      * @param dictPath   训练集单词列表
      * @return 一个储存准确率的结构
-     * @throws IOException
+     * @
      */
-    public static CWSEvaluator.Result evaluate(Segment segment, String outputPath, String goldFile, String dictPath) throws IOException
+    public static CWSEvaluator.Result evaluate(Segment segment, String outputPath, String goldFile, String dictPath) 
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(goldFile);
         BufferedWriter bw = IOUtil.newBufferedWriter(outputPath);
@@ -213,9 +213,9 @@ public class CWSEvaluator
      * @param goldFile   测试集segmented file
      * @param dictPath   训练集单词列表
      * @return 一个储存准确率的结构
-     * @throws IOException
+     * @
      */
-    public static CWSEvaluator.Result evaluate(Segment segment, String testFile, String outputPath, String goldFile, String dictPath) throws IOException
+    public static CWSEvaluator.Result evaluate(Segment segment, String testFile, String outputPath, String goldFile, String dictPath) 
     {
         return evaluate(segment, outputPath, goldFile, dictPath);
     }
@@ -227,7 +227,7 @@ public class CWSEvaluator
      * @param predFile
      * @return
      */
-    public static Result evaluate(String goldFile, String predFile, String dictPath) throws IOException
+    public static Result evaluate(String goldFile, String predFile, String dictPath) 
     {
         IOUtil.LineIterator goldIter = new IOUtil.LineIterator(goldFile);
         IOUtil.LineIterator predIter = new IOUtil.LineIterator(predFile);

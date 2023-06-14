@@ -1,13 +1,12 @@
-package com.hankcs.hanlp.model.hmm;
+namespace com.hankcs.hanlp.model.hmm;
 
-import junit.framework.TestCase;
 
-public class HMMSegmenterTest extends TestCase
+public class HMMSegmenterTest : TestCase
 {
-    public void testTrain() throws Exception
+    public void testTrain() 
     {
         HMMSegmenter segmenter = new HMMSegmenter();
         segmenter.train("data/test/my_cws_corpus.txt");
-        System.out.println(segmenter.segment("商品和服务"));
+        Console.WriteLine(segmenter.segment("商品和服务"));
     }
 }

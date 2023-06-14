@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.tokenizer.pipe;
  * 流水线式词法分析器
  * @author hankcs
  */
-public class LexicalAnalyzerPipeline extends Pipeline<String, List<IWord>, List<IWord>> : LexicalAnalyzer
+public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>> : LexicalAnalyzer
 {
     public LexicalAnalyzerPipeline(Pipe<String, List<IWord>> first, Pipe<List<IWord>, List<IWord>> last)
     {

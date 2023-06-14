@@ -30,7 +30,7 @@ public class Node
         prev = null;
     }
 
-    public static double logsumexp(double x, double y, boolean flg)
+    public static double logsumexp(double x, double y, bool flg)
     {
         if (flg)
         {

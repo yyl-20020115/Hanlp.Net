@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.corpus.dependency.model;
  */
 public class WordNatureWeightModelMaker
 {
-    public static boolean makeModel(String corpusLoadPath, String modelSavePath)
+    public static bool makeModel(String corpusLoadPath, String modelSavePath)
     {
         Set<String> posSet = new TreeSet<String>();
         DictionaryMaker dictionaryMaker = new DictionaryMaker();

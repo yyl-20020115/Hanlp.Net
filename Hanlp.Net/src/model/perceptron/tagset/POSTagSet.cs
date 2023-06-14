@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
  * 词性标注集
  * @author hankcs
  */
-public class POSTagSet extends TagSet
+public class POSTagSet : TagSet
 {
     public POSTagSet()
     {

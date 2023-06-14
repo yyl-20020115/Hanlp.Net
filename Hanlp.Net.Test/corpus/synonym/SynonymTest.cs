@@ -1,16 +1,10 @@
-package com.hankcs.hanlp.corpus.synonym;
+namespace com.hankcs.hanlp.corpus.synonym;
 
-import com.hankcs.hanlp.dictionary.CoreSynonymDictionary;
-import com.hankcs.hanlp.dictionary.common.CommonSynonymDictionary;
-import com.hankcs.hanlp.dictionary.common.CommonSynonymDictionaryEx;
-import junit.framework.TestCase;
 
-import java.io.FileInputStream;
-import java.util.List;
 
-public class SynonymTest extends TestCase
+public class SynonymTest : TestCase
 {
-//    public void testCreate() throws Exception
+//    public void testCreate() 
 //    {
 //        String[] testCaseArray = new String[]
 //            {
@@ -24,12 +18,12 @@ public class SynonymTest extends TestCase
 //        }
 //    }
 //
-//    public void testSingle() throws Exception
+//    public void testSingle() 
 //    {
 //        runCase("Aa01A01= 人 士 人物 人士 人氏 人选");
 //    }
 //
-//    public void testDictionary() throws Exception
+//    public void testDictionary() 
 //    {
 //        String apple = "苹果";
 //        String banana = "香蕉";
@@ -37,17 +31,17 @@ public class SynonymTest extends TestCase
 //        CommonSynonymDictionary.SynonymItem synonymApple = CoreSynonymDictionary.get(apple);
 //        CommonSynonymDictionary.SynonymItem synonymBanana = CoreSynonymDictionary.get(banana);
 //        CommonSynonymDictionary.SynonymItem synonymBike = CoreSynonymDictionary.get(bike);
-//        System.out.println(apple + " " + banana + "之间的距离是" + synonymApple.distance(synonymBanana));
-//        System.out.println(apple + " " + bike + "之间的距离是" + synonymApple.distance(synonymBike));
+//        Console.WriteLine(apple + " " + banana + "之间的距离是" + synonymApple.distance(synonymBanana));
+//        Console.WriteLine(apple + " " + bike + "之间的距离是" + synonymApple.distance(synonymBike));
 //    }
 //
 //    void runCase(String param)
 //    {
 //        List<Synonym> synonymList = Synonym.create(param);
-//        System.out.println(synonymList);
+//        Console.WriteLine(synonymList);
 //    }
 //
-//    public void testDictionaryEx() throws Exception
+//    public void testDictionaryEx() 
 //    {
 //        CommonSynonymDictionaryEx dictionaryEx = CommonSynonymDictionaryEx.create(new FileInputStream("data/dictionary/synonym/CoreSynonym.txt"));
 //        String[] array = new String[]
@@ -87,7 +81,7 @@ public class SynonymTest extends TestCase
 //        {
 //            for (String b : stringArray)
 //            {
-//                System.out.println(a + "\t" + b + "\t之间的距离是\t" + dictionaryEx.distance(a, b));
+//                Console.WriteLine(a + "\t" + b + "\t之间的距离是\t" + dictionaryEx.distance(a, b));
 //            }
 //        }
 //    }

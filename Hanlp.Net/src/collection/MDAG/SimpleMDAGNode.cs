@@ -35,8 +35,8 @@ public class SimpleMDAGNode : ICacheAble
     //The character labeling an incoming _transition to this node
     private char letter;
 
-    //The boolean denoting the accept state status of this node
-    private boolean isAcceptNode;
+    //The bool denoting the accept state status of this node
+    private bool isAcceptNode;
 
     //The int denoting the size of this node's outgoing _transition set
     private int transitionSetSize;
@@ -49,10 +49,10 @@ public class SimpleMDAGNode : ICacheAble
      * Constructs a SimpleMDAGNode.
      *
      * @param letter            a char representing the _transition label leading to this SimpleMDAGNode
-     * @param isAcceptNode      a boolean representing the accept state status of this SimpleMDAGNode
+     * @param isAcceptNode      a bool representing the accept state status of this SimpleMDAGNode
      * @param transitionSetSize an int denoting the size of this _transition set
      */
-    public SimpleMDAGNode(char letter, boolean isAcceptNode, int transitionSetSize)
+    public SimpleMDAGNode(char letter, bool isAcceptNode, int transitionSetSize)
     {
         this.letter = letter;
         this.isAcceptNode = isAcceptNode;
@@ -82,7 +82,7 @@ public class SimpleMDAGNode : ICacheAble
      *
      * @return true if this node is an accept state, false otherwise
      */
-    public boolean isAcceptNode()
+    public bool isAcceptNode()
     {
         return isAcceptNode;
     }
@@ -298,7 +298,7 @@ public class SimpleMDAGNode : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         letter = byteArray.nextChar();
         isAcceptNode = byteArray.nextByte() == 1;

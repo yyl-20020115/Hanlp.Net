@@ -46,7 +46,7 @@ public class MaxHeap<E> : Iterable<E>
      * @param e 元素
      * @return 是否添加成功
      */
-    public boolean add(E e)
+    public bool add(E e)
     {
         if (queue.size() < maxSize)
         { // 未达到最大容量，直接添加

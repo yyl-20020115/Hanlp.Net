@@ -20,14 +20,14 @@ namespace com.hankcs.hanlp.suggest.scorer.lexeme;
  */
 public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
 {
-    public List<Long[]> idArrayList;
+    public List<long[]> idArrayList;
 
     public IdVector(String sentence)
     {
         this(CoreSynonymDictionaryEx.convert(IndexTokenizer.segment(sentence), false));
     }
 
-    public IdVector(List<Long[]> idArrayList)
+    public IdVector(List<long[]> idArrayList)
     {
         this.idArrayList = idArrayList;
     }
@@ -38,14 +38,14 @@ public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
         int len1 = idArrayList.size();
         int len2 = o.idArrayList.size();
         int lim = Math.min(len1, len2);
-        Iterator<Long[]> iterator1 = idArrayList.iterator();
-        Iterator<Long[]> iterator2 = o.idArrayList.iterator();
+        Iterator<long[]> iterator1 = idArrayList.iterator();
+        Iterator<long[]> iterator2 = o.idArrayList.iterator();
 
         int k = 0;
         while (k < lim)
         {
-            Long[] c1 = iterator1.next();
-            Long[] c2 = iterator2.next();
+            long[] c1 = iterator1.next();
+            long[] c2 = iterator2.next();
             if (ArrayDistance.computeMinimumDistance(c1, c2) != 0)
             {
                 return ArrayCompare.compare(c1, c2);
@@ -59,11 +59,11 @@ public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
     public Double similarity(IdVector other)
     {
         Double score = 0.0;
-        for (Long[] a : idArrayList)
+        for (long[] a : idArrayList)
         {
-            for (Long[] b : other.idArrayList)
+            for (long[] b : other.idArrayList)
             {
-                Long distance = ArrayDistance.computeAverageDistance(a, b);
+                long distance = ArrayDistance.computeAverageDistance(a, b);
                 score += 1.0 / (0.1 + distance);
             }
         }

@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  *
  * @author hankcs
  */
-public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
+public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
 {
     private int size;
 
@@ -111,7 +111,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
         }
     }
 
-    public boolean containsKey(String key)
+    public bool containsKey(String key)
     {
         BaseNode branch = this;
         char[] chars = key.toCharArray();
@@ -264,9 +264,9 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
     }
 
     //@Override
-    protected boolean addChild(BaseNode node)
+    protected bool addChild(BaseNode node)
     {
-        boolean add = false;
+        bool add = false;
         char c = node.getChar();
         BaseNode target = getChild(c);
         if (target == null)
@@ -324,7 +324,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
         return child[c];
     }
 
-    public boolean save(String path)
+    public bool save(String path)
     {
         try
         {
@@ -368,7 +368,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
      * @param out
      * @return
      */
-    public boolean save(DataOutputStream out)
+    public bool save(DataOutputStream out)
     {
         try
         {
@@ -401,7 +401,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
      * @param value 额外提供的值数组，按照值的字典序。（之所以要求提供它，是因为泛型的保存不归树管理）
      * @return 是否成功
      */
-    public boolean load(String path, V[] value)
+    public bool load(String path, V[] value)
     {
         byte[] bytes = IOUtil.readBytes(path);
         if (bytes == null) return false;
@@ -427,7 +427,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
      * @param path
      * @return
      */
-    public boolean load(String path)
+    public bool load(String path)
     {
         byte[] bytes = IOUtil.readBytes(path);
         if (bytes == null) return false;
@@ -447,7 +447,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
         return true;
     }
 
-    public boolean load(ByteArray byteArray, _ValueArray valueArray)
+    public bool load(ByteArray byteArray, _ValueArray valueArray)
     {
         for (int i = 0; i < child.length; ++i)
         {
@@ -463,7 +463,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
         return true;
     }
 
-    public boolean load(ByteArray byteArray, V[] value)
+    public bool load(ByteArray byteArray, V[] value)
     {
         return load(byteArray, newValueArray().setValue(value));
     }
@@ -474,7 +474,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
     }
 
     //@Override
-    public void writeExternal(ObjectOutput out) throws IOException
+    public void writeExternal(ObjectOutput out) 
     {
         out.writeInt(size);
         for (BaseNode node : child)
@@ -492,7 +492,7 @@ public class BinTrie<V> extends BaseNode<V> : ITrie<V>, Externalizable
     }
 
     //@Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+    public void readExternal(ObjectInput in) , ClassNotFoundException
     {
         size = in.readInt();
         for (int i = 0; i < child.length; ++i)

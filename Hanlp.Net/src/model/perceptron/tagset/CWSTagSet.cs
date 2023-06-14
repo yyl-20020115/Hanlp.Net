@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
 /**
  * @author hankcs
  */
-public class CWSTagSet extends TagSet
+public class CWSTagSet : TagSet
 {
     public final int B;
     public final int M;

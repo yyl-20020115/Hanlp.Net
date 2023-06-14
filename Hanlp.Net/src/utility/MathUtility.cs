@@ -11,19 +11,16 @@
  */
 namespace com.hankcs.hanlp.utility;
 
-
-
-
 /**
  * 一些数学小工具
  * @author hankcs
  */
 public class MathUtility
 {
-    public static int sum(int ... var)
+    public static int sum(params int[] var)
     {
         int sum = 0;
-        for (int x : var)
+        foreach (int x in var)
         {
             sum += x;
         }
@@ -31,10 +28,10 @@ public class MathUtility
         return sum;
     }
 
-    public static float sum(float ... var)
+    public static float sum(params float[] var)
     {
         float sum = 0;
-        for (float x : var)
+        foreach (float x in var)
         {
             sum += x;
         }

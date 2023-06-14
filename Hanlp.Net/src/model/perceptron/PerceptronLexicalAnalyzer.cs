@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class PerceptronLexicalAnalyzer extends AbstractLexicalAnalyzer
+public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
 {
     public PerceptronLexicalAnalyzer(PerceptronSegmenter segmenter)
     {
@@ -58,17 +58,17 @@ public class PerceptronLexicalAnalyzer extends AbstractLexicalAnalyzer
         }
     }
 
-    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile, String nerModelFile) throws IOException
+    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile, String nerModelFile) 
     {
         this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), nerModelFile == null ? null : new LinearModel(nerModelFile));
     }
 
-    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile) throws IOException
+    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile) 
     {
         this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), null);
     }
 
-    public PerceptronLexicalAnalyzer(String cwsModelFile) throws IOException
+    public PerceptronLexicalAnalyzer(String cwsModelFile) 
     {
         this(new LinearModel(cwsModelFile), null, null);
     }
@@ -81,9 +81,9 @@ public class PerceptronLexicalAnalyzer extends AbstractLexicalAnalyzer
     /**
      * 加载配置文件指定的模型构造词法分析器
      *
-     * @throws IOException
+     * @
      */
-    public PerceptronLexicalAnalyzer() throws IOException
+    public PerceptronLexicalAnalyzer() 
     {
         this(HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath);
     }
@@ -137,7 +137,7 @@ public class PerceptronLexicalAnalyzer extends AbstractLexicalAnalyzer
      * @param segmentedTaggedSentence 已分词、标好词性和命名实体的人民日报2014格式的句子
      * @return 是否学习成果（失败的原因是句子格式不合法）
      */
-    public boolean learn(String segmentedTaggedSentence)
+    public bool learn(String segmentedTaggedSentence)
     {
         Sentence sentence = Sentence.create(segmentedTaggedSentence);
         return learn(sentence);
@@ -149,7 +149,7 @@ public class PerceptronLexicalAnalyzer extends AbstractLexicalAnalyzer
      * @param sentence 已分词、标好词性和命名实体的人民日报2014格式的句子
      * @return 是否学习成果（失败的原因是句子格式不合法）
      */
-    public boolean learn(Sentence sentence)
+    public bool learn(Sentence sentence)
     {
         CharTable.normalize(sentence);
         if (!getPerceptronSegmenter().learn(sentence)) return false;

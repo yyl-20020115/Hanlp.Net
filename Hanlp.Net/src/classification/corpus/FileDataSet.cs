@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.classification.corpus;
 /**
  * @author hankcs
  */
-public class FileDataSet extends AbstractDataSet
+public class FileDataSet : AbstractDataSet
 {
     File cache;
     DataOutputStream out;
@@ -28,7 +28,7 @@ public class FileDataSet extends AbstractDataSet
         initCache(cache);
     }
 
-    public FileDataSet(AbstractModel model) throws IOException
+    public FileDataSet(AbstractModel model) 
     {
         this(model, File.createTempFile(String.valueOf(System.currentTimeMillis()), ".dat"));
     }
@@ -44,12 +44,12 @@ public class FileDataSet extends AbstractDataSet
         out = new DataOutputStream(new FileOutputStream(cache));
     }
 
-    private void initCache() throws IOException
+    private void initCache() 
     {
         initCache(File.createTempFile(String.valueOf(System.currentTimeMillis()), ".dat"));
     }
 
-    public FileDataSet() throws IOException
+    public FileDataSet() 
     {
         this(File.createTempFile(String.valueOf(System.currentTimeMillis()), ".dat"));
     }
@@ -69,7 +69,7 @@ public class FileDataSet extends AbstractDataSet
         return document;
     }
 
-    private void add(Document document) throws IOException
+    private void add(Document document) 
     {
         out.writeInt(document.category);
         Set<Map.Entry<Integer, int[]>> entrySet = document.tfMap.entrySet();
@@ -142,11 +142,11 @@ public class FileDataSet extends AbstractDataSet
                 }
 
                 //@Override
-                public boolean hasNext()
+                public bool hasNext()
                 {
                     try
                     {
-                        boolean next = in.available() > 0;
+                        bool next = in.available() > 0;
                         if (!next) in.close();
                         return next;
                     }

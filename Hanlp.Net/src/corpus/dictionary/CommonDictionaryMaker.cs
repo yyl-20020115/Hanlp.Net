@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  */
 public abstract class CommonDictionaryMaker : ISaveAble
 {
-    public boolean verbose = false;
+    public bool verbose = false;
     /**
      * 语料库中的单词
      */
@@ -39,7 +39,7 @@ public abstract class CommonDictionaryMaker : ISaveAble
     }
 
     //@Override
-    public boolean saveTxtTo(String path)
+    public bool saveTxtTo(String path)
     {
         if (dictionaryMaker.saveTxtTo(path + ".txt"))
         {

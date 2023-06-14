@@ -8,13 +8,8 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
-package com.hankcs.hanlp.utility;
+namespace com.hankcs.hanlp.utility;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 /**
  * @author hankcs
@@ -126,10 +121,10 @@ public class TestUtility
                 fileName = new File(httpConn.getURL().getPath()).getName();
             }
 
-//            System.out.println("Content-Type = " + contentType);
-//            System.out.println("Content-Disposition = " + disposition);
-//            System.out.println("Content-Length = " + contentLength);
-//            System.out.println("fileName = " + fileName);
+//            Console.WriteLine("Content-Type = " + contentType);
+//            Console.WriteLine("Content-Disposition = " + disposition);
+//            Console.WriteLine("Content-Length = " + contentLength);
+//            Console.WriteLine("fileName = " + fileName);
 
             // opens input stream from the HTTP connection
             InputStream inputStream = httpConn.getInputStream();

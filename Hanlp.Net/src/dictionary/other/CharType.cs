@@ -93,7 +93,7 @@ public class CharType
         logger.info("字符类型对应表加载成功，耗时" + (System.currentTimeMillis() - start) + " ms");
     }
 
-    private static ByteArray generate() throws IOException
+    private static ByteArray generate() 
     {
         int preType = 5;
         int preChar = 0;

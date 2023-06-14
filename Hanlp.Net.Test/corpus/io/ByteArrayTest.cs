@@ -1,28 +1,20 @@
-package com.hankcs.hanlp.corpus.io;
+namespace com.hankcs.hanlp.corpus.io;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.model.maxent.MaxEntModel;
-import com.hankcs.hanlp.utility.ByteUtil;
-import com.hankcs.hanlp.utility.Predefine;
-import junit.framework.TestCase;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 
-public class ByteArrayTest extends TestCase
+public class ByteArrayTest : TestCase
 {
     static String DATA_TEST_OUT_BIN;
     private File tempFile;
 
-    @Override
-    public void setUp() throws Exception
+    //@Override
+    public void setUp() 
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
     }
 
-    public void testReadDouble() throws Exception
+    public void testReadDouble() 
     {
         DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         double d = 0.123456789;
@@ -34,7 +26,7 @@ public class ByteArrayTest extends TestCase
         assertEquals(i, byteArray.nextInt());
     }
 
-    public void testReadUTF() throws Exception
+    public void testReadUTF() 
     {
         DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         String utf = "hankcs你好123";
@@ -43,7 +35,7 @@ public class ByteArrayTest extends TestCase
         assertEquals(utf, byteArray.nextUTF());
     }
 
-    public void testReadUnsignedShort() throws Exception
+    public void testReadUnsignedShort() 
     {
         DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         int utflen = 123;
@@ -53,7 +45,7 @@ public class ByteArrayTest extends TestCase
         assertEquals(utflen, byteArray.nextUnsignedShort());
     }
 
-    public void testConvertCharToInt() throws Exception
+    public void testConvertCharToInt() 
     {
 //        for (int i = 0; i < Integer.MAX_VALUE; ++i)
         for (int i = 0; i < 1024; ++i)
@@ -64,7 +56,7 @@ public class ByteArrayTest extends TestCase
         }
     }
 
-    public void testNextBoolean() throws Exception
+    public void testNextBoolean() 
     {
         DataOutputStream out = new DataOutputStream(new FileOutputStream(tempFile));
         out.writeBoolean(true);
@@ -76,7 +68,7 @@ public class ByteArrayTest extends TestCase
         tempFile.deleteOnExit();
     }
 
-    public void testWriteAndRead() throws Exception
+    public void testWriteAndRead() 
     {
         DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         out.writeChar('H');
@@ -89,11 +81,11 @@ public class ByteArrayTest extends TestCase
         while (byteArray.hasMore())
         {
             byteArray.nextChar();
-//            System.out.println(byteArray.nextChar());
+//            Console.WriteLine(byteArray.nextChar());
         }
     }
 
-    public void testWriteBigFile() throws Exception
+    public void testWriteBigFile() 
     {
         DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         for (int i = 0; i < 10000; i++)
@@ -103,21 +95,21 @@ public class ByteArrayTest extends TestCase
         out.close();
     }
 
-    public void testStream() throws Exception
+    public void testStream() 
     {
         ByteArray byteArray = ByteArrayFileStream.createByteArrayFileStream(DATA_TEST_OUT_BIN);
         while (byteArray.hasMore())
         {
-            System.out.println(byteArray.nextInt());
+            Console.WriteLine(byteArray.nextInt());
         }
     }
 
 //    /**
 //     * 无法在-Xms512m -Xmx512m -Xmn256m下运行<br>
 //     *     java.lang.OutOfMemoryError: GC overhead limit exceeded
-//     * @throws Exception
+//     * @
 //     */
-//    public void testLoadByteArray() throws Exception
+//    public void testLoadByteArray() 
 //    {
 //        ByteArray byteArray = ByteArray.createByteArray(HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT);
 //        MaxEntModel.create(byteArray);
@@ -125,15 +117,15 @@ public class ByteArrayTest extends TestCase
 //
 //    /**
 //     * 能够在-Xms512m -Xmx512m -Xmn256m下运行
-//     * @throws Exception
+//     * @
 //     */
-//    public void testLoadByteArrayStream() throws Exception
+//    public void testLoadByteArrayStream() 
 //    {
 //        ByteArray byteArray = ByteArrayFileStream.createByteArrayFileStream(HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT);
 //        MaxEntModel.create(byteArray);
 //    }
 //
-//    public void testBenchmark() throws Exception
+//    public void testBenchmark() 
 //    {
 //        long start;
 //

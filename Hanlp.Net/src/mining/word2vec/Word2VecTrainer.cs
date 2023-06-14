@@ -13,7 +13,7 @@ public class Word2VecTrainer
     private Integer windowSize = 5;
     private Integer numThreads = Runtime.getRuntime().availableProcessors();
     private int negativeSamples = 25;
-    private boolean useHierarchicalSoftmax;
+    private bool useHierarchicalSoftmax;
     private Integer minFrequency = 5;
     private Float initialLearningRate;
     private float downSampleRate = 0.0001f;

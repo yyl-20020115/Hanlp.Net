@@ -24,5 +24,5 @@ public interface Filter
      * @param term
      * @return 是否应当
      */
-    boolean shouldInclude(Term term);
+    bool shouldInclude(Term term);
 }

@@ -1,12 +1,9 @@
-package com.hankcs.hanlp;
+namespace com.hankcs.hanlp;
 
-import com.hankcs.hanlp.model.perceptron.PerceptronLexicalAnalyzer;
-import com.hankcs.hanlp.seg.Viterbi.ViterbiSegment;
-import junit.framework.TestCase;
 
-public class HanLPTest extends TestCase
+public class HanLPTest : TestCase
 {
-    public void testNewSegment() throws Exception
+    public void testNewSegment() 
     {
         assertTrue(HanLP.newSegment("维特比") instanceof ViterbiSegment);
         assertTrue(HanLP.newSegment("感知机") instanceof PerceptronLexicalAnalyzer);
@@ -14,6 +11,6 @@ public class HanLPTest extends TestCase
 
     public void testDicUpdate()
     {
-        System.out.println(HanLP.segment("大数据是一个新词汇！"));
+        Console.WriteLine(HanLP.segment("大数据是一个新词汇！"));
     }
 }

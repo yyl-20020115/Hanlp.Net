@@ -34,7 +34,7 @@ public class CoreSynonymDictionaryEx
         }
     }
 
-    public static Long[] get(String key)
+    public static long[] get(String key)
     {
         return dictionary.get(key);
     }
@@ -56,9 +56,9 @@ public class CoreSynonymDictionaryEx
      * @param withUndefinedItem 是否保留词典中没有的词语
      * @return
      */
-    public static List<Long[]> convert(List<Term> sentence, boolean withUndefinedItem)
+    public static List<long[]> convert(List<Term> sentence, bool withUndefinedItem)
     {
-        List<Long[]> synonymItemList = new ArrayList<Long[]>(sentence.size());
+        List<long[]> synonymItemList = new ArrayList<long[]>(sentence.size());
         for (Term term : sentence)
         {
             // 除掉停用词
@@ -78,13 +78,13 @@ public class CoreSynonymDictionaryEx
             }
             // 停用词
             if (CoreStopWordDictionary.contains(term.word)) continue;
-            Long[] item = get(term.word);
+            long[] item = get(term.word);
 //            logger.trace("{} {}", wordResult.word, Arrays.toString(item));
             if (item == null)
             {
                 if (withUndefinedItem)
                 {
-                    item = new Long[]{Long.MAX_VALUE / 3};
+                    item = new long[]{long.MAX_VALUE / 3};
                     synonymItemList.add(item);
                 }
 

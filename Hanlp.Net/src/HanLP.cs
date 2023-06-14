@@ -27,12 +27,12 @@ public class HanLP
     /**
      * 库的全局配置，既可以用代码修改，也可以通过hanlp.properties配置（按照 变量名=值 的形式）
      */
-    public static final class Config
+    public static class Config
     {
         /**
          * 开发模式
          */
-        public static boolean DEBUG = false;
+        public static bool DEBUG = false;
         /**
          * 核心词典路径
          */
@@ -169,11 +169,11 @@ public class HanLP
         /**
          * 分词结果是否展示词性
          */
-        public static boolean ShowTermNature = true;
+        public static bool ShowTermNature = true;
         /**
          * 是否执行字符正规化（繁体->简体，全角->半角，大写->小写），切换配置后必须删CustomDictionary.txt.bin缓存
          */
-        public static boolean Normalization = false;
+        public static bool Normalization = false;
         /**
          * IO适配器（默认null，表示从本地文件系统读取），实现com.hankcs.hanlp.corpus.io.IIOAdapter接口
          * 以在不同的平台（Hadoop、Redis等）上运行HanLP
@@ -344,7 +344,7 @@ public class HanLP
          *
          * @param enable
          */
-        public static void enableDebug(boolean enable)
+        public static void enableDebug(bool enable)
         {
             DEBUG = enable;
             if (DEBUG)
@@ -527,7 +527,7 @@ public class HanLP
      * @param remainNone 有些字没有拼音（如标点），是否保留它们的拼音（true用none表示，false用原字符表示）
      * @return 一个字符串，由[拼音][分隔符][拼音]构成
      */
-    public static String convertToPinyinString(String text, String separator, boolean remainNone)
+    public static String convertToPinyinString(String text, String separator, bool remainNone)
     {
         List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, true);
         int length = pinyinList.size();
@@ -569,7 +569,7 @@ public class HanLP
      * @param remainNone 有些字没有拼音（如标点），是否保留它们（用none表示）
      * @return 一个字符串，由[首字母][分隔符][首字母]构成
      */
-    public static String convertToPinyinFirstCharString(String text, String separator, boolean remainNone)
+    public static String convertToPinyinFirstCharString(String text, String separator, bool remainNone)
     {
         List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, remainNone);
         int length = pinyinList.size();
@@ -705,7 +705,7 @@ public class HanLP
      * @param size   需要提取词语的数量
      * @return 一个词语列表
      */
-    public static List<WordInfo> extractWords(BufferedReader reader, int size) throws IOException
+    public static List<WordInfo> extractWords(BufferedReader reader, int size) 
     {
         return extractWords(reader, size, false);
     }
@@ -718,7 +718,7 @@ public class HanLP
      * @param newWordsOnly 是否只提取词典中没有的词语
      * @return 一个词语列表
      */
-    public static List<WordInfo> extractWords(String text, int size, boolean newWordsOnly)
+    public static List<WordInfo> extractWords(String text, int size, bool newWordsOnly)
     {
         NewWordDiscover discover = new NewWordDiscover(4, 0.0f, .5f, 100f, newWordsOnly);
         return discover.discover(text, size);
@@ -732,7 +732,7 @@ public class HanLP
      * @param newWordsOnly 是否只提取词典中没有的词语
      * @return 一个词语列表
      */
-    public static List<WordInfo> extractWords(BufferedReader reader, int size, boolean newWordsOnly) throws IOException
+    public static List<WordInfo> extractWords(BufferedReader reader, int size, bool newWordsOnly) 
     {
         NewWordDiscover discover = new NewWordDiscover(4, 0.0f, .5f, 100f, newWordsOnly);
         return discover.discover(reader, size);
@@ -750,7 +750,7 @@ public class HanLP
      * @param min_aggregation 词语最低互信息
      * @return 一个词语列表
      */
-    public static List<WordInfo> extractWords(BufferedReader reader, int size, boolean newWordsOnly, int max_word_len, float min_freq, float min_entropy, float min_aggregation) throws IOException
+    public static List<WordInfo> extractWords(BufferedReader reader, int size, bool newWordsOnly, int max_word_len, float min_freq, float min_entropy, float min_aggregation) 
     {
         NewWordDiscover discover = new NewWordDiscover(max_word_len, min_freq, min_entropy, min_aggregation, newWordsOnly);
         return discover.discover(reader, size);

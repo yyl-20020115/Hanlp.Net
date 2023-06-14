@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.dependency.nnparser;
  * 基于神经网络分类模型arc-standard转移动作的判决式依存句法分析器
  * @author hankcs
  */
-public class NeuralNetworkDependencyParser extends AbstractDependencyParser
+public class NeuralNetworkDependencyParser : AbstractDependencyParser
 {
     private parser_dll parser_dll;
 

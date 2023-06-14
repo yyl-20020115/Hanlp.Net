@@ -26,14 +26,14 @@ public class IntArrayList : Serializable, ICacheAble
     /**
      * 是否指数递增
      */
-    private boolean exponentialExpanding = false;
+    private bool exponentialExpanding = false;
 
-    public boolean isExponentialExpanding()
+    public bool isExponentialExpanding()
     {
         return exponentialExpanding;
     }
 
-    public void setExponentialExpanding(boolean multiplyExpanding)
+    public void setExponentialExpanding(bool multiplyExpanding)
     {
         this.exponentialExpanding = multiplyExpanding;
     }
@@ -153,7 +153,7 @@ public class IntArrayList : Serializable, ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) throws IOException
+    public void save(DataOutputStream out) 
     {
         out.writeInt(size);
         for (int i = 0; i < size; i++)
@@ -166,7 +166,7 @@ public class IntArrayList : Serializable, ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         if (byteArray == null)
         {
@@ -184,7 +184,7 @@ public class IntArrayList : Serializable, ICacheAble
         return true;
     }
 
-    private void writeObject(ObjectOutputStream out) throws IOException
+    private void writeObject(ObjectOutputStream out) 
     {
         loseWeight();
         out.writeInt(size);
@@ -194,7 +194,7 @@ public class IntArrayList : Serializable, ICacheAble
         out.writeDouble(exponentialExpandFactor);
     }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+    private void readObject(ObjectInputStream in) , ClassNotFoundException
     {
         size = in.readInt();
         data = (int[]) in.readObject();

@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.suggest.scorer.lexeme;
  * 单词语义向量打分器
  * @author hankcs
  */
-public class IdVectorScorer extends BaseScorer<IdVector>
+public class IdVectorScorer : BaseScorer<IdVector>
 {
     //@Override
     protected IdVector generateKey(String sentence)

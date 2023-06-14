@@ -107,7 +107,7 @@ public class CoNLLSentence : Iterable<CoNLLWord>
         {
             int index;
             //@Override
-            public boolean hasNext()
+            public bool hasNext()
             {
                 return index < word.length;
             }

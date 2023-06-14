@@ -69,7 +69,7 @@ public class FeatureTemplate : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) throws IOException
+    public void save(DataOutputStream out) 
     {
         out.writeUTF(template);
         out.writeInt(offsetList.size());
@@ -86,7 +86,7 @@ public class FeatureTemplate : ICacheAble
     }
 
     //@Override
-    public boolean load(ByteArray byteArray)
+    public bool load(ByteArray byteArray)
     {
         template = byteArray.nextUTF();
         int size = byteArray.nextInt();

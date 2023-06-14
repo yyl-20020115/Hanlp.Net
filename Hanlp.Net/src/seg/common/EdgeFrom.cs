@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.seg.common;
  * 记录了起点的边
  * @author hankcs
  */
-public class EdgeFrom extends Edge
+public class EdgeFrom : Edge
 {
     public int from;
 

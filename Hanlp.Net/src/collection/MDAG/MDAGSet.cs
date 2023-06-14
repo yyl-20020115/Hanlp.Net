@@ -17,10 +17,10 @@ namespace com.hankcs.hanlp.collection.MDAG;
  *
  * @author hankcs
  */
-public class MDAGSet extends MDAG : Set<String>
+public class MDAGSet : MDAG : Set<String>
 {
 
-    public MDAGSet(File dataFile) throws IOException
+    public MDAGSet(File dataFile) 
     {
         super(dataFile);
     }
@@ -34,7 +34,7 @@ public class MDAGSet extends MDAG : Set<String>
     {
     }
 
-    public MDAGSet(String dictionaryPath) throws IOException
+    public MDAGSet(String dictionaryPath) 
     {
         super(dictionaryPath);
     }
@@ -46,13 +46,13 @@ public class MDAGSet extends MDAG : Set<String>
     }
 
     //@Override
-    public boolean isEmpty()
+    public bool isEmpty()
     {
         return this.equivalenceClassMDAGNodeHashMap.size() != 0;
     }
 
     //@Override
-    public boolean contains(Object o)
+    public bool contains(Object o)
     {
         if (o.getClass() != String.class) return false;
         return contains((String) o);
@@ -77,14 +77,14 @@ public class MDAGSet extends MDAG : Set<String>
     }
 
     //@Override
-    public boolean add(String s)
+    public bool add(String s)
     {
         addString(s);
         return true;
     }
 
     //@Override
-    public boolean remove(Object o)
+    public bool remove(Object o)
     {
         if (o.getClass() == String.class)
         {
@@ -98,7 +98,7 @@ public class MDAGSet extends MDAG : Set<String>
     }
 
     //@Override
-    public boolean containsAll(Collection<?> c)
+    public bool containsAll(Collection<?> c)
     {
         for (Object e : c)
             if (!contains(e))
@@ -107,9 +107,9 @@ public class MDAGSet extends MDAG : Set<String>
     }
 
     //@Override
-    public boolean addAll(Collection<? extends String> c)
+    public bool addAll(Collection<? : String> c)
     {
-        boolean modified = false;
+        bool modified = false;
         for (String e : c)
             if (add(e))
                 modified = true;
@@ -117,9 +117,9 @@ public class MDAGSet extends MDAG : Set<String>
     }
 
     //@Override
-    public boolean retainAll(Collection<?> c)
+    public bool retainAll(Collection<?> c)
     {
-        boolean modified = false;
+        bool modified = false;
         Iterator<String> it = iterator();
         while (it.hasNext())
         {
@@ -133,9 +133,9 @@ public class MDAGSet extends MDAG : Set<String>
     }
 
     //@Override
-    public boolean removeAll(Collection<?> c)
+    public bool removeAll(Collection<?> c)
     {
-        boolean modified = false;
+        bool modified = false;
         Iterator<?> it = iterator();
         while (it.hasNext())
         {

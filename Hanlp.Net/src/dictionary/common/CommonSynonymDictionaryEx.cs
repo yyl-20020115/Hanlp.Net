@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.dictionary.common;
  */
 public class CommonSynonymDictionaryEx
 {
-    DoubleArrayTrie<Long[]> trie;
+    DoubleArrayTrie<long[]> trie;
 
     private CommonSynonymDictionaryEx()
     {
@@ -38,10 +38,10 @@ public class CommonSynonymDictionaryEx
         return null;
     }
 
-    public boolean load(InputStream inputStream)
+    public bool load(InputStream inputStream)
     {
-        trie = new DoubleArrayTrie<Long[]>();
-        TreeMap<String, Set<Long>> treeMap = new TreeMap<String, Set<Long>>();
+        trie = new DoubleArrayTrie<long[]>();
+        TreeMap<String, Set<long>> treeMap = new TreeMap<String, Set<long>>();
         String line = null;
         try
         {
@@ -52,10 +52,10 @@ public class CommonSynonymDictionaryEx
                 List<Synonym> synonymList = Synonym.create(args);
                 for (Synonym synonym : synonymList)
                 {
-                    Set<Long> idSet = treeMap.get(synonym.realWord);
+                    Set<long> idSet = treeMap.get(synonym.realWord);
                     if (idSet == null)
                     {
-                        idSet = new TreeSet<Long>();
+                        idSet = new TreeSet<long>();
                         treeMap.put(synonym.realWord, idSet);
                     }
                     idSet.add(synonym.id);
@@ -67,10 +67,10 @@ public class CommonSynonymDictionaryEx
             {
                 keyList.add(key);
             }
-            List<Long[]> valueList = new ArrayList<Long[]>(treeMap.size());
-            for (Set<Long> idSet : treeMap.values())
+            List<long[]> valueList = new ArrayList<long[]>(treeMap.size());
+            for (Set<long> idSet : treeMap.values())
             {
-                valueList.add(idSet.toArray(new Long[0]));
+                valueList.add(idSet.toArray(new long[0]));
             }
             int resultCode = trie.build(keyList, valueList);
             if (resultCode != 0)
@@ -87,7 +87,7 @@ public class CommonSynonymDictionaryEx
         return true;
     }
 
-    public Long[] get(String key)
+    public long[] get(String key)
     {
         return trie.get(key);
     }
@@ -100,10 +100,10 @@ public class CommonSynonymDictionaryEx
      */
     public long distance(String a, String b)
     {
-        Long[] itemA = get(a);
-        if (itemA == null) return Long.MAX_VALUE / 3;
-        Long[] itemB = get(b);
-        if (itemB == null) return Long.MAX_VALUE / 3;
+        long[] itemA = get(a);
+        if (itemA == null) return long.MAX_VALUE / 3;
+        long[] itemB = get(b);
+        if (itemB == null) return long.MAX_VALUE / 3;
 
         return ArrayDistance.computeAverageDistance(itemA, itemB);
     }
@@ -111,7 +111,7 @@ public class CommonSynonymDictionaryEx
     /**
      * 词典中的一个条目
      */
-    public static class SynonymItem extends Synonym
+    public static class SynonymItem : Synonym
     {
         /**
          * 条目的value，是key的同义词近义词列表

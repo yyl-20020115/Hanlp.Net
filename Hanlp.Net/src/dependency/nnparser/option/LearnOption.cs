@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.option;
 /**
  * @author hankcs
  */
-public class LearnOption extends BasicOption
+public class LearnOption : BasicOption
 {
     public double ada_eps;             //! Eps used in AdaGrad
     public double ada_alpha;           //! Alpha used in AdaGrad
@@ -37,9 +37,9 @@ public class LearnOption extends BasicOption
     int nr_precomputed;           //! The number of precomputed features
     int evaluation_stops;         //!
     int clear_gradient_per_iter;  //! clear gradient each iteration.
-    boolean save_intermediate;       //! Save model whenever see an improved UAS.
-    public boolean fix_embeddings;          //! Not tune the embedding when learning the parameters
-    boolean use_distance;            //! Specify to use distance feature.
-    boolean use_valency;             //! Specify to use valency feature.
-    boolean use_cluster;             //! Specify to use cluster feature.
+    bool save_intermediate;       //! Save model whenever see an improved UAS.
+    public bool fix_embeddings;          //! Not tune the embedding when learning the parameters
+    bool use_distance;            //! Specify to use distance feature.
+    bool use_valency;             //! Specify to use valency feature.
+    bool use_cluster;             //! Specify to use cluster feature.
 }

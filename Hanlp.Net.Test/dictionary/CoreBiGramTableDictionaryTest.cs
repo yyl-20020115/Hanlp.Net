@@ -1,10 +1,9 @@
-package com.hankcs.hanlp.dictionary;
+namespace com.hankcs.hanlp.dictionary;
 
-import junit.framework.TestCase;
 
-public class CoreBiGramTableDictionaryTest extends TestCase
+public class CoreBiGramTableDictionaryTest : TestCase
 {
-    public void testReload() throws Exception
+    public void testReload() 
     {
         int biFrequency = CoreBiGramTableDictionary.getBiFrequency("高性能", "计算");
         CoreBiGramTableDictionary.reload();
