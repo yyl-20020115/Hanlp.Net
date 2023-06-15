@@ -64,7 +64,7 @@ public class TestUtility
         {
             System.err.printf("数据下载失败，请尝试手动下载 %s 到 %s 。原因如下：\n", url, target.getAbsolutePath());
             e.printStackTrace();
-            System.exit(1);
+            Environment.Exit(1);
             return null;
         }
     }
@@ -163,7 +163,7 @@ public class TestUtility
 
                     System.err.printf("\r%.2f%%, %d MB, %d KB/s, ETA %d min %d s", percent, progress_size / (1024 * 1024), speed, minutes, seconds);
                 }
-                System.err.println();
+                Console.Error.WriteLine();
                 outputStream.close();
                 realPath = saveFilePath.substring(0, saveFilePath.Length() - ".downloading".Length());
                 if (!new File(saveFilePath).renameTo(new File(realPath)))
@@ -183,7 +183,7 @@ public class TestUtility
 
     private static void unzip(String zipFilePath, String destDir, bool overwrite)
     {
-        System.err.println("Unzipping to " + destDir);
+        Console.Error.WriteLine("Unzipping to " + destDir);
         File dir = new File(destDir);
         // create output directory if it doesn't exist
         if (!dir.exists()) dir.mkdirs();

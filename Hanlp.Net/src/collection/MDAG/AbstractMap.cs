@@ -11,7 +11,10 @@
  */
 namespace com.hankcs.hanlp.collection.MDAG
 {
-    public class AbstractMap<T, V> :Dictionary<T,V>
+    public class AbstractMap<T, V> : Dictionary<T, V>
     {
+        public class SimpleEntry<T1, T2>
+        {
+        }
     }
 }

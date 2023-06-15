@@ -88,7 +88,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 }
                 else
                 {
-                    System.err.println("unknown type: " + line);
+                    Console.Error.WriteLine("unknown type: " + line);
                 }
             }
             br.close();
@@ -107,7 +107,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 }
             }
             e.printStackTrace();
-            System.err.println("Error reading " + filename);
+            Console.Error.WriteLine("Error reading " + filename);
             return false;
         }
         return true;
@@ -173,7 +173,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 }
             }
             e.printStackTrace();
-            System.err.println("Error reading " + filename);
+            Console.Error.WriteLine("Error reading " + filename);
             return false;
         }
         return true;
@@ -255,7 +255,7 @@ public class EncoderFeatureIndex : FeatureIndex
         catch (Exception e)
         {
             e.printStackTrace();
-            System.err.println("Error saving model to " + filename);
+            Console.Error.WriteLine("Error saving model to " + filename);
             return false;
         }
         return true;
@@ -363,7 +363,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 string[] content = line.trim().split(" ");
                 if (content.length != 2)
                 {
-                    System.err.println("feature indices format error");
+                    Console.Error.WriteLine("feature indices format error");
                     return false;
                 }
                 dic_.put(content[1], int.valueOf(content[0]));
@@ -402,7 +402,7 @@ public class EncoderFeatureIndex : FeatureIndex
             EncoderFeatureIndex featureIndex = new EncoderFeatureIndex(1);
             if (!featureIndex.convert(args[0], args[1]))
             {
-                System.err.println("Fail to convert text model");
+                Console.Error.WriteLine("Fail to convert text model");
             }
         }
     }

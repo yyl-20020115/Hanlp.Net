@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.classification.tokenizers;
 
 
@@ -26,14 +29,14 @@ public class HanLPTokenizer : ITokenizer
         while (listIterator.hasNext())
         {
             Term term = listIterator.next();
-            if (term.word.indexOf('\u0000') >= 0)
+            if (term.word.IndexOf('\u0000') >= 0)
             {
                 listIterator.remove();
             }
         }
-        string[] termArray = new string[termList.size()];
+        string[] termArray = new string[termList.Count];
         int p = -1;
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             termArray[++p] = term.word;
         }

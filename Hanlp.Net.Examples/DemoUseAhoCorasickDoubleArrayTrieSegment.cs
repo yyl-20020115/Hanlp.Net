@@ -9,6 +9,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
 using com.hankcs.hanlp.seg.Other;
 
 namespace com.hankcs.demo;
@@ -26,7 +27,8 @@ public class DemoUseAhoCorasickDoubleArrayTrieSegment
     public static void Main(String[] args) 
     {
         // AhoCorasickDoubleArrayTrieSegment要求用户必须提供自己的词典路径
-        AhoCorasickDoubleArrayTrieSegment segment = new AhoCorasickDoubleArrayTrieSegment(HanLP.Config.CustomDictionaryPath[0]);
+        AhoCorasickDoubleArrayTrieSegment segment = new AhoCorasickDoubleArrayTrieSegment(
+            HanLP.Config.CustomDictionaryPath[0]);
         Console.WriteLine(segment.seg("微观经济学继续教育循环经济"));
     }
 }

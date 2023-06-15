@@ -165,7 +165,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //                String[] args = line.split(delimiter);
 //                if (args.Length != 2)
 //                {
-//                    System.err.println(line);
+//                    Console.Error.WriteLine(line);
 //                    System.exit(-1);
 //                }
 //                storage.put(args[0], args[1]);

@@ -93,7 +93,7 @@ public class DictionaryMakerTest : TestCase
 //            String first = params[0].split("@", 2)[0];
 //            String second = params[0].split("@", 2)[1];
 ////            if (params.Length != 2)
-////                System.err.println(line);
+////                Console.Error.WriteLine(line);
 //            int biFrequency = int.parseInt(params[1]);
 //            CoreDictionary.Attribute attribute = CoreDictionary.get(first + second);
 //            if (attribute != null && (first.Length() == 1 || second.Length() == 1))

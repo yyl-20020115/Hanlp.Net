@@ -49,7 +49,7 @@ public class DecoderFeatureIndex : FeatureIndex
         {
             if (!open(IOUtil.newInputStream(binarymodel)))
             {
-                System.err.println("Fail to read binary model " + binarymodel);
+                Console.Error.WriteLine("Fail to read binary model " + binarymodel);
                 return false;
             }
             OutputStreamWriter osw = new OutputStreamWriter(IOUtil.newOutputStream(textmodel), "UTF-8");
@@ -90,7 +90,7 @@ public class DecoderFeatureIndex : FeatureIndex
         }
         catch (Exception e)
         {
-            System.err.println(binarymodel + " does not exist");
+            Console.Error.WriteLine(binarymodel + " does not exist");
             return false;
         }
     }
@@ -189,7 +189,7 @@ public class DecoderFeatureIndex : FeatureIndex
                 }
             }
             e.printStackTrace();
-            System.err.println("Error reading " + filename1);
+            Console.Error.WriteLine("Error reading " + filename1);
             return false;
         }
         return true;
@@ -206,7 +206,7 @@ public class DecoderFeatureIndex : FeatureIndex
             DecoderFeatureIndex featureIndex = new DecoderFeatureIndex();
             if (!featureIndex.convert(args[0], args[1]))
             {
-                System.err.println("fail to convert binary model to text model");
+                Console.Error.WriteLine("fail to convert binary model to text model");
             }
         }
     }

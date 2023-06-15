@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.corpus;
+using com.hankcs.hanlp.classification.models;
+
 namespace com.hankcs.hanlp.classification.classifiers;
 
 

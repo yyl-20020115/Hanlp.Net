@@ -8,6 +8,10 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.datrie;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.mining.cluster;
 
 
@@ -21,14 +25,14 @@ namespace com.hankcs.hanlp.mining.cluster;
  */
 public class ClusterAnalyzer<K>
 {
-    protected HashMap<K, Document<K>> documents_;
+    protected Dictionary<K, Document<K>> documents_;
     protected Segment segment;
     protected MutableDoubleArrayTrieInteger vocabulary;
     const int NUM_REFINE_LOOP = 30;
 
     public ClusterAnalyzer()
     {
-        documents_ = new HashMap<K, Document<K>>();
+        documents_ = new ();
         segment = HanLP.newSegment();
         vocabulary = new MutableDoubleArrayTrieInteger();
     }
@@ -64,8 +68,8 @@ public class ClusterAnalyzer<K>
                 listIterator.remove();
             }
         }
-        List<string> wordList = new ArrayList<string>(termList.size());
-        for (Term term : termList)
+        List<string> wordList = new (termList.size());
+        for (Term term in termList)
         {
             wordList.add(term.word);
         }
@@ -75,7 +79,7 @@ public class ClusterAnalyzer<K>
     protected SparseVector toVector(List<string> wordList)
     {
         SparseVector vector = new SparseVector();
-        for (string word : wordList)
+        foreach (string word in wordList)
         {
             int id = id(word);
             Double f = vector.get(id);
@@ -124,7 +128,7 @@ public class ClusterAnalyzer<K>
      * @param nclusters 簇的数量
      * @return 指定数量的簇（Set）构成的集合
      */
-    public List<Set<K>> kmeans(int nclusters)
+    public List<HashSet<K>> kmeans(int nclusters)
     {
         Cluster<K> cluster = new Cluster<K>();
         for (Document<K> document : documents_.values())
@@ -142,12 +146,12 @@ public class ClusterAnalyzer<K>
         return toResult(clusters_);
     }
 
-    private List<Set<K>> toResult(List<Cluster<K>> clusters_)
+    private List<HashSet<K>> toResult(List<Cluster<K>> clusters_)
     {
-        List<Set<K>> result = new ArrayList<Set<K>>(clusters_.size());
+        List<HashSet<K>> result = new (clusters_.size());
         for (Cluster<K> c : clusters_)
         {
-            Set<K> s = new HashSet<K>();
+            HashSet<K> s = new HashSet<K>();
             for (Document<K> d : c.documents_)
             {
                 s.add(d.id_);
@@ -163,7 +167,7 @@ public class ClusterAnalyzer<K>
      * @param nclusters 簇的数量
      * @return 指定数量的簇（Set）构成的集合
      */
-    public List<Set<K>> repeatedBisection(int nclusters)
+    public List<HashSet<K>> repeatedBisection(int nclusters)
     {
         return repeatedBisection(nclusters, 0);
     }
@@ -174,7 +178,7 @@ public class ClusterAnalyzer<K>
      * @param limit_eval 准则函数增幅阈值
      * @return 指定数量的簇（Set）构成的集合
      */
-    public List<Set<K>> repeatedBisection(double limit_eval)
+    public List<HashSet<K>> repeatedBisection(double limit_eval)
     {
         return repeatedBisection(0, limit_eval);
     }
@@ -186,7 +190,7 @@ public class ClusterAnalyzer<K>
      * @param limit_eval 准则函数增幅阈值
      * @return 指定数量的簇（Set）构成的集合
      */
-    public List<Set<K>> repeatedBisection(int nclusters, double limit_eval)
+    public List<HashSet<K>> repeatedBisection(int nclusters, double limit_eval)
     {
         Cluster<K> cluster = new Cluster<K>();
         List<Cluster<K>> clusters_ = new ArrayList<Cluster<K>>(nclusters > 0 ? nclusters : 16);

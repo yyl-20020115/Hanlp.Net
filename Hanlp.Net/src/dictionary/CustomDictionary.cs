@@ -15,6 +15,7 @@ using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.dictionary;
 
@@ -182,7 +183,7 @@ public class CustomDictionary
                 if (param[0].length() == 0) continue;   // 排除空行
                 if (HanLP.Config.Normalization) param[0] = CharTable.convert(param[0]); // 正规化
 
-                int natureCount = (param.length - 1) / 2;
+                int natureCount = (param.Length - 1) / 2;
                 CoreDictionary.Attribute attribute;
                 if (natureCount == 0)
                 {
@@ -199,7 +200,7 @@ public class CustomDictionary
                     }
                 }
 //                if (updateAttributeIfExist(param[0], attribute, map, rewriteTable)) continue;
-                map.put(param[0], attribute);
+                map.Add(param[0], attribute);
             }
             br.close();
         }
@@ -220,7 +221,7 @@ public class CustomDictionary
      * @param rewriteTable
      * @return 是否更新了
      */
-    private static bool updateAttributeIfExist(string key, CoreDictionary.Attribute attribute, TreeMap<string, CoreDictionary.Attribute> map, TreeMap<int, CoreDictionary.Attribute> rewriteTable)
+    private static bool updateAttributeIfExist(string key, CoreDictionary.Attribute attribute, Dictionary<string, CoreDictionary.Attribute> map, Dictionary<int, CoreDictionary.Attribute> rewriteTable)
     {
         int wordID = CoreDictionary.getWordID(key);
         CoreDictionary.Attribute attributeExisted;
@@ -231,7 +232,7 @@ public class CustomDictionary
             attributeExisted.frequency = attribute.frequency;
             attributeExisted.totalFrequency = attribute.totalFrequency;
             // 收集该覆写
-            rewriteTable.put(wordID, attribute);
+            rewriteTable.Add(wordID, attribute);
             return true;
         }
 
@@ -319,7 +320,7 @@ public class CustomDictionary
      * @param customDicPath 用户词典路径
      * @return
      */
-    public static bool loadDat(string path, string customDicPath[], DoubleArrayTrie<CoreDictionary.Attribute> dat)
+    public static bool loadDat(string path, string[] customDicPath, DoubleArrayTrie<CoreDictionary.Attribute> dat)
     {
         try
         {
@@ -367,7 +368,7 @@ public class CustomDictionary
      * 获取本地词典更新状态
      * @return true 表示本地词典比缓存文件新，需要删除缓存
      */
-    private static bool isDicNeedUpdate(string mainPath, string path[])
+    private static bool isDicNeedUpdate(string mainPath, string[] path)
     {
         if (HanLP.Config.IOAdapter != null &&
             !HanLP.Config.IOAdapter.getClass().getName().contains("com.hankcs.hanlp.corpus.io.FileIOAdapter"))
@@ -550,7 +551,7 @@ public class CustomDictionary
      * @param text         文本
      * @param processor    处理器
      */
-    public static void parseText(char[] text, AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute> processor)
+    public static void parseText(char[] text, AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute> processor)
     {
         if (trie != null)
         {
@@ -568,7 +569,7 @@ public class CustomDictionary
      * @param text         文本
      * @param processor    处理器
      */
-    public static void parseText(string text, AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute> processor)
+    public static void parseText(string text, AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute> processor)
     {
         if (trie != null)
         {
@@ -594,12 +595,12 @@ public class CustomDictionary
      * @param text      文本
      * @param processor 处理器
      */
-    public static void parseLongestText(string text, AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute> processor)
+    public static void parseLongestText(string text, AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute> processor)
     {
         if (trie != null)
         {
-             int[] lengthArray = new int[text.length()];
-             CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[text.length()];
+             int[] lengthArray = new int[text.Length];
+             CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[text.Length];
             char[] charArray = text.ToCharArray();
             DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(charArray, 0);
             while (searcher.next())
@@ -607,7 +608,7 @@ public class CustomDictionary
                 lengthArray[searcher.begin] = searcher.length;
                 attributeArray[searcher.begin] = searcher.value;
             }
-            trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute>()
+            trie.parseText(charArray, new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>()
             {
                 //@Override
                 public void hit(int begin, int end, CoreDictionary.Attribute value)

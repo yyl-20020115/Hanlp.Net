@@ -60,34 +60,34 @@ public class Encoder
     {
         if (eta <= 0)
         {
-            System.err.println("eta must be > 0.0");
+            Console.Error.WriteLine("eta must be > 0.0");
             return false;
         }
         if (C < 0.0)
         {
-            System.err.println("C must be >= 0.0");
+            Console.Error.WriteLine("C must be >= 0.0");
             return false;
         }
         if (shrinkingSize < 1)
         {
-            System.err.println("shrinkingSize must be >= 1");
+            Console.Error.WriteLine("shrinkingSize must be >= 1");
             return false;
         }
         if (threadNum <= 0)
         {
-            System.err.println("thread must be  > 0");
+            Console.Error.WriteLine("thread must be  > 0");
             return false;
         }
         EncoderFeatureIndex featureIndex = new EncoderFeatureIndex(threadNum);
         List<TaggerImpl> x = new ArrayList<TaggerImpl>();
         if (!featureIndex.open(templFile, trainFile))
         {
-            System.err.println("Fail to open " + templFile + " " + trainFile);
+            Console.Error.WriteLine("Fail to open " + templFile + " " + trainFile);
         }
 //        File file = new File(trainFile);
 //        if (!file.exists())
 //        {
-//            System.err.println("train file " + trainFile + " does not exist.");
+//            Console.Error.WriteLine("train file " + trainFile + " does not exist.");
 //            return false;
 //        }
         BufferedReader br = null;
@@ -103,14 +103,14 @@ public class Encoder
                 TaggerImpl.ReadStatus status = tagger.read(br);
                 if (status == TaggerImpl.ReadStatus.ERROR)
                 {
-                    System.err.println("error when reading " + trainFile);
+                    Console.Error.WriteLine("error when reading " + trainFile);
                     return false;
                 }
                 if (!tagger.empty())
                 {
                     if (!tagger.shrink())
                     {
-                        System.err.println("fail to build feature index ");
+                        Console.Error.WriteLine("fail to build feature index ");
                         return false;
                     }
                     tagger.setThread_id_(lineNo % threadNum);
@@ -133,7 +133,7 @@ public class Encoder
         }
         catch (IOException e)
         {
-            System.err.println("train file " + trainFile + " does not exist.");
+            Console.Error.WriteLine("train file " + trainFile + " does not exist.");
             return false;
         }
         featureIndex.shrink(freq, x);
@@ -155,21 +155,21 @@ public class Encoder
             case CRF_L1:
                 if (!runCRF(x, featureIndex, alpha, maxitr, C, eta, shrinkingSize, threadNum, true))
                 {
-                    System.err.println("CRF_L1 execute error");
+                    Console.Error.WriteLine("CRF_L1 execute error");
                     return false;
                 }
                 break;
             case CRF_L2:
                 if (!runCRF(x, featureIndex, alpha, maxitr, C, eta, shrinkingSize, threadNum, false))
                 {
-                    System.err.println("CRF_L2 execute error");
+                    Console.Error.WriteLine("CRF_L2 execute error");
                     return false;
                 }
                 break;
             case MIRA:
                 if (!runMIRA(x, featureIndex, alpha, maxitr, C, eta, shrinkingSize, threadNum))
                 {
-                    System.err.println("MIRA execute error");
+                    Console.Error.WriteLine("MIRA execute error");
                     return false;
                 }
                 break;
@@ -179,7 +179,7 @@ public class Encoder
 
         if (!featureIndex.save(modelFile, textModelFile))
         {
-            System.err.println("Failed to save model");
+            Console.Error.WriteLine("Failed to save model");
         }
         System._out.println("Done!");
         return true;
@@ -325,7 +325,7 @@ public class Encoder
         catch (Exception e)
         {
             e.printStackTrace();
-            System.err.println("fail waiting executor to shutdown");
+            Console.Error.WriteLine("fail waiting executor to shutdown");
         }
         return true;
     }
@@ -350,7 +350,7 @@ public class Encoder
 
         if (threadNum > 1)
         {
-            System.err.println("WARN: MIRA does not support multi-threading");
+            Console.Error.WriteLine("WARN: MIRA does not support multi-threading");
         }
         int converge = 0;
         int all = 0;
@@ -460,7 +460,7 @@ public class Encoder
     {
         if (args.length < 3)
         {
-            System.err.println("incorrect No. of args");
+            Console.Error.WriteLine("incorrect No. of args");
             return;
         }
         string templFile = args[0];
@@ -470,7 +470,7 @@ public class Encoder
         long time1 = new Date().getTime();
         if (!enc.learn(templFile, trainFile, modelFile, false, 100000, 1, 0.0001, 1.0, 1, 20, Algorithm.CRF_L2))
         {
-            System.err.println("error training model");
+            Console.Error.WriteLine("error training model");
             return;
         }
         System._out.println(new Date().getTime() - time1);

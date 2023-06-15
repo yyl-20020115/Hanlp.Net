@@ -37,7 +37,7 @@ public interface IDataSet : IEnumerable<Document>
      *                   └── ...<br>
      *                   文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
      * @return
-     * @throws IllegalArgumentException
+     * @
      * @
      */
     IDataSet load(string folderPath) ;
@@ -59,7 +59,7 @@ public interface IDataSet : IEnumerable<Document>
      *                    文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
      * @param charsetName 文件编码
      * @return
-     * @throws IllegalArgumentException
+     * @
      * @
      */
     IDataSet load(string folderPath, string charsetName) ;
@@ -139,7 +139,7 @@ public interface IDataSet : IEnumerable<Document>
 //     * 分割数据集
 //     * @param rate 得到新数据集占原数据集的大小比率,比如原本有10个文档,rate=0.1,则新数据集有1个文档,旧数据集变成了9个文档
 //     * @return 新数据集
-//     * @throws IllegalArgumentException
+//     * @
 //     */
-//    IDataSet spilt(double rate) throws IllegalArgumentException;
+//    IDataSet spilt(double rate) ;
 }

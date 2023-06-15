@@ -10,12 +10,12 @@ public class NaiveBayesModel : AbstractModel
     /**
      * 先验概率的对数值 log( P(c) )
      */
-    public Dictionary<int, Double> logPriors = new HashMap<int, Double>();
+    public Dictionary<int, Double> logPriors = new ();
 
     /**
      * 似然对数值 log( P(x|c) )
      */
-    public Dictionary<int, Dictionary<int, Double>> logLikelihoods = new HashMap<int, Dictionary<int, Double>>();
+    public Dictionary<int, Dictionary<int, Double>> logLikelihoods = new ();
 
     /**
      * 训练样本数

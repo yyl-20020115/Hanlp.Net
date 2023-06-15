@@ -1,15 +1,18 @@
+using com.hankcs.hanlp.corpus.io;
+using System.Text;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
 
-public final class VectorsReader
+public class VectorsReader
 {
 
-    public final Charset ENCODING = Charset.forName("UTF-8");
+    public Encoding ENCODING = Encoding.UTF8;
     int words, size;
-    string[] vocab;
-    float[][] matrix;
-    final string file;
+    public string[] vocab;
+    public float[][] matrix;
+    string file;
 
     public VectorsReader(string file)
     {
@@ -20,18 +23,18 @@ public final class VectorsReader
     {
         logger.info(string.format("reading %s file. please wait...\n", file));
 
-        InputStream is = null;
+        InputStream _is = null;
         Reader r = null;
         BufferedReader br = null;
         try
         {
-            is = IOUtil.newInputStream(file);
-            r = new InputStreamReader(is, ENCODING);
+            _is = IOUtil.newInputStream(file);
+            r = new InputStreamReader(_is, ENCODING);
             br = new BufferedReader(r);
 
             string line = br.readLine();
-            words = int.parseInt(line.split("\\s+")[0].trim());
-            size = int.parseInt(line.split("\\s+")[1].trim());
+            words = int.parseInt(line.Split("\\s+")[0].trim());
+            size = int.parseInt(line.Split("\\s+")[1].trim());
 
             vocab = new string[words];
             matrix = new float[words][];
@@ -39,20 +42,20 @@ public final class VectorsReader
             for (int i = 0; i < words; i++)
             {
                 line = br.readLine().trim();
-                string[] params = line.split("\\s+");
-                if (params.length != size + 1)
+                string[] _params = line.split("\\s+");
+                if (_params.length != size + 1)
                 {
                     logger.info("词向量有一行格式不规范（可能是单词含有空格）：" + line);
                     --words;
                     --i;
                     continue;
                 }
-                vocab[i] = params[0];
+                vocab[i] = _params[0];
                 matrix[i] = new float[size];
                 double len = 0;
                 for (int j = 0; j < size; j++)
                 {
-                    matrix[i][j] = Float.parseFloat(params[j + 1]);
+                    matrix[i][j] = float.parseFloat(_params[j + 1]);
                     len += matrix[i][j] * matrix[i][j];
                 }
                 len = Math.sqrt(len);
@@ -71,7 +74,7 @@ public final class VectorsReader
         {
             Utility.closeQuietly(br);
             Utility.closeQuietly(r);
-            Utility.closeQuietly(is);
+            Utility.closeQuietly(_is);
 
         }
     }

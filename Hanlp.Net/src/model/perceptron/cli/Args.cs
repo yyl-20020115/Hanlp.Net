@@ -25,9 +25,9 @@ public class Args
         }
         catch (IllegalArgumentException e)
         {
-            System.err.println(e.getMessage());
+            Console.Error.WriteLine(e.getMessage());
             Args.usage(target);
-            System.exit(1);
+            Environment.Exit(1);
             throw e;
         }
     }

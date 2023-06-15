@@ -55,7 +55,7 @@ public class ModelImpl : Model
         }
         catch (IllegalArgumentException e)
         {
-            System.err.println("invalid arguments");
+            Console.Error.WriteLine("invalid arguments");
             return false;
         }
         string model = cmd.model;

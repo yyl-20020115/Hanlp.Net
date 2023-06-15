@@ -80,7 +80,7 @@ public abstract class AbstractVectorModel<K>
         Vector vector = storage.get(key);
         if (vector == null)
         {
-            return Collections.emptyList();
+            return new();
         }
         return nearest(key, vector, size);
     }

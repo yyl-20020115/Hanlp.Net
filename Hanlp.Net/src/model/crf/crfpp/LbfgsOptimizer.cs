@@ -219,7 +219,7 @@ public class LbfgsOptimizer
             }
             if (info != 1)
             {
-                System.err.println("The line search routine mcsrch failed: error code:" + info);
+                Console.Error.WriteLine("The line search routine mcsrch failed: error code:" + info);
                 return -1;
             }
 
@@ -298,12 +298,12 @@ public class LbfgsOptimizer
         }
         else if (diag_.length != size || v_.length != size)
         {
-            System.err.println("size of array is different");
+            Console.Error.WriteLine("size of array is different");
             return -1;
         }
         else if (orthant && v_.length != size)
         {
-            System.err.println("size of array is different");
+            Console.Error.WriteLine("size of array is different");
             return -1;
         }
         int iflag = 0;
@@ -323,7 +323,7 @@ public class LbfgsOptimizer
 
         if (iflag < 0)
         {
-            System.err.println("routine stops with unexpected error");
+            Console.Error.WriteLine("routine stops with unexpected error");
             return -1;
         }
 

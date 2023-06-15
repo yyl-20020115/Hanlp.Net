@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.MDAG;
+
 namespace com.hankcs.hanlp.corpus.occurrence;
 
 
@@ -16,7 +18,7 @@ namespace com.hankcs.hanlp.corpus.occurrence;
  * 词与词频的简单封装
  * @author hankcs
  */
-public class TermFrequency : AbstractMap.SimpleEntry<string, int> , IComparable<TermFrequency>
+public class TermFrequency : AbstractMap<string,int>.SimpleEntry<string, int> , IComparable<TermFrequency>
 {
     public TermFrequency(string term)
         : this(term, 1)

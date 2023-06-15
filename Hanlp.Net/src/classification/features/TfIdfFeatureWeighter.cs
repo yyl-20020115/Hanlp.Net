@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.classification.features;
 public class TfIdfFeatureWeighter : IFeatureWeighter
 {
     int numDocs;
-    int df[];
+    int[] df;
 
     public TfIdfFeatureWeighter(int numDocs, int[] df)
     {
@@ -16,7 +16,7 @@ public class TfIdfFeatureWeighter : IFeatureWeighter
 
     public double weight(int feature, int tf)
     {
-        if (feature >= df.length) System.err.println(feature);
-        return Math.log10(tf + 1) * (Math.log10((double) numDocs / df[feature] + 1));    // 一种改进的tf*idf计算方式;
+        if (feature >= df.Length) Console.Error.WriteLine(feature);
+        return Math.Log10(tf + 1) * (Math.Log10((double) numDocs / df[feature] + 1));    // 一种改进的tf*idf计算方式;
     }
 }

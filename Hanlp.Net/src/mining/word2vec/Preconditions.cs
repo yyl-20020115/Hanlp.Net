@@ -11,7 +11,7 @@ class Preconditions
      * Ensures the truth of an expression involving one or more parameters to the calling method.
      *
      * @param expression a bool expression
-     * @throws IllegalArgumentException if {@code expression} is false
+     * @ if {@code expression} is false
      */
     public static void checkArgument(bool expression)
     {
@@ -27,7 +27,7 @@ class Preconditions
      * @param expression   a bool expression
      * @param errorMessage the exception message to use if the check fails; will be converted to a
      *                     string using {@link string#valueOf(Object)}
-     * @throws IllegalArgumentException if {@code expression} is false
+     * @ if {@code expression} is false
      */
     public static void checkArgument(bool expression, Object errorMessage)
     {
@@ -48,7 +48,7 @@ class Preconditions
      *                             in square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
      *                             are converted to strings using {@link string#valueOf(Object)}.
-     * @throws IllegalArgumentException if {@code expression} is false
+     * @ if {@code expression} is false
      * @throws NullPointerException     if the check fails and either {@code errorMessageTemplate} or
      *                                  {@code errorMessageArgs} is null (don't let this happen)
      */
@@ -214,7 +214,7 @@ class Preconditions
      * @param size  the size of that array, list or string
      * @return the value of {@code index}
      * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
-     * @throws IllegalArgumentException  if {@code size} is negative
+     * @  if {@code size} is negative
      */
     public static int checkElementIndex(int index, int size)
     {
@@ -230,7 +230,7 @@ class Preconditions
      * @param desc  the text to use to describe this index in an error message
      * @return the value of {@code index}
      * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
-     * @throws IllegalArgumentException  if {@code size} is negative
+     * @  if {@code size} is negative
      */
     public static int checkElementIndex(
             int index, int size, string desc)
@@ -267,7 +267,7 @@ class Preconditions
      * @param size  the size of that array, list or string
      * @return the value of {@code index}
      * @throws IndexOutOfBoundsException if {@code index} is negative or is greater than {@code size}
-     * @throws IllegalArgumentException  if {@code size} is negative
+     * @  if {@code size} is negative
      */
     public static int checkPositionIndex(int index, int size)
     {
@@ -283,7 +283,7 @@ class Preconditions
      * @param desc  the text to use to describe this index in an error message
      * @return the value of {@code index}
      * @throws IndexOutOfBoundsException if {@code index} is negative or is greater than {@code size}
-     * @throws IllegalArgumentException  if {@code size} is negative
+     * @  if {@code size} is negative
      */
     public static int checkPositionIndex(int index, int size, string desc)
     {
@@ -321,7 +321,7 @@ class Preconditions
      * @param size  the size of that array, list or string
      * @throws IndexOutOfBoundsException if either index is negative or is greater than {@code size},
      *                                   or if {@code end} is less than {@code start}
-     * @throws IllegalArgumentException  if {@code size} is negative
+     * @  if {@code size} is negative
      */
     public static void checkPositionIndexes(int start, int end, int size)
     {

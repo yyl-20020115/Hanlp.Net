@@ -1,4 +1,4 @@
-/*
+﻿/*
  * <summary></summary>
  * <author>He Han</author>
  * <email>me@hankcs.com</email>
@@ -9,15 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-using com.hankcs.hanlp.collection.trie.datrie;
-
-namespace com.hankcs.hanlp.classification.tokenizers;
-
-
-/**
- * @author hankcs
- */
-public interface ITokenizer : Serializable
+namespace com.hankcs.hanlp.classification.tokenizers
 {
-    string[] segment(string text);
+    public interface Serializable
+    {
+    }
 }

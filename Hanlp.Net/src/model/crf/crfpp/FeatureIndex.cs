@@ -179,7 +179,7 @@ public abstract class FeatureIndex
             string featureID = applyRule(tmpl, curPos, tagger);
             if (featureID == null || featureID.length() == 0)
             {
-                System.err.println("format error");
+                Console.Error.WriteLine("format error");
                 return false;
             }
             int id = getID(featureID);

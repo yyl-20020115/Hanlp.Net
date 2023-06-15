@@ -8,6 +8,9 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.mining.cluster;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.demo;
 
 
@@ -17,11 +20,13 @@ namespace com.hankcs.demo;
  */
 public class DemoTextClusteringFMeasure
 {
+    public static readonly string CORPUS_FOLDER = TestUtility.ensureTestData("搜狗文本分类语料库迷你版", "http://hanlp.linrunsoft.com/release/corpus/sogou-text-classification-corpus-mini.zip");
+
     public static void Main(String[] args)
     {
         foreach (String algorithm in new String[]{"kmeans", "repeated bisection"})
         {
-            Console.Write("%s F1=%.2f\n", algorithm, ClusterAnalyzer.evaluate(CORPUS_FOLDER, algorithm) * 100);
+            Console.Write("{0} F1={1}\n", algorithm, ClusterAnalyzer<object>.evaluate(CORPUS_FOLDER, algorithm) * 100);
         }
     }
 }

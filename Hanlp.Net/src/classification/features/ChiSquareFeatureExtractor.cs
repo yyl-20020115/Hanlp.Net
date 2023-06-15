@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.classification.corpus;
+
 namespace com.hankcs.hanlp.classification.features;
 
 
@@ -36,12 +38,12 @@ public class ChiSquareFeatureExtractor
      */
     public Dictionary<int, Double> chi_square(BaseFeatureData stats)
     {
-        Dictionary<int, Double> selectedFeatures = new HashMap<int, Double>();
+        Dictionary<int, Double> selectedFeatures = new ();
 
         int N1dot, N0dot, N00, N01, N10, N11;
         double chisquareScore;
         Double previousScore;
-        for (int feature = 0; feature < stats.featureCategoryJointCount.length; feature++)
+        for (int feature = 0; feature < stats.featureCategoryJointCount.Length; feature++)
         {
             int[] categoryList = stats.featureCategoryJointCount[feature];
 

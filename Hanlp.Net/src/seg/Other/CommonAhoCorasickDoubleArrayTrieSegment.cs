@@ -8,6 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.seg.Other;
 
 
@@ -27,7 +30,7 @@ public class CommonAhoCorasickDoubleArrayTrieSegment<V>
         this.trie = trie;
     }
 
-    public CommonAhoCorasickDoubleArrayTrieSegment(TreeMap<string, V> dictionary)
+    public CommonAhoCorasickDoubleArrayTrieSegment(Dictionary<string, V> dictionary)
     {
         trie = new AhoCorasickDoubleArrayTrie<V>(dictionary);
     }

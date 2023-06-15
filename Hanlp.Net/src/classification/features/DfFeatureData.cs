@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.corpus;
+
 namespace com.hankcs.hanlp.classification.features;
 
 
@@ -25,7 +27,7 @@ public class DfFeatureData : BaseFeatureData
      * @param dataSet
      */
     public DfFeatureData(IDataSet dataSet)
+        :base(dataSet)
     {
-        super(dataSet);
     }
 }

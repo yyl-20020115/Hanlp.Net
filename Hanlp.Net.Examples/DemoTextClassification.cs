@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.classification.classifiers;
 using com.hankcs.hanlp.classification.models;
 using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.demo;
 
@@ -47,7 +48,7 @@ public class DemoTextClassification
 
     private static void predict(IClassifier classifier, String text)
     {
-        Console.Write("《%s》 属于分类 【%s】\n", text, classifier.classify(text));
+        Console.Write("《{0}》 属于分类 【{1}】\n", text, classifier.classify(text));
     }
 
     private static NaiveBayesModel trainOrLoadModel() 
@@ -55,12 +56,12 @@ public class DemoTextClassification
         NaiveBayesModel model = (NaiveBayesModel) IOUtil.readObjectFrom(MODEL_PATH);
         if (model != null) return model;
 
-        File corpusFolder = new File(CORPUS_FOLDER);
-        if (!corpusFolder.exists() || !corpusFolder.isDirectory())
+        var corpusFolder = (CORPUS_FOLDER);
+        if (!Directory.Exists(corpusFolder))
         {
-            System.err.println("没有文本分类语料，请阅读IClassifier.train(java.lang.String)中定义的语料格式与语料下载：" +
+            Console.Error.WriteLine("没有文本分类语料，请阅读IClassifier.train(java.lang.String)中定义的语料格式与语料下载：" +
                                    "https://github.com/hankcs/HanLP/wiki/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E4%B8%8E%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90");
-            System.exit(1);
+            Environment.Exit(1);
         }
 
         IClassifier classifier = new NaiveBayesClassifier(); // 创建分类器，更高级的功能请参考IClassifier的接口定义

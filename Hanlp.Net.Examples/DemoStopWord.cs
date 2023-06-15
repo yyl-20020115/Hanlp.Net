@@ -8,7 +8,10 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.dictionary.stopword;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
 
 namespace com.hankcs.demo;
 
@@ -37,18 +40,24 @@ public class DemoStopWord
         CoreStopWordDictionary.apply(termList);
         Console.WriteLine(termList);
         // 还可以自定义过滤逻辑
-        CoreStopWordDictionary.FILTER = new Filter()
-        {
-            @Override
-            public boolean shouldInclude(Term term)
-            {
-                if (term.nature == nz)
-                {
-                    return !CoreStopWordDictionary.contains(term.word);
-                }
-                return false;
-            }
-        };
+        CoreStopWordDictionary.FILTER = new FT(Nature.nz);
         Console.WriteLine(NotionalTokenizer.segment(text));
+    }
+    public class FT : Filter
+    {
+        private readonly Nature nz;
+
+        public FT(Nature nz)
+        {
+            this.nz = nz;
+        }
+        public bool shouldInclude(Term term)
+        {
+            if (term.nature == nz)
+            {
+                return !CoreStopWordDictionary.contains(term.word);
+            }
+            return false;
+        }
     }
 }

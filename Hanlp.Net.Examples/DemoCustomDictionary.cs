@@ -39,11 +39,10 @@ public class DemoCustomDictionary
          
         // DoubleArrayTrie分词
         char[] charArray = text.ToCharArray();
-        CustomDictionary.parseText(charArray, new CT3());
+        CustomDictionary.parseText(charArray, new CTX(charArray));
         // 首字哈希之后二分的trie树分词
         var searcher = CustomDictionary.getSearcher(text);
-        Map.Entry entry;
-        while ((entry = searcher.next()) != null)
+        foreach(var entry in searcher)
         {
             Console.WriteLine(entry);
         }
@@ -55,12 +54,16 @@ public class DemoCustomDictionary
         // 目前CustomDictionary使用DAT储存词典文件中的词语，用BinTrie储存动态加入的词语，前者性能高，后者性能低
         // 之所以保留动态增删功能，一方面是历史遗留特性，另一方面是调试用；未来可能会去掉动态增删特性。
     }
-    public class CT3 : AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
+    public class CTX : AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
-
+        private char[] charArray;
+        public CTX(char[] chars)
+        {
+            this.charArray = chars;
+        }
         public void hit(int begin, int end, CoreDictionary.Attribute value)
         {
-            Console.WriteLine("[%d:%d]=%s %s\n", begin, end, new String(charArray, begin, end - begin), value);
+            Console.WriteLine("[{0}:{1}]={2} {3}\n", begin, end, new String(charArray, begin, end - begin), value);
         }
     }
 }

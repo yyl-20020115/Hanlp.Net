@@ -154,7 +154,7 @@ public class TextFileCorpus : Corpus
             Utility.closeQuietly(fileInputStream);
             Utility.closeQuietly(raf);
             Utility.closeQuietly(cache);
-            System.err.println();
+            Console.Error.WriteLine();
         }
 
         if (callback == null)

@@ -51,7 +51,7 @@ public class crf_learn
         }
         catch (IllegalArgumentException e)
         {
-            System.err.println(e.getMessage());
+            Console.Error.WriteLine(e.getMessage());
             Args.usage(option);
             return false;
         }
@@ -94,7 +94,7 @@ public class crf_learn
         }
         else
         {
-            System.err.println("unknown algorithm: " + algorithm);
+            Console.Error.WriteLine("unknown algorithm: " + algorithm);
             return false;
         }
         if (convert)
@@ -102,7 +102,7 @@ public class crf_learn
             EncoderFeatureIndex featureIndex = new EncoderFeatureIndex(1);
             if (!featureIndex.convert(restArgs[0], restArgs[1]))
             {
-                System.err.println("fail to convert text model");
+                Console.Error.WriteLine("fail to convert text model");
                 return false;
             }
         }
@@ -111,7 +111,7 @@ public class crf_learn
             DecoderFeatureIndex featureIndex = new DecoderFeatureIndex();
             if (!featureIndex.convert(restArgs[0], restArgs[1]))
             {
-                System.err.println("fail to convert binary model");
+                Console.Error.WriteLine("fail to convert binary model");
                 return false;
             }
         }
@@ -121,7 +121,7 @@ public class crf_learn
             if (!encoder.learn(restArgs[0], restArgs[1], restArgs[2],
                                textmodel, maxiter, freq, eta, C, threadNum, shrinkingSize, algo))
             {
-                System.err.println("fail to learn model");
+                Console.Error.WriteLine("fail to learn model");
                 return false;
             }
         }

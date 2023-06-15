@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.collections;
+using com.hankcs.hanlp.classification.models;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -23,15 +26,15 @@ public class MemoryDataSet : AbstractDataSet
     bool editMode;
 
     public MemoryDataSet()
+        :base()
     {
-        super();
-        documentList = new LinkedList<Document>();
+        documentList = new ();
     }
 
     public MemoryDataSet(AbstractModel model)
+        :base(model)
     {
-        super(model);
-        documentList = new LinkedList<Document>();
+        documentList = new ();
     }
 
     //@Override
@@ -39,30 +42,30 @@ public class MemoryDataSet : AbstractDataSet
     {
         if (editMode) return null;
         Document document = convert(category, text);
-        documentList.add(document);
+        documentList.Add(document);
         return document;
     }
     //@Override
     public int size()
     {
-        return documentList.size();
+        return documentList.Count;
     }
 
     //@Override
     public void clear()
     {
-        documentList.clear();
+        documentList.Clear();
     }
 
     //@Override
     public IDataSet shrink(int[] idMap)
     {
-        Iterator<Document> iterator = iterator();
+        var iterator = iterator();
         while (iterator.hasNext())
         {
             Document document = iterator.next();
             FrequencyMap<int> tfMap = new FrequencyMap<int>();
-            for (KeyValuePair<int, int[]> entry : document.tfMap.entrySet())
+            foreach (KeyValuePair<int, int[]> entry in document.tfMap.entrySet())
             {
                 int feature = entry.getKey();
                 if (idMap[feature] == -1) continue;
@@ -76,8 +79,8 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public Iterator<Document> iterator()
+    public IEnumerator<Document> iterator()
     {
-        return documentList.iterator();
+        return documentList.GetEnumerator();
     }
 }

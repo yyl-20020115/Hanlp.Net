@@ -34,7 +34,7 @@ public class State
     /**
      * 只要这个状态可达，则记录模式串
      */
-    private Set<int> emits = null;
+    private HashSet<int> emits = null;
     /**
      * goto 表，也称转移函数。根据字符串的下一个字符转移到下一个状态
      */

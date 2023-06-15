@@ -56,7 +56,7 @@ public class crf_test
             InputStream stream = IOUtil.newInputStream(model);
             if (!tagger.open(stream, nbest, vlevel, costFactor))
             {
-                System.err.println("open error");
+                Console.Error.WriteLine("open error");
                 return false;
             }
             string[] restArgs = unkownArgs.toArray(new string[0]);
@@ -81,7 +81,7 @@ public class crf_test
                     TaggerImpl.ReadStatus status = tagger.read(br);
                     if (TaggerImpl.ReadStatus.ERROR == status)
                     {
-                        System.err.println("read error");
+                        Console.Error.WriteLine("read error");
                         return false;
                     }
                     else if (TaggerImpl.ReadStatus.EOF == status && tagger.empty())
@@ -90,7 +90,7 @@ public class crf_test
                     }
                     if (!tagger.parse())
                     {
-                        System.err.println("parse error");
+                        Console.Error.WriteLine("parse error");
                         return false;
                     }
                     if (osw == null)

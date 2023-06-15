@@ -355,7 +355,7 @@ class Word2VecTraining
             }
         }
 
-        System.err.println();
+        Console.Error.WriteLine();
         logger.info(string.format("finished training in %s", Utility.humanTime(DateTime.Now.Microsecond - timeStart)));
         // lose weight
         syn1 = null;

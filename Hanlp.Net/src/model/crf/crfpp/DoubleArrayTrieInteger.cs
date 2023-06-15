@@ -518,7 +518,7 @@ public class DoubleArrayTrieInteger : Serializable
     {
         for (int i = 0; i < size; i++)
         {
-            System.err.println("i: " + i + " [" + base[i] + ", " + check[i]
+            Console.Error.WriteLine("i: " + i + " [" + base[i] + ", " + check[i]
                                    + "]");
         }
     }

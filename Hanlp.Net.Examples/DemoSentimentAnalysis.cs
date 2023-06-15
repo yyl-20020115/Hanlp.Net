@@ -40,16 +40,16 @@ public class DemoSentimentAnalysis
 
     private static void predict(IClassifier classifier, String text)
     {
-        Console.Write("《%s》 情感极性是 【%s】\n", text, classifier.classify(text));
+        Console.Write("《{0}》 情感极性是 【{1}】\n", text, classifier.classify(text));
     }
 
     static DemoSentimentAnalysis()
     {
-        File corpusFolder = new File(CORPUS_FOLDER);
-        if (!corpusFolder.exists() || !corpusFolder.isDirectory())
+        var corpusFolder = (CORPUS_FOLDER);
+        if (!Directory.Exists(corpusFolder))
         {
-            System.err.println("没有文本分类语料，请阅读IClassifier.train(java.lang.String)中定义的语料格式、准备语料");
-            System.exit(1);
+            Console.Error.WriteLine("没有文本分类语料，请阅读IClassifier.train(java.lang.String)中定义的语料格式、准备语料");
+            Environment.Exit(1);
         }
     }
 }

@@ -64,7 +64,7 @@ public class TransitionSystem
     {
         if (0 == L || -1 == R)
         {
-            System.err.println("decoder: not initialized, please check if the root dependency relation is correct set by --root.");
+            Console.Error.WriteLine("decoder: not initialized, please check if the root dependency relation is correct set by --root.");
             return;
         }
         actions.clear();

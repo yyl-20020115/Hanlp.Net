@@ -381,7 +381,7 @@ public class TaggerImpl : Tagger
     {
         if (!feature_index_.buildFeatures(this))
         {
-            System.err.println("build features failed");
+            Console.Error.WriteLine("build features failed");
             return false;
         }
         return true;
@@ -406,7 +406,7 @@ public class TaggerImpl : Tagger
                 }
                 if (!add(line))
                 {
-                    System.err.println("fail to add line: " + line);
+                    Console.Error.WriteLine("fail to add line: " + line);
                     return ReadStatus.ERROR;
                 }
             }
@@ -414,7 +414,7 @@ public class TaggerImpl : Tagger
         catch (Exception e)
         {
             e.printStackTrace();
-            System.err.println("Error reading stream");
+            Console.Error.WriteLine("Error reading stream");
             return ReadStatus.ERROR;
         }
         return status;
@@ -533,7 +533,7 @@ public class TaggerImpl : Tagger
         if ((mode_ == Mode.LEARN && cols.length < xsize + 1) ||
             (mode_ == Mode.TEST && cols.length < xsize))
         {
-            System.err.println("# x is small: size=" + cols.length + " xsize=" + xsize);
+            Console.Error.WriteLine("# x is small: size=" + cols.length + " xsize=" + xsize);
             return false;
         }
         x_.add(Arrays.asList(cols));
@@ -551,7 +551,7 @@ public class TaggerImpl : Tagger
             }
             if (r == ysize_)
             {
-                System.err.println("cannot find answer");
+                Console.Error.WriteLine("cannot find answer");
                 return false;
             }
             tmpAnswer = r;
@@ -711,7 +711,7 @@ public class TaggerImpl : Tagger
     {
         if (!feature_index_.buildFeatures(this))
         {
-            System.err.println("fail to build featureIndex");
+            Console.Error.WriteLine("fail to build featureIndex");
             return false;
         }
         if (x_.isEmpty())
@@ -808,7 +808,7 @@ public class TaggerImpl : Tagger
     {
         if (costFactor <= 0.0)
         {
-            System.err.println("cost factor must be positive");
+            Console.Error.WriteLine("cost factor must be positive");
             return false;
         }
         nbest_ = nbest;
@@ -823,13 +823,13 @@ public class TaggerImpl : Tagger
     {
         if (costFactor <= 0.0)
         {
-            System.err.println("cost factor must be positive");
+            Console.Error.WriteLine("cost factor must be positive");
             return false;
         }
         feature_index_ = new DecoderFeatureIndex();
         if (!feature_index_.open(stream))
         {
-            System.err.println("Failed to open model file ");
+            Console.Error.WriteLine("Failed to open model file ");
             return false;
         }
         nbest_ = nbest;
@@ -989,7 +989,7 @@ public class TaggerImpl : Tagger
         }
         if (stream != null && !tagger.open(stream, 2, 0, 1.0))
         {
-            System.err.println("open error");
+            Console.Error.WriteLine("open error");
             return;
         }
         System._out.println("Done reading model");
@@ -1005,7 +1005,7 @@ public class TaggerImpl : Tagger
                 ReadStatus status = tagger.read(br);
                 if (ReadStatus.ERROR == status)
                 {
-                    System.err.println("read error");
+                    Console.Error.WriteLine("read error");
                     return;
                 }
                 else if (ReadStatus.EOF == status)
@@ -1018,7 +1018,7 @@ public class TaggerImpl : Tagger
                 }
                 if (!tagger.parse())
                 {
-                    System.err.println("parse error");
+                    Console.Error.WriteLine("parse error");
                     return;
                 }
                 System._out.print(tagger.toString());

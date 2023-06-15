@@ -26,18 +26,19 @@ public class WordVectorModel : AbstractVectorModel<string>
      * @ 加载错误
      */
     public WordVectorModel(string modelFileName) 
+        : base(loadVectorMap(modelFileName))
     {
-        super(loadVectorMap(modelFileName));
+        ;
     }
 
-    private static TreeMap<string, Vector> loadVectorMap(string modelFileName) 
+    private static Dictionary<string, Vector> loadVectorMap(string modelFileName) 
     {
         VectorsReader reader = new VectorsReader(modelFileName);
         reader.readVectorFile();
-        TreeMap<string, Vector> map = new TreeMap<string, Vector>();
-        for (int i = 0; i < reader.vocab.length; i++)
+        var map = new Dictionary<string, Vector>();
+        for (int i = 0; i < reader.vocab.Length; i++)
         {
-            map.put(reader.vocab[i], new Vector(reader.matrix[i]));
+            map.Add(reader.vocab[i], new Vector(reader.matrix[i]));
         }
         return map;
     }
@@ -50,7 +51,7 @@ public class WordVectorModel : AbstractVectorModel<string>
      * @param C 做加法的词语
      * @return 与(A - B + C)语义距离最近的词语及其相似度列表
      */
-    public List<KeyValuePair<string, Float>> analogy(string A, string B, string C)
+    public List<KeyValuePair<string,float>> analogy(string A, string B, string C)
     {
         return analogy(A, B, C, 10);
     }
@@ -64,7 +65,7 @@ public class WordVectorModel : AbstractVectorModel<string>
      * @param size topN个
      * @return 与(A - B + C)语义距离最近的词语及其相似度列表
      */
-    public List<KeyValuePair<string, Float>> analogy(string A, string B, string C, int size)
+    public List<KeyValuePair<string, float>> analogy(string A, string B, string C, int size)
     {
         Vector a = storage.get(A);
         Vector b = storage.get(B);

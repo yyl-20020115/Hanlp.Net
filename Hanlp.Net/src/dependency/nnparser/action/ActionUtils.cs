@@ -62,7 +62,7 @@ public class ActionUtils : ActionType
             if (head == -1)
             {
                 if (root == -1)
-                    System.err.println("error: there should be only one root.");
+                    Console.Error.WriteLine("error: there should be only one root.");
                 root = i;
             }
             else

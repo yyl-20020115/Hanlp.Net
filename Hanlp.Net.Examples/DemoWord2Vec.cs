@@ -62,7 +62,7 @@ public class DemoWord2Vec
         Console.Write("\n                                                Word     Cosine\n------------------------------------------------------------------------\n");
         foreach (var entry in model.nearest(word))
         {
-            Console.Write("%50s\t\t%f\n", entry.getKey(), entry.getValue());
+            Console.Write("%{0}\t\t{1}\n", entry.Key, entry.Value);
         }
     }
 
@@ -71,7 +71,7 @@ public class DemoWord2Vec
         printHeader(document);
         foreach (var entry in model.nearest(document))
         {
-            Console.Write("%50s\t\t%f\n", documents[entry.getKey()], entry.getValue());
+            Console.Write("%50s\t\t%f\n", documents[entry.Key], entry.Value);
         }
     }
 

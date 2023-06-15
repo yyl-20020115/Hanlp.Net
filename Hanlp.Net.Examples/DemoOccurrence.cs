@@ -29,7 +29,7 @@ public class DemoOccurrence
         occurrence.compute();
 
         var uniGram = occurrence.getUniGram();
-        foreach (var entry in uniGram)
+        foreach (var entry in uniGram) 
         {
             TermFrequency termFrequency = entry.getValue();
             Console.WriteLine(termFrequency);

@@ -1,3 +1,6 @@
+using com.hankcs.hanlp.classification.corpus;
+using com.hankcs.hanlp.collection.trie.bintrie;
+
 namespace com.hankcs.hanlp.classification.features;
 
 
@@ -39,11 +42,11 @@ public class BaseFeatureData
         categoryCounts = new int[catalog.size()];
 
         // 执行统计
-        for (Document document : dataSet)
+        foreach (Document document in dataSet)
         {
             ++categoryCounts[document.category];
 
-            for (KeyValuePair<int, int[]> entry : document.tfMap.entrySet())
+            foreach (KeyValuePair<int, int[]> entry in document.tfMap.entrySet())
             {
                 featureCategoryJointCount[entry.getKey()][document.category] += 1;
             }

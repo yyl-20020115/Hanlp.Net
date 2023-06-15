@@ -33,6 +33,6 @@ public class DemoHighSpeedSegment
             SpeedTokenizer.segment(text);
         }
         double costTime = (DateTime.Now.Microsecond - start) / (double)1000;
-        Console.WriteLine("SpeedTokenizer分词速度：%.2f字每秒\n", text.Length * pressure / costTime);
+        Console.WriteLine("SpeedTokenizer分词速度：{0}字每秒\n", text.Length * pressure / costTime);
     }
 }

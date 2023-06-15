@@ -123,7 +123,7 @@ public class Main
                 if (option.input == null)
                 {
                     scanner = new Scanner(System.in);
-//                    System.err.println("请输入文本：");
+//                    Console.Error.WriteLine("请输入文本：");
                 }
                 else
                 {
@@ -149,12 +149,12 @@ public class Main
         }
         catch (IllegalArgumentException e)
         {
-            System.err.println(e.getMessage());
+            Console.Error.WriteLine(e.getMessage());
             Args.usage(option);
         }
         catch (IOException e)
         {
-            System.err.println("发生了IO异常，请检查文件路径");
+            Console.Error.WriteLine("发生了IO异常，请检查文件路径");
             e.printStackTrace();
         }
     }

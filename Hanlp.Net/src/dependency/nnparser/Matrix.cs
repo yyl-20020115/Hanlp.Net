@@ -111,7 +111,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * Construct a matrix from a 2-D array.
      *
      * @param A Two-dimensional array of doubles.
-     * @throws IllegalArgumentException All rows must have the same length
+     * @ All rows must have the same length
      * @see #constructWithCopy
      */
 
@@ -149,7 +149,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      *
      * @param vals One-dimensional array of doubles, packed by columns (ala Fortran).
      * @param m    Number of rows.
-     * @throws IllegalArgumentException Array length must be a multiple of m.
+     * @ Array length must be a multiple of m.
      */
 
     public Matrix(double vals[], int m)
@@ -183,7 +183,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * Construct a matrix from a copy of a 2-D array.
      *
      * @param A Two-dimensional array of doubles.
-     * @throws IllegalArgumentException All rows must have the same length
+     * @ All rows must have the same length
      */
 
     public static Matrix constructWithCopy(double[][] A)
@@ -925,7 +925,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      *
      * @param B another matrix
      * @return Matrix product, A * B
-     * @throws IllegalArgumentException Matrix inner dimensions must agree.
+     * @ Matrix inner dimensions must agree.
      */
 
     public Matrix times(Matrix B)

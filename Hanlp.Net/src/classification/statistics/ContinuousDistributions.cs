@@ -30,9 +30,9 @@ public class ContinuousDistributions
      * @param x  卡方值
      * @param df 自由度
      * @return 从0到x的累积分布函数值
-     * @throws IllegalArgumentException
+     * @
      */
-    public static double ChisquareCdf(double x, int df) throws IllegalArgumentException
+    public static double ChisquareCdf(double x, int df)
     {
         if (df <= 0)
         {
@@ -179,9 +179,9 @@ public class ContinuousDistributions
      * @param x
      * @param a
      * @return
-     * @throws IllegalArgumentException
+     * @
      */
-    protected static double GammaCdf(double x, double a) throws IllegalArgumentException
+    protected static double GammaCdf(double x, double a) 
     {
         if (x < 0)
         {
@@ -223,8 +223,8 @@ public class ContinuousDistributions
      */
     public static double ChisquareInverseCdf(double p, int df)
     {
-        final double CHI_EPSILON = 0.000001;   /* Accuracy of critchi approximation */
-        final double CHI_MAX = 99999.0;        /* Maximum chi-square value */
+         double CHI_EPSILON = 0.000001;   /* Accuracy of critchi approximation */
+         double CHI_MAX = 99999.0;        /* Maximum chi-square value */
         double minchisq = 0.0;
         double maxchisq = CHI_MAX;
         double chisqval = 0.0;
