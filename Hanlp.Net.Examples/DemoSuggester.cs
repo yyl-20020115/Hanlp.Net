@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.suggest;
+
 namespace com.hankcs.demo;
 
 
@@ -29,8 +31,8 @@ public class DemoSuggester
                 "“黑格比”横扫菲：菲吸取“海燕”经验及早疏散\n" +
                 "日本保密法将正式生效 日媒指其损害国民知情权\n" +
                 "英报告说空气污染带来“公共健康危机”"
-        ).split("\\n");
-        for (String title : titleArray)
+        ).Split("\\n");
+        foreach (String title in titleArray)
         {
             suggester.addSentence(title);
         }

@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.seg.Dijkstra;

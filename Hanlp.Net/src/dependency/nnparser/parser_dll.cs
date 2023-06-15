@@ -32,13 +32,13 @@ public class parser_dll
         parser = GlobalObjectPool.get(modelPath);
         if (parser != null) return;
         parser = new NeuralNetworkParser();
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         logger.info("开始加载神经网络依存句法模型：" + modelPath);
         if (!parser.load(modelPath))
         {
             throw new IllegalArgumentException("加载神经网络依存句法模型[" + modelPath + "]失败！");
         }
-        logger.info("加载神经网络依存句法模型[" + modelPath + "]成功，耗时 " + (System.currentTimeMillis() - start) + " ms");
+        logger.info("加载神经网络依存句法模型[" + modelPath + "]成功，耗时 " + (DateTime.Now.Microsecond - start) + " ms");
         parser.setup_system();
         parser.build_feature_space();
         GlobalObjectPool.put(modelPath, parser);

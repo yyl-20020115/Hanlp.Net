@@ -8,6 +8,11 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.model.crf;
+using com.hankcs.hanlp.seg;
+using System.Text;
+
 namespace com.hankcs.demo;
 
 
@@ -30,31 +35,31 @@ public class DemoMultithreadingSegment
         HanLP.Config.ShowTermNature = false;
         Console.WriteLine(segment.seg(text));
         int pressure = 10000;
-        StringBuilder sbBigText = new StringBuilder(text.length() * pressure);
+        StringBuilder sbBigText = new StringBuilder(text.Length * pressure);
         for (int i = 0; i < pressure; i++)
         {
-            sbBigText.append(text);
+            sbBigText.Append(text);
         }
-        text = sbBigText.toString();
-        System.gc();
+        text = sbBigText.ToString();
+        GC.Collect();
 
         long start;
         double costTime;
         // 测个速度
 
         segment.enableMultithreading(false);
-        start = System.currentTimeMillis();
+        start = DateTime.Now.Microsecond;
         segment.seg(text);
-        costTime = (System.currentTimeMillis() - start) / (double) 1000;
-        System.out.printf("单线程分词速度：%.2f字每秒\n", text.length() / costTime);
-        System.gc();
+        costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
+        System._out.printf("单线程分词速度：%.2f字每秒\n", text.length() / costTime);
+        GC.Collect();
 
         segment.enableMultithreading(true); // 或者 segment.enableMultithreading(4);
-        start = System.currentTimeMillis();
+        start = DateTime.Now.Microsecond;
         segment.seg(text);
-        costTime = (System.currentTimeMillis() - start) / (double) 1000;
-        System.out.printf("多线程分词速度：%.2f字每秒\n", text.length() / costTime);
-        System.gc();
+        costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
+        System._out.printf("多线程分词速度：%.2f字每秒\n", text.length() / costTime);
+        GC.Collect();
 
         // Note:
         // 内部的并行化机制可以对1万字以上的大文本开启多线程分词

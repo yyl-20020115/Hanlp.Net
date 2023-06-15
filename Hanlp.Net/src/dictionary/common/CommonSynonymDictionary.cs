@@ -254,7 +254,7 @@ public class CommonSynonymDictionary
                 if (synonym.type != type || (preWord != null && CoreBiGramTableDictionary.getBiFrequency(preWord, synonym.realWord) == 0)) listIterator.remove();
             }
             if (synonymArrayList.Count == 0) return null;
-            return synonymArrayList.get((int) (System.currentTimeMillis() % (long)synonymArrayList.Count));
+            return synonymArrayList.get((int) (DateTime.Now.Microsecond % (long)synonymArrayList.Count));
         }
 
         public Synonym randomSynonym()

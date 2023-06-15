@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary.stopword;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.tokenizer;
 
 
@@ -60,7 +64,7 @@ public class NotionalTokenizer
     public static List<List<Term>> seg2sentence(String text)
     {
         List<List<Term>> sentenceList = SEGMENT.seg2sentence(text);
-        for (List<Term> sentence : sentenceList)
+        foreach (List<Term> sentence in sentenceList)
         {
             ListIterator<Term> listIterator = sentence.listIterator();
             while (listIterator.hasNext())
@@ -94,10 +98,10 @@ public class NotionalTokenizer
      * @param filterArrayChain 自定义过滤器链
      * @return
      */
-    public static List<List<Term>> seg2sentence(String text, Filter... filterArrayChain)
+    public static List<List<Term>> seg2sentence(String text, params Filter[] filterArrayChain)
     {
         List<List<Term>> sentenceList = SEGMENT.seg2sentence(text);
-        for (List<Term> sentence : sentenceList)
+        foreach (List<Term> sentence in sentenceList)
         {
             ListIterator<Term> listIterator = sentence.listIterator();
             while (listIterator.hasNext())

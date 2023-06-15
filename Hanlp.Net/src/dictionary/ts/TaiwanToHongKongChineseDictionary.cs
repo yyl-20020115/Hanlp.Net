@@ -25,7 +25,7 @@ public class TaiwanToHongKongChineseDictionary : BaseChineseDictionary
 
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         String datPath = HanLP.Config.tcDictionaryRoot + "tw2hk";
         if (!loadDat(datPath, trie))
         {
@@ -40,7 +40,7 @@ public class TaiwanToHongKongChineseDictionary : BaseChineseDictionary
             trie.build(t2hk);
             saveDat(datPath, trie, t2hk.entrySet());
         }
-        logger.info("台湾繁体转香港繁体词典加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("台湾繁体转香港繁体词典加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     public static String convertToTraditionalHongKongChinese(String traditionalTaiwanChinese)

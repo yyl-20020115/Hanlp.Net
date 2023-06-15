@@ -8,6 +8,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.demo;
 
 
@@ -50,8 +54,8 @@ public class DemoPerceptronLexicalAnalyzer : TestUtility
 
         // 请用户按需执行对空格制表符等的预处理，只有你最清楚自己的文本中都有些什么奇怪的东西
         Console.WriteLine(analyzer.analyze("空格 \t\n\r\f&nbsp;统统都不要"
-                                                .replaceAll("\\s+", "")    // 去除所有空白符
-                                                .replaceAll("&nbsp;", "")  // 如果一些文本中含有html控制符
+                                                .Replace("\\s+", "")    // 去除所有空白符
+                                                .Replace("&nbsp;", "")  // 如果一些文本中含有html控制符
         ));
     }
 }

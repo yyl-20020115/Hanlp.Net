@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.occurrence;
+
 namespace com.hankcs.demo;
 
 
@@ -26,8 +28,8 @@ public class DemoOccurrence
         occurrence.addAll("在计算机音视频和图形图像技术等二维信息算法处理方面目前比较先进的视频处理算法");
         occurrence.compute();
 
-        Set<Map.Entry<String, TermFrequency>> uniGram = occurrence.getUniGram();
-        for (Map.Entry<String, TermFrequency> entry : uniGram)
+        var uniGram = occurrence.getUniGram();
+        foreach (var entry in uniGram)
         {
             TermFrequency termFrequency = entry.getValue();
             Console.WriteLine(termFrequency);

@@ -45,10 +45,10 @@ public class PlaceDictionary
 
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         dictionary = new NSDictionary();
         if (dictionary.load(HanLP.Config.PlaceDictionaryPath))
-            logger.info(HanLP.Config.PlaceDictionaryPath + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+            logger.info(HanLP.Config.PlaceDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         else
             throw new IllegalArgumentException(HanLP.Config.PlaceDictionaryPath + "加载失败");
         transformMatrixDictionary = new TransformMatrixDictionary<NS>(NS.class);

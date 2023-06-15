@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.tokenizer;
 
 
@@ -30,7 +35,7 @@ public class TraditionalChineseTokenizer
         String sText = CharTable.convert(text);
         List<Term> termList = SEGMENT.seg(sText);
         int offset = 0;
-        for (Term term : termList)
+        for (Term term in termList)
         {
             term.offset = offset;
             term.word = text.substring(offset, offset + term.length());
@@ -70,11 +75,11 @@ public class TraditionalChineseTokenizer
      */
     public static List<List<Term>> seg2sentence(String text)
     {
-        List<List<Term>> resultList = new LinkedList<List<Term>>();
+        List<List<Term>> resultList = new ();
         {
             foreach (String sentence in SentencesUtil.toSentenceList(text))
             {
-                resultList.add(segment(sentence));
+                resultList.Add(segment(sentence));
             }
         }
 

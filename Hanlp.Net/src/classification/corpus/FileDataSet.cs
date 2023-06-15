@@ -32,7 +32,7 @@ public class FileDataSet : AbstractDataSet
 
     public FileDataSet(AbstractModel model) 
     {
-        this(model, File.createTempFile(String.valueOf(System.currentTimeMillis()), ".dat"));
+        this(model, File.createTempFile(String.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     public FileDataSet(File cache) 
@@ -48,12 +48,12 @@ public class FileDataSet : AbstractDataSet
 
     private void initCache() 
     {
-        initCache(File.createTempFile(String.valueOf(System.currentTimeMillis()), ".dat"));
+        initCache(File.createTempFile(String.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     public FileDataSet() 
     {
-        this(File.createTempFile(String.valueOf(System.currentTimeMillis()), ".dat"));
+        this(File.createTempFile(String.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     //@Override

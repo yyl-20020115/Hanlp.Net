@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.classifiers;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.demo;
 
 
@@ -40,7 +43,7 @@ public class DemoSentimentAnalysis
         System.out.printf("《%s》 情感极性是 【%s】\n", text, classifier.classify(text));
     }
 
-    static
+    static DemoSentimentAnalysis()
     {
         File corpusFolder = new File(CORPUS_FOLDER);
         if (!corpusFolder.exists() || !corpusFolder.isDirectory())

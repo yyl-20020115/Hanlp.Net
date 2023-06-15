@@ -67,7 +67,7 @@ public class CharType
     {
         type = new byte[65536];
         logger.info("字符类型对应表开始加载 " + HanLP.Config.CharTypePath);
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         ByteArray byteArray = ByteArray.createByteArray(HanLP.Config.CharTypePath);
         if (byteArray == null)
         {
@@ -90,7 +90,7 @@ public class CharType
                 type[i] = t;
             }
         }
-        logger.info("字符类型对应表加载成功，耗时" + (System.currentTimeMillis() - start) + " ms");
+        logger.info("字符类型对应表加载成功，耗时" + (DateTime.Now.Microsecond - start) + " ms");
     }
 
     private static ByteArray generate() 

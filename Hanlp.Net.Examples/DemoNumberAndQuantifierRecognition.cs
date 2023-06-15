@@ -8,6 +8,8 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.demo;
 
 
@@ -30,7 +32,7 @@ public class DemoNumberAndQuantifierRecognition
                         "牛奶三〇〇克*2",
                         "ChinaJoy“扫黄”细则露胸超2厘米罚款",
                 };
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
             Console.WriteLine(StandardTokenizer.segment(sentence));
         }

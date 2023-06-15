@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.demo;
 
 
@@ -25,7 +29,7 @@ public class DemoPlaceRecognition
                 "蓝翔给宁夏固原市彭阳县红河镇黑牛沟村捐赠了挖掘机",
         };
         Segment segment = HanLP.newSegment().enablePlaceRecognize(true);
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
             List<Term> termList = segment.seg(sentence);
             Console.WriteLine(termList);

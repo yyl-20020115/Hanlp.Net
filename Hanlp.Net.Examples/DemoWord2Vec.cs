@@ -8,6 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.mining.word2vec;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.demo;
 
 
@@ -42,7 +45,7 @@ public class DemoWord2Vec
         Console.WriteLine(docVectorModel.similarity(documents[0], documents[1]));
         Console.WriteLine(docVectorModel.similarity(documents[0], documents[4]));
 
-        for (int i = 0; i < documents.length; i++)
+        for (int i = 0; i < documents.Length; i++)
         {
             docVectorModel.addDocument(i, documents[i]);
         }

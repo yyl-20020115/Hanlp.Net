@@ -8,6 +8,8 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary;
+
 namespace com.hankcs.demo;
 
 

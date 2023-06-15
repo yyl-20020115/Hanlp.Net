@@ -8,6 +8,8 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.demo;
 
 
@@ -25,13 +27,13 @@ public class DemoBasicTokenizer
                 "必须警惕和抵制在历史认知和维护战后国际秩序问题上的倒行逆施。";
         Console.WriteLine(BasicTokenizer.segment(text));
         // 测试分词速度，让大家对HanLP的性能有一个直观的认识
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         int pressure = 100000;
         for (int i = 0; i < pressure; ++i)
         {
             BasicTokenizer.segment(text);
         }
-        double costTime = (System.currentTimeMillis() - start) / (double) 1000;
-        System.out.printf("BasicTokenizer分词速度：%.2f字每秒\n", text.length() * pressure / costTime);
+        double costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
+        Console.WriteLine("BasicTokenizer分词速度：{0}字每秒\n", text.Length * pressure / costTime);
     }
 }

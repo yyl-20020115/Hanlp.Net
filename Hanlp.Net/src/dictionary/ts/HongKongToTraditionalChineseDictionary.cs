@@ -23,7 +23,7 @@ public class HongKongToTraditionalChineseDictionary : BaseChineseDictionary
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         String datPath = HanLP.Config.tcDictionaryRoot + "hk2t";
         if (!load(datPath, trie))
         {
@@ -35,7 +35,7 @@ public class HongKongToTraditionalChineseDictionary : BaseChineseDictionary
             trie.build(hk2t);
             saveDat(datPath, trie, hk2t.entrySet());
         }
-        logger.info("香港繁体转繁体加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("香港繁体转繁体加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     public static String convertToTraditionalChinese(String traditionalHongKongChineseString)

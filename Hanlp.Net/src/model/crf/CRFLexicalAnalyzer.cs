@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -65,8 +67,9 @@ public class CRFLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param cwsModelPath CRF分词器模型路径
      */
     public CRFLexicalAnalyzer(String cwsModelPath) 
+        : this(new CRFSegmenter(cwsModelPath))
     {
-        this(new CRFSegmenter(cwsModelPath));
+        ;
     }
 
     /**
@@ -76,8 +79,9 @@ public class CRFLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param posModelPath CRF词性标注器模型路径
      */
     public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath) 
+        : this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath))
     {
-        this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath));
+        ;
     }
 
     /**
@@ -88,8 +92,9 @@ public class CRFLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param nerModelPath CRF命名实体识别器模型路径
      */
     public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath, String nerModelPath) 
+        : this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath), new CRFNERecognizer(nerModelPath))
     {
-        this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath), new CRFNERecognizer(nerModelPath));
+        ;
     }
 
     /**

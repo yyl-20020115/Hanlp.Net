@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.demo;
 
 
@@ -26,7 +30,7 @@ public class DemoTranslatedNameRecognition
                 "世界上最长的姓名是简森·乔伊·亚历山大·比基·卡利斯勒·达夫·埃利奥特·福克斯·伊维鲁莫·马尔尼·梅尔斯·帕特森·汤普森·华莱士·普雷斯顿。",
         };
         Segment segment = HanLP.newSegment().enableTranslatedNameRecognize(true);
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
             List<Term> termList = segment.seg(sentence);
             Console.WriteLine(termList);

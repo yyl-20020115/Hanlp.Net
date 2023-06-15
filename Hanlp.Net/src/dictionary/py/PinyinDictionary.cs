@@ -24,13 +24,13 @@ public class PinyinDictionary
 
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.PinyinDictionaryPath))
         {
             throw new IllegalArgumentException("拼音词典" + HanLP.Config.PinyinDictionaryPath + "加载失败");
         }
 
-        logger.info("拼音词典" + HanLP.Config.PinyinDictionaryPath + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("拼音词典" + HanLP.Config.PinyinDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     /**

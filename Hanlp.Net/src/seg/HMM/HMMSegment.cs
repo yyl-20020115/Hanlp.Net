@@ -31,7 +31,7 @@ public class HMMSegment : CharacterBasedSegment
         model = GlobalObjectPool.get(modelPath);
         if (model != null) return;
         model = new CharacterBasedGenerativeModel();
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         logger.info("开始从[ " + modelPath + " ]加载2阶HMM模型");
         try
         {
@@ -46,7 +46,7 @@ public class HMMSegment : CharacterBasedSegment
         {
             throw new IllegalArgumentException("发生了异常：" + TextUtility.exceptionToString(e));
         }
-        logger.info("加载成功，耗时：" + (System.currentTimeMillis() - start) + " ms");
+        logger.info("加载成功，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
         GlobalObjectPool.put(modelPath, model);
     }
 

@@ -63,12 +63,12 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
 //        Trie trie = new Trie();
 //        trie.addAllKeyword(map.Keys);
 //        AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
-//        long timeMillis = System.currentTimeMillis();
+//        long timeMillis = DateTime.Now.Microsecond;
 //        act.build(map);
-//        Console.WriteLine("构建耗时：" + (System.currentTimeMillis() - timeMillis) + " ms");
+//        Console.WriteLine("构建耗时：" + (DateTime.Now.Microsecond - timeMillis) + " ms");
 //
 //        LinkedList<String> lineList = IOUtil.readLineList("D:\\Doc\\语料库\\《我的团长我的团》.txt");
-//        timeMillis = System.currentTimeMillis();
+//        timeMillis = DateTime.Now.Microsecond;
 //        for (String sentence : lineList)
 //        {
 ////            Console.WriteLine(sentence);
@@ -82,6 +82,6 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
 //                assertEquals(sentence.substring(start, end), entry.value);
 //            }
 //        }
-//        Console.printf("%d ms\n", System.currentTimeMillis() - timeMillis);
+//        Console.printf("%d ms\n", DateTime.Now.Microsecond - timeMillis);
 //    }
 }

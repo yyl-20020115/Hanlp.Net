@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.tokenizer;
 
 
@@ -34,7 +39,7 @@ public class NLPTokenizer
         }
         catch (IOException e)
         {
-            throw new RuntimeException(e);
+            throw new Exception(e.Message,e);
         }
     }
 
@@ -71,7 +76,7 @@ public class NLPTokenizer
      * @param sentence
      * @return 结构化句子
      */
-    public static Sentence analyze(final String sentence)
+    public static Sentence analyze(String sentence)
     {
         return ANALYZER.analyze(sentence);
     }

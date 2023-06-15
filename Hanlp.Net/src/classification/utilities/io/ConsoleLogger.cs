@@ -37,11 +37,11 @@ public class ConsoleLogger : ILogger
     public void start(String format, Object... args)
     {
         _out(format, args);
-        start = System.currentTimeMillis();
+        start = DateTime.Now.Microsecond;
     }
 
     public void finish(String format, Object... args)
     {
-        _out(String.format("耗时 %d ms", System.currentTimeMillis() - start) + format, args);
+        _out(String.format("耗时 %d ms", DateTime.Now.Microsecond - start) + format, args);
     }
 }

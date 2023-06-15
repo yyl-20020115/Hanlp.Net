@@ -59,19 +59,19 @@ public class ViterbiSegment : WordBasedSegment
     //@Override
     protected List<Term> segSentence(char[] sentence)
     {
-//        long start = System.currentTimeMillis();
+//        long start = DateTime.Now.Microsecond;
         WordNet wordNetAll = new WordNet(sentence);
         ////////////////生成词网////////////////////
         generateWordNet(wordNetAll);
         ///////////////生成词图////////////////////
-//        System._out.println("构图：" + (System.currentTimeMillis() - start));
+//        System._out.println("构图：" + (DateTime.Now.Microsecond - start));
         if (HanLP.Config.DEBUG)
         {
             System._out.printf("粗分词网：\n%s\n", wordNetAll);
         }
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
         List<Vertex> vertexList = viterbi(wordNetAll);
-//        System._out.println("最短路：" + (System.currentTimeMillis() - start));
+//        System._out.println("最短路：" + (DateTime.Now.Microsecond - start));
 
         if (config.useCustomDictionary)
         {

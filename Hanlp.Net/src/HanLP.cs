@@ -55,7 +55,7 @@ public class HanLP
         /**
          * 用户自定义词典路径
          */
-        public static String CustomDictionaryPath[] = new String[]{"data/dictionary/custom/CustomDictionary.txt"};
+        public static String[] CustomDictionaryPath = new String[]{"data/dictionary/custom/CustomDictionary.txt"};
         /**
          * 2元语法词典路径
          */
@@ -194,7 +194,7 @@ public class HanLP
         static HanLP()
         {
             // 自动读取配置
-            Properties p = new Properties();
+            //Properties p = new Properties();
             try
             {
                 ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -280,8 +280,8 @@ public class HanLP
                 {
                     try
                     {
-                        Class<?> clazz = Class.forName(ioAdapterClassName);
-                        Constructor<?> ctor = clazz.getConstructor();
+                        Class clazz = Class.forName(ioAdapterClassName);
+                        Constructor ctor = clazz.getConstructor();
                         Object instance = ctor.newInstance();
                         if (instance != null) IOAdapter = (IIOAdapter) instance;
                     }

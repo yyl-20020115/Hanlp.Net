@@ -19,7 +19,7 @@ public class DemoTextClusteringFMeasure
 {
     public static void Main(String[] args)
     {
-        for (String algorithm : new String[]{"kmeans", "repeated bisection"})
+        foreach (String algorithm in new String[]{"kmeans", "repeated bisection"})
         {
             System.out.printf("%s F1=%.2f\n", algorithm, ClusterAnalyzer.evaluate(CORPUS_FOLDER, algorithm) * 100);
         }

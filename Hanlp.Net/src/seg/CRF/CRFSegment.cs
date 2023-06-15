@@ -39,16 +39,16 @@ public class CRFSegment : CharacterBasedSegment
             return;
         }
         logger.info("CRF分词模型正在加载 " + modelPath);
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         crfModel = CRFModel.loadTxt(modelPath, new CRFSegmentModel(new BinTrie<FeatureFunction>()));
         if (crfModel == null)
         {
-            String error = "CRF分词模型加载 " + modelPath + " 失败，耗时 " + (System.currentTimeMillis() - start) + " ms";
+            String error = "CRF分词模型加载 " + modelPath + " 失败，耗时 " + (DateTime.Now.Microsecond - start) + " ms";
             logger.severe(error);
             throw new IllegalArgumentException(error);
         }
         else
-            logger.info("CRF分词模型加载 " + modelPath + " 成功，耗时 " + (System.currentTimeMillis() - start) + " ms");
+            logger.info("CRF分词模型加载 " + modelPath + " 成功，耗时 " + (DateTime.Now.Microsecond - start) + " ms");
         GlobalObjectPool.put(modelPath, crfModel);
     }
 

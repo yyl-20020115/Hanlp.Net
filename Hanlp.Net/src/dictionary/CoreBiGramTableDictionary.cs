@@ -35,14 +35,14 @@ public class CoreBiGramTableDictionary
     {
         String path = HanLP.Config.BiGramDictionaryPath;
         logger.info("开始加载二元词典" + path + ".table");
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (!load(path))
         {
             throw new IllegalArgumentException("二元词典加载失败");
         }
         else
         {
-            logger.info(path + ".table" + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+            logger.info(path + ".table" + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         }
     }
 

@@ -9,9 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+
 namespace com.hankcs.hanlp.dictionary.ts;
-
-
 
 
 /**
@@ -21,14 +21,14 @@ namespace com.hankcs.hanlp.dictionary.ts;
 public class TaiwanToSimplifiedChineseDictionary : BaseChineseDictionary
 {
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
-    static
+    static TaiwanToSimplifiedChineseDictionary()
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         String datPath = HanLP.Config.tcDictionaryRoot + "tw2s";
         if (!loadDat(datPath, trie))
         {
-            TreeMap<String, String> t2s = new TreeMap<String, String>();
-            TreeMap<String, String> tw2t = new TreeMap<String, String>();
+            var t2s = new Dictionary<String, String>();
+            var tw2t = new Dictionary<String, String>();
             if (!load(t2s, false, HanLP.Config.tcDictionaryRoot + "t2s.txt") ||
                     !load(tw2t, true, HanLP.Config.tcDictionaryRoot + "t2tw.txt"))
             {
@@ -38,7 +38,7 @@ public class TaiwanToSimplifiedChineseDictionary : BaseChineseDictionary
             trie.build(t2s);
             saveDat(datPath, trie, t2s.entrySet());
         }
-        logger.info("台湾繁体转简体词典加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("台湾繁体转简体词典加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     public static String convertToSimplifiedChinese(String traditionalTaiwanChinese)

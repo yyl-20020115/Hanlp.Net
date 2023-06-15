@@ -8,6 +8,16 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.model.crf.crfpp;
+using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.tokenizer.lexical;
+using System.Text;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -15,19 +25,21 @@ namespace com.hankcs.hanlp.model.crf;
 /**
  * @author hankcs
  */
-public class CRFSegmenter : CRFTagger : Segmenter
+public class CRFSegmenter : CRFTagger , Segmenter
 {
 
     private PerceptronSegmenter perceptronSegmenter;
 
     public CRFSegmenter() 
+        : this(HanLP.Config.CRFCWSModelPath)
     {
-        this(HanLP.Config.CRFCWSModelPath);
+        ;
     }
 
     public CRFSegmenter(String modelPath) 
+        : base(modelPath)
     {
-        super(modelPath);
+        ;
         if (modelPath != null)
         {
             perceptronSegmenter = new PerceptronSegmenter(this.model);
@@ -37,10 +49,10 @@ public class CRFSegmenter : CRFTagger : Segmenter
     //@Override
     protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
-        for (Word w : sentence.toSimpleWordList())
+        foreach (Word w in sentence.toSimpleWordList())
         {
             String word = CharTable.convert(w.value);
-            if (word.length() == 1)
+            if (word.Length == 1)
             {
                 bw.write(word);
                 bw.write('\t');
@@ -53,7 +65,7 @@ public class CRFSegmenter : CRFTagger : Segmenter
                 bw.write('\t');
                 bw.write('B');
                 bw.write('\n');
-                for (int i = 1; i < word.length() - 1; ++i)
+                for (int i = 1; i < word.Length - 1; ++i)
                 {
                     bw.write(word.charAt(i));
                     bw.write('\t');
@@ -70,7 +82,7 @@ public class CRFSegmenter : CRFTagger : Segmenter
 
     public List<String> segment(String text)
     {
-        List<String> wordList = new LinkedList<String>();
+        List<String> wordList = new ();
         segment(text, CharTable.convert(text), wordList);
 
         return wordList;
@@ -84,41 +96,45 @@ public class CRFSegmenter : CRFTagger : Segmenter
 
     private CWSInstance createInstance(String text)
     {
-        final FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
-        return new CWSInstance(text, model.featureMap)
-        {
-            //@Override
-            protected int[] extractFeature(String sentence, FeatureMap featureMap, int position)
-            {
-                StringBuilder sbFeature = new StringBuilder();
-                List<int> featureVec = new LinkedList<int>();
-                for (int i = 0; i < featureTemplateArray.length; i++)
-                {
-                    Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                    Iterator<String> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
-                    delimiterIterator.next(); // ignore U0 之类的id
-                    while (offsetIterator.hasNext())
-                    {
-                        int offset = offsetIterator.next()[0] + position;
-                        if (offset < 0)
-                            sbFeature.Append(FeatureIndex.BOS[-(offset + 1)]);
-                        else if (offset >= sentence.length())
-                            sbFeature.Append(FeatureIndex.EOS[offset - sentence.length()]);
-                        else
-                            sbFeature.Append(sentence.charAt(offset));
-                        if (delimiterIterator.hasNext())
-                            sbFeature.Append(delimiterIterator.next());
-                        else
-                            sbFeature.Append(i);
-                    }
-                    addFeatureThenClear(sbFeature, featureVec, featureMap);
-                }
-                return toFeatureArray(featureVec);
-            }
-        };
+        FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
+        return new CWSIns(text, model.featureMap);
     }
+    public class CWSIns : CWSInstance
+    {
+        public CWSIns(String sentence, FeatureMap featureMap)
+            :base(sentence,featureMap)
+        {
 
-    //@Override
+        }
+        //@Override
+        protected int[] extractFeature(String sentence, FeatureMap featureMap, int position)
+        {
+            StringBuilder sbFeature = new StringBuilder();
+            List<int> featureVec = new ();
+            for (int i = 0; i < featureTemplateArray.length; i++)
+            {
+                Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
+                Iterator<String> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                delimiterIterator.next(); // ignore U0 之类的id
+                while (offsetIterator.hasNext())
+                {
+                    int offset = offsetIterator.next()[0] + position;
+                    if (offset < 0)
+                        sbFeature.Append(FeatureIndex.BOS[-(offset + 1)]);
+                    else if (offset >= sentence.length())
+                        sbFeature.Append(FeatureIndex.EOS[offset - sentence.length()]);
+                    else
+                        sbFeature.Append(sentence.charAt(offset));
+                    if (delimiterIterator.hasNext())
+                        sbFeature.Append(delimiterIterator.next());
+                    else
+                        sbFeature.Append(i);
+                }
+                addFeatureThenClear(sbFeature, featureVec, featureMap);
+            }
+            return toFeatureArray(featureVec);
+        }
+    }    //@Override
     protected String getDefaultFeatureTemplate()
     {
         return "# Unigram\n" +

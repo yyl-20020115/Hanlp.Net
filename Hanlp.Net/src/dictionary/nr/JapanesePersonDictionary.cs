@@ -36,13 +36,13 @@ public class JapanesePersonDictionary
 
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (!load())
         {
             throw new IllegalArgumentException("日本人名词典" + path + "加载失败");
         }
 
-        logger.info("日本人名词典" + HanLP.Config.PinyinDictionaryPath + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("日本人名词典" + HanLP.Config.PinyinDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     static bool load()

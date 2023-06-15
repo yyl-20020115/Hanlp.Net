@@ -73,18 +73,21 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
     }
 
     public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile) 
+        : this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), null)
     {
-        this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), null);
+        ;
     }
 
     public PerceptronLexicalAnalyzer(String cwsModelFile) 
+        : this(new LinearModel(cwsModelFile), null, null)
     {
-        this(new LinearModel(cwsModelFile), null, null);
+        ;
     }
 
     public PerceptronLexicalAnalyzer(LinearModel CWSModel)
+        : this(CWSModel, null, null)
     {
-        this(CWSModel, null, null);
+        ;
     }
 
     /**
@@ -93,8 +96,9 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
      * @
      */
     public PerceptronLexicalAnalyzer() 
+        : this(HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath)
     {
-        this(HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath);
+        ;
     }
 
     /**

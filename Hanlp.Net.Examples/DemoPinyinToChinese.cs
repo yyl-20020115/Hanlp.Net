@@ -8,6 +8,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.seg.Other;
+using System.Collections.Specialized;
+
 namespace com.hankcs.demo;
 
 
@@ -23,7 +28,7 @@ public class DemoPinyinToChinese
     {
         StringDictionary dictionary = new StringDictionary("=");
         dictionary.load(HanLP.Config.PinyinDictionaryPath);
-        TreeMap<String, Set<String>> map = new TreeMap<String, Set<String>>();
+        var map = new Dictionary<String, HashSet<String>>();
         for (Map.Entry<String, String> entry : dictionary.entrySet())
         {
             String pinyins = entry.getValue().replaceAll("[\\d,]", "");
@@ -41,12 +46,12 @@ public class DemoPinyinToChinese
         map.put("lvse", words);
 
         // 1.5.2及以下版本
-        AhoCorasickDoubleArrayTrie<Set<String>> trie = new AhoCorasickDoubleArrayTrie<Set<String>>();
+        AhoCorasickDoubleArrayTrie<HashSet<String>> trie = new AhoCorasickDoubleArrayTrie<HashSet<String>>();
         trie.build(map);
         Console.WriteLine(CommonAhoCorasickSegmentUtil.segment("renmenrenweiyalujiangbujianlvse", trie));
 
         // 1.5.3及以上版本
-        CommonAhoCorasickDoubleArrayTrieSegment<Set<String>> segment = new CommonAhoCorasickDoubleArrayTrieSegment<Set<String>>(map);
+        CommonAhoCorasickDoubleArrayTrieSegment<HashSet<String>> segment = new CommonAhoCorasickDoubleArrayTrieSegment<Set<String>>(map);
         Console.WriteLine(segment.segment("renmenrenweiyalujiangbujianlvse"));
 
     }

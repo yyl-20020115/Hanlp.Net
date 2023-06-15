@@ -31,12 +31,12 @@ public class CharTable
 
     static CharTable()
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.CharTablePath))
         {
             throw new IllegalArgumentException("字符正规化表加载失败");
         }
-        logger.info("字符正规化表加载成功：" + (System.currentTimeMillis() - start) + " ms");
+        logger.info("字符正规化表加载成功：" + (DateTime.Now.Microsecond - start) + " ms");
     }
 
     private static bool load(String path)

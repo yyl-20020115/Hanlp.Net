@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.demo;
 
 
@@ -28,7 +32,7 @@ public class DemoOrganizationRecognition
                 "不用词典，福哈生态工程有限公司是动态识别的结果。",
         };
         Segment segment = HanLP.newSegment().enableCustomDictionary(false).enableOrganizationRecognize(true);
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
             List<Term> termList = segment.seg(sentence);
             Console.WriteLine(termList);

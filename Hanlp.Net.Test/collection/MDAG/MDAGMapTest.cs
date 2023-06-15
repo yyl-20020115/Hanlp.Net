@@ -71,18 +71,18 @@ public class MDAGMapTest : TestCase
 //        }
 //
 //        long start;
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
 //            binTrie.commonPrefixSearchWithValue(key);
 //        }
-//        Console.printf("binTrie: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("binTrie: %d ms\n", DateTime.Now.Microsecond - start);
 //
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
 //            mdagMap.commonPrefixSearchWithValue(key);
 //        }
-//        Console.printf("mdagMap: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("mdagMap: %d ms\n", DateTime.Now.Microsecond - start);
 //    }
 }

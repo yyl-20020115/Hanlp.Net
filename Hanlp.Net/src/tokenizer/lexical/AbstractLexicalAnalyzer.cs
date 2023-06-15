@@ -110,7 +110,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             segmentAfterRule(sentence, normalized, wordList);
         }
     }
-    public class CPT : AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute>
+    public class CPT : AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
         //@Override
         public void hit(int begin, int end, CoreDictionary.Attribute value)

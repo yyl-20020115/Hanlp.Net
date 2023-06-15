@@ -26,13 +26,13 @@ public class TraditionalChineseDictionary : BaseChineseDictionary
 
     static TraditionalChineseDictionary()
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.tcDictionaryRoot + "t2s.txt", trie, false))
         {
             throw new IllegalArgumentException("繁简词典" + HanLP.Config.tcDictionaryRoot + "t2s.txt" + "加载失败");
         }
 
-        logger.info("繁简词典" + HanLP.Config.tcDictionaryRoot + "t2s.txt" + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("繁简词典" + HanLP.Config.tcDictionaryRoot + "t2s.txt" + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     public static String convertToSimplifiedChinese(String traditionalChineseString)

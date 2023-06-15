@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.demo;
 
 
@@ -32,7 +35,7 @@ public class DemoSegment
                 "工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作",
                 "随着页游兴起到现在的页游繁盛，依赖于存档进行逻辑判断的设计减少了，但这块也不能完全忽略掉。",
         };
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
             List<Term> termList = HanLP.segment(sentence);
             Console.WriteLine(termList);

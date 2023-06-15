@@ -32,7 +32,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         String path = HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT;
         model = GlobalObjectPool.get(path);
         if (model != null) return;
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         ByteArray byteArray = ByteArrayFileStream.createByteArrayFileStream(path);
         if (byteArray != null)
         {
@@ -47,7 +47,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
             GlobalObjectPool.put(path, model);
         }
         String result = model == null ? "失败" : "成功";
-        logger.info("最大熵依存句法模型载入" + result + "，耗时" + (System.currentTimeMillis() - start) + " ms");
+        logger.info("最大熵依存句法模型载入" + result + "，耗时" + (DateTime.Now.Microsecond - start) + " ms");
     }
 
     /**

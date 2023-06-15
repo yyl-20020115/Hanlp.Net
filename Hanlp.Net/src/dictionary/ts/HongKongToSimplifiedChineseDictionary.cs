@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+
 namespace com.hankcs.hanlp.dictionary.ts;
 
 
@@ -21,9 +23,9 @@ namespace com.hankcs.hanlp.dictionary.ts;
 public class HongKongToSimplifiedChineseDictionary : BaseChineseDictionary
 {
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
-    static
+    static HongKongToSimplifiedChineseDictionary()
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         String datPath = HanLP.Config.tcDictionaryRoot + "hk2s";
         if (!loadDat(datPath, trie))
         {
@@ -38,7 +40,7 @@ public class HongKongToSimplifiedChineseDictionary : BaseChineseDictionary
             trie.build(t2s);
             saveDat(datPath, trie, t2s.entrySet());
         }
-        logger.info("香港繁体转简体加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("香港繁体转简体加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     public static String convertToSimplifiedChinese(String traditionalHongKongChineseString)

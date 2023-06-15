@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+
 namespace com.hankcs.hanlp.corpus.occurrence;
 
 
@@ -54,7 +56,7 @@ public class Occurrence
     /**
      * 软缓存一个pair的setset
      */
-    private Set<Map.Entry<String, PairFrequency>> entrySetPair;
+    private HashSet<KeyValuePair<String, PairFrequency>> entrySetPair;
 
     public Occurrence()
     {

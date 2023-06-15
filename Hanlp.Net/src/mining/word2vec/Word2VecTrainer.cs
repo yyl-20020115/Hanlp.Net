@@ -178,7 +178,7 @@ public class Word2VecTrainer
         settings.setMinCount(minFrequency);
         settings.setOutputFile(modelFileName);
         Word2VecTraining model = new Word2VecTraining(settings);
-        final long timeStart = System.currentTimeMillis();
+        final long timeStart = DateTime.Now.Microsecond;
 //        if (callback == null)
 //        {
 //            callback = new TrainingCallback()
@@ -199,7 +199,7 @@ public class Word2VecTrainer
 //                public void training(float alpha, float progress)
 //                {
 //                    System._out.printf("\r学习率：%.6f  进度：%.2f%%", alpha, progress);
-//                    long timeNow = System.currentTimeMillis();
+//                    long timeNow = DateTime.Now.Microsecond;
 //                    long costTime = timeNow - timeStart + 1;
 //                    progress /= 100;
 //                    String etd = Utility.humanTime((long) (costTime / progress * (1.f - progress)));
@@ -214,7 +214,7 @@ public class Word2VecTrainer
         {
             model.trainModel();
             System._out.println();
-            System._out.printf("训练结束，一共耗时：%s\n", Utility.humanTime(System.currentTimeMillis() - timeStart));
+            System._out.printf("训练结束，一共耗时：%s\n", Utility.humanTime(DateTime.Now.Microsecond - timeStart));
             return new WordVectorModel(modelFileName);
         }
         catch (IOException e)

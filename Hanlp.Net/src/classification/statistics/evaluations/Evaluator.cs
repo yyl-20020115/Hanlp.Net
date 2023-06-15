@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.classifiers;
+using com.hankcs.hanlp.classification.corpus;
+
 namespace com.hankcs.hanlp.classification.statistics.evaluations;
 
 
@@ -29,7 +32,7 @@ public class Evaluator
         double[] TP_FP = new double[c]; // 判定为某个类别的数量
         double[] TP_FN = new double[c]; // 某个类别的样本数量
         double[] TP = new double[c];    // 判定为某个类别且判断正确的数量
-        double time = System.currentTimeMillis();
+        double time = DateTime.Now.Microsecond;
         for (Document document : testingDataSet)
         {
             final int _out = classifier.label(document);
@@ -41,7 +44,7 @@ public class Evaluator
                 ++TP[_out];
             }
         }
-        time = System.currentTimeMillis() - time;
+        time = DateTime.Now.Microsecond - time;
 
         FMeasure result = calculate(c, testingDataSet.size(), TP, TP_FP, TP_FN);
         result.catalog = testingDataSet.getCatalog().toArray();

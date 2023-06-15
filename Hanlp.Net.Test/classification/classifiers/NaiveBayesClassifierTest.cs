@@ -34,10 +34,10 @@ public class NaiveBayesClassifierTest : TestCase
     {
         LoadDataSet();
         NaiveBayesClassifier naiveBayesClassifier = new NaiveBayesClassifier();
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         Console.WriteLine("开始训练...");
         naiveBayesClassifier.train(trainingDataSet);
-        Console.WriteLine("训练耗时：{0} ms\n", System.currentTimeMillis() - start);
+        Console.WriteLine("训练耗时：{0} ms\n", DateTime.Now.Microsecond - start);
         // 将模型保存
         IOUtil.saveObjectTo(naiveBayesClassifier.getNaiveBayesModel(), MODEL_PATH);
     }
@@ -71,7 +71,7 @@ public class NaiveBayesClassifierTest : TestCase
         int totalDocuments = 0;
         int rightDocuments = 0;
         LoadDataSet();
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         Console.WriteLine("开始评测...");
         foreach (var entry in trainingDataSet)
         {
@@ -86,7 +86,7 @@ public class NaiveBayesClassifierTest : TestCase
         }
         Console.WriteLine("准确率 %d / %d = %.2f%%\n速度 %.2f 文档/秒", rightDocuments, totalDocuments,
                           rightDocuments / (double) totalDocuments * 100.0,
-                          totalDocuments / (double) (System.currentTimeMillis() - start) * 1000.0
+                          totalDocuments / (double) (DateTime.Now.Microsecond - start) * 1000.0
         );
     }
     [TestMethod]

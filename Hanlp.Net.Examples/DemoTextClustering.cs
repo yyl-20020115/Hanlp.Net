@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.mining.cluster;
+
 namespace com.hankcs.demo;
 
 

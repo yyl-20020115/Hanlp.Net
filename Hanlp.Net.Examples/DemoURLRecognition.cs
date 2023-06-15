@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.demo;
 
 
@@ -30,9 +33,9 @@ public class DemoURLRecognition
                         "听说.中国域名开放申请了,但我并没有申请hankcs.中国,因为穷……";
         List<Term> termList = URLTokenizer.segment(text);
         Console.WriteLine(termList);
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
-            if (term.nature == Nature.xu)
+            if (term.nature == hanlp.corpus.tag.Nature.xu)
                 Console.WriteLine(term.word);
         }
     }

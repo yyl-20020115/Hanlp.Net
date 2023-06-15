@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary;
+
 namespace com.hankcs.demo;
 
 
@@ -46,12 +48,12 @@ public class DemoWordDistance
                         "教师",
                         "会计",
                 };
-        System.out.printf("%-5s\t%-5s\t%-10s\t%-5s\n", "词A", "词B", "语义距离", "语义相似度");
-        for (String a : wordArray)
+        Console.WriteLine("%-5s\t%-5s\t%-10s\t%-5s\n", "词A", "词B", "语义距离", "语义相似度");
+        foreach (String a in wordArray)
         {
-            for (String b : wordArray)
+            foreach (String b in wordArray)
             {
-                System.out.printf("%-5s\t%-5s\t%-15d\t%-5.10f\n", a, b, CoreSynonymDictionary.distance(a, b), CoreSynonymDictionary.similarity(a, b));
+                Console.WriteLine("%-5s\t%-5s\t%-15d\t%-5.10f\n", a, b, CoreSynonymDictionary.distance(a, b), CoreSynonymDictionary.similarity(a, b));
             }
         }
     }

@@ -113,7 +113,7 @@ public class TextFileCorpus : Corpus
         {
             fileInputStream = new FileInputStream(trainFile);
             raf = new BufferedReader(new InputStreamReader(fileInputStream, encoding));
-            cacheFile = File.createTempFile(String.format("corpus_%d", System.currentTimeMillis()), ".bin");
+            cacheFile = File.createTempFile(String.format("corpus_%d", DateTime.Now.Microsecond), ".bin");
             cache = new DataOutputStream(new FileOutputStream(cacheFile));
             while (true)
             {

@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.demo;
 
 
@@ -22,17 +25,17 @@ public class DemoIndexSegment
     public static void Main(String[] args)
     {
         List<Term> termList = IndexTokenizer.segment("主副食品");
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
-            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
+            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length) + "]");
         }
 
         Console.WriteLine("\n最细颗粒度切分：");
         IndexTokenizer.SEGMENT.enableIndexMode(1);
         termList = IndexTokenizer.segment("主副食品");
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
-            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
+            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length) + "]");
         }
     }
 }

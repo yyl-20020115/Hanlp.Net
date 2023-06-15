@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
 using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.seg.common;
@@ -217,13 +218,13 @@ public class SegmentTest : TestCase
     //                .enableNameRecognize(false) // 人名识别需要二次维特比，比较慢
     //                .enableCustomDictionary(false);
     //        Console.WriteLine(segment.seg(text));
-    //        long start = System.currentTimeMillis();
+    //        long start = DateTime.Now.Microsecond;
     //        int pressure = 1000000;
     //        for (int i = 0; i < pressure; ++i)
     //        {
     //            segment.seg(text);
     //        }
-    //        double costTime = (System.currentTimeMillis() - start) / (double) 1000;
+    //        double costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
     //        Console.printf("分词速度：%.2f字每秒", text.Length() * pressure / costTime);
     //    }
     [TestMethod]
@@ -288,15 +289,15 @@ public class SegmentTest : TestCase
     //            sbBigText.append(text);
     //        }
     //        text = sbBigText.ToString();
-    //        long start = System.currentTimeMillis();
+    //        long start = DateTime.Now.Microsecond;
     //        List<Term> termList1 = segment.seg(text);
-    //        double costTime = (System.currentTimeMillis() - start) / (double) 1000;
+    //        double costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
     //        Console.printf("单线程分词速度：%.2f字每秒\n", text.Length() / costTime);
     //
     //        segment.enableMultithreading(4);
-    //        start = System.currentTimeMillis();
+    //        start = DateTime.Now.Microsecond;
     //        List<Term> termList2 = segment.seg(text);
-    //        costTime = (System.currentTimeMillis() - start) / (double) 1000;
+    //        costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
     //        Console.printf("四线程分词速度：%.2f字每秒\n", text.Length() / costTime);
     //
     //        assertEquals(termList1.size(), termList2.size());
@@ -406,9 +407,9 @@ public class SegmentTest : TestCase
     public void TestBuildASimpleSegment() 
     {
         var dictionary = new Dictionary<String, String>();
-        dictionary.put("HanLP", "名词");
-        dictionary.put("特别", "副词");
-        dictionary.put("方便", "形容词");
+        dictionary.Add("HanLP", "名词");
+        dictionary.Add("特别", "副词");
+        dictionary.Add("方便", "形容词");
         AhoCorasickDoubleArrayTrie<String> acdat = new AhoCorasickDoubleArrayTrie<String>();
         acdat.build(dictionary);
         LinkedList<ResultTerm<String>> termList =

@@ -8,6 +8,9 @@
  * This source is subject to Han He. Please contact Han He to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.crf;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.demo;
 
 
@@ -29,7 +32,7 @@ public class DemoCRFLexicalAnalyzer : TestUtility
             "上海华安工业（集团）公司董事长谭旭光和秘书胡花蕊来到美国纽约现代艺术博物馆参观",
             "微软公司於1975年由比爾·蓋茲和保羅·艾倫創立，18年啟動以智慧雲端、前端為導向的大改組。" // 支持繁体中文
         };
-        for (String sentence : tests)
+        foreach (String sentence in tests)
         {
             Console.WriteLine(analyzer.analyze(sentence));
 //            Console.WriteLine(analyzer.seg(sentence));

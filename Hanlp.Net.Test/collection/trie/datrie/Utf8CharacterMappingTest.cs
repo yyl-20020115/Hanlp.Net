@@ -15,7 +15,7 @@ public class Utf8CharacterMappingTest : TestCase
         {
             int charCount = 1;
             int start = 0;
-            for (int i = 0; i < s.Length(); i += charCount)
+            for (int i = 0; i < s.Length; i += charCount)
             {
                 int codePoint = s.codePointAt(i);
                 charCount = Character.charCount(codePoint);

@@ -57,6 +57,7 @@ public class BinTrieTest : TestCase
         trie.put(new char[] { '\uffff' }, true);
     }
 
+    [TestMethod]
     public void TestSaveAndLoad()
     {
         BinTrie<int> trie = new BinTrie<int>();

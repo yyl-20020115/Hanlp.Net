@@ -1,3 +1,8 @@
+using com.hankcs.hanlp.corpus;
+using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.demo;
 
 

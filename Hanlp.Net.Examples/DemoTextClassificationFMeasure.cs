@@ -9,6 +9,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.classifiers;
+using com.hankcs.hanlp.classification.corpus;
+using com.hankcs.hanlp.classification.statistics.evaluations;
+using com.hankcs.hanlp.classification.tokenizers;
+
 namespace com.hankcs.demo;
 
 

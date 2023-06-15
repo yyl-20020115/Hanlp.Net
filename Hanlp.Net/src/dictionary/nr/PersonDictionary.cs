@@ -38,7 +38,7 @@ public class PersonDictionary
 
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         dictionary = new NRDictionary();
         if (!dictionary.load(HanLP.Config.PersonDictionaryPath))
         {
@@ -53,7 +53,7 @@ public class PersonDictionary
             map.put(pattern.toString(), pattern);
         }
         trie.build(map);
-        logger.info(HanLP.Config.PersonDictionaryPath + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info(HanLP.Config.PersonDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     /**

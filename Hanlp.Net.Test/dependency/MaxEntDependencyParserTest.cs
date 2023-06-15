@@ -19,7 +19,7 @@ public class MaxEntDependencyParserTest : TestCase
 //        for (CoNLLSentence sentence : sentenceList)
 //        {
 //            Console.printf("%d / %d...", id++, sentenceList.size());
-//            long start = System.currentTimeMillis();
+//            long start = DateTime.Now.Microsecond;
 //            List<Term> termList = new LinkedList<Term>();
 //            for (CoNLLWord word : sentence.word)
 //            {
@@ -27,7 +27,7 @@ public class MaxEntDependencyParserTest : TestCase
 //            }
 //            CoNLLSentence _out = CRFDependencyParser.compute(termList);
 //            evaluator.e(sentence, _out);
-//            Console.WriteLine("done in " + (System.currentTimeMillis() - start) + " ms.");
+//            Console.WriteLine("done in " + (DateTime.Now.Microsecond - start) + " ms.");
 //        }
 //        Console.WriteLine(evaluator);
 //    }

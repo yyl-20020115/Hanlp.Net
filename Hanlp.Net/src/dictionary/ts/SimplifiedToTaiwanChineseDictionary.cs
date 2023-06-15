@@ -23,7 +23,7 @@ public class SimplifiedToTaiwanChineseDictionary : BaseChineseDictionary
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         String datPath = HanLP.Config.tcDictionaryRoot + "s2tw";
         if (!loadDat(datPath, trie))
         {
@@ -38,7 +38,7 @@ public class SimplifiedToTaiwanChineseDictionary : BaseChineseDictionary
             trie.build(s2t);
             saveDat(datPath, trie, s2t.entrySet());
         }
-        logger.info("简体转台湾繁体词典加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("简体转台湾繁体词典加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     public static String convertToTraditionalTaiwanChinese(String simplifiedChineseString)

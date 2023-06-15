@@ -24,14 +24,14 @@ public class WordNatureDependencyModel
 
     public WordNatureDependencyModel(String path)
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (load(path))
         {
-            logger.info("加载依存句法生成模型" + path + "成功，耗时：" + (System.currentTimeMillis() - start) + " ms");
+            logger.info("加载依存句法生成模型" + path + "成功，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
         }
         else
         {
-            throw new IllegalArgumentException("加载依存句法生成模型" + path + "失败，耗时：" + (System.currentTimeMillis() - start) + " ms");
+            throw new IllegalArgumentException("加载依存句法生成模型" + path + "失败，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
         }
     }
 

@@ -53,7 +53,7 @@ public class MDAGSetTest : TestCase
     public void TestNotContains() 
     {
         invalidKeySet = new TreeSet<String>();
-        Random random = new Random(System.currentTimeMillis());
+        Random random = new Random(DateTime.Now.Microsecond);
         mdagSet.simplify();
         mdagSet.unSimplify();
         while (invalidKeySet.size() < validKeySet.size())
@@ -149,20 +149,20 @@ public class MDAGSetTest : TestCase
     //        {
     //            binTrie.put(key, true);
     //        }
-    //        long start = System.currentTimeMillis();
+    //        long start = DateTime.Now.Microsecond;
     //        for (String key : validKeySet)
     //        {
     //            assertEquals(true, (bool)binTrie.get(key));
     //        }
-    //        Console.printf("binTrie用时 %d ms\n", System.currentTimeMillis() - start);
+    //        Console.printf("binTrie用时 %d ms\n", DateTime.Now.Microsecond - start);
     //
     //        mdagSet.simplify();
-    //        start = System.currentTimeMillis();
+    //        start = DateTime.Now.Microsecond;
     //        for (String key : validKeySet)
     //        {
     //            assertEquals(true, (bool)mdagSet.Contains(key));
     //        }
-    //        Console.printf("mdagSet用时 %d ms\n", System.currentTimeMillis() - start);
+    //        Console.printf("mdagSet用时 %d ms\n", DateTime.Now.Microsecond - start);
     //    }
     [TestMethod]
 

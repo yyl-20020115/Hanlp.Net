@@ -48,10 +48,10 @@ public class OrganizationDictionary
     }
     static
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         dictionary = new NTDictionary();
         if (dictionary.load(HanLP.Config.OrganizationDictionaryPath))
-            logger.info(HanLP.Config.OrganizationDictionaryPath + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+            logger.info(HanLP.Config.OrganizationDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         else
             throw new IllegalArgumentException(HanLP.Config.OrganizationDictionaryPath + "加载失败");
         transformMatrixDictionary = new TransformMatrixDictionary<NT>(NT.class);

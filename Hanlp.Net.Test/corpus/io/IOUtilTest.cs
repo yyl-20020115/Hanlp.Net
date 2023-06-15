@@ -8,7 +8,7 @@ public class IOUtilTest : TestCase
     [TestMethod]
     public void testReadBytesFromOtherInputStream() 
     {
-        Random random = new Random(System.currentTimeMillis());
+        Random random = new Random(DateTime.Now.Microsecond);
         byte[] originalData = new byte[1024 * 1024]; // 1MB
         random.nextBytes(originalData);
         ByteArrayInputStream _is = ();

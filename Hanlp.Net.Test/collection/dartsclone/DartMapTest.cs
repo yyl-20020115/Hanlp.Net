@@ -32,7 +32,7 @@ public class DartMapTest : TestCase
     public void TestGenerateInvalidKeySet()
     {
         invalidKeySet = new TreeSet<String>();
-        Random random = new Random(System.currentTimeMillis());
+        Random random = new Random(DateTime.Now.Microsecond);
         while (invalidKeySet.size() < validKeySet.size())
         {
             int Length = random.nextInt(10) + 1;
@@ -89,28 +89,28 @@ public class DartMapTest : TestCase
 //        trie.build(map);
 //
 //        // TreeMap
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
 //            assertEquals(key.Length(), (int)map.get(key));
 //        }
-//        Console.printf("TreeMap: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("TreeMap: %d ms\n", DateTime.Now.Microsecond - start);
 //        map = null;
 //        // DAT
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
 //            assertEquals(key.Length(), (int)trie.get(key));
 //        }
-//        Console.printf("DAT: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("DAT: %d ms\n", DateTime.Now.Microsecond - start);
 //        trie = null;
 //        // DAWG
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
 //            assertEquals(key.Length(), (int)dartMap.get(key));
 //        }
-//        Console.printf("DAWG: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("DAWG: %d ms\n", DateTime.Now.Microsecond - start);
 //
 //        /**
 //         * result:

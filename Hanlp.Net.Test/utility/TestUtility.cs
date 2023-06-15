@@ -146,12 +146,12 @@ public class TestUtility
 
                 int bytesRead;
                 byte[] buffer = new byte[4096];
-                long start = System.currentTimeMillis();
+                long start = DateTime.Now.Microsecond;
                 int progress_size = 0;
                 while ((bytesRead = inputStream.read(buffer)) != -1)
                 {
                     outputStream.write(buffer, 0, bytesRead);
-                    long duration = (System.currentTimeMillis() - start) / 1000;
+                    long duration = (DateTime.Now.Microsecond - start) / 1000;
                     duration = Math.max(duration, 1);
                     progress_size += bytesRead;
                     int speed = (int) (progress_size / (1024 * duration));

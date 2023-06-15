@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.NShort;
+using com.hankcs.hanlp.seg.Viterbi;
+
 namespace com.hankcs.demo;
 
 
@@ -28,7 +32,7 @@ public class DemoNShortSegment
                 "江西省监狱管理局与中国太平洋财产保险股份有限公司南昌中心支公司保险合同纠纷案",
                 "新北商贸有限公司",
         };
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
             Console.WriteLine("N-最短分词：" + nShortSegment.seg(sentence) + "\n最短路分词：" + shortestSegment.seg(sentence));
         }

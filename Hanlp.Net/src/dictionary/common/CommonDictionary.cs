@@ -40,7 +40,7 @@ public abstract class CommonDictionary<V>
     public bool load(String path)
     {
         trie = new DoubleArrayTrie<V>();
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (loadDat(ByteArray.createByteArray(path + BIN_EXT)))
         {
             return true;
@@ -77,7 +77,7 @@ public abstract class CommonDictionary<V>
             logger.warning("trie建立失败");
             return false;
         }
-        logger.info(path + "加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info(path + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         saveDat(path + BIN_EXT, valueList);
         return true;
     }

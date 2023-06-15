@@ -81,7 +81,7 @@ public class EasyReader
 
         int n = 0;
         int totalAddress = 0;
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         for (File file : files)
         {
             if (size-- == 0) break;
@@ -97,7 +97,7 @@ public class EasyReader
             }
         }
         handler.done();
-        if (verbose) System._out.printf("处理了 %.2f 万行，花费了 %.2f min\n", totalAddress / 10000.0, (System.currentTimeMillis() - start) / 1000.0 / 60.0);
+        if (verbose) System._out.printf("处理了 %.2f 万行，花费了 %.2f min\n", totalAddress / 10000.0, (DateTime.Now.Microsecond - start) / 1000.0 / 60.0);
     }
 
     /**

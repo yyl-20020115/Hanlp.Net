@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary.common;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -21,13 +23,13 @@ public class CoreSynonymDictionary
 {
     static CommonSynonymDictionary dictionary;
 
-    static
+    static CoreSynonymDictionary()
     {
         try
         {
-            long start = System.currentTimeMillis();
+            long start = DateTime.Now.Microsecond;
             dictionary = CommonSynonymDictionary.create(IOUtil.newInputStream(HanLP.Config.CoreSynonymDictionaryDictionaryPath));
-            logger.info("载入核心同义词词典成功，耗时 " + (System.currentTimeMillis() - start) + " ms");
+            logger.info("载入核心同义词词典成功，耗时 " + (DateTime.Now.Microsecond - start) + " ms");
         }
         catch (Exception e)
         {

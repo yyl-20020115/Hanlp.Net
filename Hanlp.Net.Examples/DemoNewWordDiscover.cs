@@ -8,6 +8,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.mining.word;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.demo;
 
 

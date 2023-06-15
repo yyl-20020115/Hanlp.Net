@@ -98,7 +98,7 @@ class Word2VecTraining
                     {
                         wordCountActual += word_count - last_word_count;
                         last_word_count = word_count;
-                        timeNow = System.currentTimeMillis();
+                        timeNow = DateTime.Now.Microsecond;
                         float percent = wordCountActual / (float) (iter * trainWords + 1);
                         long cost_time = timeNow - timeStart + 1;
                         if (config.getCallback() == null)
@@ -333,7 +333,7 @@ class Word2VecTraining
         if (config.getNegative() > 0)
             initUnigramTable(corpus);
 
-        timeStart = System.currentTimeMillis();
+        timeStart = DateTime.Now.Microsecond;
 
         threadCount = config.getNumThreads();
         for (int i = 0; i < config.getNumThreads(); i++)
@@ -356,7 +356,7 @@ class Word2VecTraining
         }
 
         System.err.println();
-        logger.info(String.format("finished training in %s", Utility.humanTime(System.currentTimeMillis() - timeStart)));
+        logger.info(String.format("finished training in %s", Utility.humanTime(DateTime.Now.Microsecond - timeStart)));
         // lose weight
         syn1 = null;
         table = null;

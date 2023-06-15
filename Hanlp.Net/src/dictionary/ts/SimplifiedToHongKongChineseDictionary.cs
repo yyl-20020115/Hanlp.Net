@@ -25,7 +25,7 @@ public class SimplifiedToHongKongChineseDictionary : BaseChineseDictionary
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
     static SimplifiedToHongKongChineseDictionary()
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         String datPath = HanLP.Config.tcDictionaryRoot + "s2hk";
         if (!load(datPath, trie))
         {
@@ -40,7 +40,7 @@ public class SimplifiedToHongKongChineseDictionary : BaseChineseDictionary
             trie.build(s2t);
             saveDat(datPath, trie, s2t.entrySet());
         }
-        logger.info("简体转香港繁体词典加载成功，耗时" + (System.currentTimeMillis() - start) + "ms");
+        logger.info("简体转香港繁体词典加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
     public static String convertToTraditionalHongKongChinese(String simplifiedChineseString)

@@ -24,7 +24,7 @@ public class Evaluator
 
     public Evaluator()
     {
-        start = System.currentTimeMillis();
+        start = DateTime.Now.Microsecond;
     }
 
     public void e(CoNLLSentence right, CoNLLSentence test)
@@ -82,7 +82,7 @@ public class Evaluator
         sb.Append(sentenceCount);
         sb.Append('\t');
         sb.Append("speed: ");
-        sb.Append(sentenceCount / (float)(System.currentTimeMillis() - start) * 1000);
+        sb.Append(sentenceCount / (float)(DateTime.Now.Microsecond - start) * 1000);
         sb.Append(" sent/s");
         return sb.toString();
     }

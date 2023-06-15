@@ -146,15 +146,15 @@ public class ByteArrayTest : TestCase
 //        byteArray = ByteArrayFileStream.createByteArrayFileStream(HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT);
 //        MaxEntModel.create(byteArray);
 //
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
 //        byteArray = ByteArray.createByteArray(HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT);
 //        MaxEntModel.create(byteArray);
-//        Console.printf("ByteArray: %d ms\n", (System.currentTimeMillis() - start));
+//        Console.printf("ByteArray: %d ms\n", (DateTime.Now.Microsecond - start));
 //
-//        start = System.currentTimeMillis();
+//        start = DateTime.Now.Microsecond;
 //        byteArray = ByteArrayFileStream.createByteArrayFileStream(HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT);
 //        MaxEntModel.create(byteArray);
-//        Console.printf("ByteArrayStream: %d ms\n", (System.currentTimeMillis() - start));
+//        Console.printf("ByteArrayStream: %d ms\n", (DateTime.Now.Microsecond - start));
 //
 ////        ByteArray: 2626 ms
 ////        ByteArrayStream: 4165 ms

@@ -31,14 +31,14 @@ public class CoreDictionary
     // 自动加载词典
     static CoreDictionary()
     {
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (!load(path))
         {
             throw new IllegalArgumentException("核心词典" + path + "加载失败");
         }
         else
         {
-            logger.info(path + "加载成功，" + trie.size() + "个词条，耗时" + (System.currentTimeMillis() - start) + "ms");
+            logger.info(path + "加载成功，" + trie.size() + "个词条，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         }
     }
 
@@ -62,7 +62,7 @@ public class CoreDictionary
             br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             String line;
             int MAX_FREQUENCY = 0;
-            long start = System.currentTimeMillis();
+            long start = DateTime.Now.Microsecond;
             while ((line = br.readLine()) != null)
             {
                 String param[] = line.split("\\s");
@@ -77,7 +77,7 @@ public class CoreDictionary
                 map.put(param[0], attribute);
                 MAX_FREQUENCY += attribute.totalFrequency;
             }
-            logger.info("核心词典读入词条" + map.size() + " 全部频次" + MAX_FREQUENCY + "，耗时" + (System.currentTimeMillis() - start) + "ms");
+            logger.info("核心词典读入词条" + map.size() + " 全部频次" + MAX_FREQUENCY + "，耗时" + (DateTime.Now.Microsecond - start) + "ms");
             br.close();
             trie.build(map);
             logger.info("核心词典加载成功:" + trie.size() + "个词条，下面将写入缓存……");

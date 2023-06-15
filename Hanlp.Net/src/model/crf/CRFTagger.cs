@@ -8,6 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using System.Text;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -109,7 +112,7 @@ public abstract class CRFTagger
 
     public void convertCorpus(String pkuPath, String tsvPath) 
     {
-        final BufferedWriter bw = IOUtil.newBufferedWriter(tsvPath);
+         BufferedWriter bw = IOUtil.newBufferedWriter(tsvPath);
         IOUtility.loadInstance(pkuPath, new InstanceHandler()
         {
             //@Override

@@ -9,9 +9,14 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.demo;
-
-
 
 
 /**
@@ -39,7 +44,7 @@ public class DemoCustomNature
         // 它们将在分词结果中生效
         List<Term> termList = HanLP.segment("苹果电脑可以运行开源阿尔法狗代码吗");
         Console.WriteLine(termList);
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             if (term.nature == pcNature)
                 System.out.printf("找到了 [%s] : %s\n", pcNature, term.word);
@@ -50,7 +55,7 @@ public class DemoCustomNature
         termList = HanLP.segment("苹果电脑可以运行开源阿尔法狗代码吗");
         Console.WriteLine(termList);
         // 1.6.5之后Nature不再是枚举类型，无法switch。但终于不再涉及反射了，在各种JRE环境下都更稳定。
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             if (term.nature == n)
             {

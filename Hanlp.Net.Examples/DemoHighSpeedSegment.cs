@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.demo;
 
 
@@ -23,13 +26,13 @@ public class DemoHighSpeedSegment
         String text = "江西鄱阳湖干枯，中国最大淡水湖变成大草原";
         HanLP.Config.ShowTermNature = false;
         Console.WriteLine(SpeedTokenizer.segment(text));
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         int pressure = 1000000;
         for (int i = 0; i < pressure; ++i)
         {
             SpeedTokenizer.segment(text);
         }
-        double costTime = (System.currentTimeMillis() - start) / (double)1000;
-        System.out.printf("SpeedTokenizer分词速度：%.2f字每秒\n", text.length() * pressure / costTime);
+        double costTime = (DateTime.Now.Microsecond - start) / (double)1000;
+        System._out.printf("SpeedTokenizer分词速度：%.2f字每秒\n", text.Length * pressure / costTime);
     }
 }

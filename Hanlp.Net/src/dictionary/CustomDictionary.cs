@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary.other;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -33,14 +40,14 @@ public class CustomDictionary
     static CustomDictionary()
     {
         String[] path = HanLP.Config.CustomDictionaryPath;
-        long start = System.currentTimeMillis();
+        long start = DateTime.Now.Microsecond;
         if (!loadMainDictionary(path[0]))
         {
             logger.warning("自定义词典" + Arrays.toString(path) + "加载失败");
         }
         else
         {
-            logger.info("自定义词典加载成功:" + dat.size() + "个词条，耗时" + (System.currentTimeMillis() - start) + "ms");
+            logger.info("自定义词典加载成功:" + dat.size() + "个词条，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         }
     }
 
@@ -54,8 +61,8 @@ public class CustomDictionary
     {
         logger.info("自定义词典开始加载:" + mainPath);
         if (loadDat(mainPath, dat)) return true;
-        TreeMap<String, CoreDictionary.Attribute> map = new TreeMap<String, CoreDictionary.Attribute>();
-        LinkedHashSet<Nature> customNatureCollector = new LinkedHashSet<Nature>();
+        var map = new Dictionary<String, CoreDictionary.Attribute>();
+        HashSet<Nature> customNatureCollector = new ();
         try
         {
             //String path[] = HanLP.Config.CustomDictionaryPath;
@@ -152,7 +159,7 @@ public class CustomDictionary
      * @param customNatureCollector 收集用户词性
      * @return
      */
-    public static bool load(String path, Nature defaultNature, TreeMap<String, CoreDictionary.Attribute> map, LinkedHashSet<Nature> customNatureCollector)
+    public static bool load(String path, Nature defaultNature, Dictionary<String, CoreDictionary.Attribute> map, LinkedHashSet<Nature> customNatureCollector)
     {
         try
         {
@@ -375,7 +382,7 @@ public class CustomDictionary
         }
         long lastModified = binFile.lastModified();
         //String path[] = HanLP.Config.CustomDictionaryPath;
-        for (String p : path)
+        for (String p in path)
         {
             File f = new File(p);
             String fileName = f.getName();
@@ -591,8 +598,8 @@ public class CustomDictionary
     {
         if (trie != null)
         {
-            final int[] lengthArray = new int[text.length()];
-            final CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[text.length()];
+             int[] lengthArray = new int[text.length()];
+             CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[text.length()];
             char[] charArray = text.ToCharArray();
             DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(charArray, 0);
             while (searcher.next())
@@ -637,7 +644,7 @@ public class CustomDictionary
      */
     public static bool reload()
     {
-        String path[] = HanLP.Config.CustomDictionaryPath;
+        String[] path = HanLP.Config.CustomDictionaryPath;
         if (path == null || path.length == 0) return false;
         IOUtil.deleteFile(path[0] + Predefine.BIN_EXT); // 删掉缓存
         return loadMainDictionary(path[0]);
