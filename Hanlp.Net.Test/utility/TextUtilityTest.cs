@@ -4,14 +4,14 @@ namespace com.hankcs.hanlp.utility;
 public class TextUtilityTest : TestCase
 {
     [TestMethod]
-    public void testIsAllSingleByte() 
+    public void TestIsAllSingleByte() 
     {
         assertEquals(false, TextUtility.isAllSingleByte("中文a"));
         assertEquals(true, TextUtility.isAllSingleByte("abcABC!@#"));
     }
 
     [TestMethod]
-    public void testChineseNum()
+    public void TestChineseNum()
     {
         assertEquals(true, TextUtility.isAllChineseNum("两千五百万"));
         assertEquals(true, TextUtility.isAllChineseNum("两千分之一"));
@@ -21,7 +21,7 @@ public class TextUtilityTest : TestCase
     }
 
     [TestMethod]
-    public void testArabicNum()
+    public void TestArabicNum()
     {
         assertEquals(true, TextUtility.isAllNum("2.5"));
         assertEquals(true, TextUtility.isAllNum("3600"));

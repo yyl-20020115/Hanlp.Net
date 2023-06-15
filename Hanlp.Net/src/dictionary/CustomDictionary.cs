@@ -30,9 +30,9 @@ public class CustomDictionary
     public static DoubleArrayTrie<CoreDictionary.Attribute> dat = new DoubleArrayTrie<CoreDictionary.Attribute>();
 
     // 自动加载词典
-    static
+    static CustomDictionary()
     {
-        String path[] = HanLP.Config.CustomDictionaryPath;
+        String[] path = HanLP.Config.CustomDictionaryPath;
         long start = System.currentTimeMillis();
         if (!loadMainDictionary(path[0]))
         {
@@ -50,7 +50,7 @@ public class CustomDictionary
      * @param path 自定义词典
      * @param isCache 是否缓存结果
      */
-    public static bool loadMainDictionary(String mainPath, String path[], DoubleArrayTrie<CoreDictionary.Attribute> dat, bool isCache)
+    public static bool loadMainDictionary(String mainPath, String[] path, DoubleArrayTrie<CoreDictionary.Attribute> dat, bool isCache)
     {
         logger.info("自定义词典开始加载:" + mainPath);
         if (loadDat(mainPath, dat)) return true;

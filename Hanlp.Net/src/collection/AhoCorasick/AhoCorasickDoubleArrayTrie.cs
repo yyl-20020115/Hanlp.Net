@@ -77,9 +77,9 @@ public class AhoCorasickDoubleArrayTrie<V>
         int position = 1;
         int currentState = 0;
         List<Hit<V>> collectedEmits = new ();
-        for (int i = 0; i < text.length(); ++i)
+        for (int i = 0; i < text.Length; ++i)
         {
-            currentState = getState(currentState, text.charAt(i));
+            currentState = getState(currentState, text[i]);
             storeEmits(position, currentState, collectedEmits);
             ++position;
         }

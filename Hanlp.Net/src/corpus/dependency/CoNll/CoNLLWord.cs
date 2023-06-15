@@ -49,11 +49,11 @@ public class CoNLLWord
     /**
      * 根节点
      */
-    public static final CoNLLWord ROOT = new CoNLLWord(0, "##核心##", "ROOT", "root");
+    public static readonly CoNLLWord ROOT = new CoNLLWord(0, "##核心##", "ROOT", "root");
     /**
      * 空白节点，用于描述下标超出word数组的词语
      */
-    public static final CoNLLWord NULL = new CoNLLWord(-1, "##空白##", "NULL", "null");
+    public static readonly CoNLLWord NULL = new CoNLLWord(-1, "##空白##", "NULL", "null");
 
     /**
      *

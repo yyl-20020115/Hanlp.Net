@@ -8,6 +8,11 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.seg.Other;
 
 
@@ -24,13 +29,15 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
     AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute> trie;
 
     public AhoCorasickDoubleArrayTrieSegment() 
+        : this(HanLP.Config.CoreDictionaryPath)
     {
-        this(HanLP.Config.CoreDictionaryPath);
+        ;
     }
 
-    public AhoCorasickDoubleArrayTrieSegment(TreeMap<String, CoreDictionary.Attribute> dictionary)
+    public AhoCorasickDoubleArrayTrieSegment(Dictionary<String, CoreDictionary.Attribute> dictionary)
+        : this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(dictionary))
     {
-        this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(dictionary));
+        ;
     }
 
     public AhoCorasickDoubleArrayTrieSegment(AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute> trie)
@@ -46,7 +53,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
      *
      * @ 加载过程中的IO异常
      */
-    public AhoCorasickDoubleArrayTrieSegment(String... dictionaryPaths) 
+    public AhoCorasickDoubleArrayTrieSegment(params String[] dictionaryPaths) 
     {
         this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(IOUtil.loadDictionary(dictionaryPaths)));
     }
@@ -59,9 +66,9 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
             logger.warning("还未加载任何词典");
             return Collections.emptyList();
         }
-        final int[] wordNet = new int[sentence.length];
+         int[] wordNet = new int[sentence.length];
         Arrays.fill(wordNet, 1);
-        final Nature[] natureArray = config.speechTagging ? new Nature[sentence.length] : null;
+         Nature[] natureArray = config.speechTagging ? new Nature[sentence.length] : null;
         trie.parseText(sentence, new AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute>()
         {
             //@Override

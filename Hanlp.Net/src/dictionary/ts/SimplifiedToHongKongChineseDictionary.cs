@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+
 namespace com.hankcs.hanlp.dictionary.ts;
 
 
@@ -21,7 +23,7 @@ namespace com.hankcs.hanlp.dictionary.ts;
 public class SimplifiedToHongKongChineseDictionary : BaseChineseDictionary
 {
     static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
-    static
+    static SimplifiedToHongKongChineseDictionary()
     {
         long start = System.currentTimeMillis();
         String datPath = HanLP.Config.tcDictionaryRoot + "s2hk";

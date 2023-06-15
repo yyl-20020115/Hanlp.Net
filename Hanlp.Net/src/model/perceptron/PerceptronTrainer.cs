@@ -8,6 +8,15 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.utilities.io;
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.dependency.nnparser;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.model;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.model.perceptron.utility;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -24,7 +33,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
     /**
      * 训练结果
      */
-    public static class Result
+    public class Result
     {
         /**
          * 模型
@@ -34,7 +43,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
          * 精确率(Precision), 召回率(Recall)和F1-Measure<br>
          * 中文参考：https://blog.argcv.com/articles/1036.c
          */
-        double prf[];
+        double[] prf;
 
         public Result(LinearModel model, double[] prf)
         {
@@ -49,7 +58,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
          */
         public double getAccuracy()
         {
-            if (prf.length == 3)
+            if (prf.Length == 3)
             {
                 return prf[2];
             }
@@ -87,8 +96,8 @@ public abstract class PerceptronTrainer : InstanceConsumer
      * @
      */
     public Result train(String trainingFile, String developFile,
-                        String modelFile, final double compressRatio,
-                        final int maxIteration, final int threadNum) 
+                        String modelFile,  double compressRatio,
+                         int maxIteration,  int threadNum) 
     {
         if (developFile == null)
         {
@@ -100,7 +109,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         ConsoleLogger logger = new ConsoleLogger();
         logger.start("开始加载训练集...\n");
         Instance[] instances = loadTrainInstances(trainingFile, mutableFeatureMap);
-        tagSet.lock();
+        tagSet._lock();
         logger.finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.length, mutableFeatureMap.size() * tagSet.size());
 
         // 开始训练
@@ -112,8 +121,8 @@ public abstract class PerceptronTrainer : InstanceConsumer
         {
             AveragedPerceptron model;
             model = new AveragedPerceptron(immutableFeatureMap);
-            final double[] total = new double[model.parameter.length];
-            final int[] timestamp = new int[model.parameter.length];
+             double[] total = new double[model.parameter.length];
+             int[] timestamp = new int[model.parameter.length];
             int current = 0;
             for (int iter = 1; iter <= maxIteration; iter++)
             {
@@ -219,7 +228,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
 
     private void printAccuracy(double[] accuracy)
     {
-        if (accuracy.length == 3)
+        if (accuracy.Length == 3)
         {
             _out.printf("P:%.2f R:%.2f F:%.2f\n", accuracy[0], accuracy[1], accuracy[2]);
         }
@@ -229,7 +238,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
     }
 
-    private static class TrainingWorker : Thread
+    private class TrainingWorker : Thread
     {
         private Instance[] instances;
         private int start;
@@ -256,24 +265,25 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
     }
 
-    protected Instance[] loadTrainInstances(String trainingFile, final MutableFeatureMap mutableFeatureMap) 
+    protected Instance[] loadTrainInstances(String trainingFile,  MutableFeatureMap mutableFeatureMap) 
     {
-        final List<Instance> instanceList = new LinkedList<Instance>();
-        IOUtility.loadInstance(trainingFile, new InstanceHandler()
-        {
-            //@Override
-            public bool process(Sentence sentence)
-            {
-                Utility.normalize(sentence);
-                instanceList.add(PerceptronTrainer.this.createInstance(sentence, mutableFeatureMap));
-                return false;
-            }
-        });
+        List<Instance> instanceList = new LinkedList<Instance>();
+        IOUtility.loadInstance(trainingFile, new Ins());
         Instance[] instances = new Instance[instanceList.size()];
         instanceList.toArray(instances);
         return instances;
     }
 
+    public class Ins: InstanceHandler
+    {
+        //@Override
+        public bool process(Sentence sentence)
+        {
+            Utility.normalize(sentence);
+            instanceList.add(PerceptronTrainer.this.createInstance(sentence, mutableFeatureMap));
+            return false;
+        }
+    }
 
     private static DoubleArrayTrie<int> loadDictionary(String trainingFile, String dictionaryFile) 
     {

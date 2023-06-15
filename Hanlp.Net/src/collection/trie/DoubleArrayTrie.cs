@@ -322,16 +322,16 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public int build(List<String> key, List<V> value)
     {
-        assert key.size() == value.size() : "键的个数与值的个数不一样！";
-        assert key.size() > 0 : "键值个数为0！";
+        //assert key.size() == value.size() : "键的个数与值的个数不一样！";
+        //assert key.size() > 0 : "键值个数为0！";
         v = (V[]) value.toArray();
         return build(key, null, null, key.size());
     }
 
     public int build(List<String> key, V[] value)
     {
-        assert key.size() == value.length : "键的个数与值的个数不一样！";
-        assert key.size() > 0 : "键值个数为0！";
+        //assert key.size() == value.length : "键的个数与值的个数不一样！";
+        //assert key.size() > 0 : "键值个数为0！";
         v = value;
         return build(key, null, null, key.size());
     }
@@ -361,10 +361,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param keyValueMap 升序键值对map
      * @return 构造结果
      */
-    public int build(TreeMap<String, V> keyValueMap)
+    public int build(Dictionary<String, V> keyValueMap)
     {
-        assert keyValueMap != null;
-        Set<Map.Entry<String, V>> entrySet = keyValueMap.entrySet();
+        //assert keyValueMap != null;
+        var entrySet = keyValueMap.entrySet();
         return build(entrySet);
     }
 
@@ -377,7 +377,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param _keySize key的长度，应该设为_key.size
      * @return 是否出错
      */
-    public int build(List<String> _key, int _length[], int _value[],
+    public int build(List<String> _key, int[] _length, int[] _value,
                      int _keySize)
     {
         if (_key == null || _keySize > _key.size())
@@ -400,7 +400,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         root_node.right = keySize;
         root_node.depth = 0;
 
-        List<Node> siblings = new ArrayList<Node>();
+        List<Node> siblings = new ();
         fetch(root_node, siblings);
         insert(siblings);
         shrink();
@@ -422,21 +422,21 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         check = new int[size];
         base = new int[size];
 
-        DataInputStream is = null;
+        DataInputStream _is = null;
         try
         {
-            is = new DataInputStream(new BufferedInputStream(
+            _is = new DataInputStream(new BufferedInputStream(
                     IOUtil.newInputStream(fileName), BUF_SIZE));
             for (int i = 0; i < size; i++)
             {
-                base[i] = is.readInt();
-                check[i] = is.readInt();
+                _base[i] = _is.readInt();
+                check[i] = _is.readInt();
             }
         }
         finally
         {
-            if (is != null)
-                is.close();
+            if (_is != null)
+                _is.close();
         }
     }
 
@@ -449,7 +449,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             _out.writeInt(size);
             for (int i = 0; i < size; i++)
             {
-                _out.writeInt(base[i]);
+                _out.writeInt(_base[i]);
                 _out.writeInt(check[i]);
             }
             _out.close();
@@ -475,7 +475,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             _out.writeInt(size);
             for (int i = 0; i < size; i++)
             {
-                _out.writeInt(base[i]);
+                _out.writeInt(_base[i]);
                 _out.writeInt(check[i]);
             }
         }
@@ -489,7 +489,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public void save(ObjectOutputStream _out) 
     {
-        _out.writeObject(base);
+        _out.writeObject(_base);
         _out.writeObject(check);
     }
 
@@ -503,7 +503,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public bool load(String path, List<V> value)
     {
         if (!loadBaseAndCheck(path)) return false;
-        v = (V[]) value.toArray();
+        v = (V[]) value.ToArray();
         return true;
     }
 
@@ -1435,9 +1435,9 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 //        {
 //            System.err.printf("释放内存 %d bytes\n", base.length - size - 65535);
 //        }
-        int nbase[] = new int[size + 65535];
+        int[] nbase = new int[size + 65535];
         System.arraycopy(base, 0, nbase, 0, size);
-        base = nbase;
+        _base = nbase;
 
         int ncheck[] = new int[size + 65535];
         System.arraycopy(check, 0, ncheck, 0, size);

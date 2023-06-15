@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.model.perceptron.model;
+
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
@@ -6,13 +8,13 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
 public class ImmutableFeatureMDatMapTest : TestCase
 {
     [TestMethod]
-    public void testCompress() 
+    public void TestCompress() 
     {
         LinearModel model = new LinearModel(HanLP.Config.PerceptronCWSModelPath);
         model.compress(0.1);
     }
     [TestMethod]
-    public void testFeatureMap() 
+    public void TestFeatureMap() 
     {
         LinearModel model = new LinearModel(HanLP.Config.PerceptronCWSModelPath);
         ImmutableFeatureMDatMap featureMap = (ImmutableFeatureMDatMap) model.featureMap;

@@ -88,7 +88,7 @@ public class Pair<K,V> : Serializable {
     //@Override
     public bool equals(Object o) {
         if (this == o) return true;
-        if (o instanceof Pair) {
+        if (o is Pair) {
             Pair pair = (Pair) o;
             if (key != null ? !key.equals(pair.key) : pair.key != null) return false;
             if (value != null ? !value.equals(pair.value) : pair.value != null) return false;

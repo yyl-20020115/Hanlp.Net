@@ -13,7 +13,7 @@ public class MDAGMapTest : TestCase
     public void setUp() 
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/custom/CustomDictionary.txt");
-        validKeySet = new TreeSet<String>();
+        validKeySet = new ();
         while (iterator.hasNext())
         {
             validKeySet.add(iterator.next().split("\\s")[0]);
@@ -37,7 +37,7 @@ public class MDAGMapTest : TestCase
 //        mdagMap.unSimplify();
         foreach (String word in validKeySet)
         {
-            assertEquals(word.Length(), (int) mdagMap.get(word));
+            assertEquals(word.Length, (int) mdagMap.get(word));
         }
     }
     [TestMethod]

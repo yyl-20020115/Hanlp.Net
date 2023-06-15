@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.model.hmm;
 public class HMMSegmenterTest : TestCase
 {
     [TestMethod]
-    public void testTrain() 
+    public void testTrain()
     {
         HMMSegmenter segmenter = new HMMSegmenter();
         segmenter.train("data/test/my_cws_corpus.txt");

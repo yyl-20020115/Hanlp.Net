@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.mining.cluster;
 public class ClusterAnalyzerTest : TestCase
 {
     [TestMethod]
-    public void testAddDocument() 
+    public void TestAddDocument() 
     {
         DemoTextClustering.main(null);
     }

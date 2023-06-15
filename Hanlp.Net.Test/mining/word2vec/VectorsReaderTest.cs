@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public class VectorsReaderTest : TestCase
 {
     [TestMethod]
-    public void testReadVectorFile() 
+    public void TestReadVectorFile() 
     {
         File tempFile = File.createTempFile("hanlp-vector", ".txt");
         tempFile.deleteOnExit();

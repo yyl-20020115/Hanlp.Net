@@ -3,7 +3,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public class VocabWord implements Comparable<VocabWord>
 {
 
-    public static final int MAX_CODE_LENGTH = 40;
+    public static readonly int MAX_CODE_LENGTH = 40;
 
     int cn, codelen;
     int[] point;

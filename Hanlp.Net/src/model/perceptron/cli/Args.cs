@@ -50,7 +50,7 @@ public class Args
         List<String> arguments = new ArrayList<String>();
         arguments.addAll(Arrays.asList(args));
         Class<?> clazz;
-        if (target instanceof Class)
+        if (target is Class)
         {
             clazz = (Class) target;
         }
@@ -248,7 +248,7 @@ public class Args
     public static void usage(PrintStream errStream, Object target)
     {
         Class<?> clazz;
-        if (target instanceof Class)
+        if (target is Class)
         {
             clazz = (Class) target;
         }
@@ -556,7 +556,7 @@ public class Args
 
     private static void makeAccessible(AccessibleObject ao)
     {
-        if (ao instanceof Member)
+        if (ao is Member)
         {
             Member member = (Member) ao;
             if (!Modifier.isPublic(member.getModifiers()))
@@ -617,7 +617,7 @@ public class Args
     /**
      * {@link ValueCreator} building object using a one arg constructor taking a {@link String} object as parameter
      */
-    public static final ValueCreator FROM_STRING_CONSTRUCTOR = new ValueCreator()
+    public static readonly ValueCreator FROM_STRING_CONSTRUCTOR = new ValueCreator()
     {
         public Object createValue(Class<?> type, String value)
         {
@@ -639,7 +639,7 @@ public class Args
         }
     };
 
-    public static final ValueCreator ENUM_CREATOR = new ValueCreator()
+    public static readonly ValueCreator ENUM_CREATOR = new ValueCreator()
     {
         @SuppressWarnings({"unchecked", "rawtypes"})
         public Object createValue(Class type, String value)
@@ -652,7 +652,7 @@ public class Args
         }
     };
 
-    private static final List<ValueCreator> DEFAULT_VALUE_CREATORS = Arrays.asList(Args.FROM_STRING_CONSTRUCTOR, Args.ENUM_CREATOR);
+    private static readonly List<ValueCreator> DEFAULT_VALUE_CREATORS = Arrays.asList(Args.FROM_STRING_CONSTRUCTOR, Args.ENUM_CREATOR);
     private static List<ValueCreator> valueCreators = new ArrayList<ValueCreator>(DEFAULT_VALUE_CREATORS);
 
     /**

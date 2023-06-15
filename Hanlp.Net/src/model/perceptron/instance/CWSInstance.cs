@@ -17,8 +17,8 @@ namespace com.hankcs.hanlp.model.perceptron.instance;
  */
 public class CWSInstance : Instance
 {
-    private static final char CHAR_BEGIN = '\u0001';
-    private static final char CHAR_END = '\u0002';
+    private static readonly char CHAR_BEGIN = '\u0001';
+    private static readonly char CHAR_END = '\u0002';
 
     /**
      * 生成分词实例

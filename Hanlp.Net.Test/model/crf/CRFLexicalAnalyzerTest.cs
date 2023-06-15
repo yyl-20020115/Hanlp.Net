@@ -6,7 +6,7 @@ public class CRFLexicalAnalyzerTest : TestCase
 {
     [TestMethod]
 
-    public void testLoad() 
+    public void TestLoad() 
     {
         CRFLexicalAnalyzer analyzer = new CRFLexicalAnalyzer();
         String[] tests = new String[]{

@@ -4,7 +4,8 @@ namespace com.hankcs.hanlp.suggest;
 [TestClass]
 public class ISuggesterTest : TestCase
 {
-    public void testRemoveAllSentences() 
+    [TestMethod]
+    public void TestRemoveAllSentences() 
     {
         ISuggester suggester = new Suggester();
         String[] titleArray =
@@ -14,16 +15,16 @@ public class ISuggesterTest : TestCase
                     "“黑格比”横扫菲：菲吸取“海燕”经验及早疏散\n" +
                     "日本保密法将正式生效 日媒指其损害国民知情权\n" +
                     "英报告说空气污染带来“公共健康危机”"
-            ).split("\\n");
-        for (String title : titleArray)
+            ).Split("\\n");
+        foreach (String title in titleArray)
         {
             suggester.addSentence(title);
         }
 
-        assertEquals(true, suggester.suggest("mayun", 1).size() > 0);
+        assertEquals(true, suggester.suggest("mayun", 1).Count > 0);
 
         suggester.removeAllSentences();
 
-        assertEquals(0, suggester.suggest("mayun", 1).size());
+        assertEquals(0, suggester.suggest("mayun", 1).Count);
     }
 }

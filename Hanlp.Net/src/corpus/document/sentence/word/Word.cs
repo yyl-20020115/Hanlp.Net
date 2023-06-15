@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.corpus.document.sentence.word;
  * 一个单词
  * @author hankcs
  */
-public class Word implements IWord
+public class Word : IWord
 {
     /**
      * 单词的真实值，比如“程序”
@@ -27,7 +27,7 @@ public class Word implements IWord
     public String label;
 
     ////@Override
-    public String toString()
+    public String ToString()
     {
         if (label == null)
             return value;
@@ -85,6 +85,6 @@ public class Word implements IWord
     //@Override
     public int length()
     {
-        return value.length();
+        return value.Length;
     }
 }

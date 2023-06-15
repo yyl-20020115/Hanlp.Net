@@ -7,7 +7,7 @@ namespace com.hankcs.hanlp.suggest.scorer.pinyin;
 public class PinyinKeyTest : TestCase
 {
     [TestMethod]
-    public void testConstruct() 
+    public void TestConstruct() 
     {
         PinyinKey pinyinKeyA = new PinyinKey("专题分析");
         PinyinKey pinyinKeyB = new PinyinKey("教室资格");

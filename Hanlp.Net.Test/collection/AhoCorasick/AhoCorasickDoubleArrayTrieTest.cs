@@ -10,10 +10,11 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
 {
     [TestMethod]
 
-    public void testTwoAC() 
+    public void TestTwoAC()
     {
         var map = new Dictionary<String, String>();
-        IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.mini.txt");
+        IOUtil.LineIterator iterator = new IOUtil.LineIterator(
+            "data/dictionary/CoreNatureDictionary.mini.txt");
         while (iterator.hasNext())
         {
             String line = iterator.next().Split("\\s")[0];

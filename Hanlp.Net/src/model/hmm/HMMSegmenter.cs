@@ -8,6 +8,13 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.hmm;
 
 
@@ -15,13 +22,13 @@ namespace com.hankcs.hanlp.model.hmm;
 /**
  * @author hankcs
  */
-public class HMMSegmenter : HMMTrainer : Segmenter
+public class HMMSegmenter : HMMTrainer , Segmenter
 {
     CWSTagSet tagSet;
 
     public HMMSegmenter(HiddenMarkovModel model)
+        :base(model)
     {
-        super(model);
         tagSet = new CWSTagSet();
     }
 
@@ -33,7 +40,7 @@ public class HMMSegmenter : HMMTrainer : Segmenter
     //@Override
     public List<String> segment(String text)
     {
-        List<String> wordList = new LinkedList<String>();
+        List<String> wordList = new ();
         segment(text, CharTable.convert(text), wordList);
         return wordList;
     }
@@ -103,19 +110,20 @@ public class HMMSegmenter : HMMTrainer : Segmenter
      */
     public Segment toSegment()
     {
-        return new Segment()
+        return new CustomSegment().enableCustomDictionary(false);
+    }
+    public class CustomSegment: Segment
+    {
+        //@Override
+        protected override List<Term> segSentence(char[] sentence)
         {
-            //@Override
-            protected List<Term> segSentence(char[] sentence)
+            List<String> wordList = segment(new String(sentence));
+            List<Term> termList = new LinkedList<Term>();
+            for (String word : wordList)
             {
-                List<String> wordList = segment(new String(sentence));
-                List<Term> termList = new LinkedList<Term>();
-                for (String word : wordList)
-                {
-                    termList.add(new Term(word, null));
-                }
-                return termList;
+                termList.add(new Term(word, null));
             }
-        }.enableCustomDictionary(false);
+            return termList;
+        }
     }
 }

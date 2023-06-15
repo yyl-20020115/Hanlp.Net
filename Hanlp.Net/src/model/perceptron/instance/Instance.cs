@@ -9,6 +9,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using System.Text;
+
 namespace com.hankcs.hanlp.model.perceptron.instance;
 
 
@@ -27,9 +31,9 @@ public class Instance
 
     protected static int[] toFeatureArray(List<int> featureVector)
     {
-        int[] featureArray = new int[featureVector.size() + 1];   // 最后一列留给转移特征
+        int[] featureArray = new int[featureVector.Count + 1];   // 最后一列留给转移特征
         int index = -1;
-        for (int feature : featureVector)
+        foreach (int feature in featureVector)
         {
             featureArray[++index] = feature;
         }
@@ -44,15 +48,15 @@ public class Instance
 
     public int length()
     {
-        return tagArray.length;
+        return tagArray.Length;
     }
 
-    protected static void addFeature(CharSequence rawFeature, List<int> featureVector, FeatureMap featureMap)
+    protected static void addFeature(string rawFeature, List<int> featureVector, FeatureMap featureMap)
     {
-        int id = featureMap.idOf(rawFeature.toString());
+        int id = featureMap.idOf(rawFeature.ToString());
         if (id != -1)
         {
-            featureVector.add(id);
+            featureVector.Add(id);
         }
     }
 
@@ -65,10 +69,10 @@ public class Instance
      */
     protected static void addFeatureThenClear(StringBuilder rawFeature, List<int> featureVector, FeatureMap featureMap)
     {
-        int id = featureMap.idOf(rawFeature.toString());
+        int id = featureMap.idOf(rawFeature.ToString());
         if (id != -1)
         {
-            featureVector.add(id);
+            featureVector.Add(id);
         }
         rawFeature.setLength(0);
     }
@@ -81,10 +85,10 @@ public class Instance
      */
     public String[] tags(TagSet tagSet)
     {
-        assert tagArray != null;
+        //assert tagArray != null;
 
-        String[] tags = new String[tagArray.length];
-        for (int i = 0; i < tags.length; i++)
+        String[] tags = new String[tagArray.Length];
+        for (int i = 0; i < tags.Length; i++)
         {
             tags[i] = tagSet.stringOf(tagArray[i]);
         }
@@ -99,6 +103,6 @@ public class Instance
      */
     public int size()
     {
-        return featureMatrix.length;
+        return featureMatrix.Length;
     }
 }

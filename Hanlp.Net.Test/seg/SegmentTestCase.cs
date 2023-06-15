@@ -8,11 +8,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.seg.common;
 using System.Text;
 
 namespace com.hankcs.hanlp.seg;
-
-
 
 /**
  * @author hankcs
@@ -32,10 +32,10 @@ public class SegmentTestCase : TestCase
     
     public static void assertSegmentationHas(List<Term> termList, String part)
     {
-        StringBuilder sbSentence = new StringBuilder();
-        for (Term term : termList)
+        var sbSentence = new StringBuilder();
+        foreach (Term term in termList)
         {
-            sbSentence.append(term.word);
+            sbSentence.Append(term.word);
         }
         assertFalse(sbSentence.ToString().Contains(part));
     }

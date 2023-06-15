@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+
 namespace com.hankcs.hanlp.model.perceptron.utility;
 
 
@@ -52,7 +54,7 @@ public class Utility
         }
     }
 
-    public static <T> void shuffleArray(T[] ar)
+    public static  void shuffleArray<T>(T[] ar)
     {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--)
@@ -81,7 +83,7 @@ public class Utility
      */
     public static void convertPKUtoCWS(String inputFolder, String outputFile, final int begin, final int end)
     {
-        final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
         CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
         {
                               int doc = 0;
@@ -133,7 +135,7 @@ bw.close();
      */
     public static void convertPKUtoPOS(String inputFolder, String outputFile, final int begin, final int end)
 {
-    final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
+     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
     CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
                           {
                               int doc = 0;
@@ -182,7 +184,7 @@ bw.close();
     List<Word> s = new ArrayList<Word>(sentence.size());
     foreach (IWord iWord in sentence)
     {
-        if (iWord instanceof Word)
+        if (iWord is Word)
                 {
             s.add((Word)iWord);
         }
@@ -234,7 +236,7 @@ return wordArray;
     public static int[] evaluateCWS(String developFile, final PerceptronSegmenter segmenter)
 {
     // int goldTotal = 0, predTotal = 0, correct = 0;
-    final int[] stat = new int[3];
+     int[] stat = new int[3];
     Arrays.fill(stat, 0);
     IOUtility.loadInstance(developFile, new InstanceHandler()
     {
@@ -302,7 +304,7 @@ return stat;
     Set<String> nerLabels = tagSet.nerLabels;
     for (IWord word : sentence.wordList)
         {
-    if (word instanceof CompoundWord)
+    if (word is CompoundWord)
             {
         List<Word> wordList = ((CompoundWord)word).innerList;
         Word[] words = wordList.toArray(new Word[0]);
@@ -345,7 +347,7 @@ return collector;
 {
     foreach (IWord word in sentence.wordList)
     {
-        if (word instanceof CompoundWord)
+        if (word is CompoundWord)
             {
     for (Word child : ((CompoundWord)word).innerList)
     {

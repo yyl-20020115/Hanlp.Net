@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.seg.NShort.Path;
+using System.Text;
+
 namespace com.hankcs.hanlp.seg;
 
 
@@ -44,9 +51,9 @@ public abstract class Segment
      * @param end       到end结束（不包含end）
      * @return 一个列表，代表从start到from的所有字构成的原子节点
      */
-    protected static List<AtomNode> atomSegment(char[] charArray, int start, int end)
+    protected static List<AtomNode> AtomSegment(char[] charArray, int start, int end)
     {
-        List<AtomNode> atomSegment = new ArrayList<AtomNode>();
+        List<AtomNode> atomSegment = new ();
         int pCur = start, nCurType, nNextType;
         StringBuilder sb = new StringBuilder();
         char c;
@@ -54,14 +61,14 @@ public abstract class Segment
         int[] charTypeArray = new int[end - start];
 
         // 生成对应单个汉字的字符类型数组
-        for (int i = 0; i < charTypeArray.length; ++i)
+        for (int i = 0; i < charTypeArray.Length; ++i)
         {
             c = charArray[i + start];
             charTypeArray[i] = CharType.get(c);
 
-            if (c == '.' && i + start < (charArray.length - 1) && CharType.get(charArray[i + start + 1]) == CharType.CT_NUM)
+            if (c == '.' && i + start < (charArray.Length - 1) && CharType.get(charArray[i + start + 1]) == CharType.CT_NUM)
                 charTypeArray[i] = CharType.CT_NUM;
-            else if (c == '.' && i + start < (charArray.length - 1) && charArray[i + start + 1] >= '0' && charArray[i + start + 1] <= '9')
+            else if (c == '.' && i + start < (charArray.Length - 1) && charArray[i + start + 1] >= '0' && charArray[i + start + 1] <= '9')
                 charTypeArray[i] = CharType.CT_SINGLE;
             else if (charTypeArray[i] == CharType.CT_LETTER)
                 charTypeArray[i] = CharType.CT_SINGLE;
@@ -124,7 +131,7 @@ public abstract class Segment
      */
     protected static List<AtomNode> simpleAtomSegment(char[] charArray, int start, int end)
     {
-        List<AtomNode> atomNodeList = new LinkedList<AtomNode>();
+        List<AtomNode> atomNodeList = new ();
         atomNodeList.add(new AtomNode(new String(charArray, start, end - start), CharType.CT_LETTER));
         return atomNodeList;
     }
@@ -139,7 +146,7 @@ public abstract class Segment
      */
     protected static List<AtomNode> quickAtomSegment(char[] charArray, int start, int end)
     {
-        List<AtomNode> atomNodeList = new LinkedList<AtomNode>();
+        List<AtomNode> atomNodeList = new ();
         int offsetAtom = start;
         int preType = CharType.get(charArray[offsetAtom]);
         int curType;
@@ -189,7 +196,7 @@ public abstract class Segment
      */
     protected static List<Vertex> combineByCustomDictionary(List<Vertex> vertexList, DoubleArrayTrie<CoreDictionary.Attribute> dat)
     {
-        assert vertexList.size() >= 2 : "vertexList至少包含 始##始 和 末##末";
+        //assert vertexList.size() >= 2 : "vertexList至少包含 始##始 和 末##末";
         Vertex[] wordNet = new Vertex[vertexList.size()];
         vertexList.toArray(wordNet);
         // DAT合并
@@ -282,27 +289,27 @@ public abstract class Segment
     {
         List<Vertex> outputList = combineByCustomDictionary(vertexList, dat);
         int line = 0;
-        for (final Vertex vertex : outputList)
+        for (Vertex vertex : outputList)
         {
-            final int parentLength = vertex.realWord.length();
-            final int currentLine = line;
+            int parentLength = vertex.realWord.length();
+            int currentLine = line;
             if (parentLength >= 3)
             {
-                CustomDictionary.parseText(vertex.realWord, new AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute>()
-                {
-                    //@Override
-                    public void hit(int begin, int end, CoreDictionary.Attribute value)
-                    {
-                        if (end - begin == parentLength) return;
-                        wordNetAll.add(currentLine + begin, new Vertex(vertex.realWord.substring(begin, end), value));
-                    }
-                });
+                CustomDictionary.parseText(vertex.realWord, new CT());
             }
             line += parentLength;
         }
         return outputList;
     }
-
+    public class CT: AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
+    {
+        //@Override
+        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        {
+            if (end - begin == parentLength) return;
+            wordNetAll.add(currentLine + begin, new Vertex(vertex.realWord.substring(begin, end), value));
+        }
+    }
     /**
      * 将连续的词语合并为一个
      * @param wordNet 词图

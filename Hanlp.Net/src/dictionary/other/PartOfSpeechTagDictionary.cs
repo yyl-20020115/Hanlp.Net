@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.dictionary.other;
 
 
@@ -22,9 +24,9 @@ public class PartOfSpeechTagDictionary
     /**
      * 词性映射表
      */
-    public static Dictionary<String, String> translator = new TreeMap<String, String>();
+    public static Dictionary<String, String> translator = new ();
 
-    static
+    static PartOfSpeechTagDictionary()
     {
         load(HanLP.Config.PartOfSpeechTagDictionary);
     }
@@ -35,9 +37,9 @@ public class PartOfSpeechTagDictionary
         iterator.next(); // header
         while (iterator.hasNext())
         {
-            String[] args = iterator.next().split(",");
-            if (args.length < 3) continue;
-            translator.put(args[1], args[2]);
+            String[] args = iterator.next().Split(",");
+            if (args.Length < 3) continue;
+            translator.Add(args[1], args[2]);
         }
     }
 
@@ -49,8 +51,6 @@ public class PartOfSpeechTagDictionary
      */
     public static String translate(String tag)
     {
-        String cn = translator.get(tag);
-        if (cn == null) return tag;
-        return cn;
+        return !translator.TryGetValue(tag,out var cn) ? tag : cn;
     }
 }

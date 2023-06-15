@@ -6,7 +6,7 @@ public class Utf8CharacterMappingTest : TestCase
 {
     [TestMethod]
 
-    public void testToIdList() 
+    public void TestToIdList() 
     {
         Utf8CharacterMapping ucm = new Utf8CharacterMapping();
         String s = "汉字\uD801\uDC00\uD801\uDC00ab\uD801\uDC00\uD801\uDC00cd";

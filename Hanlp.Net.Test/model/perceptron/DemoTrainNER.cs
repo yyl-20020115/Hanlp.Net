@@ -17,11 +17,9 @@ namespace com.hankcs.hanlp.model.perceptron;
 /**
  * @author hankcs
  */
-[TestClass]
-
 public class DemoTrainNER
 {
-    public static void main(String[] args) 
+    public static void Main(String[] args)
     {
         PerceptronTrainer trainer = new NERTrainer();
         trainer.train("data/test/pku98/199801.txt", Config.NER_MODEL_FILE);
@@ -35,7 +33,7 @@ public class DemoTrainNER
     public class PT: NERTrainer
     {
         //@Override
-        protected TagSet createTagSet()
+        protected override TagSet createTagSet()
         {
             NERTagSet tagSet = new NERTagSet();
             tagSet.nerLabels.add("YourNER1");

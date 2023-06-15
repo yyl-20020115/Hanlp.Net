@@ -7,7 +7,8 @@ namespace com.hankcs.hanlp.model.hmm;
 [TestClass]
 public class HMMPOSTaggerTest : TestCase
 {
-    public void testTrain() 
+    [TestMethod]
+    public void TestTrain() 
     {
         HMMPOSTagger tagger = new HMMPOSTagger(); // 创建词性标注器
 //        HMMPOSTagger tagger = new HMMPOSTagger(new SecondOrderHiddenMarkovModel()); // 或二阶隐马

@@ -1,5 +1,3 @@
-using static com.hankcs.hanlp.collection.AhoCorasick.AhoCorasickDoubleArrayTrie<V>;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace com.hankcs.hanlp.collection.trie.bintrie;
 
@@ -12,13 +10,13 @@ public class BinTrieTest : TestCase
     private File tempFile;
 
     [TestInitialize]
-    public void setUp()
+    public override void setUp()
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
     }
     [TestMethod]
-    public void testParseText()
+    public void TestParseText()
     {
         BinTrie<String> trie = new BinTrie<String>();
         String[] keys = new String[] { "he", "her", "his" };
@@ -27,11 +25,11 @@ public class BinTrieTest : TestCase
             trie.put(key, key);
         }
         String text = " her4he7his ";
-        IHit<String> processor = new TestHit() { text = text };
+        AhoCorasick.AhoCorasickDoubleArrayTrie<String>.IHit<String> processor = new TestHit() { text = text };
         //        trie.parseLongestText(text, processor);
         trie.parseText(text, processor);
     }
-    public class TestHit : IHit<String>
+    public class TestHit : AhoCorasick.AhoCorasickDoubleArrayTrie<String>.IHit<String>
     {
         public string text;
         //@Override
@@ -43,7 +41,7 @@ public class BinTrieTest : TestCase
     }
     [TestMethod]
 
-    public void testPut()
+    public void TestPut()
     {
         BinTrie<Boolean> trie = new BinTrie<Boolean>();
         trie.put("加入", true);
@@ -53,13 +51,13 @@ public class BinTrieTest : TestCase
     }
     [TestMethod]
 
-    public void testArrayIndexOutOfBoundsException()
+    public void TestArrayIndexOutOfBoundsException()
     {
         BinTrie<Boolean> trie = new BinTrie<Boolean>();
         trie.put(new char[] { '\uffff' }, true);
     }
 
-    public void testSaveAndLoad()
+    public void TestSaveAndLoad()
     {
         BinTrie<int> trie = new BinTrie<int>();
         trie.put("haha", 0);

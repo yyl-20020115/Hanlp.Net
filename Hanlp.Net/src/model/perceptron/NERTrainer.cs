@@ -8,6 +8,12 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.dependency.nnparser;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -48,13 +54,13 @@ public class NERTrainer : PerceptronTrainer
      * @return
      */
     //@Override
-    protected TagSet createTagSet()
+    protected override TagSet createTagSet()
     {
         return tagSet;
     }
 
     //@Override
-    protected Instance createInstance(Sentence sentence, FeatureMap featureMap)
+    protected dependency.nnparser.Instance createInstance(Sentence sentence, FeatureMap featureMap)
     {
         return NERInstance.create(sentence, featureMap);
     }

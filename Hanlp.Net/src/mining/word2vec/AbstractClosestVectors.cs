@@ -4,7 +4,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public abstract class AbstractClosestVectors
 {
 
-    static final int N = 40;
+    static readonly int N = 40;
     protected Scanner scanner;
     protected final VectorsReader vectorsReader;
 

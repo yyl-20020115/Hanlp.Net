@@ -24,7 +24,7 @@ public class SimpleItem
 
     public SimpleItem()
     {
-        labelMap = new TreeMap<String, int>();
+        labelMap = new();
     }
 
     public void addLabel(String label)
@@ -88,14 +88,7 @@ public class SimpleItem
     {
         final StringBuilder sb = new StringBuilder();
         ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(labelMap.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<String, int>>()
-        {
-            //@Override
-            public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
-            {
-                return -o1.getValue().compareTo(o2.getValue());
-            }
-        });
+        Collections.sort(entries, new CT(());
         for (Map.Entry<String, int> entry : entries)
         {
             sb.Append(entry.getKey());
@@ -105,19 +98,27 @@ public class SimpleItem
         }
         return sb.toString();
     }
+    public class CT : Comparator<Map.Entry<String, int>>
+    {
+        //@Override
+        public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
+        {
+            return -o1.getValue().compareTo(o2.getValue());
+        }
+    }
 
     public static SimpleItem create(String param)
     {
         if (param == null) return null;
-        String[] array = param.split(" ");
+        String[] array = param.Split(" ");
         return create(array);
     }
 
-    public static SimpleItem create(String param[])
+    public static SimpleItem create(String[] param)
     {
-        if (param.length % 2 == 1) return null;
+        if (param.Length % 2 == 1) return null;
         SimpleItem item = new SimpleItem();
-        int natureCount = (param.length) / 2;
+        int natureCount = (param.Length) / 2;
         for (int i = 0; i < natureCount; ++i)
         {
             item.labelMap.put(param[2 * i], int.parseInt(param[1 + 2 * i]));
@@ -131,7 +132,7 @@ public class SimpleItem
      */
     public void combine(SimpleItem other)
     {
-        for (Map.Entry<String, int> entry : other.labelMap.entrySet())
+        foreach (Map.Entry<String, int> entry in other.labelMap.entrySet())
         {
             addLabel(entry.getKey(), entry.getValue());
         }
@@ -144,7 +145,7 @@ public class SimpleItem
     public int getTotalFrequency()
     {
         int frequency = 0;
-        for (int f : labelMap.values())
+        foreach (int f in labelMap.Values)
         {
             frequency += f;
         }

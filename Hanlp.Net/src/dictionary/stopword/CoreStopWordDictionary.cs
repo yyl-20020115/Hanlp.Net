@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.dictionary.stopword;
 
 
@@ -21,7 +23,7 @@ namespace com.hankcs.hanlp.dictionary.stopword;
 public class CoreStopWordDictionary
 {
     static StopWordDictionary dictionary;
-    static
+    static CoreStopWordDictionary()
     {
         ByteArray byteArray = ByteArray.createByteArray(HanLP.Config.CoreStopWordDictionaryPath + Predefine.BIN_EXT);
         if (byteArray == null)
@@ -54,7 +56,8 @@ public class CoreStopWordDictionary
     /**
      * 核心停用词典的核心过滤器，词性属于名词、动词、副词、形容词，并且不在停用词表中才不会被过滤
      */
-    public static Filter FILTER = new Filter()
+    public static Filter FILTER = new DF();
+    public class DF:Filter
     {
         //@Override
         public bool shouldInclude(Term term)

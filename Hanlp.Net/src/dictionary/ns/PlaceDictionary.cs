@@ -37,11 +37,11 @@ public class PlaceDictionary
     /**
      * 本词典专注的词的ID
      */
-    static final int WORD_ID = CoreDictionary.getWordID(Predefine.TAG_PLACE);
+    static readonly int WORD_ID = CoreDictionary.getWordID(Predefine.TAG_PLACE);
     /**
      * 本词典专注的词的属性
      */
-    static final CoreDictionary.Attribute ATTRIBUTE = CoreDictionary.get(WORD_ID);
+    static readonly CoreDictionary.Attribute ATTRIBUTE = CoreDictionary.get(WORD_ID);
 
     static
     {

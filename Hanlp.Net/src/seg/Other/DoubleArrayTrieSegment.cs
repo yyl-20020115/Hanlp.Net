@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.seg.Other;
 
 
@@ -29,8 +36,9 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
      * 使用核心词库的trie树构造分词器
      */
     public DoubleArrayTrieSegment()
+        : this(CoreDictionary.trie)
     {
-        this(CoreDictionary.trie);
+        ;
     }
 
     /**
@@ -39,8 +47,8 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
      * @param trie
      */
     public DoubleArrayTrieSegment(DoubleArrayTrie<CoreDictionary.Attribute> trie)
+        :base()
     {
-        super();
         this.trie = trie;
         config.useCustomDictionary = false;
     }
@@ -51,54 +59,57 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
      *
      * @ 加载过程中的IO异常
      */
-    public DoubleArrayTrieSegment(String... dictionaryPaths) 
+    public DoubleArrayTrieSegment(params String[] dictionaryPaths)
+        : this(new DoubleArrayTrie<CoreDictionary.Attribute>(
+            IOUtil.loadDictionary(dictionaryPaths)))
     {
-        this(new DoubleArrayTrie<CoreDictionary.Attribute>(IOUtil.loadDictionary(dictionaryPaths)));
+        ;
     }
 
     //@Override
     protected List<Term> segSentence(char[] sentence)
     {
         char[] charArray = sentence;
-        final int[] wordNet = new int[charArray.length];
+         int[] wordNet = new int[charArray.length];
         Arrays.fill(wordNet, 1);
-        final Nature[] natureArray = config.speechTagging ? new Nature[charArray.length] : null;
+         Nature[] natureArray = config.speechTagging ? new Nature[charArray.length] : null;
         matchLongest(sentence, wordNet, natureArray, trie);
         if (config.useCustomDictionary)
         {
             matchLongest(sentence, wordNet, natureArray, CustomDictionary.dat);
             if (CustomDictionary.trie != null)
             {
-                CustomDictionary.trie.parseLongestText(charArray, new AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute>()
-                {
-                    //@Override
-                    public void hit(int begin, int end, CoreDictionary.Attribute value)
-                    {
-                        int length = end - begin;
-                        if (length > wordNet[begin])
-                        {
-                            wordNet[begin] = length;
-                            if (config.speechTagging)
-                            {
-                                natureArray[begin] = value.nature[0];
-                            }
-                        }
-                    }
-                });
+                CustomDictionary.trie.parseLongestText(charArray, new );
             }
         }
         LinkedList<Term> termList = new LinkedList<Term>();
         posTag(charArray, wordNet, natureArray);
-        for (int i = 0; i < wordNet.length; )
+        for (int i = 0; i < wordNet.Length; )
         {
-            Term term = new Term(new String(charArray, i, wordNet[i]), config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
+            Term term = new Term(new String(charArray, i, wordNet[i]), 
+                config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
             term.offset = i;
             termList.add(term);
             i += wordNet[i];
         }
         return termList;
     }
-
+    public class CT: AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
+    {
+        //@Override
+        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        {
+            int length = end - begin;
+            if (length > wordNet[begin])
+            {
+                wordNet[begin] = length;
+                if (config.speechTagging)
+                {
+                    natureArray[begin] = value.nature[0];
+                }
+            }
+        }
+    }
     private void matchLongest(char[] sentence, int[] wordNet, Nature[] natureArray, DoubleArrayTrie<CoreDictionary.Attribute> trie)
     {
         DoubleArrayTrie<CoreDictionary.Attribute>.LongestSearcher searcher = trie.getLongestSearcher(sentence, 0);

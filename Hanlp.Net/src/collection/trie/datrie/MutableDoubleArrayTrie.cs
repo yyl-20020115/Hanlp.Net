@@ -114,7 +114,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
     //@Override
     public bool containsKey(Object key)
     {
-        if (key == null || !(key instanceof String))
+        if (key == null || !(key is String))
             return false;
         return trie.containsKey((String) key);
     }
@@ -131,7 +131,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
         if (key == null)
             return null;
         int id;
-        if (key instanceof String)
+        if (key is String)
         {
             id = trie.get((String) key);
         }
@@ -166,7 +166,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
     public V remove(Object key)
     {
         if (key == null) return null;
-        int id = trie.remove(key instanceof String ? (String) key : key.toString());
+        int id = trie.remove(key is String ? (String) key : key.toString());
         if (id == -1)
             return null;
         trie.decreaseValues(id);

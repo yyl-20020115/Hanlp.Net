@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.dictionary.py;
 public class PinyinDictionary
 {
     static AhoCorasickDoubleArrayTrie<Pinyin[]> trie = new AhoCorasickDoubleArrayTrie<Pinyin[]>();
-    public static final Pinyin[] pinyins = Integer2PinyinConverter.pinyins;
+    public static readonly Pinyin[] pinyins = Integer2PinyinConverter.pinyins;
 
     static
     {

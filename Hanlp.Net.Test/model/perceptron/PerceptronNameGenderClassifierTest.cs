@@ -11,7 +11,7 @@ public class PerceptronNameGenderClassifierTest : TestCase
     public static String MODEL = "data/test/cnname.bin";
 
     [TestInitialize]
-    public void setUp() 
+    public override void setUp() 
     {
         base.setUp();
         TestUtility.ensureTestData("cnname", "http://file.hankcs.com/corpus/cnname.zip");
@@ -35,14 +35,14 @@ public class PerceptronNameGenderClassifierTest : TestCase
     }
 
     [TestMethod]
-    public void testEvaluate() 
+    public void TestEvaluate()
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier(MODEL);
         Console.WriteLine(classifier.evaluate(TESTING_SET));
     }
 
     [TestMethod]
-    public void testPrediction() 
+    public void TestPrediction()
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier(MODEL);
         predictNames(classifier);

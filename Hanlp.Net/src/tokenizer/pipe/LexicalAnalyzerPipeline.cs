@@ -61,7 +61,7 @@ public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>
     {
         for (Pipe<List<IWord>, List<IWord>> pipe : this)
         {
-            if (pipe instanceof LexicalAnalyzerPipe)
+            if (pipe is LexicalAnalyzerPipe)
             {
                 return ((LexicalAnalyzerPipe) pipe).analyzer;
             }

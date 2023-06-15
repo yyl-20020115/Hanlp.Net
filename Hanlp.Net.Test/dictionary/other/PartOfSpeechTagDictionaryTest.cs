@@ -4,7 +4,7 @@ namespace com.hankcs.hanlp.dictionary.other;
 public class PartOfSpeechTagDictionaryTest : TestCase
 {
     [TestMethod]
-    public void testTranslate() 
+    public void TestTranslate() 
     {
         assertEquals("名词", PartOfSpeechTagDictionary.translate("n"));
     }

@@ -4,7 +4,7 @@ namespace com.hankcs.hanlp.model.bigram;
 public class BigramDependencyModelTest : TestCase
 {
     [TestMethod]
-    public void testLoad() 
+    public void TestLoad() 
     {
         assertEquals("限定", BigramDependencyModel.get("传", "v", "角落", "n"));
     }

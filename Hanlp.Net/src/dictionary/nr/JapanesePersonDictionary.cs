@@ -24,15 +24,15 @@ public class JapanesePersonDictionary
     /**
      * 姓
      */
-    public static final char X = 'x';
+    public static readonly char X = 'x';
     /**
      * 名
      */
-    public static final char M = 'm';
+    public static readonly char M = 'm';
     /**
      * bad case
      */
-    public static final char A = 'A';
+    public static readonly char A = 'A';
 
     static
     {

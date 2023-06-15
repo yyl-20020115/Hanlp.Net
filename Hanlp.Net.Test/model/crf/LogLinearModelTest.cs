@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.model.crf;
 public class LogLinearModelTest : TestCase
 {
     [TestMethod]
-    public void testLoad() 
+    public void TestLoad() 
     {
         LogLinearModel model = new LogLinearModel("/Users/hankcs/Downloads/crfpp-msr-cws-model.txt");
     }

@@ -8,6 +8,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.model.perceptron.feature;
+using System.Text;
+
 namespace com.hankcs.hanlp.model.perceptron.instance;
 
 
@@ -43,14 +48,14 @@ public class POSInstance : Instance
 
     protected int[] extractFeature(String[] words, FeatureMap featureMap, int position)
     {
-        List<int> featVec = new ArrayList<int>();
+        List<int> featVec = new ();
 
 //        String pre2Word = position >= 2 ? words[position - 2] : "_B_";
         String preWord = position >= 1 ? words[position - 1] : "_B_";
         String curWord = words[position];
 
         //		System._out.println("cur: " + curWord);
-        String nextWord = position <= words.length - 2 ? words[position + 1] : "_E_";
+        String nextWord = position <= words.Length - 2 ? words[position + 1] : "_E_";
 //        String next2Word = position <= words.length - 3 ? words[position + 2] : "_E_";
 
         StringBuilder sbFeature = new StringBuilder();
@@ -96,7 +101,7 @@ public class POSInstance : Instance
 //        sbFeature.Append("CW[1,0]=").Append(curWord).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featVec, featureMap);
 //
-        int length = curWord.length();
+        int length = curWord.Length;
 //
 //        // ﬁrstchar(w0)lastchar(w0)
 //        sbFeature.delete(0, sbFeature.length());
@@ -104,34 +109,34 @@ public class POSInstance : Instance
 //        addFeature(sbFeature, featVec, featureMap);
 
         // prefix
-        sbFeature.Append(curWord.substring(0, 1)).Append('4');
+        sbFeature.Append(curWord[0..1]).Append('4');
         addFeatureThenClear(sbFeature, featVec, featureMap);
 
         if (length > 1)
         {
-            sbFeature.Append(curWord.substring(0, 2)).Append('4');
+            sbFeature.Append(curWord[0..2]).Append('4');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
         if (length > 2)
         {
-            sbFeature.Append(curWord.substring(0, 3)).Append('4');
+            sbFeature.Append(curWord[0 .. 3]).Append('4');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
         // sufﬁx(w0, i)(i = 1, 2, 3)
-        sbFeature.Append(curWord.charAt(length - 1)).Append('5');
+        sbFeature.Append(curWord[(length - 1)]).Append('5');
         addFeatureThenClear(sbFeature, featVec, featureMap);
 
         if (length > 1)
         {
-            sbFeature.Append(curWord.substring(length - 2)).Append('5');
+            sbFeature.Append(curWord.Substring(length - 2)).Append('5');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
         if (length > 2)
         {
-            sbFeature.Append(curWord.substring(length - 3)).Append('5');
+            sbFeature.Append(curWord.Substring(length - 3)).Append('5');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
@@ -223,8 +228,8 @@ public class POSInstance : Instance
 
     private void initFeatureMatrix(String[] termArray, FeatureMap featureMap)
     {
-        featureMatrix = new int[termArray.length][];
-        for (int i = 0; i < featureMatrix.length; i++)
+        featureMatrix = new int[termArray.Length][];
+        for (int i = 0; i < featureMatrix.Length; i++)
         {
             featureMatrix[i] = extractFeature(termArray, featureMap, i);
         }
@@ -242,10 +247,10 @@ public class POSInstance : Instance
             return null;
         }
         List<Word> wordList = sentence.toSimpleWordList();
-        String[] termArray = new String[wordList.size()];
-        String[] posArray = new String[wordList.size()];
+        String[] termArray = new String[wordList.Count];
+        String[] posArray = new String[wordList.Count];
         int i = 0;
-        for (Word word : wordList)
+        foreach (Word word in wordList)
         {
             termArray[i] = word.getValue();
             posArray[i] = word.getLabel();

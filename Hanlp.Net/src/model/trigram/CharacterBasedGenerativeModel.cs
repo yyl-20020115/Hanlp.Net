@@ -34,20 +34,20 @@ public class CharacterBasedGenerativeModel : ICacheAble
     /**
      * 用到的标签
      */
-    static final char[] id2tag = new char[]{'b', 'm', 'e', 's', 'x'};
+    static readonly char[] id2tag = new char[]{'b', 'm', 'e', 's', 'x'};
     /**
      * 视野范围外的事件
      */
-    static final char[] bos = {'\b', 'x'};
+    static readonly char[] bos = {'\b', 'x'};
     /**
      * 无穷小
      */
-    static final double inf = -1e10;
+    static readonly double inf = -1e10;
     /**
      * 最后两个字的状态
      * 只可能是 "be" "me" "es" "ss"
      */
-    static final int[][] probableTail = {{0,2},{1,2},{2,3},{3,3}};
+    static readonly int[][] probableTail = {{0,2},{1,2},{2,3},{3,3}};
 
     public CharacterBasedGenerativeModel()
     {

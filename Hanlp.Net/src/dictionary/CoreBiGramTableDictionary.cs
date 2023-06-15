@@ -25,13 +25,13 @@ public class CoreBiGramTableDictionary
      * 描述了词在pair中的范围，具体说来<br>
      * 给定一个词idA，从pair[start[idA]]开始的start[idA + 1] - start[idA]描述了一些接续的频次
      */
-    static int start[];
+    static int[] start;
     /**
      * pair[偶数n]表示key，pair[n+1]表示frequency
      */
-    static int pair[];
+    static int[] pair;
 
-    static
+    static CoreBiGramTableDictionary()
     {
         String path = HanLP.Config.BiGramDictionaryPath;
         logger.info("开始加载二元词典" + path + ".table");
@@ -51,7 +51,7 @@ public class CoreBiGramTableDictionary
         String datPath = HanLP.Config.BiGramDictionaryPath + ".table" + Predefine.BIN_EXT;
         if (loadDat(datPath)) return true;
         BufferedReader br;
-        TreeMap<int, TreeMap<int, int>> map = new TreeMap<int, TreeMap<int, int>>();
+        var map = new Dictionary<int, Dictionary<int, int>>();
         try
         {
             br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));

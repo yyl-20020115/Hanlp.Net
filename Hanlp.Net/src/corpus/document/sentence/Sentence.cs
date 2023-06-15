@@ -103,15 +103,15 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         sb.Append(text).Append('\n');
         int i = 1;
         int offset = 0;
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
-            assert text.charAt(offset) == word.getValue().charAt(0);
+            //assert text.charAt(offset) == word.getValue().charAt(0);
             printWord(word, sb, i, offset, withComment);
             ++i;
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
                 int offsetChild = offset;
-                for (Word child : ((CompoundWord) word).innerList)
+                foreach (Word child in ((CompoundWord) word).innerList)
                 {
                     printWord(child, sb, i, offsetChild, withComment);
                     offsetChild += child.length();
@@ -136,10 +136,10 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public Sentence translateLabels()
     {
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
             word.setLabel(PartOfSpeechTagDictionary.translate(word.getLabel()));
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
                 for (Word child : ((CompoundWord) word).innerList)
                 {
@@ -157,9 +157,9 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public Sentence translateCompoundWordLabels()
     {
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
                 word.setLabel(PartOfSpeechTagDictionary.translate(word.getLabel()));
         }
         return this;
@@ -177,7 +177,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         sb.Append('T').Append(id).Append(delimiter);
         sb.Append(word.getLabel()).Append(delimiter);
         int length = word.length();
-        if (word instanceof CompoundWord)
+        if (word is CompoundWord)
         {
             length += ((CompoundWord) word).innerList.size() - 1;
         }
@@ -225,7 +225,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         }
         if (wordList.isEmpty()) // 按照无词性来解析
         {
-            for (String w : param.split("\\s+"))
+            foreach (String w in param.Split("\\s+"))
             {
                 wordList.add(new Word(w, null));
             }
@@ -252,9 +252,9 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     public int length()
     {
         int length = 0;
-        for (IWord word : this)
+        foreach (IWord word in this)
         {
-            length += word.getValue().length();
+            length += word.getValue().Length;
         }
 
         return length;
@@ -280,11 +280,11 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     {
         if (delimiter == null) delimiter = "";
         StringBuilder sb = new StringBuilder(size() * 3);
-        for (IWord word : this)
+        foreach (IWord word in this)
         {
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
-                for (Word child : ((CompoundWord) word).innerList)
+                foreach (Word child in ((CompoundWord) word).innerList)
                 {
                     sb.Append(child.getValue()).Append(delimiter);
                 }
@@ -294,13 +294,13 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 sb.Append(word.getValue()).Append(delimiter);
             }
         }
-        sb.setLength(sb.length() - delimiter.length());
+        sb.setLength(sb.Length - delimiter.Length);
 
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override
-    public Iterator<IWord> iterator()
+    public IEnumerator<IWord> iterator()
     {
         return wordList.iterator();
     }
@@ -313,8 +313,8 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public List<IWord> findWordsByLabel(String label)
     {
-        List<IWord> wordList = new LinkedList<IWord>();
-        for (IWord word : this)
+        List<IWord> wordList = new ();
+        foreach (IWord word in this)
         {
             if (label.equals(word.getLabel()))
             {
@@ -332,9 +332,9 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public IWord findFirstWordByLabel(String label)
     {
-        for (IWord word : this)
+        foreach (IWord word in this)
         {
-            if (label.equals(word.getLabel()))
+            if (label.Equals(word.getLabel()))
             {
                 return word;
             }
@@ -382,10 +382,10 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public List<Word> toSimpleWordList()
     {
-        List<Word> wordList = new LinkedList<Word>();
-        for (IWord word : this.wordList)
+        List<Word> wordList = new ();
+        foreach (IWord word in this.wordList)
         {
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
                 wordList.addAll(((CompoundWord) word).innerList);
             }
@@ -462,7 +462,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         while (listIterator.hasNext())
         {
             IWord word = listIterator.next();
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
                 listIterator.set(new Word(word.getValue(), word.getLabel()));
             }
@@ -477,12 +477,13 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         if (o == null || getClass() != o.getClass()) return false;
 
         Sentence sentence = (Sentence) o;
-        return toString().equals(sentence.toString());
+        return ToString().Equals(sentence.ToString());
     }
 
     //@Override
-    public int hashCode()
+    public override int GetHashCode()
     {
-        return toString().hashCode();
+        return ToString().GetHashCode();
     }
 }
+

@@ -212,6 +212,6 @@ public class DoubleArray : Serializable
         return _array.length;
     }
 
-    private static final int UNIT_SIZE = 4; // sizeof(int)
+    private static readonly int UNIT_SIZE = 4; // sizeof(int)
     private int[] _array;
 }

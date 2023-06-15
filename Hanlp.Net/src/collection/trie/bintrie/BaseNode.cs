@@ -24,7 +24,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
     /**
      * 状态数组，方便读取的时候用
      */
-    static final Status[] ARRAY_STATUS = Status.values();
+    static readonly Status[] ARRAY_STATUS = Status.values();
     /**
      * 子节点
      */

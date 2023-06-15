@@ -25,7 +25,7 @@ public class DoubleArrayTrieInteger : Serializable
 
     private final static int BUF_SIZE = 16384;
     private final static int UNIT_SIZE = 8; // size of int + int
-    private static final long serialVersionUID = -4908582458604586299L;
+    private static readonly long serialVersionUID = -4908582458604586299L;
 
     private static class Node
     {

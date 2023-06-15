@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.tokenizer.lexical;
 
 

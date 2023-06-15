@@ -8,6 +8,13 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.mining.word2vec;
+using com.hankcs.hanlp.model.perceptron.common;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.model;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -33,8 +40,8 @@ public abstract class PerceptronClassifier
     }
 
     public PerceptronClassifier(String modelPath) 
+        : this(new LinearModel(modelPath))
     {
-        this(new LinearModel(modelPath));
     }
 
     /**
@@ -76,7 +83,7 @@ public abstract class PerceptronClassifier
         for (int it = 0; it < maxIteration; ++it)
         {
             Utility.shuffleArray(instanceList);
-            for (Instance instance : instanceList)
+            foreach (Instance instance in instanceList)
             {
                 ++t;
                 int y = model.decode(instance.x);
@@ -154,7 +161,7 @@ public abstract class PerceptronClassifier
     public BinaryClassificationFMeasure evaluate(Instance[] instanceList)
     {
         int TP = 0, FP = 0, FN = 0;
-        for (Instance instance : instanceList)
+        foreach(Instance instance in instanceList)
         {
             int y = model.decode(instance.x);
             if (y == 1)
@@ -182,8 +189,8 @@ public abstract class PerceptronClassifier
     private Instance[] readInstance(String corpus, FeatureMap featureMap)
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(corpus);
-        List<Instance> instanceList = new LinkedList<Instance>();
-        for (String line : lineIterator)
+        List<Instance> instanceList = new ();
+        foreach (String line in lineIterator)
         {
             String[] cells = line.split(",");
             String text = cells[0], label = cells[1];
@@ -193,9 +200,9 @@ public abstract class PerceptronClassifier
                 y = -1; // 感知机标签约定为±1
             else if (y > 1)
                 throw new IllegalArgumentException("类别数大于2，目前只支持二分类。");
-            instanceList.add(new Instance(x, y));
+            instanceList.Add(new Instance(x, y));
         }
-        return instanceList.toArray(new Instance[0]);
+        return instanceList.ToArray();
     }
 
     /**
@@ -218,13 +225,13 @@ public abstract class PerceptronClassifier
     {
         int featureId = featureMap.idOf(feature);
         if (featureId != -1)
-            featureList.add(featureId);
+            featureList.Add(featureId);
     }
 
     /**
      * 样本
      */
-    static class Instance
+    class Instance
     {
         /**
          * 特征向量
@@ -245,7 +252,7 @@ public abstract class PerceptronClassifier
     /**
      * 准确率度量
      */
-    static class BinaryClassificationFMeasure
+     class BinaryClassificationFMeasure
     {
         float P, R, F1;
 
@@ -257,9 +264,9 @@ public abstract class PerceptronClassifier
         }
 
         //@Override
-        public String toString()
+        public override string ToString()
         {
-            return String.format("P=%.2f R=%.2f F1=%.2f", P, R, F1);
+            return string.format("P=%.2f R=%.2f F1=%.2f", P, R, F1);
         }
     }
 

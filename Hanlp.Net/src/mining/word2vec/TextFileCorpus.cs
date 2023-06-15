@@ -4,7 +4,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public class TextFileCorpus : Corpus
 {
 
-    private static final int VOCAB_MAX_SIZE = 30000000;
+    private static readonly int VOCAB_MAX_SIZE = 30000000;
 
     private int minReduce = 1;
     private BufferedReader raf = null;

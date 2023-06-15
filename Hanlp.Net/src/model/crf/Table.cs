@@ -21,7 +21,7 @@ public class Table
      * 真实值，请不要直接读取
      */
     public String[][] v;
-    static final String HEAD = "_B";
+    static readonly String HEAD = "_B";
 
     //@Override
     public String toString()

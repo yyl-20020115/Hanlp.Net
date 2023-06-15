@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.mining.word;
 public class TfIdfCounterTest : TestCase
 {
     [TestMethod]
-    public void testGetKeywords() 
+    public void TestGetKeywords() 
     {
         TfIdfCounter counter = new TfIdfCounter();
         counter.add("《女排夺冠》", "女排北京奥运会夺冠");

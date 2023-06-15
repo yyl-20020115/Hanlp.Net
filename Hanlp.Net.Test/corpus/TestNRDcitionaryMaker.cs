@@ -1,3 +1,7 @@
+using com.hankcs.hanlp.corpus.dictionary;
+using com.hankcs.hanlp.corpus.document;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+
 namespace com.hankcs.hanlp.corpus;
 
 
@@ -9,21 +13,22 @@ public class TestNRDcitionaryMaker
     {
         EasyDictionary dictionary = EasyDictionary.create("data/dictionary/2014_dictionary.txt");
         NRDictionaryMaker nrDictionaryMaker = new NRDictionaryMaker(dictionary);
-        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", new CorpusLoader.Handler()
-        {
-            //@Override
-            public void handle(Document document)
-            {
-                List<List<Word>> simpleSentenceList = document.getSimpleSentenceList();
-                List<List<IWord>> compatibleList = new LinkedList<List<IWord>>();
-                for (List<Word> wordList : simpleSentenceList)
-                {
-                    compatibleList.add(new LinkedList<IWord>(wordList));
-                }
-                nrDictionaryMaker.compute(compatibleList);
-            }
-        });
+        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", );
         nrDictionaryMaker.saveTxtTo("D:\\JavaProjects\\HanLP\\data\\test\\person\\nr1");
     }
-
+    public class NRD : CorpusLoader.Handler
+    {
+        EasyDictionary nrDictionaryMaker;
+        //@Override
+        public void handle(Document document)
+        {
+            List<List<Word>> simpleSentenceList = document.getSimpleSentenceList();
+            List<List<IWord>> compatibleList = new List<List<IWord>>();
+            foreach (List<Word> wordList in simpleSentenceList)
+            {
+                compatibleList.add(new LinkedList<IWord>(wordList));
+            }
+            nrDictionaryMaker.compute(compatibleList);
+        }
+    }
 }

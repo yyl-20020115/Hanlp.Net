@@ -1185,7 +1185,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         }
     }
 
-    private static final long serialVersionUID = 1;
+    private static readonly long serialVersionUID = 1;
 
     public static Matrix zero(int m, int n)
     {

@@ -76,7 +76,7 @@ public class Term
      */
     //@Override
     public bool equals(Object obj) {
-        if (obj instanceof Term)
+        if (obj is Term)
         {
             Term term = (Term)obj;
             if (this.nature == term.nature && this.word.equals(term.word))

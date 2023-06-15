@@ -13,7 +13,7 @@ public class IIOAdapterTest : TestCase
     [TestMethod]
     public void testReturnNullInIOAdapter() 
     {
-        HanLP.Config.IOAdapter = new ;
+        HanLP.Config.IOAdapter = new IOP();
 
         HanLP.Config.enableDebug(false);
         assertEquals(true, CoreStopWordDictionary.Contains("的"));

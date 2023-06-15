@@ -43,7 +43,7 @@ public class PKU
             try
             {
                 BufferedWriter bw = IOUtil.newBufferedWriter(PKU199801_TRAIN);
-                for (String line : all.subList(0, (int) (all.size() * 0.9)))
+                foreach (String line in all.subList(0, (int) (all.size() * 0.9)))
                 {
                     bw.write(line);
                     bw.newLine();
@@ -51,7 +51,7 @@ public class PKU
                 bw.close();
 
                 bw = IOUtil.newBufferedWriter(PKU199801_TEST);
-                for (String line : all.subList((int) (all.size() * 0.9), all.size()))
+                foreach (String line in all.subList((int) (all.size() * 0.9), all.size()))
                 {
                     bw.write(line);
                     bw.newLine();
@@ -60,7 +60,7 @@ public class PKU
             }
             catch (IOException e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }

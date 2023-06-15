@@ -5,10 +5,10 @@ using com.hankcs.hanlp;
 [TestClass]
 public class LongestCommonSubsequenceTest : TestCase
 {
-    String a = "Tom Hanks";
-    String b = "Hankcs";
+    readonly string a = "Tom Hanks";
+    readonly string b = "Hankcs";
     [TestMethod]
-    public void testCompute() 
+    public void TestCompute()
     {
         assertEquals(5, LongestCommonSubsequence.compute(a, b));
     }

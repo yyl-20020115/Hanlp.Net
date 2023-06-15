@@ -23,11 +23,11 @@ public class Occurrence
     /**
      * 两个词的正向连接符 中国 RIGHT 人民
      */
-    public static final char RIGHT = '\u0000';
+    public static readonly char RIGHT = '\u0000';
     /**
      * 两个词的逆向连接符 人民 LEFT 中国
      */
-    static final char LEFT = '\u0001';
+    static readonly char LEFT = '\u0001';
 
     /**
      * 全部单词数量

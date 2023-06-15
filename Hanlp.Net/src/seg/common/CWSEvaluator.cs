@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.seg.common;
 
 
@@ -239,7 +241,7 @@ public class CWSEvaluator
         return evaluator.getResult();
     }
 
-    public static class Result
+    public class Result
     {
         float P, R, F1, OOV_R, IV_R;
 

@@ -7,7 +7,7 @@ public class CharTypeTest : TestCase
 {
     [TestMethod]
 
-    public void testNumber() 
+    public void TestNumber()
     {
 //        for (int i = 0; i <= Character.MAX_VALUE; ++i)
 //        {
@@ -19,7 +19,7 @@ public class CharTypeTest : TestCase
     }
     [TestMethod]
 
-    public void testWhiteSpace() 
+    public void TestWhiteSpace()
     {
 //        CharType.type[' '] = CharType.CT_OTHER;
         String text = "1 + 2 = 3; a+b= a + b";
@@ -27,7 +27,7 @@ public class CharTypeTest : TestCase
     }
     [TestMethod]
 
-    public void testTab() 
+    public void TestTab() 
     {
         assertTrue(TextUtility.charType('\t') == CharType.CT_DELIMITER);
         assertTrue(TextUtility.charType('\r') == CharType.CT_DELIMITER);

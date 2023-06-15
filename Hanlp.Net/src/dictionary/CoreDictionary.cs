@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.corpus.tag;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -22,10 +26,10 @@ public class CoreDictionary
 {
     public static DoubleArrayTrie<Attribute> trie = new DoubleArrayTrie<Attribute>();
     public readonly static String path = HanLP.Config.CoreDictionaryPath;
-    public static final int totalFrequency = 221894;
+    public static readonly int totalFrequency = 221894;
 
     // 自动加载词典
-    static
+    static CoreDictionary()
     {
         long start = System.currentTimeMillis();
         if (!load(path))
@@ -39,13 +43,13 @@ public class CoreDictionary
     }
 
     // 一些特殊的WORD_ID
-    public static final int NR_WORD_ID = getWordID(Predefine.TAG_PEOPLE);
-    public static final int NS_WORD_ID = getWordID(Predefine.TAG_PLACE);
-    public static final int NT_WORD_ID = getWordID(Predefine.TAG_GROUP);
-    public static final int T_WORD_ID = getWordID(Predefine.TAG_TIME);
-    public static final int X_WORD_ID = getWordID(Predefine.TAG_CLUSTER);
-    public static final int M_WORD_ID = getWordID(Predefine.TAG_NUMBER);
-    public static final int NX_WORD_ID = getWordID(Predefine.TAG_PROPER);
+    public static readonly int NR_WORD_ID = getWordID(Predefine.TAG_PEOPLE);
+    public static readonly int NS_WORD_ID = getWordID(Predefine.TAG_PLACE);
+    public static readonly int NT_WORD_ID = getWordID(Predefine.TAG_GROUP);
+    public static readonly int T_WORD_ID = getWordID(Predefine.TAG_TIME);
+    public static readonly int X_WORD_ID = getWordID(Predefine.TAG_CLUSTER);
+    public static readonly int M_WORD_ID = getWordID(Predefine.TAG_NUMBER);
+    public static readonly int NX_WORD_ID = getWordID(Predefine.TAG_PROPER);
 
     private static bool load(String path)
     {
@@ -199,16 +203,16 @@ public class CoreDictionary
     /**
      * 核心词典中的词属性
      */
-    static public class Attribute : Serializable
+    public class Attribute : Serializable
     {
         /**
          * 词性列表
          */
-        public Nature nature[];
+        public Nature[] nature;
         /**
          * 词性对应的词频
          */
-        public int frequency[];
+        public int[] frequency;
 
         public int totalFrequency;
 
@@ -229,8 +233,8 @@ public class CoreDictionary
         }
 
         public Attribute(Nature nature, int frequency)
+            : this(1)
         {
-            this(1);
             this.nature[0] = nature;
             this.frequency[0] = frequency;
             totalFrequency = frequency;
@@ -249,15 +253,15 @@ public class CoreDictionary
          * @param nature
          */
         public Attribute(Nature nature)
+            : this(nature, 1000)
         {
-            this(nature, 1000);
         }
 
         public static Attribute create(String natureWithFrequency)
         {
             try
             {
-                String param[] = natureWithFrequency.split(" ");
+                String[] param = natureWithFrequency.Split(" ");
                 if (param.length % 2 != 0)
                 {
                     return new Attribute(Nature.create(natureWithFrequency.trim()), 1); // 儿童锁
@@ -326,10 +330,10 @@ public class CoreDictionary
          * @param nature 词性
          * @return 词频
          */
-        public int getNatureFrequency(final Nature nature)
+        public int getNatureFrequency(Nature nature)
         {
             int i = 0;
-            for (Nature pos : this.nature)
+            foreach (Nature pos in this.nature)
             {
                 if (nature == pos)
                 {
@@ -357,7 +361,7 @@ public class CoreDictionary
          */
         public bool hasNatureStartsWith(String prefix)
         {
-            for (Nature n : nature)
+            foreach (Nature n in nature)
             {
                 if (n.startsWith(prefix)) return true;
             }
@@ -367,7 +371,7 @@ public class CoreDictionary
         //@Override
         public String toString()
         {
-            final StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < nature.length; ++i)
             {
                 sb.Append(nature[i]).Append(' ').Append(frequency[i]).Append(' ');

@@ -7,7 +7,7 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
  */
 public class IntArrayList : Serializable, ICacheAble
 {
-    private static final long serialVersionUID = 1908530358259070518L;
+    private static readonly long serialVersionUID = 1908530358259070518L;
     private int[] data;
     /**
      * 实际size

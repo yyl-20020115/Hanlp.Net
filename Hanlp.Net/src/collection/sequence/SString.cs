@@ -57,7 +57,7 @@ public class SString : Comparable<SString>, CharSequence
         {
             return true;
         }
-        if (anObject instanceof SString)
+        if (anObject is SString)
         {
             SString anotherString = (SString) anObject;
             int n = value.length;

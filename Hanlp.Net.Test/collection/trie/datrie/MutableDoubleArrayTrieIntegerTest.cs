@@ -9,18 +9,18 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
     private int size;
 
     [TestInitialize]
-    public void setUp() 
+    public override void setUp() 
     {
         mdat = new MutableDoubleArrayTrieInteger();
         size = 64;
         for (int i = 0; i < size; ++i)
         {
-            mdat.put(String.valueOf(i), i);
+            mdat.put(i.ToString(), i);
         }
     }
     [TestMethod]
 
-    public void testSaveLoad() 
+    public void TestSaveLoad() 
     {
         File tempFile = File.createTempFile("hanlp", ".mdat");
         mdat.save(new DataOutputStream(new FileOutputStream(tempFile)));
@@ -29,12 +29,12 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
         assertEquals(size, mdat.size());
         for (int i = 0; i < size; ++i)
         {
-            assertEquals(i, mdat.get(String.valueOf(i)));
+            assertEquals(i, mdat.get((i.ToString())));
         }
 
         for (int i = size; i < 2 * size; ++i)
         {
-            assertEquals(-1, mdat.get(String.valueOf(i)));
+            assertEquals(-1, mdat.get((i.ToString())));
         }
     }
 }

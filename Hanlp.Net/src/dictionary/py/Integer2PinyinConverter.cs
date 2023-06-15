@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.dictionary.py;
  */
 public class Integer2PinyinConverter
 {
-    public static final Pinyin[] pinyins = Pinyin.values();
+    public static readonly Pinyin[] pinyins = Pinyin.values();
 
     public static Pinyin getPinyin(int ordinal)
     {

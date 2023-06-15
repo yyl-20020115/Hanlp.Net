@@ -17,7 +17,7 @@ public class PropertiesArgs
     public static void parse(Object target, Properties arguments)
     {
         Class clazz;
-        if (target instanceof Class)
+        if (target is Class)
         {
             clazz = (Class) target;
         }

@@ -66,7 +66,7 @@ public class Document : Serializable
         List<Word> simpleWordList = new LinkedList<Word>();
         for (IWord word : wordList)
         {
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
                 simpleWordList.addAll(((CompoundWord) word).innerList);
             }
@@ -92,7 +92,7 @@ public class Document : Serializable
             List<Word> wordList = new LinkedList<Word>();
             for (IWord word : sentence.wordList)
             {
-                if (word instanceof CompoundWord)
+                if (word is CompoundWord)
                 {
                     for (Word inner : ((CompoundWord) word).innerList)
                     {
@@ -140,7 +140,7 @@ public class Document : Serializable
             List<Word> wordList = new LinkedList<Word>();
             for (IWord word : sentence.wordList)
             {
-                if (word instanceof CompoundWord)
+                if (word is CompoundWord)
                 {
                     if (spilt)
                     {
@@ -179,7 +179,7 @@ public class Document : Serializable
             List<Word> wordList = new LinkedList<Word>();
             for (IWord word : sentence.wordList)
             {
-                if (word instanceof CompoundWord)
+                if (word is CompoundWord)
                 {
                     if (labelSet.contains(word.getLabel()))
                     {

@@ -8,6 +8,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.dependency.nnparser;
+using com.hankcs.hanlp.model.perceptron.model;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -22,17 +26,17 @@ public abstract class PerceptronTagger : InstanceConsumer
     /**
      * 用StructurePerceptron实现在线学习
      */
-    protected final StructuredPerceptron model;
+    protected StructuredPerceptron model;
 
     public PerceptronTagger(LinearModel model)
     {
-        assert model != null;
-        this.model = model instanceof StructuredPerceptron ? (StructuredPerceptron) model : new StructuredPerceptron(model.featureMap, model.parameter);
+        //assert model != null;
+        this.model = model is StructuredPerceptron ? (StructuredPerceptron) model : new StructuredPerceptron(model.featureMap, model.parameter);
     }
 
     public PerceptronTagger(StructuredPerceptron model)
     {
-        assert model != null;
+        //assert model != null;
         this.model = model;
     }
 

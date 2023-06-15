@@ -22,9 +22,9 @@ public class SimplifiedChineseDictionary : BaseChineseDictionary
     /**
      * 简体=繁体
      */
-    static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
+    static collection.AhoCorasick.AhoCorasickDoubleArrayTrie<String> trie = new collection.AhoCorasick.AhoCorasickDoubleArrayTrie<String>();
     
-    static
+    static SimplifiedChineseDictionary()
     {
         long start = System.currentTimeMillis();
         if (!load(HanLP.Config.tcDictionaryRoot + "s2t.txt", trie, false))

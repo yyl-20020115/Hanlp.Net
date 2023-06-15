@@ -9,6 +9,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.perceptron.common;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
@@ -37,8 +41,8 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     public bool mutable;
 
     public FeatureMap(TagSet tagSet)
+        : this(tagSet, false)
     {
-        this(tagSet, false);
     }
 
     public FeatureMap(TagSet tagSet, bool mutable)
@@ -55,8 +59,8 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     }
 
     public FeatureMap()
+        : this(false)
     {
-        this(false);
     }
 
     //@Override
@@ -82,21 +86,21 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
         return true;
     }
 
-    protected final void loadTagSet(ByteArray byteArray)
+    protected void loadTagSet(ByteArray byteArray)
     {
         TaskType type = TaskType.values()[byteArray.nextInt()];
         switch (type)
         {
-            case CWS:
+            case TaskType.CWS:
                 tagSet = new CWSTagSet();
                 break;
-            case POS:
+            case TaskType.POS:
                 tagSet = new POSTagSet();
                 break;
-            case NER:
+            case TaskType.NER:
                 tagSet = new NERTagSet();
                 break;
-            case CLASSIFICATION:
+            case TaskType.CLASSIFICATION:
                 tagSet = new TagSet(TaskType.CLASSIFICATION);
                 break;
         }

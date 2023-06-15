@@ -81,7 +81,7 @@ public class CorpusUtil
         while (listIterator.hasNext())
         {
             IWord word = listIterator.next();
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
                 listIterator.remove();
                 for (Word inner : ((CompoundWord) word).innerList)

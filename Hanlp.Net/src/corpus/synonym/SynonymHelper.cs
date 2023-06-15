@@ -20,11 +20,11 @@ public class SynonymHelper
     /**
      * 同一行最多支持编码这么多个单词
      */
-    public static final long MAX_WORDS = 999L;
+    public static readonly long MAX_WORDS = 999L;
     /**
      * 尾数的长度，表示原子词的index
      */
-    public static final int MAX_INDEX_LENGTH = String.valueOf(MAX_WORDS).length();
+    public static readonly int MAX_INDEX_LENGTH = String.valueOf(MAX_WORDS).length();
     public static long convertString2Id(String idString)
     {
         long id;

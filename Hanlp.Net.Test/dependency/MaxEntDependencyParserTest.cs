@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.dependency;
 public class MaxEntDependencyParserTest : TestCase
 {
     [TestMethod]
-    public void testMaxEntParser() 
+    public void TestMaxEntParser() 
     {
 //        HanLP.Config.enableDebug();
 //        Console.WriteLine(MaxEntDependencyParser.compute("我每天骑车上学"));

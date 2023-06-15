@@ -14,6 +14,8 @@ using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.seg.common.wrapper;
 using com.hankcs.hanlp.seg.Dijkstra;
+using com.hankcs.hanlp.seg.Other;
+using com.hankcs.hanlp.seg.Viterbi;
 using com.hankcs.hanlp.tokenizer;
 
 namespace com.hankcs.hanlp.seg;
@@ -28,7 +30,7 @@ namespace com.hankcs.hanlp.seg;
 public class SegmentTest : TestCase
 {
     [TestMethod]
-    public void testSeg() 
+    public void TestSeg() 
     {
 //        HanLP.Config.enableDebug();
         Segment segment = new DijkstraSegment();
@@ -37,7 +39,7 @@ public class SegmentTest : TestCase
 //        ));
     }
     [TestMethod]
-    public void testIssue880() 
+    public void TestIssue880() 
     {
 //        HanLP.Config.enableDebug();
         Segment segment = new DijkstraSegment();
@@ -46,7 +48,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testViterbi() 
+    public void TestViterbi() 
     {
 //        HanLP.Config.enableDebug(true);
         CustomDictionary.add("网剧");
@@ -61,7 +63,7 @@ public class SegmentTest : TestCase
         HanLP.Config.enableDebug(false);
         String path = System.getProperty("user.dir") + "/" + "data/dictionary/custom/CustomDictionary.txt;" +
             System.getProperty("user.dir") + "/" + "data/dictionary/custom/全国地名大全.txt";
-        path = path.replace("\\", "/");
+        path = path.Replace("\\", "/");
         String text = "一半天帕克斯曼是走不出丁字桥镇的";
         Segment segment = HanLP.newSegment().enableCustomDictionary(false);
         Segment seg = new ViterbiSegment(path);
@@ -73,19 +75,19 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testNotional() 
+    public void TestNotional() 
     {
 //        Console.WriteLine(NotionalTokenizer.segment("算法可以宽泛的分为三类"));
     }
     [TestMethod]
 
-    public void testNGram() 
+    public void TestNGram() 
     {
 //        Console.WriteLine(CoreBiGramTableDictionary.getBiFrequency("牺", "牲"));
     }
     [TestMethod]
 
-    public void testShortest() 
+    public void TestShortest() 
     {
         //        HanLP.Config.enableDebug();
         //        Segment segment = new ViterbiSegment().enableAllNamedEntityRecognize(true);
@@ -94,13 +96,13 @@ public class SegmentTest : TestCase
     [TestMethod]
 
 
-    public void testIndexSeg() 
+    public void TestIndexSeg() 
     {
 //        Console.WriteLine(IndexTokenizer.segment("中科院预测科学研究中心学术委员会"));
     }
     [TestMethod]
 
-    public void testOffset() 
+    public void TestOffset() 
     {
         String text = "中华人民共和国在哪里";
 //        for (int i = 0; i < text.Length(); ++i)
@@ -109,14 +111,14 @@ public class SegmentTest : TestCase
 //        }
 //        Console.WriteLine();
         List<Term> termList = IndexTokenizer.segment(text);
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             assertEquals(term.word, text.substring(term.offset, term.offset + term.Length()));
         }
     }
     [TestMethod]
 
-    public void testWrapper() 
+    public void TestWrapper() 
     {
         SegmentWrapper wrapper = new SegmentWrapper(new BufferedReader(new StringReader("中科院预测科学研究中心学术委员会\nhaha")), tokenizer.StandardTokenizer.SEGMENT);
         Term fullTerm;
@@ -127,7 +129,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testSpeechTagging() 
+    public void TestSpeechTagging() 
     {
 //        HanLP.Config.enableDebug();
         String text = "教授正在教授自然语言处理课程";
@@ -139,13 +141,13 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testFactory() 
+    public void TestFactory() 
     {
         Segment segment = HanLP.newSegment();
     }
     [TestMethod]
 
-    public void testCustomDictionary() 
+    public void TestCustomDictionary() 
     {
         CustomDictionary.insert("肯德基", "ns 1000");
         Segment segment = new ViterbiSegment();
@@ -153,7 +155,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testNT() 
+    public void TestNT() 
     {
 //        HanLP.Config.enableDebug();
         Segment segment = new DijkstraSegment().enableOrganizationRecognize(true);
@@ -161,7 +163,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testACSegment() 
+    public void TestACSegment() 
     {
         Segment segment = new DoubleArrayTrieSegment();
         segment.enablePartOfSpeechTagging(true);
@@ -169,7 +171,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue2() 
+    public void TestIssue2() 
     {
 //        HanLP.Config.enableDebug();
         String text = "BENQphone";
@@ -179,7 +181,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue3() 
+    public void TestIssue3() 
     {
         assertEquals(CharType.CT_DELIMITER, CharType.get('*'));
 //        Console.WriteLine(HanLP.segment("300g*2"));
@@ -188,20 +190,20 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue313() 
+    public void TestIssue313() 
     {
 //        Console.WriteLine(HanLP.segment("hello\n" + "world"));
     }
     [TestMethod]
 
-    public void testQuickAtomSegment() 
+    public void TestQuickAtomSegment() 
     {
         String text = "你好1234abc Good一二三四3.14";
 //        Console.WriteLine(Segment.quickAtomSegment(text.ToCharArray(), 0, text.Length()));
     }
     [TestMethod]
 
-    public void testJP() 
+    public void TestJP() 
     {
         String text = "明天8.9你好abc对了";
         Segment segment = new ViterbiSegment().enableCustomDictionary(false).enableAllNamedEntityRecognize(false);
@@ -226,7 +228,7 @@ public class SegmentTest : TestCase
     //    }
     [TestMethod]
 
-    public void testNumberAndQuantifier() 
+    public void TestNumberAndQuantifier() 
     {
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
         String[] testCase = new String[]
@@ -236,14 +238,14 @@ public class SegmentTest : TestCase
                 "壹佰块钱都不给我",
                 "９０１２３４５６７８只蚂蚁",
             };
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
 //            Console.WriteLine(StandardTokenizer.segment(sentence));
         }
     }
     [TestMethod]
 
-    public void testIssue10() 
+    public void TestIssue10() 
     {
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
         IndexTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
@@ -326,7 +328,7 @@ public class SegmentTest : TestCase
     //    }
     [TestMethod]
 
-    public void testIssue16() 
+    public void TestIssue16() 
     {
         CustomDictionary.insert("爱听4g", "nz 1000");
         Segment segment = new ViterbiSegment();
@@ -338,7 +340,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssuse17() 
+    public void TestIssuse17() 
     {
 //        Console.WriteLine(CharType.get('\u0000'));
 //        Console.WriteLine(CharType.get(' '));
@@ -349,7 +351,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue22() 
+    public void TestIssue22() 
     {
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(false);
         CoreDictionary.Attribute attribute = CoreDictionary.get("年");
@@ -363,7 +365,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue71() 
+    public void TestIssue71() 
     {
         Segment segment = HanLP.newSegment();
         segment = segment.enableAllNamedEntityRecognize(true);
@@ -372,7 +374,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue193() 
+    public void TestIssue193() 
     {
         String[] testCase = new String[]{
             "以每台约200元的价格送到苹果售后维修中心换新机（苹果的保修基本是免费换新机）",
@@ -395,13 +397,13 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testTime() 
+    public void TestTime() 
     {
         TraditionalChineseTokenizer.segment("认可程度");
     }
     [TestMethod]
 
-    public void testBuildASimpleSegment() 
+    public void TestBuildASimpleSegment() 
     {
         var dictionary = new Dictionary<String, String>();
         dictionary.put("HanLP", "名词");

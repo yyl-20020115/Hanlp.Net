@@ -1,22 +1,20 @@
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
-
-
 [TestClass]
 public class IntArrayListTest : TestCase
 {
     IntArrayList array = new IntArrayList();
 
     [TestInitialize]
-    public void setUp() 
+    public override void setUp() 
     {
         for (int i = 0; i < 64; ++i)
         {
-            array.append(i);
+            array.Append(i);
         }
     }
     [TestMethod]
-    public void testSaveLoad() 
+    public void TestSaveLoad() 
     {
         File tempFile = File.createTempFile("hanlp", ".intarray");
         array.save(new DataOutputStream(new FileOutputStream(tempFile.getAbsolutePath())));

@@ -3,7 +3,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 
 public final class KMeansClustering
 {
-    static final Charset ENCODING = Charset.forName("UTF-8");
+    static readonly Charset ENCODING = Charset.forName("UTF-8");
     private final VectorsReader reader;
     private final int clcn;
     private final String outFile;

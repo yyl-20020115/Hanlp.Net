@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.dartsclone;
 
 
@@ -10,10 +12,10 @@ public class DartMapTest : TestCase
     private DartMap<int> dartMap;
 
     [TestInitialize]
-    public void setUp() 
+    public override void setUp()
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.ngram.txt");
-        validKeySet = new TreeSet<String>();
+        validKeySet = new ();
         while (iterator.hasNext())
         {
             validKeySet.add(iterator.next().split("\\s")[0]);
@@ -27,7 +29,7 @@ public class DartMapTest : TestCase
     }
     [TestMethod]
 
-    public void testGenerateInvalidKeySet() 
+    public void TestGenerateInvalidKeySet()
     {
         invalidKeySet = new TreeSet<String>();
         Random random = new Random(System.currentTimeMillis());
@@ -45,20 +47,20 @@ public class DartMapTest : TestCase
     }
     [TestMethod]
 
-    public void testBuild() 
+    public void TestBuild() 
     {
     }
     [TestMethod]
 
-    public void testContainsAndNoteContains() 
+    public void TestContainsAndNoteContains() 
     {
-        testBuild();
+        TestBuild();
         for (String key : validKeySet)
         {
             assertEquals(key.Length(), (int)dartMap.get(key));
         }
 
-        testGenerateInvalidKeySet();
+        TestGenerateInvalidKeySet();
         for (String key : invalidKeySet)
         {
             assertEquals(null, dartMap.get(key));

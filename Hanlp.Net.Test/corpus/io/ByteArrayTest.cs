@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus.io;
 
 
@@ -9,14 +11,14 @@ public class ByteArrayTest : TestCase
     private File tempFile;
 
     [TestInitialize]
-    public void setUp() 
+    public override void setUp() 
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
     }
     [TestMethod]
 
-    public void testReadDouble() 
+    public void TestReadDouble() 
     {
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         double d = 0.123456789;
@@ -29,7 +31,7 @@ public class ByteArrayTest : TestCase
     }
     [TestMethod]
 
-    public void testReadUTF() 
+    public void TestReadUTF() 
     {
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         String utf = "hankcs你好123";
@@ -39,7 +41,7 @@ public class ByteArrayTest : TestCase
     }
     [TestMethod]
 
-    public void testReadUnsignedShort() 
+    public void TestReadUnsignedShort() 
     {
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         int utflen = 123;
@@ -50,7 +52,7 @@ public class ByteArrayTest : TestCase
     }
     [TestMethod]
 
-    public void testConvertCharToInt() 
+    public void TestConvertCharToInt() 
     {
 //        for (int i = 0; i < int.MAX_VALUE; ++i)
         for (int i = 0; i < 1024; ++i)
@@ -62,7 +64,7 @@ public class ByteArrayTest : TestCase
     }
     [TestMethod]
 
-    public void testNextBoolean() 
+    public void TestNextBoolean()
     {
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(tempFile));
         _out.writeBoolean(true);
@@ -75,7 +77,7 @@ public class ByteArrayTest : TestCase
     }
     [TestMethod]
 
-    public void testWriteAndRead() 
+    public void TestWriteAndRead()
     {
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         _out.writeChar('H');
@@ -93,7 +95,7 @@ public class ByteArrayTest : TestCase
     }
     [TestMethod]
 
-    public void testWriteBigFile() 
+    public void TestWriteBigFile() 
     {
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         for (int i = 0; i < 10000; i++)
@@ -104,7 +106,7 @@ public class ByteArrayTest : TestCase
     }
     [TestMethod]
 
-    public void testStream() 
+    public void TestStream() 
     {
         ByteArray byteArray = ByteArrayFileStream.createByteArrayFileStream(DATA_TEST_OUT_BIN);
         while (byteArray.hasMore())

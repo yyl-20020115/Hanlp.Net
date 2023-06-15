@@ -3,13 +3,13 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public class Config
 {
 
-    static final int DEF_ITER = 5;
-    static final int DEF_WINDOW = 5;
-    static final int DEF_MIN_COUNT = 5;
-    static final int DEF_NEGATIVE = 5;
-    static final int DEF_LAYER1_SIZE = 100;
-    static final int DEF_NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    static final float DEF_SAMPLE = 0.001f;
+    static readonly int DEF_ITER = 5;
+    static readonly int DEF_WINDOW = 5;
+    static readonly int DEF_MIN_COUNT = 5;
+    static readonly int DEF_NEGATIVE = 5;
+    static readonly int DEF_LAYER1_SIZE = 100;
+    static readonly int DEF_NUM_THREADS = Runtime.getRuntime().availableProcessors();
+    static readonly float DEF_SAMPLE = 0.001f;
 
     protected String outputFile;
     protected int iter = DEF_ITER, window = DEF_WINDOW, minCount = DEF_MIN_COUNT, negative = DEF_NEGATIVE,

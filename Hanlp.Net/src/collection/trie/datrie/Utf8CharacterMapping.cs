@@ -6,10 +6,10 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
  */
 public class Utf8CharacterMapping implements CharacterMapping, Serializable
 {
-    private static final long serialVersionUID = -6529481088518753872L;
-    private static final int N = 256;
-    private static final int[] EMPTYLIST = new int[0];
-    public static final Charset UTF_8 = Charset.forName("UTF-8");
+    private static readonly long serialVersionUID = -6529481088518753872L;
+    private static readonly int N = 256;
+    private static readonly int[] EMPTYLIST = new int[0];
+    public static readonly Charset UTF_8 = Charset.forName("UTF-8");
 
     //@Override
     public int getInitSize()

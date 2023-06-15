@@ -14,7 +14,7 @@ public class CustomDictionaryTest : TestCase
     //    }
     [TestMethod]
 
-    public void testGet() 
+    public void TestGet() 
     {
         assertEquals("nz 1 ", CustomDictionary.get("一个心眼儿").ToString());
     }
@@ -154,7 +154,7 @@ public class CustomDictionaryTest : TestCase
     //        Console.WriteLine(HanLP.segment(text));
     //    }
     [TestMethod]
-    public void testIssue540() 
+    public void TtestIssue540() 
     {
         CustomDictionary.add("123");
         CustomDictionary.add("摩根");

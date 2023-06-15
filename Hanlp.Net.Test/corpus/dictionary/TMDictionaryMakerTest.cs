@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
 public class TMDictionaryMakerTest : TestCase
 {
     [TestMethod]
-    public void testCreate() 
+    public void TestCreate()
     {
         TMDictionaryMaker tmDictionaryMaker = new ();
         tmDictionaryMaker.addPair("ab", "cd");

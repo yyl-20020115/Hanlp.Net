@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -129,9 +131,9 @@ public class CRFModelTest : TestCase
 
     public static String compile(String tag)
     {
-        if (tag.startsWith("m")) return "M";
-        else if (tag.equals("x")) return "W";
-        else if (tag.equals("nx")) return "W";
+        if (tag.StartsWith("m")) return "M";
+        else if (tag.Equals("x")) return "W";
+        else if (tag.Equals("nx")) return "W";
         return null;
     }
 
@@ -143,8 +145,8 @@ public class CRFModelTest : TestCase
 
         Table table = new Table();
         String text = "人民生活进一步改善了";
-        table.v = new String[text.Length()][2];
-        for (int i = 0; i < text.Length(); i++)
+        table.v = new String[text.Length][2];
+        for (int i = 0; i < text.Length; i++)
         {
             table.v[i][0] = String.valueOf(text.charAt(i));
         }

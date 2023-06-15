@@ -114,9 +114,9 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
     //@Override
     public bool contains(Object o)
     {
-        if (o instanceof String)
+        if (o is String)
             return termFrequencyMap.containsKey(o);
-        else if (o instanceof TermFrequency)
+        else if (o is TermFrequency)
             return termFrequencyMap.containsValue(o);
         return false;
     }

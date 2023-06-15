@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.model.perceptron;
 public class PerceptronTaggerTest : TestCase
 {
     [TestMethod]
-    public void testEmptyInput() 
+    public void TestEmptyInput() 
     {
         PerceptronPOSTagger tagger = new PerceptronPOSTagger();
         tagger.tag(new List<String>());

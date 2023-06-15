@@ -8,6 +8,14 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.model.perceptron.common;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.model;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -17,13 +25,13 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class PerceptronNERecognizer : PerceptronTagger : NERecognizer
+public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
 {
-    final NERTagSet tagSet;
+    readonly NERTagSet tagSet;
 
     public PerceptronNERecognizer(LinearModel nerModel)
+        :base(nerModel)
     {
-        super(nerModel);
         if (nerModel.tagSet().type != TaskType.NER)
         {
             throw new IllegalArgumentException(String.format("错误的模型类型: 传入的不是命名实体识别模型，而是 %s 模型", nerModel.featureMap.tagSet.type));
@@ -32,8 +40,8 @@ public class PerceptronNERecognizer : PerceptronTagger : NERecognizer
     }
 
     public PerceptronNERecognizer(String nerModelPath) 
+        : this(new LinearModel(nerModelPath))
     {
-        this(new LinearModel(nerModelPath));
     }
 
     /**
@@ -42,8 +50,8 @@ public class PerceptronNERecognizer : PerceptronTagger : NERecognizer
      * @
      */
     public PerceptronNERecognizer() 
+       : this(HanLP.Config.PerceptronNERModelPath)
     {
-        this(HanLP.Config.PerceptronNERModelPath);
     }
 
     public String[] recognize(String[] wordArray, String[] posArray)

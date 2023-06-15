@@ -8,6 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.perceptron.common;
+
 namespace com.hankcs.hanlp.model.perceptron.tagset;
 
 
@@ -15,23 +18,23 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
 /**
  * @author hankcs
  */
-public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int>>, ICacheAble
+public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, int>>, ICacheAble
 {
     private Dictionary<String, int> stringIdMap;
-    private ArrayList<String> idStringMap;
+    private List<String> idStringMap;
     private int[] allTags;
     public TaskType type;
 
     public TagSet(TaskType type)
     {
-        stringIdMap = new TreeMap<String, int>();
-        idStringMap = new ArrayList<String>();
+        stringIdMap = new();
+        idStringMap = new();
         this.type = type;
     }
 
     public int add(String tag)
     {
-//        assertUnlock();
+        //        assertUnlock();
         int id = stringIdMap.get(tag);
         if (id == null)
         {
@@ -58,9 +61,9 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int
         return size();
     }
 
-    public void lock()
+    public void _lock()
     {
-//        assertUnlock();
+        //        assertUnlock();
         allTags = new int[size()];
         for (int i = 0; i < size(); i++)
         {
@@ -68,13 +71,13 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int
         }
     }
 
-//    private void assertUnlock()
-//    {
-//        if (allTags != null)
-//        {
-//            throw new IllegalStateException("标注集已锁定，无法修改");
-//        }
-//    }
+    //    private void assertUnlock()
+    //    {
+    //        if (allTags != null)
+    //        {
+    //            throw new IllegalStateException("标注集已锁定，无法修改");
+    //        }
+    //    }
 
     //@Override
     public String stringOf(int id)
@@ -91,7 +94,7 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int
     }
 
     //@Override
-    public Iterator<Map.Entry<String, int>> iterator()
+    public IEnumerator<Map.Entry<String, int>> iterator()
     {
         return stringIdMap.entrySet().iterator();
     }
@@ -106,7 +109,7 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int
         return allTags;
     }
 
-    public void save(DataOutputStream _out) 
+    public void save(DataOutputStream _out)
     {
         _out.writeInt(type.ordinal());
         _out.writeInt(size());
@@ -119,8 +122,8 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int
     //@Override
     public bool load(ByteArray byteArray)
     {
-        idStringMap.clear();
-        stringIdMap.clear();
+        idStringMap.Clear();
+        stringIdMap.Clear();
         int size = byteArray.nextInt();
         for (int i = 0; i < size; i++)
         {
@@ -128,25 +131,25 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int
             idStringMap.add(tag);
             stringIdMap.put(tag, i);
         }
-        lock();
+        _lock () ;
         return true;
     }
 
-    public void load(DataInputStream in) 
+    public void load(DataInputStream _in)
     {
         idStringMap.clear();
         stringIdMap.clear();
-        int size = in.readInt();
+        int size = _in.readInt();
         for (int i = 0; i < size; i++)
         {
-            String tag = in.readUTF();
+            String tag = _in.readUTF();
             idStringMap.add(tag);
             stringIdMap.put(tag, i);
         }
-        lock();
+        _lock () ;
     }
 
-    public Collection<String> tags()
+    public ICollection<String> tags()
     {
         return idStringMap;
     }

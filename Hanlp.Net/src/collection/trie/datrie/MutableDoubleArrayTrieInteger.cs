@@ -8,21 +8,21 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
  */
 public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubleArrayTrieInteger.KeyValuePair>, ICacheAble
 {
-    private static final long serialVersionUID = 5586394930559218802L;
+    private static readonly long serialVersionUID = 5586394930559218802L;
     /**
      * 0x40000000
      */
-    private static final int LEAF_BIT = 1073741824;
-    private static final int[] EMPTY_WALK_STATE = {-1, -1};
+    private static readonly int LEAF_BIT = 1073741824;
+    private static readonly int[] EMPTY_WALK_STATE = {-1, -1};
     CharacterMapping charMap;
     /**
      * 字符串的终止字符（会在传入的字符串末尾添加该字符）
      */
-    private static final char UNUSED_CHAR = '\000';
+    private static readonly char UNUSED_CHAR = '\000';
     /**
      * 终止字符的codePoint，这个字符作为叶节点的标识
      */
-    private static final int UNUSED_CHAR_VALUE = UNUSED_CHAR;
+    private static readonly int UNUSED_CHAR_VALUE = UNUSED_CHAR;
     private IntArrayList check;
     private IntArrayList base;
     /**
@@ -1164,7 +1164,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
     //@Override
     public void save(DataOutputStream _out) 
     {
-        if (!(charMap instanceof Utf8CharacterMapping))
+        if (!(charMap is Utf8CharacterMapping))
         {
             logger.warning("将来需要在构造的时候传入 " + charMap.getClass());
         }

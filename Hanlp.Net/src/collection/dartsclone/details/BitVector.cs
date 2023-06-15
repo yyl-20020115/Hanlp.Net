@@ -112,7 +112,7 @@ class BitVector
     /**
      * 整型大小
      */
-    private static final int UNIT_SIZE = 32; // sizeof(int) * 8
+    private static readonly int UNIT_SIZE = 32; // sizeof(int) * 8
 
     /**
      * 1的数量

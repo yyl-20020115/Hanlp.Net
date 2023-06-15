@@ -125,7 +125,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 {
                     StringBuilder sbPattern = new StringBuilder();
                     // 复杂机构
-                    if (word instanceof CompoundWord)
+                    if (word is CompoundWord)
                     {
                         listIterator.remove();
                         Word last = null;

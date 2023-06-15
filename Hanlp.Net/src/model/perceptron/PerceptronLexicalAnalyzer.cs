@@ -9,6 +9,13 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.model.perceptron.model;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -21,18 +28,19 @@ namespace com.hankcs.hanlp.model.perceptron;
 public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
 {
     public PerceptronLexicalAnalyzer(PerceptronSegmenter segmenter)
+        :base(segmenter)
     {
-        super(segmenter);
     }
 
     public PerceptronLexicalAnalyzer(PerceptronSegmenter segmenter, PerceptronPOSTagger posTagger)
+        : base(segmenter, posTagger)
     {
-        super(segmenter, posTagger);
+        ;
     }
 
     public PerceptronLexicalAnalyzer(PerceptronSegmenter segmenter, PerceptronPOSTagger posTagger, PerceptronNERecognizer neRecognizer)
+        : base(segmenter, posTagger, neRecognizer)
     {
-        super(segmenter, posTagger, neRecognizer);
     }
 
     public PerceptronLexicalAnalyzer(LinearModel cwsModel, LinearModel posModel, LinearModel nerModel)
@@ -58,9 +66,10 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
         }
     }
 
-    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile, String nerModelFile) 
+    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile, String nerModelFile)
+        : this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), nerModelFile == null ? null : new LinearModel(nerModelFile))
     {
-        this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), nerModelFile == null ? null : new LinearModel(nerModelFile));
+       ;
     }
 
     public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile) 
@@ -110,7 +119,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
     {
         if (posTagger == null)
         {
-            throw new IllegalStateException("未提供词性标注模型");
+            throw new ArgumentException("未提供词性标注模型");
         }
         return tag(wordList);
     }
@@ -126,7 +135,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
     {
         if (neRecognizer == null)
         {
-            throw new IllegalStateException("未提供命名实体识别模型");
+            throw new ArgumentException("未提供命名实体识别模型");
         }
         return recognize(wordArray, posArray);
     }

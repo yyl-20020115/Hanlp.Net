@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.seg.Dijkstra;
 
 
@@ -6,7 +8,7 @@ namespace com.hankcs.hanlp.seg.Dijkstra;
 public class DijkstraSegmentTest : SegmentTestCase
 {
     [TestMethod]
-    public void testWrongName() 
+    public void TestWrongName()
     {
         Segment segment = new DijkstraSegment();
         List<Term> termList = segment.seg("好像向你借钱的人跑了");
@@ -14,7 +16,7 @@ public class DijkstraSegmentTest : SegmentTestCase
 //        Console.WriteLine(termList);
     }
     [TestMethod]
-    public void testIssue770() 
+    public void TestIssue770() 
     {
 //        HanLP.Config.enableDebug();
         Segment segment = new DijkstraSegment();

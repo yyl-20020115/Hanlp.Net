@@ -7,17 +7,17 @@ using com.hankcs.hanlp.collection.AhoCorasick;
 public class TrieTest : TestCase
 {
     [TestMethod]
-    public void testHasKeyword()
+    public void TestHasKeyword()
     {
         var map = new Dictionary<String, String>();
-        String[] keyArray = new String[]
+        var keyArray = new String[]
             {
                 "hers",
                 "his",
                 "she",
                 "he"
             };
-        foreach (String key in keyArray)
+        foreach (var key in keyArray)
         {
             map.Add(key, key);
         }
@@ -31,17 +31,17 @@ public class TrieTest : TestCase
         assertFalse(trie.hasKeyword("构建耗时"));
     }
     [TestMethod]
-    public void testParseText()
+    public void TestParseText()
     {
         var map = new Dictionary<String, String>();
-        String[] keyArray = new String[]
+        var keyArray = new String[]
             {
                 "hers",
                 "his",
                 "she",
                 "he"
             };
-        foreach (String key in keyArray)
+        foreach (var key in keyArray)
         {
             map.Add(key, key);
         }

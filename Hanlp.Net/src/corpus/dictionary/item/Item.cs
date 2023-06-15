@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dictionary.item;
 
 
@@ -24,38 +26,40 @@ public class Item : SimpleItem
     public String key;
 
     public Item(String key, String label)
+        :this(key)
     {
-        this(key);
         labelMap.put(label, 1);
     }
 
     public Item(String key)
+        :base()
     {
-        super();
         this.key = key;
     }
 
     //@Override
-    public String toString()
+    public String ToString()
     {
-        final StringBuilder sb = new StringBuilder(key);
+        var sb = new StringBuilder(key);
         ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(labelMap.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<String, int>>()
-        {
-            //@Override
-            public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
-            {
-                return -o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        for (Map.Entry<String, int> entry : entries)
+        Collections.sort(entries, );
+        foreach (Map.Entry<String, int> entry in entries)
         {
             sb.Append(' ');             // 现阶段词典分隔符统一使用空格
             sb.Append(entry.getKey());
             sb.Append(' ');
             sb.Append(entry.getValue());
         }
-        return sb.toString();
+        return sb.ToString();
+    }
+
+    public class CT : Comparator<Map.Entry<String, int>>
+    {
+        //@Override
+        public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
+        {
+            return -o1.getValue().compareTo(o2.getValue());
+        }
     }
 
     /**
@@ -81,14 +85,14 @@ public class Item : SimpleItem
         return create(array);
     }
 
-    public static Item create(String param[])
+    public static Item create(String[] param)
     {
-        if (param.length % 2 == 0) return null;
+        if (param.Length % 2 == 0) return null;
         Item item = new Item(param[0]);
-        int natureCount = (param.length - 1) / 2;
+        int natureCount = (param.Length - 1) / 2;
         for (int i = 0; i < natureCount; ++i)
         {
-            item.labelMap.put(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
+            item.labelMap.Add(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
         }
         return item;
     }

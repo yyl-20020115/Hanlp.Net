@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.common;
+
 namespace com.hankcs.hanlp.model.perceptron.tagset;
 
 
@@ -17,14 +19,14 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
  */
 public class CWSTagSet : TagSet
 {
-    public final int B;
-    public final int M;
-    public final int E;
-    public final int S;
+    public readonly int B;
+    public readonly int M;
+    public readonly int E;
+    public readonly int S;
 
     public CWSTagSet(int b, int m, int e, int s)
+        :base(TaskType.CWS)
     {
-        super(TaskType.CWS);
         B = b;
         M = m;
         E = e;
@@ -34,20 +36,20 @@ public class CWSTagSet : TagSet
         id2tag[m] = "M";
         id2tag[e] = "E";
         id2tag[s] = "S";
-        for (String tag : id2tag)
+        foreach (String tag in id2tag)
         {
             add(tag);
         }
-        lock();
+        _lock();
     }
 
     public CWSTagSet()
+        : base(TaskType.CWS)
     {
-        super(TaskType.CWS);
         B = add("B");
         M = add("M");
         E = add("E");
         S = add("S");
-        lock();
+        _lock();
     }
 }

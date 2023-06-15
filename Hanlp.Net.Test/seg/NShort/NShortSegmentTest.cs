@@ -9,18 +9,18 @@ namespace com.hankcs.hanlp.seg.NShort;
 public class NShortSegmentTest : TestCase
 {
     [TestMethod]
-    public void testParse() 
+    public void TestParse() 
     {
-        List<List<Term>> wordResults = new LinkedList<List<Term>>();
-        wordResults.add(NShortSegment.parse("3-4月"));
-        wordResults.add(NShortSegment.parse("3-4月份"));
-        wordResults.add(NShortSegment.parse("3-4季"));
-        wordResults.add(NShortSegment.parse("3-4年"));
-        wordResults.add(NShortSegment.parse("3-4人"));
-        wordResults.add(NShortSegment.parse("2014年"));
-        wordResults.add(NShortSegment.parse("04年"));
-        wordResults.add(NShortSegment.parse("12点半"));
-        wordResults.add(NShortSegment.parse("1.abc"));
+        List<List<Term>> wordResults = new ();
+        wordResults.Add(NShortSegment.parse("3-4月"));
+        wordResults.Add(NShortSegment.parse("3-4月份"));
+        wordResults.Add(NShortSegment.parse("3-4季"));
+        wordResults.Add(NShortSegment.parse("3-4年"));
+        wordResults.Add(NShortSegment.parse("3-4人"));
+        wordResults.Add(NShortSegment.parse("2014年"));
+        wordResults.Add(NShortSegment.parse("04年"));
+        wordResults.Add(NShortSegment.parse("12点半"));
+        wordResults.Add(NShortSegment.parse("1.abc"));
 
 //        for (List<Term> result : wordResults)
 //        {
@@ -28,7 +28,7 @@ public class NShortSegmentTest : TestCase
 //        }
     }
     [TestMethod]
-    public void testIssue691() 
+    public void TestIssue691() 
     {
 //        HanLP.Config.enableDebug();
         StandardTokenizer.SEGMENT.enableCustomDictionary(false);

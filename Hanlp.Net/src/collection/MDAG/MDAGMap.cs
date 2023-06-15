@@ -121,7 +121,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
 
     static class MDAGForMap : MDAG
     {
-        static final char DELIMITER = Character.MIN_VALUE;
+        static readonly char DELIMITER = Character.MIN_VALUE;
 
         public int getValueIndex(String key)
         {

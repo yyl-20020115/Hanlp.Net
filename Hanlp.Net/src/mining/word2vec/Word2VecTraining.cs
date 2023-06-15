@@ -4,11 +4,11 @@ namespace com.hankcs.hanlp.mining.word2vec;
 
 class Word2VecTraining
 {
-    static final int EXP_TABLE_SIZE = 1000;
-    static final int MAX_EXP = 6;
-    static final int TABLE_SIZE = 100000000;
-    static final int MAX_SENTENCE_LENGTH = 1000;
-    static final Charset ENCODING = Charset.forName("UTF-8");
+    static readonly int EXP_TABLE_SIZE = 1000;
+    static readonly int MAX_EXP = 6;
+    static readonly int TABLE_SIZE = 100000000;
+    static readonly int MAX_SENTENCE_LENGTH = 1000;
+    static readonly Charset ENCODING = Charset.forName("UTF-8");
 
     long timeStart;
     static double[] syn0, syn1, syn1neg;
@@ -16,7 +16,7 @@ class Word2VecTraining
 
     private final Config config;
 
-    static final double[] expTable = new double[EXP_TABLE_SIZE + 1];
+    static readonly double[] expTable = new double[EXP_TABLE_SIZE + 1];
 
     static
     {

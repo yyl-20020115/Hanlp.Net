@@ -240,7 +240,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
     //@Override
     public bool similar(HiddenMarkovModel model)
     {
-        if (!(model instanceof SecondOrderHiddenMarkovModel)) return false;
+        if (!(model is SecondOrderHiddenMarkovModel)) return false;
         SecondOrderHiddenMarkovModel hmm2 = (SecondOrderHiddenMarkovModel) model;
         for (int i = 0; i < transition_probability.length; i++)
         {

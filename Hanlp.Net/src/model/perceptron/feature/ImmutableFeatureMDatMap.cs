@@ -8,6 +8,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.datrie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
@@ -21,32 +25,32 @@ public class ImmutableFeatureMDatMap : FeatureMap
     MutableDoubleArrayTrieInteger dat;
 
     public ImmutableFeatureMDatMap()
+        :base()
     {
-        super();
         dat = new MutableDoubleArrayTrieInteger();
     }
 
     public ImmutableFeatureMDatMap(TagSet tagSet)
+        :base(tagSet)
     {
-        super(tagSet);
         dat = new MutableDoubleArrayTrieInteger();
     }
 
     public ImmutableFeatureMDatMap(MutableDoubleArrayTrieInteger dat, TagSet tagSet)
+        :base(tagSet)
     {
-        super(tagSet);
         this.dat = dat;
     }
 
     public ImmutableFeatureMDatMap(Dictionary<String, int> featureIdMap, TagSet tagSet)
+        : base(tagSet)
     {
-        super(tagSet);
         dat = new MutableDoubleArrayTrieInteger(featureIdMap);
     }
 
     public ImmutableFeatureMDatMap(Set<Map.Entry<String, int>> featureIdSet, TagSet tagSet)
+        : base(tagSet)
     {
-        super(tagSet);
         dat = new MutableDoubleArrayTrieInteger();
         for (Map.Entry<String, int> entry : featureIdSet)
         {
@@ -55,9 +59,9 @@ public class ImmutableFeatureMDatMap : FeatureMap
     }
 
     //@Override
-    public int idOf(String string)
+    public int idOf(String s)
     {
-        return dat.get(string);
+        return dat.get(s);
     }
 
     //@Override

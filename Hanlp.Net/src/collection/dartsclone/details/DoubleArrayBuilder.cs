@@ -46,14 +46,14 @@ public class DoubleArrayBuilder
         _extrasHead = 0;
     }
 
-    private static final int BLOCK_SIZE = 256;
-    private static final int NUM_EXTRA_BLOCKS = 16;
-    private static final int NUM_EXTRAS = BLOCK_SIZE * NUM_EXTRA_BLOCKS;
+    private static readonly int BLOCK_SIZE = 256;
+    private static readonly int NUM_EXTRA_BLOCKS = 16;
+    private static readonly int NUM_EXTRAS = BLOCK_SIZE * NUM_EXTRA_BLOCKS;
 
-    private static final int UPPER_MASK = 0xFF << 21;
-    private static final int LOWER_MASK = 0xFF;
+    private static readonly int UPPER_MASK = 0xFF << 21;
+    private static readonly int LOWER_MASK = 0xFF;
 
-    private static final int OFFSET_MASK = (1 << 31) | (1 << 8) | 0xFF;
+    private static readonly int OFFSET_MASK = (1 << 31) | (1 << 8) | 0xFF;
 
     static class DoubleArrayBuilderExtraUnit
     {

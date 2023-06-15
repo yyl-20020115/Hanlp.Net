@@ -5,14 +5,14 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
  */
 public class Mcsrch
 {
-    public static final double ftol = 1e-4;
-    public static final double xtol = 1e-16;
-    public static final double eps = 1e-7;
-    public static final double lb3_1_gtol = 0.9;
-    public static final double lb3_1_stpmin = 1e-20;
-    public static final double lb3_1_stpmax = 1e20;
-    public static final int lb3_1_mp = 6;
-    public static final int lb3_1_lp = 6;
+    public static readonly double ftol = 1e-4;
+    public static readonly double xtol = 1e-16;
+    public static readonly double eps = 1e-7;
+    public static readonly double lb3_1_gtol = 0.9;
+    public static readonly double lb3_1_stpmin = 1e-20;
+    public static readonly double lb3_1_stpmax = 1e20;
+    public static readonly int lb3_1_mp = 6;
+    public static readonly int lb3_1_lp = 6;
 
     int infoc;
     bool stage1, brackt;

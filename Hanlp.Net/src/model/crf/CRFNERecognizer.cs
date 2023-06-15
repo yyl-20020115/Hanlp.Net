@@ -8,6 +8,12 @@
  * This source is subject to Han He. Please contact Han He to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -15,7 +21,7 @@ namespace com.hankcs.hanlp.model.crf;
 /**
  * @author hankcs
  */
-public class CRFNERecognizer : CRFTagger : NERecognizer
+public class CRFNERecognizer : CRFTagger , NERecognizer
 {
     private NERTagSet tagSet;
     /**
@@ -24,13 +30,13 @@ public class CRFNERecognizer : CRFTagger : NERecognizer
     private PerceptronNERecognizer perceptronNERecognizer;
 
     public CRFNERecognizer() 
+        : this(HanLP.Config.CRFNERModelPath)
     {
-        this(HanLP.Config.CRFNERModelPath);
     }
 
-    public CRFNERecognizer(String modelPath) 
+    public CRFNERecognizer(String modelPath)
+        : base(modelPath)
     {
-        super(modelPath);
         if (model == null)
         {
             tagSet = new NERTagSet();
@@ -54,7 +60,7 @@ public class CRFNERecognizer : CRFTagger : NERecognizer
     protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
         List<String[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
-        for (String[] tuple : collector)
+        foreach (String[] tuple in collector)
         {
             bw.write(tuple[0]);
             bw.write('\t');
@@ -79,7 +85,7 @@ public class CRFNERecognizer : CRFTagger : NERecognizer
 
     private NERInstance createInstance(String[] wordArray, String[] posArray)
     {
-        final FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
+        FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
         return new NERInstance(wordArray, posArray, model.featureMap)
         {
             //@Override

@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.trie;
 
 
@@ -7,34 +9,34 @@ public class DoubleArrayTrieTest : TestCase
 {
     [TestMethod]
 
-    public void testDatFromFile() 
+    public void TestDatFromFile()
     {
-        TreeMap<String, String> map = new TreeMap<String, String>();
+        var map = new Dictionary<String, String>();
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.mini.txt");
         while (iterator.hasNext())
         {
             String line = iterator.next();
-            map.put(line, line);
+            map.Add(line, line);
         }
         DoubleArrayTrie<String> trie = new DoubleArrayTrie<String>();
         trie.build(map);
-        for (String key : map.Keys)
+        foreach (String key in map.Keys)
         {
             assertEquals(key, trie.get(key));
         }
     }
     [TestMethod]
 
-    public void testGet() 
+    public void TestGet() 
     {
     }
     [TestMethod]
 
-    public void testLongestSearcher() 
+    public void TestLongestSearcher() 
     {
-        TreeMap<String, String> buildFrom = new TreeMap<String, String>();
+        var buildFrom = new Dictionary<String, String>();
         String[] keys = new String[]{"he", "her", "his"};
-        for (String key : keys)
+        foreach (String key in keys)
         {
             buildFrom.put(key, key);
         }
@@ -49,7 +51,7 @@ public class DoubleArrayTrieTest : TestCase
     }
     [TestMethod]
 
-    public void testTransmit() 
+    public void TestTransmit() 
     {
         DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
         int index = dat.transition("龙", 1);
@@ -108,11 +110,11 @@ public class DoubleArrayTrieTest : TestCase
     //    }
     [TestMethod]
 
-    public void testHandleEmptyString() 
+    public void TestHandleEmptyString()
     {
         String emptyString = "";
         DoubleArrayTrie<String> dat = new DoubleArrayTrie<String>();
-        TreeMap<String, String> dictionary = new TreeMap<String, String>();
+        var dictionary = new Dictionary<String, String>();
         dictionary.put("bug", "问题");
         dat.build(dictionary);
         DoubleArrayTrie<String>.Searcher searcher = dat.getSearcher(emptyString, 0);
@@ -122,12 +124,12 @@ public class DoubleArrayTrieTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue966() 
+    public void TestIssue966() 
     {
-        TreeMap<String, String> map = new TreeMap<String, String>();
-        for (String word : "001乡道, 北京, 北京市通信公司, 来广营乡, 通州区".split(", "))
+        var map = new Dictionary<String, String>();
+        foreach (String word in "001乡道, 北京, 北京市通信公司, 来广营乡, 通州区".Split(", "))
         {
-            map.put(word, word);
+            map.Add(word, word);
         }
         DoubleArrayTrie<String> trie = new DoubleArrayTrie<String>(map);
         DoubleArrayTrie<String>.LongestSearcher searcher = trie.getLongestSearcher("北京市通州区001乡道发生了一件有意思的事情，来广营乡歌舞队正在跳舞", 0);

@@ -1,3 +1,6 @@
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.collection.MDAG;
 
 
@@ -16,7 +19,7 @@ public class MDAGSetTest : TestCase
     private File tempFile;
 
     [TestInitialize]
-    public void setUp() 
+    public override void setUp() 
     {
         TestUtility.ensureFullData();
         tempFile = File.createTempFile("hanlp-", ".bin");
@@ -31,15 +34,15 @@ public class MDAGSetTest : TestCase
     }
     [TestMethod]
 
-    public void testSize() 
+    public void TestSize()
     {
         assertEquals(validKeySet.size(), mdagSet.size());
     }
     [TestMethod]
 
-    public void testContains() 
+    public void TestContains()
     {
-        for (String key : validKeySet)
+        for (String key in validKeySet)
         {
 //            assertEquals(true, mdagSet.Contains(key));
             assert mdagSet.Contains(key) : "本来应该有 " + key;
@@ -47,7 +50,7 @@ public class MDAGSetTest : TestCase
     }
     [TestMethod]
 
-    public void testNotContains() 
+    public void TestNotContains() 
     {
         invalidKeySet = new TreeSet<String>();
         Random random = new Random(System.currentTimeMillis());
@@ -72,7 +75,7 @@ public class MDAGSetTest : TestCase
     }
     [TestMethod]
 
-    public void testToArray() 
+    public void TestToArray() 
     {
         String[] keyArray = mdagSet.toArray(new String[0]);
         assertEquals(validKeySet.size(), keyArray.Length);
@@ -83,7 +86,7 @@ public class MDAGSetTest : TestCase
     }
     [TestMethod]
 
-    public void testRemove() 
+    public void TestRemove() 
     {
         String[] keyArray = mdagSet.toArray(new String[0]);
         for (String key : keyArray)
@@ -94,14 +97,14 @@ public class MDAGSetTest : TestCase
     }
     [TestMethod]
 
-    public void testAdd() 
+    public void TestAdd() 
     {
         assertEquals(true, mdagSet.add("成功啦"));
         assertEquals(true, mdagSet.Contains("成功啦"));
     }
     [TestMethod]
 
-    public void testSimplify() 
+    public void TestSimplify() 
     {
         HashMap<MDAGNode, MDAGNode> equivalenceClassMDAGNodeHashMapBefore = mdagSet._getEquivalenceClassMDAGNodeHashMap();
         mdagSet.simplify();
@@ -112,15 +115,15 @@ public class MDAGSetTest : TestCase
     [TestMethod]
 
 
-    public void testSimplifyAndContains() 
+    public void TestSimplifyAndContains() 
     {
         mdagSet.simplify();
-        testContains();
-        testNotContains();
+        TestContains();
+        TestNotContains();
     }
     [TestMethod]
 
-    public void testSaveAndLoad() 
+    public void TestSaveAndLoad() 
     {
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         mdagSet.save(_out);
@@ -128,12 +131,12 @@ public class MDAGSetTest : TestCase
 
         mdagSet = new MDAGSet();
         mdagSet.load(ByteArray.createByteArray(DATA_TEST_OUT_BIN));
-        testContains();
-        testNotContains();
+        TestContains();
+        TestNotContains();
     }
     [TestMethod]
 
-    public void testSingle() 
+    public void TestSingle() 
     {
         mdagSet.simplify();
         assertTrue(mdagSet.Contains("hankcs"));
@@ -163,7 +166,7 @@ public class MDAGSetTest : TestCase
     //    }
     [TestMethod]
 
-    public void testCommPrefix() 
+    public void TestCommPrefix() 
     {
         MDAGSet setTwo = new MDAGSet(validKeySet);
         setTwo.simplify();
@@ -175,7 +178,7 @@ public class MDAGSetTest : TestCase
 
     [TestMethod]
 
-    public void testSimplifyWithoutSave() 
+    public void TestSimplifyWithoutSave() 
     {
         MDAG mdag = new MDAG();
         mdag.addString("hers");
@@ -188,15 +191,15 @@ public class MDAGSetTest : TestCase
     }
     [TestMethod]
 
-    public void testSimplifyMap() 
+    public void TestSimplifyMap() 
     {
-        MDAGMap<String> mdagMap = new MDAGMap<String>();
-        List<String> validKeySet = new ArrayList<String>();
+        MDAGMap<String> mdagMap = new ();
+        List<String> validKeySet = new ();
         validKeySet.add("hers");
         validKeySet.add("his");
         validKeySet.add("she");
         validKeySet.add("he");
-        for (String key : validKeySet)
+        foreach (String key in validKeySet)
         {
             mdagMap.put(key, key);
         }

@@ -1,3 +1,7 @@
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -8,29 +12,29 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     PerceptronLexicalAnalyzer analyzer;
 
     [TestInitialize]
-    public void setUp() 
+    public override void setUp() 
     {
         analyzer = new PerceptronLexicalAnalyzer(Config.CWS_MODEL_FILE, Config.POS_MODEL_FILE, Config.NER_MODEL_FILE);
     }
     [TestMethod]
-    public void testIssue() 
+    public void TestIssue() 
     {
 //        Console.WriteLine(analyzer.seg(""));
-        for (Term term : analyzer.seg("张三丰，刘五郎，黄三元，张一楠，王三强，丁一楠，李四光，闻一多，赵一楠，李四"))
+        foreach (Term term in analyzer.seg("张三丰，刘五郎，黄三元，张一楠，王三强，丁一楠，李四光，闻一多，赵一楠，李四"))
         {
             if (term.nature == Nature.w) continue;
             assertEquals(Nature.nr, term.nature);
         }
     }
     [TestMethod]
-    public void testLearn() 
+    public void TestLearn() 
     {
         analyzer.learn("我/r 在/p 浙江/ns 金华/ns 出生/v");
         assertTrue(analyzer.analyze("我在浙江金华出生").ToString().Contains("金华/ns"));
         assertTrue(analyzer.analyze("我的名字叫金华").ToString().Contains("金华/nr"));
     }
     [TestMethod]
-    public void testEmptyInput() 
+    public void TestEmptyInput() 
     {
         analyzer.segment("");
         analyzer.seg("");

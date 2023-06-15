@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.corpus;
 using com.hankcs.hanlp.tokenizer.lexical;
 
 namespace com.hankcs.hanlp.model.perceptron;
@@ -8,17 +9,17 @@ namespace com.hankcs.hanlp.model.perceptron;
 public class PerceptronPOSTaggerTest : TestCase
 {
     [TestMethod]
-    public void testTrain() 
+    public void TestTrain()
     {
         PerceptronTrainer trainer = new POSTrainer();
         trainer.train(PKU.PKU199801_TRAIN, PKU.POS_MODEL); // 训练
         PerceptronPOSTagger tagger = new PerceptronPOSTagger(PKU.POS_MODEL); // 加载
-        Console.WriteLine(Arrays.ToString(tagger.tag("他", "的", "希望", "是", "希望", "上学"))); // 预测
+        Console.WriteLine(string.Join(' ',tagger.tag("他", "的", "希望", "是", "希望", "上学"))); // 预测
         AbstractLexicalAnalyzer analyzer = new AbstractLexicalAnalyzer(new PerceptronSegmenter(), tagger); // 构造词法分析器
         Console.WriteLine(analyzer.analyze("李狗蛋的希望是希望上学")); // 分词+词性标注
     }
     [TestMethod]
-    public void testCompress() 
+    public void TestCompress()
     {
         PerceptronPOSTagger tagger = new PerceptronPOSTagger();
         tagger.getModel().compress(0.01);

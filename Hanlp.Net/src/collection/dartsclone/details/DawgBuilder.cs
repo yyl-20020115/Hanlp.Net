@@ -479,7 +479,7 @@ class DawgBuilder
         return key;
     }
 
-    private static final int INITIAL_TABLE_SIZE = 1 << 10;
+    private static readonly int INITIAL_TABLE_SIZE = 1 << 10;
     private ArrayList<DawgNode> _nodes = new ArrayList<DawgNode>();
     private AutoIntPool _units = new AutoIntPool();
     private AutoBytePool _labels = new AutoBytePool();

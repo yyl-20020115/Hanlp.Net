@@ -1,6 +1,5 @@
-﻿namespace com.hankcs.hanlp.tokenizer.pipe
+﻿namespace com.hankcs.hanlp.tokenizer.pipe;
+
+internal class Pattern
 {
-    internal class Pattern
-    {
-    }
 }

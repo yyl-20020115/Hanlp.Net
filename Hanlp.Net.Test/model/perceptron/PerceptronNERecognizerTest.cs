@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.model.perceptron;
 public class PerceptronNERecognizerTest : TestCase
 {
     [TestMethod]
-    public void testEmptyInput() 
+    public void TestEmptyInput() 
     {
         PerceptronNERecognizer recognizer = new PerceptronNERecognizer();
         recognizer.recognize(new String[0], new String[0]);

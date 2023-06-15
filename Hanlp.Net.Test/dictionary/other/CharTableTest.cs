@@ -5,13 +5,13 @@ namespace com.hankcs.hanlp.dictionary.other;
 public class CharTableTest : TestCase
 {
     [TestMethod]
-    public void testNormalization() 
+    public void TestNormalization() 
     {
         Console.WriteLine(CharTable.convert('？'));
         assertEquals('(', CharTable.convert('（'));
     }
     [TestMethod]
-    public void testNormalizeSpace() {
+    public void TestNormalizeSpace() {
         assertEquals(CharTable.convert('\t'),' ');
         assertEquals(CharTable.convert('\n'),' ');
         assertEquals(CharTable.convert('\f'),' ');

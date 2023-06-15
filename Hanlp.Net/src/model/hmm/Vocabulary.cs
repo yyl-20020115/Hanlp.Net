@@ -18,7 +18,7 @@ public class Vocabulary : IStringIdMap
 {
     private BinTrie<int> trie;
     bool mutable;
-    private static final int UNK = 0;
+    private static readonly int UNK = 0;
 
     public Vocabulary(BinTrie<int> trie, bool mutable)
     {

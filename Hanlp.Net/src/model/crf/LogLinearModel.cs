@@ -68,7 +68,7 @@ public class LogLinearModel : LinearModel
         }
         String binPath = modelFile + Predefine.BIN_EXT;
 
-        if (!((HanLP.Config.IOAdapter == null || HanLP.Config.IOAdapter instanceof FileIOAdapter) && !IOUtil.isFileExisted(binPath)))
+        if (!((HanLP.Config.IOAdapter == null || HanLP.Config.IOAdapter is FileIOAdapter) && !IOUtil.isFileExisted(binPath)))
         {
             try
             {

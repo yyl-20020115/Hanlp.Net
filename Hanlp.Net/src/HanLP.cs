@@ -9,10 +9,21 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.dependency.nnparser;
+using com.hankcs.hanlp.dictionary.py;
+using com.hankcs.hanlp.dictionary.ts;
+using com.hankcs.hanlp.mining.phrase;
+using com.hankcs.hanlp.mining.word;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.seg.Viterbi;
+using com.hankcs.hanlp.summary;
+using com.hankcs.hanlp.tokenizer;
+using System.Text;
+
 namespace com.hankcs.hanlp;
-
-
-
 
 
 /**
@@ -180,7 +191,7 @@ public class HanLP
          */
         public static IIOAdapter IOAdapter;
 
-        static
+        static HanLP()
         {
             // 自动读取配置
             Properties p = new Properties();
@@ -189,7 +200,7 @@ public class HanLP
                 ClassLoader loader = Thread.currentThread().getContextClassLoader();
                 if (loader == null)
                 {  // IKVM (v.0.44.0.5) doesn't set context classloader
-                    loader = HanLP.Config.class.getClassLoader();
+                    loader = HanLP.Config.c.getClassLoader();
                 }
                 try
                 {
@@ -310,7 +321,7 @@ public class HanLP
                         String classPath = (String) System.getProperties().get("java.class.path");
                         if (classPath != null)
                         {
-                            for (String path : classPath.split(File.pathSeparator))
+                            foreach (String path in classPath.split(File.pathSeparator))
                             {
                                 if (new File(path).isDirectory())
                                 {
@@ -533,7 +544,7 @@ public class HanLP
         int length = pinyinList.size();
         StringBuilder sb = new StringBuilder(length * (5 + separator.length()));
         int i = 1;
-        for (Pinyin pinyin : pinyinList)
+        foreach (Pinyin pinyin in pinyinList)
         {
 
             if (pinyin == Pinyin.none5 && !remainNone)
@@ -575,7 +586,7 @@ public class HanLP
         int length = pinyinList.size();
         StringBuilder sb = new StringBuilder(length * (1 + separator.length()));
         int i = 1;
-        for (Pinyin pinyin : pinyinList)
+        foreach (Pinyin pinyin in pinyinList)
         {
             sb.Append(pinyin.getFirstChar());
             if (i < length)

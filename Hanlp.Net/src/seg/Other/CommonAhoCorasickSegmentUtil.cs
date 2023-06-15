@@ -9,6 +9,12 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.suggest.scorer.editdistance;
+using System.Text;
+using static com.hankcs.hanlp.seg.Other.CommonAhoCorasickSegmentUtil;
+
 namespace com.hankcs.hanlp.seg.Other;
 
 
@@ -28,7 +34,7 @@ public class CommonAhoCorasickSegmentUtil
      * @param <V> 类型
      * @return 结果链表
      */
-    public static <V> LinkedList<ResultTerm<V>> segment(String text, AhoCorasickDoubleArrayTrie<V> trie)
+    public static LinkedList<ResultTerm<V>> segment<V>(String text, AhoCorasickDoubleArrayTrie<V> trie)
     {
         return segment(text.ToCharArray(), trie);
     }
@@ -39,21 +45,11 @@ public class CommonAhoCorasickSegmentUtil
      * @param <V> 类型
      * @return 结果链表
      */
-    public static <V> LinkedList<ResultTerm<V>> segment(final char[] charArray, AhoCorasickDoubleArrayTrie<V> trie)
+    public static LinkedList<ResultTerm<V>> segment<V>(char[] charArray, AhoCorasickDoubleArrayTrie<V> trie)
     {
         LinkedList<ResultTerm<V>> termList = new LinkedList<ResultTerm<V>>();
-        final ResultTerm<V>[] wordNet = new ResultTerm[charArray.length];
-        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<V>()
-        {
-            //@Override
-            public void hit(int begin, int end, V value)
-            {
-                if (wordNet[begin] == null || wordNet[begin].word.length() < end - begin)
-                {
-                    wordNet[begin] = new ResultTerm<V>(new String(charArray, begin, end - begin), value, begin);
-                }
-            }
-        });
+        ResultTerm<V>[] wordNet = new ResultTerm[charArray.length];
+        trie.parseText(charArray, new CT<char>());
         for (int i = 0; i < charArray.length;)
         {
             if (wordNet[i] == null)
@@ -75,6 +71,17 @@ public class CommonAhoCorasickSegmentUtil
         }
         return termList;
     }
+    public class CT<V> : AhoCorasickDoubleArrayTrie<V>.IHit<V>
+    {
+        //@Override
+        public void hit(int begin, int end, V value)
+        {
+            if (wordNet[begin] == null || wordNet[begin].word.length() < end - begin)
+            {
+                wordNet[begin] = new ResultTerm<V>(new String(charArray, begin, end - begin), value, begin);
+            }
+        }
+    }
 
     /**
      * 逆向最长分词，合并未知语素
@@ -83,7 +90,7 @@ public class CommonAhoCorasickSegmentUtil
      * @param <V> 类型
      * @return 结果链表
      */
-    public static <V> LinkedList<ResultTerm<V>> segmentReverseOrder(String text, AhoCorasickDoubleArrayTrie<V> trie)
+    public static LinkedList<ResultTerm<V>> segmentReverseOrder<V>(String text, AhoCorasickDoubleArrayTrie<V> trie)
     {
         return segmentReverseOrder(text.ToCharArray(), trie);
     }
@@ -95,21 +102,11 @@ public class CommonAhoCorasickSegmentUtil
      * @param <V> 类型
      * @return 结果链表
      */
-    public static <V> LinkedList<ResultTerm<V>> segmentReverseOrder(final char[] charArray, AhoCorasickDoubleArrayTrie<V> trie)
+    public static LinkedList<ResultTerm<V>> segmentReverseOrder<V>(char[] charArray, AhoCorasickDoubleArrayTrie<V> trie)
     {
         LinkedList<ResultTerm<V>> termList = new LinkedList<ResultTerm<V>>();
-        final ResultTerm<V>[] wordNet = new ResultTerm[charArray.length + 1];
-        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<V>()
-        {
-            //@Override
-            public void hit(int begin, int end, V value)
-            {
-                if (wordNet[end] == null || wordNet[end].word.length() < end - begin)
-                {
-                    wordNet[end] = new ResultTerm<V>(new String(charArray, begin, end - begin), value, begin);
-                }
-            }
-        });
+        ResultTerm<V>[] wordNet = new ResultTerm[charArray.length + 1];
+        trie.parseText(charArray, CT2<char>());
         for (int i = charArray.length; i > 0;)
         {
             if (wordNet[i] == null)
@@ -133,5 +130,15 @@ public class CommonAhoCorasickSegmentUtil
         }
         return termList;
     }
-
+    public class CT2<V> : AhoCorasickDoubleArrayTrie<V>.IHit<V>
+    {
+        //@Override
+        public void hit(int begin, int end, V value)
+        {
+            if (wordNet[end] == null || wordNet[end].word.length() < end - begin)
+            {
+                wordNet[end] = new ResultTerm<V>(new String(charArray, begin, end - begin), value, begin);
+            }
+        }
+    }
 }

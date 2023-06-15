@@ -8,6 +8,13 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.model.perceptron.common;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.model;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -17,11 +24,11 @@ namespace com.hankcs.hanlp.model.perceptron;
  *
  * @author hankcs
  */
-public class PerceptronPOSTagger : PerceptronTagger : POSTagger
+public class PerceptronPOSTagger : PerceptronTagger , POSTagger
 {
     public PerceptronPOSTagger(LinearModel model)
+        :base(model)
     {
-        super(model);
         if (model.featureMap.tagSet.type != TaskType.POS)
         {
             throw new IllegalArgumentException(String.format("错误的模型类型: 传入的不是词性标注模型，而是 %s 模型", model.featureMap.tagSet.type));
@@ -29,17 +36,17 @@ public class PerceptronPOSTagger : PerceptronTagger : POSTagger
     }
 
     public PerceptronPOSTagger(String modelPath) 
+        : this(new LinearModel(modelPath))
     {
-        this(new LinearModel(modelPath));
     }
 
     /**
      * 加载配置文件指定的模型
      * @
      */
-    public PerceptronPOSTagger() 
+    public PerceptronPOSTagger()
+        : this(HanLP.Config.PerceptronPOSModelPath)
     {
-        this(HanLP.Config.PerceptronPOSModelPath);
     }
 
     /**
@@ -49,7 +56,7 @@ public class PerceptronPOSTagger : PerceptronTagger : POSTagger
      * @return
      */
     //@Override
-    public String[] tag(String... words)
+    public String[] tag(params String[] words)
     {
         POSInstance instance = new POSInstance(words, model.featureMap);
         return tag(instance);
@@ -57,7 +64,7 @@ public class PerceptronPOSTagger : PerceptronTagger : POSTagger
 
     public String[] tag(POSInstance instance)
     {
-        instance.tagArray = new int[instance.featureMatrix.length];
+        instance.tagArray = new int[instance.featureMatrix.Length];
 
         model.viterbiDecode(instance, instance.tagArray);
         return instance.tags(model.tagSet());
@@ -94,7 +101,7 @@ public class PerceptronPOSTagger : PerceptronTagger : POSTagger
      * @param wordTags [单词]/[词性]数组
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public bool learn(String... wordTags)
+    public bool learn(params String[] wordTags)
     {
         String[] words = new String[wordTags.length];
         String[] tags = new String[wordTags.length];
