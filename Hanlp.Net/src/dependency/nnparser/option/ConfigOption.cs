@@ -17,6 +17,6 @@ namespace com.hankcs.hanlp.dependency.nnparser.option;
  */
 public class ConfigOption
 {
-    public static String PATH = HanLP.Config.NNParserModelPath;
-    public static String DEPRL_DESCRIPTION_PATH = PATH + ".description.txt";
+    public static string PATH = HanLP.Config.NNParserModelPath;
+    public static string DEPRL_DESCRIPTION_PATH = PATH + ".description.txt";
 }

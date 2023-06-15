@@ -47,7 +47,7 @@ public class PersonDictionary
         transformMatrixDictionary = new TransformMatrixDictionary<NR>(NR.class);
         transformMatrixDictionary.load(HanLP.Config.PersonDictionaryTrPath);
         trie = new AhoCorasickDoubleArrayTrie<NRPattern>();
-        TreeMap<String, NRPattern> map = new TreeMap<String, NRPattern>();
+        TreeMap<string, NRPattern> map = new TreeMap<string, NRPattern>();
         for (NRPattern pattern : NRPattern.values())
         {
             map.put(pattern.toString(), pattern);
@@ -90,8 +90,8 @@ public class PersonDictionary
                     sbPattern.Append(NR.B.toString());
                     preNR = B;
                     listIterator.previous();
-                    String nowK = current.realWord.substring(0, current.realWord.length() - 1);
-                    String nowB = current.realWord.substring(current.realWord.length() - 1);
+                    string nowK = current.realWord.substring(0, current.realWord.length() - 1);
+                    string nowB = current.realWord.substring(current.realWord.length() - 1);
                     listIterator.set(new Vertex(nowK));
                     listIterator.next();
                     listIterator.add(new Vertex(nowB));
@@ -114,8 +114,8 @@ public class PersonDictionary
                     sbPattern.Append(NR.L.toString());
                     // 对串也做一些修改
                     listIterator.previous();
-                    String EorD = current.realWord.substring(0, 1);
-                    String L = current.realWord.substring(1, current.realWord.length());
+                    string EorD = current.realWord.substring(0, 1);
+                    string L = current.realWord.substring(1, current.realWord.length());
                     listIterator.set(new Vertex(EorD));
                     listIterator.next();
                     listIterator.add(new Vertex(L));
@@ -126,7 +126,7 @@ public class PersonDictionary
             }
             preNR = nr;
         }
-        String pattern = sbPattern.toString();
+        string pattern = sbPattern.toString();
 //        logger.trace("模式串：{}", pattern);
 //        logger.trace("对应串：{}", vertexList);
 //        if (pattern.length() != vertexList.size())
@@ -152,14 +152,14 @@ public class PersonDictionary
                 {
                     sbName.Append(wordArray[i].realWord);
                 }
-                String name = sbName.toString();
+                string name = sbName.toString();
 //            logger.trace("识别出：{}", name);
                 // 对一些bad case做出调整
                 switch (value)
                 {
                     case BCD:
                         if (name.charAt(0) == name.charAt(2)) return; // 姓和最后一个名不可能相等的
-//                        String cd = name.substring(1);
+//                        string cd = name.substring(1);
 //                        if (CoreDictionary.contains(cd))
 //                        {
 //                            EnumItem<NR> item = PersonDictionary.dictionary.get(cd);
@@ -187,7 +187,7 @@ public class PersonDictionary
      * @param name
      * @return
      */
-    static bool isBadCase(String name)
+    static bool isBadCase(string name)
     {
         EnumItem<NR> nrEnumItem = dictionary.get(name);
         if (nrEnumItem == null) return false;

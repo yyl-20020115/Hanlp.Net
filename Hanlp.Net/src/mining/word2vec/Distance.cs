@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public class Distance : AbstractClosestVectors
 {
 
-    public Distance(String file)
+    public Distance(string file)
     {
         super(file);
     }
@@ -17,7 +17,7 @@ public class Distance : AbstractClosestVectors
         System.exit(0);
     }
 
-    public static void main(String[] args) 
+    public static void main(string[] args) 
     {
         if (args.length < 1) usage();
         new Distance(args[0]).execute();
@@ -28,7 +28,7 @@ public class Distance : AbstractClosestVectors
         final int words = vectorsReader.getNumWords();
         final int size = vectorsReader.getSize();
 
-        String[] input = null;
+        string[] input = null;
         while ((input = nextWords(1, "Enter a word")) != null)
         {
             // linear search the input word in vocabulary

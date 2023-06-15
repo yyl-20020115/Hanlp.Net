@@ -17,23 +17,23 @@ namespace com.hankcs.hanlp.dependency.nnparser;
  */
 public class Instance
 {
-    List<String> raw_forms; //! The original form.
-    List<String> forms;     //! The converted form.
-    List<String> lemmas;    //! The lemmas.
-    List<String> postags;   //! The postags.
-    List<String> cpostags;  //! The cpostags.
+    List<string> raw_forms; //! The original form.
+    List<string> forms;     //! The converted form.
+    List<string> lemmas;    //! The lemmas.
+    List<string> postags;   //! The postags.
+    List<string> cpostags;  //! The cpostags.
 
     List<int> heads;
     List<int> deprelsidx;
-    List<String> deprels;
+    List<string> deprels;
     List<int> predict_heads;
     List<int> predict_deprelsidx;
-    List<String> predict_deprels;
+    List<string> predict_deprels;
 
     public Instance()
     {
-        forms = new ArrayList<String>();
-        postags = new ArrayList<String>();
+        forms = new ArrayList<string>();
+        postags = new ArrayList<string>();
     }
 
     int size()

@@ -202,7 +202,7 @@ public class State
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("State{");
         sb.Append("depth=").Append(depth);

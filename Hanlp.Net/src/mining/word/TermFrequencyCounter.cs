@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.mining.word;
 public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
 {
     bool filterStopWord;
-    Dictionary<String, TermFrequency> termFrequencyMap;
+    Dictionary<string, TermFrequency> termFrequencyMap;
 
     /**
      * 构造
@@ -32,7 +32,7 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
     {
         this.filterStopWord = filterStopWord;
         this.defaultSegment = segment;
-        termFrequencyMap = new TreeMap<String, TermFrequency>();
+        termFrequencyMap = new TreeMap<string, TermFrequency>();
     }
 
     public TermFrequencyCounter()
@@ -40,7 +40,7 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
         this(HanLP.newSegment(), true);
     }
 
-    public void add(String document)
+    public void add(string document)
     {
         if (document == null || document.isEmpty()) return;
         List<Term> termList = defaultSegment.seg(document);
@@ -55,7 +55,7 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
         }
         for (Term term : termList)
         {
-            String word = term.word;
+            string word = term.word;
             TermFrequency frequency = termFrequencyMap.get(word);
             if (frequency == null)
             {
@@ -114,7 +114,7 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
     //@Override
     public bool contains(Object o)
     {
-        if (o is String)
+        if (o is string)
             return termFrequencyMap.containsKey(o);
         else if (o is TermFrequency)
             return termFrequencyMap.containsValue(o);
@@ -210,12 +210,12 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
      * @return
      */
     //@Override
-    public List<String> getKeywords(List<Term> termList, int size)
+    public List<string> getKeywords(List<Term> termList, int size)
     {
         clear();
         add(termList);
         Collection<TermFrequency> topN = top(size);
-        List<String> r = new ArrayList<String>(topN.size());
+        List<string> r = new ArrayList<string>(topN.size());
         for (TermFrequency termFrequency : topN)
         {
             r.add(termFrequency.getTerm());
@@ -230,13 +230,13 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
      * @param size     希望提取几个关键词
      * @return 一个列表
      */
-    public static List<String> getKeywordList(String document, int size)
+    public static List<string> getKeywordList(string document, int size)
     {
         return new TermFrequencyCounter().getKeywords(document, size);
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final int max = 100;
         return top(Math.min(max, size())).toString();

@@ -25,7 +25,7 @@ namespace com.hankcs.hanlp.dictionary;
 public class CoreDictionary
 {
     public static DoubleArrayTrie<Attribute> trie = new DoubleArrayTrie<Attribute>();
-    public readonly static String path = HanLP.Config.CoreDictionaryPath;
+    public readonly static string path = HanLP.Config.CoreDictionaryPath;
     public static readonly int totalFrequency = 221894;
 
     // 自动加载词典
@@ -51,21 +51,21 @@ public class CoreDictionary
     public static readonly int M_WORD_ID = getWordID(Predefine.TAG_NUMBER);
     public static readonly int NX_WORD_ID = getWordID(Predefine.TAG_PROPER);
 
-    private static bool load(String path)
+    private static bool load(string path)
     {
         logger.info("核心词典开始加载:" + path);
         if (loadDat(path)) return true;
-        TreeMap<String, CoreDictionary.Attribute> map = new TreeMap<String, Attribute>();
+        TreeMap<string, CoreDictionary.Attribute> map = new TreeMap<string, Attribute>();
         BufferedReader br = null;
         try
         {
             br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            String line;
+            string line;
             int MAX_FREQUENCY = 0;
             long start = DateTime.Now.Microsecond;
             while ((line = br.readLine()) != null)
             {
-                String param[] = line.split("\\s");
+                string param[] = line.split("\\s");
                 int natureCount = (param.length - 1) / 2;
                 CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)
@@ -125,7 +125,7 @@ public class CoreDictionary
      * @param path
      * @return
      */
-    static bool loadDat(String path)
+    static bool loadDat(string path)
     {
         try
         {
@@ -162,7 +162,7 @@ public class CoreDictionary
      * @param key
      * @return
      */
-    public static Attribute get(String key)
+    public static Attribute get(string key)
     {
         return trie.get(key);
     }
@@ -183,7 +183,7 @@ public class CoreDictionary
      * @param term
      * @return
      */
-    public static int getTermFrequency(String term)
+    public static int getTermFrequency(string term)
     {
         Attribute attribute = get(term);
         if (attribute == null) return 0;
@@ -195,7 +195,7 @@ public class CoreDictionary
      * @param key
      * @return
      */
-    public static bool contains(String key)
+    public static bool contains(string key)
     {
         return trie.get(key) != null;
     }
@@ -257,11 +257,11 @@ public class CoreDictionary
         {
         }
 
-        public static Attribute create(String natureWithFrequency)
+        public static Attribute create(string natureWithFrequency)
         {
             try
             {
-                String[] param = natureWithFrequency.Split(" ");
+                string[] param = natureWithFrequency.Split(" ");
                 if (param.length % 2 != 0)
                 {
                     return new Attribute(Nature.create(natureWithFrequency.trim()), 1); // 儿童锁
@@ -311,7 +311,7 @@ public class CoreDictionary
          * @return 词频
          * @deprecated 推荐使用Nature参数！
          */
-        public int getNatureFrequency(String nature)
+        public int getNatureFrequency(string nature)
         {
             try
             {
@@ -359,7 +359,7 @@ public class CoreDictionary
          * @param prefix 词性前缀，比如u会查询是否有ude, uzhe等等
          * @return
          */
-        public bool hasNatureStartsWith(String prefix)
+        public bool hasNatureStartsWith(string prefix)
         {
             foreach (Nature n in nature)
             {
@@ -369,7 +369,7 @@ public class CoreDictionary
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < nature.length; ++i)
@@ -396,7 +396,7 @@ public class CoreDictionary
      * @param a 词语
      * @return ID,如果不存在,则返回-1
      */
-    public static int getWordID(String a)
+    public static int getWordID(string a)
     {
         return CoreDictionary.trie.exactMatchSearch(a);
     }

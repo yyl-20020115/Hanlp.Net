@@ -39,15 +39,15 @@ public class Pair<K,V> : Serializable {
     }
 
     /**
-     * <p><code>String</code> representation of this
+     * <p><code>string</code> representation of this
      * <code>Pair</code>.</p>
      *
      * <p>The default name/value delimiter '=' is always used.</p>
      *
-     *  @return <code>String</code> representation of this <code>Pair</code>
+     *  @return <code>string</code> representation of this <code>Pair</code>
      */
     //@Override
-    public String toString() {
+    public string toString() {
         return key + "=" + value;
     }
 

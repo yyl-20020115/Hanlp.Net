@@ -20,14 +20,14 @@ namespace com.hankcs.hanlp.dictionary.ts;
  */
 public class TraditionalToTaiwanChineseDictionary : BaseChineseDictionary
 {
-    static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
+    static AhoCorasickDoubleArrayTrie<string> trie = new AhoCorasickDoubleArrayTrie<string>();
     static
     {
         long start = DateTime.Now.Microsecond;
-        String datPath = HanLP.Config.tcDictionaryRoot + "t2tw";
+        string datPath = HanLP.Config.tcDictionaryRoot + "t2tw";
         if (!loadDat(datPath, trie))
         {
-            TreeMap<String, String> t2tw = new TreeMap<String, String>();
+            TreeMap<string, string> t2tw = new TreeMap<string, string>();
             if (!load(t2tw, false, HanLP.Config.tcDictionaryRoot + "t2tw.txt"))
             {
                 throw new IllegalArgumentException("繁体转台湾繁体加载失败");
@@ -38,12 +38,12 @@ public class TraditionalToTaiwanChineseDictionary : BaseChineseDictionary
         logger.info("繁体转台湾繁体加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
-    public static String convertToTaiwanChinese(String traditionalTaiwanChineseString)
+    public static string convertToTaiwanChinese(string traditionalTaiwanChineseString)
     {
         return segLongest(traditionalTaiwanChineseString.ToCharArray(), trie);
     }
 
-    public static String convertToTaiwanChinese(char[] traditionalTaiwanChineseString)
+    public static string convertToTaiwanChinese(char[] traditionalTaiwanChineseString)
     {
         return segLongest(traditionalTaiwanChineseString, trie);
     }

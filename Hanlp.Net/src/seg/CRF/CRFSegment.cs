@@ -30,7 +30,7 @@ public class CRFSegment : CharacterBasedSegment
         this.crfModel = crfModel;
     }
 
-    public CRFSegment(String modelPath)
+    public CRFSegment(string modelPath)
     {
         logger.warning("已废弃CRFSegment，请使用功能更丰富、设计更优雅的CRFLexicalAnalyzer");
         crfModel = GlobalObjectPool.get(modelPath);
@@ -43,7 +43,7 @@ public class CRFSegment : CharacterBasedSegment
         crfModel = CRFModel.loadTxt(modelPath, new CRFSegmentModel(new BinTrie<FeatureFunction>()));
         if (crfModel == null)
         {
-            String error = "CRF分词模型加载 " + modelPath + " 失败，耗时 " + (DateTime.Now.Microsecond - start) + " ms";
+            string error = "CRF分词模型加载 " + modelPath + " 失败，耗时 " + (DateTime.Now.Microsecond - start) + " ms";
             logger.severe(error);
             throw new IllegalArgumentException(error);
         }
@@ -76,7 +76,7 @@ public class CRFSegment : CharacterBasedSegment
         OUTER:
         for (int i = 0; i < table.v.length; offset += table.v[i][1].length(), ++i)
         {
-            String[] line = table.v[i];
+            string[] line = table.v[i];
             switch (line[2].charAt(0))
             {
                 case 'B':
@@ -93,16 +93,16 @@ public class CRFSegment : CharacterBasedSegment
                     }
                     if (i == table.v.length)
                     {
-                        termList.add(new Term(new String(sentence, begin, offset - begin), toDefaultNature(table.v[i][0])));
+                        termList.add(new Term(new string(sentence, begin, offset - begin), toDefaultNature(table.v[i][0])));
                         break OUTER;
                     }
                     else
-                        termList.add(new Term(new String(sentence, begin, offset - begin + table.v[i][1].length()), toDefaultNature(table.v[i][0])));
+                        termList.add(new Term(new string(sentence, begin, offset - begin + table.v[i][1].length()), toDefaultNature(table.v[i][0])));
                 }
                 break;
                 default:
                 {
-                    termList.add(new Term(new String(sentence, offset, table.v[i][1].length()), toDefaultNature(table.v[i][0])));
+                    termList.add(new Term(new string(sentence, offset, table.v[i][1].length()), toDefaultNature(table.v[i][0])));
                 }
                 break;
             }
@@ -110,7 +110,7 @@ public class CRFSegment : CharacterBasedSegment
         return termList;
     }
 
-    protected static Nature toDefaultNature(String compiledChar)
+    protected static Nature toDefaultNature(string compiledChar)
     {
         if (compiledChar.equals("M"))
             return Nature.m;
@@ -119,9 +119,9 @@ public class CRFSegment : CharacterBasedSegment
         return null;
     }
 
-    public static List<String> atomSegment(char[] sentence)
+    public static List<string> atomSegment(char[] sentence)
     {
-        List<String> atomList = new ArrayList<String>(sentence.length);
+        List<string> atomList = new ArrayList<string>(sentence.length);
         final int maxLen = sentence.length - 1;
         final StringBuilder sbAtom = new StringBuilder();
         _out:
@@ -179,16 +179,16 @@ public class CRFSegment : CharacterBasedSegment
             }
             else
             {
-                atomList.add(String.valueOf(sentence[i]));
+                atomList.add(string.valueOf(sentence[i]));
             }
         }
 
         return atomList;
     }
 
-    public static String[][] atomSegmentToTable(char[] sentence)
+    public static string[][] atomSegmentToTable(char[] sentence)
     {
-        String table[][] = new String[sentence.length][3];
+        string table[][] = new string[sentence.length][3];
         int size = 0;
         final int maxLen = sentence.length - 1;
         final StringBuilder sbAtom = new StringBuilder();
@@ -259,7 +259,7 @@ public class CRFSegment : CharacterBasedSegment
             }
             else
             {
-                table[size][0] = table[size][1] = String.valueOf(sentence[i]);
+                table[size][0] = table[size][1] = string.valueOf(sentence[i]);
                 ++size;
             }
         }
@@ -274,10 +274,10 @@ public class CRFSegment : CharacterBasedSegment
      * @param size
      * @return
      */
-    private static String[][] resizeArray(String[][] array, int size)
+    private static string[][] resizeArray(string[][] array, int size)
     {
         if (array.length == size) return array;
-        String[][] nArray = new String[size][];
+        string[][] nArray = new string[size][];
         System.arraycopy(array, 0, nArray, 0, size);
         return nArray;
     }

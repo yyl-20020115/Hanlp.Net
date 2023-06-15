@@ -32,13 +32,13 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
     }
 
     //@Override
-    protected List<String[]> convertToSequence(Sentence sentence)
+    protected List<string[]> convertToSequence(Sentence sentence)
     {
         List<Word> wordList = sentence.toSimpleWordList();
-        List<String[]> xyList = new ArrayList<String[]>(wordList.size());
+        List<string[]> xyList = new ArrayList<string[]>(wordList.size());
         for (Word word : wordList)
         {
-            xyList.add(new String[]{word.getValue(), word.getLabel()});
+            xyList.add(new string[]{word.getValue(), word.getLabel()});
         }
         return xyList;
     }
@@ -50,7 +50,7 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
     }
 
     //@Override
-    public String[] tag(String... words)
+    public string[] tag(string... words)
     {
         int[] obsArray = new int[words.length];
         for (int i = 0; i < obsArray.length; i++)
@@ -59,7 +59,7 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
         }
         int[] tagArray = new int[obsArray.length];
         model.predict(obsArray, tagArray);
-        String[] tags = new String[obsArray.length];
+        string[] tags = new string[obsArray.length];
         for (int i = 0; i < tagArray.length; i++)
         {
             tags[i] = tagSet.stringOf(tagArray[i]);
@@ -69,8 +69,8 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
     }
 
     //@Override
-    public String[] tag(List<String> wordList)
+    public string[] tag(List<string> wordList)
     {
-        return tag(wordList.toArray(new String[0]));
+        return tag(wordList.toArray(new string[0]));
     }
 }

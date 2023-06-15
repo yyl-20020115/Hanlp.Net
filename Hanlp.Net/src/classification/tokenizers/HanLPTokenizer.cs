@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.classification.tokenizers;
  */
 public class HanLPTokenizer : ITokenizer
 {
-    public String[] segment(String text)
+    public string[] segment(string text)
     {
         char[] charArray = text.ToCharArray();
         List<Term> termList = NotionalTokenizer.segment(charArray);
@@ -31,7 +31,7 @@ public class HanLPTokenizer : ITokenizer
                 listIterator.remove();
             }
         }
-        String[] termArray = new String[termList.size()];
+        string[] termArray = new string[termList.size()];
         int p = -1;
         for (Term term : termList)
         {

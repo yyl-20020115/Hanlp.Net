@@ -129,7 +129,7 @@ public class EditDistance
      * @param b 串B
      * @return 它们之间的距离
      */
-    public static int compute(String a, String b)
+    public static int compute(string a, string b)
     {
         return ed(a, b);
     }
@@ -141,7 +141,7 @@ public class EditDistance
      * @param rightWord 串B
      * @return 它们之间的距离
      */
-    public static int ed(String wrongWord, String rightWord)
+    public static int ed(string wrongWord, string rightWord)
     {
         int m = wrongWord.length();
         int n = rightWord.length();

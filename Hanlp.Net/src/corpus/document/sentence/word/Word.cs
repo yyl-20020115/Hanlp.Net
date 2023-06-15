@@ -20,21 +20,21 @@ public class Word : IWord
     /**
      * 单词的真实值，比如“程序”
      */
-    public String value;
+    public string value;
     /**
      * 单词的标签，比如“n”
      */
-    public String label;
+    public string label;
 
     ////@Override
-    public String ToString()
+    public string ToString()
     {
         if (label == null)
             return value;
         return value + '/' + label;
     }
 
-    public Word(String value, String label)
+    public Word(string value, string label)
     {
         this.value = value;
         this.label = label;
@@ -45,7 +45,7 @@ public class Word : IWord
      * @param param 比如 人民网/nz
      * @return 一个单词
      */
-    public static Word create(String param)
+    public static Word create(string param)
     {
         if (param == null) return null;
         int cutIndex = param.lastIndexOf('/');
@@ -59,25 +59,25 @@ public class Word : IWord
     }
 
     ////@Override
-    public String getValue()
+    public string getValue()
     {
         return value;
     }
 
     //@Override
-    public String getLabel()
+    public string getLabel()
     {
         return label;
     }
 
     //@Override
-    public void setLabel(String label)
+    public void setLabel(string label)
     {
         this.label = label;
     }
 
     //@Override
-    public void setValue(String value)
+    public void setValue(string value)
     {
         this.value = value;
     }

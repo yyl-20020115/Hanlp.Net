@@ -7,7 +7,7 @@ namespace com.hankcs.hanlp.model.perceptron.cli;
 public class PropertiesArgs
 {
     /**
-     * Parse properties instead of String arguments.  Any additional arguments need to be passed some other way.
+     * Parse properties instead of string arguments.  Any additional arguments need to be passed some other way.
      * This is often used in a second pass when the property filename is passed on the command line.  Because of
      * required properties you must be careful to set them all in the property file.
      *
@@ -48,8 +48,8 @@ public class PropertiesArgs
         Argument argument = field.getAnnotation(Argument.class);
         if (argument != null)
         {
-            String name = Args.getName(argument, field);
-            String alias = Args.getAlias(argument);
+            string name = Args.getName(argument, field);
+            string alias = Args.getAlias(argument);
             Class type = field.getType();
             Object value = arguments.get(name);
             if (value == null && alias != null)
@@ -82,8 +82,8 @@ public class PropertiesArgs
             Argument argument = writeMethod.getAnnotation(Argument.class);
             if (argument != null)
             {
-                String name = Args.getName(argument, property);
-                String alias = Args.getAlias(argument);
+                string name = Args.getName(argument, property);
+                string alias = Args.getAlias(argument);
                 Object value = arguments.get(name);
                 if (value == null && alias != null)
                 {

@@ -32,7 +32,7 @@ public class FileDataSet : AbstractDataSet
 
     public FileDataSet(AbstractModel model) 
     {
-        this(model, File.createTempFile(String.valueOf(DateTime.Now.Microsecond), ".dat"));
+        this(model, File.createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     public FileDataSet(File cache) 
@@ -48,16 +48,16 @@ public class FileDataSet : AbstractDataSet
 
     private void initCache() 
     {
-        initCache(File.createTempFile(String.valueOf(DateTime.Now.Microsecond), ".dat"));
+        initCache(File.createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     public FileDataSet() 
     {
-        this(File.createTempFile(String.valueOf(DateTime.Now.Microsecond), ".dat"));
+        this(File.createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     //@Override
-    public Document add(String category, String text)
+    public Document add(string category, string text)
     {
         Document document = convert(category, text);
         try
@@ -74,9 +74,9 @@ public class FileDataSet : AbstractDataSet
     private void add(Document document) 
     {
         _out.writeInt(document.category);
-        Set<Map.Entry<int, int[]>> entrySet = document.tfMap.entrySet();
+        Set<KeyValuePair<int, int[]>> entrySet = document.tfMap.entrySet();
         _out.writeInt(entrySet.size());
-        for (Map.Entry<int, int[]> entry : entrySet)
+        for (KeyValuePair<int, int[]> entry : entrySet)
         {
             _out.writeInt(entry.getKey());
             _out.writeInt(entry.getValue()[0]);
@@ -108,7 +108,7 @@ public class FileDataSet : AbstractDataSet
             {
                 Document document = iterator.next();
                 FrequencyMap<int> tfMap = new FrequencyMap<int>();
-                for (Map.Entry<int, int[]> entry : document.tfMap.entrySet())
+                for (KeyValuePair<int, int[]> entry : document.tfMap.entrySet())
                 {
                     int feature = entry.getKey();
                     if (idMap[feature] == -1) continue;

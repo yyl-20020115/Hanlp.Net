@@ -21,9 +21,9 @@ public class Edge
     public int from;
     public int to;
     public float cost;
-    public String label;
+    public string label;
 
-    public Edge(int from, int to, String label, float cost)
+    public Edge(int from, int to, string label, float cost)
     {
         this.from = from;
         this.to = to;

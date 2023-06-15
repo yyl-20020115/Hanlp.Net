@@ -119,11 +119,11 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (listIterator.hasNext())
             {
                 IWord word = listIterator.next();
-                String label = word.getLabel();
+                string label = word.getLabel();
                 if (label.equals(label.toUpperCase())) continue;
                 if (label.startsWith("ns"))
                 {
-                    String value = word.getValue();
+                    string value = word.getValue();
                     int longestSuffixLength = PlaceSuffixDictionary.dictionary.getLongestSuffixLength(value);
                     int wordLength = value.length() - longestSuffixLength;
                     if (longestSuffixLength == 0 || wordLength == 0)

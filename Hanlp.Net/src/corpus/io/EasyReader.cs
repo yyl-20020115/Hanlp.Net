@@ -21,7 +21,7 @@ public class EasyReader
     /**
      * 根目录
      */
-    String root;
+    string root;
     /**
      * 是否输出进度
      */
@@ -31,7 +31,7 @@ public class EasyReader
      * 构造
      * @param root 根目录
      */
-    public EasyReader(String root)
+    public EasyReader(string root)
     {
         this.root = root;
     }
@@ -41,7 +41,7 @@ public class EasyReader
      * @param root 根目录
      * @param verbose 是否输出进度
      */
-    public EasyReader(String root, bool verbose)
+    public EasyReader(string root, bool verbose)
     {
         this.root = root;
         this.verbose = verbose;
@@ -91,7 +91,7 @@ public class EasyReader
             while (lineIterator.hasNext())
             {
                 ++totalAddress;
-                String line = lineIterator.next();
+                string line = lineIterator.next();
                 if (line.length() == 0) continue;
                 handler.handle(line);
             }

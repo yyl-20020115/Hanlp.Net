@@ -18,10 +18,10 @@ namespace com.hankcs.hanlp.corpus.dependency.CoNll;
  */
 public class CoNLLFixer
 {
-    public static bool fix(String path)
+    public static bool fix(string path)
     {
         StringBuilder sbOut = new StringBuilder();
-        for (String line : IOUtil.readLineListWithLessMemory(path))
+        for (string line : IOUtil.readLineListWithLessMemory(path))
         {
             if (line.trim().length() == 0)
             {
@@ -29,7 +29,7 @@ public class CoNLLFixer
                 sbOut.Append('\n');
                 continue;
             }
-            String[] args = line.split("\t");
+            string[] args = line.split("\t");
             for (int i = 10 - args.length; i > 0; --i)
             {
                 line += "\t_";

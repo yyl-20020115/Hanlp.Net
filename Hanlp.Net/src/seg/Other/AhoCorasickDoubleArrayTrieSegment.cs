@@ -34,7 +34,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         ;
     }
 
-    public AhoCorasickDoubleArrayTrieSegment(Dictionary<String, CoreDictionary.Attribute> dictionary)
+    public AhoCorasickDoubleArrayTrieSegment(Dictionary<string, CoreDictionary.Attribute> dictionary)
         : this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(dictionary))
     {
         ;
@@ -53,7 +53,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
      *
      * @ 加载过程中的IO异常
      */
-    public AhoCorasickDoubleArrayTrieSegment(params String[] dictionaryPaths) 
+    public AhoCorasickDoubleArrayTrieSegment(params string[] dictionaryPaths) 
     {
         this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(IOUtil.loadDictionary(dictionaryPaths)));
     }
@@ -89,7 +89,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         posTag(sentence, wordNet, natureArray);
         for (int i = 0; i < wordNet.length; )
         {
-            Term term = new Term(new String(sentence, i, wordNet[i]), config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
+            Term term = new Term(new string(sentence, i, wordNet[i]), config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
             term.offset = i;
             termList.add(term);
             i += wordNet[i];
@@ -113,10 +113,10 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         this.trie = trie;
     }
 
-    public AhoCorasickDoubleArrayTrieSegment loadDictionary(String... pathArray)
+    public AhoCorasickDoubleArrayTrieSegment loadDictionary(string... pathArray)
     {
         trie = new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>();
-        TreeMap<String, CoreDictionary.Attribute> map = null;
+        TreeMap<string, CoreDictionary.Attribute> map = null;
         try
         {
             map = IOUtil.loadDictionary(pathArray);

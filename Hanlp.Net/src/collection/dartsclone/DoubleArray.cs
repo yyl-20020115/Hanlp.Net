@@ -31,10 +31,10 @@ public class DoubleArray : Serializable
         _array = builder.copy();
     }
 
-    public void build(List<String> keys, int[] values)
+    public void build(List<string> keys, int[] values)
     {
         byte[][] byteKey = new byte[keys.size()][];
-        Iterator<String> iteratorKey = keys.iterator();
+        Iterator<string> iteratorKey = keys.iterator();
         int i = 0;
         while (iteratorKey.hasNext())
         {
@@ -119,7 +119,7 @@ public class DoubleArray : Serializable
      * @param key search key
      * @return found value
      */
-    public int exactMatchSearch(String key)
+    public int exactMatchSearch(string key)
     {
         return exactMatchSearch(key.getBytes(utf8));
     }

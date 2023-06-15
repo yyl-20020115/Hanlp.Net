@@ -64,7 +64,7 @@ public class Evaluator
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMinimumFractionDigits(2);

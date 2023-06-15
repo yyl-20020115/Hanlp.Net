@@ -26,14 +26,14 @@ class Preconditions
      *
      * @param expression   a bool expression
      * @param errorMessage the exception message to use if the check fails; will be converted to a
-     *                     string using {@link String#valueOf(Object)}
+     *                     string using {@link string#valueOf(Object)}
      * @throws IllegalArgumentException if {@code expression} is false
      */
     public static void checkArgument(bool expression, Object errorMessage)
     {
         if (!expression)
         {
-            throw new IllegalArgumentException(String.valueOf(errorMessage));
+            throw new IllegalArgumentException(string.valueOf(errorMessage));
         }
     }
 
@@ -47,13 +47,13 @@ class Preconditions
      *                             errorMessageArgs[0]}, etc.  Unmatched arguments will be appended to the formatted message
      *                             in square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
-     *                             are converted to strings using {@link String#valueOf(Object)}.
+     *                             are converted to strings using {@link string#valueOf(Object)}.
      * @throws IllegalArgumentException if {@code expression} is false
      * @throws NullPointerException     if the check fails and either {@code errorMessageTemplate} or
      *                                  {@code errorMessageArgs} is null (don't let this happen)
      */
     public static void checkArgument(bool expression,
-                                     String errorMessageTemplate,
+                                     string errorMessageTemplate,
                                      Object... errorMessageArgs)
     {
         if (!expression)
@@ -83,14 +83,14 @@ class Preconditions
      *
      * @param expression   a bool expression
      * @param errorMessage the exception message to use if the check fails; will be converted to a
-     *                     string using {@link String#valueOf(Object)}
+     *                     string using {@link string#valueOf(Object)}
      * @throws IllegalStateException if {@code expression} is false
      */
     public static void checkState(bool expression, Object errorMessage)
     {
         if (!expression)
         {
-            throw new IllegalStateException(String.valueOf(errorMessage));
+            throw new IllegalStateException(string.valueOf(errorMessage));
         }
     }
 
@@ -105,13 +105,13 @@ class Preconditions
      *                             errorMessageArgs[0]}, etc.  Unmatched arguments will be appended to the formatted message
      *                             in square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
-     *                             are converted to strings using {@link String#valueOf(Object)}.
+     *                             are converted to strings using {@link string#valueOf(Object)}.
      * @throws IllegalStateException if {@code expression} is false
      * @throws NullPointerException  if the check fails and either {@code errorMessageTemplate} or
      *                               {@code errorMessageArgs} is null (don't let this happen)
      */
     public static void checkState(bool expression,
-                                  String errorMessageTemplate,
+                                  string errorMessageTemplate,
                                   Object... errorMessageArgs)
     {
         if (!expression)
@@ -141,7 +141,7 @@ class Preconditions
      *
      * @param reference    an object reference
      * @param errorMessage the exception message to use if the check fails; will be converted to a
-     *                     string using {@link String#valueOf(Object)}
+     *                     string using {@link string#valueOf(Object)}
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      */
@@ -149,7 +149,7 @@ class Preconditions
     {
         if (reference == null)
         {
-            throw new NullPointerException(String.valueOf(errorMessage));
+            throw new NullPointerException(string.valueOf(errorMessage));
         }
         return reference;
     }
@@ -164,12 +164,12 @@ class Preconditions
      *                             errorMessageArgs[0]}, etc.  Unmatched arguments will be appended to the formatted message
      *                             in square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
-     *                             are converted to strings using {@link String#valueOf(Object)}.
+     *                             are converted to strings using {@link string#valueOf(Object)}.
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      */
     public static <T> T checkNotNull(T reference,
-                                     String errorMessageTemplate,
+                                     string errorMessageTemplate,
                                      Object... errorMessageArgs)
     {
         if (reference == null)
@@ -187,7 +187,7 @@ class Preconditions
    *    throw new BadException(messageExpression);
    * }
    *
-   * refactored so that messageExpression is moved to a separate String-returning method.
+   * refactored so that messageExpression is moved to a separate string-returning method.
    *
    * if (guardExpression) {
    *    throw new BadException(badMsg(...));
@@ -233,7 +233,7 @@ class Preconditions
      * @throws IllegalArgumentException  if {@code size} is negative
      */
     public static int checkElementIndex(
-            int index, int size, String desc)
+            int index, int size, string desc)
     {
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index >= size)
@@ -243,7 +243,7 @@ class Preconditions
         return index;
     }
 
-    private static String badElementIndex(int index, int size, String desc)
+    private static string badElementIndex(int index, int size, string desc)
     {
         if (index < 0)
         {
@@ -285,7 +285,7 @@ class Preconditions
      * @throws IndexOutOfBoundsException if {@code index} is negative or is greater than {@code size}
      * @throws IllegalArgumentException  if {@code size} is negative
      */
-    public static int checkPositionIndex(int index, int size, String desc)
+    public static int checkPositionIndex(int index, int size, string desc)
     {
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index > size)
@@ -295,7 +295,7 @@ class Preconditions
         return index;
     }
 
-    private static String badPositionIndex(int index, int size, String desc)
+    private static string badPositionIndex(int index, int size, string desc)
     {
         if (index < 0)
         {
@@ -332,7 +332,7 @@ class Preconditions
         }
     }
 
-    private static String badPositionIndexes(int start, int end, int size)
+    private static string badPositionIndexes(int start, int end, int size)
     {
         if (start < 0 || start > size)
         {
@@ -354,12 +354,12 @@ class Preconditions
      *
      * @param template a non-null string containing 0 or more {@code %s} placeholders.
      * @param args     the arguments to be substituted into the message template. Arguments are converted
-     *                 to strings using {@link String#valueOf(Object)}. Arguments can be null.
+     *                 to strings using {@link string#valueOf(Object)}. Arguments can be null.
      */
     // Note that this is somewhat-improperly used from Verify.java as well.
-    static String format(String template, Object... args)
+    static string format(string template, Object... args)
     {
-        template = String.valueOf(template); // null -> "null"
+        template = string.valueOf(template); // null -> "null"
 
         // start substituting the arguments into the '%s' placeholders
         StringBuilder builder = new StringBuilder(template.length() + 16 * args.length);

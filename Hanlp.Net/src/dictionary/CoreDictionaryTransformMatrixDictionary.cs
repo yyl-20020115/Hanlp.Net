@@ -24,7 +24,7 @@ public class CoreDictionaryTransformMatrixDictionary
         transformMatrixDictionary = new TransformMatrix(){
 
             //@Override
-            public int ordinal(String tag)
+            public int ordinal(string tag)
             {
                 return Nature.create(tag).ordinal();
             }

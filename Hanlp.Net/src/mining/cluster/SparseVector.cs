@@ -30,7 +30,7 @@ public class SparseVector : Dictionary<int, double>
     void normalize()
     {
         double nrm = norm();
-        for (Map.Entry<int, Double> d : entrySet())
+        for (KeyValuePair<int, Double> d : entrySet())
         {
             d.setValue(d.getValue() / nrm);
         }
@@ -62,7 +62,7 @@ public class SparseVector : Dictionary<int, double>
      */
     void multiply_constant(double x)
     {
-        for (Map.Entry<int, Double> entry : entrySet())
+        for (KeyValuePair<int, Double> entry : entrySet())
         {
             entry.setValue(entry.getValue() * x);
         }
@@ -74,7 +74,7 @@ public class SparseVector : Dictionary<int, double>
     void add_vector(SparseVector vec)
     {
 
-        for (Map.Entry<int, Double> entry : vec.entrySet())
+        for (KeyValuePair<int, Double> entry : vec.entrySet())
         {
             Double v = get(entry.getKey());
             if (v == null)
@@ -89,7 +89,7 @@ public class SparseVector : Dictionary<int, double>
     void sub_vector(SparseVector vec)
     {
 
-        for (Map.Entry<int, Double> entry : vec.entrySet())
+        for (KeyValuePair<int, Double> entry : vec.entrySet())
         {
             Double v = get(entry.getKey());
             if (v == null)
@@ -137,7 +137,7 @@ public class SparseVector : Dictionary<int, double>
      */
     static double inner_product(SparseVector vec1, SparseVector vec2)
     {
-        Iterator<Map.Entry<int, Double>> it;
+        Iterator<KeyValuePair<int, Double>> it;
         SparseVector other;
         if (vec1.size() < vec2.size())
         {
@@ -152,7 +152,7 @@ public class SparseVector : Dictionary<int, double>
         double prod = 0;
         while (it.hasNext())
         {
-            Map.Entry<int, Double> entry = it.next();
+            KeyValuePair<int, Double> entry = it.next();
             prod += entry.getValue() * other.get(entry.getKey());
         }
         return prod;

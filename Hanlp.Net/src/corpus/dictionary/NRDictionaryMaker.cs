@@ -96,7 +96,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.previous();
                 if (word.getLabel().equals(Nature.nr.toString()))
                 {
-                    String label = next.getLabel();
+                    string label = next.getLabel();
                     if (label.equals("A")) next.setLabel("L");
                     else if (label.equals("K")) next.setLabel("M");
                 }
@@ -164,7 +164,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.next();
                 if (word.getLabel().equals(NR.B.toString()))
                 {
-                    String combine = pre.getValue() + word.getValue();
+                    string combine = pre.getValue() + word.getValue();
                     if (dictionary.contains(combine))
                     {
                         pre.setValue(combine);
@@ -182,7 +182,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.previous();
                 if (word.getLabel().equals(NR.B.toString()))
                 {
-                    String combine = word.getValue() + next.getValue();
+                    string combine = word.getValue() + next.getValue();
                     if (dictionary.contains(combine))
                     {
                         next.setValue(combine);
@@ -200,7 +200,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.next();
                 if (word.getLabel().equals(NR.D.toString()))
                 {
-                    String combine = pre.getValue() + word.getValue();
+                    string combine = pre.getValue() + word.getValue();
                     if (dictionary.contains(combine))
                     {
                         pre.setValue(combine);
@@ -218,7 +218,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.previous();
                 if (word.getLabel().equals(NR.D.toString()))
                 {
-                    String combine = word.getValue() + next.getValue();
+                    string combine = word.getValue() + next.getValue();
                     if (dictionary.contains(combine))
                     {
                         next.setValue(combine);

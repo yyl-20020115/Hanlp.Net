@@ -51,14 +51,14 @@ public class DemoMultithreadingSegment
         start = DateTime.Now.Microsecond;
         segment.seg(text);
         costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
-        System._out.printf("单线程分词速度：%.2f字每秒\n", text.length() / costTime);
+        Console.WriteLine("单线程分词速度：%.2f字每秒\n", text.Length / costTime);
         GC.Collect();
 
         segment.enableMultithreading(true); // 或者 segment.enableMultithreading(4);
         start = DateTime.Now.Microsecond;
         segment.seg(text);
         costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
-        System._out.printf("多线程分词速度：%.2f字每秒\n", text.length() / costTime);
+        Console.WriteLine("多线程分词速度：%.2f字每秒\n", text.Length / costTime);
         GC.Collect();
 
         // Note:

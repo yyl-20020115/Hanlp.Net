@@ -34,7 +34,7 @@ public class CommonAhoCorasickSegmentUtil
      * @param <V> 类型
      * @return 结果链表
      */
-    public static LinkedList<ResultTerm<V>> segment<V>(String text, AhoCorasickDoubleArrayTrie<V> trie)
+    public static LinkedList<ResultTerm<V>> segment<V>(string text, AhoCorasickDoubleArrayTrie<V> trie)
     {
         return segment(text.ToCharArray(), trie);
     }
@@ -78,7 +78,7 @@ public class CommonAhoCorasickSegmentUtil
         {
             if (wordNet[begin] == null || wordNet[begin].word.length() < end - begin)
             {
-                wordNet[begin] = new ResultTerm<V>(new String(charArray, begin, end - begin), value, begin);
+                wordNet[begin] = new ResultTerm<V>(new string(charArray, begin, end - begin), value, begin);
             }
         }
     }
@@ -90,7 +90,7 @@ public class CommonAhoCorasickSegmentUtil
      * @param <V> 类型
      * @return 结果链表
      */
-    public static LinkedList<ResultTerm<V>> segmentReverseOrder<V>(String text, AhoCorasickDoubleArrayTrie<V> trie)
+    public static LinkedList<ResultTerm<V>> segmentReverseOrder<V>(string text, AhoCorasickDoubleArrayTrie<V> trie)
     {
         return segmentReverseOrder(text.ToCharArray(), trie);
     }
@@ -137,7 +137,7 @@ public class CommonAhoCorasickSegmentUtil
         {
             if (wordNet[end] == null || wordNet[end].word.length() < end - begin)
             {
-                wordNet[end] = new ResultTerm<V>(new String(charArray, begin, end - begin), value, begin);
+                wordNet[end] = new ResultTerm<V>(new string(charArray, begin, end - begin), value, begin);
             }
         }
     }

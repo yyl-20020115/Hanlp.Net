@@ -37,7 +37,7 @@ public abstract class CommonDictionary<V>
      * @param path
      * @return
      */
-    public bool load(String path)
+    public bool load(string path)
     {
         trie = new DoubleArrayTrie<V>();
         long start = DateTime.Now.Microsecond;
@@ -45,14 +45,14 @@ public abstract class CommonDictionary<V>
         {
             return true;
         }
-        TreeMap<String, V> map = new TreeMap<String, V>();
+        TreeMap<string, V> map = new TreeMap<string, V>();
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            String line;
+            string line;
             while ((line = br.readLine()) != null)
             {
-                String[] paramArray = line.split("\\s");
+                string[] paramArray = line.split("\\s");
                 map.put(paramArray[0], createValue(paramArray));
             }
             br.close();
@@ -63,10 +63,10 @@ public abstract class CommonDictionary<V>
             return false;
         }
         onLoaded(map);
-        Set<Map.Entry<String, V>> entrySet = map.entrySet();
-        List<String> keyList = new ArrayList<String>(entrySet.size());
+        Set<KeyValuePair<string, V>> entrySet = map.entrySet();
+        List<string> keyList = new ArrayList<string>(entrySet.size());
         List<V> valueList = new ArrayList<V>(entrySet.size());
-        for (Map.Entry<String, V> entry : entrySet)
+        for (KeyValuePair<string, V> entry : entrySet)
         {
             keyList.add(entry.getKey());
             valueList.add(entry.getValue());
@@ -105,7 +105,7 @@ public abstract class CommonDictionary<V>
      * @param valueArray
      * @return
      */
-    protected bool saveDat(String path, List<V> valueArray)
+    protected bool saveDat(string path, List<V> valueArray)
     {
         try
         {
@@ -141,7 +141,7 @@ public abstract class CommonDictionary<V>
      * @param key
      * @return 单词对应的条目
      */
-    public V get(String key)
+    public V get(string key)
     {
         return trie.get(key);
     }
@@ -152,7 +152,7 @@ public abstract class CommonDictionary<V>
      * @param key
      * @return
      */
-    public bool contains(String key)
+    public bool contains(string key)
     {
         return get(key) != null;
     }
@@ -173,14 +173,14 @@ public abstract class CommonDictionary<V>
      * @param params 第一个元素为键，请注意跳过
      * @return
      */
-    protected abstract V createValue(String[] params);
+    protected abstract V createValue(string[] params);
 
     /**
      * 文本词典加载完毕的回调函数
      *
      * @param map
      */
-    protected void onLoaded(TreeMap<String, V> map)
+    protected void onLoaded(TreeMap<string, V> map)
     {
     }
 }

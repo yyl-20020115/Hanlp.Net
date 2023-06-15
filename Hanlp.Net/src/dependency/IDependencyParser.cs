@@ -34,7 +34,7 @@ public interface IDependencyParser
      * @param sentence 句子
      * @return CoNLL格式的依存句法树
      */
-    CoNLLSentence parse(String sentence);
+    CoNLLSentence parse(string sentence);
 
     /**
      * 获取Parser使用的分词器
@@ -55,14 +55,14 @@ public interface IDependencyParser
      *
      * @return
      */
-    Dictionary<String, String> getDeprelTranslator();
+    Dictionary<string, string> getDeprelTranslator();
 
     /**
      * 设置依存关系映射表
      *
      * @param deprelTranslator
      */
-    IDependencyParser setDeprelTranslator(Dictionary<String, String> deprelTranslator);
+    IDependencyParser setDeprelTranslator(Dictionary<string, string> deprelTranslator);
 
     /**
      * 依存关系自动转换开关

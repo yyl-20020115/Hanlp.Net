@@ -66,19 +66,19 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
         }
     }
 
-    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile, String nerModelFile)
+    public PerceptronLexicalAnalyzer(string cwsModelFile, string posModelFile, string nerModelFile)
         : this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), nerModelFile == null ? null : new LinearModel(nerModelFile))
     {
        ;
     }
 
-    public PerceptronLexicalAnalyzer(String cwsModelFile, String posModelFile) 
+    public PerceptronLexicalAnalyzer(string cwsModelFile, string posModelFile) 
         : this(new LinearModel(cwsModelFile), posModelFile == null ? null : new LinearModel(posModelFile), null)
     {
         ;
     }
 
-    public PerceptronLexicalAnalyzer(String cwsModelFile) 
+    public PerceptronLexicalAnalyzer(string cwsModelFile) 
         : this(new LinearModel(cwsModelFile), null, null)
     {
         ;
@@ -107,9 +107,9 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param text
      * @param output
      */
-    public void segment(String text, List<String> output)
+    public void segment(string text, List<string> output)
     {
-        String normalized = CharTable.convert(text);
+        string normalized = CharTable.convert(text);
         segment(text, normalized, output);
     }
 
@@ -119,7 +119,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param wordList
      * @return
      */
-    public String[] partOfSpeechTag(List<String> wordList)
+    public string[] partOfSpeechTag(List<string> wordList)
     {
         if (posTagger == null)
         {
@@ -135,7 +135,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param posArray
      * @return
      */
-    public String[] namedEntityRecognize(String[] wordArray, String[] posArray)
+    public string[] namedEntityRecognize(string[] wordArray, string[] posArray)
     {
         if (neRecognizer == null)
         {
@@ -150,7 +150,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param segmentedTaggedSentence 已分词、标好词性和命名实体的人民日报2014格式的句子
      * @return 是否学习成果（失败的原因是句子格式不合法）
      */
-    public bool learn(String segmentedTaggedSentence)
+    public bool learn(string segmentedTaggedSentence)
     {
         Sentence sentence = Sentence.create(segmentedTaggedSentence);
         return learn(sentence);

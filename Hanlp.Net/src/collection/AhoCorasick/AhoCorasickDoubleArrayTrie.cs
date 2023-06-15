@@ -61,7 +61,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      *
      * @param dictionary 词典
      */
-    public AhoCorasickDoubleArrayTrie(Dictionary<String, V> dictionary)
+    public AhoCorasickDoubleArrayTrie(Dictionary<string, V> dictionary)
     {
         build(dictionary);
     }
@@ -72,7 +72,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param text 一些文本
      * @return 一个pair列表
      */
-    public List<Hit<V>> parseText(String text)
+    public List<Hit<V>> parseText(string text)
     {
         int position = 1;
         int currentState = 0;
@@ -93,7 +93,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseText(String text, IHit<V> processor)
+    public void parseText(string text, IHit<V> processor)
     {
         int position = 1;
         int currentState = 0;
@@ -275,7 +275,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param key 键
      * @return
      */
-    public V get(String key)
+    public V get(string key)
     {
         int index = exactMatchSearch(key);
         if (index >= 0)
@@ -293,7 +293,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param value 值
      * @return 是否成功（失败的原因是没有这个键）
      */
-    public bool set(String key, V value)
+    public bool set(string key, V value)
     {
         int index = exactMatchSearch(key);
         if (index >= 0)
@@ -373,9 +373,9 @@ public class AhoCorasickDoubleArrayTrie<V>
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
-            return String.format("[%d:%d]=%s", begin, end, value);
+            return string.format("[%d:%d]=%s", begin, end, value);
         }
     }
 
@@ -464,7 +464,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     /**
      * 由一个排序好的map创建
      */
-    public void build(Dictionary<String, V> map)
+    public void build(Dictionary<string, V> map)
     {
         new Builder().build(map);
     }
@@ -476,7 +476,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param siblings （子）兄弟节点
      * @return 兄弟节点个数
      */
-    private int fetch(State parent, List<Map.Entry<int, State>> siblings)
+    private int fetch(State parent, List<KeyValuePair<int, State>> siblings)
     {
         if (parent.isAcceptable())
         {
@@ -484,7 +484,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             fakeNode.addEmit(parent.getLargestValueId());
             siblings.add(new AbstractMap.SimpleEntry<int, State>(0, fakeNode));
         }
-        for (Map.Entry<Character, State> entry : parent.getSuccess().entrySet())
+        for (KeyValuePair<Character, State> entry : parent.getSuccess().entrySet())
         {
             siblings.add(new AbstractMap.SimpleEntry<int, State>(entry.getKey() + 1, entry.getValue()));
         }
@@ -497,7 +497,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param key 键
      * @return 值的下标
      */
-    public int exactMatchSearch(String key)
+    public int exactMatchSearch(string key)
     {
         return exactMatchSearch(key, 0, 0, 0);
     }
@@ -511,7 +511,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param nodePos
      * @return
      */
-    private int exactMatchSearch(String key, int pos, int len, int nodePos)
+    private int exactMatchSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
             len = key.length();
@@ -582,7 +582,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //        dfs(rootState, "", walker);
 //    }
 //
-//    private void dfs(State currentState, String path, IWalker walker)
+//    private void dfs(State currentState, string path, IWalker walker)
 //    {
 //        walker.meet(path, currentState);
 //        for (Character _transition : currentState.getTransitions())
@@ -601,7 +601,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //         * @param path
 //         * @param state
 //         */
-//        void meet(String path, State state);
+//        void meet(string path, State state);
 //    }
 //
 
@@ -638,20 +638,20 @@ public class AhoCorasickDoubleArrayTrie<V>
 //    }
 
 //    //@Override
-//    public String toString()
+//    public string toString()
 //    {
-//        String infoIndex = "i    = ";
-//        String infoChar = "char = ";
-//        String infoBase = "base = ";
-//        String infoCheck = "check= ";
+//        string infoIndex = "i    = ";
+//        string infoChar = "char = ";
+//        string infoBase = "base = ";
+//        string infoCheck = "check= ";
 //        for (int i = 0; i < Math.min(base.length, 200); ++i)
 //        {
 //            if (base[i] != 0 || check[i] != 0)
 //            {
 //                infoChar += "    " + (i == check[i] ? " ×" : (char) (i - check[i] - 1));
-//                infoIndex += " " + String.format("%5d", i);
-//                infoBase += " " + String.format("%5d", base[i]);
-//                infoCheck += " " + String.format("%5d", check[i]);
+//                infoIndex += " " + string.format("%5d", i);
+//                infoBase += " " + string.format("%5d", base[i]);
+//                infoCheck += " " + string.format("%5d", check[i]);
 //            }
 //        }
 //        return "DoubleArrayTrie：" +
@@ -677,30 +677,30 @@ public class AhoCorasickDoubleArrayTrie<V>
      */
     private static class DebugArray
     {
-        Dictionary<String, String> nameValueMap = new LinkedHashMap<String, String>();
+        Dictionary<string, string> nameValueMap = new LinkedHashMap<string, string>();
 
-        public void add(String name, int value)
+        public void add(string name, int value)
         {
-            String valueInMap = nameValueMap.get(name);
+            string valueInMap = nameValueMap.get(name);
             if (valueInMap == null)
             {
                 valueInMap = "";
             }
 
-            valueInMap += " " + String.format("%5d", value);
+            valueInMap += " " + string.format("%5d", value);
 
             nameValueMap.put(name, valueInMap);
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
-            String text = "";
-            for (Map.Entry<String, String> entry : nameValueMap.entrySet())
+            string text = "";
+            for (KeyValuePair<string, string> entry : nameValueMap.entrySet())
             {
-                String name = entry.getKey();
-                String value = entry.getValue();
-                text += String.format("%-5s", name) + "= " + value + '\n';
+                string name = entry.getKey();
+                string value = entry.getValue();
+                text += string.format("%-5s", name) + "= " + value + '\n';
             }
 
             return text;
@@ -756,12 +756,12 @@ public class AhoCorasickDoubleArrayTrie<V>
          * 由一个排序好的map创建
          */
         
-        public void build(TreeMap<String, V> map)
+        public void build(TreeMap<string, V> map)
         {
             // 把值保存下来
             v = (V[]) map.values().toArray();
             l = new int[v.length];
-            Set<String> keySet = map.keySet();
+            Set<string> keySet = map.keySet();
             // 构建二分trie树
             addAllKeyword(keySet);
             // 在二分trie树的基础上构建双数组trie树
@@ -779,7 +779,7 @@ public class AhoCorasickDoubleArrayTrie<V>
          * @param keyword 键
          * @param index   值的下标
          */
-        private void addKeyword(String keyword, int index)
+        private void addKeyword(string keyword, int index)
         {
             State currentState = this.rootState;
             for (Character character : keyword.ToCharArray())
@@ -795,10 +795,10 @@ public class AhoCorasickDoubleArrayTrie<V>
          *
          * @param keywordSet
          */
-        private void addAllKeyword(Collection<String> keywordSet)
+        private void addAllKeyword(Collection<string> keywordSet)
         {
             int i = 0;
-            for (String keyword : keywordSet)
+            for (string keyword : keywordSet)
             {
                 addKeyword(keyword, i++);
             }
@@ -861,7 +861,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             AhoCorasickDoubleArrayTrie.this.output[targetState.getIndex()] = output;
         }
 
-        private void buildDoubleArrayTrie(Set<String> keySet)
+        private void buildDoubleArrayTrie(Set<string> keySet)
         {
             progress = 0;
             keySize = keySet.size();
@@ -872,7 +872,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 
             State root_node = this.rootState;
 
-            List<Map.Entry<int, State>> siblings = new ArrayList<Map.Entry<int, State>>(root_node.getSuccess().entrySet().size());
+            List<KeyValuePair<int, State>> siblings = new ArrayList<KeyValuePair<int, State>>(root_node.getSuccess().entrySet().size());
             fetch(root_node, siblings);
             insert(siblings);
         }
@@ -908,7 +908,7 @@ public class AhoCorasickDoubleArrayTrie<V>
          * @param siblings 等待插入的兄弟节点
          * @return 插入位置
          */
-        private int insert(List<Map.Entry<int, State>> siblings)
+        private int insert(List<KeyValuePair<int, State>> siblings)
         {
             int begin = 0;
             int pos = Math.max(siblings.get(0).getKey() + 1, nextCheckPos) - 1;
@@ -968,14 +968,14 @@ public class AhoCorasickDoubleArrayTrie<V>
 
             size = (size > begin + siblings.get(siblings.size() - 1).getKey() + 1) ? size : begin + siblings.get(siblings.size() - 1).getKey() + 1;
 
-            for (Map.Entry<int, State> sibling : siblings)
+            for (KeyValuePair<int, State> sibling : siblings)
             {
                 check[begin + sibling.getKey()] = begin;
             }
 
-            for (Map.Entry<int, State> sibling : siblings)
+            for (KeyValuePair<int, State> sibling : siblings)
             {
-                List<Map.Entry<int, State>> new_siblings = new ArrayList<Map.Entry<int, State>>(sibling.getValue().getSuccess().entrySet().size() + 1);
+                List<KeyValuePair<int, State>> new_siblings = new ArrayList<KeyValuePair<int, State>>(sibling.getValue().getSuccess().entrySet().size() + 1);
 
                 if (fetch(sibling.getValue(), new_siblings) == 0)  // 一个词的终止且不为其他词的前缀，其实就是叶子节点
                 {

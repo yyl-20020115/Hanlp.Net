@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.dictionary.nr;
  */
 public class TranslatedPersonDictionary
 {
-    static String path = HanLP.Config.TranslatedPersonDictionaryPath;
+    static string path = HanLP.Config.TranslatedPersonDictionaryPath;
     static DoubleArrayTrie<Boolean> trie;
 
     static TranslatedPersonDictionary()
@@ -41,8 +41,8 @@ public class TranslatedPersonDictionary
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            String line;
-            TreeMap<String, Boolean> map = new TreeMap<String, Boolean>();
+            string line;
+            TreeMap<string, Boolean> map = new TreeMap<string, Boolean>();
             TreeMap<Character, int> charFrequencyMap = new TreeMap<Character, int>();
             while ((line = br.readLine()) != null)
             {
@@ -58,14 +58,14 @@ public class TranslatedPersonDictionary
                 }
             }
             br.close();
-            map.put(String.valueOf('·'), true);
-//            map.put(String.valueOf('-'), true);
-//            map.put(String.valueOf('—'), true);
+            map.put(string.valueOf('·'), true);
+//            map.put(string.valueOf('-'), true);
+//            map.put(string.valueOf('—'), true);
             // 将常用字也加进去
-            for (Map.Entry<Character, int> entry : charFrequencyMap.entrySet())
+            for (KeyValuePair<Character, int> entry : charFrequencyMap.entrySet())
             {
                 if (entry.getValue() < 10) continue;
-                map.put(String.valueOf(entry.getKey()), true);
+                map.put(string.valueOf(entry.getKey()), true);
             }
             logger.info("音译人名词典" + path + "开始构建双数组……");
             trie.build(map);
@@ -100,7 +100,7 @@ public class TranslatedPersonDictionary
      * @param key
      * @return
      */
-    public static bool containsKey(String key)
+    public static bool containsKey(string key)
     {
         return trie.containsKey(key);
     }
@@ -111,7 +111,7 @@ public class TranslatedPersonDictionary
      * @param length
      * @return
      */
-    public static bool containsKey(String key, int length)
+    public static bool containsKey(string key, int length)
     {
         if (!trie.containsKey(key)) return false;
         return key.length() >= length;

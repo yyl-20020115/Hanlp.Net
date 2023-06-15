@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.classification.tokenizers;
  */
 public class BlankTokenizer : ITokenizer
 {
-    public String[] segment(String text)
+    public string[] segment(string text)
     {
         return text.split("\\s");
     }

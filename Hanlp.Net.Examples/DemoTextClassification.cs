@@ -47,7 +47,7 @@ public class DemoTextClassification
 
     private static void predict(IClassifier classifier, String text)
     {
-        System.out.printf("《%s》 属于分类 【%s】\n", text, classifier.classify(text));
+        Console.Write("《%s》 属于分类 【%s】\n", text, classifier.classify(text));
     }
 
     private static NaiveBayesModel trainOrLoadModel() 

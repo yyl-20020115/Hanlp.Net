@@ -26,12 +26,12 @@ public class CommonSuffixExtractor
         tfDictionary = new TFDictionary();
     }
 
-    public void add(String key)
+    public void add(string key)
     {
         tfDictionary.add(key);
     }
 
-    public List<String> extractSuffixExtended(int length, int size)
+    public List<string> extractSuffixExtended(int length, int size)
     {
         return extractSuffix(length, size, true);
     }
@@ -43,10 +43,10 @@ public class CommonSuffixExtractor
      * @param extend 长度是否拓展为从1到length为止的后缀
      * @return 公共后缀列表
      */
-    public List<String> extractSuffix(int length, int size, bool extend)
+    public List<string> extractSuffix(int length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
-        for (String key : tfDictionary.keySet())
+        for (string key : tfDictionary.keySet())
         {
             if (key.length() > length)
             {
@@ -69,9 +69,9 @@ public class CommonSuffixExtractor
         return extract(suffixTreeSet, size);
     }
 
-    private static List<String> extract(TFDictionary suffixTreeSet, int size)
+    private static List<string> extract(TFDictionary suffixTreeSet, int size)
     {
-        List<String> suffixList = new ArrayList<String>(size);
+        List<string> suffixList = new ArrayList<string>(size);
         for (TermFrequency termFrequency : suffixTreeSet.values())
         {
             if (suffixList.size() >= size) break;
@@ -88,10 +88,10 @@ public class CommonSuffixExtractor
      * @param extend
      * @return
      */
-    public List<String> extractSuffixByWords(int length, int size, bool extend)
+    public List<string> extractSuffixByWords(int length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
-        for (String key : tfDictionary.keySet())
+        for (string key : tfDictionary.keySet())
         {
             List<Term> termList = StandardTokenizer.segment(key);
             if (termList.size() > length)
@@ -111,7 +111,7 @@ public class CommonSuffixExtractor
     }
 
 
-    private static String combine(List<Term> termList)
+    private static string combine(List<Term> termList)
     {
         StringBuilder sbResult = new StringBuilder();
         for (Term term : termList)

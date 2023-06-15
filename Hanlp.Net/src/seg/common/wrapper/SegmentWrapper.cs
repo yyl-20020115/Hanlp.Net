@@ -52,7 +52,7 @@ public class SegmentWrapper
     public Term next() 
     {
         if (termArray != null && index < termArray.length) return termArray[index++];
-        String line = br.readLine();
+        string line = br.readLine();
         while (TextUtility.isBlank(line))
         {
             if (line == null) return null;

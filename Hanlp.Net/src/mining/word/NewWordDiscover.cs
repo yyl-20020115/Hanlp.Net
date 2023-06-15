@@ -48,8 +48,8 @@ public class NewWordDiscover
      */
     public List<WordInfo> discover(BufferedReader reader, int size) 
     {
-        String doc;
-        Dictionary<String, WordInfo> word_cands = new TreeMap<String, WordInfo>();
+        string doc;
+        Dictionary<string, WordInfo> word_cands = new TreeMap<string, WordInfo>();
         int totalLength = 0;
         Pattern delimiter = Pattern.compile("[\\s\\d,.<>/?:;'\"\\[\\]{}()\\|~!@#$%^&*\\-_=+，。《》、？：；“”‘’｛｝【】（）…￥！—┄－]+");
         while ((doc = reader.readLine()) != null)
@@ -61,7 +61,7 @@ public class NewWordDiscover
                 int end = Math.min(i + 1 + max_word_len, docLength + 1);
                 for (int j = i + 1; j < end; ++j)
                 {
-                    String word = doc.substring(i, j);
+                    string word = doc.substring(i, j);
                     if (word.indexOf('\0') >= 0)
                         continue; // 含有分隔符的不认为是词语
                     WordInfo info = word_cands.get(word);
@@ -117,7 +117,7 @@ public class NewWordDiscover
      * @param size 需要提取词语的数量
      * @return 一个词语列表
      */
-    public List<WordInfo> discover(String doc, int size)
+    public List<WordInfo> discover(string doc, int size)
     {
         try
         {

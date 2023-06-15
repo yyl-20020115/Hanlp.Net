@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.dictionary.ns;
 public class NSDictionary : EnumItemDictionary<NS>
 {
     //@Override
-    protected NS valueOf(String name)
+    protected NS valueOf(string name)
     {
         return NS.valueOf(name);
     }

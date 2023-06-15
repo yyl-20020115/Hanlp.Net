@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.option;
  */
 public class TestOption : BasicOption
 {
-    String input_file;   //! The path to the input file.
-    String output_file;  //! The path to the output file.
+    string input_file;   //! The path to the input file.
+    string output_file;  //! The path to the output file.
     bool evaluate;
 }

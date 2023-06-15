@@ -7,7 +7,7 @@ public abstract class AbstractTrainer
 
     protected abstract void localUsage();
 
-    protected void paramDesc(String param, String desc)
+    protected void paramDesc(string param, string desc)
     {
         System.err.printf("\t%s\n\t\t%s\n", param, desc);
     }
@@ -35,26 +35,26 @@ public abstract class AbstractTrainer
         System.exit(0);
     }
 
-    protected int argPos(String param, String[] args)
+    protected int argPos(string param, string[] args)
     {
         return argPos(param, args, true);
     }
 
-    protected int argPos(String param, String[] args, bool checkArgNum)
+    protected int argPos(string param, string[] args, bool checkArgNum)
     {
         for (int i = 0; i < args.length; i++)
         {
             if (param.equals(args[i]))
             {
                 if (checkArgNum && (i == args.length - 1))
-                    throw new IllegalArgumentException(String.format("Argument missing for %s", param));
+                    throw new IllegalArgumentException(string.format("Argument missing for %s", param));
                 return i;
             }
         }
         return -1;
     }
 
-    protected void setConfig(String[] args, Config config)
+    protected void setConfig(string[] args, Config config)
     {
         int i;
         if ((i = argPos("-size", args)) >= 0) config.setLayer1Size(int.parseInt(args[i + 1]));

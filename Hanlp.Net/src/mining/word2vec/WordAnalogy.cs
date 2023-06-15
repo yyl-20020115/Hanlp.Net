@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public class WordAnalogy : AbstractClosestVectors
 {
 
-    protected WordAnalogy(String file)
+    protected WordAnalogy(string file)
     {
         super(file);
     }
@@ -17,7 +17,7 @@ public class WordAnalogy : AbstractClosestVectors
         System.exit(0);
     }
 
-    public static void main(String[] args) 
+    public static void main(string[] args) 
     {
         if (args.length < 1) usage();
         new WordAnalogy(args[0]).execute();
@@ -28,7 +28,7 @@ public class WordAnalogy : AbstractClosestVectors
         final int words = vectorsReader.getNumWords();
         final int size = vectorsReader.getSize();
 
-        String[] input = null;
+        string[] input = null;
         while ((input = nextWords(3, "Enter 3 words")) != null)
         {
             // linear search the input word in vocabulary

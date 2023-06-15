@@ -26,14 +26,14 @@ public class Document : Serializable
         this.sentenceList = sentenceList;
     }
 
-    public static Document create(String param)
+    public static Document create(string param)
     {
         Pattern pattern = Pattern.compile(".+?((。/w)|(！/w )|(？/w )|\\n|$)");
         Matcher matcher = pattern.matcher(param);
         List<Sentence> sentenceList = new LinkedList<Sentence>();
         while (matcher.find())
         {
-            String single = matcher.group();
+            string single = matcher.group();
             Sentence sentence = Sentence.create(single);
             if (sentence == null)
             {
@@ -171,7 +171,7 @@ public class Document : Serializable
      * @param labelSet
      * @return
      */
-    public List<List<Word>> getSimpleSentenceList(Set<String> labelSet)
+    public List<List<Word>> getSimpleSentenceList(Set<string> labelSet)
     {
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
         for (Sentence sentence : sentenceList)
@@ -205,7 +205,7 @@ public class Document : Serializable
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         StringBuilder sb = new StringBuilder();
         for (Sentence sentence : sentenceList)
@@ -221,7 +221,7 @@ public class Document : Serializable
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file.getAbsolutePath());
         List<Sentence> sentenceList = new LinkedList<Sentence>();
-        for (String line : lineIterator)
+        for (string line : lineIterator)
         {
             line = line.trim();
             if (line.isEmpty()) continue;

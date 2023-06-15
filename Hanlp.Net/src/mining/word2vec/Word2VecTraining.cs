@@ -106,7 +106,7 @@ class Word2VecTraining
                             System.err.printf("%cAlpha: %f  iter: %d  Progress: %.2f%%  Words/thread/sec: %.2fk", 13, alpha, local_iter,
                                               percent * 100,
                                               wordCountActual / (float) (cost_time));
-                            String etd = Utility.humanTime((long) (cost_time / percent * (1.f - percent)));
+                            string etd = Utility.humanTime((long) (cost_time / percent * (1.f - percent)));
                             if (etd.length() > 0) System.err.printf("  ETD: %s", etd);
                             System.err.flush();
                         }
@@ -356,7 +356,7 @@ class Word2VecTraining
         }
 
         System.err.println();
-        logger.info(String.format("finished training in %s", Utility.humanTime(DateTime.Now.Microsecond - timeStart)));
+        logger.info(string.format("finished training in %s", Utility.humanTime(DateTime.Now.Microsecond - timeStart)));
         // lose weight
         syn1 = null;
         table = null;

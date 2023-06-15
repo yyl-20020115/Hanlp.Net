@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus.dependency.CoNll;
  * CoNLL中的一个句子
  * @author hankcs
  */
-public class CoNLLSentence : Iterable<CoNLLWord>
+public class CoNLLSentence : IEnumerable<CoNLLWord>
 {
     /**
      * 有许多行，每行是一个单词
@@ -29,10 +29,10 @@ public class CoNLLSentence : Iterable<CoNLLWord>
      */
     public CoNLLSentence(List<CoNllLine> lineList)
     {
-        CoNllLine[] lineArray = lineList.toArray(new CoNllLine[0]);
+        CoNllLine[] lineArray = lineList.ToArray();
         this.word = new CoNLLWord[lineList.size()];
         int i = 0;
-        for (CoNllLine line : lineList)
+        foreach(CoNllLine line in lineList)
         {
             word[i++] = new CoNLLWord(line);
         }
@@ -56,9 +56,9 @@ public class CoNLLSentence : Iterable<CoNLLWord>
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
-        final StringBuilder sb = new StringBuilder(word.length * 50);
+        StringBuilder sb = new StringBuilder(word.length * 50);
         for (CoNLLWord word : this.word)
         {
             sb.Append(word);
@@ -71,10 +71,10 @@ public class CoNLLSentence : Iterable<CoNLLWord>
      * 获取边的列表，edge[i][j]表示id为i的词语与j存在一条依存关系为该值的边，否则为null
      * @return
      */
-    public String[][] getEdgeArray()
+    public string[][] getEdgeArray()
     {
-        String[][] edge = new String[word.length + 1][word.length + 1];
-        for (CoNLLWord coNLLWord : word)
+        string[][] edge = new string[word.length + 1][word.length + 1];
+        for (CoNLLWord coNLLWord in word)
         {
             edge[coNLLWord.ID][coNLLWord.HEAD.ID] = coNLLWord.DEPREL;
         }

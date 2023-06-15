@@ -53,7 +53,9 @@ public class DemoWordDistance
         {
             foreach (String b in wordArray)
             {
-                Console.WriteLine("%-5s\t%-5s\t%-15d\t%-5.10f\n", a, b, CoreSynonymDictionary.distance(a, b), CoreSynonymDictionary.similarity(a, b));
+                Console.WriteLine("%-5s\t%-5s\t%-15d\t%-5.10f\n",
+                    a, b, CoreSynonymDictionary.distance(a, b),
+                    CoreSynonymDictionary.similarity(a, b));
             }
         }
     }

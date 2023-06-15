@@ -9,6 +9,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.utility;
 
 
@@ -26,7 +30,7 @@ public class LexiconUtility
      * @param word 单词
      * @return 包含词性与频次的信息
      */
-    public static CoreDictionary.Attribute getAttribute(String word)
+    public static CoreDictionary.Attribute getAttribute(string word)
     {
         CoreDictionary.Attribute attribute = CoreDictionary.get(word);
         if (attribute != null) return attribute;
@@ -38,7 +42,7 @@ public class LexiconUtility
      * @param word
      * @return
      */
-    public static bool contains(String word)
+    public static bool contains(string word)
     {
         return getAttribute(word) != null;
     }
@@ -59,7 +63,7 @@ public class LexiconUtility
      * @param word
      * @return
      */
-    public static int getFrequency(String word)
+    public static int getFrequency(string word)
     {
         CoreDictionary.Attribute attribute = getAttribute(word);
         if (attribute == null) return 0;
@@ -72,7 +76,7 @@ public class LexiconUtility
      * @param attribute
      * @return
      */
-    public static bool setAttribute(String word, CoreDictionary.Attribute attribute)
+    public static bool setAttribute(string word, CoreDictionary.Attribute attribute)
     {
         if (attribute == null) return false;
 
@@ -92,13 +96,12 @@ public class LexiconUtility
      * @param natures
      * @return
      */
-    public static bool setAttribute(String word, Nature... natures)
+    public static bool setAttribute(string word, params Nature[] natures)
     {
         if (natures == null) return false;
 
         CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natures, new int[natures.length]);
-        Arrays.fill(attribute.frequency, 1);
-
+        System.Array.Fill(attribute.frequency, 1);
         return setAttribute(word, attribute);
     }
 
@@ -108,12 +111,12 @@ public class LexiconUtility
      * @param natures
      * @return
      */
-    public static bool setAttribute(String word, String... natures)
+    public static bool setAttribute(string word, params string[] natures)
     {
         if (natures == null) return false;
 
-        Nature[] natureArray = new Nature[natures.length];
-        for (int i = 0; i < natureArray.length; i++)
+        Nature[] natureArray = new Nature[natures.Length];
+        for (int i = 0; i < natureArray.Length; i++)
         {
             natureArray[i] = Nature.create(natures[i]);
         }
@@ -128,7 +131,7 @@ public class LexiconUtility
      * @param natureWithFrequency
      * @return
      */
-    public static bool setAttribute(String word, String natureWithFrequency)
+    public static bool setAttribute(string word, string natureWithFrequency)
     {
         CoreDictionary.Attribute attribute = CoreDictionary.Attribute.create(natureWithFrequency);
         return setAttribute(word, attribute);
@@ -140,13 +143,13 @@ public class LexiconUtility
      * @param customNatureCollector 一个收集集合
      * @return 转换结果
      */
-    public static Nature convertStringToNature(String name, LinkedHashSet<Nature> customNatureCollector)
+    public static Nature convertStringToNature(string name, HashSet<Nature> customNatureCollector)
     {
         Nature nature = Nature.fromString(name);
         if (nature == null)
         {
             nature = Nature.create(name);
-            if (customNatureCollector != null) customNatureCollector.add(nature);
+            if (customNatureCollector != null) customNatureCollector.Add(nature);
         }
         return nature;
     }
@@ -156,7 +159,7 @@ public class LexiconUtility
      * @param name 词性名称
      * @return 转换结果
      */
-    public static Nature convertStringToNature(String name)
+    public static Nature convertStringToNature(string name)
     {
         return convertStringToNature(name, null);
     }

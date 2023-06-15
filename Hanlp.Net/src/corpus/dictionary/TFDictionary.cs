@@ -19,9 +19,9 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  */
 public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
 {
-    String delimeter;
+    string delimeter;
 
-    public TFDictionary(String delimeter)
+    public TFDictionary(string delimeter)
     {
         this.delimeter = delimeter;
     }
@@ -32,10 +32,10 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     }
 
     //@Override
-    protected Map.Entry<String, TermFrequency> onGenerateEntry(String line)
+    protected KeyValuePair<string, TermFrequency> onGenerateEntry(string line)
     {
-        String[] param = line.split(delimeter);
-        return new AbstractMap.SimpleEntry<String, TermFrequency>(param[0], new TermFrequency(param[0], int.valueOf(param[1])));
+        string[] param = line.split(delimeter);
+        return new AbstractMap.SimpleEntry<string, TermFrequency>(param[0], new TermFrequency(param[0], int.valueOf(param[1])));
     }
 
     /**
@@ -48,7 +48,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     public int combine(TFDictionary dictionary, int limit, bool add)
     {
         int preSize = trie.size();
-        for (Map.Entry<String, TermFrequency> entry : dictionary.trie.entrySet())
+        for (KeyValuePair<string, TermFrequency> entry : dictionary.trie.entrySet())
         {
             TermFrequency termFrequency = trie.get(entry.getKey());
             if (termFrequency == null)
@@ -71,7 +71,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
      * @param path 多个词典的路径，第一个是主词典。主词典与其他词典的区别详见com.hankcs.hanlp.corpus.dictionary.TFDictionary#combine(com.hankcs.hanlp.corpus.dictionary.TFDictionary, int, bool)
      * @return 词条的增量
      */
-    public static int combine(String... path)
+    public static int combine(string... path)
     {
         TFDictionary dictionaryMain = new TFDictionary();
         dictionaryMain.load(path[0]);
@@ -85,11 +85,11 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path[0]), "UTF-8"));
-            for (Map.Entry<String, TermFrequency> entry : dictionaryMain.trie.entrySet())
+            for (KeyValuePair<string, TermFrequency> entry : dictionaryMain.trie.entrySet())
             {
                 bw.write(entry.getKey());
                 bw.write(' ');
-                bw.write(String.valueOf(entry.getValue().getValue()));
+                bw.write(string.valueOf(entry.getValue().getValue()));
                 bw.newLine();
             }
             bw.close();
@@ -108,14 +108,14 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
      * @param key
      * @return
      */
-    public int getFrequency(String key)
+    public int getFrequency(string key)
     {
         TermFrequency termFrequency = get(key);
         if (termFrequency == null) return 0;
         return termFrequency.getFrequency();
     }
 
-    public void add(String key)
+    public void add(string key)
     {
         TermFrequency termFrequency = trie.get(key);
         if (termFrequency == null)
@@ -130,12 +130,12 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     }
 
     //@Override
-    public bool saveTxtTo(String path)
+    public bool saveTxtTo(string path)
     {
         if ("=".equals(delimeter))
         {
             LinkedList<TermFrequency> termFrequencyLinkedList = new LinkedList<TermFrequency>();
-            for (Map.Entry<String, TermFrequency> entry : trie.entrySet())
+            for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
             {
                 termFrequencyLinkedList.add(entry.getValue());
             }
@@ -143,8 +143,8 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
         }
         else
         {
-            ArrayList<String> outList = new ArrayList<String>(size());
-            for (Map.Entry<String, TermFrequency> entry : trie.entrySet())
+            ArrayList<string> outList = new ArrayList<string>(size());
+            for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
             {
                 outList.add(entry.getKey() + delimeter + entry.getValue().getFrequency());
             }
@@ -157,10 +157,10 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
      * @param path
      * @return
      */
-    public bool saveKeyTo(String path)
+    public bool saveKeyTo(string path)
     {
-        LinkedList<String> keyList = new LinkedList<String>();
-        for (Map.Entry<String, TermFrequency> entry : trie.entrySet())
+        LinkedList<string> keyList = new LinkedList<string>();
+        for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
         {
             keyList.add(entry.getKey());
         }
@@ -175,7 +175,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     {
         TreeSet<TermFrequency> set = new TreeSet<TermFrequency>(Collections.reverseOrder());
 
-        for (Map.Entry<String, TermFrequency> entry : entrySet())
+        for (KeyValuePair<string, TermFrequency> entry : entrySet())
         {
             set.add(entry.getValue());
         }

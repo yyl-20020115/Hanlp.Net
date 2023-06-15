@@ -16,12 +16,12 @@ namespace com.hankcs.hanlp.dependency.nnparser.util;
  */
 public class Log
 {
-    public static void ERROR_LOG(String format, Object ... args)
+    public static void ERROR_LOG(string format, Object ... args)
     {
         System.err.printf(format, args);
     }
 
-    public static void INFO_LOG(String format, Object ... args)
+    public static void INFO_LOG(string format, Object ... args)
     {
         System.err.printf(format, args);
     }

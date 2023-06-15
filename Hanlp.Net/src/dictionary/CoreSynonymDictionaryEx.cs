@@ -34,7 +34,7 @@ public class CoreSynonymDictionaryEx
         }
     }
 
-    public static long[] get(String key)
+    public static long[] get(string key)
     {
         return dictionary.get(key);
     }
@@ -63,7 +63,7 @@ public class CoreSynonymDictionaryEx
         {
             // 除掉停用词
             if (term.nature == null) continue;
-            String nature = term.nature.toString();
+            string nature = term.nature.toString();
             char firstChar = nature.charAt(0);
             switch (firstChar)
             {

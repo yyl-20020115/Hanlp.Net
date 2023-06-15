@@ -46,7 +46,7 @@ public class Node
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return vertex.toString();
     }

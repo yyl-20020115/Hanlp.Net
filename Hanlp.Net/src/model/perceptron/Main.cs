@@ -33,22 +33,22 @@ public class Main
         bool evaluate;
 
         @Argument(description = "模型文件路径")
-        String[] model = new String[]{HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath};
+        string[] model = new string[]{HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath};
 
         @Argument(description = "输入文本路径")
-        String input;
+        string input;
 
         @Argument(description = "结果保存路径")
-        String result;
+        string result;
 
         @Argument(description = "标准分词语料")
-        String gold;
+        string gold;
 
         @Argument(description = "训练集")
-        String reference;
+        string reference;
 
         @Argument(description = "开发集")
-        String development;
+        string development;
 
         @Argument(description = "迭代次数")
         int iter = 5;
@@ -60,7 +60,7 @@ public class Main
         int thread = Runtime.getRuntime().availableProcessors();
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         // nohup time java -jar averaged-perceptron-segment-1.0.jar -train -model 2014_2w.bin -reference 2014_blank.txt -development 2014_1k.txt > log.txt
         Option option = new Option();
@@ -93,7 +93,7 @@ public class Main
             else
             {
                 PerceptronLexicalAnalyzer analyzer;
-                String[] models = option.model;
+                string[] models = option.model;
                 switch (models.length)
                 {
                     case 1:
@@ -129,8 +129,8 @@ public class Main
                 {
                     scanner = new Scanner(new File(option.input), "utf-8");
                 }
-                String line;
-                String lineSeparator = System.getProperty("line.separator");
+                string line;
+                string lineSeparator = System.getProperty("line.separator");
                 while (scanner.hasNext() && (line = scanner.nextLine()) != null)
                 {
                     line = line.trim();

@@ -39,12 +39,12 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
         //super(cwsModel);
         if (cwsModel.featureMap.tagSet.type != TaskType.CWS)
         {
-            throw new IllegalArgumentException(String.format("错误的模型类型: 传入的不是分词模型，而是 %s 模型", cwsModel.featureMap.tagSet.type));
+            throw new IllegalArgumentException(string.format("错误的模型类型: 传入的不是分词模型，而是 %s 模型", cwsModel.featureMap.tagSet.type));
         }
         CWSTagSet = (CWSTagSet) cwsModel.featureMap.tagSet;
     }
 
-    public PerceptronSegmenter(String cwsModelFile)
+    public PerceptronSegmenter(string cwsModelFile)
         : this(new LinearModel(cwsModelFile))
     {
     }
@@ -58,20 +58,20 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
     {
     }
 
-    public void segment(String text, List<String> output)
+    public void segment(string text, List<string> output)
     {
-        String normalized = normalize(text);
+        string normalized = normalize(text);
         segment(text, normalized, output);
     }
 
-    public void segment(String text, String normalized, List<String> output)
+    public void segment(string text, string normalized, List<string> output)
     {
         if (text.isEmpty()) return;
         Instance instance = new CWSInstance(normalized, model.featureMap);
         segment(text, instance, output);
     }
 
-    public void segment(String text, Instance instance, List<String> output)
+    public void segment(string text, Instance instance, List<string> output)
     {
         int[] tagArray = instance.tagArray;
         model.viterbiDecode(instance, tagArray);
@@ -94,9 +94,9 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
         }
     }
 
-    public List<String> segment(String sentence)
+    public List<string> segment(string sentence)
     {
-        List<String> result = new ();
+        List<string> result = new ();
         segment(sentence, result);
         return result;
     }
@@ -107,7 +107,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
      * @param segmentedSentence 分好词的句子，空格或tab分割，不含词性
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public bool learn(String segmentedSentence)
+    public bool learn(string segmentedSentence)
     {
         return learn(segmentedSentence.Split("\\s+"));
     }
@@ -118,7 +118,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
      * @param words 分好词的句子
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public bool learn(params String[] words)
+    public bool learn(params string[] words)
     {
 //        for (int i = 0; i < words.length; i++) // 防止传入带词性的词语
 //        {
@@ -138,7 +138,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
     }
 
     //@Override
-    public double[] evaluate(String corpora) 
+    public double[] evaluate(string corpora) 
     {
         // 这里用CWS的F1
         double[] prf = Utility.prf(Utility.evaluateCWS(corpora, this));

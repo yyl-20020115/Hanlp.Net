@@ -12,7 +12,7 @@ public class TextUtility
 
     public static int charType(char c)
     {
-        return charType(String.valueOf(c));
+        return charType(string.valueOf(c));
     }
 
     /**
@@ -20,7 +20,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static int charType(String str)
+    public static int charType(string str)
     {
         if (str != null && str.length() > 0)
         {
@@ -72,7 +72,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static bool isAllChinese(String str)
+    public static bool isAllChinese(string str)
     {
         return str.matches("[\\u4E00-\\u9FA5]+");
     }
@@ -103,7 +103,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static bool isAllSingleByte(String str)
+    public static bool isAllSingleByte(string str)
     {
         assert str != null;
         for (int i = 0; i < str.length(); i++)
@@ -122,7 +122,7 @@ public class TextUtility
      * @param str 要转换的字符串
      * @return 如果是有意义的整数，则返回此整数值。否则，返回-1。
      */
-    public static int cint(String str)
+    public static int cint(string str)
     {
         if (str != null)
             try
@@ -142,7 +142,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static bool isAllNum(String str)
+    public static bool isAllNum(string str)
     {
         if (str == null)
             return false;
@@ -231,7 +231,7 @@ public class TextUtility
      * @param text
      * @return
      */
-    public static bool isAllLetter(String text)
+    public static bool isAllLetter(string text)
     {
         for (int i = 0; i < text.length(); ++i)
         {
@@ -251,7 +251,7 @@ public class TextUtility
      * @param text
      * @return
      */
-    public static bool isAllLetterOrNum(String text)
+    public static bool isAllLetterOrNum(string text)
     {
         for (int i = 0; i < text.length(); ++i)
         {
@@ -289,12 +289,12 @@ public class TextUtility
      * @param word
      * @return
      */
-    public static bool isAllChineseNum(String word)
+    public static bool isAllChineseNum(string word)
     {// 百分之五点六的人早上八点十八分起床
 
-        String chineseNum = "零○一二两三四五六七八九十廿百千万亿壹贰叁肆伍陆柒捌玖拾佰仟∶·．／点";//
-        String prefix = "几数上第";
-        String surfix = "几多余来成倍";
+        string chineseNum = "零○一二两三四五六七八九十廿百千万亿壹贰叁肆伍陆柒捌玖拾佰仟∶·．／点";//
+        string prefix = "几数上第";
+        string surfix = "几多余来成倍";
         bool round = false;
 
         if (word == null)
@@ -331,16 +331,16 @@ public class TextUtility
      * @param word
      * @return
      */
-    public static int getCharCount(String charSet, String word)
+    public static int getCharCount(string charSet, string word)
     {
         int nCount = 0;
 
         if (word != null)
         {
-            String temp = word + " ";
+            string temp = word + " ";
             for (int i = 0; i < word.length(); i++)
             {
-                String s = temp.substring(i, i + 1);
+                string s = temp.substring(i, i + 1);
                 if (charSet.indexOf(s) != -1)
                     nCount++;
             }
@@ -370,12 +370,12 @@ public class TextUtility
      * @param snum
      * @return
      */
-    public static bool isYearTime(String snum)
+    public static bool isYearTime(string snum)
     {
         if (snum != null)
         {
             int len = snum.length();
-            String first = snum.substring(0, 1);
+            string first = snum.substring(0, 1);
 
             // 1992年, 98年,06年
             if (isAllSingleByte(snum)
@@ -403,14 +403,14 @@ public class TextUtility
      * @param str  需要判断的字符串
      * @return
      */
-    public static bool isInAggregate(String aggr, String str)
+    public static bool isInAggregate(string aggr, string str)
     {
         if (aggr != null && str != null)
         {
             str += "1";
             for (int i = 0; i < str.length(); i++)
             {
-                String s = str.substring(i, i + 1);
+                string s = str.substring(i, i + 1);
                 if (aggr.indexOf(s) == -1)
                     return false;
             }
@@ -426,14 +426,14 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static bool isDBCCase(String str)
+    public static bool isDBCCase(string str)
     {
         if (str != null)
         {
             str += " ";
             for (int i = 0; i < str.length(); i++)
             {
-                String s = str.substring(i, i + 1);
+                string s = str.substring(i, i + 1);
                 int length = 0;
                 try
                 {
@@ -460,14 +460,14 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static bool isSBCCase(String str)
+    public static bool isSBCCase(string str)
     {
         if (str != null)
         {
             str += " ";
             for (int i = 0; i < str.length(); i++)
             {
-                String s = str.substring(i, i + 1);
+                string s = str.substring(i, i + 1);
                 int length = 0;
                 try
                 {
@@ -494,7 +494,7 @@ public class TextUtility
      * @param str
      * @return
      */
-    public static bool isDelimiter(String str)
+    public static bool isDelimiter(string str)
     {
         if (str != null && ("-".equals(str) || "－".equals(str)))
             return true;
@@ -502,7 +502,7 @@ public class TextUtility
             return false;
     }
 
-    public static bool isUnknownWord(String word)
+    public static bool isUnknownWord(string word)
     {
         if (word != null && word.indexOf("未##") == 0)
             return true;
@@ -544,7 +544,7 @@ public class TextUtility
      * @param x
      * @return
      */
-    public static String long2String(long x)
+    public static string long2String(long x)
     {
         char[] cArray = long2char(x);
         StringBuilder sbResult = new StringBuilder(cArray.length);
@@ -561,7 +561,7 @@ public class TextUtility
      * @param e
      * @return
      */
-    public static String exceptionToString(Exception e)
+    public static string exceptionToString(Exception e)
     {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
@@ -577,8 +577,8 @@ public class TextUtility
      */
     public static bool isChinese(char c)
     {
-        String regex = "[\\u4e00-\\u9fa5]";
-        return String.valueOf(c).matches(regex);
+        string regex = "[\\u4e00-\\u9fa5]";
+        return string.valueOf(c).matches(regex);
     }
 
     /**
@@ -588,7 +588,7 @@ public class TextUtility
      * @param srcText
      * @return
      */
-    public static int count(String keyword, String srcText)
+    public static int count(string keyword, string srcText)
     {
         int count = 0;
         int leng = srcText.length();
@@ -615,13 +615,13 @@ public class TextUtility
     }
 
     /**
-     * 简单好用的写String方式
+     * 简单好用的写string方式
      *
      * @param s
      * @param _out
      * @
      */
-    public static void writeString(String s, DataOutputStream _out) 
+    public static void writeString(string s, DataOutputStream _out) 
     {
         _out.writeInt(s.length());
         for (char c : s.ToCharArray())
@@ -653,10 +653,10 @@ public class TextUtility
         return true;
     }
 
-    public static String join(String delimiter, Collection<String> stringCollection)
+    public static string join(string delimiter, Collection<string> stringCollection)
     {
         StringBuilder sb = new StringBuilder(stringCollection.size() * (16 + delimiter.length()));
-        for (String str : stringCollection)
+        for (string str : stringCollection)
         {
             sb.Append(str).Append(delimiter);
         }
@@ -664,17 +664,17 @@ public class TextUtility
         return sb.toString();
     }
 
-    public static String combine(String... termArray)
+    public static string combine(string... termArray)
     {
         StringBuilder sbSentence = new StringBuilder();
-        for (String word : termArray)
+        for (string word : termArray)
         {
             sbSentence.Append(word);
         }
         return sbSentence.toString();
     }
 
-    public static String join(Iterable<? : CharSequence> s, String delimiter)
+    public static string join(Iterable<? : CharSequence> s, string delimiter)
     {
         Iterator<? : CharSequence> iter = s.iterator();
         if (!iter.hasNext()) return "";
@@ -683,7 +683,7 @@ public class TextUtility
         return buffer.toString();
     }
 
-    public static String combine(Sentence sentence)
+    public static string combine(Sentence sentence)
     {
         StringBuilder sb = new StringBuilder(sentence.wordList.size() * 3);
         for (IWord word : sentence.wordList)
@@ -694,7 +694,7 @@ public class TextUtility
         return sb.toString();
     }
 
-    public static String combine(List<Word> wordList)
+    public static string combine(List<Word> wordList)
     {
         StringBuilder sb = new StringBuilder(wordList.size() * 3);
         for (IWord word : wordList)

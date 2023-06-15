@@ -42,7 +42,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
      */
     protected V value;
 
-    public BaseNode<V> transition(String path, int begin)
+    public BaseNode<V> transition(string path, int begin)
     {
         BaseNode<V> cur = this;
         for (int i = begin; i < path.length(); ++i)
@@ -161,7 +161,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         return status;
     }
 
-    protected void walk(StringBuilder sb, Set<Map.Entry<String, V>> entrySet)
+    protected void walk(StringBuilder sb, Set<KeyValuePair<string, V>> entrySet)
     {
         sb.Append(c);
         if (status == Status.WORD_MIDDLE_2 || status == Status.WORD_END_3)
@@ -262,9 +262,9 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         WORD_END_3,
     }
 
-    public class TrieEntry : AbstractMap.SimpleEntry<String, V> : Comparable<TrieEntry>
+    public class TrieEntry : AbstractMap.SimpleEntry<string, V> : Comparable<TrieEntry>
     {
-        public TrieEntry(String key, V value)
+        public TrieEntry(string key, V value)
         {
             super(key, value);
         }
@@ -276,7 +276,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         if (child == null)
         {

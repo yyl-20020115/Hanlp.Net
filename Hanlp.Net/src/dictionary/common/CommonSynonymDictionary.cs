@@ -49,15 +49,15 @@ public class CommonSynonymDictionary
     public bool load(InputStream inputStream)
     {
         trie = new DoubleArrayTrie<SynonymItem>();
-        TreeMap<String, SynonymItem> treeMap = new TreeMap<String, SynonymItem>();
-        String line = null;
+        TreeMap<string, SynonymItem> treeMap = new TreeMap<string, SynonymItem>();
+        string line = null;
         try
         {
             BufferedReader bw = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             ArrayList<Synonym> synonymList = null;
             while ((line = bw.readLine()) != null)
             {
-                String[] args = line.split(" ");
+                string[] args = line.split(" ");
                 synonymList = Synonym.create(args);
                 char type = args[0].charAt(args[0].length() - 1);
                 for (Synonym synonym : synonymList)
@@ -88,7 +88,7 @@ public class CommonSynonymDictionary
         return true;
     }
 
-    public SynonymItem get(String key)
+    public SynonymItem get(string key)
     {
         return trie.get(key);
     }
@@ -109,7 +109,7 @@ public class CommonSynonymDictionary
      * @param b
      * @return
      */
-    public long distance(String a, String b)
+    public long distance(string a, string b)
     {
         SynonymItem itemA = get(a);
         if (itemA == null) return long.MAX_VALUE / 3;
@@ -119,11 +119,11 @@ public class CommonSynonymDictionary
         return itemA.distance(itemB);
     }
 
-    public String rewriteQuickly(String text)
+    public string rewriteQuickly(string text)
     {
         assert text != null;
         StringBuilder sbOut = new StringBuilder((int) (text.length() * 1.2));
-        String preWord = Predefine.TAG_BIGIN;
+        string preWord = Predefine.TAG_BIGIN;
         for (int i = 0; i < text.length(); ++i)
         {
             int state = 1;
@@ -162,13 +162,13 @@ public class CommonSynonymDictionary
                 }
                 else
                 {
-                    preWord = String.valueOf(text.charAt(i));
+                    preWord = string.valueOf(text.charAt(i));
                     sbOut.Append(text.charAt(i));
                 }
             }
             else
             {
-                preWord = String.valueOf(text.charAt(i));
+                preWord = string.valueOf(text.charAt(i));
                 sbOut.Append(text.charAt(i));
             }
         }
@@ -176,11 +176,11 @@ public class CommonSynonymDictionary
         return sbOut.toString();
     }
 
-    public String rewrite(String text)
+    public string rewrite(string text)
     {
         List<Term> termList = StandardTokenizer.segment(text.ToCharArray());
         StringBuilder sbOut = new StringBuilder((int) (text.length() * 1.2));
-        String preWord = Predefine.TAG_BIGIN;
+        string preWord = Predefine.TAG_BIGIN;
         for (Term term : termList)
         {
             SynonymItem synonymItem = get(term.word);
@@ -244,7 +244,7 @@ public class CommonSynonymDictionary
          * @param type 类型
          * @return
          */
-        public Synonym randomSynonym(Type type, String preWord)
+        public Synonym randomSynonym(Type type, string preWord)
         {
             ArrayList<Synonym> synonymArrayList = new ArrayList<Synonym>(synonymList);
             ListIterator<Synonym> listIterator = synonymArrayList.listIterator();
@@ -263,7 +263,7 @@ public class CommonSynonymDictionary
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
             final StringBuilder sb = new StringBuilder();
             sb.Append(entry);
@@ -291,7 +291,7 @@ public class CommonSynonymDictionary
          * @param word
          * @return
          */
-        public static SynonymItem createUndefined(String word)
+        public static SynonymItem createUndefined(string word)
         {
             SynonymItem item = new SynonymItem(new Synonym(word, word.hashCode() * 1000000 + long.MAX_VALUE / 3), null, Type.UNDEFINED);
             return item;

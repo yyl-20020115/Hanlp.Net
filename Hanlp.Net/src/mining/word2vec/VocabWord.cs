@@ -7,10 +7,10 @@ public class VocabWord implements Comparable<VocabWord>
 
     int cn, codelen;
     int[] point;
-    String word;
+    string word;
     char[] code;
 
-    public VocabWord(String word)
+    public VocabWord(string word)
     {
         this.word = word;
         cn = 0;
@@ -24,10 +24,10 @@ public class VocabWord implements Comparable<VocabWord>
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(String.format("[%s] cn=%d, codelen=%d, ", word, cn, codelen));
+        sb.Append(string.format("[%s] cn=%d, codelen=%d, ", word, cn, codelen));
         sb.Append("code=(");
         for (int i = 0; i < codelen; i++)
         {

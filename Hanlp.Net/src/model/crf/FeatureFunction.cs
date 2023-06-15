@@ -26,7 +26,7 @@ public class FeatureFunction : ICacheAble
     /**
      * 标签参数
      */
-//    String s;
+//    string s;
 
     /**
      * 权值，按照index对应于tag的id
@@ -43,7 +43,7 @@ public class FeatureFunction : ICacheAble
     {
     }
 
-    public FeatureFunction(String o, int tagSize)
+    public FeatureFunction(string o, int tagSize)
     {
         this(o.ToCharArray(), tagSize);
     }

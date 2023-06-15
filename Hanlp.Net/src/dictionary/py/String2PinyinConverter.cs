@@ -23,7 +23,7 @@ public class String2PinyinConverter
     /**
      * 将拼音和输入法头转为Pyinyin的map
      */
-    static Dictionary<String, Pinyin> map;
+    static Dictionary<string, Pinyin> map;
     /**
      * 将音调统一换为轻声，下标为拼音的ordinal，值为音调5或最大值
      */
@@ -32,13 +32,13 @@ public class String2PinyinConverter
     {
         // TODO:什么时候有空了升级到双数组吧
         trie = new Trie().remainLongest();
-        map = new TreeMap<String, Pinyin>();
+        map = new TreeMap<string, Pinyin>();
         int end = Pinyin.none5.ordinal();
         for (int i = 0; i < end; ++i)
         {
             Pinyin pinyin = Integer2PinyinConverter.pinyins[i];
-            String pinyinWithoutTone = pinyin.getPinyinWithoutTone();
-            String firstChar = String.valueOf(pinyin.getFirstChar());
+            string pinyinWithoutTone = pinyin.getPinyinWithoutTone();
+            string firstChar = string.valueOf(pinyin.getFirstChar());
             trie.addKeyword(pinyinWithoutTone);
             trie.addKeyword(firstChar);
             map.put(pinyinWithoutTone, pinyin);
@@ -52,7 +52,7 @@ public class String2PinyinConverter
      * @param complexText
      * @return
      */
-    public static Pinyin[] convert2Array(String complexText, bool removeTone)
+    public static Pinyin[] convert2Array(string complexText, bool removeTone)
     {
         return PinyinUtil.convertList2Array(convert(complexText, removeTone));
     }
@@ -62,14 +62,14 @@ public class String2PinyinConverter
      * @param complexText
      * @return
      */
-    public static List<Pinyin> convert(String complexText)
+    public static List<Pinyin> convert(string complexText)
     {
         List<Pinyin> pinyinList = new LinkedList<Pinyin>();
         Collection<Token> tokenize = trie.tokenize(complexText);
 //        System._out.println(tokenize);
         for (Token token : tokenize)
         {
-            String fragment = token.getFragment();
+            string fragment = token.getFragment();
             if (token.isMatch())
             {
                 // 是拼音或拼音的一部分，用map转
@@ -90,7 +90,7 @@ public class String2PinyinConverter
      * @param removeTone 是否将所有的音调都同一化
      * @return
      */
-    public static List<Pinyin> convert(String complexText, bool removeTone)
+    public static List<Pinyin> convert(string complexText, bool removeTone)
     {
         List<Pinyin> pinyinList = convert(complexText);
         if (removeTone)
@@ -106,14 +106,14 @@ public class String2PinyinConverter
      * @param removeTone
      * @return 一个键值对，键为拼音列表，值为类型（true表示这是一个拼音，false表示这是一个输入法头）
      */
-    public static Pair<List<Pinyin>, List<Boolean>> convert2Pair(String complexText, bool removeTone)
+    public static Pair<List<Pinyin>, List<Boolean>> convert2Pair(string complexText, bool removeTone)
     {
         List<Pinyin> pinyinList = new LinkedList<Pinyin>();
         List<Boolean> booleanList = new LinkedList<Boolean>();
         Collection<Token> tokenize = trie.tokenize(complexText);
         for (Token token : tokenize)
         {
-            String fragment = token.getFragment();
+            string fragment = token.getFragment();
             if (token.isMatch())
             {
                 // 是拼音或拼音的一部分，用map转
@@ -147,7 +147,7 @@ public class String2PinyinConverter
      * @param single
      * @return
      */
-    public static Pinyin convertSingle(String single)
+    public static Pinyin convertSingle(string single)
     {
         Pinyin pinyin = map.get(single);
         if (pinyin == null) return Pinyin.none5;

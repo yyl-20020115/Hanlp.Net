@@ -41,14 +41,14 @@ public class CommonSynonymDictionaryEx
     public bool load(InputStream inputStream)
     {
         trie = new DoubleArrayTrie<long[]>();
-        TreeMap<String, Set<long>> treeMap = new TreeMap<String, Set<long>>();
-        String line = null;
+        TreeMap<string, Set<long>> treeMap = new TreeMap<string, Set<long>>();
+        string line = null;
         try
         {
             BufferedReader bw = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             while ((line = bw.readLine()) != null)
             {
-                String[] args = line.split(" ");
+                string[] args = line.split(" ");
                 List<Synonym> synonymList = Synonym.create(args);
                 for (Synonym synonym : synonymList)
                 {
@@ -62,8 +62,8 @@ public class CommonSynonymDictionaryEx
                 }
             }
             bw.close();
-            List<String> keyList = new ArrayList<String>(treeMap.size());
-            for (String key : treeMap.keySet())
+            List<string> keyList = new ArrayList<string>(treeMap.size());
+            for (string key : treeMap.keySet())
             {
                 keyList.add(key);
             }
@@ -87,7 +87,7 @@ public class CommonSynonymDictionaryEx
         return true;
     }
 
-    public long[] get(String key)
+    public long[] get(string key)
     {
         return trie.get(key);
     }
@@ -98,7 +98,7 @@ public class CommonSynonymDictionaryEx
      * @param b
      * @return
      */
-    public long distance(String a, String b)
+    public long distance(string a, string b)
     {
         long[] itemA = get(a);
         if (itemA == null) return long.MAX_VALUE / 3;
@@ -116,16 +116,16 @@ public class CommonSynonymDictionaryEx
         /**
          * 条目的value，是key的同义词近义词列表
          */
-        public Dictionary<String, Synonym> synonymMap;
+        public Dictionary<string, Synonym> synonymMap;
 
-        public SynonymItem(Synonym entry, Dictionary<String, Synonym> synonymMap)
+        public SynonymItem(Synonym entry, Dictionary<string, Synonym> synonymMap)
         {
             super(entry.realWord, entry.id, entry.type);
             this.synonymMap = synonymMap;
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
             final StringBuilder sb = new StringBuilder();
             sb.Append(super.toString());

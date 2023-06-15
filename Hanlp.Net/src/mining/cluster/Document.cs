@@ -88,7 +88,7 @@ public class Document<K>
      */
     void idf(HashMap<int, int> df, int ndocs)
     {
-        for (Map.Entry<int, Double> entry : feature_.entrySet())
+        for (KeyValuePair<int, Double> entry : feature_.entrySet())
         {
             int denom = df.get(entry.getKey());
             if (denom == null) denom = 1;

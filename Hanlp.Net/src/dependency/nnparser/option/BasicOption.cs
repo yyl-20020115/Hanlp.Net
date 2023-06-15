@@ -16,6 +16,6 @@ namespace com.hankcs.hanlp.dependency.nnparser.option;
  */
 public class BasicOption
 {
-    String model_file;     //! The path to the model.
-    String root;           //! The root.
+    string model_file;     //! The path to the model.
+    string root;           //! The root.
 }

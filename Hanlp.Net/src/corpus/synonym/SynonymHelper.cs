@@ -24,8 +24,8 @@ public class SynonymHelper
     /**
      * 尾数的长度，表示原子词的index
      */
-    public static readonly int MAX_INDEX_LENGTH = String.valueOf(MAX_WORDS).length();
-    public static long convertString2Id(String idString)
+    public static readonly int MAX_INDEX_LENGTH = string.valueOf(MAX_WORDS).length();
+    public static long convertString2Id(string idString)
     {
         long id;
         id =    (idString.charAt(0) - 'A') * 26L * 10 * 10 * 26 * 10 * 10 +
@@ -38,7 +38,7 @@ public class SynonymHelper
         return id;
     }
 
-    public static String convertId2String(long id)
+    public static string convertId2String(long id)
     {
         StringBuilder sbId = new StringBuilder(7);
         sbId.Append((char)(id / (26 * 10 * 10 * 26 * 10 * 10) + 'A'));
@@ -51,22 +51,22 @@ public class SynonymHelper
         return sbId.toString();
     }
 
-    public static long convertString2IdWithIndex(String idString, long index)
+    public static long convertString2IdWithIndex(string idString, long index)
     {
         long id = convertString2Id(idString);
         id = id * MAX_WORDS + index;
         return id;
     }
 
-    public static long convertString2IdWithIndex(String idString, int index)
+    public static long convertString2IdWithIndex(string idString, int index)
     {
         return convertString2IdWithIndex(idString, (long) index);
     }
 
-    public static String convertId2StringWithIndex(long id)
+    public static string convertId2StringWithIndex(long id)
     {
-        String idString = convertId2String(id / MAX_WORDS);
+        string idString = convertId2String(id / MAX_WORDS);
         long index = id % MAX_WORDS;
-        return String.format("%s%0" + MAX_INDEX_LENGTH + "d", idString, index);
+        return string.format("%s%0" + MAX_INDEX_LENGTH + "d", idString, index);
     }
 }

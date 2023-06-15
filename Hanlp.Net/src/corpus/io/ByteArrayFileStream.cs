@@ -26,7 +26,7 @@ public class ByteArrayFileStream : ByteArrayStream
         this.fileChannel = fileChannel;
     }
 
-    public static ByteArrayFileStream createByteArrayFileStream(String path)
+    public static ByteArrayFileStream createByteArrayFileStream(string path)
     {
         try
         {

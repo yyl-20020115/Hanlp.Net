@@ -7,18 +7,18 @@ public final class VectorsReader
 
     public final Charset ENCODING = Charset.forName("UTF-8");
     int words, size;
-    String[] vocab;
+    string[] vocab;
     float[][] matrix;
-    final String file;
+    final string file;
 
-    public VectorsReader(String file)
+    public VectorsReader(string file)
     {
         this.file = file;
     }
 
     public void readVectorFile() 
     {
-        logger.info(String.format("reading %s file. please wait...\n", file));
+        logger.info(string.format("reading %s file. please wait...\n", file));
 
         InputStream is = null;
         Reader r = null;
@@ -29,17 +29,17 @@ public final class VectorsReader
             r = new InputStreamReader(is, ENCODING);
             br = new BufferedReader(r);
 
-            String line = br.readLine();
+            string line = br.readLine();
             words = int.parseInt(line.split("\\s+")[0].trim());
             size = int.parseInt(line.split("\\s+")[1].trim());
 
-            vocab = new String[words];
+            vocab = new string[words];
             matrix = new float[words][];
 
             for (int i = 0; i < words; i++)
             {
                 line = br.readLine().trim();
-                String[] params = line.split("\\s+");
+                string[] params = line.split("\\s+");
                 if (params.length != size + 1)
                 {
                     logger.info("词向量有一行格式不规范（可能是单词含有空格）：" + line);
@@ -63,7 +63,7 @@ public final class VectorsReader
             }
             if (words != vocab.length)
             {
-                vocab = Utility.shrink(vocab, new String[words]);
+                vocab = Utility.shrink(vocab, new string[words]);
                 matrix = Utility.shrink(matrix, new float[words][]);
             }
         }
@@ -86,7 +86,7 @@ public final class VectorsReader
         return words;
     }
 
-    public String getWord(int idx)
+    public string getWord(int idx)
     {
         return vocab[idx];
     }

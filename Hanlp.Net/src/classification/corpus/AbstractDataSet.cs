@@ -55,9 +55,9 @@ public abstract class AbstractDataSet : IDataSet
         return this;
     }
 
-    public Document convert(String category, String text)
+    public Document convert(string category, string text)
     {
-        String[] tokenArray = tokenizer.segment(text);
+        string[] tokenArray = tokenizer.segment(text);
         return testingDataSet ?
                 new Document(catalog.categoryId, lexicon.wordId, category, tokenArray) :
                 new Document(catalog, lexicon, category, tokenArray);
@@ -79,13 +79,13 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet load(String folderPath, String charsetName) 
+    public IDataSet load(string folderPath, string charsetName) 
     {
         return load(folderPath, charsetName, 1.);
     }
 
     //@Override
-    public IDataSet load(String folderPath) 
+    public IDataSet load(string folderPath) 
     {
         return load(folderPath, "UTF-8");
     }
@@ -97,13 +97,13 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet load(String folderPath, String charsetName, double percentage) , IOException
+    public IDataSet load(string folderPath, string charsetName, double percentage) , IOException
     {
         if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
-        if (!root.exists()) throw new IllegalArgumentException(String.format("目录 %s 不存在", root.getAbsolutePath()));
+        if (!root.exists()) throw new IllegalArgumentException(string.format("目录 %s 不存在", root.getAbsolutePath()));
         if (!root.isDirectory())
-            throw new IllegalArgumentException(String.format("目录 %s 不是一个目录", root.getAbsolutePath()));
+            throw new IllegalArgumentException(string.format("目录 %s 不是一个目录", root.getAbsolutePath()));
         if (percentage > 1.0 || percentage < -1.0) throw new IllegalArgumentException("percentage 的绝对值必须介于[0, 1]之间");
 
         File[] folders = root.listFiles();
@@ -114,7 +114,7 @@ public abstract class AbstractDataSet : IDataSet
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
             if (files == null) continue;
-            String category = folder.getName();
+            string category = folder.getName();
             logger._out("[%s]...", category);
             int b, e;
             if (percentage > 0)
@@ -144,17 +144,17 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet load(String folderPath, double rate) , IOException
+    public IDataSet load(string folderPath, double rate) , IOException
     {
         return null;
     }
 
     //@Override
-    public IDataSet add(Dictionary<String, String[]> testingDataSet)
+    public IDataSet add(Dictionary<string, string[]> testingDataSet)
     {
-        for (Map.Entry<String, String[]> entry : testingDataSet.entrySet())
+        for (KeyValuePair<string, string[]> entry : testingDataSet.entrySet())
         {
-            for (String document : entry.getValue())
+            for (string document : entry.getValue())
             {
                 add(entry.getKey(), document);
             }

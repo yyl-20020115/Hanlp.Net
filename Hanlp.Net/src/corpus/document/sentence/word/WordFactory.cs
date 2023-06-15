@@ -22,7 +22,7 @@ public class WordFactory
      * @param param
      * @return
      */
-    public static IWord create(String param)
+    public static IWord create(string param)
     {
         if (param == null) return null;
         if (param.startsWith("[") && !param.startsWith("[/"))

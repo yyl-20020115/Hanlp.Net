@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.dictionary.py;
  * 拼音，组成部分=声母+韵母+声调12345
  * @author hankcs
  */
-public enum Pinyin
+public class Pinyin
 {
     a1(Shengmu.none, Yunmu.a, 1, "ā", "a", Head.a, 'a'),
     a2(Shengmu.none, Yunmu.a, 2, "á", "a", Head.a, 'a'),
@@ -1487,7 +1487,7 @@ public enum Pinyin
      * @param pinyinWithToneMark 包含音调的字符串形式
      * @param pinyinWithoutTone 不含音调的字符串形式
      */
-    Pinyin(Shengmu shengmu, Yunmu yunmu, int tone, String pinyinWithToneMark, String pinyinWithoutTone, Head head, char firstChar)
+    Pinyin(Shengmu shengmu, Yunmu yunmu, int tone, string pinyinWithToneMark, string pinyinWithoutTone, Head head, char firstChar)
     {
         this.shengmu = shengmu;
         this.yunmu = yunmu;
@@ -1525,12 +1525,12 @@ public enum Pinyin
     /**
      * 声母+韵母+āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ
      */
-    private String pinyinWithToneMark;
+    private string pinyinWithToneMark;
 
     /**
      * 声母+韵母不含音调，纯字母
      */
-    private String pinyinWithoutTone;
+    private string pinyinWithoutTone;
 
     /**
      * 获取声母
@@ -1563,7 +1563,7 @@ public enum Pinyin
      * 获取带音调的拼音
      * @return
      */
-    public String getPinyinWithToneMark()
+    public string getPinyinWithToneMark()
     {
         return pinyinWithToneMark;
     }
@@ -1572,7 +1572,7 @@ public enum Pinyin
      * 获取纯字母的拼音
      * @return
      */
-    public String getPinyinWithoutTone()
+    public string getPinyinWithoutTone()
     {
         return pinyinWithoutTone;
     }
@@ -1581,7 +1581,7 @@ public enum Pinyin
      * 获取输入法头
      * @return
      */
-    public String getHeadString()
+    public string getHeadString()
     {
         return head.toString();
     }

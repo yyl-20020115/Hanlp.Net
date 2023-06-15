@@ -21,24 +21,24 @@ public class ComputeAccuracy
     final static int N = 1;                   // number of closest words
     final static int max_w = 50;              // max length of vocabulary entries
 
-    public static void main(String[] argv) 
+    public static void main(string[] argv) 
     {
         BufferedReader f;
-        String st1 = null, st2, st3, st4;
-        String[] bestw = new String[N];
+        string st1 = null, st2, st3, st4;
+        string[] bestw = new string[N];
         double dist, len;
         double[] bestd = new double[N];
         double[] vec = new double[max_size];
         int words = 0, size = 0, a, b, c, d, b1, b2, b3, threshold = 0;
         double M[];
-        String vocab[];
+        string vocab[];
         int TCN, CCN = 0, TACN = 0, CACN = 0, SECN = 0, SYCN = 0, SEAC = 0, SYAC = 0, QID = 0, TQ = 0, TQS = 0;
         if (argv == null || argv.length != 3)
         {
             printf("Usage: ./compute-accuracy <FILE> <threshold> <QUESTION FILE>\nwhere FILE contains word projections, and threshold is used to reduce vocabulary of the model for fast approximate evaluation (0 = off, otherwise typical value is 30000). Question file contains questions and answers\n");
             return;
         }
-        String file_name = argv[0];
+        string file_name = argv[0];
         threshold = int.parseInt(argv[1]);
         try
         {
@@ -58,11 +58,11 @@ public class ComputeAccuracy
 
         try
         {
-            String[] params = f.readLine().split("\\s");
+            string[] params = f.readLine().split("\\s");
             words = int.parseInt(params[0]);
             if (words > threshold) words = threshold;
             size = int.parseInt(params[1]);
-            vocab = new String[words];
+            vocab = new string[words];
             M = new double[words * size];
             for (b = 0; b < words; b++)
             {
@@ -106,9 +106,9 @@ public class ComputeAccuracy
         {
             for (a = 0; a < N; a++) bestd[a] = 0;
             for (a = 0; a < N; a++) bestw[a] = null;
-            String line = stdin.readLine();
+            string line = stdin.readLine();
 
-            String[] params = null;
+            string[] params = null;
             if (line != null && line.length() > 0)
             {
                 params = line.toUpperCase().split("\\s");
@@ -187,7 +187,7 @@ public class ComputeAccuracy
         printf("Questions seen / total: %d %d   %.2f %% \n", TQS, TQ, TQS / (double) TQ * 100);
     }
 
-    private static void printf(String format, Object... args)
+    private static void printf(string format, Object... args)
     {
         System._out.printf(format, args);
     }

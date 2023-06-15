@@ -41,9 +41,9 @@ public class PinyinUtil
      * @param pinyinStr the ascii represention with tone numbers
      * @return the unicode represention with tone marks
      */
-    public static String convertToneNumber2ToneMark(final String pinyinStr)
+    public static string convertToneNumber2ToneMark(final string pinyinStr)
     {
-        String lowerCasePinyinStr = pinyinStr.toLowerCase();
+        string lowerCasePinyinStr = pinyinStr.toLowerCase();
 
         if (lowerCasePinyinStr.matches("[a-z]*[1-5]?"))
         {
@@ -55,9 +55,9 @@ public class PinyinUtil
 
             final char charA = 'a';
             final char charE = 'e';
-            final String ouStr = "ou";
-            final String allUnmarkedVowelStr = "aeiouv";
-            final String allMarkedVowelStr = "āáǎàaēéěèeīíǐìiōóǒòoūúǔùuǖǘǚǜü";
+            final string ouStr = "ou";
+            final string allUnmarkedVowelStr = "aeiouv";
+            final string allMarkedVowelStr = "āáǎàaēéěèeīíǐìiōóǒòoūúǔùuǖǘǚǜü";
 
             if (lowerCasePinyinStr.matches("[a-z]*[1-5]"))
             {
@@ -88,7 +88,7 @@ public class PinyinUtil
                 {
                     for (int i = lowerCasePinyinStr.length() - 1; i >= 0; i--)
                     {
-                        if (String.valueOf(lowerCasePinyinStr.charAt(i)).matches(
+                        if (string.valueOf(lowerCasePinyinStr.charAt(i)).matches(
                                 "[" + allUnmarkedVowelStr + "]"))
                         {
                             indexOfUnmarkedVowel = i;
@@ -154,13 +154,13 @@ public class PinyinUtil
     }
 
     /**
-     * 转换List<Pinyin> pinyinList到List<String>，其中的String为带声调符号形式
+     * 转换List<Pinyin> pinyinList到List<string>，其中的string为带声调符号形式
      * @param pinyinList
      * @return
      */
-    public static List<String> convertPinyinList2TonePinyinList(List<Pinyin> pinyinList)
+    public static List<string> convertPinyinList2TonePinyinList(List<Pinyin> pinyinList)
     {
-        List<String> tonePinyinList = new ArrayList<String>(pinyinList.size());
+        List<string> tonePinyinList = new ArrayList<string>(pinyinList.size());
         for (Pinyin pinyin : pinyinList)
         {
             tonePinyinList.add(pinyin.getPinyinWithToneMark());

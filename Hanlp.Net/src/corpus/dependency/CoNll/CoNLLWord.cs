@@ -23,15 +23,15 @@ public class CoNLLWord
     /**
      * 当前词语（或标点）的原型或词干，在中文中，此列与FORM相同
      */
-    public String LEMMA;
+    public string LEMMA;
     /**
      * 当前词语的词性（粗粒度）
      */
-    public String CPOSTAG;
+    public string CPOSTAG;
     /**
      * 当前词语的词性（细粒度）
      */
-    public String POSTAG;
+    public string POSTAG;
     /**
      * 当前词语的中心词
      */
@@ -39,12 +39,12 @@ public class CoNLLWord
     /**
      * 当前词语与中心词的依存关系
      */
-    public String DEPREL;
+    public string DEPREL;
 
     /**
      * 等效字符串
      */
-    public String NAME;
+    public string NAME;
 
     /**
      * 根节点
@@ -61,7 +61,7 @@ public class CoNLLWord
      * @param LEMMA 当前词语（或标点）的原型或词干，在中文中，此列与FORM相同
      * @param POSTAG 当前词语的词性（细粒度）
      */
-    public CoNLLWord(int ID, String LEMMA, String POSTAG)
+    public CoNLLWord(int ID, string LEMMA, string POSTAG)
     {
         this.ID = ID;
         this.LEMMA = LEMMA;
@@ -77,7 +77,7 @@ public class CoNLLWord
      * @param CPOSTAG 当前词语的词性（粗粒度）
      * @param POSTAG 当前词语的词性（细粒度）
      */
-    public CoNLLWord(int ID, String LEMMA, String CPOSTAG, String POSTAG)
+    public CoNLLWord(int ID, string LEMMA, string CPOSTAG, string POSTAG)
     {
         this.ID = ID;
         this.LEMMA = LEMMA;
@@ -107,7 +107,7 @@ public class CoNLLWord
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder();
         // ID为0时为根节点，ID为-1时为空白节点

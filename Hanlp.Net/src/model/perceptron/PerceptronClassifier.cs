@@ -39,7 +39,7 @@ public abstract class PerceptronClassifier
         this.model = model;
     }
 
-    public PerceptronClassifier(String modelPath) 
+    public PerceptronClassifier(string modelPath) 
         : this(new LinearModel(modelPath))
     {
     }
@@ -102,7 +102,7 @@ public abstract class PerceptronClassifier
      * @param maxIteration 最大迭代次数
      * @return 模型在训练集上的准确率
      */
-    public BinaryClassificationFMeasure train(String corpus, int maxIteration)
+    public BinaryClassificationFMeasure train(string corpus, int maxIteration)
     {
         return train(corpus, maxIteration, true);
     }
@@ -115,7 +115,7 @@ public abstract class PerceptronClassifier
      * @param averagePerceptron 是否使用平均感知机算法
      * @return 模型在训练集上的准确率
      */
-    public BinaryClassificationFMeasure train(String corpus, int maxIteration, bool averagePerceptron)
+    public BinaryClassificationFMeasure train(string corpus, int maxIteration, bool averagePerceptron)
     {
         FeatureMap featureMap = new LockableFeatureMap(new TagSet(TaskType.CLASSIFICATION));
         featureMap.mutable = true; // 训练时特征映射可拓充
@@ -132,7 +132,7 @@ public abstract class PerceptronClassifier
      * @param text
      * @return
      */
-    public String predict(String text)
+    public string predict(string text)
     {
         int y = model.decode(extractFeature(text, model.featureMap));
         if (y == -1)
@@ -146,7 +146,7 @@ public abstract class PerceptronClassifier
      * @param corpus
      * @return
      */
-    public BinaryClassificationFMeasure evaluate(String corpus)
+    public BinaryClassificationFMeasure evaluate(string corpus)
     {
         Instance[] instanceList = readInstance(corpus, model.featureMap);
         return evaluate(instanceList);
@@ -186,14 +186,14 @@ public abstract class PerceptronClassifier
      * @param featureMap 特征映射
      * @return 数据集
      */
-    private Instance[] readInstance(String corpus, FeatureMap featureMap)
+    private Instance[] readInstance(string corpus, FeatureMap featureMap)
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(corpus);
         List<Instance> instanceList = new ();
-        foreach (String line in lineIterator)
+        foreach (string line in lineIterator)
         {
-            String[] cells = line.split(",");
-            String text = cells[0], label = cells[1];
+            string[] cells = line.split(",");
+            string text = cells[0], label = cells[1];
             List<int> x = extractFeature(text, featureMap);
             int y = featureMap.tagSet.add(label);
             if (y == 0)
@@ -212,7 +212,7 @@ public abstract class PerceptronClassifier
      * @param featureMap 特征映射
      * @return 特征向量
      */
-    protected abstract List<int> extractFeature(String text, FeatureMap featureMap);
+    protected abstract List<int> extractFeature(string text, FeatureMap featureMap);
 
     /**
      * 向特征向量插入特征
@@ -221,7 +221,7 @@ public abstract class PerceptronClassifier
      * @param featureMap  特征映射
      * @param featureList 特征向量
      */
-    protected static void addFeature(String feature, FeatureMap featureMap, List<int> featureList)
+    protected static void addFeature(string feature, FeatureMap featureMap, List<int> featureList)
     {
         int featureId = featureMap.idOf(feature);
         if (featureId != -1)

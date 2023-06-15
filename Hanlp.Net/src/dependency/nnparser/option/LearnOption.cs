@@ -24,11 +24,11 @@ public class LearnOption : BasicOption
     public int hidden_layer_size;    //! Size for hidden layer.
     public int embedding_size;       //! Size for embedding.
 
-    String reference_file;   //! The path to the reference file.
-    String devel_file;       //! The path to the devel file.
-    String embedding_file;   //! The path to the embedding.
-    String cluster_file;     //! The path to the cluster file, actived in use-cluster.
-    String oracle;           //! The oracle type, can be [static, nondet, explore]
+    string reference_file;   //! The path to the reference file.
+    string devel_file;       //! The path to the devel file.
+    string embedding_file;   //! The path to the embedding.
+    string cluster_file;     //! The path to the cluster file, actived in use-cluster.
+    string oracle;           //! The oracle type, can be [static, nondet, explore]
     int word_cutoff;              //! The frequency of rare word, word lower than that
     //! will be cut off.
     int max_iter;                 //! The maximum iteration.

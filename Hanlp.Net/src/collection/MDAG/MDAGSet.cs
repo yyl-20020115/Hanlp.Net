@@ -13,11 +13,11 @@ namespace com.hankcs.hanlp.collection.MDAG;
 
 
 /**
- * 基于MDAG（又称DAWG，Minimal Acyclic Finite-State Automata）的String Set
+ * 基于MDAG（又称DAWG，Minimal Acyclic Finite-State Automata）的string Set
  *
  * @author hankcs
  */
-public class MDAGSet : MDAG : Set<String>
+public class MDAGSet : MDAG : Set<string>
 {
 
     public MDAGSet(File dataFile) 
@@ -25,7 +25,7 @@ public class MDAGSet : MDAG : Set<String>
         super(dataFile);
     }
 
-    public MDAGSet(Collection<String> strCollection)
+    public MDAGSet(Collection<string> strCollection)
     {
         super(strCollection);
     }
@@ -34,7 +34,7 @@ public class MDAGSet : MDAG : Set<String>
     {
     }
 
-    public MDAGSet(String dictionaryPath) 
+    public MDAGSet(string dictionaryPath) 
     {
         super(dictionaryPath);
     }
@@ -54,12 +54,12 @@ public class MDAGSet : MDAG : Set<String>
     //@Override
     public bool contains(Object o)
     {
-        if (o.getClass() != String.class) return false;
-        return contains((String) o);
+        if (o.getClass() != string.class) return false;
+        return contains((string) o);
     }
 
     //@Override
-    public Iterator<String> iterator()
+    public Iterator<string> iterator()
     {
         return getAllStrings().iterator();
     }
@@ -77,7 +77,7 @@ public class MDAGSet : MDAG : Set<String>
     }
 
     //@Override
-    public bool add(String s)
+    public bool add(string s)
     {
         addString(s);
         return true;
@@ -86,9 +86,9 @@ public class MDAGSet : MDAG : Set<String>
     //@Override
     public bool remove(Object o)
     {
-        if (o.getClass() == String.class)
+        if (o.getClass() == string.class)
         {
-            removeString((String) o);
+            removeString((string) o);
         }
         else
         {
@@ -107,10 +107,10 @@ public class MDAGSet : MDAG : Set<String>
     }
 
     //@Override
-    public bool addAll(Collection<? : String> c)
+    public bool addAll(Collection<? : string> c)
     {
         bool modified = false;
-        for (String e : c)
+        for (string e : c)
             if (add(e))
                 modified = true;
         return modified;
@@ -120,7 +120,7 @@ public class MDAGSet : MDAG : Set<String>
     public bool retainAll(Collection<?> c)
     {
         bool modified = false;
-        Iterator<String> it = iterator();
+        Iterator<string> it = iterator();
         while (it.hasNext())
         {
             if (!c.contains(it.next()))

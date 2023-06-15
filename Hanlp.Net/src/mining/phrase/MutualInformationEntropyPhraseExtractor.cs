@@ -21,9 +21,9 @@ namespace com.hankcs.hanlp.mining.phrase;
 public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
 {
     //@Override
-    public List<String> extractPhrase(String text, int size)
+    public List<string> extractPhrase(string text, int size)
     {
-        List<String> phraseList = new LinkedList<String>();
+        List<string> phraseList = new LinkedList<string>();
         Occurrence occurrence = new Occurrence();
         Filter[] filterChain = new Filter[]
                 {
@@ -87,16 +87,16 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
      * @param size
      * @return
      */
-    public static List<String> extract(String text, int size)
+    public static List<string> extract(string text, int size)
     {
         IPhraseExtractor extractor = new MutualInformationEntropyPhraseExtractor();
         return extractor.extractPhrase(text, size);
     }
 
-//    public static void main(String[] args)
+//    public static void main(string[] args)
 //    {
 //        MutualInformationEntropyPhraseExtractor extractor = new MutualInformationEntropyPhraseExtractor();
-//        String text = "算法工程师\n" +
+//        string text = "算法工程师\n" +
 //                "算法（Algorithm）是一系列解决问题的清晰指令，也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。算法工程师就是利用算法处理事物的人。\n" +
 //                "\n" +
 //                "1职位简介\n" +
@@ -116,7 +116,7 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
 //                "另外数据挖掘、互联网搜索算法也成为当今的热门方向。\n" +
 //                "算法工程师逐渐往人工智能方向发展。";
 ////        System._out.println(text);
-//        List<String> phraseList = extractor.extractPhrase(text, 10);
+//        List<string> phraseList = extractor.extractPhrase(text, 10);
 //        System._out.println(phraseList);
 //    }
 }

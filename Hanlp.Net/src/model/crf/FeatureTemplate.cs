@@ -23,21 +23,21 @@ public class FeatureTemplate : ICacheAble
      * 用来解析模板的正则表达式
      */
     static readonly Pattern pattern = Pattern.compile("%x\\[(-?\\d*),(\\d*)]");
-    String template;
+    string template;
     /**
      * 每个部分%x[-2,0]的位移，其中int[0]储存第一个数（-2），int[1]储存第二个数（0）
      */
     ArrayList<int[]> offsetList;
-    List<String> delimiterList;
+    List<string> delimiterList;
 
     public FeatureTemplate()
     {
     }
 
-    public static FeatureTemplate create(String template)
+    public static FeatureTemplate create(string template)
     {
         FeatureTemplate featureTemplate = new FeatureTemplate();
-        featureTemplate.delimiterList = new LinkedList<String>();
+        featureTemplate.delimiterList = new LinkedList<string>();
         featureTemplate.offsetList = new ArrayList<int[]>(3);
         featureTemplate.template = template;
         Matcher matcher = pattern.matcher(template);
@@ -55,7 +55,7 @@ public class FeatureTemplate : ICacheAble
     {
         StringBuilder sb = new StringBuilder();
         int i = 0;
-        for (String d : delimiterList)
+        for (string d : delimiterList)
         {
             sb.Append(d);
             int[] offset = offsetList.get(i++);
@@ -79,7 +79,7 @@ public class FeatureTemplate : ICacheAble
             _out.writeInt(offset[1]);
         }
         _out.writeInt(delimiterList.size());
-        for (String s : delimiterList)
+        for (string s : delimiterList)
         {
             _out.writeUTF(s);
         }
@@ -96,7 +96,7 @@ public class FeatureTemplate : ICacheAble
             offsetList.add(new int[]{byteArray.nextInt(), byteArray.nextInt()});
         }
         size = byteArray.nextInt();
-        delimiterList = new ArrayList<String>(size);
+        delimiterList = new ArrayList<string>(size);
         for (int i = 0; i < size; ++i)
         {
             delimiterList.add(byteArray.nextUTF());
@@ -105,7 +105,7 @@ public class FeatureTemplate : ICacheAble
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("FeatureTemplate{");
         sb.Append("template='").Append(template).Append('\'');
@@ -114,7 +114,7 @@ public class FeatureTemplate : ICacheAble
         return sb.toString();
     }
 
-    public String getTemplate()
+    public string getTemplate()
     {
         return template;
     }

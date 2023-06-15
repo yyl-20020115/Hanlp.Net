@@ -31,22 +31,22 @@ public class BM25
     /**
      * 拆分为[句子[单词]]形式的文档
      */
-    List<List<String>> docs;
+    List<List<string>> docs;
 
     /**
      * 文档中每个句子中的每个词与词频
      */
-    Dictionary<String, int>[] f;
+    Dictionary<string, int>[] f;
 
     /**
      * 文档中全部词语与出现在几个句子中
      */
-    Dictionary<String, int> df;
+    Dictionary<string, int> df;
 
     /**
      * IDF
      */
-    Dictionary<String, Double> idf;
+    Dictionary<string, Double> idf;
 
     /**
      * 调节因子
@@ -58,18 +58,18 @@ public class BM25
      */
     final static float b = 0.75f;
 
-    public BM25(List<List<String>> docs)
+    public BM25(List<List<string>> docs)
     {
         this.docs = docs;
         D = docs.size();
-        for (List<String> sentence : docs)
+        for (List<string> sentence : docs)
         {
             avgdl += sentence.size();
         }
         avgdl /= D;
         f = new Map[D];
-        df = new TreeMap<String, int>();
-        idf = new TreeMap<String, Double>();
+        df = new TreeMap<string, int>();
+        idf = new TreeMap<string, Double>();
         init();
     }
 
@@ -79,28 +79,28 @@ public class BM25
     private void init()
     {
         int index = 0;
-        for (List<String> sentence : docs)
+        for (List<string> sentence : docs)
         {
-            Dictionary<String, int> tf = new TreeMap<String, int>();
-            for (String word : sentence)
+            Dictionary<string, int> tf = new TreeMap<string, int>();
+            for (string word : sentence)
             {
                 int freq = tf.get(word);
                 freq = (freq == null ? 0 : freq) + 1;
                 tf.put(word, freq);
             }
             f[index] = tf;
-            for (Map.Entry<String, int> entry : tf.entrySet())
+            for (KeyValuePair<string, int> entry : tf.entrySet())
             {
-                String word = entry.getKey();
+                string word = entry.getKey();
                 int freq = df.get(word);
                 freq = (freq == null ? 0 : freq) + 1;
                 df.put(word, freq);
             }
             ++index;
         }
-        for (Map.Entry<String, int> entry : df.entrySet())
+        for (KeyValuePair<string, int> entry : df.entrySet())
         {
-            String word = entry.getKey();
+            string word = entry.getKey();
             int freq = entry.getValue();
             idf.put(word, Math.log(D - freq + 0.5) - Math.log(freq + 0.5));
         }
@@ -113,10 +113,10 @@ public class BM25
      * @param index    文档（用语料库中的下标表示）
      * @return BM25 score
      */
-    public double sim(List<String> sentence, int index)
+    public double sim(List<string> sentence, int index)
     {
         double score = 0;
-        for (String word : sentence)
+        for (string word : sentence)
         {
             if (!f[index].containsKey(word)) continue;
             int d = docs.get(index).size();
@@ -129,7 +129,7 @@ public class BM25
         return score;
     }
 
-    public double[] simAll(List<String> sentence)
+    public double[] simAll(List<string> sentence)
     {
         double[] scores = new double[D];
         for (int i = 0; i < D; ++i)

@@ -21,7 +21,7 @@ namespace com.hankcs.demo;
  */
 public class DemoAtFirstSight
 {
-    public static void Main(String[] args)
+    public static void Main(string[] args)
     {
         Console.WriteLine("首次编译运行时，HanLP会自动构建词典缓存，请稍候……");
         HanLP.Config.enableDebug();         // 为了避免你等得无聊，开启调试模式说点什么:-)

@@ -30,23 +30,23 @@ public class SuffixDictionary
      * 添加一个词语
      * @param word
      */
-    public void add(String word)
+    public void add(string word)
     {
         word = reverse(word);
         trie.put(word, word.length());
     }
 
-    public void addAll(String total)
+    public void addAll(string total)
     {
         for (int i = 0; i < total.length(); ++i)
         {
-            add(String.valueOf(total.charAt(i)));
+            add(string.valueOf(total.charAt(i)));
         }
     }
 
-    public void addAll(String[] total)
+    public void addAll(string[] total)
     {
-        for (String single : total)
+        for (string single : total)
         {
             add(single);
         }
@@ -57,7 +57,7 @@ public class SuffixDictionary
      * @param suffix
      * @return
      */
-    public int get(String suffix)
+    public int get(string suffix)
     {
         suffix = reverse(suffix);
         int length = trie.get(suffix);
@@ -71,7 +71,7 @@ public class SuffixDictionary
      * @param word
      * @return
      */
-    public bool endsWith(String word)
+    public bool endsWith(string word)
     {
         word = reverse(word);
         return trie.commonPrefixSearchWithValue(word).size() > 0;
@@ -82,15 +82,15 @@ public class SuffixDictionary
      * @param word
      * @return
      */
-    public int getLongestSuffixLength(String word)
+    public int getLongestSuffixLength(string word)
     {
         word = reverse(word);
-        LinkedList<Map.Entry<String, int>> suffixList = trie.commonPrefixSearchWithValue(word);
+        LinkedList<KeyValuePair<string, int>> suffixList = trie.commonPrefixSearchWithValue(word);
         if (suffixList.size() == 0) return 0;
         return suffixList.getLast().getValue();
     }
 
-    private static String reverse(String word)
+    private static string reverse(string word)
     {
         return new StringBuilder(word).reverse().toString();
     }
@@ -99,12 +99,12 @@ public class SuffixDictionary
      * 键值对
      * @return
      */
-    public Set<Map.Entry<String, int>> entrySet()
+    public Set<KeyValuePair<string, int>> entrySet()
     {
-        Set<Map.Entry<String, int>> treeSet = new LinkedHashSet<Map.Entry<String, int>>();
-        for (Map.Entry<String, int> entry : trie.entrySet())
+        Set<KeyValuePair<string, int>> treeSet = new LinkedHashSet<KeyValuePair<string, int>>();
+        for (KeyValuePair<string, int> entry : trie.entrySet())
         {
-            treeSet.add(new AbstractMap.SimpleEntry<String, int>(reverse(entry.getKey()), entry.getValue()));
+            treeSet.add(new AbstractMap.SimpleEntry<string, int>(reverse(entry.getKey()), entry.getValue()));
         }
 
         return treeSet;

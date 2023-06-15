@@ -36,7 +36,7 @@ public class DemoCustomDictionary
         Console.WriteLine(CustomDictionary.get("单身狗"));
 
         String text = "攻城狮逆袭单身狗，迎娶白富美，走上人生巅峰";  // 怎么可能噗哈哈！
-
+         
         // DoubleArrayTrie分词
         char[] charArray = text.ToCharArray();
         CustomDictionary.parseText(charArray, new CT3());

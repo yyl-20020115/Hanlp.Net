@@ -25,7 +25,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     /**
      * 依存关系映射表（可以将英文标签映射为中文）
      */
-    private Dictionary<String, String> deprelTranslater;
+    private Dictionary<string, string> deprelTranslater;
     /**
      * 是否自动转换依存关系
      */
@@ -42,7 +42,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     }
 
     //@Override
-    public CoNLLSentence parse(String sentence)
+    public CoNLLSentence parse(string sentence)
     {
         assert sentence != null;
         CoNLLSentence output = parse(segment.seg(sentence.ToCharArray()));
@@ -50,7 +50,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
         {
             for (CoNLLWord word : output)
             {
-                String translatedDeprel = deprelTranslater.get(word.DEPREL);
+                string translatedDeprel = deprelTranslater.get(word.DEPREL);
                 word.DEPREL = translatedDeprel;
             }
         }
@@ -71,13 +71,13 @@ public abstract class AbstractDependencyParser : IDependencyParser
     }
 
     //@Override
-    public Dictionary<String, String> getDeprelTranslator()
+    public Dictionary<string, string> getDeprelTranslator()
     {
         return deprelTranslater;
     }
 
     //@Override
-    public IDependencyParser setDeprelTranslator(Dictionary<String, String> deprelTranslator)
+    public IDependencyParser setDeprelTranslator(Dictionary<string, string> deprelTranslator)
     {
         this.deprelTranslater = deprelTranslator;
         return this;
@@ -88,16 +88,16 @@ public abstract class AbstractDependencyParser : IDependencyParser
      * @param deprelTranslatorPath 映射表路径
      * @return
      */
-    public IDependencyParser setDeprelTranslater(String deprelTranslatorPath)
+    public IDependencyParser setDeprelTranslater(string deprelTranslatorPath)
     {
         deprelTranslater = GlobalObjectPool.get(deprelTranslatorPath);
         if (deprelTranslater != null) return this;
 
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(deprelTranslatorPath);
-        deprelTranslater = new TreeMap<String, String>();
+        deprelTranslater = new TreeMap<string, string>();
         while (iterator.hasNext())
         {
-            String[] args = iterator.next().split("\\s");
+            string[] args = iterator.next().split("\\s");
             deprelTranslater.put(args[0], args[1]);
         }
         if (deprelTranslater.size() == 0)

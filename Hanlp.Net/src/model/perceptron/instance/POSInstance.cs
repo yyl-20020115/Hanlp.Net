@@ -28,9 +28,9 @@ public class POSInstance : Instance
      * @param termArray 词语
      * @param posArray  词性
      */
-    public POSInstance(String[] termArray, String[] posArray, FeatureMap featureMap)
+    public POSInstance(string[] termArray, string[] posArray, FeatureMap featureMap)
     {
-//        String sentence = TextUtility.combine(termArray);
+//        string sentence = TextUtility.combine(termArray);
         this(termArray, featureMap);
 
         POSTagSet tagSet = (POSTagSet) featureMap.tagSet;
@@ -41,22 +41,22 @@ public class POSInstance : Instance
         }
     }
 
-    public POSInstance(String[] termArray, FeatureMap featureMap)
+    public POSInstance(string[] termArray, FeatureMap featureMap)
     {
         initFeatureMatrix(termArray, featureMap);
     }
 
-    protected int[] extractFeature(String[] words, FeatureMap featureMap, int position)
+    protected int[] extractFeature(string[] words, FeatureMap featureMap, int position)
     {
         List<int> featVec = new ();
 
-//        String pre2Word = position >= 2 ? words[position - 2] : "_B_";
-        String preWord = position >= 1 ? words[position - 1] : "_B_";
-        String curWord = words[position];
+//        string pre2Word = position >= 2 ? words[position - 2] : "_B_";
+        string preWord = position >= 1 ? words[position - 1] : "_B_";
+        string curWord = words[position];
 
         //		System._out.println("cur: " + curWord);
-        String nextWord = position <= words.Length - 2 ? words[position + 1] : "_E_";
-//        String next2Word = position <= words.length - 3 ? words[position + 2] : "_E_";
+        string nextWord = position <= words.Length - 2 ? words[position + 1] : "_E_";
+//        string next2Word = position <= words.length - 3 ? words[position + 2] : "_E_";
 
         StringBuilder sbFeature = new StringBuilder();
 //        sbFeature.delete(0, sbFeature.length());
@@ -90,13 +90,13 @@ public class POSInstance : Instance
 //        addFeature(sbFeature, featVec, featureMap);
 
         // last char(w−1)w0
-//        String lastChar = position >= 1 ? "" + words[position - 1].charAt(words[position - 1].length() - 1) : "_BC_";
+//        string lastChar = position >= 1 ? "" + words[position - 1].charAt(words[position - 1].length() - 1) : "_BC_";
 //        sbFeature.delete(0, sbFeature.length());
 //        sbFeature.Append("CW[-1,0]=").Append(lastChar).Append("/").Append(curWord);
 //        addFeature(sbFeature, featVec, featureMap);
 //
 //        // w0 ﬁrst_char(w1)
-//        String nextChar = position <= words.length - 2 ? "" + words[position + 1].charAt(0) : "_EC_";
+//        string nextChar = position <= words.length - 2 ? "" + words[position + 1].charAt(0) : "_EC_";
 //        sbFeature.delete(0, sbFeature.length());
 //        sbFeature.Append("CW[1,0]=").Append(curWord).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featVec, featureMap);
@@ -151,7 +151,7 @@ public class POSInstance : Instance
 //        }
 
         // label feature
-//        String preLabel;
+//        string preLabel;
 //        if (position >= 1)
 //        {
 //            preLabel = label[position - 1];
@@ -165,9 +165,9 @@ public class POSInstance : Instance
 
 //        for (int i = 0; i < curWord.length(); i++)
 //        {
-//            String prefix = curWord.substring(0, 1) + curWord.charAt(i) + "";
+//            string prefix = curWord.substring(0, 1) + curWord.charAt(i) + "";
 //            addFeature("p2f=" + prefix, featVec, featureMap);
-//            String suffix = curWord.substring(curWord.length() - 1) + curWord.charAt(i) + "";
+//            string suffix = curWord.substring(curWord.length() - 1) + curWord.charAt(i) + "";
 //            addFeature("s2f=" + suffix, featVec, featureMap);
 
 //            if ((i < curWord.length() - 1) && (curWord.charAt(i) == curWord.charAt(i + 1)))
@@ -226,7 +226,7 @@ public class POSInstance : Instance
         return toFeatureArray(featVec);
     }
 
-    private void initFeatureMatrix(String[] termArray, FeatureMap featureMap)
+    private void initFeatureMatrix(string[] termArray, FeatureMap featureMap)
     {
         featureMatrix = new int[termArray.Length][];
         for (int i = 0; i < featureMatrix.Length; i++)
@@ -235,7 +235,7 @@ public class POSInstance : Instance
         }
     }
 
-    public static POSInstance create(String segmentedTaggedSentence, FeatureMap featureMap)
+    public static POSInstance create(string segmentedTaggedSentence, FeatureMap featureMap)
     {
         return create(Sentence.create(segmentedTaggedSentence), featureMap);
     }
@@ -247,8 +247,8 @@ public class POSInstance : Instance
             return null;
         }
         List<Word> wordList = sentence.toSimpleWordList();
-        String[] termArray = new String[wordList.Count];
-        String[] posArray = new String[wordList.Count];
+        string[] termArray = new string[wordList.Count];
+        string[] posArray = new string[wordList.Count];
         int i = 0;
         foreach (Word word in wordList)
         {

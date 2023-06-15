@@ -31,11 +31,11 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
     {
         if (model.featureMap.tagSet.type != TaskType.POS)
         {
-            throw new IllegalArgumentException(String.format("错误的模型类型: 传入的不是词性标注模型，而是 %s 模型", model.featureMap.tagSet.type));
+            throw new IllegalArgumentException(string.format("错误的模型类型: 传入的不是词性标注模型，而是 %s 模型", model.featureMap.tagSet.type));
         }
     }
 
-    public PerceptronPOSTagger(String modelPath) 
+    public PerceptronPOSTagger(string modelPath) 
         : this(new LinearModel(modelPath))
     {
     }
@@ -56,13 +56,13 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
      * @return
      */
     //@Override
-    public String[] tag(params String[] words)
+    public string[] tag(params string[] words)
     {
         POSInstance instance = new POSInstance(words, model.featureMap);
         return tag(instance);
     }
 
-    public String[] tag(POSInstance instance)
+    public string[] tag(POSInstance instance)
     {
         instance.tagArray = new int[instance.featureMatrix.Length];
 
@@ -77,9 +77,9 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
      * @return
      */
     //@Override
-    public String[] tag(List<String> wordList)
+    public string[] tag(List<string> wordList)
     {
-        String[] termArray = new String[wordList.size()];
+        string[] termArray = new string[wordList.size()];
         wordList.toArray(termArray);
         return tag(termArray);
     }
@@ -90,7 +90,7 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
      * @param segmentedTaggedSentence 人民日报2014格式的句子
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public bool learn(String segmentedTaggedSentence)
+    public bool learn(string segmentedTaggedSentence)
     {
         return learn(POSInstance.create(segmentedTaggedSentence, model.featureMap));
     }
@@ -101,13 +101,13 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
      * @param wordTags [单词]/[词性]数组
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public bool learn(params String[] wordTags)
+    public bool learn(params string[] wordTags)
     {
-        String[] words = new String[wordTags.length];
-        String[] tags = new String[wordTags.length];
+        string[] words = new string[wordTags.length];
+        string[] tags = new string[wordTags.length];
         for (int i = 0; i < wordTags.length; i++)
         {
-            String[] wordTag = wordTags[i].split("//");
+            string[] wordTag = wordTags[i].split("//");
             words[i] = wordTag[0];
             tags[i] = wordTag[1];
         }

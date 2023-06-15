@@ -17,7 +17,7 @@ public class CacheCorpus : Corpus
     }
 
     //@Override
-    public String nextWord() 
+    public string nextWord() 
     {
         return null;
     }

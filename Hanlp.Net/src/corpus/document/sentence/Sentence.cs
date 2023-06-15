@@ -35,7 +35,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     }
 
     //@Override
-    public String ToString()
+    public string ToString()
     {
         StringBuilder sb = new StringBuilder(size() * 4);
         int i = 1;
@@ -49,11 +49,11 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     }
 
     /**
-     * 转换为空格分割无标签的String
+     * 转换为空格分割无标签的string
      *
      * @return
      */
-    public String toStringWithoutLabels()
+    public string toStringWithoutLabels()
     {
         StringBuilder sb = new StringBuilder(size() * 4);
         int i = 1;
@@ -83,7 +83,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public String toStandoff()
+    public string toStandoff()
     {
         return toStandoff(false);
     }
@@ -95,11 +95,11 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param withComment
      * @return
      */
-    public String toStandoff(bool withComment)
+    public string toStandoff(bool withComment)
     {
         StringBuilder sb = new StringBuilder(size() * 4);
-        String delimiter = " ";
-        String text = text(delimiter);
+        string delimiter = " ";
+        string text = text(delimiter);
         sb.Append(text).Append('\n');
         int i = 1;
         int offset = 0;
@@ -183,7 +183,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         }
         sb.Append(offset).Append(delimiter).Append(offset + length).Append(delimiter);
         sb.Append(word.getValue()).Append(endLine);
-        String translated = PartOfSpeechTagDictionary.translate(word.getLabel());
+        string translated = PartOfSpeechTagDictionary.translate(word.getLabel());
         if (withComment && !word.getLabel().equals(translated))
         {
             sb.Append('#').Append(id).Append(delimiter).Append("AnnotatorNotes").Append(delimiter)
@@ -198,7 +198,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param param
      * @return
      */
-    public static Sentence create(String param)
+    public static Sentence create(string param)
     {
         if (param == null)
         {
@@ -214,7 +214,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         List<IWord> wordList = new LinkedList<IWord>();
         while (matcher.find())
         {
-            String single = matcher.group();
+            string single = matcher.group();
             IWord word = WordFactory.create(single);
             if (word == null)
             {
@@ -225,7 +225,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         }
         if (wordList.isEmpty()) // 按照无词性来解析
         {
-            foreach (String w in param.Split("\\s+"))
+            foreach (string w in param.Split("\\s+"))
             {
                 wordList.add(new Word(w, null));
             }
@@ -265,7 +265,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public String text()
+    public string text()
     {
         return text(null);
     }
@@ -276,7 +276,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param delimiter 词语之间的分隔符
      * @return
      */
-    public String text(String delimiter)
+    public string text(string delimiter)
     {
         if (delimiter == null) delimiter = "";
         StringBuilder sb = new StringBuilder(size() * 3);
@@ -311,7 +311,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param label
      * @return
      */
-    public List<IWord> findWordsByLabel(String label)
+    public List<IWord> findWordsByLabel(string label)
     {
         List<IWord> wordList = new ();
         foreach (IWord word in this)
@@ -330,7 +330,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param label
      * @return
      */
-    public IWord findFirstWordByLabel(String label)
+    public IWord findFirstWordByLabel(string label)
     {
         foreach (IWord word in this)
         {
@@ -350,7 +350,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param label
      * @return
      */
-    public ListIterator<IWord> findFirstWordIteratorByLabel(String label)
+    public ListIterator<IWord> findFirstWordIteratorByLabel(string label)
     {
         ListIterator<IWord> listIterator = this.wordList.listIterator();
         while (listIterator.hasNext())
@@ -370,7 +370,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param label
      * @return
      */
-    public bool containsWordWithLabel(String label)
+    public bool containsWordWithLabel(string label)
     {
         return findFirstWordByLabel(label) != null;
     }
@@ -403,10 +403,10 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public String[] toWordArray()
+    public string[] toWordArray()
     {
         List<Word> wordList = toSimpleWordList();
-        String[] wordArray = new String[wordList.size()];
+        string[] wordArray = new string[wordList.size()];
         Iterator<Word> iterator = wordList.iterator();
         for (int i = 0; i < wordArray.length; i++)
         {
@@ -420,10 +420,10 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public String[][] toWordTagArray()
+    public string[][] toWordTagArray()
     {
         List<Word> wordList = toSimpleWordList();
-        String[][] pair = new String[2][wordList.size()];
+        string[][] pair = new string[2][wordList.size()];
         Iterator<Word> iterator = wordList.iterator();
         for (int i = 0; i < pair[0].length; i++)
         {
@@ -440,14 +440,14 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param tagSet
      * @return
      */
-    public String[][] toWordTagNerArray(NERTagSet tagSet)
+    public string[][] toWordTagNerArray(NERTagSet tagSet)
     {
-        List<String[]> tupleList = Utility.convertSentenceToNER(this, tagSet);
-        String[][] result = new String[3][tupleList.size()];
-        Iterator<String[]> iterator = tupleList.iterator();
+        List<string[]> tupleList = Utility.convertSentenceToNER(this, tagSet);
+        string[][] result = new string[3][tupleList.size()];
+        Iterator<string[]> iterator = tupleList.iterator();
         for (int i = 0; i < result[0].length; i++)
         {
-            String[] tuple = iterator.next();
+            string[] tuple = iterator.next();
             for (int j = 0; j < 3; ++j)
             {
                 result[j][i] = tuple[j];

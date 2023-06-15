@@ -66,7 +66,7 @@ public class CRFLexicalAnalyzer : AbstractLexicalAnalyzer
      *
      * @param cwsModelPath CRF分词器模型路径
      */
-    public CRFLexicalAnalyzer(String cwsModelPath) 
+    public CRFLexicalAnalyzer(string cwsModelPath) 
         : this(new CRFSegmenter(cwsModelPath))
     {
         ;
@@ -78,7 +78,7 @@ public class CRFLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param cwsModelPath CRF分词器模型路径
      * @param posModelPath CRF词性标注器模型路径
      */
-    public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath) 
+    public CRFLexicalAnalyzer(string cwsModelPath, string posModelPath) 
         : this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath))
     {
         ;
@@ -91,7 +91,7 @@ public class CRFLexicalAnalyzer : AbstractLexicalAnalyzer
      * @param posModelPath CRF词性标注器模型路径
      * @param nerModelPath CRF命名实体识别器模型路径
      */
-    public CRFLexicalAnalyzer(String cwsModelPath, String posModelPath, String nerModelPath) 
+    public CRFLexicalAnalyzer(string cwsModelPath, string posModelPath, string nerModelPath) 
         : this(new CRFSegmenter(cwsModelPath), new CRFPOSTagger(posModelPath), new CRFNERecognizer(nerModelPath))
     {
         ;

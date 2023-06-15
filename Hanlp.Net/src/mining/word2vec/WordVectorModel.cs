@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
  *
  * @author hankcs
  */
-public class WordVectorModel : AbstractVectorModel<String>
+public class WordVectorModel : AbstractVectorModel<string>
 {
     /**
      * 加载模型<br>
@@ -25,16 +25,16 @@ public class WordVectorModel : AbstractVectorModel<String>
      * @param modelFileName 模型路径
      * @ 加载错误
      */
-    public WordVectorModel(String modelFileName) 
+    public WordVectorModel(string modelFileName) 
     {
         super(loadVectorMap(modelFileName));
     }
 
-    private static TreeMap<String, Vector> loadVectorMap(String modelFileName) 
+    private static TreeMap<string, Vector> loadVectorMap(string modelFileName) 
     {
         VectorsReader reader = new VectorsReader(modelFileName);
         reader.readVectorFile();
-        TreeMap<String, Vector> map = new TreeMap<String, Vector>();
+        TreeMap<string, Vector> map = new TreeMap<string, Vector>();
         for (int i = 0; i < reader.vocab.length; i++)
         {
             map.put(reader.vocab[i], new Vector(reader.matrix[i]));
@@ -50,7 +50,7 @@ public class WordVectorModel : AbstractVectorModel<String>
      * @param C 做加法的词语
      * @return 与(A - B + C)语义距离最近的词语及其相似度列表
      */
-    public List<Map.Entry<String, Float>> analogy(String A, String B, String C)
+    public List<KeyValuePair<string, Float>> analogy(string A, string B, string C)
     {
         return analogy(A, B, C, 10);
     }
@@ -64,7 +64,7 @@ public class WordVectorModel : AbstractVectorModel<String>
      * @param size topN个
      * @return 与(A - B + C)语义距离最近的词语及其相似度列表
      */
-    public List<Map.Entry<String, Float>> analogy(String A, String B, String C, int size)
+    public List<KeyValuePair<string, Float>> analogy(string A, string B, string C, int size)
     {
         Vector a = storage.get(A);
         Vector b = storage.get(B);
@@ -74,11 +74,11 @@ public class WordVectorModel : AbstractVectorModel<String>
             return Collections.emptyList();
         }
 
-        List<Map.Entry<String, Float>> resultList = nearest(a.minus(b).add(c), size + 3);
-        ListIterator<Map.Entry<String, Float>> listIterator = resultList.listIterator();
+        List<KeyValuePair<string, Float>> resultList = nearest(a.minus(b).add(c), size + 3);
+        ListIterator<KeyValuePair<string, Float>> listIterator = resultList.listIterator();
         while (listIterator.hasNext())
         {
-            String key = listIterator.next().getKey();
+            string key = listIterator.next().getKey();
             if (key.equals(A) || key.equals(B) || key.equals(C))
             {
                 listIterator.remove();
@@ -94,7 +94,7 @@ public class WordVectorModel : AbstractVectorModel<String>
     }
 
     //@Override
-    public Vector query(String query)
+    public Vector query(string query)
     {
         return vector(query);
     }

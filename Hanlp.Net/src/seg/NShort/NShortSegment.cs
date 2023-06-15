@@ -163,7 +163,7 @@ public class NShortSegment : WordBasedSegment
      * @param text
      * @return
      */
-    public static List<Term> parse(String text)
+    public static List<Term> parse(string text)
     {
         return new NShortSegment().seg(text);
     }

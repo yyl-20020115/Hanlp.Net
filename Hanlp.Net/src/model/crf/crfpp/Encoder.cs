@@ -15,7 +15,7 @@ public class Encoder
     {
         CRF_L2, CRF_L1, MIRA;
 
-        public static Algorithm fromString(String algorithm)
+        public static Algorithm fromString(string algorithm)
         {
             algorithm = algorithm.toLowerCase();
             if (algorithm.equals("crf") || algorithm.equals("crf-l2"))
@@ -54,7 +54,7 @@ public class Encoder
      * @param algorithm     训练算法
      * @return
      */
-    public bool learn(String templFile, String trainFile, String modelFile, bool textModelFile,
+    public bool learn(string templFile, string trainFile, string modelFile, bool textModelFile,
                          int maxitr, int freq, double eta, double C, int threadNum, int shrinkingSize,
                          Algorithm algorithm)
     {
@@ -456,16 +456,16 @@ public class Encoder
         return true;
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         if (args.length < 3)
         {
             System.err.println("incorrect No. of args");
             return;
         }
-        String templFile = args[0];
-        String trainFile = args[1];
-        String modelFile = args[2];
+        string templFile = args[0];
+        string trainFile = args[1];
+        string modelFile = args[2];
         Encoder enc = new Encoder();
         long time1 = new Date().getTime();
         if (!enc.learn(templFile, trainFile, modelFile, false, 100000, 1, 0.0001, 1.0, 1, 20, Algorithm.CRF_L2))

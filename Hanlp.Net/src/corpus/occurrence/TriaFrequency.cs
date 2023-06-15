@@ -18,14 +18,14 @@ namespace com.hankcs.hanlp.corpus.occurrence;
  */
 public class TriaFrequency : PairFrequency
 {
-    public String third;
+    public string third;
 
-    private TriaFrequency(String term, int frequency)
+    private TriaFrequency(string term, int frequency)
     {
         super(term, frequency);
     }
 
-    private TriaFrequency(String term)
+    private TriaFrequency(string term)
     {
         super(term);
     }
@@ -39,7 +39,7 @@ public class TriaFrequency : PairFrequency
      * @param delimiter 一般使用RIGHT！
      * @return
      */
-    public static TriaFrequency create(String first, char delimiter, String second, String third)
+    public static TriaFrequency create(string first, char delimiter, string second, string third)
     {
         TriaFrequency triaFrequency = new TriaFrequency(first + delimiter + second + Occurrence.RIGHT + third);
         triaFrequency.first = first;
@@ -57,7 +57,7 @@ public class TriaFrequency : PairFrequency
      * @param first
      * @return
      */
-    public static TriaFrequency create(String second, String third, char delimiter, String first)
+    public static TriaFrequency create(string second, string third, char delimiter, string first)
     {
         TriaFrequency triaFrequency = new TriaFrequency(second + Occurrence.RIGHT + third + delimiter + first);
         triaFrequency.first = first;
@@ -68,7 +68,7 @@ public class TriaFrequency : PairFrequency
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder();
         sb.Append(getKey().replace(Occurrence.LEFT, '←').replace(Occurrence.RIGHT, '→'));

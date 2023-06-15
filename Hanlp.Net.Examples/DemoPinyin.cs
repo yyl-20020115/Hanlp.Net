@@ -26,59 +26,59 @@ public class DemoPinyin
     {
         String text = "重载不是重任！";
         List<Pinyin> pinyinList = HanLP.convertToPinyinList(text);
-        System.out.print("原文,");
-        for (char c : text.toCharArray())
+        Console.Write("原文,");
+        foreach (char c in text.ToCharArray())
         {
-            System.out.printf("%c,", c);
+            Console.Write("%c,", c);
         }
         Console.WriteLine();
 
-        System.out.print("拼音（数字音调）,");
-        for (Pinyin pinyin : pinyinList)
+        Console.Write("拼音（数字音调）,");
+        foreach (Pinyin pinyin in pinyinList)
         {
-            System.out.printf("%s,", pinyin);
+            Console.Write("%s,", pinyin);
         }
         Console.WriteLine();
 
-        System.out.print("拼音（符号音调）,");
-        for (Pinyin pinyin : pinyinList)
+        Console.Write("拼音（符号音调）,");
+        foreach (Pinyin pinyin in pinyinList)
         {
-            System.out.printf("%s,", pinyin.getPinyinWithToneMark());
+            Console.Write("%s,", pinyin.getPinyinWithToneMark());
         }
         Console.WriteLine();
 
-        System.out.print("拼音（无音调）,");
-        for (Pinyin pinyin : pinyinList)
+        Console.Write("拼音（无音调）,");
+        foreach (Pinyin pinyin in pinyinList)
         {
-            System.out.printf("%s,", pinyin.getPinyinWithoutTone());
+            Console.Write("%s,", pinyin.getPinyinWithoutTone());
         }
         Console.WriteLine();
 
-        System.out.print("声调,");
-        for (Pinyin pinyin : pinyinList)
+        Console.Write("声调,");
+        foreach (Pinyin pinyin in pinyinList)
         {
-            System.out.printf("%s,", pinyin.getTone());
+            Console.Write("%s,", pinyin.getTone());
         }
         Console.WriteLine();
 
-        System.out.print("声母,");
-        for (Pinyin pinyin : pinyinList)
+        Console.Write("声母,");
+        foreach (Pinyin pinyin in pinyinList)
         {
-            System.out.printf("%s,", pinyin.getShengmu());
+            Console.Write("%s,", pinyin.getShengmu());
         }
         Console.WriteLine();
 
-        System.out.print("韵母,");
-        for (Pinyin pinyin : pinyinList)
+        Console.Write("韵母,");
+        foreach (Pinyin pinyin in pinyinList)
         {
-            System.out.printf("%s,", pinyin.getYunmu());
+            Console.Write("%s,", pinyin.getYunmu());
         }
         Console.WriteLine();
 
-        System.out.print("输入法头,");
-        for (Pinyin pinyin : pinyinList)
+        Console.Write("输入法头,");
+        foreach (Pinyin pinyin in pinyinList)
         {
-            System.out.printf("%s,", pinyin.getHead());
+            Console.Write("%s,", pinyin.getHead());
         }
         Console.WriteLine();
 

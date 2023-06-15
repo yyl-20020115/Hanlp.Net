@@ -20,9 +20,9 @@ namespace com.hankcs.hanlp.mining.word;
 public class TfIdfCounter : KeywordExtractor
 {
     private bool filterStopWord;
-    private Dictionary<Object, Dictionary<String, Double>> tfMap;
-    private Dictionary<Object, Dictionary<String, Double>> tfidfMap;
-    private Dictionary<String, Double> idf;
+    private Dictionary<Object, Dictionary<string, Double>> tfMap;
+    private Dictionary<Object, Dictionary<string, Double>> tfidfMap;
+    private Dictionary<string, Double> idf;
 
     public TfIdfCounter()
     {
@@ -38,7 +38,7 @@ public class TfIdfCounter : KeywordExtractor
     {
         super(defaultSegment);
         this.filterStopWord = filterStopWord;
-        tfMap = new HashMap<Object, Dictionary<String, Double>>();
+        tfMap = new HashMap<Object, Dictionary<string, Double>>();
     }
 
     public TfIdfCounter(Segment defaultSegment)
@@ -47,11 +47,11 @@ public class TfIdfCounter : KeywordExtractor
     }
 
     //@Override
-    public List<String> getKeywords(List<Term> termList, int size)
+    public List<string> getKeywords(List<Term> termList, int size)
     {
-        List<Map.Entry<String, Double>> entryList = getKeywordsWithTfIdf(termList, size);
-        List<String> r = new ArrayList<String>(entryList.size());
-        for (Map.Entry<String, Double> entry : entryList)
+        List<KeyValuePair<string, Double>> entryList = getKeywordsWithTfIdf(termList, size);
+        List<string> r = new ArrayList<string>(entryList.size());
+        for (KeyValuePair<string, Double> entry : entryList)
         {
             r.add(entry.getKey());
         }
@@ -59,32 +59,32 @@ public class TfIdfCounter : KeywordExtractor
         return r;
     }
 
-    public List<Map.Entry<String, Double>> getKeywordsWithTfIdf(String document, int size)
+    public List<KeyValuePair<string, Double>> getKeywordsWithTfIdf(string document, int size)
     {
         return getKeywordsWithTfIdf(preprocess(document), size);
     }
 
 
-    public List<Map.Entry<String, Double>> getKeywordsWithTfIdf(List<Term> termList, int size)
+    public List<KeyValuePair<string, Double>> getKeywordsWithTfIdf(List<Term> termList, int size)
     {
         if (idf == null)
             compute();
 
-        Dictionary<String, Double> tfIdf = TfIdf.tfIdf(TfIdf.tf(convert(termList)), idf);
+        Dictionary<string, Double> tfIdf = TfIdf.tfIdf(TfIdf.tf(convert(termList)), idf);
         return topN(tfIdf, size);
     }
 
     public void add(Object id, List<Term> termList)
     {
-        List<String> words = convert(termList);
-        Dictionary<String, Double> tf = TfIdf.tf(words);
+        List<string> words = convert(termList);
+        Dictionary<string, Double> tf = TfIdf.tf(words);
         tfMap.put(id, tf);
         idf = null;
     }
 
-    private static List<String> convert(List<Term> termList)
+    private static List<string> convert(List<Term> termList)
     {
-        List<String> words = new ArrayList<String>(termList.size());
+        List<string> words = new ArrayList<string>(termList.size());
         for (Term term : termList)
         {
             words.add(term.word);
@@ -103,13 +103,13 @@ public class TfIdfCounter : KeywordExtractor
      * @param id   文档id
      * @param text 文档内容
      */
-    public void add(Object id, String text)
+    public void add(Object id, string text)
     {
         List<Term> termList = preprocess(text);
         add(id, termList);
     }
 
-    private List<Term> preprocess(String text)
+    private List<Term> preprocess(string text)
     {
         List<Term> termList = defaultSegment.seg(text);
         if (filterStopWord)
@@ -124,45 +124,45 @@ public class TfIdfCounter : KeywordExtractor
      *
      * @param text
      */
-    public int add(String text)
+    public int add(string text)
     {
         int id = tfMap.size();
         add(id, text);
         return id;
     }
 
-    public Dictionary<Object, Dictionary<String, Double>> compute()
+    public Dictionary<Object, Dictionary<string, Double>> compute()
     {
         idf = TfIdf.idfFromTfs(tfMap.values());
-        tfidfMap = new HashMap<Object, Dictionary<String, Double>>(idf.size());
-        for (Map.Entry<Object, Dictionary<String, Double>> entry : tfMap.entrySet())
+        tfidfMap = new HashMap<Object, Dictionary<string, Double>>(idf.size());
+        for (KeyValuePair<Object, Dictionary<string, Double>> entry : tfMap.entrySet())
         {
-            Dictionary<String, Double> tfidf = TfIdf.tfIdf(entry.getValue(), idf);
+            Dictionary<string, Double> tfidf = TfIdf.tfIdf(entry.getValue(), idf);
             tfidfMap.put(entry.getKey(), tfidf);
         }
         return tfidfMap;
     }
 
-    public List<Map.Entry<String, Double>> getKeywordsOf(Object id)
+    public List<KeyValuePair<string, Double>> getKeywordsOf(Object id)
     {
         return getKeywordsOf(id, 10);
     }
 
 
-    public List<Map.Entry<String, Double>> getKeywordsOf(Object id, int size)
+    public List<KeyValuePair<string, Double>> getKeywordsOf(Object id, int size)
     {
-        Dictionary<String, Double> tfidfs = tfidfMap.get(id);
+        Dictionary<string, Double> tfidfs = tfidfMap.get(id);
         if (tfidfs == null) return null;
 
         return topN(tfidfs, size);
     }
 
-    private List<Map.Entry<String, Double>> topN(Dictionary<String, Double> tfidfs, int size)
+    private List<KeyValuePair<string, Double>> topN(Dictionary<string, Double> tfidfs, int size)
     {
-        MaxHeap<Map.Entry<String, Double>> heap = new MaxHeap<Map.Entry<String, Double>>(size, new Comparator<Map.Entry<String, Double>>()
+        MaxHeap<KeyValuePair<string, Double>> heap = new MaxHeap<KeyValuePair<string, Double>>(size, new Comparator<KeyValuePair<string, Double>>()
         {
             //@Override
-            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2)
+            public int compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
             {
                 return o1.getValue().compareTo(o2.getValue());
             }
@@ -177,27 +177,27 @@ public class TfIdfCounter : KeywordExtractor
         return tfMap.keySet();
     }
 
-    public Dictionary<Object, Dictionary<String, Double>> getTfMap()
+    public Dictionary<Object, Dictionary<string, Double>> getTfMap()
     {
         return tfMap;
     }
 
-    public List<Map.Entry<String, Double>> sortedAllTf()
+    public List<KeyValuePair<string, Double>> sortedAllTf()
     {
         return sort(allTf());
     }
 
-    public List<Map.Entry<String, int>> sortedAllTfInt()
+    public List<KeyValuePair<string, int>> sortedAllTfInt()
     {
         return doubleToInteger(sortedAllTf());
     }
 
-    public Dictionary<String, Double> allTf()
+    public Dictionary<string, Double> allTf()
     {
-        Dictionary<String, Double> result = new HashMap<String, Double>();
-        for (Dictionary<String, Double> d : tfMap.values())
+        Dictionary<string, Double> result = new HashMap<string, Double>();
+        for (Dictionary<string, Double> d : tfMap.values())
         {
-            for (Map.Entry<String, Double> tf : d.entrySet())
+            for (KeyValuePair<string, Double> tf : d.entrySet())
             {
                 Double f = result.get(tf.getKey());
                 if (f == null)
@@ -214,13 +214,13 @@ public class TfIdfCounter : KeywordExtractor
         return result;
     }
 
-    private static List<Map.Entry<String, Double>> sort(Dictionary<String, Double> map)
+    private static List<KeyValuePair<string, Double>> sort(Dictionary<string, Double> map)
     {
-        List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(map.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<String, Double>>()
+        List<KeyValuePair<string, Double>> list = new ArrayList<KeyValuePair<string, Double>>(map.entrySet());
+        Collections.sort(list, new Comparator<KeyValuePair<string, Double>>()
         {
             //@Override
-            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2)
+            public int compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
             {
                 return o2.getValue().compareTo(o1.getValue());
             }
@@ -229,12 +229,12 @@ public class TfIdfCounter : KeywordExtractor
         return list;
     }
 
-    private static List<Map.Entry<String, int>> doubleToInteger(List<Map.Entry<String, Double>> list)
+    private static List<KeyValuePair<string, int>> doubleToInteger(List<KeyValuePair<string, Double>> list)
     {
-        List<Map.Entry<String, int>> result = new ArrayList<Map.Entry<String, int>>(list.size());
-        for (Map.Entry<String, Double> entry : list)
+        List<KeyValuePair<string, int>> result = new ArrayList<KeyValuePair<string, int>>(list.size());
+        for (KeyValuePair<string, Double> entry : list)
         {
-            result.add(new AbstractMap.SimpleEntry<String, int>(entry.getKey(), entry.getValue().intValue()));
+            result.add(new AbstractMap.SimpleEntry<string, int>(entry.getKey(), entry.getValue().intValue()));
         }
 
         return result;

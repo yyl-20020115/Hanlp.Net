@@ -22,7 +22,7 @@ public class WordNatureDependencyModel
 {
     DoubleArrayTrie<Attribute> trie;
 
-    public WordNatureDependencyModel(String path)
+    public WordNatureDependencyModel(string path)
     {
         long start = DateTime.Now.Microsecond;
         if (load(path))
@@ -35,15 +35,15 @@ public class WordNatureDependencyModel
         }
     }
 
-    bool load(String path)
+    bool load(string path)
     {
         trie = new DoubleArrayTrie<Attribute>();
         if (loadDat(path)) return true;
-        TreeMap<String, Attribute> map = new TreeMap<String, Attribute>();
-        TreeMap<String, int> tagMap = new TreeMap<String, int>();
-        for (String line : IOUtil.readLineListWithLessMemory(path))
+        TreeMap<string, Attribute> map = new TreeMap<string, Attribute>();
+        TreeMap<string, int> tagMap = new TreeMap<string, int>();
+        for (string line : IOUtil.readLineListWithLessMemory(path))
         {
-            String[] param = line.split(" ");
+            string[] param = line.split(" ");
             if (param[0].endsWith("@"))
             {
                 tagMap.put(param[0], int.parseInt(param[2]));
@@ -60,10 +60,10 @@ public class WordNatureDependencyModel
         }
         if (map.size() == 0) return false;
         // 为它们计算概率
-        for (Map.Entry<String, Attribute> entry : map.entrySet())
+        for (KeyValuePair<string, Attribute> entry : map.entrySet())
         {
-            String key = entry.getKey();
-            String[] param = key.split("@", 2);
+            string key = entry.getKey();
+            string[] param = key.split("@", 2);
             Attribute attribute = entry.getValue();
             int total = tagMap.get(param[0] + "@");
             for (int i = 0; i < attribute.p.length; ++i)
@@ -89,7 +89,7 @@ public class WordNatureDependencyModel
         return true;
     }
 
-    bool saveDat(String path, TreeMap<String, Attribute> map)
+    bool saveDat(string path, TreeMap<string, Attribute> map)
     {
         Collection<Attribute> attributeList = map.values();
         // 缓存值文件
@@ -122,7 +122,7 @@ public class WordNatureDependencyModel
         return true;
     }
 
-    bool loadDat(String path)
+    bool loadDat(string path)
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
@@ -143,7 +143,7 @@ public class WordNatureDependencyModel
         return trie.load(byteArray, attributeArray);
     }
 
-    public Attribute get(String key)
+    public Attribute get(string key)
     {
         return trie.get(key);
     }
@@ -172,7 +172,7 @@ public class WordNatureDependencyModel
         return new Edge(from.id, to.id, attribute.dependencyRelation[0], attribute.p[0]);
     }
 
-    public Attribute get(String from, String to)
+    public Attribute get(string from, string to)
     {
         return get(from + "@" + to);
     }
@@ -183,7 +183,7 @@ public class WordNatureDependencyModel
         /**
          * 依存关系
          */
-        public String[] dependencyRelation;
+        public string[] dependencyRelation;
         /**
          * 概率
          */
@@ -191,13 +191,13 @@ public class WordNatureDependencyModel
 
         public Attribute(int size)
         {
-            dependencyRelation = new String[size];
+            dependencyRelation = new string[size];
             p = new float[size];
         }
 
-        Attribute(String dr, float p)
+        Attribute(string dr, float p)
         {
-            dependencyRelation = new String[]{dr};
+            dependencyRelation = new string[]{dr};
             this.p = new float[]{p};
         }
 
@@ -214,7 +214,7 @@ public class WordNatureDependencyModel
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
             final StringBuilder sb = new StringBuilder(dependencyRelation.length * 10);
             for (int i = 0; i < dependencyRelation.length; ++i)

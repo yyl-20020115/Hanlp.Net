@@ -33,7 +33,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         int right;
 
         //@Override
-        public String toString()
+        public string toString()
         {
             return "Node{" +
                     "code=" + code +
@@ -55,7 +55,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     protected int size;
     private int allocSize;
-    private List<String> key;
+    private List<string> key;
     private int keySize;
     private int length[];
     private int value[];
@@ -110,7 +110,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             if ((length != null ? length[i] : key.get(i).length()) < parent.depth)
                 continue;
 
-            String tmp = key.get(i);
+            string tmp = key.get(i);
 
             int cur = 0;
             if ((length != null ? length[i] : tmp.length()) != parent.depth)
@@ -267,7 +267,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * 从TreeMap构造
      * @param buildFrom
      */
-    public DoubleArrayTrie(TreeMap<String, V> buildFrom)
+    public DoubleArrayTrie(TreeMap<string, V> buildFrom)
     {
         this();
         if (build(buildFrom) != 0)
@@ -320,7 +320,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return result;
     }
 
-    public int build(List<String> key, List<V> value)
+    public int build(List<string> key, List<V> value)
     {
         //assert key.size() == value.size() : "键的个数与值的个数不一样！";
         //assert key.size() > 0 : "键值个数为0！";
@@ -328,7 +328,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return build(key, null, null, key.size());
     }
 
-    public int build(List<String> key, V[] value)
+    public int build(List<string> key, V[] value)
     {
         //assert key.size() == value.length : "键的个数与值的个数不一样！";
         //assert key.size() > 0 : "键值个数为0！";
@@ -342,11 +342,11 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param entrySet 注意此entrySet一定要是字典序的！否则会失败
      * @return
      */
-    public int build(Set<Map.Entry<String, V>> entrySet)
+    public int build(Set<KeyValuePair<string, V>> entrySet)
     {
-        List<String> keyList = new ArrayList<String>(entrySet.size());
+        List<string> keyList = new ArrayList<string>(entrySet.size());
         List<V> valueList = new ArrayList<V>(entrySet.size());
-        for (Map.Entry<String, V> entry : entrySet)
+        for (KeyValuePair<string, V> entry : entrySet)
         {
             keyList.add(entry.getKey());
             valueList.add(entry.getValue());
@@ -361,7 +361,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param keyValueMap 升序键值对map
      * @return 构造结果
      */
-    public int build(Dictionary<String, V> keyValueMap)
+    public int build(Dictionary<string, V> keyValueMap)
     {
         //assert keyValueMap != null;
         var entrySet = keyValueMap.entrySet();
@@ -377,7 +377,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param _keySize key的长度，应该设为_key.size
      * @return 是否出错
      */
-    public int build(List<String> _key, int[] _length, int[] _value,
+    public int build(List<string> _key, int[] _length, int[] _value,
                      int _keySize)
     {
         if (_key == null || _keySize > _key.size())
@@ -415,7 +415,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return error_;
     }
 
-    public void open(String fileName) 
+    public void open(string fileName) 
     {
         File file = new File(fileName);
         size = (int) file.length() / UNIT_SIZE;
@@ -440,7 +440,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         }
     }
 
-    public bool save(String fileName)
+    public bool save(string fileName)
     {
         DataOutputStream _out;
         try
@@ -500,7 +500,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param value
      * @return
      */
-    public bool load(String path, List<V> value)
+    public bool load(string path, List<V> value)
     {
         if (!loadBaseAndCheck(path)) return false;
         v = (V[]) value.ToArray();
@@ -514,7 +514,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param value
      * @return
      */
-    public bool load(String path, V[] value)
+    public bool load(string path, V[] value)
     {
         if (!(IOAdapter == null ? loadBaseAndCheckByFileChannel(path) :
         load(ByteArrayStream.createByteArrayStream(path), value)
@@ -571,7 +571,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param path
      * @return
      */
-    public bool load(String path)
+    public bool load(string path)
     {
         return loadBaseAndCheckByFileChannel(path);
     }
@@ -582,7 +582,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param path
      * @return
      */
-    private bool loadBaseAndCheck(String path)
+    private bool loadBaseAndCheck(string path)
     {
         try
         {
@@ -606,7 +606,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    private bool loadBaseAndCheckByFileChannel(String path)
+    private bool loadBaseAndCheckByFileChannel(string path)
     {
         try
         {
@@ -657,7 +657,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param path
      * @return
      */
-    public bool serializeTo(String path)
+    public bool serializeTo(string path)
     {
         ObjectOutputStream _out = null;
         try
@@ -673,7 +673,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    public static <T> DoubleArrayTrie<T> unSerialize(String path)
+    public static <T> DoubleArrayTrie<T> unSerialize(string path)
     {
         ObjectInputStream in;
         try
@@ -694,12 +694,12 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param key 键
      * @return 值
      */
-    public int exactMatchSearch(String key)
+    public int exactMatchSearch(string key)
     {
         return exactMatchSearch(key, 0, 0, 0);
     }
 
-    public int exactMatchSearch(String key, int pos, int len, int nodePos)
+    public int exactMatchSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
             len = key.length();
@@ -763,7 +763,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return result;
     }
 
-    public List<int> commonPrefixSearch(String key)
+    public List<int> commonPrefixSearch(string key)
     {
         return commonPrefixSearch(key, 0, 0, 0);
     }
@@ -777,7 +777,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param nodePos base中的开始位置
      * @return 一个含有所有下标的list
      */
-    public List<int> commonPrefixSearch(String key, int pos, int len, int nodePos)
+    public List<int> commonPrefixSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
             len = key.length();
@@ -817,10 +817,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @return 键值对列表
      * @deprecated 最好用优化版的
      */
-    public LinkedList<Map.Entry<String, V>> commonPrefixSearchWithValue(String key)
+    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
     {
         int len = key.length();
-        LinkedList<Map.Entry<String, V>> result = new LinkedList<Map.Entry<String, V>>();
+        LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
         char[] keyChars = key.ToCharArray();
         int b = base[0];
         int n;
@@ -832,7 +832,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             n = base[p];
             if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
             {
-                result.add(new AbstractMap.SimpleEntry<String, V>(new String(keyChars, 0, i), v[-n - 1]));
+                result.add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, 0, i), v[-n - 1]));
             }
 
             p = b + (int) (keyChars[i]) + 1;    // 状态转移 p = base[char[i-1]] + char[i] + 1
@@ -848,7 +848,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         if (b == check[p] && n < 0)
         {
-            result.add(new AbstractMap.SimpleEntry<String, V>(key, v[-n - 1]));
+            result.add(new AbstractMap.SimpleEntry<string, V>(key, v[-n - 1]));
         }
 
         return result;
@@ -861,10 +861,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param begin
      * @return
      */
-    public LinkedList<Map.Entry<String, V>> commonPrefixSearchWithValue(char[] keyChars, int begin)
+    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] keyChars, int begin)
     {
         int len = keyChars.length;
-        LinkedList<Map.Entry<String, V>> result = new LinkedList<Map.Entry<String, V>>();
+        LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
         int b = base[0];
         int n;
         int p;
@@ -875,7 +875,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             n = base[p];
             if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
             {
-                result.add(new AbstractMap.SimpleEntry<String, V>(new String(keyChars, begin, i - begin), v[-n - 1]));
+                result.add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, begin, i - begin), v[-n - 1]));
             }
 
             p = b + (int) (keyChars[i]) + 1;    // 状态转移 p = base[char[i-1]] + char[i] + 1
@@ -891,27 +891,27 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         if (b == check[p] && n < 0)
         {
-            result.add(new AbstractMap.SimpleEntry<String, V>(new String(keyChars, begin, len - begin), v[-n - 1]));
+            result.add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, begin, len - begin), v[-n - 1]));
         }
 
         return result;
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
-//        String infoIndex    = "i    = ";
-//        String infoChar     = "char = ";
-//        String infoBase     = "base = ";
-//        String infoCheck    = "check= ";
+//        string infoIndex    = "i    = ";
+//        string infoChar     = "char = ";
+//        string infoBase     = "base = ";
+//        string infoCheck    = "check= ";
 //        for (int i = 0; i < base.length; ++i)
 //        {
 //            if (base[i] != 0 || check[i] != 0)
 //            {
 //                infoChar  += "    " + (i == check[i] ? " ×" : (char)(i - check[i] - 1));
-//                infoIndex += " " + String.format("%5d", i);
-//                infoBase  += " " +  String.format("%5d", base[i]);
-//                infoCheck += " " + String.format("%5d", check[i]);
+//                infoIndex += " " + string.format("%5d", i);
+//                infoBase  += " " +  string.format("%5d", base[i]);
+//                infoCheck += " " + string.format("%5d", check[i]);
 //            }
 //        }
         return "DoubleArrayTrie{" +
@@ -981,7 +981,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param key 键
      * @return 值
      */
-    public V get(String key)
+    public V get(string key)
     {
         int index = exactMatchSearch(key);
         if (index >= 0)
@@ -1014,7 +1014,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return a;
     }
 
-    public bool containsKey(String key)
+    public bool containsKey(string key)
     {
         return exactMatchSearch(key) >= 0;
     }
@@ -1025,7 +1025,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param path
      * @return
      */
-    protected int transition(String path)
+    protected int transition(string path)
     {
         return transition(path.ToCharArray());
     }
@@ -1061,7 +1061,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param from 起点（根起点为base[0]=1）
      * @return 转移后的状态（双数组下标）
      */
-    public int transition(String path, int from)
+    public int transition(string path, int from)
     {
         int b = from;
         int p;
@@ -1221,12 +1221,12 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         }
     }
 
-    public Searcher getSearcher(String text)
+    public Searcher getSearcher(string text)
     {
         return getSearcher(text, 0);
     }
 
-    public Searcher getSearcher(String text, int offset)
+    public Searcher getSearcher(string text, int offset)
     {
         return new Searcher(offset, text.ToCharArray());
     }
@@ -1339,7 +1339,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseText(String text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
     {
         Searcher searcher = getSearcher(text, 0);
         while (searcher.next())
@@ -1348,7 +1348,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         }
     }
 
-    public LongestSearcher getLongestSearcher(String text, int offset)
+    public LongestSearcher getLongestSearcher(string text, int offset)
     {
         return getLongestSearcher(text.ToCharArray(), offset);
     }
@@ -1364,7 +1364,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseLongestText(String text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseLongestText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
     {
         LongestSearcher searcher = getLongestSearcher(text, 0);
         while (searcher.next())
@@ -1402,7 +1402,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param value 值
      * @return 是否成功（失败的原因是没有这个键）
      */
-    public bool set(String key, V value)
+    public bool set(string key, V value)
     {
         int index = exactMatchSearch(key);
         if (index >= 0)

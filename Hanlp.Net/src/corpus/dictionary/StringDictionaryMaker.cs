@@ -24,7 +24,7 @@ public class StringDictionaryMaker
      * @param separator
      * @return
      */
-    public static StringDictionary load(String path, String separator)
+    public static StringDictionary load(string path, string separator)
     {
         StringDictionary dictionary = new StringDictionary(separator);
         if (dictionary.load(path)) return dictionary;
@@ -36,7 +36,7 @@ public class StringDictionaryMaker
      * @param path
      * @return
      */
-    public static StringDictionary load(String path)
+    public static StringDictionary load(string path)
     {
         return load(path, "=");
     }
@@ -58,11 +58,11 @@ public class StringDictionaryMaker
         return mainDictionary;
     }
 
-    public static StringDictionary combine(String... args)
+    public static StringDictionary combine(string... args)
     {
-        String[] pathArray = args.clone();
+        string[] pathArray = args.clone();
         List<StringDictionary> dictionaryList = new LinkedList<StringDictionary>();
-        for (String path : pathArray)
+        for (string path : pathArray)
         {
             StringDictionary dictionary = load(path);
             if (dictionary == null) continue;

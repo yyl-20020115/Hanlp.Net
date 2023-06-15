@@ -65,7 +65,7 @@ public class Graph
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return "Graph{" +
                 "vertexes=" + Arrays.toString(vertexes) +
@@ -73,7 +73,7 @@ public class Graph
                 '}';
     }
 
-    public String printByTo()
+    public string printByTo()
     {
         StringBuffer sb = new StringBuffer();
         sb.Append("========按终点打印========\n");
@@ -82,7 +82,7 @@ public class Graph
             List<EdgeFrom> edgeFromList = edgesTo[to];
             for (EdgeFrom edgeFrom : edgeFromList)
             {
-                sb.Append(String.format("to:%3d, from:%3d, weight:%05.2f, word:%s\n", to, edgeFrom.from, edgeFrom.weight, edgeFrom.name));
+                sb.Append(string.format("to:%3d, from:%3d, weight:%05.2f, word:%s\n", to, edgeFrom.from, edgeFrom.weight, edgeFrom.name));
             }
         }
 
@@ -110,7 +110,7 @@ public class Graph
      * @param path
      * @return
      */
-    public static String parseResult(List<Vertex> path)
+    public static string parseResult(List<Vertex> path)
     {
         if (path.size() < 2)
         {

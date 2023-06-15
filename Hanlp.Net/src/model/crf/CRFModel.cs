@@ -24,11 +24,11 @@ public class CRFModel : ICacheAble
     /**
      * 标签和id的相互转换
      */
-    Dictionary<String, int> tag2id;
+    Dictionary<string, int> tag2id;
     /**
      * id转标签
      */
-    protected String[] id2tag;
+    protected string[] id2tag;
     /**
      * 特征函数
      */
@@ -69,7 +69,7 @@ public class CRFModel : ICacheAble
      * @param instance 模型的实例（这里允许用户构造不同的CRFModel来储存最终读取的结果）
      * @return 该模型
      */
-    public static CRFModel loadTxt(String path, CRFModel instance)
+    public static CRFModel loadTxt(string path, CRFModel instance)
     {
         CRFModel CRFModel = instance;
         // 先尝试从bin加载
@@ -81,21 +81,21 @@ public class CRFModel : ICacheAble
         int maxid = int.parseInt(lineIterator.next().substring("maxid:".length()).trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
-        String line;
+        string line;
         int id = 0;
-        CRFModel.tag2id = new HashMap<String, int>();
+        CRFModel.tag2id = new HashMap<string, int>();
         while ((line = lineIterator.next()).length() != 0)
         {
             CRFModel.tag2id.put(line, id);
             ++id;
         }
-        CRFModel.id2tag = new String[CRFModel.tag2id.size()];
+        CRFModel.id2tag = new string[CRFModel.tag2id.size()];
         final int size = CRFModel.id2tag.length;
-        for (Map.Entry<String, int> entry : CRFModel.tag2id.entrySet())
+        for (KeyValuePair<string, int> entry : CRFModel.tag2id.entrySet())
         {
             CRFModel.id2tag[entry.getValue()] = entry.getKey();
         }
-        TreeMap<String, FeatureFunction> featureFunctionMap = new TreeMap<String, FeatureFunction>();  // 构建trie树的时候用
+        TreeMap<string, FeatureFunction> featureFunctionMap = new TreeMap<string, FeatureFunction>();  // 构建trie树的时候用
         TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
         CRFModel.featureTemplateList = new LinkedList<FeatureTemplate>();
         while ((line = lineIterator.next()).length() != 0)
@@ -114,21 +114,21 @@ public class CRFModel : ICacheAble
         int b = -1;// 转换矩阵的权重位置
         if (CRFModel.matrix != null)
         {
-            String[] args = lineIterator.next().split(" ", 2);    // 0 B
+            string[] args = lineIterator.next().split(" ", 2);    // 0 B
             b = int.valueOf(args[0]);
             featureFunctionList.put(b, null);
         }
 
         while ((line = lineIterator.next()).length() != 0)
         {
-            String[] args = line.split(" ", 2);
+            string[] args = line.split(" ", 2);
             char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, size);
             featureFunctionMap.put(args[1], featureFunction);
             featureFunctionList.put(int.parseInt(args[0]), featureFunction);
         }
 
-        for (Map.Entry<int, FeatureFunction> entry : featureFunctionList.entrySet())
+        for (KeyValuePair<int, FeatureFunction> entry : featureFunctionList.entrySet())
         {
             int fid = entry.getKey();
             FeatureFunction featureFunction = entry.getValue();
@@ -297,7 +297,7 @@ public class CRFModel : ICacheAble
     public void save(DataOutputStream _out)
     {
         _out.writeInt(id2tag.length);
-        for (String tag : id2tag)
+        for (string tag : id2tag)
         {
             _out.writeUTF(tag);
         }
@@ -337,8 +337,8 @@ public class CRFModel : ICacheAble
         try
         {
             int size = byteArray.nextInt();
-            id2tag = new String[size];
-            tag2id = new HashMap<String, int>(size);
+            id2tag = new string[size];
+            tag2id = new HashMap<string, int>(size);
             for (int i = 0; i < id2tag.length; i++)
             {
                 id2tag[i] = byteArray.nextUTF();
@@ -386,7 +386,7 @@ public class CRFModel : ICacheAble
      * @param path 模型路径
      * @return 该模型
      */
-    public static CRFModel loadTxt(String path)
+    public static CRFModel loadTxt(string path)
     {
         return loadTxt(path, new CRFModel(new DoubleArrayTrie<FeatureFunction>()));
     }
@@ -398,7 +398,7 @@ public class CRFModel : ICacheAble
      * @param path txt的路径，即使不存在.txt，只存在.bin，也应传入txt的路径，方法内部会自动加.bin后缀
      * @return
      */
-    public static CRFModel load(String path)
+    public static CRFModel load(string path)
     {
         CRFModel model = loadBin(path + BIN_EXT);
         if (model != null) return model;
@@ -412,7 +412,7 @@ public class CRFModel : ICacheAble
      * @param path
      * @return
      */
-    public static CRFModel loadBin(String path)
+    public static CRFModel loadBin(string path)
     {
         ByteArray byteArray = ByteArray.createByteArray(path);
         if (byteArray == null) return null;
@@ -427,7 +427,7 @@ public class CRFModel : ICacheAble
      * @param tag
      * @return
      */
-    public int getTagId(String tag)
+    public int getTagId(string tag)
     {
         return tag2id.get(tag);
     }

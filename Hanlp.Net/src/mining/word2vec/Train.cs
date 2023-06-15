@@ -14,7 +14,7 @@ public class Train : AbstractTrainer
                           Train.class.getName());
     }
 
-    void execute(String[] args) 
+    void execute(string[] args) 
     {
         if (args.length <= 1) usage();
 
@@ -32,7 +32,7 @@ public class Train : AbstractTrainer
         w2v.trainModel();
     }
 
-    public static void main(String[] args) 
+    public static void main(string[] args) 
     {
         new Train().execute(args);
     }

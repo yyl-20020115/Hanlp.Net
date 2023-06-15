@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.option;
  */
 public class SpecialOption
 {
-    public final static String UNKNOWN = "$unk";
-    public final static String NIL = "$nil";
-    public final static String ROOT = "$root";
+    public final static string UNKNOWN = "$unk";
+    public final static string NIL = "$nil";
+    public final static string ROOT = "$root";
 }

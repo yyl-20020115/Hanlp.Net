@@ -24,7 +24,7 @@ public class LockableFeatureMap : ImmutableFeatureMDatMap
     }
 
     //@Override
-    public int idOf(String string)
+    public int idOf(string string)
     {
         int id = super.idOf(string); // 查询id
         if (id == -1 && mutable) // 如果不存在该key且处于可写状态

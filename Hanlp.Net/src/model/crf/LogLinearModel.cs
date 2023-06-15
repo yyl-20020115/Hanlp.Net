@@ -58,7 +58,7 @@ public class LogLinearModel : LinearModel
      * @param modelFile HanLP的.bin格式，或CRF++的.txt格式（将会自动转换为model.txt.bin，下次会直接加载.txt.bin）
      * @
      */
-    public LogLinearModel(String modelFile) 
+    public LogLinearModel(string modelFile) 
     {
         super(null, null);
         if (modelFile.endsWith(BIN_EXT))
@@ -66,7 +66,7 @@ public class LogLinearModel : LinearModel
             load(modelFile); // model.bin
             return;
         }
-        String binPath = modelFile + Predefine.BIN_EXT;
+        string binPath = modelFile + Predefine.BIN_EXT;
 
         if (!((HanLP.Config.IOAdapter == null || HanLP.Config.IOAdapter is FileIOAdapter) && !IOUtil.isFileExisted(binPath)))
         {
@@ -91,13 +91,13 @@ public class LogLinearModel : LinearModel
      * @param binFile bin
      * @
      */
-    public LogLinearModel(String txtFile, String binFile) 
+    public LogLinearModel(string txtFile, string binFile) 
     {
         super(null, null);
         convert(txtFile, binFile);
     }
 
-    private void convert(String txtFile, String binFile) 
+    private void convert(string txtFile, string binFile) 
     {
         TagSet tagSet = new TagSet(TaskType.CLASSIFICATION);
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(txtFile);
@@ -107,7 +107,7 @@ public class LogLinearModel : LinearModel
         int maxid = int.parseInt(lineIterator.next().substring("maxid:".length()).trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
-        String line;
+        string line;
         while ((line = lineIterator.next()).length() != 0)
         {
             tagSet.add(line);
@@ -126,7 +126,7 @@ public class LogLinearModel : LinearModel
         this.featureMap = new MutableFeatureMap(tagSet);
         FeatureMap featureMap = this.featureMap;
         final int sizeOfTagSet = tagSet.size();
-        TreeMap<String, FeatureFunction> featureFunctionMap = new TreeMap<String, FeatureFunction>();  // 构建trie树的时候用
+        TreeMap<string, FeatureFunction> featureFunctionMap = new TreeMap<string, FeatureFunction>();  // 构建trie树的时候用
         TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
         ArrayList<FeatureTemplate> featureTemplateList = new ArrayList<FeatureTemplate>();
         float[][] matrix = null;
@@ -147,21 +147,21 @@ public class LogLinearModel : LinearModel
         int b = -1;// 转换矩阵的权重位置
         if (matrix != null)
         {
-            String[] args = lineIterator.next().split(" ", 2);    // 0 B
+            string[] args = lineIterator.next().split(" ", 2);    // 0 B
             b = int.valueOf(args[0]);
             featureFunctionList.put(b, null);
         }
 
         while ((line = lineIterator.next()).length() != 0)
         {
-            String[] args = line.split(" ", 2);
+            string[] args = line.split(" ", 2);
             char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, sizeOfTagSet);
             featureFunctionMap.put(args[1], featureFunction);
             featureFunctionList.put(int.parseInt(args[0]), featureFunction);
         }
 
-        for (Map.Entry<int, FeatureFunction> entry : featureFunctionList.entrySet())
+        for (KeyValuePair<int, FeatureFunction> entry : featureFunctionList.entrySet())
         {
             int fid = entry.getKey();
             FeatureFunction featureFunction = entry.getValue();
@@ -201,17 +201,17 @@ public class LogLinearModel : LinearModel
                 }
             }
         }
-        for (Map.Entry<int, FeatureFunction> entry : featureFunctionList.entrySet())
+        for (KeyValuePair<int, FeatureFunction> entry : featureFunctionList.entrySet())
         {
             int id = entry.getKey();
             FeatureFunction f = entry.getValue();
             if (f == null) continue;
-            String feature = new String(f.o);
+            string feature = new string(f.o);
             for (int tid = 0; tid < featureTemplateList.size(); tid++)
             {
                 FeatureTemplate template = featureTemplateList.get(tid);
-                Iterator<String> iterator = template.delimiterList.iterator();
-                String header = iterator.next();
+                Iterator<string> iterator = template.delimiterList.iterator();
+                string header = iterator.next();
                 if (feature.startsWith(header))
                 {
                     int fid = featureMap.idOf(feature.substring(header.length()) + tid);
@@ -248,9 +248,9 @@ public class LogLinearModel : LinearModel
         }
         if (tagSet.idOf("O") != -1)
         {
-            for (String tag : tagSet.tags())
+            for (string tag : tagSet.tags())
             {
-                String[] parts = tag.split("-");
+                string[] parts = tag.split("-");
                 if (parts.length > 1)
                 {
                     if (parts[0].length() == 1 && "BMES".contains(parts[0]))

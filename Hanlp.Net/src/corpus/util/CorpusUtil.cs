@@ -19,16 +19,16 @@ namespace com.hankcs.hanlp.corpus.util;
  */
 public class CorpusUtil
 {
-    public final static String TAG_PLACE = "未##地";
-    public final static String TAG_BIGIN = "始##始";
-    public final static String TAG_OTHER = "未##它";
-    public final static String TAG_GROUP = "未##团";
-    public final static String TAG_NUMBER = "未##数";
-    public final static String TAG_PROPER = "未##专";
-    public final static String TAG_TIME = "未##时";
-    public final static String TAG_CLUSTER = "未##串";
-    public final static String TAG_END = "末##末";
-    public final static String TAG_PEOPLE = "未##人";
+    public final static string TAG_PLACE = "未##地";
+    public final static string TAG_BIGIN = "始##始";
+    public final static string TAG_OTHER = "未##它";
+    public final static string TAG_GROUP = "未##团";
+    public final static string TAG_NUMBER = "未##数";
+    public final static string TAG_PROPER = "未##专";
+    public final static string TAG_TIME = "未##时";
+    public final static string TAG_CLUSTER = "未##串";
+    public final static string TAG_END = "末##末";
+    public final static string TAG_PEOPLE = "未##人";
 
     /**
      * 编译单词
@@ -38,7 +38,7 @@ public class CorpusUtil
      */
     public static IWord compile(IWord word)
     {
-        String label = word.getLabel();
+        string label = word.getLabel();
         if ("nr".equals(label)) return new Word(word.getValue(), TAG_PEOPLE);
         else if ("m".equals(label) || "mq".equals(label)) return new Word(word.getValue(), TAG_NUMBER);
         else if ("t".equals(label)) return new Word(word.getValue(), TAG_TIME);

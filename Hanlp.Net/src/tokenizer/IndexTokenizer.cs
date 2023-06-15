@@ -26,7 +26,7 @@ public class IndexTokenizer
      * 预置分词器
      */
     public static readonly Segment SEGMENT = HanLP.newSegment().enableIndexMode(true);
-    public static List<Term> segment(String text)
+    public static List<Term> segment(string text)
     {
         return SEGMENT.seg(text);
     }
@@ -46,7 +46,7 @@ public class IndexTokenizer
      * @param text 文本
      * @return 句子列表
      */
-    public static List<List<Term>> seg2sentence(String text)
+    public static List<List<Term>> seg2sentence(string text)
     {
         return SEGMENT.seg2sentence(text);
     }
@@ -58,7 +58,7 @@ public class IndexTokenizer
      * @param shortest 是否断句为最细的子句（将逗号也视作分隔符）
      * @return 句子列表，每个句子由一个单词列表组成
      */
-    public List<List<Term>> seg2sentence(String text, bool shortest)
+    public List<List<Term>> seg2sentence(string text, bool shortest)
     {
         return SEGMENT.seg2sentence(text, shortest);
     }

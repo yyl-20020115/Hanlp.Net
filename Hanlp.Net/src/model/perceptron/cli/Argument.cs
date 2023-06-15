@@ -13,7 +13,7 @@ public @interface Argument
     /**
      * This is the actual command line argument itself
      */
-    String value() default "";
+    string value() default "";
 
     /**
      * If this is true, then the argument must be set or the parse will fail
@@ -23,20 +23,20 @@ public @interface Argument
     /**
      * This is the prefix expected for the argument
      */
-    String prefix() default "-";
+    string prefix() default "-";
 
     /**
      * Each argument can have an alias
      */
-    String alias() default "";
+    string alias() default "";
 
     /**
      * A description of the argument that will appear in the usage method
      */
-    String description() default "";
+    string description() default "";
 
     /**
      * A delimiter for arguments that are multi-valued.
      */
-    String delimiter() default ",";
+    string delimiter() default ",";
 }

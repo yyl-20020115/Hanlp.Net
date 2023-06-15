@@ -40,7 +40,7 @@ public class DemoSentimentAnalysis
 
     private static void predict(IClassifier classifier, String text)
     {
-        System.out.printf("《%s》 情感极性是 【%s】\n", text, classifier.classify(text));
+        Console.Write("《%s》 情感极性是 【%s】\n", text, classifier.classify(text));
     }
 
     static DemoSentimentAnalysis()

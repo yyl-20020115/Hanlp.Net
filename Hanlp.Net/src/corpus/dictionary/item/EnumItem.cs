@@ -92,19 +92,19 @@ public class EnumItem<E : Enum<E>>
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder();
-        ArrayList<Map.Entry<E, int>> entries = new ArrayList<Map.Entry<E, int>>(labelMap.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<E, int>>()
+        ArrayList<KeyValuePair<E, int>> entries = new ArrayList<KeyValuePair<E, int>>(labelMap.entrySet());
+        Collections.sort(entries, new Comparator<KeyValuePair<E, int>>()
         {
             //@Override
-            public int compare(Map.Entry<E, int> o1, Map.Entry<E, int> o2)
+            public int compare(KeyValuePair<E, int> o1, KeyValuePair<E, int> o2)
             {
                 return -o1.getValue().compareTo(o2.getValue());
             }
         });
-        for (Map.Entry<E, int> entry : entries)
+        for (KeyValuePair<E, int> entry : entries)
         {
             sb.Append(entry.getKey());
             sb.Append(' ');
@@ -114,23 +114,23 @@ public class EnumItem<E : Enum<E>>
         return sb.toString();
     }
 
-    public static Map.Entry<String, Map.Entry<String, int>[]> create(String param)
+    public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string param)
     {
         if (param == null) return null;
-        String[] array = param.split(" ");
+        string[] array = param.split(" ");
         return create(array);
     }
 
     
-    public static Map.Entry<String, Map.Entry<String, int>[]> create(String param[])
+    public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string param[])
     {
         if (param.length % 2 == 0) return null;
         int natureCount = (param.length - 1) / 2;
-        Map.Entry<String, int>[] entries = (Map.Entry<String, int>[]) Array.newInstance(Map.Entry.class, natureCount);
+        KeyValuePair<string, int>[] entries = (KeyValuePair<string, int>[]) Array.newInstance(KeyValuePair.class, natureCount);
         for (int i = 0; i < natureCount; ++i)
         {
-            entries[i] = new AbstractMap.SimpleEntry<String, int>(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
+            entries[i] = new AbstractMap.SimpleEntry<string, int>(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
         }
-        return new AbstractMap.SimpleEntry<String, Map.Entry<String, int>[]>(param[0], entries);
+        return new AbstractMap.SimpleEntry<string, KeyValuePair<string, int>[]>(param[0], entries);
     }
 }

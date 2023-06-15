@@ -29,7 +29,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
 
     public MaxEntDependencyParser()
     {
-        String path = HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT;
+        string path = HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT;
         model = GlobalObjectPool.get(path);
         if (model != null) return;
         long start = DateTime.Now.Microsecond;
@@ -46,7 +46,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         {
             GlobalObjectPool.put(path, model);
         }
-        String result = model == null ? "失败" : "成功";
+        string result = model == null ? "失败" : "成功";
         logger.info("最大熵依存句法模型载入" + result + "，耗时" + (DateTime.Now.Microsecond - start) + " ms");
     }
 
@@ -67,7 +67,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
      * @param sentence 句子
      * @return CoNLL格式的依存句法树
      */
-    public static CoNLLSentence compute(String sentence)
+    public static CoNLLSentence compute(string sentence)
     {
         return new MaxEntDependencyParser().parse(sentence);
     }
@@ -75,7 +75,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
     //@Override
     protected Edge makeEdge(Node[] nodeArray, int from, int to)
     {
-        LinkedList<String> context = new LinkedList<String>();
+        LinkedList<string> context = new LinkedList<string>();
         int index = from;
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
@@ -100,11 +100,11 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         context.add(nodeArray[from].compiledWord + '→' + wordBeforeJ.compiledWord + '@' + nodeArray[to].compiledWord);
         context.add(wordBeforeI.label + '@' + nodeArray[from].label + '→' + nodeArray[to].label);
         context.add(nodeArray[from].label + '→' + wordBeforeJ.label + '@' + nodeArray[to].label);
-        List<Pair<String, Double>> pairList = model.predict(context.toArray(new String[0]));
-        Pair<String, Double> maxPair = new Pair<String, Double>("null", -1.0);
+        List<Pair<string, Double>> pairList = model.predict(context.toArray(new string[0]));
+        Pair<string, Double> maxPair = new Pair<string, Double>("null", -1.0);
 //        System._out.println(context);
 //        System._out.println(pairList);
-        for (Pair<String, Double> pair : pairList)
+        for (Pair<string, Double> pair : pairList)
         {
             if (pair.getValue() > maxPair.getValue() && !"null".equals(pair.getKey()))
             {

@@ -9,6 +9,6 @@
  * </copyright>
  */
 /**
- * 可变双数组trie树，可以当做Dictionary<String, V>来用。如果V是int，可以直接用MutableDoubleArrayTrieInteger
+ * 可变双数组trie树，可以当做Dictionary<string, V>来用。如果V是int，可以直接用MutableDoubleArrayTrieInteger
  */
 namespace com.hankcs.hanlp.collection.trie.datrie;

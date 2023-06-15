@@ -31,7 +31,7 @@ public class DemoEvaluateCWS
         Console.WriteLine(CWSEvaluator.evaluate(segment, MSR.TEST_PATH, MSR.OUTPUT_PATH, MSR.GOLD_PATH, MSR.TRAIN_WORDS)); // 标准化评测
         // P:96.80 R:96.55 F1:96.68 OOV-R:70.91 IV-R:97.25
         // 受随机数影响，可能在96.60%左右波动
-        System.out.printf("上述结果可通过sighan05官方脚本校验：perl %s %s %s %s\n",
+        Console.WriteLine("上述结果可通过sighan05官方脚本校验：perl %s %s %s %s\n",
             MSR.SIGHAN05_ROOT + "/scripts/score",
             MSR.TRAIN_WORDS,
             MSR.GOLD_PATH,

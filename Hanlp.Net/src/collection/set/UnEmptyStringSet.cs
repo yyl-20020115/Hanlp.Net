@@ -16,10 +16,10 @@ namespace com.hankcs.hanlp.collection.set;
  * 一个不接受空白的字符串set
  * @author hankcs
  */
-public class UnEmptyStringSet : TreeSet<String>
+public class UnEmptyStringSet : TreeSet<string>
 {
     //@Override
-    public bool add(String s)
+    public bool add(string s)
     {
         if (s.trim().length() == 0) return false;
 

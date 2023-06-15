@@ -103,7 +103,7 @@ public abstract class WordBasedSegment : Segment
             Nature currentNature = current.getNature();
             if (currentNature == Nature.nx && (next.hasNature(Nature.q) || next.hasNature(Nature.n)))
             {
-                String[] param = current.realWord.split("-", 1);
+                string[] param = current.realWord.split("-", 1);
                 if (param.length == 2)
                 {
                     if (TextUtility.isAllNum(param[0]) && TextUtility.isAllNum(param[1]))
@@ -146,7 +146,7 @@ public abstract class WordBasedSegment : Segment
             if (TextUtility.isAllNum(current.realWord) || TextUtility.isAllChineseNum(current.realWord))
             {
                 //===== 1、如果当前词是数字，下一个词是“月、日、时、分、秒、月份”中的一个，则合并且当前词词性是时间
-                String nextWord = next.realWord;
+                string nextWord = next.realWord;
                 if ((nextWord.length() == 1 && "月日时分秒".contains(nextWord)) || (nextWord.length() == 2 && nextWord.equals("月份")))
                 {
                     mergeDate(listIterator, next, current);
@@ -174,7 +174,7 @@ public abstract class WordBasedSegment : Segment
                     else
                     {
                         char[] tmpCharArray = current.realWord.ToCharArray();
-                        String lastChar = String.valueOf(tmpCharArray[tmpCharArray.length - 1]);
+                        string lastChar = string.valueOf(tmpCharArray[tmpCharArray.length - 1]);
                         //===== 4、如果当前串最后一个汉字不是"∶·．／"和半角的'.''/'，那么是数
                         if (!"∶·．／./".contains(lastChar))
                         {
@@ -189,7 +189,7 @@ public abstract class WordBasedSegment : Segment
                             listIterator.previous();
                             listIterator.set(current);
                             listIterator.next();
-                            listIterator.add(Vertex.newPunctuationInstance(String.valueOf(last)));
+                            listIterator.add(Vertex.newPunctuationInstance(string.valueOf(last)));
                         }
                     }
                 }
@@ -241,7 +241,7 @@ public abstract class WordBasedSegment : Segment
      * @return
      * @deprecated 应该使用字符数组的版本
      */
-    private static List<AtomNode> atomSegment(String sSentence, int start, int end)
+    private static List<AtomNode> atomSegment(string sSentence, int start, int end)
     {
         if (end < start)
         {
@@ -284,7 +284,7 @@ public abstract class WordBasedSegment : Segment
             if (nCurType == CharType.CT_CHINESE || nCurType == CharType.CT_INDEX ||
                 nCurType == CharType.CT_DELIMITER || nCurType == CharType.CT_OTHER)
             {
-                String single = String.valueOf(charArray[pCur]);
+                string single = string.valueOf(charArray[pCur]);
                 if (single.length() != 0)
                     atomSegment.add(new AtomNode(single, nCurType));
                 pCur++;
@@ -378,7 +378,7 @@ public abstract class WordBasedSegment : Segment
         DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = CoreDictionary.trie.getSearcher(charArray, 0);
         while (searcher.next())
         {
-            wordNetStorage.add(searcher.begin + 1, new Vertex(new String(charArray, searcher.begin, searcher.length), searcher.value, searcher.index));
+            wordNetStorage.add(searcher.begin + 1, new Vertex(new string(charArray, searcher.begin, searcher.length), searcher.value, searcher.index));
         }
         // 强制用户词典查询
         if (config.forceCustomDictionary)
@@ -388,7 +388,7 @@ public abstract class WordBasedSegment : Segment
                 //@Override
                 public void hit(int begin, int end, CoreDictionary.Attribute value)
                 {
-                    wordNetStorage.add(begin + 1, new Vertex(new String(charArray, begin, end - begin), value));
+                    wordNetStorage.add(begin + 1, new Vertex(new string(charArray, begin, end - begin), value));
                 }
             });
         }

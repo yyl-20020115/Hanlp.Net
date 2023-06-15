@@ -21,5 +21,5 @@ public interface ISaveAble
      * @param path 保存位置，包含文件名，不一定包含后缀
      * @return 是否成功
      */
-    public bool saveTxtTo(String path);
+    public bool saveTxtTo(string path);
 }

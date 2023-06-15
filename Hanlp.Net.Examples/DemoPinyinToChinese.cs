@@ -10,8 +10,8 @@
  */
 using com.hankcs.hanlp;
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.corpus.dictionary;
 using com.hankcs.hanlp.seg.Other;
-using System.Collections.Specialized;
 
 namespace com.hankcs.demo;
 
@@ -29,21 +29,20 @@ public class DemoPinyinToChinese
         StringDictionary dictionary = new StringDictionary("=");
         dictionary.load(HanLP.Config.PinyinDictionaryPath);
         var map = new Dictionary<String, HashSet<String>>();
-        for (Map.Entry<String, String> entry : dictionary.entrySet())
+        foreach (var entry in dictionary.keySet())
         {
             String pinyins = entry.getValue().replaceAll("[\\d,]", "");
-            Set<String> words = map.get(pinyins);
-            if (words == null)
+            if (!map.TryGetValue(pinyins,out var words))
             {
-                words = new TreeSet<String>();
-                map.put(pinyins, words);
+                words = new HashSet<String>();
+                map.Add(pinyins, words);
             }
-            words.add(entry.getKey());
+            words.Add(entry.getKey());
         }
-        Set<String> words = new TreeSet<String>();
-        words.add("绿色");
-        words.add("滤色");
-        map.put("lvse", words);
+        var words2 = new HashSet<String>();
+        words2.Add("绿色");
+        words2.Add("滤色");
+        map.Add("lvse", words2);
 
         // 1.5.2及以下版本
         AhoCorasickDoubleArrayTrie<HashSet<String>> trie = new AhoCorasickDoubleArrayTrie<HashSet<String>>();
@@ -51,7 +50,8 @@ public class DemoPinyinToChinese
         Console.WriteLine(CommonAhoCorasickSegmentUtil.segment("renmenrenweiyalujiangbujianlvse", trie));
 
         // 1.5.3及以上版本
-        CommonAhoCorasickDoubleArrayTrieSegment<HashSet<String>> segment = new CommonAhoCorasickDoubleArrayTrieSegment<Set<String>>(map);
+        CommonAhoCorasickDoubleArrayTrieSegment<HashSet<String>> segment 
+            = new CommonAhoCorasickDoubleArrayTrieSegment<HashSet<String>>(map);
         Console.WriteLine(segment.segment("renmenrenweiyalujiangbujianlvse"));
 
     }

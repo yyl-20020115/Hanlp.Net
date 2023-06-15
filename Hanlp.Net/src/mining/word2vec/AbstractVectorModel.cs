@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.mining.word2vec;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
@@ -28,7 +30,7 @@ public abstract class AbstractVectorModel<K>
 
     public AbstractVectorModel()
     {
-        storage = new TreeMap<K, Vector>();
+        storage = new ();
     }
 
     /**
@@ -37,7 +39,7 @@ public abstract class AbstractVectorModel<K>
      * @param key 键
      * @return 向量
      */
-    final public Vector vector(K key)
+    public Vector vector(K key)
     {
         Vector vector = storage.get(key);
         if (vector == null) return null;
@@ -73,7 +75,7 @@ public abstract class AbstractVectorModel<K>
      * @param size topN个
      * @return 键值对列表, 键是相似词语, 值是相似度, 按相似度降序排列
      */
-    public List<Map.Entry<K, Float>> nearest(K key, int size)
+    public List<KeyValuePair<K, float>> nearest(K key, int size)
     {
         Vector vector = storage.get(key);
         if (vector == null)
@@ -91,18 +93,18 @@ public abstract class AbstractVectorModel<K>
      * @param size   topN个
      * @return 键值对列表, 键是相似词语, 值是相似度, 按相似度降序排列
      */
-    private List<Map.Entry<K, Float>> nearest(K key, Vector vector, int size)
+    private List<KeyValuePair<K, float>> nearest(K key, Vector vector, int size)
     {
-        MaxHeap<Map.Entry<K, Float>> maxHeap = new MaxHeap<Map.Entry<K, Float>>(size, new Comparator<Map.Entry<K, Float>>()
+        MaxHeap<KeyValuePair<K, Float>> maxHeap = new MaxHeap<KeyValuePair<K, Float>>(size, new Comparator<KeyValuePair<K, Float>>()
         {
             //@Override
-            public int compare(Map.Entry<K, Float> o1, Map.Entry<K, Float> o2)
+            public int compare(KeyValuePair<K, Float> o1, KeyValuePair<K, Float> o2)
             {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
 
-        for (Map.Entry<K, Vector> entry : storage.entrySet())
+        for (KeyValuePair<K, Vector> entry : storage.entrySet())
         {
             if (entry.getKey().equals(key))
             {
@@ -120,18 +122,18 @@ public abstract class AbstractVectorModel<K>
      * @param size   topN个
      * @return 键值对列表, 键是相似词语, 值是相似度, 按相似度降序排列
      */
-    public List<Map.Entry<K, Float>> nearest(Vector vector, int size)
+    public List<KeyValuePair<K, float>> nearest(Vector vector, int size)
     {
-        MaxHeap<Map.Entry<K, Float>> maxHeap = new MaxHeap<Map.Entry<K, Float>>(size, new Comparator<Map.Entry<K, Float>>()
+        MaxHeap<KeyValuePair<K, Float>> maxHeap = new MaxHeap<KeyValuePair<K, Float>>(size, new Comparator<KeyValuePair<K, Float>>()
         {
             //@Override
-            public int compare(Map.Entry<K, Float> o1, Map.Entry<K, Float> o2)
+            public int compare(KeyValuePair<K, Float> o1, KeyValuePair<K, Float> o2)
             {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
 
-        for (Map.Entry<K, Vector> entry : storage.entrySet())
+        for (KeyValuePair<K, Vector> entry : storage.entrySet())
         {
             maxHeap.add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
         }
@@ -144,7 +146,7 @@ public abstract class AbstractVectorModel<K>
      * @param vector 向量
      * @return 键值对列表, 键是相似词语, 值是相似度, 按相似度降序排列
      */
-    public List<Map.Entry<K, Float>> nearest(Vector vector)
+    public List<KeyValuePair<K, float>> nearest(Vector vector)
     {
         return nearest(vector, 10);
     }
@@ -155,7 +157,7 @@ public abstract class AbstractVectorModel<K>
      * @param key 词语
      * @return 键值对列表, 键是相似词语, 值是相似度, 按相似度降序排列
      */
-    public List<Map.Entry<K, Float>> nearest(K key)
+    public List<KeyValuePair<K, float>> nearest(K key)
     {
         return nearest(key, 10);
     }
@@ -167,7 +169,7 @@ public abstract class AbstractVectorModel<K>
      * @param size  需要返回前多少个对象
      * @return
      */
-    final List<Map.Entry<K, Float>> queryNearest(String query, int size)
+    List<KeyValuePair<K, Float>> queryNearest(string query, int size)
     {
         if (query == null || query.length() == 0)
         {
@@ -189,7 +191,7 @@ public abstract class AbstractVectorModel<K>
      * @param query
      * @return
      */
-    public abstract Vector query(String query);
+    public abstract Vector query(string query);
 
     /**
      * 模型中的词向量总数（词表大小）

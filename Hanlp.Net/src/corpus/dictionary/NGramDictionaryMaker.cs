@@ -35,7 +35,7 @@ public class NGramDictionaryMaker
 
     public void addPair(IWord first, IWord second)
     {
-        String combine = first.getValue() + "@" + second.getValue();
+        string combine = first.getValue() + "@" + second.getValue();
         int frequency = trie.get(combine);
         if (frequency == null) frequency = 0;
         trie.put(combine, frequency + 1);
@@ -49,7 +49,7 @@ public class NGramDictionaryMaker
      * @param path
      * @return
      */
-    public bool saveTxtTo(String path)
+    public bool saveTxtTo(string path)
     {
         saveNGramToTxt(path + ".ngram.txt");
         saveTransformMatrixToTxt(path + ".tr.txt");
@@ -62,12 +62,12 @@ public class NGramDictionaryMaker
      * @param path
      * @return
      */
-    public bool saveNGramToTxt(String path)
+    public bool saveNGramToTxt(string path)
     {
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
-            for (Map.Entry<String, int> entry : trie.entrySet())
+            for (KeyValuePair<string, int> entry : trie.entrySet())
             {
                 bw.write(entry.getKey() + " " + entry.getValue());
                 bw.newLine();
@@ -89,7 +89,7 @@ public class NGramDictionaryMaker
      * @param path
      * @return
      */
-    public bool saveTransformMatrixToTxt(String path)
+    public bool saveTransformMatrixToTxt(string path)
     {
         return tmDictionaryMaker.saveTxtTo(path);
     }

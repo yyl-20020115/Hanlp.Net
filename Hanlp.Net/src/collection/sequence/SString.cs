@@ -13,7 +13,7 @@ namespace com.hankcs.hanlp.collection.sequence;
 
 
 /**
- * (SimpleString)字符串，因为String内部的char[]无法访问，而许多任务经常操作char[]，所以封装了这个结构。
+ * (SimpleString)字符串，因为string内部的char[]无法访问，而许多任务经常操作char[]，所以封装了这个结构。
  *
  * @author hankcs
  */
@@ -43,7 +43,7 @@ public class SString : Comparable<SString>, CharSequence
         this.e = e;
     }
 
-    public SString(String s)
+    public SString(string s)
     {
         value = s.ToCharArray();
         b = 0;
@@ -97,9 +97,9 @@ public class SString : Comparable<SString>, CharSequence
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
-        return new String(value, b, e - b);
+        return new string(value, b, e - b);
     }
 
     //@Override

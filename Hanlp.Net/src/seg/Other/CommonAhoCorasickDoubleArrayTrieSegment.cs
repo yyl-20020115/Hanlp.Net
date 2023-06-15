@@ -27,12 +27,12 @@ public class CommonAhoCorasickDoubleArrayTrieSegment<V>
         this.trie = trie;
     }
 
-    public CommonAhoCorasickDoubleArrayTrieSegment(TreeMap<String, V> dictionary)
+    public CommonAhoCorasickDoubleArrayTrieSegment(TreeMap<string, V> dictionary)
     {
         trie = new AhoCorasickDoubleArrayTrie<V>(dictionary);
     }
 
-    public LinkedList<ResultTerm<V>> segment(String text)
+    public LinkedList<ResultTerm<V>> segment(string text)
     {
         return CommonAhoCorasickSegmentUtil.segment(text, trie);
     }

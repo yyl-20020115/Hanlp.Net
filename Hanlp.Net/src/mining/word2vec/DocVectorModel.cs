@@ -35,7 +35,7 @@ public class DocVectorModel : AbstractVectorModel<int>
      * @param content 文档内容
      * @return 文档向量
      */
-    public Vector addDocument(int id, String content)
+    public Vector addDocument(int id, string content)
     {
         Vector result = query(content);
         if (result == null) return null;
@@ -50,7 +50,7 @@ public class DocVectorModel : AbstractVectorModel<int>
      * @param query 查询语句（或者说一个文档的内容）
      * @return
      */
-    public List<Map.Entry<int, Float>> nearest(String query)
+    public List<KeyValuePair<int, Float>> nearest(string query)
     {
         return queryNearest(query, 10);
     }
@@ -62,7 +62,7 @@ public class DocVectorModel : AbstractVectorModel<int>
      * @param content 文档
      * @return 向量
      */
-    public Vector query(String content)
+    public Vector query(string content)
     {
         if (content == null || content.length() == 0) return null;
         List<Term> termList = NotionalTokenizer.segment(content);
@@ -98,7 +98,7 @@ public class DocVectorModel : AbstractVectorModel<int>
      * @param with
      * @return
      */
-    public float similarity(String what, String with)
+    public float similarity(string what, string with)
     {
         Vector A = query(what);
         if (A == null) return -1f;

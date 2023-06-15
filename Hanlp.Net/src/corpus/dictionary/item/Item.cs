@@ -23,27 +23,27 @@ public class Item : SimpleItem
     /**
      * 该条目的索引，比如“啊”
      */
-    public String key;
+    public string key;
 
-    public Item(String key, String label)
+    public Item(string key, string label)
         :this(key)
     {
         labelMap.put(label, 1);
     }
 
-    public Item(String key)
+    public Item(string key)
         :base()
     {
         this.key = key;
     }
 
     //@Override
-    public String ToString()
+    public string ToString()
     {
         var sb = new StringBuilder(key);
-        ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(labelMap.entrySet());
+        ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(labelMap.entrySet());
         Collections.sort(entries, );
-        foreach (Map.Entry<String, int> entry in entries)
+        foreach (KeyValuePair<string, int> entry in entries)
         {
             sb.Append(' ');             // 现阶段词典分隔符统一使用空格
             sb.Append(entry.getKey());
@@ -53,10 +53,10 @@ public class Item : SimpleItem
         return sb.ToString();
     }
 
-    public class CT : Comparator<Map.Entry<String, int>>
+    public class CT : Comparator<KeyValuePair<string, int>>
     {
         //@Override
-        public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
+        public int compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
         {
             return -o1.getValue().compareTo(o2.getValue());
         }
@@ -66,7 +66,7 @@ public class Item : SimpleItem
      * 获取首个label
      * @return
      */
-    public String firstLabel()
+    public string firstLabel()
     {
         return labelMap.keySet().iterator().next();
     }
@@ -76,16 +76,16 @@ public class Item : SimpleItem
      * @param param 类似 “希望 v 7685 vn 616” 的字串
      * @return
      */
-    public static Item create(String param)
+    public static Item create(string param)
     {
         if (param == null) return null;
-        String mark = "\\s";    // 分隔符，历史格式用空格，但是现在觉得用制表符比较好
+        string mark = "\\s";    // 分隔符，历史格式用空格，但是现在觉得用制表符比较好
         if (param.indexOf('\t') > 0) mark = "\t";
-        String[] array = param.split(mark);
+        string[] array = param.split(mark);
         return create(array);
     }
 
-    public static Item create(String[] param)
+    public static Item create(string[] param)
     {
         if (param.Length % 2 == 0) return null;
         Item item = new Item(param[0]);

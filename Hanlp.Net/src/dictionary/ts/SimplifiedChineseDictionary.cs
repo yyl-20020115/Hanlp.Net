@@ -22,7 +22,7 @@ public class SimplifiedChineseDictionary : BaseChineseDictionary
     /**
      * 简体=繁体
      */
-    static collection.AhoCorasick.AhoCorasickDoubleArrayTrie<String> trie = new collection.AhoCorasick.AhoCorasickDoubleArrayTrie<String>();
+    static collection.AhoCorasick.AhoCorasickDoubleArrayTrie<string> trie = new collection.AhoCorasick.AhoCorasickDoubleArrayTrie<string>();
     
     static SimplifiedChineseDictionary()
     {
@@ -35,17 +35,17 @@ public class SimplifiedChineseDictionary : BaseChineseDictionary
         logger.info("简繁词典" + HanLP.Config.tcDictionaryRoot + "s2t.txt" + Predefine.BIN_EXT + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
-    public static String convertToTraditionalChinese(String simplifiedChineseString)
+    public static string convertToTraditionalChinese(string simplifiedChineseString)
     {
         return segLongest(simplifiedChineseString.ToCharArray(), trie);
     }
 
-    public static String convertToTraditionalChinese(char[] simplifiedChinese)
+    public static string convertToTraditionalChinese(char[] simplifiedChinese)
     {
         return segLongest(simplifiedChinese, trie);
     }
 
-    public static String getTraditionalChinese(String simplifiedChinese)
+    public static string getTraditionalChinese(string simplifiedChinese)
     {
         return trie.get(simplifiedChinese);
     }

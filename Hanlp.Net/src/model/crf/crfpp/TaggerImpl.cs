@@ -34,11 +34,11 @@ public class TaggerImpl : Tagger
     int feature_id_;
     int thread_id_;
     FeatureIndex feature_index_;
-    List<List<String>> x_;
+    List<List<string>> x_;
     List<List<Node>> node_;
     List<int> answer_;
     List<int> result_;
-    String lastError;
+    string lastError;
     PriorityQueue<QueueElement> agenda_;
     List<List<Double>> penalty_;
     List<List<int>> featureCache_;
@@ -54,7 +54,7 @@ public class TaggerImpl : Tagger
         thread_id_ = 0;
         lastError = null;
         feature_index_ = null;
-        x_ = new ArrayList<List<String>>();
+        x_ = new ArrayList<List<string>>();
         node_ = new ArrayList<List<Node>>();
         answer_ = new ArrayList<int>();
         result_ = new ArrayList<int>();
@@ -393,7 +393,7 @@ public class TaggerImpl : Tagger
         ReadStatus status = ReadStatus.SUCCESS;
         try
         {
-            String line;
+            string line;
             while (true)
             {
                 if ((line = br.readLine()) == null)
@@ -420,7 +420,7 @@ public class TaggerImpl : Tagger
         return status;
     }
 
-    public String toString()
+    public string toString()
     {
         StringBuilder sb = new StringBuilder();
         if (nbest_ < 1)
@@ -433,7 +433,7 @@ public class TaggerImpl : Tagger
             }
             for (int i = 0; i < x_.size(); i++)
             {
-                for (String s : x_.get(i))
+                for (string s : x_.get(i))
                 {
                     sb.Append(s);
                     sb.Append("\t");
@@ -469,7 +469,7 @@ public class TaggerImpl : Tagger
                 sb.Append("# ").Append(n).Append(" ").Append(prob()).Append("\n");
                 for (int i = 0; i < x_.size(); ++i)
                 {
-                    for (String s : x_.get(i))
+                    for (string s : x_.get(i))
                     {
                         sb.Append(s).Append('\t');
                     }
@@ -501,7 +501,7 @@ public class TaggerImpl : Tagger
         return true;
     }
 
-    public bool open(String filename)
+    public bool open(string filename)
     {
         return true;
     }
@@ -520,14 +520,14 @@ public class TaggerImpl : Tagger
     {
     }
 
-    public bool add(String line)
+    public bool add(string line)
     {
-        String[] cols = line.split("[\t ]", -1);
+        string[] cols = line.split("[\t ]", -1);
         return add(cols);
     }
 
     //@Override
-    public bool add(String[] cols)
+    public bool add(string[] cols)
     {
         int xsize = feature_index_.getXsize_();
         if ((mode_ == Mode.LEARN && cols.length < xsize + 1) ||
@@ -672,37 +672,37 @@ public class TaggerImpl : Tagger
         return result_.get(i);
     }
 
-    public String yname(int i)
+    public string yname(int i)
     {
         return feature_index_.getY_().get(i);
     }
 
-    public String y2(int i)
+    public string y2(int i)
     {
         return yname(result_.get(i));
     }
 
-    public String x(int i, int j)
+    public string x(int i, int j)
     {
         return x_.get(i).get(j);
     }
 
-    public List<String> x(int i)
+    public List<string> x(int i)
     {
         return x_.get(i);
     }
 
-    public String parse(String s)
+    public string parse(string s)
     {
         return "";
     }
 
-    public String parse(String s, int i)
+    public string parse(string s, int i)
     {
         return "";
     }
 
-    public String parse(String s, int i, String s2, int j)
+    public string parse(string s, int i, string s2, int j)
     {
         return "";
     }
@@ -929,12 +929,12 @@ public class TaggerImpl : Tagger
         this.feature_index_ = feature_index_;
     }
 
-    public List<List<String>> getX_()
+    public List<List<string>> getX_()
     {
         return x_;
     }
 
-    public void setX_(List<List<String>> x_)
+    public void setX_(List<List<string>> x_)
     {
         this.x_ = x_;
     }
@@ -969,7 +969,7 @@ public class TaggerImpl : Tagger
         this.result_ = result_;
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         if (args.length < 1)
         {

@@ -15,13 +15,13 @@ namespace com.hankcs.hanlp.seg;
 /**
  * @author hankcs
  */
-public class SegmentPipeline : Segment : Pipe<String, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
+public class SegmentPipeline : Segment : Pipe<string, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
 {
-    Pipe<String, List<IWord>> first;
+    Pipe<string, List<IWord>> first;
     Pipe<List<IWord>, List<Term>> last;
     List<Pipe<List<IWord>, List<IWord>>> pipeList;
 
-    private SegmentPipeline(Pipe<String, List<IWord>> first, Pipe<List<IWord>, List<Term>> last)
+    private SegmentPipeline(Pipe<string, List<IWord>> first, Pipe<List<IWord>, List<Term>> last)
     {
         this.first = first;
         this.last = last;
@@ -30,10 +30,10 @@ public class SegmentPipeline : Segment : Pipe<String, List<Term>>, List<Pipe<Lis
 
     public SegmentPipeline(final Segment delegate)
     {
-        this(new Pipe<String, List<IWord>>()
+        this(new Pipe<string, List<IWord>>()
              {
                  //@Override
-                 public List<IWord> flow(String input)
+                 public List<IWord> flow(string input)
                  {
                      List<IWord> task = new LinkedList<IWord>();
                      task.add(new Word(input, null));
@@ -67,17 +67,17 @@ public class SegmentPipeline : Segment : Pipe<String, List<Term>>, List<Pipe<Lis
     //@Override
     protected List<Term> segSentence(char[] sentence)
     {
-        return seg(new String(sentence));
+        return seg(new string(sentence));
     }
 
     //@Override
-    public List<Term> seg(String text)
+    public List<Term> seg(string text)
     {
         return flow(text);
     }
 
     //@Override
-    public List<Term> flow(String input)
+    public List<Term> flow(string input)
     {
         List<IWord> i = first.flow(input);
         for (Pipe<List<IWord>, List<IWord>> pipe : pipeList)

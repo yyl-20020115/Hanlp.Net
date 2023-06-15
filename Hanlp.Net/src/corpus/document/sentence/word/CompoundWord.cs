@@ -26,10 +26,10 @@ public class CompoundWord : IWord, Iterable<Word>
     /**
      * 标签，通常是词性
      */
-    public String label;
+    public string label;
 
     //@Override
-    public String getValue()
+    public string getValue()
     {
         StringBuilder sb = new StringBuilder();
         for (Word word : innerList)
@@ -40,19 +40,19 @@ public class CompoundWord : IWord, Iterable<Word>
     }
 
     //@Override
-    public String getLabel()
+    public string getLabel()
     {
         return label;
     }
 
     //@Override
-    public void setLabel(String label)
+    public void setLabel(string label)
     {
         this.label = label;
     }
 
     //@Override
-    public void setValue(String value)
+    public void setValue(string value)
     {
         innerList.clear();
         innerList.add(new Word(value, label));
@@ -65,7 +65,7 @@ public class CompoundWord : IWord, Iterable<Word>
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         StringBuilder sb = new StringBuilder();
         sb.Append('[');
@@ -73,7 +73,7 @@ public class CompoundWord : IWord, Iterable<Word>
         for (Word word : innerList)
         {
             sb.Append(word.getValue());
-            String label = word.getLabel();
+            string label = word.getLabel();
             if (label != null)
             {
                 sb.Append('/').Append(label);
@@ -98,20 +98,20 @@ public class CompoundWord : IWord, Iterable<Word>
         return new Word(getValue(), getLabel());
     }
 
-    public CompoundWord(List<Word> innerList, String label)
+    public CompoundWord(List<Word> innerList, string label)
     {
         this.innerList = innerList;
         this.label = label;
     }
 
-    public static CompoundWord create(String param)
+    public static CompoundWord create(string param)
     {
         if (param == null) return null;
         int cutIndex = param.lastIndexOf(']');
         if (cutIndex <= 2 || cutIndex == param.length() - 1) return null;
-        String wordParam  = param.substring(1, cutIndex);
+        string wordParam  = param.substring(1, cutIndex);
         List<Word> wordList = new LinkedList<Word>();
-        for (String single : wordParam.split("\\s+"))
+        for (string single : wordParam.split("\\s+"))
         {
             if (single.length() == 0) continue;
             Word word = Word.create(single);
@@ -122,7 +122,7 @@ public class CompoundWord : IWord, Iterable<Word>
             }
             wordList.add(word);
         }
-        String labelParam = param.substring(cutIndex + 1);
+        string labelParam = param.substring(cutIndex + 1);
         if (labelParam.startsWith("/"))
         {
             labelParam = labelParam.substring(1);

@@ -14,13 +14,13 @@ namespace com.hankcs.hanlp.dependency.nnparser;
 
 
 /**
- * int 到 String 的双向map
+ * int 到 string 的双向map
  * @author hankcs
  */
 public class Alphabet : ICacheAble
 {
     ITrie<int> trie;
-    String[] idToLabelMap;
+    string[] idToLabelMap;
 
     public Alphabet()
     {
@@ -32,16 +32,16 @@ public class Alphabet : ICacheAble
      * @param id
      * @return
      */
-    public String labelOf(int id)
+    public string labelOf(int id)
     {
         return idToLabelMap[id];
     }
 
 
-    public int build(TreeMap<String, int> keyValueMap)
+    public int build(TreeMap<string, int> keyValueMap)
     {
-        idToLabelMap = new String[keyValueMap.size()];
-        for (Map.Entry<String, int> entry : keyValueMap.entrySet())
+        idToLabelMap = new string[keyValueMap.size()];
+        for (KeyValuePair<string, int> entry : keyValueMap.entrySet())
         {
             idToLabelMap[entry.getValue()] = entry.getKey();
         }
@@ -63,7 +63,7 @@ public class Alphabet : ICacheAble
      * @param label
      * @return
      */
-    public int idOf(String label)
+    public int idOf(string label)
     {
         return trie.get(label);
     }
@@ -80,7 +80,7 @@ public class Alphabet : ICacheAble
     public void save(DataOutputStream _out)
     {
         _out.writeInt(idToLabelMap.length);
-        for (String value : idToLabelMap)
+        for (string value : idToLabelMap)
         {
             TextUtility.writeString(value, _out);
         }
@@ -88,8 +88,8 @@ public class Alphabet : ICacheAble
 
     public bool load(ByteArray byteArray)
     {
-        idToLabelMap = new String[byteArray.nextInt()];
-        TreeMap<String, int> map = new TreeMap<String, int>();
+        idToLabelMap = new string[byteArray.nextInt()];
+        TreeMap<string, int> map = new TreeMap<string, int>();
         for (int i = 0; i < idToLabelMap.length; i++)
         {
             idToLabelMap[i] = byteArray.nextString();

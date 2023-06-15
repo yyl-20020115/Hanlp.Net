@@ -30,7 +30,7 @@ public class TermOccurrence
         trieSingle = new BinTrie<TermFrequency>();
     }
 
-    public void add(String term)
+    public void add(string term)
     {
         TermFrequency value = trieSingle.get(term);
         if (value == null)
@@ -45,15 +45,15 @@ public class TermOccurrence
         ++totalTerm;
     }
 
-    public void addAll(List<String> termList)
+    public void addAll(List<string> termList)
     {
-        for (String s : termList)
+        for (string s : termList)
         {
             add(s);
         }
     }
 
-    public java.util.Set<java.util.Map.Entry<String, TermFrequency>> getEntrySet()
+    public java.util.Set<java.util.KeyValuePair<string, TermFrequency>> getEntrySet()
     {
         return trieSingle.entrySet();
     }

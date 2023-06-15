@@ -17,5 +17,5 @@ namespace com.hankcs.hanlp.model.perceptron.common;
  */
 public interface IIdStringMap
 {
-    String stringOf(int id);
+    string stringOf(int id);
 }

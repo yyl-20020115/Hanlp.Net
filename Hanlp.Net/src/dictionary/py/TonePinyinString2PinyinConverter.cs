@@ -22,21 +22,21 @@ public class TonePinyinString2PinyinConverter
     /**
      * 带音调的字母到Pinyin的map
      */
-    static Dictionary<String, Pinyin> mapKey;
+    static Dictionary<string, Pinyin> mapKey;
     /**
      * 带数字音调的字幕到Pinyin的map
      */
-    static Dictionary<String, Pinyin> mapNumberKey;
+    static Dictionary<string, Pinyin> mapNumberKey;
     static Trie trie;
     static TonePinyinString2PinyinConverter()
     {
-        mapNumberKey = new TreeMap<String, Pinyin>();
-        mapKey = new TreeMap<String, Pinyin>();
+        mapNumberKey = new TreeMap<string, Pinyin>();
+        mapKey = new TreeMap<string, Pinyin>();
         for (Pinyin pinyin : Integer2PinyinConverter.pinyins)
         {
             mapNumberKey.put(pinyin.toString(), pinyin);
-            String pinyinWithToneMark = pinyin.getPinyinWithToneMark();
-            String pinyinWithoutTone = pinyin.getPinyinWithoutTone();
+            string pinyinWithToneMark = pinyin.getPinyinWithToneMark();
+            string pinyinWithoutTone = pinyin.getPinyinWithoutTone();
             Pinyin tone5 = String2PinyinConverter.convert2Tone5(pinyin);
             mapKey.put(pinyinWithToneMark, pinyin);
             mapKey.put(pinyinWithoutTone, tone5);
@@ -50,19 +50,19 @@ public class TonePinyinString2PinyinConverter
      * @param singlePinyin
      * @return
      */
-    public static bool valid(String singlePinyin)
+    public static bool valid(string singlePinyin)
     {
         if (mapNumberKey.containsKey(singlePinyin)) return true;
 
         return false;
     }
 
-    public static Pinyin convertFromToneNumber(String singlePinyin)
+    public static Pinyin convertFromToneNumber(string singlePinyin)
     {
         return mapNumberKey.get(singlePinyin);
     }
 
-    public static List<Pinyin> convert(String[] pinyinArray)
+    public static List<Pinyin> convert(string[] pinyinArray)
     {
         List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.length);
         for (int i = 0; i < pinyinArray.length; i++)
@@ -73,7 +73,7 @@ public class TonePinyinString2PinyinConverter
         return pinyinList;
     }
 
-    public static Pinyin convert(String singlePinyin)
+    public static Pinyin convert(string singlePinyin)
     {
         return mapKey.get(singlePinyin);
     }
@@ -83,7 +83,7 @@ public class TonePinyinString2PinyinConverter
      * @param tonePinyinText
      * @return
      */
-    public static List<Pinyin> convert(String tonePinyinText, bool removeNull)
+    public static List<Pinyin> convert(string tonePinyinText, bool removeNull)
     {
         List<Pinyin> pinyinList = new LinkedList<Pinyin>();
         Collection<Token> tokenize = trie.tokenize(tonePinyinText);
@@ -102,9 +102,9 @@ public class TonePinyinString2PinyinConverter
      * @param pinyinStringArray
      * @return
      */
-    public static bool valid(String[] pinyinStringArray)
+    public static bool valid(string[] pinyinStringArray)
     {
-        for (String p : pinyinStringArray)
+        for (string p : pinyinStringArray)
         {
             if (!valid(p)) return false;
         }
@@ -112,10 +112,10 @@ public class TonePinyinString2PinyinConverter
         return true;
     }
 
-    public static List<Pinyin> convertFromToneNumber(String[] pinyinArray)
+    public static List<Pinyin> convertFromToneNumber(string[] pinyinArray)
     {
         List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.length);
-        for (String py : pinyinArray)
+        for (string py : pinyinArray)
         {
             pinyinList.add(convertFromToneNumber(py));
         }

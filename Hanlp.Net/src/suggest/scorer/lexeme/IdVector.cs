@@ -22,7 +22,7 @@ public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
 {
     public List<long[]> idArrayList;
 
-    public IdVector(String sentence)
+    public IdVector(string sentence)
     {
         this(CoreSynonymDictionaryEx.convert(IndexTokenizer.segment(sentence), false));
     }

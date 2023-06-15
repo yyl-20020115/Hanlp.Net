@@ -69,7 +69,7 @@ public class PlaceRecognition
             // 构成更长的
 //            if (Nature.ns == vertex.getNature() && vertex.getAttribute().totalFrequency <= 1000)
 //            {
-//                String value = vertex.realWord;
+//                string value = vertex.realWord;
 //                int longestSuffixLength = PlaceSuffixDictionary.dictionary.getLongestSuffixLength(value);
 //                int wordLength = value.length() - longestSuffixLength;
 //                if (longestSuffixLength != 0 && wordLength != 0)

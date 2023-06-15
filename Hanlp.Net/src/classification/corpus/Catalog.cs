@@ -18,8 +18,8 @@ namespace com.hankcs.hanlp.classification.corpus;
  */
 public class Catalog : Serializable
 {
-    Dictionary<String, int> categoryId;
-    List<String> idCategory;
+    Dictionary<string, int> categoryId;
+    List<string> idCategory;
 
     public Catalog()
     {
@@ -27,7 +27,7 @@ public class Catalog : Serializable
         idCategory = new ();
     }
 
-    public Catalog(String[] catalog)
+    public Catalog(string[] catalog)
     {
         this();
         for (int i = 0; i < catalog.length; i++)
@@ -37,7 +37,7 @@ public class Catalog : Serializable
         }
     }
 
-    public int addCategory(String category)
+    public int addCategory(string category)
     {
         int id = categoryId.get(category);
         if (id == null)
@@ -51,12 +51,12 @@ public class Catalog : Serializable
         return id;
     }
 
-    public int getId(String category)
+    public int getId(string category)
     {
         return categoryId.get(category);
     }
 
-    public String getCategory(int id)
+    public string getCategory(int id)
     {
         assert 0 <= id;
         assert id < idCategory.size();
@@ -69,9 +69,9 @@ public class Catalog : Serializable
         return idCategory.size();
     }
 
-    public String[] toArray()
+    public string[] toArray()
     {
-        String[] catalog = new String[idCategory.size()];
+        string[] catalog = new string[idCategory.size()];
         idCategory.toArray(catalog);
 
         return catalog;

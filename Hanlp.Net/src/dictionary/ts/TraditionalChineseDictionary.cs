@@ -22,7 +22,7 @@ public class TraditionalChineseDictionary : BaseChineseDictionary
     /**
      * 繁体=简体
      */
-    public static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
+    public static AhoCorasickDoubleArrayTrie<string> trie = new AhoCorasickDoubleArrayTrie<string>();
 
     static TraditionalChineseDictionary()
     {
@@ -35,12 +35,12 @@ public class TraditionalChineseDictionary : BaseChineseDictionary
         logger.info("繁简词典" + HanLP.Config.tcDictionaryRoot + "t2s.txt" + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
-    public static String convertToSimplifiedChinese(String traditionalChineseString)
+    public static string convertToSimplifiedChinese(string traditionalChineseString)
     {
         return segLongest(traditionalChineseString.ToCharArray(), trie);
     }
 
-    public static String convertToSimplifiedChinese(char[] traditionalChinese)
+    public static string convertToSimplifiedChinese(char[] traditionalChinese)
     {
         return segLongest(traditionalChinese, trie);
     }

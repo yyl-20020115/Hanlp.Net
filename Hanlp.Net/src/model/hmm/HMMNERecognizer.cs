@@ -34,10 +34,10 @@ public class HMMNERecognizer : HMMTrainer : NERecognizer
     }
 
     //@Override
-    protected List<String[]> convertToSequence(Sentence sentence)
+    protected List<string[]> convertToSequence(Sentence sentence)
     {
-        List<String[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
-        for (String[] pair : collector)
+        List<string[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
+        for (string[] pair : collector)
         {
             pair[1] = pair[2];
         }
@@ -52,7 +52,7 @@ public class HMMNERecognizer : HMMTrainer : NERecognizer
     }
 
     //@Override
-    public String[] recognize(String[] wordArray, String[] posArray)
+    public string[] recognize(string[] wordArray, string[] posArray)
     {
         int[] obsArray = new int[wordArray.length];
         for (int i = 0; i < obsArray.length; i++)
@@ -61,7 +61,7 @@ public class HMMNERecognizer : HMMTrainer : NERecognizer
         }
         int[] tagArray = new int[obsArray.length];
         model.predict(obsArray, tagArray);
-        String[] tags = new String[obsArray.length];
+        string[] tags = new string[obsArray.length];
         for (int i = 0; i < tagArray.length; i++)
         {
             tags[i] = tagSet.stringOf(tagArray[i]);

@@ -31,7 +31,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
      */
     char[] firstCharArray;
 
-    public PinyinKey(String sentence)
+    public PinyinKey(string sentence)
     {
         Pair<List<Pinyin>, List<Boolean>> pair = String2PinyinConverter.convert2Pair(sentence, true);
         pinyinArray = PinyinUtil.convertList2Array(pair.getKey());
@@ -119,7 +119,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("PinyinKey{");
         sb.Append("pinyinArray=").Append(Arrays.toString(pinyinArray));

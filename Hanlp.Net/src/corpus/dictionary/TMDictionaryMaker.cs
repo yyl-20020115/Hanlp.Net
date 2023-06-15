@@ -19,11 +19,11 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  */
 public class TMDictionaryMaker : ISaveAble
 {
-    Dictionary<String, Dictionary<String, int>> transferMatrix;
+    Dictionary<string, Dictionary<string, int>> transferMatrix;
 
     public TMDictionaryMaker()
     {
-        transferMatrix = new TreeMap<String, Dictionary<String, int>>();
+        transferMatrix = new TreeMap<string, Dictionary<string, int>>();
     }
 
     /**
@@ -31,12 +31,12 @@ public class TMDictionaryMaker : ISaveAble
      * @param first
      * @param second
      */
-    public void addPair(String first, String second)
+    public void addPair(string first, string second)
     {
-        Dictionary<String, int> firstMatrix = transferMatrix.get(first);
+        Dictionary<string, int> firstMatrix = transferMatrix.get(first);
         if (firstMatrix == null)
         {
-            firstMatrix = new TreeMap<String, int>();
+            firstMatrix = new TreeMap<string, int>();
             transferMatrix.put(first, firstMatrix);
         }
         int frequency = firstMatrix.get(second);
@@ -45,28 +45,28 @@ public class TMDictionaryMaker : ISaveAble
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
-        Set<String> labelSet = new TreeSet<String>();
-        for (Map.Entry<String, Dictionary<String, int>> first : transferMatrix.entrySet())
+        Set<string> labelSet = new TreeSet<string>();
+        for (KeyValuePair<string, Dictionary<string, int>> first : transferMatrix.entrySet())
         {
             labelSet.add(first.getKey());
             labelSet.addAll(first.getValue().keySet());
         }
         final StringBuilder sb = new StringBuilder();
         sb.Append(' ');
-        for (String key : labelSet)
+        for (string key : labelSet)
         {
             sb.Append(',');
             sb.Append(key);
         }
         sb.Append('\n');
-        for (String first : labelSet)
+        for (string first : labelSet)
         {
-            Dictionary<String, int> firstMatrix = transferMatrix.get(first);
-            if (firstMatrix == null) firstMatrix = new TreeMap<String, int>();
+            Dictionary<string, int> firstMatrix = transferMatrix.get(first);
+            if (firstMatrix == null) firstMatrix = new TreeMap<string, int>();
             sb.Append(first);
-            for (String second : labelSet)
+            for (string second : labelSet)
             {
                 sb.Append(',');
                 int frequency = firstMatrix.get(second);
@@ -79,7 +79,7 @@ public class TMDictionaryMaker : ISaveAble
     }
 
     //@Override
-    public bool saveTxtTo(String path)
+    public bool saveTxtTo(string path)
     {
         try
         {

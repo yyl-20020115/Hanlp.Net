@@ -126,7 +126,7 @@ public class MDAG : ICacheAble
          * @param str2 字符串2
          * @return 是否满足自己这种关系
          */
-        public bool satisfiesCondition(String str1, String str2)
+        public bool satisfiesCondition(string str1, string str2)
         {
             bool satisfiesSearchCondition;
 
@@ -156,7 +156,7 @@ public class MDAG : ICacheAble
      * @param path
      * @
      */
-    public MDAG(String path) 
+    public MDAG(string path) 
     {
         this(IOUtil.newBufferedReader(path));
     }
@@ -182,10 +182,10 @@ public class MDAG : ICacheAble
      */
     public MDAG(BufferedReader dataFileBufferedReader) 
     {
-        String currentString = "";
-        String previousString = "";
+        string currentString = "";
+        string previousString = "";
 
-        //Read all the lines in dataFile and add the String contained in each to the MDAG.
+        //Read all the lines in dataFile and add the string contained in each to the MDAG.
         while ((currentString = dataFileBufferedReader.readLine()) != null)
         {
             int mpsIndex = calculateMinimizationProcessingStartIndex(previousString, currentString);
@@ -194,8 +194,8 @@ public class MDAG : ICacheAble
             //equivalence class representation after a certain point, call replaceOrRegister to do so.
             if (mpsIndex != -1)
             {
-                String transitionSubstring = previousString.substring(0, mpsIndex);             // 公共前缀
-                String minimizationProcessingSubstring = previousString.substring(mpsIndex);    // 不同后缀
+                string transitionSubstring = previousString.substring(0, mpsIndex);             // 公共前缀
+                string minimizationProcessingSubstring = previousString.substring(mpsIndex);    // 不同后缀
                 replaceOrRegister(sourceNode.transition(transitionSubstring), minimizationProcessingSubstring);
             }
             /////
@@ -205,9 +205,9 @@ public class MDAG : ICacheAble
         }
         /////
 
-        //Since we delay the minimization of the previously-added String
+        //Since we delay the minimization of the previously-added string
         //until after we read the next one, we need to have a seperate
-        //statement to minimize the absolute last String.
+        //statement to minimize the absolute last string.
         replaceOrRegister(sourceNode, previousString);
     }
 
@@ -217,7 +217,7 @@ public class MDAG : ICacheAble
      *
      * @param strCollection a {@link java.util.Collection} containing Strings that the MDAG will contain
      */
-    public MDAG(Collection<String> strCollection)
+    public MDAG(Collection<string> strCollection)
     {
         addStrings(strCollection);
     }
@@ -234,14 +234,14 @@ public class MDAG : ICacheAble
      *
      * @param strCollection a {@link java.util.Collection} containing Strings to be added to the MDAG
      */
-    public final void addStrings(Collection<String> strCollection)
+    public final void addStrings(Collection<string> strCollection)
     {
         if (sourceNode != null)
         {
-            String previousString = "";
+            string previousString = "";
 
             //Add all the Strings in strCollection to the MDAG.
-            for (String currentString : strCollection)
+            for (string currentString : strCollection)
             {
                 int mpsIndex = calculateMinimizationProcessingStartIndex(previousString, currentString);
 
@@ -250,8 +250,8 @@ public class MDAG : ICacheAble
                 if (mpsIndex != -1)
                 {
 
-                    String transitionSubstring = previousString.substring(0, mpsIndex);
-                    String minimizationProcessingSubString = previousString.substring(mpsIndex);
+                    string transitionSubstring = previousString.substring(0, mpsIndex);
+                    string minimizationProcessingSubString = previousString.substring(mpsIndex);
                     replaceOrRegister(sourceNode.transition(transitionSubstring), minimizationProcessingSubString);
                 }
                 /////
@@ -261,9 +261,9 @@ public class MDAG : ICacheAble
             }
             /////
 
-            //Since we delay the minimization of the previously-added String
+            //Since we delay the minimization of the previously-added string
             //until after we read the next one, we need to have a seperate
-            //statement to minimize the absolute last String.
+            //statement to minimize the absolute last string.
             replaceOrRegister(sourceNode, previousString);
         }
         else
@@ -277,9 +277,9 @@ public class MDAG : ICacheAble
     /**
      * Adds a string to the MDAG.
      *
-     * @param str the String to be added to the MDAG
+     * @param str the string to be added to the MDAG
      */
-    public void addString(String str)
+    public void addString(string str)
     {
         if (sourceNode != null)
         {
@@ -294,9 +294,9 @@ public class MDAG : ICacheAble
     }
 
 
-    private void splitTransitionPath(MDAGNode originNode, String storedStringSubstr)
+    private void splitTransitionPath(MDAGNode originNode, string storedStringSubstr)
     {
-        HashMap<String, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(originNode, storedStringSubstr);
+        HashMap<string, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(originNode, storedStringSubstr);
         int toFirstConfluenceNodeTransitionCharIndex = (int) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
         MDAGNode firstConfluenceNode = (MDAGNode) firstConfluenceNodeDataHashMap.get("confluenceNode");
 
@@ -308,7 +308,7 @@ public class MDAG : ICacheAble
 
             transitionCount += firstConfluenceNodeClone.getOutgoingTransitionCount();
 
-            String unprocessedSubString = storedStringSubstr.substring(toFirstConfluenceNodeTransitionCharIndex + 1);
+            string unprocessedSubString = storedStringSubstr.substring(toFirstConfluenceNodeTransitionCharIndex + 1);
             splitTransitionPath(firstConfluenceNodeClone, unprocessedSubString);
         }
     }
@@ -317,11 +317,11 @@ public class MDAG : ICacheAble
     /**
      * Calculates the length of the the sub-path in a _transition path, that is used only by a given string.
      *
-     * @param str a String corresponding to a _transition path from sourceNode
+     * @param str a string corresponding to a _transition path from sourceNode
      * @return an int denoting the size of the sub-path in the _transition path
      * corresponding to {@code str} that is only used by {@code str}
      */
-    private int calculateSoleTransitionPathLength(String str)
+    private int calculateSoleTransitionPathLength(string str)
     {
         Stack<MDAGNode> transitionPathNodeStack = sourceNode.getTransitionPathNodes(str);
         transitionPathNodeStack.pop();  //The MDAGNode at the top of the stack is not needed
@@ -348,11 +348,11 @@ public class MDAG : ICacheAble
 
 
     /**
-     * Removes a String from the MDAG.
+     * Removes a string from the MDAG.
      *
-     * @param str the String to be removed from the MDAG
+     * @param str the string to be removed from the MDAG
      */
-    public void removeString(String str)
+    public void removeString(string str)
     {
         if (sourceNode != null)
         {
@@ -405,7 +405,7 @@ public class MDAG : ICacheAble
 
     /**
      * 计算最小化的执行位置，其实是prevStr和currStr的第一个分叉点<br>
-     * Determines the start index of the substring in the String most recently added to the MDAG
+     * Determines the start index of the substring in the string most recently added to the MDAG
      * that corresponds to the _transition path that will be next up for minimization processing.
      * <p/>
      * The "minimization processing start index" is defined as the index in {@code prevStr} which starts the substring
@@ -413,12 +413,12 @@ public class MDAG : ICacheAble
      * the substring before this point is not considered for minimization in order to limit the amount of times the
      * equivalence classes of its nodes will need to be reassigned during the processing of Strings which share prefixes.
      *
-     * @param prevStr the String most recently added to the MDAG
-     * @param currStr the String next to be added to the MDAG
+     * @param prevStr the string most recently added to the MDAG
+     * @param currStr the string next to be added to the MDAG
      * @return an int of the index in {@code prevStr} that starts the substring corresponding
      * to the _transition path next up for minimization processing
      */
-    private int calculateMinimizationProcessingStartIndex(String prevStr, String currStr)
+    private int calculateMinimizationProcessingStartIndex(string prevStr, string currStr)
     {
         int mpsIndex;
 
@@ -443,14 +443,14 @@ public class MDAG : ICacheAble
 
 
     /**
-     * Determines the longest prefix of a given String that is
-     * the prefix of another String previously added to the MDAG.
+     * Determines the longest prefix of a given string that is
+     * the prefix of another string previously added to the MDAG.
      *
-     * @param str the String to be processed
-     * @return a String of the longest prefix of {@code str}
-     * that is also a prefix of a String contained in the MDAG
+     * @param str the string to be processed
+     * @return a string of the longest prefix of {@code str}
+     * that is also a prefix of a string contained in the MDAG
      */
-    private String determineLongestPrefixInMDAG(String str)
+    private string determineLongestPrefixInMDAG(string str)
     {
         MDAGNode currentNode = sourceNode;
         int numberOfChars = str.length();
@@ -476,15 +476,15 @@ public class MDAG : ICacheAble
     /**
      * Determines and retrieves data related to the first confluence node
      * (defined as a node with two or more incoming transitions) of a
-     * _transition path corresponding to a given String from a given node.
+     * _transition path corresponding to a given string from a given node.
      *
      * @param originNode the MDAGNode from which the _transition path corresponding to str starts from
-     * @param str        a String corresponding to a _transition path in the MDAG
+     * @param str        a string corresponding to a _transition path in the MDAG
      * @return a HashMap of Strings to Objects containing:
      * - an int denoting the length of the path to the first confluence node in the _transition path of interest
      * - the MDAGNode which is the first confluence node in the _transition path of interest (or null if one does not exist)
      */
-    private HashMap<String, Object> getTransitionPathFirstConfluenceNodeData(MDAGNode originNode, String str)
+    private HashMap<string, Object> getTransitionPathFirstConfluenceNodeData(MDAGNode originNode, string str)
     {
         int currentIndex = 0;
         int charCount = str.length();
@@ -507,7 +507,7 @@ public class MDAG : ICacheAble
 
         //Create a HashMap containing the index of the last char in the substring corresponding
         //to the transitoin path to the confluence node, as well as the actual confluence node
-        HashMap<String, Object> confluenceNodeDataHashMap = new HashMap<String, Object>(2);
+        HashMap<string, Object> confluenceNodeDataHashMap = new HashMap<string, Object>(2);
         confluenceNodeDataHashMap.put("toConfluenceNodeTransitionCharIndex", (noConfluenceNode ? null : currentIndex));
         confluenceNodeDataHashMap.put("confluenceNode", noConfluenceNode ? null : currentNode);
         /////
@@ -525,9 +525,9 @@ public class MDAG : ICacheAble
      * a representative of a right language/equivalence class if a such a node does not already exist.
      *
      * @param originNode the MDAGNode that the _transition path corresponding to str starts from
-     * @param str        a String related to a _transition path
+     * @param str        a string related to a _transition path
      */
-    private void replaceOrRegister(MDAGNode originNode, String str)
+    private void replaceOrRegister(MDAGNode originNode, string str)
     {
         char transitionLabelChar = str.charAt(0);
         MDAGNode relevantTargetNode = originNode.transition(transitionLabelChar);
@@ -560,9 +560,9 @@ public class MDAG : ICacheAble
      * Adds a _transition path starting from a specific node in the MDAG.
      *
      * @param originNode the MDAGNode which will serve as the start point of the to-be-created _transition path
-     * @param str        the String to be used to create a new _transition path from {@code originNode}
+     * @param str        the string to be used to create a new _transition path from {@code originNode}
      */
-    private void addTransitionPath(MDAGNode originNode, String str)
+    private void addTransitionPath(MDAGNode originNode, string str)
     {
         if (!str.isEmpty())
         {
@@ -590,9 +590,9 @@ public class MDAG : ICacheAble
      * 从登记簿中移除路径对应的状态们<br>
      * Removes from equivalenceClassMDAGNodeHashmap the entries of all the nodes in a _transition path.
      *
-     * @param str a String corresponding to a _transition path from sourceNode
+     * @param str a string corresponding to a _transition path from sourceNode
      */
-    private void removeTransitionPathRegisterEntries(String str)
+    private void removeTransitionPathRegisterEntries(string str)
     {
         MDAGNode currentNode = sourceNode;
 
@@ -617,10 +617,10 @@ public class MDAG : ICacheAble
      * Clones a _transition path from a given node.
      *
      * @param pivotConfluenceNode         the MDAGNode that the cloning operation is to be based from
-     * @param transitionStringToPivotNode a String which corresponds with a _transition path from souceNode to {@code pivotConfluenceNode}
-     * @param str                         a String which corresponds to the _transition path from {@code pivotConfluenceNode} that is to be cloned
+     * @param transitionStringToPivotNode a string which corresponds with a _transition path from souceNode to {@code pivotConfluenceNode}
+     * @param str                         a string which corresponds to the _transition path from {@code pivotConfluenceNode} that is to be cloned
      */
-    private void cloneTransitionPath(MDAGNode pivotConfluenceNode, String transitionStringToPivotNode, String str)
+    private void cloneTransitionPath(MDAGNode pivotConfluenceNode, string transitionStringToPivotNode, string str)
     {
         MDAGNode lastTargetNode = pivotConfluenceNode.transition(str);      //Will store the last node which was used as the base of a cloning operation
         MDAGNode lastClonedNode = null;                                     //Will store the last cloned node
@@ -630,14 +630,14 @@ public class MDAG : ICacheAble
         //which will be used to _transition to, and duplicate the nodes in the _transition path of str from pivotConfluenceNode.
         for (int i = str.length(); i >= 0; i--)
         {
-            String currentTransitionString = (i > 0 ? str.substring(0, i) : null);
+            string currentTransitionString = (i > 0 ? str.substring(0, i) : null);
             MDAGNode currentTargetNode = (i > 0 ? pivotConfluenceNode.transition(currentTransitionString) : pivotConfluenceNode);
             MDAGNode clonedNode;
 
             if (i == 0)  //if we have reached pivotConfluenceNode
             {
                 //Clone pivotConfluenceNode in a way that reassigns the _transition of its parent node (in transitionStringToConfluenceNode's path) to the clone.
-                String transitionStringToPivotNodeParent = transitionStringToPivotNode.substring(0, transitionStringToPivotNode.length() - 1);
+                string transitionStringToPivotNodeParent = transitionStringToPivotNode.substring(0, transitionStringToPivotNode.length() - 1);
                 char parentTransitionLabelChar = transitionStringToPivotNode.charAt(transitionStringToPivotNode.length() - 1);
                 clonedNode = pivotConfluenceNode.clone(sourceNode.transition(transitionStringToPivotNodeParent), parentTransitionLabelChar);
                 /////
@@ -666,18 +666,18 @@ public class MDAG : ICacheAble
 
 
     /**
-     * Adds a String to the MDAG (called by addString to do actual MDAG manipulation).
+     * Adds a string to the MDAG (called by addString to do actual MDAG manipulation).
      *
-     * @param str the String to be added to the MDAG
+     * @param str the string to be added to the MDAG
      */
-    private void addStringInternal(String str)
+    private void addStringInternal(string str)
     {
-        String prefixString = determineLongestPrefixInMDAG(str);
-        String suffixString = str.substring(prefixString.length());
+        string prefixString = determineLongestPrefixInMDAG(str);
+        string suffixString = str.substring(prefixString.length());
 
         //Retrive the data related to the first confluence node (a node with two or more incoming transitions)
         //in the _transition path from sourceNode corresponding to prefixString.
-        HashMap<String, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(sourceNode, prefixString);
+        HashMap<string, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(sourceNode, prefixString);
         MDAGNode firstConfluenceNodeInPrefix = (MDAGNode) firstConfluenceNodeDataHashMap.get("confluenceNode");
         int toFirstConfluenceNodeTransitionCharIndex = (int) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
         /////
@@ -692,8 +692,8 @@ public class MDAG : ICacheAble
         //This ensures that we do not disturb the other _transition paths containing this node.
         if (firstConfluenceNodeInPrefix != null)
         {
-            String transitionStringOfPathToFirstConfluenceNode = prefixString.substring(0, toFirstConfluenceNodeTransitionCharIndex + 1);
-            String transitionStringOfToBeDuplicatedPath = prefixString.substring(toFirstConfluenceNodeTransitionCharIndex + 1);
+            string transitionStringOfPathToFirstConfluenceNode = prefixString.substring(0, toFirstConfluenceNodeTransitionCharIndex + 1);
+            string transitionStringOfToBeDuplicatedPath = prefixString.substring(toFirstConfluenceNodeTransitionCharIndex + 1);
             cloneTransitionPath(firstConfluenceNodeInPrefix, transitionStringOfPathToFirstConfluenceNode, transitionStringOfToBeDuplicatedPath);
         }
         /////
@@ -817,12 +817,12 @@ public class MDAG : ICacheAble
 
     /**
      * 是否包含<br>
-     * Determines whether a String is present in the MDAG.
+     * Determines whether a string is present in the MDAG.
      *
-     * @param str the String to be searched for
+     * @param str the string to be searched for
      * @return true if {@code str} is present in the MDAG, and false otherwise
      */
-    public bool contains(String str)
+    public bool contains(string str)
     {
         if (sourceNode != null)      //if the MDAG hasn't been simplified
         {
@@ -844,18 +844,18 @@ public class MDAG : ICacheAble
      *                              {@code searchCondition} with {@code conditionString}
      * @param searchCondition       the SearchCondition enum field describing the type of relationship that Strings contained in the MDAG
      *                              must have with {@code conditionString} in order to be included in the result set
-     * @param searchConditionString the String that all Strings in the MDAG must be related with in the fashion denoted
+     * @param searchConditionString the string that all Strings in the MDAG must be related with in the fashion denoted
      *                              by {@code searchCondition} in order to be included in the result set
-     * @param prefixString          the String corresponding to the currently traversed _transition path
+     * @param prefixString          the string corresponding to the currently traversed _transition path
      * @param transitionTreeMap     a TreeMap of Characters to MDAGNodes collectively representing an MDAGNode's _transition set
      */
-    private void getStrings(HashSet<String> strHashSet, SearchCondition searchCondition, String searchConditionString, String prefixString, TreeMap<Character, MDAGNode> transitionTreeMap)
+    private void getStrings(HashSet<string> strHashSet, SearchCondition searchCondition, string searchConditionString, string prefixString, TreeMap<Character, MDAGNode> transitionTreeMap)
     {
         //Traverse all the valid _transition paths beginning from each _transition in transitionTreeMap, inserting the
         //corresponding Strings in to strHashSet that have the relationship with conditionString denoted by searchCondition
         for (Entry<Character, MDAGNode> transitionKeyValuePair : transitionTreeMap.entrySet())
         {
-            String newPrefixString = prefixString + transitionKeyValuePair.getKey();
+            string newPrefixString = prefixString + transitionKeyValuePair.getKey();
             MDAGNode currentNode = transitionKeyValuePair.getValue();
 
             if (currentNode.isAcceptNode() && searchCondition.satisfiesCondition(newPrefixString, searchConditionString))
@@ -875,12 +875,12 @@ public class MDAG : ICacheAble
      *                                {@code searchCondition} with {@code conditionString}
      * @param searchCondition         the SearchCondition enum field describing the type of relationship that Strings contained in the MDAG
      *                                must have with {@code conditionString} in order to be included in the result set
-     * @param searchConditionString   the String that all Strings in the MDAG must be related with in the fashion denoted
+     * @param searchConditionString   the string that all Strings in the MDAG must be related with in the fashion denoted
      *                                by {@code searchCondition} in order to be included in the result set
-     * @param prefixString            the String corresponding to the currently traversed _transition path
+     * @param prefixString            the string corresponding to the currently traversed _transition path
      * @param node                    an int denoting the starting index of a SimpleMDAGNode's _transition set in mdagDataArray
      */
-    private void getStrings(HashSet<String> strHashSet, SearchCondition searchCondition, String searchConditionString, String prefixString, SimpleMDAGNode node)
+    private void getStrings(HashSet<string> strHashSet, SearchCondition searchCondition, string searchConditionString, string prefixString, SimpleMDAGNode node)
     {
         int transitionSetBegin = node.getTransitionSetBeginIndex();
         int onePastTransitionSetEnd = transitionSetBegin + node.getOutgoingTransitionSetSize();
@@ -890,7 +890,7 @@ public class MDAG : ICacheAble
         for (int i = transitionSetBegin; i < onePastTransitionSetEnd; i++)
         {
             SimpleMDAGNode currentNode = mdagDataArray[i];
-            String newPrefixString = prefixString + currentNode.getLetter();
+            string newPrefixString = prefixString + currentNode.getLetter();
 
             if (currentNode.isAcceptNode() && searchCondition.satisfiesCondition(newPrefixString, searchConditionString))
                 strHashSet.add(newPrefixString);
@@ -908,9 +908,9 @@ public class MDAG : ICacheAble
      *
      * @return a HashSet containing all the Strings that have been inserted into the MDAG
      */
-    public HashSet<String> getAllStrings()
+    public HashSet<string> getAllStrings()
     {
-        HashSet<String> strHashSet = new LinkedHashSet<String>();
+        HashSet<string> strHashSet = new LinkedHashSet<string>();
 
         if (sourceNode != null)
             getStrings(strHashSet, SearchCondition.NO_SEARCH_CONDITION, null, "", sourceNode.getOutgoingTransitions());
@@ -923,14 +923,14 @@ public class MDAG : ICacheAble
 
     /**
      * 前缀查询<br>
-     * Retrieves all the Strings in the MDAG that begin with a given String.
+     * Retrieves all the Strings in the MDAG that begin with a given string.
      *
-     * @param prefixStr a String that is the prefix for all the desired Strings
+     * @param prefixStr a string that is the prefix for all the desired Strings
      * @return a HashSet containing all the Strings present in the MDAG that begin with {@code prefixString}
      */
-    public HashSet<String> getStringsStartingWith(String prefixStr)
+    public HashSet<string> getStringsStartingWith(string prefixStr)
     {
-        HashSet<String> strHashSet = new HashSet<String>();
+        HashSet<string> strHashSet = new HashSet<string>();
 
         if (sourceNode != null)      //if the MDAG hasn't been simplified
         {
@@ -959,14 +959,14 @@ public class MDAG : ICacheAble
 
     /**
      * 返回包含字串的key<br>
-     * Retrieves all the Strings in the MDAG that contain a given String.
+     * Retrieves all the Strings in the MDAG that contain a given string.
      *
-     * @param str a String that is contained in all the desired Strings
+     * @param str a string that is contained in all the desired Strings
      * @return a HashSet containing all the Strings present in the MDAG that begin with {@code prefixString}
      */
-    public HashSet<String> getStringsWithSubstring(String str)
+    public HashSet<string> getStringsWithSubstring(string str)
     {
-        HashSet<String> strHashSet = new HashSet<String>();
+        HashSet<string> strHashSet = new HashSet<string>();
 
         if (sourceNode != null)      //if the MDAG hasn't been simplified
             getStrings(strHashSet, SearchCondition.SUBSTRING_SEARCH_CONDITION, str, "", sourceNode.getOutgoingTransitions());
@@ -979,14 +979,14 @@ public class MDAG : ICacheAble
 
     /**
      * 后缀查询<br>
-     * Retrieves all the Strings in the MDAG that begin with a given String.
+     * Retrieves all the Strings in the MDAG that begin with a given string.
      *
-     * @param suffixStr a String that is the suffix for all the desired Strings
+     * @param suffixStr a string that is the suffix for all the desired Strings
      * @return a HashSet containing all the Strings present in the MDAG that end with {@code suffixStr}
      */
-    public HashSet<String> getStringsEndingWith(String suffixStr)
+    public HashSet<string> getStringsEndingWith(string suffixStr)
     {
-        HashSet<String> strHashSet = new HashSet<String>();
+        HashSet<string> strHashSet = new HashSet<string>();
 
         if (sourceNode != null)      //if the MDAG hasn't been simplified
             getStrings(strHashSet, SearchCondition.SUFFIX_SEARCH_CONDITION, suffixStr, "", sourceNode.getOutgoingTransitions());
@@ -1059,7 +1059,7 @@ public class MDAG : ICacheAble
     }
 
 //    //@Override
-//    public String toString()
+//    public string toString()
 //    {
 //        final StringBuilder sb = new StringBuilder("MDAG{");
 //        sb.Append("sourceNode=").Append(sourceNode);

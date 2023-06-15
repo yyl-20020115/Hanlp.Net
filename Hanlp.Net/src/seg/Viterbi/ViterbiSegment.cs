@@ -32,7 +32,7 @@ public class ViterbiSegment : WordBasedSegment
     /**
      * @param customPath 自定义字典路径（绝对路径，多词典使用英文分号隔开）
      */
-    public ViterbiSegment(String customPath)
+    public ViterbiSegment(string customPath)
     {
         loadCustomDic(customPath, false);
     }
@@ -41,7 +41,7 @@ public class ViterbiSegment : WordBasedSegment
      * @param customPath customPath 自定义字典路径（绝对路径，多词典使用英文分号隔开）
      * @param cache      是否缓存词典
      */
-    public ViterbiSegment(String customPath, bool cache)
+    public ViterbiSegment(string customPath, bool cache)
     {
         loadCustomDic(customPath, cache);
     }
@@ -178,7 +178,7 @@ public class ViterbiSegment : WordBasedSegment
         return vertexList;
     }
 
-    private void loadCustomDic(String customPath, bool isCache)
+    private void loadCustomDic(string customPath, bool isCache)
     {
         if (TextUtility.isBlank(customPath))
         {
@@ -186,10 +186,10 @@ public class ViterbiSegment : WordBasedSegment
         }
         logger.info("开始加载自定义词典:" + customPath);
         DoubleArrayTrie<CoreDictionary.Attribute> dat = new DoubleArrayTrie<CoreDictionary.Attribute>();
-        String path[] = customPath.split(";");
-        String mainPath = path[0];
+        string path[] = customPath.split(";");
+        string mainPath = path[0];
         StringBuilder combinePath = new StringBuilder();
-        for (String aPath : path)
+        for (string aPath : path)
         {
             combinePath.Append(aPath.trim());
         }

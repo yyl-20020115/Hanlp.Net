@@ -20,7 +20,7 @@ public class ImmutableFeatureDatMap : FeatureMap
 {
     DoubleArrayTrie<int> dat;
 
-    public ImmutableFeatureDatMap(TreeMap<String, int> featureIdMap, TagSet tagSet)
+    public ImmutableFeatureDatMap(TreeMap<string, int> featureIdMap, TagSet tagSet)
     {
         super(tagSet);
         dat = new DoubleArrayTrie<int>();
@@ -28,7 +28,7 @@ public class ImmutableFeatureDatMap : FeatureMap
     }
 
     //@Override
-    public int idOf(String string)
+    public int idOf(string string)
     {
         return dat.exactMatchSearch(string);
     }
@@ -40,7 +40,7 @@ public class ImmutableFeatureDatMap : FeatureMap
     }
 
     //@Override
-    public Set<Map.Entry<String, int>> entrySet()
+    public Set<KeyValuePair<string, int>> entrySet()
     {
         throw new UnsupportedOperationException("这份DAT实现不支持遍历");
     }

@@ -29,7 +29,7 @@ public class ModelImpl : Model
         return tagger;
     }
 
-    public bool open(String arg)
+    public bool open(string arg)
     {
         return open(arg.split(" ", -1));
     }
@@ -37,7 +37,7 @@ public class ModelImpl : Model
     private static class Option
     {
         @Argument(description = "set FILE for model file", alias = "m", required = true)
-        String model;
+        string model;
         @Argument(description = "output n-best results", alias = "n")
         int nbest = 0;
         @Argument(description = "set INT for verbose level", alias = "v")
@@ -46,7 +46,7 @@ public class ModelImpl : Model
         Double cost_factor = 1.0;
     }
 
-    public bool open(String[] args)
+    public bool open(string[] args)
     {
         Option cmd = new Option();
         try
@@ -58,7 +58,7 @@ public class ModelImpl : Model
             System.err.println("invalid arguments");
             return false;
         }
-        String model = cmd.model;
+        string model = cmd.model;
         int nbest = cmd.nbest;
         int vlevel = cmd.verbose;
         double costFactor = cmd.cost_factor;
@@ -77,7 +77,7 @@ public class ModelImpl : Model
         return featureIndex_.open(stream);
     }
 
-    public bool open(String model, int nbest, int vlevel, double costFactor)
+    public bool open(string model, int nbest, int vlevel, double costFactor)
     {
         try
         {
@@ -90,7 +90,7 @@ public class ModelImpl : Model
         }
     }
 
-    public String getTemplate()
+    public string getTemplate()
     {
         if (featureIndex_ != null)
         {

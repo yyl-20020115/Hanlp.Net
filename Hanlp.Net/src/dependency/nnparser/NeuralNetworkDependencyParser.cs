@@ -36,14 +36,14 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
     //@Override
     public CoNLLSentence parse(List<Term> termList)
     {
-        List<String> posTagList = PosTagUtil.to863(termList);
-        List<String> wordList = new ArrayList<String>(termList.size());
+        List<string> posTagList = PosTagUtil.to863(termList);
+        List<string> wordList = new ArrayList<string>(termList.size());
         for (Term term : termList)
         {
             wordList.add(term.word);
         }
         List<int> heads = new ArrayList<int>(termList.size());
-        List<String> deprels = new ArrayList<String>(termList.size());
+        List<string> deprels = new ArrayList<string>(termList.size());
         parser_dll.parse(wordList, posTagList, heads, deprels);
 
         CoNLLWord[] wordArray = new CoNLLWord[termList.size()];
@@ -82,7 +82,7 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
      * @param sentence 句子
      * @return CoNLL格式的依存句法树
      */
-    public static CoNLLSentence compute(String sentence)
+    public static CoNLLSentence compute(string sentence)
     {
         return new NeuralNetworkDependencyParser().parse(sentence);
     }

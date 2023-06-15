@@ -8,6 +8,11 @@
  * See LICENSE file in the project root for full license information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.tokenizer.pipe;
 
 
@@ -16,40 +21,43 @@ namespace com.hankcs.hanlp.tokenizer.pipe;
  * 流水线式词法分析器
  * @author hankcs
  */
-public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>> : LexicalAnalyzer
+public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>>, LexicalAnalyzer
 {
-    public LexicalAnalyzerPipeline(Pipe<String, List<IWord>> first, Pipe<List<IWord>, List<IWord>> last)
+    public LexicalAnalyzerPipeline(Pipe<string, List<IWord>> first, Pipe<List<IWord>, List<IWord>> last)
+        : base(first, last)
     {
-        super(first, last);
+
     }
 
     public LexicalAnalyzerPipeline(LexicalAnalyzer analyzer)
+        : this(new LexicalAnalyzerPipe(analyzer))
     {
-        this(new LexicalAnalyzerPipe(analyzer));
+        ;
     }
 
     public LexicalAnalyzerPipeline(LexicalAnalyzerPipe analyzer)
+        : this(new PL(), new PW())
     {
-        this(new Pipe<String, List<IWord>>()
-             {
-                 //@Override
-                 public List<IWord> flow(String input)
-                 {
-                     List<IWord> output = new LinkedList<IWord>();
-                     output.add(new Word(input, null));
-                     return output;
-                 }
-             },
-             new Pipe<List<IWord>, List<IWord>>()
-             {
-                 //@Override
-                 public List<IWord> flow(List<IWord> input)
-                 {
-                     return input;
-                 }
-             }
-        );
         add(analyzer);
+    }
+
+    public class PL : Pipe<string, List<IWord>>
+    {
+        //@Override
+        public List<IWord> flow(string input)
+        {
+            List<IWord> output = new();
+            output.Add(new Word(input, null));
+            return output;
+        }
+    }
+    public class PW : Pipe<List<IWord>, List<IWord>>
+    {
+        //@Override
+        public List<IWord> flow(List<IWord> input)
+        {
+            return input;
+        }
     }
 
     /**
@@ -59,18 +67,18 @@ public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>
      */
     public LexicalAnalyzer getAnalyzer()
     {
-        for (Pipe<List<IWord>, List<IWord>> pipe : this)
+        foreach (Pipe<List<IWord>, List<IWord>> pipe in this)
         {
             if (pipe is LexicalAnalyzerPipe)
             {
-                return ((LexicalAnalyzerPipe) pipe).analyzer;
+                return ((LexicalAnalyzerPipe)pipe).analyzer;
             }
         }
         return null;
     }
 
     //@Override
-    public void segment(String sentence, String normalized, List<String> wordList)
+    public void segment(string sentence, string normalized, List<string> wordList)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
@@ -79,7 +87,7 @@ public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>
     }
 
     //@Override
-    public List<String> segment(String sentence)
+    public List<string> segment(string sentence)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
@@ -88,7 +96,7 @@ public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>
     }
 
     //@Override
-    public String[] recognize(String[] wordArray, String[] posArray)
+    public string[] recognize(string[] wordArray, string[] posArray)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
@@ -97,7 +105,7 @@ public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>
     }
 
     //@Override
-    public String[] tag(String... words)
+    public string[] tag(params string[] words)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
@@ -106,7 +114,7 @@ public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>
     }
 
     //@Override
-    public String[] tag(List<String> wordList)
+    public string[] tag(List<string> wordList)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
@@ -124,7 +132,7 @@ public class LexicalAnalyzerPipeline : Pipeline<String, List<IWord>, List<IWord>
     }
 
     //@Override
-    public Sentence analyze(String sentence)
+    public Sentence analyze(string sentence)
     {
         return new Sentence(flow(sentence));
     }

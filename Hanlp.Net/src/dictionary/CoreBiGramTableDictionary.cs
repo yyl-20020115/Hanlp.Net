@@ -33,7 +33,7 @@ public class CoreBiGramTableDictionary
 
     static CoreBiGramTableDictionary()
     {
-        String path = HanLP.Config.BiGramDictionaryPath;
+        string path = HanLP.Config.BiGramDictionaryPath;
         logger.info("开始加载二元词典" + path + ".table");
         long start = DateTime.Now.Microsecond;
         if (!load(path))
@@ -46,23 +46,23 @@ public class CoreBiGramTableDictionary
         }
     }
 
-    static bool load(String path)
+    static bool load(string path)
     {
-        String datPath = HanLP.Config.BiGramDictionaryPath + ".table" + Predefine.BIN_EXT;
+        string datPath = HanLP.Config.BiGramDictionaryPath + ".table" + Predefine.BIN_EXT;
         if (loadDat(datPath)) return true;
         BufferedReader br;
         var map = new Dictionary<int, Dictionary<int, int>>();
         try
         {
             br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            String line;
+            string line;
             int total = 0;
             int maxWordId = CoreDictionary.trie.size();
             while ((line = br.readLine()) != null)
             {
-                String[] params = line.split("\\s");
-                String[] twoWord = params[0].split("@", 2);
-                String a = twoWord[0];
+                string[] params = line.split("\\s");
+                string[] twoWord = params[0].split("@", 2);
+                string a = twoWord[0];
                 int idA = CoreDictionary.trie.exactMatchSearch(a);
                 if (idA == -1)
                 {
@@ -70,7 +70,7 @@ public class CoreBiGramTableDictionary
 //                        logger.warning(line + " 中的 " + a + "不存在于核心词典，将会忽略这一行");
                     continue;
                 }
-                String b = twoWord[1];
+                string b = twoWord[1];
                 int idB = CoreDictionary.trie.exactMatchSearch(b);
                 if (idB == -1)
                 {
@@ -98,7 +98,7 @@ public class CoreBiGramTableDictionary
                 TreeMap<int, int> bMap = map.get(i);
                 if (bMap != null)
                 {
-                    for (Map.Entry<int, int> entry : bMap.entrySet())
+                    for (KeyValuePair<int, int> entry : bMap.entrySet())
                     {
                         int index = offset << 1;
                         pair[index] = entry.getKey();
@@ -129,7 +129,7 @@ public class CoreBiGramTableDictionary
         return true;
     }
 
-    static bool saveDat(String path)
+    static bool saveDat(string path)
     {
         try
         {
@@ -159,7 +159,7 @@ public class CoreBiGramTableDictionary
         return true;
     }
 
-    static bool loadDat(String path)
+    static bool loadDat(string path)
     {
 //        ByteArray byteArray = ByteArray.createByteArray(path);
 //        if (byteArray == null) return false;
@@ -233,7 +233,7 @@ public class CoreBiGramTableDictionary
      * @param b 第二个词
      * @return 第一个词@第二个词出现的频次
      */
-    public static int getBiFrequency(String a, String b)
+    public static int getBiFrequency(string a, string b)
     {
         int idA = CoreDictionary.trie.exactMatchSearch(a);
         if (idA == -1)
@@ -280,7 +280,7 @@ public class CoreBiGramTableDictionary
      * @param a 词语
      * @return id
      */
-    public static int getWordID(String a)
+    public static int getWordID(string a)
     {
         return CoreDictionary.trie.exactMatchSearch(a);
     }
@@ -292,7 +292,7 @@ public class CoreBiGramTableDictionary
      */
     public static bool reload()
     {
-        String biGramDictionaryPath = HanLP.Config.BiGramDictionaryPath;
+        string biGramDictionaryPath = HanLP.Config.BiGramDictionaryPath;
         IOUtil.deleteFile(biGramDictionaryPath + ".table" + Predefine.BIN_EXT);
 
         return load(biGramDictionaryPath);

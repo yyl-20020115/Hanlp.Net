@@ -67,7 +67,7 @@ public class Utility
         }
     }
 
-    public static String normalize(String text)
+    public static string normalize(string text)
     {
         return CharTable.convert(text);
     }
@@ -81,7 +81,7 @@ public class Utility
      * @param end
      * @ 转换过程中的IO异常
      */
-    public static void convertPKUtoCWS(String inputFolder, String outputFile, final int begin, final int end)
+    public static void convertPKUtoCWS(string inputFolder, string outputFile, final int begin, final int end)
     {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
         CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
@@ -133,7 +133,7 @@ bw.close();
      * @param end
      * @ 转换过程中的IO异常
      */
-    public static void convertPKUtoPOS(String inputFolder, String outputFile, final int begin, final int end)
+    public static void convertPKUtoPOS(string inputFolder, string outputFile, final int begin, final int end)
 {
      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
     CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
@@ -177,7 +177,7 @@ bw.close();
 
     private static List<List<Word>> convertComplexWordToSimpleWord(List<List<IWord>> document)
 {
-    String nerTag[] = new String[] { "nr", "ns", "nt" };
+    string nerTag[] = new string[] { "nr", "ns", "nt" };
     List<List<Word>> output = new ArrayList<List<Word>>(document.size());
     for (List<IWord> sentence : document)
         {
@@ -207,9 +207,9 @@ bw.close();
 return output;
     }
 
-    private static bool isNer(IWord word, String nerTag[])
+    private static bool isNer(IWord word, string nerTag[])
 {
-    for (String tag : nerTag)
+    for (string tag : nerTag)
         {
     if (word.getLabel().startsWith(tag))
     {
@@ -221,9 +221,9 @@ return output;
 return false;
     }
 
-    public static String[] toWordArray(List<Word> wordList)
+    public static string[] toWordArray(List<Word> wordList)
 {
-    String[] wordArray = new String[wordList.size()];
+    string[] wordArray = new string[wordList.size()];
     int i = -1;
     for (Word word : wordList)
         {
@@ -233,7 +233,7 @@ return false;
 return wordArray;
     }
 
-    public static int[] evaluateCWS(String developFile, final PerceptronSegmenter segmenter)
+    public static int[] evaluateCWS(string developFile, final PerceptronSegmenter segmenter)
 {
     // int goldTotal = 0, predTotal = 0, correct = 0;
      int[] stat = new int[3];
@@ -244,10 +244,10 @@ return wordArray;
             public bool process(Sentence sentence)
     {
         List<Word> wordList = sentence.toSimpleWordList();
-        String[] wordArray = toWordArray(wordList);
+        string[] wordArray = toWordArray(wordList);
         stat[0] += wordArray.length;
-        String text = com.hankcs.hanlp.utility.TextUtility.combine(wordArray);
-        String[] predArray = segmenter.segment(text).toArray(new String[0]);
+        string text = com.hankcs.hanlp.utility.TextUtility.combine(wordArray);
+        string[] predArray = segmenter.segment(text).toArray(new string[0]);
         stat[1] += predArray.length;
 
         int goldIndex = 0, predIndex = 0;
@@ -298,10 +298,10 @@ return stat;
      * @param tagSet
      * @return
      */
-    public static List<String[]> convertSentenceToNER(Sentence sentence, NERTagSet tagSet)
+    public static List<string[]> convertSentenceToNER(Sentence sentence, NERTagSet tagSet)
 {
-    List<String[]> collector = new LinkedList<String[]>();
-    Set<String> nerLabels = tagSet.nerLabels;
+    List<string[]> collector = new LinkedList<string[]>();
+    Set<string> nerLabels = tagSet.nerLabels;
     for (IWord word : sentence.wordList)
         {
     if (word is CompoundWord)
@@ -311,19 +311,19 @@ return stat;
 
         if (nerLabels.contains(word.getLabel()))
         {
-            collector.add(new String[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
+            collector.add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
             for (int i = 1; i < words.length - 1; i++)
             {
-                collector.add(new String[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
+                collector.add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
             }
-            collector.add(new String[]{words[words.length - 1].value, words[words.length - 1].label,
+            collector.add(new string[]{words[words.length - 1].value, words[words.length - 1].label,
                         tagSet.E_TAG_PREFIX + word.getLabel()});
         }
         else
         {
             for (Word w : words)
             {
-                collector.add(new String[] { w.value, w.label, tagSet.O_TAG });
+                collector.add(new string[] { w.value, w.label, tagSet.O_TAG });
             }
         }
     }
@@ -332,11 +332,11 @@ return stat;
         if (nerLabels.contains(word.getLabel()))
         {
             // 单个实体
-            collector.add(new String[] { word.getValue(), word.getLabel(), tagSet.S_TAG });
+            collector.add(new string[] { word.getValue(), word.getLabel(), tagSet.S_TAG });
         }
         else
         {
-            collector.add(new String[] { word.getValue(), word.getLabel(), tagSet.O_TAG });
+            collector.add(new string[] { word.getValue(), word.getLabel(), tagSet.O_TAG });
         }
     }
 }
@@ -361,25 +361,25 @@ return collector;
         }
     }
 
-    public static Dictionary<String, double[]> evaluateNER(NERecognizer recognizer, String goldFile)
+    public static Dictionary<string, double[]> evaluateNER(NERecognizer recognizer, string goldFile)
 {
-    Dictionary<String, double[]> scores = new TreeMap<String, double[]>();
+    Dictionary<string, double[]> scores = new TreeMap<string, double[]>();
     double[] avg = new double[] { 0, 0, 0 };
     scores.put("avg.", avg);
     NERTagSet tagSet = recognizer.getNERTagSet();
     IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(goldFile);
-    for (String line : lineIterator)
+    for (string line : lineIterator)
         {
     line = line.trim();
     if (line.isEmpty()) continue;
     Sentence sentence = Sentence.create(line);
     if (sentence == null) continue;
-    String[][] table = reshapeNER(convertSentenceToNER(sentence, tagSet));
-    Set<String> pred = combineNER(recognizer.recognize(table[0], table[1]), tagSet);
-    Set<String> gold = combineNER(table[2], tagSet);
-    for (String p : pred)
+    string[][] table = reshapeNER(convertSentenceToNER(sentence, tagSet));
+    Set<string> pred = combineNER(recognizer.recognize(table[0], table[1]), tagSet);
+    Set<string> gold = combineNER(table[2], tagSet);
+    for (string p : pred)
     {
-        String type = p.split("\t")[2];
+        string type = p.split("\t")[2];
         double[] s = scores.get(type);
         if (s == null)
         {
@@ -394,9 +394,9 @@ return collector;
         ++s[0]; // 识别出该类命名实体总数
         ++avg[0];
     }
-    for (String g : gold)
+    for (string g : gold)
     {
-        String type = g.split("\t")[2];
+        string type = g.split("\t")[2];
         double[] s = scores.get(type);
         if (s == null)
         {
@@ -422,41 +422,41 @@ for (double[] s : scores.values())
 return scores;
     }
 
-    public static Set<String> combineNER(String[] nerArray, NERTagSet tagSet)
+    public static Set<string> combineNER(string[] nerArray, NERTagSet tagSet)
 {
-    Set<String> result = new LinkedHashSet<String>();
+    Set<string> result = new LinkedHashSet<string>();
     int begin = 0;
-    String prePos = NERTagSet.posOf(nerArray[0]);
+    string prePos = NERTagSet.posOf(nerArray[0]);
     for (int i = 1; i < nerArray.length; i++)
     {
         if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
         {
             if (i - begin > 1)
-                result.add(String.format("%d\t%d\t%s", begin, i, prePos));
+                result.add(string.format("%d\t%d\t%s", begin, i, prePos));
             begin = i;
         }
         prePos = NERTagSet.posOf(nerArray[i]);
     }
     if (nerArray.length - 1 - begin > 1)
     {
-        result.add(String.format("%d\t%d\t%s", begin, nerArray.length, prePos));
+        result.add(string.format("%d\t%d\t%s", begin, nerArray.length, prePos));
     }
     return result;
 }
 
-public static String[][] reshapeNER(List<String[]> ner)
+public static string[][] reshapeNER(List<string[]> ner)
 {
-    String[] wordArray = new String[ner.size()];
-    String[] posArray = new String[ner.size()];
-    String[] nerArray = new String[ner.size()];
+    string[] wordArray = new string[ner.size()];
+    string[] posArray = new string[ner.size()];
+    string[] nerArray = new string[ner.size()];
     reshapeNER(ner, wordArray, posArray, nerArray);
-    return new String[][] { wordArray, posArray, nerArray };
+    return new string[][] { wordArray, posArray, nerArray };
 }
 
-public static void reshapeNER(List<String[]> collector, String[] wordArray, String[] posArray, String[] tagArray)
+public static void reshapeNER(List<string[]> collector, string[] wordArray, string[] posArray, string[] tagArray)
 {
     int i = 0;
-    for (String[] tuple : collector)
+    for (string[] tuple : collector)
         {
     wordArray[i] = tuple[0];
     posArray[i] = tuple[1];
@@ -465,12 +465,12 @@ public static void reshapeNER(List<String[]> collector, String[] wordArray, Stri
 }
     }
 
-    public static void printNERScore(Dictionary<String, double[]> scores)
+    public static void printNERScore(Dictionary<string, double[]> scores)
 {
     System._out.printf("%4s\t%6s\t%6s\t%6s\n", "NER", "P", "R", "F1");
-    for (Map.Entry<String, double[]> entry : scores.entrySet())
+    for (KeyValuePair<string, double[]> entry : scores.entrySet())
         {
-    String type = entry.getKey();
+    string type = entry.getKey();
     double[] s = entry.getValue();
     System._out.printf("%4s\t%6.2f\t%6.2f\t%6.2f\n", type, s[0], s[1], s[2]);
 }

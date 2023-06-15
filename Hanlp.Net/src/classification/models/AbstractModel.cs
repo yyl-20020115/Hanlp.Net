@@ -22,7 +22,7 @@ public class AbstractModel : ISerializable
     /**
      * 类目表
      */
-    public String[] catalog;
+    public string[] catalog;
     /**
      * 分词器
      */

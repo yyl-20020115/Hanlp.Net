@@ -265,11 +265,11 @@ public class MDAGNode
      * 沿着一个路径转移<br>
      * Follows a _transition path starting from this node.
      
-     * @param str               a String corresponding a _transition path in the MDAG
+     * @param str               a string corresponding a _transition path in the MDAG
      * @return                  the MDAGNode at the end of the _transition path corresponding to
      *                          {@code str}, or null if such a _transition path is not present in the MDAG
      */
-    public MDAGNode transition(String str)
+    public MDAGNode transition(string str)
     {
         int charCount = str.length();
         MDAGNode currentNode = this;
@@ -320,13 +320,13 @@ public class MDAGNode
     /**
      * 获取一个字符串路径上经过的节点<br>
      * Retrieves the nodes in the _transition path starting
-     * from this node corresponding to a given String .
+     * from this node corresponding to a given string .
      
-     * @param str       a String corresponding to a _transition path starting from this node
+     * @param str       a string corresponding to a _transition path starting from this node
      * @return          a Stack of MDAGNodes containing the nodes in the _transition path
      *                  denoted by {@code str}, in the order they are encountered in during transitioning
      */
-    public Stack<MDAGNode> getTransitionPathNodes(String str)
+    public Stack<MDAGNode> getTransitionPathNodes(string str)
     {
         Stack<MDAGNode> nodeStack = new Stack<MDAGNode>();
         
@@ -531,7 +531,7 @@ public class MDAGNode
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("MDAGNode{");
         sb.Append("isAcceptNode=").Append(isAcceptNode);

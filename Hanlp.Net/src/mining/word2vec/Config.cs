@@ -11,21 +11,21 @@ public class Config
     static readonly int DEF_NUM_THREADS = Runtime.getRuntime().availableProcessors();
     static readonly float DEF_SAMPLE = 0.001f;
 
-    protected String outputFile;
+    protected string outputFile;
     protected int iter = DEF_ITER, window = DEF_WINDOW, minCount = DEF_MIN_COUNT, negative = DEF_NEGATIVE,
             layer1Size = DEF_LAYER1_SIZE, numThreads = DEF_NUM_THREADS;
     protected bool hs, cbow;
     protected float sample = DEF_SAMPLE, alpha = 0.025f;
-    private String inputFile;
+    private string inputFile;
     private TrainingCallback callback;
 
-    public Config setOutputFile(String outputFile)
+    public Config setOutputFile(string outputFile)
     {
         this.outputFile = outputFile;
         return this;
     }
 
-    public String getOutputFile()
+    public string getOutputFile()
     {
         return outputFile;
     }
@@ -140,13 +140,13 @@ public class Config
         return alpha;
     }
 
-    public Config setInputFile(String inputFile)
+    public Config setInputFile(string inputFile)
     {
         this.inputFile = inputFile;
         return this;
     }
 
-    public String getInputFile()
+    public string getInputFile()
     {
         return inputFile;
     }

@@ -38,15 +38,15 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     }
 
     //@Override
-    public List<String> segment(String text)
+    public List<string> segment(string text)
     {
-        List<String> wordList = new ();
+        List<string> wordList = new ();
         segment(text, CharTable.convert(text), wordList);
         return wordList;
     }
 
     //@Override
-    public void segment(String text, String normalized, List<String> output)
+    public void segment(string text, string normalized, List<string> output)
     {
         int[] obsArray = new int[text.length()];
         for (int i = 0; i < obsArray.length; i++)
@@ -74,24 +74,24 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     }
 
     //@Override
-    protected List<String[]> convertToSequence(Sentence sentence)
+    protected List<string[]> convertToSequence(Sentence sentence)
     {
-        List<String[]> charList = new LinkedList<String[]>();
+        List<string[]> charList = new LinkedList<string[]>();
         for (Word w : sentence.toSimpleWordList())
         {
-            String word = CharTable.convert(w.value);
+            string word = CharTable.convert(w.value);
             if (word.length() == 1)
             {
-                charList.add(new String[]{word, "S"});
+                charList.add(new string[]{word, "S"});
             }
             else
             {
-                charList.add(new String[]{word.substring(0, 1), "B"});
+                charList.add(new string[]{word.substring(0, 1), "B"});
                 for (int i = 1; i < word.length() - 1; ++i)
                 {
-                    charList.add(new String[]{word.substring(i, i + 1), "M"});
+                    charList.add(new string[]{word.substring(i, i + 1), "M"});
                 }
-                charList.add(new String[]{word.substring(word.length() - 1), "E"});
+                charList.add(new string[]{word.substring(word.length() - 1), "E"});
             }
         }
         return charList;
@@ -117,9 +117,9 @@ public class HMMSegmenter : HMMTrainer , Segmenter
         //@Override
         protected override List<Term> segSentence(char[] sentence)
         {
-            List<String> wordList = segment(new String(sentence));
+            List<string> wordList = segment(new string(sentence));
             List<Term> termList = new LinkedList<Term>();
-            for (String word : wordList)
+            for (string word : wordList)
             {
                 termList.add(new Term(word, null));
             }

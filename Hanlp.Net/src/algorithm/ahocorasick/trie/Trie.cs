@@ -36,7 +36,7 @@ public class Trie
     {
     }
 
-    public Trie(ICollection<String> keywords)
+    public Trie(ICollection<string> keywords)
         :this()
     {
         addAllKeyword(keywords);
@@ -58,7 +58,7 @@ public class Trie
         return this;
     }
 
-    public void addKeyword(String keyword)
+    public void addKeyword(string keyword)
     {
         if (keyword == null || keyword.Length == 0)
         {
@@ -72,9 +72,9 @@ public class Trie
         currentState.addEmit(keyword);
     }
 
-    public void addAllKeyword(ICollection<String> keywordSet)
+    public void addAllKeyword(ICollection<string> keywordSet)
     {
-        foreach (String keyword in keywordSet)
+        foreach (string keyword in keywordSet)
         {
             addKeyword(keyword);
         }
@@ -86,7 +86,7 @@ public class Trie
      * @param text 待分词文本
      * @return
      */
-    public ICollection<Token> tokenize(String text)
+    public ICollection<Token> tokenize(string text)
     {
 
         List<Token> tokens = new ();
@@ -115,12 +115,12 @@ public class Trie
         return tokens;
     }
 
-    private Token createFragment(Emit emit, String text, int lastCollectedPosition)
+    private Token createFragment(Emit emit, string text, int lastCollectedPosition)
     {
         return new FragmentToken(text[(lastCollectedPosition + 1)..(emit == null ? text.Length : emit.getStart())]);
     }
 
-    private Token createMatch(Emit emit, String text)
+    private Token createMatch(Emit emit, string text)
     {
         return new MatchToken(text[emit.getStart().. (emit.getEnd() + 1)], emit);
     }
@@ -132,7 +132,7 @@ public class Trie
      * @return 匹配到的模式串
      */
     
-    public ICollection<Emit> parseText(String text)
+    public ICollection<Emit> parseText(string text)
     {
         checkForConstructedFailureStates();
 
@@ -268,7 +268,7 @@ public class Trie
         dfs(rootState, "", walker);
     }
 
-    private void dfs(State currentState, String path, IWalker walker)
+    private void dfs(State currentState, string path, IWalker walker)
     {
         walker.meet(path, currentState);
         foreach (char transition in currentState.getTransitions())
@@ -286,7 +286,7 @@ public class Trie
          * @param path
          * @param state
          */
-        void meet(String path, State state);
+        void meet(string path, State state);
     }
 
     /**
@@ -301,7 +301,7 @@ public class Trie
         var emits = currentState.emit();
         if (emits != null && emits.Count>0)
         {
-            foreach (String emit in emits)
+            foreach (string emit in emits)
             {
                 collectedEmits.Add(new Emit(position - emit.Length + 1, position, emit));
             }
@@ -314,7 +314,7 @@ public class Trie
      * @param text 待匹配的文本
      * @return 文本包含模式時回傳true
      */
-    public bool hasKeyword(String text)
+    public bool hasKeyword(string text)
     {
         checkForConstructedFailureStates();
 

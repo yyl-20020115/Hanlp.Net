@@ -8,6 +8,9 @@
  * See LICENSE file in the project root for full license information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.tokenizer.pipe;
 
 
@@ -39,8 +42,8 @@ public class LexicalAnalyzerPipe : Pipe<List<IWord>, List<IWord>>
             if (wordOrSentence.getLabel() != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
             listIterator.remove(); // 否则是句子
-            String sentence = wordOrSentence.getValue();
-            for (IWord word : analyzer.analyze(sentence))
+            string sentence = wordOrSentence.getValue();
+            foreach (IWord word in analyzer.analyze(sentence))
             {
                 listIterator.add(word);
             }

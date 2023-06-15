@@ -24,7 +24,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
         this(HanLP.Config.CRFPOSModelPath);
     }
 
-    public CRFPOSTagger(String modelPath) 
+    public CRFPOSTagger(string modelPath) 
     {
         super(modelPath);
         if (modelPath != null)
@@ -34,7 +34,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
     }
 
     //@Override
-    public void train(String trainCorpusPath, String modelPath) 
+    public void train(string trainCorpusPath, string modelPath) 
     {
         crf_learn.Option option = new crf_learn.Option();
         train(trainCorpusPath, modelPath, option.maxiter, 10, option.eta, option.cost,
@@ -45,17 +45,17 @@ public class CRFPOSTagger : CRFTagger : POSTagger
     protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
         List<Word> simpleWordList = sentence.toSimpleWordList();
-        List<String> wordList = new ArrayList<String>(simpleWordList.size());
+        List<string> wordList = new ArrayList<string>(simpleWordList.size());
         for (Word word : simpleWordList)
         {
             wordList.add(word.value);
         }
-        String[] words = wordList.toArray(new String[0]);
+        string[] words = wordList.toArray(new string[0]);
         Iterator<Word> iterator = simpleWordList.iterator();
         for (int i = 0; i < words.length; i++)
         {
-            String curWord = words[i];
-            String[] cells = createCells(true);
+            string curWord = words[i];
+            string[] cells = createCells(true);
             extractFeature(curWord, cells);
             cells[5] = iterator.next().label;
             for (int j = 0; j < cells.length; j++)
@@ -68,12 +68,12 @@ public class CRFPOSTagger : CRFTagger : POSTagger
         }
     }
 
-    private String[] createCells(bool withTag)
+    private string[] createCells(bool withTag)
     {
-        return withTag ? new String[6] : new String[5];
+        return withTag ? new string[6] : new string[5];
     }
 
-    private void extractFeature(String curWord, String[] cells)
+    private void extractFeature(string curWord, string[] cells)
     {
         int length = curWord.length();
         cells[0] = curWord;
@@ -86,7 +86,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
     }
 
     //@Override
-    protected String getDefaultFeatureTemplate()
+    protected string getDefaultFeatureTemplate()
     {
         return "# Unigram\n" +
             "U0:%x[-1,0]\n" +
@@ -103,23 +103,23 @@ public class CRFPOSTagger : CRFTagger : POSTagger
             "B";
     }
 
-    public String[] tag(List<String> wordList)
+    public string[] tag(List<string> wordList)
     {
-        String[] words = new String[wordList.size()];
+        string[] words = new string[wordList.size()];
         wordList.toArray(words);
         return tag(words);
     }
 
     //@Override
-    public String[] tag(String... words)
+    public string[] tag(string... words)
     {
         return perceptronPOSTagger.tag(createInstance(words));
     }
 
-    private POSInstance createInstance(String[] words)
+    private POSInstance createInstance(string[] words)
     {
         final FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
-        final String[][] table = new String[words.length][5];
+        final string[][] table = new string[words.length][5];
         for (int i = 0; i < words.length; i++)
         {
             extractFeature(words[i], table[i]);
@@ -128,14 +128,14 @@ public class CRFPOSTagger : CRFTagger : POSTagger
         return new POSInstance(words, model.featureMap)
         {
             //@Override
-            protected int[] extractFeature(String[] words, FeatureMap featureMap, int position)
+            protected int[] extractFeature(string[] words, FeatureMap featureMap, int position)
             {
                 StringBuilder sbFeature = new StringBuilder();
                 List<int> featureVec = new LinkedList<int>();
                 for (int i = 0; i < featureTemplateArray.length; i++)
                 {
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                    Iterator<String> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                    Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                     delimiterIterator.next(); // ignore U0 之类的id
                     while (offsetIterator.hasNext())
                     {

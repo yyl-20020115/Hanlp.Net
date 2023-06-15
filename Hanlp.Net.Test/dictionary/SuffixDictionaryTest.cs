@@ -18,24 +18,37 @@ public class SuffixDictionaryTest : TestCase
     }
 
     [TestMethod]
-    public void testEndsWith() 
+    public void TestEndsWith() 
     {
         assertEquals(true, dictionary.endsWith("黄冈市"));
         assertEquals(false, dictionary.endsWith("黄冈一二三"));
     }
     [TestMethod]
-    public void testLongest() 
+    public void TestLongest()
     {
         assertEquals(2, dictionary.getLongestSuffixLength("巴尔干半岛"));
     }
-
-//    public void testDump() 
-//    {
-//        DictionaryMaker dictionaryMaker = new DictionaryMaker();
-//        for (Map.Entry<String, int> entry : PlaceSuffixDictionary.dictionary.entrySet())
-//        {
-//            dictionaryMaker.add(entry.getKey(), NS.H.ToString());
-//        }
-//        dictionaryMaker.saveTxtTo("data/dictionary/place/suffix.txt");
-//    }
+    [TestMethod]
+    public void TestGet()
+    {
+        String total = Predefine.POSTFIX_SINGLE;
+        for (int i = 0; i < total.Length; ++i)
+        {
+            String single = (total[i]).ToString();
+            assertEquals(1, dictionary.get(single));
+        }
+        foreach (String single in Predefine.POSTFIX_MUTIPLE)
+        {
+            assertEquals(single.Length, dictionary.get(single));
+        }
+    }
+    //    public void testDump() 
+    //    {
+    //        DictionaryMaker dictionaryMaker = new DictionaryMaker();
+    //        for (Map.Entry<String, int> entry : PlaceSuffixDictionary.dictionary.entrySet())
+    //        {
+    //            dictionaryMaker.add(entry.getKey(), NS.H.ToString());
+    //        }
+    //        dictionaryMaker.saveTxtTo("data/dictionary/place/suffix.txt");
+    //    }
 }

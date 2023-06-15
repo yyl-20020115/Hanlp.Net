@@ -19,11 +19,11 @@ namespace com.hankcs.hanlp.corpus.dependency.CoNll;
  */
 public class CoNLLLoader
 {
-    public static LinkedList<CoNLLSentence> loadSentenceList(String path)
+    public static LinkedList<CoNLLSentence> loadSentenceList(string path)
     {
         LinkedList<CoNLLSentence> result = new LinkedList<CoNLLSentence>();
         LinkedList<CoNllLine> lineList = new LinkedList<CoNllLine>();
-        for (String line : IOUtil.readLineListWithLessMemory(path))
+        for (string line : IOUtil.readLineListWithLessMemory(path))
         {
             if (line.trim().length() == 0)
             {

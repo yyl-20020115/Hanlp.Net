@@ -21,14 +21,14 @@ public class IOUtility : IOUtil
 {
     private static Pattern PATTERN_SPACE = Pattern.compile("\\s+");
 
-    public static String[] readLineToArray(String line)
+    public static string[] readLineToArray(string line)
     {
         line = line.trim();
-        if (line.length() == 0) return new String[0];
+        if (line.length() == 0) return new string[0];
         return PATTERN_SPACE.split(line);
     }
 
-    public static int loadInstance(final String path, InstanceHandler handler) 
+    public static int loadInstance(final string path, InstanceHandler handler) 
     {
         ConsoleLogger logger = new ConsoleLogger();
         int size = 0;
@@ -53,7 +53,7 @@ public class IOUtility : IOUtil
         for (File file : allFiles)
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-            String line;
+            string line;
             while ((line = br.readLine()) != null)
             {
                 line = line.trim();

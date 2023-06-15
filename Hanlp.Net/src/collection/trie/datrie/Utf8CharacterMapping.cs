@@ -30,7 +30,7 @@ public class Utf8CharacterMapping implements CharacterMapping, Serializable
     }
 
     //@Override
-    public int[] toIdList(String key)
+    public int[] toIdList(string key)
     {
 
         byte[] bytes = key.getBytes(UTF_8);
@@ -97,7 +97,7 @@ public class Utf8CharacterMapping implements CharacterMapping, Serializable
     }
 
     //@Override
-    public String toString(int[] ids)
+    public string toString(int[] ids)
     {
         byte[] bytes = new byte[ids.length];
         for (int i = 0; i < ids.length; i++)
@@ -106,7 +106,7 @@ public class Utf8CharacterMapping implements CharacterMapping, Serializable
         }
         try
         {
-            return new String(bytes, "UTF-8");
+            return new string(bytes, "UTF-8");
         }
         catch (UnsupportedEncodingException e)
         {

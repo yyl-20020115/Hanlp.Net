@@ -29,7 +29,8 @@ public class DemoNewWordDiscover
     public static void Main(String[] args) 
     {
         // 文本长度越大越好，试试红楼梦？
-        List<WordInfo> wordInfoList = HanLP.extractWords(IOUtil.newBufferedReader(CORPUS_PATH), 100);
+        List<WordInfo> wordInfoList = HanLP.extractWords(
+            IOUtil.newBufferedReader(CORPUS_PATH), 100);
         Console.WriteLine(wordInfoList);
     }
 }

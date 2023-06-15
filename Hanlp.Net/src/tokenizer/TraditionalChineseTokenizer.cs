@@ -30,9 +30,9 @@ public class TraditionalChineseTokenizer
      */
     public static Segment SEGMENT = HanLP.newSegment();
 
-    private static List<Term> segSentence(String text)
+    private static List<Term> segSentence(string text)
     {
-        String sText = CharTable.convert(text);
+        string sText = CharTable.convert(text);
         List<Term> termList = SEGMENT.seg(sText);
         int offset = 0;
         for (Term term in termList)
@@ -45,10 +45,10 @@ public class TraditionalChineseTokenizer
         return termList;
     }
 
-    public static List<Term> segment(String text)
+    public static List<Term> segment(string text)
     {
         List<Term> termList = new LinkedList<Term>();
-        for (String sentence : SentencesUtil.toSentenceList(text))
+        for (string sentence : SentencesUtil.toSentenceList(text))
         {
             termList.addAll(segSentence(sentence));
         }
@@ -73,11 +73,11 @@ public class TraditionalChineseTokenizer
      * @param text 文本
      * @return 句子列表
      */
-    public static List<List<Term>> seg2sentence(String text)
+    public static List<List<Term>> seg2sentence(string text)
     {
         List<List<Term>> resultList = new ();
         {
-            foreach (String sentence in SentencesUtil.toSentenceList(text))
+            foreach (string sentence in SentencesUtil.toSentenceList(text))
             {
                 resultList.Add(segment(sentence));
             }
@@ -93,7 +93,7 @@ public class TraditionalChineseTokenizer
      * @param shortest 是否断句为最细的子句（将逗号也视作分隔符）
      * @return 句子列表，每个句子由一个单词列表组成
      */
-    public List<List<Term>> seg2sentence(String text, bool shortest)
+    public List<List<Term>> seg2sentence(string text, bool shortest)
     {
         return SEGMENT.seg2sentence(text, shortest);
     }

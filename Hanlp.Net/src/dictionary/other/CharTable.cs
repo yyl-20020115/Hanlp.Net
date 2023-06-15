@@ -39,9 +39,9 @@ public class CharTable
         logger.info("字符正规化表加载成功：" + (DateTime.Now.Microsecond - start) + " ms");
     }
 
-    private static bool load(String path)
+    private static bool load(string path)
     {
-        String binPath = path + Predefine.BIN_EXT;
+        string binPath = path + Predefine.BIN_EXT;
         if (loadBin(binPath)) return true;
         CONVERT = new char[Character.MAX_VALUE + 1];
         for (int i = 0; i < CONVERT.length; i++)
@@ -51,7 +51,7 @@ public class CharTable
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(path);
         while (iterator.hasNext())
         {
-            String line = iterator.next();
+            string line = iterator.next();
             if (line == null) return false;
             if (line.length() != 3) continue;
             CONVERT[line.charAt(0)] = CONVERT[line.charAt(2)];
@@ -71,7 +71,7 @@ public class CharTable
         }
     }
 
-    private static bool loadBin(String path)
+    private static bool loadBin(string path)
     {
         try
         {
@@ -109,16 +109,16 @@ public class CharTable
         return result;
     }
 
-    public static String convert(String sentence)
+    public static string convert(string sentence)
     {
         //assert sentence != null;
         char[] result = new char[sentence.length()];
         convert(sentence, result);
 
-        return new String(result);
+        return new string(result);
     }
 
-    public static void convert(String charArray, char[] result)
+    public static void convert(string charArray, char[] result)
     {
         for (int i = 0; i < charArray.Length; i++)
         {

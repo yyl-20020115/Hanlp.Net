@@ -36,9 +36,9 @@ public abstract class HMMTrainer
         this(new FirstOrderHiddenMarkovModel());
     }
 
-    public void train(String corpus) 
+    public void train(string corpus) 
     {
-        final List<List<String[]>> sequenceList = new LinkedList<List<String[]>>();
+        final List<List<string[]>> sequenceList = new LinkedList<List<string[]>>();
         IOUtility.loadInstance(corpus, new InstanceHandler()
         {
             //@Override
@@ -52,11 +52,11 @@ public abstract class HMMTrainer
         TagSet tagSet = getTagSet();
 
         List<int[][]> sampleList = new ArrayList<int[][]>(sequenceList.size());
-        for (List<String[]> sequence : sequenceList)
+        for (List<string[]> sequence : sequenceList)
         {
             int[][] sample = new int[2][sequence.size()];
             int i = 0;
-            for (String[] os : sequence)
+            for (string[] os : sequence)
             {
                 sample[0][i] = vocabulary.idOf(os[0]);
                 assert sample[0][i] != -1;
@@ -71,6 +71,6 @@ public abstract class HMMTrainer
         vocabulary.mutable = false;
     }
 
-    protected abstract List<String[]> convertToSequence(Sentence sentence);
+    protected abstract List<string[]> convertToSequence(Sentence sentence);
     protected abstract TagSet getTagSet();
 }

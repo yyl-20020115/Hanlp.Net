@@ -83,11 +83,11 @@ public class Instance
      * @param tagSet
      * @return
      */
-    public String[] tags(TagSet tagSet)
+    public string[] tags(TagSet tagSet)
     {
         //assert tagArray != null;
 
-        String[] tags = new String[tagArray.Length];
+        string[] tags = new string[tagArray.Length];
         for (int i = 0; i < tags.Length; i++)
         {
             tags[i] = tagSet.stringOf(tagArray[i]);

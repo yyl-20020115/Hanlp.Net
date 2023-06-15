@@ -10,7 +10,7 @@ public abstract class Corpus
     protected int vocabSize;
     protected int vocabMaxSize = 1000;
     protected VocabWord[] vocab;
-    protected Dictionary<String, int> vocabIndexMap;
+    protected Dictionary<string, int> vocabIndexMap;
     protected bool eoc = true;    // end of corpus
     protected Charset encoding = Charset.forName("UTF-8");
     protected int[] table;
@@ -40,7 +40,7 @@ public abstract class Corpus
      * @param word
      * @return
      */
-    protected int addWordToVocab(String word)
+    protected int addWordToVocab(string word)
     {
         vocab[vocabSize] = new VocabWord(word);
         vocabSize++;
@@ -72,7 +72,7 @@ public abstract class Corpus
         return vocab;
     }
 
-    public Dictionary<String, int> getVocabIndexMap()
+    public Dictionary<string, int> getVocabIndexMap()
     {
         return vocabIndexMap;
     }
@@ -91,7 +91,7 @@ public abstract class Corpus
      */
     public int readWordIndex() 
     {
-        String word = nextWord();
+        string word = nextWord();
         if (word == null)
         {
             if (eoc) return -2;    // end of corpus
@@ -109,7 +109,7 @@ public abstract class Corpus
      * @return next word that is read from the corpus. null will be returned
      * @
      */
-    public abstract String nextWord() ;
+    public abstract string nextWord() ;
 
     /**
      * Close the corpus and it cannot be read any more.
@@ -131,7 +131,7 @@ public abstract class Corpus
      * @param word
      * @return
      */
-    int searchVocab(String word)
+    int searchVocab(string word)
     {
         if (word == null) return -1;
         int pos = vocabIndexMap.get(word);

@@ -19,19 +19,19 @@ namespace com.hankcs.hanlp.dictionary.ts;
  */
 public class BaseChineseDictionary
 {
-    static void combineChain(TreeMap<String, String> s2t, TreeMap<String, String> t2x)
+    static void combineChain(TreeMap<string, string> s2t, TreeMap<string, string> t2x)
     {
-        for (Map.Entry<String, String> entry : s2t.entrySet())
+        for (KeyValuePair<string, string> entry : s2t.entrySet())
         {
-            String x = t2x.get(entry.getValue());
+            string x = t2x.get(entry.getValue());
             if (x != null)
             {
                 entry.setValue(x);
             }
         }
-        for (Map.Entry<String, String> entry : t2x.entrySet())
+        for (KeyValuePair<string, string> entry : t2x.entrySet())
         {
-            String s = CharTable.convert(entry.getKey());
+            string s = CharTable.convert(entry.getKey());
             if (!s2t.containsKey(s))
             {
                 s2t.put(s, entry.getValue());
@@ -39,12 +39,12 @@ public class BaseChineseDictionary
         }
     }
 
-    static void combineReverseChain(TreeMap<String, String> t2s, TreeMap<String, String> tw2t, bool convert)
+    static void combineReverseChain(TreeMap<string, string> t2s, TreeMap<string, string> tw2t, bool convert)
     {
-        for (Map.Entry<String, String> entry : tw2t.entrySet())
+        for (KeyValuePair<string, string> entry : tw2t.entrySet())
         {
-            String tw = entry.getKey();
-            String s = t2s.get(entry.getValue());
+            string tw = entry.getKey();
+            string s = t2s.get(entry.getValue());
             if (s == null)
                 s = convert ? CharTable.convert(entry.getValue()) : entry.getValue();
             t2s.put(tw, s);
@@ -58,16 +58,16 @@ public class BaseChineseDictionary
      * @param pathArray 路径
      * @return 是否加载成功
      */
-    static bool load(Dictionary<String, String> storage, bool reverse, String... pathArray)
+    static bool load(Dictionary<string, string> storage, bool reverse, string... pathArray)
     {
         StringDictionary dictionary = new StringDictionary("=");
-        for (String path : pathArray)
+        for (string path : pathArray)
         {
             if (!dictionary.load(path)) return false;
         }
         if (reverse) dictionary = dictionary.reverse();
-        Set<Map.Entry<String, String>> entrySet = dictionary.entrySet();
-        for (Map.Entry<String, String> entry : entrySet)
+        Set<KeyValuePair<string, string>> entrySet = dictionary.entrySet();
+        for (KeyValuePair<string, string> entry : entrySet)
         {
             storage.put(entry.getKey(), entry.getValue());
         }
@@ -80,7 +80,7 @@ public class BaseChineseDictionary
      * @param trie
      * @return
      */
-    static bool load(String path, AhoCorasickDoubleArrayTrie<String> trie)
+    static bool load(string path, AhoCorasickDoubleArrayTrie<string> trie)
     {
         return load(path, trie, false);
     }
@@ -92,16 +92,16 @@ public class BaseChineseDictionary
      * @param reverse 是否将其翻转
      * @return
      */
-    static bool load(String path, AhoCorasickDoubleArrayTrie<String> trie, bool reverse)
+    static bool load(string path, AhoCorasickDoubleArrayTrie<string> trie, bool reverse)
     {
-        String datPath = path;
+        string datPath = path;
         if (reverse)
         {
             datPath += Predefine.REVERSE_EXT;
         }
         if (loadDat(datPath, trie)) return true;
         // 从文本中载入并且尝试生成dat
-        TreeMap<String, String> map = new TreeMap<String, String>();
+        TreeMap<string, string> map = new TreeMap<string, string>();
         if (!load(map, reverse, path)) return false;
         logger.info("正在构建AhoCorasickDoubleArrayTrie，来源：" + path);
         trie.build(map);
@@ -110,12 +110,12 @@ public class BaseChineseDictionary
         return true;
     }
 
-    static bool loadDat(String path, AhoCorasickDoubleArrayTrie<String> trie)
+    static bool loadDat(string path, AhoCorasickDoubleArrayTrie<string> trie)
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
         int size = byteArray.nextInt();
-        String[] valueArray = new String[size];
+        string[] valueArray = new string[size];
         for (int i = 0; i < valueArray.length; ++i)
         {
             valueArray[i] = byteArray.nextString();
@@ -124,7 +124,7 @@ public class BaseChineseDictionary
         return true;
     }
 
-    static bool saveDat(String path, AhoCorasickDoubleArrayTrie<String> trie, Set<Map.Entry<String, String>> entrySet)
+    static bool saveDat(string path, AhoCorasickDoubleArrayTrie<string> trie, Set<KeyValuePair<string, string>> entrySet)
     {
         if (trie.size() != entrySet.size())
         {
@@ -135,7 +135,7 @@ public class BaseChineseDictionary
         {
             DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
             _out.writeInt(entrySet.size());
-            for (Map.Entry<String, String> entry : entrySet)
+            for (KeyValuePair<string, string> entry : entrySet)
             {
                 char[] charArray = entry.getValue().ToCharArray();
                 _out.writeInt(charArray.length);
@@ -156,16 +156,16 @@ public class BaseChineseDictionary
         return true;
     }
 
-    public static BaseSearcher getSearcher(char[] charArray, DoubleArrayTrie<String> trie)
+    public static BaseSearcher getSearcher(char[] charArray, DoubleArrayTrie<string> trie)
     {
         return new Searcher(charArray, trie);
     }
 
-    protected static String segLongest(char[] charArray, DoubleArrayTrie<String> trie)
+    protected static string segLongest(char[] charArray, DoubleArrayTrie<string> trie)
     {
         StringBuilder sb = new StringBuilder(charArray.length);
         BaseSearcher searcher = getSearcher(charArray, trie);
-        Map.Entry<String, String> entry;
+        KeyValuePair<string, string> entry;
         int p = 0;  // 当前处理到什么位置
         int offset;
         while ((entry = searcher.next()) != null)
@@ -189,14 +189,14 @@ public class BaseChineseDictionary
         return sb.toString();
     }
 
-    protected static String segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<String> trie)
+    protected static string segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<string> trie)
     {
-        final String[] wordNet = new String[charArray.length];
+        final string[] wordNet = new string[charArray.length];
         final int[] lengthNet = new int[charArray.length];
-        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<String>()
+        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<string>()
         {
             //@Override
-            public void hit(int begin, int end, String value)
+            public void hit(int begin, int end, string value)
             {
                 int length = end - begin;
                 if (length > lengthNet[begin])
@@ -224,35 +224,35 @@ public class BaseChineseDictionary
     /**
      * 最长分词
      */
-    public static class Searcher : BaseSearcher<String>
+    public static class Searcher : BaseSearcher<string>
     {
         /**
          * 分词从何处开始，这是一个状态
          */
         int begin;
 
-        DoubleArrayTrie<String> trie;
+        DoubleArrayTrie<string> trie;
 
-        protected Searcher(char[] c, DoubleArrayTrie<String> trie)
+        protected Searcher(char[] c, DoubleArrayTrie<string> trie)
         {
             super(c);
             this.trie = trie;
         }
 
-        protected Searcher(String text, DoubleArrayTrie<String> trie)
+        protected Searcher(string text, DoubleArrayTrie<string> trie)
         {
             super(text);
             this.trie = trie;
         }
 
         //@Override
-        public Map.Entry<String, String> next()
+        public KeyValuePair<string, string> next()
         {
             // 保证首次调用找到一个词语
-            Map.Entry<String, String> result = null;
+            KeyValuePair<string, string> result = null;
             while (begin < c.length)
             {
-                LinkedList<Map.Entry<String, String>> entryList = trie.commonPrefixSearchWithValue(c, begin);
+                LinkedList<KeyValuePair<string, string>> entryList = trie.commonPrefixSearchWithValue(c, begin);
                 if (entryList.size() == 0)
                 {
                     ++begin;

@@ -17,14 +17,14 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  * 满足 key=value 格式的词典，其中“=”可以自定义
  * @author hankcs
  */
-public class StringDictionary : SimpleDictionary<String>
+public class StringDictionary : SimpleDictionary<string>
 {
     /**
      * key value之间的分隔符
      */
-    protected String separator;
+    protected string separator;
 
-    public StringDictionary(String separator)
+    public StringDictionary(string separator)
     {
         this.separator = separator;
     }
@@ -35,15 +35,15 @@ public class StringDictionary : SimpleDictionary<String>
     }
 
     //@Override
-    protected Map.Entry<String, String> onGenerateEntry(String line)
+    protected KeyValuePair<string, string> onGenerateEntry(string line)
     {
-        String[] paramArray = line.split(separator, 2);
+        string[] paramArray = line.split(separator, 2);
         if (paramArray.length != 2)
         {
             logger.warning("词典有一行读取错误： " + line);
             return null;
         }
-        return new AbstractMap.SimpleEntry<String, String>(paramArray[0], paramArray[1]);
+        return new AbstractMap.SimpleEntry<string, string>(paramArray[0], paramArray[1]);
     }
 
     /**
@@ -51,12 +51,12 @@ public class StringDictionary : SimpleDictionary<String>
      * @param path
      * @return 是否成功
      */
-    public bool save(String path)
+    public bool save(string path)
     {
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
-            for (Map.Entry<String, String> entry : trie.entrySet())
+            for (KeyValuePair<string, string> entry : trie.entrySet())
             {
                 bw.write(entry.getKey());
                 bw.write(separator);
@@ -80,7 +80,7 @@ public class StringDictionary : SimpleDictionary<String>
     public StringDictionary reverse()
     {
         StringDictionary dictionary = new StringDictionary(separator);
-        for (Map.Entry<String, String> entry : entrySet())
+        for (KeyValuePair<string, string> entry : entrySet())
         {
             dictionary.trie.put(entry.getValue(), entry.getKey());
         }

@@ -66,10 +66,10 @@ public class NatureDictionaryMaker : CommonDictionaryMaker
      * 指定语料库文件夹，制作一份词频词典
      * @return
      */
-    static bool makeCoreDictionary(String inPath, String outPath)
+    static bool makeCoreDictionary(string inPath, string outPath)
     {
         final DictionaryMaker dictionaryMaker = new DictionaryMaker();
-        final TreeSet<String> labelSet = new TreeSet<String>();
+        final TreeSet<string> labelSet = new TreeSet<string>();
 
         CorpusLoader.walk(inPath, new CorpusLoader.Handler()
         {

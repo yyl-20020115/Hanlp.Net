@@ -29,7 +29,7 @@ public class NotionalTokenizer
      */
     public static Segment SEGMENT = HanLP.newSegment();
 
-    public static List<Term> segment(String text)
+    public static List<Term> segment(string text)
     {
         return segment(text.ToCharArray());
     }
@@ -61,7 +61,7 @@ public class NotionalTokenizer
      * @param text
      * @return
      */
-    public static List<List<Term>> seg2sentence(String text)
+    public static List<List<Term>> seg2sentence(string text)
     {
         List<List<Term>> sentenceList = SEGMENT.seg2sentence(text);
         foreach (List<Term> sentence in sentenceList)
@@ -86,7 +86,7 @@ public class NotionalTokenizer
      * @param shortest 是否断句为最细的子句（将逗号也视作分隔符）
      * @return 句子列表，每个句子由一个单词列表组成
      */
-    public List<List<Term>> seg2sentence(String text, bool shortest)
+    public List<List<Term>> seg2sentence(string text, bool shortest)
     {
         return SEGMENT.seg2sentence(text, shortest);
     }
@@ -98,7 +98,7 @@ public class NotionalTokenizer
      * @param filterArrayChain 自定义过滤器链
      * @return
      */
-    public static List<List<Term>> seg2sentence(String text, params Filter[] filterArrayChain)
+    public static List<List<Term>> seg2sentence(string text, params Filter[] filterArrayChain)
     {
         List<List<Term>> sentenceList = SEGMENT.seg2sentence(text);
         foreach (List<Term> sentence in sentenceList)

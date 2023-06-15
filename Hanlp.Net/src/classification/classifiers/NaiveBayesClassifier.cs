@@ -109,7 +109,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         return model;
     }
 
-    public Dictionary<String, Double> predict(String text) 
+    public Dictionary<string, Double> predict(string text) 
     {
         if (model == null)
         {
@@ -135,13 +135,13 @@ public class NaiveBayesClassifier : AbstractClassifier
         Double logprob;
 
         double[] predictionScores = new double[model.catalog.length];
-        for (Map.Entry<int, Double> entry1 : model.logPriors.entrySet())
+        for (KeyValuePair<int, Double> entry1 : model.logPriors.entrySet())
         {
             category = entry1.getKey();
             logprob = entry1.getValue(); //用类目的对数似然初始化概率
 
             //对文档中的每个特征
-            for (Map.Entry<int, int[]> entry2 : document.tfMap.entrySet())
+            for (KeyValuePair<int, int[]> entry2 : document.tfMap.entrySet())
             {
                 feature = entry2.getKey();
 
@@ -181,7 +181,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         //从统计数据中删掉无用的特征并重建特征映射表
         int[][] featureCategoryJointCount = new int[selectedFeatures.size()][];
         featureData.wordIdTrie = new BinTrie<int>();
-        String[] wordIdArray = dataSet.getLexicon().getWordIdArray();
+        string[] wordIdArray = dataSet.getLexicon().getWordIdArray();
         int p = -1;
         for (int feature : selectedFeatures.keySet())
         {

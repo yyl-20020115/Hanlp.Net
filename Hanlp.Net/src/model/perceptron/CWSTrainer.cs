@@ -30,13 +30,13 @@ public class CWSTrainer : PerceptronTrainer
     protected Instance createInstance(Sentence sentence, FeatureMap mutableFeatureMap)
     {
         List<Word> wordList = sentence.toSimpleWordList();
-        String[] termArray = Utility.toWordArray(wordList);
+        string[] termArray = Utility.toWordArray(wordList);
         Instance instance = new CWSInstance(termArray, mutableFeatureMap);
         return instance;
     }
 
     //@Override
-    public double[] evaluate(String developFile, LinearModel model) 
+    public double[] evaluate(string developFile, LinearModel model) 
     {
         PerceptronSegmenter segmenter = new PerceptronSegmenter(model);
         double[] prf = Utility.prf(Utility.evaluateCWS(developFile, segmenter));

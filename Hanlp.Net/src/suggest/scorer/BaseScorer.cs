@@ -22,13 +22,13 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
 {
     public BaseScorer()
     {
-        storage = new TreeMap<T, Set<String>>();
+        storage = new TreeMap<T, Set<string>>();
     }
 
     /**
      * 储存
      */
-    protected Dictionary<T, Set<String>> storage;
+    protected Dictionary<T, Set<string>> storage;
     /**
      * 权重
      */
@@ -46,14 +46,14 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
     }
 
     //@Override
-    public void addSentence(String sentence)
+    public void addSentence(string sentence)
     {
         T key = generateKey(sentence);
         if (key == null) return;
-        Set<String> set = storage.get(key);
+        Set<string> set = storage.get(key);
         if (set == null)
         {
-            set = new TreeSet<String>();
+            set = new TreeSet<string>();
             storage.put(key, set);
         }
         set.add(sentence);
@@ -64,19 +64,19 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
      * @param sentence
      * @return
      */
-    protected abstract T generateKey(String sentence);
+    protected abstract T generateKey(string sentence);
 
     //@Override
-    public Dictionary<String, Double> computeScore(String outerSentence)
+    public Dictionary<string, Double> computeScore(string outerSentence)
     {
-        TreeMap<String, Double> result = new TreeMap<String, Double>(Collections.reverseOrder());
+        TreeMap<string, Double> result = new TreeMap<string, Double>(Collections.reverseOrder());
         T keyOuter = generateKey(outerSentence);
         if (keyOuter == null) return result;
-        for (Map.Entry<T, Set<String>> entry : storage.entrySet())
+        for (KeyValuePair<T, Set<string>> entry : storage.entrySet())
         {
             T key = entry.getKey();
             Double score = keyOuter.similarity(key);
-            for (String sentence : entry.getValue())
+            for (string sentence : entry.getValue())
             {
                 result.put(sentence, score);
             }

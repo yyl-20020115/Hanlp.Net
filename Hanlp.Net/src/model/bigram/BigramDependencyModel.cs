@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.model.bigram;
  */
 public class BigramDependencyModel
 {
-    static DoubleArrayTrie<String> trie;
+    static DoubleArrayTrie<string> trie;
 
     static
     {
@@ -35,19 +35,19 @@ public class BigramDependencyModel
         }
     }
 
-    static bool load(String path)
+    static bool load(string path)
     {
-        trie = new DoubleArrayTrie<String>();
+        trie = new DoubleArrayTrie<string>();
         if (loadDat(path + ".bi" + Predefine.BIN_EXT)) return true;
-        TreeMap<String, String> map = new TreeMap<String, String>();
-        for (String line : IOUtil.readLineListWithLessMemory(path))
+        TreeMap<string, string> map = new TreeMap<string, string>();
+        for (string line : IOUtil.readLineListWithLessMemory(path))
         {
-            String[] param = line.split(" ");
+            string[] param = line.split(" ");
             if (param[0].endsWith("@"))
             {
                 continue;
             }
-            String dependency = param[1];
+            string dependency = param[1];
             map.put(param[0], dependency);
         }
         if (map.size() == 0) return false;
@@ -56,12 +56,12 @@ public class BigramDependencyModel
         return true;
     }
 
-    private static bool loadDat(String path)
+    private static bool loadDat(string path)
     {
         ByteArray byteArray = ByteArray.createByteArray(path);
         if (byteArray == null) return false;
         int size = byteArray.nextInt();
-        String[] valueArray = new String[size];
+        string[] valueArray = new string[size];
         for (int i = 0; i < valueArray.length; ++i)
         {
             valueArray[i] = byteArray.nextUTF();
@@ -69,15 +69,15 @@ public class BigramDependencyModel
         return trie.load(byteArray, valueArray);
     }
 
-    static bool saveDat(String path, TreeMap<String, String> map)
+    static bool saveDat(string path, TreeMap<string, string> map)
     {
-        Collection<String> dependencyList = map.values();
+        Collection<string> dependencyList = map.values();
         // 缓存值文件
         try
         {
             DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path +  ".bi" + Predefine.BIN_EXT));
             _out.writeInt(dependencyList.size());
-            for (String dependency : dependencyList)
+            for (string dependency : dependencyList)
             {
                 _out.writeUTF(dependency);
             }
@@ -92,7 +92,7 @@ public class BigramDependencyModel
         return true;
     }
 
-    public static String get(String key)
+    public static string get(string key)
     {
         return trie.get(key);
     }
@@ -105,9 +105,9 @@ public class BigramDependencyModel
      * @param toPos
      * @return
      */
-    public static String get(String fromWord, String fromPos, String toWord, String toPos)
+    public static string get(string fromWord, string fromPos, string toWord, string toPos)
     {
-        String dependency = get(fromWord + "@" + toWord);
+        string dependency = get(fromWord + "@" + toWord);
         if (dependency == null) dependency = get(fromWord + "@" + WordNatureWeightModelMaker.wrapTag(toPos));
         if (dependency == null) dependency = get(WordNatureWeightModelMaker.wrapTag(fromPos) + "@" + toWord);
         if (dependency == null) dependency = get(WordNatureWeightModelMaker.wrapTag(fromPos) + "@" + WordNatureWeightModelMaker.wrapTag(toPos));

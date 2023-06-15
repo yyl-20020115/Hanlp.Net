@@ -20,11 +20,11 @@ namespace com.hankcs.hanlp.dictionary.common;
 public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumItem<E>>
 {
     //@Override
-    protected EnumItem<E> createValue(String[] params)
+    protected EnumItem<E> createValue(string[] params)
     {
-        Map.Entry<String, Map.Entry<String, int>[]> args = EnumItem.create(params);
+        KeyValuePair<string, KeyValuePair<string, int>[]> args = EnumItem.create(params);
         EnumItem<E> nrEnumItem = new EnumItem<E>();
-        for (Map.Entry<String, int> e : args.getValue())
+        for (KeyValuePair<string, int> e : args.getValue())
         {
             nrEnumItem.labelMap.put(valueOf(e.getKey()), e.getValue());
         }
@@ -37,7 +37,7 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
      * @param name
      * @return
      */
-    protected abstract E valueOf(String name);
+    protected abstract E valueOf(string name);
 
     /**
      * 代理E.values
@@ -82,7 +82,7 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
     protected void saveValue(EnumItem<E> item, DataOutputStream _out) 
     {
         _out.writeInt(item.labelMap.size());
-        for (Map.Entry<E, int> entry : item.labelMap.entrySet())
+        for (KeyValuePair<E, int> entry : item.labelMap.entrySet())
         {
             _out.writeInt(entry.getKey().ordinal());
             _out.writeInt(entry.getValue());

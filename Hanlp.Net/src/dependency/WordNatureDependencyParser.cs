@@ -27,7 +27,7 @@ public class WordNatureDependencyParser : MinimumSpanningTreeParser
         this.model = model;
     }
 
-    public WordNatureDependencyParser(String modelPath)
+    public WordNatureDependencyParser(string modelPath)
     {
         model = GlobalObjectPool.get(modelPath);
         if (model != null) return;
@@ -57,7 +57,7 @@ public class WordNatureDependencyParser : MinimumSpanningTreeParser
      * @param sentence 句子
      * @return CoNLL格式的依存句法树
      */
-    public static CoNLLSentence compute(String sentence)
+    public static CoNLLSentence compute(string sentence)
     {
         return new WordNatureDependencyParser().parse(sentence);
     }

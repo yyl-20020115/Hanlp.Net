@@ -72,7 +72,7 @@ public class State
      * 添加一个匹配到的模式串（这个状态对应着这个模式串)
      * @param keyword
      */
-    public void addEmit(String keyword)
+    public void addEmit(string keyword)
     {
         if (this.emits == null)
         {
@@ -85,7 +85,7 @@ public class State
      * 添加一些匹配到的模式串
      * @param emits
      */
-    public void addEmit(ICollection<String> emits)
+    public void addEmit(ICollection<string> emits)
     {
         foreach (string emit in emits)
         {

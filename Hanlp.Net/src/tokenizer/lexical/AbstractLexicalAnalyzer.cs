@@ -94,7 +94,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param wordList      储存单词列表
      * @param attributeList 储存用户词典中的词性，设为null表示不查询用户词典
      */
-    protected void segment(String sentence, string normalized, List<String> wordList, List<CoreDictionary.Attribute> attributeList)
+    protected void segment(string sentence, string normalized, List<string> wordList, List<CoreDictionary.Attribute> attributeList)
     {
         if (attributeList != null)
         {
@@ -128,7 +128,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
     }
     //@Override
-    public void segment(String sentence, String normalized, List<String> wordList)
+    public void segment(string sentence, string normalized, List<string> wordList)
     {
         if (config.useCustomDictionary)
         {
@@ -164,25 +164,25 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param sentence
      * @return
      */
-    public List<String> segment(String sentence)
+    public List<string> segment(string sentence)
     {
         return segment(sentence, CharTable.convert(sentence));
     }
 
     //@Override
-    public String[] recognize(String[] wordArray, String[] posArray)
+    public string[] recognize(string[] wordArray, string[] posArray)
     {
         return neRecognizer.recognize(wordArray, posArray);
     }
 
     //@Override
-    public String[] tag(params String[] words)
+    public string[] tag(params string[] words)
     {
         return posTagger.tag(words);
     }
 
     //@Override
-    public String[] tag(List<String> wordList)
+    public string[] tag(List<string> wordList)
     {
         return posTagger.tag(wordList);
     }
@@ -194,20 +194,20 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     }
 
     //@Override
-    public Sentence analyze(String sentence)
+    public Sentence analyze(string sentence)
     {
         if (sentence.isEmpty())
         {
             return new Sentence(new List<corpus.document.sentence.word.IWord>());
         }
-        String normalized = CharTable.convert(sentence);
-        List<String> wordList = new ();
+        string normalized = CharTable.convert(sentence);
+        List<string> wordList = new ();
         List<CoreDictionary.Attribute> attributeList = segmentWithAttribute(sentence, normalized, wordList);
 
-        String[] wordArray = new String[wordList.Count];
+        string[] wordArray = new string[wordList.Count];
         int offset = 0;
         int id = 0;
-        for (String word in wordList)
+        for (string word in wordList)
         {
             wordArray[id] = normalized.substring(offset, offset + word.length());
             ++id;
@@ -217,16 +217,16 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         List<IWord> termList = new (wordList.size());
         if (posTagger != null)
         {
-            String[] posArray = tag(wordArray);
+            string[] posArray = tag(wordArray);
             if (neRecognizer != null)
             {
-                String[] nerArray = neRecognizer.recognize(wordArray, posArray);
+                string[] nerArray = neRecognizer.recognize(wordArray, posArray);
                 overwriteTag(attributeList, posArray);
                 wordList.toArray(wordArray);
 
                 List<Word> result = new ();
                 result.add(new Word(wordArray[0], posArray[0]));
-                String prePos = posArray[0];
+                string prePos = posArray[0];
 
                 NERTagSet tagSet = getNERTagSet();
                 for (int i = 1; i < nerArray.length; i++)
@@ -264,7 +264,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         else
         {
             wordList.toArray(wordArray);
-            for (String word : wordArray)
+            for (string word : wordArray)
             {
                 termList.add(new Word(word, null));
             }
@@ -273,7 +273,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         return new Sentence(termList);
     }
 
-    private void overwriteTag(List<CoreDictionary.Attribute> attributeList, String[] posArray)
+    private void overwriteTag(List<CoreDictionary.Attribute> attributeList, string[] posArray)
     {
         int id;
         if (attributeList != null)
@@ -295,9 +295,9 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param normalized
      * @return
      */
-    public List<String> segment( String sentence,  String normalized)
+    public List<string> segment( string sentence,  string normalized)
     {
-         List<String> wordList = new ();
+         List<string> wordList = new ();
         segment(sentence, normalized, wordList);
         return wordList;
     }
@@ -329,15 +329,15 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             return Collections.emptyList();
         }
-        String original = new String(sentence);
+        string original = new string(sentence);
         CharTable.normalization(sentence);
-        String normalized = new String(sentence);
-        List<String> wordList = new ();
+        string normalized = new string(sentence);
+        List<string> wordList = new ();
         List<CoreDictionary.Attribute> attributeList;
         attributeList = segmentWithAttribute(original, normalized, wordList);
         List<Term> termList = new (wordList.size());
         int offset = 0;
-        foreach (String word in wordList)
+        foreach (string word in wordList)
         {
             Term term = new Term(word, null);
             term.offset = offset;
@@ -348,16 +348,16 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             if (posTagger != null)
             {
-                String[] wordArray = new String[wordList.size()];
+                string[] wordArray = new string[wordList.size()];
                 offset = 0;
                 int id = 0;
-                foreach (String word in wordList)
+                foreach (string word in wordList)
                 {
                     wordArray[id] = normalized.substring(offset, offset + word.length());
                     ++id;
                     offset += word.length();
                 }
-                String[] posArray = tag(wordArray);
+                string[] posArray = tag(wordArray);
                 Iterator<Term> iterator = termList.iterator();
                 Iterator<CoreDictionary.Attribute> attributeIterator = attributeList == null ? null : attributeList.iterator();
                 for (int i = 0; i < posArray.length; i++)
@@ -383,7 +383,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         iterator = termList.iterator();
                     }
                     termList = new ArrayList<Term>(termList.size());
-                    String[] nerArray = recognize(wordArray, posArray);
+                    string[] nerArray = recognize(wordArray, posArray);
                     wordList.toArray(wordArray);
                     StringBuilder result = new StringBuilder();
                     result.Append(wordArray[0]);
@@ -391,7 +391,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     {
                         childrenList.add(iterator.next());
                     }
-                    String prePos = posArray[0];
+                    string prePos = posArray[0];
                     offset = 0;
 
                     for (int i = 1; i < nerArray.length; i++)
@@ -483,7 +483,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param preType
      * @param wordList
      */
-    private void pushPiece(String sentence, String normalized, int start, int end, byte preType, List<String> wordList)
+    private void pushPiece(string sentence, string normalized, int start, int end, byte preType, List<string> wordList)
     {
         if (preType == CharType.CT_CHINESE)
         {
@@ -502,7 +502,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param normalized
      * @param wordList
      */
-    protected void segmentAfterRule(String sentence, String normalized, List<String> wordList)
+    protected void segmentAfterRule(string sentence, string normalized, List<string> wordList)
     {
         if (!_enableRuleBasedSegment)
         {
@@ -554,7 +554,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param wordList
      * @return
      */
-    private List<CoreDictionary.Attribute> segmentWithAttribute(String original, String normalized, List<String> wordList)
+    private List<CoreDictionary.Attribute> segmentWithAttribute(string original, string normalized, List<string> wordList)
     {
         List<CoreDictionary.Attribute> attributeList;
         if (config.useCustomDictionary)
@@ -584,9 +584,9 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param vertexList 粗分结果
      * @return 合并后的结果
      */
-    protected static List<CoreDictionary.Attribute> combineWithCustomDictionary(List<String> vertexList)
+    protected static List<CoreDictionary.Attribute> combineWithCustomDictionary(List<string> vertexList)
     {
-        String[] wordNet = new String[vertexList.size()];
+        string[] wordNet = new string[vertexList.size()];
         vertexList.toArray(wordNet);
         CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[wordNet.length];
         // DAT合并
@@ -671,7 +671,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param end     结束下标（不包含）
      * @param value   新的属性
      */
-    private static void combineWords(String[] wordNet, int start, int end, CoreDictionary.Attribute[] attributeArray, CoreDictionary.Attribute value)
+    private static void combineWords(string[] wordNet, int start, int end, CoreDictionary.Attribute[] attributeArray, CoreDictionary.Attribute value)
     {
         if (start + 1 != end)   // 小优化，如果只有一个词，那就不需要合并，直接应用新属性
         {

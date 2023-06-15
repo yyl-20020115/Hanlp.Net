@@ -24,5 +24,5 @@ public interface IPhraseExtractor
      * @param size 希望提取前几个短语
      * @return 短语列表
      */
-    List<String> extractPhrase(String text, int size);
+    List<string> extractPhrase(string text, int size);
 }

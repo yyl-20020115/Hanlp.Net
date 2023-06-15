@@ -32,7 +32,7 @@ public class ByteArrayOtherStream : ByteArrayStream
         this.is = is;
     }
 
-    public static ByteArrayOtherStream createByteArrayOtherStream(String path)
+    public static ByteArrayOtherStream createByteArrayOtherStream(string path)
     {
         try
         {

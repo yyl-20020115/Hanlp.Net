@@ -21,7 +21,7 @@ public class Term
     /**
      * 词语
      */
-    public String word;
+    public string word;
 
     /**
      * 词性
@@ -38,14 +38,14 @@ public class Term
      * @param word 词语
      * @param nature 词性
      */
-    public Term(String word, Nature nature)
+    public Term(string word, Nature nature)
     {
         this.word = word;
         this.nature = nature;
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         if (HanLP.Config.ShowTermNature)
             return word + "/" + nature;

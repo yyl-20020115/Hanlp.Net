@@ -23,13 +23,13 @@ public interface IScorer
      * @param outerSentence 外部句子
      * @return key为分值x，value为分值等于x的一系列句子
      */
-    Dictionary<String, Double> computeScore(String outerSentence);
+    Dictionary<string, Double> computeScore(string outerSentence);
 
     /**
      * 输入一个候选句子
      * @param sentence
      */
-    void addSentence(String sentence);
+    void addSentence(string sentence);
 
     /**
      * 清空该推荐器中的所有句子

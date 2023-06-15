@@ -39,7 +39,7 @@ public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
      * @param to
      * @return
      */
-    public int getFrequency(String from, String to)
+    public int getFrequency(string from, string to)
     {
         return getFrequency(convert(from), convert(to));
     }
@@ -77,13 +77,13 @@ public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
         return totalFrequency;
     }
 
-    protected E convert(String label)
+    protected E convert(string label)
     {
         return Enum.valueOf(enumType, label);
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("TransformMatrixDictionary{");
         sb.Append("enumType=").Append(enumType);
@@ -96,7 +96,7 @@ public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
     }
 
     //@Override
-    public int ordinal(String tag)
+    public int ordinal(string tag)
     {
         return Enum.valueOf(enumType, tag).ordinal();
     }

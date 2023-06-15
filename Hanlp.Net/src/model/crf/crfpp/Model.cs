@@ -6,12 +6,12 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 public abstract class Model
 {
 
-    public bool open(String[] args)
+    public bool open(string[] args)
     {
         return true;
     }
 
-    public bool open(String arg)
+    public bool open(string arg)
     {
         return true;
     }

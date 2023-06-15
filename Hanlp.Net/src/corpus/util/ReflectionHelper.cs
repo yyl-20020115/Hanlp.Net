@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.corpus.util;
  */
 public class ReflectionHelper
 {
-    private static readonly String MODIFIERS_FIELD = "modifiers";
+    private static readonly string MODIFIERS_FIELD = "modifiers";
 
 //    private static readonly ReflectionFactory reflection =
 //            ReflectionFactory.getReflectionFactory();

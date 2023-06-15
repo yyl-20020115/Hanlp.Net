@@ -49,7 +49,7 @@ public class CoreStopWordDictionary
         }
     }
 
-    public static bool contains(String key)
+    public static bool contains(string key)
     {
         return dictionary.contains(key);
     }
@@ -64,7 +64,7 @@ public class CoreStopWordDictionary
         public bool shouldInclude(Term term)
         {
             // 除掉停用词
-            String nature = term.nature != null ? term.nature.toString() : "空";
+            string nature = term.nature != null ? term.nature.toString() : "空";
             char firstChar = nature.charAt(0);
             switch (firstChar)
             {
@@ -123,7 +123,7 @@ public class CoreStopWordDictionary
      * @param stopWord 停用词
      * @return 词典是否发生了改变
      */
-    public static bool add(String stopWord)
+    public static bool add(string stopWord)
     {
         return dictionary.add(stopWord);
     }
@@ -133,7 +133,7 @@ public class CoreStopWordDictionary
      * @param stopWord 停用词
      * @return 词典是否发生了改变
      */
-    public static bool remove(String stopWord)
+    public static bool remove(string stopWord)
     {
         return dictionary.remove(stopWord);
     }

@@ -36,14 +36,14 @@ public interface IClassifier
      * @ 参数错误
      * @throws IllegalStateException    未训练模型
      */
-    Dictionary<String, Double> predict(String text) ;
+    Dictionary<string, Double> predict(string text) ;
 
     /**
      * 预测分类
      * @param document
      * @return
      */
-    Dictionary<String, Double> predict(Document document) ;
+    Dictionary<string, Double> predict(Document document) ;
 
     /**
      * 预测分类
@@ -70,7 +70,7 @@ public interface IClassifier
      * @
      * @throws IllegalStateException
      */
-    String classify(String text) ;
+    string classify(string text) ;
 
     /**
      * 预测最可能的分类
@@ -79,14 +79,14 @@ public interface IClassifier
      * @
      * @throws IllegalStateException
      */
-    String classify(Document document) ;
+    string classify(Document document) ;
 
     /**
      * 训练模型
      *
      * @param trainingDataSet 训练数据集,用Map储存.键是分类名,值是一个数组,数组中每个元素都是一篇文档的内容.
      */
-    void train(Dictionary<String, String[]> trainingDataSet) ;
+    void train(Dictionary<string, string[]> trainingDataSet) ;
 
     /**
      * 训练模型
@@ -105,7 +105,7 @@ public interface IClassifier
      * @param charsetName 文件编码
      * @ 任何可能的IO异常
      */
-    void train(String folderPath, String charsetName) ;
+    void train(string folderPath, string charsetName) ;
 
     /**
      * 用UTF-8编码的语料训练模型

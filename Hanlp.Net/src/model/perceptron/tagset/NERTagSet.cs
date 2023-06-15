@@ -17,15 +17,15 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
  */
 public class NERTagSet : TagSet
 {
-    public final String O_TAG = "O";
+    public final string O_TAG = "O";
     public final char O_TAG_CHAR = 'O';
-    public final String B_TAG_PREFIX = "B-";
+    public final string B_TAG_PREFIX = "B-";
     public final char B_TAG_CHAR = 'B';
-    public final String M_TAG_PREFIX = "M-";
-    public final String E_TAG_PREFIX = "E-";
-    public final String S_TAG = "S";
+    public final string M_TAG_PREFIX = "M-";
+    public final string E_TAG_PREFIX = "E-";
+    public final string S_TAG = "S";
     public final char S_TAG_CHAR = 'S';
-    public final Set<String> nerLabels = new HashSet<String>();
+    public final Set<string> nerLabels = new HashSet<string>();
 
     /**
      * 非NER
@@ -38,20 +38,20 @@ public class NERTagSet : TagSet
         O = add(O_TAG);
     }
 
-    public NERTagSet(int o, Collection<String> tags)
+    public NERTagSet(int o, Collection<string> tags)
     {
         super(TaskType.NER);
         O = o;
-        for (String tag : tags)
+        for (string tag : tags)
         {
             add(tag);
-            String label = NERTagSet.posOf(tag);
+            string label = NERTagSet.posOf(tag);
             if (label.length() != tag.length())
                 nerLabels.add(label);
         }
     }
 
-    public static String posOf(String tag)
+    public static string posOf(string tag)
     {
         int index = tag.indexOf('-');
         if (index == -1)
@@ -67,9 +67,9 @@ public class NERTagSet : TagSet
     {
         super.load(byteArray);
         nerLabels.clear();
-        for (Map.Entry<String, int> entry : this)
+        for (KeyValuePair<string, int> entry : this)
         {
-            String tag = entry.getKey();
+            string tag = entry.getKey();
             int index = tag.indexOf('-');
             if (index != -1)
             {

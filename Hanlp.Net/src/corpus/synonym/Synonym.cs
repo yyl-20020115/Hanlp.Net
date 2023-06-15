@@ -18,25 +18,25 @@ namespace com.hankcs.hanlp.corpus.synonym;
  */
 public class Synonym : ISynonym
 {
-    public String realWord;
+    public string realWord;
     public long id;
     public Type type;
 
     @Deprecated
-    public Synonym(String realWord, String idString)
+    public Synonym(string realWord, string idString)
     {
         this.realWord = realWord;
         id = SynonymHelper.convertString2Id(idString);
     }
 
     @Deprecated
-    public Synonym(String realWord, long id)
+    public Synonym(string realWord, long id)
     {
         this.realWord = realWord;
         this.id = id;
     }
 
-    public Synonym(String realWord, long id, Type type)
+    public Synonym(string realWord, long id, Type type)
     {
         this.realWord = realWord;
         this.id = id;
@@ -44,7 +44,7 @@ public class Synonym : ISynonym
     }
 
     //@Override
-    public String getRealWord()
+    public string getRealWord()
     {
         return realWord;
     }
@@ -56,7 +56,7 @@ public class Synonym : ISynonym
     }
 
     //@Override
-    public String getIdString()
+    public string getIdString()
     {
         return SynonymHelper.convertId2StringWithIndex(id);
     }
@@ -66,23 +66,23 @@ public class Synonym : ISynonym
      * @param param
      * @return
      */
-    public static List<Synonym> create(String param)
+    public static List<Synonym> create(string param)
     {
         if (param == null) return null;
-        String[] args = param.split(" ");
+        string[] args = param.split(" ");
         return create(args);
     }
 
     /**
-     * @see com.hankcs.hanlp.corpus.synonym.Synonym#create(String)
+     * @see com.hankcs.hanlp.corpus.synonym.Synonym#create(string)
      * @param args
      * @return
      */
-    public static ArrayList<Synonym> create(String[] args)
+    public static ArrayList<Synonym> create(string[] args)
     {
         ArrayList<Synonym> synonymList = new ArrayList<Synonym>(args.length - 1);
 
-        String idString = args[0];
+        string idString = args[0];
         Type type;
         switch (idString.charAt(idString.length() - 1))
         {
@@ -112,7 +112,7 @@ public class Synonym : ISynonym
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder();
         sb.Append(realWord);

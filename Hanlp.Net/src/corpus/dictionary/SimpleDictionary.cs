@@ -23,15 +23,15 @@ public abstract class SimpleDictionary<V>
 {
     BinTrie<V> trie = new BinTrie<V>();
 
-    public bool load(String path)
+    public bool load(string path)
     {
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path), "UTF-8"));
-            String line;
+            string line;
             while ((line = br.readLine()) != null)
             {
-                Map.Entry<String, V> entry = onGenerateEntry(line);
+                KeyValuePair<string, V> entry = onGenerateEntry(line);
                 if (entry == null) continue;
                 trie.put(entry.getKey(), entry.getValue());
             }
@@ -51,7 +51,7 @@ public abstract class SimpleDictionary<V>
      * @param key
      * @return 单词对应的条目
      */
-    public V get(String key)
+    public V get(string key)
     {
         return trie.get(key);
     }
@@ -62,7 +62,7 @@ public abstract class SimpleDictionary<V>
      * @param line
      * @return
      */
-    protected abstract Map.Entry<String, V> onGenerateEntry(String line);
+    protected abstract KeyValuePair<string, V> onGenerateEntry(string line);
 
     /**
      * 以我为主词典，合并一个副词典，我有的词条不会被副词典覆盖
@@ -75,7 +75,7 @@ public abstract class SimpleDictionary<V>
             logger.warning("有个词典还没加载");
             return;
         }
-        for (Map.Entry<String, V> entry : other.trie.entrySet())
+        for (KeyValuePair<string, V> entry : other.trie.entrySet())
         {
             if (trie.containsKey(entry.getKey())) continue;
             trie.put(entry.getKey(), entry.getValue());
@@ -85,7 +85,7 @@ public abstract class SimpleDictionary<V>
      * 获取键值对集合
      * @return
      */
-    public Set<Map.Entry<String, V>> entrySet()
+    public Set<KeyValuePair<string, V>> entrySet()
     {
         return trie.entrySet();
     }
@@ -94,11 +94,11 @@ public abstract class SimpleDictionary<V>
      * 键集合
      * @return
      */
-    public Set<String> keySet()
+    public Set<string> keySet()
     {
-        TreeSet<String> keySet = new TreeSet<String>();
+        TreeSet<string> keySet = new TreeSet<string>();
 
-        for (Map.Entry<String, V> entry : entrySet())
+        for (KeyValuePair<string, V> entry : entrySet())
         {
             keySet.add(entry.getKey());
         }
@@ -114,7 +114,7 @@ public abstract class SimpleDictionary<V>
     public int remove(Filter filter)
     {
         int size = trie.size();
-        for (Map.Entry<String, V> entry : entrySet())
+        for (KeyValuePair<string, V> entry : entrySet())
         {
             if (filter.remove(entry))
             {
@@ -127,14 +127,14 @@ public abstract class SimpleDictionary<V>
 
     public interface Filter<V>
     {
-        bool remove(Map.Entry<String, V> entry);
+        bool remove(KeyValuePair<string, V> entry);
     }
     /**
      * 向中加入单词
      * @param key
      * @param value
      */
-    public void add(String key, V value)
+    public void add(string key, V value)
     {
         trie.put(key, value);
     }

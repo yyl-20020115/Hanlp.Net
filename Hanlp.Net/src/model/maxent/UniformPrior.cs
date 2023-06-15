@@ -43,7 +43,7 @@ public class UniformPrior
      * 初始化
      * @param outcomeLabels
      */
-    public void setLabels(String[] outcomeLabels)
+    public void setLabels(string[] outcomeLabels)
     {
         this.numOutcomes = outcomeLabels.length;
         r = Math.log(1.0 / numOutcomes);

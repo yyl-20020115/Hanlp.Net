@@ -18,26 +18,26 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
  */
 public class ImmutableFeatureMap : FeatureMap
 {
-    public Dictionary<String, int> featureIdMap;
+    public Dictionary<string, int> featureIdMap;
 
-    public ImmutableFeatureMap(Dictionary<String, int> featureIdMap, TagSet tagSet)
+    public ImmutableFeatureMap(Dictionary<string, int> featureIdMap, TagSet tagSet)
     {
         super(tagSet);
         this.featureIdMap = featureIdMap;
     }
 
-    public ImmutableFeatureMap(Set<Map.Entry<String, int>> entrySet, TagSet tagSet)
+    public ImmutableFeatureMap(Set<KeyValuePair<string, int>> entrySet, TagSet tagSet)
     {
         super(tagSet);
-        this.featureIdMap = new HashMap<String, int>();
-        for (Map.Entry<String, int> entry : entrySet)
+        this.featureIdMap = new HashMap<string, int>();
+        for (KeyValuePair<string, int> entry : entrySet)
         {
             featureIdMap.put(entry.getKey(), entry.getValue());
         }
     }
 
     //@Override
-    public int idOf(String string)
+    public int idOf(string string)
     {
         int id = featureIdMap.get(string);
         if (id == null) return -1;
@@ -51,7 +51,7 @@ public class ImmutableFeatureMap : FeatureMap
     }
 
     //@Override
-    public Set<Map.Entry<String, int>> entrySet()
+    public Set<KeyValuePair<string, int>> entrySet()
     {
         return featureIdMap.entrySet();
     }

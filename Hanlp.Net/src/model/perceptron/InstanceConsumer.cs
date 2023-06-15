@@ -30,12 +30,12 @@ public abstract class InstanceConsumer
 
     protected abstract Instance createInstance(Sentence sentence,  FeatureMap featureMap);
 
-    protected double[] evaluate(String developFile, String modelFile) 
+    protected double[] evaluate(string developFile, string modelFile) 
     {
         return evaluate(developFile, new LinearModel(modelFile));
     }
 
-    protected double[] evaluate(String developFile,  LinearModel model) 
+    protected double[] evaluate(string developFile,  LinearModel model) 
     {
          int[] stat = new int[2];
         IOUtility.loadInstance(developFile,new Ins());
@@ -53,7 +53,7 @@ public abstract class InstanceConsumer
             return false;
         }
     }
-    protected String normalize(String text)
+    protected string normalize(string text)
     {
         return CharTable.convert(text);
     }

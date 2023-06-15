@@ -59,7 +59,7 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
      *
      * @ 加载过程中的IO异常
      */
-    public DoubleArrayTrieSegment(params String[] dictionaryPaths)
+    public DoubleArrayTrieSegment(params string[] dictionaryPaths)
         : this(new DoubleArrayTrie<CoreDictionary.Attribute>(
             IOUtil.loadDictionary(dictionaryPaths)))
     {
@@ -86,7 +86,7 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
         posTag(charArray, wordNet, natureArray);
         for (int i = 0; i < wordNet.Length; )
         {
-            Term term = new Term(new String(charArray, i, wordNet[i]), 
+            Term term = new Term(new string(charArray, i, wordNet[i]), 
                 config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
             term.offset = i;
             termList.add(term);

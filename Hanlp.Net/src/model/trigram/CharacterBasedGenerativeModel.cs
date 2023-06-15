@@ -72,7 +72,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         LinkedList<char[]> sentence = new LinkedList<char[]>();
         for (IWord iWord : wordList)
         {
-            String word = iWord.getValue();
+            string word = iWord.getValue();
             if (word.length() == 1)
             {
                 sentence.add(new char[]{word.charAt(0), 's'});
@@ -111,7 +111,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         double tl1 = 0.0;
         double tl2 = 0.0;
         double tl3 = 0.0;
-        for (String key : tf.d.keySet())
+        for (string key : tf.d.keySet())
         {
             if (key.length() != 6) continue;    // tri samples
             char[][] now = new char[][]

@@ -57,18 +57,18 @@ public class MathUtility
      *
      * @param predictionScores
      */
-    public static void normalizeExp(Dictionary<String, Double> predictionScores)
+    public static void normalizeExp(Dictionary<string, Double> predictionScores)
     {
-        Set<Map.Entry<String, Double>> entrySet = predictionScores.entrySet();
+        Set<KeyValuePair<string, Double>> entrySet = predictionScores.entrySet();
         double max = Double.NEGATIVE_INFINITY;
-        for (Map.Entry<String, Double> entry : entrySet)
+        for (KeyValuePair<string, Double> entry : entrySet)
         {
             max = Math.max(max, entry.getValue());
         }
 
         double sum = 0.0;
         //通过减去最大值防止浮点数溢出
-        for (Map.Entry<String, Double> entry : entrySet)
+        for (KeyValuePair<string, Double> entry : entrySet)
         {
             Double value = Math.exp(entry.getValue() - max);
             entry.setValue(value);
@@ -78,7 +78,7 @@ public class MathUtility
 
         if (sum != 0.0)
         {
-            for (Map.Entry<String, Double> entry : entrySet)
+            for (KeyValuePair<string, Double> entry : entrySet)
             {
                 predictionScores.put(entry.getKey(), entry.getValue() / sum);
             }
@@ -131,7 +131,7 @@ public class MathUtility
         {
             value = -value;
         }
-//        logger.info(String.format("%5s frequency:%6d, %s nTwoWordsFreq:%3d, weight:%.2f", from.word, frequency, from.word + "@" + to.word, nTwoWordsFreq, value));
+//        logger.info(string.format("%5s frequency:%6d, %s nTwoWordsFreq:%3d, weight:%.2f", from.word, frequency, from.word + "@" + to.word, nTwoWordsFreq, value));
         return value;
     }
 

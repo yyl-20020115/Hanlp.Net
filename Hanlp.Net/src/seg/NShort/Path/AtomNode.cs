@@ -18,10 +18,10 @@ namespace com.hankcs.hanlp.seg.NShort.Path;
  */
 public class AtomNode
 {
-    public String sWord;
+    public string sWord;
     public int nPOS;
 
-    public AtomNode(String sWord, int nPOS)
+    public AtomNode(string sWord, int nPOS)
     {
         this.sWord = sWord;
         this.nPOS = nPOS;
@@ -29,7 +29,7 @@ public class AtomNode
 
     public AtomNode(char c, int nPOS)
     {
-        this.sWord = String.valueOf(c);
+        this.sWord = string.valueOf(c);
         this.nPOS = nPOS;
     }
 
@@ -75,7 +75,7 @@ public class AtomNode
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return "AtomNode{" +
                 "word='" + sWord + '\'' +
@@ -83,9 +83,9 @@ public class AtomNode
                 '}';
     }
 
-    public static Vertex convert(String word, int type)
+    public static Vertex convert(string word, int type)
     {
-        String name = word;
+        string name = word;
         Nature nature = Nature.n;
         int dValue = 1;
         switch (type)

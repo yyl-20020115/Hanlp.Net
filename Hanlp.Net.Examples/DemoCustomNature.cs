@@ -47,7 +47,7 @@ public class DemoCustomNature
         foreach (Term term in termList)
         {
             if (term.nature == pcNature)
-                System.out.printf("找到了 [%s] : %s\n", pcNature, term.word);
+                Console.WriteLine("找到了 [{0}] : {1}\n", pcNature, term.word);
         }
         // 还可以直接插入到用户词典
         CustomDictionary.insert("阿尔法狗", "科技名词 1024");
@@ -57,9 +57,9 @@ public class DemoCustomNature
         // 1.6.5之后Nature不再是枚举类型，无法switch。但终于不再涉及反射了，在各种JRE环境下都更稳定。
         foreach (Term term in termList)
         {
-            if (term.nature == n)
+            if (term.nature == pcNature)
             {
-                System.out.printf("找到了 [%s] : %s\n", "名词", term.word);
+                Console.WriteLine("找到了 [{0}] : {1}\n", "名词", term.word);
             }
         }
     }

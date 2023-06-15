@@ -17,13 +17,13 @@ namespace com.hankcs.hanlp.collection.MDAG;
  * 最好不要把MDAG当map用，现在的实现在key后面放一个int，导致右语言全部不同，退化为bintrie
  * @author hankcs
  */
-public class MDAGMap<V> : AbstractMap<String, V>
+public class MDAGMap<V> : AbstractMap<string, V>
 {
     ArrayList<V> valueList = new ArrayList<V>();
     MDAGForMap mdag = new MDAGForMap();
 
     //@Override
-    public V put(String key, V value)
+    public V put(string key, V value)
     {
         V origin = get(key);
         if (origin == null)
@@ -46,7 +46,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
         return null;
     }
 
-    public V get(String key)
+    public V get(string key)
     {
         int valueIndex = mdag.getValueIndex(key);
         if (valueIndex != -1)
@@ -57,21 +57,21 @@ public class MDAGMap<V> : AbstractMap<String, V>
     }
 
     //@Override
-    public Set<Entry<String, V>> entrySet()
+    public Set<Entry<string, V>> entrySet()
     {
-        HashSet<String> keySet = mdag.getAllStrings();
+        HashSet<string> keySet = mdag.getAllStrings();
         return null;
     }
 
     //@Override
-    public Set<String> keySet()
+    public Set<string> keySet()
     {
-        HashSet<String> stringSet = mdag.getAllStrings();
-        LinkedHashSet<String> keySet = new LinkedHashSet<String>();
-        Iterator<String> iterator = stringSet.iterator();
+        HashSet<string> stringSet = mdag.getAllStrings();
+        LinkedHashSet<string> keySet = new LinkedHashSet<string>();
+        Iterator<string> iterator = stringSet.iterator();
         while (iterator.hasNext())
         {
-            String key = iterator.next();
+            string key = iterator.next();
             keySet.add(key.substring(0, key.length() - 3));
         }
         return keySet;
@@ -83,13 +83,13 @@ public class MDAGMap<V> : AbstractMap<String, V>
      * @param begin
      * @return
      */
-    public LinkedList<Entry<String, V>> commonPrefixSearchWithValue(char[] key, int begin)
+    public LinkedList<Entry<string, V>> commonPrefixSearchWithValue(char[] key, int begin)
     {
-        LinkedList<Entry<String, int>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
-        LinkedList<Entry<String, V>> entryList = new LinkedList<Entry<String, V>>();
-        for (Entry<String, int> entry : valueIndex)
+        LinkedList<Entry<string, int>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
+        LinkedList<Entry<string, V>> entryList = new LinkedList<Entry<string, V>>();
+        for (Entry<string, int> entry : valueIndex)
         {
-            entryList.add(new SimpleEntry<String, V>(entry.getKey(), valueList.get(entry.getValue())));
+            entryList.add(new SimpleEntry<string, V>(entry.getKey(), valueList.get(entry.getValue())));
         }
 
         return entryList;
@@ -100,7 +100,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
      * @param key
      * @return
      */
-    public LinkedList<Entry<String, V>> commonPrefixSearchWithValue(String key)
+    public LinkedList<Entry<string, V>> commonPrefixSearchWithValue(string key)
     {
         return commonPrefixSearchWithValue(key.ToCharArray(), 0);
     }
@@ -123,7 +123,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
     {
         static readonly char DELIMITER = Character.MIN_VALUE;
 
-        public int getValueIndex(String key)
+        public int getValueIndex(string key)
         {
             if (sourceNode != null)      //if the MDAG hasn't been simplified
             {
@@ -171,9 +171,9 @@ public class MDAGMap<V> : AbstractMap<String, V>
             return ByteUtil.convertTwoCharToInt(high, low);
         }
 
-        public LinkedList<Entry<String, int>> commonPrefixSearchWithValueIndex(char[] key, int begin)
+        public LinkedList<Entry<string, int>> commonPrefixSearchWithValueIndex(char[] key, int begin)
         {
-            LinkedList<Map.Entry<String, int>> result = new LinkedList<Map.Entry<String, int>>();
+            LinkedList<KeyValuePair<string, int>> result = new LinkedList<KeyValuePair<string, int>>();
             if (sourceNode != null)
             {
                 int charCount = key.length;
@@ -184,7 +184,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
                     if (currentNode == null) break;
                     {
                         int index = getValueIndex(currentNode);
-                        if (index != -1) result.add(new SimpleEntry<String, int>(new String(key, begin, i + 1), index));
+                        if (index != -1) result.add(new SimpleEntry<string, int>(new string(key, begin, i + 1), index));
                     }
                 }
             }
@@ -198,7 +198,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
                     if (currentNode == null) break;
                     {
                         int index = getValueIndex(currentNode);
-                        if (index != -1) result.add(new SimpleEntry<String, int>(new String(key, begin, i + 1), index));
+                        if (index != -1) result.add(new SimpleEntry<string, int>(new string(key, begin, i + 1), index));
                     }
                 }
             }

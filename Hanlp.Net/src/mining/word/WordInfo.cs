@@ -18,7 +18,7 @@ public class WordInfo
     /**
      * 词语
      */
-    public String text;
+    public string text;
     /**
      * 词频
      */
@@ -35,7 +35,7 @@ public class WordInfo
      */
     public float entropy;
 
-    WordInfo(String text)
+    WordInfo(string text)
     {
         this.text = text;
         left = new TreeMap<Character, int[]>();
@@ -60,7 +60,7 @@ public class WordInfo
     private float computeEntropy(Dictionary<Character, int[]> storage)
     {
         float sum = 0;
-        for (Map.Entry<Character, int[]> entry : storage.entrySet())
+        for (KeyValuePair<Character, int[]> entry : storage.entrySet())
         {
             float p = entry.getValue()[0] / (float) frequency;
             sum -= p * Math.log(p);
@@ -83,7 +83,7 @@ public class WordInfo
         entropy = Math.min(leftEntropy, rightEntropy);
     }
 
-    void computeAggregation(Dictionary<String, WordInfo> word_cands)
+    void computeAggregation(Dictionary<string, WordInfo> word_cands)
     {
         if (text.length() == 1)
         {
@@ -98,7 +98,7 @@ public class WordInfo
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return text;
     }

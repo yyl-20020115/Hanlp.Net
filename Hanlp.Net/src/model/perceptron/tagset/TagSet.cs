@@ -18,10 +18,10 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
 /**
  * @author hankcs
  */
-public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, int>>, ICacheAble
+public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<string, int>>, ICacheAble
 {
-    private Dictionary<String, int> stringIdMap;
-    private List<String> idStringMap;
+    private Dictionary<string, int> stringIdMap;
+    private List<string> idStringMap;
     private int[] allTags;
     public TaskType type;
 
@@ -32,7 +32,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, 
         this.type = type;
     }
 
-    public int add(String tag)
+    public int add(string tag)
     {
         //        assertUnlock();
         int id = stringIdMap.get(tag);
@@ -80,13 +80,13 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, 
     //    }
 
     //@Override
-    public String stringOf(int id)
+    public string stringOf(int id)
     {
         return idStringMap.get(id);
     }
 
     //@Override
-    public int idOf(String string)
+    public int idOf(string string)
     {
         int id = stringIdMap.get(string);
         if (id == null) id = -1;
@@ -94,7 +94,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, 
     }
 
     //@Override
-    public IEnumerator<Map.Entry<String, int>> iterator()
+    public IEnumerator<KeyValuePair<string, int>> iterator()
     {
         return stringIdMap.entrySet().iterator();
     }
@@ -113,7 +113,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, 
     {
         _out.writeInt(type.ordinal());
         _out.writeInt(size());
-        for (String tag : idStringMap)
+        for (string tag : idStringMap)
         {
             _out.writeUTF(tag);
         }
@@ -127,7 +127,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, 
         int size = byteArray.nextInt();
         for (int i = 0; i < size; i++)
         {
-            String tag = byteArray.nextUTF();
+            string tag = byteArray.nextUTF();
             idStringMap.add(tag);
             stringIdMap.put(tag, i);
         }
@@ -142,14 +142,14 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<Map.Entry<String, 
         int size = _in.readInt();
         for (int i = 0; i < size; i++)
         {
-            String tag = _in.readUTF();
+            string tag = _in.readUTF();
             idStringMap.add(tag);
             stringIdMap.put(tag, i);
         }
         _lock () ;
     }
 
-    public ICollection<String> tags()
+    public ICollection<string> tags()
     {
         return idStringMap;
     }

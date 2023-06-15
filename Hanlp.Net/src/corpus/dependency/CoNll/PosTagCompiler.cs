@@ -24,7 +24,7 @@ public class PosTagCompiler
      * @param name 原词
      * @return 编译后的等效词
      */
-    public static String compile(String tag, String name)
+    public static string compile(string tag, string name)
     {
         if (tag.startsWith("m")) return Predefine.TAG_NUMBER;
         else if (tag.startsWith("nr")) return Predefine.TAG_PEOPLE;

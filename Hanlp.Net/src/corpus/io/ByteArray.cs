@@ -40,7 +40,7 @@ public class ByteArray
      * @param path
      * @return
      */
-    public static ByteArray createByteArray(String path)
+    public static ByteArray createByteArray(string path)
     {
         byte[] bytes = IOUtil.readBytes(path);
         if (bytes == null) return null;
@@ -112,18 +112,18 @@ public class ByteArray
     }
 
     /**
-     * 读取一个String，注意这个String是双字节版的，在字符之前有一个整型表示长度
+     * 读取一个string，注意这个string是双字节版的，在字符之前有一个整型表示长度
      *
      * @return
      */
-    public String nextString()
+    public string nextString()
     {
         char[] buffer = new char[nextInt()];
         for (int i = 0; i < buffer.length; ++i)
         {
             buffer[i] = nextChar();
         }
-        return new String(buffer);
+        return new string(buffer);
     }
 
     public float nextFloat()
@@ -148,7 +148,7 @@ public class ByteArray
      * 读取一个UTF字符串
      * @return
      */
-    public String nextUTF()
+    public string nextUTF()
     {
         int utflen = nextUnsignedShort();
         byte[] bytearr = null;
@@ -226,7 +226,7 @@ public class ByteArray
             }
         }
         // The number of chars produced may be less than utflen
-        return new String(chararr, 0, chararr_count);
+        return new string(chararr, 0, chararr_count);
     }
 
     public int getOffset()

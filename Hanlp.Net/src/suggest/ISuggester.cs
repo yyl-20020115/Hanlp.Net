@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.suggest;
  */
 public interface ISuggester
 {
-    void addSentence(String sentence);
+    void addSentence(string sentence);
 
     /**
      * 清空该推荐器中的所有句子
@@ -31,5 +31,5 @@ public interface ISuggester
      * @param size
      * @return
      */
-    List<String> suggest(String key, int size);
+    List<string> suggest(string key, int size);
 }

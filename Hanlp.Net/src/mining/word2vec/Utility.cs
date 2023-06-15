@@ -12,7 +12,7 @@ public class Utility
     private static readonly int HOUR = 60 * MINUTE;
     private static readonly int DAY = 24 * HOUR;
 
-    static String humanTime(long ms)
+    static string humanTime(long ms)
     {
         StringBuffer text = new StringBuffer("");
         if (ms > DAY)

@@ -33,7 +33,7 @@ public class Vocabulary : IStringIdMap
     }
 
     //@Override
-    public int idOf(String string)
+    public int idOf(string string)
     {
         int id = trie.get(string);
         if (id == null)

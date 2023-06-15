@@ -21,7 +21,7 @@ public interface ISynonym
      * 获取原本的词语
      * @return
      */
-    String getRealWord();
+    string getRealWord();
 
     /**
      * 获取ID
@@ -33,5 +33,5 @@ public interface ISynonym
      * 获取字符类型的ID
      * @return
      */
-    String getIdString();
+    string getIdString();
 }

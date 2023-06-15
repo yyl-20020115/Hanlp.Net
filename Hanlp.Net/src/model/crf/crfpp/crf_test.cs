@@ -13,7 +13,7 @@ public class crf_test
     private static class Option
     {
         @Argument(description = "set FILE for model file", alias = "m", required = true)
-        String model;
+        string model;
         @Argument(description = "output n-best results", alias = "n")
         int nbest = 0;
         @Argument(description = "set INT for verbose level", alias = "v")
@@ -21,15 +21,15 @@ public class crf_test
         @Argument(description = "set cost factor", alias = "c")
         Double cost_factor = 1.0;
         @Argument(description = "output file path", alias = "o")
-        String output;
+        string output;
         @Argument(description = "show this help and exit", alias = "h")
         Boolean help = false;
     }
 
-    public static bool run(String[] args)
+    public static bool run(string[] args)
     {
         Option cmd = new Option();
-        List<String> unkownArgs = null;
+        List<string> unkownArgs = null;
         try
         {
             unkownArgs = Args.parse(cmd, args, false);
@@ -47,8 +47,8 @@ public class crf_test
         int nbest = cmd.nbest;
         int vlevel = cmd.verbose;
         double costFactor = cmd.cost_factor;
-        String model = cmd.model;
-        String outputFile = cmd.output;
+        string model = cmd.model;
+        string outputFile = cmd.output;
 
         TaggerImpl tagger = new TaggerImpl(TaggerImpl.Mode.TEST);
         try
@@ -59,7 +59,7 @@ public class crf_test
                 System.err.println("open error");
                 return false;
             }
-            String[] restArgs = unkownArgs.toArray(new String[0]);
+            string[] restArgs = unkownArgs.toArray(new string[0]);
             if (restArgs.length == 0)
             {
                 return false;
@@ -70,7 +70,7 @@ public class crf_test
             {
                 osw = new OutputStreamWriter(IOUtil.newOutputStream(outputFile));
             }
-            for (String inputFile : restArgs)
+            for (string inputFile : restArgs)
             {
                 InputStream fis = IOUtil.newInputStream(inputFile);
                 InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
@@ -121,7 +121,7 @@ public class crf_test
         return true;
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         crf_test.run(args);
     }

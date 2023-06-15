@@ -204,7 +204,7 @@ public class IntArrayList : Serializable, ICacheAble
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         ArrayList<int> head = new ArrayList<int>(20);
         for (int i = 0; i < Math.min(size, 20); ++i)

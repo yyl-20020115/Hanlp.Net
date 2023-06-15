@@ -21,7 +21,7 @@ namespace com.hankcs.demo;
  * @author hankcs
  */
 public class DemoOccurrence
-{
+{ 
     public static void Main(String[] args)
     {
         Occurrence occurrence = new Occurrence();

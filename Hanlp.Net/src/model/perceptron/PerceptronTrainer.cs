@@ -95,8 +95,8 @@ public abstract class PerceptronTrainer : InstanceConsumer
      * @return 一个包含模型和精度的结构
      * @
      */
-    public Result train(String trainingFile, String developFile,
-                        String modelFile,  double compressRatio,
+    public Result train(string trainingFile, string developFile,
+                        string modelFile,  double compressRatio,
                          int maxIteration,  int threadNum) 
     {
         if (developFile == null)
@@ -265,7 +265,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
     }
 
-    protected Instance[] loadTrainInstances(String trainingFile,  MutableFeatureMap mutableFeatureMap) 
+    protected Instance[] loadTrainInstances(string trainingFile,  MutableFeatureMap mutableFeatureMap) 
     {
         List<Instance> instanceList = new LinkedList<Instance>();
         IOUtility.loadInstance(trainingFile, new Ins());
@@ -285,7 +285,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
     }
 
-    private static DoubleArrayTrie<int> loadDictionary(String trainingFile, String dictionaryFile) 
+    private static DoubleArrayTrie<int> loadDictionary(string trainingFile, string dictionaryFile) 
     {
         FrequencyMap dictionaryMap = new FrequencyMap();
         if (dictionaryFile == null)
@@ -305,25 +305,25 @@ public abstract class PerceptronTrainer : InstanceConsumer
         return dat;
     }
 
-    public Result train(String trainingFile, String modelFile) 
+    public Result train(string trainingFile, string modelFile) 
     {
         return train(trainingFile, trainingFile, modelFile);
     }
 
-    public Result train(String trainingFile, String developFile, String modelFile) 
+    public Result train(string trainingFile, string developFile, string modelFile) 
     {
         return train(trainingFile, developFile, modelFile, 0.1, 50, Runtime.getRuntime().availableProcessors());
     }
 
-    private static void loadWordFromFile(String path, FrequencyMap storage, bool segmented) 
+    private static void loadWordFromFile(string path, FrequencyMap storage, bool segmented) 
     {
         BufferedReader br = IOUtility.newBufferedReader(path);
-        String line;
+        string line;
         while ((line = br.readLine()) != null)
         {
             if (segmented)
             {
-                for (String word : IOUtility.readLineToArray(line))
+                for (string word : IOUtility.readLineToArray(line))
                 {
                     storage.add(word);
                 }

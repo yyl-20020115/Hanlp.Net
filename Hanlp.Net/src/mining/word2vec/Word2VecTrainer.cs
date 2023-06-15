@@ -162,7 +162,7 @@ public class Word2VecTrainer
      * @param modelFileName     输出模型路径
      * @return 词向量模型
      */
-    public WordVectorModel train(String trainFileName, String modelFileName)
+    public WordVectorModel train(string trainFileName, string modelFileName)
     {
         Config settings = new Config();
         settings.setInputFile(trainFileName);
@@ -202,7 +202,7 @@ public class Word2VecTrainer
 //                    long timeNow = DateTime.Now.Microsecond;
 //                    long costTime = timeNow - timeStart + 1;
 //                    progress /= 100;
-//                    String etd = Utility.humanTime((long) (costTime / progress * (1.f - progress)));
+//                    string etd = Utility.humanTime((long) (costTime / progress * (1.f - progress)));
 //                    if (etd.length() > 0) System._out.printf("  剩余时间：%s", etd);
 //                    System._out.flush();
 //                }

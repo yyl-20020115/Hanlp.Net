@@ -13,7 +13,7 @@ namespace com.hankcs.hanlp.suggest.scorer.editdistance;
 
 
 /**
- * 对字符数组的封装，可以代替String
+ * 对字符数组的封装，可以代替string
  * @author hankcs
  */
 public class CharArray : Comparable<CharArray>, ISentenceKey<CharArray>

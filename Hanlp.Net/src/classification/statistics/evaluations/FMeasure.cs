@@ -54,7 +54,7 @@ public class FMeasure : Serializable
     /**
      * 分类名称
      */
-    public String[] catalog;
+    public string[] catalog;
 
     /**
      * 速度
@@ -62,10 +62,10 @@ public class FMeasure : Serializable
     public double speed;
 
     //@Override
-    public String toString()
+    public string toString()
     {
         int l = -1;
-        for (String c : catalog)
+        for (string c : catalog)
         {
             l = Math.max(l, c.length());
         }
@@ -92,8 +92,8 @@ public class FMeasure : Serializable
         return sb.toString();
     }
 
-    private static void printf(StringBuilder sb, String format, Object... args)
+    private static void printf(StringBuilder sb, string format, Object... args)
     {
-        sb.Append(String.format(format, args));
+        sb.Append(string.format(format, args));
     }
 }

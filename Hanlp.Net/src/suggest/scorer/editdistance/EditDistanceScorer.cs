@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.suggest.scorer.editdistance;
 public class EditDistanceScorer : BaseScorer<CharArray>
 {
     //@Override
-    protected CharArray generateKey(String sentence)
+    protected CharArray generateKey(string sentence)
     {
         char[] charArray = sentence.ToCharArray();
         if (charArray.length == 0) return null;

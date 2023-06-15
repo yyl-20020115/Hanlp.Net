@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.tokenizer;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.demo;
 

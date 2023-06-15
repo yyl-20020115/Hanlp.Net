@@ -6,9 +6,9 @@ public final class KMeansClustering
     static readonly Charset ENCODING = Charset.forName("UTF-8");
     private final VectorsReader reader;
     private final int clcn;
-    private final String outFile;
+    private final string outFile;
 
-    public KMeansClustering(VectorsReader reader, int k, String outFile)
+    public KMeansClustering(VectorsReader reader, int k, string outFile)
     {
         this.reader = reader;
         this.clcn = k;
@@ -91,10 +91,10 @@ public final class KMeansClustering
             }
             // Save the K-means classes
             System.err.printf("now saving the result of K-means clustering to the file %s\n", outFile);
-            List<String>[] cluster = new List[clcn];
+            List<string>[] cluster = new List[clcn];
             for (int i = 0; i < cluster.length; i++)
             {
-                cluster[i] = new LinkedList<String>();
+                cluster[i] = new LinkedList<string>();
             }
             for (int i = 0; i < vocabSize; i++)
             {
@@ -102,7 +102,7 @@ public final class KMeansClustering
             }
             for (int i = 0; i < cluster.length; i++)
             {
-                for (String word : cluster[i])
+                for (string word : cluster[i])
                 {
                     pw.printf("%s\t%d\n", word, i);
                 }

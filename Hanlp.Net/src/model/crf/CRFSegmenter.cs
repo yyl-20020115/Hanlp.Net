@@ -36,7 +36,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
         ;
     }
 
-    public CRFSegmenter(String modelPath) 
+    public CRFSegmenter(string modelPath) 
         : base(modelPath)
     {
         ;
@@ -51,7 +51,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
     {
         foreach (Word w in sentence.toSimpleWordList())
         {
-            String word = CharTable.convert(w.value);
+            string word = CharTable.convert(w.value);
             if (word.Length == 1)
             {
                 bw.write(word);
@@ -80,41 +80,41 @@ public class CRFSegmenter : CRFTagger , Segmenter
         }
     }
 
-    public List<String> segment(String text)
+    public List<string> segment(string text)
     {
-        List<String> wordList = new ();
+        List<string> wordList = new ();
         segment(text, CharTable.convert(text), wordList);
 
         return wordList;
     }
 
     //@Override
-    public void segment(String text, String normalized, List<String> wordList)
+    public void segment(string text, string normalized, List<string> wordList)
     {
         perceptronSegmenter.segment(text, createInstance(normalized), wordList);
     }
 
-    private CWSInstance createInstance(String text)
+    private CWSInstance createInstance(string text)
     {
         FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
         return new CWSIns(text, model.featureMap);
     }
     public class CWSIns : CWSInstance
     {
-        public CWSIns(String sentence, FeatureMap featureMap)
+        public CWSIns(string sentence, FeatureMap featureMap)
             :base(sentence,featureMap)
         {
 
         }
         //@Override
-        protected int[] extractFeature(String sentence, FeatureMap featureMap, int position)
+        protected int[] extractFeature(string sentence, FeatureMap featureMap, int position)
         {
             StringBuilder sbFeature = new StringBuilder();
             List<int> featureVec = new ();
             for (int i = 0; i < featureTemplateArray.length; i++)
             {
                 Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                Iterator<String> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                 delimiterIterator.next(); // ignore U0 之类的id
                 while (offsetIterator.hasNext())
                 {
@@ -135,7 +135,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
             return toFeatureArray(featureVec);
         }
     }    //@Override
-    protected String getDefaultFeatureTemplate()
+    protected string getDefaultFeatureTemplate()
     {
         return "# Unigram\n" +
             "U0:%x[-1,0]\n" +

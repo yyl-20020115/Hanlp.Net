@@ -4,9 +4,9 @@ namespace com.hankcs.hanlp.classification.tokenizers;
 
 public class BigramTokenizer : ITokenizer
 {
-    public String[] segment(String text)
+    public string[] segment(string text)
     {
-        if (text.length() == 0) return new String[0];
+        if (text.length() == 0) return new string[0];
         char[] charArray = text.ToCharArray();
         CharTable.normalization(charArray);
 
@@ -43,9 +43,9 @@ public class BigramTokenizer : ITokenizer
         }
         if (offsetAtom == end)
             if (preType == CharType.CT_NUM || preType == CharType.CT_LETTER) atomList.add(new int[]{start, offsetAtom - start});
-        if (atomList.isEmpty()) return new String[0];
+        if (atomList.isEmpty()) return new string[0];
         // 输出
-        String[] termArray = new String[atomList.size() - 1];
+        string[] termArray = new string[atomList.size() - 1];
         Iterator<int[]> iterator = atomList.iterator();
         int[] pre = iterator.next();
         int p = -1;
@@ -59,11 +59,11 @@ public class BigramTokenizer : ITokenizer
         return termArray;
     }
 
-//    public static void main(String args[])
+//    public static void main(string args[])
 //    {
 //        BigramTokenizer bws = new BigramTokenizer();
-//        String[] result = bws.segment("@hankcs你好，广阔的世界2０16！\u0000\u0000\t\n\r\n慶祝Coding worlds!");
-//        for (String str : result)
+//        string[] result = bws.segment("@hankcs你好，广阔的世界2０16！\u0000\u0000\t\n\r\n慶祝Coding worlds!");
+//        for (string str : result)
 //        {
 //            System._out.println(str);
 //        }

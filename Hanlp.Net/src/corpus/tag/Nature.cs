@@ -761,14 +761,14 @@ public class Nature
      */
     public static readonly Nature begin = new Nature("begin");
 
-    private static TreeMap<String, int> idMap;
+    private static TreeMap<string, int> idMap;
     private static Nature[] values;
     private int ordinal;
-    private final String name;
+    private final string name;
 
-    private Nature(String name)
+    private Nature(string name)
     {
-        if (idMap == null) idMap = new TreeMap<String, int>();
+        if (idMap == null) idMap = new TreeMap<string, int>();
         assert !idMap.containsKey(name);
         this.name = name;
         ordinal = idMap.size();
@@ -787,7 +787,7 @@ public class Nature
      * @param prefix 前缀
      * @return 是否以该前缀开头
      */
-    public bool startsWith(String prefix)
+    public bool startsWith(string prefix)
     {
         return name.startsWith(prefix);
     }
@@ -821,7 +821,7 @@ public class Nature
      * @param name 字符串词性
      * @return Enum词性
      */
-    public static readonly Nature fromString(String name)
+    public static readonly Nature fromString(string name)
     {
         int id = idMap.get(name);
         if (id == null)
@@ -835,7 +835,7 @@ public class Nature
      * @param name 字符串词性
      * @return Enum词性
      */
-    public static readonly Nature create(String name)
+    public static readonly Nature create(string name)
     {
         Nature nature = fromString(name);
         if (nature == null)
@@ -845,7 +845,7 @@ public class Nature
     public:
 
     //@Override
-    public override String ToString()
+    public override string ToString()
     {
         return name;
     }

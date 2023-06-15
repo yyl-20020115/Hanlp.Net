@@ -22,25 +22,25 @@ public interface IWord : Serializable
      * 获取单词
      * @return
      */
-    String getValue();
+    string getValue();
 
     /**
      * 获取标签
      * @return
      */
-    String getLabel();
+    string getLabel();
 
     /**
      * 设置标签
      * @param label
      */
-    void setLabel(String label);
+    void setLabel(string label);
 
     /**
      * 设置单词
      * @param value
      */
-    void setValue(String value);
+    void setValue(string value);
 
     /**
      * 单词长度

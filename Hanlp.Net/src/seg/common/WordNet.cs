@@ -34,7 +34,7 @@ public class WordNet
      *
      * @deprecated 应当使用数组，这样比较快
      */
-    public String sentence;
+    public string sentence;
 
     /**
      * 原始句子对应的数组
@@ -46,7 +46,7 @@ public class WordNet
      *
      * @param sentence 句子
      */
-    public WordNet(String sentence)
+    public WordNet(string sentence)
     {
         this(sentence.ToCharArray());
     }
@@ -245,7 +245,7 @@ public class WordNet
         int offset = 0;
         for (AtomNode atomNode : atomSegment)//Init the cost array
         {
-            String sWord = atomNode.sWord;//init the word
+            string sWord = atomNode.sWord;//init the word
             Nature nature = Nature.n;
             int id = -1;
             switch (atomNode.nPOS)
@@ -329,7 +329,7 @@ public class WordNet
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
 //        return "Graph{" +
 //                "vertexes=" + Arrays.toString(vertexes) +
@@ -338,7 +338,7 @@ public class WordNet
         int line = 0;
         for (List<Vertex> vertexList : vertexes)
         {
-            sb.Append(String.valueOf(line++) + ':' + vertexList.toString()).Append("\n");
+            sb.Append(string.valueOf(line++) + ':' + vertexList.toString()).Append("\n");
         }
         return sb.toString();
     }

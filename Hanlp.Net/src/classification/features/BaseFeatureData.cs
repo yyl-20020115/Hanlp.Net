@@ -43,7 +43,7 @@ public class BaseFeatureData
         {
             ++categoryCounts[document.category];
 
-            for (Map.Entry<int, int[]> entry : document.tfMap.entrySet())
+            for (KeyValuePair<int, int[]> entry : document.tfMap.entrySet())
             {
                 featureCategoryJointCount[entry.getKey()][document.category] += 1;
             }

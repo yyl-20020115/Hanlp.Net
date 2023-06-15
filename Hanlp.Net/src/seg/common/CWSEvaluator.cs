@@ -22,25 +22,25 @@ namespace com.hankcs.hanlp.seg.common;
 public class CWSEvaluator
 {
     private int A_size, B_size, A_cap_B_size, OOV, OOV_R, IV, IV_R;
-    private Set<String> dic;
+    private Set<string> dic;
 
     public CWSEvaluator()
     {
     }
 
-    public CWSEvaluator(Set<String> dic)
+    public CWSEvaluator(Set<string> dic)
     {
         this.dic = dic;
     }
 
-    public CWSEvaluator(String dictPath) 
+    public CWSEvaluator(string dictPath) 
     {
-        this(new TreeSet<String>());
+        this(new TreeSet<string>());
         if (dictPath == null) return;
         try
         {
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(dictPath);
-            for (String word : lineIterator)
+            for (string word : lineIterator)
             {
                 word = word.trim();
                 if (word.isEmpty()) continue;
@@ -102,11 +102,11 @@ public class CWSEvaluator
      * @param gold
      * @param pred
      */
-    public void compare(String gold, String pred)
+    public void compare(string gold, string pred)
     {
-        String[] wordArray = gold.split("\\s+");
+        string[] wordArray = gold.split("\\s+");
         A_size += wordArray.length;
-        String[] predArray = pred.split("\\s+");
+        string[] predArray = pred.split("\\s+");
         B_size += predArray.length;
 
         int goldIndex = 0, predIndex = 0;
@@ -153,7 +153,7 @@ public class CWSEvaluator
 
         if (dic != null)
         {
-            for (String word : wordArray)
+            for (string word : wordArray)
             {
                 if (dic.contains(word))
                     IV += 1;
@@ -170,7 +170,7 @@ public class CWSEvaluator
      * @param predFile
      * @return
      */
-    public static Result evaluate(String goldFile, String predFile) 
+    public static Result evaluate(string goldFile, string predFile) 
     {
         return evaluate(goldFile, predFile, null);
     }
@@ -185,11 +185,11 @@ public class CWSEvaluator
      * @return 一个储存准确率的结构
      * @
      */
-    public static CWSEvaluator.Result evaluate(Segment segment, String outputPath, String goldFile, String dictPath) 
+    public static CWSEvaluator.Result evaluate(Segment segment, string outputPath, string goldFile, string dictPath) 
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(goldFile);
         BufferedWriter bw = IOUtil.newBufferedWriter(outputPath);
-        for (String line : lineIterator)
+        for (string line : lineIterator)
         {
             List<Term> termList = segment.seg(line.replaceAll("\\s+", "")); // 一些testFile与goldFile根本不匹配，比如MSR的testFile有些行缺少单词，所以用goldFile去掉空格代替
             int i = 0;
@@ -217,7 +217,7 @@ public class CWSEvaluator
      * @return 一个储存准确率的结构
      * @
      */
-    public static CWSEvaluator.Result evaluate(Segment segment, String testFile, String outputPath, String goldFile, String dictPath) 
+    public static CWSEvaluator.Result evaluate(Segment segment, string testFile, string outputPath, string goldFile, string dictPath) 
     {
         return evaluate(segment, outputPath, goldFile, dictPath);
     }
@@ -229,7 +229,7 @@ public class CWSEvaluator
      * @param predFile
      * @return
      */
-    public static Result evaluate(String goldFile, String predFile, String dictPath) 
+    public static Result evaluate(string goldFile, string predFile, string dictPath) 
     {
         IOUtil.LineIterator goldIter = new IOUtil.LineIterator(goldFile);
         IOUtil.LineIterator predIter = new IOUtil.LineIterator(predFile);
@@ -255,9 +255,9 @@ public class CWSEvaluator
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
-            return String.format("P:%.2f R:%.2f F1:%.2f OOV-R:%.2f IV-R:%.2f", P, R, F1, OOV_R, IV_R);
+            return string.format("P:%.2f R:%.2f F1:%.2f OOV-R:%.2f IV-R:%.2f", P, R, F1, OOV_R, IV_R);
         }
     }
 }

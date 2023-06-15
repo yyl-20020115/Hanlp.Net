@@ -8,6 +8,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.mining.word2vec;
 using com.hankcs.hanlp.utility;
 
@@ -58,25 +59,25 @@ public class DemoWord2Vec
 
     static void printNearest(String word, WordVectorModel model)
     {
-        System.out.printf("\n                                                Word     Cosine\n------------------------------------------------------------------------\n");
-        for (Map.Entry<String, Float> entry : model.nearest(word))
+        Console.Write("\n                                                Word     Cosine\n------------------------------------------------------------------------\n");
+        foreach (var entry in model.nearest(word))
         {
-            System.out.printf("%50s\t\t%f\n", entry.getKey(), entry.getValue());
+            Console.Write("%50s\t\t%f\n", entry.getKey(), entry.getValue());
         }
     }
 
     static void printNearestDocument(String document, String[] documents, DocVectorModel model)
     {
         printHeader(document);
-        for (Map.Entry<Integer, Float> entry : model.nearest(document))
+        foreach (var entry in model.nearest(document))
         {
-            System.out.printf("%50s\t\t%f\n", documents[entry.getKey()], entry.getValue());
+            Console.Write("%50s\t\t%f\n", documents[entry.getKey()], entry.getValue());
         }
     }
 
     private static void printHeader(String query)
     {
-        System.out.printf("\n%50s          Cosine\n------------------------------------------------------------------------\n", query);
+        Console.Write("\n%50s          Cosine\n------------------------------------------------------------------------\n", query);
     }
 
     static WordVectorModel trainOrLoadModel() 
@@ -85,8 +86,8 @@ public class DemoWord2Vec
         {
             if (!IOUtil.isFileExisted(TRAIN_FILE_NAME))
             {
-                System.err.println("语料不存在，请阅读文档了解语料获取与格式：https://github.com/hankcs/HanLP/wiki/word2vec");
-                System.exit(1);
+                Console.WriteLine("语料不存在，请阅读文档了解语料获取与格式：https://github.com/hankcs/HanLP/wiki/word2vec");
+                Environment.Exit(1);
             }
             Word2VecTrainer trainerBuilder = new Word2VecTrainer();
             return trainerBuilder.train(TRAIN_FILE_NAME, MODEL_FILE_NAME);

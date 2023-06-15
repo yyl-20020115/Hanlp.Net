@@ -33,7 +33,7 @@ public class URLTokenizer
      * @param text 文本
      * @return 分词结果
      */
-    public static List<Term> segment(String text)
+    public static List<Term> segment(string text)
     {
         List<Term> termList = new LinkedList<Term>();
         Matcher matcher = WEB_URL.matcher(text);

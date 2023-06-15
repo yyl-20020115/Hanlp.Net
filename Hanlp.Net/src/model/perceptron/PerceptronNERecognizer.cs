@@ -34,12 +34,12 @@ public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
     {
         if (nerModel.tagSet().type != TaskType.NER)
         {
-            throw new IllegalArgumentException(String.format("错误的模型类型: 传入的不是命名实体识别模型，而是 %s 模型", nerModel.featureMap.tagSet.type));
+            throw new IllegalArgumentException(string.format("错误的模型类型: 传入的不是命名实体识别模型，而是 %s 模型", nerModel.featureMap.tagSet.type));
         }
         this.tagSet = (NERTagSet) model.tagSet();
     }
 
-    public PerceptronNERecognizer(String nerModelPath) 
+    public PerceptronNERecognizer(string nerModelPath) 
         : this(new LinearModel(nerModelPath))
     {
     }
@@ -54,13 +54,13 @@ public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
     {
     }
 
-    public String[] recognize(String[] wordArray, String[] posArray)
+    public string[] recognize(string[] wordArray, string[] posArray)
     {
         NERInstance instance = new NERInstance(wordArray, posArray, model.featureMap);
         return recognize(instance);
     }
 
-    public String[] recognize(NERInstance instance)
+    public string[] recognize(NERInstance instance)
     {
         instance.tagArray = new int[instance.size()];
         model.viterbiDecode(instance);
@@ -80,7 +80,7 @@ public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
      * @param segmentedTaggedNERSentence 人民日报2014格式的句子
      * @return 是否学习成功（失败的原因是参数错误）
      */
-    public bool learn(String segmentedTaggedNERSentence)
+    public bool learn(string segmentedTaggedNERSentence)
     {
         return learn(NERInstance.create(segmentedTaggedNERSentence, model.featureMap));
     }

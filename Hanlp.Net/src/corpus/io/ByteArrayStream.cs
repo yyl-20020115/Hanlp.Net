@@ -28,7 +28,7 @@ public abstract class ByteArrayStream : ByteArray
         this.bufferSize = bufferSize;
     }
 
-    public static ByteArrayStream createByteArrayStream(String path)
+    public static ByteArrayStream createByteArrayStream(string path)
     {
         if (IOAdapter == null) return ByteArrayFileStream.createByteArrayFileStream(path);
 

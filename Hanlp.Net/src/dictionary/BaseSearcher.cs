@@ -31,7 +31,7 @@ public abstract class BaseSearcher<V>
         this.c = c;
     }
 
-    protected BaseSearcher(String text)
+    protected BaseSearcher(string text)
     {
         this(text.ToCharArray());
     }
@@ -40,7 +40,7 @@ public abstract class BaseSearcher<V>
      * 分出下一个词
      * @return
      */
-    public abstract Map.Entry<String, V> next();
+    public abstract KeyValuePair<string, V> next();
 
     /**
      * 获取当前偏移

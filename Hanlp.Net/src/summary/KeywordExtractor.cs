@@ -71,7 +71,7 @@ public abstract class KeywordExtractor
      * @param size     需要几个关键词
      * @return
      */
-    public List<String> getKeywords(String document, int size)
+    public List<string> getKeywords(string document, int size)
     {
         return getKeywords(defaultSegment.seg(document), size);
     }
@@ -82,7 +82,7 @@ public abstract class KeywordExtractor
      * @param document 文章
      * @return
      */
-    public List<String> getKeywords(String document)
+    public List<string> getKeywords(string document)
     {
         return getKeywords(defaultSegment.seg(document), 10);
     }
@@ -97,5 +97,5 @@ public abstract class KeywordExtractor
         }
     }
 
-    abstract public List<String> getKeywords(List<Term> termList, int size);
+    abstract public List<string> getKeywords(List<Term> termList, int size);
 }

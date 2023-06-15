@@ -24,7 +24,7 @@ public class StopWordDictionary : MDAGSet : Filter
         super(file);
     }
 
-    public StopWordDictionary(Collection<String> strCollection)
+    public StopWordDictionary(Collection<string> strCollection)
     {
         super(strCollection);
     }
@@ -33,7 +33,7 @@ public class StopWordDictionary : MDAGSet : Filter
     {
     }
 
-    public StopWordDictionary(String stopWordDictionaryPath) 
+    public StopWordDictionary(string stopWordDictionaryPath) 
     {
         super(stopWordDictionaryPath);
     }

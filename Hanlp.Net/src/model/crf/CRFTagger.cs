@@ -26,7 +26,7 @@ public abstract class CRFTagger
     {
     }
 
-    public CRFTagger(String modelPath) 
+    public CRFTagger(string modelPath) 
     {
         if (modelPath == null) return; // 训练模式
         model = new LogLinearModel(modelPath);
@@ -47,7 +47,7 @@ public abstract class CRFTagger
      * @param algorithm     训练算法
      * @return
      */
-    public void train(String templFile, String trainFile, String modelFile,
+    public void train(string templFile, string trainFile, string modelFile,
                       int maxitr, int freq, double eta, double C, int threadNum, int shrinkingSize,
                       Encoder.Algorithm algorithm) 
     {
@@ -66,27 +66,27 @@ public abstract class CRFTagger
      * @param modelFile
      * @
      */
-    private void convert(String modelFile) 
+    private void convert(string modelFile) 
     {
         this.model = new LogLinearModel(modelFile + ".txt", modelFile);
     }
 
-    public void train(String trainCorpusPath, String modelPath) 
+    public void train(string trainCorpusPath, string modelPath) 
     {
         crf_learn.Option option = new crf_learn.Option();
         train(trainCorpusPath, modelPath, option.maxiter, option.freq, option.eta, option.cost,
               option.thread, option.shrinking_size, Encoder.Algorithm.fromString(option.algorithm));
     }
 
-    public void train(String trainFile, String modelFile,
+    public void train(string trainFile, string modelFile,
                       int maxitr, int freq, double eta, double C, int threadNum, int shrinkingSize,
                       Encoder.Algorithm algorithm) 
     {
-        String templFile = null;
+        string templFile = null;
         File tmpTemplate = File.createTempFile("crfpp-template-" + new Date().getTime(), ".txt");
         tmpTemplate.deleteOnExit();
         templFile = tmpTemplate.getAbsolutePath();
-        String template = getDefaultFeatureTemplate();
+        string template = getDefaultFeatureTemplate();
         IOUtil.saveTxt(templFile, template);
 
         File tmpTrain = File.createTempFile("crfpp-train-" + new Date().getTime(), ".txt");
@@ -108,9 +108,9 @@ public abstract class CRFTagger
 
     protected abstract void convertCorpus(Sentence sentence, BufferedWriter bw) ;
 
-    protected abstract String getDefaultFeatureTemplate();
+    protected abstract string getDefaultFeatureTemplate();
 
-    public void convertCorpus(String pkuPath, String tsvPath) 
+    public void convertCorpus(string pkuPath, string tsvPath) 
     {
          BufferedWriter bw = IOUtil.newBufferedWriter(tsvPath);
         IOUtility.loadInstance(pkuPath, new InstanceHandler()
@@ -140,10 +140,10 @@ public abstract class CRFTagger
      * @param templatePath
      * @
      */
-    public void dumpTemplate(String templatePath) 
+    public void dumpTemplate(string templatePath) 
     {
         BufferedWriter bw = IOUtil.newBufferedWriter(templatePath);
-        String template = getTemplate();
+        string template = getTemplate();
         bw.write(template);
         bw.close();
     }
@@ -153,9 +153,9 @@ public abstract class CRFTagger
      *
      * @return
      */
-    public String getTemplate()
+    public string getTemplate()
     {
-        String template = getDefaultFeatureTemplate();
+        string template = getDefaultFeatureTemplate();
         if (model != null && model.getFeatureTemplateArray() != null)
         {
             StringBuilder sbTemplate = new StringBuilder();

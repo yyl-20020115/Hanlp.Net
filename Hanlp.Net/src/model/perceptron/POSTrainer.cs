@@ -30,7 +30,7 @@ public class POSTrainer : PerceptronTrainer
     }
 
     //@Override
-    public Result train(String trainingFile, String developFile, String modelFile) 
+    public Result train(string trainingFile, string developFile, string modelFile) 
     {
         // 词性标注模型压缩会显著降低效果
         return train(trainingFile, developFile, modelFile, 0, 10, Runtime.getRuntime().availableProcessors());

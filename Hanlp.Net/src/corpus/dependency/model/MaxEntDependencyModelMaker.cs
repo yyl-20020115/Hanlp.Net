@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.corpus.dependency.model;
  */
 public class MaxEntDependencyModelMaker
 {
-    public static bool makeModel(String corpusLoadPath, String modelSavePath) 
+    public static bool makeModel(string corpusLoadPath, string modelSavePath) 
     {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(modelSavePath)));
         LinkedList<CoNLLSentence> sentenceList = CoNLLLoader.loadSentenceList(corpusLoadPath);
@@ -28,7 +28,7 @@ public class MaxEntDependencyModelMaker
         for (CoNLLSentence sentence : sentenceList)
         {
             System._out.printf("%d / %d...", id++, sentenceList.size());
-            String[][] edgeArray = sentence.getEdgeArray();
+            string[][] edgeArray = sentence.getEdgeArray();
             CoNLLWord[] word = sentence.getWordArrayWithRoot();
             for (int i = 0; i < word.length; ++i)
             {
@@ -36,14 +36,14 @@ public class MaxEntDependencyModelMaker
                 {
                     if (i == j) continue;
                     // 这就是一个边的实例，从i出发，到j，当然它可能存在也可能不存在，不存在取null照样是一个实例
-                    List<String> contextList = new LinkedList<String>();
+                    List<string> contextList = new LinkedList<string>();
                     // 先生成i和j的原子特征
                     contextList.addAll(generateSingleWordContext(word, i, "i"));
                     contextList.addAll(generateSingleWordContext(word, j, "j"));
                     // 然后生成二元组的特征
                     contextList.addAll(generateUniContext(word, i, j));
                     // 将特征字符串化
-                    for (String f : contextList)
+                    for (string f : contextList)
                     {
                         bw.write(f);
                         bw.write(' ');
@@ -59,9 +59,9 @@ public class MaxEntDependencyModelMaker
         return true;
     }
 
-    public static Collection<String> generateSingleWordContext(CoNLLWord[] word, int index, String mark)
+    public static Collection<string> generateSingleWordContext(CoNLLWord[] word, int index, string mark)
     {
-        Collection<String> context = new LinkedList<String>();
+        Collection<string> context = new LinkedList<string>();
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
             CoNLLWord w = i >= 0 && i < word.length ? word[i] : CoNLLWord.NULL;
@@ -72,9 +72,9 @@ public class MaxEntDependencyModelMaker
         return context;
     }
 
-    public static Collection<String> generateUniContext(CoNLLWord[] word, int i, int j)
+    public static Collection<string> generateUniContext(CoNLLWord[] word, int i, int j)
     {
-        Collection<String> context = new LinkedList<String>();
+        Collection<string> context = new LinkedList<string>();
         context.add(word[i].NAME + '→' + word[j].NAME);
         context.add(word[i].POSTAG + '→' + word[j].POSTAG);
         context.add(word[i].NAME + '→' + word[j].NAME + (i - j));

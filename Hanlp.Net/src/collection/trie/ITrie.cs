@@ -19,12 +19,12 @@ namespace com.hankcs.hanlp.collection.trie;
  */
 public interface ITrie<V>
 {
-    int build(TreeMap<String, V> keyValueMap);
+    int build(TreeMap<string, V> keyValueMap);
     bool save(DataOutputStream _out);
     bool load(ByteArray byteArray, V[] value);
     V get(char[] key);
-    V get(String key);
+    V get(string key);
     V[] getValueArray(V[] a);
-    bool containsKey(String key);
+    bool containsKey(string key);
     int size();
 }

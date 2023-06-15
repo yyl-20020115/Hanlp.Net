@@ -32,7 +32,7 @@ public class Document : BagOfWordsDocument
      * @param category
      * @param tokenArray
      */
-    public Document(Catalog catalog, Lexicon lexicon, String category, String[] tokenArray)
+    public Document(Catalog catalog, Lexicon lexicon, string category, string[] tokenArray)
     {
         super();
         assert catalog != null;
@@ -54,7 +54,7 @@ public class Document : BagOfWordsDocument
      * @param wordIdTrie
      * @param tokenArray
      */
-    public Document(ITrie<int> wordIdTrie, String[] tokenArray)
+    public Document(ITrie<int> wordIdTrie, string[] tokenArray)
     {
         super();
         for (int i = 0; i < tokenArray.length; i++)
@@ -72,7 +72,7 @@ public class Document : BagOfWordsDocument
      * @param category
      * @param tokenArray
      */
-    public Document(Dictionary<String, int> categoryId, BinTrie<int> wordId, String category, String[] tokenArray)
+    public Document(Dictionary<string, int> categoryId, BinTrie<int> wordId, string category, string[] tokenArray)
     {
         this(wordId, tokenArray);
         int id = categoryId.get(category);
@@ -92,13 +92,13 @@ public class Document : BagOfWordsDocument
     }
 
     //    //@Override
-//    public String toString()
+//    public string toString()
 //    {
 //        final StringBuilder sb = new StringBuilder(tfMap.size() * 5);
 //        sb.Append('《').Append(super.toString()).Append('》').Append('\t');
 //        sb.Append(catalog.getCategory(category));
 //        sb.Append('\n');
-//        for (Map.Entry<int, int[]> entry : tfMap.entrySet())
+//        for (KeyValuePair<int, int[]> entry : tfMap.entrySet())
 //        {
 //            sb.Append(lexicon.getWord(entry.getKey()));
 //            sb.Append('\t');

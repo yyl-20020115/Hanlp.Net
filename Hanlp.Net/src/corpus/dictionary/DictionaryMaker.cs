@@ -46,7 +46,7 @@ public class DictionaryMaker : ISaveAble
         }
     }
 
-    public void add(String value, String label)
+    public void add(string value, string label)
     {
         add(new Word(value, label));
     }
@@ -55,12 +55,12 @@ public class DictionaryMaker : ISaveAble
      * 删除一个词条
      * @param value
      */
-    public void remove(String value)
+    public void remove(string value)
     {
         trie.remove(value);
     }
 
-    public Item get(String key)
+    public Item get(string key)
     {
         return trie.get(key);
     }
@@ -70,10 +70,10 @@ public class DictionaryMaker : ISaveAble
         return get(word.getValue());
     }
 
-    public TreeSet<String> labelSet()
+    public TreeSet<string> labelSet()
     {
-        TreeSet<String> labelSet = new TreeSet<String>();
-        for (Map.Entry<String, Item> entry : entrySet())
+        TreeSet<string> labelSet = new TreeSet<string>();
+        for (KeyValuePair<string, Item> entry : entrySet())
         {
             labelSet.addAll(entry.getValue().labelMap.keySet());
         }
@@ -87,14 +87,14 @@ public class DictionaryMaker : ISaveAble
      * @param path
      * @return
      */
-    public static List<Item> loadAsItemList(String path)
+    public static List<Item> loadAsItemList(string path)
     {
         List<Item> itemList = new LinkedList<Item>();
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOAdapter == null ? new FileInputStream(path) :
                                                                                  IOAdapter.open(path), "UTF-8"));
-            String line;
+            string line;
             while ((line = br.readLine()) != null)
             {
                 Item item = Item.create(line);
@@ -121,7 +121,7 @@ public class DictionaryMaker : ISaveAble
      * @param path
      * @return
      */
-    public static DictionaryMaker load(String path)
+    public static DictionaryMaker load(string path)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(path));
@@ -178,12 +178,12 @@ public class DictionaryMaker : ISaveAble
      * 浏览所有词条
      * @return
      */
-    public Set<Map.Entry<String, Item>> entrySet()
+    public Set<KeyValuePair<string, Item>> entrySet()
     {
         return trie.entrySet();
     }
 
-    public Set<String> keySet()
+    public Set<string> keySet()
     {
         return trie.keySet();
     }
@@ -210,7 +210,7 @@ public class DictionaryMaker : ISaveAble
      * @param pathB
      * @return
      */
-    public static DictionaryMaker combine(String pathA, String pathB)
+    public static DictionaryMaker combine(string pathA, string pathB)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(pathA));
@@ -225,10 +225,10 @@ public class DictionaryMaker : ISaveAble
      * @param pathArray
      * @return
      */
-    public static DictionaryMaker combine(String... pathArray)
+    public static DictionaryMaker combine(string... pathArray)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
-        for (String path : pathArray)
+        for (string path : pathArray)
         {
             logger.warning("正在处理" + path);
             dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(path));
@@ -242,7 +242,7 @@ public class DictionaryMaker : ISaveAble
      * @param pathArray
      * @return
      */
-    public static DictionaryMaker combineWithNormalization(String[] pathArray)
+    public static DictionaryMaker combineWithNormalization(string[] pathArray)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         logger.info("正在处理主词典" + pathArray[0]);
@@ -261,7 +261,7 @@ public class DictionaryMaker : ISaveAble
      * @param pathArray
      * @return
      */
-    public static DictionaryMaker combineWhenNotInclude(String[] pathArray)
+    public static DictionaryMaker combineWhenNotInclude(string[] pathArray)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         logger.info("正在处理主词典" + pathArray[0]);
@@ -275,7 +275,7 @@ public class DictionaryMaker : ISaveAble
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("词条数量：");
         sb.Append(trie.size());
@@ -283,14 +283,14 @@ public class DictionaryMaker : ISaveAble
     }
 
     //@Override
-    public bool saveTxtTo(String path)
+    public bool saveTxtTo(string path)
     {
         if (trie.size() == 0) return true;  // 如果没有词条，那也算成功了
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
-            Set<Map.Entry<String, Item>> entries = trie.entrySet();
-            for (Map.Entry<String, Item> entry : entries)
+            Set<KeyValuePair<string, Item>> entries = trie.entrySet();
+            for (KeyValuePair<string, Item> entry : entries)
             {
                 bw.write(entry.getValue().toString());
                 bw.newLine();
@@ -306,7 +306,7 @@ public class DictionaryMaker : ISaveAble
         return true;
     }
 
-    public void add(String param)
+    public void add(string param)
     {
         Item item = Item.create(param);
         if (item != null) add(item);
@@ -329,13 +329,13 @@ public class DictionaryMaker : ISaveAble
      * @param filter
      * @return
      */
-    public bool saveTxtTo(String path, Filter filter)
+    public bool saveTxtTo(string path, Filter filter)
     {
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
-            Set<Map.Entry<String, Item>> entries = trie.entrySet();
-            for (Map.Entry<String, Item> entry : entries)
+            Set<KeyValuePair<string, Item>> entries = trie.entrySet();
+            for (KeyValuePair<string, Item> entry : entries)
             {
                 if (filter.onSave(entry.getValue()))
                 {
@@ -364,17 +364,17 @@ public class DictionaryMaker : ISaveAble
     {
         for (Item item : itemList)
         {
-            ArrayList<Map.Entry<String, int>> entryArray = new ArrayList<Map.Entry<String, int>>(item.labelMap.entrySet());
-            Collections.sort(entryArray, new Comparator<Map.Entry<String, int>>()
+            ArrayList<KeyValuePair<string, int>> entryArray = new ArrayList<KeyValuePair<string, int>>(item.labelMap.entrySet());
+            Collections.sort(entryArray, new Comparator<KeyValuePair<string, int>>()
             {
                 //@Override
-                public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
+                public int compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
                 {
                     return o1.getValue().compareTo(o2.getValue());
                 }
             });
             int index = 1;
-            for (Map.Entry<String, int> pair : entryArray)
+            for (KeyValuePair<string, int> pair : entryArray)
             {
                 item.labelMap.put(pair.getKey(), index);
                 ++index;

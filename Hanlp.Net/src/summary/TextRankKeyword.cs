@@ -36,7 +36,7 @@ public class TextRankKeyword : KeywordExtractor
      * @param size     希望提取几个关键词
      * @return 一个列表
      */
-    public static List<String> getKeywordList(String document, int size)
+    public static List<string> getKeywordList(string document, int size)
     {
         TextRankKeyword textRankKeyword = new TextRankKeyword();
 
@@ -48,9 +48,9 @@ public class TextRankKeyword : KeywordExtractor
      *
      * @param content
      * @return
-     * @deprecated 请使用 {@link KeywordExtractor#getKeywords(java.lang.String)}
+     * @deprecated 请使用 {@link KeywordExtractor#getKeywords(java.lang.string)}
      */
-    public List<String> getKeyword(String content)
+    public List<string> getKeyword(string content)
     {
         return getKeywords(content);
     }
@@ -61,7 +61,7 @@ public class TextRankKeyword : KeywordExtractor
      * @param content
      * @return
      */
-    public Dictionary<String, Float> getTermAndRank(String content)
+    public Dictionary<string, Float> getTermAndRank(string content)
     {
         assert content != null;
         List<Term> termList = defaultSegment.seg(content);
@@ -75,21 +75,21 @@ public class TextRankKeyword : KeywordExtractor
      * @param size
      * @return
      */
-    public Dictionary<String, Float> getTermAndRank(String content, int size)
+    public Dictionary<string, Float> getTermAndRank(string content, int size)
     {
-        Dictionary<String, Float> map = getTermAndRank(content);
-        Dictionary<String, Float> result = top(size, map);
+        Dictionary<string, Float> map = getTermAndRank(content);
+        Dictionary<string, Float> result = top(size, map);
 
         return result;
     }
 
-    private Dictionary<String, Float> top(int size, Dictionary<String, Float> map)
+    private Dictionary<string, Float> top(int size, Dictionary<string, Float> map)
     {
-        Dictionary<String, Float> result = new LinkedHashMap<String, Float>();
-        for (Map.Entry<String, Float> entry : new MaxHeap<Map.Entry<String, Float>>(size, new Comparator<Map.Entry<String, Float>>()
+        Dictionary<string, Float> result = new LinkedHashMap<string, Float>();
+        for (KeyValuePair<string, Float> entry : new MaxHeap<KeyValuePair<string, Float>>(size, new Comparator<KeyValuePair<string, Float>>()
         {
             //@Override
-            public int compare(Map.Entry<String, Float> o1, Map.Entry<String, Float> o2)
+            public int compare(KeyValuePair<string, Float> o1, KeyValuePair<string, Float> o2)
             {
                 return o1.getValue().compareTo(o2.getValue());
             }
@@ -106,9 +106,9 @@ public class TextRankKeyword : KeywordExtractor
      * @param termList
      * @return
      */
-    public Dictionary<String, Float> getTermAndRank(List<Term> termList)
+    public Dictionary<string, Float> getTermAndRank(List<Term> termList)
     {
-        List<String> wordList = new ArrayList<String>(termList.size());
+        List<string> wordList = new ArrayList<string>(termList.size());
         for (Term t : termList)
         {
             if (shouldInclude(t))
@@ -117,20 +117,20 @@ public class TextRankKeyword : KeywordExtractor
             }
         }
 //        System._out.println(wordList);
-        Dictionary<String, Set<String>> words = new TreeMap<String, Set<String>>();
-        Queue<String> que = new LinkedList<String>();
-        for (String w : wordList)
+        Dictionary<string, Set<string>> words = new TreeMap<string, Set<string>>();
+        Queue<string> que = new LinkedList<string>();
+        for (string w : wordList)
         {
             if (!words.containsKey(w))
             {
-                words.put(w, new TreeSet<String>());
+                words.put(w, new TreeSet<string>());
             }
             // 复杂度O(n-1)
             if (que.size() >= 5)
             {
                 que.poll();
             }
-            for (String qWord : que)
+            for (string qWord : que)
             {
                 if (w.equals(qWord))
                 {
@@ -143,22 +143,22 @@ public class TextRankKeyword : KeywordExtractor
             que.offer(w);
         }
 //        System._out.println(words);
-        Dictionary<String, Float> score = new HashMap<String, Float>();
+        Dictionary<string, Float> score = new HashMap<string, Float>();
         //依据TF来设置初值
-        for (Map.Entry<String, Set<String>> entry : words.entrySet())
+        for (KeyValuePair<string, Set<string>> entry : words.entrySet())
         {
             score.put(entry.getKey(), sigMoid(entry.getValue().size()));
         }
         for (int i = 0; i < max_iter; ++i)
         {
-            Dictionary<String, Float> m = new HashMap<String, Float>();
+            Dictionary<string, Float> m = new HashMap<string, Float>();
             float max_diff = 0;
-            for (Map.Entry<String, Set<String>> entry : words.entrySet())
+            for (KeyValuePair<string, Set<string>> entry : words.entrySet())
             {
-                String key = entry.getKey();
-                Set<String> value = entry.getValue();
+                string key = entry.getKey();
+                Set<string> value = entry.getValue();
                 m.put(key, 1 - d);
-                for (String element : value)
+                for (string element : value)
                 {
                     int size = words.get(element).size();
                     if (key.equals(element) || size == 0) continue;
@@ -185,11 +185,11 @@ public class TextRankKeyword : KeywordExtractor
     }
 
     //@Override
-    public List<String> getKeywords(List<Term> termList, int size)
+    public List<string> getKeywords(List<Term> termList, int size)
     {
-        Set<Map.Entry<String, Float>> entrySet = top(size, getTermAndRank(termList)).entrySet();
-        List<String> result = new ArrayList<String>(entrySet.size());
-        for (Map.Entry<String, Float> entry : entrySet)
+        Set<KeyValuePair<string, Float>> entrySet = top(size, getTermAndRank(termList)).entrySet();
+        List<string> result = new ArrayList<string>(entrySet.size());
+        for (KeyValuePair<string, Float> entry : entrySet)
         {
             result.add(entry.getKey());
         }

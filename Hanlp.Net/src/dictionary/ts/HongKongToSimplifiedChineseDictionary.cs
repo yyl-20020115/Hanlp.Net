@@ -22,15 +22,15 @@ namespace com.hankcs.hanlp.dictionary.ts;
  */
 public class HongKongToSimplifiedChineseDictionary : BaseChineseDictionary
 {
-    static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
+    static AhoCorasickDoubleArrayTrie<string> trie = new AhoCorasickDoubleArrayTrie<string>();
     static HongKongToSimplifiedChineseDictionary()
     {
         long start = DateTime.Now.Microsecond;
-        String datPath = HanLP.Config.tcDictionaryRoot + "hk2s";
+        string datPath = HanLP.Config.tcDictionaryRoot + "hk2s";
         if (!loadDat(datPath, trie))
         {
-            TreeMap<String, String> t2s = new TreeMap<String, String>();
-            TreeMap<String, String> hk2t = new TreeMap<String, String>();
+            TreeMap<string, string> t2s = new TreeMap<string, string>();
+            TreeMap<string, string> hk2t = new TreeMap<string, string>();
             if (!load(t2s, false, HanLP.Config.tcDictionaryRoot + "t2s.txt") ||
                     !load(hk2t, true, HanLP.Config.tcDictionaryRoot + "t2hk.txt"))
             {
@@ -43,12 +43,12 @@ public class HongKongToSimplifiedChineseDictionary : BaseChineseDictionary
         logger.info("香港繁体转简体加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
-    public static String convertToSimplifiedChinese(String traditionalHongKongChineseString)
+    public static string convertToSimplifiedChinese(string traditionalHongKongChineseString)
     {
         return segLongest(traditionalHongKongChineseString.ToCharArray(), trie);
     }
 
-    public static String convertToSimplifiedChinese(char[] traditionalHongKongChineseString)
+    public static string convertToSimplifiedChinese(char[] traditionalHongKongChineseString)
     {
         return segLongest(traditionalHongKongChineseString, trie);
     }

@@ -29,7 +29,7 @@ public class TextFileCorpus : Corpus
     }
 
     //@Override
-    public String nextWord() 
+    public string nextWord() 
     {
         return readWord(raf);
     }
@@ -78,13 +78,13 @@ public class TextFileCorpus : Corpus
             cache.close();
             if (!fixingFile.renameTo(cacheFile))
             {
-                throw new RuntimeException(String.format("moving %s to %s failed", fixingFile.getAbsolutePath(), cacheFile.getName()));
+                throw new RuntimeException(string.format("moving %s to %s failed", fixingFile.getAbsolutePath(), cacheFile.getName()));
             }
             cache = new DataOutputStream(new FileOutputStream(cacheFile));
         }
         catch (IOException e)
         {
-            throw new RuntimeException(String.format("failed to adjust cache file", e));
+            throw new RuntimeException(string.format("failed to adjust cache file", e));
         }
         table = null;
         vocabSize = j;
@@ -99,7 +99,7 @@ public class TextFileCorpus : Corpus
     public void learnVocab() 
     {
         vocab = new VocabWord[vocabMaxSize];
-        vocabIndexMap = new TreeMap<String, int>();
+        vocabIndexMap = new TreeMap<string, int>();
         vocabSize = 0;
 
         final File trainFile = new File(config.getInputFile());
@@ -113,11 +113,11 @@ public class TextFileCorpus : Corpus
         {
             fileInputStream = new FileInputStream(trainFile);
             raf = new BufferedReader(new InputStreamReader(fileInputStream, encoding));
-            cacheFile = File.createTempFile(String.format("corpus_%d", DateTime.Now.Microsecond), ".bin");
+            cacheFile = File.createTempFile(string.format("corpus_%d", DateTime.Now.Microsecond), ".bin");
             cache = new DataOutputStream(new FileOutputStream(cacheFile));
             while (true)
             {
-                String word = readWord(raf);
+                string word = readWord(raf);
                 if (word == null && eoc) break;
                 trainWords++;
                 if (trainWords % 100000 == 0)
@@ -169,7 +169,7 @@ public class TextFileCorpus : Corpus
         }
     }
 
-    String[] wordsBuffer = new String[0];
+    string[] wordsBuffer = new string[0];
     int wbp = wordsBuffer.length;
 
     /**
@@ -179,7 +179,7 @@ public class TextFileCorpus : Corpus
      * @return null if EOF
      * @
      */
-    String readWord(BufferedReader raf) 
+    string readWord(BufferedReader raf) 
     {
         while (true)
         {
@@ -189,7 +189,7 @@ public class TextFileCorpus : Corpus
                 return wordsBuffer[wbp++];
             }
 
-            String line = raf.readLine();
+            string line = raf.readLine();
             if (line == null)
             {      // end of corpus
                 eoc = true;

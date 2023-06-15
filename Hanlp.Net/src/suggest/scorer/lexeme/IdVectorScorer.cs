@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.suggest.scorer.lexeme;
 public class IdVectorScorer : BaseScorer<IdVector>
 {
     //@Override
-    protected IdVector generateKey(String sentence)
+    protected IdVector generateKey(string sentence)
     {
         IdVector idVector = new IdVector(sentence);
         if (idVector.idArrayList.size() == 0) return null;

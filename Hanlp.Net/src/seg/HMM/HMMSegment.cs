@@ -26,7 +26,7 @@ public class HMMSegment : CharacterBasedSegment
         this(HanLP.Config.HMMSegmentModelPath);
     }
 
-    public HMMSegment(String modelPath)
+    public HMMSegment(string modelPath)
     {
         model = GlobalObjectPool.get(modelPath);
         if (model != null) return;
@@ -74,15 +74,15 @@ public class HMMSegment : CharacterBasedSegment
                     }
                     if (i == tag.length)
                     {
-                        termList.add(new Term(new String(sentence, begin, offset - begin), null));
+                        termList.add(new Term(new string(sentence, begin, offset - begin), null));
                     }
                     else
-                        termList.add(new Term(new String(sentence, begin, offset - begin + 1), null));
+                        termList.add(new Term(new string(sentence, begin, offset - begin + 1), null));
                 }
                 break;
                 default:
                 {
-                    termList.add(new Term(new String(sentence, offset, 1), null));
+                    termList.add(new Term(new string(sentence, offset, 1), null));
                 }
                 break;
             }

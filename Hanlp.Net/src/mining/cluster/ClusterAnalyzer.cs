@@ -33,7 +33,7 @@ public class ClusterAnalyzer<K>
         vocabulary = new MutableDoubleArrayTrieInteger();
     }
 
-    protected int id(String word)
+    protected int id(string word)
     {
         int id = vocabulary.get(word);
         if (id == -1)
@@ -50,7 +50,7 @@ public class ClusterAnalyzer<K>
      * @param document 文档
      * @return 单词列表
      */
-    protected List<String> preprocess(String document)
+    protected List<string> preprocess(string document)
     {
         List<Term> termList = segment.seg(document);
         ListIterator<Term> listIterator = termList.listIterator();
@@ -64,7 +64,7 @@ public class ClusterAnalyzer<K>
                 listIterator.remove();
             }
         }
-        List<String> wordList = new ArrayList<String>(termList.size());
+        List<string> wordList = new ArrayList<string>(termList.size());
         for (Term term : termList)
         {
             wordList.add(term.word);
@@ -72,10 +72,10 @@ public class ClusterAnalyzer<K>
         return wordList;
     }
 
-    protected SparseVector toVector(List<String> wordList)
+    protected SparseVector toVector(List<string> wordList)
     {
         SparseVector vector = new SparseVector();
-        for (String word : wordList)
+        for (string word : wordList)
         {
             int id = id(word);
             Double f = vector.get(id);
@@ -99,7 +99,7 @@ public class ClusterAnalyzer<K>
      * @param document 文档内容
      * @return 文档对象
      */
-    public Document<K> addDocument(K id, String document)
+    public Document<K> addDocument(K id, string document)
     {
         return addDocument(id, preprocess(document));
     }
@@ -111,7 +111,7 @@ public class ClusterAnalyzer<K>
      * @param document 文档内容
      * @return 文档对象
      */
-    public Document<K> addDocument(K id, List<String> document)
+    public Document<K> addDocument(K id, List<string> document)
     {
         SparseVector vector = toVector(document);
         Document<K> d = new Document<K>(id, vector);
@@ -327,7 +327,7 @@ public class ClusterAnalyzer<K>
     double refined_vector_value(SparseVector composite, SparseVector vec, int sign)
     {
         double sum = 0.0;
-        for (Map.Entry<int, Double> entry : vec.entrySet())
+        for (KeyValuePair<int, Double> entry : vec.entrySet())
         {
             sum += Math.pow(entry.getValue(), 2) + sign * 2 * composite.get(entry.getKey()) * entry.getValue();
         }
@@ -351,28 +351,28 @@ public class ClusterAnalyzer<K>
      * @param algorithm  kmeans 或 repeated bisection
      * @ 任何可能的IO异常
      */
-    public static double evaluate(String folderPath, String algorithm)
+    public static double evaluate(string folderPath, string algorithm)
     {
         if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
-        if (!root.exists()) throw new IllegalArgumentException(String.format("目录 %s 不存在", root.getAbsolutePath()));
+        if (!root.exists()) throw new IllegalArgumentException(string.format("目录 %s 不存在", root.getAbsolutePath()));
         if (!root.isDirectory())
-            throw new IllegalArgumentException(String.format("目录 %s 不是一个目录", root.getAbsolutePath()));
+            throw new IllegalArgumentException(string.format("目录 %s 不是一个目录", root.getAbsolutePath()));
 
-        ClusterAnalyzer<String> analyzer = new ClusterAnalyzer<String>();
+        ClusterAnalyzer<string> analyzer = new ClusterAnalyzer<string>();
         File[] folders = root.listFiles();
         if (folders == null) return 1.;
         logger.start("根目录:%s\n加载中...\n", folderPath);
         int docSize = 0;
         int[] ni = new int[folders.length];
-        String[] cat = new String[folders.length];
+        string[] cat = new string[folders.length];
         int offset = 0;
         for (File folder : folders)
         {
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
             if (files == null) continue;
-            String category = folder.getName();
+            string category = folder.getName();
             cat[offset] = category;
             logger._out("[%s]...", category);
             int b = 0;
@@ -394,16 +394,16 @@ public class ClusterAnalyzer<K>
         }
         logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", folders.length, docSize);
         logger.start(algorithm + "聚类中...");
-        List<Set<String>> clusterList = algorithm.replaceAll("[-\\s]", "").toLowerCase().equals("kmeans") ?
+        List<Set<string>> clusterList = algorithm.replaceAll("[-\\s]", "").toLowerCase().equals("kmeans") ?
             analyzer.kmeans(ni.length) : analyzer.repeatedBisection(ni.length);
         logger.finish(" 完毕。\n");
         double[] fi = new double[ni.length];
         for (int i = 0; i < ni.length; i++)
         {
-            for (Set<String> j : clusterList)
+            for (Set<string> j : clusterList)
             {
                 int nij = 0;
-                for (String d : j)
+                for (string d : j)
                 {
                     if (d.startsWith(cat[i]))
                         ++nij;

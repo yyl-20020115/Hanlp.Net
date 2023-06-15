@@ -35,7 +35,7 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public Document add(String category, String text)
+    public Document add(string category, string text)
     {
         if (editMode) return null;
         Document document = convert(category, text);
@@ -62,7 +62,7 @@ public class MemoryDataSet : AbstractDataSet
         {
             Document document = iterator.next();
             FrequencyMap<int> tfMap = new FrequencyMap<int>();
-            for (Map.Entry<int, int[]> entry : document.tfMap.entrySet())
+            for (KeyValuePair<int, int[]> entry : document.tfMap.entrySet())
             {
                 int feature = entry.getKey();
                 if (idMap[feature] == -1) continue;

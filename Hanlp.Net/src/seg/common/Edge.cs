@@ -24,9 +24,9 @@ public class Edge
     /**
      * 节点名字，调试用
      */
-    String name;
+    string name;
 
-    protected Edge(double weight, String name)
+    protected Edge(double weight, string name)
     {
         this.weight = weight;
         this.name = name;

@@ -146,7 +146,7 @@ public class TfIdf
             }
         }
         Dictionary<TERM, Double> idf = new HashMap<TERM, Double>();
-        for (Map.Entry<TERM, int> e : df.entrySet())
+        for (KeyValuePair<TERM, int> e : df.entrySet())
         {
             TERM term = e.getKey();
             double f = e.getValue();

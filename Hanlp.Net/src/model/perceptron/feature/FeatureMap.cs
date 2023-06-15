@@ -51,7 +51,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
         this.mutable = mutable;
     }
 
-    public abstract Set<Map.Entry<String, int>> entrySet();
+    public abstract Set<KeyValuePair<string, int>> entrySet();
 
     public FeatureMap(bool mutable)
     {
@@ -68,7 +68,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     {
         tagSet.save(_out);
         _out.writeInt(size());
-        for (Map.Entry<String, int> entry : entrySet())
+        for (KeyValuePair<string, int> entry : entrySet())
         {
             _out.writeUTF(entry.getKey());
         }

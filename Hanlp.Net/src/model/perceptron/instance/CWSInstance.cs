@@ -29,9 +29,9 @@ public class CWSInstance : Instance
      * @param termArray  分词序列
      * @param featureMap 特征收集
      */
-    public CWSInstance(String[] termArray, FeatureMap featureMap)
+    public CWSInstance(string[] termArray, FeatureMap featureMap)
     {
-        String sentence = com.hankcs.hanlp.utility.TextUtility.combine(termArray);
+        string sentence = com.hankcs.hanlp.utility.TextUtility.combine(termArray);
         CWSTagSet tagSet = (CWSTagSet) featureMap.tagSet;
 
         tagArray = new int[sentence.length()];
@@ -52,13 +52,13 @@ public class CWSInstance : Instance
         initFeatureMatrix(sentence, featureMap);
     }
 
-    public CWSInstance(String sentence, FeatureMap featureMap)
+    public CWSInstance(string sentence, FeatureMap featureMap)
     {
         initFeatureMatrix(sentence, featureMap);
         tagArray = new int[sentence.length()];
     }
 
-    protected int[] extractFeature(String sentence, FeatureMap featureMap, int position)
+    protected int[] extractFeature(string sentence, FeatureMap featureMap, int position)
     {
         List<int> featureVec = new LinkedList<int>();
 
@@ -196,7 +196,7 @@ public class CWSInstance : Instance
         return toFeatureArray(featureVec);
     }
 
-    protected void initFeatureMatrix(String sentence, FeatureMap featureMap)
+    protected void initFeatureMatrix(string sentence, FeatureMap featureMap)
     {
         featureMatrix = new int[sentence.length()][];
         for (int i = 0; i < sentence.length(); i++)
@@ -212,7 +212,7 @@ public class CWSInstance : Instance
             return null;
         }
         List<Word> wordList = sentence.toSimpleWordList();
-        String[] termArray = new String[wordList.size()];
+        string[] termArray = new string[wordList.size()];
         int i = 0;
         for (Word word : wordList)
         {

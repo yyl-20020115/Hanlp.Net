@@ -42,24 +42,24 @@ public class ImmutableFeatureMDatMap : FeatureMap
         this.dat = dat;
     }
 
-    public ImmutableFeatureMDatMap(Dictionary<String, int> featureIdMap, TagSet tagSet)
+    public ImmutableFeatureMDatMap(Dictionary<string, int> featureIdMap, TagSet tagSet)
         : base(tagSet)
     {
         dat = new MutableDoubleArrayTrieInteger(featureIdMap);
     }
 
-    public ImmutableFeatureMDatMap(Set<Map.Entry<String, int>> featureIdSet, TagSet tagSet)
+    public ImmutableFeatureMDatMap(Set<KeyValuePair<string, int>> featureIdSet, TagSet tagSet)
         : base(tagSet)
     {
         dat = new MutableDoubleArrayTrieInteger();
-        for (Map.Entry<String, int> entry : featureIdSet)
+        for (KeyValuePair<string, int> entry : featureIdSet)
         {
             dat.put(entry.getKey(), entry.getValue());
         }
     }
 
     //@Override
-    public int idOf(String s)
+    public int idOf(string s)
     {
         return dat.get(s);
     }
@@ -71,7 +71,7 @@ public class ImmutableFeatureMDatMap : FeatureMap
     }
 
     //@Override
-    public Set<Map.Entry<String, int>> entrySet()
+    public Set<KeyValuePair<string, int>> entrySet()
     {
         return dat.entrySet();
     }

@@ -30,15 +30,15 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      */
     private int size;
 
-    public MutableDoubleArrayTrieInteger(Dictionary<String, int> stringIntegerMap)
+    public MutableDoubleArrayTrieInteger(Dictionary<string, int> stringIntegerMap)
     {
         this(stringIntegerMap.entrySet());
     }
 
-    public MutableDoubleArrayTrieInteger(Set<Map.Entry<String, int>> entrySet)
+    public MutableDoubleArrayTrieInteger(Set<KeyValuePair<string, int>> entrySet)
     {
         this();
-        for (Map.Entry<String, int> entry : entrySet)
+        for (KeyValuePair<string, int> entry : entrySet)
         {
             put(entry.getKey(), entry.getValue());
         }
@@ -243,7 +243,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param overwrite 是否覆盖
      * @return
      */
-    public bool insert(String key, int value, bool overwrite)
+    public bool insert(string key, int value, bool overwrite)
     {
         if ((null == key) || key.length() == 0 || (key.indexOf(UNUSED_CHAR) != -1))
         {
@@ -420,7 +420,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return
      */
-    public bool insert(String key, int value)
+    public bool insert(string key, int value)
     {
         return insert(key, value, true);
     }
@@ -432,7 +432,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return
      */
-    public bool add(String key, int value)
+    public bool add(string key, int value)
     {
         return insert(key, value, false);
     }
@@ -443,7 +443,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param key
      * @return
      */
-    public bool add(String key)
+    public bool add(string key)
     {
         return add(key, size);
     }
@@ -454,7 +454,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param prefix
      * @return
      */
-    public List<String> prefixMatch(String prefix)
+    public List<string> prefixMatch(string prefix)
     {
         int curState = 1;
         IntArrayList bytes = new IntArrayList(prefix.length() * 4);
@@ -490,13 +490,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
         }
-        List<String> result = new ArrayList<String>();
+        List<string> result = new ArrayList<string>();
         recursiveAddSubTree(curState, result, bytes);
 
         return result;
     }
 
-    private void recursiveAddSubTree(int curState, List<String> result, IntArrayList bytes)
+    private void recursiveAddSubTree(int curState, List<string> result, IntArrayList bytes)
     {
         if (getCheck(getBase(curState) + UNUSED_CHAR_VALUE) == curState)
         {
@@ -505,7 +505,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             {
                 array[i] = (byte) bytes.get(i);
             }
-            result.add(new String(array, Utf8CharacterMapping.UTF_8));
+            result.add(new string(array, Utf8CharacterMapping.UTF_8));
         }
         int base = getBase(curState);
         for (int c = 0; c < charMap.getCharsetSize(); c++)
@@ -554,7 +554,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return new int[]{maxLength, lastVal};
     }
 
-    public int[] findWithSupplementary(String query, int start)
+    public int[] findWithSupplementary(string query, int start)
     {
         if ((query == null) || (start >= query.length()))
         {
@@ -584,7 +584,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
 
     }
 
-    public List<int[]> findAllWithSupplementary(String query, int start)
+    public List<int[]> findAllWithSupplementary(string query, int start)
     {
         List<int[]> ret = new ArrayList<int[]>(5);
         if ((query == null) || (start >= query.length()))
@@ -618,7 +618,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param start
      * @return
      */
-    public List<int[]> commonPrefixSearch(String query, int start)
+    public List<int[]> commonPrefixSearch(string query, int start)
     {
         List<int[]> ret = new ArrayList<int[]>(5);
         if ((query == null) || (start >= query.length()))
@@ -782,7 +782,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param start
      * @return -1表示不存在
      */
-    public int get(String key, int start)
+    public int get(string key, int start)
     {
         assert key != null;
         assert 0 <= start && start <= key.length();
@@ -802,7 +802,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param key
      * @return -1表示不存在
      */
-    public int get(String key)
+    public int get(string key)
     {
         return get(key, 0);
     }
@@ -814,7 +814,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return 是否设置成功（失败的原因是键值不合法）
      */
-    public bool set(String key, int value)
+    public bool set(string key, int value)
     {
         return insert(key, value, true);
     }
@@ -826,7 +826,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param value
      * @return 是否设置成功（失败的原因是键值不合法）
      */
-    public bool put(String key, int value)
+    public bool put(string key, int value)
     {
         return insert(key, value, true);
     }
@@ -837,7 +837,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param key
      * @return 值
      */
-    public int remove(String key)
+    public int remove(string key)
     {
         return delete(key);
     }
@@ -848,7 +848,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param key
      * @return 值
      */
-    public int delete(String key)
+    public int delete(string key)
     {
         if (key == null)
         {
@@ -934,9 +934,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return LEAF_BIT - 1;
     }
 
-    public Set<Map.Entry<String, int>> entrySet()
+    public Set<KeyValuePair<string, int>> entrySet()
     {
-        return new Set<Map.Entry<String, int>>()
+        return new Set<KeyValuePair<string, int>>()
         {
             //@Override
             public int size()
@@ -957,9 +957,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public Iterator<Map.Entry<String, int>> iterator()
+            public Iterator<KeyValuePair<string, int>> iterator()
             {
-                return new Iterator<Map.Entry<String, int>>()
+                return new Iterator<KeyValuePair<string, int>>()
                 {
                     KeyValuePair iterator = MutableDoubleArrayTrieInteger.this.iterator();
 
@@ -976,10 +976,10 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                     }
 
                     //@Override
-                    public Map.Entry<String, int> next()
+                    public KeyValuePair<string, int> next()
                     {
                         iterator.next();
-                        return new AbstractMap.SimpleEntry<String, int>(iterator.key, iterator.value);
+                        return new AbstractMap.SimpleEntry<string, int>(iterator.key, iterator.value);
                     }
                 };
             }
@@ -987,8 +987,8 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             //@Override
             public Object[] toArray()
             {
-                ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(size);
-                for (Map.Entry<String, int> entry : this)
+                ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(size);
+                for (KeyValuePair<string, int> entry : this)
                 {
                     entries.add(entry);
                 }
@@ -1002,7 +1002,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public bool add(Map.Entry<String, int> stringIntegerEntry)
+            public bool add(KeyValuePair<string, int> stringIntegerEntry)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1020,7 +1020,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public bool addAll(Collection<? : Map.Entry<String, int>> c)
+            public bool addAll(Collection<? : KeyValuePair<string, int>> c)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1051,14 +1051,14 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return new KeyValuePair();
     }
 
-    public bool containsKey(String key)
+    public bool containsKey(string key)
     {
         return get(key) != -1;
     }
 
-    public Set<String> keySet()
+    public Set<string> keySet()
     {
-        return new Set<String>()
+        return new Set<string>()
         {
             //@Override
             public int size()
@@ -1075,13 +1075,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             //@Override
             public bool contains(Object o)
             {
-                return MutableDoubleArrayTrieInteger.this.containsKey((String) o);
+                return MutableDoubleArrayTrieInteger.this.containsKey((string) o);
             }
 
             //@Override
-            public Iterator<String> iterator()
+            public Iterator<string> iterator()
             {
-                return new Iterator<String>()
+                return new Iterator<string>()
                 {
                     KeyValuePair iterator = MutableDoubleArrayTrieInteger.this.iterator();
 
@@ -1098,7 +1098,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                     }
 
                     //@Override
-                    public String next()
+                    public string next()
                     {
                         return iterator.next().key;
                     }
@@ -1118,7 +1118,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public bool add(String s)
+            public bool add(string s)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1136,7 +1136,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public bool addAll(Collection<? : String> c)
+            public bool addAll(Collection<? : string> c)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1218,7 +1218,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
          */
         private int index;
         private int value = -1;
-        private String key = null;
+        private string key = null;
         private int currentBase;
 
         public KeyValuePair()
@@ -1260,7 +1260,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
         }
 
-        public String key()
+        public string key()
         {
             return key;
         }
@@ -1270,7 +1270,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             return value;
         }
 
-        public String getKey()
+        public string getKey()
         {
             return key;
         }
@@ -1371,7 +1371,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
             return key + '=' + value;
         }

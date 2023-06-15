@@ -8,19 +8,19 @@ public abstract class AbstractClosestVectors
     protected Scanner scanner;
     protected final VectorsReader vectorsReader;
 
-    protected AbstractClosestVectors(String file)
+    protected AbstractClosestVectors(string file)
     {
         vectorsReader = new VectorsReader(file);
     }
 
-    protected String[] nextWords(int n, String msg)
+    protected string[] nextWords(int n, string msg)
     {
         System._out.println(msg + " ('q' to break): ");
-        String[] words = new String[n];
+        string[] words = new string[n];
 
         for (int i = 0; i < n; i++)
         {
-            String word = nextWord();
+            string word = nextWord();
             if (word == null) return null;
             words[i] = word;
         }
@@ -28,9 +28,9 @@ public abstract class AbstractClosestVectors
         return words;
     }
 
-    protected String nextWord()
+    protected string nextWord()
     {
-        String word = scanner.next();
+        string word = scanner.next();
         return word == null || word.length() == 0 || word.equals("q") ? null : word;
     }
 
@@ -50,7 +50,7 @@ public abstract class AbstractClosestVectors
             {
 
                 double[] bestd = new double[N];
-                String[] bestw = new String[N];
+                string[] bestw = new string[N];
                 next_word:
                 for (int i = 0; i < words; i++)
                 {

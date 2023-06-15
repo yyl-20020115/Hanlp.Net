@@ -18,7 +18,7 @@ public class EncoderFeatureIndex : FeatureIndex
         frequency = new IntArrayList();
     }
 
-    public int getID(String key)
+    public int getID(string key)
     {
         int k = dic_.get(key);
         if (k == -1)
@@ -64,14 +64,14 @@ public class EncoderFeatureIndex : FeatureIndex
      * @param filename
      * @return
      */
-    private bool openTemplate(String filename)
+    private bool openTemplate(string filename)
     {
         InputStreamReader isr = null;
         try
         {
             isr = new InputStreamReader(IOUtil.newInputStream(filename), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
-            String line;
+            string line;
             while ((line = br.readLine()) != null)
             {
                 if (line.length() == 0 || line.charAt(0) == ' ' || line.charAt(0) == '#')
@@ -119,7 +119,7 @@ public class EncoderFeatureIndex : FeatureIndex
      * @param filename
      * @return
      */
-    private bool openTagSet(String filename)
+    private bool openTagSet(string filename)
     {
         int max_size = 0;
         InputStreamReader isr = null;
@@ -128,7 +128,7 @@ public class EncoderFeatureIndex : FeatureIndex
         {
             isr = new InputStreamReader(IOUtil.newInputStream(filename), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
-            String line;
+            string line;
             while ((line = br.readLine()) != null)
             {
                 if (line.length() == 0)
@@ -140,14 +140,14 @@ public class EncoderFeatureIndex : FeatureIndex
                 {
                     continue;
                 }
-                String[] cols = line.split("[\t ]", -1);
+                string[] cols = line.split("[\t ]", -1);
                 if (max_size == 0)
                 {
                     max_size = cols.length;
                 }
                 if (max_size != cols.length)
                 {
-                    String msg = "inconsistent column size: " + max_size +
+                    string msg = "inconsistent column size: " + max_size +
                         " " + cols.length + " " + filename;
                     throw new RuntimeException(msg);
                 }
@@ -179,13 +179,13 @@ public class EncoderFeatureIndex : FeatureIndex
         return true;
     }
 
-    public bool open(String filename1, String filename2)
+    public bool open(string filename1, string filename2)
     {
         checkMaxXsize_ = true;
         return openTemplate(filename1) && openTagSet(filename2);
     }
 
-    public bool save(String filename, bool textModelFile)
+    public bool save(string filename, bool textModelFile)
     {
         try
         {
@@ -202,7 +202,7 @@ public class EncoderFeatureIndex : FeatureIndex
             oos.writeObject(unigramTempls_);
             oos.writeObject(bigramTempls_);
             oos.writeObject(dic_);
-//            List<String> keyList = new ArrayList<String>(dic_.size());
+//            List<string> keyList = new ArrayList<string>(dic_.size());
 //            int[] values = new int[dic_.size()];
 //            int i = 0;
 //            for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
@@ -224,16 +224,16 @@ public class EncoderFeatureIndex : FeatureIndex
                 osw.write("maxid: " + maxid_ + "\n");
                 osw.write("xsize: " + xsize_ + "\n");
                 osw.write("\n");
-                for (String y : y_)
+                for (string y : y_)
                 {
                     osw.write(y + "\n");
                 }
                 osw.write("\n");
-                for (String utempl : unigramTempls_)
+                for (string utempl : unigramTempls_)
                 {
                     osw.write(utempl + "\n");
                 }
-                for (String bitempl : bigramTempls_)
+                for (string bitempl : bigramTempls_)
                 {
                     osw.write(bitempl + "\n");
                 }
@@ -246,7 +246,7 @@ public class EncoderFeatureIndex : FeatureIndex
 
                 for (int k = 0; k < maxid_; k++)
                 {
-                    String val = new DecimalFormat("0.0000000000000000").format(alpha_[k]);
+                    string val = new DecimalFormat("0.0000000000000000").format(alpha_[k]);
                     osw.write(val + "\n");
                 }
                 osw.close();
@@ -274,12 +274,12 @@ public class EncoderFeatureIndex : FeatureIndex
         }
         int newMaxId = 0;
         Dictionary<int, int> old2new = new TreeMap<int, int>();
-        List<String> deletedKeys = new ArrayList<String>(dic_.size() / 8);
-        List<Map.Entry<String, int>> l = new LinkedList<Map.Entry<String, int>>(dic_.entrySet());
+        List<string> deletedKeys = new ArrayList<string>(dic_.size() / 8);
+        List<KeyValuePair<string, int>> l = new LinkedList<KeyValuePair<string, int>>(dic_.entrySet());
         // update dictionary in key order, to make result compatible with crfpp
         for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
         {
-            String key = pair.key();
+            string key = pair.key();
             int id = pair.value();
             int cid = continuousId(id);
             int f = frequency.get(cid);
@@ -294,7 +294,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 deletedKeys.add(key);
             }
         }
-        for (String key : deletedKeys)
+        for (string key : deletedKeys)
         {
             dic_.remove(key);
         }
@@ -325,13 +325,13 @@ public class EncoderFeatureIndex : FeatureIndex
         maxid_ = newMaxId;
     }
 
-    public bool convert(String textmodel, String binarymodel)
+    public bool convert(string textmodel, string binarymodel)
     {
         try
         {
             InputStreamReader isr = new InputStreamReader(IOUtil.newInputStream(textmodel), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
-            String line;
+            string line;
 
             int version = int.valueOf(br.readLine().substring("version: ".length()));
             costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".length()));
@@ -360,7 +360,7 @@ public class EncoderFeatureIndex : FeatureIndex
             dic_ = new MutableDoubleArrayTrieInteger();
             while ((line = br.readLine()) != null && line.length() > 0)
             {
-                String[] content = line.trim().split(" ");
+                string[] content = line.trim().split(" ");
                 if (content.length != 2)
                 {
                     System.err.println("feature indices format error");
@@ -391,7 +391,7 @@ public class EncoderFeatureIndex : FeatureIndex
         }
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         if (args.length < 2)
         {

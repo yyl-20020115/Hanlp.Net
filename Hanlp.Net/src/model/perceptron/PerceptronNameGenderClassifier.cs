@@ -28,16 +28,16 @@ public class PerceptronNameGenderClassifier : PerceptronClassifier
         super(model);
     }
 
-    public PerceptronNameGenderClassifier(String modelPath) 
+    public PerceptronNameGenderClassifier(string modelPath) 
     {
         super(modelPath);
     }
 
     //@Override
-    protected List<int> extractFeature(String text, FeatureMap featureMap)
+    protected List<int> extractFeature(string text, FeatureMap featureMap)
     {
         List<int> featureList = new LinkedList<int>();
-        String givenName = extractGivenName(text);
+        string givenName = extractGivenName(text);
         // 特征模板1：g[0]
         addFeature("1" + givenName.substring(0, 1), featureMap, featureList);
         // 特征模板2：g[1]
@@ -55,7 +55,7 @@ public class PerceptronNameGenderClassifier : PerceptronClassifier
      * @param name 姓名
      * @return 名
      */
-    public static String extractGivenName(String name)
+    public static string extractGivenName(string name)
     {
         if (name.length() <= 2)
             return "_" + name.substring(name.length() - 1);

@@ -31,12 +31,12 @@ public class CWSTagSet : TagSet
         M = m;
         E = e;
         S = s;
-        String[] id2tag = new String[4];
+        string[] id2tag = new string[4];
         id2tag[b] = "B";
         id2tag[m] = "M";
         id2tag[e] = "E";
         id2tag[s] = "S";
-        foreach (String tag in id2tag)
+        foreach (string tag in id2tag)
         {
             add(tag);
         }

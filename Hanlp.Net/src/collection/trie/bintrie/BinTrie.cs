@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  *
  * @author hankcs
  */
-public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
+public class BinTrie<V> : BaseNode<V> , ITrie<V>, Externalizable
 {
     private int size;
 
@@ -30,10 +30,10 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
         status = Status.NOT_WORD_1;
     }
 
-    public BinTrie(Dictionary<String, V> map)
+    public BinTrie(Dictionary<string, V> map)
     {
         this();
-        for (Map.Entry<String, V> entry : map.entrySet())
+        for (KeyValuePair<string, V> entry : map.entrySet())
         {
             put(entry.getKey(), entry.getValue());
         }
@@ -45,7 +45,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param key
      * @param value
      */
-    public void put(String key, V value)
+    public void put(string key, V value)
     {
         if (key.length() == 0) return;  // 安全起见
         BaseNode branch = this;
@@ -84,7 +84,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param key
      * @param value
      */
-    public void set(String key, V value)
+    public void set(string key, V value)
     {
         put(key.ToCharArray(), value);
     }
@@ -94,7 +94,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      *
      * @param key
      */
-    public void remove(String key)
+    public void remove(string key)
     {
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
@@ -111,7 +111,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
         }
     }
 
-    public bool containsKey(String key)
+    public bool containsKey(string key)
     {
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
@@ -124,7 +124,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
         return branch != null && (branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2);
     }
 
-    public V get(String key)
+    public V get(string key)
     {
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
@@ -162,7 +162,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
             a = (V[]) java.lang.reflect.Array.newInstance(
                     a.getClass().getComponentType(), size);
         int i = 0;
-        for (Map.Entry<String, V> entry : entrySet())
+        for (KeyValuePair<string, V> entry : entrySet())
         {
             a[i++] = entry.getValue();
         }
@@ -174,9 +174,9 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      *
      * @return
      */
-    public Set<Map.Entry<String, V>> entrySet()
+    public Set<KeyValuePair<string, V>> entrySet()
     {
-        Set<Map.Entry<String, V>> entrySet = new TreeSet<Map.Entry<String, V>>();
+        Set<KeyValuePair<string, V>> entrySet = new TreeSet<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder();
         for (BaseNode node : child)
         {
@@ -190,10 +190,10 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * 键集合
      * @return
      */
-    public Set<String> keySet()
+    public Set<string> keySet()
     {
-        TreeSet<String> keySet = new TreeSet<String>();
-        for (Map.Entry<String, V> entry : entrySet())
+        TreeSet<string> keySet = new TreeSet<string>();
+        for (KeyValuePair<string, V> entry : entrySet())
         {
             keySet.add(entry.getKey());
         }
@@ -207,9 +207,9 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param key 查询串
      * @return 键值对
      */
-    public Set<Map.Entry<String, V>> prefixSearch(String key)
+    public Set<KeyValuePair<string, V>> prefixSearch(string key)
     {
-        Set<Map.Entry<String, V>> entrySet = new TreeSet<Map.Entry<String, V>>();
+        Set<KeyValuePair<string, V>> entrySet = new TreeSet<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder(key.substring(0, key.length() - 1));
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
@@ -230,7 +230,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param key 键
      * @return 键值对列表
      */
-    public LinkedList<Map.Entry<String, V>> commonPrefixSearchWithValue(String key)
+    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
     {
         char[] chars = key.ToCharArray();
         return commonPrefixSearchWithValue(chars, 0);
@@ -243,9 +243,9 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param begin 开始的下标
      * @return
      */
-    public LinkedList<Map.Entry<String, V>> commonPrefixSearchWithValue(char[] chars, int begin)
+    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] chars, int begin)
     {
-        LinkedList<Map.Entry<String, V>> result = new LinkedList<Map.Entry<String, V>>();
+        LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder();
         BaseNode branch = this;
         for (int i = begin; i < chars.length; ++i)
@@ -256,7 +256,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
             sb.Append(aChar);
             if (branch.status == Status.WORD_MIDDLE_2 || branch.status == Status.WORD_END_3)
             {
-                result.add(new AbstractMap.SimpleEntry<String, V>(sb.toString(), (V) branch.value));
+                result.add(new AbstractMap.SimpleEntry<string, V>(sb.toString(), (V) branch.value));
             }
         }
 
@@ -324,7 +324,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
         return child[c];
     }
 
-    public bool save(String path)
+    public bool save(string path)
     {
         try
         {
@@ -353,9 +353,9 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     }
 
     //@Override
-    public int build(TreeMap<String, V> keyValueMap)
+    public int build(TreeMap<string, V> keyValueMap)
     {
-        for (Map.Entry<String, V> entry : keyValueMap.entrySet())
+        for (KeyValuePair<string, V> entry : keyValueMap.entrySet())
         {
             put(entry.getKey(), entry.getValue());
         }
@@ -401,7 +401,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param value 额外提供的值数组，按照值的字典序。（之所以要求提供它，是因为泛型的保存不归树管理）
      * @return 是否成功
      */
-    public bool load(String path, V[] value)
+    public bool load(string path, V[] value)
     {
         byte[] bytes = IOUtil.readBytes(path);
         if (bytes == null) return false;
@@ -427,7 +427,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param path
      * @return
      */
-    public bool load(String path)
+    public bool load(string path)
     {
         byte[] bytes = IOUtil.readBytes(path);
         if (bytes == null) return false;
@@ -512,7 +512,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseLongestText(String text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseLongestText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
     {
         int length = text.length();
         for (int i = 0; i < length; ++i)
@@ -584,7 +584,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseText(String text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
     {
         int length = text.length();
         int begin = 0;

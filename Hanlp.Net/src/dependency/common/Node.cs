@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.dependency.common;
  */
 public class Node
 {
-    private final static Dictionary<String, String> natureConverter = new TreeMap<String, String>();
+    private final static Dictionary<string, string> natureConverter = new TreeMap<string, string>();
     static
     {
         natureConverter.put("begin", "root");
@@ -98,9 +98,9 @@ public class Node
     {
         NULL.label = "null";
     }
-    public String word;
-    public String compiledWord;
-    public String label;
+    public string word;
+    public string compiledWord;
+    public string label;
     public int id;
 
     public Node(Term term, int id)
@@ -114,7 +114,7 @@ public class Node
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return word + "/" + label;
     }

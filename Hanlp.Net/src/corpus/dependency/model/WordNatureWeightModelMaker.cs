@@ -20,9 +20,9 @@ namespace com.hankcs.hanlp.corpus.dependency.model;
  */
 public class WordNatureWeightModelMaker
 {
-    public static bool makeModel(String corpusLoadPath, String modelSavePath)
+    public static bool makeModel(string corpusLoadPath, string modelSavePath)
     {
-        Set<String> posSet = new TreeSet<String>();
+        Set<string> posSet = new TreeSet<string>();
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         for (CoNLLSentence sentence : CoNLLLoader.loadSentenceList(corpusLoadPath))
         {
@@ -47,7 +47,7 @@ public class WordNatureWeightModelMaker
             }
         }
         StringBuilder sb = new StringBuilder();
-        for (String pos : posSet)
+        for (string pos : posSet)
         {
             sb.Append("case \"" + pos + "\":\n");
         }
@@ -55,7 +55,7 @@ public class WordNatureWeightModelMaker
         return dictionaryMaker.saveTxtTo(modelSavePath);
     }
 
-    private static void addPair(String from, String to, String label, DictionaryMaker dictionaryMaker)
+    private static void addPair(string from, string to, string label, DictionaryMaker dictionaryMaker)
     {
         dictionaryMaker.add(new Word(from + "@" + to, label));
         dictionaryMaker.add(new Word(from + "@", "频次"));
@@ -66,7 +66,7 @@ public class WordNatureWeightModelMaker
      * @param tag
      * @return
      */
-    public static String wrapTag(String tag)
+    public static string wrapTag(string tag)
     {
         return "<" + tag + ">";
     }

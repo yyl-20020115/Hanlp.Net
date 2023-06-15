@@ -34,7 +34,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
     {
     }
 
-    public CRFNERecognizer(String modelPath)
+    public CRFNERecognizer(string modelPath)
         : base(modelPath)
     {
         if (model == null)
@@ -59,8 +59,8 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
     //@Override
     protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
-        List<String[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
-        foreach (String[] tuple in collector)
+        List<string[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
+        foreach (string[] tuple in collector)
         {
             bw.write(tuple[0]);
             bw.write('\t');
@@ -72,7 +72,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
     }
 
     //@Override
-    public String[] recognize(String[] wordArray, String[] posArray)
+    public string[] recognize(string[] wordArray, string[] posArray)
     {
         return perceptronNERecognizer.recognize(createInstance(wordArray, posArray));
     }
@@ -83,20 +83,20 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
         return tagSet;
     }
 
-    private NERInstance createInstance(String[] wordArray, String[] posArray)
+    private NERInstance createInstance(string[] wordArray, string[] posArray)
     {
         FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
         return new NERInstance(wordArray, posArray, model.featureMap)
         {
             //@Override
-            protected int[] extractFeature(String[] wordArray, String[] posArray, FeatureMap featureMap, int position)
+            protected int[] extractFeature(string[] wordArray, string[] posArray, FeatureMap featureMap, int position)
             {
                 StringBuilder sbFeature = new StringBuilder();
                 List<int> featureVec = new LinkedList<int>();
                 for (int i = 0; i < featureTemplateArray.length; i++)
                 {
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                    Iterator<String> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                    Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                     delimiterIterator.next(); // ignore U0 之类的id
                     while (offsetIterator.hasNext())
                     {
@@ -122,7 +122,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
     }
 
     //@Override
-    protected String getDefaultFeatureTemplate()
+    protected string getDefaultFeatureTemplate()
     {
         return "# Unigram\n" +
             // form

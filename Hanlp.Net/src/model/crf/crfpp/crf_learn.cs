@@ -27,7 +27,7 @@ public class crf_learn
         @Argument(description = "build also text model file for debugging", alias = "t")
         public  Boolean textmodel = false;
         @Argument(description = "(CRF|CRF-L1|CRF-L2|MIRA)\", \"select training algorithm", alias = "a")
-        public  String algorithm = "CRF-L2";
+        public  string algorithm = "CRF-L2";
         @Argument(description = "set INT for number of iterations variable needs to be optimal before considered for shrinking. (default 20)", alias = "H")
         public  int shrinking_size = 20;
         @Argument(description = "show this help and exit", alias = "h")
@@ -36,15 +36,15 @@ public class crf_learn
         public  int thread = Runtime.getRuntime().availableProcessors();
     }
 
-    public static bool run(String args)
+    public static bool run(string args)
     {
         return run(args.split("\\s"));
     }
 
-    public static bool run(String[] args)
+    public static bool run(string[] args)
     {
         Option option = new Option();
-        List<String> unkownArgs = null;
+        List<string> unkownArgs = null;
         try
         {
             unkownArgs = Args.parse(option, args, false);
@@ -58,7 +58,7 @@ public class crf_learn
 
         bool convert = option.convert;
         bool convertToText = option.convert_to_text;
-        String[] restArgs = unkownArgs.toArray(new String[0]);
+        string[] restArgs = unkownArgs.toArray(new string[0]);
         if (option.help || ((convertToText || convert) && restArgs.length != 2) ||
             (!convert && !convertToText && restArgs.length != 3))
         {
@@ -77,7 +77,7 @@ public class crf_learn
         }
         int shrinkingSize = option.shrinking_size;
 
-        String algorithm = option.algorithm;
+        string algorithm = option.algorithm;
         algorithm = algorithm.toLowerCase();
         Encoder.Algorithm algo = Encoder.Algorithm.CRF_L2;
         if (algorithm.equals("crf") || algorithm.equals("crf-l2"))
@@ -128,7 +128,7 @@ public class crf_learn
         return true;
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         crf_learn.run(args);
     }

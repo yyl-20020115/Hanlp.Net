@@ -17,9 +17,9 @@ namespace com.hankcs.hanlp.corpus.io;
  */
 public abstract class LineHandler
 {
-    String delimiter = "\t";
+    string delimiter = "\t";
 
-    public LineHandler(String delimiter)
+    public LineHandler(string delimiter)
     {
         this.delimiter = delimiter;
     }
@@ -28,9 +28,9 @@ public abstract class LineHandler
     {
     }
 
-    public void handle(String line)
+    public void handle(string line)
     {
-        List<String> tokenList = new LinkedList<String>();
+        List<string> tokenList = new LinkedList<string>();
         int start = 0;
         int end;
         while ((end = line.indexOf(delimiter, start)) != -1)
@@ -39,7 +39,7 @@ public abstract class LineHandler
             start = end + 1;
         }
         tokenList.add(line.substring(start, line.length()));
-        handle(tokenList.toArray(new String[0]));
+        handle(tokenList.toArray(new string[0]));
     }
 
     public void done() 
@@ -47,5 +47,5 @@ public abstract class LineHandler
         // do noting
     }
 
-    public abstract void handle(String[] params) ;
+    public abstract void handle(string[] params) ;
 }

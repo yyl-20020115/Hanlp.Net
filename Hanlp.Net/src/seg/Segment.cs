@@ -82,7 +82,7 @@ public abstract class Segment
             if (nCurType == CharType.CT_CHINESE || nCurType == CharType.CT_INDEX ||
                     nCurType == CharType.CT_DELIMITER || nCurType == CharType.CT_OTHER)
             {
-                String single = String.valueOf(charArray[pCur]);
+                string single = string.valueOf(charArray[pCur]);
                 if (single.length() != 0)
                     atomSegment.add(new AtomNode(single, nCurType));
                 pCur++;
@@ -132,7 +132,7 @@ public abstract class Segment
     protected static List<AtomNode> simpleAtomSegment(char[] charArray, int start, int end)
     {
         List<AtomNode> atomNodeList = new ();
-        atomNodeList.add(new AtomNode(new String(charArray, start, end - start), CharType.CT_LETTER));
+        atomNodeList.add(new AtomNode(new string(charArray, start, end - start), CharType.CT_LETTER));
         return atomNodeList;
     }
 
@@ -167,13 +167,13 @@ public abstract class Segment
                         }
                     }
                 }
-                atomNodeList.add(new AtomNode(new String(charArray, start, offsetAtom - start), preType));
+                atomNodeList.add(new AtomNode(new string(charArray, start, offsetAtom - start), preType));
                 start = offsetAtom;
             }
             preType = curType;
         }
         if (offsetAtom == end)
-            atomNodeList.add(new AtomNode(new String(charArray, start, offsetAtom - start), preType));
+            atomNodeList.add(new AtomNode(new string(charArray, start, offsetAtom - start), preType));
 
         return atomNodeList;
     }
@@ -329,7 +329,7 @@ public abstract class Segment
             for (int j = start; j < end; ++j)
             {
                 if (wordNet[j] == null) continue;
-                String realWord = wordNet[j].realWord;
+                string realWord = wordNet[j].realWord;
                 sbTerm.Append(realWord);
                 wordNet[j] = null;
             }
@@ -478,7 +478,7 @@ public abstract class Segment
      * @param text 待分词文本
      * @return 单词列表
      */
-    public List<Term> seg(String text)
+    public List<Term> seg(string text)
     {
         char[] charArray = text.ToCharArray();
         if (HanLP.Config.Normalization)
@@ -487,8 +487,8 @@ public abstract class Segment
         }
         if (config.threadNumber > 1 && charArray.length > 10000)    // 小文本多线程没意义，反而变慢了
         {
-            List<String> sentenceList = SentencesUtil.toSentenceList(charArray);
-            String[] sentenceArray = new String[sentenceList.size()];
+            List<string> sentenceList = SentencesUtil.toSentenceList(charArray);
+            string[] sentenceArray = new string[sentenceList.size()];
             sentenceList.toArray(sentenceArray);
             //noinspection unchecked
             List<Term>[] termListArray = new List[sentenceArray.length];
@@ -544,7 +544,7 @@ public abstract class Segment
 //            if (config.offset || config.indexMode)
 //            {
 //                int sentenceOffset = 0;
-//                for (String sentence : SentencesUtil.toSentenceList(charArray))
+//                for (string sentence : SentencesUtil.toSentenceList(charArray))
 //                {
 //                    List<Term> termOfSentence = segSentence(sentence.ToCharArray());
 //                    for (Term term : termOfSentence)
@@ -557,7 +557,7 @@ public abstract class Segment
 //            }
 //            else
 //            {
-//                for (String sentence : SentencesUtil.toSentenceList(charArray))
+//                for (string sentence : SentencesUtil.toSentenceList(charArray))
 //                {
 //                    termList.addAll(segSentence(sentence.ToCharArray()));
 //                }
@@ -590,7 +590,7 @@ public abstract class Segment
      * @param text 待分词句子
      * @return 句子列表，每个句子由一个单词列表组成
      */
-    public List<List<Term>> seg2sentence(String text)
+    public List<List<Term>> seg2sentence(string text)
     {
         return seg2sentence(text, true);
     }
@@ -602,11 +602,11 @@ public abstract class Segment
      * @param shortest 是否断句为最细的子句（将逗号也视作分隔符）
      * @return 句子列表，每个句子由一个单词列表组成
      */
-    public List<List<Term>> seg2sentence(String text, bool shortest)
+    public List<List<Term>> seg2sentence(string text, bool shortest)
     {
         List<List<Term>> resultList = new LinkedList<List<Term>>();
         {
-            for (String sentence : SentencesUtil.toSentenceList(text, shortest))
+            for (string sentence : SentencesUtil.toSentenceList(text, shortest))
             {
                 resultList.add(segSentence(sentence.ToCharArray()));
             }
@@ -796,12 +796,12 @@ public abstract class Segment
 
     class WorkThread : Thread
     {
-        String[] sentenceArray;
+        string[] sentenceArray;
         List<Term>[] termListArray;
         int from;
         int to;
 
-        public WorkThread(String[] sentenceArray, List<Term>[] termListArray, int from, int to)
+        public WorkThread(string[] sentenceArray, List<Term>[] termListArray, int from, int to)
         {
             this.sentenceArray = sentenceArray;
             this.termListArray = termListArray;

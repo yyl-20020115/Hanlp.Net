@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.dictionary.nr;
  */
 public class JapanesePersonDictionary
 {
-    static String path = HanLP.Config.JapanesePersonDictionaryPath;
+    static string path = HanLP.Config.JapanesePersonDictionaryPath;
     static DoubleArrayTrie<Character> trie;
     /**
      * 姓
@@ -52,11 +52,11 @@ public class JapanesePersonDictionary
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            String line;
-            TreeMap<String, Character> map = new TreeMap<String, Character>();
+            string line;
+            TreeMap<string, Character> map = new TreeMap<string, Character>();
             while ((line = br.readLine()) != null)
             {
-                String[] param = line.split(" ", 2);
+                string[] param = line.split(" ", 2);
                 map.put(param[0], param[1].charAt(0));
             }
             br.close();
@@ -79,7 +79,7 @@ public class JapanesePersonDictionary
      * @param map
      * @return
      */
-    static bool saveDat(TreeMap<String, Character> map)
+    static bool saveDat(TreeMap<string, Character> map)
     {
         try
         {
@@ -117,7 +117,7 @@ public class JapanesePersonDictionary
      * @param key
      * @return
      */
-    public static bool containsKey(String key)
+    public static bool containsKey(string key)
     {
         return trie.containsKey(key);
     }
@@ -128,13 +128,13 @@ public class JapanesePersonDictionary
      * @param length
      * @return
      */
-    public static bool containsKey(String key, int length)
+    public static bool containsKey(string key, int length)
     {
         if (!trie.containsKey(key)) return false;
         return key.length() >= length;
     }
 
-    public static Character get(String key)
+    public static Character get(string key)
     {
         return trie.get(key);
     }
@@ -162,20 +162,20 @@ public class JapanesePersonDictionary
             this.trie = trie;
         }
 
-        protected Searcher(String text, DoubleArrayTrie<Character> trie)
+        protected Searcher(string text, DoubleArrayTrie<Character> trie)
         {
             super(text);
             this.trie = trie;
         }
 
         //@Override
-        public Map.Entry<String, Character> next()
+        public KeyValuePair<string, Character> next()
         {
             // 保证首次调用找到一个词语
-            Map.Entry<String, Character> result = null;
+            KeyValuePair<string, Character> result = null;
             while (begin < c.length)
             {
-                LinkedList<Map.Entry<String, Character>> entryList = trie.commonPrefixSearchWithValue(c, begin);
+                LinkedList<KeyValuePair<string, Character>> entryList = trie.commonPrefixSearchWithValue(c, begin);
                 if (entryList.size() == 0)
                 {
                     ++begin;

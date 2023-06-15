@@ -24,20 +24,20 @@ public class PartOfSpeechTagDictionary
     /**
      * 词性映射表
      */
-    public static Dictionary<String, String> translator = new ();
+    public static Dictionary<string, string> translator = new ();
 
     static PartOfSpeechTagDictionary()
     {
         load(HanLP.Config.PartOfSpeechTagDictionary);
     }
 
-    public static void load(String path)
+    public static void load(string path)
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(path);
         iterator.next(); // header
         while (iterator.hasNext())
         {
-            String[] args = iterator.next().Split(",");
+            string[] args = iterator.next().Split(",");
             if (args.Length < 3) continue;
             translator.Add(args[1], args[2]);
         }
@@ -49,7 +49,7 @@ public class PartOfSpeechTagDictionary
      * @param tag
      * @return
      */
-    public static String translate(String tag)
+    public static string translate(string tag)
     {
         return !translator.TryGetValue(tag,out var cn) ? tag : cn;
     }

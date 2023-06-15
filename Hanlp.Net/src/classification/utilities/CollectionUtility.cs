@@ -20,16 +20,16 @@ public class CollectionUtility
     public static <K, V : Comparable<V>> Dictionary<K, V> sortMapByValue(Dictionary<K, V> input, final bool desc)
     {
         LinkedHashMap<K, V> output = new LinkedHashMap<K, V>(input.size());
-        ArrayList<Map.Entry<K, V>> entryList = new ArrayList<Map.Entry<K, V>>(input.size());
-        Collections.sort(entryList, new Comparator<Map.Entry<K, V>>()
+        ArrayList<KeyValuePair<K, V>> entryList = new ArrayList<KeyValuePair<K, V>>(input.size());
+        Collections.sort(entryList, new Comparator<KeyValuePair<K, V>>()
         {
-            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2)
+            public int compare(KeyValuePair<K, V> o1, KeyValuePair<K, V> o2)
             {
                 if (desc) return o2.getValue().compareTo(o1.getValue());
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
-        for (Map.Entry<K, V> entry : entryList)
+        for (KeyValuePair<K, V> entry : entryList)
         {
             output.put(entry.getKey(), entry.getValue());
         }
@@ -42,11 +42,11 @@ public class CollectionUtility
         return sortMapByValue(input, true);
     }
 
-    public static String max(Dictionary<String, Double> scoreMap)
+    public static string max(Dictionary<string, Double> scoreMap)
     {
         double max = Double.NEGATIVE_INFINITY;
-        String best = null;
-        for (Map.Entry<String, Double> entry : scoreMap.entrySet())
+        string best = null;
+        for (KeyValuePair<string, Double> entry : scoreMap.entrySet())
         {
             Double score = entry.getValue();
             if (score > max)
@@ -65,12 +65,12 @@ public class CollectionUtility
      * @param rate 第一个数组所占的比例
      * @return 两个数组
      */
-    public static String[][] spiltArray(String[] src, double rate)
+    public static string[][] spiltArray(string[] src, double rate)
     {
         assert 0 <= rate && rate <= 1;
-        String[][] output = new String[2][];
-        output[0] = new String[(int) (src.length * rate)];
-        output[1] = new String[src.length - output[0].length];
+        string[][] output = new string[2][];
+        output[0] = new string[(int) (src.length * rate)];
+        output[1] = new string[src.length - output[0].length];
         System.arraycopy(src, 0, output[0], 0, output[0].length);
         System.arraycopy(src, output[0].length, output[1], 0, output[1].length);
         return output;
@@ -82,13 +82,13 @@ public class CollectionUtility
      * @param rate
      * @return
      */
-    public static Dictionary<String, String[]> splitMap(Dictionary<String, String[]> src, double rate)
+    public static Dictionary<string, string[]> splitMap(Dictionary<string, string[]> src, double rate)
     {
         assert 0 <= rate && rate <= 1;
-        Dictionary<String, String[]> output = new TreeMap<String, String[]>();
-        for (Map.Entry<String, String[]> entry : src.entrySet())
+        Dictionary<string, string[]> output = new TreeMap<string, string[]>();
+        for (KeyValuePair<string, string[]> entry : src.entrySet())
         {
-            String[][] array = spiltArray(entry.getValue(), rate);
+            string[][] array = spiltArray(entry.getValue(), rate);
             output.put(entry.getKey(), array[0]);
             entry.setValue(array[1]);
         }

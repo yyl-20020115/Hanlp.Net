@@ -14,7 +14,7 @@ public class DecoderFeatureIndex : FeatureIndex
         dat = new MutableDoubleArrayTrieInteger();
     }
 
-    public int getID(String key)
+    public int getID(string key)
     {
         return dat.get(key);
     }
@@ -28,9 +28,9 @@ public class DecoderFeatureIndex : FeatureIndex
             costFactor_ = (Double) ois.readObject();
             maxid_ = (int) ois.readObject();
             xsize_ = (int) ois.readObject();
-            y_ = (List<String>) ois.readObject();
-            unigramTempls_ = (List<String>) ois.readObject();
-            bigramTempls_ = (List<String>) ois.readObject();
+            y_ = (List<string>) ois.readObject();
+            unigramTempls_ = (List<string>) ois.readObject();
+            bigramTempls_ = (List<string>) ois.readObject();
             dat = (MutableDoubleArrayTrieInteger) ois.readObject();
             alpha_ = (double[]) ois.readObject();
             ois.close();
@@ -43,7 +43,7 @@ public class DecoderFeatureIndex : FeatureIndex
         }
     }
 
-    public bool convert(String binarymodel, String textmodel)
+    public bool convert(string binarymodel, string textmodel)
     {
         try
         {
@@ -58,16 +58,16 @@ public class DecoderFeatureIndex : FeatureIndex
             osw.write("maxid: " + maxid_ + "\n");
             osw.write("xsize: " + xsize_ + "\n");
             osw.write("\n");
-            for (String y : y_)
+            for (string y : y_)
             {
                 osw.write(y + "\n");
             }
             osw.write("\n");
-            for (String utempl : unigramTempls_)
+            for (string utempl : unigramTempls_)
             {
                 osw.write(utempl + "\n");
             }
-            for (String bitempl : bigramTempls_)
+            for (string bitempl : bigramTempls_)
             {
                 osw.write(bitempl + "\n");
             }
@@ -82,7 +82,7 @@ public class DecoderFeatureIndex : FeatureIndex
 
             for (int k = 0; k < maxid_; k++)
             {
-                String val = new DecimalFormat("0.0000000000000000").format(alpha_[k]);
+                string val = new DecimalFormat("0.0000000000000000").format(alpha_[k]);
                 osw.write(val + "\n");
             }
             osw.close();
@@ -95,12 +95,12 @@ public class DecoderFeatureIndex : FeatureIndex
         }
     }
 
-    public bool openTextModel(String filename1, bool cacheBinModel)
+    public bool openTextModel(string filename1, bool cacheBinModel)
     {
         InputStreamReader isr = null;
         try
         {
-            String binFileName = filename1 + ".bin";
+            string binFileName = filename1 + ".bin";
             try
             {
                 if (open(IOUtil.newInputStream(binFileName)))
@@ -116,7 +116,7 @@ public class DecoderFeatureIndex : FeatureIndex
 
             isr = new InputStreamReader(IOUtil.newInputStream(filename1), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
-            String line;
+            string line;
 
             int version = int.valueOf(br.readLine().substring("version: ".length()));
             costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".length()));
@@ -144,7 +144,7 @@ public class DecoderFeatureIndex : FeatureIndex
             System._out.println("Done reading templates");
             while ((line = br.readLine()) != null && line.length() > 0)
             {
-                String[] content = line.trim().split(" ");
+                string[] content = line.trim().split(" ");
                 dat.put(content[1], int.valueOf(content[0]));
             }
             List<Double> alpha = new ArrayList<Double>();
@@ -195,7 +195,7 @@ public class DecoderFeatureIndex : FeatureIndex
         return true;
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         if (args.length < 2)
         {

@@ -119,7 +119,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             while (listIterator.hasNext())
             {
                 IWord word = listIterator.next();
-                String label = word.getLabel();
+                string label = word.getLabel();
                 if (label.equals(label.toUpperCase())) continue;
                 if (label.startsWith("nt"))
                 {
@@ -132,7 +132,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                         for (Word inner : ((CompoundWord) word).innerList)
                         {
                             last = inner;
-                            String innerLabel = inner.label;
+                            string innerLabel = inner.label;
                             if (innerLabel.startsWith("ns"))
                             {
                                 inner.setValue(Predefine.TAG_PLACE);
@@ -244,7 +244,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
 }
 
     //@Override
-    public bool saveTxtTo(String path)
+    public bool saveTxtTo(string path)
     {
         if (!super.saveTxtTo(path)) return false;
         return tfDictionary.saveKeyTo(path + ".pattern.txt");

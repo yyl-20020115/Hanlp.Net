@@ -36,7 +36,7 @@ public class Probability : ICacheAble
         };
     }
 
-    public bool exists(String key)
+    public bool exists(string key)
     {
         return d.containsKey(key);
     }
@@ -46,7 +46,7 @@ public class Probability : ICacheAble
         return total;
     }
 
-    int get(String key)
+    int get(string key)
     {
         return d.get(key);
     }
@@ -65,7 +65,7 @@ public class Probability : ICacheAble
         return f;
     }
 
-    public double freq(String key)
+    public double freq(string key)
     {
         int f = get(key);
         if (f == null) f = 0;
@@ -84,12 +84,12 @@ public class Probability : ICacheAble
         return f / (double) total;
     }
 
-    public Set<String> samples()
+    public Set<string> samples()
     {
         return d.keySet();
     }
 
-    void add(String key, int value)
+    void add(string key, int value)
     {
         int f = get(key);
         if (f == null) f = 0;
@@ -117,7 +117,7 @@ public class Probability : ICacheAble
         add(convert(keyArray), value);
     }
 
-    private String convert(Collection<char[]> keyArray)
+    private string convert(Collection<char[]> keyArray)
     {
         StringBuilder sbKey = new StringBuilder(keyArray.size() * 2);
         for (char[] key : keyArray)
@@ -128,7 +128,7 @@ public class Probability : ICacheAble
         return sbKey.toString();
     }
 
-    static private String convert(char[]... keyArray)
+    static private string convert(char[]... keyArray)
     {
         StringBuilder sbKey = new StringBuilder(keyArray.length * 2);
         for (char[] key : keyArray)

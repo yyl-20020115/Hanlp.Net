@@ -49,7 +49,7 @@ public class LinearModel : ICacheAble
         parameter = new float[featureMap.size() * featureMap.tagSet.size()];
     }
 
-    public LinearModel(String modelFile) 
+    public LinearModel(string modelFile) 
     {
         load(modelFile);
     }
@@ -91,7 +91,7 @@ public class LinearModel : ICacheAble
         logger.start("裁剪特征...\n");
         int logEvery = (int) Math.ceil(featureMap.size() / 10000f);
         int n = 0;
-        for (Map.Entry<String, int> entry : featureIdSet)
+        for (KeyValuePair<string, int> entry : featureIdSet)
         {
             if (++n % logEvery == 0 || n == featureMap.size())
             {
@@ -110,7 +110,7 @@ public class LinearModel : ICacheAble
         int size = heap.size() + tagSet.sizeIncludingBos();
         float[] parameter = new float[size * tagSet.size()];
         MutableDoubleArrayTrieInteger mdat = new MutableDoubleArrayTrieInteger();
-        for (Map.Entry<String, int> tag : tagSet)
+        for (KeyValuePair<string, int> tag : tagSet)
         {
             mdat.add("BL=" + tag.getKey());
         }
@@ -147,7 +147,7 @@ public class LinearModel : ICacheAble
      * @param modelFile
      * @
      */
-    public void save(String modelFile) 
+    public void save(string modelFile) 
     {
         DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
         save(_out);
@@ -161,12 +161,12 @@ public class LinearModel : ICacheAble
      * @param ratio     压缩比c（压缩掉的体积，压缩后体积变为1-c）
      * @
      */
-    public void save(String modelFile,  double ratio) 
+    public void save(string modelFile,  double ratio) 
     {
         save(modelFile, featureMap.entrySet(), ratio);
     }
 
-    public void save(String modelFile, Set<Map.Entry<String, int>> featureIdSet, double ratio) 
+    public void save(string modelFile, Set<KeyValuePair<string, int>> featureIdSet, double ratio) 
     {
         save(modelFile, featureIdSet, ratio, false);
     }
@@ -180,7 +180,7 @@ public class LinearModel : ICacheAble
      * @param text         是否输出文本以供调试
      * @
      */
-    public void save(String modelFile, Set<Map.Entry<String, int>> featureIdSet, double ratio, bool text) 
+    public void save(string modelFile, Set<KeyValuePair<string, int>> featureIdSet, double ratio, bool text) 
     {
         float[] parameter = this.parameter;
         this.compress(ratio, 1e-3f);
@@ -193,20 +193,20 @@ public class LinearModel : ICacheAble
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(modelFile + ".txt"), "UTF-8"));
             TagSet tagSet = featureMap.tagSet;
-            for (Map.Entry<String, int> entry : featureIdSet)
+            for (KeyValuePair<string, int> entry : featureIdSet)
             {
                 bw.write(entry.getKey());
                 if (featureIdSet.size() == parameter.length)
                 {
                     bw.write("\t");
-                    bw.write(String.valueOf(parameter[entry.getValue()]));
+                    bw.write(string.valueOf(parameter[entry.getValue()]));
                 }
                 else
                 {
                     for (int i = 0; i < tagSet.size(); ++i)
                     {
                         bw.write("\t");
-                        bw.write(String.valueOf(parameter[entry.getValue() * tagSet.size() + i]));
+                        bw.write(string.valueOf(parameter[entry.getValue() * tagSet.size() + i]));
                     }
                 }
                 bw.newLine();
@@ -370,14 +370,14 @@ public class LinearModel : ICacheAble
      * @param modelFile
      * @
      */
-    public void load(String modelFile) 
+    public void load(string modelFile) 
     {
         if (HanLP.Config.DEBUG)
             logger.start("加载 %s ... ", modelFile);
         ByteArrayStream byteArray = ByteArrayStream.createByteArrayStream(modelFile);
         if (!load(byteArray))
         {
-            throw new IOException(String.format("%s 加载失败", modelFile));
+            throw new IOException(string.format("%s 加载失败", modelFile));
         }
         if (HanLP.Config.DEBUG)
             logger.finish(" 加载完毕\n");

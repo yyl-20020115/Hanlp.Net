@@ -36,7 +36,7 @@ public class MaxEntModel
     /**
      * 事件名
      */
-    protected String[] outcomeNames;
+    protected string[] outcomeNames;
     /**
      * 衡量参数
      */
@@ -53,7 +53,7 @@ public class MaxEntModel
      * @param context 环境
      * @return 概率数组
      */
-    public final double[] eval(String[] context)
+    public final double[] eval(string[] context)
     {
         return (eval(context, new double[evalParams.getNumOutcomes()]));
     }
@@ -64,13 +64,13 @@ public class MaxEntModel
      * @param context
      * @return
      */
-    public final List<Pair<String, Double>> predict(String[] context)
+    public final List<Pair<string, Double>> predict(string[] context)
     {
-        List<Pair<String, Double>> result = new ArrayList<Pair<String, Double>>(outcomeNames.length);
+        List<Pair<string, Double>> result = new ArrayList<Pair<string, Double>>(outcomeNames.length);
         double[] p = eval(context);
         for (int i = 0; i < p.length; ++i)
         {
-            result.add(new Pair<String, Double>(outcomeNames[i], p[i]));
+            result.add(new Pair<string, Double>(outcomeNames[i], p[i]));
         }
         return result;
     }
@@ -81,12 +81,12 @@ public class MaxEntModel
      * @param context
      * @return
      */
-    public final Pair<String, Double> predictBest(String[] context)
+    public final Pair<string, Double> predictBest(string[] context)
     {
-        List<Pair<String, Double>> resultList = predict(context);
+        List<Pair<string, Double>> resultList = predict(context);
         double bestP = -1.0;
-        Pair<String, Double> bestPair = null;
-        for (Pair<String, Double> pair : resultList)
+        Pair<string, Double> bestPair = null;
+        for (Pair<string, Double> pair : resultList)
         {
             if (pair.getSecond() > bestP)
             {
@@ -104,9 +104,9 @@ public class MaxEntModel
      * @param context
      * @return
      */
-    public final List<Pair<String, Double>> predict(Collection<String> context)
+    public final List<Pair<string, Double>> predict(Collection<string> context)
     {
-        return predict(context.toArray(new String[0]));
+        return predict(context.toArray(new string[0]));
     }
 
     /**
@@ -116,7 +116,7 @@ public class MaxEntModel
      * @param outsums 先验分布
      * @return 概率数组
      */
-    public final double[] eval(String[] context, double[] outsums)
+    public final double[] eval(string[] context, double[] outsums)
     {
         assert context != null;
         int[] scontexts = new int[context.length];
@@ -189,7 +189,7 @@ public class MaxEntModel
      * @param path
      * @return
      */
-    public static MaxEntModel create(String path)
+    public static MaxEntModel create(string path)
     {
         MaxEntModel m = new MaxEntModel();
         try
@@ -204,7 +204,7 @@ public class MaxEntModel
             // label
             int numOutcomes = int.parseInt(br.readLine());
             _out.writeInt(numOutcomes);
-            String[] outcomeLabels = new String[numOutcomes];
+            string[] outcomeLabels = new string[numOutcomes];
             m.outcomeNames = outcomeLabels;
             for (int i = 0; i < numOutcomes; i++)
             {
@@ -230,9 +230,9 @@ public class MaxEntModel
             // feature
             int NUM_PREDS = int.parseInt(br.readLine());
             _out.writeInt(NUM_PREDS);
-            String[] predLabels = new String[NUM_PREDS];
+            string[] predLabels = new string[NUM_PREDS];
             m.pmap = new DoubleArrayTrie<int>();
-            TreeMap<String, int> tmpMap = new TreeMap<String, int>();
+            TreeMap<string, int> tmpMap = new TreeMap<string, int>();
             for (int i = 0; i < NUM_PREDS; i++)
             {
                 predLabels[i] = br.readLine();
@@ -241,7 +241,7 @@ public class MaxEntModel
                 tmpMap.put(predLabels[i], i);
             }
             m.pmap.build(tmpMap);
-            for (Map.Entry<String, int> entry : tmpMap.entrySet())
+            for (KeyValuePair<string, int> entry : tmpMap.entrySet())
             {
                 _out.writeInt(entry.getValue());
             }
@@ -295,7 +295,7 @@ public class MaxEntModel
         m.correctionParam = byteArray.nextDouble();  // getCorrectionParameter
         // label
         int numOutcomes = byteArray.nextInt();
-        String[] outcomeLabels = new String[numOutcomes];
+        string[] outcomeLabels = new string[numOutcomes];
         m.outcomeNames = outcomeLabels;
         for (int i = 0; i < numOutcomes; i++) outcomeLabels[i] = byteArray.nextString();
         // pattern
@@ -313,7 +313,7 @@ public class MaxEntModel
         }
         // feature
         int NUM_PREDS = byteArray.nextInt();
-        String[] predLabels = new String[NUM_PREDS];
+        string[] predLabels = new string[NUM_PREDS];
         m.pmap = new DoubleArrayTrie<int>();
         for (int i = 0; i < NUM_PREDS; i++)
         {
@@ -360,7 +360,7 @@ public class MaxEntModel
      * @param txtPath txt的路径，即使不存在.txt，只存在.bin，也应传入txt的路径，方法内部会自动加.bin后缀
      * @return
      */
-    public static MaxEntModel load(String txtPath)
+    public static MaxEntModel load(string txtPath)
     {
         ByteArray byteArray = ByteArray.createByteArray(txtPath + Predefine.BIN_EXT);
         if (byteArray != null) return create(byteArray);

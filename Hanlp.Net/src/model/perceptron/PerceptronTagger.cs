@@ -76,7 +76,7 @@ public abstract class PerceptronTagger : InstanceConsumer
      * @return 默认返回accuracy，有些子类可能返回P,R,F1
      * @
      */
-    public double[] evaluate(String corpora) 
+    public double[] evaluate(string corpora) 
     {
         return evaluate(corpora, this.getModel());
     }

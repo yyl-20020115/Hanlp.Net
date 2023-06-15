@@ -6,8 +6,8 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
  */
 public abstract class FeatureIndex
 {
-    public static String[] BOS = {"_B-1", "_B-2", "_B-3", "_B-4", "_B-5", "_B-6", "_B-7", "_B-8"};
-    public static String[] EOS = {"_B+1", "_B+2", "_B+3", "_B+4", "_B+5", "_B+6", "_B+7", "_B+8"};
+    public static string[] BOS = {"_B-1", "_B-2", "_B-3", "_B-4", "_B-5", "_B-6", "_B-7", "_B-8"};
+    public static string[] EOS = {"_B+1", "_B+2", "_B+3", "_B+4", "_B+5", "_B+6", "_B+7", "_B+8"};
     protected int maxid_;
     protected double[] alpha_;
     protected float[] alphaFloat_;
@@ -16,10 +16,10 @@ public abstract class FeatureIndex
     protected bool checkMaxXsize_;
     protected int max_xsize_;
     protected int threadNum_;
-    protected List<String> unigramTempls_;
-    protected List<String> bigramTempls_;
-    protected String templs_;
-    protected List<String> y_;
+    protected List<string> unigramTempls_;
+    protected List<string> bigramTempls_;
+    protected string templs_;
+    protected List<string> y_;
     protected List<List<Path>> pathList_;
     protected List<List<Node>> nodeList_;
 
@@ -33,12 +33,12 @@ public abstract class FeatureIndex
         checkMaxXsize_ = false;
         max_xsize_ = 0;
         threadNum_ = 1;
-        unigramTempls_ = new ArrayList<String>();
-        bigramTempls_ = new ArrayList<String>();
-        y_ = new ArrayList<String>();
+        unigramTempls_ = new ArrayList<string>();
+        bigramTempls_ = new ArrayList<string>();
+        y_ = new ArrayList<string>();
     }
 
-    protected abstract int getID(String s);
+    protected abstract int getID(string s);
 
     /**
      * 计算状态特征函数的代价
@@ -96,26 +96,26 @@ public abstract class FeatureIndex
         }
     }
 
-    public String makeTempls(List<String> unigramTempls, List<String> bigramTempls)
+    public string makeTempls(List<string> unigramTempls, List<string> bigramTempls)
     {
         StringBuilder sb = new StringBuilder();
-        for (String temp : unigramTempls)
+        for (string temp : unigramTempls)
         {
             sb.Append(temp).Append("\n");
         }
-        for (String temp : bigramTempls)
+        for (string temp : bigramTempls)
         {
             sb.Append(temp).Append("\n");
         }
         return sb.toString();
     }
 
-    public String getTemplate()
+    public string getTemplate()
     {
         return templs_;
     }
 
-    public String getIndex(String[] idxStr, int cur, TaggerImpl tagger)
+    public string getIndex(string[] idxStr, int cur, TaggerImpl tagger)
     {
         int row = int.valueOf(idxStr[0]);
         int col = int.valueOf(idxStr[1]);
@@ -144,10 +144,10 @@ public abstract class FeatureIndex
         }
     }
 
-    public String applyRule(String str, int cur, TaggerImpl tagger)
+    public string applyRule(string str, int cur, TaggerImpl tagger)
     {
         StringBuilder sb = new StringBuilder();
-        for (String tmp : str.split("%x", -1))
+        for (string tmp : str.split("%x", -1))
         {
             if (tmp.startsWith("U") || tmp.startsWith("B"))
             {
@@ -155,9 +155,9 @@ public abstract class FeatureIndex
             }
             else if (tmp.length() > 0)
             {
-                String[] tuple = tmp.split("]");
-                String[] idx = tuple[0].replace("[", "").split(",");
-                String r = getIndex(idx, cur, tagger);
+                string[] tuple = tmp.split("]");
+                string[] idx = tuple[0].replace("[", "").split(",");
+                string r = getIndex(idx, cur, tagger);
                 if (r != null)
                 {
                     sb.Append(r);
@@ -172,11 +172,11 @@ public abstract class FeatureIndex
         return sb.toString();
     }
 
-    private bool buildFeatureFromTempl(List<int> feature, List<String> templs, int curPos, TaggerImpl tagger)
+    private bool buildFeatureFromTempl(List<int> feature, List<string> templs, int curPos, TaggerImpl tagger)
     {
-        for (String tmpl : templs)
+        for (string tmpl : templs)
         {
-            String featureID = applyRule(tmpl, curPos, tagger);
+            string featureID = applyRule(tmpl, curPos, tagger);
             if (featureID == null || featureID.length() == 0)
             {
                 System.err.println("format error");
@@ -253,7 +253,7 @@ public abstract class FeatureIndex
         }
     }
 
-    public bool open(String file)
+    public bool open(string file)
     {
         return true;
     }
@@ -348,32 +348,32 @@ public abstract class FeatureIndex
         this.threadNum_ = threadNum_;
     }
 
-    public List<String> getUnigramTempls_()
+    public List<string> getUnigramTempls_()
     {
         return unigramTempls_;
     }
 
-    public void setUnigramTempls_(List<String> unigramTempls_)
+    public void setUnigramTempls_(List<string> unigramTempls_)
     {
         this.unigramTempls_ = unigramTempls_;
     }
 
-    public List<String> getBigramTempls_()
+    public List<string> getBigramTempls_()
     {
         return bigramTempls_;
     }
 
-    public void setBigramTempls_(List<String> bigramTempls_)
+    public void setBigramTempls_(List<string> bigramTempls_)
     {
         this.bigramTempls_ = bigramTempls_;
     }
 
-    public List<String> getY_()
+    public List<string> getY_()
     {
         return y_;
     }
 
-    public void setY_(List<String> y_)
+    public void setY_(List<string> y_)
     {
         this.y_ = y_;
     }

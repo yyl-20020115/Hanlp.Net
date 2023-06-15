@@ -27,7 +27,7 @@ public class parser_dll
         this(ConfigOption.PATH);
     }
 
-    public parser_dll(String modelPath)
+    public parser_dll(string modelPath)
     {
         parser = GlobalObjectPool.get(modelPath);
         if (parser != null) return;
@@ -53,7 +53,7 @@ public class parser_dll
      * @param deprels 输出依存名称列表
      * @return 节点的个数
      */
-    public int parse(List<String> words, List<String> postags, List<int> heads, List<String> deprels)
+    public int parse(List<string> words, List<string> postags, List<int> heads, List<string> deprels)
     {
         Instance inst = new Instance();
         inst.forms.add(SpecialOption.ROOT);

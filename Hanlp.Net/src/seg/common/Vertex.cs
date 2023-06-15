@@ -24,11 +24,11 @@ public class Vertex
     /**
      * 节点对应的词或等效词（如未##数）
      */
-    public String word;
+    public string word;
     /**
      * 节点对应的真实词，绝对不含##
      */
-    public String realWord;
+    public string realWord;
     /**
      * 词的属性，谨慎修改属性内部的数据，因为会影响到字典<br>
      * 如果要修改，应当new一个Attribute
@@ -71,12 +71,12 @@ public class Vertex
      * @param realWord  真实词
      * @param attribute 属性
      */
-    public Vertex(String word, String realWord, CoreDictionary.Attribute attribute)
+    public Vertex(string word, string realWord, CoreDictionary.Attribute attribute)
     {
         this(word, realWord, attribute, attribute == null ? -1 : -attribute.totalFrequency);
     }
 
-    public Vertex(String word, String realWord, CoreDictionary.Attribute attribute, int wordID)
+    public Vertex(string word, string realWord, CoreDictionary.Attribute attribute, int wordID)
     {
         if (attribute == null) attribute = new CoreDictionary.Attribute(Nature.n, 1);   // 安全起见
         this.wordID = wordID;
@@ -93,7 +93,7 @@ public class Vertex
      * @param attribute 等效词串
      * @return
      */
-    private String compileRealWord(String realWord, CoreDictionary.Attribute attribute)
+    private string compileRealWord(string realWord, CoreDictionary.Attribute attribute)
     {
         if (attribute.nature.length == 1)
         {
@@ -161,12 +161,12 @@ public class Vertex
      * @param realWord
      * @param attribute
      */
-    public Vertex(String realWord, CoreDictionary.Attribute attribute)
+    public Vertex(string realWord, CoreDictionary.Attribute attribute)
     {
         this(null, realWord, attribute);
     }
 
-    public Vertex(String realWord, CoreDictionary.Attribute attribute, int wordID)
+    public Vertex(string realWord, CoreDictionary.Attribute attribute, int wordID)
     {
         this(null, realWord, attribute, wordID);
     }
@@ -176,7 +176,7 @@ public class Vertex
      *
      * @param entry
      */
-    public Vertex(Map.Entry<String, CoreDictionary.Attribute> entry)
+    public Vertex(KeyValuePair<string, CoreDictionary.Attribute> entry)
     {
         this(entry.getKey(), entry.getValue());
     }
@@ -186,14 +186,14 @@ public class Vertex
      *
      * @param realWord
      */
-    public Vertex(String realWord)
+    public Vertex(string realWord)
     {
         this(null, realWord, CoreDictionary.get(realWord));
     }
 
     public Vertex(char realWord, CoreDictionary.Attribute attribute)
     {
-        this(String.valueOf(realWord), attribute);
+        this(string.valueOf(realWord), attribute);
     }
 
     /**
@@ -201,7 +201,7 @@ public class Vertex
      *
      * @return
      */
-    public String getRealWord()
+    public string getRealWord()
     {
         return realWord;
     }
@@ -315,13 +315,13 @@ public class Vertex
         return new Vertex(word, realWord, attribute);
     }
 
-    public Vertex setWord(String word)
+    public Vertex setWord(string word)
     {
         this.word = word;
         return this;
     }
 
-    public Vertex setRealWord(String realWord)
+    public Vertex setRealWord(string realWord)
     {
         this.realWord = realWord;
         return this;
@@ -333,7 +333,7 @@ public class Vertex
      * @param realWord 数字对应的真实字串
      * @return 数词顶点
      */
-    public static Vertex newNumberInstance(String realWord)
+    public static Vertex newNumberInstance(string realWord)
     {
         return new Vertex(Predefine.TAG_NUMBER, realWord, new CoreDictionary.Attribute(Nature.m, 1000));
     }
@@ -344,7 +344,7 @@ public class Vertex
      * @param realWord 数字对应的真实字串
      * @return 地名顶点
      */
-    public static Vertex newAddressInstance(String realWord)
+    public static Vertex newAddressInstance(string realWord)
     {
         return new Vertex(Predefine.TAG_PLACE, realWord, new CoreDictionary.Attribute(Nature.ns, 1000));
     }
@@ -355,7 +355,7 @@ public class Vertex
      * @param realWord 标点符号对应的真实字串
      * @return 标点符号顶点
      */
-    public static Vertex newPunctuationInstance(String realWord)
+    public static Vertex newPunctuationInstance(string realWord)
     {
         return new Vertex(realWord, new CoreDictionary.Attribute(Nature.w, 1000));
     }
@@ -366,7 +366,7 @@ public class Vertex
      * @param realWord
      * @return
      */
-    public static Vertex newPersonInstance(String realWord)
+    public static Vertex newPersonInstance(string realWord)
     {
         return newPersonInstance(realWord, 1000);
     }
@@ -377,7 +377,7 @@ public class Vertex
      * @param realWord
      * @return
      */
-    public static Vertex newTranslatedPersonInstance(String realWord, int frequency)
+    public static Vertex newTranslatedPersonInstance(string realWord, int frequency)
     {
         return new Vertex(Predefine.TAG_PEOPLE, realWord, new CoreDictionary.Attribute(Nature.nrf, frequency));
     }
@@ -388,7 +388,7 @@ public class Vertex
      * @param realWord
      * @return
      */
-    public static Vertex newJapanesePersonInstance(String realWord, int frequency)
+    public static Vertex newJapanesePersonInstance(string realWord, int frequency)
     {
         return new Vertex(Predefine.TAG_PEOPLE, realWord, new CoreDictionary.Attribute(Nature.nrj, frequency));
     }
@@ -400,7 +400,7 @@ public class Vertex
      * @param frequency
      * @return
      */
-    public static Vertex newPersonInstance(String realWord, int frequency)
+    public static Vertex newPersonInstance(string realWord, int frequency)
     {
         return new Vertex(Predefine.TAG_PEOPLE, realWord, new CoreDictionary.Attribute(Nature.nr, frequency));
     }
@@ -412,7 +412,7 @@ public class Vertex
      * @param frequency
      * @return
      */
-    public static Vertex newPlaceInstance(String realWord, int frequency)
+    public static Vertex newPlaceInstance(string realWord, int frequency)
     {
         return new Vertex(Predefine.TAG_PLACE, realWord, new CoreDictionary.Attribute(Nature.ns, frequency));
     }
@@ -424,7 +424,7 @@ public class Vertex
      * @param frequency
      * @return
      */
-    public static Vertex newOrganizationInstance(String realWord, int frequency)
+    public static Vertex newOrganizationInstance(string realWord, int frequency)
     {
         return new Vertex(Predefine.TAG_GROUP, realWord, new CoreDictionary.Attribute(Nature.nt, frequency));
     }
@@ -435,7 +435,7 @@ public class Vertex
      * @param realWord 时间对应的真实字串
      * @return 时间顶点
      */
-    public static Vertex newTimeInstance(String realWord)
+    public static Vertex newTimeInstance(string realWord)
     {
         return new Vertex(Predefine.TAG_TIME, realWord, new CoreDictionary.Attribute(Nature.t, 1000));
     }
@@ -464,7 +464,7 @@ public class Vertex
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return realWord;
 //        return "WordNode{" +

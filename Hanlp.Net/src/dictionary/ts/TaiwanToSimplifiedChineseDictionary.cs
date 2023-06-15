@@ -20,15 +20,15 @@ namespace com.hankcs.hanlp.dictionary.ts;
  */
 public class TaiwanToSimplifiedChineseDictionary : BaseChineseDictionary
 {
-    static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
+    static AhoCorasickDoubleArrayTrie<string> trie = new AhoCorasickDoubleArrayTrie<string>();
     static TaiwanToSimplifiedChineseDictionary()
     {
         long start = DateTime.Now.Microsecond;
-        String datPath = HanLP.Config.tcDictionaryRoot + "tw2s";
+        string datPath = HanLP.Config.tcDictionaryRoot + "tw2s";
         if (!loadDat(datPath, trie))
         {
-            var t2s = new Dictionary<String, String>();
-            var tw2t = new Dictionary<String, String>();
+            var t2s = new Dictionary<string, string>();
+            var tw2t = new Dictionary<string, string>();
             if (!load(t2s, false, HanLP.Config.tcDictionaryRoot + "t2s.txt") ||
                     !load(tw2t, true, HanLP.Config.tcDictionaryRoot + "t2tw.txt"))
             {
@@ -41,12 +41,12 @@ public class TaiwanToSimplifiedChineseDictionary : BaseChineseDictionary
         logger.info("台湾繁体转简体词典加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
-    public static String convertToSimplifiedChinese(String traditionalTaiwanChinese)
+    public static string convertToSimplifiedChinese(string traditionalTaiwanChinese)
     {
         return segLongest(traditionalTaiwanChinese.ToCharArray(), trie);
     }
 
-    public static String convertToSimplifiedChinese(char[] traditionalTaiwanChinese)
+    public static string convertToSimplifiedChinese(char[] traditionalTaiwanChinese)
     {
         return segLongest(traditionalTaiwanChinese, trie);
     }

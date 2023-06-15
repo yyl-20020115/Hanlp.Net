@@ -38,16 +38,16 @@ public class PinyinDictionary
      * @param path
      * @return
      */
-    static bool load(String path)
+    static bool load(string path)
     {
         if (loadDat(path)) return true;
         // 从文本中载入并且尝试生成dat
         StringDictionary dictionary = new StringDictionary("=");
         if (!dictionary.load(path)) return false;
-        TreeMap<String, Pinyin[]> map = new TreeMap<String, Pinyin[]>();
-        for (Map.Entry<String, String> entry : dictionary.entrySet())
+        TreeMap<string, Pinyin[]> map = new TreeMap<string, Pinyin[]>();
+        for (KeyValuePair<string, string> entry : dictionary.entrySet())
         {
-            String[] args = entry.getValue().split(",");
+            string[] args = entry.getValue().split(",");
             Pinyin[] pinyinValue = new Pinyin[args.length];
             for (int i = 0; i < pinyinValue.length; ++i)
             {
@@ -70,7 +70,7 @@ public class PinyinDictionary
         return true;
     }
 
-    static bool loadDat(String path)
+    static bool loadDat(string path)
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
@@ -89,13 +89,13 @@ public class PinyinDictionary
         return true;
     }
 
-    static bool saveDat(String path, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, Set<Map.Entry<String, Pinyin[]>> entrySet)
+    static bool saveDat(string path, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, Set<KeyValuePair<string, Pinyin[]>> entrySet)
     {
         try
         {
             DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
             _out.writeInt(entrySet.size());
-            for (Map.Entry<String, Pinyin[]> entry : entrySet)
+            for (KeyValuePair<string, Pinyin[]> entry : entrySet)
             {
                 Pinyin[] value = entry.getValue();
                 _out.writeInt(value.length);
@@ -116,7 +116,7 @@ public class PinyinDictionary
         return true;
     }
 
-    public static Pinyin[] get(String key)
+    public static Pinyin[] get(string key)
     {
         return trie.get(key);
     }
@@ -126,12 +126,12 @@ public class PinyinDictionary
      * @param text
      * @return List形式的拼音，对应每一个字（所谓字，指的是任意字符）
      */
-    public static List<Pinyin> convertToPinyin(String text)
+    public static List<Pinyin> convertToPinyin(string text)
     {
         return segLongest(text.ToCharArray(), trie);
     }
 
-    public static List<Pinyin> convertToPinyin(String text, bool remainNone)
+    public static List<Pinyin> convertToPinyin(string text, bool remainNone)
     {
         return segLongest(text.ToCharArray(), trie, remainNone);
     }
@@ -141,7 +141,7 @@ public class PinyinDictionary
      * @param text
      * @return 数组形式的拼音
      */
-    public static Pinyin[] convertToPinyinArray(String text)
+    public static Pinyin[] convertToPinyinArray(string text)
     {
         return convertToPinyin(text).toArray(new Pinyin[0]);
     }
@@ -213,20 +213,20 @@ public class PinyinDictionary
             this.trie = trie;
         }
 
-        protected Searcher(String text, DoubleArrayTrie<Pinyin[]> trie)
+        protected Searcher(string text, DoubleArrayTrie<Pinyin[]> trie)
         {
             super(text);
             this.trie = trie;
         }
 
         //@Override
-        public Map.Entry<String, Pinyin[]> next()
+        public KeyValuePair<string, Pinyin[]> next()
         {
             // 保证首次调用找到一个词语
-            Map.Entry<String, Pinyin[]> result = null;
+            KeyValuePair<string, Pinyin[]> result = null;
             while (begin < c.length)
             {
-                LinkedList<Map.Entry<String, Pinyin[]>> entryList = trie.commonPrefixSearchWithValue(c, begin);
+                LinkedList<KeyValuePair<string, Pinyin[]>> entryList = trie.commonPrefixSearchWithValue(c, begin);
                 if (entryList.size() == 0)
                 {
                     ++begin;

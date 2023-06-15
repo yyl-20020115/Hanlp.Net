@@ -43,7 +43,7 @@ public class DoubleArrayTrieInteger : Serializable
     private bool used[];
     private int size;
     private int allocSize;
-    private List<String> key;
+    private List<string> key;
     private int keySize;
     private int length[];
     private int value[];
@@ -83,7 +83,7 @@ public class DoubleArrayTrieInteger : Serializable
             if ((length != null ? length[i] : key.get(i).length()) < parent.depth)
                 continue;
 
-            String tmp = key.get(i);
+            string tmp = key.get(i);
 
             int cur = 0;
             if ((length != null ? length[i] : tmp.length()) != parent.depth)
@@ -265,12 +265,12 @@ public class DoubleArrayTrieInteger : Serializable
         return result;
     }
 
-    public int build(List<String> key)
+    public int build(List<string> key)
     {
         return build(key, null, null, key.size());
     }
 
-    public int build(List<String> _key, int _length[], int _value[],
+    public int build(List<string> _key, int _length[], int _value[],
                      int _keySize)
     {
         if (_keySize > _key.size() || _key == null)
@@ -307,7 +307,7 @@ public class DoubleArrayTrieInteger : Serializable
      */
     public void recoverKeyValue()
     {
-        key = new ArrayList<String>();
+        key = new ArrayList<string>();
         List<int> val1 = new ArrayList<int>();
         HashMap<int, List<int>> childIdxMap = new HashMap<int, List<int>>();
         for (int i = 0; i < check.length; i++)
@@ -365,7 +365,7 @@ public class DoubleArrayTrieInteger : Serializable
                     {
                         chars[i] = (char) (int) charBuf.get(i);
                     }
-                    key.add(new String(chars));
+                    key.add(new string(chars));
                     val1.add(-base[c] - 1);
                 }
                 continue;
@@ -381,7 +381,7 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public void open(String fileName) 
+    public void open(string fileName) 
     {
         File file = new File(fileName);
         size = (int) file.length() / UNIT_SIZE;
@@ -406,7 +406,7 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public void save(String fileName) 
+    public void save(string fileName) 
     {
         DataOutputStream _out = null;
         try
@@ -427,12 +427,12 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public int exactMatchSearch(String key)
+    public int exactMatchSearch(string key)
     {
         return exactMatchSearch(key, 0, 0, 0);
     }
 
-    public int exactMatchSearch(String key, int pos, int len, int nodePos)
+    public int exactMatchSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
             len = key.length();
@@ -464,12 +464,12 @@ public class DoubleArrayTrieInteger : Serializable
         return result;
     }
 
-    public List<int> commonPrefixSearch(String key)
+    public List<int> commonPrefixSearch(string key)
     {
         return commonPrefixSearch(key, 0, 0, 0);
     }
 
-    public List<int> commonPrefixSearch(String key, int pos, int len,
+    public List<int> commonPrefixSearch(string key, int pos, int len,
                                             int nodePos)
     {
         if (len <= 0)
@@ -523,7 +523,7 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public List<String> getKey()
+    public List<string> getKey()
     {
         return key;
     }
@@ -538,7 +538,7 @@ public class DoubleArrayTrieInteger : Serializable
         this.value = value;
     }
 
-    public void setKey(List<String> key)
+    public void setKey(List<string> key)
     {
         this.key = key;
     }

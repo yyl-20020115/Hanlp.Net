@@ -17,11 +17,11 @@ namespace com.hankcs.hanlp.seg.common;
 */
 public class ResultTerm<V>
 {
-    public String word;
+    public string word;
     public V label;
     public int offset;
 
-    public ResultTerm(String word, V label, int offset)
+    public ResultTerm(string word, V label, int offset)
     {
         this.word = word;
         this.label = label;
@@ -29,7 +29,7 @@ public class ResultTerm<V>
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return word + '/' + label;
     }

@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.corpus.document;
  */
 public class CorpusLoader
 {
-    public static void walk(String folderPath, Handler handler)
+    public static void walk(string folderPath, Handler handler)
     {
         long start = DateTime.Now.Microsecond;
         List<File> fileList = IOUtil.fileList(folderPath);
@@ -34,7 +34,7 @@ public class CorpusLoader
         System._out.printf("花费时间%d ms\n", DateTime.Now.Microsecond - start);
     }
 
-    public static void walk(String folderPath, HandlerThread[] threadArray)
+    public static void walk(string folderPath, HandlerThread[] threadArray)
     {
         long start = DateTime.Now.Microsecond;
         List<File> fileList = IOUtil.fileList(folderPath);
@@ -59,7 +59,7 @@ public class CorpusLoader
         System._out.printf("花费时间%d ms\n", DateTime.Now.Microsecond - start);
     }
 
-    public static List<Document> convert2DocumentList(String folderPath)
+    public static List<Document> convert2DocumentList(string folderPath)
     {
         return convert2DocumentList(folderPath, false);
     }
@@ -71,7 +71,7 @@ public class CorpusLoader
      * @param verbose
      * @return
      */
-    public static List<Document> convert2DocumentList(String folderPath, bool verbose)
+    public static List<Document> convert2DocumentList(string folderPath, bool verbose)
     {
         long start = DateTime.Now.Microsecond;
         List<File> fileList = IOUtil.fileList(folderPath);
@@ -92,27 +92,27 @@ public class CorpusLoader
         return documentList;
     }
 
-    public static List<Document> loadCorpus(String path)
+    public static List<Document> loadCorpus(string path)
     {
         return (List<Document>) IOUtil.readObjectFrom(path);
     }
 
-    public static bool saveCorpus(List<Document> documentList, String path)
+    public static bool saveCorpus(List<Document> documentList, string path)
     {
         return IOUtil.saveObjectTo(documentList, path);
     }
 
-    public static List<List<IWord>> loadSentenceList(String path)
+    public static List<List<IWord>> loadSentenceList(string path)
     {
         return (List<List<IWord>>) IOUtil.readObjectFrom(path);
     }
 
-    public static bool saveSentenceList(List<List<IWord>> sentenceList, String path)
+    public static bool saveSentenceList(List<List<IWord>> sentenceList, string path)
     {
         return IOUtil.saveObjectTo(sentenceList, path);
     }
 
-    public static List<List<IWord>> convert2SentenceList(String path)
+    public static List<List<IWord>> convert2SentenceList(string path)
     {
         List<Document> documentList = CorpusLoader.convert2DocumentList(path);
         List<List<IWord>> simpleList = new LinkedList<List<IWord>>();
@@ -127,7 +127,7 @@ public class CorpusLoader
         return simpleList;
     }
 
-    public static List<List<Word>> convert2SimpleSentenceList(String path)
+    public static List<List<Word>> convert2SimpleSentenceList(string path)
     {
         List<Document> documentList = CorpusLoader.convert2DocumentList(path);
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
@@ -175,7 +175,7 @@ public class CorpusLoader
          */
         public List<File> fileList;
 
-        public HandlerThread(String name)
+        public HandlerThread(string name)
         {
             super(name);
         }

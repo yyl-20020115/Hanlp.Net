@@ -196,11 +196,11 @@ public class SimpleMDAGNode : ICacheAble
      * Follows a _transition path starting from this node.
      *
      * @param mdagDataArray the array of SimpleMDAGNodes containing this node
-     * @param str           a String corresponding a _transition path in the MDAG
+     * @param str           a string corresponding a _transition path in the MDAG
      * @return the SimpleMDAGNode at the end of the _transition path corresponding to
      * {@code str}, or null if such a _transition path is not present in the MDAG
      */
-    public SimpleMDAGNode transition(SimpleMDAGNode[] mdagDataArray, String str)
+    public SimpleMDAGNode transition(SimpleMDAGNode[] mdagDataArray, string str)
     {
         SimpleMDAGNode currentNode = this;
         int numberOfChars = str.length();
@@ -254,11 +254,11 @@ public class SimpleMDAGNode : ICacheAble
      *
      * @param mdagDataArray the array containing the data of the MDAG to be traversed
      * @param sourceNode    the dummy SimpleMDAGNode which functions as the source of the MDAG data in {@code mdagDataArray}
-     * @param str           a String corresponding to a _transition path in the to-be-traversed MDAG
+     * @param str           a string corresponding to a _transition path in the to-be-traversed MDAG
      * @return the SimpleMDAGNode at the end of the _transition path corresponding to
      * {@code str}, or null if such a _transition path is not present in the MDAG
      */
-    public static SimpleMDAGNode traverseMDAG(SimpleMDAGNode[] mdagDataArray, SimpleMDAGNode sourceNode, String str)
+    public static SimpleMDAGNode traverseMDAG(SimpleMDAGNode[] mdagDataArray, SimpleMDAGNode sourceNode, string str)
     {
 //        char firstLetter = str.charAt(0);
 
@@ -277,7 +277,7 @@ public class SimpleMDAGNode : ICacheAble
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("SimpleMDAGNode{");
         sb.Append("letter=").Append(letter);

@@ -43,7 +43,7 @@ public class CoreSynonymDictionary
      * @param key
      * @return
      */
-    public static CommonSynonymDictionary.SynonymItem get(String key)
+    public static CommonSynonymDictionary.SynonymItem get(string key)
     {
         return dictionary.get(key);
     }
@@ -53,12 +53,12 @@ public class CoreSynonymDictionary
      * @param text
      * @return
      */
-    public static String rewriteQuickly(String text)
+    public static string rewriteQuickly(string text)
     {
         return dictionary.rewriteQuickly(text);
     }
 
-    public static String rewrite(String text)
+    public static string rewrite(string text)
     {
         return dictionary.rewrite(text);
     }
@@ -80,7 +80,7 @@ public class CoreSynonymDictionary
      * @param B
      * @return
      */
-    public static long distance(String A, String B)
+    public static long distance(string A, string B)
     {
         CommonSynonymDictionary.SynonymItem itemA = get(A);
         CommonSynonymDictionary.SynonymItem itemB = get(B);
@@ -95,7 +95,7 @@ public class CoreSynonymDictionary
      * @param B
      * @return
      */
-    public static double similarity(String A, String B)
+    public static double similarity(string A, string B)
     {
         long distance = distance(A, B);
         if (distance > dictionary.getMaxSynonymItemIdDistance()) return 0.0;

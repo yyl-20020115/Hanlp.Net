@@ -32,7 +32,7 @@ public class OrganizationDictionary
     /**
      * AC算法用到的Trie树
      */
-    public static AhoCorasickDoubleArrayTrie<String> trie;
+    public static AhoCorasickDoubleArrayTrie<string> trie;
     /**
      * 本词典专注的词的ID
      */
@@ -42,7 +42,7 @@ public class OrganizationDictionary
      */
     static readonly CoreDictionary.Attribute ATTRIBUTE = CoreDictionary.get(WORD_ID);
 
-    private static void addKeyword(TreeMap<String, String> patternMap, String keyword)
+    private static void addKeyword(TreeMap<string, string> patternMap, string keyword)
     {
         patternMap.put(keyword, keyword);
     }
@@ -56,8 +56,8 @@ public class OrganizationDictionary
             throw new IllegalArgumentException(HanLP.Config.OrganizationDictionaryPath + "加载失败");
         transformMatrixDictionary = new TransformMatrixDictionary<NT>(NT.class);
         transformMatrixDictionary.load(HanLP.Config.OrganizationDictionaryTrPath);
-        trie = new AhoCorasickDoubleArrayTrie<String>();
-        TreeMap<String, String> patternMap = new TreeMap<String, String>();
+        trie = new AhoCorasickDoubleArrayTrie<string>();
+        TreeMap<string, string> patternMap = new TreeMap<string, string>();
         addKeyword(patternMap, "CCCCCCCCD");
         addKeyword(patternMap, "CCCCCCCD");
         addKeyword(patternMap, "CCCCCCD");
@@ -3738,19 +3738,19 @@ public class OrganizationDictionary
         {
             sbPattern.Append(nt.toString());
         }
-        String pattern = sbPattern.toString();
+        string pattern = sbPattern.toString();
         final Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
-        trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<String>()
+        trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<string>()
         {
             //@Override
-            public void hit(int begin, int end, String keyword)
+            public void hit(int begin, int end, string keyword)
             {
                 StringBuilder sbName = new StringBuilder();
                 for (int i = begin; i < end; ++i)
                 {
                     sbName.Append(wordArray[i].realWord);
                 }
-                String name = sbName.toString();
+                string name = sbName.toString();
                 // 对一些bad case做出调整
                 if (isBadCase(name)) return;
 
@@ -3776,7 +3776,7 @@ public class OrganizationDictionary
      * @param name
      * @return
      */
-    static bool isBadCase(String name)
+    static bool isBadCase(string name)
     {
         EnumItem<NT> nrEnumItem = dictionary.get(name);
         if (nrEnumItem == null) return false;

@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
  */
 public abstract class Tagger
 {
-    public bool open(String[] args)
+    public bool open(string[] args)
     {
         return true;
     }
@@ -21,12 +21,12 @@ public abstract class Tagger
         return true;
     }
 
-    public bool open(String arg)
+    public bool open(string arg)
     {
         return true;
     }
 
-    public bool add(String[] strArr)
+    public bool add(string[] strArr)
     {
         return true;
     }
@@ -40,7 +40,7 @@ public abstract class Tagger
         return null;
     }
 
-    public bool add(String str)
+    public bool add(string str)
     {
         return true;
     }
@@ -75,17 +75,17 @@ public abstract class Tagger
         return result(i);
     }
 
-    public String y2(int i)
+    public string y2(int i)
     {
         return "";
     }
 
-    public String yname(int i)
+    public string yname(int i)
     {
         return "";
     }
 
-    public String x(int i, int j)
+    public string x(int i, int j)
     {
         return "";
     }
@@ -180,27 +180,27 @@ public abstract class Tagger
         return true;
     }
 
-    public String parse(String str)
+    public string parse(string str)
     {
         return "";
     }
 
-    public String toString()
+    public string toString()
     {
         return "";
     }
 
-    public String toString(String result, int size)
+    public string toString(string result, int size)
     {
         return "";
     }
 
-    public String parse(String str, int size)
+    public string parse(string str, int size)
     {
         return "";
     }
 
-    public String parse(String str, int size1, String result, int size2)
+    public string parse(string str, int size1, string result, int size2)
     {
         return "";
     }

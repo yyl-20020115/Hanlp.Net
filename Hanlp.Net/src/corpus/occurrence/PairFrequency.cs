@@ -33,16 +33,16 @@ public class PairFrequency : TermFrequency
      * 分数
      */
     public double score;
-    public String first;
-    public String second;
+    public string first;
+    public string second;
     public char delimiter;
 
-    protected PairFrequency(String term, int frequency)
+    protected PairFrequency(string term, int frequency)
     {
         super(term, frequency);
     }
 
-    protected PairFrequency(String term)
+    protected PairFrequency(string term)
     {
         super(term);
     }
@@ -54,7 +54,7 @@ public class PairFrequency : TermFrequency
      * @param second
      * @return
      */
-    public static PairFrequency create(String first, char delimiter ,String second)
+    public static PairFrequency create(string first, char delimiter ,string second)
     {
         PairFrequency pairFrequency = new PairFrequency(first + delimiter + second);
         pairFrequency.first = first;
@@ -73,7 +73,7 @@ public class PairFrequency : TermFrequency
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder();
         sb.Append(first);

@@ -23,7 +23,7 @@ public class EasyDictionary
 {
     DoubleArrayTrie<Attribute> trie = new DoubleArrayTrie<Attribute>();
 
-    public static EasyDictionary create(String path)
+    public static EasyDictionary create(string path)
     {
         EasyDictionary dictionary = new EasyDictionary();
         if (dictionary.load(path))
@@ -38,18 +38,18 @@ public class EasyDictionary
         return null;
     }
 
-    private bool load(String path)
+    private bool load(string path)
     {
         logger.info("通用词典开始加载:" + path);
-        TreeMap<String, Attribute> map = new TreeMap<String, Attribute>();
+        TreeMap<string, Attribute> map = new TreeMap<string, Attribute>();
         BufferedReader br = null;
         try
         {
             br = new BufferedReader(new InputStreamReader(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path), "UTF-8"));
-            String line;
+            string line;
             while ((line = br.readLine()) != null)
             {
-                String param[] = line.split("\\s+");
+                string param[] = line.split("\\s+");
                 int natureCount = (param.length - 1) / 2;
                 Attribute attribute = new Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)
@@ -79,17 +79,17 @@ public class EasyDictionary
         return true;
     }
 
-    public Attribute GetWordInfo(String key)
+    public Attribute GetWordInfo(string key)
     {
         return trie.get(key);
     }
 
-    public bool contains(String key)
+    public bool contains(string key)
     {
         return GetWordInfo(key) != null;
     }
 
-    public BaseSearcher getSearcher(String text)
+    public BaseSearcher getSearcher(string text)
     {
         return new Searcher(text);
     }
@@ -101,21 +101,21 @@ public class EasyDictionary
          */
         int begin;
 
-        private List<Map.Entry<String, Attribute>> entryList;
+        private List<KeyValuePair<string, Attribute>> entryList;
 
         protected Searcher(char[] c)
         {
             super(c);
         }
 
-        protected Searcher(String text)
+        protected Searcher(string text)
         {
             super(text);
-            entryList = new LinkedList<Map.Entry<String, Attribute>>();
+            entryList = new LinkedList<KeyValuePair<string, Attribute>>();
         }
 
         //@Override
-        public Map.Entry<String, Attribute> next()
+        public KeyValuePair<string, Attribute> next()
         {
             // 保证首次调用找到一个词语
             while (entryList.size() == 0 && begin < c.length)
@@ -133,7 +133,7 @@ public class EasyDictionary
             {
                 return null;
             }
-            Map.Entry<String, Attribute> result = entryList.get(0);
+            KeyValuePair<string, Attribute> result = entryList.get(0);
             entryList.remove(0);
             offset = begin - 1;
             return result;
@@ -193,7 +193,7 @@ public class EasyDictionary
          * @return 词频
          * @deprecated 推荐使用Nature参数！
          */
-        public int getNatureFrequency(String nature)
+        public int getNatureFrequency(string nature)
         {
             try
             {
@@ -228,7 +228,7 @@ public class EasyDictionary
         }
 
         //@Override
-        public String toString()
+        public string toString()
         {
             return "Attribute{" +
                     "nature=" + Arrays.toString(nature) +

@@ -38,7 +38,7 @@ public class PathNode
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return "PathNode{" +
                 "from=" + from +

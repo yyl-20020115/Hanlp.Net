@@ -20,17 +20,17 @@ public class Table
     /**
      * 真实值，请不要直接读取
      */
-    public String[][] v;
-    static readonly String HEAD = "_B";
+    public string[][] v;
+    static readonly string HEAD = "_B";
 
     //@Override
-    public String toString()
+    public string toString()
     {
         if (v == null) return "null";
         final StringBuilder sb = new StringBuilder(v.length * v[0].length * 2);
-        for (String[] line : v)
+        for (string[] line : v)
         {
-            for (String element : line)
+            for (string element : line)
             {
                 sb.Append(element).Append('\t');
             }
@@ -45,7 +45,7 @@ public class Table
      * @param y
      * @return
      */
-    public String get(int x, int y)
+    public string get(int x, int y)
     {
         if (x < 0) return HEAD + x;
         if (x >= v.length) return HEAD + "+" + (x - v.length + 1);
@@ -53,7 +53,7 @@ public class Table
         return v[x][y];
     }
 
-    public void setLast(int x, String t)
+    public void setLast(int x, string t)
     {
         v[x][v[x].length - 1] = t;
     }

@@ -20,14 +20,14 @@ public class SimpleItem
     /**
      * 该条目的标签
      */
-    public Dictionary<String, int> labelMap;
+    public Dictionary<string, int> labelMap;
 
     public SimpleItem()
     {
         labelMap = new();
     }
 
-    public void addLabel(String label)
+    public void addLabel(string label)
     {
         int frequency = labelMap.get(label);
         if (frequency == null)
@@ -47,7 +47,7 @@ public class SimpleItem
      * @param label
      * @param frequency
      */
-    public void addLabel(String label, int frequency)
+    public void addLabel(string label, int frequency)
     {
         int innerFrequency = labelMap.get(label);
         if (innerFrequency == null)
@@ -66,17 +66,17 @@ public class SimpleItem
      * 删除一个标签
      * @param label 标签
      */
-    public void removeLabel(String label)
+    public void removeLabel(string label)
     {
         labelMap.remove(label);
     }
 
-    public bool containsLabel(String label)
+    public bool containsLabel(string label)
     {
         return labelMap.containsKey(label);
     }
 
-    public int getFrequency(String label)
+    public int getFrequency(string label)
     {
         int frequency = labelMap.get(label);
         if (frequency == null) return 0;
@@ -84,12 +84,12 @@ public class SimpleItem
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder();
-        ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(labelMap.entrySet());
+        ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(labelMap.entrySet());
         Collections.sort(entries, new CT(());
-        for (Map.Entry<String, int> entry : entries)
+        for (KeyValuePair<string, int> entry : entries)
         {
             sb.Append(entry.getKey());
             sb.Append(' ');
@@ -98,23 +98,23 @@ public class SimpleItem
         }
         return sb.toString();
     }
-    public class CT : Comparator<Map.Entry<String, int>>
+    public class CT : Comparator<KeyValuePair<string, int>>
     {
         //@Override
-        public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
+        public int compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
         {
             return -o1.getValue().compareTo(o2.getValue());
         }
     }
 
-    public static SimpleItem create(String param)
+    public static SimpleItem create(string param)
     {
         if (param == null) return null;
-        String[] array = param.Split(" ");
+        string[] array = param.Split(" ");
         return create(array);
     }
 
-    public static SimpleItem create(String[] param)
+    public static SimpleItem create(string[] param)
     {
         if (param.Length % 2 == 1) return null;
         SimpleItem item = new SimpleItem();
@@ -132,7 +132,7 @@ public class SimpleItem
      */
     public void combine(SimpleItem other)
     {
-        foreach (Map.Entry<String, int> entry in other.labelMap.entrySet())
+        foreach (KeyValuePair<string, int> entry in other.labelMap.entrySet())
         {
             addLabel(entry.getKey(), entry.getValue());
         }
@@ -152,7 +152,7 @@ public class SimpleItem
         return frequency;
     }
 
-    public String getMostLikelyLabel()
+    public string getMostLikelyLabel()
     {
         return labelMap.entrySet().iterator().next().getKey();
     }

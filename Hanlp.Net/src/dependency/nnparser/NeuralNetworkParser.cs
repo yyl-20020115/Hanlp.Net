@@ -59,7 +59,7 @@ public class NeuralNetworkParser : ICacheAble
     /**
      * 根节点词语
      */
-    String root;
+    string root;
 
     /**
      * 语料库之外的词语的id
@@ -107,16 +107,16 @@ public class NeuralNetworkParser : ICacheAble
      */
     bool use_cluster;
 
-    static String model_header;
+    static string model_header;
 
     /**
      * 加载parser模型
      * @param path
      * @return
      */
-    public bool load(String path)
+    public bool load(string path)
     {
-        String binPath = path + Predefine.BIN_EXT;
+        string binPath = path + Predefine.BIN_EXT;
         if (load(ByteArrayStream.createByteArrayStream(binPath))) return true;
         if (!loadTxt(path)) return false;
         try
@@ -139,7 +139,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param path
      * @return
      */
-    public bool loadTxt(String path)
+    public bool loadTxt(string path)
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(path);
         model_header = lineIterator.next();
@@ -277,13 +277,13 @@ public class NeuralNetworkParser : ICacheAble
 
     private static Matrix read_matrix(IOUtil.LineIterator lineIterator)
     {
-        String[] rc = lineIterator.next().split("\t");
+        string[] rc = lineIterator.next().split("\t");
         int rows = int.valueOf(rc[0]);
         int cols = int.valueOf(rc[1]);
         double[][] valueArray = new double[rows][cols];
         for (double[] valueRow : valueArray)
         {
-            String[] args = lineIterator.next().split("\t");
+            string[] args = lineIterator.next().split("\t");
             for (int i = 0; i < valueRow.length; i++)
             {
                 valueRow[i] = Double.valueOf(args[i]);
@@ -297,7 +297,7 @@ public class NeuralNetworkParser : ICacheAble
     {
         int rows = int.valueOf(lineIterator.next());
         double[][] valueArray = new double[rows][1];
-        String[] args = lineIterator.next().split("\t");
+        string[] args = lineIterator.next().split("\t");
         for (int i = 0; i < rows; i++)
         {
             valueArray[i][0] = Double.valueOf(args[i]);
@@ -309,10 +309,10 @@ public class NeuralNetworkParser : ICacheAble
     private static Alphabet read_alphabet(IOUtil.LineIterator lineIterator)
     {
         int size = int.valueOf(lineIterator.next());
-        TreeMap<String, int> map = new TreeMap<String, int>();
+        TreeMap<string, int> map = new TreeMap<string, int>();
         for (int i = 0; i < size; i++)
         {
-            String[] args = lineIterator.next().split("\t");
+            string[] args = lineIterator.next().split("\t");
             map.put(args[0], int.valueOf(args[1]));
         }
 
@@ -328,7 +328,7 @@ public class NeuralNetworkParser : ICacheAble
         Dictionary<int, int> map = new HashMap<int, int>();
         for (int i = 0; i < size; i++)
         {
-            String[] args = lineIterator.next().split("\t");
+            string[] args = lineIterator.next().split("\t");
             map.put(int.valueOf(args[0]), int.valueOf(args[1]));
         }
 
@@ -350,7 +350,7 @@ public class NeuralNetworkParser : ICacheAble
     private static void save_map(Dictionary<int, int> map, DataOutputStream _out) 
     {
         _out.writeInt(map.size());
-        for (Map.Entry<int, int> entry : map.entrySet())
+        for (KeyValuePair<int, int> entry : map.entrySet())
         {
             _out.writeInt(entry.getKey());
             _out.writeInt(entry.getValue());
@@ -490,7 +490,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param deprels 依存关系的储存位置
      */
     void predict(final Instance data, List<int> heads,
-                 List<String> deprels)
+                 List<string> deprels)
     {
         Dependency dependency = new Dependency();
         List<int> cluster = new ArrayList<int>(), cluster4 = new ArrayList<int>(), cluster6 = new ArrayList<int>();

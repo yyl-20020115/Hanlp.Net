@@ -20,14 +20,14 @@ public class CoNllLine
     /**
      * 十个值
      */
-    public String[] value = new String[10];
+    public string[] value = new string[10];
 
     /**
      * 第一个值化为id
      */
     public int id;
 
-    public CoNllLine(String... args)
+    public CoNllLine(string... args)
     {
         int length = Math.min(args.length, value.length);
         for (int i = 0; i < length; ++i)
@@ -38,10 +38,10 @@ public class CoNllLine
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder();
-        for (String value : this.value)
+        for (string value : this.value)
         {
             sb.Append(value);
             sb.Append('\t');

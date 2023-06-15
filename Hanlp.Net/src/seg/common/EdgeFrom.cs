@@ -19,14 +19,14 @@ public class EdgeFrom : Edge
 {
     public int from;
 
-    public EdgeFrom(int from, double weight, String name)
+    public EdgeFrom(int from, double weight, string name)
     {
         super(weight, name);
         this.from = from;
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         return "EdgeFrom{" +
                 "from=" + from +

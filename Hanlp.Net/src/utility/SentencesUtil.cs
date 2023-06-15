@@ -13,7 +13,7 @@ public class SentencesUtil
      * @param content
      * @return
      */
-    public static List<String> toSentenceList(String content)
+    public static List<string> toSentenceList(string content)
     {
         return toSentenceList(content.ToCharArray(), true);
     }
@@ -25,22 +25,22 @@ public class SentencesUtil
      * @param shortest 是否切割为最细的单位（将逗号也视作分隔符）
      * @return
      */
-    public static List<String> toSentenceList(String content, bool shortest)
+    public static List<string> toSentenceList(string content, bool shortest)
     {
         return toSentenceList(content.ToCharArray(), shortest);
     }
 
-    public static List<String> toSentenceList(char[] chars)
+    public static List<string> toSentenceList(char[] chars)
     {
         return toSentenceList(chars, true);
     }
 
-    public static List<String> toSentenceList(char[] chars, bool shortest)
+    public static List<string> toSentenceList(char[] chars, bool shortest)
     {
 
         StringBuilder sb = new StringBuilder();
 
-        List<String> sentences = new LinkedList<String>();
+        List<string> sentences = new LinkedList<string>();
 
         for (int i = 0; i < chars.length; ++i)
         {
@@ -102,9 +102,9 @@ public class SentencesUtil
         return sentences;
     }
 
-    private static void insertIntoList(StringBuilder sb, List<String> sentences)
+    private static void insertIntoList(StringBuilder sb, List<string> sentences)
     {
-        String content = sb.toString().trim();
+        string content = sb.toString().trim();
         if (content.length() > 0)
         {
             sentences.add(content);

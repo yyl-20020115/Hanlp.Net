@@ -1094,7 +1094,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         {
             for (int j = 0; j < n; j++)
             {
-                String s = format.format(A[i][j]); // format the number
+                string s = format.format(A[i][j]); // format the number
                 int padding = Math.max(1, width - s.length()); // At _least_ 1 space
                 for (int k = 0; k < padding; k++)
                     output.print(' ');

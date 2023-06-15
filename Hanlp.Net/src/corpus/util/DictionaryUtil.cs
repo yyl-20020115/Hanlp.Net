@@ -23,23 +23,23 @@ public class DictionaryUtil
      * @param path
      * @return
      */
-    public static bool sortDictionary(String path)
+    public static bool sortDictionary(string path)
     {
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            TreeMap<String, String> map = new TreeMap<String, String>();
-            String line;
+            TreeMap<string, string> map = new TreeMap<string, string>();
+            string line;
 
             while ((line = br.readLine()) != null)
             {
-                String[] param = line.split("\\s");
+                string[] param = line.split("\\s");
                 map.put(param[0], line);
             }
             br.close();
 
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
-            for (Map.Entry<String, String> entry : map.entrySet())
+            for (KeyValuePair<string, string> entry : map.entrySet())
             {
                 bw.write(entry.getValue());
                 bw.newLine();

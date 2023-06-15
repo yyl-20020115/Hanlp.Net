@@ -39,7 +39,7 @@ public abstract class CommonDictionaryMaker : ISaveAble
     }
 
     //@Override
-    public bool saveTxtTo(String path)
+    public bool saveTxtTo(string path)
     {
         if (dictionaryMaker.saveTxtTo(path + ".txt"))
         {
@@ -88,7 +88,7 @@ public abstract class CommonDictionaryMaker : ISaveAble
      * 训练
      * @param corpus 语料库路径
      */
-    public void train(String corpus)
+    public void train(string corpus)
     {
         CorpusLoader.walk(corpus, new CorpusLoader.Handler()
         {

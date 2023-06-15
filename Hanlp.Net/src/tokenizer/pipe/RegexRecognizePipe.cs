@@ -8,6 +8,9 @@
  * See LICENSE file in the project root for full license information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using System.Text.RegularExpressions;
+
 namespace com.hankcs.hanlp.tokenizer.pipe;
 
 
@@ -22,13 +25,13 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
     /**
      * 正则表达式
      */
-    protected Pattern pattern;
+    protected Regex pattern;
     /**
      * 所属标签
      */
-    protected String label;
+    protected string label;
 
-    public RegexRecognizePipe(Pattern pattern, String label)
+    public RegexRecognizePipe(Regex pattern, string label)
     {
         this.pattern = pattern;
         this.label = label;
@@ -45,8 +48,8 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
             if (wordOrSentence.getLabel() != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
             listIterator.remove(); // 否则是句子
-            String sentence = wordOrSentence.getValue();
-            Matcher matcher = pattern.matcher(sentence);
+            string sentence = wordOrSentence.getValue();
+            var matcher = pattern.matcher(sentence);
             int begin = 0;
             int end;
             while (matcher.find())
@@ -56,7 +59,7 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
                 listIterator.add(new Word(matcher.group(), label)); // 拦截到的部分
                 begin = matcher.end();
             }
-            if (begin < sentence.length()) listIterator.add(new Word(sentence.substring(begin), null));
+            if (begin < sentence.Length) listIterator.add(new Word(sentence.substring(begin), null));
         }
         return input;
     }

@@ -11,9 +11,9 @@ public interface CharacterMapping
 
     int zeroId();
 
-    int[] toIdList(String key);
+    int[] toIdList(string key);
 
     int[] toIdList(int codePoint);
 
-    String toString(int[] ids);
+    string toString(int[] ids);
 }

@@ -32,7 +32,7 @@ public class PlaceDictionary
     /**
      * AC算法用到的Trie树
      */
-    public static AhoCorasickDoubleArrayTrie<String> trie;
+    public static AhoCorasickDoubleArrayTrie<string> trie;
 
     /**
      * 本词典专注的词的ID
@@ -53,8 +53,8 @@ public class PlaceDictionary
             throw new IllegalArgumentException(HanLP.Config.PlaceDictionaryPath + "加载失败");
         transformMatrixDictionary = new TransformMatrixDictionary<NS>(NS.class);
         transformMatrixDictionary.load(HanLP.Config.PlaceDictionaryTrPath);
-        trie = new AhoCorasickDoubleArrayTrie<String>();
-        TreeMap<String, String> patternMap = new TreeMap<String, String>();
+        trie = new AhoCorasickDoubleArrayTrie<string>();
+        TreeMap<string, string> patternMap = new TreeMap<string, string>();
         patternMap.put("CH", "CH");
         patternMap.put("CDH", "CDH");
         patternMap.put("CDEH", "CDEH");
@@ -78,19 +78,19 @@ public class PlaceDictionary
         {
             sbPattern.Append(ns.toString());
         }
-        String pattern = sbPattern.toString();
+        string pattern = sbPattern.toString();
         final Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
-        trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<String>()
+        trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<string>()
         {
             //@Override
-            public void hit(int begin, int end, String value)
+            public void hit(int begin, int end, string value)
             {
                 StringBuilder sbName = new StringBuilder();
                 for (int i = begin; i < end; ++i)
                 {
                     sbName.Append(wordArray[i].realWord);
                 }
-                String name = sbName.toString();
+                string name = sbName.toString();
                 // 对一些bad case做出调整
                 if (isBadCase(name)) return;
 
@@ -116,7 +116,7 @@ public class PlaceDictionary
      * @param name
      * @return
      */
-    static bool isBadCase(String name)
+    static bool isBadCase(string name)
     {
         EnumItem<NS> nrEnumItem = dictionary.get(name);
         if (nrEnumItem == null) return false;

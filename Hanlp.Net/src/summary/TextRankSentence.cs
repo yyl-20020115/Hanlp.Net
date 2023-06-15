@@ -31,7 +31,7 @@ public class TextRankSentence
     final static int max_iter = 200;
     final static double min_diff = 0.001;
     
-    final static String default_sentence_separator = "[，,。:：“”？?！!；;]";
+    final static string default_sentence_separator = "[，,。:：“”？?！!；;]";
     /**
      * 文档句子的个数
      */
@@ -39,7 +39,7 @@ public class TextRankSentence
     /**
      * 拆分为[句子[单词]]形式的文档
      */
-    List<List<String>> docs;
+    List<List<string>> docs;
     /**
      * 排序后的最终结果 score <-> index
      */
@@ -63,7 +63,7 @@ public class TextRankSentence
      */
     BM25 bm25;
 
-    public TextRankSentence(List<List<String>> docs)
+    public TextRankSentence(List<List<string>> docs)
     {
         this.docs = docs;
         bm25 = new BM25(docs);
@@ -78,7 +78,7 @@ public class TextRankSentence
     private void solve()
     {
         int cnt = 0;
-        for (List<String> sentence : docs)
+        for (List<string> sentence : docs)
         {
             double[] scores = bm25.simAll(sentence);
 //            System._out.println(Arrays.toString(scores));
@@ -157,7 +157,7 @@ public class TextRankSentence
      * @param document
      * @return
      */
-    static List<String> splitSentence(String document)
+    static List<string> splitSentence(string document)
     {
     	return splitSentence(document, default_sentence_separator);
     }
@@ -169,14 +169,14 @@ public class TextRankSentence
      * @param sentence_separator 句子分隔符，正则表达式，如：   [。:？?！!；;]
      * @return
      */
-    static List<String> splitSentence(String document, String sentence_separator)
+    static List<string> splitSentence(string document, string sentence_separator)
     {
-        List<String> sentences = new ArrayList<String>();
-        for (String line : document.split("[\r\n]"))
+        List<string> sentences = new ArrayList<string>();
+        for (string line : document.split("[\r\n]"))
         {
             line = line.trim();
             if (line.length() == 0) continue;
-            for (String sent : line.split(sentence_separator))		// [，,。:：“”？?！!；;]
+            for (string sent : line.split(sentence_separator))		// [，,。:：“”？?！!；;]
             {
                 sent = sent.trim();
                 if (sent.length() == 0) continue;
@@ -193,13 +193,13 @@ public class TextRankSentence
      * @param sentenceList
      * @return
      */
-    private static List<List<String>> convertSentenceListToDocument(List<String> sentenceList)
+    private static List<List<string>> convertSentenceListToDocument(List<string> sentenceList)
     {
-        List<List<String>> docs = new ArrayList<List<String>>(sentenceList.size());
-        for (String sentence : sentenceList)
+        List<List<string>> docs = new ArrayList<List<string>>(sentenceList.size());
+        for (string sentence : sentenceList)
         {
             List<Term> termList = StandardTokenizer.segment(sentence.ToCharArray());
-            List<String> wordList = new LinkedList<String>();
+            List<string> wordList = new LinkedList<string>();
             for (Term term : termList)
             {
                 if (CoreStopWordDictionary.shouldInclude(term))
@@ -219,7 +219,7 @@ public class TextRankSentence
      * @param size     需要的关键句的个数
      * @return 关键句列表
      */
-    public static List<String> getTopSentenceList(String document, int size)
+    public static List<string> getTopSentenceList(string document, int size)
     {
     	return getTopSentenceList(document, size, default_sentence_separator);
     }
@@ -232,13 +232,13 @@ public class TextRankSentence
      * @param sentence_separator 句子分隔符，正则格式， 如：[。？?！!；;]
      * @return 关键句列表
      */
-    public static List<String> getTopSentenceList(String document, int size, String sentence_separator)
+    public static List<string> getTopSentenceList(string document, int size, string sentence_separator)
     {
-        List<String> sentenceList = splitSentence(document, sentence_separator);
-        List<List<String>> docs = convertSentenceListToDocument(sentenceList);
+        List<string> sentenceList = splitSentence(document, sentence_separator);
+        List<List<string>> docs = convertSentenceListToDocument(sentenceList);
         TextRankSentence textRank = new TextRankSentence(docs);
         int[] topSentence = textRank.getTopSentence(size);
-        List<String> resultList = new LinkedList<String>();
+        List<string> resultList = new LinkedList<string>();
         for (int i : topSentence)
         {
             resultList.add(sentenceList.get(i));
@@ -253,7 +253,7 @@ public class TextRankSentence
      * @param max_length 需要摘要的长度
      * @return 摘要文本
      */
-    public static String getSummary(String document, int max_length)
+    public static string getSummary(string document, int max_length)
     {
     	return getSummary(document, max_length, default_sentence_separator);
     }
@@ -266,18 +266,18 @@ public class TextRankSentence
      * @param sentence_separator 句子分隔符，正则格式， 如：[。？?！!；;]
      * @return 摘要文本
      */
-    public static String getSummary(String document, int max_length, String sentence_separator)
+    public static string getSummary(string document, int max_length, string sentence_separator)
     {
-        List<String> sentenceList = splitSentence(document, sentence_separator);
+        List<string> sentenceList = splitSentence(document, sentence_separator);
 
         int sentence_count = sentenceList.size();
         int document_length = document.length();
         int sentence_length_avg = document_length / sentence_count;
         int size = max_length / sentence_length_avg + 1;
-        List<List<String>> docs = convertSentenceListToDocument(sentenceList);
+        List<List<string>> docs = convertSentenceListToDocument(sentenceList);
         TextRankSentence textRank = new TextRankSentence(docs);
         int[] topSentence = textRank.getTopSentence(size);
-        List<String> resultList = new LinkedList<String>();
+        List<string> resultList = new LinkedList<string>();
         for (int i : topSentence)
         {
             resultList.add(sentenceList.get(i));
@@ -288,11 +288,11 @@ public class TextRankSentence
         return TextUtility.join("。", resultList);
     }
 
-    private static List<String> permutation(List<String> resultList, final List<String> sentenceList)
+    private static List<string> permutation(List<string> resultList, final List<string> sentenceList)
     {
-        Collections.sort(resultList, new Comparator<String>() {
+        Collections.sort(resultList, new Comparator<string>() {
             //@Override
-            public int compare(String o1, String o2) {
+            public int compare(string o1, string o2) {
                 int num1 = sentenceList.indexOf(o1);
                 int num2 = sentenceList.indexOf(o2);
                 return num1.compareTo(num2);
@@ -301,11 +301,11 @@ public class TextRankSentence
         return resultList;
     }
 
-    private static List<String> pick_sentences(List<String> resultList, int max_length)
+    private static List<string> pick_sentences(List<string> resultList, int max_length)
     {
-        List<String> summary = new ArrayList<String>();
+        List<string> summary = new ArrayList<string>();
         int count = 0;
-        for (String result : resultList) {
+        for (string result : resultList) {
             if (count + result.length() <= max_length) {
                 summary.add(result);
                 count += result.length();

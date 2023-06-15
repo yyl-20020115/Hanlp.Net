@@ -13,7 +13,7 @@ public class TextProcessUtility
      * @param text
      * @return
      */
-    public static String preprocess(String text)
+    public static string preprocess(string text)
     {
         return text.replaceAll("\\p{P}", " ").replaceAll("\\s+", " ").toLowerCase(Locale.getDefault());
     }
@@ -24,10 +24,10 @@ public class TextProcessUtility
      * @param text
      * @return
      */
-    public static String[] extractKeywords(String text)
+    public static string[] extractKeywords(string text)
     {
         List<Term> termList = NotionalTokenizer.segment(text);
-        String[] wordArray = new String[termList.size()];
+        string[] wordArray = new string[termList.size()];
         Iterator<Term> iterator = termList.iterator();
         for (int i = 0; i < wordArray.length; i++)
         {
@@ -42,9 +42,9 @@ public class TextProcessUtility
      * @param keywordArray
      * @return
      */
-    public static Dictionary<String, int> getKeywordCounts(String[] keywordArray)
+    public static Dictionary<string, int> getKeywordCounts(string[] keywordArray)
     {
-        Dictionary<String, int> counts = new HashMap<String, int>();
+        Dictionary<string, int> counts = new HashMap<string, int>();
 
         int counter;
         for (int i = 0; i < keywordArray.length; ++i)
@@ -66,9 +66,9 @@ public class TextProcessUtility
      * @param path
      * @return
      */
-    public static Dictionary<String, String[]> loadCorpus(String path)
+    public static Dictionary<string, string[]> loadCorpus(string path)
     {
-        Dictionary<String, String[]> dataSet = new TreeMap<String, String[]>();
+        Dictionary<string, string[]> dataSet = new TreeMap<string, string[]>();
         File root = new File(path);
         File[] folders = root.listFiles();
         if (folders == null) return null;
@@ -77,7 +77,7 @@ public class TextProcessUtility
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
             if (files == null) continue;
-            String[] documents = new String[files.length];
+            string[] documents = new string[files.length];
             for (int i = 0; i < files.length; i++)
             {
                 documents[i] = IOUtil.readTxt(files[i].getAbsolutePath());
@@ -94,15 +94,15 @@ public class TextProcessUtility
      * @param folderPath
      * @return
      */
-    public static Dictionary<String, String[]> loadCorpusWithException(String folderPath, String charsetName) 
+    public static Dictionary<string, string[]> loadCorpusWithException(string folderPath, string charsetName) 
     {
         if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
-        if (!root.exists()) throw new IllegalArgumentException(String.format("目录 %s 不存在", root.getAbsolutePath()));
+        if (!root.exists()) throw new IllegalArgumentException(string.format("目录 %s 不存在", root.getAbsolutePath()));
         if (!root.isDirectory())
-            throw new IllegalArgumentException(String.format("目录 %s 不是一个目录", root.getAbsolutePath()));
+            throw new IllegalArgumentException(string.format("目录 %s 不是一个目录", root.getAbsolutePath()));
 
-        Dictionary<String, String[]> dataSet = new TreeMap<String, String[]>();
+        Dictionary<string, string[]> dataSet = new TreeMap<string, string[]>();
         File[] folders = root.listFiles();
         if (folders == null) return null;
         for (File folder : folders)
@@ -110,7 +110,7 @@ public class TextProcessUtility
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
             if (files == null) continue;
-            String[] documents = new String[files.length];
+            string[] documents = new string[files.length];
             for (int i = 0; i < files.length; i++)
             {
                 documents[i] = readTxt(files[i], charsetName);
@@ -121,7 +121,7 @@ public class TextProcessUtility
         return dataSet;
     }
 
-    public static String readTxt(File file, String charsetName) 
+    public static string readTxt(File file, string charsetName) 
     {
         FileInputStream is = new FileInputStream(file);
         byte[] targetArray = new byte[is.available()];
@@ -133,10 +133,10 @@ public class TextProcessUtility
         }
         is.close();
 
-        return new String(targetArray, charsetName);
+        return new string(targetArray, charsetName);
     }
 
-    public static Dictionary<String, String[]> loadCorpusWithException(String corpusPath) 
+    public static Dictionary<string, string[]> loadCorpusWithException(string corpusPath) 
     {
         return loadCorpusWithException(corpusPath, "UTF-8");
     }

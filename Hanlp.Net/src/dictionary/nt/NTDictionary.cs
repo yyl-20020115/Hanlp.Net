@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.dictionary.nt;
 public class NTDictionary : EnumItemDictionary<NT>
 {
     //@Override
-    protected NT valueOf(String name)
+    protected NT valueOf(string name)
     {
         return NT.valueOf(name);
     }

@@ -29,21 +29,21 @@ public class DemoDependencyParser : TestUtility
         // 可以方便地遍历它
         foreach (CoNLLWord word in sentence)
         {
-            System._out.printf("%s --(%s)--> %s\n", word.LEMMA, word.DEPREL, word.HEAD.LEMMA);
+            Console.WriteLine("%s --(%s)--> %s\n", word.LEMMA, word.DEPREL, word.HEAD.LEMMA);
         }
         // 也可以直接拿到数组，任意顺序或逆序遍历
         CoNLLWord[] wordArray = sentence.getWordArray();
-        for (int i = wordArray.length - 1; i >= 0; i--)
+        for (int i = wordArray.Length - 1; i >= 0; i--)
         {
             CoNLLWord word = wordArray[i];
-            System._out.printf("%s --(%s)--> %s\n", word.LEMMA, word.DEPREL, word.HEAD.LEMMA);
+            Console.WriteLine("%s --(%s)--> %s\n", word.LEMMA, word.DEPREL, word.HEAD.LEMMA);
         }
         // 还可以直接遍历子树，从某棵子树的某个节点一路遍历到虚根
         CoNLLWord head = wordArray[12];
         while ((head = head.HEAD) != null)
         {
             if (head == CoNLLWord.ROOT) Console.WriteLine(head.LEMMA);
-            else System._out.printf("%s --(%s)--> ", head.LEMMA, head.DEPREL);
+            else Console.WriteLine("%s --(%s)--> ", head.LEMMA, head.DEPREL);
         }
     }
 }

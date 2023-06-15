@@ -39,23 +39,23 @@ public abstract class AbstractClassifier : IClassifier
      * @throws IllegalStateException
      */
     //@Override
-    public String classify(String text) 
+    public string classify(string text) 
     {
-        Dictionary<String, Double> scoreMap = predict(text);
+        Dictionary<string, Double> scoreMap = predict(text);
 
         return CollectionUtility.max(scoreMap);
     }
 
     //@Override
-    public String classify(Document document) 
+    public string classify(Document document) 
     {
-        Dictionary<String, Double> scoreMap = predict(document);
+        Dictionary<string, Double> scoreMap = predict(document);
 
         return CollectionUtility.max(scoreMap);
     }
 
     //@Override
-    public void train(String folderPath, String charsetName) 
+    public void train(string folderPath, string charsetName) 
     {
         IDataSet dataSet = new MemoryDataSet();
         dataSet.load(folderPath, charsetName);
@@ -63,17 +63,17 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(Dictionary<String, String[]> trainingDataSet) 
+    public void train(Dictionary<string, string[]> trainingDataSet) 
     {
         IDataSet dataSet = new MemoryDataSet();
         logger.start("正在构造训练数据集...");
         int total = trainingDataSet.size();
         int cur = 0;
-        for (Map.Entry<String, String[]> entry : trainingDataSet.entrySet())
+        for (KeyValuePair<string, string[]> entry : trainingDataSet.entrySet())
         {
-            String category = entry.getKey();
+            string category = entry.getKey();
             logger._out("[%s]...", category);
-            for (String doc : entry.getValue())
+            for (string doc : entry.getValue())
             {
                 dataSet.add(category, doc);
             }
@@ -85,13 +85,13 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(String folderPath) 
+    public void train(string folderPath) 
     {
         train(folderPath, "UTF-8");
     }
 
     //@Override
-    public Dictionary<String, Double> predict(Document document)
+    public Dictionary<string, Double> predict(Document document)
     {
         AbstractModel model = getModel();
         if (model == null)
@@ -104,7 +104,7 @@ public abstract class AbstractClassifier : IClassifier
         }
 
         double[] probs = categorize(document);
-        Dictionary<String, Double> scoreMap = new TreeMap<String, Double>();
+        Dictionary<string, Double> scoreMap = new TreeMap<string, Double>();
         for (int i = 0; i < probs.length; i++)
         {
             scoreMap.put(model.catalog[i], probs[i]);

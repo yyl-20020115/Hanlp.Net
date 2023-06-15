@@ -49,16 +49,16 @@ public abstract class TransformMatrix
      */
     int totalFrequency;
 
-    public bool load(String path)
+    public bool load(string path)
     {
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             // 第一行是矩阵的各个类型
-            String line = br.readLine();
-            String[] _param = line.split(",");
+            string line = br.readLine();
+            string[] _param = line.split(",");
             // 为了制表方便，第一个label是废物，所以要抹掉它
-            String[] labels = new String[_param.length - 1];
+            string[] labels = new string[_param.length - 1];
             System.arraycopy(_param, 1, labels, 0, labels.length);
             int[] ordinaryArray = new int[labels.length];
             ordinaryMax = 0;
@@ -79,7 +79,7 @@ public abstract class TransformMatrix
             // 之后就描述了矩阵
             while ((line = br.readLine()) != null)
             {
-                String[] paramArray = line.split(",");
+                string[] paramArray = line.split(",");
                 int currentOrdinary = ordinal(paramArray[0]);
                 for (int i = 0; i < ordinaryArray.length; ++i)
                 {
@@ -168,7 +168,7 @@ public abstract class TransformMatrix
         matrix = n_matrix;
     }
 
-    public abstract int ordinal(String tag);
+    public abstract int ordinal(string tag);
 
     public int getTotalFrequency(int ordinal)
     {

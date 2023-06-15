@@ -23,7 +23,7 @@ public class NRDictionary : EnumItemDictionary<NR>
 {
 
     //@Override
-    protected NR valueOf(String name)
+    protected NR valueOf(string name)
     {
         return NR.valueOf(name);
     }
@@ -41,7 +41,7 @@ public class NRDictionary : EnumItemDictionary<NR>
     }
 
     //@Override
-    protected void onLoaded(TreeMap<String, EnumItem<NR>> map)
+    protected void onLoaded(TreeMap<string, EnumItem<NR>> map)
     {
         map.put(" ", new EnumItem<NR>(NR.K, NR.A)); // txt中不允许出现空格词条，这里补上
     }

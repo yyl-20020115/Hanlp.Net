@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.util;
  */
 public class PosTagUtil
 {
-    private static Dictionary<String, String> posConverter = new TreeMap<String, String>();
+    private static Dictionary<string, string> posConverter = new TreeMap<string, string>();
 
     static
     {
@@ -174,12 +174,12 @@ public class PosTagUtil
      * @param termList
      * @return
      */
-    public static List<String> to863(List<Term> termList)
+    public static List<string> to863(List<Term> termList)
     {
-        List<String> posTagList = new ArrayList<String>(termList.size());
+        List<string> posTagList = new ArrayList<string>(termList.size());
         for (Term term : termList)
         {
-            String posTag = posConverter.get(term.nature.toString());
+            string posTag = posConverter.get(term.nature.toString());
             if (posTag == null)
                 posTag = term.nature.toString();
             posTagList.add(posTag);
@@ -195,16 +195,16 @@ public class PosTagUtil
      * @param corpus 测试集
      * @return Accuracy百分比
      */
-    public static float evaluate(POSTagger tagger, String corpus)
+    public static float evaluate(POSTagger tagger, string corpus)
     {
         int correct = 0, total = 0;
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(corpus);
-        for (String line : lineIterator)
+        for (string line : lineIterator)
         {
             Sentence sentence = Sentence.create(line);
             if (sentence == null) continue;
-            String[][] wordTagArray = sentence.toWordTagArray();
-            String[] prediction = tagger.tag(wordTagArray[0]);
+            string[][] wordTagArray = sentence.toWordTagArray();
+            string[] prediction = tagger.tag(wordTagArray[0]);
             assert prediction.length == wordTagArray[1].length;
             total += prediction.length;
             for (int i = 0; i < prediction.length; i++)

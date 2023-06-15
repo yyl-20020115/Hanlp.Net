@@ -30,7 +30,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static bool saveObjectTo(Object o, String path)
+    public static bool saveObjectTo(Object o, string path)
     {
         try
         {
@@ -53,7 +53,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static Object readObjectFrom(String path)
+    public static Object readObjectFrom(string path)
     {
         ObjectInputStream ois = null;
         try
@@ -77,7 +77,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static String readTxt(String path)
+    public static string readTxt(string path)
     {
         if (path == null) return null;
         try
@@ -89,8 +89,8 @@ public class IOUtil
             _in.close();
             // 处理 UTF-8 BOM
             if (read >= 3 && fileContent[0] == -17 && fileContent[1] == -69 && fileContent[2] == -65)
-                return new String(fileContent, 3, fileContent.length - 3, Charset.forName("UTF-8"));
-            return new String(fileContent, Charset.forName("UTF-8"));
+                return new string(fileContent, 3, fileContent.length - 3, Charset.forName("UTF-8"));
+            return new string(fileContent, Charset.forName("UTF-8"));
         }
         catch (FileNotFoundException e)
         {
@@ -104,11 +104,11 @@ public class IOUtil
         }
     }
 
-    public static LinkedList<String[]> readCsv(String path)
+    public static LinkedList<string[]> readCsv(string path)
     {
-        LinkedList<String[]> resultList = new LinkedList<String[]>();
-        LinkedList<String> lineList = readLineList(path);
-        foreach (String line in lineList)
+        LinkedList<string[]> resultList = new LinkedList<string[]>();
+        LinkedList<string> lineList = readLineList(path);
+        foreach (string line in lineList)
         {
             resultList.add(line.split(","));
         }
@@ -122,7 +122,7 @@ public class IOUtil
      * @param content
      * @return
      */
-    public static bool saveTxt(String path, String content)
+    public static bool saveTxt(string path, string content)
     {
         try
         {
@@ -139,12 +139,12 @@ public class IOUtil
         return true;
     }
 
-    public static bool saveTxt(String path, StringBuilder content)
+    public static bool saveTxt(string path, StringBuilder content)
     {
         return saveTxt(path, content.ToString());
     }
 
-    public static bool saveCollectionToTxt<T>(ICollection<T> collection, String path)
+    public static bool saveCollectionToTxt<T>(ICollection<T> collection, string path)
     {
         StringBuilder sb = new StringBuilder();
         foreach (Object o in collection)
@@ -161,7 +161,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static byte[] readBytes(String path)
+    public static byte[] readBytes(string path)
     {
         try
         {
@@ -181,7 +181,7 @@ public class IOUtil
         return null;
     }
 
-    public static String readTxt(String file, String charsetName) 
+    public static string readTxt(string file, string charsetName) 
     {
         InputStream _is = IOAdapter.open(file);
         byte[] targetArray = new byte[_is.available()];
@@ -193,10 +193,10 @@ public class IOUtil
         }
         _is.close();
 
-        return new String(targetArray, charsetName);
+        return new string(targetArray, charsetName);
     }
 
-    public static String baseName(String path)
+    public static string baseName(string path)
     {
         if (path == null || path.length() == 0)
             return "";
@@ -213,7 +213,7 @@ public class IOUtil
                     return "";
             }
             int lastInd = path.lastIndexOf('/', len - 1);
-            String fileName = path.substring(lastInd + 1, len);
+            string fileName = path.substring(lastInd + 1, len);
             if (fileName.equals("."))
             {
                 len--;
@@ -292,10 +292,10 @@ public class IOUtil
         return off;
     }
 
-    public static LinkedList<String> readLineList(String path)
+    public static LinkedList<string> readLineList(string path)
     {
-        LinkedList<String> result = new LinkedList<String>();
-        String txt = readTxt(path);
+        LinkedList<string> result = new LinkedList<string>();
+        string txt = readTxt(path);
         if (txt == null) return result;
         StringTokenizer tokenizer = new StringTokenizer(txt, "\n");
         while (tokenizer.hasMoreTokens())
@@ -312,10 +312,10 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static LinkedList<String> readLineListWithLessMemory(String path)
+    public static LinkedList<string> readLineListWithLessMemory(string path)
     {
-        LinkedList<String> result = new LinkedList<String>();
-        String line = null;
+        LinkedList<string> result = new LinkedList<string>();
+        string line = null;
         bool first = true;
         try
         {
@@ -340,21 +340,21 @@ public class IOUtil
         return result;
     }
 
-    public static bool saveMapToTxt(Dictionary<Object, Object> map, String path)
+    public static bool saveMapToTxt(Dictionary<Object, Object> map, string path)
     {
         return saveMapToTxt(map, path, "=");
     }
 
-    public static bool saveMapToTxt(Dictionary<Object, Object> map, String path, String separator)
+    public static bool saveMapToTxt(Dictionary<Object, Object> map, string path, string separator)
     {
         map = new TreeMap<Object, Object>(map);
         return saveEntrySetToTxt(map.entrySet(), path, separator);
     }
 
-    public static bool saveEntrySetToTxt(HashSet<Map.Entry<Object, Object>> entrySet, String path, String separator)
+    public static bool saveEntrySetToTxt(HashSet<KeyValuePair<Object, Object>> entrySet, string path, string separator)
     {
         StringBuilder sbOut = new StringBuilder();
-        for (Map.Entry<Object, Object> entry : entrySet)
+        for (KeyValuePair<Object, Object> entry : entrySet)
         {
             sbOut.Append(entry.getKey());
             sbOut.Append(separator);
@@ -369,14 +369,14 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static String dirname(String path)
+    public static string dirname(string path)
     {
         int index = path.lastIndexOf('/');
         if (index == -1) return path;
         return path.substring(0, index + 1);
     }
 
-    public static LineIterator readLine(String path)
+    public static LineIterator readLine(string path)
     {
         return new LineIterator(path);
     }
@@ -386,7 +386,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static bool deleteFile(String path)
+    public static bool deleteFile(string path)
     {
         return new File(path).delete();
     }
@@ -397,7 +397,7 @@ public class IOUtil
      * @param line 文件第一行
      * @return 去除BOM的部分
      */
-    public static String removeUTF8BOM(String line)
+    public static string removeUTF8BOM(string line)
     {
         if (line != null && line.startsWith("\uFEFF")) // UTF-8 byte order mark (EF BB BF)
         {
@@ -412,7 +412,7 @@ public class IOUtil
      * @param path 根目录
      * @return 文件列表
      */
-    public static List<File> fileList(String path)
+    public static List<File> fileList(string path)
     {
         List<File> fileList = new LinkedList<File>();
         File folder = new File(path);
@@ -451,10 +451,10 @@ public class IOUtil
     /**
      * 方便读取按行读取大文件
      */
-    public class LineIterator : IEnumerable<String>, IEnumerator<String>
+    public class LineIterator : IEnumerable<string>, IEnumerator<string>
     {
         BufferedReader bw;
-        String line;
+        string line;
 
         public LineIterator(BufferedReader bw)
         {
@@ -471,7 +471,7 @@ public class IOUtil
             }
         }
 
-        public LineIterator(String path)
+        public LineIterator(string path)
         {
             try
             {
@@ -528,9 +528,9 @@ public class IOUtil
         }
 
         //@Override
-        public String next()
+        public string next()
         {
-            String preLine = line;
+            string preLine = line;
             try
             {
                 if (bw != null)
@@ -568,7 +568,7 @@ public class IOUtil
         }
 
         //@Override
-        public Iterator<String> iterator()
+        public Iterator<string> iterator()
         {
             return this;
         }
@@ -582,7 +582,7 @@ public class IOUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedWriter newBufferedWriter(String path) 
+    public static BufferedWriter newBufferedWriter(string path) 
     {
         return new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
     }
@@ -594,12 +594,12 @@ public class IOUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedReader newBufferedReader(String path) 
+    public static BufferedReader newBufferedReader(string path) 
     {
         return new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
     }
 
-    public static BufferedWriter newBufferedWriter(String path, bool Append) 
+    public static BufferedWriter newBufferedWriter(string path, bool Append) 
     {
         return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, Append), "UTF-8"));
     }
@@ -610,7 +610,7 @@ public class IOUtil
      * @return
      * @
      */
-    public static InputStream newInputStream(String path) 
+    public static InputStream newInputStream(string path) 
     {
         if (IOAdapter == null) return new FileInputStream(path);
         return IOAdapter.open(path);
@@ -622,7 +622,7 @@ public class IOUtil
      * @return
      * @
      */
-    public static OutputStream newOutputStream(String path) 
+    public static OutputStream newOutputStream(string path) 
     {
         if (IOAdapter == null) return new FileOutputStream(path);
         return IOAdapter.create(path);
@@ -634,7 +634,7 @@ public class IOUtil
      * @param delimiter
      * @return
      */
-    public static String getSuffix(String name, String delimiter)
+    public static string getSuffix(string name, string delimiter)
     {
         return name.substring(name.lastIndexOf(delimiter) + 1);
     }
@@ -645,7 +645,7 @@ public class IOUtil
      * @param params
      * @
      */
-    public static void writeLine(BufferedWriter bw, params String[] _params) 
+    public static void writeLine(BufferedWriter bw, params string[] _params) 
     {
         for (int i = 0; i < _params.Length - 1; i++)
         {
@@ -661,18 +661,18 @@ public class IOUtil
      * @return 一个储存了词条的map
      * @ 异常表示加载失败
      */
-    public static Dictionary<String, CoreDictionary.Attribute> loadDictionary(params String[] pathArray) 
+    public static Dictionary<string, CoreDictionary.Attribute> loadDictionary(params string[] pathArray) 
     {
-        var map = new TreeMap<String, CoreDictionary.Attribute>();
-        for (String path : pathArray)
+        var map = new TreeMap<string, CoreDictionary.Attribute>();
+        for (string path : pathArray)
         {
             File file = new File(path);
-            String fileName = file.getName();
+            string fileName = file.getName();
             int natureIndex = fileName.lastIndexOf(' ');
             Nature defaultNature = Nature.n;
             if (natureIndex > 0)
             {
-                String natureString = fileName.substring(natureIndex + 1);
+                string natureString = fileName.substring(natureIndex + 1);
                 path = file.getParent() + File.separator + fileName.substring(0, natureIndex);
                 if (natureString.length() > 0 && !natureString.endsWith(".txt") && !natureString.endsWith(".csv"))
                 {
@@ -692,14 +692,14 @@ public class IOUtil
      * @param storage 储存位置
      * @ 异常表示加载失败
      */
-    public static void loadDictionary(BufferedReader br, Dictionary<String, CoreDictionary.Attribute> storage, bool isCSV, Nature defaultNature) 
+    public static void loadDictionary(BufferedReader br, Dictionary<string, CoreDictionary.Attribute> storage, bool isCSV, Nature defaultNature) 
     {
-        String splitter = "\\s";
+        string splitter = "\\s";
         if (isCSV)
         {
             splitter = ",";
         }
-        String line;
+        string line;
         bool firstLine = true;
         while ((line = br.readLine()) != null)
         {
@@ -708,7 +708,7 @@ public class IOUtil
                 line = IOUtil.removeUTF8BOM(line);
                 firstLine = false;
             }
-            String param = line.split(splitter);
+            string param = line.split(splitter);
 
             int natureCount = (param.length - 1) / 2;
             CoreDictionary.Attribute attribute;
@@ -746,7 +746,7 @@ public class IOUtil
      * @param path
      * @return
      */
-    public static bool isFileExisted(String path)
+    public static bool isFileExisted(string path)
     {
         File file = new File(path);
         return file.isFile() && file.exists();

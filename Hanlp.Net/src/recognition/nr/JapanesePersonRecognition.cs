@@ -40,7 +40,7 @@ public class JapanesePersonRecognition
         {
             Character label = searcher.value;
             int offset = searcher.begin;
-            String key = new String(charArray, offset, searcher.length);
+            string key = new string(charArray, offset, searcher.length);
             if (preOffset != offset)
             {
                 if (appendTimes > 1 && sbName.length() > 2) // 日本人名最短为3字
@@ -92,7 +92,7 @@ public class JapanesePersonRecognition
      * @param name
      * @return
      */
-    public static bool isBadCase(String name)
+    public static bool isBadCase(string name)
     {
         Character label = JapanesePersonDictionary.get(name);
         if (label == null) return false;
@@ -106,7 +106,7 @@ public class JapanesePersonRecognition
      * @param wordNetOptimum
      * @param wordNetAll
      */
-    private static void insertName(String name, int activeLine, WordNet wordNetOptimum, WordNet wordNetAll)
+    private static void insertName(string name, int activeLine, WordNet wordNetOptimum, WordNet wordNetAll)
     {
         if (isBadCase(name)) return;
         wordNetOptimum.insert(activeLine, new Vertex(Predefine.TAG_PEOPLE, name, new CoreDictionary.Attribute(Nature.nrj), WORD_ID), wordNetAll);

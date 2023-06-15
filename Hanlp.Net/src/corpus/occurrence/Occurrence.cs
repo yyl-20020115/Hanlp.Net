@@ -56,7 +56,7 @@ public class Occurrence
     /**
      * 软缓存一个pair的setset
      */
-    private HashSet<KeyValuePair<String, PairFrequency>> entrySetPair;
+    private HashSet<KeyValuePair<string, PairFrequency>> entrySetPair;
 
     public Occurrence()
     {
@@ -72,7 +72,7 @@ public class Occurrence
      * @param first  第一个词
      * @param second 第二个词
      */
-    public void addPair(String first, String second)
+    public void addPair(string first, string second)
     {
         addPair(first, RIGHT, second);
     }
@@ -82,7 +82,7 @@ public class Occurrence
      *
      * @param key 增加一个词
      */
-    public void addTerm(String key)
+    public void addTerm(string key)
     {
         TermFrequency value = trieSingle.get(key);
         if (value == null)
@@ -97,9 +97,9 @@ public class Occurrence
         ++totalTerm;
     }
 
-    private void addPair(String first, char delimiter, String second)
+    private void addPair(string first, char delimiter, string second)
     {
-        String key = first + delimiter + second;
+        string key = first + delimiter + second;
         PairFrequency value = triePair.get(key);
         if (value == null)
         {
@@ -113,9 +113,9 @@ public class Occurrence
         ++totalPair;
     }
 
-    public void addTria(String first, String second, String third)
+    public void addTria(string first, string second, string third)
     {
-        String key = first + RIGHT + second + RIGHT + third;
+        string key = first + RIGHT + second + RIGHT + third;
         TriaFrequency value = trieTria.get(key);
         if (value == null)
         {
@@ -145,29 +145,29 @@ public class Occurrence
      * @param term
      * @return
      */
-    public int getTermFrequency(String term)
+    public int getTermFrequency(string term)
     {
         TermFrequency termFrequency = trieSingle.get(term);
         if (termFrequency == null) return 0;
         return termFrequency.getValue();
     }
 
-    public int getPairFrequency(String first, String second)
+    public int getPairFrequency(string first, string second)
     {
         TermFrequency termFrequency = triePair.get(first + RIGHT + second);
         if (termFrequency == null) return 0;
         return termFrequency.getValue();
     }
 
-    public void addAll(String[] termList)
+    public void addAll(string[] termList)
     {
-        for (String term : termList)
+        for (string term : termList)
         {
             addTerm(term);
         }
 
-        String first = null;
-        for (String current : termList)
+        string first = null;
+        for (string current : termList)
         {
             if (first != null)
             {
@@ -184,7 +184,7 @@ public class Occurrence
     public List<PairFrequency> getPhraseByMi()
     {
         List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
-        for (Map.Entry<String, PairFrequency> entry : entrySetPair)
+        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
             pairFrequencyList.add(entry.getValue());
         }
@@ -202,7 +202,7 @@ public class Occurrence
     public List<PairFrequency> getPhraseByLe()
     {
         List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
-        for (Map.Entry<String, PairFrequency> entry : entrySetPair)
+        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
             pairFrequencyList.add(entry.getValue());
         }
@@ -220,7 +220,7 @@ public class Occurrence
     public List<PairFrequency> getPhraseByRe()
     {
         List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
-        for (Map.Entry<String, PairFrequency> entry : entrySetPair)
+        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
             pairFrequencyList.add(entry.getValue());
         }
@@ -238,7 +238,7 @@ public class Occurrence
     public List<PairFrequency> getPhraseByScore()
     {
         List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
-        for (Map.Entry<String, PairFrequency> entry : entrySetPair)
+        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
             pairFrequencyList.add(entry.getValue());
         }
@@ -256,7 +256,7 @@ public class Occurrence
     public void addAll(List<Term> resultList)
     {
 //        System._out.println(resultList);
-        String[] termList = new String[resultList.size()];
+        string[] termList = new string[resultList.size()];
         int i = 0;
         for (Term word : resultList)
         {
@@ -266,28 +266,28 @@ public class Occurrence
         addAll(termList);
     }
 
-    public void addAll(String text)
+    public void addAll(string text)
     {
         addAll(NotionalTokenizer.segment(text));
     }
 
     //@Override
-    public String toString()
+    public string toString()
     {
         final StringBuilder sb = new StringBuilder("二阶共现：\n");
-        for (Map.Entry<String, PairFrequency> entry : triePair.entrySet())
+        for (KeyValuePair<string, PairFrequency> entry : triePair.entrySet())
         {
             sb.Append(entry.getValue()).Append('\n');
         }
         sb.Append("三阶共现：\n");
-        for (Map.Entry<String, TriaFrequency> entry : trieTria.entrySet())
+        for (KeyValuePair<string, TriaFrequency> entry : trieTria.entrySet())
         {
             sb.Append(entry.getValue()).Append('\n');
         }
         return sb.toString();
     }
 
-    public double computeMutualInformation(String first, String second)
+    public double computeMutualInformation(string first, string second)
     {
         return Math.log(Math.max(Predefine.MIN_PROBABILITY, getPairFrequency(first, second) / (totalPair / 2)) / Math.max(Predefine.MIN_PROBABILITY, (getTermFrequency(first) / totalTerm * getTermFrequency(second) / totalTerm)));
     }
@@ -305,7 +305,7 @@ public class Occurrence
      */
     public double computeLeftEntropy(PairFrequency pair)
     {
-        Set<Map.Entry<String, TriaFrequency>> entrySet = trieTria.prefixSearch(pair.getKey() + LEFT);
+        Set<KeyValuePair<string, TriaFrequency>> entrySet = trieTria.prefixSearch(pair.getKey() + LEFT);
         return computeEntropy(entrySet);
     }
 
@@ -317,19 +317,19 @@ public class Occurrence
      */
     public double computeRightEntropy(PairFrequency pair)
     {
-        Set<Map.Entry<String, TriaFrequency>> entrySet = trieTria.prefixSearch(pair.getKey() + RIGHT);
+        Set<KeyValuePair<string, TriaFrequency>> entrySet = trieTria.prefixSearch(pair.getKey() + RIGHT);
         return computeEntropy(entrySet);
     }
 
-    private double computeEntropy(Set<Map.Entry<String, TriaFrequency>> entrySet)
+    private double computeEntropy(Set<KeyValuePair<string, TriaFrequency>> entrySet)
     {
         double totalFrequency = 0;
-        for (Map.Entry<String, TriaFrequency> entry : entrySet)
+        for (KeyValuePair<string, TriaFrequency> entry : entrySet)
         {
             totalFrequency += entry.getValue().getValue();
         }
         double le = 0;
-        for (Map.Entry<String, TriaFrequency> entry : entrySet)
+        for (KeyValuePair<string, TriaFrequency> entry : entrySet)
         {
             double p = entry.getValue().getValue() / totalFrequency;
             le += -p * Math.log(p);
@@ -346,7 +346,7 @@ public class Occurrence
         double total_mi = 0;
         double total_le = 0;
         double total_re = 0;
-        for (Map.Entry<String, PairFrequency> entry : entrySetPair)
+        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
             PairFrequency value = entry.getValue();
             value.mi = computeMutualInformation(value);
@@ -357,7 +357,7 @@ public class Occurrence
             total_re += value.re;
         }
 
-        for (Map.Entry<String, PairFrequency> entry : entrySetPair)
+        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
             PairFrequency value = entry.getValue();
             value.score = value.mi / total_mi + value.le / total_le+ value.re / total_re;   // 归一化
@@ -369,7 +369,7 @@ public class Occurrence
      * 获取一阶共现,其实就是词频统计
      * @return
      */
-    public Set<Map.Entry<String, TermFrequency>> getUniGram()
+    public Set<KeyValuePair<string, TermFrequency>> getUniGram()
     {
         return trieSingle.entrySet();
     }
@@ -378,7 +378,7 @@ public class Occurrence
      * 获取二阶共现
      * @return
      */
-    public Set<Map.Entry<String, PairFrequency>> getBiGram()
+    public Set<KeyValuePair<string, PairFrequency>> getBiGram()
     {
         return triePair.entrySet();
     }
@@ -387,13 +387,13 @@ public class Occurrence
      * 获取三阶共现
      * @return
      */
-    public Set<Map.Entry<String, TriaFrequency>> getTriGram()
+    public Set<KeyValuePair<string, TriaFrequency>> getTriGram()
     {
         return trieTria.entrySet();
     }
 
 
-//    public static void main(String[] args)
+//    public static void main(string[] args)
 //    {
 //        Occurrence occurrence = new Occurrence();
 //        occurrence.addAll("算法工程师\n" +

@@ -22,7 +22,7 @@ namespace com.hankcs.hanlp.model.perceptron.instance;
  */
 public class NERInstance : Instance
 {
-    public NERInstance(String[] wordArray, String[] posArray, String[] nerArray, NERTagSet tagSet, FeatureMap featureMap)
+    public NERInstance(string[] wordArray, string[] posArray, string[] nerArray, NERTagSet tagSet, FeatureMap featureMap)
     {
         this(wordArray, posArray, featureMap);
 
@@ -33,12 +33,12 @@ public class NERInstance : Instance
         }
     }
 
-    public NERInstance(String[] wordArray, String[] posArray, FeatureMap featureMap)
+    public NERInstance(string[] wordArray, string[] posArray, FeatureMap featureMap)
     {
         initFeatureMatrix(wordArray, posArray, featureMap);
     }
 
-    private void initFeatureMatrix(String[] wordArray, String[] posArray, FeatureMap featureMap)
+    private void initFeatureMatrix(string[] wordArray, string[] posArray, FeatureMap featureMap)
     {
         featureMatrix = new int[wordArray.length][];
         for (int i = 0; i < featureMatrix.length; i++)
@@ -56,21 +56,21 @@ public class NERInstance : Instance
      * @param position   当前提取的词语所在的位置
      * @return 特征向量
      */
-    protected int[] extractFeature(String[] wordArray, String[] posArray, FeatureMap featureMap, int position)
+    protected int[] extractFeature(string[] wordArray, string[] posArray, FeatureMap featureMap, int position)
     {
         List<int> featVec = new ArrayList<int>();
 
-        String pre2Word = position >= 2 ? wordArray[position - 2] : "_B_";
-        String preWord = position >= 1 ? wordArray[position - 1] : "_B_";
-        String curWord = wordArray[position];
-        String nextWord = position <= wordArray.length - 2 ? wordArray[position + 1] : "_E_";
-        String next2Word = position <= wordArray.length - 3 ? wordArray[position + 2] : "_E_";
+        string pre2Word = position >= 2 ? wordArray[position - 2] : "_B_";
+        string preWord = position >= 1 ? wordArray[position - 1] : "_B_";
+        string curWord = wordArray[position];
+        string nextWord = position <= wordArray.length - 2 ? wordArray[position + 1] : "_E_";
+        string next2Word = position <= wordArray.length - 3 ? wordArray[position + 2] : "_E_";
 
-        String pre2Pos = position >= 2 ? posArray[position - 2] : "_B_";
-        String prePos = position >= 1 ? posArray[position - 1] : "_B_";
-        String curPos = posArray[position];
-        String nextPos = position <= posArray.length - 2 ? posArray[position + 1] : "_E_";
-        String next2Pos = position <= posArray.length - 3 ? posArray[position + 2] : "_E_";
+        string pre2Pos = position >= 2 ? posArray[position - 2] : "_B_";
+        string prePos = position >= 1 ? posArray[position - 1] : "_B_";
+        string curPos = posArray[position];
+        string nextPos = position <= posArray.length - 2 ? posArray[position + 1] : "_E_";
+        string next2Pos = position <= posArray.length - 3 ? posArray[position + 2] : "_E_";
 
         StringBuilder sb = new StringBuilder();
         addFeatureThenClear(sb.Append(pre2Word).Append('1'), featVec, featureMap);
@@ -96,7 +96,7 @@ public class NERInstance : Instance
         return toFeatureArray(featVec);
     }
 
-    public static NERInstance create(String segmentedTaggedNERSentence, FeatureMap featureMap)
+    public static NERInstance create(string segmentedTaggedNERSentence, FeatureMap featureMap)
     {
         return create(Sentence.create(segmentedTaggedNERSentence), featureMap);
     }
@@ -106,10 +106,10 @@ public class NERInstance : Instance
         if (sentence == null || featureMap == null) return null;
 
         NERTagSet tagSet = (NERTagSet) featureMap.tagSet;
-        List<String[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
-        String[] wordArray = new String[collector.size()];
-        String[] posArray = new String[collector.size()];
-        String[] tagArray = new String[collector.size()];
+        List<string[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
+        string[] wordArray = new string[collector.size()];
+        string[] posArray = new string[collector.size()];
+        string[] tagArray = new string[collector.size()];
         Utility.reshapeNER(collector, wordArray, posArray, tagArray);
         return new NERInstance(wordArray, posArray, tagArray, tagSet, featureMap);
     }

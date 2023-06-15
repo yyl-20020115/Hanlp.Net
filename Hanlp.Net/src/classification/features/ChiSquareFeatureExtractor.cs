@@ -87,20 +87,20 @@ public class ChiSquareFeatureExtractor
         }
         if (selectedFeatures.size() > maxSize)
         {
-            MaxHeap<Map.Entry<int, Double>> maxHeap = new MaxHeap<Map.Entry<int, Double>>(maxSize, new Comparator<Map.Entry<int, Double>>()
+            MaxHeap<KeyValuePair<int, Double>> maxHeap = new MaxHeap<KeyValuePair<int, Double>>(maxSize, new Comparator<KeyValuePair<int, Double>>()
             {
                 //@Override
-                public int compare(Map.Entry<int, Double> o1, Map.Entry<int, Double> o2)
+                public int compare(KeyValuePair<int, Double> o1, KeyValuePair<int, Double> o2)
                 {
                     return o1.getValue().compareTo(o2.getValue());
                 }
             });
-            for (Map.Entry<int, Double> entry : selectedFeatures.entrySet())
+            for (KeyValuePair<int, Double> entry : selectedFeatures.entrySet())
             {
                 maxHeap.add(entry);
             }
             selectedFeatures.clear();
-            for (Map.Entry<int, Double> entry : maxHeap)
+            for (KeyValuePair<int, Double> entry : maxHeap)
             {
                 selectedFeatures.put(entry.getKey(), entry.getValue());
             }

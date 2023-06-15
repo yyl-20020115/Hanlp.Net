@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.tokenizer.pipe;
  *
  * @author hankcs
  */
-public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
+public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
 {
     /**
      * 入口
@@ -42,7 +42,7 @@ public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
     public O flow(I input)
     {
         M i = first.flow(input);
-        for (Pipe<M, M> pipe : pipeList)
+        foreach (Pipe<M, M> pipe in pipeList)
         {
             i = pipe.flow(i);
         }
@@ -52,7 +52,7 @@ public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
     //@Override
     public int size()
     {
-        return pipeList.size();
+        return pipeList.Count;
     }
 
     //@Override
@@ -80,7 +80,7 @@ public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
     }
 
     //@Override
-    public <T> T[] toArray(T[] a)
+    public  T[] toArray<T>(T[] a)
     {
         return pipeList.toArray(a);
     }

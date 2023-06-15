@@ -13,13 +13,13 @@ public final class WordCluster
         System.exit(0);
     }
 
-    public static void main(String[] args)
+    public static void main(string[] args)
     {
         if (args.length < 3) usage();
 
-        final String vectorFile = args[0];
+        final string vectorFile = args[0];
         final int k = int.parseInt(args[1]);
-        final String outFile = args[2];
+        final string outFile = args[2];
         final VectorsReader vectorsReader = new VectorsReader(vectorFile);
         vectorsReader.readVectorFile();
 

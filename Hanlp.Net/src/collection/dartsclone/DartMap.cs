@@ -17,11 +17,11 @@ namespace com.hankcs.hanlp.collection.dartsclone;
  * 双数组trie树map，更省内存，原本希望代替DoubleArrayTrie，后来发现效率不够
  * @author hankcs
  */
-public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
+public class DartMap<V> : DoubleArray : Dictionary<string, V>, ITrie<V>
 {
     V[] valueArray;
 
-    public DartMap(List<String> keyList, V[] valueArray)
+    public DartMap(List<string> keyList, V[] valueArray)
     {
         int[] indexArray = new int[valueArray.length];
         for (int i = 0; i < indexArray.length; ++i)
@@ -32,7 +32,7 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
         build(keyList, indexArray);
     }
 
-    public DartMap(TreeMap<String, V> map)
+    public DartMap(TreeMap<string, V> map)
     {
         build(map);
     }
@@ -59,7 +59,7 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
      * @param key
      * @return
      */
-    public bool containsKey(String key)
+    public bool containsKey(string key)
     {
         return exactMatchSearch(key) != -1;
     }
@@ -77,14 +77,14 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
     }
 
     //@Override
-    public int build(TreeMap<String, V> keyValueMap)
+    public int build(TreeMap<string, V> keyValueMap)
     {
         int size = keyValueMap.size();
         int[] indexArray = new int[size];
         valueArray = (V[]) keyValueMap.values().toArray();
-        List<String> keyList = new ArrayList<String>(size);
+        List<string> keyList = new ArrayList<string>(size);
         int i = 0;
-        for (Entry<String, V> entry : keyValueMap.entrySet())
+        for (Entry<string, V> entry : keyValueMap.entrySet())
         {
             indexArray[i] = i;
             valueArray[i] = entry.getValue();
@@ -110,10 +110,10 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
     //@Override
     public V get(char[] key)
     {
-        return get(new String(key));
+        return get(new string(key));
     }
 
-    public V get(String key)
+    public V get(string key)
     {
         int id = exactMatchSearch(key);
         if (id == -1) return null;
@@ -133,25 +133,25 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
      * @param maxResults
      * @return
      */
-    public ArrayList<Pair<String, V>> commonPrefixSearch(String key, int offset, int maxResults)
+    public ArrayList<Pair<string, V>> commonPrefixSearch(string key, int offset, int maxResults)
     {
         byte[] keyBytes = key.getBytes(utf8);
         List<Pair<int, int>> pairList = commonPrefixSearch(keyBytes, offset, maxResults);
-        ArrayList<Pair<String, V>> resultList = new ArrayList<Pair<String, V>>(pairList.size());
+        ArrayList<Pair<string, V>> resultList = new ArrayList<Pair<string, V>>(pairList.size());
         for (Pair<int, int> pair : pairList)
         {
-            resultList.add(new Pair<String, V>(new String(keyBytes, 0, pair.first), valueArray[pair.second]));
+            resultList.add(new Pair<string, V>(new string(keyBytes, 0, pair.first), valueArray[pair.second]));
         }
         return resultList;
     }
 
-    public ArrayList<Pair<String, V>> commonPrefixSearch(String key)
+    public ArrayList<Pair<string, V>> commonPrefixSearch(string key)
     {
         return commonPrefixSearch(key, 0, int.MAX_VALUE);
     }
 
     //@Override
-    public V put(String key, V value)
+    public V put(string key, V value)
     {
         throw new UnsupportedOperationException("双数组不支持增量式插入");
     }
@@ -163,7 +163,7 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
     }
 
     //@Override
-    public void putAll(Dictionary<? : String, ? : V> m)
+    public void putAll(Dictionary<? : string, ? : V> m)
     {
         throw new UnsupportedOperationException("双数组不支持增量式插入");
     }
@@ -175,7 +175,7 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
     }
 
     //@Override
-    public Set<String> keySet()
+    public Set<string> keySet()
     {
         throw new UnsupportedOperationException("双数组不支持");
     }
@@ -187,7 +187,7 @@ public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
     }
 
     //@Override
-    public Set<Entry<String, V>> entrySet()
+    public Set<Entry<string, V>> entrySet()
     {
         throw new UnsupportedOperationException("双数组不支持");
     }

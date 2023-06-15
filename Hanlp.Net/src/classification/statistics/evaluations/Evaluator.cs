@@ -53,7 +53,7 @@ public class Evaluator
         return result;
     }
 
-    public static FMeasure evaluate(IClassifier classifier, Dictionary<String, String[]> testingDataSet)
+    public static FMeasure evaluate(IClassifier classifier, Dictionary<string, string[]> testingDataSet)
     {
         return evaluate(classifier, new MemoryDataSet(classifier.getModel()).add(testingDataSet));
     }

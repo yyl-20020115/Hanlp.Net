@@ -40,8 +40,8 @@ public interface IDataSet : IEnumerable<Document>
      * @throws IllegalArgumentException
      * @
      */
-    IDataSet load(String folderPath) ;
-    IDataSet load(String folderPath, double rate) ;
+    IDataSet load(string folderPath) ;
+    IDataSet load(string folderPath, double rate) ;
 
     /**
      * 加载数据集
@@ -62,8 +62,8 @@ public interface IDataSet : IEnumerable<Document>
      * @throws IllegalArgumentException
      * @
      */
-    IDataSet load(String folderPath, String charsetName) ;
-    IDataSet load(String folderPath, String charsetName, double percentage) ;
+    IDataSet load(string folderPath, string charsetName) ;
+    IDataSet load(string folderPath, string charsetName, double percentage) ;
 
     /**
      * 往训练集中加入一个文档
@@ -72,7 +72,7 @@ public interface IDataSet : IEnumerable<Document>
      * @param text     文本
      * @return
      */
-    Document add(String category, String text);
+    Document add(string category, string text);
 
     /**
      * 利用本数据集的词表和类目表将文本形式的文档转换为内部通用的文档
@@ -81,7 +81,7 @@ public interface IDataSet : IEnumerable<Document>
      * @param text
      * @return
      */
-    Document convert(String category, String text);
+    Document convert(string category, string text);
 
     /**
      * 设置分词器
@@ -131,7 +131,7 @@ public interface IDataSet : IEnumerable<Document>
      */
     bool isTestingDataSet();
 
-    IDataSet add(Dictionary<String, String[]> testingDataSet);
+    IDataSet add(Dictionary<string, string[]> testingDataSet);
 
     IDataSet shrink(int[] idMap);
 
