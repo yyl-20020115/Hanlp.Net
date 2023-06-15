@@ -58,7 +58,6 @@ public class TrieTest : TestCase
         {
             this.text = text;
         }
-        //@Override
         public void hit(int begin, int end, String value)
         {
             //                Console.printf("[%d:%d]=%s\n", begin, end, value);

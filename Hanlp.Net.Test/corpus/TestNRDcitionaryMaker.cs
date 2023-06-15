@@ -13,7 +13,7 @@ public class TestNRDcitionaryMaker
     {
         EasyDictionary dictionary = EasyDictionary.create("data/dictionary/2014_dictionary.txt");
         NRDictionaryMaker nrDictionaryMaker = new NRDictionaryMaker(dictionary);
-        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", );
+        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", new NRD());
         nrDictionaryMaker.saveTxtTo("D:\\JavaProjects\\HanLP\\data\\test\\person\\nr1");
     }
     public class NRD : CorpusLoader.Handler

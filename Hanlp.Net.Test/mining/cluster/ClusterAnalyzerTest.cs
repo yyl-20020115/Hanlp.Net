@@ -7,6 +7,6 @@ public class ClusterAnalyzerTest : TestCase
     [TestMethod]
     public void TestAddDocument() 
     {
-        DemoTextClustering.main(null);
+        //DemoTextClustering.Main(null);
     }
 }

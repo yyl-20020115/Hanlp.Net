@@ -59,15 +59,15 @@ public class NaiveBayesClassifierTest : TestCase
         String text = IOUtil.readTxt(path);
         String label = naiveBayesClassifier.classify(text);
         String title = text.Split("\\n")[0].Replace("\\s", "");
-        Console.WriteLine("《%s》 属于分类 【%s】\n", title, label);
+        Console.WriteLine("《{0}》 属于分类 【{1}】\n", title, label);
         text = "2016年中国铁路完成固定资产投资将达8000亿元";
         title = text;
         label = naiveBayesClassifier.classify(text);
-        Console.WriteLine("《%s》 属于分类 【%s】\n", title, label);
+        Console.WriteLine("《{0}》 属于分类 【{1}】\n", title, label);
         text = "国安2016赛季年票开售比赛场次减少套票却上涨";
         title = text;
         label = naiveBayesClassifier.classify(text);
-        Console.WriteLine("《%s》 属于分类 【%s】\n", title, label);
+        Console.WriteLine("《{0}》 属于分类 【{1}】\n", title, label);
         // 对将训练集作为测试，计算准确率
         int totalDocuments = 0;
         int rightDocuments = 0;

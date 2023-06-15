@@ -23,6 +23,10 @@ public class IIOAdapterTest : TestCase
 
     public class IOP : FileIOAdapter
     {
+        public IOP()
+        {
+                
+        }
         //@Override
         public InputStream open(String path)
         {

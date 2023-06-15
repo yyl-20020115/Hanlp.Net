@@ -41,7 +41,7 @@ public class IOUtilTest : TestCase
         IOUtil.saveTxt(tempFile.getAbsolutePath(), "\uFEFF第1行\n第2行");
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(tempFile.getAbsolutePath());
         int i = 1;
-        for (String line : lineIterator)
+        foreach (String line in lineIterator)
         {
             assertEquals(String.format("第%d行", i++), line);
         }

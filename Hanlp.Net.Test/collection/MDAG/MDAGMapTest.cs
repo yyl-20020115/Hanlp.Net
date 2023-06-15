@@ -25,14 +25,14 @@ public class MDAGMapTest : TestCase
     }
     [TestMethod]
 
-    public void testPut() 
+    public void TestPut()
     {
     }
     [TestMethod]
 
-    public void testGet() 
+    public void TestGet() 
     {
-        testPut();
+        TestPut();
         mdagMap.simplify();
 //        mdagMap.unSimplify();
         foreach (String word in validKeySet)
@@ -42,17 +42,17 @@ public class MDAGMapTest : TestCase
     }
     [TestMethod]
 
-    public void testSingle() 
+    public void TestSingle() 
     {
-        testPut();
+        TestPut();
         mdagMap.simplify();
         assertEquals(null, mdagMap.get("齿轮厂"));
     }
     [TestMethod]
 
-    public void testCommonPrefixSearch() 
+    public void TestCommonPrefixSearch() 
     {
-        testPut();
+        TestPut();
         assertEquals("[hankcs=6]", mdagMap.commonPrefixSearchWithValue("hankcs").ToString());
     }
 

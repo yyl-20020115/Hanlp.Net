@@ -24,7 +24,7 @@ public class TestJianFanDictionaryMaker : TestCase
     private String root = "data/dictionary/tc/";
     [TestMethod]
 
-    public void testCombine() 
+    public void TestCombine() 
     {
 //        StringDictionary dictionaryHanLP = new StringDictionary("=");
 //        dictionaryHanLP.load(HanLP.Config.t2sDictionaryPath);

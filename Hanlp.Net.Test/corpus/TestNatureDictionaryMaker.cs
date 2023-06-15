@@ -27,7 +27,8 @@ public class TestNatureDictionaryMaker
         //        makeCoreDictionary("D:\\JavaProjects\\CorpusToolBox\\data\\2014", "data/dictionary/CoreNatureDictionary.txt");
         //        EasyDictionary dictionary = EasyDictionary.create("data/dictionary/CoreNatureDictionary.txt");
         NatureDictionaryMaker dictionaryMaker = new NatureDictionaryMaker();
-        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new NDM(dictionaryMaker)); ;
+        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", 
+            new NDM(dictionaryMaker));
         dictionaryMaker.saveTxtTo("data/test/CoreNatureDictionary");
     }
 

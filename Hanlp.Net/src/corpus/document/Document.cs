@@ -59,7 +59,7 @@ public class Document : Serializable
     public List<IWord> getWordList()
     {
         List<IWord> wordList = new LinkedList<IWord>();
-        for (Sentence sentence : sentenceList)
+        foreach (Sentence sentence in sentenceList)
         {
             wordList.addAll(sentence.wordList);
         }
@@ -70,7 +70,7 @@ public class Document : Serializable
     {
         List<IWord> wordList = getWordList();
         List<Word> simpleWordList = new LinkedList<Word>();
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
             if (word is CompoundWord)
             {
@@ -141,7 +141,7 @@ public class Document : Serializable
     public List<List<Word>> getSimpleSentenceList(bool spilt)
     {
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
-        for (Sentence sentence : sentenceList)
+        foreach (Sentence sentence in sentenceList)
         {
             List<Word> wordList = new LinkedList<Word>();
             for (IWord word : sentence.wordList)

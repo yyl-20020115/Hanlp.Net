@@ -17,15 +17,15 @@ namespace com.hankcs.hanlp.collection.MDAG;
  *
  * @author hankcs
  */
-public class MDAGSet : MDAG : Set<string>
+public class MDAGSet : MDAG , ISet<string>
 {
 
-    public MDAGSet(File dataFile) 
+    public MDAGSet(string dataFile) 
     {
         super(dataFile);
     }
 
-    public MDAGSet(Collection<string> strCollection)
+    public MDAGSet(ICollection<string> strCollection)
     {
         super(strCollection);
     }
@@ -48,13 +48,13 @@ public class MDAGSet : MDAG : Set<string>
     //@Override
     public bool isEmpty()
     {
-        return this.equivalenceClassMDAGNodeHashMap.size() != 0;
+        return this.equivalenceClassMDAGNodeHashMap.Count != 0;
     }
 
     //@Override
     public bool contains(Object o)
     {
-        if (o.getClass() != string.class) return false;
+        if (o.getClass() != string.s) return false;
         return contains((string) o);
     }
 
@@ -71,7 +71,7 @@ public class MDAGSet : MDAG : Set<string>
     }
 
     //@Override
-    public <T> T[] toArray(T[] a)
+    public T[] toArray<T>(T[] a)
     {
         return getAllStrings().toArray(a);
     }
@@ -86,7 +86,7 @@ public class MDAGSet : MDAG : Set<string>
     //@Override
     public bool remove(Object o)
     {
-        if (o.getClass() == string.class)
+        if (o.getClass() == string.s)
         {
             removeString((string) o);
         }
@@ -98,7 +98,7 @@ public class MDAGSet : MDAG : Set<string>
     }
 
     //@Override
-    public bool containsAll(Collection<?> c)
+    public bool containsAll(ICollection<?> c)
     {
         for (Object e : c)
             if (!contains(e))
@@ -107,7 +107,7 @@ public class MDAGSet : MDAG : Set<string>
     }
 
     //@Override
-    public bool addAll(Collection<? : string> c)
+    public bool addAll(ICollection<string> c)
     {
         bool modified = false;
         for (string e : c)
@@ -117,7 +117,7 @@ public class MDAGSet : MDAG : Set<string>
     }
 
     //@Override
-    public bool retainAll(Collection<?> c)
+    public bool retainAll<T>(ICollection<T> c)
     {
         bool modified = false;
         Iterator<string> it = iterator();
@@ -133,7 +133,7 @@ public class MDAGSet : MDAG : Set<string>
     }
 
     //@Override
-    public bool removeAll(Collection<?> c)
+    public bool removeAll<T>(ICollection<T> c)
     {
         bool modified = false;
         Iterator<?> it = iterator();
@@ -153,9 +153,9 @@ public class MDAGSet : MDAG : Set<string>
     {
         sourceNode = new MDAGNode(false);
         simplifiedSourceNode = null;
-        equivalenceClassMDAGNodeHashMap.clear();
+        equivalenceClassMDAGNodeHashMap.Clear();
         mdagDataArray = null;
-        charTreeSet.clear();
+        charTreeSet.Clear();
         transitionCount = 0;
     }
 }

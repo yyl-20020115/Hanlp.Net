@@ -30,7 +30,7 @@ public class ViterbiTest : TestCase
         new double[]{0.6, 0.3, 0.1},
     };
     [TestMethod]
-    public void testCompute() 
+    public void TestCompute() 
     {
         for (int i = 0; i < start_probability.Length; ++i)
         {

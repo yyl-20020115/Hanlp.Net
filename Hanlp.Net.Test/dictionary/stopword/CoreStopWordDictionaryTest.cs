@@ -7,18 +7,18 @@ namespace com.hankcs.hanlp.dictionary.stopword;
 public class CoreStopWordDictionaryTest : TestCase
 {
     [TestMethod]
-    public void testContains() 
+    public void TestContains()
     {
-        assertTrue(CoreStopWordDictionary.Contains("这就是说"));
+        assertTrue(CoreStopWordDictionary.contains("这就是说"));
     }
     [TestMethod]
-    public void testContainsSomeWords() 
+    public void TestContainsSomeWords()
     {
-        assertEquals(true, CoreStopWordDictionary.Contains("可以"));
+        assertEquals(true, CoreStopWordDictionary.contains("可以"));
     }
     [TestMethod]
 
-    public void testMDAG() 
+    public void TestMDAG()
     {
         List<String> wordList = new ();
         wordList.Add("zoo");

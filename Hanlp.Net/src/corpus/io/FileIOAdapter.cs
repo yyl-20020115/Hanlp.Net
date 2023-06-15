@@ -20,13 +20,13 @@ namespace com.hankcs.hanlp.corpus.io;
 public class FileIOAdapter : IIOAdapter
 {
     //@Override
-    public InputStream open(string path) throws FileNotFoundException
+    public InputStream open(string path)
     {
         return new FileInputStream(path);
     }
 
     //@Override
-    public OutputStream create(string path) throws FileNotFoundException
+    public OutputStream create(string path) 
     {
         return new FileOutputStream(path);
     }
