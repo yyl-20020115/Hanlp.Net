@@ -9,7 +9,7 @@ namespace com.hankcs.hanlp.corpus;
 public class TestNRDcitionaryMaker
 {
 
-    public static void main(String[] args)
+    public static void Main(String[] args)
     {
         EasyDictionary dictionary = EasyDictionary.create("data/dictionary/2014_dictionary.txt");
         NRDictionaryMaker nrDictionaryMaker = new NRDictionaryMaker(dictionary);
@@ -26,7 +26,7 @@ public class TestNRDcitionaryMaker
             List<List<IWord>> compatibleList = new List<List<IWord>>();
             foreach (List<Word> wordList in simpleSentenceList)
             {
-                compatibleList.add(new LinkedList<IWord>(wordList));
+                compatibleList.Add(new (wordList));
             }
             nrDictionaryMaker.compute(compatibleList);
         }

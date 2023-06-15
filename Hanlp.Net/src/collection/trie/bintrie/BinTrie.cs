@@ -19,20 +19,20 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  *
  * @author hankcs
  */
-public class BinTrie<V> : BaseNode<V> , ITrie<V>, Externalizable
+public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 {
-    private int size;
+    private int _size;
 
     public BinTrie()
     {
         child = new BaseNode[65535 + 1];    // (int)Character.MAX_VALUE
-        size = 0;
+        _size = 0;
         status = Status.NOT_WORD_1;
     }
 
     public BinTrie(Dictionary<string, V> map)
+        :this()
     {
-        this();
         for (KeyValuePair<string, V> entry : map.entrySet())
         {
             put(entry.getKey(), entry.getValue());

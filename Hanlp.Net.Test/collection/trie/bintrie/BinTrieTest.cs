@@ -20,7 +20,7 @@ public class BinTrieTest : TestCase
     {
         BinTrie<String> trie = new BinTrie<String>();
         String[] keys = new String[] { "he", "her", "his" };
-        for (String key : keys)
+        foreach (String key in keys)
         {
             trie.put(key, key);
         }
@@ -36,24 +36,24 @@ public class BinTrieTest : TestCase
         public void hit(int begin, int end, String value)
         {
             //                Console.printf("[%d, %d)=%s\n", begin, end, value);
-            assertEquals(value, text.substring(begin, end));
+            assertEquals(value, text[begin .. end]);
         }
     }
     [TestMethod]
 
     public void TestPut()
     {
-        BinTrie<Boolean> trie = new BinTrie<Boolean>();
+        BinTrie<bool> trie = new BinTrie<bool>();
         trie.put("加入", true);
         trie.put("加入", false);
 
-        assertEquals(new Boolean(false), trie.get("加入"));
+        assertEquals(false, trie.get("加入"));
     }
     [TestMethod]
 
     public void TestArrayIndexOutOfBoundsException()
     {
-        BinTrie<Boolean> trie = new BinTrie<Boolean>();
+        BinTrie<bool> trie = new BinTrie<bool>();
         trie.put(new char[] { '\uffff' }, true);
     }
 
@@ -75,7 +75,7 @@ public class BinTrieTest : TestCase
             value[i] = i;
         }
         assertTrue(trie.load(DATA_TEST_OUT_BIN, value));
-        Set<Map.Entry<String, int>> entrySet = trie.entrySet();
+        var entrySet = trie.entrySet();
         assertEquals("[haha=0, hankcs=1, hello=2, za=3, zb=4, zzz=5]", entrySet.ToString());
     }
 

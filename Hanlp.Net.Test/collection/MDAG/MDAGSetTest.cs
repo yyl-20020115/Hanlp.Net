@@ -195,10 +195,10 @@ public class MDAGSetTest : TestCase
     {
         MDAGMap<String> mdagMap = new ();
         List<String> validKeySet = new ();
-        validKeySet.add("hers");
-        validKeySet.add("his");
-        validKeySet.add("she");
-        validKeySet.add("he");
+        validKeySet.Add("hers");
+        validKeySet.Add("his");
+        validKeySet.Add("she");
+        validKeySet.Add("he");
         foreach (String key in validKeySet)
         {
             mdagMap.put(key, key);

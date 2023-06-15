@@ -15,16 +15,19 @@ public class ViterbiTest : TestCase
         shop,
         clean,
     }
-    static int[] states = new int[]{Rainy.ordinal(), Sunny.ordinal()};
-    static int[] observations = new int[]{walk.ordinal(), shop.ordinal(), clean.ordinal()};
+    static int[] states = new int[]{ (int)Weather.Rainy, (int)Weather.Sunny};
+    static int[] observations = new int[]{
+        (int)Activity.walk,
+        (int)Activity.shop,
+        (int)Activity.clean};
     double[] start_probability = new double[]{0.6, 0.4};
     double[][] transititon_probability = new double[][]{
-        {0.7, 0.3},
-        {0.4, 0.6},
+        new double[]{0.7, 0.3},
+        new double[]{0.4, 0.6},
     };
     double[][] emission_probability = new double[][]{
-        {0.1, 0.4, 0.5},
-        {0.6, 0.3, 0.1},
+        new double[]{0.1, 0.4, 0.5},
+        new double[]{0.6, 0.3, 0.1},
     };
     [TestMethod]
     public void testCompute() 

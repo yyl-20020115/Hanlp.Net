@@ -8,6 +8,10 @@
  * See LICENSE file in the project root for full license information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer.pipe;
+
 namespace com.hankcs.hanlp.seg;
 
 
@@ -15,7 +19,7 @@ namespace com.hankcs.hanlp.seg;
 /**
  * @author hankcs
  */
-public class SegmentPipeline : Segment : Pipe<string, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
+public class SegmentPipeline : Segment , Pipe<string, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
 {
     Pipe<string, List<IWord>> first;
     Pipe<List<IWord>, List<Term>> last;
@@ -25,10 +29,10 @@ public class SegmentPipeline : Segment : Pipe<string, List<Term>>, List<Pipe<Lis
     {
         this.first = first;
         this.last = last;
-        pipeList = new ArrayList<Pipe<List<IWord>, List<IWord>>>();
+        pipeList = new List<Pipe<List<IWord>, List<IWord>>>();
     }
 
-    public SegmentPipeline(final Segment delegate)
+    public SegmentPipeline(Segment _delegate)
     {
         this(new Pipe<string, List<IWord>>()
              {

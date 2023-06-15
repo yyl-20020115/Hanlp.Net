@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.collection.MDAG;
  */
 public class MDAGMap<V> : AbstractMap<string, V>
 {
-    ArrayList<V> valueList = new ArrayList<V>();
+    List<V> valueList = new ();
     MDAGForMap mdag = new MDAGForMap();
 
     //@Override
@@ -38,7 +38,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
     //@Override
     public V get(Object key)
     {
-        int valueIndex = mdag.getValueIndex(key.toString());
+        int valueIndex = mdag.getValueIndex(key.ToString());
         if (valueIndex != -1)
         {
             return valueList.get(valueIndex);
@@ -57,14 +57,14 @@ public class MDAGMap<V> : AbstractMap<string, V>
     }
 
     //@Override
-    public Set<Entry<string, V>> entrySet()
+    public HashSet<KeyValuePair<string, V>> entrySet()
     {
         HashSet<string> keySet = mdag.getAllStrings();
         return null;
     }
 
     //@Override
-    public Set<string> keySet()
+    public HashSet<string> keySet()
     {
         HashSet<string> stringSet = mdag.getAllStrings();
         LinkedHashSet<string> keySet = new LinkedHashSet<string>();
@@ -83,11 +83,11 @@ public class MDAGMap<V> : AbstractMap<string, V>
      * @param begin
      * @return
      */
-    public LinkedList<Entry<string, V>> commonPrefixSearchWithValue(char[] key, int begin)
+    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] key, int begin)
     {
-        LinkedList<Entry<string, int>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
-        LinkedList<Entry<string, V>> entryList = new LinkedList<Entry<string, V>>();
-        for (Entry<string, int> entry : valueIndex)
+        LinkedList<KeyValuePair<string, int>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
+        LinkedList<KeyValuePair<string, V>> entryList = new LinkedList<Entry<string, V>>();
+        for (KeyValuePair<string, int> entry : valueIndex)
         {
             entryList.add(new SimpleEntry<string, V>(entry.getKey(), valueList.get(entry.getValue())));
         }
@@ -100,7 +100,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
      * @param key
      * @return
      */
-    public LinkedList<Entry<string, V>> commonPrefixSearchWithValue(string key)
+    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
     {
         return commonPrefixSearchWithValue(key.ToCharArray(), 0);
     }
@@ -119,7 +119,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         mdag.unSimplify();
     }
 
-    static class MDAGForMap : MDAG
+    public class MDAGForMap : MDAG
     {
         static readonly char DELIMITER = Character.MIN_VALUE;
 

@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using System.Text;
+
 namespace com.hankcs.hanlp.collection.trie.bintrie;
 
 
@@ -19,7 +22,7 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  * @param <V> 值
  * @author He Han
  */
-public abstract class BaseNode<V> : Comparable<BaseNode>
+public abstract class BaseNode<V> : IComparable<BaseNode>
 {
     /**
      * 状态数组，方便读取的时候用
@@ -28,7 +31,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
     /**
      * 子节点
      */
-    protected BaseNode[] child;
+    protected BaseNode<V>[] child;
     /**
      * 节点状态
      */
@@ -113,7 +116,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
      *
      * @return 值
      */
-    public final V getValue()
+    public V getValue()
     {
         return value;
     }
@@ -123,7 +126,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
      *
      * @param value 值
      */
-    public final void setValue(V value)
+    public void setValue(V value)
     {
         this.value = value;
     }
@@ -161,7 +164,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         return status;
     }
 
-    protected void walk(StringBuilder sb, Set<KeyValuePair<string, V>> entrySet)
+    protected void walk(StringBuilder sb, HashSet<KeyValuePair<string, V>> entrySet)
     {
         sb.Append(c);
         if (status == Status.WORD_MIDDLE_2 || status == Status.WORD_END_3)
@@ -225,7 +228,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         }
     }
 
-    protected void walkToLoad(ObjectInput byteArray) , ClassNotFoundException
+    protected void walkToLoad(ObjectInput byteArray) 
     {
         c = byteArray.readChar();
         status = ARRAY_STATUS[byteArray.readInt()];
@@ -262,11 +265,12 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         WORD_END_3,
     }
 
-    public class TrieEntry : AbstractMap.SimpleEntry<string, V> : Comparable<TrieEntry>
+    public class TrieEntry : AbstractMap.SimpleEntry<string, V> , IComparable<TrieEntry>
     {
         public TrieEntry(string key, V value)
+            : base(key, value)
         {
-            super(key, value);
+           ;
         }
         //@Override
         public int compareTo(TrieEntry o)
@@ -287,7 +291,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
                     '}';
         }
         return "BaseNode{" +
-                "child=" + child.length +
+                "child=" + child.Length +
                 ", status=" + status +
                 ", c=" + c +
                 ", value=" + value +

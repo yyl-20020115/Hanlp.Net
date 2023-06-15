@@ -9,6 +9,12 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.datrie;
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.document;
 
 
@@ -86,25 +92,25 @@ public class Document : Serializable
      */
     public List<List<Word>> getSimpleSentenceList()
     {
-        List<List<Word>> simpleList = new LinkedList<List<Word>>();
-        for (Sentence sentence : sentenceList)
+        List<List<Word>> simpleList = new ();
+        foreach (Sentence sentence in sentenceList)
         {
-            List<Word> wordList = new LinkedList<Word>();
-            for (IWord word : sentence.wordList)
+            List<Word> wordList = new ();
+            foreach (IWord word in sentence.wordList)
             {
                 if (word is CompoundWord)
                 {
-                    for (Word inner : ((CompoundWord) word).innerList)
+                    foreach (Word inner in ((CompoundWord) word).innerList)
                     {
-                        wordList.add(inner);
+                        wordList.Add(inner);
                     }
                 }
                 else
                 {
-                    wordList.add((Word) word);
+                    wordList.Add((Word) word);
                 }
             }
-            simpleList.add(wordList);
+            simpleList.Add(wordList);
         }
 
         return simpleList;
@@ -171,7 +177,7 @@ public class Document : Serializable
      * @param labelSet
      * @return
      */
-    public List<List<Word>> getSimpleSentenceList(Set<string> labelSet)
+    public List<List<Word>> getSimpleSentenceList(HashSet<string> labelSet)
     {
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
         for (Sentence sentence : sentenceList)

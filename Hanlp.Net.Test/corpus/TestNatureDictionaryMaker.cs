@@ -10,7 +10,11 @@ public class TestNatureDictionaryMaker
 
     public class NDM : CorpusLoader.Handler
     {
-        public NatureDictionaryMaker dictionaryMaker;
+        public readonly NatureDictionaryMaker dictionaryMaker;
+        public NDM(NatureDictionaryMaker dictionaryMaker)
+        {
+            this.dictionaryMaker = dictionaryMaker;
+        }
         //@Override
         public void handle(Document document)
         {
@@ -18,12 +22,12 @@ public class TestNatureDictionaryMaker
             dictionaryMaker.compute(CorpusUtil.convert2CompatibleList(document.getSimpleSentenceList(true)));  // 先打一遍拆分的
         }
     }
-    public static void main(String[] args)
+    public static void Main(String[] args)
     {
         //        makeCoreDictionary("D:\\JavaProjects\\CorpusToolBox\\data\\2014", "data/dictionary/CoreNatureDictionary.txt");
         //        EasyDictionary dictionary = EasyDictionary.create("data/dictionary/CoreNatureDictionary.txt");
         NatureDictionaryMaker dictionaryMaker = new NatureDictionaryMaker();
-        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new NDM() { dictionaryMaker = dictionaryMaker }); ;
+        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new NDM(dictionaryMaker)); ;
         dictionaryMaker.saveTxtTo("data/test/CoreNatureDictionary");
     }
 

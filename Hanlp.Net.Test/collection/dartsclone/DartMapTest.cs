@@ -1,4 +1,5 @@
 using com.hankcs.hanlp.corpus.io;
+using System.Text;
 
 namespace com.hankcs.hanlp.collection.dartsclone;
 
@@ -18,31 +19,32 @@ public class DartMapTest : TestCase
         validKeySet = new ();
         while (iterator.hasNext())
         {
-            validKeySet.add(iterator.next().split("\\s")[0]);
+            validKeySet.Add(iterator.next().Split("\\s")[0]);
         }
-        TreeMap<String, int> map = new TreeMap<String, int>();
-        for (String key : validKeySet)
+        var map = new Dictionary<String, int>();
+        foreach (String key in validKeySet)
         {
-            map.put(key, key.Length());
+            map.Add(key, key.Length);
         }
+
         dartMap = new DartMap<int>(map);
     }
     [TestMethod]
 
     public void TestGenerateInvalidKeySet()
     {
-        invalidKeySet = new TreeSet<String>();
+        invalidKeySet = new ();
         Random random = new Random(DateTime.Now.Microsecond);
-        while (invalidKeySet.size() < validKeySet.size())
+        while (invalidKeySet.Count < validKeySet.Count)
         {
-            int Length = random.nextInt(10) + 1;
+            int Length = random.Next(10) + 1;
             StringBuilder key = new StringBuilder(Length);
             for (int i = 0; i < Length; ++i)
             {
-                key.append(random.nextInt(Character.MAX_VALUE));
+                key.Append(random.Next(char.MaxValue));
             }
             if (validKeySet.Contains(key.ToString())) continue;
-            invalidKeySet.add(key.ToString());
+            invalidKeySet.Add(key.ToString());
         }
     }
     [TestMethod]
@@ -55,13 +57,13 @@ public class DartMapTest : TestCase
     public void TestContainsAndNoteContains() 
     {
         TestBuild();
-        for (String key : validKeySet)
+        foreach (String key in validKeySet)
         {
-            assertEquals(key.Length(), (int)dartMap.get(key));
+            assertEquals(key.Length, (int)dartMap.get(key));
         }
 
         TestGenerateInvalidKeySet();
-        for (String key : invalidKeySet)
+        foreach (String key in invalidKeySet)
         {
             assertEquals(null, dartMap.get(key));
         }

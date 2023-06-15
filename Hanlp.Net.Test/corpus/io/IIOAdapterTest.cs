@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.dictionary.stopword;
+
 namespace com.hankcs.hanlp.corpus.io;
 
 
@@ -11,12 +13,12 @@ public class IIOAdapterTest : TestCase
      * @
      */
     [TestMethod]
-    public void testReturnNullInIOAdapter() 
+    public void TestReturnNullInIOAdapter() 
     {
         HanLP.Config.IOAdapter = new IOP();
 
         HanLP.Config.enableDebug(false);
-        assertEquals(true, CoreStopWordDictionary.Contains("的"));
+        assertEquals(true, CoreStopWordDictionary.contains("的"));
     }
 
     public class IOP : FileIOAdapter

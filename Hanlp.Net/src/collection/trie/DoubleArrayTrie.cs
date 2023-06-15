@@ -1,18 +1,20 @@
+
+using com.hankcs.hanlp.collection.AhoCorasick;
 /**
- * DoubleArrayTrie: Java implementation of Darts (Double-ARray Trie System)
- * <p/>
- * <p>
- * Copyright(C) 2001-2007 Taku Kudo &lt;taku@chasen.org&gt;<br />
- * Copyright(C) 2009 MURAWAKI Yugo &lt;murawaki@nlp.kuee.kyoto-u.ac.jp&gt;
- * Copyright(C) 2012 KOMIYA Atsushi &lt;komiya.atsushi@gmail.com&gt;
- * </p>
- * <p/>
- * <p>
- * The contents of this file may be used under the terms of either of the GNU
- * Lesser General Public License Version 2.1 or later (the "LGPL"), or the BSD
- * License (the "BSD").
- * </p>
- */
+* DoubleArrayTrie: Java implementation of Darts (Double-ARray Trie System)
+* <p/>
+* <p>
+* Copyright(C) 2001-2007 Taku Kudo &lt;taku@chasen.org&gt;<br />
+* Copyright(C) 2009 MURAWAKI Yugo &lt;murawaki@nlp.kuee.kyoto-u.ac.jp&gt;
+* Copyright(C) 2012 KOMIYA Atsushi &lt;komiya.atsushi@gmail.com&gt;
+* </p>
+* <p/>
+* <p>
+* The contents of this file may be used under the terms of either of the GNU
+* Lesser General Public License Version 2.1 or later (the "LGPL"), or the BSD
+* License (the "BSD").
+* </p>
+*/
 namespace com.hankcs.hanlp.collection.trie;
 
 
@@ -267,7 +269,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * 从TreeMap构造
      * @param buildFrom
      */
-    public DoubleArrayTrie(TreeMap<string, V> buildFrom)
+    public DoubleArrayTrie(Dictionary<string, V> buildFrom)
     {
         this();
         if (build(buildFrom) != 0)
@@ -342,7 +344,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param entrySet 注意此entrySet一定要是字典序的！否则会失败
      * @return
      */
-    public int build(Set<KeyValuePair<string, V>> entrySet)
+    public int build(HashSet<KeyValuePair<string, V>> entrySet)
     {
         List<string> keyList = new ArrayList<string>(entrySet.size());
         List<V> valueList = new ArrayList<V>(entrySet.size());
@@ -1280,7 +1282,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         {
             this.charArray = charArray;
             i = offset;
-            arrayLength = charArray.length;
+            arrayLength = charArray.Length;
             begin = offset;
         }
 
@@ -1293,7 +1295,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         {
             value = null;
             begin = i;
-            int b = base[0];
+            int b = _base[0];
             int n;
             int p;
 
@@ -1305,7 +1307,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                 }
                 p = b + (int) (charArray[i]) + 1;   // 状态转移 p = base[char[i-1]] + char[i] + 1
                 if (b == check[p])                  // base[char[i-1]] == check[base[char[i-1]] + char[i] + 1]
-                    b = base[p];                    // 转移成功
+                    b = _base[p];                    // 转移成功
                 else
                 {
                     if (begin == arrayLength) break;
@@ -1317,10 +1319,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
                     i = begin;                      // 转移失败，也将起点往前挪一个，重新开始，状态归零
                     ++begin;
-                    b = base[0];
+                    b = _base[0];
                 }
                 p = b;
-                n = base[p];
+                n = _base[p];
                 if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
                 {
                     length = i - begin + 1;
@@ -1339,7 +1341,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseText(string text, AhoCorasickDoubleArrayTrie<V>.IHit<V> processor)
     {
         Searcher searcher = getSearcher(text, 0);
         while (searcher.next())
@@ -1364,7 +1366,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseLongestText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseLongestText(string text, AhoCorasickDoubleArrayTrie<V>.IHit<V> processor)
     {
         LongestSearcher searcher = getLongestSearcher(text, 0);
         while (searcher.next())

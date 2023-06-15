@@ -32,6 +32,6 @@ public class MaxHeapTest : TestCase
     [TestMethod]
     public void TestToList()
     {
-        assertEquals("[9, 8, 7, 6, 5]", heap.ToList().ToString());
+        assertEquals("[9, 8, 7, 6, 5]","["+string.Join(", ", heap.ToList())+"]");
     }
 }

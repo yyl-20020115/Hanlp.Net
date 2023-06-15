@@ -1,15 +1,17 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
 
 /**
  * UTF-8编码到int的映射
  */
-public class Utf8CharacterMapping implements CharacterMapping, Serializable
+public class Utf8CharacterMapping : CharacterMapping, Serializable
 {
     private static readonly long serialVersionUID = -6529481088518753872L;
     private static readonly int N = 256;
     private static readonly int[] EMPTYLIST = new int[0];
-    public static readonly Charset UTF_8 = Charset.forName("UTF-8");
+    public static readonly Encoding UTF_8 = Charset.forName("UTF-8");
 
     //@Override
     public int getInitSize()
@@ -33,13 +35,13 @@ public class Utf8CharacterMapping implements CharacterMapping, Serializable
     public int[] toIdList(string key)
     {
 
-        byte[] bytes = key.getBytes(UTF_8);
-        int[] res = new int[bytes.length];
-        for (int i = 0; i < res.length; i++)
+        byte[] bytes = key.GetBytes(UTF_8);
+        int[] res = new int[bytes.Length];
+        for (int i = 0; i < res.Length; i++)
         {
             res[i] = bytes[i] & 0xFF; // unsigned byte
         }
-        if ((res.length == 1) && (res[0] == 0))
+        if ((res.Length == 1) && (res[0] == 0))
         {
             return EMPTYLIST;
         }

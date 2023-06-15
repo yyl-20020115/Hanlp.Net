@@ -9,10 +9,9 @@ namespace com.hankcs.hanlp.collection.AhoCorasick;
 public class AhoCorasickDoubleArrayTrieTest : TestCase
 {
     [TestMethod]
-
     public void TestTwoAC()
     {
-        var map = new Dictionary<String, String>();
+        var map = new Dictionary<string, string>();
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(
             "data/dictionary/CoreNatureDictionary.mini.txt");
         while (iterator.hasNext())
@@ -26,20 +25,20 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
         AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
         act.build(map);
 
-        for (String key : map.Keys)
+        foreach (String key in map.Keys)
         {
-            Collection<Emit> emits = trie.parseText(key);
-            Set<String> otherSet = new HashSet<String>();
-            for (Emit emit : emits)
+            var emits = trie.parseText(key);
+            var otherSet = new HashSet<String>();
+            foreach (Emit emit in emits)
             {
-                otherSet.add(emit.getKeyword() + emit.getEnd());
+                otherSet.Add(emit.getKeyword() + emit.getEnd());
             }
 
-            List<AhoCorasickDoubleArrayTrie<String>.Hit<String>> entries = act.parseText(key);
-            Set<String> mySet = new HashSet<String>();
-            for (AhoCorasickDoubleArrayTrie<String>.Hit<String> entry : entries)
+            var entries = act.parseText(key);
+            var mySet = new HashSet<String>();
+            foreach (AhoCorasickDoubleArrayTrie<String>.Hit<String> entry in entries)
             {
-                mySet.add(entry.value + (entry.end - 1));
+                mySet.Add(entry.value + (entry.end - 1));
             }
 
             assertEquals(otherSet, mySet);

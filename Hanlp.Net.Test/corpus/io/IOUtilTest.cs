@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.corpus.io;
 public class IOUtilTest : TestCase
 {
     [TestMethod]
-    public void testReadBytesFromOtherInputStream() 
+    public void TestReadBytesFromOtherInputStream() 
     {
         Random random = new Random(DateTime.Now.Microsecond);
         byte[] originalData = new byte[1024 * 1024]; // 1MB
@@ -34,7 +34,7 @@ public class IOUtilTest : TestCase
         }
     }
     [TestMethod]
-    public void testUTF8BOM() 
+    public void TestUTF8BOM() 
     {
         File tempFile = File.createTempFile("hanlp-", ".txt");
         tempFile.deleteOnExit();

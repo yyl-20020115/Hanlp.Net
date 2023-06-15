@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
 
@@ -24,7 +26,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      */
     private static readonly int UNUSED_CHAR_VALUE = UNUSED_CHAR;
     private IntArrayList check;
-    private IntArrayList base;
+    private IntArrayList _base;
     /**
      * 键值对数量
      */

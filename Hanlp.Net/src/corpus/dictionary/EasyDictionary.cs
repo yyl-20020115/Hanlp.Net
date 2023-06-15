@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -41,7 +45,7 @@ public class EasyDictionary
     private bool load(string path)
     {
         logger.info("通用词典开始加载:" + path);
-        TreeMap<string, Attribute> map = new TreeMap<string, Attribute>();
+        var map = new Dictionary<string, Attribute>();
         BufferedReader br = null;
         try
         {
@@ -143,16 +147,16 @@ public class EasyDictionary
     /**
      * 通用词典中的词属性
      */
-    static public class Attribute
+     public class Attribute
     {
         /**
          * 词性列表
          */
-        public Nature nature[];
+        public Nature[] nature;
         /**
          * 词性对应的词频
          */
-        public int frequency[];
+        public int[] frequency;
 
         public int totalFrequency;
 
@@ -212,11 +216,11 @@ public class EasyDictionary
          * @param nature 词性
          * @return 词频
          */
-        public int getNatureFrequency(final Nature nature)
+        public int getNatureFrequency( Nature nature)
         {
             int result = 0;
             int i = 0;
-            for (Nature pos : this.nature)
+            for (Nature pos in this.nature)
             {
                 if (nature == pos)
                 {

@@ -8,6 +8,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.summary;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.mining.word;
 
 
@@ -25,35 +30,39 @@ public class TfIdfCounter : KeywordExtractor
     private Dictionary<string, Double> idf;
 
     public TfIdfCounter()
+        : this(true)
     {
-        this(true);
+        ;
     }
 
     public TfIdfCounter(bool filterStopWord)
+        : this(StandardTokenizer.SEGMENT, filterStopWord)
     {
-        this(StandardTokenizer.SEGMENT, filterStopWord);
+        ;
     }
 
     public TfIdfCounter(Segment defaultSegment, bool filterStopWord)
+        : base(defaultSegment)
     {
-        super(defaultSegment);
+        ;
         this.filterStopWord = filterStopWord;
         tfMap = new HashMap<Object, Dictionary<string, Double>>();
     }
 
     public TfIdfCounter(Segment defaultSegment)
+        : this(defaultSegment, true)
     {
-        this(defaultSegment, true);
+        ;
     }
 
     //@Override
     public List<string> getKeywords(List<Term> termList, int size)
     {
         List<KeyValuePair<string, Double>> entryList = getKeywordsWithTfIdf(termList, size);
-        List<string> r = new ArrayList<string>(entryList.size());
-        for (KeyValuePair<string, Double> entry : entryList)
+        List<string> r = new List<string>(entryList.size());
+        foreach (KeyValuePair<string, Double> entry in entryList)
         {
-            r.add(entry.getKey());
+            r.Add(entry.getKey());
         }
 
         return r;
@@ -84,10 +93,10 @@ public class TfIdfCounter : KeywordExtractor
 
     private static List<string> convert(List<Term> termList)
     {
-        List<string> words = new ArrayList<string>(termList.size());
-        for (Term term : termList)
+        List<string> words = new List<string>(termList.size());
+        foreach (Term term in termList)
         {
-            words.add(term.word);
+            words.Add(term.word);
         }
         return words;
     }

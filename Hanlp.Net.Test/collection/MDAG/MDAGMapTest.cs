@@ -16,11 +16,11 @@ public class MDAGMapTest : TestCase
         validKeySet = new ();
         while (iterator.hasNext())
         {
-            validKeySet.add(iterator.next().split("\\s")[0]);
+            validKeySet.Add(iterator.next().Split("\\s")[0]);
         }
-        for (String word : validKeySet)
+        foreach (String word in validKeySet)
         {
-            mdagMap.put(word, word.Length());
+            mdagMap.Add(word, word.Length);
         }
     }
     [TestMethod]

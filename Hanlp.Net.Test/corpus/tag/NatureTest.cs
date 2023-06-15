@@ -5,7 +5,7 @@ namespace com.hankcs.hanlp.corpus.tag;
 public class NatureTest : TestCase
 {
     [TestMethod]
-    public void testFromString() 
+    public void TestFromString() 
     {
         Nature one = Nature.create("新词性1");
         Nature two = Nature.create("新词性2");

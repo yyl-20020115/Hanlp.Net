@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.corpus;
  */
 public class ZZGenerateNR
 {
-    public static void main(String[] strings)
+    public static void Main(String[] strings)
     {
         String text = "B\tPf\t姓氏\t张华平先生\n" +
                 "C\tPm\t双名的首字\t张华平先生\n" +

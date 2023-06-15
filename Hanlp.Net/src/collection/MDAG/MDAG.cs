@@ -1,26 +1,28 @@
-/**
- * MDAG is a Java library capable of constructing character-sequence-storing,
- * directed acyclic graphs of minimal size.<br>
- * hankcs implemented the unSimplify() method.
- *
- *  Copyright (C) 2012 Kevin Lawson <Klawson88@gmail.com>
- *
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
+
+using com.hankcs.hanlp.corpus.io;
+/**
+* MDAG is a Java library capable of constructing character-sequence-storing,
+* directed acyclic graphs of minimal size.<br>
+* hankcs implemented the unSimplify() method.
+*
+*  Copyright (C) 2012 Kevin Lawson <Klawson88@gmail.com>
+*
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 namespace com.hankcs.hanlp.collection.MDAG;
 
 
@@ -51,7 +53,7 @@ public class MDAG : ICacheAble
     /**
      * 等价类集合，相当于论文中的register
      */
-    protected HashMap<MDAGNode, MDAGNode> equivalenceClassMDAGNodeHashMap = new HashMap<MDAGNode, MDAGNode>();
+    protected Dictionary<MDAGNode, MDAGNode> equivalenceClassMDAGNodeHashMap = new Dictionary<MDAGNode, MDAGNode>();
 
     //Array that will contain a space-saving version of the MDAG after a call to simplify().
     /**
@@ -63,7 +65,7 @@ public class MDAG : ICacheAble
     /**
      * 字母表
      */
-    protected TreeSet<Character> charTreeSet = new TreeSet<Character>();
+    protected HashSet<Character> charTreeSet = new HashSet<Character>();
 
     //An int denoting the total number of transitions between the nodes of the MDAG
     /**
@@ -76,13 +78,13 @@ public class MDAG : ICacheAble
     {
         simplify();
         _out.writeInt(charTreeSet.size());
-        for (Character character : charTreeSet)
+        foreach (Character character in charTreeSet)
         {
             _out.writeChar(character);
         }
         simplifiedSourceNode.save(_out);
         _out.writeInt(mdagDataArray.length);
-        for (SimpleMDAGNode simpleMDAGNode : mdagDataArray)
+        foreach (SimpleMDAGNode simpleMDAGNode in mdagDataArray)
         {
             simpleMDAGNode.save(_out);
         }
@@ -114,9 +116,12 @@ public class MDAG : ICacheAble
     /**
      * 几种搜索模式
      */
-    private static enum SearchCondition
+    private class SearchCondition
     {
-        NO_SEARCH_CONDITION, PREFIX_SEARCH_CONDITION, SUBSTRING_SEARCH_CONDITION, SUFFIX_SEARCH_CONDITION;
+        NO_SEARCH_CONDITION, 
+        PREFIX_SEARCH_CONDITION, 
+        SUBSTRING_SEARCH_CONDITION,
+        SUFFIX_SEARCH_CONDITION;
 
         /**
          * 判断两个字符串是否满足关系<br>
@@ -157,8 +162,9 @@ public class MDAG : ICacheAble
      * @
      */
     public MDAG(string path) 
+        : this(IOUtil.newBufferedReader(path))
     {
-        this(IOUtil.newBufferedReader(path));
+        ;
     }
 
 
@@ -170,9 +176,10 @@ public class MDAG : ICacheAble
      *                 containing the Strings that the MDAG will contain
      * @throws java.io.IOException if {@code datafile} cannot be opened, or a read operation on it cannot be carried _out
      */
-    public MDAG(File dataFile) 
+    public MDAG(File dataFile)
+        : this(IOUtil.newBufferedReader(dataFile.getPath()))
     {
-        this(IOUtil.newBufferedReader(dataFile.getPath()));
+       ;
     }
 
     /**
@@ -217,7 +224,7 @@ public class MDAG : ICacheAble
      *
      * @param strCollection a {@link java.util.Collection} containing Strings that the MDAG will contain
      */
-    public MDAG(Collection<string> strCollection)
+    public MDAG(ICollection<string> strCollection)
     {
         addStrings(strCollection);
     }
@@ -234,14 +241,14 @@ public class MDAG : ICacheAble
      *
      * @param strCollection a {@link java.util.Collection} containing Strings to be added to the MDAG
      */
-    public final void addStrings(Collection<string> strCollection)
+    public void addStrings(ICollection<string> strCollection)
     {
         if (sourceNode != null)
         {
             string previousString = "";
 
             //Add all the Strings in strCollection to the MDAG.
-            for (string currentString : strCollection)
+            foreach (string currentString in strCollection)
             {
                 int mpsIndex = calculateMinimizationProcessingStartIndex(previousString, currentString);
 
@@ -296,7 +303,7 @@ public class MDAG : ICacheAble
 
     private void splitTransitionPath(MDAGNode originNode, string storedStringSubstr)
     {
-        HashMap<string, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(originNode, storedStringSubstr);
+        var firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(originNode, storedStringSubstr);
         int toFirstConfluenceNodeTransitionCharIndex = (int) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
         MDAGNode firstConfluenceNode = (MDAGNode) firstConfluenceNodeDataHashMap.get("confluenceNode");
 
@@ -484,7 +491,7 @@ public class MDAG : ICacheAble
      * - an int denoting the length of the path to the first confluence node in the _transition path of interest
      * - the MDAGNode which is the first confluence node in the _transition path of interest (or null if one does not exist)
      */
-    private HashMap<string, Object> getTransitionPathFirstConfluenceNodeData(MDAGNode originNode, string str)
+    private Dictionary<string, Object> getTransitionPathFirstConfluenceNodeData(MDAGNode originNode, string str)
     {
         int currentIndex = 0;
         int charCount = str.length();
@@ -507,9 +514,9 @@ public class MDAG : ICacheAble
 
         //Create a HashMap containing the index of the last char in the substring corresponding
         //to the transitoin path to the confluence node, as well as the actual confluence node
-        HashMap<string, Object> confluenceNodeDataHashMap = new HashMap<string, Object>(2);
-        confluenceNodeDataHashMap.put("toConfluenceNodeTransitionCharIndex", (noConfluenceNode ? null : currentIndex));
-        confluenceNodeDataHashMap.put("confluenceNode", noConfluenceNode ? null : currentNode);
+        var confluenceNodeDataHashMap = new Dictionary<string, Object>(2);
+        confluenceNodeDataHashMap.Add("toConfluenceNodeTransitionCharIndex", (noConfluenceNode ? null : currentIndex));
+        confluenceNodeDataHashMap.Add("confluenceNode", noConfluenceNode ? null : currentNode);
         /////
 
         return confluenceNodeDataHashMap;
@@ -677,7 +684,7 @@ public class MDAG : ICacheAble
 
         //Retrive the data related to the first confluence node (a node with two or more incoming transitions)
         //in the _transition path from sourceNode corresponding to prefixString.
-        HashMap<string, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(sourceNode, prefixString);
+        var firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(sourceNode, prefixString);
         MDAGNode firstConfluenceNodeInPrefix = (MDAGNode) firstConfluenceNodeDataHashMap.get("confluenceNode");
         int toFirstConfluenceNodeTransitionCharIndex = (int) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
         /////
@@ -720,8 +727,8 @@ public class MDAG : ICacheAble
 
         //Create a SimpleMDAGNode representing each _transition label/target combo in transitionTreeMap, recursively calling this method (if necessary)
         //to set indices in these SimpleMDAGNodes that the set of transitions emitting from their respective _transition targets starts from.
-        TreeMap<Character, MDAGNode> transitionTreeMap = node.getOutgoingTransitions();
-        for (Entry<Character, MDAGNode> transitionKeyValuePair : transitionTreeMap.entrySet())
+        var transitionTreeMap = node.getOutgoingTransitions();
+        foreach (var transitionKeyValuePair in transitionTreeMap.entrySet())
         {
             //Use the current _transition's label and target node to create a SimpleMDAGNode
             //(which is a space-saving representation of the _transition), and insert it in to mdagDataArray
@@ -772,11 +779,11 @@ public class MDAG : ICacheAble
         if (sourceNode == null)
         {
             sourceNode = new MDAGNode(false);
-            equivalenceClassMDAGNodeHashMap = new HashMap<MDAGNode, MDAGNode>();
-            MDAGNode[] toNodeArray = new MDAGNode[mdagDataArray.length];
+            equivalenceClassMDAGNodeHashMap = new ();
+            MDAGNode[] toNodeArray = new MDAGNode[mdagDataArray.Length];
             createMDAGNode(simplifiedSourceNode, -1, toNodeArray, new MDAGNode[mdagDataArray.length]);
             // 构建注册表
-            for (MDAGNode mdagNode : toNodeArray)
+            foreach (MDAGNode mdagNode in toNodeArray)
             {
                 equivalenceClassMDAGNodeHashMap.put(mdagNode, mdagNode);
             }
@@ -853,13 +860,13 @@ public class MDAG : ICacheAble
     {
         //Traverse all the valid _transition paths beginning from each _transition in transitionTreeMap, inserting the
         //corresponding Strings in to strHashSet that have the relationship with conditionString denoted by searchCondition
-        for (Entry<Character, MDAGNode> transitionKeyValuePair : transitionTreeMap.entrySet())
+        foreach (var transitionKeyValuePair in transitionTreeMap.entrySet())
         {
             string newPrefixString = prefixString + transitionKeyValuePair.getKey();
             MDAGNode currentNode = transitionKeyValuePair.getValue();
 
             if (currentNode.isAcceptNode() && searchCondition.satisfiesCondition(newPrefixString, searchConditionString))
-                strHashSet.add(newPrefixString);
+                strHashSet.Add(newPrefixString);
 
             //Recursively call this to traverse all the valid _transition paths from currentNode
             getStrings(strHashSet, searchCondition, searchConditionString, newPrefixString, currentNode.getOutgoingTransitions());
@@ -893,7 +900,7 @@ public class MDAG : ICacheAble
             string newPrefixString = prefixString + currentNode.getLetter();
 
             if (currentNode.isAcceptNode() && searchCondition.satisfiesCondition(newPrefixString, searchConditionString))
-                strHashSet.add(newPrefixString);
+                strHashSet.Add(newPrefixString);
 
             //Recursively call this to traverse all the valid _transition paths from currentNode
             getStrings(strHashSet, searchCondition, searchConditionString, newPrefixString, currentNode);
@@ -910,7 +917,7 @@ public class MDAG : ICacheAble
      */
     public HashSet<string> getAllStrings()
     {
-        HashSet<string> strHashSet = new LinkedHashSet<string>();
+        HashSet<string> strHashSet = new ();
 
         if (sourceNode != null)
             getStrings(strHashSet, SearchCondition.NO_SEARCH_CONDITION, null, "", sourceNode.getOutgoingTransitions());
@@ -938,7 +945,7 @@ public class MDAG : ICacheAble
 
             if (originNode != null) //if there a _transition path corresponding to prefixString (one or more stored Strings begin with prefixString)
             {
-                if (originNode.isAcceptNode()) strHashSet.add(prefixStr);
+                if (originNode.isAcceptNode()) strHashSet.Add(prefixStr);
                 getStrings(strHashSet, SearchCondition.PREFIX_SEARCH_CONDITION, prefixStr, prefixStr, originNode.getOutgoingTransitions());   //retrieve all Strings that extend the _transition path denoted by prefixStr
             }
         }
@@ -948,7 +955,7 @@ public class MDAG : ICacheAble
 
             if (originNode != null)      //if there a _transition path corresponding to prefixString (one or more stored Strings begin with prefixStr)
             {
-                if (originNode.isAcceptNode()) strHashSet.add(prefixStr);
+                if (originNode.isAcceptNode()) strHashSet.Add(prefixStr);
                 getStrings(strHashSet, SearchCondition.PREFIX_SEARCH_CONDITION, prefixStr, prefixStr, originNode);        //retrieve all Strings that extend the _transition path denoted by prefixString
             }
         }
@@ -1028,7 +1035,7 @@ public class MDAG : ICacheAble
      *
      * @return a TreeSet of chars which collectively label all the transitions in the MDAG
      */
-    private TreeSet<Character> getTransitionLabelSet()
+    private HashSet<char> getTransitionLabelSet()
     {
         return charTreeSet;
     }
@@ -1048,9 +1055,9 @@ public class MDAG : ICacheAble
         {
             Class nodeObjClass = nodeObj.getClass();
 
-            if (nodeObjClass.equals(MDAGNode.class))
+            if (nodeObjClass.equals(MDAGNode.c))
                 return ((MDAGNode) nodeObj).isAcceptNode();
-            else if (nodeObjClass.equals(SimpleMDAGNode.class))
+            else if (nodeObjClass.equals(SimpleMDAGNode.c))
                 return ((SimpleMDAGNode) nodeObj).isAcceptNode();
 
         }
@@ -1076,8 +1083,8 @@ public class MDAG : ICacheAble
      * 调试用
      * @return
      */
-    public HashMap<MDAGNode, MDAGNode> _getEquivalenceClassMDAGNodeHashMap()
+    public Dictionary<MDAGNode, MDAGNode> _getEquivalenceClassMDAGNodeHashMap()
     {
-        return new HashMap<MDAGNode, MDAGNode>(equivalenceClassMDAGNodeHashMap);
+        return new Dictionary<MDAGNode, MDAGNode>(equivalenceClassMDAGNodeHashMap);
     }
 }

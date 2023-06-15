@@ -33,8 +33,8 @@ public class MSR
         SIGHAN05_ROOT = TestUtility.ensureTestData("icwb2-data", "http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip");
         if (!IOUtil.isFileExisted(TRAIN_PATH))
         {
-            System.err.println("请下载 http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip 并解压为 data/test/icwb2-data");
-            System.exit(1);
+            Console.Error.WriteLine("请下载 http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip 并解压为 data/test/icwb2-data");
+            Environment.Exit(1);
         }
     }
 }

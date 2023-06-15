@@ -38,7 +38,7 @@ public class PKU
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(PKU199801);
             while (lineIterator.hasNext())
             {
-                all.add(lineIterator.next());
+                all.Add(lineIterator.next());
             }
             try
             {

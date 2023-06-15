@@ -9,8 +9,8 @@ public class TrieTest : TestCase
     [TestMethod]
     public void TestHasKeyword()
     {
-        var map = new Dictionary<String, String>();
-        var keyArray = new String[]
+        var map = new Dictionary<string, string>();
+        var keyArray = new string[]
             {
                 "hers",
                 "his",
@@ -21,9 +21,9 @@ public class TrieTest : TestCase
         {
             map.Add(key, key);
         }
-        Trie trie = new Trie();
+        var trie = new Trie();
         trie.addAllKeyword(map.Keys);
-        foreach (String key in keyArray)
+        foreach (var key in keyArray)
         {
             assertTrue(trie.hasKeyword(key));
         }
@@ -33,8 +33,8 @@ public class TrieTest : TestCase
     [TestMethod]
     public void TestParseText()
     {
-        var map = new Dictionary<String, String>();
-        var keyArray = new String[]
+        var map = new Dictionary<string, string>();
+        var keyArray = new string[]
             {
                 "hers",
                 "his",
@@ -45,15 +45,19 @@ public class TrieTest : TestCase
         {
             map.Add(key, key);
         }
-        AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
+        AhoCorasickDoubleArrayTrie<string> act = new AhoCorasickDoubleArrayTrie<string>();
         act.build(map);
         //        act.debug();
         String text = "uhers";
-        act.parseText(text, new TestHit() { text = text });
+        act.parseText(text, new TestHit(text));
     }
-    public class TestHit : TestCase, IHit<String>
+    public class TestHit : TestCase, AhoCorasickDoubleArrayTrie<string>.IHit<string>
     {
-        public string text;
+        private readonly string text;
+        public TestHit(string text)
+        {
+            this.text = text;
+        }
         //@Override
         public void hit(int begin, int end, String value)
         {

@@ -1,6 +1,7 @@
 using com.hankcs.hanlp.classification.models;
 using com.hankcs.hanlp.classification.utilities;
 using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.classification.classifiers;
 
@@ -9,10 +10,11 @@ namespace com.hankcs.hanlp.classification.classifiers;
 [TestClass]
 public class NaiveBayesClassifierTest : TestCase
 {
+    public static readonly string CORPUS_FOLDER = TestUtility.ensureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
+
     private static readonly string MODEL_PATH = "data/test/classification.ser";
     private Dictionary<String, String[]> trainingDataSet;
 
-    //@Override
     [TestInitialize]
     public override void setUp() 
     {
@@ -42,7 +44,6 @@ public class NaiveBayesClassifierTest : TestCase
         IOUtil.saveObjectTo(naiveBayesClassifier.getNaiveBayesModel(), MODEL_PATH);
     }
     [TestMethod]
-
     public void TestPredictAndAccuracy()
     {
         // 加载模型
@@ -75,8 +76,8 @@ public class NaiveBayesClassifierTest : TestCase
         Console.WriteLine("开始评测...");
         foreach (var entry in trainingDataSet)
         {
-            String category = entry.getKey();
-            String[] documents = entry.getValue();
+            String category = entry.Key;
+            String[] documents = entry.Value;
 
             totalDocuments += documents.Length;
             foreach (String document in documents)
@@ -84,13 +85,13 @@ public class NaiveBayesClassifierTest : TestCase
                 if (category.Equals(naiveBayesClassifier.classify(document))) ++rightDocuments;
             }
         }
-        Console.WriteLine("准确率 %d / %d = %.2f%%\n速度 %.2f 文档/秒", rightDocuments, totalDocuments,
-                          rightDocuments / (double) totalDocuments * 100.0,
-                          totalDocuments / (double) (DateTime.Now.Microsecond - start) * 1000.0
+        Console.WriteLine("准确率 {0} / {1} = {2}%\n速度 {3} 文档/秒", 
+                            rightDocuments, totalDocuments,
+                            rightDocuments / (double) totalDocuments * 100.0,
+                            totalDocuments / (double) (DateTime.Now.Microsecond - start) * 1000.0
         );
     }
     [TestMethod]
-
     public void TestPredict()
     {
         // 加载模型
