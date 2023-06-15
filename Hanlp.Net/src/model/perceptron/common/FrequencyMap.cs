@@ -15,14 +15,14 @@ namespace com.hankcs.hanlp.model.perceptron.common;
 /**
  * @author hankcs
  */
-public class FrequencyMap : TreeMap<String, Integer>
+public class FrequencyMap : TreeMap<String, int>
 {
     public int totalFrequency;
 
     public int add(String word)
     {
         ++totalFrequency;
-        Integer frequency = get(word);
+        int frequency = get(word);
         if (frequency == null)
         {
             put(word, 1);

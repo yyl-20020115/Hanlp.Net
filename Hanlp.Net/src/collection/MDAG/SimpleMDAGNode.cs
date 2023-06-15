@@ -265,7 +265,7 @@ public class SimpleMDAGNode : ICacheAble
         //Loop through the SimpleMDAGNodes in the processing MDAG's source node's _transition set,
         //searching for the the one with a letter (char) equal to the first char of str.
         //We can use that target node to _transition through the MDAG with the rest of the string
-        return sourceNode.transition(mdagDataArray, str.toCharArray());
+        return sourceNode.transition(mdagDataArray, str.ToCharArray());
 //        for(int i = 0; i < sourceNode.transitionSetSize; i++)
 //        {
 //            if(mdagDataArray[i].getLetter() == firstLetter)
@@ -280,21 +280,21 @@ public class SimpleMDAGNode : ICacheAble
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("SimpleMDAGNode{");
-        sb.append("letter=").append(letter);
-        sb.append(", isAcceptNode=").append(isAcceptNode);
-        sb.append(", transitionSetSize=").append(transitionSetSize);
-        sb.append(", transitionSetBeginIndex=").append(transitionSetBeginIndex);
-        sb.append('}');
+        sb.Append("letter=").Append(letter);
+        sb.Append(", isAcceptNode=").Append(isAcceptNode);
+        sb.Append(", transitionSetSize=").Append(transitionSetSize);
+        sb.Append(", transitionSetBeginIndex=").Append(transitionSetBeginIndex);
+        sb.Append('}');
         return sb.toString();
     }
 
     //@Override
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
-        out.writeChar(letter);
-        out.writeByte(isAcceptNode ? 1 : 0);
-        out.writeInt(transitionSetBeginIndex);
-        out.writeInt(transitionSetSize);
+        _out.writeChar(letter);
+        _out.writeByte(isAcceptNode ? 1 : 0);
+        _out.writeInt(transitionSetBeginIndex);
+        _out.writeInt(transitionSetSize);
     }
 
     //@Override

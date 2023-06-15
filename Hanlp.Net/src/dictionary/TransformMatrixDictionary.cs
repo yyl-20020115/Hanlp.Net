@@ -86,12 +86,12 @@ public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("TransformMatrixDictionary{");
-        sb.append("enumType=").append(enumType);
-        sb.append(", ordinaryMax=").append(ordinaryMax);
-        sb.append(", matrix=").append(Arrays.toString(matrix));
-        sb.append(", total=").append(Arrays.toString(total));
-        sb.append(", totalFrequency=").append(totalFrequency);
-        sb.append('}');
+        sb.Append("enumType=").Append(enumType);
+        sb.Append(", ordinaryMax=").Append(ordinaryMax);
+        sb.Append(", matrix=").Append(Arrays.toString(matrix));
+        sb.Append(", total=").Append(Arrays.toString(total));
+        sb.Append(", totalFrequency=").Append(totalFrequency);
+        sb.Append('}');
         return sb.toString();
     }
 

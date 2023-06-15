@@ -40,7 +40,7 @@ public class Distance : AbstractClosestVectors
                 if (input[0].equals(vectorsReader.getWord(i)))
                 {
                     bi = i;
-                    System.out.printf("\nWord: %s  Position in vocabulary: %d\n", input[0], bi);
+                    System._out.printf("\nWord: %s  Position in vocabulary: %d\n", input[0], bi);
                     vec = new float[size];
                     for (int j = 0; j < size; j++)
                     {
@@ -51,7 +51,7 @@ public class Distance : AbstractClosestVectors
             }
             if (vec == null)
             {
-                System.out.printf("%s : Out of dictionary word!\n", input[0]);
+                System._out.printf("%s : Out of dictionary word!\n", input[0]);
                 continue;
             }
 

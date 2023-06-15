@@ -6,9 +6,9 @@ namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 public class MatchToken : Token
 {
 
-    private Emit emit;
+    private readonly Emit emit;
 
-    public MatchToken(String fragment, Emit emit)
+    public MatchToken(string fragment, Emit emit)
         : base(fragment)
     {
         this.emit = emit;

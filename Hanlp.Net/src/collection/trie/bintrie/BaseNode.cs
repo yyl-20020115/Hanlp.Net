@@ -163,7 +163,7 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
 
     protected void walk(StringBuilder sb, Set<Map.Entry<String, V>> entrySet)
     {
-        sb.append(c);
+        sb.Append(c);
         if (status == Status.WORD_MIDDLE_2 || status == Status.WORD_END_3)
         {
             entrySet.add(new TrieEntry(sb.toString(), value));
@@ -176,35 +176,35 @@ public abstract class BaseNode<V> : Comparable<BaseNode>
         }
     }
 
-    protected void walkToSave(DataOutputStream out) 
+    protected void walkToSave(DataOutputStream _out) 
     {
-        out.writeChar(c);
-        out.writeInt(status.ordinal());
+        _out.writeChar(c);
+        _out.writeInt(status.ordinal());
         int childSize = 0;
         if (child != null) childSize = child.length;
-        out.writeInt(childSize);
+        _out.writeInt(childSize);
         if (child == null) return;
         for (BaseNode node : child)
         {
-            node.walkToSave(out);
+            node.walkToSave(_out);
         }
     }
 
-    protected void walkToSave(ObjectOutput out) 
+    protected void walkToSave(ObjectOutput _out) 
     {
-        out.writeChar(c);
-        out.writeInt(status.ordinal());
+        _out.writeChar(c);
+        _out.writeInt(status.ordinal());
         if (status == Status.WORD_END_3 || status == Status.WORD_MIDDLE_2)
         {
-            out.writeObject(value);
+            _out.writeObject(value);
         }
         int childSize = 0;
         if (child != null) childSize = child.length;
-        out.writeInt(childSize);
+        _out.writeInt(childSize);
         if (child == null) return;
         for (BaseNode node : child)
         {
-            node.walkToSave(out);
+            node.walkToSave(_out);
         }
     }
 

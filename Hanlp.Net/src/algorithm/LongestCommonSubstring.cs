@@ -91,12 +91,12 @@ public class LongestCommonSubstring
                 ++n;
             }
         }
-//        System.out.printf("from %d of %s and %d of %s, compared for %d times\n", start1, new String(str1), start2, new String(str2), comparisons);
+//        System._out.printf("from %d of %s and %d of %s, compared for %d times\n", start1, new String(str1), start2, new String(str2), comparisons);
         return longest;
     }
 
     public static int compute(String str1, String str2)
     {
-        return compute(str1.toCharArray(), str2.toCharArray());
+        return compute(str1.ToCharArray(), str2.ToCharArray());
     }
 }

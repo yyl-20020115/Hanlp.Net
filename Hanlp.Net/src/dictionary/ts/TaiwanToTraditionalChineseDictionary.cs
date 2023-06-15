@@ -40,7 +40,7 @@ public class TaiwanToTraditionalChineseDictionary : BaseChineseDictionary
 
     public static String convertToTraditionalChinese(String traditionalTaiwanChineseString)
     {
-        return segLongest(traditionalTaiwanChineseString.toCharArray(), trie);
+        return segLongest(traditionalTaiwanChineseString.ToCharArray(), trie);
     }
 
     public static String convertToTraditionalChinese(char[] traditionalTaiwanChineseString)

@@ -22,7 +22,7 @@ public class State
     /**
      * 栈
      */
-    List<Integer> stack;
+    List<int> stack;
     /**
      * 队列的队首元素（的下标）
      */
@@ -46,20 +46,20 @@ public class State
      * 栈顶元素的下一个元素（全栈第二个元素）
      */
     int top1;                 //! The second top word on the stack.
-    List<Integer> heads;   //! Use to record the heads in current state.
-    List<Integer> deprels; //! The dependency relation cached in state.
+    List<int> heads;   //! Use to record the heads in current state.
+    List<int> deprels; //! The dependency relation cached in state.
     /**
      * 当前节点的左孩子数量
      */
-    List<Integer> nr_left_children;      //! The number of left children in this state.
+    List<int> nr_left_children;      //! The number of left children in this state.
     /**
      * 当前节点的右孩子数量
      */
-    List<Integer> nr_right_children;     //! The number of right children in this state.
-    List<Integer> left_most_child;       //! The left most child for each word in this state.
-    List<Integer> right_most_child;      //! The right most child for each word in this state.
-    List<Integer> left_2nd_most_child;   //! The left 2nd-most child for each word in this state.
-    List<Integer> right_2nd_most_child;  //! The right 2nd-most child for each word in this state.
+    List<int> nr_right_children;     //! The number of right children in this state.
+    List<int> left_most_child;       //! The left most child for each word in this state.
+    List<int> right_most_child;      //! The right most child for each word in this state.
+    List<int> left_2nd_most_child;   //! The left 2nd-most child for each word in this state.
+    List<int> right_2nd_most_child;  //! The right 2nd-most child for each word in this state.
 
     public State()
     {
@@ -68,7 +68,7 @@ public class State
     public State(Dependency ref)
     {
         this.ref = ref;
-        stack = new ArrayList<Integer>(ref.size());
+        stack = new ArrayList<int>(ref.size());
         clear();
         int L = ref.size();
         heads = std.create(L, -1);
@@ -254,10 +254,10 @@ public class State
         return true;
     }
 
-    int cost(List<Integer> gold_heads,
-             List<Integer> gold_deprels)
+    int cost(List<int> gold_heads,
+             List<int> gold_deprels)
     {
-        List<List<Integer>> tree = new ArrayList<List<Integer>>(gold_heads.size());
+        List<List<int>> tree = new ArrayList<List<int>>(gold_heads.size());
         for (int i = 0; i < gold_heads.size(); ++i)
         {
             int h = gold_heads.get(i);
@@ -267,8 +267,8 @@ public class State
             }
         }
 
-        List<Integer> sigma_l = stack;
-        List<Integer> sigma_r = new ArrayList<Integer>();
+        List<int> sigma_l = stack;
+        List<int> sigma_r = new ArrayList<int>();
         sigma_r.add(stack.get(stack.size() - 1));
 
         bool[] sigma_l_mask = new bool[gold_heads.size()];
@@ -287,7 +287,7 @@ public class State
                 continue;
             }
 
-            List<Integer> node = tree.get(i);
+            List<int> node = tree.get(i);
             for (int d = 0; d < node.size(); ++d)
             {
                 if (sigma_l_mask[node.get(d)] || sigma_r_mask[node.get(d)])

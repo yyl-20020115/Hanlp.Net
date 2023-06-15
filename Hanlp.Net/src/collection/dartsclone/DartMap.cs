@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.collection.dartsclone;
  * 双数组trie树map，更省内存，原本希望代替DoubleArrayTrie，后来发现效率不够
  * @author hankcs
  */
-public class DartMap<V> : DoubleArray : Map<String, V>, ITrie<V>
+public class DartMap<V> : DoubleArray : Dictionary<String, V>, ITrie<V>
 {
     V[] valueArray;
 
@@ -96,7 +96,7 @@ public class DartMap<V> : DoubleArray : Map<String, V>, ITrie<V>
     }
 
     //@Override
-    public bool save(DataOutputStream out)
+    public bool save(DataOutputStream _out)
     {
         return false;
     }
@@ -136,9 +136,9 @@ public class DartMap<V> : DoubleArray : Map<String, V>, ITrie<V>
     public ArrayList<Pair<String, V>> commonPrefixSearch(String key, int offset, int maxResults)
     {
         byte[] keyBytes = key.getBytes(utf8);
-        List<Pair<Integer, Integer>> pairList = commonPrefixSearch(keyBytes, offset, maxResults);
+        List<Pair<int, int>> pairList = commonPrefixSearch(keyBytes, offset, maxResults);
         ArrayList<Pair<String, V>> resultList = new ArrayList<Pair<String, V>>(pairList.size());
-        for (Pair<Integer, Integer> pair : pairList)
+        for (Pair<int, int> pair : pairList)
         {
             resultList.add(new Pair<String, V>(new String(keyBytes, 0, pair.first), valueArray[pair.second]));
         }
@@ -147,7 +147,7 @@ public class DartMap<V> : DoubleArray : Map<String, V>, ITrie<V>
 
     public ArrayList<Pair<String, V>> commonPrefixSearch(String key)
     {
-        return commonPrefixSearch(key, 0, Integer.MAX_VALUE);
+        return commonPrefixSearch(key, 0, int.MAX_VALUE);
     }
 
     //@Override
@@ -163,7 +163,7 @@ public class DartMap<V> : DoubleArray : Map<String, V>, ITrie<V>
     }
 
     //@Override
-    public void putAll(Map<? : String, ? : V> m)
+    public void putAll(Dictionary<? : String, ? : V> m)
     {
         throw new UnsupportedOperationException("双数组不支持增量式插入");
     }

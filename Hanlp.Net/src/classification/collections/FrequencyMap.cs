@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.classification.collections;
  * 统计词频的Map
  * @author hankcs
  */
-public class FrequencyMap<K> : TreeMap<K, int[]>
+public class FrequencyMap<K> : Dictionary<K, int[]>
 {
     /**
      * 增加一个词的词频
@@ -25,11 +25,10 @@ public class FrequencyMap<K> : TreeMap<K, int[]>
      */
     public int add(K key)
     {
-        int[] f = get(key);
-        if (f == null)
+        if (!this.TryGetValue(key,out var f))
         {
             f = new int[]{1};
-            put(key, f);
+            Add(key, f);
         }
         else ++f[0];
 

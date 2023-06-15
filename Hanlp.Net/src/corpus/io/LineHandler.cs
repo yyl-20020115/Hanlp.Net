@@ -28,7 +28,7 @@ public abstract class LineHandler
     {
     }
 
-    public void handle(String line) throws Exception
+    public void handle(String line)
     {
         List<String> tokenList = new LinkedList<String>();
         int start = 0;

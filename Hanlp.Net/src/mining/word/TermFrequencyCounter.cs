@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.mining.word;
 public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
 {
     bool filterStopWord;
-    Map<String, TermFrequency> termFrequencyMap;
+    Dictionary<String, TermFrequency> termFrequencyMap;
 
     /**
      * 构造

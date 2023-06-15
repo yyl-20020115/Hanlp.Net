@@ -49,7 +49,7 @@ public class WordNatureWeightModelMaker
         StringBuilder sb = new StringBuilder();
         for (String pos : posSet)
         {
-            sb.append("case \"" + pos + "\":\n");
+            sb.Append("case \"" + pos + "\":\n");
         }
         IOUtil.saveTxt("data/model/dependency/pos-thu.txt", sb.toString());
         return dictionaryMaker.saveTxtTo(modelSavePath);

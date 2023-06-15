@@ -125,15 +125,15 @@ public class TransitionSystem
         }
     }
 
-    List<Integer> transform(List<Action> actions)
+    List<int> transform(List<Action> actions)
     {
-        List<Integer> classes = new ArrayList<Integer>();
+        List<int> classes = new ArrayList<int>();
         transform(actions, classes);
         return classes;
     }
 
     void transform(List<Action> actions,
-                   List<Integer> classes)
+                   List<int> classes)
     {
         classes.clear();
         for (int i = 0; i < actions.size(); ++i)

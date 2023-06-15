@@ -18,10 +18,10 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
 public class FeatureSortItem
 {
     public String key;
-    public Integer id;
+    public int id;
     public float total;
 
-    public FeatureSortItem(Map.Entry<String, Integer> entry, float[] parameter, int tagSetSize)
+    public FeatureSortItem(Map.Entry<String, int> entry, float[] parameter, int tagSetSize)
     {
         key = entry.getKey();
         id = entry.getValue();

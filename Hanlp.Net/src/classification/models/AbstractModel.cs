@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.classification.models;
  * 所有文本分类模型的基类,包含基本的需要序列化的数据
  * @author hankcs
  */
-public class AbstractModel : Serializable
+public class AbstractModel : ISerializable
 {
     /**
      * 类目表
@@ -30,5 +30,5 @@ public class AbstractModel : Serializable
     /**
      * 词语到的映射
      */
-    public BinTrie<Integer> wordIdTrie;
+    public BinTrie<int> wordIdTrie;
 }

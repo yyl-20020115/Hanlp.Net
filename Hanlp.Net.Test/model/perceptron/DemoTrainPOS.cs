@@ -14,9 +14,11 @@ namespace com.hankcs.hanlp.model.perceptron;
 /**
  * @author hankcs
  */
+[TestClass]
+
 public class DemoTrainPOS
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) 
     {
         PerceptronTrainer trainer = new POSTrainer();
         trainer.train("data/test/pku98/199801.txt", Config.POS_MODEL_FILE);

@@ -5,16 +5,17 @@ namespace com.hankcs.hanlp.collection.MDAG;
 /**
  * 测试MDAG
  */
+[TestClass]
 public class MDAGSetTest : TestCase
 {
-    Set<String> validKeySet;
-    Set<String> invalidKeySet;
+    HashSet<String> validKeySet;
+    HashSet<String> invalidKeySet;
     MDAGSet mdagSet;
 
     static String DATA_TEST_OUT_BIN;
     private File tempFile;
 
-
+    [TestInitialize]
     public void setUp() 
     {
         TestUtility.ensureFullData();
@@ -28,20 +29,23 @@ public class MDAGSetTest : TestCase
         }
         mdagSet = new MDAGSet(validKeySet);
     }
+    [TestMethod]
 
     public void testSize() 
     {
         assertEquals(validKeySet.size(), mdagSet.size());
     }
+    [TestMethod]
 
     public void testContains() 
     {
         for (String key : validKeySet)
         {
-//            assertEquals(true, mdagSet.contains(key));
-            assert mdagSet.contains(key) : "本来应该有 " + key;
+//            assertEquals(true, mdagSet.Contains(key));
+            assert mdagSet.Contains(key) : "本来应该有 " + key;
         }
     }
+    [TestMethod]
 
     public void testNotContains() 
     {
@@ -51,31 +55,33 @@ public class MDAGSetTest : TestCase
         mdagSet.unSimplify();
         while (invalidKeySet.size() < validKeySet.size())
         {
-            int length = random.nextInt(10) + 1;
-            StringBuilder key = new StringBuilder(length);
-            for (int i = 0; i < length; ++i)
+            int Length = random.nextInt(10) + 1;
+            StringBuilder key = new StringBuilder(Length);
+            for (int i = 0; i < Length; ++i)
             {
                 key.append(random.nextInt(Character.MAX_VALUE));
             }
-            if (validKeySet.contains(key.toString())) continue;
-            invalidKeySet.add(key.toString());
+            if (validKeySet.Contains(key.ToString())) continue;
+            invalidKeySet.add(key.ToString());
         }
 
         for (String key : invalidKeySet)
         {
-            assertEquals(false, mdagSet.contains(key));
+            assertEquals(false, mdagSet.Contains(key));
         }
     }
+    [TestMethod]
 
     public void testToArray() 
     {
         String[] keyArray = mdagSet.toArray(new String[0]);
-        assertEquals(validKeySet.size(), keyArray.length);
+        assertEquals(validKeySet.size(), keyArray.Length);
         for (String key : keyArray)
         {
-            assertEquals(true, mdagSet.contains(key));
+            assertEquals(true, mdagSet.Contains(key));
         }
     }
+    [TestMethod]
 
     public void testRemove() 
     {
@@ -83,15 +89,17 @@ public class MDAGSetTest : TestCase
         for (String key : keyArray)
         {
             mdagSet.remove(key);
-            assertEquals(false, mdagSet.contains(key));
+            assertEquals(false, mdagSet.Contains(key));
         }
     }
+    [TestMethod]
 
     public void testAdd() 
     {
         assertEquals(true, mdagSet.add("成功啦"));
-        assertEquals(true, mdagSet.contains("成功啦"));
+        assertEquals(true, mdagSet.Contains("成功啦"));
     }
+    [TestMethod]
 
     public void testSimplify() 
     {
@@ -101,6 +109,8 @@ public class MDAGSetTest : TestCase
         HashMap<MDAGNode, MDAGNode> equivalenceClassMDAGNodeHashMapAfter = mdagSet._getEquivalenceClassMDAGNodeHashMap();
         assertEquals(equivalenceClassMDAGNodeHashMapBefore, equivalenceClassMDAGNodeHashMapAfter);
     }
+    [TestMethod]
+
 
     public void testSimplifyAndContains() 
     {
@@ -108,47 +118,50 @@ public class MDAGSetTest : TestCase
         testContains();
         testNotContains();
     }
+    [TestMethod]
 
     public void testSaveAndLoad() 
     {
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
-        mdagSet.save(out);
-        out.close();
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        mdagSet.save(_out);
+        _out.close();
 
         mdagSet = new MDAGSet();
         mdagSet.load(ByteArray.createByteArray(DATA_TEST_OUT_BIN));
         testContains();
         testNotContains();
     }
+    [TestMethod]
 
     public void testSingle() 
     {
         mdagSet.simplify();
-        assertTrue(mdagSet.contains("hankcs"));
+        assertTrue(mdagSet.Contains("hankcs"));
     }
 
-//    public void testBenchmark() 
-//    {
-//        BinTrie<Boolean> binTrie = new BinTrie<Boolean>();
-//        for (String key : validKeySet)
-//        {
-//            binTrie.put(key, true);
-//        }
-//        long start = System.currentTimeMillis();
-//        for (String key : validKeySet)
-//        {
-//            assertEquals(true, (boolean)binTrie.get(key));
-//        }
-//        System.out.printf("binTrie用时 %d ms\n", System.currentTimeMillis() - start);
-//
-//        mdagSet.simplify();
-//        start = System.currentTimeMillis();
-//        for (String key : validKeySet)
-//        {
-//            assertEquals(true, (boolean)mdagSet.contains(key));
-//        }
-//        System.out.printf("mdagSet用时 %d ms\n", System.currentTimeMillis() - start);
-//    }
+    //    public void testBenchmark() 
+    //    {
+    //        BinTrie<Boolean> binTrie = new BinTrie<Boolean>();
+    //        for (String key : validKeySet)
+    //        {
+    //            binTrie.put(key, true);
+    //        }
+    //        long start = System.currentTimeMillis();
+    //        for (String key : validKeySet)
+    //        {
+    //            assertEquals(true, (bool)binTrie.get(key));
+    //        }
+    //        Console.printf("binTrie用时 %d ms\n", System.currentTimeMillis() - start);
+    //
+    //        mdagSet.simplify();
+    //        start = System.currentTimeMillis();
+    //        for (String key : validKeySet)
+    //        {
+    //            assertEquals(true, (bool)mdagSet.Contains(key));
+    //        }
+    //        Console.printf("mdagSet用时 %d ms\n", System.currentTimeMillis() - start);
+    //    }
+    [TestMethod]
 
     public void testCommPrefix() 
     {
@@ -160,6 +173,7 @@ public class MDAGSetTest : TestCase
         }
     }
 
+    [TestMethod]
 
     public void testSimplifyWithoutSave() 
     {
@@ -170,8 +184,9 @@ public class MDAGSetTest : TestCase
         mdag.addString("he");
 
         mdag.simplify();
-        assertTrue(mdag.contains("hers"));
+        assertTrue(mdag.Contains("hers"));
     }
+    [TestMethod]
 
     public void testSimplifyMap() 
     {

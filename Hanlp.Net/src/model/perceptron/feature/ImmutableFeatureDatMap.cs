@@ -18,12 +18,12 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
  */
 public class ImmutableFeatureDatMap : FeatureMap
 {
-    DoubleArrayTrie<Integer> dat;
+    DoubleArrayTrie<int> dat;
 
-    public ImmutableFeatureDatMap(TreeMap<String, Integer> featureIdMap, TagSet tagSet)
+    public ImmutableFeatureDatMap(TreeMap<String, int> featureIdMap, TagSet tagSet)
     {
         super(tagSet);
-        dat = new DoubleArrayTrie<Integer>();
+        dat = new DoubleArrayTrie<int>();
         dat.build(featureIdMap);
     }
 
@@ -40,7 +40,7 @@ public class ImmutableFeatureDatMap : FeatureMap
     }
 
     //@Override
-    public Set<Map.Entry<String, Integer>> entrySet()
+    public Set<Map.Entry<String, int>> entrySet()
     {
         throw new UnsupportedOperationException("这份DAT实现不支持遍历");
     }

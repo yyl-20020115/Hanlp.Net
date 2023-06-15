@@ -13,9 +13,9 @@ public class crf_learn
     public static class Option
     {
         @Argument(description = "use features that occur no less than INT(default 1)", alias = "f")
-        public Integer freq = 1;
+        public int freq = 1;
         @Argument(description = "set INT for max iterations in LBFGS routine(default 10k)", alias = "m")
-        public  Integer maxiter = 10000;
+        public  int maxiter = 10000;
         @Argument(description = "set FLOAT for cost parameter(default 1.0)", alias = "c")
         public  Double cost = 1.0;
         @Argument(description = "set FLOAT for termination criterion(default 0.0001)", alias = "e")
@@ -29,11 +29,11 @@ public class crf_learn
         @Argument(description = "(CRF|CRF-L1|CRF-L2|MIRA)\", \"select training algorithm", alias = "a")
         public  String algorithm = "CRF-L2";
         @Argument(description = "set INT for number of iterations variable needs to be optimal before considered for shrinking. (default 20)", alias = "H")
-        public  Integer shrinking_size = 20;
+        public  int shrinking_size = 20;
         @Argument(description = "show this help and exit", alias = "h")
         public  Boolean help = false;
         @Argument(description = "number of threads(default auto detect)")
-        public  Integer thread = Runtime.getRuntime().availableProcessors();
+        public  int thread = Runtime.getRuntime().availableProcessors();
     }
 
     public static bool run(String args)

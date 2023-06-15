@@ -1,11 +1,12 @@
 namespace com.hankcs.hanlp.model.hmm;
 
 
+[TestClass]
 public class HMMLexicalAnalyzerTest : TestCase
 {
 
-    public static final String CORPUS_PATH = "data/test/pku98/199801.txt";
-
+    public static readonly string CORPUS_PATH = "data/test/pku98/199801.txt";
+    [TestMethod]
     public void testTrain() 
     {
         HMMSegmenter segmenter = new HMMSegmenter();

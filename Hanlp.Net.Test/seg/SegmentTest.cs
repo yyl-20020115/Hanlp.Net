@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.seg.common.wrapper;
+using com.hankcs.hanlp.seg.Dijkstra;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.seg;
 
 
@@ -16,8 +23,11 @@ namespace com.hankcs.hanlp.seg;
 /**
  * @author hankcs
  */
+[TestClass]
+
 public class SegmentTest : TestCase
 {
+    [TestMethod]
     public void testSeg() 
     {
 //        HanLP.Config.enableDebug();
@@ -26,7 +36,7 @@ public class SegmentTest : TestCase
 //                "我遗忘我的密码了"
 //        ));
     }
-
+    [TestMethod]
     public void testIssue880() 
     {
 //        HanLP.Config.enableDebug();
@@ -34,6 +44,7 @@ public class SegmentTest : TestCase
         Console.WriteLine(segment.seg("龚学平等表示会保证金云鹏的安全"));
         Console.WriteLine(segment.seg("王中军代表蓝队发言"));
     }
+    [TestMethod]
 
     public void testViterbi() 
     {
@@ -43,6 +54,7 @@ public class SegmentTest : TestCase
         List<Term> termList = seg.seg("优酷总裁魏明介绍了优酷2015年的内容战略，表示要以“大电影、大网剧、大综艺”为关键词");
 //        Console.WriteLine(termList);
     }
+    [TestMethod]
 
     public void testExtendViterbi() 
     {
@@ -59,53 +71,61 @@ public class SegmentTest : TestCase
         List<Term> termList = seg.seg(text);
         Console.WriteLine("自定义字典的分词结果：" + termList);
     }
+    [TestMethod]
 
     public void testNotional() 
     {
 //        Console.WriteLine(NotionalTokenizer.segment("算法可以宽泛的分为三类"));
     }
+    [TestMethod]
 
     public void testNGram() 
     {
 //        Console.WriteLine(CoreBiGramTableDictionary.getBiFrequency("牺", "牲"));
     }
+    [TestMethod]
 
     public void testShortest() 
     {
-//        HanLP.Config.enableDebug();
-//        Segment segment = new ViterbiSegment().enableAllNamedEntityRecognize(true);
-//        Console.WriteLine(segment.seg("把市场经济奉行的等价交换原则引入党的生活和国家机关政务活动中"));
+        //        HanLP.Config.enableDebug();
+        //        Segment segment = new ViterbiSegment().enableAllNamedEntityRecognize(true);
+        //        Console.WriteLine(segment.seg("把市场经济奉行的等价交换原则引入党的生活和国家机关政务活动中"));
     }
+    [TestMethod]
+
 
     public void testIndexSeg() 
     {
 //        Console.WriteLine(IndexTokenizer.segment("中科院预测科学研究中心学术委员会"));
     }
+    [TestMethod]
 
     public void testOffset() 
     {
         String text = "中华人民共和国在哪里";
-//        for (int i = 0; i < text.length(); ++i)
+//        for (int i = 0; i < text.Length(); ++i)
 //        {
-//            System.out.print(text.charAt(i) + "" + i + " ");
+//            Console.print(text.charAt(i) + "" + i + " ");
 //        }
 //        Console.WriteLine();
         List<Term> termList = IndexTokenizer.segment(text);
         for (Term term : termList)
         {
-            assertEquals(term.word, text.substring(term.offset, term.offset + term.length()));
+            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length()));
         }
     }
+    [TestMethod]
 
     public void testWrapper() 
     {
-        SegmentWrapper wrapper = new SegmentWrapper(new BufferedReader(new StringReader("中科院预测科学研究中心学术委员会\nhaha")), StandardTokenizer.SEGMENT);
+        SegmentWrapper wrapper = new SegmentWrapper(new BufferedReader(new StringReader("中科院预测科学研究中心学术委员会\nhaha")), tokenizer.StandardTokenizer.SEGMENT);
         Term fullTerm;
         while ((fullTerm = wrapper.next()) != null)
         {
 //            Console.WriteLine(fullTerm);
         }
     }
+    [TestMethod]
 
     public void testSpeechTagging() 
     {
@@ -117,11 +137,13 @@ public class SegmentTest : TestCase
         segment.enablePartOfSpeechTagging(true);
 //        Console.WriteLine("标注后：" + segment.seg(text));
     }
+    [TestMethod]
 
     public void testFactory() 
     {
         Segment segment = HanLP.newSegment();
     }
+    [TestMethod]
 
     public void testCustomDictionary() 
     {
@@ -129,6 +151,7 @@ public class SegmentTest : TestCase
         Segment segment = new ViterbiSegment();
 //        Console.WriteLine(segment.seg("肯德基"));
     }
+    [TestMethod]
 
     public void testNT() 
     {
@@ -136,6 +159,7 @@ public class SegmentTest : TestCase
         Segment segment = new DijkstraSegment().enableOrganizationRecognize(true);
 //        Console.WriteLine(segment.seg("张克智与潍坊地铁建设工程公司"));
     }
+    [TestMethod]
 
     public void testACSegment() 
     {
@@ -143,6 +167,7 @@ public class SegmentTest : TestCase
         segment.enablePartOfSpeechTagging(true);
 //        Console.WriteLine(segment.seg("江西鄱阳湖干枯，中国最大淡水湖变成大草原"));
     }
+    [TestMethod]
 
     public void testIssue2() 
     {
@@ -152,6 +177,7 @@ public class SegmentTest : TestCase
         CustomDictionary.insert("BENQ");
 //        Console.WriteLine(HanLP.segment(text));
     }
+    [TestMethod]
 
     public void testIssue3() 
     {
@@ -160,17 +186,20 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(HanLP.segment("３００ｇ＊２"));
 //        Console.WriteLine(HanLP.segment("鱼300克*2/组"));
     }
+    [TestMethod]
 
     public void testIssue313() 
     {
 //        Console.WriteLine(HanLP.segment("hello\n" + "world"));
     }
+    [TestMethod]
 
     public void testQuickAtomSegment() 
     {
         String text = "你好1234abc Good一二三四3.14";
-//        Console.WriteLine(Segment.quickAtomSegment(text.toCharArray(), 0, text.length()));
+//        Console.WriteLine(Segment.quickAtomSegment(text.ToCharArray(), 0, text.Length()));
     }
+    [TestMethod]
 
     public void testJP() 
     {
@@ -179,22 +208,23 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(segment.seg(text));
     }
 
-//    public void testSpeedOfSecondViterbi() 
-//    {
-//        String text = "王总和小丽结婚了";
-//        Segment segment = new ViterbiSegment().enableAllNamedEntityRecognize(false)
-//                .enableNameRecognize(false) // 人名识别需要二次维特比，比较慢
-//                .enableCustomDictionary(false);
-//        Console.WriteLine(segment.seg(text));
-//        long start = System.currentTimeMillis();
-//        int pressure = 1000000;
-//        for (int i = 0; i < pressure; ++i)
-//        {
-//            segment.seg(text);
-//        }
-//        double costTime = (System.currentTimeMillis() - start) / (double) 1000;
-//        System.out.printf("分词速度：%.2f字每秒", text.length() * pressure / costTime);
-//    }
+    //    public void testSpeedOfSecondViterbi() 
+    //    {
+    //        String text = "王总和小丽结婚了";
+    //        Segment segment = new ViterbiSegment().enableAllNamedEntityRecognize(false)
+    //                .enableNameRecognize(false) // 人名识别需要二次维特比，比较慢
+    //                .enableCustomDictionary(false);
+    //        Console.WriteLine(segment.seg(text));
+    //        long start = System.currentTimeMillis();
+    //        int pressure = 1000000;
+    //        for (int i = 0; i < pressure; ++i)
+    //        {
+    //            segment.seg(text);
+    //        }
+    //        double costTime = (System.currentTimeMillis() - start) / (double) 1000;
+    //        Console.printf("分词速度：%.2f字每秒", text.Length() * pressure / costTime);
+    //    }
+    [TestMethod]
 
     public void testNumberAndQuantifier() 
     {
@@ -211,12 +241,13 @@ public class SegmentTest : TestCase
 //            Console.WriteLine(StandardTokenizer.segment(sentence));
         }
     }
+    [TestMethod]
 
     public void testIssue10() 
     {
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
         IndexTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
-        List termList = StandardTokenizer.segment("此帐号有欠费业务是什么");
+        var termList = StandardTokenizer.segment("此帐号有欠费业务是什么");
 //        Console.WriteLine(termList);
         termList = IndexTokenizer.segment("此帐号有欠费业务是什么");
 //        Console.WriteLine(termList);
@@ -226,73 +257,74 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(termList);
     }
 
-//    public void testIssue199() 
-//    {
-//        Segment segment = new CRFSegment();
-//        segment.enableCustomDictionary(false);// 开启自定义词典
-//        segment.enablePartOfSpeechTagging(true);
-//        List<Term> termList = segment.seg("更多采购");
-////        Console.WriteLine(termList);
-//        for (Term term : termList)
-//        {
-//            if (term.nature == null)
-//            {
-////                Console.WriteLine("识别到新词：" + term.word);
-//            }
-//        }
-//    }
+    //    public void testIssue199() 
+    //    {
+    //        Segment segment = new CRFSegment();
+    //        segment.enableCustomDictionary(false);// 开启自定义词典
+    //        segment.enablePartOfSpeechTagging(true);
+    //        List<Term> termList = segment.seg("更多采购");
+    ////        Console.WriteLine(termList);
+    //        for (Term term : termList)
+    //        {
+    //            if (term.nature == null)
+    //            {
+    ////                Console.WriteLine("识别到新词：" + term.word);
+    //            }
+    //        }
+    //    }
 
-//    public void testMultiThreading() 
-//    {
-//        Segment segment = BasicTokenizer.SEGMENT;
-//        // 测个速度
-//        String text = "江西鄱阳湖干枯，中国最大淡水湖变成大草原。";
-//        Console.WriteLine(segment.seg(text));
-//        int pressure = 100000;
-//        StringBuilder sbBigText = new StringBuilder(text.length() * pressure);
-//        for (int i = 0; i < pressure; i++)
-//        {
-//            sbBigText.append(text);
-//        }
-//        text = sbBigText.toString();
-//        long start = System.currentTimeMillis();
-//        List<Term> termList1 = segment.seg(text);
-//        double costTime = (System.currentTimeMillis() - start) / (double) 1000;
-//        System.out.printf("单线程分词速度：%.2f字每秒\n", text.length() / costTime);
-//
-//        segment.enableMultithreading(4);
-//        start = System.currentTimeMillis();
-//        List<Term> termList2 = segment.seg(text);
-//        costTime = (System.currentTimeMillis() - start) / (double) 1000;
-//        System.out.printf("四线程分词速度：%.2f字每秒\n", text.length() / costTime);
-//
-//        assertEquals(termList1.size(), termList2.size());
-//        Iterator<Term> iterator1 = termList1.iterator();
-//        Iterator<Term> iterator2 = termList2.iterator();
-//        while (iterator1.hasNext())
-//        {
-//            Term term1 = iterator1.next();
-//            Term term2 = iterator2.next();
-//            assertEquals(term1.word, term2.word);
-//            assertEquals(term1.nature, term2.nature);
-//            assertEquals(term1.offset, term2.offset);
-//        }
-//    }
+    //    public void testMultiThreading() 
+    //    {
+    //        Segment segment = BasicTokenizer.SEGMENT;
+    //        // 测个速度
+    //        String text = "江西鄱阳湖干枯，中国最大淡水湖变成大草原。";
+    //        Console.WriteLine(segment.seg(text));
+    //        int pressure = 100000;
+    //        StringBuilder sbBigText = new StringBuilder(text.Length() * pressure);
+    //        for (int i = 0; i < pressure; i++)
+    //        {
+    //            sbBigText.append(text);
+    //        }
+    //        text = sbBigText.ToString();
+    //        long start = System.currentTimeMillis();
+    //        List<Term> termList1 = segment.seg(text);
+    //        double costTime = (System.currentTimeMillis() - start) / (double) 1000;
+    //        Console.printf("单线程分词速度：%.2f字每秒\n", text.Length() / costTime);
+    //
+    //        segment.enableMultithreading(4);
+    //        start = System.currentTimeMillis();
+    //        List<Term> termList2 = segment.seg(text);
+    //        costTime = (System.currentTimeMillis() - start) / (double) 1000;
+    //        Console.printf("四线程分词速度：%.2f字每秒\n", text.Length() / costTime);
+    //
+    //        assertEquals(termList1.size(), termList2.size());
+    //        Iterator<Term> iterator1 = termList1.iterator();
+    //        Iterator<Term> iterator2 = termList2.iterator();
+    //        while (iterator1.hasNext())
+    //        {
+    //            Term term1 = iterator1.next();
+    //            Term term2 = iterator2.next();
+    //            assertEquals(term1.word, term2.word);
+    //            assertEquals(term1.nature, term2.nature);
+    //            assertEquals(term1.offset, term2.offset);
+    //        }
+    //    }
 
-//    public void testTryToCrashSegment() 
-//    {
-//        String text = "尝试玩坏分词器";
-//        Segment segment = new ViterbiSegment().enableMultithreading(100);
-//        Console.WriteLine(segment.seg(text));
-//    }
+    //    public void testTryToCrashSegment() 
+    //    {
+    //        String text = "尝试玩坏分词器";
+    //        Segment segment = new ViterbiSegment().enableMultithreading(100);
+    //        Console.WriteLine(segment.seg(text));
+    //    }
 
-//    public void testCRFSegment() 
-//    {
-//        HanLP.Config.enableDebug();
-////        HanLP.Config.ShowTermNature = false;
-//        Segment segment = new CRFSegment();
-//        Console.WriteLine(segment.seg("有句谚语叫做一个萝卜一个坑儿"));
-//    }
+    //    public void testCRFSegment() 
+    //    {
+    //        HanLP.Config.enableDebug();
+    ////        HanLP.Config.ShowTermNature = false;
+    //        Segment segment = new CRFSegment();
+    //        Console.WriteLine(segment.seg("有句谚语叫做一个萝卜一个坑儿"));
+    //    }
+    [TestMethod]
 
     public void testIssue16() 
     {
@@ -304,6 +336,7 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(segment.seg("爱听４Ｇ"));
 //        Console.WriteLine(segment.seg("愛聽４Ｇ"));
     }
+    [TestMethod]
 
     public void testIssuse17() 
     {
@@ -314,6 +347,7 @@ public class SegmentTest : TestCase
         HanLP.Config.Normalization = true;
 //        Console.WriteLine(StandardTokenizer.segment("号 "));
     }
+    [TestMethod]
 
     public void testIssue22() 
     {
@@ -327,6 +361,7 @@ public class SegmentTest : TestCase
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
 //        Console.WriteLine(StandardTokenizer.segment("三年"));
     }
+    [TestMethod]
 
     public void testIssue71() 
     {
@@ -335,6 +370,7 @@ public class SegmentTest : TestCase
         segment = segment.enableNumberQuantifierRecognize(true);
 //        Console.WriteLine(segment.seg("曾幻想过，若干年后的我就是这个样子的吗"));
     }
+    [TestMethod]
 
     public void testIssue193() 
     {
@@ -351,21 +387,23 @@ public class SegmentTest : TestCase
             "则应从排名第八的投标人开始依次递补三名投标人"
         };
         Segment segment = HanLP.newSegment().enableOrganizationRecognize(true).enableNumberQuantifierRecognize(true);
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
             List<Term> termList = segment.seg(sentence);
 //            Console.WriteLine(termList);
         }
     }
+    [TestMethod]
 
     public void testTime() 
     {
         TraditionalChineseTokenizer.segment("认可程度");
     }
+    [TestMethod]
 
     public void testBuildASimpleSegment() 
     {
-        TreeMap<String, String> dictionary = new TreeMap<String, String>();
+        var dictionary = new Dictionary<String, String>();
         dictionary.put("HanLP", "名词");
         dictionary.put("特别", "副词");
         dictionary.put("方便", "形容词");
@@ -375,18 +413,21 @@ public class SegmentTest : TestCase
             CommonAhoCorasickSegmentUtil.segment("HanLP是不是特别方便？", acdat);
 //        Console.WriteLine(termList);
     }
+    [TestMethod]
 
     public void testNLPSegment() 
     {
         String text = "2013年4月27日11时54分";
 //        Console.WriteLine(NLPTokenizer.segment(text));
     }
+    [TestMethod]
 
     public void testTraditionalSegment() 
     {
         String text = "吵架吵到快取消結婚了";
 //        Console.WriteLine(TraditionalChineseTokenizer.segment(text));
     }
+    [TestMethod]
 
     public void testIssue290() 
     {
@@ -395,6 +436,7 @@ public class SegmentTest : TestCase
         Segment seg_viterbi = new ViterbiSegment().enablePartOfSpeechTagging(true).enableOffset(true).enableNameRecognize(true).enablePlaceRecognize(true).enableOrganizationRecognize(true).enableNumberQuantifierRecognize(true);
 //        Console.WriteLine(seg_viterbi.seg(txt));
     }
+    [TestMethod]
 
     public void testIssue343() 
     {
@@ -403,6 +445,7 @@ public class SegmentTest : TestCase
         Segment segment = HanLP.newSegment().enableIndexMode(true);
 //        Console.WriteLine(segment.seg("1酷我音乐2酷我音乐3酷我4酷我音乐6酷7酷我音乐"));
     }
+    [TestMethod]
 
     public void testIssue358() 
     {
@@ -414,6 +457,7 @@ public class SegmentTest : TestCase
 
 //        Console.WriteLine(segment.seg(text));
     }
+    [TestMethod]
 
     public void testIssue496() 
     {
@@ -421,15 +465,17 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(segment.seg("中医药"));
 //        Console.WriteLine(segment.seg("中医药大学"));
     }
+    [TestMethod]
 
     public void testIssue513() 
     {
         List<Term> termList = IndexTokenizer.segment("南京市长江大桥");
         for (Term term : termList)
         {
-//            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
+//            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length()) + "]");
         }
     }
+    [TestMethod]
 
     public void testIssue519() 
     {
@@ -439,17 +485,18 @@ public class SegmentTest : TestCase
             "铁道部运输局",
             "铁道部运输局营运部货运营销计划处",
         };
-        for (String sentence : testCase)
+        foreach (String sentence in testCase)
         {
 //            Console.WriteLine(sentence);
             List<Term> termList = IndexTokenizer.segment(sentence);
-            for (Term term : termList)
+            foreach (Term term in termList)
             {
-//                Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.length()) + "]");
+//                Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length()) + "]");
             }
 //            Console.WriteLine();
         }
     }
+    [TestMethod]
 
     public void testIssue542() 
     {
@@ -458,6 +505,7 @@ public class SegmentTest : TestCase
         seg.enableNumberQuantifierRecognize(true);
 //        Console.WriteLine(seg.seg("一分钟就累了"));
     }
+    [TestMethod]
 
     public void testIssue623() 
     {
@@ -465,6 +513,7 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(HanLP.segment("赵四158开头的号码"));
 //        Console.WriteLine(HanLP.segment("上周四18:00召开股东大会"));
     }
+    [TestMethod]
 
     public void testIssue633() 
     {
@@ -472,14 +521,16 @@ public class SegmentTest : TestCase
         StandardTokenizer.SEGMENT.enableCustomDictionaryForcing(true);
 //        Console.WriteLine(HanLP.segment("钱管家中怎么绑定网银"));
     }
+    [TestMethod]
 
     public void testIssue784() 
     {
         String s = "苏苏中级会计什么时候更新";
         CustomDictionary.add("苏苏");
         StandardTokenizer.SEGMENT.enableCustomDictionaryForcing(true);
-        assertTrue(HanLP.segment(s).toString().contains("苏苏"));
+        assertTrue(HanLP.segment(s).ToString().Contains("苏苏"));
     }
+    [TestMethod]
 
     public void testIssue790() 
     {
@@ -491,11 +542,13 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(seg.seg(raw));
         seg.seg(raw);
     }
+    [TestMethod]
 
     public void testTimeIssue() 
     {
-        assertTrue(HanLP.segment("1月中旬应该会发生什么").toString().contains("1月"));
+        assertTrue(HanLP.segment("1月中旬应该会发生什么").ToString().Contains("1月"));
     }
+    [TestMethod]
 
     public void testIssue932() 
     {

@@ -45,7 +45,7 @@ public class TaiwanToHongKongChineseDictionary : BaseChineseDictionary
 
     public static String convertToTraditionalHongKongChinese(String traditionalTaiwanChinese)
     {
-        return segLongest(traditionalTaiwanChinese.toCharArray(), trie);
+        return segLongest(traditionalTaiwanChinese.ToCharArray(), trie);
     }
 
     public static String convertToTraditionalHongKongChinese(char[] traditionalTaiwanChinese)

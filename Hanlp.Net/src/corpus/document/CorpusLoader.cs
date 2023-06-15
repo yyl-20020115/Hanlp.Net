@@ -26,12 +26,12 @@ public class CorpusLoader
         int i = 0;
         for (File file : fileList)
         {
-            System.out.print(file);
+            System._out.print(file);
             Document document = convert2Document(file);
-            System.out.println(" " + ++i + " / " + fileList.size());
+            System._out.println(" " + ++i + " / " + fileList.size());
             handler.handle(document);
         }
-        System.out.printf("花费时间%d ms\n", System.currentTimeMillis() - start);
+        System._out.printf("花费时间%d ms\n", System.currentTimeMillis() - start);
     }
 
     public static void walk(String folderPath, HandlerThread[] threadArray)
@@ -56,7 +56,7 @@ public class CorpusLoader
                 logger.warning("多线程异常" + e);
             }
         }
-        System.out.printf("花费时间%d ms\n", System.currentTimeMillis() - start);
+        System._out.printf("花费时间%d ms\n", System.currentTimeMillis() - start);
     }
 
     public static List<Document> convert2DocumentList(String folderPath)
@@ -79,15 +79,15 @@ public class CorpusLoader
         int i = 0;
         for (File file : fileList)
         {
-            if (verbose) System.out.print(file);
+            if (verbose) System._out.print(file);
             Document document = convert2Document(file);
             documentList.add(document);
-            if (verbose) System.out.println(" " + ++i + " / " + fileList.size());
+            if (verbose) System._out.println(" " + ++i + " / " + fileList.size());
         }
         if (verbose)
         {
-            System.out.println(documentList.size());
-            System.out.printf("花费时间%d ms\n", System.currentTimeMillis() - start);
+            System._out.println(documentList.size());
+            System._out.printf("花费时间%d ms\n", System.currentTimeMillis() - start);
         }
         return documentList;
     }
@@ -184,16 +184,16 @@ public class CorpusLoader
         public void run()
         {
             long start = System.currentTimeMillis();
-            System.out.printf("线程#%s 开始运行\n", getName());
+            System._out.printf("线程#%s 开始运行\n", getName());
             int i = 0;
             for (File file : fileList)
             {
-                System.out.print(file);
+                System._out.print(file);
                 Document document = convert2Document(file);
-                System.out.println(" " + ++i + " / " + fileList.size());
+                System._out.println(" " + ++i + " / " + fileList.size());
                 handle(document);
             }
-            System.out.printf("线程#%s 运行完毕，耗时%dms\n", getName(), System.currentTimeMillis() - start);
+            System._out.printf("线程#%s 运行完毕，耗时%dms\n", getName(), System.currentTimeMillis() - start);
         }
     }
 }

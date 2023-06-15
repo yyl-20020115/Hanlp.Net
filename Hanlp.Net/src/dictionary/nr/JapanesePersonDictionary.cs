@@ -83,13 +83,13 @@ public class JapanesePersonDictionary
     {
         try
         {
-            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
-            out.writeInt(map.size());
+            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
+            _out.writeInt(map.size());
             for (Character character : map.values())
             {
-                out.writeChar(character);
+                _out.writeChar(character);
             }
-            out.close();
+            _out.close();
         }
         catch (Exception e)
         {

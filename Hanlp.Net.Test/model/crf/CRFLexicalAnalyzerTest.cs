@@ -1,8 +1,11 @@
 namespace com.hankcs.hanlp.model.crf;
 
 
+[TestClass]
 public class CRFLexicalAnalyzerTest : TestCase
 {
+    [TestMethod]
+
     public void testLoad() 
     {
         CRFLexicalAnalyzer analyzer = new CRFLexicalAnalyzer();

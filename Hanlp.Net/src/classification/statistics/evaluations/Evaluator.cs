@@ -32,13 +32,13 @@ public class Evaluator
         double time = System.currentTimeMillis();
         for (Document document : testingDataSet)
         {
-            final int out = classifier.label(document);
+            final int _out = classifier.label(document);
             final int key = document.category;
-            ++TP_FP[out];
+            ++TP_FP[_out];
             ++TP_FN[key];
-            if (key == out)
+            if (key == _out)
             {
-                ++TP[out];
+                ++TP[_out];
             }
         }
         time = System.currentTimeMillis() - time;
@@ -50,7 +50,7 @@ public class Evaluator
         return result;
     }
 
-    public static FMeasure evaluate(IClassifier classifier, Map<String, String[]> testingDataSet)
+    public static FMeasure evaluate(IClassifier classifier, Dictionary<String, String[]> testingDataSet)
     {
         return evaluate(classifier, new MemoryDataSet(classifier.getModel()).add(testingDataSet));
     }

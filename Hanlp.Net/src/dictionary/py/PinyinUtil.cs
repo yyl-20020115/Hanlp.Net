@@ -109,10 +109,10 @@ public class PinyinUtil
 
                     StringBuffer resultBuffer = new StringBuffer();
 
-                    resultBuffer.append(lowerCasePinyinStr.substring(0, indexOfUnmarkedVowel).replaceAll("v",
+                    resultBuffer.Append(lowerCasePinyinStr.substring(0, indexOfUnmarkedVowel).replaceAll("v",
                                                                                                          "ü"));
-                    resultBuffer.append(markedVowel);
-                    resultBuffer.append(lowerCasePinyinStr.substring(indexOfUnmarkedVowel + 1,
+                    resultBuffer.Append(markedVowel);
+                    resultBuffer.Append(lowerCasePinyinStr.substring(indexOfUnmarkedVowel + 1,
                                                                      lowerCasePinyinStr.length() - 1).replaceAll("v", "ü"));
 
                     return resultBuffer.toString();

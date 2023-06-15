@@ -58,7 +58,7 @@ public class BaseChineseDictionary
      * @param pathArray 路径
      * @return 是否加载成功
      */
-    static bool load(Map<String, String> storage, bool reverse, String... pathArray)
+    static bool load(Dictionary<String, String> storage, bool reverse, String... pathArray)
     {
         StringDictionary dictionary = new StringDictionary("=");
         for (String path : pathArray)
@@ -133,19 +133,19 @@ public class BaseChineseDictionary
         }
         try
         {
-            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
-            out.writeInt(entrySet.size());
+            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
+            _out.writeInt(entrySet.size());
             for (Map.Entry<String, String> entry : entrySet)
             {
-                char[] charArray = entry.getValue().toCharArray();
-                out.writeInt(charArray.length);
+                char[] charArray = entry.getValue().ToCharArray();
+                _out.writeInt(charArray.length);
                 for (char c : charArray)
                 {
-                    out.writeChar(c);
+                    _out.writeChar(c);
                 }
             }
-            trie.save(out);
-            out.close();
+            trie.save(_out);
+            _out.close();
         }
         catch (Exception e)
         {
@@ -174,16 +174,16 @@ public class BaseChineseDictionary
             // 补足没查到的词
             while (p < offset)
             {
-                sb.append(charArray[p]);
+                sb.Append(charArray[p]);
                 ++p;
             }
-            sb.append(entry.getValue());
+            sb.Append(entry.getValue());
             p = offset + entry.getKey().length();
         }
         // 补足没查到的词
         while (p < charArray.length)
         {
-            sb.append(charArray[p]);
+            sb.Append(charArray[p]);
             ++p;
         }
         return sb.toString();
@@ -211,11 +211,11 @@ public class BaseChineseDictionary
         {
             if (wordNet[offset] == null)
             {
-                sb.append(charArray[offset]);
+                sb.Append(charArray[offset]);
                 ++offset;
                 continue;
             }
-            sb.append(wordNet[offset]);
+            sb.Append(wordNet[offset]);
             offset += lengthNet[offset];
         }
         return sb.toString();

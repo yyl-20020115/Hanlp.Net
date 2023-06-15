@@ -41,7 +41,7 @@ public class TranslatedPersonRecognition
             {
                 if (vertex.guessNature() == Nature.nrf || TranslatedPersonDictionary.containsKey(vertex.realWord))
                 {
-                    sbName.append(vertex.realWord);
+                    sbName.Append(vertex.realWord);
                     ++appendTimes;
                 }
                 else
@@ -51,7 +51,7 @@ public class TranslatedPersonRecognition
                     {
                         if (HanLP.Config.DEBUG)
                         {
-                            System.out.println("音译人名识别出：" + sbName.toString());
+                            System._out.println("音译人名识别出：" + sbName.toString());
                         }
                         wordNetOptimum.insert(activeLine, new Vertex(Predefine.TAG_PEOPLE, sbName.toString(), new CoreDictionary.Attribute(Nature.nrf), WORD_ID), wordNetAll);
                     }
@@ -66,7 +66,7 @@ public class TranslatedPersonRecognition
 //                        || TranslatedPersonDictionary.containsKey(vertex.realWord)
                         )
                 {
-                    sbName.append(vertex.realWord);
+                    sbName.Append(vertex.realWord);
                     ++appendTimes;
                     activeLine = line;
                 }

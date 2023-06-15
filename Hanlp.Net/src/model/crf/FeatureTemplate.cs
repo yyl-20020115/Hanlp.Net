@@ -46,7 +46,7 @@ public class FeatureTemplate : ICacheAble
         {
             featureTemplate.delimiterList.add(template.substring(start, matcher.start()));
             start = matcher.end();
-            featureTemplate.offsetList.add(new int[]{Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2))});
+            featureTemplate.offsetList.add(new int[]{int.parseInt(matcher.group(1)), int.parseInt(matcher.group(2))});
         }
         return featureTemplate;
     }
@@ -57,9 +57,9 @@ public class FeatureTemplate : ICacheAble
         int i = 0;
         for (String d : delimiterList)
         {
-            sb.append(d);
+            sb.Append(d);
             int[] offset = offsetList.get(i++);
-            sb.append(table.get(current + offset[0], offset[1]));
+            sb.Append(table.get(current + offset[0], offset[1]));
         }
 
         char[] o = new char[sb.length()];
@@ -69,19 +69,19 @@ public class FeatureTemplate : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) 
+    public void save(DataOutputStream _out) 
     {
-        out.writeUTF(template);
-        out.writeInt(offsetList.size());
+        _out.writeUTF(template);
+        _out.writeInt(offsetList.size());
         for (int[] offset : offsetList)
         {
-            out.writeInt(offset[0]);
-            out.writeInt(offset[1]);
+            _out.writeInt(offset[0]);
+            _out.writeInt(offset[1]);
         }
-        out.writeInt(delimiterList.size());
+        _out.writeInt(delimiterList.size());
         for (String s : delimiterList)
         {
-            out.writeUTF(s);
+            _out.writeUTF(s);
         }
     }
 
@@ -108,9 +108,9 @@ public class FeatureTemplate : ICacheAble
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("FeatureTemplate{");
-        sb.append("template='").append(template).append('\'');
-        sb.append(", delimiterList=").append(delimiterList);
-        sb.append('}');
+        sb.Append("template='").Append(template).Append('\'');
+        sb.Append(", delimiterList=").Append(delimiterList);
+        sb.Append('}');
         return sb.toString();
     }
 

@@ -1,6 +1,7 @@
 namespace com.hankcs.hanlp.recognition.nt;
 
 
+[TestClass]
 
 public class OrganizationRecognitionTest : TestCase
 {
@@ -19,15 +20,15 @@ public class OrganizationRecognitionTest : TestCase
 //        CommonStringDictionary commonStringDictionary = new CommonStringDictionary();
 //        commonStringDictionary.load("data/dictionary/organization/nt.pattern.txt");
 //        StringBuilder sb = new StringBuilder();
-//        Set<String> keySet = commonStringDictionary.keySet();
+//        Set<String> keySet = commonStringDictionary.Keys;
 //        CommonStringDictionary secondDictionary = new CommonStringDictionary();
 //        secondDictionary.load("data/dictionary/organization/outerNT.pattern.txt");
-//        keySet.addAll(secondDictionary.keySet());
+//        keySet.addAll(secondDictionary.Keys);
 //        for (String pattern : keySet)
 //        {
 //            sb.append("trie.addKeyword(\"" + pattern + "\");\n");
 //        }
-//        IOUtil.saveTxt("data/dictionary/organization/code.txt", sb.toString());
+//        IOUtil.saveTxt("data/dictionary/organization/code.txt", sb.ToString());
 //    }
 //
 //    public void testRemoveP() 

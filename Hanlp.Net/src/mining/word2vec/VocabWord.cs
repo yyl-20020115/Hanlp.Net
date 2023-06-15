@@ -27,20 +27,20 @@ public class VocabWord implements Comparable<VocabWord>
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("[%s] cn=%d, codelen=%d, ", word, cn, codelen));
-        sb.append("code=(");
+        sb.Append(String.format("[%s] cn=%d, codelen=%d, ", word, cn, codelen));
+        sb.Append("code=(");
         for (int i = 0; i < codelen; i++)
         {
-            if (i > 0) sb.append(',');
-            sb.append(code[i]);
+            if (i > 0) sb.Append(',');
+            sb.Append(code[i]);
         }
-        sb.append("), point=(");
+        sb.Append("), point=(");
         for (int i = 0; i < codelen; i++)
         {
-            if (i > 0) sb.append(',');
-            sb.append(point[i]);
+            if (i > 0) sb.Append(',');
+            sb.Append(point[i]);
         }
-        sb.append(")");
+        sb.Append(")");
         return sb.toString();
     }
 

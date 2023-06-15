@@ -101,7 +101,7 @@ public class CharType
         for (int i = 0; i <= Character.MAX_VALUE; ++i)
         {
             int type = TextUtility.charType((char) i);
-//            System.out.printf("%d %d\n", i, TextUtility.charType((char) i));
+//            System._out.printf("%d %d\n", i, TextUtility.charType((char) i));
             if (type != preType)
             {
                 int[] array = new int[3];
@@ -109,7 +109,7 @@ public class CharType
                 array[1] = i - 1;
                 array[2] = preType;
                 typeList.add(array);
-//                System.out.printf("%d %d %d\n", array[0], array[1], array[2]);
+//                System._out.printf("%d %d %d\n", array[0], array[1], array[2]);
                 preChar = i;
             }
             preType = type;
@@ -121,16 +121,16 @@ public class CharType
             array[2] = preType;
             typeList.add(array);
         }
-//        System.out.print("int[" + typeList.size() + "][3] array = \n");
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(HanLP.Config.CharTypePath));
+//        System._out.print("int[" + typeList.size() + "][3] array = \n");
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(HanLP.Config.CharTypePath));
         for (int[] array : typeList)
         {
-//            System.out.printf("%d %d %d\n", array[0], array[1], array[2]);
-            out.writeChar(array[0]);
-            out.writeChar(array[1]);
-            out.writeByte(array[2]);
+//            System._out.printf("%d %d %d\n", array[0], array[1], array[2]);
+            _out.writeChar(array[0]);
+            _out.writeChar(array[1]);
+            _out.writeByte(array[2]);
         }
-        out.close();
+        _out.close();
         ByteArray byteArray = ByteArray.createByteArray(HanLP.Config.CharTypePath);
         return byteArray;
     }

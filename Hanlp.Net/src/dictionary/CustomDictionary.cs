@@ -101,7 +101,7 @@ public class CustomDictionary
                 {
                     attributeList.add(entry.getValue());
                 }
-                DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(mainPath + Predefine.BIN_EXT)));
+                DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(mainPath + Predefine.BIN_EXT)));
                 // 缓存用户词性
                 if (customNatureCollector.isEmpty()) // 热更新
                 {
@@ -110,15 +110,15 @@ public class CustomDictionary
                         customNatureCollector.add(Nature.values()[i]);
                     }
                 }
-                IOUtil.writeCustomNature(out, customNatureCollector);
+                IOUtil.writeCustomNature(_out, customNatureCollector);
                 // 缓存正文
-                out.writeInt(attributeList.size());
+                _out.writeInt(attributeList.size());
                 for (CoreDictionary.Attribute attribute : attributeList)
                 {
-                    attribute.save(out);
+                    attribute.save(_out);
                 }
-                dat.save(out);
-                out.close();
+                dat.save(_out);
+                _out.close();
             }
         }
         catch (FileNotFoundException e)
@@ -187,7 +187,7 @@ public class CustomDictionary
                     for (int i = 0; i < natureCount; ++i)
                     {
                         attribute.nature[i] = LexiconUtility.convertStringToNature(param[1 + 2 * i], customNatureCollector);
-                        attribute.frequency[i] = Integer.parseInt(param[2 + 2 * i]);
+                        attribute.frequency[i] = int.parseInt(param[2 + 2 * i]);
                         attribute.totalFrequency += attribute.frequency[i];
                     }
                 }
@@ -213,7 +213,7 @@ public class CustomDictionary
      * @param rewriteTable
      * @return 是否更新了
      */
-    private static bool updateAttributeIfExist(String key, CoreDictionary.Attribute attribute, TreeMap<String, CoreDictionary.Attribute> map, TreeMap<Integer, CoreDictionary.Attribute> rewriteTable)
+    private static bool updateAttributeIfExist(String key, CoreDictionary.Attribute attribute, TreeMap<String, CoreDictionary.Attribute> map, TreeMap<int, CoreDictionary.Attribute> rewriteTable)
     {
         int wordID = CoreDictionary.getWordID(key);
         CoreDictionary.Attribute attributeExisted;
@@ -593,7 +593,7 @@ public class CustomDictionary
         {
             final int[] lengthArray = new int[text.length()];
             final CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[text.length()];
-            char[] charArray = text.toCharArray();
+            char[] charArray = text.ToCharArray();
             DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(charArray, 0);
             while (searcher.next())
             {

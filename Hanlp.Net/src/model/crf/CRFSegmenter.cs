@@ -91,7 +91,7 @@ public class CRFSegmenter : CRFTagger : Segmenter
             protected int[] extractFeature(String sentence, FeatureMap featureMap, int position)
             {
                 StringBuilder sbFeature = new StringBuilder();
-                List<Integer> featureVec = new LinkedList<Integer>();
+                List<int> featureVec = new LinkedList<int>();
                 for (int i = 0; i < featureTemplateArray.length; i++)
                 {
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
@@ -101,15 +101,15 @@ public class CRFSegmenter : CRFTagger : Segmenter
                     {
                         int offset = offsetIterator.next()[0] + position;
                         if (offset < 0)
-                            sbFeature.append(FeatureIndex.BOS[-(offset + 1)]);
+                            sbFeature.Append(FeatureIndex.BOS[-(offset + 1)]);
                         else if (offset >= sentence.length())
-                            sbFeature.append(FeatureIndex.EOS[offset - sentence.length()]);
+                            sbFeature.Append(FeatureIndex.EOS[offset - sentence.length()]);
                         else
-                            sbFeature.append(sentence.charAt(offset));
+                            sbFeature.Append(sentence.charAt(offset));
                         if (delimiterIterator.hasNext())
-                            sbFeature.append(delimiterIterator.next());
+                            sbFeature.Append(delimiterIterator.next());
                         else
-                            sbFeature.append(i);
+                            sbFeature.Append(i);
                     }
                     addFeatureThenClear(sbFeature, featureVec, featureMap);
                 }

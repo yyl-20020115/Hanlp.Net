@@ -20,16 +20,16 @@ public class SimpleItem
     /**
      * 该条目的标签
      */
-    public Map<String, Integer> labelMap;
+    public Dictionary<String, int> labelMap;
 
     public SimpleItem()
     {
-        labelMap = new TreeMap<String, Integer>();
+        labelMap = new TreeMap<String, int>();
     }
 
     public void addLabel(String label)
     {
-        Integer frequency = labelMap.get(label);
+        int frequency = labelMap.get(label);
         if (frequency == null)
         {
             frequency = 1;
@@ -47,9 +47,9 @@ public class SimpleItem
      * @param label
      * @param frequency
      */
-    public void addLabel(String label, Integer frequency)
+    public void addLabel(String label, int frequency)
     {
-        Integer innerFrequency = labelMap.get(label);
+        int innerFrequency = labelMap.get(label);
         if (innerFrequency == null)
         {
             innerFrequency = frequency;
@@ -78,7 +78,7 @@ public class SimpleItem
 
     public int getFrequency(String label)
     {
-        Integer frequency = labelMap.get(label);
+        int frequency = labelMap.get(label);
         if (frequency == null) return 0;
         return frequency;
     }
@@ -87,21 +87,21 @@ public class SimpleItem
     public String toString()
     {
         final StringBuilder sb = new StringBuilder();
-        ArrayList<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(labelMap.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>()
+        ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(labelMap.entrySet());
+        Collections.sort(entries, new Comparator<Map.Entry<String, int>>()
         {
             //@Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
+            public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
             {
                 return -o1.getValue().compareTo(o2.getValue());
             }
         });
-        for (Map.Entry<String, Integer> entry : entries)
+        for (Map.Entry<String, int> entry : entries)
         {
-            sb.append(entry.getKey());
-            sb.append(' ');
-            sb.append(entry.getValue());
-            sb.append(' ');
+            sb.Append(entry.getKey());
+            sb.Append(' ');
+            sb.Append(entry.getValue());
+            sb.Append(' ');
         }
         return sb.toString();
     }
@@ -120,7 +120,7 @@ public class SimpleItem
         int natureCount = (param.length) / 2;
         for (int i = 0; i < natureCount; ++i)
         {
-            item.labelMap.put(param[2 * i], Integer.parseInt(param[1 + 2 * i]));
+            item.labelMap.put(param[2 * i], int.parseInt(param[1 + 2 * i]));
         }
         return item;
     }
@@ -131,7 +131,7 @@ public class SimpleItem
      */
     public void combine(SimpleItem other)
     {
-        for (Map.Entry<String, Integer> entry : other.labelMap.entrySet())
+        for (Map.Entry<String, int> entry : other.labelMap.entrySet())
         {
             addLabel(entry.getKey(), entry.getValue());
         }
@@ -144,7 +144,7 @@ public class SimpleItem
     public int getTotalFrequency()
     {
         int frequency = 0;
-        for (Integer f : labelMap.values())
+        for (int f : labelMap.values())
         {
             frequency += f;
         }

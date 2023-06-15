@@ -54,12 +54,12 @@ public class Document : BagOfWordsDocument
      * @param wordIdTrie
      * @param tokenArray
      */
-    public Document(ITrie<Integer> wordIdTrie, String[] tokenArray)
+    public Document(ITrie<int> wordIdTrie, String[] tokenArray)
     {
         super();
         for (int i = 0; i < tokenArray.length; i++)
         {
-            Integer id = wordIdTrie.get(tokenArray[i].toCharArray());
+            int id = wordIdTrie.get(tokenArray[i].ToCharArray());
             if (id == null) continue;
             tfMap.add(id);
         }
@@ -72,10 +72,10 @@ public class Document : BagOfWordsDocument
      * @param category
      * @param tokenArray
      */
-    public Document(Map<String, Integer> categoryId, BinTrie<Integer> wordId, String category, String[] tokenArray)
+    public Document(Dictionary<String, int> categoryId, BinTrie<int> wordId, String category, String[] tokenArray)
     {
         this(wordId, tokenArray);
-        Integer id = categoryId.get(category);
+        int id = categoryId.get(category);
         if (id == null) id = -1;
         this.category = id;
     }
@@ -84,7 +84,7 @@ public class Document : BagOfWordsDocument
     {
         category = in.readInt();
         int size = in.readInt();
-        tfMap = new FrequencyMap<Integer>();
+        tfMap = new FrequencyMap<int>();
         for (int i = 0; i < size; i++)
         {
             tfMap.put(in.readInt(), new int[]{in.readInt()});
@@ -95,15 +95,15 @@ public class Document : BagOfWordsDocument
 //    public String toString()
 //    {
 //        final StringBuilder sb = new StringBuilder(tfMap.size() * 5);
-//        sb.append('《').append(super.toString()).append('》').append('\t');
-//        sb.append(catalog.getCategory(category));
-//        sb.append('\n');
-//        for (Map.Entry<Integer, int[]> entry : tfMap.entrySet())
+//        sb.Append('《').Append(super.toString()).Append('》').Append('\t');
+//        sb.Append(catalog.getCategory(category));
+//        sb.Append('\n');
+//        for (Map.Entry<int, int[]> entry : tfMap.entrySet())
 //        {
-//            sb.append(lexicon.getWord(entry.getKey()));
-//            sb.append('\t');
-//            sb.append(entry.getValue()[0]);
-//            sb.append('\n');
+//            sb.Append(lexicon.getWord(entry.getKey()));
+//            sb.Append('\t');
+//            sb.Append(entry.getValue()[0]);
+//            sb.Append('\n');
 //        }
 //        return sb.toString();
 //    }

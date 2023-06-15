@@ -43,7 +43,7 @@ public class TextRankSentence
     /**
      * 排序后的最终结果 score <-> index
      */
-    TreeMap<Double, Integer> top;
+    TreeMap<Double, int> top;
 
     /**
      * 句子和其他句子的相关程度
@@ -71,7 +71,7 @@ public class TextRankSentence
         weight = new double[D][D];
         weight_sum = new double[D];
         vertex = new double[D];
-        top = new TreeMap<Double, Integer>(Collections.reverseOrder());
+        top = new TreeMap<Double, int>(Collections.reverseOrder());
         solve();
     }
 
@@ -81,7 +81,7 @@ public class TextRankSentence
         for (List<String> sentence : docs)
         {
             double[] scores = bm25.simAll(sentence);
-//            System.out.println(Arrays.toString(scores));
+//            System._out.println(Arrays.toString(scores));
             weight[cnt] = scores;
             weight_sum[cnt] = sum(scores) - scores[cnt]; // 减掉自己，自己跟自己肯定最相似
             vertex[cnt] = 1.0;
@@ -123,10 +123,10 @@ public class TextRankSentence
      */
     public int[] getTopSentence(int size)
     {
-        Collection<Integer> values = top.values();
+        Collection<int> values = top.values();
         size = Math.min(size, values.size());
         int[] indexArray = new int[size];
-        Iterator<Integer> it = values.iterator();
+        Iterator<int> it = values.iterator();
         for (int i = 0; i < size; ++i)
         {
             indexArray[i] = it.next();
@@ -198,7 +198,7 @@ public class TextRankSentence
         List<List<String>> docs = new ArrayList<List<String>>(sentenceList.size());
         for (String sentence : sentenceList)
         {
-            List<Term> termList = StandardTokenizer.segment(sentence.toCharArray());
+            List<Term> termList = StandardTokenizer.segment(sentence.ToCharArray());
             List<String> wordList = new LinkedList<String>();
             for (Term term : termList)
             {
@@ -293,8 +293,8 @@ public class TextRankSentence
         Collections.sort(resultList, new Comparator<String>() {
             //@Override
             public int compare(String o1, String o2) {
-                Integer num1 = sentenceList.indexOf(o1);
-                Integer num2 = sentenceList.indexOf(o2);
+                int num1 = sentenceList.indexOf(o1);
+                int num2 = sentenceList.indexOf(o2);
                 return num1.compareTo(num2);
             }
         });

@@ -38,17 +38,17 @@ public class ImmutableFeatureMDatMap : FeatureMap
         this.dat = dat;
     }
 
-    public ImmutableFeatureMDatMap(Map<String, Integer> featureIdMap, TagSet tagSet)
+    public ImmutableFeatureMDatMap(Dictionary<String, int> featureIdMap, TagSet tagSet)
     {
         super(tagSet);
         dat = new MutableDoubleArrayTrieInteger(featureIdMap);
     }
 
-    public ImmutableFeatureMDatMap(Set<Map.Entry<String, Integer>> featureIdSet, TagSet tagSet)
+    public ImmutableFeatureMDatMap(Set<Map.Entry<String, int>> featureIdSet, TagSet tagSet)
     {
         super(tagSet);
         dat = new MutableDoubleArrayTrieInteger();
-        for (Map.Entry<String, Integer> entry : featureIdSet)
+        for (Map.Entry<String, int> entry : featureIdSet)
         {
             dat.put(entry.getKey(), entry.getValue());
         }
@@ -67,16 +67,16 @@ public class ImmutableFeatureMDatMap : FeatureMap
     }
 
     //@Override
-    public Set<Map.Entry<String, Integer>> entrySet()
+    public Set<Map.Entry<String, int>> entrySet()
     {
         return dat.entrySet();
     }
 
     //@Override
-    public void save(DataOutputStream out) 
+    public void save(DataOutputStream _out) 
     {
-        tagSet.save(out);
-        dat.save(out);
+        tagSet.save(_out);
+        dat.save(_out);
     }
 
     //@Override

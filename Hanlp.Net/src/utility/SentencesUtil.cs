@@ -15,7 +15,7 @@ public class SentencesUtil
      */
     public static List<String> toSentenceList(String content)
     {
-        return toSentenceList(content.toCharArray(), true);
+        return toSentenceList(content.ToCharArray(), true);
     }
 
     /**
@@ -27,7 +27,7 @@ public class SentencesUtil
      */
     public static List<String> toSentenceList(String content, bool shortest)
     {
-        return toSentenceList(content.toCharArray(), shortest);
+        return toSentenceList(content.ToCharArray(), shortest);
     }
 
     public static List<String> toSentenceList(char[] chars)
@@ -49,7 +49,7 @@ public class SentencesUtil
                 continue;
             }
 
-            sb.append(chars[i]);
+            sb.Append(chars[i]);
             switch (chars[i])
             {
                 case '.':
@@ -63,7 +63,7 @@ public class SentencesUtil
                 {
                     if (i < chars.length - 1 && chars[i + 1] == '…')
                     {
-                        sb.append('…');
+                        sb.Append('…');
                         ++i;
                         insertIntoList(sb, sentences);
                         sb = new StringBuilder();

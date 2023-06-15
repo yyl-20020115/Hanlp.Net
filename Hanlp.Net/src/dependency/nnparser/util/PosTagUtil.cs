@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.util;
  */
 public class PosTagUtil
 {
-    private static Map<String, String> posConverter = new TreeMap<String, String>();
+    private static Dictionary<String, String> posConverter = new TreeMap<String, String>();
 
     static
     {

@@ -41,13 +41,13 @@ public class WordAnalogy : AbstractClosestVectors
                     if (input[k].equals(vectorsReader.getWord(i)))
                     {
                         bi[k] = i;
-                        System.out.printf("\nWord: %s  Position in vocabulary: %d\n", input[k], bi[k]);
+                        System._out.printf("\nWord: %s  Position in vocabulary: %d\n", input[k], bi[k]);
                         found++;
                     }
                 }
                 if (found == k)
                 {
-                    System.out.printf("%s : Out of dictionary word!\n", input[k]);
+                    System._out.printf("%s : Out of dictionary word!\n", input[k]);
                 }
             }
             if (found < input.length)

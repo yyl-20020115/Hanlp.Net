@@ -1,23 +1,25 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 
+using System.Collections.Generic;
+using System.Text;
 
 /**
- * <p>
- * 一个状态有如下几个功能
- * </p>
- * <p/>
- * <ul>
- * <li>success; 成功转移到另一个状态</li>
- * <li>failure; 不可顺着字符串跳转的话，则跳转到一个浅一点的节点</li>
- * <li>emits; 命中一个模式串</li>
- * </ul>
- * <p/>
- * <p>
- * 根节点稍有不同，根节点没有 failure 功能，它的“failure”指的是按照字符串路径转移到下一个状态。其他节点则都有failure状态。
- * </p>
- *
- * @author Robert Bor
- */
+* <p>
+* 一个状态有如下几个功能
+* </p>
+* <p/>
+* <ul>
+* <li>success; 成功转移到另一个状态</li>
+* <li>failure; 不可顺着字符串跳转的话，则跳转到一个浅一点的节点</li>
+* <li>emits; 命中一个模式串</li>
+* </ul>
+* <p/>
+* <p>
+* 根节点稍有不同，根节点没有 failure 功能，它的“failure”指的是按照字符串路径转移到下一个状态。其他节点则都有failure状态。
+* </p>
+*
+* @author Robert Bor
+*/
 public class State
 {
 
@@ -29,12 +31,12 @@ public class State
     /**
      * fail 函数，如果没有匹配到，则跳转到此状态。
      */
-    private State failure = null;
+    private State _failure = null;
 
     /**
      * 只要这个状态可达，则记录模式串
      */
-    private HashSet<String> emits = null;
+    private HashSet<string> emits = null;
     /**
      * goto 表，也称转移函数。根据字符串的下一个字符转移到下一个状态
      */
@@ -44,8 +46,8 @@ public class State
      * 构造深度为0的节点
      */
     public State()
+        :this(0)
     {
-        this(0);
     }
 
     /**
@@ -74,18 +76,18 @@ public class State
     {
         if (this.emits == null)
         {
-            this.emits = new TreeSet<String>();
+            this.emits = new ();
         }
-        this.emits.add(keyword);
+        this.emits.Add(keyword);
     }
 
     /**
      * 添加一些匹配到的模式串
      * @param emits
      */
-    public void addEmit(Collection<String> emits)
+    public void addEmit(ICollection<String> emits)
     {
-        for (String emit : emits)
+        foreach (string emit in emits)
         {
             addEmit(emit);
         }
@@ -95,9 +97,9 @@ public class State
      * 获取这个节点代表的模式串（们）
      * @return
      */
-    public Collection<String> emit()
+    public ICollection<string> emit()
     {
-        return this.emits == null ? Collections.<String>emptyList() : this.emits;
+        return this.emits == null ? new() : this.emits;
     }
 
     /**
@@ -106,7 +108,7 @@ public class State
      */
     public State failure()
     {
-        return this.failure;
+        return this._failure;
     }
 
     /**
@@ -115,7 +117,7 @@ public class State
      */
     public void setFailure(State failState)
     {
-        this.failure = failState;
+        this._failure = failState;
     }
 
     /**
@@ -126,8 +128,7 @@ public class State
      */
     private State nextState(char character, bool ignoreRootState)
     {
-        State nextState = this.success.get(character);
-        if (!ignoreRootState && nextState == null && this.depth == 0)
+        if (this.success.TryGetValue(character,out var nextState)&& !ignoreRootState && nextState == null && this.depth == 0)
         {
             nextState = this;
         }
@@ -160,30 +161,29 @@ public class State
         if (nextState == null)
         {
             nextState = new State(this.depth + 1);
-            this.success.put(character, nextState);
+            this.success.Add(character, nextState);
         }
         return nextState;
     }
 
-    public Collection<State> getStates()
+    public ICollection<State> getStates()
     {
-        return this.success.values();
+        return this.success.Values;
     }
 
-    public Collection<char> getTransitions()
+    public ICollection<char> getTransitions()
     {
-        return this.success.keySet();
+        return this.success.Keys;
     }
 
-    //@Override
-    public String toString()
+    public override string ToString()
     {
-        final StringBuilder sb = new StringBuilder("State{");
-        sb.append("depth=").append(depth);
-        sb.append(", emits=").append(emits);
-        sb.append(", success=").append(success.keySet());
-        sb.append(", failure=").append(failure);
-        sb.append('}');
-        return sb.toString();
+        StringBuilder sb = new StringBuilder("State{");
+        sb.Append("depth=").Append(depth);
+        sb.Append(", emits=").Append(emits);
+        sb.Append(", success=").Append(success.Keys);
+        sb.Append(", failure=").Append(_failure);
+        sb.Append('}');
+        return sb.ToString();
     }
 }

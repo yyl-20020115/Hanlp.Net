@@ -57,7 +57,7 @@ public class CWSInstance : Instance
 
     protected int[] extractFeature(String sentence, FeatureMap featureMap, int position)
     {
-        List<Integer> featureVec = new LinkedList<Integer>();
+        List<int> featureVec = new LinkedList<int>();
 
         char pre2Char = position >= 2 ? sentence.charAt(position - 2) : CHAR_BEGIN;
         char preChar = position >= 1 ? sentence.charAt(position - 1) : CHAR_BEGIN;
@@ -68,57 +68,57 @@ public class CWSInstance : Instance
         StringBuilder sbFeature = new StringBuilder();
         //char unigram feature
 //        sbFeature.delete(0, sbFeature.length());
-//        sbFeature.append("U[-2,0]=").append(pre2Char);
+//        sbFeature.Append("U[-2,0]=").Append(pre2Char);
 //        addFeature(sbFeature, featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.length());
-        sbFeature.append(preChar).append('1');
+        sbFeature.Append(preChar).Append('1');
         addFeature(sbFeature, featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.length());
-        sbFeature.append(curChar).append('2');
+        sbFeature.Append(curChar).Append('2');
         addFeature(sbFeature, featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.length());
-        sbFeature.append(nextChar).append('3');
+        sbFeature.Append(nextChar).Append('3');
         addFeature(sbFeature, featureVec, featureMap);
 
 //        sbFeature.delete(0, sbFeature.length());
-//        sbFeature.append("U[2,0]=").append(next2Char);
+//        sbFeature.Append("U[2,0]=").Append(next2Char);
 //        addFeature(sbFeature, featureVec, featureMap);
 
         //char bigram feature
         sbFeature.delete(0, sbFeature.length());
-        sbFeature.append(pre2Char).append("/").append(preChar).append('4');
+        sbFeature.Append(pre2Char).Append("/").Append(preChar).Append('4');
         addFeature(sbFeature, featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.length());
-        sbFeature.append(preChar).append("/").append(curChar).append('5');
+        sbFeature.Append(preChar).Append("/").Append(curChar).Append('5');
         addFeature(sbFeature, featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.length());
-        sbFeature.append(curChar).append("/").append(nextChar).append('6');
+        sbFeature.Append(curChar).Append("/").Append(nextChar).Append('6');
         addFeature(sbFeature, featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.length());
-        sbFeature.append(nextChar).append("/").append(next2Char).append('7');
+        sbFeature.Append(nextChar).Append("/").Append(next2Char).Append('7');
         addFeature(sbFeature, featureVec, featureMap);
 
 //        sbFeature.delete(0, sbFeature.length());
-//        sbFeature.append("B[-2,0]=").append(pre2Char).append("/").append(curChar);
+//        sbFeature.Append("B[-2,0]=").Append(pre2Char).Append("/").Append(curChar);
 //        addFeature(sbFeature, featureVec, featureMap);
 //
 //        sbFeature.delete(0, sbFeature.length());
-//        sbFeature.append("B[-1,1]=").append(preChar).append("/").append(nextChar);
+//        sbFeature.Append("B[-1,1]=").Append(preChar).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featureVec, featureMap);
 //
 //        sbFeature.delete(0, sbFeature.length());
-//        sbFeature.append("B[0,2]=").append(curChar).append("/").append(next2Char);
+//        sbFeature.Append("B[0,2]=").Append(curChar).Append("/").Append(next2Char);
 //        addFeature(sbFeature, featureVec, featureMap);
 
         //char trigram feature
 //        sbFeature.delete(0, sbFeature.length());
-//        sbFeature.append("T[-1,0]=").append(preChar).append("/").append(curChar).append("/").append(nextChar);
+//        sbFeature.Append("T[-1,0]=").Append(preChar).Append("/").Append(curChar).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featureVec, featureMap);
         sbFeature = null;
 
@@ -141,16 +141,16 @@ public class CWSInstance : Instance
 //        StringBuffer trigram = new StringBuffer();
 //
 //        if (position > 0)
-//            trigram.append(CharType.get(sentence.charAt(position - 1)));
+//            trigram.Append(CharType.get(sentence.charAt(position - 1)));
 //        else
-//            trigram.append("_BT_");
+//            trigram.Append("_BT_");
 //
-//        trigram.append("/" + CharType.get(sentence.charAt(position)));
+//        trigram.Append("/" + CharType.get(sentence.charAt(position)));
 //
 //        if (position < sentence.length() - 1)
-//            trigram.append("/" + CharType.get(sentence.charAt(position + 1)));
+//            trigram.Append("/" + CharType.get(sentence.charAt(position + 1)));
 //        else
-//            trigram.append("/_EL_");
+//            trigram.Append("/_EL_");
 //
 //        addFeature("cTT=" + trigram, featureVec, featureMap);
 

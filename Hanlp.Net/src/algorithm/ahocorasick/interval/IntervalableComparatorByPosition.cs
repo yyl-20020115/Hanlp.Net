@@ -6,8 +6,6 @@ using System.Collections.Generic;
  */
 public class IntervalableComparatorByPosition : IComparer<Intervalable>
 {
-    public int Compare(Intervalable intervalable, Intervalable intervalable2)
-    {
-        return intervalable.getStart() - intervalable2.getStart();
-    }
+    public int Compare(Intervalable? intervalable, Intervalable? intervalable2) 
+        => intervalable.getStart() - intervalable2.getStart();
 }

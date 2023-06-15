@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  */
 public class NGramDictionaryMaker
 {
-    BinTrie<Integer> trie;
+    BinTrie<int> trie;
     /**
      * 转移矩阵
      */
@@ -29,14 +29,14 @@ public class NGramDictionaryMaker
 
     public NGramDictionaryMaker()
     {
-        trie = new BinTrie<Integer>();
+        trie = new BinTrie<int>();
         tmDictionaryMaker = new TMDictionaryMaker();
     }
 
     public void addPair(IWord first, IWord second)
     {
         String combine = first.getValue() + "@" + second.getValue();
-        Integer frequency = trie.get(combine);
+        int frequency = trie.get(combine);
         if (frequency == null) frequency = 0;
         trie.put(combine, frequency + 1);
         // 同时还要统计标签的转移情况
@@ -67,7 +67,7 @@ public class NGramDictionaryMaker
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
-            for (Map.Entry<String, Integer> entry : trie.entrySet())
+            for (Map.Entry<String, int> entry : trie.entrySet())
             {
                 bw.write(entry.getKey() + " " + entry.getValue());
                 bw.newLine();

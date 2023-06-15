@@ -104,13 +104,13 @@ public class Pipeline<I, M, O> : Pipe<I, O>, List<Pipe<M, M>>
     }
 
     //@Override
-    public bool addAll(Collection<? : Pipe<M, M>> c)
+    public bool addAll(Collection<Pipe<M, M>> c)
     {
         return pipeList.addAll(c);
     }
 
     //@Override
-    public bool addAll(int index, Collection<? : Pipe<M, M>> c)
+    public bool addAll(int index, Collection<Pipe<M, M>> c)
     {
         return pipeList.addAll(c);
     }

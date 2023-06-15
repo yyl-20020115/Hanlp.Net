@@ -34,7 +34,7 @@ public class CoNllLine
         {
             value[i] = args[i];
         }
-        id = Integer.parseInt(value[0]);
+        id = int.parseInt(value[0]);
     }
 
     //@Override
@@ -43,8 +43,8 @@ public class CoNllLine
         final StringBuilder sb = new StringBuilder();
         for (String value : this.value)
         {
-            sb.append(value);
-            sb.append('\t');
+            sb.Append(value);
+            sb.Append('\t');
         }
         return sb.deleteCharAt(sb.length() - 1).toString();
     }

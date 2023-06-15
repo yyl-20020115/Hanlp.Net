@@ -45,21 +45,21 @@ public class FeatureFunction : ICacheAble
 
     public FeatureFunction(String o, int tagSize)
     {
-        this(o.toCharArray(), tagSize);
+        this(o.ToCharArray(), tagSize);
     }
 
     //@Override
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
-        out.writeInt(o.length);
+        _out.writeInt(o.length);
         for (char c : o)
         {
-            out.writeChar(c);
+            _out.writeChar(c);
         }
-        out.writeInt(w.length);
+        _out.writeInt(w.length);
         for (double v : w)
         {
-            out.writeDouble(v);
+            _out.writeDouble(v);
         }
     }
 

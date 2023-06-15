@@ -51,7 +51,7 @@ public class CoreBiGramTableDictionary
         String datPath = HanLP.Config.BiGramDictionaryPath + ".table" + Predefine.BIN_EXT;
         if (loadDat(datPath)) return true;
         BufferedReader br;
-        TreeMap<Integer, TreeMap<Integer, Integer>> map = new TreeMap<Integer, TreeMap<Integer, Integer>>();
+        TreeMap<int, TreeMap<int, int>> map = new TreeMap<int, TreeMap<int, int>>();
         try
         {
             br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
@@ -78,11 +78,11 @@ public class CoreBiGramTableDictionary
 //                        logger.warning(line + " 中的 " + b + "不存在于核心词典，将会忽略这一行");
                     continue;
                 }
-                int freq = Integer.parseInt(params[1]);
-                TreeMap<Integer, Integer> biMap = map.get(idA);
+                int freq = int.parseInt(params[1]);
+                TreeMap<int, int> biMap = map.get(idA);
                 if (biMap == null)
                 {
-                    biMap = new TreeMap<Integer, Integer>();
+                    biMap = new TreeMap<int, int>();
                     map.put(idA, biMap);
                 }
                 biMap.put(idB, freq);
@@ -95,10 +95,10 @@ public class CoreBiGramTableDictionary
 
             for (int i = 0; i < maxWordId; ++i)
             {
-                TreeMap<Integer, Integer> bMap = map.get(i);
+                TreeMap<int, int> bMap = map.get(i);
                 if (bMap != null)
                 {
-                    for (Map.Entry<Integer, Integer> entry : bMap.entrySet())
+                    for (Map.Entry<int, int> entry : bMap.entrySet())
                     {
                         int index = offset << 1;
                         pair[index] = entry.getKey();
@@ -133,22 +133,22 @@ public class CoreBiGramTableDictionary
     {
         try
         {
-//            DataOutputStream out = new DataOutputStream(new FileOutputStream(path));
-//            out.writeInt(start.length);
+//            DataOutputStream _out = new DataOutputStream(new FileOutputStream(path));
+//            _out.writeInt(start.length);
 //            for (int i : start)
 //            {
-//                out.writeInt(i);
+//                _out.writeInt(i);
 //            }
-//            out.writeInt(pair.length);
+//            _out.writeInt(pair.length);
 //            for (int i : pair)
 //            {
-//                out.writeInt(i);
+//                _out.writeInt(i);
 //            }
-//            out.close();
-            ObjectOutputStream out = new ObjectOutputStream(IOUtil.newOutputStream(path));
-            out.writeObject(start);
-            out.writeObject(pair);
-            out.close();
+//            _out.close();
+            ObjectOutputStream _out = new ObjectOutputStream(IOUtil.newOutputStream(path));
+            _out.writeObject(start);
+            _out.writeObject(pair);
+            _out.close();
         }
         catch (Exception e)
         {

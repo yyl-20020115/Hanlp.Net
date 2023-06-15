@@ -39,7 +39,7 @@ public class ComputeAccuracy
             return;
         }
         String file_name = argv[0];
-        threshold = Integer.parseInt(argv[1]);
+        threshold = int.parseInt(argv[1]);
         try
         {
             f = new BufferedReader(new InputStreamReader(new FileInputStream(file_name), "UTF-8"));
@@ -59,9 +59,9 @@ public class ComputeAccuracy
         try
         {
             String[] params = f.readLine().split("\\s");
-            words = Integer.parseInt(params[0]);
+            words = int.parseInt(params[0]);
             if (words > threshold) words = threshold;
-            size = Integer.parseInt(params[1]);
+            size = int.parseInt(params[1]);
             vocab = new String[words];
             M = new double[words * size];
             for (b = 0; b < words; b++)
@@ -189,6 +189,6 @@ public class ComputeAccuracy
 
     private static void printf(String format, Object... args)
     {
-        System.out.printf(format, args);
+        System._out.printf(format, args);
     }
 }

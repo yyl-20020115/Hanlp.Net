@@ -1,8 +1,10 @@
 namespace com.hankcs.hanlp.seg.common;
 
+[TestClass]
 
 public class CWSEvaluatorTest : TestCase
 {
+    [TestMethod]
     public void testGetPRF() 
     {
         CWSEvaluator evaluator = new CWSEvaluator();

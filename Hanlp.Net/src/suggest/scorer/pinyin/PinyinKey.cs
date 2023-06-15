@@ -122,10 +122,10 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("PinyinKey{");
-        sb.append("pinyinArray=").append(Arrays.toString(pinyinArray));
-        sb.append(", pyOrdinalArray=").append(Arrays.toString(pyOrdinalArray));
-        sb.append(", firstCharArray=").append(Arrays.toString(firstCharArray));
-        sb.append('}');
+        sb.Append("pinyinArray=").Append(Arrays.toString(pinyinArray));
+        sb.Append(", pyOrdinalArray=").Append(Arrays.toString(pyOrdinalArray));
+        sb.Append(", firstCharArray=").Append(Arrays.toString(firstCharArray));
+        sb.Append('}');
         return sb.toString();
     }
 

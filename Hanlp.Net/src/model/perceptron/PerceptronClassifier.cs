@@ -187,7 +187,7 @@ public abstract class PerceptronClassifier
         {
             String[] cells = line.split(",");
             String text = cells[0], label = cells[1];
-            List<Integer> x = extractFeature(text, featureMap);
+            List<int> x = extractFeature(text, featureMap);
             int y = featureMap.tagSet.add(label);
             if (y == 0)
                 y = -1; // 感知机标签约定为±1
@@ -205,7 +205,7 @@ public abstract class PerceptronClassifier
      * @param featureMap 特征映射
      * @return 特征向量
      */
-    protected abstract List<Integer> extractFeature(String text, FeatureMap featureMap);
+    protected abstract List<int> extractFeature(String text, FeatureMap featureMap);
 
     /**
      * 向特征向量插入特征
@@ -214,7 +214,7 @@ public abstract class PerceptronClassifier
      * @param featureMap  特征映射
      * @param featureList 特征向量
      */
-    protected static void addFeature(String feature, FeatureMap featureMap, List<Integer> featureList)
+    protected static void addFeature(String feature, FeatureMap featureMap, List<int> featureList)
     {
         int featureId = featureMap.idOf(feature);
         if (featureId != -1)
@@ -229,13 +229,13 @@ public abstract class PerceptronClassifier
         /**
          * 特征向量
          */
-        List<Integer> x;
+        List<int> x;
         /**
          * 标签
          */
         int y;
 
-        public Instance(List<Integer> x, int y)
+        public Instance(List<int> x, int y)
         {
             this.x = x;
             this.y = y;

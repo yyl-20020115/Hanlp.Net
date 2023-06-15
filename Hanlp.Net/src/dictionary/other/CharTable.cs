@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dictionary.other;
 
 
@@ -24,7 +29,7 @@ public class CharTable
      */
     public static char[] CONVERT;
 
-    static
+    static CharTable()
     {
         long start = System.currentTimeMillis();
         if (!load(HanLP.Config.CharTablePath))
@@ -70,8 +75,8 @@ public class CharTable
     {
         try
         {
-            ObjectInputStream in = new ObjectInputStream(IOUtil.newInputStream(path));
-            CONVERT = (char[]) in.readObject();
+            ObjectInputStream _in = new ObjectInputStream(IOUtil.newInputStream(path));
+            CONVERT = (char[]) _in.readObject();
             in.close();
         }
         catch (Exception e)
@@ -95,8 +100,8 @@ public class CharTable
 
     public static char[] convert(char[] charArray)
     {
-        char[] result = new char[charArray.length];
-        for (int i = 0; i < charArray.length; i++)
+        char[] result = new char[charArray.Length];
+        for (int i = 0; i < charArray.Length; i++)
         {
             result[i] = CONVERT[charArray[i]];
         }
@@ -106,7 +111,7 @@ public class CharTable
 
     public static String convert(String sentence)
     {
-        assert sentence != null;
+        //assert sentence != null;
         char[] result = new char[sentence.length()];
         convert(sentence, result);
 
@@ -115,7 +120,7 @@ public class CharTable
 
     public static void convert(String charArray, char[] result)
     {
-        for (int i = 0; i < charArray.length(); i++)
+        for (int i = 0; i < charArray.Length; i++)
         {
             result[i] = CONVERT[charArray.charAt(i)];
         }
@@ -127,8 +132,8 @@ public class CharTable
      */
     public static void normalization(char[] charArray)
     {
-        assert charArray != null;
-        for (int i = 0; i < charArray.length; i++)
+        //assert charArray != null;
+        for (int i = 0; i < charArray.Length; i++)
         {
             charArray[i] = CONVERT[charArray[i]];
         }
@@ -136,11 +141,11 @@ public class CharTable
 
     public static void normalize(Sentence sentence)
     {
-        for (IWord word : sentence)
+        foreach (IWord word in sentence)
         {
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
-                for (Word w : ((CompoundWord) word).innerList)
+                foreach (Word w in ((CompoundWord) word).innerList)
                 {
                     w.value = convert(w.value);
                 }

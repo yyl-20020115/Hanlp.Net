@@ -53,7 +53,7 @@ public class parser_dll
      * @param deprels 输出依存名称列表
      * @return 节点的个数
      */
-    public int parse(List<String> words, List<String> postags, List<Integer> heads, List<String> deprels)
+    public int parse(List<String> words, List<String> postags, List<int> heads, List<String> deprels)
     {
         Instance inst = new Instance();
         inst.forms.add(SpecialOption.ROOT);

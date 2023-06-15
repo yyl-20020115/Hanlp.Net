@@ -10,11 +10,11 @@ public class WordInfo
     /**
      * 左邻接字集合
      */
-    Map<Character, int[]> left;
+    Dictionary<Character, int[]> left;
     /**
      * 右邻接字集合
      */
-    Map<Character, int[]> right;
+    Dictionary<Character, int[]> right;
     /**
      * 词语
      */
@@ -43,7 +43,7 @@ public class WordInfo
         aggregation = Float.MAX_VALUE;
     }
 
-    private static void increaseFrequency(char c, Map<Character, int[]> storage)
+    private static void increaseFrequency(char c, Dictionary<Character, int[]> storage)
     {
         int[] freq = storage.get(c);
         if (freq == null)
@@ -57,7 +57,7 @@ public class WordInfo
         }
     }
 
-    private float computeEntropy(Map<Character, int[]> storage)
+    private float computeEntropy(Dictionary<Character, int[]> storage)
     {
         float sum = 0;
         for (Map.Entry<Character, int[]> entry : storage.entrySet())
@@ -83,7 +83,7 @@ public class WordInfo
         entropy = Math.min(leftEntropy, rightEntropy);
     }
 
-    void computeAggregation(Map<String, WordInfo> word_cands)
+    void computeAggregation(Dictionary<String, WordInfo> word_cands)
     {
         if (text.length() == 1)
         {

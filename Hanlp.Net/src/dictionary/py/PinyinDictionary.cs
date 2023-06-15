@@ -93,19 +93,19 @@ public class PinyinDictionary
     {
         try
         {
-            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
-            out.writeInt(entrySet.size());
+            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
+            _out.writeInt(entrySet.size());
             for (Map.Entry<String, Pinyin[]> entry : entrySet)
             {
                 Pinyin[] value = entry.getValue();
-                out.writeInt(value.length);
+                _out.writeInt(value.length);
                 for (Pinyin pinyin : value)
                 {
-                    out.writeInt(pinyin.ordinal());
+                    _out.writeInt(pinyin.ordinal());
                 }
             }
-            trie.save(out);
-            out.close();
+            trie.save(_out);
+            _out.close();
         }
         catch (Exception e)
         {
@@ -128,12 +128,12 @@ public class PinyinDictionary
      */
     public static List<Pinyin> convertToPinyin(String text)
     {
-        return segLongest(text.toCharArray(), trie);
+        return segLongest(text.ToCharArray(), trie);
     }
 
     public static List<Pinyin> convertToPinyin(String text, bool remainNone)
     {
-        return segLongest(text.toCharArray(), trie, remainNone);
+        return segLongest(text.ToCharArray(), trie, remainNone);
     }
 
     /**

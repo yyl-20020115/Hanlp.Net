@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.tokenizer;
 
 
@@ -22,7 +24,7 @@ public class StandardTokenizer
     /**
      * 预置分词器
      */
-    public static final Segment SEGMENT = HanLP.newSegment();
+    public static readonly Segment SEGMENT = HanLP.newSegment();
 
     /**
      * 分词
@@ -31,7 +33,7 @@ public class StandardTokenizer
      */
     public static List<Term> segment(String text)
     {
-        return SEGMENT.seg(text.toCharArray());
+        return SEGMENT.seg(text.ToCharArray());
     }
 
     /**

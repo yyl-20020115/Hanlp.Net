@@ -34,11 +34,11 @@ public class State
     /**
      * 只要这个状态可达，则记录模式串
      */
-    private Set<Integer> emits = null;
+    private Set<int> emits = null;
     /**
      * goto 表，也称转移函数。根据字符串的下一个字符转移到下一个状态
      */
-    private Map<Character, State> success = new TreeMap<Character, State>();
+    private Dictionary<Character, State> success = new TreeMap<Character, State>();
 
     /**
      * 在双数组中的对应下标
@@ -79,7 +79,7 @@ public class State
     {
         if (this.emits == null)
         {
-            this.emits = new TreeSet<Integer>(Collections.reverseOrder());
+            this.emits = new TreeSet<int>(Collections.reverseOrder());
         }
         this.emits.add(keyword);
     }
@@ -88,7 +88,7 @@ public class State
      * 获取最大的值
      * @return
      */
-    public Integer getLargestValueId()
+    public int getLargestValueId()
     {
         if (emits == null || emits.size() == 0) return null;
 
@@ -99,7 +99,7 @@ public class State
      * 添加一些匹配到的模式串
      * @param emits
      */
-    public void addEmit(Collection<Integer> emits)
+    public void addEmit(Collection<int> emits)
     {
         for (int emit : emits)
         {
@@ -111,9 +111,9 @@ public class State
      * 获取这个节点代表的模式串（们）
      * @return
      */
-    public Collection<Integer> emit()
+    public Collection<int> emit()
     {
-        return this.emits == null ? Collections.<Integer>emptyList() : this.emits;
+        return this.emits == null ? Collections.<int>emptyList() : this.emits;
     }
 
     /**
@@ -205,13 +205,13 @@ public class State
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("State{");
-        sb.append("depth=").append(depth);
-        sb.append(", ID=").append(index);
-        sb.append(", emits=").append(emits);
-        sb.append(", success=").append(success.keySet());
-        sb.append(", failureID=").append(failure == null ? "-1" : failure.index);
-        sb.append(", failure=").append(failure);
-        sb.append('}');
+        sb.Append("depth=").Append(depth);
+        sb.Append(", ID=").Append(index);
+        sb.Append(", emits=").Append(emits);
+        sb.Append(", success=").Append(success.keySet());
+        sb.Append(", failureID=").Append(failure == null ? "-1" : failure.index);
+        sb.Append(", failure=").Append(failure);
+        sb.Append('}');
         return sb.toString();
     }
 
@@ -219,7 +219,7 @@ public class State
      * 获取goto表
      * @return
      */
-    public Map<Character, State> getSuccess()
+    public Dictionary<Character, State> getSuccess()
     {
         return success;
     }

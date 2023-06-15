@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.mining.cluster;
 /**
  * @author hankcs
  */
-public class SparseVector : TreeMap<Integer, Double>
+public class SparseVector : Dictionary<int, double>
 {
     //@Override
     public Double get(Object key)
@@ -30,7 +30,7 @@ public class SparseVector : TreeMap<Integer, Double>
     void normalize()
     {
         double nrm = norm();
-        for (Map.Entry<Integer, Double> d : entrySet())
+        for (Map.Entry<int, Double> d : entrySet())
         {
             d.setValue(d.getValue() / nrm);
         }
@@ -62,7 +62,7 @@ public class SparseVector : TreeMap<Integer, Double>
      */
     void multiply_constant(double x)
     {
-        for (Map.Entry<Integer, Double> entry : entrySet())
+        for (Map.Entry<int, Double> entry : entrySet())
         {
             entry.setValue(entry.getValue() * x);
         }
@@ -74,7 +74,7 @@ public class SparseVector : TreeMap<Integer, Double>
     void add_vector(SparseVector vec)
     {
 
-        for (Map.Entry<Integer, Double> entry : vec.entrySet())
+        for (Map.Entry<int, Double> entry : vec.entrySet())
         {
             Double v = get(entry.getKey());
             if (v == null)
@@ -89,7 +89,7 @@ public class SparseVector : TreeMap<Integer, Double>
     void sub_vector(SparseVector vec)
     {
 
-        for (Map.Entry<Integer, Double> entry : vec.entrySet())
+        for (Map.Entry<int, Double> entry : vec.entrySet())
         {
             Double v = get(entry.getKey());
             if (v == null)
@@ -137,7 +137,7 @@ public class SparseVector : TreeMap<Integer, Double>
      */
     static double inner_product(SparseVector vec1, SparseVector vec2)
     {
-        Iterator<Map.Entry<Integer, Double>> it;
+        Iterator<Map.Entry<int, Double>> it;
         SparseVector other;
         if (vec1.size() < vec2.size())
         {
@@ -152,7 +152,7 @@ public class SparseVector : TreeMap<Integer, Double>
         double prod = 0;
         while (it.hasNext())
         {
-            Map.Entry<Integer, Double> entry = it.next();
+            Map.Entry<int, Double> entry = it.next();
             prod += entry.getValue() * other.get(entry.getKey());
         }
         return prod;

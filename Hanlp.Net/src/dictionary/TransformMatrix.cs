@@ -83,7 +83,7 @@ public abstract class TransformMatrix
                 int currentOrdinary = ordinal(paramArray[0]);
                 for (int i = 0; i < ordinaryArray.length; ++i)
                 {
-                    matrix[currentOrdinary][ordinaryArray[i]] = Integer.valueOf(paramArray[1 + i]);
+                    matrix[currentOrdinary][ordinaryArray[i]] = int.valueOf(paramArray[1 + i]);
                 }
             }
             br.close();
@@ -126,7 +126,7 @@ public abstract class TransformMatrix
                 {
                     double frequency = matrix[from][to] + 1e-8;
                     transititon_probability[from][to] = -Math.log(frequency / total[from]);
-//                    System.out.println("from" + NR.values()[from] + " to" + NR.values()[to] + " = " + transititon_probability[from][to]);
+//                    System._out.println("from" + NR.values()[from] + " to" + NR.values()[to] + " = " + transititon_probability[from][to]);
                 }
             }
         }

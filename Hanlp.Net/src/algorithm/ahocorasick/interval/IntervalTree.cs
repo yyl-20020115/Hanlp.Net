@@ -30,32 +30,30 @@ public class IntervalTree
      */
     public List<Intervalable> removeOverlaps(List<Intervalable> intervals)
     {
-
         // 排序，按照先大小后左端点的顺序
-        Collections.sort(intervals, new IntervalableComparatorBySize());
+        intervals.Sort(new IntervalableComparatorBySize());
+        HashSet<Intervalable> removeIntervals = new();
 
-        Set<Intervalable> removeIntervals = new TreeSet<Intervalable>();
-
-        for (Intervalable interval : intervals)
+        foreach (Intervalable interval in intervals)
         {
             // 如果区间已经被移除了，就忽略它
-            if (removeIntervals.contains(interval))
+            if (removeIntervals.Contains(interval))
             {
                 continue;
             }
 
             // 否则就移除它
-            removeIntervals.addAll(findOverlaps(interval));
+            removeIntervals.UnionWith(findOverlaps(interval));
         }
 
         // 移除所有的重叠区间
-        for (Intervalable removeInterval : removeIntervals)
+        foreach (Intervalable removeInterval in removeIntervals)
         {
-            intervals.remove(removeInterval);
+            intervals.Remove(removeInterval);
         }
 
         // 排序，按照左端顺序
-        Collections.sort(intervals, new IntervalableComparatorByPosition());
+        intervals.Sort(new IntervalableComparatorByPosition());
 
         return intervals;
     }

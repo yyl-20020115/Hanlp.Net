@@ -1,9 +1,11 @@
 namespace com.hankcs.hanlp.seg.Dijkstra;
 
 
+[TestClass]
 
 public class DijkstraSegmentTest : SegmentTestCase
 {
+    [TestMethod]
     public void testWrongName() 
     {
         Segment segment = new DijkstraSegment();
@@ -11,7 +13,7 @@ public class DijkstraSegmentTest : SegmentTestCase
         assertNoNature(termList, Nature.nr);
 //        Console.WriteLine(termList);
     }
-
+    [TestMethod]
     public void testIssue770() 
     {
 //        HanLP.Config.enableDebug();

@@ -25,7 +25,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     /**
      * 依存关系映射表（可以将英文标签映射为中文）
      */
-    private Map<String, String> deprelTranslater;
+    private Dictionary<String, String> deprelTranslater;
     /**
      * 是否自动转换依存关系
      */
@@ -45,7 +45,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     public CoNLLSentence parse(String sentence)
     {
         assert sentence != null;
-        CoNLLSentence output = parse(segment.seg(sentence.toCharArray()));
+        CoNLLSentence output = parse(segment.seg(sentence.ToCharArray()));
         if (enableDeprelTranslater && deprelTranslater != null)
         {
             for (CoNLLWord word : output)
@@ -71,13 +71,13 @@ public abstract class AbstractDependencyParser : IDependencyParser
     }
 
     //@Override
-    public Map<String, String> getDeprelTranslator()
+    public Dictionary<String, String> getDeprelTranslator()
     {
         return deprelTranslater;
     }
 
     //@Override
-    public IDependencyParser setDeprelTranslator(Map<String, String> deprelTranslator)
+    public IDependencyParser setDeprelTranslator(Dictionary<String, String> deprelTranslator)
     {
         this.deprelTranslater = deprelTranslator;
         return this;

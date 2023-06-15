@@ -8,14 +8,14 @@ public abstract class Token
     /**
      * 对应的片段
      */
-    private String fragment;
+    private readonly string fragment;
 
-    public Token(String fragment)
+    public Token(string fragment)
     {
         this.fragment = fragment;
     }
 
-    public String getFragment()
+    public string getFragment()
     {
         return this.fragment;
     }
@@ -24,8 +24,5 @@ public abstract class Token
 
     public abstract Emit getEmit();
 
-    public override String ToString()
-    {
-        return fragment + "/" + isMatch();
-    }
+    public override string ToString() => $"{fragment}/{isMatch()}";
 }

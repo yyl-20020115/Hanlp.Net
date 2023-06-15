@@ -21,7 +21,7 @@ public class BasicTokenizer
     /**
      * 预置分词器
      */
-    public static final Segment SEGMENT = HanLP.newSegment().enableAllNamedEntityRecognize(false).enableCustomDictionary(false);
+    public static readonly Segment SEGMENT = HanLP.newSegment().enableAllNamedEntityRecognize(false).enableCustomDictionary(false);
 
     /**
      * 分词
@@ -30,7 +30,7 @@ public class BasicTokenizer
      */
     public static List<Term> segment(String text)
     {
-        return SEGMENT.seg(text.toCharArray());
+        return SEGMENT.seg(text.ToCharArray());
     }
 
     /**

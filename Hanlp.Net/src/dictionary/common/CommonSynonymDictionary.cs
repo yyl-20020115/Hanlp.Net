@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.synonym;
+
 namespace com.hankcs.hanlp.dictionary.common;
 
 
@@ -66,9 +69,9 @@ public class CommonSynonymDictionary
             }
             bw.close();
             // 获取最大语义id
-            if (synonymList != null && synonymList.size() > 0)
+            if (synonymList != null && synonymList.Count > 0)
             {
-                maxSynonymItemIdDistance = synonymList.get(synonymList.size() - 1).id - SynonymHelper.convertString2IdWithIndex("Aa01A01", 0) + 1;
+                maxSynonymItemIdDistance = synonymList.get(synonymList.Count - 1).id - SynonymHelper.convertString2IdWithIndex("Aa01A01", 0) + 1;
             }
             int resultCode = trie.build(treeMap);
             if (resultCode != 0)
@@ -147,26 +150,26 @@ public class CommonSynonymDictionary
                     Synonym synonym = value.randomSynonym(Type.EQUAL, preWord);
                     if (synonym != null)
                     {
-                        sbOut.append(synonym.realWord);
+                        sbOut.Append(synonym.realWord);
                         preWord = synonym.realWord;
                     }
                     else
                     {
                         preWord = text.substring(start, end);
-                        sbOut.append(preWord);
+                        sbOut.Append(preWord);
                     }
                     i = end - 1;
                 }
                 else
                 {
                     preWord = String.valueOf(text.charAt(i));
-                    sbOut.append(text.charAt(i));
+                    sbOut.Append(text.charAt(i));
                 }
             }
             else
             {
                 preWord = String.valueOf(text.charAt(i));
-                sbOut.append(text.charAt(i));
+                sbOut.Append(text.charAt(i));
             }
         }
 
@@ -175,7 +178,7 @@ public class CommonSynonymDictionary
 
     public String rewrite(String text)
     {
-        List<Term> termList = StandardTokenizer.segment(text.toCharArray());
+        List<Term> termList = StandardTokenizer.segment(text.ToCharArray());
         StringBuilder sbOut = new StringBuilder((int) (text.length() * 1.2));
         String preWord = Predefine.TAG_BIGIN;
         for (Term term : termList)
@@ -184,9 +187,9 @@ public class CommonSynonymDictionary
             Synonym synonym;
             if (synonymItem != null && (synonym = synonymItem.randomSynonym(Type.EQUAL, preWord)) != null)
             {
-                sbOut.append(synonym.realWord);
+                sbOut.Append(synonym.realWord);
             }
-            else sbOut.append(term.word);
+            else sbOut.Append(term.word);
             preWord = PosTagCompiler.compile(term.nature.toString(), term.word);
         }
         return sbOut.toString();
@@ -195,7 +198,7 @@ public class CommonSynonymDictionary
     /**
      * 词典中的一个条目
      */
-    public static class SynonymItem
+    public class SynonymItem
     {
         /**
          * 条目的key
@@ -250,8 +253,8 @@ public class CommonSynonymDictionary
                 Synonym synonym = listIterator.next();
                 if (synonym.type != type || (preWord != null && CoreBiGramTableDictionary.getBiFrequency(preWord, synonym.realWord) == 0)) listIterator.remove();
             }
-            if (synonymArrayList.size() == 0) return null;
-            return synonymArrayList.get((int) (System.currentTimeMillis() % (long)synonymArrayList.size()));
+            if (synonymArrayList.Count == 0) return null;
+            return synonymArrayList.get((int) (System.currentTimeMillis() % (long)synonymArrayList.Count));
         }
 
         public Synonym randomSynonym()
@@ -263,11 +266,11 @@ public class CommonSynonymDictionary
         public String toString()
         {
             final StringBuilder sb = new StringBuilder();
-            sb.append(entry);
-            sb.append(' ');
-            sb.append(type);
-            sb.append(' ');
-            sb.append(synonymList);
+            sb.Append(entry);
+            sb.Append(' ');
+            sb.Append(type);
+            sb.Append(' ');
+            sb.Append(synonymList);
             return sb.toString();
         }
 

@@ -9,7 +9,7 @@ public class EncoderFeatureIndex : FeatureIndex
 {
     private MutableDoubleArrayTrieInteger dic_;
     private IntArrayList frequency;
-    private int bId = Integer.MAX_VALUE;
+    private int bId = int.MAX_VALUE;
 
     public EncoderFeatureIndex(int n)
     {
@@ -24,7 +24,7 @@ public class EncoderFeatureIndex : FeatureIndex
         if (k == -1)
         {
             dic_.put(key, maxid_);
-            frequency.append(1);
+            frequency.Append(1);
             int n = maxid_;
             if (key.charAt(0) == 'U')
             {
@@ -273,9 +273,9 @@ public class EncoderFeatureIndex : FeatureIndex
             return;
         }
         int newMaxId = 0;
-        Map<Integer, Integer> old2new = new TreeMap<Integer, Integer>();
+        Dictionary<int, int> old2new = new TreeMap<int, int>();
         List<String> deletedKeys = new ArrayList<String>(dic_.size() / 8);
-        List<Map.Entry<String, Integer>> l = new LinkedList<Map.Entry<String, Integer>>(dic_.entrySet());
+        List<Map.Entry<String, int>> l = new LinkedList<Map.Entry<String, int>>(dic_.entrySet());
         // update dictionary in key order, to make result compatible with crfpp
         for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
         {
@@ -301,18 +301,18 @@ public class EncoderFeatureIndex : FeatureIndex
 
         for (TaggerImpl tagger : taggers)
         {
-            List<List<Integer>> featureCache = tagger.getFeatureCache_();
+            List<List<int>> featureCache = tagger.getFeatureCache_();
             for (int k = 0; k < featureCache.size(); k++)
             {
-                List<Integer> featureCacheItem = featureCache.get(k);
-                List<Integer> newCache = new ArrayList<Integer>();
-                for (Integer it : featureCacheItem)
+                List<int> featureCacheItem = featureCache.get(k);
+                List<int> newCache = new ArrayList<int>();
+                for (int it : featureCacheItem)
                 {
                     if (it == -1)
                     {
                         continue;
                     }
-                    Integer nid = old2new.get(it);
+                    int nid = old2new.get(it);
                     if (nid != null)
                     {
                         newCache.add(nid);
@@ -333,18 +333,18 @@ public class EncoderFeatureIndex : FeatureIndex
             BufferedReader br = new BufferedReader(isr);
             String line;
 
-            int version = Integer.valueOf(br.readLine().substring("version: ".length()));
+            int version = int.valueOf(br.readLine().substring("version: ".length()));
             costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".length()));
-            maxid_ = Integer.valueOf(br.readLine().substring("maxid: ".length()));
-            xsize_ = Integer.valueOf(br.readLine().substring("xsize: ".length()));
-            System.out.println("Done reading meta-info");
+            maxid_ = int.valueOf(br.readLine().substring("maxid: ".length()));
+            xsize_ = int.valueOf(br.readLine().substring("xsize: ".length()));
+            System._out.println("Done reading meta-info");
             br.readLine();
 
             while ((line = br.readLine()) != null && line.length() > 0)
             {
                 y_.add(line);
             }
-            System.out.println("Done reading labels");
+            System._out.println("Done reading labels");
             while ((line = br.readLine()) != null && line.length() > 0)
             {
                 if (line.startsWith("U"))
@@ -356,7 +356,7 @@ public class EncoderFeatureIndex : FeatureIndex
                     bigramTempls_.add(line);
                 }
             }
-            System.out.println("Done reading templates");
+            System._out.println("Done reading templates");
             dic_ = new MutableDoubleArrayTrieInteger();
             while ((line = br.readLine()) != null && line.length() > 0)
             {
@@ -366,22 +366,22 @@ public class EncoderFeatureIndex : FeatureIndex
                     System.err.println("feature indices format error");
                     return false;
                 }
-                dic_.put(content[1], Integer.valueOf(content[0]));
+                dic_.put(content[1], int.valueOf(content[0]));
             }
-            System.out.println("Done reading feature indices");
+            System._out.println("Done reading feature indices");
             List<Double> alpha = new ArrayList<Double>();
             while ((line = br.readLine()) != null && line.length() > 0)
             {
                 alpha.add(Double.valueOf(line));
             }
-            System.out.println("Done reading weights");
+            System._out.println("Done reading weights");
             alpha_ = new double[alpha.size()];
             for (int i = 0; i < alpha.size(); i++)
             {
                 alpha_[i] = alpha.get(i);
             }
             br.close();
-            System.out.println("Writing binary model to " + binarymodel);
+            System._out.println("Writing binary model to " + binarymodel);
             return save(binarymodel, false);
         }
         catch (Exception e)

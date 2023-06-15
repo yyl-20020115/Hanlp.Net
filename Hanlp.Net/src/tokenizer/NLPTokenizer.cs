@@ -25,7 +25,7 @@ public class NLPTokenizer
      */
     public static AbstractLexicalAnalyzer ANALYZER;
 
-    static
+    static NLPTokenizer()
     {
         try
         {

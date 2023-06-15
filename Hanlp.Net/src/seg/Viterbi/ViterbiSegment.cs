@@ -64,14 +64,14 @@ public class ViterbiSegment : WordBasedSegment
         ////////////////生成词网////////////////////
         generateWordNet(wordNetAll);
         ///////////////生成词图////////////////////
-//        System.out.println("构图：" + (System.currentTimeMillis() - start));
+//        System._out.println("构图：" + (System.currentTimeMillis() - start));
         if (HanLP.Config.DEBUG)
         {
-            System.out.printf("粗分词网：\n%s\n", wordNetAll);
+            System._out.printf("粗分词网：\n%s\n", wordNetAll);
         }
 //        start = System.currentTimeMillis();
         List<Vertex> vertexList = viterbi(wordNetAll);
-//        System.out.println("最短路：" + (System.currentTimeMillis() - start));
+//        System._out.println("最短路：" + (System.currentTimeMillis() - start));
 
         if (config.useCustomDictionary)
         {
@@ -82,7 +82,7 @@ public class ViterbiSegment : WordBasedSegment
 
         if (HanLP.Config.DEBUG)
         {
-            System.out.println("粗分结果" + convert(vertexList, false));
+            System._out.println("粗分结果" + convert(vertexList, false));
         }
 
         // 数字识别
@@ -127,7 +127,7 @@ public class ViterbiSegment : WordBasedSegment
                 vertexList = viterbi(wordNetOptimum);
                 if (HanLP.Config.DEBUG)
                 {
-                    System.out.printf("细分词网：\n%s\n", wordNetOptimum);
+                    System._out.printf("细分词网：\n%s\n", wordNetOptimum);
                 }
             }
         }
@@ -191,7 +191,7 @@ public class ViterbiSegment : WordBasedSegment
         StringBuilder combinePath = new StringBuilder();
         for (String aPath : path)
         {
-            combinePath.append(aPath.trim());
+            combinePath.Append(aPath.trim());
         }
         File file = new File(mainPath);
         mainPath = file.getParent() + "/" + Math.abs(combinePath.toString().hashCode());

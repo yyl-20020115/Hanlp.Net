@@ -45,15 +45,15 @@ public class ActionUtils : ActionType
         return false;
     }
 
-    void get_oracle_actions(List<Integer> heads,
-                            List<Integer> deprels,
+    void get_oracle_actions(List<int> heads,
+                            List<int> deprels,
                             List<Action> actions)
     {
         // The oracle finding algorithm for arcstandard is using a in-order tree
         // searching.
         int N = heads.size();
         int root = -1;
-        List<List<Integer>> tree = new ArrayList<List<Integer>>(N);
+        List<List<int>> tree = new ArrayList<List<int>>(N);
 
         actions.clear();
         for (int i = 0; i < N; ++i)
@@ -75,12 +75,12 @@ public class ActionUtils : ActionType
     }
 
     void get_oracle_actions_travel(int root,
-                                   List<Integer> heads,
-                                   List<Integer> deprels,
-                                   List<List<Integer>> tree,
+                                   List<int> heads,
+                                   List<int> deprels,
+                                   List<List<int>> tree,
                                    List<Action> actions)
     {
-        List<Integer> children = tree.get(root);
+        List<int> children = tree.get(root);
 
         int i;
         for (i = 0; i < children.size() && children.get(i) < root; ++i)
@@ -110,14 +110,14 @@ public class ActionUtils : ActionType
         get_oracle_actions2(instance.heads, instance.deprels, actions);
     }
     
-    void get_oracle_actions2(List<Integer> heads,
-                             List<Integer> deprels,
+    void get_oracle_actions2(List<int> heads,
+                             List<int> deprels,
                              List<Action> actions) {
         actions.clear();
         int len = heads.size();
-        List<Integer> sigma = new ArrayList<Integer>();
+        List<int> sigma = new ArrayList<int>();
         int beta = 0;
-        List<Integer> output = new ArrayList<Integer>(len);
+        List<int> output = new ArrayList<int>(len);
         for (int i = 0; i < len; i++)
         {
             output.add(-1);
@@ -132,11 +132,11 @@ public class ActionUtils : ActionType
         }
     }
     
-    void get_oracle_actions_onestep(List<Integer> heads,
-                                    List<Integer> deprels,
-                                    List<Integer> sigma,
+    void get_oracle_actions_onestep(List<int> heads,
+                                    List<int> deprels,
+                                    List<int> sigma,
                                     int[] beta,
-                                    List<Integer> output,
+                                    List<int> output,
                                     List<Action> actions)
     {
         int top0 = (sigma.size() > 0 ? sigma.get(sigma.size() - 1) : -1);

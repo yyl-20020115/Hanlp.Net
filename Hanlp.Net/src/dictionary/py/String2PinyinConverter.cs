@@ -23,7 +23,7 @@ public class String2PinyinConverter
     /**
      * 将拼音和输入法头转为Pyinyin的map
      */
-    static Map<String, Pinyin> map;
+    static Dictionary<String, Pinyin> map;
     /**
      * 将音调统一换为轻声，下标为拼音的ordinal，值为音调5或最大值
      */
@@ -66,7 +66,7 @@ public class String2PinyinConverter
     {
         List<Pinyin> pinyinList = new LinkedList<Pinyin>();
         Collection<Token> tokenize = trie.tokenize(complexText);
-//        System.out.println(tokenize);
+//        System._out.println(tokenize);
         for (Token token : tokenize)
         {
             String fragment = token.getFragment();

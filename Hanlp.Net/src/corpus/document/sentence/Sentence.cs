@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.document.sentence;
 
 
@@ -19,7 +22,7 @@ namespace com.hankcs.hanlp.corpus.document.sentence;
  *
  * @author hankcs
  */
-public class Sentence : Serializable, Iterable<IWord>
+public class Sentence : /*Serializable,*/ IEnumerable<IWord>
 {
     /**
      * 词语列表（复合或简单单词的列表）
@@ -32,17 +35,17 @@ public class Sentence : Serializable, Iterable<IWord>
     }
 
     //@Override
-    public String toString()
+    public String ToString()
     {
         StringBuilder sb = new StringBuilder(size() * 4);
         int i = 1;
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
-            sb.append(word);
-            if (i != wordList.size()) sb.append(' ');
+            sb.Append(word);
+            if (i != wordList.size()) sb.Append(' ');
             ++i;
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -54,24 +57,24 @@ public class Sentence : Serializable, Iterable<IWord>
     {
         StringBuilder sb = new StringBuilder(size() * 4);
         int i = 1;
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
-            if (word instanceof CompoundWord)
+            if (word is CompoundWord)
             {
                 int j = 0;
-                for (Word w : ((CompoundWord) word).innerList)
+                foreach (Word w in ((CompoundWord) word).innerList)
                 {
-                    sb.append(w.getValue());
+                    sb.Append(w.getValue());
                     if (++j != ((CompoundWord) word).innerList.size())
-                        sb.append(' ');
+                        sb.Append(' ');
                 }
             }
             else
-                sb.append(word.getValue());
-            if (i != wordList.size()) sb.append(' ');
+                sb.Append(word.getValue());
+            if (i != wordList.size()) sb.Append(' ');
             ++i;
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -97,7 +100,7 @@ public class Sentence : Serializable, Iterable<IWord>
         StringBuilder sb = new StringBuilder(size() * 4);
         String delimiter = " ";
         String text = text(delimiter);
-        sb.append(text).append('\n');
+        sb.Append(text).Append('\n');
         int i = 1;
         int offset = 0;
         for (IWord word : wordList)
@@ -171,21 +174,21 @@ public class Sentence : Serializable, Iterable<IWord>
     {
         char delimiter = '\t';
         char endLine = '\n';
-        sb.append('T').append(id).append(delimiter);
-        sb.append(word.getLabel()).append(delimiter);
+        sb.Append('T').Append(id).Append(delimiter);
+        sb.Append(word.getLabel()).Append(delimiter);
         int length = word.length();
         if (word instanceof CompoundWord)
         {
             length += ((CompoundWord) word).innerList.size() - 1;
         }
-        sb.append(offset).append(delimiter).append(offset + length).append(delimiter);
-        sb.append(word.getValue()).append(endLine);
+        sb.Append(offset).Append(delimiter).Append(offset + length).Append(delimiter);
+        sb.Append(word.getValue()).Append(endLine);
         String translated = PartOfSpeechTagDictionary.translate(word.getLabel());
         if (withComment && !word.getLabel().equals(translated))
         {
-            sb.append('#').append(id).append(delimiter).append("AnnotatorNotes").append(delimiter)
-                .append('T').append(id).append(delimiter).append(translated)
-                .append(endLine);
+            sb.Append('#').Append(id).Append(delimiter).Append("AnnotatorNotes").Append(delimiter)
+                .Append('T').Append(id).Append(delimiter).Append(translated)
+                .Append(endLine);
         }
     }
 
@@ -283,12 +286,12 @@ public class Sentence : Serializable, Iterable<IWord>
             {
                 for (Word child : ((CompoundWord) word).innerList)
                 {
-                    sb.append(child.getValue()).append(delimiter);
+                    sb.Append(child.getValue()).Append(delimiter);
                 }
             }
             else
             {
-                sb.append(word.getValue()).append(delimiter);
+                sb.Append(word.getValue()).Append(delimiter);
             }
         }
         sb.setLength(sb.length() - delimiter.length());

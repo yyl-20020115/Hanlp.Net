@@ -34,9 +34,9 @@ public class ZZGenerateNR
                 "Z\tPmt\t双名本身成词\t张朝阳\n" +
                 "A\tPo\t以上之外其他的角色\t\n";
 
-        for (String line : text.split("\n"))
+        foreach(String line in text.Split("\n"))
         {
-            System.out.printf("/**\n* %s\n*/\n%s,\n\n", line.substring(1, line.length()), line.substring(0, 1));
+            Console.WriteLine("/**\n* {0}\n*/\n{1},\n\n", line[1 .. line.Length], line[0 .. 1]);
         }
     }
 }

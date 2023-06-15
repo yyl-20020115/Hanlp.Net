@@ -33,60 +33,60 @@ public interface IClassifier
      *
      * @param text 文本
      * @return 所有分类对应的分值(或概率, 需要enableProbability)
-     * @throws IllegalArgumentException 参数错误
+     * @ 参数错误
      * @throws IllegalStateException    未训练模型
      */
-    Map<String, Double> predict(String text) throws IllegalArgumentException, IllegalStateException;
+    Dictionary<String, Double> predict(String text) ;
 
     /**
      * 预测分类
      * @param document
      * @return
      */
-    Map<String, Double> predict(Document document) throws IllegalArgumentException, IllegalStateException;
+    Dictionary<String, Double> predict(Document document) ;
 
     /**
      * 预测分类
      * @param document
      * @return
-     * @throws IllegalArgumentException
+     * @
      * @throws IllegalStateException
      */
-    double[] categorize(Document document) throws IllegalArgumentException, IllegalStateException;
+    double[] categorize(Document document) ;
 
     /**
      * 预测最可能的分类
      * @param document
      * @return
-     * @throws IllegalArgumentException
+     * @
      * @throws IllegalStateException
      */
-    int label(Document document) throws IllegalArgumentException, IllegalStateException;
+    int label(Document document) ;
 
     /**
      * 预测最可能的分类
      * @param text 文本
      * @return 最可能的分类
-     * @throws IllegalArgumentException
+     * @
      * @throws IllegalStateException
      */
-    String classify(String text) throws IllegalArgumentException, IllegalStateException;
+    String classify(String text) ;
 
     /**
      * 预测最可能的分类
      * @param document 一个结构化的文档(注意!这是一个底层数据结构,请谨慎操作)
      * @return 最可能的分类
-     * @throws IllegalArgumentException
+     * @
      * @throws IllegalStateException
      */
-    String classify(Document document) throws IllegalArgumentException, IllegalStateException;
+    String classify(Document document) ;
 
     /**
      * 训练模型
      *
      * @param trainingDataSet 训练数据集,用Map储存.键是分类名,值是一个数组,数组中每个元素都是一篇文档的内容.
      */
-    void train(Map<String, String[]> trainingDataSet) throws IllegalArgumentException;
+    void train(Dictionary<String, String[]> trainingDataSet) ;
 
     /**
      * 训练模型
@@ -123,14 +123,14 @@ public interface IClassifier
      *                    文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
      * @ 任何可能的IO异常
      */
-    void train(String folderPath) ;
+    void train(string folderPath) ;
 
     /**
      * 训练模型
      * @param dataSet 训练数据集
-     * @throws IllegalArgumentException 当数据集为空时,将抛出此异常
+     * @ 当数据集为空时,将抛出此异常
      */
-    void train(IDataSet dataSet) throws IllegalArgumentException;
+    void train(IDataSet dataSet) ;
 
     /**
      * 获取训练后的模型,可用于序列化保存或预测.

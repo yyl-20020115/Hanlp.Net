@@ -55,7 +55,7 @@ public class EasyDictionary
                 for (int i = 0; i < natureCount; ++i)
                 {
                     attribute.nature[i] = Nature.create(param[1 + 2 * i]);
-                    attribute.frequency[i] = Integer.parseInt(param[2 + 2 * i]);
+                    attribute.frequency[i] = int.parseInt(param[2 + 2 * i]);
                     attribute.totalFrequency += attribute.frequency[i];
                 }
                 map.put(param[0], attribute);

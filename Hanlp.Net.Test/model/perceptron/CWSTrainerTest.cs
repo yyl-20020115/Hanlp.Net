@@ -1,10 +1,11 @@
 namespace com.hankcs.hanlp.model.perceptron;
 
+[TestClass]
 
 public class CWSTrainerTest : TestCase
 {
 
-    public static final String SENTENCE = "香港特别行政区的张朝阳说商品和服务是三原县鲁桥食品厂的主营业务";
+    public static readonly string SENTENCE = "香港特别行政区的张朝阳说商品和服务是三原县鲁桥食品厂的主营业务";
 
     public void testTrain() 
     {
@@ -14,7 +15,7 @@ public class CWSTrainerTest : TestCase
                 "data/test/pku98/199801.txt",
                 Config.CWS_MODEL_FILE
         );
-//        System.out.printf("准确率F1:%.2f\n", result.prf[2]);
+//        Console.printf("准确率F1:%.2f\n", result.prf[2]);
         PerceptronSegmenter segmenter = new PerceptronSegmenter(result.model);
         // 也可以用
 //        Segment segmenter = new AveragedPerceptronSegment(POS_MODEL_FILE);

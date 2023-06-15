@@ -101,11 +101,11 @@ public abstract class FeatureIndex
         StringBuilder sb = new StringBuilder();
         for (String temp : unigramTempls)
         {
-            sb.append(temp).append("\n");
+            sb.Append(temp).Append("\n");
         }
         for (String temp : bigramTempls)
         {
-            sb.append(temp).append("\n");
+            sb.Append(temp).Append("\n");
         }
         return sb.toString();
     }
@@ -117,8 +117,8 @@ public abstract class FeatureIndex
 
     public String getIndex(String[] idxStr, int cur, TaggerImpl tagger)
     {
-        int row = Integer.valueOf(idxStr[0]);
-        int col = Integer.valueOf(idxStr[1]);
+        int row = int.valueOf(idxStr[0]);
+        int col = int.valueOf(idxStr[1]);
         int pos = row + cur;
         if (row < -EOS.length || row > EOS.length || col < 0 || col >= tagger.xsize())
         {
@@ -151,7 +151,7 @@ public abstract class FeatureIndex
         {
             if (tmp.startsWith("U") || tmp.startsWith("B"))
             {
-                sb.append(tmp);
+                sb.Append(tmp);
             }
             else if (tmp.length() > 0)
             {
@@ -160,11 +160,11 @@ public abstract class FeatureIndex
                 String r = getIndex(idx, cur, tagger);
                 if (r != null)
                 {
-                    sb.append(r);
+                    sb.Append(r);
                 }
                 if (tuple.length > 1)
                 {
-                    sb.append(tuple[1]);
+                    sb.Append(tuple[1]);
                 }
             }
         }
@@ -172,7 +172,7 @@ public abstract class FeatureIndex
         return sb.toString();
     }
 
-    private bool buildFeatureFromTempl(List<Integer> feature, List<String> templs, int curPos, TaggerImpl tagger)
+    private bool buildFeatureFromTempl(List<int> feature, List<String> templs, int curPos, TaggerImpl tagger)
     {
         for (String tmpl : templs)
         {
@@ -193,8 +193,8 @@ public abstract class FeatureIndex
 
     public bool buildFeatures(TaggerImpl tagger)
     {
-        List<Integer> feature = new ArrayList<Integer>();
-        List<List<Integer>> featureCache = tagger.getFeatureCache_();
+        List<int> feature = new ArrayList<int>();
+        List<List<int>> featureCache = tagger.getFeatureCache_();
         tagger.setFeature_id_(featureCache.size());
 
         for (int cur = 0; cur < tagger.size(); cur++)
@@ -205,7 +205,7 @@ public abstract class FeatureIndex
             }
             feature.add(-1);
             featureCache.add(feature);
-            feature = new ArrayList<Integer>();
+            feature = new ArrayList<int>();
         }
         for (int cur = 1; cur < tagger.size(); cur++)
         {
@@ -215,7 +215,7 @@ public abstract class FeatureIndex
             }
             feature.add(-1);
             featureCache.add(feature);
-            feature = new ArrayList<Integer>();
+            feature = new ArrayList<int>();
         }
         return true;
     }
@@ -223,10 +223,10 @@ public abstract class FeatureIndex
     public void rebuildFeatures(TaggerImpl tagger)
     {
         int fid = tagger.getFeature_id_();
-        List<List<Integer>> featureCache = tagger.getFeatureCache_();
+        List<List<int>> featureCache = tagger.getFeatureCache_();
         for (int cur = 0; cur < tagger.size(); cur++)
         {
-            List<Integer> f = featureCache.get(fid++);
+            List<int> f = featureCache.get(fid++);
             for (int i = 0; i < y_.size(); i++)
             {
                 Node n = new Node();
@@ -239,7 +239,7 @@ public abstract class FeatureIndex
         }
         for (int cur = 1; cur < tagger.size(); cur++)
         {
-            List<Integer> f = featureCache.get(fid++);
+            List<int> f = featureCache.get(fid++);
             for (int j = 0; j < y_.size(); j++)
             {
                 for (int i = 0; i < y_.size(); i++)

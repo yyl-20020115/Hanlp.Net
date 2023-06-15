@@ -21,16 +21,16 @@ namespace com.hankcs.hanlp.classification.corpus;
  */
 public class Lexicon
 {
-    public BinTrie<Integer> wordId;
+    public BinTrie<int> wordId;
     public List<String> idWord;
 
     public Lexicon()
     {
-        wordId = new BinTrie<Integer>();
+        wordId = new BinTrie<int>();
         idWord = new LinkedList<String>();
     }
 
-    public Lexicon(BinTrie<Integer> wordIdTrie)
+    public Lexicon(BinTrie<int> wordIdTrie)
     {
         wordId = wordIdTrie;
     }
@@ -38,8 +38,8 @@ public class Lexicon
     public int addWord(String word)
     {
         assert word != null;
-        char[] charArray = word.toCharArray();
-        Integer id = wordId.get(charArray);
+        char[] charArray = word.ToCharArray();
+        int id = wordId.get(charArray);
         if (id == null)
         {
             id = wordId.size();
@@ -51,7 +51,7 @@ public class Lexicon
         return id;
     }
 
-    public Integer getId(String word)
+    public int getId(String word)
     {
         return wordId.get(word);
     }

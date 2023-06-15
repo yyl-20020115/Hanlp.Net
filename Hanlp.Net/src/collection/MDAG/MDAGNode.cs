@@ -60,7 +60,7 @@ public class MDAGNode
     /**
      * 当它被计算后的hash值
      */
-    private Integer storedHashCode = null;
+    private int storedHashCode = null;
     
     
     
@@ -534,12 +534,12 @@ public class MDAGNode
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("MDAGNode{");
-        sb.append("isAcceptNode=").append(isAcceptNode);
-        sb.append(", outgoingTransitionTreeMap=").append(outgoingTransitionTreeMap.keySet());
-        sb.append(", incomingTransitionCount=").append(incomingTransitionCount);
-//        sb.append(", transitionSetBeginIndex=").append(transitionSetBeginIndex);
-//        sb.append(", storedHashCode=").append(storedHashCode);
-        sb.append('}');
+        sb.Append("isAcceptNode=").Append(isAcceptNode);
+        sb.Append(", outgoingTransitionTreeMap=").Append(outgoingTransitionTreeMap.keySet());
+        sb.Append(", incomingTransitionCount=").Append(incomingTransitionCount);
+//        sb.Append(", transitionSetBeginIndex=").Append(transitionSetBeginIndex);
+//        sb.Append(", storedHashCode=").Append(storedHashCode);
+        sb.Append('}');
         return sb.toString();
     }
 }

@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.models;
+using com.hankcs.hanlp.classification.tokenizers;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -76,13 +79,13 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet load(String folderPath, String charsetName) throws IllegalArgumentException, IOException
+    public IDataSet load(String folderPath, String charsetName) 
     {
         return load(folderPath, charsetName, 1.);
     }
 
     //@Override
-    public IDataSet load(String folderPath) throws IllegalArgumentException, IOException
+    public IDataSet load(String folderPath) 
     {
         return load(folderPath, "UTF-8");
     }
@@ -94,7 +97,7 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet load(String folderPath, String charsetName, double percentage) throws IllegalArgumentException, IOException
+    public IDataSet load(String folderPath, String charsetName, double percentage) , IOException
     {
         if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
@@ -112,7 +115,7 @@ public abstract class AbstractDataSet : IDataSet
             File[] files = folder.listFiles();
             if (files == null) continue;
             String category = folder.getName();
-            logger.out("[%s]...", category);
+            logger._out("[%s]...", category);
             int b, e;
             if (percentage > 0)
             {
@@ -131,23 +134,23 @@ public abstract class AbstractDataSet : IDataSet
                 add(folder.getName(), TextProcessUtility.readTxt(files[i], charsetName));
                 if (i % logEvery == 0)
                 {
-                    logger.out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
+                    logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
                 }
             }
-            logger.out(" %d 篇文档\n", e - b);
+            logger._out(" %d 篇文档\n", e - b);
         }
         logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", getCatalog().size(), size());
         return this;
     }
 
     //@Override
-    public IDataSet load(String folderPath, double rate) throws IllegalArgumentException, IOException
+    public IDataSet load(String folderPath, double rate) , IOException
     {
         return null;
     }
 
     //@Override
-    public IDataSet add(Map<String, String[]> testingDataSet)
+    public IDataSet add(Dictionary<String, String[]> testingDataSet)
     {
         for (Map.Entry<String, String[]> entry : testingDataSet.entrySet())
         {

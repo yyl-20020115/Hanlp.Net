@@ -1,15 +1,15 @@
 namespace com.hankcs.hanlp.algorithm;
 
 
-
+[TestClass]
 public class ViterbiTest : TestCase
 {
-    static enum Weather
+    public enum Weather
     {
         Rainy,
         Sunny,
     }
-    static enum Activity
+    public enum Activity
     {
         walk,
         shop,
@@ -26,30 +26,31 @@ public class ViterbiTest : TestCase
         {0.1, 0.4, 0.5},
         {0.6, 0.3, 0.1},
     };
+    [TestMethod]
     public void testCompute() 
     {
-        for (int i = 0; i < start_probability.length; ++i)
+        for (int i = 0; i < start_probability.Length; ++i)
         {
-            start_probability[i] = -Math.log(start_probability[i]);
+            start_probability[i] = -Math.Log(start_probability[i]);
         }
-        for (int i = 0; i < transititon_probability.length; ++i)
+        for (int i = 0; i < transititon_probability.Length; ++i)
         {
-            for (int j = 0; j < transititon_probability[i].length; ++j)
+            for (int j = 0; j < transititon_probability[i].Length; ++j)
             {
-                transititon_probability[i][j] = -Math.log(transititon_probability[i][j]);
+                transititon_probability[i][j] = -Math.Log(transititon_probability[i][j]);
             }
         }
-        for (int i = 0; i < emission_probability.length; ++i)
+        for (int i = 0; i < emission_probability.Length; ++i)
         {
-            for (int j = 0; j < emission_probability[i].length; ++j)
+            for (int j = 0; j < emission_probability[i].Length; ++j)
             {
-                emission_probability[i][j] = -Math.log(emission_probability[i][j]);
+                emission_probability[i][j] = -Math.Log(emission_probability[i][j]);
             }
         }
         int[] result = Viterbi.compute(observations, states, start_probability, transititon_probability, emission_probability);
-        for (int r : result)
+        foreach (int r in result)
         {
-//            System.out.print(Weather.values()[r] + " ");
+//            Console.print(Weather.values()[r] + " ");
         }
 //        Console.WriteLine();
     }

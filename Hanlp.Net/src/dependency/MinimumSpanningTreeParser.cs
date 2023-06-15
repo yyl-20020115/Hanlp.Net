@@ -71,7 +71,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
             used[v] = true;
             if (p.edge != null)
             {
-//                System.out.println(p.edge.from + " " + p.edge.to + p.edge.label);
+//                System._out.println(p.edge.from + " " + p.edge.to + p.edge.label);
                 edgeResult[p.edge.from - 1] = p.edge;
             }
             for (Edge e : edges[v])

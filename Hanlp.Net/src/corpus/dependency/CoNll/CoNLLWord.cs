@@ -112,13 +112,13 @@ public class CoNLLWord
         final StringBuilder sb = new StringBuilder();
         // ID为0时为根节点，ID为-1时为空白节点
         if (ID!=0 && ID!=-1){
-            sb.append(ID).append('\t').append(LEMMA).append('\t').append(LEMMA).append('\t').append(CPOSTAG).append('\t')
-                .append(POSTAG).append('\t').append('_').append('\t').append(HEAD.ID).append('\t').append(DEPREL).append('\t')
-                .append('_').append('\t').append('_');  
+            sb.Append(ID).Append('\t').Append(LEMMA).Append('\t').Append(LEMMA).Append('\t').Append(CPOSTAG).Append('\t')
+                .Append(POSTAG).Append('\t').Append('_').Append('\t').Append(HEAD.ID).Append('\t').Append(DEPREL).Append('\t')
+                .Append('_').Append('\t').Append('_');  
         } else {
-            sb.append(ID).append('\t').append(LEMMA).append('\t').append(LEMMA).append('\t').append(CPOSTAG).append('\t')
-                .append(POSTAG).append('\t').append('_').append('\t').append('_').append('\t').append(DEPREL).append('\t')
-                .append('_').append('\t').append('_');  
+            sb.Append(ID).Append('\t').Append(LEMMA).Append('\t').Append(LEMMA).Append('\t').Append(CPOSTAG).Append('\t')
+                .Append(POSTAG).Append('\t').Append('_').Append('\t').Append('_').Append('\t').Append(DEPREL).Append('\t')
+                .Append('_').Append('\t').Append('_');  
         }
         return sb.toString();
     }

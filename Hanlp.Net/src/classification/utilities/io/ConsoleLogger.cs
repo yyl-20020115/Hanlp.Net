@@ -24,9 +24,9 @@ public class ConsoleLogger : ILogger
     public static ILogger logger = new ConsoleLogger();
     long start;
 
-    public void out(String format, Object... args)
+    public void _out(String format, Object... args)
     {
-        System.out.printf(format, args);
+        System._out.printf(format, args);
     }
 
     public void err(String format, Object... args)
@@ -36,12 +36,12 @@ public class ConsoleLogger : ILogger
 
     public void start(String format, Object... args)
     {
-        out(format, args);
+        _out(format, args);
         start = System.currentTimeMillis();
     }
 
     public void finish(String format, Object... args)
     {
-        out(String.format("耗时 %d ms", System.currentTimeMillis() - start) + format, args);
+        _out(String.format("耗时 %d ms", System.currentTimeMillis() - start) + format, args);
     }
 }

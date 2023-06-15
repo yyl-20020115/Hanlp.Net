@@ -109,14 +109,14 @@ public abstract class CommonDictionary<V>
     {
         try
         {
-            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path)));
-            out.writeInt(valueArray.size());
+            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path)));
+            _out.writeInt(valueArray.size());
             for (V item : valueArray)
             {
-                saveValue(item, out);
+                saveValue(item, _out);
             }
-            trie.save(out);
-            out.close();
+            trie.save(_out);
+            _out.close();
         }
         catch (Exception e)
         {
@@ -130,10 +130,10 @@ public abstract class CommonDictionary<V>
      * 保存单个值到流中
      *
      * @param value
-     * @param out
+     * @param _out
      * @
      */
-    protected abstract void saveValue(V value, DataOutputStream out) ;
+    protected abstract void saveValue(V value, DataOutputStream _out) ;
 
     /**
      * 查询一个单词

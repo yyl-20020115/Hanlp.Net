@@ -24,7 +24,7 @@ public class CRFModel : ICacheAble
     /**
      * 标签和id的相互转换
      */
-    Map<String, Integer> tag2id;
+    Dictionary<String, int> tag2id;
     /**
      * id转标签
      */
@@ -78,12 +78,12 @@ public class CRFModel : ICacheAble
         if (!lineIterator.hasNext()) return null;
         logger.info(lineIterator.next());   // verson
         logger.info(lineIterator.next());   // cost-factor
-        int maxid = Integer.parseInt(lineIterator.next().substring("maxid:".length()).trim());
+        int maxid = int.parseInt(lineIterator.next().substring("maxid:".length()).trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
         String line;
         int id = 0;
-        CRFModel.tag2id = new HashMap<String, Integer>();
+        CRFModel.tag2id = new HashMap<String, int>();
         while ((line = lineIterator.next()).length() != 0)
         {
             CRFModel.tag2id.put(line, id);
@@ -91,12 +91,12 @@ public class CRFModel : ICacheAble
         }
         CRFModel.id2tag = new String[CRFModel.tag2id.size()];
         final int size = CRFModel.id2tag.length;
-        for (Map.Entry<String, Integer> entry : CRFModel.tag2id.entrySet())
+        for (Map.Entry<String, int> entry : CRFModel.tag2id.entrySet())
         {
             CRFModel.id2tag[entry.getValue()] = entry.getKey();
         }
         TreeMap<String, FeatureFunction> featureFunctionMap = new TreeMap<String, FeatureFunction>();  // 构建trie树的时候用
-        TreeMap<Integer, FeatureFunction> featureFunctionList = new TreeMap<Integer, FeatureFunction>(); // 读取权值的时候用
+        TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
         CRFModel.featureTemplateList = new LinkedList<FeatureTemplate>();
         while ((line = lineIterator.next()).length() != 0)
         {
@@ -115,20 +115,20 @@ public class CRFModel : ICacheAble
         if (CRFModel.matrix != null)
         {
             String[] args = lineIterator.next().split(" ", 2);    // 0 B
-            b = Integer.valueOf(args[0]);
+            b = int.valueOf(args[0]);
             featureFunctionList.put(b, null);
         }
 
         while ((line = lineIterator.next()).length() != 0)
         {
             String[] args = line.split(" ", 2);
-            char[] charArray = args[1].toCharArray();
+            char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, size);
             featureFunctionMap.put(args[1], featureFunction);
-            featureFunctionList.put(Integer.parseInt(args[0]), featureFunction);
+            featureFunctionList.put(int.parseInt(args[0]), featureFunction);
         }
 
-        for (Map.Entry<Integer, FeatureFunction> entry : featureFunctionList.entrySet())
+        for (Map.Entry<int, FeatureFunction> entry : featureFunctionList.entrySet())
         {
             int fid = entry.getKey();
             FeatureFunction featureFunction = entry.getValue();
@@ -161,9 +161,9 @@ public class CRFModel : ICacheAble
         try
         {
             logger.info("开始缓存" + path + Predefine.BIN_EXT);
-            DataOutputStream out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            CRFModel.save(out);
-            out.close();
+            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            CRFModel.save(_out);
+            _out.close();
         }
         catch (Exception e)
         {
@@ -294,39 +294,39 @@ public class CRFModel : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
-        out.writeInt(id2tag.length);
+        _out.writeInt(id2tag.length);
         for (String tag : id2tag)
         {
-            out.writeUTF(tag);
+            _out.writeUTF(tag);
         }
         FeatureFunction[] valueArray = featureFunctionTrie.getValueArray(new FeatureFunction[0]);
-        out.writeInt(valueArray.length);
+        _out.writeInt(valueArray.length);
         for (FeatureFunction featureFunction : valueArray)
         {
-            featureFunction.save(out);
+            featureFunction.save(_out);
         }
-        featureFunctionTrie.save(out);
-        out.writeInt(featureTemplateList.size());
+        featureFunctionTrie.save(_out);
+        _out.writeInt(featureTemplateList.size());
         for (FeatureTemplate featureTemplate : featureTemplateList)
         {
-            featureTemplate.save(out);
+            featureTemplate.save(_out);
         }
         if (matrix != null)
         {
-            out.writeInt(matrix.length);
+            _out.writeInt(matrix.length);
             for (double[] line : matrix)
             {
                 for (double v : line)
                 {
-                    out.writeDouble(v);
+                    _out.writeDouble(v);
                 }
             }
         }
         else
         {
-            out.writeInt(0);
+            _out.writeInt(0);
         }
     }
 
@@ -338,7 +338,7 @@ public class CRFModel : ICacheAble
         {
             int size = byteArray.nextInt();
             id2tag = new String[size];
-            tag2id = new HashMap<String, Integer>(size);
+            tag2id = new HashMap<String, int>(size);
             for (int i = 0; i < id2tag.length; i++)
             {
                 id2tag[i] = byteArray.nextUTF();
@@ -427,7 +427,7 @@ public class CRFModel : ICacheAble
      * @param tag
      * @return
      */
-    public Integer getTagId(String tag)
+    public int getTagId(String tag)
     {
         return tag2id.get(tag);
     }

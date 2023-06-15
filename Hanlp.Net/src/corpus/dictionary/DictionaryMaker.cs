@@ -278,7 +278,7 @@ public class DictionaryMaker : ISaveAble
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("词条数量：");
-        sb.append(trie.size());
+        sb.Append(trie.size());
         return sb.toString();
     }
 
@@ -364,17 +364,17 @@ public class DictionaryMaker : ISaveAble
     {
         for (Item item : itemList)
         {
-            ArrayList<Map.Entry<String, Integer>> entryArray = new ArrayList<Map.Entry<String, Integer>>(item.labelMap.entrySet());
-            Collections.sort(entryArray, new Comparator<Map.Entry<String, Integer>>()
+            ArrayList<Map.Entry<String, int>> entryArray = new ArrayList<Map.Entry<String, int>>(item.labelMap.entrySet());
+            Collections.sort(entryArray, new Comparator<Map.Entry<String, int>>()
             {
                 //@Override
-                public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
+                public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
                 {
                     return o1.getValue().compareTo(o2.getValue());
                 }
             });
             int index = 1;
-            for (Map.Entry<String, Integer> pair : entryArray)
+            for (Map.Entry<String, int> pair : entryArray)
             {
                 item.labelMap.put(pair.getKey(), index);
                 ++index;

@@ -372,23 +372,23 @@ class Preconditions
             {
                 break;
             }
-            builder.append(template.substring(templateStart, placeholderStart));
-            builder.append(args[i++]);
+            builder.Append(template.substring(templateStart, placeholderStart));
+            builder.Append(args[i++]);
             templateStart = placeholderStart + 2;
         }
-        builder.append(template.substring(templateStart));
+        builder.Append(template.substring(templateStart));
 
-        // if we run out of placeholders, append the extra args in square braces
+        // if we run _out of placeholders, Append the extra args in square braces
         if (i < args.length)
         {
-            builder.append(" [");
-            builder.append(args[i++]);
+            builder.Append(" [");
+            builder.Append(args[i++]);
             while (i < args.length)
             {
-                builder.append(", ");
-                builder.append(args[i++]);
+                builder.Append(", ");
+                builder.Append(args[i++]);
             }
-            builder.append(']');
+            builder.Append(']');
         }
 
         return builder.toString();

@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.utility;
  */
 public class TestUtility
 {
-    static
+    static TestUtility()
     {
         ensureFullData();
     }
@@ -45,7 +45,7 @@ public class TestUtility
      * @param url  下载地址
      * @return name的绝对路径
      */
-    public static String ensureData(String name, String url, String parentPath, boolean overwrite)
+    public static String ensureData(String name, String url, String parentPath, bool overwrite)
     {
         File target = new File(name);
         if (target.exists()) return target.getAbsolutePath();
@@ -86,11 +86,11 @@ public class TestUtility
      *
      * @param fileURL  HTTP URL of the file to be downloaded
      * @param savePath path of the directory to save the file
-     * @throws IOException
+     * @
      * @author www.codejava.net
      */
     public static String downloadFile(String fileURL, String savePath)
-        throws IOException
+        
     {
         System.err.printf("Downloading %s to %s\n", fileURL, savePath);
         URL url = new URL(fileURL);
@@ -112,7 +112,7 @@ public class TestUtility
                 if (index > 0)
                 {
                     fileName = disposition.substring(index + 10,
-                                                     disposition.length() - 1);
+                                                     disposition.Length() - 1);
                 }
             }
             else
@@ -165,7 +165,7 @@ public class TestUtility
                 }
                 System.err.println();
                 outputStream.close();
-                realPath = saveFilePath.substring(0, saveFilePath.length() - ".downloading".length());
+                realPath = saveFilePath.substring(0, saveFilePath.Length() - ".downloading".Length());
                 if (!new File(saveFilePath).renameTo(new File(realPath)))
                     throw new IOException("Failed to move file");
             }
@@ -181,7 +181,7 @@ public class TestUtility
         }
     }
 
-    private static void unzip(String zipFilePath, String destDir, boolean overwrite)
+    private static void unzip(String zipFilePath, String destDir, bool overwrite)
     {
         System.err.println("Unzipping to " + destDir);
         File dir = new File(destDir);

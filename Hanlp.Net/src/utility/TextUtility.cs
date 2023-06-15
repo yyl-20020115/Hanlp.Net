@@ -127,7 +127,7 @@ public class TextUtility
         if (str != null)
             try
             {
-                int i = new Integer(str).intValue();
+                int i = new int(str).intValue();
                 return i;
             }
             catch (NumberFormatException e)
@@ -300,7 +300,7 @@ public class TextUtility
         if (word == null)
             return false;
 
-        char[] temp = word.toCharArray();
+        char[] temp = word.ToCharArray();
         for (int i = 0; i < temp.length; i++)
         {
             if (word.startsWith("分之", i))// 百分之五
@@ -550,7 +550,7 @@ public class TextUtility
         StringBuilder sbResult = new StringBuilder(cArray.length);
         for (char c : cArray)
         {
-            sbResult.append(c);
+            sbResult.Append(c);
         }
         return sbResult.toString();
     }
@@ -618,15 +618,15 @@ public class TextUtility
      * 简单好用的写String方式
      *
      * @param s
-     * @param out
+     * @param _out
      * @
      */
-    public static void writeString(String s, DataOutputStream out) 
+    public static void writeString(String s, DataOutputStream _out) 
     {
-        out.writeInt(s.length());
-        for (char c : s.toCharArray())
+        _out.writeInt(s.length());
+        for (char c : s.ToCharArray())
         {
-            out.writeChar(c);
+            _out.writeChar(c);
         }
     }
 
@@ -658,7 +658,7 @@ public class TextUtility
         StringBuilder sb = new StringBuilder(stringCollection.size() * (16 + delimiter.length()));
         for (String str : stringCollection)
         {
-            sb.append(str).append(delimiter);
+            sb.Append(str).Append(delimiter);
         }
 
         return sb.toString();
@@ -669,7 +669,7 @@ public class TextUtility
         StringBuilder sbSentence = new StringBuilder();
         for (String word : termArray)
         {
-            sbSentence.append(word);
+            sbSentence.Append(word);
         }
         return sbSentence.toString();
     }
@@ -679,7 +679,7 @@ public class TextUtility
         Iterator<? : CharSequence> iter = s.iterator();
         if (!iter.hasNext()) return "";
         StringBuilder buffer = new StringBuilder(iter.next());
-        while (iter.hasNext()) buffer.append(delimiter).append(iter.next());
+        while (iter.hasNext()) buffer.Append(delimiter).Append(iter.next());
         return buffer.toString();
     }
 
@@ -688,7 +688,7 @@ public class TextUtility
         StringBuilder sb = new StringBuilder(sentence.wordList.size() * 3);
         for (IWord word : sentence.wordList)
         {
-            sb.append(word.getValue());
+            sb.Append(word.getValue());
         }
 
         return sb.toString();
@@ -699,7 +699,7 @@ public class TextUtility
         StringBuilder sb = new StringBuilder(wordList.size() * 3);
         for (IWord word : wordList)
         {
-            sb.append(word.getValue());
+            sb.Append(word.getValue());
         }
 
         return sb.toString();

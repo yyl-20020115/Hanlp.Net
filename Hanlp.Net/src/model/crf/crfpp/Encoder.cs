@@ -126,7 +126,7 @@ public class Encoder
                 }
                 if (++lineNo % 100 == 0)
                 {
-                    System.out.print(lineNo + ".. ");
+                    System._out.print(lineNo + ".. ");
                 }
             }
             br.close();
@@ -142,13 +142,13 @@ public class Encoder
         Arrays.fill(alpha, 0.0);
         featureIndex.setAlpha_(alpha);
 
-        System.out.println("Number of sentences: " + x.size());
-        System.out.println("Number of features:  " + featureIndex.size());
-        System.out.println("Number of thread(s): " + threadNum);
-        System.out.println("Freq:                " + freq);
-        System.out.println("eta:                 " + eta);
-        System.out.println("C:                   " + C);
-        System.out.println("shrinking size:      " + shrinkingSize);
+        System._out.println("Number of sentences: " + x.size());
+        System._out.println("Number of features:  " + featureIndex.size());
+        System._out.println("Number of thread(s): " + threadNum);
+        System._out.println("Freq:                " + freq);
+        System._out.println("eta:                 " + eta);
+        System._out.println("C:                   " + C);
+        System._out.println("shrinking size:      " + shrinkingSize);
 
         switch (algorithm)
         {
@@ -181,7 +181,7 @@ public class Encoder
         {
             System.err.println("Failed to save model");
         }
-        System.out.println("Done!");
+        System._out.println("Done!");
         return true;
     }
 
@@ -287,13 +287,13 @@ public class Encoder
 
             double diff = (itr == 0 ? 1.0 : Math.abs(oldObj - threads.get(0).obj) / oldObj);
             StringBuilder b = new StringBuilder();
-            b.append("iter=").append(itr);
-            b.append(" terr=").append(1.0 * threads.get(0).err / all);
-            b.append(" serr=").append(1.0 * threads.get(0).zeroone / x.size());
-            b.append(" act=").append(numNonZero);
-            b.append(" obj=").append(threads.get(0).obj);
-            b.append(" diff=").append(diff);
-            System.out.println(b.toString());
+            b.Append("iter=").Append(itr);
+            b.Append(" terr=").Append(1.0 * threads.get(0).err / all);
+            b.Append(" serr=").Append(1.0 * threads.get(0).zeroone / x.size());
+            b.Append(" act=").Append(numNonZero);
+            b.Append(" obj=").Append(threads.get(0).obj);
+            b.Append(" diff=").Append(diff);
+            System._out.println(b.toString());
 
             oldObj = threads.get(0).obj;
 
@@ -339,9 +339,9 @@ public class Encoder
                            int shrinkingSize,
                            int threadNum)
     {
-        Integer[] shrinkArr = new Integer[x.size()];
+        int[] shrinkArr = new int[x.size()];
         Arrays.fill(shrinkArr, 0);
-        List<Integer> shrink = Arrays.asList(shrinkArr);
+        List<int> shrink = Arrays.asList(shrinkArr);
         Double[] upperArr = new Double[x.size()];
         Arrays.fill(upperArr, 0.0);
         List<Double> upperBound = Arrays.asList(upperArr);
@@ -427,14 +427,14 @@ public class Encoder
             }
 
             StringBuilder b = new StringBuilder();
-            b.append("iter=").append(itr);
-            b.append(" terr=").append(1.0 * err / all);
-            b.append(" serr=").append(1.0 * zeroone / x.size());
-            b.append(" act=").append(activeSet);
-            b.append(" uact=").append(upperActiveSet);
-            b.append(" obj=").append(obj);
-            b.append(" kkt=").append(maxKktViolation);
-            System.out.println(b.toString());
+            b.Append("iter=").Append(itr);
+            b.Append(" terr=").Append(1.0 * err / all);
+            b.Append(" serr=").Append(1.0 * zeroone / x.size());
+            b.Append(" act=").Append(activeSet);
+            b.Append(" uact=").Append(upperActiveSet);
+            b.Append(" obj=").Append(obj);
+            b.Append(" kkt=").Append(maxKktViolation);
+            System._out.println(b.toString());
 
             if (maxKktViolation <= 0.0)
             {
@@ -473,6 +473,6 @@ public class Encoder
             System.err.println("error training model");
             return;
         }
-        System.out.println(new Date().getTime() - time1);
+        System._out.println(new Date().getTime() - time1);
     }
 }

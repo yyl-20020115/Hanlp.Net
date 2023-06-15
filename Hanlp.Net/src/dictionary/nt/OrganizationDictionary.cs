@@ -3736,7 +3736,7 @@ public class OrganizationDictionary
         StringBuilder sbPattern = new StringBuilder(ntList.size());
         for (NT nt : ntList)
         {
-            sbPattern.append(nt.toString());
+            sbPattern.Append(nt.toString());
         }
         String pattern = sbPattern.toString();
         final Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
@@ -3748,7 +3748,7 @@ public class OrganizationDictionary
                 StringBuilder sbName = new StringBuilder();
                 for (int i = begin; i < end; ++i)
                 {
-                    sbName.append(wordArray[i].realWord);
+                    sbName.Append(wordArray[i].realWord);
                 }
                 String name = sbName.toString();
                 // 对一些bad case做出调整
@@ -3757,7 +3757,7 @@ public class OrganizationDictionary
                 // 正式算它是一个名字
                 if (HanLP.Config.DEBUG)
                 {
-                    System.out.printf("识别出机构名：%s %s\n", name, keyword);
+                    System._out.printf("识别出机构名：%s %s\n", name, keyword);
                 }
                 int offset = 0;
                 for (int i = 0; i < begin; ++i)

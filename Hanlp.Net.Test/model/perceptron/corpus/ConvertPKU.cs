@@ -15,6 +15,8 @@ namespace com.hankcs.hanlp.model.perceptron.corpus;
 /**
  * @author hankcs
  */
+[TestClass]
+
 public class ConvertPKU : TestCase
 {
 }

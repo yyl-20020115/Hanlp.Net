@@ -2,6 +2,7 @@ namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
 
 
+[TestClass]
 public class CoNLLLoaderTest : TestCase
 {
 //    public void testConvert() 
@@ -158,7 +159,7 @@ public class CoNLLLoaderTest : TestCase
 //            sb.append(String.format("U%d:%s\n", id, template));
 //            ++id;
 //        }
-//        Console.WriteLine(sb.toString());
+//        Console.WriteLine(sb.ToString());
 //        IOUtil.saveTxt("D:\\Tools\\CRF++-0.58\\example\\dependency\\template.txt", sb);
 //    }
 //
@@ -201,7 +202,7 @@ public class CoNLLLoaderTest : TestCase
 //            sb.append(String.format("U%d:%s\n", id, template));
 //            ++id;
 //        }
-//        Console.WriteLine(sb.toString());
+//        Console.WriteLine(sb.ToString());
 //        IOUtil.saveTxt("D:\\Tools\\CRF++-0.58\\example\\dependency\\template.txt", sb);
 //    }
 }

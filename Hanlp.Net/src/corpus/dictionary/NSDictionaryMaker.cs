@@ -63,13 +63,13 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             Precompiler.compileWithoutNS(wordList);
             if (verbose)
             {
-                System.out.print(++i + " / " + sentenceList.size() + " ");
-                System.out.println("原始语料 " + wordList);
+                System._out.print(++i + " / " + sentenceList.size() + " ");
+                System._out.println("原始语料 " + wordList);
             }
             LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, "S"));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "Z"));
-            if (verbose) System.out.println("添加首尾 " + wordList);
+            if (verbose) System._out.println("添加首尾 " + wordList);
             // 标注上文
             Iterator<IWord> iterator = wordLinkedList.iterator();
             IWord pre = iterator.next();
@@ -82,7 +82,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 }
                 pre = current;
             }
-            if (verbose) System.out.println("标注上文 " + wordList);
+            if (verbose) System._out.println("标注上文 " + wordList);
             // 标注下文
             iterator = wordLinkedList.descendingIterator();
             pre = iterator.next();
@@ -95,7 +95,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 }
                 pre = current;
             }
-            if (verbose) System.out.println("标注下文 " + wordList);
+            if (verbose) System._out.println("标注下文 " + wordList);
             // 标注中间
             iterator = wordLinkedList.iterator();
             IWord first = iterator.next();
@@ -110,10 +110,10 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 first = second;
                 second = third;
             }
-            if (verbose) System.out.println("标注中间 " + wordList);
+            if (verbose) System._out.println("标注中间 " + wordList);
             // 拆分地名
             CorpusUtil.spilt(wordList);
-            if (verbose) System.out.println("拆分地名 " + wordList);
+            if (verbose) System._out.println("拆分地名 " + wordList);
             // 处理整个
             ListIterator<IWord> listIterator = wordLinkedList.listIterator();
             while (listIterator.hasNext())
@@ -149,7 +149,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                     word.setLabel(NS.Z.toString());
                 }
             }
-            if (verbose) System.out.println("处理整个 " + wordList);
+            if (verbose) System._out.println("处理整个 " + wordList);
         }
     }
 }

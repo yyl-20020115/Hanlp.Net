@@ -48,7 +48,7 @@ public class WordNet
      */
     public WordNet(String sentence)
     {
-        this(sentence.toCharArray());
+        this(sentence.ToCharArray());
     }
 
     public WordNet(char[] charArray)
@@ -338,7 +338,7 @@ public class WordNet
         int line = 0;
         for (List<Vertex> vertexList : vertexes)
         {
-            sb.append(String.valueOf(line++) + ':' + vertexList.toString()).append("\n");
+            sb.Append(String.valueOf(line++) + ':' + vertexList.toString()).Append("\n");
         }
         return sb.toString();
     }

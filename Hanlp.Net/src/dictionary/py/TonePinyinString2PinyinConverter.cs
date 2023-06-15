@@ -22,13 +22,13 @@ public class TonePinyinString2PinyinConverter
     /**
      * 带音调的字母到Pinyin的map
      */
-    static Map<String, Pinyin> mapKey;
+    static Dictionary<String, Pinyin> mapKey;
     /**
      * 带数字音调的字幕到Pinyin的map
      */
-    static Map<String, Pinyin> mapNumberKey;
+    static Dictionary<String, Pinyin> mapNumberKey;
     static Trie trie;
-    static
+    static TonePinyinString2PinyinConverter()
     {
         mapNumberKey = new TreeMap<String, Pinyin>();
         mapKey = new TreeMap<String, Pinyin>();

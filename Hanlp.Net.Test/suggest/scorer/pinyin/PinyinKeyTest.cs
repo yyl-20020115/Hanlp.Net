@@ -1,8 +1,12 @@
+using com.hankcs.hanlp.algorithm;
+
 namespace com.hankcs.hanlp.suggest.scorer.pinyin;
 
 
+[TestClass]
 public class PinyinKeyTest : TestCase
 {
+    [TestMethod]
     public void testConstruct() 
     {
         PinyinKey pinyinKeyA = new PinyinKey("专题分析");

@@ -20,7 +20,7 @@ public class HanLPTokenizer : ITokenizer
 {
     public String[] segment(String text)
     {
-        char[] charArray = text.toCharArray();
+        char[] charArray = text.ToCharArray();
         List<Term> termList = NotionalTokenizer.segment(charArray);
         ListIterator<Term> listIterator = termList.listIterator();
         while (listIterator.hasNext())

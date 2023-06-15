@@ -148,8 +148,8 @@ public class IOUtil
         StringBuilder sb = new StringBuilder();
         for (Object o : collection)
         {
-            sb.append(o);
-            sb.append('\n');
+            sb.Append(o);
+            sb.Append('\n');
         }
         return saveTxt(path, sb.toString());
     }
@@ -339,12 +339,12 @@ public class IOUtil
         return result;
     }
 
-    public static bool saveMapToTxt(Map<Object, Object> map, String path)
+    public static bool saveMapToTxt(Dictionary<Object, Object> map, String path)
     {
         return saveMapToTxt(map, path, "=");
     }
 
-    public static bool saveMapToTxt(Map<Object, Object> map, String path, String separator)
+    public static bool saveMapToTxt(Dictionary<Object, Object> map, String path, String separator)
     {
         map = new TreeMap<Object, Object>(map);
         return saveEntrySetToTxt(map.entrySet(), path, separator);
@@ -355,10 +355,10 @@ public class IOUtil
         StringBuilder sbOut = new StringBuilder();
         for (Map.Entry<Object, Object> entry : entrySet)
         {
-            sbOut.append(entry.getKey());
-            sbOut.append(separator);
-            sbOut.append(entry.getValue());
-            sbOut.append('\n');
+            sbOut.Append(entry.getKey());
+            sbOut.Append(separator);
+            sbOut.Append(entry.getValue());
+            sbOut.Append('\n');
         }
         return saveTxt(path, sbOut.toString());
     }
@@ -598,9 +598,9 @@ public class IOUtil
         return new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
     }
 
-    public static BufferedWriter newBufferedWriter(String path, bool append) throws FileNotFoundException, UnsupportedEncodingException
+    public static BufferedWriter newBufferedWriter(String path, bool Append) throws FileNotFoundException, UnsupportedEncodingException
     {
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, append), "UTF-8"));
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, Append), "UTF-8"));
     }
 
     /**
@@ -721,7 +721,7 @@ public class IOUtil
                 for (int i = 0; i < natureCount; ++i)
                 {
                     attribute.nature[i] = LexiconUtility.convertStringToNature(param[1 + 2 * i]);
-                    attribute.frequency[i] = Integer.parseInt(param[2 + 2 * i]);
+                    attribute.frequency[i] = int.parseInt(param[2 + 2 * i]);
                     attribute.totalFrequency += attribute.frequency[i];
                 }
             }
@@ -730,13 +730,13 @@ public class IOUtil
         br.close();
     }
 
-    public static void writeCustomNature(DataOutputStream out, LinkedHashSet<Nature> customNatureCollector) 
+    public static void writeCustomNature(DataOutputStream _out, LinkedHashSet<Nature> customNatureCollector) 
     {
         if (customNatureCollector.size() == 0) return;
-        out.writeInt(-customNatureCollector.size());
+        _out.writeInt(-customNatureCollector.size());
         for (Nature nature : customNatureCollector)
         {
-            TextUtility.writeString(nature.toString(), out);
+            TextUtility.writeString(nature.toString(), _out);
         }
     }
 

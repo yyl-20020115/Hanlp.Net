@@ -30,7 +30,7 @@ public class CommonAhoCorasickSegmentUtil
      */
     public static <V> LinkedList<ResultTerm<V>> segment(String text, AhoCorasickDoubleArrayTrie<V> trie)
     {
-        return segment(text.toCharArray(), trie);
+        return segment(text.ToCharArray(), trie);
     }
     /**
      * 最长分词，合并未知语素
@@ -62,7 +62,7 @@ public class CommonAhoCorasickSegmentUtil
                 int offset = i;
                 while (i < charArray.length && wordNet[i] == null)
                 {
-                    sbTerm.append(charArray[i]);
+                    sbTerm.Append(charArray[i]);
                     ++i;
                 }
                 termList.add(new ResultTerm<V>(sbTerm.toString(), null, offset));
@@ -85,7 +85,7 @@ public class CommonAhoCorasickSegmentUtil
      */
     public static <V> LinkedList<ResultTerm<V>> segmentReverseOrder(String text, AhoCorasickDoubleArrayTrie<V> trie)
     {
-        return segmentReverseOrder(text.toCharArray(), trie);
+        return segmentReverseOrder(text.ToCharArray(), trie);
     }
 
     /**
@@ -119,7 +119,7 @@ public class CommonAhoCorasickSegmentUtil
                 byte preCharType = CharType.get(charArray[offset]);
                 while (i > 0 && wordNet[i] == null && CharType.get(charArray[i - 1]) == preCharType)
                 {
-                    sbTerm.append(charArray[i - 1]);
+                    sbTerm.Append(charArray[i - 1]);
                     preCharType = CharType.get(charArray[i - 1]);
                     --i;
                 }

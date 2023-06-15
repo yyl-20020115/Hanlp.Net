@@ -124,11 +124,11 @@ public class CharacterBasedGenerativeModel : ICacheAble
             double c2 = div(tf.get(now[1], now[2]) - 1, tf.get(now[1]) - 1);
             double c1 = div(tf.get(now[2]) - 1, tf.getsum() - 1);
             if (c3 >= c1 && c3 >= c2)
-                tl3 += tf.get(key.toCharArray());
+                tl3 += tf.get(key.ToCharArray());
             else if (c2 >= c1 && c2 >= c3)
-                tl2 += tf.get(key.toCharArray());
+                tl2 += tf.get(key.ToCharArray());
             else if (c1 >= c2 && c1 >= c3)
-                tl1 += tf.get(key.toCharArray());
+                tl1 += tf.get(key.ToCharArray());
         }
 
         l1 = div(tl1, tl1 + tl2 + tl3);
@@ -271,12 +271,12 @@ public class CharacterBasedGenerativeModel : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
-        out.writeDouble(l1);
-        out.writeDouble(l2);
-        out.writeDouble(l3);
-        tf.save(out);
+        _out.writeDouble(l1);
+        _out.writeDouble(l2);
+        _out.writeDouble(l3);
+        tf.save(_out);
     }
 
     //@Override

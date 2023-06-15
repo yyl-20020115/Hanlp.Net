@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.corpus;
 public class TestICWB : TestCase
 {
 
-//    public static final String PATH = "D:\\Doc\\语料库\\icwb2-data\\training\\msr_training.utf8";
+//    public static readonly string PATH = "D:\\Doc\\语料库\\icwb2-data\\training\\msr_training.utf8";
 //
 //    public void testGenerateBMES() 
 //    {
@@ -31,18 +31,18 @@ public class TestICWB : TestCase
 //            String[] wordArray = line.split("\\s");
 //            for (String word : wordArray)
 //            {
-//                if (word.length() == 1)
+//                if (word.Length() == 1)
 //                {
 //                    bw.write(word + "\tS\n");
 //                }
-//                else if (word.length() > 1)
+//                else if (word.Length() > 1)
 //                {
 //                    bw.write(word.charAt(0) + "\tB\n");
-//                    for (int i = 1; i < word.length() - 1; ++i)
+//                    for (int i = 1; i < word.Length() - 1; ++i)
 //                    {
 //                        bw.write(word.charAt(i) + "\tM\n");
 //                    }
-//                    bw.write(word.charAt(word.length() - 1) + "\tE\n");
+//                    bw.write(word.charAt(word.Length() - 1) + "\tE\n");
 //                }
 //            }
 //            bw.newLine();

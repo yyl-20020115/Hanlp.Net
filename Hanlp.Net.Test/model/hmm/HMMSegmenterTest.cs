@@ -1,8 +1,10 @@
 namespace com.hankcs.hanlp.model.hmm;
 
 
+[TestClass]
 public class HMMSegmenterTest : TestCase
 {
+    [TestMethod]
     public void testTrain() 
     {
         HMMSegmenter segmenter = new HMMSegmenter();

@@ -1,9 +1,14 @@
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.seg.NShort;
 
 
+[TestClass]
 
 public class NShortSegmentTest : TestCase
 {
+    [TestMethod]
     public void testParse() 
     {
         List<List<Term>> wordResults = new LinkedList<List<Term>>();
@@ -22,7 +27,7 @@ public class NShortSegmentTest : TestCase
 //            Console.WriteLine(result);
 //        }
     }
-
+    [TestMethod]
     public void testIssue691() 
     {
 //        HanLP.Config.enableDebug();

@@ -20,10 +20,10 @@ public interface ICacheAble
 {
     /**
      * 写入
-     * @param out
+     * @param _out
      * @throws Exception
      */
-    void save(DataOutputStream out) throws Exception;
+    void save(DataOutputStream _out);
 
     /**
      * 载入

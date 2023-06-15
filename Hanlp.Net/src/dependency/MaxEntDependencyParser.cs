@@ -102,8 +102,8 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         context.add(nodeArray[from].label + '→' + wordBeforeJ.label + '@' + nodeArray[to].label);
         List<Pair<String, Double>> pairList = model.predict(context.toArray(new String[0]));
         Pair<String, Double> maxPair = new Pair<String, Double>("null", -1.0);
-//        System.out.println(context);
-//        System.out.println(pairList);
+//        System._out.println(context);
+//        System._out.println(pairList);
         for (Pair<String, Double> pair : pairList)
         {
             if (pair.getValue() > maxPair.getValue() && !"null".equals(pair.getKey()))
@@ -111,7 +111,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
                 maxPair = pair;
             }
         }
-//        System.out.println(nodeArray[from].word + "→" + nodeArray[to].word + " : " + maxPair);
+//        System._out.println(nodeArray[from].word + "→" + nodeArray[to].word + " : " + maxPair);
 
         return new Edge(from, to, maxPair.getKey(), (float) - Math.log(maxPair.getValue()));
     }

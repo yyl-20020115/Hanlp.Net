@@ -61,10 +61,10 @@ public class MemoryDataSet : AbstractDataSet
         while (iterator.hasNext())
         {
             Document document = iterator.next();
-            FrequencyMap<Integer> tfMap = new FrequencyMap<Integer>();
-            for (Map.Entry<Integer, int[]> entry : document.tfMap.entrySet())
+            FrequencyMap<int> tfMap = new FrequencyMap<int>();
+            for (Map.Entry<int, int[]> entry : document.tfMap.entrySet())
             {
-                Integer feature = entry.getKey();
+                int feature = entry.getKey();
                 if (idMap[feature] == -1) continue;
                 tfMap.put(idMap[feature], entry.getValue());
             }

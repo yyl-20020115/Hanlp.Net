@@ -1,8 +1,10 @@
 namespace com.hankcs.hanlp.corpus.tag;
 
 
+[TestClass]
 public class NatureTest : TestCase
 {
+    [TestMethod]
     public void testFromString() 
     {
         Nature one = Nature.create("新词性1");

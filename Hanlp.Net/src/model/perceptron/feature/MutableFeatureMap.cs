@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
  */
 public class MutableFeatureMap : FeatureMap
 {
-    public Map<String, Integer> featureIdMap;
+    public Dictionary<String, int> featureIdMap;
     // TreeMap 5136
     // Bin 2712
     // DAT minutes
@@ -27,7 +27,7 @@ public class MutableFeatureMap : FeatureMap
     public MutableFeatureMap(TagSet tagSet)
     {
         super(tagSet, true);
-        featureIdMap = new TreeMap<String, Integer>();
+        featureIdMap = new TreeMap<String, int>();
         addTransitionFeatures(tagSet);
     }
 
@@ -40,7 +40,7 @@ public class MutableFeatureMap : FeatureMap
         idOf("BL=_BL_");
     }
 
-    public MutableFeatureMap(TagSet tagSet, Map<String, Integer> featureIdMap)
+    public MutableFeatureMap(TagSet tagSet, Dictionary<String, int> featureIdMap)
     {
         super(tagSet);
         this.featureIdMap = featureIdMap;
@@ -48,7 +48,7 @@ public class MutableFeatureMap : FeatureMap
     }
 
     //@Override
-    public Set<Map.Entry<String, Integer>> entrySet()
+    public Set<Map.Entry<String, int>> entrySet()
     {
         return featureIdMap.entrySet();
     }
@@ -56,7 +56,7 @@ public class MutableFeatureMap : FeatureMap
     //@Override
     public int idOf(String string)
     {
-        Integer id = featureIdMap.get(string);
+        int id = featureIdMap.get(string);
         if (id == null)
         {
             id = featureIdMap.size();

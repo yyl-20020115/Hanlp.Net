@@ -69,21 +69,21 @@ public class Evaluator
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMinimumFractionDigits(2);
         StringBuilder sb = new StringBuilder();
-        sb.append("UA: ");
-        sb.append(percentFormat.format(getUA()));
-        sb.append('\t');
-        sb.append("LA: ");
-        sb.append(percentFormat.format(getLA()));
-        sb.append('\t');
-        sb.append("DA: ");
-        sb.append(percentFormat.format(getDA()));
-        sb.append('\t');
-        sb.append("sentences: ");
-        sb.append(sentenceCount);
-        sb.append('\t');
-        sb.append("speed: ");
-        sb.append(sentenceCount / (float)(System.currentTimeMillis() - start) * 1000);
-        sb.append(" sent/s");
+        sb.Append("UA: ");
+        sb.Append(percentFormat.format(getUA()));
+        sb.Append('\t');
+        sb.Append("LA: ");
+        sb.Append(percentFormat.format(getLA()));
+        sb.Append('\t');
+        sb.Append("DA: ");
+        sb.Append(percentFormat.format(getDA()));
+        sb.Append('\t');
+        sb.Append("sentences: ");
+        sb.Append(sentenceCount);
+        sb.Append('\t');
+        sb.Append("speed: ");
+        sb.Append(sentenceCount / (float)(System.currentTimeMillis() - start) * 1000);
+        sb.Append(" sent/s");
         return sb.toString();
     }
 }

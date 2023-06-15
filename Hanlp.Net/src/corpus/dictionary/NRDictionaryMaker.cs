@@ -29,7 +29,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
     protected void addToDictionary(List<List<IWord>> sentenceList)
     {
         if (verbose)
-            System.out.println("开始制作词典");
+            System._out.println("开始制作词典");
         // 将非A的词语保存下来
         for (List<IWord> wordList : sentenceList)
         {
@@ -60,14 +60,14 @@ public class NRDictionaryMaker : CommonDictionaryMaker
     protected void roleTag(List<List<IWord>> sentenceList)
     {
         if (verbose)
-            System.out.println("开始标注角色");
+            System._out.println("开始标注角色");
         int i = 0;
         for (List<IWord> wordList : sentenceList)
         {
             if (verbose)
             {
-                System.out.println(++i + " / " + sentenceList.size());
-                System.out.println("原始语料 " + wordList);
+                System._out.println(++i + " / " + sentenceList.size());
+                System._out.println("原始语料 " + wordList);
             }
             // 先标注A和K
             IWord pre = new Word("##始##", "begin");
@@ -88,7 +88,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 pre = word;
             }
-            if (verbose) System.out.println("标注非前 " + wordList);
+            if (verbose) System._out.println("标注非前 " + wordList);
             // 然后标注LM
             IWord next = new Word("##末##", "end");
             while (listIterator.hasPrevious())
@@ -102,7 +102,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 next = word;
             }
-            if (verbose) System.out.println("标注中后 " + wordList);
+            if (verbose) System._out.println("标注中后 " + wordList);
             // 拆分名字
             listIterator = wordList.listIterator();
             while (listIterator.hasNext())
@@ -155,7 +155,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                     }
                 }
             }
-            if (verbose) System.out.println("姓名拆分 " + wordList);
+            if (verbose) System._out.println("姓名拆分 " + wordList);
             // 上文成词
             listIterator = wordList.listIterator();
             pre = new Word("##始##", "begin");
@@ -174,7 +174,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 pre = word;
             }
-            if (verbose) System.out.println("上文成词 " + wordList);
+            if (verbose) System._out.println("上文成词 " + wordList);
             // 头部成词
             next = new Word("##末##", "end");
             while (listIterator.hasPrevious())
@@ -192,7 +192,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 next = word;
             }
-            if (verbose) System.out.println("头部成词 " + wordList);
+            if (verbose) System._out.println("头部成词 " + wordList);
             // 尾部成词
             pre = new Word("##始##", "begin");
             while (listIterator.hasNext())
@@ -210,7 +210,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 pre = word;
             }
-            if (verbose) System.out.println("尾部成词 " + wordList);
+            if (verbose) System._out.println("尾部成词 " + wordList);
             // 下文成词
             next = new Word("##末##", "end");
             while (listIterator.hasPrevious())
@@ -228,11 +228,11 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 next = word;
             }
-            if (verbose) System.out.println("头部成词 " + wordList);
+            if (verbose) System._out.println("头部成词 " + wordList);
             LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, "S"));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "A"));
-            if (verbose) System.out.println("添加首尾 " + wordList);
+            if (verbose) System._out.println("添加首尾 " + wordList);
         }
     }
 }

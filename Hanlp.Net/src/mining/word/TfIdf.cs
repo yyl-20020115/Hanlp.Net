@@ -50,9 +50,9 @@ public class TfIdf
      * @param <TERM>   词语类型
      * @return 一个包含词频的Map
      */
-    public static <TERM> Map<TERM, Double> tf(Collection<TERM> document, TfType type)
+    public static <TERM> Dictionary<TERM, Double> tf(Collection<TERM> document, TfType type)
     {
-        Map<TERM, Double> tf = new HashMap<TERM, Double>();
+        Dictionary<TERM, Double> tf = new HashMap<TERM, Double>();
         for (TERM term : document)
         {
             Double f = tf.get(term);
@@ -84,7 +84,7 @@ public class TfIdf
      * @param <TERM>   词语类型
      * @return 一个包含词频的Map
      */
-    public static <TERM> Map<TERM, Double> tf(Collection<TERM> document)
+    public static <TERM> Dictionary<TERM, Double> tf(Collection<TERM> document)
     {
         return tf(document, TfType.NATURAL);
     }
@@ -97,9 +97,9 @@ public class TfIdf
      * @param <TERM>    词语类型
      * @return 一个包含词频的Map的列表
      */
-    public static <TERM> Iterable<Map<TERM, Double>> tfs(Iterable<Collection<TERM>> documents, TfType type)
+    public static <TERM> Iterable<Dictionary<TERM, Double>> tfs(Iterable<Collection<TERM>> documents, TfType type)
     {
-        List<Map<TERM, Double>> tfs = new ArrayList<Map<TERM, Double>>();
+        List<Dictionary<TERM, Double>> tfs = new ArrayList<Dictionary<TERM, Double>>();
         for (Collection<TERM> document : documents)
         {
             tfs.add(tf(document, type));
@@ -114,7 +114,7 @@ public class TfIdf
      * @param <TERM>    词语类型
      * @return 一个包含词频的Map的列表
      */
-    public static <TERM> Iterable<Map<TERM, Double>> tfs(Iterable<Collection<TERM>> documents)
+    public static <TERM> Iterable<Dictionary<TERM, Double>> tfs(Iterable<Collection<TERM>> documents)
     {
         return tfs(documents, TfType.NATURAL);
     }
@@ -128,10 +128,10 @@ public class TfIdf
      * @param <TERM>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Map<TERM, Double> idf(Iterable<Iterable<TERM>> documentVocabularies,
+    public static <TERM> Dictionary<TERM, Double> idf(Iterable<Iterable<TERM>> documentVocabularies,
                                                bool smooth, bool addOne)
     {
-        Map<TERM, Integer> df = new HashMap<TERM, Integer>();
+        Dictionary<TERM, int> df = new HashMap<TERM, int>();
         int d = smooth ? 1 : 0;
         int a = addOne ? 1 : 0;
         int n = d;
@@ -140,13 +140,13 @@ public class TfIdf
             n += 1;
             for (TERM term : documentVocabulary)
             {
-                Integer t = df.get(term);
+                int t = df.get(term);
                 if (t == null) t = d;
                 df.put(term, t + 1);
             }
         }
-        Map<TERM, Double> idf = new HashMap<TERM, Double>();
-        for (Map.Entry<TERM, Integer> e : df.entrySet())
+        Dictionary<TERM, Double> idf = new HashMap<TERM, Double>();
+        for (Map.Entry<TERM, int> e : df.entrySet())
         {
             TERM term = e.getKey();
             double f = e.getValue();
@@ -162,7 +162,7 @@ public class TfIdf
      * @param <TERM>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Map<TERM, Double> idf(Iterable<Iterable<TERM>> documentVocabularies)
+    public static <TERM> Dictionary<TERM, Double> idf(Iterable<Iterable<TERM>> documentVocabularies)
     {
         return idf(documentVocabularies, true, true);
     }
@@ -176,10 +176,10 @@ public class TfIdf
      * @param <TERM>        词语类型
      * @return 一个词语->tf-idf的Map
      */
-    public static <TERM> Map<TERM, Double> tfIdf(Map<TERM, Double> tf, Map<TERM, Double> idf,
+    public static <TERM> Dictionary<TERM, Double> tfIdf(Dictionary<TERM, Double> tf, Dictionary<TERM, Double> idf,
                                                  Normalization normalization)
     {
-        Map<TERM, Double> tfIdf = new HashMap<TERM, Double>();
+        Dictionary<TERM, Double> tfIdf = new HashMap<TERM, Double>();
         for (TERM term : tf.keySet())
         {
             Double TF = tf.get(term);
@@ -213,7 +213,7 @@ public class TfIdf
      * @param <TERM> 词语类型
      * @return 一个词语->tf-idf的Map
      */
-    public static <TERM> Map<TERM, Double> tfIdf(Map<TERM, Double> tf, Map<TERM, Double> idf)
+    public static <TERM> Dictionary<TERM, Double> tfIdf(Dictionary<TERM, Double> tf, Dictionary<TERM, Double> idf)
     {
         return tfIdf(tf, idf, Normalization.NONE);
     }
@@ -227,7 +227,7 @@ public class TfIdf
      * @param <TERM> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Map<TERM, Double> idfFromTfs(Iterable<Map<TERM, Double>> tfs, bool smooth, bool addOne)
+    public static <TERM> Dictionary<TERM, Double> idfFromTfs(Iterable<Dictionary<TERM, Double>> tfs, bool smooth, bool addOne)
     {
         return idf(new KeySetIterable<TERM, Double>(tfs), smooth, addOne);
     }
@@ -239,7 +239,7 @@ public class TfIdf
      * @param <TERM> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Map<TERM, Double> idfFromTfs(Iterable<Map<TERM, Double>> tfs)
+    public static <TERM> Dictionary<TERM, Double> idfFromTfs(Iterable<Dictionary<TERM, Double>> tfs)
     {
         return idfFromTfs(tfs, true, true);
     }
@@ -252,9 +252,9 @@ public class TfIdf
      */
     static private class KeySetIterable<KEY, VALUE> : Iterable<Iterable<KEY>>
     {
-        final private Iterator<Map<KEY, VALUE>> maps;
+        final private Iterator<Dictionary<KEY, VALUE>> maps;
 
-        public KeySetIterable(Iterable<Map<KEY, VALUE>> maps)
+        public KeySetIterable(Iterable<Dictionary<KEY, VALUE>> maps)
         {
             this.maps = maps.iterator();
         }

@@ -67,7 +67,7 @@ public class NERTagSet : TagSet
     {
         super.load(byteArray);
         nerLabels.clear();
-        for (Map.Entry<String, Integer> entry : this)
+        for (Map.Entry<String, int> entry : this)
         {
             String tag = entry.getKey();
             int index = tag.indexOf('-');

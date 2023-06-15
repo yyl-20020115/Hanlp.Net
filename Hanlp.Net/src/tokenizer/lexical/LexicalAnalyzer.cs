@@ -22,5 +22,5 @@ public interface LexicalAnalyzer : Segmenter, POSTagger, NERecognizer
      * @param sentence 纯文本句子
      * @return HanLP定义的结构化句子
      */
-    Sentence analyze(final String sentence);
+    Sentence analyze(String sentence);
 }

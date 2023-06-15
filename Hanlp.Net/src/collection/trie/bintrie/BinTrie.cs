@@ -30,7 +30,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
         status = Status.NOT_WORD_1;
     }
 
-    public BinTrie(Map<String, V> map)
+    public BinTrie(Dictionary<String, V> map)
     {
         this();
         for (Map.Entry<String, V> entry : map.entrySet())
@@ -49,7 +49,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     {
         if (key.length() == 0) return;  // 安全起见
         BaseNode branch = this;
-        char[] chars = key.toCharArray();
+        char[] chars = key.ToCharArray();
         for (int i = 0; i < chars.length - 1; ++i)
         {
             // 除了最后一个字外，都是继续
@@ -86,7 +86,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      */
     public void set(String key, V value)
     {
-        put(key.toCharArray(), value);
+        put(key.ToCharArray(), value);
     }
 
     /**
@@ -97,7 +97,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     public void remove(String key)
     {
         BaseNode branch = this;
-        char[] chars = key.toCharArray();
+        char[] chars = key.ToCharArray();
         for (int i = 0; i < chars.length - 1; ++i)
         {
             if (branch == null) return;
@@ -114,7 +114,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     public bool containsKey(String key)
     {
         BaseNode branch = this;
-        char[] chars = key.toCharArray();
+        char[] chars = key.ToCharArray();
         for (char aChar : chars)
         {
             if (branch == null) return false;
@@ -127,7 +127,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     public V get(String key)
     {
         BaseNode branch = this;
-        char[] chars = key.toCharArray();
+        char[] chars = key.ToCharArray();
         for (char aChar : chars)
         {
             if (branch == null) return null;
@@ -212,7 +212,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
         Set<Map.Entry<String, V>> entrySet = new TreeSet<Map.Entry<String, V>>();
         StringBuilder sb = new StringBuilder(key.substring(0, key.length() - 1));
         BaseNode branch = this;
-        char[] chars = key.toCharArray();
+        char[] chars = key.ToCharArray();
         for (char aChar : chars)
         {
             if (branch == null) return entrySet;
@@ -232,7 +232,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
      */
     public LinkedList<Map.Entry<String, V>> commonPrefixSearchWithValue(String key)
     {
-        char[] chars = key.toCharArray();
+        char[] chars = key.ToCharArray();
         return commonPrefixSearchWithValue(chars, 0);
     }
 
@@ -253,7 +253,7 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
             char aChar = chars[i];
             branch = branch.getChild(aChar);
             if (branch == null || branch.status == Status.UNDEFINED_0) return result;
-            sb.append(aChar);
+            sb.Append(aChar);
             if (branch.status == Status.WORD_MIDDLE_2 || branch.status == Status.WORD_END_3)
             {
                 result.add(new AbstractMap.SimpleEntry<String, V>(sb.toString(), (V) branch.value));
@@ -328,20 +328,20 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     {
         try
         {
-            DataOutputStream out = new DataOutputStream(IOUtil.newOutputStream(path));
+            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path));
             for (BaseNode node : child)
             {
                 if (node == null)
                 {
-                    out.writeInt(0);
+                    _out.writeInt(0);
                 }
                 else
                 {
-                    out.writeInt(1);
-                    node.walkToSave(out);
+                    _out.writeInt(1);
+                    node.walkToSave(_out);
                 }
             }
-            out.close();
+            _out.close();
         }
         catch (Exception e)
         {
@@ -365,10 +365,10 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     /**
      * 保存到二进制输出流
      *
-     * @param out
+     * @param _out
      * @return
      */
-    public bool save(DataOutputStream out)
+    public bool save(DataOutputStream _out)
     {
         try
         {
@@ -376,18 +376,18 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
             {
                 if (node == null)
                 {
-                    out.writeInt(0);
+                    _out.writeInt(0);
                 }
                 else
                 {
-                    out.writeInt(1);
-                    node.walkToSave(out);
+                    _out.writeInt(1);
+                    node.walkToSave(_out);
                 }
             }
         }
         catch (Exception e)
         {
-            logger.warning("保存到" + out + "失败" + TextUtility.exceptionToString(e));
+            logger.warning("保存到" + _out + "失败" + TextUtility.exceptionToString(e));
             return false;
         }
 
@@ -474,19 +474,19 @@ public class BinTrie<V> : BaseNode<V> : ITrie<V>, Externalizable
     }
 
     //@Override
-    public void writeExternal(ObjectOutput out) 
+    public void writeExternal(ObjectOutput _out) 
     {
-        out.writeInt(size);
+        _out.writeInt(size);
         for (BaseNode node : child)
         {
             if (node == null)
             {
-                out.writeInt(0);
+                _out.writeInt(0);
             }
             else
             {
-                out.writeInt(1);
-                node.walkToSave(out);
+                _out.writeInt(1);
+                node.walkToSave(_out);
             }
         }
     }

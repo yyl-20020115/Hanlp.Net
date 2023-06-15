@@ -27,7 +27,7 @@ public class MaxEntDependencyModelMaker
         int id = 1;
         for (CoNLLSentence sentence : sentenceList)
         {
-            System.out.printf("%d / %d...", id++, sentenceList.size());
+            System._out.printf("%d / %d...", id++, sentenceList.size());
             String[][] edgeArray = sentence.getEdgeArray();
             CoNLLWord[] word = sentence.getWordArrayWithRoot();
             for (int i = 0; i < word.length; ++i)
@@ -53,7 +53,7 @@ public class MaxEntDependencyModelMaker
                     bw.newLine();
                 }
             }
-            System.out.println("done.");
+            System._out.println("done.");
         }
         bw.close();
         return true;

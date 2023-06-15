@@ -24,10 +24,10 @@ public class DecoderFeatureIndex : FeatureIndex
         try
         {
             ObjectInputStream ois = new ObjectInputStream(stream);
-            int version = (Integer) ois.readObject();
+            int version = (int) ois.readObject();
             costFactor_ = (Double) ois.readObject();
-            maxid_ = (Integer) ois.readObject();
-            xsize_ = (Integer) ois.readObject();
+            maxid_ = (int) ois.readObject();
+            xsize_ = (int) ois.readObject();
             y_ = (List<String>) ois.readObject();
             unigramTempls_ = (List<String>) ois.readObject();
             bigramTempls_ = (List<String>) ois.readObject();
@@ -105,7 +105,7 @@ public class DecoderFeatureIndex : FeatureIndex
             {
                 if (open(IOUtil.newInputStream(binFileName)))
                 {
-                    System.out.println("Found binary model " + binFileName);
+                    System._out.println("Found binary model " + binFileName);
                     return true;
                 }
             }
@@ -118,18 +118,18 @@ public class DecoderFeatureIndex : FeatureIndex
             BufferedReader br = new BufferedReader(isr);
             String line;
 
-            int version = Integer.valueOf(br.readLine().substring("version: ".length()));
+            int version = int.valueOf(br.readLine().substring("version: ".length()));
             costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".length()));
-            maxid_ = Integer.valueOf(br.readLine().substring("maxid: ".length()));
-            xsize_ = Integer.valueOf(br.readLine().substring("xsize: ".length()));
-            System.out.println("Done reading meta-info");
+            maxid_ = int.valueOf(br.readLine().substring("maxid: ".length()));
+            xsize_ = int.valueOf(br.readLine().substring("xsize: ".length()));
+            System._out.println("Done reading meta-info");
             br.readLine();
 
             while ((line = br.readLine()) != null && line.length() > 0)
             {
                 y_.add(line);
             }
-            System.out.println("Done reading labels");
+            System._out.println("Done reading labels");
             while ((line = br.readLine()) != null && line.length() > 0)
             {
                 if (line.startsWith("U"))
@@ -141,18 +141,18 @@ public class DecoderFeatureIndex : FeatureIndex
                     bigramTempls_.add(line);
                 }
             }
-            System.out.println("Done reading templates");
+            System._out.println("Done reading templates");
             while ((line = br.readLine()) != null && line.length() > 0)
             {
                 String[] content = line.trim().split(" ");
-                dat.put(content[1], Integer.valueOf(content[0]));
+                dat.put(content[1], int.valueOf(content[0]));
             }
             List<Double> alpha = new ArrayList<Double>();
             while ((line = br.readLine()) != null && line.length() > 0)
             {
                 alpha.add(Double.valueOf(line));
             }
-            System.out.println("Done reading weights");
+            System._out.println("Done reading weights");
             alpha_ = new double[alpha.size()];
             for (int i = 0; i < alpha.size(); i++)
             {
@@ -162,7 +162,7 @@ public class DecoderFeatureIndex : FeatureIndex
 
             if (cacheBinModel)
             {
-                System.out.println("Writing binary model to " + binFileName);
+                System._out.println("Writing binary model to " + binFileName);
                 ObjectOutputStream oos = new ObjectOutputStream(IOUtil.newOutputStream(binFileName));
                 oos.writeObject(version);
                 oos.writeObject(costFactor_);

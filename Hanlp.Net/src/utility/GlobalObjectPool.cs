@@ -25,7 +25,7 @@ public class GlobalObjectPool
     /**
      * 缓存池
      */
-    private static Map<Object, SoftReference> pool = new HashMap<Object, SoftReference>();
+    private static Dictionary<Object, SoftReference> pool = new HashMap<Object, SoftReference>();
 
     /**
      * 获取对象

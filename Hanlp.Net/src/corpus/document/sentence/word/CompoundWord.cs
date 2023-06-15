@@ -34,7 +34,7 @@ public class CompoundWord : IWord, Iterable<Word>
         StringBuilder sb = new StringBuilder();
         for (Word word : innerList)
         {
-            sb.append(word.value);
+            sb.Append(word.value);
         }
         return sb.toString();
     }
@@ -68,24 +68,24 @@ public class CompoundWord : IWord, Iterable<Word>
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append('[');
+        sb.Append('[');
         int i = 1;
         for (Word word : innerList)
         {
-            sb.append(word.getValue());
+            sb.Append(word.getValue());
             String label = word.getLabel();
             if (label != null)
             {
-                sb.append('/').append(label);
+                sb.Append('/').Append(label);
             }
             if (i != innerList.size())
             {
-                sb.append(' ');
+                sb.Append(' ');
             }
             ++i;
         }
-        sb.append("]/");
-        sb.append(label);
+        sb.Append("]/");
+        sb.Append(label);
         return sb.toString();
     }
 

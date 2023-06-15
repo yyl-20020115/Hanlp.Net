@@ -40,13 +40,13 @@ public class WordNatureDependencyModel
         trie = new DoubleArrayTrie<Attribute>();
         if (loadDat(path)) return true;
         TreeMap<String, Attribute> map = new TreeMap<String, Attribute>();
-        TreeMap<String, Integer> tagMap = new TreeMap<String, Integer>();
+        TreeMap<String, int> tagMap = new TreeMap<String, int>();
         for (String line : IOUtil.readLineListWithLessMemory(path))
         {
             String[] param = line.split(" ");
             if (param[0].endsWith("@"))
             {
-                tagMap.put(param[0], Integer.parseInt(param[2]));
+                tagMap.put(param[0], int.parseInt(param[2]));
                 continue;
             }
             int natureCount = (param.length - 1) / 2;
@@ -54,7 +54,7 @@ public class WordNatureDependencyModel
             for (int i = 0; i < natureCount; ++i)
             {
                 attribute.dependencyRelation[i] = param[1 + 2 * i];
-                attribute.p[i] = Integer.parseInt(param[2 + 2 * i]);
+                attribute.p[i] = int.parseInt(param[2 + 2 * i]);
             }
             map.put(param[0], attribute);
         }
@@ -95,24 +95,24 @@ public class WordNatureDependencyModel
         // 缓存值文件
         try
         {
-            DataOutputStream out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            out.writeInt(attributeList.size());
+            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            _out.writeInt(attributeList.size());
             for (Attribute attribute : attributeList)
             {
-                out.writeInt(attribute.p.length);
+                _out.writeInt(attribute.p.length);
                 for (int i = 0; i < attribute.p.length; ++i)
                 {
-                    char[] charArray = attribute.dependencyRelation[i].toCharArray();
-                    out.writeInt(charArray.length);
+                    char[] charArray = attribute.dependencyRelation[i].ToCharArray();
+                    _out.writeInt(charArray.length);
                     for (char c : charArray)
                     {
-                        out.writeChar(c);
+                        _out.writeChar(c);
                     }
-                    out.writeFloat(attribute.p[i]);
+                    _out.writeFloat(attribute.p[i]);
                 }
             }
-            if (!trie.save(out)) return false;
-            out.close();
+            if (!trie.save(_out)) return false;
+            _out.close();
         }
         catch (Exception e)
         {
@@ -167,7 +167,7 @@ public class WordNatureDependencyModel
         }
         if (HanLP.Config.DEBUG)
         {
-            System.out.println(from + " 到 " + to + " : " + attribute);
+            System._out.println(from + " 到 " + to + " : " + attribute);
         }
         return new Edge(from.id, to.id, attribute.dependencyRelation[0], attribute.p[0]);
     }
@@ -219,7 +219,7 @@ public class WordNatureDependencyModel
             final StringBuilder sb = new StringBuilder(dependencyRelation.length * 10);
             for (int i = 0; i < dependencyRelation.length; ++i)
             {
-                sb.append(dependencyRelation[i]).append(' ').append(p[i]).append(' ');
+                sb.Append(dependencyRelation[i]).Append(' ').Append(p[i]).Append(' ');
             }
             return sb.toString();
         }

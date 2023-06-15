@@ -8,23 +8,27 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus;
 
 
 /**
  * @author hankcs
  */
+[TestClass]
 public class MSR
 {
-    public static final String TRAIN_PATH = "data/test/icwb2-data/training/msr_training.utf8";
-    public static final String TEST_PATH = "data/test/icwb2-data/testing/msr_test.utf8";
-    public static final String GOLD_PATH = "data/test/icwb2-data/gold/msr_test_gold.utf8";
-    public static final String MODEL_PATH = "data/test/msr_cws";
-    public static final String OUTPUT_PATH = "data/test/msr_output.txt";
-    public static final String TRAIN_WORDS = "data/test/icwb2-data/gold/msr_training_words.utf8";
+    public static readonly string TRAIN_PATH = "data/test/icwb2-data/training/msr_training.utf8";
+    public static readonly string TEST_PATH = "data/test/icwb2-data/testing/msr_test.utf8";
+    public static readonly string GOLD_PATH = "data/test/icwb2-data/gold/msr_test_gold.utf8";
+    public static readonly string MODEL_PATH = "data/test/msr_cws";
+    public static readonly string OUTPUT_PATH = "data/test/msr_output.txt";
+    public static readonly string TRAIN_WORDS = "data/test/icwb2-data/gold/msr_training_words.utf8";
     public static String SIGHAN05_ROOT;
 
-    static
+    static MSR()
     {
         SIGHAN05_ROOT = TestUtility.ensureTestData("icwb2-data", "http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip");
         if (!IOUtil.isFileExisted(TRAIN_PATH))

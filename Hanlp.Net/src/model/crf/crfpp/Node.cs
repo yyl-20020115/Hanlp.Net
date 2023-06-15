@@ -15,7 +15,7 @@ public class Node
     public double cost;
     public double bestCost;
     public Node prev;
-    public List<Integer> fVector;
+    public List<int> fVector;
     public List<Path> lpath;
     public List<Path> rpath;
     public static double LOG2 = 0.69314718055;

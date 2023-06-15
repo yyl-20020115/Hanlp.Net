@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg;
+
 namespace com.hankcs.hanlp.tokenizer.lexical;
 
 
@@ -35,7 +37,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment , LexicalAnalyzer
     {
         typeTable = new byte[CharType.type.length];
         System.arraycopy(CharType.type, 0, typeTable, 0, typeTable.length);
-        for (char c : Predefine.CHINESE_NUMBERS.toCharArray())
+        for (char c : Predefine.CHINESE_NUMBERS.ToCharArray())
         {
             typeTable[c] = CharType.CT_CHINESE;
         }
@@ -371,7 +373,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment , LexicalAnalyzer
                     String[] nerArray = recognize(wordArray, posArray);
                     wordList.toArray(wordArray);
                     StringBuilder result = new StringBuilder();
-                    result.append(wordArray[0]);
+                    result.Append(wordArray[0]);
                     if (childrenList != null)
                     {
                         childrenList.add(iterator.next());
@@ -404,7 +406,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment , LexicalAnalyzer
                             }
                             result.setLength(0);
                         }
-                        result.append(wordArray[i]);
+                        result.Append(wordArray[i]);
                         if (childrenList != null)
                         {
                             childrenList.add(iterator.next());
@@ -664,7 +666,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment , LexicalAnalyzer
             for (int j = start; j < end; ++j)
             {
                 if (wordNet[j] == null) continue;
-                sbTerm.append(wordNet[j]);
+                sbTerm.Append(wordNet[j]);
                 wordNet[j] = null;
             }
             wordNet[start] = sbTerm.toString();

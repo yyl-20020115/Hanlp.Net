@@ -269,7 +269,7 @@ public class ByteUtil
 
     /**
      * 无符号整型输出
-     * @param out
+     * @param _out
      * @param uint
      * @
      */

@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.collections;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -26,14 +28,14 @@ public class BagOfWordsDocument : ITermFrequencyHolder
     //     * 文档所属的类表
     //     */
     //    private Catalog catalog;
-    public FrequencyMap<Integer> tfMap;
+    public FrequencyMap<int> tfMap;
 
     public BagOfWordsDocument()
     {
-        tfMap = new FrequencyMap<Integer>();
+        tfMap = new FrequencyMap<int>();
     }
 
-    public FrequencyMap<Integer> getTfMap()
+    public FrequencyMap<int> getTfMap()
     {
         return tfMap;
     }

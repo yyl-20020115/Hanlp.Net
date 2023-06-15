@@ -33,9 +33,9 @@ public class Viterbi
     public static int[] compute(int[] obs, int[] states, double[] start_p, double[][] trans_p, double[][] emit_p)
     {
         int _max_states_value = 0;
-        for (int s : states)
+        foreach (int s in states)
         {
-            _max_states_value = Math.max(_max_states_value, s);
+            _max_states_value = Math.Max(_max_states_value, s);
         }
         ++_max_states_value;
         double[][] V = new double[obs.length][_max_states_value];

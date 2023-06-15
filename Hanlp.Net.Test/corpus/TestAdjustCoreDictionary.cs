@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.corpus;
 public class TestAdjustCoreDictionary : TestCase
 {
 
-//    public static final String DATA_DICTIONARY_CORE_NATURE_DICTIONARY_TXT = HanLP.Config.CoreDictionaryPath;
+//    public static readonly string DATA_DICTIONARY_CORE_NATURE_DICTIONARY_TXT = HanLP.Config.CoreDictionaryPath;
 //
 //    public void testGetCompiledWordFromDictionary() 
 //    {
@@ -44,7 +44,7 @@ public class TestAdjustCoreDictionary : TestCase
 //        {
 //            String word = entry.getKey();
 //            TermFrequency frequency = entry.getValue();
-//            if (word.contains("##"))
+//            if (word.Contains("##"))
 //            {
 //                Console.WriteLine(frequency);
 //            }
@@ -87,9 +87,9 @@ public class TestAdjustCoreDictionary : TestCase
 //        dictionaryMaker.saveTxtTo(DATA_DICTIONARY_CORE_NATURE_DICTIONARY_TXT, new DictionaryMaker.Filter()
 //        {
 //            //@Override
-//            public boolean onSave(Item item)
+//            public bool onSave(Item item)
 //            {
-//                if (item.key.length() == 1 && "0123456789零○〇一二两三四五六七八九十廿百千万亿壹贰叁肆伍陆柒捌玖拾佰仟".indexOf(item.key.charAt(0)) >= 0)
+//                if (item.key.Length() == 1 && "0123456789零○〇一二两三四五六七八九十廿百千万亿壹贰叁肆伍陆柒捌玖拾佰仟".indexOf(item.key.charAt(0)) >= 0)
 //                {
 //                    Console.WriteLine(item);
 //                    return false;

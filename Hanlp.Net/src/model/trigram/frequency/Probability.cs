@@ -19,16 +19,16 @@ namespace com.hankcs.hanlp.model.trigram.frequency;
  */
 public class Probability : ICacheAble
 {
-    public BinTrie<Integer> d;
+    public BinTrie<int> d;
     int total;
 
     public Probability()
     {
-        d = new BinTrie<Integer>(){
+        d = new BinTrie<int>(){
             //@Override
             public bool load(ByteArray byteArray, _ValueArray valueArray)
             {
-                BaseNode<Integer>[] nchild = new BaseNode[child.length - 1];    // 兼容旧模型
+                BaseNode<int>[] nchild = new BaseNode[child.length - 1];    // 兼容旧模型
                 System.arraycopy(child, 0, nchild, 0, nchild.length);
                 child = nchild;
                 return super.load(byteArray, valueArray);
@@ -46,28 +46,28 @@ public class Probability : ICacheAble
         return total;
     }
 
-    Integer get(String key)
+    int get(String key)
     {
         return d.get(key);
     }
 
     public int get(char[]... keyArray)
     {
-        Integer f = get(convert(keyArray));
+        int f = get(convert(keyArray));
         if (f == null) return 0;
         return f;
     }
 
     public int get(char... key)
     {
-        Integer f = d.get(key);
+        int f = d.get(key);
         if (f == null) return 0;
         return f;
     }
 
     public double freq(String key)
     {
-        Integer f = get(key);
+        int f = get(key);
         if (f == null) f = 0;
         return f / (double) total;
     }
@@ -79,7 +79,7 @@ public class Probability : ICacheAble
 
     public double freq(char... keyArray)
     {
-        Integer f = d.get(keyArray);
+        int f = d.get(keyArray);
         if (f == null) f = 0;
         return f / (double) total;
     }
@@ -91,7 +91,7 @@ public class Probability : ICacheAble
 
     void add(String key, int value)
     {
-        Integer f = get(key);
+        int f = get(key);
         if (f == null) f = 0;
         f += value;
         d.put(key, f);
@@ -100,7 +100,7 @@ public class Probability : ICacheAble
 
     void add(int value, char... key)
     {
-        Integer f = d.get(key);
+        int f = d.get(key);
         if (f == null) f = 0;
         f += value;
         d.put(key, f);
@@ -122,8 +122,8 @@ public class Probability : ICacheAble
         StringBuilder sbKey = new StringBuilder(keyArray.size() * 2);
         for (char[] key : keyArray)
         {
-            sbKey.append(key[0]);
-            sbKey.append(key[1]);
+            sbKey.Append(key[0]);
+            sbKey.Append(key[1]);
         }
         return sbKey.toString();
     }
@@ -133,23 +133,23 @@ public class Probability : ICacheAble
         StringBuilder sbKey = new StringBuilder(keyArray.length * 2);
         for (char[] key : keyArray)
         {
-            sbKey.append(key[0]);
-            sbKey.append(key[1]);
+            sbKey.Append(key[0]);
+            sbKey.Append(key[1]);
         }
         return sbKey.toString();
     }
 
     //@Override
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
-        out.writeInt(total);
-        Integer[] valueArray = d.getValueArray(new Integer[0]);
-        out.writeInt(valueArray.length);
-        for (Integer v : valueArray)
+        _out.writeInt(total);
+        int[] valueArray = d.getValueArray(new int[0]);
+        _out.writeInt(valueArray.length);
+        for (int v : valueArray)
         {
-            out.writeInt(v);
+            _out.writeInt(v);
         }
-        d.save(out);
+        d.save(_out);
     }
 
     //@Override
@@ -157,7 +157,7 @@ public class Probability : ICacheAble
     {
         total = byteArray.nextInt();
         int size = byteArray.nextInt();
-        Integer[] valueArray = new Integer[size];
+        int[] valueArray = new int[size];
         for (int i = 0; i < valueArray.length; ++i)
         {
             valueArray[i] = byteArray.nextInt();

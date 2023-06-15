@@ -72,7 +72,7 @@ public class TraditionalChineseTokenizer
     {
         List<List<Term>> resultList = new LinkedList<List<Term>>();
         {
-            for (String sentence : SentencesUtil.toSentenceList(text))
+            foreach (String sentence in SentencesUtil.toSentenceList(text))
             {
                 resultList.add(segment(sentence));
             }

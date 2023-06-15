@@ -85,9 +85,9 @@ public class MDAGMap<V> : AbstractMap<String, V>
      */
     public LinkedList<Entry<String, V>> commonPrefixSearchWithValue(char[] key, int begin)
     {
-        LinkedList<Entry<String, Integer>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
+        LinkedList<Entry<String, int>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
         LinkedList<Entry<String, V>> entryList = new LinkedList<Entry<String, V>>();
-        for (Entry<String, Integer> entry : valueIndex)
+        for (Entry<String, int> entry : valueIndex)
         {
             entryList.add(new SimpleEntry<String, V>(entry.getKey(), valueList.get(entry.getValue())));
         }
@@ -102,7 +102,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
      */
     public LinkedList<Entry<String, V>> commonPrefixSearchWithValue(String key)
     {
-        return commonPrefixSearchWithValue(key.toCharArray(), 0);
+        return commonPrefixSearchWithValue(key.ToCharArray(), 0);
     }
 
     /**
@@ -127,14 +127,14 @@ public class MDAGMap<V> : AbstractMap<String, V>
         {
             if (sourceNode != null)      //if the MDAG hasn't been simplified
             {
-                MDAGNode currentNode = sourceNode.transition(key.toCharArray());
+                MDAGNode currentNode = sourceNode.transition(key.ToCharArray());
                 if (currentNode == null) return -1;
                 return getValueIndex(currentNode);
 
             }
             else
             {
-                SimpleMDAGNode currentNode = simplifiedSourceNode.transition(mdagDataArray, key.toCharArray());
+                SimpleMDAGNode currentNode = simplifiedSourceNode.transition(mdagDataArray, key.ToCharArray());
                 if (currentNode == null) return -1;
                 return getValueIndex(currentNode);
             }
@@ -171,9 +171,9 @@ public class MDAGMap<V> : AbstractMap<String, V>
             return ByteUtil.convertTwoCharToInt(high, low);
         }
 
-        public LinkedList<Entry<String, Integer>> commonPrefixSearchWithValueIndex(char[] key, int begin)
+        public LinkedList<Entry<String, int>> commonPrefixSearchWithValueIndex(char[] key, int begin)
         {
-            LinkedList<Map.Entry<String, Integer>> result = new LinkedList<Map.Entry<String, Integer>>();
+            LinkedList<Map.Entry<String, int>> result = new LinkedList<Map.Entry<String, int>>();
             if (sourceNode != null)
             {
                 int charCount = key.length;
@@ -184,7 +184,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
                     if (currentNode == null) break;
                     {
                         int index = getValueIndex(currentNode);
-                        if (index != -1) result.add(new SimpleEntry<String, Integer>(new String(key, begin, i + 1), index));
+                        if (index != -1) result.add(new SimpleEntry<String, int>(new String(key, begin, i + 1), index));
                     }
                 }
             }
@@ -198,7 +198,7 @@ public class MDAGMap<V> : AbstractMap<String, V>
                     if (currentNode == null) break;
                     {
                         int index = getValueIndex(currentNode);
-                        if (index != -1) result.add(new SimpleEntry<String, Integer>(new String(key, begin, i + 1), index));
+                        if (index != -1) result.add(new SimpleEntry<String, int>(new String(key, begin, i + 1), index));
                     }
                 }
             }

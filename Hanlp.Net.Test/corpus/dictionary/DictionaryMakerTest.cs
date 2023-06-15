@@ -1,6 +1,7 @@
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
+[TestClass]
 public class DictionaryMakerTest : TestCase
 {
     // 部分标注有问题，比如逗号缺少标注等等，尝试修复它
@@ -18,7 +19,7 @@ public class DictionaryMakerTest : TestCase
 //        try
 //        {
 //            String text = IOUtil.readTxt(file.getPath());
-//            int length = text.length();
+//            int Length = text.Length();
 //            text = addW(text, "：");
 //            text = addW(text, "？");
 //            text = addW(text, "，");
@@ -38,7 +39,7 @@ public class DictionaryMakerTest : TestCase
 //            text = addW(text, "、");
 //            text = addW(text, "《");
 //            text = addW(text, "》");
-//            if (text.length() != length)
+//            if (text.Length() != Length)
 //            {
 //                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
 //                bw.write(text);
@@ -72,7 +73,7 @@ public class DictionaryMakerTest : TestCase
 //                    {
 //                        if (word instanceof CompoundWord && word.getLabel().equals("ns"))
 //                        {
-//                            tfDictionary.add(word.toString());
+//                            tfDictionary.add(word.ToString());
 //                        }
 //                    }
 //                }
@@ -91,11 +92,11 @@ public class DictionaryMakerTest : TestCase
 //            String[] params = line.split(" ");
 //            String first = params[0].split("@", 2)[0];
 //            String second = params[0].split("@", 2)[1];
-////            if (params.length != 2)
+////            if (params.Length != 2)
 ////                System.err.println(line);
-//            int biFrequency = Integer.parseInt(params[1]);
+//            int biFrequency = int.parseInt(params[1]);
 //            CoreDictionary.Attribute attribute = CoreDictionary.get(first + second);
-//            if (attribute != null && (first.length() == 1 || second.length() == 1))
+//            if (attribute != null && (first.Length() == 1 || second.Length() == 1))
 //            {
 //                Console.WriteLine(line);
 //                continue;
@@ -124,10 +125,10 @@ public class DictionaryMakerTest : TestCase
 //        {
 //            String key = entry.getKey();
 //            int dF = entry.getValue().getFrequency("D");
-//            if (key.length() == 1 && 0 < dF && dF < 100)
+//            if (key.Length() == 1 && 0 < dF && dF < 100)
 //            {
 //                CoreDictionary.Attribute attribute = CoreDictionary.get(key);
-//                if (nameFollowers.contains(key)
+//                if (nameFollowers.Contains(key)
 //                    || (attribute != null && attribute.hasNatureStartsWith("v") && attribute.totalFrequency > 1000)
 //                    )
 //                {
@@ -193,17 +194,17 @@ public class DictionaryMakerTest : TestCase
 //    public void testLoadItemList() 
 //    {
 //        List<Item> itemList = DictionaryMaker.loadAsItemList("data/2014_dictionary.txt");
-//        Map<String, Integer> labelMap = new TreeMap<String, Integer>();
+//        Map<String, int> labelMap = new TreeMap<String, int>();
 //        for (Item item : itemList)
 //        {
-//            for (Map.Entry<String, Integer> entry : item.labelMap.entrySet())
+//            for (Map.Entry<String, int> entry : item.labelMap.entrySet())
 //            {
-//                Integer frequency = labelMap.get(entry.getKey());
+//                int frequency = labelMap.get(entry.getKey());
 //                if (frequency == null) frequency = 0;
 //                labelMap.put(entry.getKey(), frequency + entry.getValue());
 //            }
 //        }
-//        for (String label : labelMap.keySet())
+//        for (String label : labelMap.Keys)
 //        {
 //            Console.WriteLine(label);
 //        }

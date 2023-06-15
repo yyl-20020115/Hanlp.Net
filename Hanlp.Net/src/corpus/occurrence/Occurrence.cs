@@ -253,7 +253,7 @@ public class Occurrence
 
     public void addAll(List<Term> resultList)
     {
-//        System.out.println(resultList);
+//        System._out.println(resultList);
         String[] termList = new String[resultList.size()];
         int i = 0;
         for (Term word : resultList)
@@ -275,12 +275,12 @@ public class Occurrence
         final StringBuilder sb = new StringBuilder("二阶共现：\n");
         for (Map.Entry<String, PairFrequency> entry : triePair.entrySet())
         {
-            sb.append(entry.getValue()).append('\n');
+            sb.Append(entry.getValue()).Append('\n');
         }
-        sb.append("三阶共现：\n");
+        sb.Append("三阶共现：\n");
         for (Map.Entry<String, TriaFrequency> entry : trieTria.entrySet())
         {
-            sb.append(entry.getValue()).append('\n');
+            sb.Append(entry.getValue()).Append('\n');
         }
         return sb.toString();
     }
@@ -414,7 +414,7 @@ public class Occurrence
 //                                  "另外数据挖掘、互联网搜索算法也成为当今的热门方向。\n" +
 //                                  "算法工程师逐渐往人工智能方向发展。");
 //        occurrence.compute();
-//        System.out.println(occurrence);
-//        System.out.println(occurrence.getPhraseByScore());
+//        System._out.println(occurrence);
+//        System._out.println(occurrence.getPhraseByScore());
 //    }
 }

@@ -28,7 +28,7 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
     /**
      * 储存
      */
-    protected Map<T, Set<String>> storage;
+    protected Dictionary<T, Set<String>> storage;
     /**
      * 权重
      */
@@ -67,7 +67,7 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
     protected abstract T generateKey(String sentence);
 
     //@Override
-    public Map<String, Double> computeScore(String outerSentence)
+    public Dictionary<String, Double> computeScore(String outerSentence)
     {
         TreeMap<String, Double> result = new TreeMap<String, Double>(Collections.reverseOrder());
         T keyOuter = generateKey(outerSentence);

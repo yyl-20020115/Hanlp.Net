@@ -2,12 +2,14 @@ namespace com.hankcs.hanlp.collection.dartsclone;
 
 
 
+[TestClass]
 public class DartMapTest : TestCase
 {
-    Set<String> validKeySet;
-    Set<String> invalidKeySet;
-    private DartMap<Integer> dartMap;
+    HashSet<String> validKeySet;
+    HashSet<String> invalidKeySet;
+    private DartMap<int> dartMap;
 
+    [TestInitialize]
     public void setUp() 
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.ngram.txt");
@@ -16,13 +18,14 @@ public class DartMapTest : TestCase
         {
             validKeySet.add(iterator.next().split("\\s")[0]);
         }
-        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+        TreeMap<String, int> map = new TreeMap<String, int>();
         for (String key : validKeySet)
         {
-            map.put(key, key.length());
+            map.put(key, key.Length());
         }
-        dartMap = new DartMap<Integer>(map);
+        dartMap = new DartMap<int>(map);
     }
+    [TestMethod]
 
     public void testGenerateInvalidKeySet() 
     {
@@ -30,27 +33,29 @@ public class DartMapTest : TestCase
         Random random = new Random(System.currentTimeMillis());
         while (invalidKeySet.size() < validKeySet.size())
         {
-            int length = random.nextInt(10) + 1;
-            StringBuilder key = new StringBuilder(length);
-            for (int i = 0; i < length; ++i)
+            int Length = random.nextInt(10) + 1;
+            StringBuilder key = new StringBuilder(Length);
+            for (int i = 0; i < Length; ++i)
             {
                 key.append(random.nextInt(Character.MAX_VALUE));
             }
-            if (validKeySet.contains(key.toString())) continue;
-            invalidKeySet.add(key.toString());
+            if (validKeySet.Contains(key.ToString())) continue;
+            invalidKeySet.add(key.ToString());
         }
     }
+    [TestMethod]
 
     public void testBuild() 
     {
     }
+    [TestMethod]
 
     public void testContainsAndNoteContains() 
     {
         testBuild();
         for (String key : validKeySet)
         {
-            assertEquals(key.length(), (int)dartMap.get(key));
+            assertEquals(key.Length(), (int)dartMap.get(key));
         }
 
         testGenerateInvalidKeySet();
@@ -73,11 +78,11 @@ public class DartMapTest : TestCase
 //        {
 //
 //        }
-//        DoubleArrayTrie<Integer> trie = new DoubleArrayTrie<Integer>();
-//        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+//        DoubleArrayTrie<int> trie = new DoubleArrayTrie<int>();
+//        TreeMap<String, int> map = new TreeMap<String, int>();
 //        for (String key : validKeySet)
 //        {
-//            map.put(key, key.length());
+//            map.put(key, key.Length());
 //        }
 //        trie.build(map);
 //
@@ -85,25 +90,25 @@ public class DartMapTest : TestCase
 //        start = System.currentTimeMillis();
 //        for (String key : validKeySet)
 //        {
-//            assertEquals(key.length(), (int)map.get(key));
+//            assertEquals(key.Length(), (int)map.get(key));
 //        }
-//        System.out.printf("TreeMap: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("TreeMap: %d ms\n", System.currentTimeMillis() - start);
 //        map = null;
 //        // DAT
 //        start = System.currentTimeMillis();
 //        for (String key : validKeySet)
 //        {
-//            assertEquals(key.length(), (int)trie.get(key));
+//            assertEquals(key.Length(), (int)trie.get(key));
 //        }
-//        System.out.printf("DAT: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("DAT: %d ms\n", System.currentTimeMillis() - start);
 //        trie = null;
 //        // DAWG
 //        start = System.currentTimeMillis();
 //        for (String key : validKeySet)
 //        {
-//            assertEquals(key.length(), (int)dartMap.get(key));
+//            assertEquals(key.Length(), (int)dartMap.get(key));
 //        }
-//        System.out.printf("DAWG: %d ms\n", System.currentTimeMillis() - start);
+//        Console.printf("DAWG: %d ms\n", System.currentTimeMillis() - start);
 //
 //        /**
 //         * result:

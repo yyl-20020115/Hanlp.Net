@@ -37,7 +37,7 @@ public class SimplifiedChineseDictionary : BaseChineseDictionary
 
     public static String convertToTraditionalChinese(String simplifiedChineseString)
     {
-        return segLongest(simplifiedChineseString.toCharArray(), trie);
+        return segLongest(simplifiedChineseString.ToCharArray(), trie);
     }
 
     public static String convertToTraditionalChinese(char[] simplifiedChinese)

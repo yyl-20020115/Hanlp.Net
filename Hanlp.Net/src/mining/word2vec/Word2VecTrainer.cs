@@ -9,15 +9,15 @@ namespace com.hankcs.hanlp.mining.word2vec;
  */
 public class Word2VecTrainer
 {
-    private Integer layerSize = 200;
-    private Integer windowSize = 5;
-    private Integer numThreads = Runtime.getRuntime().availableProcessors();
+    private int layerSize = 200;
+    private int windowSize = 5;
+    private int numThreads = Runtime.getRuntime().availableProcessors();
     private int negativeSamples = 25;
     private bool useHierarchicalSoftmax;
-    private Integer minFrequency = 5;
+    private int minFrequency = 5;
     private Float initialLearningRate;
     private float downSampleRate = 0.0001f;
-    private Integer iterations = 15;
+    private int iterations = 15;
     private NeuralNetworkType type = NeuralNetworkType.CBOW;
     private TrainingCallback callback;
 
@@ -185,26 +185,26 @@ public class Word2VecTrainer
 //            {
 //                public void corpusLoading(float percent)
 //                {
-//                    System.out.printf("\r加载训练语料：%.2f%%", percent);
+//                    System._out.printf("\r加载训练语料：%.2f%%", percent);
 //                }
 //
 //                public void corpusLoaded(int vocWords, int trainWords, int totalWords)
 //                {
-//                    System.out.println();
-//                    System.out.printf("词表大小：%d\n", vocWords);
-//                    System.out.printf("训练词数：%d\n", trainWords);
-//                    System.out.printf("语料词数：%d\n", totalWords);
+//                    System._out.println();
+//                    System._out.printf("词表大小：%d\n", vocWords);
+//                    System._out.printf("训练词数：%d\n", trainWords);
+//                    System._out.printf("语料词数：%d\n", totalWords);
 //                }
 //
 //                public void training(float alpha, float progress)
 //                {
-//                    System.out.printf("\r学习率：%.6f  进度：%.2f%%", alpha, progress);
+//                    System._out.printf("\r学习率：%.6f  进度：%.2f%%", alpha, progress);
 //                    long timeNow = System.currentTimeMillis();
 //                    long costTime = timeNow - timeStart + 1;
 //                    progress /= 100;
 //                    String etd = Utility.humanTime((long) (costTime / progress * (1.f - progress)));
-//                    if (etd.length() > 0) System.out.printf("  剩余时间：%s", etd);
-//                    System.out.flush();
+//                    if (etd.length() > 0) System._out.printf("  剩余时间：%s", etd);
+//                    System._out.flush();
 //                }
 //            };
 //        }
@@ -213,8 +213,8 @@ public class Word2VecTrainer
         try
         {
             model.trainModel();
-            System.out.println();
-            System.out.printf("训练结束，一共耗时：%s\n", Utility.humanTime(System.currentTimeMillis() - timeStart));
+            System._out.println();
+            System._out.printf("训练结束，一共耗时：%s\n", Utility.humanTime(System.currentTimeMillis() - timeStart));
             return new WordVectorModel(modelFileName);
         }
         catch (IOException e)

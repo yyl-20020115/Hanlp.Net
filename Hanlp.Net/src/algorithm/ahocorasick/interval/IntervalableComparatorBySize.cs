@@ -7,8 +7,7 @@ using System.Collections.Generic;
  */
 public class IntervalableComparatorBySize : IComparer<Intervalable>
 {
-    //@Override
-    public int Compare(Intervalable intervalable, Intervalable intervalable2)
+    public int Compare(Intervalable? intervalable, Intervalable? intervalable2)
     {
         int comparison = intervalable2.size() - intervalable.size();
         if (comparison == 0)

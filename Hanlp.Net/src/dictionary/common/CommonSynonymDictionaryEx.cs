@@ -116,9 +116,9 @@ public class CommonSynonymDictionaryEx
         /**
          * 条目的value，是key的同义词近义词列表
          */
-        public Map<String, Synonym> synonymMap;
+        public Dictionary<String, Synonym> synonymMap;
 
-        public SynonymItem(Synonym entry, Map<String, Synonym> synonymMap)
+        public SynonymItem(Synonym entry, Dictionary<String, Synonym> synonymMap)
         {
             super(entry.realWord, entry.id, entry.type);
             this.synonymMap = synonymMap;
@@ -128,9 +128,9 @@ public class CommonSynonymDictionaryEx
         public String toString()
         {
             final StringBuilder sb = new StringBuilder();
-            sb.append(super.toString());
-            sb.append(' ');
-            sb.append(synonymMap);
+            sb.Append(super.toString());
+            sb.Append(' ');
+            sb.Append(synonymMap);
             return sb.toString();
         }
     }

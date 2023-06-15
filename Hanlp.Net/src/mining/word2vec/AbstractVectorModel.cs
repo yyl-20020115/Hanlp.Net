@@ -19,9 +19,9 @@ namespace com.hankcs.hanlp.mining.word2vec;
  */
 public abstract class AbstractVectorModel<K>
 {
-    Map<K, Vector> storage;
+    Dictionary<K, Vector> storage;
 
-    public AbstractVectorModel(Map<K, Vector> storage)
+    public AbstractVectorModel(Dictionary<K, Vector> storage)
     {
         this.storage = storage;
     }

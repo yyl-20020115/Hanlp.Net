@@ -76,13 +76,13 @@ public class Graph
     public String printByTo()
     {
         StringBuffer sb = new StringBuffer();
-        sb.append("========按终点打印========\n");
+        sb.Append("========按终点打印========\n");
         for (int to = 0; to < edgesTo.length; ++to)
         {
             List<EdgeFrom> edgeFromList = edgesTo[to];
             for (EdgeFrom edgeFrom : edgeFromList)
             {
-                sb.append(String.format("to:%3d, from:%3d, weight:%05.2f, word:%s\n", to, edgeFrom.from, edgeFrom.weight, edgeFrom.name));
+                sb.Append(String.format("to:%3d, from:%3d, weight:%05.2f, word:%s\n", to, edgeFrom.from, edgeFrom.weight, edgeFrom.name));
             }
         }
 
@@ -121,7 +121,7 @@ public class Graph
         for (int i = 1; i < path.size() - 1; ++i)
         {
             Vertex v = path.get(i);
-            sb.append(v.getRealWord() + " ");
+            sb.Append(v.getRealWord() + " ");
         }
 
         return sb.toString();

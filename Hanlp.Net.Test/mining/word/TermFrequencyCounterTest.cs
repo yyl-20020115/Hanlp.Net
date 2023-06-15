@@ -1,8 +1,11 @@
 namespace com.hankcs.hanlp.mining.word;
 
+[TestClass]
 
 public class TermFrequencyCounterTest : TestCase
 {
+    [TestMethod]
+
     public void testGetKeywords() 
     {
         TermFrequencyCounter counter = new TermFrequencyCounter();

@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.seg;
 
 
@@ -15,18 +17,19 @@ namespace com.hankcs.hanlp.seg;
 /**
  * @author hankcs
  */
+[TestClass]
 public class SegmentTestCase : TestCase
 {
-    @SuppressWarnings("deprecation")
+    
     public static void assertNoNature(List<Term> termList, Nature nature)
     {
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
-            Assert.assertNotSame(nature, term.nature);
+            Assert.AreNotSame(nature, term.nature);
         }
     }
 
-    @SuppressWarnings("deprecation")
+    
     public static void assertSegmentationHas(List<Term> termList, String part)
     {
         StringBuilder sbSentence = new StringBuilder();
@@ -34,7 +37,7 @@ public class SegmentTestCase : TestCase
         {
             sbSentence.append(term.word);
         }
-        assertFalse(sbSentence.toString().contains(part));
+        assertFalse(sbSentence.ToString().Contains(part));
     }
 
 }

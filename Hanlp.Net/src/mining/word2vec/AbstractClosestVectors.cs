@@ -15,7 +15,7 @@ public abstract class AbstractClosestVectors
 
     protected String[] nextWords(int n, String msg)
     {
-        System.out.println(msg + " ('q' to break): ");
+        System._out.println(msg + " ('q' to break): ");
         String[] words = new String[n];
 
         for (int i = 0; i < n; i++)
@@ -79,9 +79,9 @@ public abstract class AbstractClosestVectors
                     }
                 }
 
-                System.out.printf("\n                                              Word       Cosine cosine\n------------------------------------------------------------------------\n");
+                System._out.printf("\n                                              Word       Cosine cosine\n------------------------------------------------------------------------\n");
                 for (int j = 0; j < N; j++)
-                    System.out.printf("%50s\t\t%f\n", bestw[j], bestd[j]);
+                    System._out.printf("%50s\t\t%f\n", bestw[j], bestd[j]);
             }
         }
         finally

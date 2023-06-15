@@ -49,7 +49,7 @@ public class NewWordDiscover
     public List<WordInfo> discover(BufferedReader reader, int size) 
     {
         String doc;
-        Map<String, WordInfo> word_cands = new TreeMap<String, WordInfo>();
+        Dictionary<String, WordInfo> word_cands = new TreeMap<String, WordInfo>();
         int totalLength = 0;
         Pattern delimiter = Pattern.compile("[\\s\\d,.<>/?:;'\"\\[\\]{}()\\|~!@#$%^&*\\-_=+，。《》、？：；“”‘’｛｝【】（）…￥！—┄－]+");
         while ((doc = reader.readLine()) != null)

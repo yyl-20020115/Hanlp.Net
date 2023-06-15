@@ -26,7 +26,7 @@ public class NShortSegment : WordBasedSegment
     {
         WordNet wordNetOptimum = new WordNet(sentence);
         WordNet wordNetAll = new WordNet(sentence);
-//        char[] charArray = text.toCharArray();
+//        char[] charArray = text.ToCharArray();
         // 粗分
         List<List<Vertex>> coarseResult = biSegment(sentence, 2, wordNetOptimum, wordNetAll);
         bool NERexists = false;
@@ -34,7 +34,7 @@ public class NShortSegment : WordBasedSegment
         {
             if (HanLP.Config.DEBUG)
             {
-                System.out.println("粗分结果" + convert(vertexList, false));
+                System._out.println("粗分结果" + convert(vertexList, false));
             }
             // 实体命名识别
             if (config.ner)
@@ -78,8 +78,8 @@ public class NShortSegment : WordBasedSegment
             vertexList = Dijkstra.compute(graph);
             if (HanLP.Config.DEBUG)
             {
-                System.out.printf("细分词网：\n%s\n", wordNetOptimum);
-                System.out.printf("细分词图：%s\n", graph.printByTo());
+                System._out.printf("细分词网：\n%s\n", wordNetOptimum);
+                System._out.printf("细分词图：%s\n", graph.printByTo());
             }
         }
 
@@ -131,7 +131,7 @@ public class NShortSegment : WordBasedSegment
 //        logger.trace(graph.toString());
         if (HanLP.Config.DEBUG)
         {
-            System.out.printf("打印词图：%s\n", graph.printByTo());
+            System._out.printf("打印词图：%s\n", graph.printByTo());
         }
         ///////////////N-最短路径////////////////////
         NShortPath nShortPath = new NShortPath(graph, nKind);

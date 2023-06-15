@@ -15,6 +15,7 @@ namespace com.hankcs.hanlp.corpus;
 /**
  * @author hankcs
  */
+[TestClass]
 public class ZZGenerateNature : TestCase
 {
 //    public void testGenerate() 
@@ -151,8 +152,8 @@ public class ZZGenerateNature : TestCase
 //        for (String p : params)
 //        {
 //            p = p.trim();
-//            if (p.length() == 0) continue;
-//            System.out.print(++i + " ");
+//            if (p.Length() == 0) continue;
+//            Console.print(++i + " ");
 //            Console.WriteLine(p);
 ////            int cut = p.indexOf(' ');
 ////            Console.WriteLine("/**\n" +
@@ -164,6 +165,6 @@ public class ZZGenerateNature : TestCase
 //
 //    public void testSize() 
 //    {
-//            Console.WriteLine(Nature.values().length);
+//            Console.WriteLine(Nature.values().Length);
 //    }
 }

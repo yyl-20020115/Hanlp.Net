@@ -8,7 +8,7 @@ public class TestNRDcitionaryMaker
     public static void main(String[] args)
     {
         EasyDictionary dictionary = EasyDictionary.create("data/dictionary/2014_dictionary.txt");
-        final NRDictionaryMaker nrDictionaryMaker = new NRDictionaryMaker(dictionary);
+        NRDictionaryMaker nrDictionaryMaker = new NRDictionaryMaker(dictionary);
         CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", new CorpusLoader.Handler()
         {
             //@Override

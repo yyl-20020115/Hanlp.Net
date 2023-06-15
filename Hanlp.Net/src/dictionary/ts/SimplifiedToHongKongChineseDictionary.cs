@@ -43,7 +43,7 @@ public class SimplifiedToHongKongChineseDictionary : BaseChineseDictionary
 
     public static String convertToTraditionalHongKongChinese(String simplifiedChineseString)
     {
-        return segLongest(simplifiedChineseString.toCharArray(), trie);
+        return segLongest(simplifiedChineseString.ToCharArray(), trie);
     }
 
     public static String convertToTraditionalHongKongChinese(char[] simplifiedChinese)

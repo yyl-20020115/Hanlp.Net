@@ -1,42 +1,49 @@
+using static com.hankcs.hanlp.collection.AhoCorasick.AhoCorasickDoubleArrayTrie<V>;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace com.hankcs.hanlp.collection.trie.bintrie;
 
 
 
+[TestClass]
 public class BinTrieTest : TestCase
 {
     static String DATA_TEST_OUT_BIN;
     private File tempFile;
 
-    //@Override
-    public void setUp() 
+    [TestInitialize]
+    public void setUp()
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
     }
-
-    public void testParseText() 
+    [TestMethod]
+    public void testParseText()
     {
         BinTrie<String> trie = new BinTrie<String>();
-        String[] keys = new String[]{"he", "her", "his"};
+        String[] keys = new String[] { "he", "her", "his" };
         for (String key : keys)
         {
             trie.put(key, key);
         }
-        final String text = " her4he7his ";
-        AhoCorasickDoubleArrayTrie.IHit<String> processor = new AhoCorasickDoubleArrayTrie.IHit<String>()
-        {
-            //@Override
-            public void hit(int begin, int end, String value)
-            {
-//                System.out.printf("[%d, %d)=%s\n", begin, end, value);
-                assertEquals(value, text.substring(begin, end));
-            }
-        };
-//        trie.parseLongestText(text, processor);
+        String text = " her4he7his ";
+        IHit<String> processor = new TestHit() { text = text };
+        //        trie.parseLongestText(text, processor);
         trie.parseText(text, processor);
     }
+    public class TestHit : IHit<String>
+    {
+        public string text;
+        //@Override
+        public void hit(int begin, int end, String value)
+        {
+            //                Console.printf("[%d, %d)=%s\n", begin, end, value);
+            assertEquals(value, text.substring(begin, end));
+        }
+    }
+    [TestMethod]
 
-    public void testPut() 
+    public void testPut()
     {
         BinTrie<Boolean> trie = new BinTrie<Boolean>();
         trie.put("加入", true);
@@ -44,16 +51,17 @@ public class BinTrieTest : TestCase
 
         assertEquals(new Boolean(false), trie.get("加入"));
     }
+    [TestMethod]
 
-    public void testArrayIndexOutOfBoundsException() 
+    public void testArrayIndexOutOfBoundsException()
     {
         BinTrie<Boolean> trie = new BinTrie<Boolean>();
-        trie.put(new char[]{'\uffff'}, true);
+        trie.put(new char[] { '\uffff' }, true);
     }
 
-    public void testSaveAndLoad() 
+    public void testSaveAndLoad()
     {
-        BinTrie<Integer> trie = new BinTrie<Integer>();
+        BinTrie<int> trie = new BinTrie<int>();
         trie.put("haha", 0);
         trie.put("hankcs", 1);
         trie.put("hello", 2);
@@ -61,25 +69,25 @@ public class BinTrieTest : TestCase
         trie.put("zb", 4);
         trie.put("zzz", 5);
         assertTrue(trie.save(DATA_TEST_OUT_BIN));
-        trie = new BinTrie<Integer>();
-        Integer[] value = new Integer[100];
-        for (int i = 0; i < value.length; ++i)
+        trie = new BinTrie<int>();
+        int[] value = new int[100];
+        for (int i = 0; i < value.Length; ++i)
         {
             value[i] = i;
         }
         assertTrue(trie.load(DATA_TEST_OUT_BIN, value));
-        Set<Map.Entry<String, Integer>> entrySet = trie.entrySet();
-        assertEquals("[haha=0, hankcs=1, hello=2, za=3, zb=4, zzz=5]", entrySet.toString());
+        Set<Map.Entry<String, int>> entrySet = trie.entrySet();
+        assertEquals("[haha=0, hankcs=1, hello=2, za=3, zb=4, zzz=5]", entrySet.ToString());
     }
 
-//    public void testCustomDictionary() 
-//    {
-//        HanLP.Config.enableDebug(true);
-//        Console.WriteLine(CustomDictionary.get("龟兔赛跑"));
-//    }
-//
-//    public void testSortCustomDictionary() 
-//    {
-//        DictionaryUtil.sortDictionary(HanLP.Config.CustomDictionaryPath[0]);
-//    }
+    //    public void testCustomDictionary() 
+    //    {
+    //        HanLP.Config.enableDebug(true);
+    //        Console.WriteLine(CustomDictionary.get("龟兔赛跑"));
+    //    }
+    //
+    //    public void testSortCustomDictionary() 
+    //    {
+    //        DictionaryUtil.sortDictionary(HanLP.Config.CustomDictionaryPath[0]);
+    //    }
 }

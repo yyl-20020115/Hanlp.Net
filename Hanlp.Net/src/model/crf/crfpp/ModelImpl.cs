@@ -39,9 +39,9 @@ public class ModelImpl : Model
         @Argument(description = "set FILE for model file", alias = "m", required = true)
         String model;
         @Argument(description = "output n-best results", alias = "n")
-        Integer nbest = 0;
+        int nbest = 0;
         @Argument(description = "set INT for verbose level", alias = "v")
-        Integer verbose = 0;
+        int verbose = 0;
         @Argument(description = "set cost factor", alias = "c")
         Double cost_factor = 1.0;
     }

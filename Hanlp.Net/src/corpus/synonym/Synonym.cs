@@ -115,24 +115,24 @@ public class Synonym : ISynonym
     public String toString()
     {
         final StringBuilder sb = new StringBuilder();
-        sb.append(realWord);
+        sb.Append(realWord);
         switch (type)
         {
 
             case EQUAL:
-                sb.append('=');
+                sb.Append('=');
                 break;
             case LIKE:
-                sb.append('#');
+                sb.Append('#');
                 break;
             case SINGLE:
-                sb.append('@');
+                sb.Append('@');
                 break;
             case UNDEFINED:
-                sb.append('?');
+                sb.Append('?');
                 break;
         }
-        sb.append(getIdString());
+        sb.Append(getIdString());
         return sb.toString();
     }
 

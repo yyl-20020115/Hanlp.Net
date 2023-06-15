@@ -88,7 +88,7 @@ public class NeuralNetworkClassifier
     /**
      * 将某个特征映射到预计算的矩阵的某一个列号
      */
-    Map<Integer, Integer> precomputation_id_encoder;
+    Dictionary<int, int> precomputation_id_encoder;
 
     bool initialized;
 
@@ -98,7 +98,7 @@ public class NeuralNetworkClassifier
             int _nr_feature_types,
             final LearnOption opt,
             final List<List<Double>> embeddings,
-            final List<Integer> precomputed_features
+            final List<int> precomputed_features
     )
     {
         if (initialized)
@@ -154,7 +154,7 @@ public class NeuralNetworkClassifier
         grad_E = Matrix.zero(E.rows(), E.cols());
 
         // Initialized the precomputed features
-        Map<Integer, Integer> encoder = precomputation_id_encoder;
+        Dictionary<int, int> encoder = precomputation_id_encoder;
         int rank = 0;
 
         for (int i = 0; i < precomputed_features.size(); ++i)
@@ -193,7 +193,7 @@ public class NeuralNetworkClassifier
             Matrix _E,
             Matrix _b1,
             Matrix _saved,
-            Map<Integer, Integer> encoder)
+            Dictionary<int, int> encoder)
 
     {
         initialized = false;
@@ -215,10 +215,10 @@ public class NeuralNetworkClassifier
      * @param attributes 属性
      * @param retval 返回各个类别的得分
      */
-    void score(final List<Integer> attributes,
+    void score(final List<int> attributes,
                List<Double> retval)
     {
-        Map <Integer,Integer >   encoder = precomputation_id_encoder;
+        Map <int,int >   encoder = precomputation_id_encoder;
         // arma.vec hidden_layer = arma.zeros<arma.vec>(hidden_layer_size);
         Matrix hidden_layer = Matrix.zero(hidden_layer_size, 1);
 
@@ -226,7 +226,7 @@ public class NeuralNetworkClassifier
         {
             int aid = attributes.get(i);
             int fid = aid * nr_feature_types + i;
-            Integer rep = encoder.get(fid);
+            int rep = encoder.get(fid);
             if (rep != null)
             {
                 hidden_layer.plusEquals(saved.col(rep));
@@ -261,7 +261,7 @@ public class NeuralNetworkClassifier
 //        }
 //
 //        // precomputing
-//        Set<Integer> precomputed_features = new TreeSet<Integer>();
+//        Set<int> precomputed_features = new TreeSet<int>();
 //        get_precomputed_features(begin, end, precomputed_features);
 //        precomputing(precomputed_features);
 //
@@ -306,7 +306,7 @@ public class NeuralNetworkClassifier
 //    void get_precomputed_features(
 //            int begin,
 //            int end,
-//            Set<Integer> retval)
+//            Set<int> retval)
 //    {
 //        final std.unordered_map <int,int >   encoder = precomputation_id_encoder;
 //        for (List < Sample >.final_iterator sample = begin;
@@ -325,7 +325,7 @@ public class NeuralNetworkClassifier
 //        // (double)retval.size() / encoder.size() * 100);
 //    }
 
-//    void precomputing(Set<Integer> precomputed_features)
+//    void precomputing(Set<int> precomputed_features)
 //    {
 //        final std.unordered_map <int,int >   encoder = precomputation_id_encoder;
 //        std.unordered_set <int>features;
@@ -469,7 +469,7 @@ public class NeuralNetworkClassifier
 //    }
 
 //    void compute_saved_gradient(
-//            final Set<Integer> features)
+//            final Set<int> features)
 //    {
 //        std.unordered_map <int,int >   encoder = precomputation_id_encoder;
 //        for (std.unordered_set <int>.final_iterator rep = features.begin();

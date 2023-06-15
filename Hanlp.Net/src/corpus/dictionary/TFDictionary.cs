@@ -35,13 +35,13 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     protected Map.Entry<String, TermFrequency> onGenerateEntry(String line)
     {
         String[] param = line.split(delimeter);
-        return new AbstractMap.SimpleEntry<String, TermFrequency>(param[0], new TermFrequency(param[0], Integer.valueOf(param[1])));
+        return new AbstractMap.SimpleEntry<String, TermFrequency>(param[0], new TermFrequency(param[0], int.valueOf(param[1])));
     }
 
     /**
      * 合并自己（主词典）和某个词频词典
      * @param dictionary 某个词频词典
-     * @param limit 如果该词频词典试图引入一个词语，其词频不得超过此limit（如果不需要使用limit功能，可以传入Integer.MAX_VALUE）
+     * @param limit 如果该词频词典试图引入一个词语，其词频不得超过此limit（如果不需要使用limit功能，可以传入int.MAX_VALUE）
      * @param add 设为true则是词频叠加模式，否则是词频覆盖模式
      * @return 词条的增量
      */

@@ -1,7 +1,7 @@
 namespace com.hankcs.hanlp.model.crf;
 
 
-
+[TestClass]
 public class CRFModelTest : TestCase
 {
 //    public void testTemplate() 
@@ -18,11 +18,11 @@ public class CRFModelTest : TestCase
 
 //    public void testTestLoadTemplate() 
 //    {
-//        DataOutputStream out = new DataOutputStream(new FileOutputStream("data/test/out.bin"));
+//        DataOutputStream _out = new DataOutputStream(new FileOutputStream("data/test/_out.bin"));
 //        FeatureTemplate featureTemplate = FeatureTemplate.create("U05:%x[-2,0]/%x[-1,0]/%x[0,0]");
-//        featureTemplate.save(out);
+//        featureTemplate.save(_out);
 //        featureTemplate = new FeatureTemplate();
-//        featureTemplate.load(ByteArray.createByteArray("data/test/out.bin"));
+//        featureTemplate.load(ByteArray.createByteArray("data/test/_out.bin"));
 //        Console.WriteLine(featureTemplate);
 //    }
 
@@ -78,7 +78,7 @@ public class CRFModelTest : TestCase
 //                                              {
 //                                                  word = compiledString;
 //                                              }
-//                                              if (word.length() == 1 || compiledString != null)
+//                                              if (word.Length() == 1 || compiledString != null)
 //                                              {
 //                                                  bw.write(word);
 //                                                  bw.write('\t');
@@ -91,14 +91,14 @@ public class CRFModelTest : TestCase
 //                                                  bw.write('\t');
 //                                                  bw.write('B');
 //                                                  bw.write('\n');
-//                                                  for (int i = 1; i < word.length() - 1; ++i)
+//                                                  for (int i = 1; i < word.Length() - 1; ++i)
 //                                                  {
 //                                                      bw.write(word.charAt(i));
 //                                                      bw.write('\t');
 //                                                      bw.write('M');
 //                                                      bw.write('\n');
 //                                                  }
-//                                                  bw.write(word.charAt(word.length() - 1));
+//                                                  bw.write(word.charAt(word.Length() - 1));
 //                                                  bw.write('\t');
 //                                                  bw.write('E');
 //                                                  bw.write('\n');
@@ -121,7 +121,7 @@ public class CRFModelTest : TestCase
 //    public void testEnglishAndNumber() 
 //    {
 //        String text = "2.34米";
-////        Console.WriteLine(CRFSegment.atomSegment(text.toCharArray()));
+////        Console.WriteLine(CRFSegment.atomSegment(text.ToCharArray()));
 //        HanLP.Config.enableDebug();
 //        CRFSegment segment = new CRFSegment();
 //        Console.WriteLine(segment.seg(text));
@@ -143,8 +143,8 @@ public class CRFModelTest : TestCase
 
         Table table = new Table();
         String text = "人民生活进一步改善了";
-        table.v = new String[text.length()][2];
-        for (int i = 0; i < text.length(); i++)
+        table.v = new String[text.Length()][2];
+        for (int i = 0; i < text.Length(); i++)
         {
             table.v[i][0] = String.valueOf(text.charAt(i));
         }
@@ -163,10 +163,10 @@ public class CRFModelTest : TestCase
 //        int preLength = 0;
 //        while ((line = br.readLine()) != null)
 //        {
-//            if (preLength == 0 && line.length() == 0) continue;
+//            if (preLength == 0 && line.Length() == 0) continue;
 //            bw.write(line);
 //            bw.newLine();
-//            preLength = line.length();
+//            preLength = line.Length();
 //        }
 //        bw.close();
 //    }

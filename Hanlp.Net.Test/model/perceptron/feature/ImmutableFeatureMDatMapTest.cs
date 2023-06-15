@@ -1,15 +1,17 @@
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
+[TestClass]
 
 public class ImmutableFeatureMDatMapTest : TestCase
 {
+    [TestMethod]
     public void testCompress() 
     {
         LinearModel model = new LinearModel(HanLP.Config.PerceptronCWSModelPath);
         model.compress(0.1);
     }
-
+    [TestMethod]
     public void testFeatureMap() 
     {
         LinearModel model = new LinearModel(HanLP.Config.PerceptronCWSModelPath);
@@ -18,8 +20,8 @@ public class ImmutableFeatureMDatMapTest : TestCase
         Console.WriteLine(featureMap.size());
         Console.WriteLine(featureMap.entrySet().size());
         Console.WriteLine(featureMap.idOf("\u0001/\u00014"));
-        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
-        for (Map.Entry<String, Integer> entry : dat.entrySet())
+        TreeMap<String, int> map = new TreeMap<String, int>();
+        for (Map.Entry<String, int> entry : dat.entrySet())
         {
             map.put(entry.getKey(), entry.getValue());
             assertEquals(entry.getValue().intValue(), dat.get(entry.getKey()));

@@ -36,12 +36,12 @@ public class TaggerImpl : Tagger
     FeatureIndex feature_index_;
     List<List<String>> x_;
     List<List<Node>> node_;
-    List<Integer> answer_;
-    List<Integer> result_;
+    List<int> answer_;
+    List<int> result_;
     String lastError;
     PriorityQueue<QueueElement> agenda_;
     List<List<Double>> penalty_;
-    List<List<Integer>> featureCache_;
+    List<List<int>> featureCache_;
 
     public TaggerImpl(Mode mode)
     {
@@ -56,11 +56,11 @@ public class TaggerImpl : Tagger
         feature_index_ = null;
         x_ = new ArrayList<List<String>>();
         node_ = new ArrayList<List<Node>>();
-        answer_ = new ArrayList<Integer>();
-        result_ = new ArrayList<Integer>();
+        answer_ = new ArrayList<int>();
+        result_ = new ArrayList<int>();
         agenda_ = null;
         penalty_ = new ArrayList<List<Double>>();
-        featureCache_ = new ArrayList<List<Integer>>();
+        featureCache_ = new ArrayList<List<int>>();
     }
 
     public void clearNodes()
@@ -274,7 +274,7 @@ public class TaggerImpl : Tagger
         }
         for (int i = 0; i < x_.size(); i++)
         {
-            List<Integer> fvector = node_.get(i).get(answer_.get(i)).fVector;
+            List<int> fvector = node_.get(i).get(answer_.get(i)).fVector;
             for (int j = 0; fvector.get(j) != -1; j++)
             {
                 int idx = fvector.get(j) + answer_.get(i);
@@ -329,7 +329,7 @@ public class TaggerImpl : Tagger
         {
             // answer
             s += node_.get(i).get(answer_.get(i)).cost;
-            List<Integer> fvector = node_.get(i).get(answer_.get(i)).fVector;
+            List<int> fvector = node_.get(i).get(answer_.get(i)).fVector;
             for (int k = 0; fvector.get(k) != -1; k++)
             {
                 int idx = fvector.get(k) + answer_.get(i);
@@ -352,7 +352,7 @@ public class TaggerImpl : Tagger
 
             // result
             s -= node_.get(i).get(result_.get(i)).cost;
-            List<Integer> fvectorR = node_.get(i).get(result_.get(i)).fVector;
+            List<int> fvectorR = node_.get(i).get(result_.get(i)).fVector;
             for (int k = 0; fvectorR.get(k) != -1; k++)
             {
                 int idx = fvector.get(k) + result_.get(i);
@@ -427,36 +427,36 @@ public class TaggerImpl : Tagger
         {
             if (vlevel_ >= 1)
             {
-                sb.append("# ");
-                sb.append(prob());
-                sb.append("\n");
+                sb.Append("# ");
+                sb.Append(prob());
+                sb.Append("\n");
             }
             for (int i = 0; i < x_.size(); i++)
             {
                 for (String s : x_.get(i))
                 {
-                    sb.append(s);
-                    sb.append("\t");
+                    sb.Append(s);
+                    sb.Append("\t");
                 }
-                sb.append(yname(y(i)));
+                sb.Append(yname(y(i)));
                 if (vlevel_ >= 1)
                 {
-                    sb.append("/");
-                    sb.append(prob(i));
+                    sb.Append("/");
+                    sb.Append(prob(i));
                 }
                 if (vlevel_ >= 2)
                 {
                     for (int j = 0; j < ysize_; j++)
                     {
-                        sb.append("\t");
-                        sb.append(yname(j));
-                        sb.append("/");
-                        sb.append(prob(i, j));
+                        sb.Append("\t");
+                        sb.Append(yname(j));
+                        sb.Append("/");
+                        sb.Append(prob(i, j));
                     }
                 }
-                sb.append("\n");
+                sb.Append("\n");
             }
-            sb.append("\n");
+            sb.Append("\n");
         }
         else
         {
@@ -466,28 +466,28 @@ public class TaggerImpl : Tagger
                 {
                     break;
                 }
-                sb.append("# ").append(n).append(" ").append(prob()).append("\n");
+                sb.Append("# ").Append(n).Append(" ").Append(prob()).Append("\n");
                 for (int i = 0; i < x_.size(); ++i)
                 {
                     for (String s : x_.get(i))
                     {
-                        sb.append(s).append('\t');
+                        sb.Append(s).Append('\t');
                     }
-                    sb.append(yname(y(i)));
+                    sb.Append(yname(y(i)));
                     if (vlevel_ >= 1)
                     {
-                        sb.append('/').append(prob(i));
+                        sb.Append('/').Append(prob(i));
                     }
                     if (vlevel_ >= 2)
                     {
                         for (int j = 0; j < ysize_; ++j)
                         {
-                            sb.append('\t').append(yname(j)).append('/').append(prob(i, j));
+                            sb.Append('\t').Append(yname(j)).Append('/').Append(prob(i, j));
                         }
                     }
-                    sb.append('\n');
+                    sb.Append('\n');
                 }
-                sb.append('\n');
+                sb.Append('\n');
             }
         }
         return sb.toString();
@@ -562,12 +562,12 @@ public class TaggerImpl : Tagger
         return true;
     }
 
-    public List<List<Integer>> getFeatureCache_()
+    public List<List<int>> getFeatureCache_()
     {
         return featureCache_;
     }
 
-    public void setFeatureCache_(List<List<Integer>> featureCache_)
+    public void setFeatureCache_(List<List<int>> featureCache_)
     {
         this.featureCache_ = featureCache_;
     }
@@ -642,17 +642,17 @@ public class TaggerImpl : Tagger
         return node_.get(i).get(j).bestCost;
     }
 
-    public List<Integer> emissionVector(int i, int j)
+    public List<int> emissionVector(int i, int j)
     {
         return node_.get(i).get(j).fVector;
     }
 
-    public List<Integer> nextTransitionVector(int i, int j, int k)
+    public List<int> nextTransitionVector(int i, int j, int k)
     {
         return node_.get(i).get(j).rpath.get(k).fvector;
     }
 
-    public List<Integer> prevTransitionVector(int i, int j, int k)
+    public List<int> prevTransitionVector(int i, int j, int k)
     {
         return node_.get(i).get(j).lpath.get(k).fvector;
     }
@@ -949,27 +949,27 @@ public class TaggerImpl : Tagger
         this.node_ = node_;
     }
 
-    public List<Integer> getAnswer_()
+    public List<int> getAnswer_()
     {
         return answer_;
     }
 
-    public void setAnswer_(List<Integer> answer_)
+    public void setAnswer_(List<int> answer_)
     {
         this.answer_ = answer_;
     }
 
-    public List<Integer> getResult_()
+    public List<int> getResult_()
     {
         return result_;
     }
 
-    public void setResult_(List<Integer> result_)
+    public void setResult_(List<int> result_)
     {
         this.result_ = result_;
     }
 
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
     {
         if (args.length < 1)
         {
@@ -992,7 +992,7 @@ public class TaggerImpl : Tagger
             System.err.println("open error");
             return;
         }
-        System.out.println("Done reading model");
+        System._out.println("Done reading model");
 
         if (args.length >= 2)
         {
@@ -1021,7 +1021,7 @@ public class TaggerImpl : Tagger
                     System.err.println("parse error");
                     return;
                 }
-                System.out.print(tagger.toString());
+                System._out.print(tagger.toString());
             }
             br.close();
         }

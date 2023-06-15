@@ -131,7 +131,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
             protected int[] extractFeature(String[] words, FeatureMap featureMap, int position)
             {
                 StringBuilder sbFeature = new StringBuilder();
-                List<Integer> featureVec = new LinkedList<Integer>();
+                List<int> featureVec = new LinkedList<int>();
                 for (int i = 0; i < featureTemplateArray.length; i++)
                 {
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
@@ -143,15 +143,15 @@ public class CRFPOSTagger : CRFTagger : POSTagger
                         int t = offset[0] + position;
                         int j = offset[1];
                         if (t < 0)
-                            sbFeature.append(FeatureIndex.BOS[-(t + 1)]);
+                            sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
                         else if (t >= words.length)
-                            sbFeature.append(FeatureIndex.EOS[t - words.length]);
+                            sbFeature.Append(FeatureIndex.EOS[t - words.length]);
                         else
-                            sbFeature.append(table[t][j]);
+                            sbFeature.Append(table[t][j]);
                         if (delimiterIterator.hasNext())
-                            sbFeature.append(delimiterIterator.next());
+                            sbFeature.Append(delimiterIterator.next());
                         else
-                            sbFeature.append(i);
+                            sbFeature.Append(i);
                     }
                     addFeatureThenClear(sbFeature, featureVec, featureMap);
                 }

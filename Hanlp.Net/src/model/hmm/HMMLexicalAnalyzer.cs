@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.hmm;
 
 
@@ -23,17 +25,17 @@ public class HMMLexicalAnalyzer : AbstractLexicalAnalyzer
     }
 
     public HMMLexicalAnalyzer(HMMSegmenter segmenter)
+        :base(segmenter)
     {
-        super(segmenter);
     }
 
     public HMMLexicalAnalyzer(HMMSegmenter segmenter, HMMPOSTagger posTagger)
+        : base(segmenter, posTagger)
     {
-        super(segmenter, posTagger);
     }
 
     public HMMLexicalAnalyzer(HMMSegmenter segmenter, HMMPOSTagger posTagger, HMMNERecognizer neRecognizer)
+        : base(segmenter, posTagger, neRecognizer)
     {
-        super(segmenter, posTagger, neRecognizer);
     }
 }

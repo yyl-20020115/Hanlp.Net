@@ -354,41 +354,41 @@ public class Args
     private static void propertyUsage(PrintStream errStream, String prefix, String name, String alias, Class<?> type, String delimiter, String description, Object defaultValue)
     {
         StringBuilder sb = new StringBuilder("  ");
-        sb.append(prefix);
-        sb.append(name);
+        sb.Append(prefix);
+        sb.Append(name);
         if (alias != null)
         {
-            sb.append(" (");
-            sb.append(prefix);
-            sb.append(alias);
-            sb.append(")");
+            sb.Append(" (");
+            sb.Append(prefix);
+            sb.Append(alias);
+            sb.Append(")");
         }
         if (type == Boolean.TYPE || type == Boolean.class)
         {
-            sb.append("\t[flag]\t");
-            sb.append(description);
+            sb.Append("\t[flag]\t");
+            sb.Append(description);
         }
         else
         {
-            sb.append("\t[");
+            sb.Append("\t[");
             if (type.isArray())
             {
                 String typeName = getTypeName(type.getComponentType());
-                sb.append(typeName);
-                sb.append("[");
-                sb.append(delimiter);
-                sb.append("]");
+                sb.Append(typeName);
+                sb.Append("[");
+                sb.Append(delimiter);
+                sb.Append("]");
             }
             else
             {
                 String typeName = getTypeName(type);
-                sb.append(typeName);
+                sb.Append(typeName);
             }
-            sb.append("]\t");
-            sb.append(description);
+            sb.Append("]\t");
+            sb.Append(description);
             if (defaultValue != null)
             {
-                sb.append(" (");
+                sb.Append(" (");
                 if (type.isArray())
                 {
                     List<Object> list = new ArrayList<Object>();
@@ -397,13 +397,13 @@ public class Args
                     {
                         list.add(Array.get(defaultValue, i));
                     }
-                    sb.append(list);
+                    sb.Append(list);
                 }
                 else
                 {
-                    sb.append(defaultValue);
+                    sb.Append(defaultValue);
                 }
-                sb.append(")");
+                sb.Append(")");
             }
 
         }

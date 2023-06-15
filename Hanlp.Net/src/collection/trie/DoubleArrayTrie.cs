@@ -219,7 +219,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         for (int i = 0; i < siblings.size(); i++)
         {
             check[begin + siblings.get(i).code] = begin;
-//            System.out.println(this);
+//            System._out.println(this);
         }
 
         for (int i = 0; i < siblings.size(); i++)
@@ -230,7 +230,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             {
                 base[begin + siblings.get(i).code] = (value != null) ? (-value[siblings
                         .get(i).left] - 1) : (-siblings.get(i).left - 1);
-//                System.out.println(this);
+//                System._out.println(this);
 
                 if (value != null && (-value[siblings.get(i).left] - 1) >= 0)
                 {
@@ -246,7 +246,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             {
                 int h = insert(new_siblings);   // dfs
                 base[begin + siblings.get(i).code] = h;
-//                System.out.println(this);
+//                System._out.println(this);
             }
         }
         return begin;
@@ -442,17 +442,17 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public bool save(String fileName)
     {
-        DataOutputStream out;
+        DataOutputStream _out;
         try
         {
-            out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(fileName)));
-            out.writeInt(size);
+            _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(fileName)));
+            _out.writeInt(size);
             for (int i = 0; i < size; i++)
             {
-                out.writeInt(base[i]);
-                out.writeInt(check[i]);
+                _out.writeInt(base[i]);
+                _out.writeInt(check[i]);
             }
-            out.close();
+            _out.close();
         }
         catch (Exception e)
         {
@@ -465,18 +465,18 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     /**
      * 将base和check保存下来
      *
-     * @param out
+     * @param _out
      * @return
      */
-    public bool save(DataOutputStream out)
+    public bool save(DataOutputStream _out)
     {
         try
         {
-            out.writeInt(size);
+            _out.writeInt(size);
             for (int i = 0; i < size; i++)
             {
-                out.writeInt(base[i]);
-                out.writeInt(check[i]);
+                _out.writeInt(base[i]);
+                _out.writeInt(check[i]);
             }
         }
         catch (Exception e)
@@ -487,10 +487,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    public void save(ObjectOutputStream out) 
+    public void save(ObjectOutputStream _out) 
     {
-        out.writeObject(base);
-        out.writeObject(check);
+        _out.writeObject(base);
+        _out.writeObject(check);
     }
 
     /**
@@ -659,11 +659,11 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public bool serializeTo(String path)
     {
-        ObjectOutputStream out = null;
+        ObjectOutputStream _out = null;
         try
         {
-            out = new ObjectOutputStream(IOUtil.newOutputStream(path));
-            out.writeObject(this);
+            _out = new ObjectOutputStream(IOUtil.newOutputStream(path));
+            _out.writeObject(this);
         }
         catch (Exception e)
         {
@@ -763,7 +763,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return result;
     }
 
-    public List<Integer> commonPrefixSearch(String key)
+    public List<int> commonPrefixSearch(String key)
     {
         return commonPrefixSearch(key, 0, 0, 0);
     }
@@ -777,16 +777,16 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param nodePos base中的开始位置
      * @return 一个含有所有下标的list
      */
-    public List<Integer> commonPrefixSearch(String key, int pos, int len, int nodePos)
+    public List<int> commonPrefixSearch(String key, int pos, int len, int nodePos)
     {
         if (len <= 0)
             len = key.length();
         if (nodePos <= 0)
             nodePos = 0;
 
-        List<Integer> result = new ArrayList<Integer>();
+        List<int> result = new ArrayList<int>();
 
-        char[] keyChars = key.toCharArray();
+        char[] keyChars = key.ToCharArray();
 
         int b = base[nodePos];
         int n;
@@ -821,7 +821,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         int len = key.length();
         LinkedList<Map.Entry<String, V>> result = new LinkedList<Map.Entry<String, V>>();
-        char[] keyChars = key.toCharArray();
+        char[] keyChars = key.ToCharArray();
         int b = base[0];
         int n;
         int p;
@@ -1027,7 +1027,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     protected int transition(String path)
     {
-        return transition(path.toCharArray());
+        return transition(path.ToCharArray());
     }
 
     /**
@@ -1228,7 +1228,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public Searcher getSearcher(String text, int offset)
     {
-        return new Searcher(offset, text.toCharArray());
+        return new Searcher(offset, text.ToCharArray());
     }
 
     public Searcher getSearcher(char[] text, int offset)
@@ -1350,7 +1350,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public LongestSearcher getLongestSearcher(String text, int offset)
     {
-        return getLongestSearcher(text.toCharArray(), offset);
+        return getLongestSearcher(text.ToCharArray(), offset);
     }
 
     public LongestSearcher getLongestSearcher(char[] text, int offset)
@@ -1450,18 +1450,18 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
 //    public void report()
 //    {
-//        System.out.println("size: " + size);
+//        System._out.println("size: " + size);
 //        int nonZeroIndex = 0;
 //        for (int i = 0; i < base.length; i++)
 //        {
 //            if (base[i] != 0) nonZeroIndex = i;
 //        }
-//        System.out.println("BaseUsed: " + nonZeroIndex);
+//        System._out.println("BaseUsed: " + nonZeroIndex);
 //        nonZeroIndex = 0;
 //        for (int i = 0; i < check.length; i++)
 //        {
 //            if (check[i] != 0) nonZeroIndex = i;
 //        }
-//        System.out.println("CheckUsed: " + nonZeroIndex);
+//        System._out.println("CheckUsed: " + nonZeroIndex);
 //    }
 }

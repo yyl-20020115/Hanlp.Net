@@ -21,7 +21,7 @@ public class EditDistanceScorer : BaseScorer<CharArray>
     //@Override
     protected CharArray generateKey(String sentence)
     {
-        char[] charArray = sentence.toCharArray();
+        char[] charArray = sentence.ToCharArray();
         if (charArray.length == 0) return null;
         return new CharArray(charArray);
     }

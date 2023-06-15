@@ -10,7 +10,7 @@ public abstract class Corpus
     protected int vocabSize;
     protected int vocabMaxSize = 1000;
     protected VocabWord[] vocab;
-    protected Map<String, Integer> vocabIndexMap;
+    protected Dictionary<String, int> vocabIndexMap;
     protected bool eoc = true;    // end of corpus
     protected Charset encoding = Charset.forName("UTF-8");
     protected int[] table;
@@ -72,7 +72,7 @@ public abstract class Corpus
         return vocab;
     }
 
-    public Map<String, Integer> getVocabIndexMap()
+    public Dictionary<String, int> getVocabIndexMap()
     {
         return vocabIndexMap;
     }
@@ -134,7 +134,7 @@ public abstract class Corpus
     int searchVocab(String word)
     {
         if (word == null) return -1;
-        Integer pos = vocabIndexMap.get(word);
+        int pos = vocabIndexMap.get(word);
         return pos == null ? -1 : pos.intValue();
     }
 
@@ -194,7 +194,7 @@ public abstract class Corpus
         for (int i = 0; i < vocabSize; i++)
             count[i] = vocab[i].cn;
         for (int i = vocabSize; i < vocabSize * 2; i++)
-            count[i] = Integer.MAX_VALUE;
+            count[i] = int.MAX_VALUE;
         int pos1 = vocabSize - 1;
         int pos2 = vocabSize;
         // Following algorithm constructs the Huffman tree by adding one node at a time

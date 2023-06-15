@@ -86,11 +86,11 @@ public class Document<K>
      * @param df    document frequencies
      * @param ndocs the number of documents
      */
-    void idf(HashMap<Integer, Integer> df, int ndocs)
+    void idf(HashMap<int, int> df, int ndocs)
     {
-        for (Map.Entry<Integer, Double> entry : feature_.entrySet())
+        for (Map.Entry<int, Double> entry : feature_.entrySet())
         {
-            Integer denom = df.get(entry.getKey());
+            int denom = df.get(entry.getKey());
             if (denom == null) denom = 1;
             entry.setValue((double) (entry.getValue() * Math.log(ndocs / denom)));
         }

@@ -57,7 +57,7 @@ public class MathUtility
      *
      * @param predictionScores
      */
-    public static void normalizeExp(Map<String, Double> predictionScores)
+    public static void normalizeExp(Dictionary<String, Double> predictionScores)
     {
         Set<Map.Entry<String, Double>> entrySet = predictionScores.entrySet();
         double max = Double.NEGATIVE_INFINITY;

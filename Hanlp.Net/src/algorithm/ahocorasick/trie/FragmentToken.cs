@@ -3,8 +3,8 @@ namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 public class FragmentToken : Token
 {
 
-    public FragmentToken(String fragment)
-        :base(fragment)
+    public FragmentToken(string fragment)
+        : base(fragment)
     {
     }
 

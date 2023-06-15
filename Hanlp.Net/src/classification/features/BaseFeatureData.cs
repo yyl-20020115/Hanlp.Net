@@ -25,7 +25,7 @@ public class BaseFeatureData
     /**
      * 新的特征映射表
      */
-    public BinTrie<Integer> wordIdTrie;
+    public BinTrie<int> wordIdTrie;
 
     /**
      * 构造一个空白的统计对象
@@ -43,7 +43,7 @@ public class BaseFeatureData
         {
             ++categoryCounts[document.category];
 
-            for (Map.Entry<Integer, int[]> entry : document.tfMap.entrySet())
+            for (Map.Entry<int, int[]> entry : document.tfMap.entrySet())
             {
                 featureCategoryJointCount[entry.getKey()][document.category] += 1;
             }

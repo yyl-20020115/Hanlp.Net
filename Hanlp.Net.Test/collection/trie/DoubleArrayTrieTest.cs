@@ -2,8 +2,11 @@ namespace com.hankcs.hanlp.collection.trie;
 
 
 
+[TestClass]
 public class DoubleArrayTrieTest : TestCase
 {
+    [TestMethod]
+
     public void testDatFromFile() 
     {
         TreeMap<String, String> map = new TreeMap<String, String>();
@@ -15,15 +18,17 @@ public class DoubleArrayTrieTest : TestCase
         }
         DoubleArrayTrie<String> trie = new DoubleArrayTrie<String>();
         trie.build(map);
-        for (String key : map.keySet())
+        for (String key : map.Keys)
         {
             assertEquals(key, trie.get(key));
         }
     }
+    [TestMethod]
 
     public void testGet() 
     {
     }
+    [TestMethod]
 
     public void testLongestSearcher() 
     {
@@ -35,13 +40,14 @@ public class DoubleArrayTrieTest : TestCase
         }
         DoubleArrayTrie<String> trie = new DoubleArrayTrie<String>(buildFrom);
         String text = "her3he6his-hers! ";
-        DoubleArrayTrie<String>.LongestSearcher searcher = trie.getLongestSearcher(text.toCharArray(), 0);
+        DoubleArrayTrie<String>.LongestSearcher searcher = trie.getLongestSearcher(text.ToCharArray(), 0);
         while (searcher.next())
         {
-//            System.out.printf("[%d, %d)=%s\n", searcher.begin, searcher.begin + searcher.length, searcher.value);
-            assertEquals(searcher.value, text.substring(searcher.begin, searcher.begin + searcher.length));
+//            Console.printf("[%d, %d)=%s\n", searcher.begin, searcher.begin + searcher.Length, searcher.value);
+            assertEquals(searcher.value, text.substring(searcher.begin, searcher.begin + searcher.Length));
         }
     }
+    [TestMethod]
 
     public void testTransmit() 
     {
@@ -49,57 +55,58 @@ public class DoubleArrayTrieTest : TestCase
         int index = dat.transition("龙", 1);
         assertNull(dat.output(index));
         index = dat.transition("窝", index);
-        assertEquals("nz 183 ", dat.output(index).toString());
+        assertEquals("nz 183 ", dat.output(index).ToString());
     }
 
-//    public void testCombine() 
-//    {
-//        DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
-//        String[] wordNet = new String[]
-//            {
-//                "他",
-//                "一",
-//                "丁",
-//                "不",
-//                "识",
-//                "一",
-//                "丁",
-//                "呀",
-//            };
-//        for (int i = 0; i < wordNet.length; ++i)
-//        {
-//            int state = 1;
-//            state = dat.transition(wordNet[i], state);
-//            if (state > 0)
-//            {
-//                int start = i;
-//                int to = i + 1;
-//                int end = - 1;
-//                CoreDictionary.Attribute value = null;
-//                for (; to < wordNet.length; ++to)
-//                {
-//                    state = dat.transition(wordNet[to], state);
-//                    if (state < 0) break;
-//                    CoreDictionary.Attribute output = dat.output(state);
-//                    if (output != null)
-//                    {
-//                        value = output;
-//                        end = to + 1;
-//                    }
-//                }
-//                if (value != null)
-//                {
-//                    StringBuilder sbTerm = new StringBuilder();
-//                    for (int j = start; j < end; ++j)
-//                    {
-//                        sbTerm.append(wordNet[j]);
-//                    }
-//                    Console.WriteLine(sbTerm.toString() + "/" + value);
-//                    i = end - 1;
-//                }
-//            }
-//        }
-//    }
+    //    public void testCombine() 
+    //    {
+    //        DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
+    //        String[] wordNet = new String[]
+    //            {
+    //                "他",
+    //                "一",
+    //                "丁",
+    //                "不",
+    //                "识",
+    //                "一",
+    //                "丁",
+    //                "呀",
+    //            };
+    //        for (int i = 0; i < wordNet.Length; ++i)
+    //        {
+    //            int state = 1;
+    //            state = dat.transition(wordNet[i], state);
+    //            if (state > 0)
+    //            {
+    //                int start = i;
+    //                int to = i + 1;
+    //                int end = - 1;
+    //                CoreDictionary.Attribute value = null;
+    //                for (; to < wordNet.Length; ++to)
+    //                {
+    //                    state = dat.transition(wordNet[to], state);
+    //                    if (state < 0) break;
+    //                    CoreDictionary.Attribute output = dat.output(state);
+    //                    if (output != null)
+    //                    {
+    //                        value = output;
+    //                        end = to + 1;
+    //                    }
+    //                }
+    //                if (value != null)
+    //                {
+    //                    StringBuilder sbTerm = new StringBuilder();
+    //                    for (int j = start; j < end; ++j)
+    //                    {
+    //                        sbTerm.append(wordNet[j]);
+    //                    }
+    //                    Console.WriteLine(sbTerm.ToString() + "/" + value);
+    //                    i = end - 1;
+    //                }
+    //            }
+    //        }
+    //    }
+    [TestMethod]
 
     public void testHandleEmptyString() 
     {
@@ -113,6 +120,7 @@ public class DoubleArrayTrieTest : TestCase
         {
         }
     }
+    [TestMethod]
 
     public void testIssue966() 
     {
@@ -125,7 +133,7 @@ public class DoubleArrayTrieTest : TestCase
         DoubleArrayTrie<String>.LongestSearcher searcher = trie.getLongestSearcher("北京市通州区001乡道发生了一件有意思的事情，来广营乡歌舞队正在跳舞", 0);
         while (searcher.next())
         {
-            System.out.printf("%d %s\n", searcher.begin, searcher.value);
+            Console.printf("%d %s\n", searcher.begin, searcher.value);
         }
     }
 }

@@ -86,8 +86,8 @@ public class PersonDictionary
                         listIterator = vertexList.listIterator(index);
                         backUp = true;
                     }
-                    sbPattern.append(NR.K.toString());
-                    sbPattern.append(NR.B.toString());
+                    sbPattern.Append(NR.K.toString());
+                    sbPattern.Append(NR.B.toString());
                     preNR = B;
                     listIterator.previous();
                     String nowK = current.realWord.substring(0, current.realWord.length() - 1);
@@ -105,13 +105,13 @@ public class PersonDictionary
                     }
                     if (preNR == B)
                     {
-                        sbPattern.append(NR.E.toString());  //BE
+                        sbPattern.Append(NR.E.toString());  //BE
                     }
                     else
                     {
-                        sbPattern.append(NR.D.toString());  //CD
+                        sbPattern.Append(NR.D.toString());  //CD
                     }
-                    sbPattern.append(NR.L.toString());
+                    sbPattern.Append(NR.L.toString());
                     // 对串也做一些修改
                     listIterator.previous();
                     String EorD = current.realWord.substring(0, 1);
@@ -121,7 +121,7 @@ public class PersonDictionary
                     listIterator.add(new Vertex(L));
                     continue;
                 default:
-                    sbPattern.append(nr.toString());
+                    sbPattern.Append(nr.toString());
                     break;
             }
             preNR = nr;
@@ -150,7 +150,7 @@ public class PersonDictionary
                 StringBuilder sbName = new StringBuilder();
                 for (int i = begin; i < end; ++i)
                 {
-                    sbName.append(wordArray[i].realWord);
+                    sbName.Append(wordArray[i].realWord);
                 }
                 String name = sbName.toString();
 //            logger.trace("识别出：{}", name);
@@ -172,7 +172,7 @@ public class PersonDictionary
                 // 正式算它是一个名字
                 if (HanLP.Config.DEBUG)
                 {
-                    System.out.printf("识别出人名：%s %s\n", name, value);
+                    System._out.printf("识别出人名：%s %s\n", name, value);
                 }
                 int offset = offsetArray[begin];
                 wordNetOptimum.insert(offset, new Vertex(Predefine.TAG_PEOPLE, name, ATTRIBUTE, WORD_ID), wordNetAll);

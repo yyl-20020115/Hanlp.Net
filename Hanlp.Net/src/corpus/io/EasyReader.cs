@@ -53,7 +53,7 @@ public class EasyReader
      * @param size 读取多少个文件
      * @throws Exception
      */
-    public void read(LineHandler handler, int size) throws Exception
+    public void read(LineHandler handler, int size)
     {
         File rootFile = new File(root);
         File[] files;
@@ -86,7 +86,7 @@ public class EasyReader
         {
             if (size-- == 0) break;
             if (file.isDirectory()) continue;
-            if (verbose) System.out.printf("正在处理%s, %d / %d\n", file.getName(), ++n, files.length);
+            if (verbose) System._out.printf("正在处理%s, %d / %d\n", file.getName(), ++n, files.length);
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file.getAbsolutePath());
             while (lineIterator.hasNext())
             {
@@ -97,7 +97,7 @@ public class EasyReader
             }
         }
         handler.done();
-        if (verbose) System.out.printf("处理了 %.2f 万行，花费了 %.2f min\n", totalAddress / 10000.0, (System.currentTimeMillis() - start) / 1000.0 / 60.0);
+        if (verbose) System._out.printf("处理了 %.2f 万行，花费了 %.2f min\n", totalAddress / 10000.0, (System.currentTimeMillis() - start) / 1000.0 / 60.0);
     }
 
     /**
@@ -105,8 +105,8 @@ public class EasyReader
      * @param handler 处理逻辑
      * @throws Exception
      */
-    public void read(LineHandler handler) throws Exception
+    public void read(LineHandler handler)
     {
-        read(handler, Integer.MAX_VALUE);
+        read(handler, int.MAX_VALUE);
     }
 }

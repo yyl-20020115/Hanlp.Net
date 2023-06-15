@@ -51,13 +51,13 @@ public class Main
         String development;
 
         @Argument(description = "迭代次数")
-        Integer iter = 5;
+        int iter = 5;
 
         @Argument(description = "模型压缩比率")
         Double compressRatio = 0.0;
 
         @Argument(description = "线程数")
-        Integer thread = Runtime.getRuntime().availableProcessors();
+        int thread = Runtime.getRuntime().availableProcessors();
     }
 
     public static void main(String[] args)
@@ -88,7 +88,7 @@ public class Main
             else if (option.evaluate)
             {
                 double[] prf = trainer.evaluate(option.gold, option.model[0]);
-                out.printf("Performance - P:%.2f R:%.2f F:%.2f\n", prf[0], prf[1], prf[2]);
+                _out.printf("Performance - P:%.2f R:%.2f F:%.2f\n", prf[0], prf[1], prf[2]);
             }
             else
             {
@@ -113,7 +113,7 @@ public class Main
                 PrintWriter printer;
                 if (option.result == null)
                 {
-                    printer = new PrintWriter(System.out);
+                    printer = new PrintWriter(System._out);
                 }
                 else
                 {

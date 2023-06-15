@@ -28,30 +28,30 @@ public class PlaceRecognition
             Iterator<Vertex> iterator = pWordSegResult.iterator();
             for (EnumItem<NS> NSEnumItem : roleTagList)
             {
-                sbLog.append('[');
-                sbLog.append(iterator.next().realWord);
-                sbLog.append(' ');
-                sbLog.append(NSEnumItem);
-                sbLog.append(']');
+                sbLog.Append('[');
+                sbLog.Append(iterator.next().realWord);
+                sbLog.Append(' ');
+                sbLog.Append(NSEnumItem);
+                sbLog.Append(']');
             }
-            System.out.printf("地名角色观察：%s\n", sbLog.toString());
+            System._out.printf("地名角色观察：%s\n", sbLog.toString());
         }
         List<NS> NSList = viterbiCompute(roleTagList);
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
             Iterator<Vertex> iterator = pWordSegResult.iterator();
-            sbLog.append('[');
+            sbLog.Append('[');
             for (NS NS : NSList)
             {
-                sbLog.append(iterator.next().realWord);
-                sbLog.append('/');
-                sbLog.append(NS);
-                sbLog.append(" ,");
+                sbLog.Append(iterator.next().realWord);
+                sbLog.Append('/');
+                sbLog.Append(NS);
+                sbLog.Append(" ,");
             }
             if (sbLog.length() > 1) sbLog.delete(sbLog.length() - 2, sbLog.length());
-            sbLog.append(']');
-            System.out.printf("地名角色标注：%s\n", sbLog.toString());
+            sbLog.Append(']');
+            System._out.printf("地名角色标注：%s\n", sbLog.toString());
         }
 
         PlaceDictionary.parsePattern(NSList, pWordSegResult, wordNetOptimum, wordNetAll);

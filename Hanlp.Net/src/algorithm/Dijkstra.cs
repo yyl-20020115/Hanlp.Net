@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm.ahocorasick.trie;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.algorithm;
 
 
@@ -21,21 +24,21 @@ public class Dijkstra
 {
     public static List<Vertex> compute(Graph graph)
     {
-        List<Vertex> resultList = new LinkedList<Vertex>();
+        List<Vertex> resultList = new ();
         Vertex[] vertexes = graph.getVertexes();
         List<EdgeFrom>[] edgesTo = graph.getEdgesTo();
-        double[] d = new double[vertexes.length];
-        Arrays.fill(d, Double.MAX_VALUE);
-        d[d.length - 1] = 0;
-        int[] path = new int[vertexes.length];
+        double[] d = new double[vertexes.Length];
+        Arrays.fill(d, double.MaxValue);
+        d[^1] = 0;
+        int[] path = new int[vertexes.Length];
         Arrays.fill(path, -1);
         PriorityQueue<State> que = new PriorityQueue<State>();
-        que.add(new State(0, vertexes.length - 1));
+        que.add(new State(0, vertexes.Length - 1));
         while (!que.isEmpty())
         {
             State p = que.poll();
             if (d[p.vertex] < p.cost) continue;
-            for (EdgeFrom edgeFrom : edgesTo[p.vertex])
+            foreach (EdgeFrom edgeFrom in edgesTo[p.vertex])
             {
                 if (d[edgeFrom.from] > d[p.vertex] + edgeFrom.weight)
                 {
@@ -47,7 +50,7 @@ public class Dijkstra
         }
         for (int t = 0; t != -1; t = path[t])
         {
-            resultList.add(vertexes[t]);
+            resultList.Add(vertexes[t]);
         }
         return resultList;
     }

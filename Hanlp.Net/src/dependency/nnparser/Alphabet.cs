@@ -19,12 +19,12 @@ namespace com.hankcs.hanlp.dependency.nnparser;
  */
 public class Alphabet : ICacheAble
 {
-    ITrie<Integer> trie;
+    ITrie<int> trie;
     String[] idToLabelMap;
 
     public Alphabet()
     {
-        trie = new DoubleArrayTrie<Integer>();
+        trie = new DoubleArrayTrie<int>();
     }
 
     /**
@@ -38,10 +38,10 @@ public class Alphabet : ICacheAble
     }
 
 
-    public int build(TreeMap<String, Integer> keyValueMap)
+    public int build(TreeMap<String, int> keyValueMap)
     {
         idToLabelMap = new String[keyValueMap.size()];
-        for (Map.Entry<String, Integer> entry : keyValueMap.entrySet())
+        for (Map.Entry<String, int> entry : keyValueMap.entrySet())
         {
             idToLabelMap[entry.getValue()] = entry.getKey();
         }
@@ -53,7 +53,7 @@ public class Alphabet : ICacheAble
      * @param label
      * @return
      */
-    public Integer idOf(char[] label)
+    public int idOf(char[] label)
     {
         return trie.get(label);
     }
@@ -63,7 +63,7 @@ public class Alphabet : ICacheAble
      * @param label
      * @return
      */
-    public Integer idOf(String label)
+    public int idOf(String label)
     {
         return trie.get(label);
     }
@@ -77,19 +77,19 @@ public class Alphabet : ICacheAble
         return trie.size();
     }
 
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
-        out.writeInt(idToLabelMap.length);
+        _out.writeInt(idToLabelMap.length);
         for (String value : idToLabelMap)
         {
-            TextUtility.writeString(value, out);
+            TextUtility.writeString(value, _out);
         }
     }
 
     public bool load(ByteArray byteArray)
     {
         idToLabelMap = new String[byteArray.nextInt()];
-        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+        TreeMap<String, int> map = new TreeMap<String, int>();
         for (int i = 0; i < idToLabelMap.length; i++)
         {
             idToLabelMap[i] = byteArray.nextString();

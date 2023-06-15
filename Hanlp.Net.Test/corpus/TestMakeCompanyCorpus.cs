@@ -17,6 +17,7 @@ namespace com.hankcs.hanlp.corpus;
 /**
  * @author hankcs
  */
+[TestClass]
 public class TestMakeCompanyCorpus : TestCase
 {
 //    public void testMake() 
@@ -25,12 +26,12 @@ public class TestMakeCompanyCorpus : TestCase
 //        String line = null;
 //        BufferedReader bw = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\Doc\\语料库\\company.dic")));
 //        BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/test/nt/company.txt")));
-//        int limit = Integer.MAX_VALUE;
+//        int limit = int.MAX_VALUE;
 //        while ((line = bw.readLine()) != null && limit-- > 0)
 //        {
 //            if (line.endsWith("）")) continue;
-//            if (line.length() < 4) continue;
-//            if (line.contains("个体") || line.contains("个人"))
+//            if (line.Length() < 4) continue;
+//            if (line.Contains("个体") || line.Contains("个人"))
 //            {
 //                continue;
 //            }
@@ -41,7 +42,7 @@ public class TestMakeCompanyCorpus : TestCase
 //            br.write("[");
 //            for (Term term : termList)
 //            {
-//                br.write(term.toString());
+//                br.write(term.ToString());
 //                if (term != last) br.write(" ");
 //            }
 //            br.write("]/ntc");

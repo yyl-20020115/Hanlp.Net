@@ -39,21 +39,21 @@ public class Item : SimpleItem
     public String toString()
     {
         final StringBuilder sb = new StringBuilder(key);
-        ArrayList<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(labelMap.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>()
+        ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(labelMap.entrySet());
+        Collections.sort(entries, new Comparator<Map.Entry<String, int>>()
         {
             //@Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
+            public int compare(Map.Entry<String, int> o1, Map.Entry<String, int> o2)
             {
                 return -o1.getValue().compareTo(o2.getValue());
             }
         });
-        for (Map.Entry<String, Integer> entry : entries)
+        for (Map.Entry<String, int> entry : entries)
         {
-            sb.append(' ');             // 现阶段词典分隔符统一使用空格
-            sb.append(entry.getKey());
-            sb.append(' ');
-            sb.append(entry.getValue());
+            sb.Append(' ');             // 现阶段词典分隔符统一使用空格
+            sb.Append(entry.getKey());
+            sb.Append(' ');
+            sb.Append(entry.getValue());
         }
         return sb.toString();
     }
@@ -88,7 +88,7 @@ public class Item : SimpleItem
         int natureCount = (param.length - 1) / 2;
         for (int i = 0; i < natureCount; ++i)
         {
-            item.labelMap.put(param[1 + 2 * i], Integer.parseInt(param[2 + 2 * i]));
+            item.labelMap.put(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
         }
         return item;
     }

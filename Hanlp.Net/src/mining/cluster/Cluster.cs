@@ -10,11 +10,11 @@
  */
 namespace com.hankcs.hanlp.mining.cluster;
 
-
+using System.Collections.Generic;
 /**
  * @author hankcs
  */
-public class Cluster<K> : Comparable<Cluster<K>>
+public class Cluster<K> : IComparable<Cluster<K>>
 {
     List<Document<K>> documents_;          ///< documents
     SparseVector composite_;                           ///< a composite SparseVector
@@ -24,8 +24,9 @@ public class Cluster<K> : Comparable<Cluster<K>>
     Random random;
 
     public Cluster()
+        : this(new List<Document<K>>())
     {
-        this(new ArrayList<Document<K>>());
+        ;
     }
 
     public Cluster(List<Document<K>> documents)

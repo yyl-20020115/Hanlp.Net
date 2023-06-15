@@ -1,6 +1,7 @@
 namespace com.hankcs.hanlp.suggest;
 
 
+[TestClass]
 public class ISuggesterTest : TestCase
 {
     public void testRemoveAllSentences() 

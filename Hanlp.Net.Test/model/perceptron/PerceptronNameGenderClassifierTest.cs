@@ -1,5 +1,8 @@
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
+[TestClass]
 
 public class PerceptronNameGenderClassifierTest : TestCase
 {
@@ -7,13 +10,13 @@ public class PerceptronNameGenderClassifierTest : TestCase
     public static String TESTING_SET = "data/test/cnname/test.csv";
     public static String MODEL = "data/test/cnname.bin";
 
-    //@Override
+    [TestInitialize]
     public void setUp() 
     {
-        super.setUp();
+        base.setUp();
         TestUtility.ensureTestData("cnname", "http://file.hankcs.com/corpus/cnname.zip");
     }
-
+    [TestMethod]
     public void testTrain() 
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier();
@@ -27,17 +30,18 @@ public class PerceptronNameGenderClassifierTest : TestCase
         String[] names = new String[]{"赵建军", "沈雁冰", "陆雪琪", "李冰冰"};
         for (String name : names)
         {
-            System.out.printf("%s=%s\n", name, classifier.predict(name));
+            Console.printf("%s=%s\n", name, classifier.predict(name));
         }
     }
 
-
+    [TestMethod]
     public void testEvaluate() 
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier(MODEL);
         Console.WriteLine(classifier.evaluate(TESTING_SET));
     }
 
+    [TestMethod]
     public void testPrediction() 
     {
         PerceptronNameGenderClassifier classifier = new PerceptronNameGenderClassifier(MODEL);

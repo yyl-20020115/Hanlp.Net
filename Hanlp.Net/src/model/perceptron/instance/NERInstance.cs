@@ -53,7 +53,7 @@ public class NERInstance : Instance
      */
     protected int[] extractFeature(String[] wordArray, String[] posArray, FeatureMap featureMap, int position)
     {
-        List<Integer> featVec = new ArrayList<Integer>();
+        List<int> featVec = new ArrayList<int>();
 
         String pre2Word = position >= 2 ? wordArray[position - 2] : "_B_";
         String preWord = position >= 1 ? wordArray[position - 1] : "_B_";
@@ -68,25 +68,25 @@ public class NERInstance : Instance
         String next2Pos = position <= posArray.length - 3 ? posArray[position + 2] : "_E_";
 
         StringBuilder sb = new StringBuilder();
-        addFeatureThenClear(sb.append(pre2Word).append('1'), featVec, featureMap);
-        addFeatureThenClear(sb.append(preWord).append('2'), featVec, featureMap);
-        addFeatureThenClear(sb.append(curWord).append('3'), featVec, featureMap);
-        addFeatureThenClear(sb.append(nextWord).append('4'), featVec, featureMap);
-        addFeatureThenClear(sb.append(next2Word).append('5'), featVec, featureMap);
-//        addFeatureThenClear(sb.append(pre2Word).append(preWord).append('6'), featVec, featureMap);
-//        addFeatureThenClear(sb.append(preWord).append(curWord).append('7'), featVec, featureMap);
-//        addFeatureThenClear(sb.append(curWord).append(nextWord).append('8'), featVec, featureMap);
-//        addFeatureThenClear(sb.append(nextWord).append(next2Word).append('9'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(pre2Word).Append('1'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(preWord).Append('2'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(curWord).Append('3'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(nextWord).Append('4'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(next2Word).Append('5'), featVec, featureMap);
+//        addFeatureThenClear(sb.Append(pre2Word).Append(preWord).Append('6'), featVec, featureMap);
+//        addFeatureThenClear(sb.Append(preWord).Append(curWord).Append('7'), featVec, featureMap);
+//        addFeatureThenClear(sb.Append(curWord).Append(nextWord).Append('8'), featVec, featureMap);
+//        addFeatureThenClear(sb.Append(nextWord).Append(next2Word).Append('9'), featVec, featureMap);
 
-        addFeatureThenClear(sb.append(pre2Pos).append('A'), featVec, featureMap);
-        addFeatureThenClear(sb.append(prePos).append('B'), featVec, featureMap);
-        addFeatureThenClear(sb.append(curPos).append('C'), featVec, featureMap);
-        addFeatureThenClear(sb.append(nextPos).append('D'), featVec, featureMap);
-        addFeatureThenClear(sb.append(next2Pos).append('E'), featVec, featureMap);
-        addFeatureThenClear(sb.append(pre2Pos).append(prePos).append('F'), featVec, featureMap);
-        addFeatureThenClear(sb.append(prePos).append(curPos).append('G'), featVec, featureMap);
-        addFeatureThenClear(sb.append(curPos).append(nextPos).append('H'), featVec, featureMap);
-        addFeatureThenClear(sb.append(nextPos).append(next2Pos).append('I'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(pre2Pos).Append('A'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(prePos).Append('B'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(curPos).Append('C'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(nextPos).Append('D'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(next2Pos).Append('E'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(pre2Pos).Append(prePos).Append('F'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(prePos).Append(curPos).Append('G'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(curPos).Append(nextPos).Append('H'), featVec, featureMap);
+        addFeatureThenClear(sb.Append(nextPos).Append(next2Pos).Append('I'), featVec, featureMap);
 
         return toFeatureArray(featVec);
     }

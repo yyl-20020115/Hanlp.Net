@@ -29,30 +29,30 @@ public class PersonRecognition
             Iterator<Vertex> iterator = pWordSegResult.iterator();
             for (EnumItem<NR> nrEnumItem : roleTagList)
             {
-                sbLog.append('[');
-                sbLog.append(iterator.next().realWord);
-                sbLog.append(' ');
-                sbLog.append(nrEnumItem);
-                sbLog.append(']');
+                sbLog.Append('[');
+                sbLog.Append(iterator.next().realWord);
+                sbLog.Append(' ');
+                sbLog.Append(nrEnumItem);
+                sbLog.Append(']');
             }
-            System.out.printf("人名角色观察：%s\n", sbLog.toString());
+            System._out.printf("人名角色观察：%s\n", sbLog.toString());
         }
         List<NR> nrList = viterbiComputeSimply(roleTagList);
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
             Iterator<Vertex> iterator = pWordSegResult.iterator();
-            sbLog.append('[');
+            sbLog.Append('[');
             for (NR nr : nrList)
             {
-                sbLog.append(iterator.next().realWord);
-                sbLog.append('/');
-                sbLog.append(nr);
-                sbLog.append(" ,");
+                sbLog.Append(iterator.next().realWord);
+                sbLog.Append('/');
+                sbLog.Append(nr);
+                sbLog.Append(" ,");
             }
             if (sbLog.length() > 1) sbLog.delete(sbLog.length() - 2, sbLog.length());
-            sbLog.append(']');
-            System.out.printf("人名角色标注：%s\n", sbLog.toString());
+            sbLog.Append(']');
+            System._out.printf("人名角色标注：%s\n", sbLog.toString());
         }
 
         PersonDictionary.parsePattern(nrList, pWordSegResult, wordNetOptimum, wordNetAll);

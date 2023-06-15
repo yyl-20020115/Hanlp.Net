@@ -15,6 +15,7 @@ namespace com.hankcs.hanlp.corpus;
 /**
  * @author hankcs
  */
+[TestClass]
 public class TestPinyinGuesser : TestCase
 {
 //    public void testGuess() 
@@ -24,8 +25,8 @@ public class TestPinyinGuesser : TestCase
 //
 //    public void testTextUtil() 
 //    {
-//        Console.WriteLine(TextUtility.isAllLetter(Pinyin.ai1.toString()));
-//        Console.WriteLine(TextUtility.isAllLetterOrNum(Pinyin.ai1.toString()));
+//        Console.WriteLine(TextUtility.isAllLetter(Pinyin.ai1.ToString()));
+//        Console.WriteLine(TextUtility.isAllLetterOrNum(Pinyin.ai1.ToString()));
 //        Console.WriteLine(TextUtility.isAllLetter(Pinyin.ai1.getPinyinWithoutTone()));
 //    }
 //
@@ -37,7 +38,7 @@ public class TestPinyinGuesser : TestCase
 //
 //        for (Pinyin pinyin : PinyinDictionary.pinyins)
 //        {
-//            System.out.printf("Pinyin.%s,", convert(pinyin));
+//            Console.printf("Pinyin.%s,", convert(pinyin));
 //            assertEquals(convert(pinyin), tone2tone1[pinyin.ordinal()]);
 //        }
 //    }

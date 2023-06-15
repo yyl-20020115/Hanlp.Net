@@ -64,9 +64,9 @@ public class AveragedPerceptron : LinearModel
      * @param timestamp     每个权值上次更新的时间戳
      * @param current       当前时间戳
      */
-    public void update(Collection<Integer> featureVector, float value, double[] total, int[] timestamp, int current)
+    public void update(Collection<int> featureVector, float value, double[] total, int[] timestamp, int current)
     {
-        for (Integer i : featureVector)
+        for (int i : featureVector)
             update(i, value, total, timestamp, current);
     }
 

@@ -94,6 +94,6 @@ public class FMeasure : Serializable
 
     private static void printf(StringBuilder sb, String format, Object... args)
     {
-        sb.append(String.format(format, args));
+        sb.Append(String.format(format, args));
     }
 }

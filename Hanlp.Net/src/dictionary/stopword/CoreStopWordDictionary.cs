@@ -29,9 +29,9 @@ public class CoreStopWordDictionary
             try
             {
                 dictionary = new StopWordDictionary(HanLP.Config.CoreStopWordDictionaryPath);
-                DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(HanLP.Config.CoreStopWordDictionaryPath + Predefine.BIN_EXT)));
-                dictionary.save(out);
-                out.close();
+                DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(HanLP.Config.CoreStopWordDictionaryPath + Predefine.BIN_EXT)));
+                dictionary.save(_out);
+                _out.close();
             }
             catch (Exception e)
             {

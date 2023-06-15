@@ -22,9 +22,9 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
     //@Override
     protected EnumItem<E> createValue(String[] params)
     {
-        Map.Entry<String, Map.Entry<String, Integer>[]> args = EnumItem.create(params);
+        Map.Entry<String, Map.Entry<String, int>[]> args = EnumItem.create(params);
         EnumItem<E> nrEnumItem = new EnumItem<E>();
-        for (Map.Entry<String, Integer> e : args.getValue())
+        for (Map.Entry<String, int> e : args.getValue())
         {
             nrEnumItem.labelMap.put(valueOf(e.getKey()), e.getValue());
         }
@@ -79,13 +79,13 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
     }
 
     //@Override
-    protected void saveValue(EnumItem<E> item, DataOutputStream out) 
+    protected void saveValue(EnumItem<E> item, DataOutputStream _out) 
     {
-        out.writeInt(item.labelMap.size());
-        for (Map.Entry<E, Integer> entry : item.labelMap.entrySet())
+        _out.writeInt(item.labelMap.size());
+        for (Map.Entry<E, int> entry : item.labelMap.entrySet())
         {
-            out.writeInt(entry.getKey().ordinal());
-            out.writeInt(entry.getValue());
+            _out.writeInt(entry.getKey().ordinal());
+            _out.writeInt(entry.getValue());
         }
     }
 }

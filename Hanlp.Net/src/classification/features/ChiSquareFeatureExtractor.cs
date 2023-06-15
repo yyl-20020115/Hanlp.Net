@@ -34,9 +34,9 @@ public class ChiSquareFeatureExtractor
      * @param stats
      * @return
      */
-    public Map<Integer, Double> chi_square(BaseFeatureData stats)
+    public Dictionary<int, Double> chi_square(BaseFeatureData stats)
     {
-        Map<Integer, Double> selectedFeatures = new HashMap<Integer, Double>();
+        Dictionary<int, Double> selectedFeatures = new HashMap<int, Double>();
 
         int N1dot, N0dot, N00, N01, N10, N11;
         double chisquareScore;
@@ -87,20 +87,20 @@ public class ChiSquareFeatureExtractor
         }
         if (selectedFeatures.size() > maxSize)
         {
-            MaxHeap<Map.Entry<Integer, Double>> maxHeap = new MaxHeap<Map.Entry<Integer, Double>>(maxSize, new Comparator<Map.Entry<Integer, Double>>()
+            MaxHeap<Map.Entry<int, Double>> maxHeap = new MaxHeap<Map.Entry<int, Double>>(maxSize, new Comparator<Map.Entry<int, Double>>()
             {
                 //@Override
-                public int compare(Map.Entry<Integer, Double> o1, Map.Entry<Integer, Double> o2)
+                public int compare(Map.Entry<int, Double> o1, Map.Entry<int, Double> o2)
                 {
                     return o1.getValue().compareTo(o2.getValue());
                 }
             });
-            for (Map.Entry<Integer, Double> entry : selectedFeatures.entrySet())
+            for (Map.Entry<int, Double> entry : selectedFeatures.entrySet())
             {
                 maxHeap.add(entry);
             }
             selectedFeatures.clear();
-            for (Map.Entry<Integer, Double> entry : maxHeap)
+            for (Map.Entry<int, Double> entry : maxHeap)
             {
                 selectedFeatures.put(entry.getKey(), entry.getValue());
             }

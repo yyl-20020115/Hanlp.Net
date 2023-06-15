@@ -24,7 +24,7 @@ public class Suggester : ISuggester
 
     public Suggester()
     {
-        scorerList = new ArrayList<BaseScorer>();
+        scorerList = new List<BaseScorer>();
         scorerList.add(new IdVectorScorer());
         scorerList.add(new EditDistanceScorer());
         scorerList.add(new PinyinScorer());
@@ -73,7 +73,7 @@ public class Suggester : ISuggester
         TreeMap<String, Double> scoreMap = new TreeMap<String, Double>();
         for (BaseScorer scorer : scorerList)
         {
-            Map<String, Double> map = scorer.computeScore(key);
+            Dictionary<String, Double> map = scorer.computeScore(key);
             Double max = max(map);  // 用于正规化一个map
             for (Map.Entry<String, Double> entry : map.entrySet())
             {
@@ -121,7 +121,7 @@ public class Suggester : ISuggester
      * @param map
      * @return
      */
-    private static Double max(Map<String, Double> map)
+    private static Double max(Dictionary<String, Double> map)
     {
         Double theMax = 0.0;
         for (Double v : map.values())

@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.models;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -19,12 +21,12 @@ namespace com.hankcs.hanlp.classification.corpus;
 public class FileDataSet : AbstractDataSet
 {
     File cache;
-    DataOutputStream out;
+    DataOutputStream _out;
     int size;
 
-    public FileDataSet(AbstractModel model, File cache) throws FileNotFoundException
+    public FileDataSet(AbstractModel model, File cache) 
+        :base(model)
     {
-        super(model);
         initCache(cache);
     }
 
@@ -33,15 +35,15 @@ public class FileDataSet : AbstractDataSet
         this(model, File.createTempFile(String.valueOf(System.currentTimeMillis()), ".dat"));
     }
 
-    public FileDataSet(File cache) throws FileNotFoundException
+    public FileDataSet(File cache) 
     {
         initCache(cache);
     }
 
-    private void initCache(File cache) throws FileNotFoundException
+    private void initCache(File cache) 
     {
         this.cache = cache;
-        out = new DataOutputStream(new FileOutputStream(cache));
+        _out = new DataOutputStream(new FileOutputStream(cache));
     }
 
     private void initCache() 
@@ -71,13 +73,13 @@ public class FileDataSet : AbstractDataSet
 
     private void add(Document document) 
     {
-        out.writeInt(document.category);
-        Set<Map.Entry<Integer, int[]>> entrySet = document.tfMap.entrySet();
-        out.writeInt(entrySet.size());
-        for (Map.Entry<Integer, int[]> entry : entrySet)
+        _out.writeInt(document.category);
+        Set<Map.Entry<int, int[]>> entrySet = document.tfMap.entrySet();
+        _out.writeInt(entrySet.size());
+        for (Map.Entry<int, int[]> entry : entrySet)
         {
-            out.writeInt(entry.getKey());
-            out.writeInt(entry.getValue()[0]);
+            _out.writeInt(entry.getKey());
+            _out.writeInt(entry.getValue()[0]);
         }
         ++size;
     }
@@ -105,10 +107,10 @@ public class FileDataSet : AbstractDataSet
             while (iterator.hasNext())
             {
                 Document document = iterator.next();
-                FrequencyMap<Integer> tfMap = new FrequencyMap<Integer>();
-                for (Map.Entry<Integer, int[]> entry : document.tfMap.entrySet())
+                FrequencyMap<int> tfMap = new FrequencyMap<int>();
+                for (Map.Entry<int, int[]> entry : document.tfMap.entrySet())
                 {
-                    Integer feature = entry.getKey();
+                    int feature = entry.getKey();
                     if (idMap[feature] == -1) continue;
                     tfMap.put(idMap[feature], entry.getValue());
                 }
@@ -131,8 +133,8 @@ public class FileDataSet : AbstractDataSet
     {
         try
         {
-            out.close();
-            final DataInputStream in  = new DataInputStream(new FileInputStream(cache));
+            _out.close();
+            final DataInputStream _in  = new DataInputStream(new FileInputStream(cache));
             return new Iterator<Document>()
             {
                 //@Override

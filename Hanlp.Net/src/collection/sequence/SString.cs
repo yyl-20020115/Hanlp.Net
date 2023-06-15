@@ -45,7 +45,7 @@ public class SString : Comparable<SString>, CharSequence
 
     public SString(String s)
     {
-        value = s.toCharArray();
+        value = s.ToCharArray();
         b = 0;
         e = s.length();
     }
@@ -125,7 +125,7 @@ public class SString : Comparable<SString>, CharSequence
         return len1 - len2;
     }
 
-    public char[] toCharArray()
+    public char[] ToCharArray()
     {
         return Arrays.copyOfRange(value, b, e);
     }

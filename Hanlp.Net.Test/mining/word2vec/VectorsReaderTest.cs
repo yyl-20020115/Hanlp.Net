@@ -1,9 +1,11 @@
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
+[TestClass]
 
 public class VectorsReaderTest : TestCase
 {
+    [TestMethod]
     public void testReadVectorFile() 
     {
         File tempFile = File.createTempFile("hanlp-vector", ".txt");
@@ -19,8 +21,8 @@ public class VectorsReaderTest : TestCase
         VectorsReader reader = new VectorsReader(tempFile.getAbsolutePath());
         reader.readVectorFile();
         assertEquals(2, reader.words);
-        assertEquals(2, reader.vocab.length);
-        assertEquals(2, reader.matrix.length);
+        assertEquals(2, reader.vocab.Length);
+        assertEquals(2, reader.matrix.Length);
         assertEquals(1f, reader.matrix[1][0]);
     }
 }

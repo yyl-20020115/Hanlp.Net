@@ -22,10 +22,10 @@ public class SpeedTokenizer
     /**
      * 预置分词器
      */
-    public static final Segment SEGMENT = new DoubleArrayTrieSegment();
+    public static readonly Segment SEGMENT = new DoubleArrayTrieSegment();
     public static List<Term> segment(String text)
     {
-        return SEGMENT.seg(text.toCharArray());
+        return SEGMENT.seg(text.ToCharArray());
     }
 
     /**

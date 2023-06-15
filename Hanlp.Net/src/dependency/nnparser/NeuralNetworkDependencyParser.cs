@@ -42,7 +42,7 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
         {
             wordList.add(term.word);
         }
-        List<Integer> heads = new ArrayList<Integer>(termList.size());
+        List<int> heads = new ArrayList<int>(termList.size());
         List<String> deprels = new ArrayList<String>(termList.size());
         parser_dll.parse(wordList, posTagList, heads, deprels);
 

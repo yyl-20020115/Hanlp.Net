@@ -19,11 +19,11 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  */
 public class SuffixDictionary
 {
-    BinTrie<Integer> trie;
+    BinTrie<int> trie;
 
     public SuffixDictionary()
     {
-        trie = new BinTrie<Integer>();
+        trie = new BinTrie<int>();
     }
 
     /**
@@ -60,7 +60,7 @@ public class SuffixDictionary
     public int get(String suffix)
     {
         suffix = reverse(suffix);
-        Integer length = trie.get(suffix);
+        int length = trie.get(suffix);
         if (length == null) return 0;
 
         return length;
@@ -85,7 +85,7 @@ public class SuffixDictionary
     public int getLongestSuffixLength(String word)
     {
         word = reverse(word);
-        LinkedList<Map.Entry<String, Integer>> suffixList = trie.commonPrefixSearchWithValue(word);
+        LinkedList<Map.Entry<String, int>> suffixList = trie.commonPrefixSearchWithValue(word);
         if (suffixList.size() == 0) return 0;
         return suffixList.getLast().getValue();
     }
@@ -99,12 +99,12 @@ public class SuffixDictionary
      * 键值对
      * @return
      */
-    public Set<Map.Entry<String, Integer>> entrySet()
+    public Set<Map.Entry<String, int>> entrySet()
     {
-        Set<Map.Entry<String, Integer>> treeSet = new LinkedHashSet<Map.Entry<String, Integer>>();
-        for (Map.Entry<String, Integer> entry : trie.entrySet())
+        Set<Map.Entry<String, int>> treeSet = new LinkedHashSet<Map.Entry<String, int>>();
+        for (Map.Entry<String, int> entry : trie.entrySet())
         {
-            treeSet.add(new AbstractMap.SimpleEntry<String, Integer>(reverse(entry.getKey()), entry.getValue()));
+            treeSet.add(new AbstractMap.SimpleEntry<String, int>(reverse(entry.getKey()), entry.getValue()));
         }
 
         return treeSet;

@@ -27,7 +27,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
         values = new ArrayList<V>();
     }
 
-    public MutableDoubleArrayTrie(Map<String, V> map)
+    public MutableDoubleArrayTrie(Dictionary<String, V> map)
     {
         this();
         putAll(map);
@@ -45,9 +45,9 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
     public String toString()
     {
         final StringBuilder sb = new StringBuilder("MutableDoubleArrayTrie{");
-        sb.append("size=").append(size()).append(',');
-        sb.append("allocated=").append(trie.getBaseArraySize()).append(',');
-        sb.append('}');
+        sb.Append("size=").Append(size()).Append(',');
+        sb.Append("allocated=").Append(trie.getBaseArraySize()).Append(',');
+        sb.Append('}');
         return sb.toString();
     }
 
@@ -174,7 +174,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<String, V>, Iterable<Map.Entr
     }
 
     //@Override
-    public void putAll(Map<? : String, ? : V> m)
+    public void putAll(Dictionary<? : String, ? : V> m)
     {
         for (Entry<? : String, ? : V> entry : m.entrySet())
         {

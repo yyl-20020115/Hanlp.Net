@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
  *
  * @author hankcs
  */
-public class DocVectorModel : AbstractVectorModel<Integer>
+public class DocVectorModel : AbstractVectorModel<int>
 {
     private final WordVectorModel wordVectorModel;
 
@@ -50,7 +50,7 @@ public class DocVectorModel : AbstractVectorModel<Integer>
      * @param query 查询语句（或者说一个文档的内容）
      * @return
      */
-    public List<Map.Entry<Integer, Float>> nearest(String query)
+    public List<Map.Entry<int, Float>> nearest(String query)
     {
         return queryNearest(query, 10);
     }

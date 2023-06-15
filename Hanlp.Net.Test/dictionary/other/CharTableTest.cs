@@ -1,14 +1,16 @@
 namespace com.hankcs.hanlp.dictionary.other;
 
 
-
+[TestClass]
 public class CharTableTest : TestCase
 {
+    [TestMethod]
     public void testNormalization() 
     {
         Console.WriteLine(CharTable.convert('？'));
         assertEquals('(', CharTable.convert('（'));
     }
+    [TestMethod]
     public void testNormalizeSpace() {
         assertEquals(CharTable.convert('\t'),' ');
         assertEquals(CharTable.convert('\n'),' ');
@@ -92,7 +94,7 @@ public class CharTableTest : TestCase
 //        CONVERT['眾'] = '众';
 //        CONVERT['龕'] = '龛';
 //        CONVERT['製'] = '制';
-//        for (int i = 0; i < CONVERT.length; i++)
+//        for (int i = 0; i < CONVERT.Length; i++)
 //        {
 //            if (CONVERT[i] == '\u0000')
 //            {
@@ -100,9 +102,9 @@ public class CharTableTest : TestCase
 //                else CONVERT[i] = ' ';
 //            }
 //        }
-//        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(HanLP.Config.CharTablePath));
-//        out.writeObject(CONVERT);
-//        out.close();
+//        ObjectOutputStream _out = new ObjectOutputStream(new FileOutputStream(HanLP.Config.CharTablePath));
+//        _out.writeObject(CONVERT);
+//        _out.close();
 //    }
 //
 //    public void testImportSingleCharFromTraditionalChineseDictionary() 
@@ -113,27 +115,27 @@ public class CharTableTest : TestCase
 ////        for (Map.Entry<String, String> entry : dictionary.entrySet())
 ////        {
 ////            String key = entry.getKey();
-////            if (key.length() != 1) continue;
+////            if (key.Length() != 1) continue;
 ////            String value = entry.getValue();
 ////            char t = key.charAt(0);
 ////            char s = value.charAt(0);
 //////            if (CONVERT[t] != s)
 //////            {
-//////                System.out.printf("%s\t%c=%c\n", entry, t, CONVERT[t]);
+//////                Console.printf("%s\t%c=%c\n", entry, t, CONVERT[t]);
 //////            }
 ////            CONVERT[t] = s;
 ////        }
 ////
-////        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(HanLP.Config.CharTablePath));
-////        out.writeObject(CONVERT);
-////        out.close();
+////        ObjectOutputStream _out = new ObjectOutputStream(new FileOutputStream(HanLP.Config.CharTablePath));
+////        _out.writeObject(CONVERT);
+////        _out.close();
 //    }
 //
 //    public void testDumpCharTable() 
 //    {
 //        BufferedWriter bw = IOUtil.newBufferedWriter(HanLP.Config.CharTablePath.replace(".bin.yes", ".txt"));
 //        char[] CONVERT = CharTable.CONVERT;
-//        for (int i = 0; i < CONVERT.length; i++)
+//        for (int i = 0; i < CONVERT.Length; i++)
 //        {
 //            if (i != CONVERT[i])
 //            {

@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  */
 public class Config
 {
-    public static final String CWS_MODEL_FILE = HanLP.Config.PerceptronCWSModelPath;
-    public static final String POS_MODEL_FILE = HanLP.Config.PerceptronPOSModelPath;
-    public static final String NER_MODEL_FILE = HanLP.Config.PerceptronNERModelPath;
+    public static readonly string CWS_MODEL_FILE = HanLP.Config.PerceptronCWSModelPath;
+    public static readonly string POS_MODEL_FILE = HanLP.Config.PerceptronPOSModelPath;
+    public static readonly string NER_MODEL_FILE = HanLP.Config.PerceptronNERModelPath;
 }

@@ -761,14 +761,14 @@ public class Nature
      */
     public static final Nature begin = new Nature("begin");
 
-    private static TreeMap<String, Integer> idMap;
+    private static TreeMap<String, int> idMap;
     private static Nature[] values;
     private int ordinal;
     private final String name;
 
     private Nature(String name)
     {
-        if (idMap == null) idMap = new TreeMap<String, Integer>();
+        if (idMap == null) idMap = new TreeMap<String, int>();
         assert !idMap.containsKey(name);
         this.name = name;
         ordinal = idMap.size();
@@ -823,7 +823,7 @@ public class Nature
      */
     public static final Nature fromString(String name)
     {
-        Integer id = idMap.get(name);
+        int id = idMap.get(name);
         if (id == null)
             return null;
         return values[id];

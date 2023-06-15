@@ -45,7 +45,7 @@ public class MaxEntModel
     /**
      * 将特征与一个数字（下标）对应起来的映射map
      */
-    DoubleArrayTrie<Integer> pmap;
+    DoubleArrayTrie<int> pmap;
 
     /**
      * 预测分布
@@ -122,7 +122,7 @@ public class MaxEntModel
         int[] scontexts = new int[context.length];
         for (int i = 0; i < context.length; i++)
         {
-            Integer ci = pmap.get(context[i]);
+            int ci = pmap.get(context[i]);
             scontexts[i] = ci == null ? -1 : ci;
         }
         prior.logPrior(outsums);
@@ -195,57 +195,57 @@ public class MaxEntModel
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            DataOutputStream out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
             br.readLine();  // type
-            m.correctionConstant = Integer.parseInt(br.readLine());  // correctionConstant
-            out.writeInt(m.correctionConstant);
+            m.correctionConstant = int.parseInt(br.readLine());  // correctionConstant
+            _out.writeInt(m.correctionConstant);
             m.correctionParam = Double.parseDouble(br.readLine());  // getCorrectionParameter
-            out.writeDouble(m.correctionParam);
+            _out.writeDouble(m.correctionParam);
             // label
-            int numOutcomes = Integer.parseInt(br.readLine());
-            out.writeInt(numOutcomes);
+            int numOutcomes = int.parseInt(br.readLine());
+            _out.writeInt(numOutcomes);
             String[] outcomeLabels = new String[numOutcomes];
             m.outcomeNames = outcomeLabels;
             for (int i = 0; i < numOutcomes; i++)
             {
                 outcomeLabels[i] = br.readLine();
-                TextUtility.writeString(outcomeLabels[i], out);
+                TextUtility.writeString(outcomeLabels[i], _out);
             }
             // pattern
-            int numOCTypes = Integer.parseInt(br.readLine());
-            out.writeInt(numOCTypes);
+            int numOCTypes = int.parseInt(br.readLine());
+            _out.writeInt(numOCTypes);
             int[][] outcomePatterns = new int[numOCTypes][];
             for (int i = 0; i < numOCTypes; i++)
             {
                 StringTokenizer tok = new StringTokenizer(br.readLine(), " ");
                 int[] infoInts = new int[tok.countTokens()];
-                out.writeInt(infoInts.length);
+                _out.writeInt(infoInts.length);
                 for (int j = 0; tok.hasMoreTokens(); j++)
                 {
-                    infoInts[j] = Integer.parseInt(tok.nextToken());
-                    out.writeInt(infoInts[j]);
+                    infoInts[j] = int.parseInt(tok.nextToken());
+                    _out.writeInt(infoInts[j]);
                 }
                 outcomePatterns[i] = infoInts;
             }
             // feature
-            int NUM_PREDS = Integer.parseInt(br.readLine());
-            out.writeInt(NUM_PREDS);
+            int NUM_PREDS = int.parseInt(br.readLine());
+            _out.writeInt(NUM_PREDS);
             String[] predLabels = new String[NUM_PREDS];
-            m.pmap = new DoubleArrayTrie<Integer>();
-            TreeMap<String, Integer> tmpMap = new TreeMap<String, Integer>();
+            m.pmap = new DoubleArrayTrie<int>();
+            TreeMap<String, int> tmpMap = new TreeMap<String, int>();
             for (int i = 0; i < NUM_PREDS; i++)
             {
                 predLabels[i] = br.readLine();
                 assert !tmpMap.containsKey(predLabels[i]) : "重复的键： " + predLabels[i] + " 请使用 -Dfile.encoding=UTF-8 训练";
-                TextUtility.writeString(predLabels[i], out);
+                TextUtility.writeString(predLabels[i], _out);
                 tmpMap.put(predLabels[i], i);
             }
             m.pmap.build(tmpMap);
-            for (Map.Entry<String, Integer> entry : tmpMap.entrySet())
+            for (Map.Entry<String, int> entry : tmpMap.entrySet())
             {
-                out.writeInt(entry.getValue());
+                _out.writeInt(entry.getValue());
             }
-            m.pmap.save(out);
+            m.pmap.save(_out);
             // params
             Context[] params = new Context[NUM_PREDS];
             int pid = 0;
@@ -262,7 +262,7 @@ public class MaxEntModel
                     for (int k = 1; k < outcomePatterns[i].length; k++)
                     {
                         contextParameters[k - 1] = Double.parseDouble(br.readLine());
-                        out.writeDouble(contextParameters[k - 1]);
+                        _out.writeDouble(contextParameters[k - 1]);
                     }
                     params[pid] = new Context(outcomePattern, contextParameters);
                     pid++;
@@ -273,7 +273,7 @@ public class MaxEntModel
             m.prior.setLabels(outcomeLabels);
             // eval
             m.evalParams = new EvalParameters(params, m.correctionParam, m.correctionConstant, outcomeLabels.length);
-            out.close();
+            _out.close();
         }
         catch (Exception e)
         {
@@ -314,12 +314,12 @@ public class MaxEntModel
         // feature
         int NUM_PREDS = byteArray.nextInt();
         String[] predLabels = new String[NUM_PREDS];
-        m.pmap = new DoubleArrayTrie<Integer>();
+        m.pmap = new DoubleArrayTrie<int>();
         for (int i = 0; i < NUM_PREDS; i++)
         {
             predLabels[i] = byteArray.nextString();
         }
-        Integer[] v = new Integer[NUM_PREDS];
+        int[] v = new int[NUM_PREDS];
         for (int i = 0; i < v.length; i++)
         {
             v[i] = byteArray.nextInt();

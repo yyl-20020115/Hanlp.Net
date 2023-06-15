@@ -72,19 +72,19 @@ public class MDAG : ICacheAble
     protected int transitionCount;
 
     //@Override
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
         simplify();
-        out.writeInt(charTreeSet.size());
+        _out.writeInt(charTreeSet.size());
         for (Character character : charTreeSet)
         {
-            out.writeChar(character);
+            _out.writeChar(character);
         }
-        simplifiedSourceNode.save(out);
-        out.writeInt(mdagDataArray.length);
+        simplifiedSourceNode.save(_out);
+        _out.writeInt(mdagDataArray.length);
         for (SimpleMDAGNode simpleMDAGNode : mdagDataArray)
         {
-            simpleMDAGNode.save(out);
+            simpleMDAGNode.save(_out);
         }
     }
 
@@ -168,7 +168,7 @@ public class MDAG : ICacheAble
      *
      * @param dataFile a {@link java.io.File} representation of a file
      *                 containing the Strings that the MDAG will contain
-     * @throws java.io.IOException if {@code datafile} cannot be opened, or a read operation on it cannot be carried out
+     * @throws java.io.IOException if {@code datafile} cannot be opened, or a read operation on it cannot be carried _out
      */
     public MDAG(File dataFile) 
     {
@@ -297,7 +297,7 @@ public class MDAG : ICacheAble
     private void splitTransitionPath(MDAGNode originNode, String storedStringSubstr)
     {
         HashMap<String, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(originNode, storedStringSubstr);
-        Integer toFirstConfluenceNodeTransitionCharIndex = (Integer) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
+        int toFirstConfluenceNodeTransitionCharIndex = (int) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
         MDAGNode firstConfluenceNode = (MDAGNode) firstConfluenceNodeDataHashMap.get("confluenceNode");
 
         if (firstConfluenceNode != null)
@@ -679,7 +679,7 @@ public class MDAG : ICacheAble
         //in the _transition path from sourceNode corresponding to prefixString.
         HashMap<String, Object> firstConfluenceNodeDataHashMap = getTransitionPathFirstConfluenceNodeData(sourceNode, prefixString);
         MDAGNode firstConfluenceNodeInPrefix = (MDAGNode) firstConfluenceNodeDataHashMap.get("confluenceNode");
-        Integer toFirstConfluenceNodeTransitionCharIndex = (Integer) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
+        int toFirstConfluenceNodeTransitionCharIndex = (int) firstConfluenceNodeDataHashMap.get("toConfluenceNodeTransitionCharIndex");
         /////
 
         //Remove the register entries of all the nodes in the prefixString _transition path up to the first confluence node
@@ -826,12 +826,12 @@ public class MDAG : ICacheAble
     {
         if (sourceNode != null)      //if the MDAG hasn't been simplified
         {
-            MDAGNode targetNode = sourceNode.transition(str.toCharArray());
+            MDAGNode targetNode = sourceNode.transition(str.ToCharArray());
             return (targetNode != null && targetNode.isAcceptNode());
         }
         else
         {
-            SimpleMDAGNode targetNode = simplifiedSourceNode.transition(mdagDataArray, str.toCharArray());
+            SimpleMDAGNode targetNode = simplifiedSourceNode.transition(mdagDataArray, str.ToCharArray());
             return (targetNode != null && targetNode.isAcceptNode());
         }
     }
@@ -1040,7 +1040,7 @@ public class MDAG : ICacheAble
      * @param nodeObj an Object
      * @return if {@code nodeObj} is either an MDAGNode or a SimplifiedMDAGNode,
      * true if the node is accepting, false otherwise
-     * throws IllegalArgumentException      if {@code nodeObj} is not an MDAGNode or SimplifiedMDAGNode
+     *       if {@code nodeObj} is not an MDAGNode or SimplifiedMDAGNode
      */
     private static bool isAcceptNode(Object nodeObj)
     {
@@ -1062,13 +1062,13 @@ public class MDAG : ICacheAble
 //    public String toString()
 //    {
 //        final StringBuilder sb = new StringBuilder("MDAG{");
-//        sb.append("sourceNode=").append(sourceNode);
-//        sb.append(", simplifiedSourceNode=").append(simplifiedSourceNode);
-//        sb.append(", equivalenceClassMDAGNodeHashMap=").append(equivalenceClassMDAGNodeHashMap);
-//        sb.append(", mdagDataArray=").append(Arrays.toString(mdagDataArray));
-//        sb.append(", charTreeSet=").append(charTreeSet);
-//        sb.append(", transitionCount=").append(transitionCount);
-//        sb.append('}');
+//        sb.Append("sourceNode=").Append(sourceNode);
+//        sb.Append(", simplifiedSourceNode=").Append(simplifiedSourceNode);
+//        sb.Append(", equivalenceClassMDAGNodeHashMap=").Append(equivalenceClassMDAGNodeHashMap);
+//        sb.Append(", mdagDataArray=").Append(Arrays.toString(mdagDataArray));
+//        sb.Append(", charTreeSet=").Append(charTreeSet);
+//        sb.Append(", transitionCount=").Append(transitionCount);
+//        sb.Append('}');
 //        return sb.toString();
 //    }
 

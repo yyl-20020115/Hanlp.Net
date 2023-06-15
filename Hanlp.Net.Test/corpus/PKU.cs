@@ -8,6 +8,9 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus;
 
 
@@ -22,16 +25,16 @@ public class PKU
     public static String PKU199801_TEST = "data/test/pku98/199801-test.txt";
     public static String POS_MODEL = "/pos.bin";
     public static String NER_MODEL = "/ner.bin";
-    public static final String PKU_98 = TestUtility.ensureTestData("pku98", "http://hanlp.linrunsoft.com/release/corpus/pku98.zip");
+    public static readonly string PKU_98 = TestUtility.ensureTestData("pku98", "http://hanlp.linrunsoft.com/release/corpus/pku98.zip");
 
-    static
+    static PKU()
     {
         PKU199801 = PKU_98 + "/199801.txt";
         POS_MODEL = PKU_98 + POS_MODEL;
         NER_MODEL = PKU_98 +NER_MODEL;
         if (!IOUtil.isFileExisted(PKU199801_TRAIN))
         {
-            ArrayList<String> all = new ArrayList<String>();
+            List<String> all = new ();
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(PKU199801);
             while (lineIterator.hasNext())
             {

@@ -36,17 +36,17 @@ public class BM25
     /**
      * 文档中每个句子中的每个词与词频
      */
-    Map<String, Integer>[] f;
+    Dictionary<String, int>[] f;
 
     /**
      * 文档中全部词语与出现在几个句子中
      */
-    Map<String, Integer> df;
+    Dictionary<String, int> df;
 
     /**
      * IDF
      */
-    Map<String, Double> idf;
+    Dictionary<String, Double> idf;
 
     /**
      * 调节因子
@@ -68,7 +68,7 @@ public class BM25
         }
         avgdl /= D;
         f = new Map[D];
-        df = new TreeMap<String, Integer>();
+        df = new TreeMap<String, int>();
         idf = new TreeMap<String, Double>();
         init();
     }
@@ -81,27 +81,27 @@ public class BM25
         int index = 0;
         for (List<String> sentence : docs)
         {
-            Map<String, Integer> tf = new TreeMap<String, Integer>();
+            Dictionary<String, int> tf = new TreeMap<String, int>();
             for (String word : sentence)
             {
-                Integer freq = tf.get(word);
+                int freq = tf.get(word);
                 freq = (freq == null ? 0 : freq) + 1;
                 tf.put(word, freq);
             }
             f[index] = tf;
-            for (Map.Entry<String, Integer> entry : tf.entrySet())
+            for (Map.Entry<String, int> entry : tf.entrySet())
             {
                 String word = entry.getKey();
-                Integer freq = df.get(word);
+                int freq = df.get(word);
                 freq = (freq == null ? 0 : freq) + 1;
                 df.put(word, freq);
             }
             ++index;
         }
-        for (Map.Entry<String, Integer> entry : df.entrySet())
+        for (Map.Entry<String, int> entry : df.entrySet())
         {
             String word = entry.getKey();
-            Integer freq = entry.getValue();
+            int freq = entry.getValue();
             idf.put(word, Math.log(D - freq + 0.5) - Math.log(freq + 0.5));
         }
     }
@@ -120,7 +120,7 @@ public class BM25
         {
             if (!f[index].containsKey(word)) continue;
             int d = docs.get(index).size();
-            Integer tf = f[index].get(word);
+            int tf = f[index].get(word);
             score += (idf.get(word) * tf * (k1 + 1)
                     / (tf + k1 * (1 - b + b * d
                                                 / avgdl)));

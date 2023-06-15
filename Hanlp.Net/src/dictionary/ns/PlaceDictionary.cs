@@ -76,7 +76,7 @@ public class PlaceDictionary
         StringBuilder sbPattern = new StringBuilder(nsList.size());
         for (NS ns : nsList)
         {
-            sbPattern.append(ns.toString());
+            sbPattern.Append(ns.toString());
         }
         String pattern = sbPattern.toString();
         final Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
@@ -88,7 +88,7 @@ public class PlaceDictionary
                 StringBuilder sbName = new StringBuilder();
                 for (int i = begin; i < end; ++i)
                 {
-                    sbName.append(wordArray[i].realWord);
+                    sbName.Append(wordArray[i].realWord);
                 }
                 String name = sbName.toString();
                 // 对一些bad case做出调整
@@ -97,7 +97,7 @@ public class PlaceDictionary
                 // 正式算它是一个名字
                 if (HanLP.Config.DEBUG)
                 {
-                    System.out.printf("识别出地名：%s %s\n", name, value);
+                    System._out.printf("识别出地名：%s %s\n", name, value);
                 }
                 int offset = 0;
                 for (int i = 0; i < begin; ++i)

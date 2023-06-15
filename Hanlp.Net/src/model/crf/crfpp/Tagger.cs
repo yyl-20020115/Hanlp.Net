@@ -140,17 +140,17 @@ public abstract class Tagger
         return 0.0;
     }
 
-    public List<Integer> emissionVector(int i, int j)
+    public List<int> emissionVector(int i, int j)
     {
         return null;
     }
 
-    public List<Integer> nextTransitionVector(int i, int j, int k)
+    public List<int> nextTransitionVector(int i, int j, int k)
     {
         return null;
     }
 
-    public List<Integer> prevTransitionVector(int i, int j, int k)
+    public List<int> prevTransitionVector(int i, int j, int k)
     {
         return null;
     }

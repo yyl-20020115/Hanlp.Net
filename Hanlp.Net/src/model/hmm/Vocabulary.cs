@@ -16,11 +16,11 @@ namespace com.hankcs.hanlp.model.hmm;
  */
 public class Vocabulary : IStringIdMap
 {
-    private BinTrie<Integer> trie;
+    private BinTrie<int> trie;
     bool mutable;
     private static final int UNK = 0;
 
-    public Vocabulary(BinTrie<Integer> trie, bool mutable)
+    public Vocabulary(BinTrie<int> trie, bool mutable)
     {
         this.trie = trie;
         this.mutable = mutable;
@@ -28,14 +28,14 @@ public class Vocabulary : IStringIdMap
 
     public Vocabulary()
     {
-        this(new BinTrie<Integer>(), true);
+        this(new BinTrie<int>(), true);
         trie.put("\t", UNK);
     }
 
     //@Override
     public int idOf(String string)
     {
-        Integer id = trie.get(string);
+        int id = trie.get(string);
         if (id == null)
         {
             if (mutable)

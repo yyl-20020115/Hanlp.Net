@@ -42,11 +42,11 @@ public class TextProcessUtility
      * @param keywordArray
      * @return
      */
-    public static Map<String, Integer> getKeywordCounts(String[] keywordArray)
+    public static Dictionary<String, int> getKeywordCounts(String[] keywordArray)
     {
-        Map<String, Integer> counts = new HashMap<String, Integer>();
+        Dictionary<String, int> counts = new HashMap<String, int>();
 
-        Integer counter;
+        int counter;
         for (int i = 0; i < keywordArray.length; ++i)
         {
             counter = counts.get(keywordArray[i]);
@@ -66,9 +66,9 @@ public class TextProcessUtility
      * @param path
      * @return
      */
-    public static Map<String, String[]> loadCorpus(String path)
+    public static Dictionary<String, String[]> loadCorpus(String path)
     {
-        Map<String, String[]> dataSet = new TreeMap<String, String[]>();
+        Dictionary<String, String[]> dataSet = new TreeMap<String, String[]>();
         File root = new File(path);
         File[] folders = root.listFiles();
         if (folders == null) return null;
@@ -94,7 +94,7 @@ public class TextProcessUtility
      * @param folderPath
      * @return
      */
-    public static Map<String, String[]> loadCorpusWithException(String folderPath, String charsetName) 
+    public static Dictionary<String, String[]> loadCorpusWithException(String folderPath, String charsetName) 
     {
         if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
@@ -102,7 +102,7 @@ public class TextProcessUtility
         if (!root.isDirectory())
             throw new IllegalArgumentException(String.format("目录 %s 不是一个目录", root.getAbsolutePath()));
 
-        Map<String, String[]> dataSet = new TreeMap<String, String[]>();
+        Dictionary<String, String[]> dataSet = new TreeMap<String, String[]>();
         File[] folders = root.listFiles();
         if (folders == null) return null;
         for (File folder : folders)
@@ -136,7 +136,7 @@ public class TextProcessUtility
         return new String(targetArray, charsetName);
     }
 
-    public static Map<String, String[]> loadCorpusWithException(String corpusPath) 
+    public static Dictionary<String, String[]> loadCorpusWithException(String corpusPath) 
     {
         return loadCorpusWithException(corpusPath, "UTF-8");
     }

@@ -34,9 +34,9 @@ public class ArrayCompare
         {
             long c1 = arrayA[k];
             long c2 = arrayB[k];
-            if (!c1.equals(c2))
+            if (c1!=c2)
             {
-                return c1.compareTo(c2);
+                return c1.CompareTo(c2);
             }
             ++k;
         }

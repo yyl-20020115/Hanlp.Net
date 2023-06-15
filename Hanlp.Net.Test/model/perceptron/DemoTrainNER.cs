@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -15,9 +17,11 @@ namespace com.hankcs.hanlp.model.perceptron;
 /**
  * @author hankcs
  */
+[TestClass]
+
 public class DemoTrainNER
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) 
     {
         PerceptronTrainer trainer = new NERTrainer();
         trainer.train("data/test/pku98/199801.txt", Config.NER_MODEL_FILE);
@@ -25,17 +29,19 @@ public class DemoTrainNER
 
     public static void trainYourNER()
     {
-        PerceptronTrainer trainer = new NERTrainer()
+        PerceptronTrainer trainer = new PT();
+    }
+
+    public class PT: NERTrainer
+    {
+        //@Override
+        protected TagSet createTagSet()
         {
-            //@Override
-            protected TagSet createTagSet()
-            {
-                NERTagSet tagSet = new NERTagSet();
-                tagSet.nerLabels.add("YourNER1");
-                tagSet.nerLabels.add("YourNER2");
-                tagSet.nerLabels.add("YourNER3");
-                return tagSet;
-            }
-        };
+            NERTagSet tagSet = new NERTagSet();
+            tagSet.nerLabels.add("YourNER1");
+            tagSet.nerLabels.add("YourNER2");
+            tagSet.nerLabels.add("YourNER3");
+            return tagSet;
+        }
     }
 }

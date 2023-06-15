@@ -54,7 +54,7 @@ public class JapanesePersonRecognition
             {
                 if (label == JapanesePersonDictionary.X)
                 {
-                    sbName.append(key);
+                    sbName.Append(key);
                     ++appendTimes;
                     activeLine = offset + 1;
                 }
@@ -63,7 +63,7 @@ public class JapanesePersonRecognition
             {
                 if (label == JapanesePersonDictionary.M)
                 {
-                    sbName.append(key);
+                    sbName.Append(key);
                     ++appendTimes;
                 }
                 else

@@ -210,8 +210,8 @@ public class Document : Serializable
         StringBuilder sb = new StringBuilder();
         for (Sentence sentence : sentenceList)
         {
-            sb.append(sentence);
-            sb.append(' ');
+            sb.Append(sentence);
+            sb.Append(' ');
         }
         if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
         return sb.toString();

@@ -116,7 +116,7 @@ public class CommonSuffixExtractor
         StringBuilder sbResult = new StringBuilder();
         for (Term term : termList)
         {
-            sbResult.append(term.word);
+            sbResult.Append(term.word);
         }
 
         return sbResult.toString();

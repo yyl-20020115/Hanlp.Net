@@ -30,8 +30,8 @@ public final class VectorsReader
             br = new BufferedReader(r);
 
             String line = br.readLine();
-            words = Integer.parseInt(line.split("\\s+")[0].trim());
-            size = Integer.parseInt(line.split("\\s+")[1].trim());
+            words = int.parseInt(line.split("\\s+")[0].trim());
+            size = int.parseInt(line.split("\\s+")[1].trim());
 
             vocab = new String[words];
             matrix = new float[words][];

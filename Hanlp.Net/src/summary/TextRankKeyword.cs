@@ -61,7 +61,7 @@ public class TextRankKeyword : KeywordExtractor
      * @param content
      * @return
      */
-    public Map<String, Float> getTermAndRank(String content)
+    public Dictionary<String, Float> getTermAndRank(String content)
     {
         assert content != null;
         List<Term> termList = defaultSegment.seg(content);
@@ -75,17 +75,17 @@ public class TextRankKeyword : KeywordExtractor
      * @param size
      * @return
      */
-    public Map<String, Float> getTermAndRank(String content, int size)
+    public Dictionary<String, Float> getTermAndRank(String content, int size)
     {
-        Map<String, Float> map = getTermAndRank(content);
-        Map<String, Float> result = top(size, map);
+        Dictionary<String, Float> map = getTermAndRank(content);
+        Dictionary<String, Float> result = top(size, map);
 
         return result;
     }
 
-    private Map<String, Float> top(int size, Map<String, Float> map)
+    private Dictionary<String, Float> top(int size, Dictionary<String, Float> map)
     {
-        Map<String, Float> result = new LinkedHashMap<String, Float>();
+        Dictionary<String, Float> result = new LinkedHashMap<String, Float>();
         for (Map.Entry<String, Float> entry : new MaxHeap<Map.Entry<String, Float>>(size, new Comparator<Map.Entry<String, Float>>()
         {
             //@Override
@@ -106,7 +106,7 @@ public class TextRankKeyword : KeywordExtractor
      * @param termList
      * @return
      */
-    public Map<String, Float> getTermAndRank(List<Term> termList)
+    public Dictionary<String, Float> getTermAndRank(List<Term> termList)
     {
         List<String> wordList = new ArrayList<String>(termList.size());
         for (Term t : termList)
@@ -116,8 +116,8 @@ public class TextRankKeyword : KeywordExtractor
                 wordList.add(t.word);
             }
         }
-//        System.out.println(wordList);
-        Map<String, Set<String>> words = new TreeMap<String, Set<String>>();
+//        System._out.println(wordList);
+        Dictionary<String, Set<String>> words = new TreeMap<String, Set<String>>();
         Queue<String> que = new LinkedList<String>();
         for (String w : wordList)
         {
@@ -142,8 +142,8 @@ public class TextRankKeyword : KeywordExtractor
             }
             que.offer(w);
         }
-//        System.out.println(words);
-        Map<String, Float> score = new HashMap<String, Float>();
+//        System._out.println(words);
+        Dictionary<String, Float> score = new HashMap<String, Float>();
         //依据TF来设置初值
         for (Map.Entry<String, Set<String>> entry : words.entrySet())
         {
@@ -151,7 +151,7 @@ public class TextRankKeyword : KeywordExtractor
         }
         for (int i = 0; i < max_iter; ++i)
         {
-            Map<String, Float> m = new HashMap<String, Float>();
+            Dictionary<String, Float> m = new HashMap<String, Float>();
             float max_diff = 0;
             for (Map.Entry<String, Set<String>> entry : words.entrySet())
             {

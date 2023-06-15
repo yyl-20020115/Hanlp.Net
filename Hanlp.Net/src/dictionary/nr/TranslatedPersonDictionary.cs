@@ -23,7 +23,7 @@ public class TranslatedPersonDictionary
     static String path = HanLP.Config.TranslatedPersonDictionaryPath;
     static DoubleArrayTrie<Boolean> trie;
 
-    static
+    static TranslatedPersonDictionary()
     {
         long start = System.currentTimeMillis();
         if (!load())
@@ -43,16 +43,16 @@ public class TranslatedPersonDictionary
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             String line;
             TreeMap<String, Boolean> map = new TreeMap<String, Boolean>();
-            TreeMap<Character, Integer> charFrequencyMap = new TreeMap<Character, Integer>();
+            TreeMap<Character, int> charFrequencyMap = new TreeMap<Character, int>();
             while ((line = br.readLine()) != null)
             {
                 map.put(line, true);
                 // 音译人名常用字词典自动生成
-                for (char c : line.toCharArray())
+                for (char c : line.ToCharArray())
                 {
                     // 排除一些过于常用的字
                     if ("不赞".indexOf(c) >= 0) continue;
-                    Integer f = charFrequencyMap.get(c);
+                    int f = charFrequencyMap.get(c);
                     if (f == null) f = 0;
                     charFrequencyMap.put(c, f + 1);
                 }
@@ -62,7 +62,7 @@ public class TranslatedPersonDictionary
 //            map.put(String.valueOf('-'), true);
 //            map.put(String.valueOf('—'), true);
             // 将常用字也加进去
-            for (Map.Entry<Character, Integer> entry : charFrequencyMap.entrySet())
+            for (Map.Entry<Character, int> entry : charFrequencyMap.entrySet())
             {
                 if (entry.getValue() < 10) continue;
                 map.put(String.valueOf(entry.getKey()), true);

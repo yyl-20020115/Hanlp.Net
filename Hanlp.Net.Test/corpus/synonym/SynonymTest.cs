@@ -2,6 +2,7 @@ namespace com.hankcs.hanlp.corpus.synonym;
 
 
 
+[TestClass]
 public class SynonymTest : TestCase
 {
 //    public void testCreate() 

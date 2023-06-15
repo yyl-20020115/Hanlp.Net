@@ -83,28 +83,28 @@ public class DoubleArray : Serializable
      */
     public void save(OutputStream stream) 
     {
-        DataOutputStream out = null;
+        DataOutputStream _out = null;
         try
         {
-            out = new DataOutputStream(new BufferedOutputStream(
+            _out = new DataOutputStream(new BufferedOutputStream(
                     stream));
             for (int i = 0; i < _array.length; ++i)
             {
-                out.writeInt(_array[i]);
+                _out.writeInt(_array[i]);
             }
         }
         finally
         {
-            if (out != null)
+            if (_out != null)
             {
-                out.close();
+                _out.close();
             }
         }
     }
 
-    private void writeObject(ObjectOutputStream out) 
+    private void writeObject(ObjectOutputStream _out) 
     {
-        out.writeObject(_array);
+        _out.writeObject(_array);
     }
 
     private void readObject(ObjectInputStream in) , ClassNotFoundException
@@ -166,11 +166,11 @@ public class DoubleArray : Serializable
      * @param maxResults
      * @return found keys and values
      */
-    public List<Pair<Integer, Integer>> commonPrefixSearch(byte[] key,
+    public List<Pair<int, int>> commonPrefixSearch(byte[] key,
                                                            int offset,
                                                            int maxResults)
     {
-        ArrayList<Pair<Integer, Integer>> result = new ArrayList<Pair<Integer, Integer>>();
+        ArrayList<Pair<int, int>> result = new ArrayList<Pair<int, int>>();
         int unit = _array[0];
         int nodePos = 0;
         // nodePos ^= unit.offset();
@@ -195,7 +195,7 @@ public class DoubleArray : Serializable
                 if (result.size() < maxResults)
                 {
                     // result.add(new Pair<i, _array[nodePos].value());
-                    result.add(new Pair<Integer, Integer>(i + 1, _array[nodePos] & ((1 << 31) - 1)));
+                    result.add(new Pair<int, int>(i + 1, _array[nodePos] & ((1 << 31) - 1)));
                 }
             }
         }

@@ -2,12 +2,13 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
 
 
 
+[TestClass]
 public class MutableDoubleArrayTrieIntegerTest : TestCase
 {
     MutableDoubleArrayTrieInteger mdat;
     private int size;
 
-    //@Override
+    [TestInitialize]
     public void setUp() 
     {
         mdat = new MutableDoubleArrayTrieInteger();
@@ -17,6 +18,7 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
             mdat.put(String.valueOf(i), i);
         }
     }
+    [TestMethod]
 
     public void testSaveLoad() 
     {

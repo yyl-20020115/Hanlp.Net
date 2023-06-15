@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.classification.utilities;
  */
 public class CollectionUtility
 {
-    public static <K, V : Comparable<V>> Map<K, V> sortMapByValue(Map<K, V> input, final bool desc)
+    public static <K, V : Comparable<V>> Dictionary<K, V> sortMapByValue(Dictionary<K, V> input, final bool desc)
     {
         LinkedHashMap<K, V> output = new LinkedHashMap<K, V>(input.size());
         ArrayList<Map.Entry<K, V>> entryList = new ArrayList<Map.Entry<K, V>>(input.size());
@@ -37,12 +37,12 @@ public class CollectionUtility
         return output;
     }
 
-    public static <K, V : Comparable<V>> Map<K, V> sortMapByValue(Map<K, V> input)
+    public static <K, V : Comparable<V>> Dictionary<K, V> sortMapByValue(Dictionary<K, V> input)
     {
         return sortMapByValue(input, true);
     }
 
-    public static String max(Map<String, Double> scoreMap)
+    public static String max(Dictionary<String, Double> scoreMap)
     {
         double max = Double.NEGATIVE_INFINITY;
         String best = null;
@@ -82,10 +82,10 @@ public class CollectionUtility
      * @param rate
      * @return
      */
-    public static Map<String, String[]> splitMap(Map<String, String[]> src, double rate)
+    public static Dictionary<String, String[]> splitMap(Dictionary<String, String[]> src, double rate)
     {
         assert 0 <= rate && rate <= 1;
-        Map<String, String[]> output = new TreeMap<String, String[]>();
+        Dictionary<String, String[]> output = new TreeMap<String, String[]>();
         for (Map.Entry<String, String[]> entry : src.entrySet())
         {
             String[][] array = spiltArray(entry.getValue(), rate);

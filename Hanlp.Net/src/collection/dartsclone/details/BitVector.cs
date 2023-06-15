@@ -76,7 +76,7 @@ class BitVector
     /**
      * 在末尾追加
      */
-    void append()
+    void Append()
     {
         if ((_size % UNIT_SIZE) == 0)
         {

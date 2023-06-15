@@ -25,11 +25,11 @@ public class Instance
     {
     }
 
-    protected static int[] toFeatureArray(List<Integer> featureVector)
+    protected static int[] toFeatureArray(List<int> featureVector)
     {
         int[] featureArray = new int[featureVector.size() + 1];   // 最后一列留给转移特征
         int index = -1;
-        for (Integer feature : featureVector)
+        for (int feature : featureVector)
         {
             featureArray[++index] = feature;
         }
@@ -47,7 +47,7 @@ public class Instance
         return tagArray.length;
     }
 
-    protected static void addFeature(CharSequence rawFeature, List<Integer> featureVector, FeatureMap featureMap)
+    protected static void addFeature(CharSequence rawFeature, List<int> featureVector, FeatureMap featureMap)
     {
         int id = featureMap.idOf(rawFeature.toString());
         if (id != -1)
@@ -63,7 +63,7 @@ public class Instance
      * @param featureVector
      * @param featureMap
      */
-    protected static void addFeatureThenClear(StringBuilder rawFeature, List<Integer> featureVector, FeatureMap featureMap)
+    protected static void addFeatureThenClear(StringBuilder rawFeature, List<int> featureVector, FeatureMap featureMap)
     {
         int id = featureMap.idOf(rawFeature.toString());
         if (id != -1)

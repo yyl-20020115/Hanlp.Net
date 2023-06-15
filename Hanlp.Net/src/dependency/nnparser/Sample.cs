@@ -17,14 +17,14 @@ namespace com.hankcs.hanlp.dependency.nnparser;
  */
 public class Sample
 {
-    List<Integer> attributes;  //! sparse vector of attributes
+    List<int> attributes;  //! sparse vector of attributes
     List<Double> classes;  //! dense vector of classes
 
     public Sample()
     {
     }
 
-    public Sample(List<Integer> attributes, List<Double> classes)
+    public Sample(List<int> attributes, List<Double> classes)
     {
         this.attributes = attributes;
         this.classes = classes;

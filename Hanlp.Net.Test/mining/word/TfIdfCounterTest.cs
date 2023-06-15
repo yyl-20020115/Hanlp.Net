@@ -1,8 +1,10 @@
 namespace com.hankcs.hanlp.mining.word;
 
+[TestClass]
 
 public class TfIdfCounterTest : TestCase
 {
+    [TestMethod]
     public void testGetKeywords() 
     {
         TfIdfCounter counter = new TfIdfCounter();
@@ -11,7 +13,7 @@ public class TfIdfCounterTest : TestCase
         counter.add("《女排》", "中国队女排夺北京奥运会金牌重返巅峰，观众欢呼女排女排女排！");
         counter.compute();
 
-        for (Object id : counter.documents())
+        foreach (Object id in counter.documents())
         {
             Console.WriteLine(id + " : " + counter.getKeywordsOf(id, 3));
         }

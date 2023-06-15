@@ -18,11 +18,11 @@ namespace com.hankcs.hanlp.corpus.dictionary.item;
  */
 public class EnumItem<E : Enum<E>>
 {
-    public Map<E, Integer> labelMap;
+    public Dictionary<E, int> labelMap;
 
     public EnumItem()
     {
-        labelMap = new TreeMap<E, Integer>();
+        labelMap = new TreeMap<E, int>();
     }
 
     /**
@@ -30,7 +30,7 @@ public class EnumItem<E : Enum<E>>
      * @param label
      * @param frequency
      */
-    public EnumItem(E label, Integer frequency)
+    public EnumItem(E label, int frequency)
     {
         this();
         labelMap.put(label, frequency);
@@ -51,7 +51,7 @@ public class EnumItem<E : Enum<E>>
 
     public void addLabel(E label)
     {
-        Integer frequency = labelMap.get(label);
+        int frequency = labelMap.get(label);
         if (frequency == null)
         {
             frequency = 1;
@@ -64,9 +64,9 @@ public class EnumItem<E : Enum<E>>
         labelMap.put(label, frequency);
     }
 
-    public void addLabel(E label, Integer frequency)
+    public void addLabel(E label, int frequency)
     {
-        Integer innerFrequency = labelMap.get(label);
+        int innerFrequency = labelMap.get(label);
         if (innerFrequency == null)
         {
             innerFrequency = frequency;
@@ -86,7 +86,7 @@ public class EnumItem<E : Enum<E>>
 
     public int getFrequency(E label)
     {
-        Integer frequency = labelMap.get(label);
+        int frequency = labelMap.get(label);
         if (frequency == null) return 0;
         return frequency;
     }
@@ -95,26 +95,26 @@ public class EnumItem<E : Enum<E>>
     public String toString()
     {
         final StringBuilder sb = new StringBuilder();
-        ArrayList<Map.Entry<E, Integer>> entries = new ArrayList<Map.Entry<E, Integer>>(labelMap.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<E, Integer>>()
+        ArrayList<Map.Entry<E, int>> entries = new ArrayList<Map.Entry<E, int>>(labelMap.entrySet());
+        Collections.sort(entries, new Comparator<Map.Entry<E, int>>()
         {
             //@Override
-            public int compare(Map.Entry<E, Integer> o1, Map.Entry<E, Integer> o2)
+            public int compare(Map.Entry<E, int> o1, Map.Entry<E, int> o2)
             {
                 return -o1.getValue().compareTo(o2.getValue());
             }
         });
-        for (Map.Entry<E, Integer> entry : entries)
+        for (Map.Entry<E, int> entry : entries)
         {
-            sb.append(entry.getKey());
-            sb.append(' ');
-            sb.append(entry.getValue());
-            sb.append(' ');
+            sb.Append(entry.getKey());
+            sb.Append(' ');
+            sb.Append(entry.getValue());
+            sb.Append(' ');
         }
         return sb.toString();
     }
 
-    public static Map.Entry<String, Map.Entry<String, Integer>[]> create(String param)
+    public static Map.Entry<String, Map.Entry<String, int>[]> create(String param)
     {
         if (param == null) return null;
         String[] array = param.split(" ");
@@ -122,15 +122,15 @@ public class EnumItem<E : Enum<E>>
     }
 
     
-    public static Map.Entry<String, Map.Entry<String, Integer>[]> create(String param[])
+    public static Map.Entry<String, Map.Entry<String, int>[]> create(String param[])
     {
         if (param.length % 2 == 0) return null;
         int natureCount = (param.length - 1) / 2;
-        Map.Entry<String, Integer>[] entries = (Map.Entry<String, Integer>[]) Array.newInstance(Map.Entry.class, natureCount);
+        Map.Entry<String, int>[] entries = (Map.Entry<String, int>[]) Array.newInstance(Map.Entry.class, natureCount);
         for (int i = 0; i < natureCount; ++i)
         {
-            entries[i] = new AbstractMap.SimpleEntry<String, Integer>(param[1 + 2 * i], Integer.parseInt(param[2 + 2 * i]));
+            entries[i] = new AbstractMap.SimpleEntry<String, int>(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
         }
-        return new AbstractMap.SimpleEntry<String, Map.Entry<String, Integer>[]>(param[0], entries);
+        return new AbstractMap.SimpleEntry<String, Map.Entry<String, int>[]>(param[0], entries);
     }
 }

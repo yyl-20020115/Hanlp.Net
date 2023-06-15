@@ -20,7 +20,7 @@ public class TriaFrequency : PairFrequency
 {
     public String third;
 
-    private TriaFrequency(String term, Integer frequency)
+    private TriaFrequency(String term, int frequency)
     {
         super(term, frequency);
     }
@@ -71,17 +71,17 @@ public class TriaFrequency : PairFrequency
     public String toString()
     {
         final StringBuilder sb = new StringBuilder();
-        sb.append(getKey().replace(Occurrence.LEFT, '←').replace(Occurrence.RIGHT, '→'));
-        sb.append('=');
-        sb.append(" tf=");
-        sb.append(getValue());
-        sb.append(' ');
-        sb.append("mi=");
-        sb.append(mi);
-        sb.append(" le=");
-        sb.append(le);
-        sb.append(" re=");
-        sb.append(re);
+        sb.Append(getKey().replace(Occurrence.LEFT, '←').replace(Occurrence.RIGHT, '→'));
+        sb.Append('=');
+        sb.Append(" tf=");
+        sb.Append(getValue());
+        sb.Append(' ');
+        sb.Append("mi=");
+        sb.Append(mi);
+        sb.Append(" le=");
+        sb.Append(le);
+        sb.Append(" re=");
+        sb.Append(re);
         return sb.toString();
     }
 }

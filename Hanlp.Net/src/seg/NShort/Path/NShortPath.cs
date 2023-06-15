@@ -186,7 +186,7 @@ public class NShortPath
             while (curNode != 0)
             {
                 element = fromArray[element.from - 1][element.index].GetFirst();
-//                System.out.println(element.from + " " + element.index);
+//                System._out.println(element.from + " " + element.index);
                 stack.push(new PathNode(element.from, element.index));
                 curNode = element.from;
             }
@@ -223,11 +223,11 @@ public class NShortPath
      * 获取唯一一条最短路径，当然最短路径可能不只一条
      * @return
      */
-    public Integer[] getBestPath()
+    public int[] getBestPath()
     {
         assert (vertexCount > 2);
 
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<int> stack = new Stack<int>();
         int curNode = vertexCount - 1, curIndex = 0;
         QueueElement element;
 
@@ -244,7 +244,7 @@ public class NShortPath
             curNode = element.from;
         }
 
-        return (Integer[]) stack.toArray();
+        return (int[]) stack.toArray();
     }
 
 

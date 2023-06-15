@@ -1,8 +1,10 @@
 namespace com.hankcs.hanlp.model.perceptron;
 
+[TestClass]
 
 public class PerceptronNERecognizerTest : TestCase
 {
+    [TestMethod]
     public void testEmptyInput() 
     {
         PerceptronNERecognizer recognizer = new PerceptronNERecognizer();

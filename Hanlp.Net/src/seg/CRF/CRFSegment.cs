@@ -69,8 +69,8 @@ public class CRFSegment : CharacterBasedSegment
         List<Term> termList = new LinkedList<Term>();
         if (HanLP.Config.DEBUG)
         {
-            System.out.println("CRF标注结果");
-            System.out.println(table);
+            System._out.println("CRF标注结果");
+            System._out.println(table);
         }
         int offset = 0;
         OUTER:
@@ -124,12 +124,12 @@ public class CRFSegment : CharacterBasedSegment
         List<String> atomList = new ArrayList<String>(sentence.length);
         final int maxLen = sentence.length - 1;
         final StringBuilder sbAtom = new StringBuilder();
-        out:
+        _out:
         for (int i = 0; i < sentence.length; i++)
         {
             if (sentence[i] >= '0' && sentence[i] <= '9')
             {
-                sbAtom.append(sentence[i]);
+                sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
                     atomList.add(sbAtom.toString());
@@ -139,12 +139,12 @@ public class CRFSegment : CharacterBasedSegment
                 char c = sentence[++i];
                 while (c == '.' || c == '%' || (c >= '0' && c <= '9'))
                 {
-                    sbAtom.append(sentence[i]);
+                    sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
                         atomList.add(sbAtom.toString());
                         sbAtom.setLength(0);
-                        break out;
+                        break _out;
                     }
                     c = sentence[++i];
                 }
@@ -154,7 +154,7 @@ public class CRFSegment : CharacterBasedSegment
             }
             else if (CharacterHelper.isEnglishLetter(sentence[i]))
             {
-                sbAtom.append(sentence[i]);
+                sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
                     atomList.add(sbAtom.toString());
@@ -164,12 +164,12 @@ public class CRFSegment : CharacterBasedSegment
                 char c = sentence[++i];
                 while (CharacterHelper.isEnglishLetter(c))
                 {
-                    sbAtom.append(sentence[i]);
+                    sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
                         atomList.add(sbAtom.toString());
                         sbAtom.setLength(0);
-                        break out;
+                        break _out;
                     }
                     c = sentence[++i];
                 }
@@ -192,12 +192,12 @@ public class CRFSegment : CharacterBasedSegment
         int size = 0;
         final int maxLen = sentence.length - 1;
         final StringBuilder sbAtom = new StringBuilder();
-        out:
+        _out:
         for (int i = 0; i < sentence.length; i++)
         {
             if (sentence[i] >= '0' && sentence[i] <= '9')
             {
-                sbAtom.append(sentence[i]);
+                sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
                     table[size][0] = "M";
@@ -209,14 +209,14 @@ public class CRFSegment : CharacterBasedSegment
                 char c = sentence[++i];
                 while (c == '.' || c == '%' || (c >= '0' && c <= '9'))
                 {
-                    sbAtom.append(sentence[i]);
+                    sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
                         table[size][0] = "M";
                         table[size][1] = sbAtom.toString();
                         ++size;
                         sbAtom.setLength(0);
-                        break out;
+                        break _out;
                     }
                     c = sentence[++i];
                 }
@@ -228,7 +228,7 @@ public class CRFSegment : CharacterBasedSegment
             }
             else if (CharacterHelper.isEnglishLetter(sentence[i]) || sentence[i] == ' ')
             {
-                sbAtom.append(sentence[i]);
+                sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
                     table[size][0] = "W";
@@ -240,14 +240,14 @@ public class CRFSegment : CharacterBasedSegment
                 char c = sentence[++i];
                 while (CharacterHelper.isEnglishLetter(c) || c == ' ')
                 {
-                    sbAtom.append(sentence[i]);
+                    sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
                         table[size][0] = "W";
                         table[size][1] = sbAtom.toString();
                         ++size;
                         sbAtom.setLength(0);
-                        break out;
+                        break _out;
                     }
                     c = sentence[++i];
                 }

@@ -34,9 +34,9 @@ public class PerceptronNameGenderClassifier : PerceptronClassifier
     }
 
     //@Override
-    protected List<Integer> extractFeature(String text, FeatureMap featureMap)
+    protected List<int> extractFeature(String text, FeatureMap featureMap)
     {
-        List<Integer> featureList = new LinkedList<Integer>();
+        List<int> featureList = new LinkedList<int>();
         String givenName = extractGivenName(text);
         // 特征模板1：g[0]
         addFeature("1" + givenName.substring(0, 1), featureMap, featureList);

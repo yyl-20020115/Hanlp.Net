@@ -37,7 +37,7 @@ public class AbstractInexactAction : Comparable<AbstractInexactAction>
 
     public int compareTo(AbstractInexactAction o)
     {
-        return new Integer(seed).compareTo(o.seed);
+        return new int(seed).compareTo(o.seed);
     }
 
     //@Override

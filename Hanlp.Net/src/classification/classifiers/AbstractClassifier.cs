@@ -35,21 +35,21 @@ public abstract class AbstractClassifier : IClassifier
      *
      * @param text
      * @return
-     * @throws IllegalArgumentException
+     * @
      * @throws IllegalStateException
      */
     //@Override
-    public String classify(String text) throws IllegalArgumentException, IllegalStateException
+    public String classify(String text) 
     {
-        Map<String, Double> scoreMap = predict(text);
+        Dictionary<String, Double> scoreMap = predict(text);
 
         return CollectionUtility.max(scoreMap);
     }
 
     //@Override
-    public String classify(Document document) throws IllegalArgumentException, IllegalStateException
+    public String classify(Document document) 
     {
-        Map<String, Double> scoreMap = predict(document);
+        Dictionary<String, Double> scoreMap = predict(document);
 
         return CollectionUtility.max(scoreMap);
     }
@@ -63,7 +63,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(Map<String, String[]> trainingDataSet) throws IllegalArgumentException
+    public void train(Dictionary<String, String[]> trainingDataSet) 
     {
         IDataSet dataSet = new MemoryDataSet();
         logger.start("正在构造训练数据集...");
@@ -72,13 +72,13 @@ public abstract class AbstractClassifier : IClassifier
         for (Map.Entry<String, String[]> entry : trainingDataSet.entrySet())
         {
             String category = entry.getKey();
-            logger.out("[%s]...", category);
+            logger._out("[%s]...", category);
             for (String doc : entry.getValue())
             {
                 dataSet.add(category, doc);
             }
             ++cur;
-            logger.out("%.2f%%...", MathUtility.percentage(cur, total));
+            logger._out("%.2f%%...", MathUtility.percentage(cur, total));
         }
         logger.finish(" 加载完毕\n");
         train(dataSet);
@@ -91,7 +91,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public Map<String, Double> predict(Document document)
+    public Dictionary<String, Double> predict(Document document)
     {
         AbstractModel model = getModel();
         if (model == null)
@@ -104,7 +104,7 @@ public abstract class AbstractClassifier : IClassifier
         }
 
         double[] probs = categorize(document);
-        Map<String, Double> scoreMap = new TreeMap<String, Double>();
+        Dictionary<String, Double> scoreMap = new TreeMap<String, Double>();
         for (int i = 0; i < probs.length; i++)
         {
             scoreMap.put(model.catalog[i], probs[i]);
@@ -113,7 +113,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public int label(Document document) throws IllegalArgumentException, IllegalStateException
+    public int label(Document document) 
     {
         AbstractModel model = getModel();
         if (model == null)

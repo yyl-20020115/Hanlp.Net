@@ -1,18 +1,20 @@
 namespace com.hankcs.hanlp.algorithm;
 
 
+[TestClass]
 
 public class MaxHeapTest : TestCase
 {
-    static MaxHeap<Integer> heap = new MaxHeap<Integer>(5, new Comparator<Integer>()
+    public class Comparer : IComparer<int>
     {
         //@Override
-        public int compare(Integer o1, Integer o2)
+        public int Compare(int o1, int o2)
         {
-            return o1.compareTo(o2);
+            return o1.CompareTo(o2);
         }
-    });
-
+    }
+    static MaxHeap<int> heap = new MaxHeap<int>(5,new Comparer() );
+    [TestInitialize]
     //@Override
     public void setUp() 
     {
@@ -27,9 +29,9 @@ public class MaxHeapTest : TestCase
         heap.add(2);
         heap.add(0);
     }
-
+    [TestMethod]
     public void testToList() 
     {
-        assertEquals("[9, 8, 7, 6, 5]", heap.toList().toString());
+        assertEquals("[9, 8, 7, 6, 5]", heap.toList().ToString());
     }
 }

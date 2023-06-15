@@ -32,9 +32,9 @@ public class Table
         {
             for (String element : line)
             {
-                sb.append(element).append('\t');
+                sb.Append(element).Append('\t');
             }
-            sb.append('\n');
+            sb.Append('\n');
         }
         return sb.toString();
     }

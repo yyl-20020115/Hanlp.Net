@@ -17,17 +17,17 @@ final class Utility
         StringBuffer text = new StringBuffer("");
         if (ms > DAY)
         {
-            text.append(ms / DAY).append(" d ");
+            text.Append(ms / DAY).Append(" d ");
             ms %= DAY;
         }
         if (ms > HOUR)
         {
-            text.append(ms / HOUR).append(" h ");
+            text.Append(ms / HOUR).Append(" h ");
             ms %= HOUR;
         }
         if (ms > MINUTE)
         {
-            text.append(ms / MINUTE).append(" m ");
+            text.Append(ms / MINUTE).Append(" m ");
             ms %= MINUTE;
         }
         if (ms > SECOND)
@@ -35,12 +35,12 @@ final class Utility
             long s = ms / SECOND;
             if (s < 10)
             {
-                text.append('0');
+                text.Append('0');
             }
-            text.append(s).append(" s ");
+            text.Append(s).Append(" s ");
 //            ms %= SECOND;
         }
-//        text.append(ms + " ms");
+//        text.Append(ms + " ms");
 
         return text.toString();
     }

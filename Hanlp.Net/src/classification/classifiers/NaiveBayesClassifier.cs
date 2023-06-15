@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.classification.models;
+
 namespace com.hankcs.hanlp.classification.classifiers;
 
 
@@ -41,7 +43,7 @@ public class NaiveBayesClassifier : AbstractClassifier
 
     public void train(IDataSet dataSet)
     {
-        logger.out("原始数据集大小:%d\n", dataSet.size());
+        logger._out("原始数据集大小:%d\n", dataSet.size());
         //选择最佳特征
         BaseFeatureData featureData = selectFeatures(dataSet);
 
@@ -51,7 +53,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         model.d = featureData.featureCategoryJointCount.length; //特征数量
 
         model.c = featureData.categoryCounts.length; //类目数量
-        model.logPriors = new TreeMap<Integer, Double>();
+        model.logPriors = new TreeMap<int, Double>();
 
         int sumCategory;
         for (int category = 0; category < featureData.categoryCounts.length; category++)
@@ -61,10 +63,10 @@ public class NaiveBayesClassifier : AbstractClassifier
         }
 
         //拉普拉斯平滑处理（又称加一平滑），这时需要估计每个类目下的实例
-        Map<Integer, Double> featureOccurrencesInCategory = new TreeMap<Integer, Double>();
+        Dictionary<int, Double> featureOccurrencesInCategory = new TreeMap<int, Double>();
 
         Double featureOccSum;
-        for (Integer category : model.logPriors.keySet())
+        for (int category : model.logPriors.keySet())
         {
             featureOccSum = 0.0;
             for (int feature = 0; feature < featureData.featureCategoryJointCount.length; feature++)
@@ -79,7 +81,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         int count;
         int[] featureCategoryCounts;
         double logLikelihood;
-        for (Integer category : model.logPriors.keySet())
+        for (int category : model.logPriors.keySet())
         {
             for (int feature = 0; feature < featureData.featureCategoryJointCount.length; feature++)
             {
@@ -91,12 +93,12 @@ public class NaiveBayesClassifier : AbstractClassifier
                 logLikelihood = Math.log((count + 1.0) / (featureOccurrencesInCategory.get(category) + model.d));
                 if (!model.logLikelihoods.containsKey(feature))
                 {
-                    model.logLikelihoods.put(feature, new TreeMap<Integer, Double>());
+                    model.logLikelihoods.put(feature, new TreeMap<int, Double>());
                 }
                 model.logLikelihoods.get(feature).put(category, logLikelihood);
             }
         }
-        logger.out("贝叶斯统计结束\n");
+        logger._out("贝叶斯统计结束\n");
         model.catalog = dataSet.getCatalog().toArray();
         model.tokenizer = dataSet.getTokenizer();
         model.wordIdTrie = featureData.wordIdTrie;
@@ -107,7 +109,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         return model;
     }
 
-    public Map<String, Double> predict(String text) throws IllegalArgumentException, IllegalStateException
+    public Dictionary<String, Double> predict(String text) 
     {
         if (model == null)
         {
@@ -125,21 +127,21 @@ public class NaiveBayesClassifier : AbstractClassifier
     }
 
     //@Override
-    public double[] categorize(Document document) throws IllegalArgumentException, IllegalStateException
+    public double[] categorize(Document document) 
     {
-        Integer category;
-        Integer feature;
-        Integer occurrences;
+        int category;
+        int feature;
+        int occurrences;
         Double logprob;
 
         double[] predictionScores = new double[model.catalog.length];
-        for (Map.Entry<Integer, Double> entry1 : model.logPriors.entrySet())
+        for (Map.Entry<int, Double> entry1 : model.logPriors.entrySet())
         {
             category = entry1.getKey();
             logprob = entry1.getValue(); //用类目的对数似然初始化概率
 
             //对文档中的每个特征
-            for (Map.Entry<Integer, int[]> entry2 : document.tfMap.entrySet())
+            for (Map.Entry<int, int[]> entry2 : document.tfMap.entrySet())
             {
                 feature = entry2.getKey();
 
@@ -174,14 +176,14 @@ public class NaiveBayesClassifier : AbstractClassifier
         BaseFeatureData featureData = chiSquareFeatureExtractor.extractBasicFeatureData(dataSet); //执行统计
 
         //我们传入这些统计信息到特征选择算法中，得到特征与其分值
-        Map<Integer, Double> selectedFeatures = chiSquareFeatureExtractor.chi_square(featureData);
+        Dictionary<int, Double> selectedFeatures = chiSquareFeatureExtractor.chi_square(featureData);
 
         //从统计数据中删掉无用的特征并重建特征映射表
         int[][] featureCategoryJointCount = new int[selectedFeatures.size()][];
-        featureData.wordIdTrie = new BinTrie<Integer>();
+        featureData.wordIdTrie = new BinTrie<int>();
         String[] wordIdArray = dataSet.getLexicon().getWordIdArray();
         int p = -1;
-        for (Integer feature : selectedFeatures.keySet())
+        for (int feature : selectedFeatures.keySet())
         {
             featureCategoryJointCount[++p] = featureData.featureCategoryJointCount[feature];
             featureData.wordIdTrie.put(wordIdArray[feature], p);

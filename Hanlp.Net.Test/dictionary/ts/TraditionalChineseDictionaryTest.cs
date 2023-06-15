@@ -1,5 +1,6 @@
 namespace com.hankcs.hanlp.dictionary.ts;
 
+[TestClass]
 
 public class TraditionalChineseDictionaryTest : TestCase
 {

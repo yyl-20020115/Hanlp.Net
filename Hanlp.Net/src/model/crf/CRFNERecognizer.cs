@@ -86,7 +86,7 @@ public class CRFNERecognizer : CRFTagger : NERecognizer
             protected int[] extractFeature(String[] wordArray, String[] posArray, FeatureMap featureMap, int position)
             {
                 StringBuilder sbFeature = new StringBuilder();
-                List<Integer> featureVec = new LinkedList<Integer>();
+                List<int> featureVec = new LinkedList<int>();
                 for (int i = 0; i < featureTemplateArray.length; i++)
                 {
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
@@ -98,15 +98,15 @@ public class CRFNERecognizer : CRFTagger : NERecognizer
                         int t = offset[0] + position;
                         bool first = offset[1] == 0;
                         if (t < 0)
-                            sbFeature.append(FeatureIndex.BOS[-(t + 1)]);
+                            sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
                         else if (t >= wordArray.length)
-                            sbFeature.append(FeatureIndex.EOS[t - wordArray.length]);
+                            sbFeature.Append(FeatureIndex.EOS[t - wordArray.length]);
                         else
-                            sbFeature.append(first ? wordArray[t] : posArray[t]);
+                            sbFeature.Append(first ? wordArray[t] : posArray[t]);
                         if (delimiterIterator.hasNext())
-                            sbFeature.append(delimiterIterator.next());
+                            sbFeature.Append(delimiterIterator.next());
                         else
-                            sbFeature.append(i);
+                            sbFeature.Append(i);
                     }
                     addFeatureThenClear(sbFeature, featureVec, featureMap);
                 }

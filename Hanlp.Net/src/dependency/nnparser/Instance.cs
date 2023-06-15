@@ -23,11 +23,11 @@ public class Instance
     List<String> postags;   //! The postags.
     List<String> cpostags;  //! The cpostags.
 
-    List<Integer> heads;
-    List<Integer> deprelsidx;
+    List<int> heads;
+    List<int> deprelsidx;
     List<String> deprels;
-    List<Integer> predict_heads;
-    List<Integer> predict_deprelsidx;
+    List<int> predict_heads;
+    List<int> predict_deprelsidx;
     List<String> predict_deprels;
 
     public Instance()
@@ -43,7 +43,7 @@ public class Instance
 
     bool is_tree()
     {
-        List<List<Integer>> tree = new ArrayList<List<Integer>>(heads.size());
+        List<List<int>> tree = new ArrayList<List<int>>(heads.size());
         int root = -1;
         for (int modifier = 0; modifier < heads.size(); ++modifier)
         {
@@ -73,7 +73,7 @@ public class Instance
         return true;
     }
 
-    bool is_tree_travel(int now, List<List<Integer>> tree, bool visited[])
+    bool is_tree_travel(int now, List<List<int>> tree, bool visited[])
     {
         if (visited[now])
         {

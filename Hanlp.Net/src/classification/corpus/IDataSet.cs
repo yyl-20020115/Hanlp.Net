@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.tokenizers;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -18,7 +20,7 @@ namespace com.hankcs.hanlp.classification.corpus;
  *
  * @author hankcs
  */
-public interface IDataSet : Iterable<Document>
+public interface IDataSet : IEnumerable<Document>
 {
     /**
      * 加载数据集
@@ -38,8 +40,8 @@ public interface IDataSet : Iterable<Document>
      * @throws IllegalArgumentException
      * @
      */
-    IDataSet load(String folderPath) throws IllegalArgumentException, IOException;
-    IDataSet load(String folderPath, double rate) throws IllegalArgumentException, IOException;
+    IDataSet load(String folderPath) ;
+    IDataSet load(String folderPath, double rate) ;
 
     /**
      * 加载数据集
@@ -60,8 +62,8 @@ public interface IDataSet : Iterable<Document>
      * @throws IllegalArgumentException
      * @
      */
-    IDataSet load(String folderPath, String charsetName) throws IllegalArgumentException, IOException;
-    IDataSet load(String folderPath, String charsetName, double percentage) throws IllegalArgumentException, IOException;
+    IDataSet load(String folderPath, String charsetName) ;
+    IDataSet load(String folderPath, String charsetName, double percentage) ;
 
     /**
      * 往训练集中加入一个文档
@@ -129,7 +131,7 @@ public interface IDataSet : Iterable<Document>
      */
     bool isTestingDataSet();
 
-    IDataSet add(Map<String, String[]> testingDataSet);
+    IDataSet add(Dictionary<String, String[]> testingDataSet);
 
     IDataSet shrink(int[] idMap);
 

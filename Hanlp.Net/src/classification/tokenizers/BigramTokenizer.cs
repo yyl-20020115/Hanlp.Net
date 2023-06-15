@@ -7,7 +7,7 @@ public class BigramTokenizer : ITokenizer
     public String[] segment(String text)
     {
         if (text.length() == 0) return new String[0];
-        char[] charArray = text.toCharArray();
+        char[] charArray = text.ToCharArray();
         CharTable.normalization(charArray);
 
         // 先拆成字
@@ -52,7 +52,7 @@ public class BigramTokenizer : ITokenizer
         while (iterator.hasNext())
         {
             int[] cur = iterator.next();
-            termArray[++p] = new StringBuilder(pre[1] + cur[1]).append(charArray, pre[0], pre[1]).append(charArray, cur[0], cur[1]).toString();
+            termArray[++p] = new StringBuilder(pre[1] + cur[1]).Append(charArray, pre[0], pre[1]).Append(charArray, cur[0], cur[1]).toString();
             pre = cur;
         }
 
@@ -65,7 +65,7 @@ public class BigramTokenizer : ITokenizer
 //        String[] result = bws.segment("@hankcs你好，广阔的世界2０16！\u0000\u0000\t\n\r\n慶祝Coding worlds!");
 //        for (String str : result)
 //        {
-//            System.out.println(str);
+//            System._out.println(str);
 //        }
 //    }
 

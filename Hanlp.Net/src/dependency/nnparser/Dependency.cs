@@ -17,14 +17,14 @@ namespace com.hankcs.hanlp.dependency.nnparser;
  */
 public class Dependency
 {
-    public List<Integer> forms;
-    public List<Integer> postags;
-    public List<Integer> heads;
-    public List<Integer> deprels;
+    public List<int> forms;
+    public List<int> postags;
+    public List<int> heads;
+    public List<int> deprels;
 
-    private static ArrayList<Integer> allocate()
+    private static ArrayList<int> allocate()
     {
-        return new ArrayList<Integer>();
+        return new ArrayList<int>();
     }
 
     public Dependency()

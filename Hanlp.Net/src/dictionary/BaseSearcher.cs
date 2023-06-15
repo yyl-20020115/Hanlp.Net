@@ -33,7 +33,7 @@ public abstract class BaseSearcher<V>
 
     protected BaseSearcher(String text)
     {
-        this(text.toCharArray());
+        this(text.ToCharArray());
     }
 
     /**

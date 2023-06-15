@@ -55,14 +55,14 @@ public interface IDependencyParser
      *
      * @return
      */
-    Map<String, String> getDeprelTranslator();
+    Dictionary<String, String> getDeprelTranslator();
 
     /**
      * 设置依存关系映射表
      *
      * @param deprelTranslator
      */
-    IDependencyParser setDeprelTranslator(Map<String, String> deprelTranslator);
+    IDependencyParser setDeprelTranslator(Dictionary<String, String> deprelTranslator);
 
     /**
      * 依存关系自动转换开关

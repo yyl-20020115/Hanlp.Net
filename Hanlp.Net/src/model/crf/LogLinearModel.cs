@@ -104,7 +104,7 @@ public class LogLinearModel : LinearModel
         if (!lineIterator.hasNext()) throw new IOException("空白文件");
         logger.info(lineIterator.next());   // verson
         logger.info(lineIterator.next());   // cost-factor
-        int maxid = Integer.parseInt(lineIterator.next().substring("maxid:".length()).trim());
+        int maxid = int.parseInt(lineIterator.next().substring("maxid:".length()).trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
         String line;
@@ -127,7 +127,7 @@ public class LogLinearModel : LinearModel
         FeatureMap featureMap = this.featureMap;
         final int sizeOfTagSet = tagSet.size();
         TreeMap<String, FeatureFunction> featureFunctionMap = new TreeMap<String, FeatureFunction>();  // 构建trie树的时候用
-        TreeMap<Integer, FeatureFunction> featureFunctionList = new TreeMap<Integer, FeatureFunction>(); // 读取权值的时候用
+        TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
         ArrayList<FeatureTemplate> featureTemplateList = new ArrayList<FeatureTemplate>();
         float[][] matrix = null;
         while ((line = lineIterator.next()).length() != 0)
@@ -148,20 +148,20 @@ public class LogLinearModel : LinearModel
         if (matrix != null)
         {
             String[] args = lineIterator.next().split(" ", 2);    // 0 B
-            b = Integer.valueOf(args[0]);
+            b = int.valueOf(args[0]);
             featureFunctionList.put(b, null);
         }
 
         while ((line = lineIterator.next()).length() != 0)
         {
             String[] args = line.split(" ", 2);
-            char[] charArray = args[1].toCharArray();
+            char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, sizeOfTagSet);
             featureFunctionMap.put(args[1], featureFunction);
-            featureFunctionList.put(Integer.parseInt(args[0]), featureFunction);
+            featureFunctionList.put(int.parseInt(args[0]), featureFunction);
         }
 
-        for (Map.Entry<Integer, FeatureFunction> entry : featureFunctionList.entrySet())
+        for (Map.Entry<int, FeatureFunction> entry : featureFunctionList.entrySet())
         {
             int fid = entry.getKey();
             FeatureFunction featureFunction = entry.getValue();
@@ -201,7 +201,7 @@ public class LogLinearModel : LinearModel
                 }
             }
         }
-        for (Map.Entry<Integer, FeatureFunction> entry : featureFunctionList.entrySet())
+        for (Map.Entry<int, FeatureFunction> entry : featureFunctionList.entrySet())
         {
             int id = entry.getKey();
             FeatureFunction f = entry.getValue();
@@ -224,14 +224,14 @@ public class LogLinearModel : LinearModel
                 }
             }
         }
-        DataOutputStream out = new DataOutputStream(IOUtil.newOutputStream(binFile));
-        save(out);
-        out.writeInt(featureTemplateList.size());
+        DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(binFile));
+        save(_out);
+        _out.writeInt(featureTemplateList.size());
         for (FeatureTemplate template : featureTemplateList)
         {
-            template.save(out);
+            template.save(_out);
         }
-        out.close();
+        _out.close();
     }
 
 

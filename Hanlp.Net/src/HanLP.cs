@@ -303,7 +303,7 @@ public class HanLP
                     StringBuilder sbInfo = new StringBuilder("========Tips========\n请将hanlp.properties放在下列目录：\n"); // 打印一些友好的tips
                     if (new File("src/main/java").isDirectory())
                     {
-                        sbInfo.append("src/main/resources");
+                        sbInfo.Append("src/main/resources");
                     }
                     else
                     {
@@ -314,17 +314,17 @@ public class HanLP
                             {
                                 if (new File(path).isDirectory())
                                 {
-                                    sbInfo.append(path).append('\n');
+                                    sbInfo.Append(path).Append('\n');
                                 }
                             }
                         }
-                        sbInfo.append("Web项目则请放到下列目录：\n" +
+                        sbInfo.Append("Web项目则请放到下列目录：\n" +
                                           "Webapp/WEB-INF/lib\n" +
                                           "Webapp/WEB-INF/classes\n" +
                                           "Appserver/lib\n" +
                                           "JRE/lib\n");
-                        sbInfo.append("并且编辑root=PARENT/path/to/your/data\n");
-                        sbInfo.append("现在HanLP将尝试从").append(System.getProperties().get("user.dir")).append("读取data……");
+                        sbInfo.Append("并且编辑root=PARENT/path/to/your/data\n");
+                        sbInfo.Append("现在HanLP将尝试从").Append(System.getProperties().get("user.dir")).Append("读取data……");
                     }
                     logger.severe("没有找到hanlp.properties，可能会导致找不到data\n" + sbInfo);
                 }
@@ -373,7 +373,7 @@ public class HanLP
      */
     public static String convertToSimplifiedChinese(String traditionalChineseString)
     {
-        return TraditionalChineseDictionary.convertToSimplifiedChinese(traditionalChineseString.toCharArray());
+        return TraditionalChineseDictionary.convertToSimplifiedChinese(traditionalChineseString.ToCharArray());
     }
 
     /**
@@ -384,7 +384,7 @@ public class HanLP
      */
     public static String convertToTraditionalChinese(String simplifiedChineseString)
     {
-        return SimplifiedChineseDictionary.convertToTraditionalChinese(simplifiedChineseString.toCharArray());
+        return SimplifiedChineseDictionary.convertToTraditionalChinese(simplifiedChineseString.ToCharArray());
     }
 
     /**
@@ -538,12 +538,12 @@ public class HanLP
 
             if (pinyin == Pinyin.none5 && !remainNone)
             {
-                sb.append(text.charAt(i - 1));
+                sb.Append(text.charAt(i - 1));
             }
-            else sb.append(pinyin.getPinyinWithoutTone());
+            else sb.Append(pinyin.getPinyinWithoutTone());
             if (i < length)
             {
-                sb.append(separator);
+                sb.Append(separator);
             }
             ++i;
         }
@@ -577,10 +577,10 @@ public class HanLP
         int i = 1;
         for (Pinyin pinyin : pinyinList)
         {
-            sb.append(pinyin.getFirstChar());
+            sb.Append(pinyin.getFirstChar());
             if (i < length)
             {
-                sb.append(separator);
+                sb.Append(separator);
             }
             ++i;
         }
@@ -595,7 +595,7 @@ public class HanLP
      */
     public static List<Term> segment(String text)
     {
-        return StandardTokenizer.segment(text.toCharArray());
+        return StandardTokenizer.segment(text.ToCharArray());
     }
 
     /**

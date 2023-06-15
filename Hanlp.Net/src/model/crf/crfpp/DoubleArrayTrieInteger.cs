@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
 /**
- * 储存{@code Integer}的{@code DoubleArrayTrie}，相当于{@code DoubleArrayTrie<Integer>}，但比后者省内存，所以保留两份代码
+ * 储存{@code int}的{@code DoubleArrayTrie}，相当于{@code DoubleArrayTrie<int>}，但比后者省内存，所以保留两份代码
  */
 public class DoubleArrayTrieInteger : Serializable
 {
@@ -308,26 +308,26 @@ public class DoubleArrayTrieInteger : Serializable
     public void recoverKeyValue()
     {
         key = new ArrayList<String>();
-        List<Integer> val1 = new ArrayList<Integer>();
-        HashMap<Integer, List<Integer>> childIdxMap = new HashMap<Integer, List<Integer>>();
+        List<int> val1 = new ArrayList<int>();
+        HashMap<int, List<int>> childIdxMap = new HashMap<int, List<int>>();
         for (int i = 0; i < check.length; i++)
         {
             if (check[i] <= 0) continue;
             if (!childIdxMap.containsKey(check[i]))
             {
-                List<Integer> childList = new ArrayList<Integer>();
+                List<int> childList = new ArrayList<int>();
                 childIdxMap.put(check[i], childList);
             }
             childIdxMap.get(check[i]).add(i);
         }
-        Stack<Integer[]> s = new Stack<Integer[]>();
-        s.add(new Integer[]{1, -1});
+        Stack<int[]> s = new Stack<int[]>();
+        s.add(new int[]{1, -1});
 
-        List<Integer> charBuf = new ArrayList<Integer>();
+        List<int> charBuf = new ArrayList<int>();
         while (true)
         {
-            Integer[] pair = s.peek();
-            List<Integer> childList = childIdxMap.get(pair[0]);
+            int[] pair = s.peek();
+            List<int> childList = childIdxMap.get(pair[0]);
             if (childList == null || (childList.size() - 1) == pair[1])
             {
                 s.pop();
@@ -352,7 +352,7 @@ public class DoubleArrayTrieInteger : Serializable
             int code = (c - 1 - pair[0]);
             if (base[c] > 0)
             {
-                s.add(new Integer[]{base[c], -1});
+                s.add(new int[]{base[c], -1});
                 charBuf.add(code);
                 continue;
             }
@@ -408,22 +408,22 @@ public class DoubleArrayTrieInteger : Serializable
 
     public void save(String fileName) 
     {
-        DataOutputStream out = null;
+        DataOutputStream _out = null;
         try
         {
-            out = new DataOutputStream(new BufferedOutputStream(
+            _out = new DataOutputStream(new BufferedOutputStream(
                 IOUtil.newOutputStream(fileName)));
             for (int i = 0; i < size; i++)
             {
-                out.writeInt(base[i]);
-                out.writeInt(check[i]);
+                _out.writeInt(base[i]);
+                _out.writeInt(check[i]);
             }
-            out.close();
+            _out.close();
         }
         finally
         {
-            if (out != null)
-                out.close();
+            if (_out != null)
+                _out.close();
         }
     }
 
@@ -441,7 +441,7 @@ public class DoubleArrayTrieInteger : Serializable
 
         int result = -1;
 
-        char[] keyChars = key.toCharArray();
+        char[] keyChars = key.ToCharArray();
 
         int b = base[nodePos];
         int p;
@@ -464,12 +464,12 @@ public class DoubleArrayTrieInteger : Serializable
         return result;
     }
 
-    public List<Integer> commonPrefixSearch(String key)
+    public List<int> commonPrefixSearch(String key)
     {
         return commonPrefixSearch(key, 0, 0, 0);
     }
 
-    public List<Integer> commonPrefixSearch(String key, int pos, int len,
+    public List<int> commonPrefixSearch(String key, int pos, int len,
                                             int nodePos)
     {
         if (len <= 0)
@@ -477,9 +477,9 @@ public class DoubleArrayTrieInteger : Serializable
         if (nodePos <= 0)
             nodePos = 0;
 
-        List<Integer> result = new ArrayList<Integer>();
+        List<int> result = new ArrayList<int>();
 
-        char[] keyChars = key.toCharArray();
+        char[] keyChars = key.ToCharArray();
 
         int b = base[nodePos];
         int n;

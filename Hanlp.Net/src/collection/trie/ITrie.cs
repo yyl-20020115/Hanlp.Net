@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.collection.trie;
 public interface ITrie<V>
 {
     int build(TreeMap<String, V> keyValueMap);
-    bool save(DataOutputStream out);
+    bool save(DataOutputStream _out);
     bool load(ByteArray byteArray, V[] value);
     V get(char[] key);
     V get(String key);

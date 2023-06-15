@@ -10,7 +10,7 @@ public class Path
 {
     public Node rnode;
     public Node lnode;
-    public List<Integer> fvector;
+    public List<int> fvector;
     public double cost;
 
     public Path()

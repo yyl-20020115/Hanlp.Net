@@ -18,13 +18,13 @@ namespace com.hankcs.hanlp.classification.corpus;
  */
 public class Catalog : Serializable
 {
-    Map<String, Integer> categoryId;
+    Dictionary<String, int> categoryId;
     List<String> idCategory;
 
     public Catalog()
     {
-        categoryId = new TreeMap<String, Integer>();
-        idCategory = new ArrayList<String>();
+        categoryId = new ();
+        idCategory = new ();
     }
 
     public Catalog(String[] catalog)
@@ -39,7 +39,7 @@ public class Catalog : Serializable
 
     public int addCategory(String category)
     {
-        Integer id = categoryId.get(category);
+        int id = categoryId.get(category);
         if (id == null)
         {
             id = categoryId.size();
@@ -51,7 +51,7 @@ public class Catalog : Serializable
         return id;
     }
 
-    public Integer getId(String category)
+    public int getId(String category)
     {
         return categoryId.get(category);
     }

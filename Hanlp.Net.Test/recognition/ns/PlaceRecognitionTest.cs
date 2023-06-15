@@ -1,8 +1,12 @@
+using com.hankcs.hanlp.seg.Dijkstra;
+
 namespace com.hankcs.hanlp.recognition.ns;
 
+[TestClass]
 
 public class PlaceRecognitionTest : TestCase
 {
+    [TestMethod]
     public void testSeg() 
     {
 //        HanLP.Config.enableDebug();

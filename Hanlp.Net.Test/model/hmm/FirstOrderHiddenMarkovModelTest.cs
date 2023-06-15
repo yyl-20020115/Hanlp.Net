@@ -3,6 +3,7 @@ namespace com.hankcs.hanlp.model.hmm;
 
 
 
+[TestClass]
 public class FirstOrderHiddenMarkovModelTest : TestCase
 {
 
@@ -46,18 +47,18 @@ public class FirstOrderHiddenMarkovModelTest : TestCase
      * 某个病人的观测序列
      */
     static int[] observations = new int[]{normal.ordinal(), cold.ordinal(), dizzy.ordinal()};
-
+    [TestMethod]
     public void testGenerate() 
     {
         FirstOrderHiddenMarkovModel givenModel = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
         for (int[][] sample : givenModel.generate(3, 5, 2))
         {
-            for (int t = 0; t < sample[0].length; t++)
-                System.out.printf("%s/%s ", Feel.values()[sample[0][t]], Status.values()[sample[1][t]]);
+            for (int t = 0; t < sample[0].Length; t++)
+                Console.printf("%s/%s ", Feel.values()[sample[0][t]], Status.values()[sample[1][t]]);
             Console.WriteLine();
         }
     }
-
+    [TestMethod]
     public void testTrain() 
     {
         FirstOrderHiddenMarkovModel givenModel = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
@@ -65,33 +66,33 @@ public class FirstOrderHiddenMarkovModelTest : TestCase
         trainedModel.train(givenModel.generate(3, 10, 100000));
         assertTrue(trainedModel.similar(givenModel));
     }
-
+    [TestMethod]
     public void testPredict() 
     {
         FirstOrderHiddenMarkovModel model = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
         evaluateModel(model);
     }
-
+    [TestMethod]
     public void evaluateModel(FirstOrderHiddenMarkovModel model)
     {
-        int[] pred = new int[observations.length];
+        int[] pred = new int[observations.Length];
         float prob = (float) Math.exp(model.predict(observations, pred));
         int[] answer = {Healthy.ordinal(), Healthy.ordinal(), Fever.ordinal()};
-        assertEquals(Arrays.toString(answer), Arrays.toString(pred));
+        assertEquals(Arrays.ToString(answer), Arrays.ToString(pred));
 //        assertEquals("0.01512", String.format("%.5f", prob));
         assertEquals("0.015", String.format("%.3f", prob));
 
         pred = new int[]{pred[0], pred[1]};
         answer = new int[]{answer[0], answer[1]};
-        assertEquals(Arrays.toString(answer), Arrays.toString(pred));
+        assertEquals(Arrays.ToString(answer), Arrays.ToString(pred));
 
         pred = new int[]{pred[0]};
         answer = new int[]{answer[0]};
-        assertEquals(Arrays.toString(answer), Arrays.toString(pred));
+        assertEquals(Arrays.ToString(answer), Arrays.ToString(pred));
 //        for (int s : pred)
 //        {
-//            System.out.print(Status.values()[s] + " ");
+//            Console.print(Status.values()[s] + " ");
 //        }
-//        System.out.printf(" with highest probability of %.5f\n", prob);
+//        Console.printf(" with highest probability of %.5f\n", prob);
     }
 }

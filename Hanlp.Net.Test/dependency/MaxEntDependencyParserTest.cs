@@ -1,9 +1,10 @@
 namespace com.hankcs.hanlp.dependency;
 
 
-
+[TestClass]
 public class MaxEntDependencyParserTest : TestCase
 {
+    [TestMethod]
     public void testMaxEntParser() 
     {
 //        HanLP.Config.enableDebug();
@@ -17,15 +18,15 @@ public class MaxEntDependencyParserTest : TestCase
 //        int id = 1;
 //        for (CoNLLSentence sentence : sentenceList)
 //        {
-//            System.out.printf("%d / %d...", id++, sentenceList.size());
+//            Console.printf("%d / %d...", id++, sentenceList.size());
 //            long start = System.currentTimeMillis();
 //            List<Term> termList = new LinkedList<Term>();
 //            for (CoNLLWord word : sentence.word)
 //            {
 //                termList.add(new Term(word.LEMMA, Nature.valueOf(word.POSTAG)));
 //            }
-//            CoNLLSentence out = CRFDependencyParser.compute(termList);
-//            evaluator.e(sentence, out);
+//            CoNLLSentence _out = CRFDependencyParser.compute(termList);
+//            evaluator.e(sentence, _out);
 //            Console.WriteLine("done in " + (System.currentTimeMillis() - start) + " ms.");
 //        }
 //        Console.WriteLine(evaluator);

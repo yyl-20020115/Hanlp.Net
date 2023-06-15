@@ -65,7 +65,7 @@ public class PerceptronSegmenter : PerceptronTagger : Segmenter
         model.viterbiDecode(instance, tagArray);
 
         StringBuilder result = new StringBuilder();
-        result.append(text.charAt(0));
+        result.Append(text.charAt(0));
 
         for (int i = 1; i < tagArray.length; i++)
         {
@@ -74,7 +74,7 @@ public class PerceptronSegmenter : PerceptronTagger : Segmenter
                 output.add(result.toString());
                 result.setLength(0);
             }
-            result.append(text.charAt(i));
+            result.Append(text.charAt(i));
         }
         if (result.length() != 0)
         {

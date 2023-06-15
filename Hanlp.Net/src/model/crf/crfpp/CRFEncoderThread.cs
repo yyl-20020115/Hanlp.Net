@@ -4,7 +4,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 /**
  * @author zhifac
  */
-public class CRFEncoderThread : Callable<Integer>
+public class CRFEncoderThread : Callable<int>
 {
     public List<TaggerImpl> x;
     public int start_i;
@@ -26,7 +26,7 @@ public class CRFEncoderThread : Callable<Integer>
         }
     }
 
-    public Integer call()
+    public int call()
     {
         obj = 0.0;
         err = zeroone = 0;

@@ -1,12 +1,15 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.trie;
 
+using com.hankcs.hanlp;
+using com.hankcs.hanlp.collection.AhoCorasick;
 
-
+[TestClass]
 public class TrieTest : TestCase
 {
-    public void testHasKeyword() 
+    [TestMethod]
+    public void testHasKeyword()
     {
-        TreeMap<String, String> map = new TreeMap<String, String>();
+        var map = new Dictionary<String, String>();
         String[] keyArray = new String[]
             {
                 "hers",
@@ -14,23 +17,23 @@ public class TrieTest : TestCase
                 "she",
                 "he"
             };
-        for (String key : keyArray)
+        foreach (String key in keyArray)
         {
-            map.put(key, key);
+            map.Add(key, key);
         }
         Trie trie = new Trie();
-        trie.addAllKeyword(map.keySet());
-        for (String key : keyArray)
+        trie.addAllKeyword(map.Keys);
+        foreach (String key in keyArray)
         {
             assertTrue(trie.hasKeyword(key));
         }
         assertTrue(trie.hasKeyword("ushers"));
         assertFalse(trie.hasKeyword("构建耗时"));
     }
-
-    public void testParseText() 
+    [TestMethod]
+    public void testParseText()
     {
-        TreeMap<String, String> map = new TreeMap<String, String>();
+        var map = new Dictionary<String, String>();
         String[] keyArray = new String[]
             {
                 "hers",
@@ -38,24 +41,25 @@ public class TrieTest : TestCase
                 "she",
                 "he"
             };
-        for (String key : keyArray)
+        foreach (String key in keyArray)
         {
-            map.put(key, key);
+            map.Add(key, key);
         }
         AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
         act.build(map);
-//        act.debug();
-        final String text = "uhers";
-        act.parseText(text, new AhoCorasickDoubleArrayTrie.IHit<String>()
-        {
-            //@Override
-            public void hit(int begin, int end, String value)
-            {
-//                System.out.printf("[%d:%d]=%s\n", begin, end, value);
-                assertEquals(value, text.substring(begin, end));
-            }
-        });
+        //        act.debug();
+        String text = "uhers";
+        act.parseText(text, new TestHit() { text = text });
     }
-
+    public class TestHit : TestCase, IHit<String>
+    {
+        public string text;
+        //@Override
+        public void hit(int begin, int end, String value)
+        {
+            //                Console.printf("[%d:%d]=%s\n", begin, end, value);
+            assertEquals(value, text[begin..end]);
+        }
+    }
 
 }

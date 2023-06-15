@@ -24,7 +24,7 @@ public class TraditionalChineseDictionary : BaseChineseDictionary
      */
     public static AhoCorasickDoubleArrayTrie<String> trie = new AhoCorasickDoubleArrayTrie<String>();
 
-    static
+    static TraditionalChineseDictionary()
     {
         long start = System.currentTimeMillis();
         if (!load(HanLP.Config.tcDictionaryRoot + "t2s.txt", trie, false))
@@ -37,7 +37,7 @@ public class TraditionalChineseDictionary : BaseChineseDictionary
 
     public static String convertToSimplifiedChinese(String traditionalChineseString)
     {
-        return segLongest(traditionalChineseString.toCharArray(), trie);
+        return segLongest(traditionalChineseString.ToCharArray(), trie);
     }
 
     public static String convertToSimplifiedChinese(char[] traditionalChinese)

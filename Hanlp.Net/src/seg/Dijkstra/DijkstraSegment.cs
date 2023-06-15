@@ -30,7 +30,7 @@ public class DijkstraSegment : WordBasedSegment
         Graph graph = generateBiGraph(wordNetAll);
         if (HanLP.Config.DEBUG)
         {
-            System.out.printf("粗分词图：%s\n", graph.printByTo());
+            System._out.printf("粗分词图：%s\n", graph.printByTo());
         }
         List<Vertex> vertexList = dijkstra(graph);
 //        fixResultByRule(vertexList);
@@ -44,7 +44,7 @@ public class DijkstraSegment : WordBasedSegment
 
         if (HanLP.Config.DEBUG)
         {
-            System.out.println("粗分结果" + convert(vertexList, false));
+            System._out.println("粗分结果" + convert(vertexList, false));
         }
 
         // 数字识别
@@ -90,8 +90,8 @@ public class DijkstraSegment : WordBasedSegment
                 vertexList = dijkstra(graph);
                 if (HanLP.Config.DEBUG)
                 {
-                    System.out.printf("细分词网：\n%s\n", wordNetOptimum);
-                    System.out.printf("细分词图：%s\n", graph.printByTo());
+                    System._out.printf("细分词网：\n%s\n", wordNetOptimum);
+                    System._out.printf("细分词图：%s\n", graph.printByTo());
                 }
             }
         }

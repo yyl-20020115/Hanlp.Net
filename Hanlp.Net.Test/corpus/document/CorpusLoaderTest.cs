@@ -2,12 +2,13 @@ namespace com.hankcs.hanlp.corpus.document;
 
 
 
+[TestClass]
 public class CorpusLoaderTest : TestCase
 {
 //    public void testMultiThread() 
 //    {
 //        CorpusLoader.HandlerThread[] handlerThreadArray = new CorpusLoader.HandlerThread[4];
-//        for (int i = 0; i < handlerThreadArray.length; ++i)
+//        for (int i = 0; i < handlerThreadArray.Length; ++i)
 //        {
 //            handlerThreadArray[i] = new CorpusLoader.HandlerThread(String.valueOf(i))
 //            {
@@ -138,7 +139,7 @@ public class CorpusLoaderTest : TestCase
 //                        if (wordList.size() == 0) continue;
 //                        for (IWord word : wordList)
 //                        {
-//                            if (word.getValue().length() > 1 && word.getValue().charAt(0) == '。')
+//                            if (word.getValue().Length() > 1 && word.getValue().charAt(0) == '。')
 //                            {
 //                                bw.write("。/w");
 //                                bw.write(word.getValue().substring(1));
@@ -147,7 +148,7 @@ public class CorpusLoaderTest : TestCase
 //                                bw.write(' ');
 //                                continue;
 //                            }
-//                            bw.write(word.toString());
+//                            bw.write(word.ToString());
 //                            bw.write(' ');
 //                        }
 //                        bw.newLine();
@@ -201,7 +202,7 @@ public class CorpusLoaderTest : TestCase
 //                {
 //                    for (Word word : wordList)
 //                    {
-//                        if(word.value.length() > 1 && word.value.endsWith("\""))
+//                        if(word.value.Length() > 1 && word.value.endsWith("\""))
 //                        {
 //                            Console.WriteLine(word);
 //                        }

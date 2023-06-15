@@ -84,7 +84,7 @@ public abstract class Segment
             else if (pCur < end - 1 && ((nCurType == CharType.CT_SINGLE) || nCurType == CharType.CT_NUM))
             {
                 sb.delete(0, sb.length());
-                sb.append(charArray[pCur]);
+                sb.Append(charArray[pCur]);
 
                 bool reachEnd = true;
                 while (pCur < end - 1)
@@ -92,7 +92,7 @@ public abstract class Segment
                     nNextType = charTypeArray[++pCur - start];
 
                     if (nNextType == nCurType)
-                        sb.append(charArray[pCur]);
+                        sb.Append(charArray[pCur]);
                     else
                     {
                         reachEnd = false;
@@ -227,7 +227,7 @@ public abstract class Segment
             for (int i = 1; i < length; ++i)
             {
                 if (wordNet[i] == null) continue;
-                BaseNode<CoreDictionary.Attribute> state = CustomDictionary.trie.transition(wordNet[i].realWord.toCharArray(), 0);
+                BaseNode<CoreDictionary.Attribute> state = CustomDictionary.trie.transition(wordNet[i].realWord.ToCharArray(), 0);
                 if (state != null)
                 {
                     int to = i + 1;
@@ -236,7 +236,7 @@ public abstract class Segment
                     for (; to < length; ++to)
                     {
                         if (wordNet[to] == null) continue;
-                        state = state.transition(wordNet[to].realWord.toCharArray(), 0);
+                        state = state.transition(wordNet[to].realWord.ToCharArray(), 0);
                         if (state == null) break;
                         if (state.getValue() != null)
                         {
@@ -323,7 +323,7 @@ public abstract class Segment
             {
                 if (wordNet[j] == null) continue;
                 String realWord = wordNet[j].realWord;
-                sbTerm.append(realWord);
+                sbTerm.Append(realWord);
                 wordNet[j] = null;
             }
             wordNet[start] = new Vertex(sbTerm.toString(), value);
@@ -396,11 +396,11 @@ public abstract class Segment
             Vertex pre = iterator.next();
             if (pre.hasNature(Nature.m))
             {
-                sbQuantifier.append(pre.realWord);
+                sbQuantifier.Append(pre.realWord);
                 Vertex cur = null;
                 while (iterator.hasNext() && (cur = iterator.next()).hasNature(Nature.m))
                 {
-                    sbQuantifier.append(cur.realWord);
+                    sbQuantifier.Append(cur.realWord);
                     iterator.remove();
                     removeFromWordNet(cur, wordNetAll, line, sbQuantifier.length());
                 }
@@ -412,7 +412,7 @@ public abstract class Segment
                         {
                             wordNetAll.add(line, new Vertex(sbQuantifier.toString(), new CoreDictionary.Attribute(Nature.m)));
                         }
-                        sbQuantifier.append(cur.realWord);
+                        sbQuantifier.Append(cur.realWord);
                         iterator.remove();
                         removeFromWordNet(cur, wordNetAll, line, sbQuantifier.length());
                     }
@@ -437,7 +437,7 @@ public abstract class Segment
             sbQuantifier.setLength(0);
             line += pre.realWord.length();
         }
-//        System.out.println(wordNetAll);
+//        System._out.println(wordNetAll);
     }
 
     /**
@@ -473,7 +473,7 @@ public abstract class Segment
      */
     public List<Term> seg(String text)
     {
-        char[] charArray = text.toCharArray();
+        char[] charArray = text.ToCharArray();
         if (HanLP.Config.Normalization)
         {
             CharTable.normalization(charArray);
@@ -539,7 +539,7 @@ public abstract class Segment
 //                int sentenceOffset = 0;
 //                for (String sentence : SentencesUtil.toSentenceList(charArray))
 //                {
-//                    List<Term> termOfSentence = segSentence(sentence.toCharArray());
+//                    List<Term> termOfSentence = segSentence(sentence.ToCharArray());
 //                    for (Term term : termOfSentence)
 //                    {
 //                        term.offset += sentenceOffset;
@@ -552,7 +552,7 @@ public abstract class Segment
 //            {
 //                for (String sentence : SentencesUtil.toSentenceList(charArray))
 //                {
-//                    termList.addAll(segSentence(sentence.toCharArray()));
+//                    termList.addAll(segSentence(sentence.ToCharArray()));
 //                }
 //            }
 //
@@ -601,7 +601,7 @@ public abstract class Segment
         {
             for (String sentence : SentencesUtil.toSentenceList(text, shortest))
             {
-                resultList.add(segSentence(sentence.toCharArray()));
+                resultList.add(segSentence(sentence.ToCharArray()));
             }
         }
 
@@ -807,7 +807,7 @@ public abstract class Segment
         {
             for (int i = from; i < to; ++i)
             {
-                termListArray[i] = segSentence(sentenceArray[i].toCharArray());
+                termListArray[i] = segSentence(sentenceArray[i].ToCharArray());
             }
         }
     }

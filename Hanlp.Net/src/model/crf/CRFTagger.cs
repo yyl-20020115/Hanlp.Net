@@ -90,7 +90,7 @@ public abstract class CRFTagger
         tmpTrain.deleteOnExit();
         convertCorpus(trainFile, tmpTrain.getAbsolutePath());
         trainFile = tmpTrain.getAbsolutePath();
-        System.out.printf("Java效率低，建议安装CRF++，执行下列等价训练命令（不要终止本进程，否则临时语料库和特征模板将被清除）：\n" +
+        System._out.printf("Java效率低，建议安装CRF++，执行下列等价训练命令（不要终止本进程，否则临时语料库和特征模板将被清除）：\n" +
                               "crf_learn -m %d -f %d -e %f -c %f -p %d -H %d -a %s -t %s %s %s\n", maxitr, freq, eta,
                           C, threadNum, shrinkingSize, algorithm.toString().replace('_', '-'),
                           templFile, trainFile, modelFile);
@@ -158,7 +158,7 @@ public abstract class CRFTagger
             StringBuilder sbTemplate = new StringBuilder();
             for (FeatureTemplate featureTemplate : model.getFeatureTemplateArray())
             {
-                sbTemplate.append(featureTemplate.getTemplate()).append('\n');
+                sbTemplate.Append(featureTemplate.getTemplate()).Append('\n');
             }
         }
         return template;

@@ -15,16 +15,16 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
 /**
  * @author hankcs
  */
-public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, Integer>>, ICacheAble
+public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, int>>, ICacheAble
 {
-    private Map<String, Integer> stringIdMap;
+    private Dictionary<String, int> stringIdMap;
     private ArrayList<String> idStringMap;
     private int[] allTags;
     public TaskType type;
 
     public TagSet(TaskType type)
     {
-        stringIdMap = new TreeMap<String, Integer>();
+        stringIdMap = new TreeMap<String, int>();
         idStringMap = new ArrayList<String>();
         this.type = type;
     }
@@ -32,7 +32,7 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, Int
     public int add(String tag)
     {
 //        assertUnlock();
-        Integer id = stringIdMap.get(tag);
+        int id = stringIdMap.get(tag);
         if (id == null)
         {
             id = stringIdMap.size();
@@ -85,13 +85,13 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, Int
     //@Override
     public int idOf(String string)
     {
-        Integer id = stringIdMap.get(string);
+        int id = stringIdMap.get(string);
         if (id == null) id = -1;
         return id;
     }
 
     //@Override
-    public Iterator<Map.Entry<String, Integer>> iterator()
+    public Iterator<Map.Entry<String, int>> iterator()
     {
         return stringIdMap.entrySet().iterator();
     }
@@ -106,13 +106,13 @@ public class TagSet : IIdStringMap, IStringIdMap, Iterable<Map.Entry<String, Int
         return allTags;
     }
 
-    public void save(DataOutputStream out) 
+    public void save(DataOutputStream _out) 
     {
-        out.writeInt(type.ordinal());
-        out.writeInt(size());
+        _out.writeInt(type.ordinal());
+        _out.writeInt(size());
         for (String tag : idStringMap)
         {
-            out.writeUTF(tag);
+            _out.writeUTF(tag);
         }
     }
 

@@ -76,7 +76,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
             // end of swap
             for (int s = 0; s < max_s; ++s)
             {
-                score[s] = Integer.MIN_VALUE;
+                score[s] = int.MIN_VALUE;
                 for (int f = 0; f < max_s; ++f)
                 {
                     float p = pre[f] + transition_probability[f][s] + emission_probability[s][observation[t]];
@@ -89,7 +89,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
             }
         }
 
-        float max_score = Integer.MIN_VALUE;
+        float max_score = int.MIN_VALUE;
         int best_s = 0;
         for (int s = 0; s < max_s; s++)
         {

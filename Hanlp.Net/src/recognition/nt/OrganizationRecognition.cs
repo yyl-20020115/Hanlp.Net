@@ -30,30 +30,30 @@ public class OrganizationRecognition
             Iterator<Vertex> iterator = pWordSegResult.iterator();
             for (EnumItem<NT> NTEnumItem : roleTagList)
             {
-                sbLog.append('[');
-                sbLog.append(iterator.next().realWord);
-                sbLog.append(' ');
-                sbLog.append(NTEnumItem);
-                sbLog.append(']');
+                sbLog.Append('[');
+                sbLog.Append(iterator.next().realWord);
+                sbLog.Append(' ');
+                sbLog.Append(NTEnumItem);
+                sbLog.Append(']');
             }
-            System.out.printf("机构名角色观察：%s\n", sbLog.toString());
+            System._out.printf("机构名角色观察：%s\n", sbLog.toString());
         }
         List<NT> NTList = viterbiCompute(roleTagList);
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
             Iterator<Vertex> iterator = pWordSegResult.iterator();
-            sbLog.append('[');
+            sbLog.Append('[');
             for (NT NT : NTList)
             {
-                sbLog.append(iterator.next().realWord);
-                sbLog.append('/');
-                sbLog.append(NT);
-                sbLog.append(" ,");
+                sbLog.Append(iterator.next().realWord);
+                sbLog.Append('/');
+                sbLog.Append(NT);
+                sbLog.Append(" ,");
             }
             if (sbLog.length() > 1) sbLog.delete(sbLog.length() - 2, sbLog.length());
-            sbLog.append(']');
-            System.out.printf("机构名角色标注：%s\n", sbLog.toString());
+            sbLog.Append(']');
+            System._out.printf("机构名角色标注：%s\n", sbLog.toString());
         }
 
         OrganizationDictionary.parsePattern(NTList, pWordSegResult, wordNetOptimum, wordNetAll);

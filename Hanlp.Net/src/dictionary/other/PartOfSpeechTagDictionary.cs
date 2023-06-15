@@ -22,7 +22,7 @@ public class PartOfSpeechTagDictionary
     /**
      * 词性映射表
      */
-    public static Map<String, String> translator = new TreeMap<String, String>();
+    public static Dictionary<String, String> translator = new TreeMap<String, String>();
 
     static
     {

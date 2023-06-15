@@ -1,21 +1,21 @@
 namespace com.hankcs.hanlp.algorithm.ahocorasick.interval;
 
 /**
- * åŒºé—´
+ * Çø¼ä
  */
 public class Interval : Intervalable
 {
     /**
-     * èµ·ç‚¹
+     * Æğµã
      */
-    private int start;
+    private readonly int start;
     /**
-     * ç»ˆç‚¹
+     * ÖÕµã
      */
-    private int end;
+    private readonly int end;
 
     /**
-     * æ„é€ ä¸€ä¸ªåŒºé—´
+     * ¹¹ÔìÒ»¸öÇø¼ä
      * @param start
      * @param end
      */
@@ -25,75 +25,47 @@ public class Interval : Intervalable
         this.end = end;
     }
 
-    public int getStart()
-    {
-        return this.start;
-    }
+    public int getStart() => this.start;
 
-    public int getEnd()
-    {
-        return this.end;
-    }
+    public int getEnd() => this.end;
 
-    public int size()
-    {
-        return end - start + 1;
-    }
+    public int size() => end - start + 1;
 
     /**
-     * æ˜¯å¦ä¸å¦ä¸€ä¸ªåŒºé—´äº¤å‰ï¼ˆæœ‰ä¸€éƒ¨åˆ†é‡å ï¼‰
+     * ÊÇ·ñÓëÁíÒ»¸öÇø¼ä½»²æ£¨ÓĞÒ»²¿·ÖÖØµş£©
      * @param other
      * @return
      */
-    public bool overlapsWith(Interval other)
-    {
-        return this.start <= other.getEnd() &&
+    public bool overlapsWith(Interval other) 
+        => this.start <= other.getEnd() &&
                 this.end >= other.getStart();
-    }
 
     /**
-     * åŒºé—´æ˜¯å¦è¦†ç›–äº†è¿™ä¸ªç‚¹
+     * Çø¼äÊÇ·ñ¸²¸ÇÁËÕâ¸öµã
      * @param point
      * @return
      */
-    public bool overlapsWith(int point)
-    {
-        return this.start <= point && point <= this.end;
-    }
+    public bool overlapsWith(int point) 
+        => this.start <= point && point <= this.end;
 
     ////@Override
-    public override bool Equals(object o)
-    {
-        if (!(o is Intervalable))
-        {
-            return false;
-        }
-        Intervalable other = (Intervalable)o;
-        return this.start == other.getStart() &&
+    public override bool Equals(object? o)
+        => o is Intervalable other && this.start == other.getStart() &&
                 this.end == other.getEnd();
-    }
 
     ////@Override
-    public override int GetHashCode()
-    {
-        return this.start % 100 + this.end % 100;
-    }
+    public override int GetHashCode() => (start % 100) + this.end % 100;
 
     ////@Override
-    public int CompareTo(object o)
+    public int CompareTo(object? o)
     {
-        if (!(o is Intervalable))
+        if (o is Intervalable other)
         {
-            return -1;
+            int comparison = this.start - other.getStart();
+            return comparison != 0 ? comparison : this.end - other.getEnd();
         }
-        Intervalable other = (Intervalable)o;
-        int comparison = this.start - other.getStart();
-        return comparison != 0 ? comparison : this.end - other.getEnd();
+        return -1;
     }
 
-    ////@Override
-    public override string ToString()
-    {
-        return this.start + ":" + this.end;
-    }
+    public override string ToString() => this.start + ":" + this.end;
 }

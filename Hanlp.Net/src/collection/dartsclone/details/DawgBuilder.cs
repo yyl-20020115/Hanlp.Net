@@ -439,7 +439,7 @@ class DawgBuilder
 
     private int appendUnit()
     {
-        _isIntersections.append();
+        _isIntersections.Append();
         _units.add(0);
         _labels.add((byte) 0);
 

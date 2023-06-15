@@ -99,7 +99,7 @@ public class TextFileCorpus : Corpus
     public void learnVocab() 
     {
         vocab = new VocabWord[vocabMaxSize];
-        vocabIndexMap = new TreeMap<String, Integer>();
+        vocabIndexMap = new TreeMap<String, int>();
         vocabSize = 0;
 
         final File trainFile = new File(config.getInputFile());

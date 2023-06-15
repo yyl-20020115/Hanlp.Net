@@ -2,52 +2,57 @@ namespace com.hankcs.hanlp.corpus.io;
 
 
 
+[TestClass]
 public class ByteArrayTest : TestCase
 {
     static String DATA_TEST_OUT_BIN;
     private File tempFile;
 
-    //@Override
+    [TestInitialize]
     public void setUp() 
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
     }
+    [TestMethod]
 
     public void testReadDouble() 
     {
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         double d = 0.123456789;
-        out.writeDouble(d);
+        _out.writeDouble(d);
         int i = 3389;
-        out.writeInt(i);
+        _out.writeInt(i);
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         assertEquals(d, byteArray.nextDouble());
         assertEquals(i, byteArray.nextInt());
     }
+    [TestMethod]
 
     public void testReadUTF() 
     {
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         String utf = "hankcs你好123";
-        out.writeUTF(utf);
+        _out.writeUTF(utf);
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         assertEquals(utf, byteArray.nextUTF());
     }
+    [TestMethod]
 
     public void testReadUnsignedShort() 
     {
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         int utflen = 123;
-        out.writeByte((byte) ((utflen >>> 8) & 0xFF));
-        out.writeByte((byte) ((utflen >>> 0) & 0xFF));
+        _out.writeByte((byte) ((utflen >>> 8) & 0xFF));
+        _out.writeByte((byte) ((utflen >>> 0) & 0xFF));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         assertEquals(utflen, byteArray.nextUnsignedShort());
     }
+    [TestMethod]
 
     public void testConvertCharToInt() 
     {
-//        for (int i = 0; i < Integer.MAX_VALUE; ++i)
+//        for (int i = 0; i < int.MAX_VALUE; ++i)
         for (int i = 0; i < 1024; ++i)
         {
             int n = i;
@@ -55,28 +60,30 @@ public class ByteArrayTest : TestCase
             assertEquals(n, ByteUtil.convertTwoCharToInt(twoChar[0], twoChar[1]));
         }
     }
+    [TestMethod]
 
     public void testNextBoolean() 
     {
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(tempFile));
-        out.writeBoolean(true);
-        out.writeBoolean(false);
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(tempFile));
+        _out.writeBoolean(true);
+        _out.writeBoolean(false);
         ByteArray byteArray = ByteArray.createByteArray(tempFile.getAbsolutePath());
         assertNotNull(byteArray);
         assertEquals(byteArray.nextBoolean(), true);
         assertEquals(byteArray.nextBoolean(), false);
         tempFile.deleteOnExit();
     }
+    [TestMethod]
 
     public void testWriteAndRead() 
     {
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
-        out.writeChar('H');
-        out.writeChar('e');
-        out.writeChar('l');
-        out.writeChar('l');
-        out.writeChar('o');
-        out.close();
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        _out.writeChar('H');
+        _out.writeChar('e');
+        _out.writeChar('l');
+        _out.writeChar('l');
+        _out.writeChar('o');
+        _out.close();
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         while (byteArray.hasMore())
         {
@@ -84,16 +91,18 @@ public class ByteArrayTest : TestCase
 //            Console.WriteLine(byteArray.nextChar());
         }
     }
+    [TestMethod]
 
     public void testWriteBigFile() 
     {
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
         for (int i = 0; i < 10000; i++)
         {
-            out.writeInt(i);
+            _out.writeInt(i);
         }
-        out.close();
+        _out.close();
     }
+    [TestMethod]
 
     public void testStream() 
     {
@@ -138,12 +147,12 @@ public class ByteArrayTest : TestCase
 //        start = System.currentTimeMillis();
 //        byteArray = ByteArray.createByteArray(HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT);
 //        MaxEntModel.create(byteArray);
-//        System.out.printf("ByteArray: %d ms\n", (System.currentTimeMillis() - start));
+//        Console.printf("ByteArray: %d ms\n", (System.currentTimeMillis() - start));
 //
 //        start = System.currentTimeMillis();
 //        byteArray = ByteArrayFileStream.createByteArrayFileStream(HanLP.Config.MaxEntModelPath + Predefine.BIN_EXT);
 //        MaxEntModel.create(byteArray);
-//        System.out.printf("ByteArrayStream: %d ms\n", (System.currentTimeMillis() - start));
+//        Console.printf("ByteArrayStream: %d ms\n", (System.currentTimeMillis() - start));
 //
 ////        ByteArray: 2626 ms
 ////        ByteArrayStream: 4165 ms

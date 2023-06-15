@@ -19,11 +19,11 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  */
 public class TMDictionaryMaker : ISaveAble
 {
-    Map<String, Map<String, Integer>> transferMatrix;
+    Dictionary<String, Dictionary<String, int>> transferMatrix;
 
     public TMDictionaryMaker()
     {
-        transferMatrix = new TreeMap<String, Map<String, Integer>>();
+        transferMatrix = new TreeMap<String, Dictionary<String, int>>();
     }
 
     /**
@@ -33,13 +33,13 @@ public class TMDictionaryMaker : ISaveAble
      */
     public void addPair(String first, String second)
     {
-        Map<String, Integer> firstMatrix = transferMatrix.get(first);
+        Dictionary<String, int> firstMatrix = transferMatrix.get(first);
         if (firstMatrix == null)
         {
-            firstMatrix = new TreeMap<String, Integer>();
+            firstMatrix = new TreeMap<String, int>();
             transferMatrix.put(first, firstMatrix);
         }
-        Integer frequency = firstMatrix.get(second);
+        int frequency = firstMatrix.get(second);
         if (frequency == null) frequency = 0;
         firstMatrix.put(second, frequency + 1);
     }
@@ -48,32 +48,32 @@ public class TMDictionaryMaker : ISaveAble
     public String toString()
     {
         Set<String> labelSet = new TreeSet<String>();
-        for (Map.Entry<String, Map<String, Integer>> first : transferMatrix.entrySet())
+        for (Map.Entry<String, Dictionary<String, int>> first : transferMatrix.entrySet())
         {
             labelSet.add(first.getKey());
             labelSet.addAll(first.getValue().keySet());
         }
         final StringBuilder sb = new StringBuilder();
-        sb.append(' ');
+        sb.Append(' ');
         for (String key : labelSet)
         {
-            sb.append(',');
-            sb.append(key);
+            sb.Append(',');
+            sb.Append(key);
         }
-        sb.append('\n');
+        sb.Append('\n');
         for (String first : labelSet)
         {
-            Map<String, Integer> firstMatrix = transferMatrix.get(first);
-            if (firstMatrix == null) firstMatrix = new TreeMap<String, Integer>();
-            sb.append(first);
+            Dictionary<String, int> firstMatrix = transferMatrix.get(first);
+            if (firstMatrix == null) firstMatrix = new TreeMap<String, int>();
+            sb.Append(first);
             for (String second : labelSet)
             {
-                sb.append(',');
-                Integer frequency = firstMatrix.get(second);
+                sb.Append(',');
+                int frequency = firstMatrix.get(second);
                 if (frequency == null) frequency = 0;
-                sb.append(frequency);
+                sb.Append(frequency);
             }
-            sb.append('\n');
+            sb.Append('\n');
         }
         return sb.toString();
     }

@@ -67,7 +67,7 @@ public class CoreDictionary
                 for (int i = 0; i < natureCount; ++i)
                 {
                     attribute.nature[i] = Nature.create(param[1 + 2 * i]);
-                    attribute.frequency[i] = Integer.parseInt(param[2 + 2 * i]);
+                    attribute.frequency[i] = int.parseInt(param[2 + 2 * i]);
                     attribute.totalFrequency += attribute.frequency[i];
                 }
                 map.put(param[0], attribute);
@@ -79,21 +79,21 @@ public class CoreDictionary
             logger.info("核心词典加载成功:" + trie.size() + "个词条，下面将写入缓存……");
             try
             {
-                DataOutputStream out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
+                DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
                 Collection<CoreDictionary.Attribute> attributeList = map.values();
-                out.writeInt(attributeList.size());
+                _out.writeInt(attributeList.size());
                 for (CoreDictionary.Attribute attribute : attributeList)
                 {
-                    out.writeInt(attribute.totalFrequency);
-                    out.writeInt(attribute.nature.length);
+                    _out.writeInt(attribute.totalFrequency);
+                    _out.writeInt(attribute.nature.length);
                     for (int i = 0; i < attribute.nature.length; ++i)
                     {
-                        out.writeInt(attribute.nature[i].ordinal());
-                        out.writeInt(attribute.frequency[i]);
+                        _out.writeInt(attribute.nature[i].ordinal());
+                        _out.writeInt(attribute.frequency[i]);
                     }
                 }
-                trie.save(out);
-                out.close();
+                trie.save(_out);
+                _out.close();
             }
             catch (Exception e)
             {
@@ -267,7 +267,7 @@ public class CoreDictionary
                 for (int i = 0; i < natureCount; ++i)
                 {
                     attribute.nature[i] = Nature.create(param[2 * i]);
-                    attribute.frequency[i] = Integer.parseInt(param[1 + 2 * i]);
+                    attribute.frequency[i] = int.parseInt(param[1 + 2 * i]);
                     attribute.totalFrequency += attribute.frequency[i];
                 }
                 return attribute;
@@ -370,19 +370,19 @@ public class CoreDictionary
             final StringBuilder sb = new StringBuilder();
             for (int i = 0; i < nature.length; ++i)
             {
-                sb.append(nature[i]).append(' ').append(frequency[i]).append(' ');
+                sb.Append(nature[i]).Append(' ').Append(frequency[i]).Append(' ');
             }
             return sb.toString();
         }
 
-        public void save(DataOutputStream out) 
+        public void save(DataOutputStream _out) 
         {
-            out.writeInt(totalFrequency);
-            out.writeInt(nature.length);
+            _out.writeInt(totalFrequency);
+            _out.writeInt(nature.length);
             for (int i = 0; i < nature.length; ++i)
             {
-                out.writeInt(nature[i].ordinal());
-                out.writeInt(frequency[i]);
+                _out.writeInt(nature[i].ordinal());
+                _out.writeInt(frequency[i]);
             }
         }
     }

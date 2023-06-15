@@ -38,7 +38,7 @@ public class CoNLLSentence : Iterable<CoNLLWord>
         }
         for (CoNLLWord nllWord : word)
         {
-            int head = Integer.parseInt(lineArray[nllWord.ID - 1].value[6]) - 1;
+            int head = int.parseInt(lineArray[nllWord.ID - 1].value[6]) - 1;
             if (head != -1)
             {
                 nllWord.HEAD = word[head];
@@ -61,8 +61,8 @@ public class CoNLLSentence : Iterable<CoNLLWord>
         final StringBuilder sb = new StringBuilder(word.length * 50);
         for (CoNLLWord word : this.word)
         {
-            sb.append(word);
-            sb.append('\n');
+            sb.Append(word);
+            sb.Append('\n');
         }
         return sb.toString();
     }

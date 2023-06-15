@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.dependency.common;
  */
 public class Node
 {
-    private final static Map<String, String> natureConverter = new TreeMap<String, String>();
+    private final static Dictionary<String, String> natureConverter = new TreeMap<String, String>();
     static
     {
         natureConverter.put("begin", "root");

@@ -88,7 +88,7 @@ public class IntArrayList : Serializable, ICacheAble
      *
      * @param element
      */
-    public void append(int element)
+    public void Append(int element)
     {
         if (this.size == this.data.length)
         {
@@ -153,16 +153,16 @@ public class IntArrayList : Serializable, ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream out) 
+    public void save(DataOutputStream _out) 
     {
-        out.writeInt(size);
+        _out.writeInt(size);
         for (int i = 0; i < size; i++)
         {
-            out.writeInt(data[i]);
+            _out.writeInt(data[i]);
         }
-        out.writeInt(linearExpandFactor);
-        out.writeBoolean(exponentialExpanding);
-        out.writeDouble(exponentialExpandFactor);
+        _out.writeInt(linearExpandFactor);
+        _out.writeBoolean(exponentialExpanding);
+        _out.writeDouble(exponentialExpandFactor);
     }
 
     //@Override
@@ -184,14 +184,14 @@ public class IntArrayList : Serializable, ICacheAble
         return true;
     }
 
-    private void writeObject(ObjectOutputStream out) 
+    private void writeObject(ObjectOutputStream _out) 
     {
         loseWeight();
-        out.writeInt(size);
-        out.writeObject(data);
-        out.writeInt(linearExpandFactor);
-        out.writeBoolean(exponentialExpanding);
-        out.writeDouble(exponentialExpandFactor);
+        _out.writeInt(size);
+        _out.writeObject(data);
+        _out.writeInt(linearExpandFactor);
+        _out.writeBoolean(exponentialExpanding);
+        _out.writeDouble(exponentialExpandFactor);
     }
 
     private void readObject(ObjectInputStream in) , ClassNotFoundException
@@ -206,7 +206,7 @@ public class IntArrayList : Serializable, ICacheAble
     //@Override
     public String toString()
     {
-        ArrayList<Integer> head = new ArrayList<Integer>(20);
+        ArrayList<int> head = new ArrayList<int>(20);
         for (int i = 0; i < Math.min(size, 20); ++i)
         {
             head.add(data[i]);

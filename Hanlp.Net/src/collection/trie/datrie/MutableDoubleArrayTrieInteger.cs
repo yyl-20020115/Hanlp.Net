@@ -30,15 +30,15 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      */
     private int size;
 
-    public MutableDoubleArrayTrieInteger(Map<String, Integer> stringIntegerMap)
+    public MutableDoubleArrayTrieInteger(Dictionary<String, int> stringIntegerMap)
     {
         this(stringIntegerMap.entrySet());
     }
 
-    public MutableDoubleArrayTrieInteger(Set<Map.Entry<String, Integer>> entrySet)
+    public MutableDoubleArrayTrieInteger(Set<Map.Entry<String, int>> entrySet)
     {
         this();
-        for (Map.Entry<String, Integer> entry : entrySet)
+        for (Map.Entry<String, int> entry : entrySet)
         {
             put(entry.getKey(), entry.getValue());
         }
@@ -93,11 +93,11 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         this.base = new IntArrayList(this.charMap.getInitSize());
         this.check = new IntArrayList(this.charMap.getInitSize());
 
-        this.base.append(0);
-        this.check.append(0);
+        this.base.Append(0);
+        this.check.Append(0);
 
-        this.base.append(1);
-        this.check.append(0);
+        this.base.Append(1);
+        this.check.Append(0);
         expandArray(this.charMap.getInitSize());
     }
 
@@ -229,8 +229,8 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         }
         for (int i = curSize; i <= maxSize; ++i)
         {
-            this.base.append(0);
-            this.check.append(0);
+            this.base.Append(0);
+            this.check.Append(0);
             addFreeLink(i);
         }
     }
@@ -304,7 +304,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
      * @param children 子节点集合
      * @return base值
      */
-    private int searchFreeBase(SortedSet<Integer> children)
+    private int searchFreeBase(SortedSet<int> children)
     {
         int minChild = children.first();
         int maxChild = children.last();
@@ -315,7 +315,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             {
                 int base = current - minChild;
                 bool ok = true;
-                for (Iterator<Integer> it = children.iterator(); it.hasNext(); ) // 检查是否每个子节点的位置都空闲（“连续”区间）
+                for (Iterator<int> it = children.iterator(); it.hasNext(); ) // 检查是否每个子节点的位置都空闲（“连续”区间）
                 {
                     int to = base + it.next();
                     if (to >= getBaseArraySize())
@@ -350,7 +350,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
     private void solveConflict(int parent, int newChild)
     {
         // 找出parent的所有子节点
-        TreeSet<Integer> children = new TreeSet<Integer>();
+        TreeSet<int> children = new TreeSet<int>();
         children.add(newChild);
         final int charsetSize = this.charMap.getCharsetSize();
         for (int c = 0; c < charsetSize; ++c)
@@ -368,7 +368,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         // 移动旧子节点到新的位置
         int newBase = searchFreeBase(children);
         children.remove(newChild);
-        for (Integer c : children)
+        for (int c : children)
         {
             int child = newBase + c;
             deleteFreeLink(child);
@@ -480,7 +480,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                 if ((getBase(curState) + c < getBaseArraySize())
                     && (getCheck(getBase(curState) + c) == curState))
                 {
-                    bytes.append(c);
+                    bytes.Append(c);
                     curState = getBase(curState) + c;
                 }
                 else
@@ -514,7 +514,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             int check = getCheck(base + c);
             if (base + c < getBaseArraySize() && check == curState)
             {
-                bytes.append(c);
+                bytes.Append(c);
                 recursiveAddSubTree(base + c, result, bytes);
                 bytes.removeLast();
             }
@@ -934,9 +934,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return LEAF_BIT - 1;
     }
 
-    public Set<Map.Entry<String, Integer>> entrySet()
+    public Set<Map.Entry<String, int>> entrySet()
     {
-        return new Set<Map.Entry<String, Integer>>()
+        return new Set<Map.Entry<String, int>>()
         {
             //@Override
             public int size()
@@ -957,9 +957,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public Iterator<Map.Entry<String, Integer>> iterator()
+            public Iterator<Map.Entry<String, int>> iterator()
             {
-                return new Iterator<Map.Entry<String, Integer>>()
+                return new Iterator<Map.Entry<String, int>>()
                 {
                     KeyValuePair iterator = MutableDoubleArrayTrieInteger.this.iterator();
 
@@ -976,10 +976,10 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                     }
 
                     //@Override
-                    public Map.Entry<String, Integer> next()
+                    public Map.Entry<String, int> next()
                     {
                         iterator.next();
-                        return new AbstractMap.SimpleEntry<String, Integer>(iterator.key, iterator.value);
+                        return new AbstractMap.SimpleEntry<String, int>(iterator.key, iterator.value);
                     }
                 };
             }
@@ -987,8 +987,8 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             //@Override
             public Object[] toArray()
             {
-                ArrayList<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(size);
-                for (Map.Entry<String, Integer> entry : this)
+                ArrayList<Map.Entry<String, int>> entries = new ArrayList<Map.Entry<String, int>>(size);
+                for (Map.Entry<String, int> entry : this)
                 {
                     entries.add(entry);
                 }
@@ -1002,7 +1002,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public bool add(Map.Entry<String, Integer> stringIntegerEntry)
+            public bool add(Map.Entry<String, int> stringIntegerEntry)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1020,7 +1020,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
             }
 
             //@Override
-            public bool addAll(Collection<? : Map.Entry<String, Integer>> c)
+            public bool addAll(Collection<? : Map.Entry<String, int>> c)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1162,15 +1162,15 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
     }
 
     //@Override
-    public void save(DataOutputStream out) 
+    public void save(DataOutputStream _out) 
     {
         if (!(charMap instanceof Utf8CharacterMapping))
         {
             logger.warning("将来需要在构造的时候传入 " + charMap.getClass());
         }
-        out.writeInt(size);
-        base.save(out);
-        check.save(out);
+        _out.writeInt(size);
+        base.save(_out);
+        check.save(_out);
     }
 
     //@Override
@@ -1182,11 +1182,11 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         return true;
     }
 
-    private void writeObject(ObjectOutputStream out) 
+    private void writeObject(ObjectOutputStream _out) 
     {
-        out.writeInt(size);
-        out.writeObject(base);
-        out.writeObject(check);
+        _out.writeInt(size);
+        _out.writeObject(base);
+        _out.writeObject(check);
     }
 
     private void readObject(ObjectInputStream in) , ClassNotFoundException
@@ -1224,7 +1224,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
         public KeyValuePair()
         {
             path = new IntArrayList(20);
-            path.append(1); // ROOT
+            path.Append(1); // ROOT
             int from = 1;
             int b = base.get(from);
             if (size > 0)
@@ -1236,9 +1236,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                         int c = check.get(b + i);
                         if (c == from)
                         {
-                            path.append(i);
+                            path.Append(i);
                             from = b + i;
-                            path.append(from);
+                            path.Append(from);
                             b = base.get(from);
                             i = 0;
                             if (getCheck(b + UNUSED_CHAR_VALUE) == from)
@@ -1250,7 +1250,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                                     ids[k] = path.get(j);
                                 }
                                 key = charMap.toString(ids);
-                                path.append(UNUSED_CHAR_VALUE);
+                                path.Append(UNUSED_CHAR_VALUE);
                                 currentBase = b;
                                 return;
                             }
@@ -1344,9 +1344,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                 int to = baseParent + i;
                 if (check.size() > to && check.get(to) == from)
                 {
-                    path.append(i);
+                    path.Append(i);
                     from = to;
-                    path.append(from);
+                    path.Append(from);
                     baseParent = base.get(from);
                     if (getCheck(baseParent + UNUSED_CHAR_VALUE) == from)
                     {
@@ -1357,7 +1357,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
                             ids[k] = path.get(j);
                         }
                         key = charMap.toString(ids);
-                        path.append(UNUSED_CHAR_VALUE);
+                        path.Append(UNUSED_CHAR_VALUE);
                         currentBase = baseParent;
                         return from;
                     }

@@ -1029,7 +1029,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public void print(int w, int d)
     {
-        print(new PrintWriter(System.out, true), w, d);
+        print(new PrintWriter(System._out, true), w, d);
     }
 
     /**
@@ -1066,11 +1066,11 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public void print(NumberFormat format, int width)
     {
-        print(new PrintWriter(System.out, true), format, width);
+        print(new PrintWriter(System._out, true), format, width);
     }
 
     // DecimalFormat is a little disappointing coming from Fortran or C's printf.
-    // Since it doesn't pad on the left, the elements will come out different
+    // Since it doesn't pad on the left, the elements will come _out different
     // widths.  Consequently, we'll pass the desired column width in as an
     // argument and do the extra padding ourselves.
 
@@ -1164,7 +1164,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         }
         int m = v.size();  // Now we've got the number of rows.
         double[][] A = new double[m][];
-        v.copyInto(A);  // copy the rows out of the vector
+        v.copyInto(A);  // copy the rows _out of the vector
         return new Matrix(A);
     }
 
@@ -1275,15 +1275,15 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         }
     }
 
-    public void save(DataOutputStream out) throws Exception
+    public void save(DataOutputStream _out)
     {
-        out.writeInt(m);
-        out.writeInt(n);
+        _out.writeInt(m);
+        _out.writeInt(n);
         for (int i = 0; i < m; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                out.writeDouble(A[i][j]);
+                _out.writeDouble(A[i][j]);
             }
         }
     }

@@ -25,8 +25,8 @@ public class CoNLLFixer
         {
             if (line.trim().length() == 0)
             {
-                sbOut.append(line);
-                sbOut.append('\n');
+                sbOut.Append(line);
+                sbOut.Append('\n');
                 continue;
             }
             String[] args = line.split("\t");
@@ -34,8 +34,8 @@ public class CoNLLFixer
             {
                 line += "\t_";
             }
-            sbOut.append(line);
-            sbOut.append('\n');
+            sbOut.Append(line);
+            sbOut.Append('\n');
         }
         return IOUtil.saveTxt(path + ".fixed.txt", sbOut.toString());
     }

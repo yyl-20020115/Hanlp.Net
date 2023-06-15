@@ -37,7 +37,7 @@ public class PairFrequency : TermFrequency
     public String second;
     public char delimiter;
 
-    protected PairFrequency(String term, Integer frequency)
+    protected PairFrequency(String term, int frequency)
     {
         super(term, frequency);
     }
@@ -76,21 +76,21 @@ public class PairFrequency : TermFrequency
     public String toString()
     {
         final StringBuilder sb = new StringBuilder();
-        sb.append(first);
-        sb.append(isRight() ? '→' : '←');
-        sb.append(second);
-        sb.append('=');
-        sb.append(" tf=");
-        sb.append(getValue());
-        sb.append(' ');
-        sb.append("mi=");
-        sb.append(mi);
-        sb.append(" le=");
-        sb.append(le);
-        sb.append(" re=");
-        sb.append(re);
-        sb.append(" score=");
-        sb.append(score);
+        sb.Append(first);
+        sb.Append(isRight() ? '→' : '←');
+        sb.Append(second);
+        sb.Append('=');
+        sb.Append(" tf=");
+        sb.Append(getValue());
+        sb.Append(' ');
+        sb.Append("mi=");
+        sb.Append(mi);
+        sb.Append(" le=");
+        sb.Append(le);
+        sb.Append(" re=");
+        sb.Append(re);
+        sb.Append(" score=");
+        sb.Append(score);
         return sb.toString();
     }
 }

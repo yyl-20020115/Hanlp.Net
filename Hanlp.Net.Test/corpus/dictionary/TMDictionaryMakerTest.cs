@@ -1,11 +1,13 @@
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
+[TestClass]
 public class TMDictionaryMakerTest : TestCase
 {
+    [TestMethod]
     public void testCreate() 
     {
-        TMDictionaryMaker tmDictionaryMaker = new TMDictionaryMaker();
+        TMDictionaryMaker tmDictionaryMaker = new ();
         tmDictionaryMaker.addPair("ab", "cd");
         tmDictionaryMaker.addPair("ab", "cd");
         tmDictionaryMaker.addPair("ab", "Y");

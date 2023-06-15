@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.algorithm;
  *
  * @author hankcs
  */
-public class MaxHeap<E> : Iterable<E>
+public class MaxHeap<E> : IEnumerable<E>
 {
     /**
      * 优先队列
@@ -33,7 +33,7 @@ public class MaxHeap<E> : Iterable<E>
      * @param maxSize 保留多少个元素
      * @param comparator 比较器，生成最大堆使用o1-o2，生成最小堆使用o2-o1，并修改 e.compareTo(peek) 比较规则
      */
-    public MaxHeap(int maxSize, Comparator<E> comparator)
+    public MaxHeap(int maxSize, IComparer<E> comparator)
     {
         if (maxSize <= 0)
             throw new IllegalArgumentException();

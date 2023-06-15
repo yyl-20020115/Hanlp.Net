@@ -264,7 +264,7 @@ public abstract class HiddenMarkovModel
      * @param s 预测状态序列（需预先分配内存）
      * @return 概率的对数，可利用 (float) Math.exp(maxScore) 还原
      */
-    public float predict(int[] o, Integer[] s)
+    public float predict(int[] o, int[] s)
     {
         int[] states = new int[s.length];
         float p = predict(o, states);

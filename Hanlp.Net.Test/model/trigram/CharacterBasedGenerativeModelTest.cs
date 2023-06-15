@@ -1,6 +1,7 @@
 namespace com.hankcs.hanlp.model.trigram;
 
 
+[TestClass]
 
 public class CharacterBasedGenerativeModelTest : TestCase
 {
@@ -19,12 +20,12 @@ public class CharacterBasedGenerativeModelTest : TestCase
 //            }
 //        });
 //        model.train();
-////        DataOutputStream out = new DataOutputStream(new FileOutputStream(HanLP.Config.HMMSegmentModelPath));
-////        model.save(out);
-////        out.close();
+////        DataOutputStream _out = new DataOutputStream(new FileOutputStream(HanLP.Config.HMMSegmentModelPath));
+////        model.save(_out);
+////        _out.close();
 ////        model.load(ByteArray.createByteArray(HanLP.Config.HMMSegmentModelPath));
 //        String text = "中国领土";
-//        char[] charArray = text.toCharArray();
+//        char[] charArray = text.ToCharArray();
 //        char[] tag = model.tag(charArray);
 //        Console.WriteLine(tag);
 //    }
@@ -34,12 +35,12 @@ public class CharacterBasedGenerativeModelTest : TestCase
 //        CharacterBasedGenerativeModel model = new CharacterBasedGenerativeModel();
 //        model.load(ByteArray.createByteArray(HanLP.Config.HMMSegmentModelPath));
 //        String text = "我实现了一个基于Character Based TriGram的分词器";
-//        char[] sentence = text.toCharArray();
+//        char[] sentence = text.ToCharArray();
 //        char[] tag = model.tag(sentence);
 //
 //        List<String> termList = new LinkedList<String>();
 //        int offset = 0;
-//        for (int i = 0; i < tag.length; offset += 1, ++i)
+//        for (int i = 0; i < tag.Length; offset += 1, ++i)
 //        {
 //            switch (tag[i])
 //            {
@@ -50,12 +51,12 @@ public class CharacterBasedGenerativeModelTest : TestCase
 //                    {
 //                        offset += 1;
 //                        ++i;
-//                        if (i == tag.length)
+//                        if (i == tag.Length)
 //                        {
 //                            break;
 //                        }
 //                    }
-//                    if (i == tag.length)
+//                    if (i == tag.Length)
 //                    {
 //                        termList.add(new String(sentence, begin, offset - begin));
 //                    }

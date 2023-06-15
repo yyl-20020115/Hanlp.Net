@@ -17,28 +17,30 @@ namespace com.hankcs.hanlp.dictionary;
  * 有一些类似于 工程@学 1 的条目会干扰 工程学家 的识别，这类@后接短字符的可以过滤掉
  * @author hankcs
  */
+[TestClass]
+
 public class SimplifyNGramDictionary : TestCase
 {
 //    String path = "data/dictionary/CoreNatureDictionary.ngram.txt";
 //    public void testSimplify() 
 //    {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
-//        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+//        TreeMap<String, int> map = new TreeMap<String, int>();
 //        String line;
 //        while ((line = br.readLine()) != null)
 //        {
 //            String[] param = line.split("\\s");
-//            map.put(param[0], Integer.valueOf(param[1]));
+//            map.put(param[0], int.valueOf(param[1]));
 //        }
 //        br.close();
-//        Set<Map.Entry<String, Integer>> entrySet = map.descendingMap().entrySet();
-//        Iterator<Map.Entry<String, Integer>> iterator = entrySet.iterator();
+//        Set<Map.Entry<String, int>> entrySet = map.descendingMap().entrySet();
+//        Iterator<Map.Entry<String, int>> iterator = entrySet.iterator();
 //        // 第一步去包含
-////        Map.Entry<String, Integer> pre = new AbstractMap.SimpleEntry<>(" @ ", 1);
+////        Map.Entry<String, int> pre = new AbstractMap.SimpleEntry<>(" @ ", 1);
 ////        while (iterator.hasNext())
 ////        {
-////            Map.Entry<String, Integer> current = iterator.next();
-////            if (current.getKey().length() - current.getKey().indexOf('@') == 2 && pre.getKey().indexOf(current.getKey()) == 0 && current.getValue() <= 2)
+////            Map.Entry<String, int> current = iterator.next();
+////            if (current.getKey().Length() - current.getKey().indexOf('@') == 2 && pre.getKey().indexOf(current.getKey()) == 0 && current.getValue() <= 2)
 ////            {
 ////                Console.WriteLine("应当删除 " + current + " 保留 " + pre);
 ////                iterator.remove();
@@ -49,8 +51,8 @@ public class SimplifyNGramDictionary : TestCase
 ////        iterator = entrySet.iterator();
 ////        while (iterator.hasNext())
 ////        {
-////            Map.Entry<String, Integer> current = iterator.next();
-////            if (current.getKey().length() == 3)
+////            Map.Entry<String, int> current = iterator.next();
+////            if (current.getKey().Length() == 3)
 ////            {
 ////                Console.WriteLine("应当删除 " + current);
 ////            }
@@ -59,9 +61,9 @@ public class SimplifyNGramDictionary : TestCase
 ////        iterator = entrySet.iterator();
 ////        while (iterator.hasNext())
 ////        {
-////            Map.Entry<String, Integer> current = iterator.next();
+////            Map.Entry<String, int> current = iterator.next();
 ////            String[] termArray = current.getKey().split("@", 2);
-////            if (termArray[0].equals("未##人") && termArray[1].length() < 2)
+////            if (termArray[0].equals("未##人") && termArray[1].Length() < 2)
 ////            {
 ////                Console.WriteLine("删除 " + current.getKey());
 ////                iterator.remove();
@@ -71,8 +73,8 @@ public class SimplifyNGramDictionary : TestCase
 ////        iterator = entrySet.iterator();
 ////        while (iterator.hasNext())
 ////        {
-////            Map.Entry<String, Integer> current = iterator.next();
-////            if (current.getKey().contains("未##人") && current.getValue() < 10)
+////            Map.Entry<String, int> current = iterator.next();
+////            if (current.getKey().Contains("未##人") && current.getValue() < 10)
 ////            {
 ////                Console.WriteLine("删除 " + current.getKey());
 ////                iterator.remove();
@@ -84,8 +86,8 @@ public class SimplifyNGramDictionary : TestCase
 //        iterator = entrySet.iterator();
 //        while (iterator.hasNext())
 //        {
-//            Map.Entry<String, Integer> current = iterator.next();
-//            if (current.getKey().contains("未##人") && dictionary.getFrequency(current.getKey()) < 10)
+//            Map.Entry<String, int> current = iterator.next();
+//            if (current.getKey().Contains("未##人") && dictionary.getFrequency(current.getKey()) < 10)
 //            {
 //                Console.WriteLine("删除 " + current.getKey());
 //                iterator.remove();
@@ -93,7 +95,7 @@ public class SimplifyNGramDictionary : TestCase
 //        }
 //        // 输出
 //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path)));
-//        for (Map.Entry<String, Integer> entry : map.entrySet())
+//        for (Map.Entry<String, int> entry : map.entrySet())
 //        {
 //            bw.write(entry.getKey());
 //            bw.write(' ');
@@ -110,28 +112,28 @@ public class SimplifyNGramDictionary : TestCase
 //    public void testLoseWeight() 
 //    {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-//        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+//        TreeMap<String, int> map = new TreeMap<String, int>();
 //        String line;
 //        while ((line = br.readLine()) != null)
 //        {
 //            String[] param = line.split(" ");
-//            map.put(param[0], Integer.valueOf(param[1]));
+//            map.put(param[0], int.valueOf(param[1]));
 //        }
 //        br.close();
-//        Iterator<String> iterator = map.keySet().iterator();
+//        Iterator<String> iterator = map.Keys.iterator();
 //        while (iterator.hasNext())
 //        {
 //            line = iterator.next();
 //            String[] params = line.split("@", 2);
 //            String one = params[0];
 //            String two = params[1];
-//            if (!CoreDictionary.contains(one) || !CoreDictionary.contains(two))
+//            if (!CoreDictionary.Contains(one) || !CoreDictionary.Contains(two))
 //                iterator.remove();
 //        }
 //
 //        // 输出
 //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
-//        for (Map.Entry<String, Integer> entry : map.entrySet())
+//        for (Map.Entry<String, int> entry : map.entrySet())
 //        {
 //            bw.write(entry.getKey());
 //            bw.write(' ');

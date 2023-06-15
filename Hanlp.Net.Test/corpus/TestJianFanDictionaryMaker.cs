@@ -16,11 +16,13 @@ namespace com.hankcs.hanlp.corpus;
 /**
  * @author hankcs
  */
+[TestClass]
 public class TestJianFanDictionaryMaker : TestCase
 {
 
     private String cc = "/Users/hankcs/CppProjects/OpenCC/data/dictionary/";
     private String root = "data/dictionary/tc/";
+    [TestMethod]
 
     public void testCombine() 
     {
@@ -34,7 +36,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //        {
 //            String t = entry.getKey();
 //            String s = entry.getValue();
-//            if (t.length() == 1) continue;
+//            if (t.Length() == 1) continue;
 //            if (HanLP.convertToTraditionalChinese(s).equals(t)) continue;
 //            dictionaryHanLP.add(t, s);
 //        }
@@ -91,12 +93,12 @@ public class TestJianFanDictionaryMaker : TestCase
 //        save(t2tw, "data/dictionary/tc/t2tw.txt");
 //    }
 //
-//    private void save(Map<String, String> storage, String path) throws IOException
+//    private void save(Map<String, String> storage, String path) 
 //    {
 //        BufferedWriter bw = IOUtil.newBufferedWriter(path);
 //        for (Map.Entry<String, String> entry : storage.entrySet())
 //        {
-//            String line = entry.toString();
+//            String line = entry.ToString();
 //            int firstBlank = line.indexOf(' ');
 //            if (firstBlank != -1)
 //            {
@@ -122,7 +124,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //            }
 //            for (String v : entry.getValue().split(" "))
 //            {
-//                if (key.length() == 1 && key.equals(v))
+//                if (key.Length() == 1 && key.equals(v))
 //                {
 //                    continue;
 //                }
@@ -134,7 +136,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //        {
 //            for (String key : entry.getValue().split(" "))
 //            {
-//                if (key.length() == 1 && key.equals(entry.getKey()))
+//                if (key.Length() == 1 && key.equals(entry.getKey()))
 //                {
 //                    continue;
 //                }
@@ -161,7 +163,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //            {
 //                String line = lineIterator.next();
 //                String[] args = line.split(delimiter);
-//                if (args.length != 2)
+//                if (args.Length != 2)
 //                {
 //                    System.err.println(line);
 //                    System.exit(-1);

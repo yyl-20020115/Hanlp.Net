@@ -24,7 +24,7 @@ public class ClusterAnalyzer<K>
     protected HashMap<K, Document<K>> documents_;
     protected Segment segment;
     protected MutableDoubleArrayTrieInteger vocabulary;
-    static final int NUM_REFINE_LOOP = 30;
+    const int NUM_REFINE_LOOP = 30;
 
     public ClusterAnalyzer()
     {
@@ -327,7 +327,7 @@ public class ClusterAnalyzer<K>
     double refined_vector_value(SparseVector composite, SparseVector vec, int sign)
     {
         double sum = 0.0;
-        for (Map.Entry<Integer, Double> entry : vec.entrySet())
+        for (Map.Entry<int, Double> entry : vec.entrySet())
         {
             sum += Math.pow(entry.getValue(), 2) + sign * 2 * composite.get(entry.getKey()) * entry.getValue();
         }
@@ -374,7 +374,7 @@ public class ClusterAnalyzer<K>
             if (files == null) continue;
             String category = folder.getName();
             cat[offset] = category;
-            logger.out("[%s]...", category);
+            logger._out("[%s]...", category);
             int b = 0;
             int e = files.length;
 
@@ -384,12 +384,12 @@ public class ClusterAnalyzer<K>
                 analyzer.addDocument(folder.getName() + " " + files[i].getName(), IOUtil.readTxt(files[i].getAbsolutePath()));
                 if (i % logEvery == 0)
                 {
-                    logger.out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
+                    logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
                 }
                 ++docSize;
                 ++ni[offset];
             }
-            logger.out(" %d 篇文档\n", e - b);
+            logger._out(" %d 篇文档\n", e - b);
             ++offset;
         }
         logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", folders.length, docSize);

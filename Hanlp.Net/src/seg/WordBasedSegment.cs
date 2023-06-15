@@ -99,7 +99,7 @@ public abstract class WordBasedSegment : Segment
         while (listIterator.hasNext())
         {
             next = listIterator.next();
-//            System.out.println("current:" + current + " next:" + next);
+//            System._out.println("current:" + current + " next:" + next);
             Nature currentNature = current.getNature();
             if (currentNature == Nature.nx && (next.hasNature(Nature.q) || next.hasNature(Nature.n)))
             {
@@ -173,7 +173,7 @@ public abstract class WordBasedSegment : Segment
                     }
                     else
                     {
-                        char[] tmpCharArray = current.realWord.toCharArray();
+                        char[] tmpCharArray = current.realWord.ToCharArray();
                         String lastChar = String.valueOf(tmpCharArray[tmpCharArray.length - 1]);
                         //===== 4、如果当前串最后一个汉字不是"∶·．／"和半角的'.''/'，那么是数
                         if (!"∶·．／./".contains(lastChar))
@@ -259,7 +259,7 @@ public abstract class WordBasedSegment : Segment
         // TODO: 使用一系列正则表达式将句子中的完整成分（百分比、日期、电子邮件、URL等）预先提取出来
         //==============================================================================================
 
-        char[] charArray = sSentence.substring(start, end).toCharArray();
+        char[] charArray = sSentence.substring(start, end).ToCharArray();
         int[] charTypeArray = new int[charArray.length];
 
         // 生成对应单个汉字的字符类型数组
@@ -293,7 +293,7 @@ public abstract class WordBasedSegment : Segment
             else if (pCur < charArray.length - 1 && ((nCurType == CharType.CT_SINGLE) || nCurType == CharType.CT_NUM))
             {
                 sb.delete(0, sb.length());
-                sb.append(charArray[pCur]);
+                sb.Append(charArray[pCur]);
 
                 bool reachEnd = true;
                 while (pCur < charArray.length - 1)
@@ -301,7 +301,7 @@ public abstract class WordBasedSegment : Segment
                     nNextType = charTypeArray[++pCur];
 
                     if (nNextType == nCurType)
-                        sb.append(charArray[pCur]);
+                        sb.Append(charArray[pCur]);
                     else
                     {
                         reachEnd = false;
@@ -340,7 +340,7 @@ public abstract class WordBasedSegment : Segment
         while (listIterator.hasNext())
         {
             next = listIterator.next();
-//            System.out.println("current:" + current + " next:" + next);
+//            System._out.println("current:" + current + " next:" + next);
             if ((TextUtility.isAllNum(current.realWord) || TextUtility.isAllChineseNum(current.realWord)) && (TextUtility.isAllNum(next.realWord) || TextUtility.isAllChineseNum(next.realWord)))
             {
                 /////////// 这部分从逻辑上等同于current.realWord = current.realWord + next.realWord;
@@ -352,9 +352,9 @@ public abstract class WordBasedSegment : Segment
                 listIterator.next();
                 listIterator.next();
                 /////////// end 这部分
-//                System.out.println("before:" + linkedArray);
+//                System._out.println("before:" + linkedArray);
                 listIterator.remove();
-//                System.out.println("after:" + linkedArray);
+//                System._out.println("after:" + linkedArray);
             }
             else
             {

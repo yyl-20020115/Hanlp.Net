@@ -24,7 +24,7 @@ public interface POSTagger
      * @param words 单词
      * @return 词性数组
      */
-    String[] tag(String... words);
+    String[] tag(params String[] words);
 
     /**
      * 词性标注

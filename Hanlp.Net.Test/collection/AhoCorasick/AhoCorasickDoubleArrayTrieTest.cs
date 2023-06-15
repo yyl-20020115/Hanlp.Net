@@ -1,26 +1,31 @@
+using com.hankcs.hanlp.algorithm.ahocorasick.trie;
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.AhoCorasick;
 
 
 
+[TestClass]
 public class AhoCorasickDoubleArrayTrieTest : TestCase
 {
+    [TestMethod]
 
     public void testTwoAC() 
     {
-        TreeMap<String, String> map = new TreeMap<String, String>();
+        var map = new Dictionary<String, String>();
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.mini.txt");
         while (iterator.hasNext())
         {
-            String line = iterator.next().split("\\s")[0];
-            map.put(line, line);
+            String line = iterator.next().Split("\\s")[0];
+            map.Add(line, line);
         }
 
         Trie trie = new Trie();
-        trie.addAllKeyword(map.keySet());
+        trie.addAllKeyword(map.Keys);
         AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
         act.build(map);
 
-        for (String key : map.keySet())
+        for (String key : map.Keys)
         {
             Collection<Emit> emits = trie.parseText(key);
             Set<String> otherSet = new HashSet<String>();
@@ -55,7 +60,7 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
 //        }
 //
 //        Trie trie = new Trie();
-//        trie.addAllKeyword(map.keySet());
+//        trie.addAllKeyword(map.Keys);
 //        AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
 //        long timeMillis = System.currentTimeMillis();
 //        act.build(map);
@@ -71,11 +76,11 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
 //            {
 //                int end = entry.end;
 //                int start = entry.begin;
-////                System.out.printf("[%d:%d]=%s\n", start, end, entry.value);
+////                Console.printf("[%d:%d]=%s\n", start, end, entry.value);
 //
 //                assertEquals(sentence.substring(start, end), entry.value);
 //            }
 //        }
-//        System.out.printf("%d ms\n", System.currentTimeMillis() - timeMillis);
+//        Console.printf("%d ms\n", System.currentTimeMillis() - timeMillis);
 //    }
 }
