@@ -28,7 +28,7 @@ namespace com.hankcs.demo;
  */
 public class DemoTextClassificationFMeasure
 {
-    public static readonly string CORPUS_FOLDER = TestUtility.ensureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
+    public static readonly string CORPUS_FOLDER = TestUtility.EnsureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
 
     public static void Main(String[] args) 
     {

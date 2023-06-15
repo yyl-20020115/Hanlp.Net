@@ -64,7 +64,7 @@ public class FirstOrderHiddenMarkovModelTest : TestCase
         FirstOrderHiddenMarkovModel givenModel = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
         FirstOrderHiddenMarkovModel trainedModel = new FirstOrderHiddenMarkovModel();
         trainedModel.train(givenModel.generate(3, 10, 100000));
-        assertTrue(trainedModel.similar(givenModel));
+        AssertTrue(trainedModel.similar(givenModel));
     }
     [TestMethod]
     public void testPredict() 

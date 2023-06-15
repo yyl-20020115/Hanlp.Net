@@ -9,12 +9,12 @@ public class CoreStopWordDictionaryTest : TestCase
     [TestMethod]
     public void TestContains()
     {
-        assertTrue(CoreStopWordDictionary.contains("这就是说"));
+        AssertTrue(CoreStopWordDictionary.contains("这就是说"));
     }
     [TestMethod]
     public void TestContainsSomeWords()
     {
-        assertEquals(true, CoreStopWordDictionary.contains("可以"));
+        AssertEquals(true, CoreStopWordDictionary.contains("可以"));
     }
     [TestMethod]
 
@@ -26,9 +26,9 @@ public class CoreStopWordDictionaryTest : TestCase
         wordList.Add("world");
         MDAGSet set = new MDAGSet(wordList);
         set.add("bee");
-        assertEquals(true, set.Contains("bee"));
+        AssertEquals(true, set.Contains("bee"));
         set.remove("bee");
-        assertEquals(false, set.Contains("bee"));
+        AssertEquals(false, set.Contains("bee"));
     }
 
 //    public void testRemoveDuplicateEntries() 

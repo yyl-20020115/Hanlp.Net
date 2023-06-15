@@ -8,13 +8,13 @@ public class CharTableTest : TestCase
     public void TestNormalization() 
     {
         Console.WriteLine(CharTable.convert('？'));
-        assertEquals('(', CharTable.convert('（'));
+        AssertEquals('(', CharTable.convert('（'));
     }
     [TestMethod]
     public void TestNormalizeSpace() {
-        assertEquals(CharTable.convert('\t'),' ');
-        assertEquals(CharTable.convert('\n'),' ');
-        assertEquals(CharTable.convert('\f'),' ');
+        AssertEquals(CharTable.convert('\t'),' ');
+        AssertEquals(CharTable.convert('\n'),' ');
+        AssertEquals(CharTable.convert('\f'),' ');
     }
 //    public void testConvert() 
 //    {

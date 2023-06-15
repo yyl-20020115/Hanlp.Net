@@ -17,19 +17,19 @@ public class MDAGSetTest : TestCase
     MDAGSet mdagSet;
 
     static String DATA_TEST_OUT_BIN;
-    private File tempFile;
+    private string tempFile;
 
     [TestInitialize]
-    public override void setUp() 
+    public override void SetUp() 
     {
-        TestUtility.ensureFullData();
+        TestUtility.EnsureFullData();
         tempFile = File.createTempFile("hanlp-", ".bin");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/custom/CustomDictionary.txt");
-        validKeySet = new TreeSet<String>();
+        validKeySet = new ();
         while (iterator.hasNext())
         {
-            validKeySet.add(iterator.next().split("\\s")[0]);
+            validKeySet.Add(iterator.next().Split("\\s")[0]);
         }
         mdagSet = new MDAGSet(validKeySet);
     }
@@ -37,13 +37,13 @@ public class MDAGSetTest : TestCase
 
     public void TestSize()
     {
-        assertEquals(validKeySet.size(), mdagSet.size());
+        AssertEquals(validKeySet.Count, mdagSet.size());
     }
     [TestMethod]
 
     public void TestContains()
     {
-        foreach (String key : validKeySet)
+        foreach (String key in validKeySet)
         {
 //            assertEquals(true, mdagSet.Contains(key));
             //assert mdagSet.Contains(key) : "本来应该有 " + key;
@@ -57,13 +57,13 @@ public class MDAGSetTest : TestCase
         Random random = new Random(DateTime.Now.Microsecond);
         mdagSet.simplify();
         mdagSet.unSimplify();
-        while (invalidKeySet.size() < validKeySet.size())
+        while (invalidKeySet.Count < validKeySet.Count)
         {
             int Length = random.Next(10) + 1;
             StringBuilder key = new StringBuilder(Length);
             for (int i = 0; i < Length; ++i)
             {
-                key.Append(random.Next(Character.MAX_VALUE));
+                key.Append(random.Next(char.MaxValue));
             }
             if (validKeySet.Contains(key.ToString())) continue;
             invalidKeySet.Add(key.ToString());
@@ -71,7 +71,7 @@ public class MDAGSetTest : TestCase
 
         foreach (String key in invalidKeySet)
         {
-            assertEquals(false, mdagSet.Contains(key));
+            AssertEquals(false, mdagSet.Contains(key));
         }
     }
     [TestMethod]
@@ -79,10 +79,10 @@ public class MDAGSetTest : TestCase
     public void TestToArray() 
     {
         String[] keyArray = mdagSet.toArray(new String[0]);
-        assertEquals(validKeySet.size(), keyArray.Length);
-        for (String key : keyArray)
+        AssertEquals(validKeySet.Count, keyArray.Length);
+        foreach (String key in keyArray)
         {
-            assertEquals(true, mdagSet.Contains(key));
+            AssertEquals(true, mdagSet.Contains(key));
         }
     }
     [TestMethod]
@@ -90,28 +90,28 @@ public class MDAGSetTest : TestCase
     public void TestRemove() 
     {
         String[] keyArray = mdagSet.ToArray();
-        for (String key : keyArray)
+        foreach (String key in keyArray)
         {
             mdagSet.remove(key);
-            assertEquals(false, mdagSet.Contains(key));
+            AssertEquals(false, mdagSet.Contains(key));
         }
     }
     [TestMethod]
 
     public void TestAdd() 
     {
-        assertEquals(true, mdagSet.add("成功啦"));
-        assertEquals(true, mdagSet.Contains("成功啦"));
+        AssertEquals(true, mdagSet.add("成功啦"));
+        AssertEquals(true, mdagSet.Contains("成功啦"));
     }
     [TestMethod]
 
     public void TestSimplify() 
     {
-        HashMap<MDAGNode, MDAGNode> equivalenceClassMDAGNodeHashMapBefore = mdagSet._getEquivalenceClassMDAGNodeHashMap();
+        var equivalenceClassMDAGNodeHashMapBefore = mdagSet._getEquivalenceClassMDAGNodeHashMap();
         mdagSet.simplify();
         mdagSet.unSimplify();
-        HashMap<MDAGNode, MDAGNode> equivalenceClassMDAGNodeHashMapAfter = mdagSet._getEquivalenceClassMDAGNodeHashMap();
-        assertEquals(equivalenceClassMDAGNodeHashMapBefore, equivalenceClassMDAGNodeHashMapAfter);
+        var equivalenceClassMDAGNodeHashMapAfter = mdagSet._getEquivalenceClassMDAGNodeHashMap();
+        AssertEquals(equivalenceClassMDAGNodeHashMapBefore, equivalenceClassMDAGNodeHashMapAfter);
     }
     [TestMethod]
 
@@ -140,7 +140,7 @@ public class MDAGSetTest : TestCase
     public void TestSingle() 
     {
         mdagSet.simplify();
-        assertTrue(mdagSet.Contains("hankcs"));
+        AssertTrue(mdagSet.Contains("hankcs"));
     }
 
     //    public void testBenchmark() 
@@ -171,9 +171,9 @@ public class MDAGSetTest : TestCase
     {
         MDAGSet setTwo = new MDAGSet(validKeySet);
         setTwo.simplify();
-        for (String key : validKeySet)
+        foreach(String key in validKeySet)
         {
-            assertEquals(mdagSet.getStringsStartingWith(key), setTwo.getStringsStartingWith(key));
+            AssertEquals(mdagSet.getStringsStartingWith(key), setTwo.getStringsStartingWith(key));
         }
     }
 
@@ -188,7 +188,7 @@ public class MDAGSetTest : TestCase
         mdag.addString("he");
 
         mdag.simplify();
-        assertTrue(mdag.Contains("hers"));
+        AssertTrue(mdag.contains("hers"));
     }
     [TestMethod]
 
@@ -206,6 +206,6 @@ public class MDAGSetTest : TestCase
         }
         mdagMap.simplify();
 
-        assertEquals("he", mdagMap.get("he"));
+        AssertEquals("he", mdagMap.get("he"));
     }
 }

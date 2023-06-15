@@ -13,7 +13,7 @@ public class DartMapTest : TestCase
     private DartMap<int> dartMap;
 
     [TestInitialize]
-    public override void setUp()
+    public override void SetUp()
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.ngram.txt");
         validKeySet = new ();
@@ -59,13 +59,13 @@ public class DartMapTest : TestCase
         TestBuild();
         foreach (String key in validKeySet)
         {
-            assertEquals(key.Length, (int)dartMap.get(key));
+            AssertEquals(key.Length, (int)dartMap.get(key));
         }
 
         TestGenerateInvalidKeySet();
         foreach (String key in invalidKeySet)
         {
-            assertEquals(null, dartMap.get(key));
+            AssertEquals(null, dartMap.get(key));
         }
     }
 

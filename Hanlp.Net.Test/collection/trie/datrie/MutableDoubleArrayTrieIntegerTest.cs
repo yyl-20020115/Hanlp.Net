@@ -9,7 +9,7 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
     private int size;
 
     [TestInitialize]
-    public override void setUp() 
+    public override void SetUp() 
     {
         mdat = new MutableDoubleArrayTrieInteger();
         size = 64;
@@ -26,15 +26,15 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
         mdat.save(new DataOutputStream(new FileOutputStream(tempFile)));
         mdat = new MutableDoubleArrayTrieInteger();
         mdat.load(ByteArray.createByteArray(tempFile.getAbsolutePath()));
-        assertEquals(size, mdat.size());
+        AssertEquals(size, mdat.size());
         for (int i = 0; i < size; ++i)
         {
-            assertEquals(i, mdat.get((i.ToString())));
+            AssertEquals(i, mdat.get((i.ToString())));
         }
 
         for (int i = size; i < 2 * size; ++i)
         {
-            assertEquals(-1, mdat.get((i.ToString())));
+            AssertEquals(-1, mdat.get((i.ToString())));
         }
     }
 }

@@ -21,6 +21,6 @@ public class SecondOrderHiddenMarkovModelTest : FirstOrderHiddenMarkovModelTest
         trainedModel.train(hmm2.generate(3, 10, 100000));
         hmm2.unLog();
         trainedModel.unLog();
-        assertTrue(hmm2.similar(trainedModel));
+        AssertTrue(hmm2.similar(trainedModel));
     }
 }

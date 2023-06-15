@@ -13,10 +13,10 @@ public class IOUtilTest : TestCase
         random.nextBytes(originalData);
         ByteArrayInputStream _is = ();
         byte[] readData = IOUtil.readBytesFromOtherInputStream(_is);
-        assertEquals(originalData.Length, readData.Length);
+        AssertEquals(originalData.Length, readData.Length);
         for (int i = 0; i < originalData.Length; i++)
         {
-            assertEquals(originalData[i], readData[i]);
+            AssertEquals(originalData[i], readData[i]);
         }
     }
 
@@ -43,7 +43,7 @@ public class IOUtilTest : TestCase
         int i = 1;
         foreach (String line in lineIterator)
         {
-            assertEquals(String.format("第%d行", i++), line);
+            AssertEquals(String.format("第%d行", i++), line);
         }
     }
 }

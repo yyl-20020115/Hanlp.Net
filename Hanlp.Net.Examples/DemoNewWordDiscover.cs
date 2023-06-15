@@ -24,7 +24,7 @@ namespace com.hankcs.demo;
  */
 public class DemoNewWordDiscover
 {
-    static readonly string CORPUS_PATH = TestUtility.ensureTestData("红楼梦.txt", "http://hanlp.linrunsoft.com/release/corpus/红楼梦.zip");
+    static readonly string CORPUS_PATH = TestUtility.EnsureTestData("红楼梦.txt", "http://hanlp.linrunsoft.com/release/corpus/红楼梦.zip");
 
     public static void Main(String[] args) 
     {

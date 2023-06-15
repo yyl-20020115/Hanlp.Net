@@ -7,7 +7,7 @@ namespace com.hankcs.hanlp.recognition.ns;
 public class PlaceRecognitionTest : TestCase
 {
     [TestMethod]
-    public void testSeg() 
+    public void TestSeg() 
     {
 //        HanLP.Config.enableDebug();
         DijkstraSegment segment = new DijkstraSegment();

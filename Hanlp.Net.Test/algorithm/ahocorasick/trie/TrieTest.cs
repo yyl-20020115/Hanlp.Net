@@ -25,10 +25,10 @@ public class TrieTest : TestCase
         trie.addAllKeyword(map.Keys);
         foreach (var key in keyArray)
         {
-            assertTrue(trie.hasKeyword(key));
+            AssertTrue(trie.hasKeyword(key));
         }
-        assertTrue(trie.hasKeyword("ushers"));
-        assertFalse(trie.hasKeyword("构建耗时"));
+        AssertTrue(trie.hasKeyword("ushers"));
+        AssertFalse(trie.hasKeyword("构建耗时"));
     }
     [TestMethod]
     public void TestParseText()
@@ -61,7 +61,7 @@ public class TrieTest : TestCase
         public void hit(int begin, int end, String value)
         {
             //                Console.printf("[%d:%d]=%s\n", begin, end, value);
-            assertEquals(value, text[begin..end]);
+            AssertEquals(value, text[begin..end]);
         }
     }
 

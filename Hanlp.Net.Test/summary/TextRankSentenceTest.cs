@@ -15,21 +15,21 @@ public class TextRankSentenceTest :TestCase
 	private static readonly String separator = "[。?？!！]";
 	
 	[TestMethod]
-	public void testExtractSummary()
+    public void TestExtractSummary()
 	{
 		List<String> oldSum = HanLP.extractSummary(str, 2);
 		List<String> newSum = HanLP.extractSummary(str, 2, separator);
 //		Console.WriteLine("exctractSummay old:" + oldSum);
 //		Console.WriteLine("exctractSummay new:" + newSum);
 		
-		assertTrue(oldSum.ToString().Length < newSum.ToString().Length);
-		assertFalse(oldSum.ToString().Contains("，"));
-		assertTrue(newSum.ToString().Contains("，"));
+		AssertTrue(oldSum.ToString().Length < newSum.ToString().Length);
+		AssertFalse(oldSum.ToString().Contains("，"));
+		AssertTrue(newSum.ToString().Contains("，"));
 	}
 	
 	[TestMethod]
-	public void testGetSummary() 
-	{
+    public void TestGetSummary()
+    {
 		
 		String oldSum = HanLP.getSummary(str, 100);
 		String newSum = HanLP.getSummary(str, 100, separator);
@@ -37,8 +37,8 @@ public class TextRankSentenceTest :TestCase
 //		Console.WriteLine("getSummay old:" + oldSum);
 //		Console.WriteLine("getSummay new:" + newSum);
 		
-		assertFalse(oldSum.Contains("，"));
-		assertTrue(newSum.Contains("，"));
+		AssertFalse(oldSum.Contains("，"));
+		AssertTrue(newSum.Contains("，"));
 	}
 	
 }

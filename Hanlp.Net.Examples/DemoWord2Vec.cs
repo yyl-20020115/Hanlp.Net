@@ -23,7 +23,7 @@ namespace com.hankcs.demo;
  */
 public class DemoWord2Vec
 {
-    private static readonly string TRAIN_FILE_NAME = TestUtility.ensureTestData("搜狗文本分类语料库已分词.txt", "http://hanlp.linrunsoft.com/release/corpus/sogou-mini-segmented.zip");
+    private static readonly string TRAIN_FILE_NAME = TestUtility.EnsureTestData("搜狗文本分类语料库已分词.txt", "http://hanlp.linrunsoft.com/release/corpus/sogou-mini-segmented.zip");
     private static readonly string MODEL_FILE_NAME = "data/test/word2vec.txt";
 
     public static void Main(String[] args) 

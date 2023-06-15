@@ -7,7 +7,7 @@ public class ItemTest : TestCase
     [TestMethod]
     public void TestCreate() 
     {
-        assertEquals("希望 v 7685 vn 616", Item.create("希望 v 7685 vn 616").ToString());
+        AssertEquals("希望 v 7685 vn 616", Item.create("希望 v 7685 vn 616").ToString());
     }
     [TestMethod]
     public void TestCombine() 
@@ -15,6 +15,6 @@ public class ItemTest : TestCase
         var itemA = SimpleItem.create("A 1 B 2");
         var itemB = SimpleItem.create("B 1 C 2 D 3");
         itemA.combine(itemB);
-        assertEquals("B 3 D 3 C 2 A 1 ", string.Join(' ',itemA));
+        AssertEquals("B 3 D 3 C 2 A 1 ", string.Join(' ',itemA));
     }
 }

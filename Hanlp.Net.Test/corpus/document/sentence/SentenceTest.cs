@@ -17,9 +17,9 @@ public class SentenceTest : TestCase
         assertEquals("[上海/ns 华安/nz 工业/n （/w 集团/n ）/w 公司/n]/nt", nt.previous().ToString());
         CompoundWord apple = CompoundWord.create("[苹果/n 公司/n]/nt");
         nt.set(apple);
-        assertEquals(sentence.findFirstWordByLabel("nt"), apple);
+        AssertEquals(sentence.findFirstWordByLabel("nt"), apple);
         nt.remove();
-        assertEquals("董事长/n 谭旭光/nr 和/c 秘书/n 胡花蕊/nr 来到/v [美国/ns 纽约/ns 现代/t 艺术/n 博物馆/n]/ns 参观/v", sentence.ToString());
+        AssertEquals("董事长/n 谭旭光/nr 和/c 秘书/n 胡花蕊/nr 来到/v [美国/ns 纽约/ns 现代/t 艺术/n 博物馆/n]/ns 参观/v", sentence.ToString());
         ListIterator<IWord> ns = sentence.findFirstWordIteratorByLabel("ns");
         assertEquals("参观/v", ns.next().ToString());
     }
@@ -32,7 +32,7 @@ public class SentenceTest : TestCase
     [TestMethod]
     public void TestText()
     {
-        assertEquals("人民网纽约时报", Sentence.create("人民网/nz [纽约/nsf 时报/n]/nz").text());
+        AssertEquals("人民网纽约时报", Sentence.create("人民网/nz [纽约/nsf 时报/n]/nz").text());
     }
     [TestMethod]
     public void TestCreate() 
@@ -43,9 +43,9 @@ public class SentenceTest : TestCase
         while (matcher.find())
         {
             String param = matcher.group();
-            assertEquals(param, WordFactory.create(param).ToString());
+            AssertEquals(param, WordFactory.create(param).ToString());
         }
-        assertEquals(text, Sentence.create(text).ToString());
+        AssertEquals(text, Sentence.create(text).ToString());
     }
     [TestMethod]
     public void TestCreateNoTag() 

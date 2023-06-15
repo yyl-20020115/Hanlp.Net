@@ -9,6 +9,6 @@ public class CoreBiGramTableDictionaryTest : TestCase
     {
         int biFrequency = CoreBiGramTableDictionary.getBiFrequency("高性能", "计算");
         CoreBiGramTableDictionary.reload();
-        assertEquals(biFrequency, CoreBiGramTableDictionary.getBiFrequency("高性能", "计算"));
+        AssertEquals(biFrequency, CoreBiGramTableDictionary.getBiFrequency("高性能", "计算"));
     }
 }

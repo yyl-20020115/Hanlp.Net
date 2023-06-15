@@ -12,7 +12,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     PerceptronLexicalAnalyzer analyzer;
 
     [TestInitialize]
-    public override void setUp() 
+    public override void SetUp() 
     {
         analyzer = new PerceptronLexicalAnalyzer(Config.CWS_MODEL_FILE, Config.POS_MODEL_FILE, Config.NER_MODEL_FILE);
     }
@@ -30,8 +30,8 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     public void TestLearn() 
     {
         analyzer.learn("我/r 在/p 浙江/ns 金华/ns 出生/v");
-        assertTrue(analyzer.analyze("我在浙江金华出生").ToString().Contains("金华/ns"));
-        assertTrue(analyzer.analyze("我的名字叫金华").ToString().Contains("金华/nr"));
+        AssertTrue(analyzer.analyze("我在浙江金华出生").ToString().Contains("金华/ns"));
+        AssertTrue(analyzer.analyze("我的名字叫金华").ToString().Contains("金华/nr"));
     }
     [TestMethod]
     public void TestEmptyInput() 
@@ -43,17 +43,17 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     public void testCustomDictionary() 
     {
         analyzer.enableCustomDictionary(true);
-        assertTrue(CustomDictionary.Contains("一字长蛇阵"));
+        AssertTrue(CustomDictionary.Contains("一字长蛇阵"));
         final String text = "张飞摆出一字长蛇阵如入无人之境，孙权惊呆了";
 //        Console.WriteLine(analyzer.analyze(text));
-        assertTrue(analyzer.analyze(text).ToString().Contains(" 一字长蛇阵/"));
+        AssertTrue(analyzer.analyze(text).ToString().Contains(" 一字长蛇阵/"));
     }
     [TestMethod]
     public void testCustomNature() 
     {
         assertTrue(CustomDictionary.insert("饿了么", "ntc 1"));
         analyzer.enableCustomDictionaryForcing(true);
-        assertEquals("美团/n 与/p 饿了么/ntc 争夺/v 外卖/v 市场/n", analyzer.analyze("美团与饿了么争夺外卖市场").ToString());
+        AssertEquals("美团/n 与/p 饿了么/ntc 争夺/v 外卖/v 市场/n", analyzer.analyze("美团与饿了么争夺外卖市场").ToString());
     }
     [TestMethod]
     public void testIndexMode() 
@@ -61,7 +61,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         analyzer.enableIndexMode(true);
         String text = "来到美国纽约现代艺术博物馆参观";
         List<Term> termList = analyzer.seg(text);
-        assertEquals("[来到/v, 美国纽约现代艺术博物馆/ns, 美国/ns, 纽约/ns, 现代/t, 艺术/n, 博物馆/n, 参观/v]", termList.ToString());
+        AssertEquals("[来到/v, 美国纽约现代艺术博物馆/ns, 美国/ns, 纽约/ns, 现代/t, 艺术/n, 博物馆/n, 参观/v]", termList.ToString());
         for (Term term : termList)
         {
             assertEquals(term.word, text.substring(term.offset, term.offset + term.Length()));
@@ -86,10 +86,10 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         String text = "來到美國紐約現代藝術博物館參觀?";
         Sentence sentence = analyzer.analyze(text);
 //        Console.WriteLine(sentence);
-        assertEquals("來到/v [美國/ns 紐約/ns 現代/t 藝術/n 博物館/n]/ns 參觀/v ?/w", sentence.ToString());
+        AssertEquals("來到/v [美國/ns 紐約/ns 現代/t 藝術/n 博物館/n]/ns 參觀/v ?/w", sentence.ToString());
         List<Term> termList = analyzer.seg(text);
 //        Console.WriteLine(termList);
-        assertEquals("[來到/v, 美國紐約現代藝術博物館/ns, 參觀/v, ?/w]", termList.ToString());
+        AssertEquals("[來到/v, 美國紐約現代藝術博物館/ns, 參觀/v, ?/w]", termList.ToString());
     }
     [TestMethod]
     public void testWhiteSpace() 
@@ -101,8 +101,8 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         {
             if (!word.getLabel().equals("w"))
             {
-                assertFalse(word.getValue().Contains(" "));
-                assertFalse(word.getValue().Contains("\t"));
+                AssertFalse(word.getValue().Contains(" "));
+                AssertFalse(word.getValue().Contains("\t"));
             }
         }
     }

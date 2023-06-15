@@ -32,8 +32,8 @@ public class Instance
 
     public Instance()
     {
-        forms = new ArrayList<string>();
-        postags = new ArrayList<string>();
+        forms = new ();
+        postags = new ();
     }
 
     int size()
@@ -43,7 +43,7 @@ public class Instance
 
     bool is_tree()
     {
-        List<List<int>> tree = new ArrayList<List<int>>(heads.size());
+        List<List<int>> tree = new (heads.size());
         int root = -1;
         for (int modifier = 0; modifier < heads.size(); ++modifier)
         {
@@ -57,7 +57,7 @@ public class Instance
                 tree.get(head).add(modifier);
             }
         }
-        bool visited[] = new bool[heads.size()];
+        bool[] visited = new bool[heads.size()];
         if (!is_tree_travel(root, tree, visited))
         {
             return false;
@@ -73,7 +73,7 @@ public class Instance
         return true;
     }
 
-    bool is_tree_travel(int now, List<List<int>> tree, bool visited[])
+    bool is_tree_travel(int now, List<List<int>> tree, bool[] visited)
     {
         if (visited[now])
         {

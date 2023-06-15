@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.tokenizers;
 using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.corpus.document.sentence.word;
@@ -34,8 +35,8 @@ public class Document : Serializable
 
     public static Document create(string param)
     {
-        Pattern pattern = Pattern.compile(".+?((。/w)|(！/w )|(？/w )|\\n|$)");
-        Matcher matcher = pattern.matcher(param);
+        var pattern = Pattern.compile(".+?((。/w)|(！/w )|(？/w )|\\n|$)");
+        var matcher = pattern.matcher(param);
         List<Sentence> sentenceList = new LinkedList<Sentence>();
         while (matcher.find())
         {
@@ -58,7 +59,7 @@ public class Document : Serializable
      */
     public List<IWord> getWordList()
     {
-        List<IWord> wordList = new LinkedList<IWord>();
+        List<IWord> wordList = new ();
         foreach (Sentence sentence in sentenceList)
         {
             wordList.addAll(sentence.wordList);
@@ -69,7 +70,7 @@ public class Document : Serializable
     public List<Word> getSimpleWordList()
     {
         List<IWord> wordList = getWordList();
-        List<Word> simpleWordList = new LinkedList<Word>();
+        List<Word> simpleWordList = new ();
         foreach (IWord word in wordList)
         {
             if (word is CompoundWord)
@@ -123,8 +124,8 @@ public class Document : Serializable
      */
     public List<List<IWord>> getComplexSentenceList()
     {
-        List<List<IWord>> complexList = new LinkedList<List<IWord>>();
-        for (Sentence sentence : sentenceList)
+        List<List<IWord>> complexList = new ();
+        for (Sentence sentence in sentenceList)
         {
             complexList.add(sentence.wordList);
         }
@@ -140,17 +141,17 @@ public class Document : Serializable
      */
     public List<List<Word>> getSimpleSentenceList(bool spilt)
     {
-        List<List<Word>> simpleList = new LinkedList<List<Word>>();
+        List<List<Word>> simpleList = new ();
         foreach (Sentence sentence in sentenceList)
         {
-            List<Word> wordList = new LinkedList<Word>();
-            for (IWord word : sentence.wordList)
+            List<Word> wordList = new ();
+            for (IWord word in sentence.wordList)
             {
                 if (word is CompoundWord)
                 {
                     if (spilt)
                     {
-                        for (Word inner : ((CompoundWord) word).innerList)
+                        for (Word inner in ((CompoundWord) word).innerList)
                         {
                             wordList.add(inner);
                         }
@@ -180,10 +181,10 @@ public class Document : Serializable
     public List<List<Word>> getSimpleSentenceList(HashSet<string> labelSet)
     {
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
-        for (Sentence sentence : sentenceList)
+        for (Sentence sentence in sentenceList)
         {
             List<Word> wordList = new LinkedList<Word>();
-            for (IWord word : sentence.wordList)
+            for (IWord word in sentence.wordList)
             {
                 if (word is CompoundWord)
                 {
@@ -214,7 +215,7 @@ public class Document : Serializable
     public string toString()
     {
         StringBuilder sb = new StringBuilder();
-        for (Sentence sentence : sentenceList)
+        for (Sentence sentence in sentenceList)
         {
             sb.Append(sentence);
             sb.Append(' ');
@@ -227,7 +228,7 @@ public class Document : Serializable
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file.getAbsolutePath());
         List<Sentence> sentenceList = new LinkedList<Sentence>();
-        for (string line : lineIterator)
+        for (string line in lineIterator)
         {
             line = line.trim();
             if (line.isEmpty()) continue;

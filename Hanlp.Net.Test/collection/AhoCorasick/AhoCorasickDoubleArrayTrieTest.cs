@@ -41,7 +41,7 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
                 mySet.Add(entry.value + (entry.end - 1));
             }
 
-            assertEquals(otherSet, mySet);
+            AssertEquals(otherSet, mySet);
         }
     }
 

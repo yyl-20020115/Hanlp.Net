@@ -23,15 +23,15 @@ public class CharTypeTest : TestCase
     {
 //        CharType.type[' '] = CharType.CT_OTHER;
         String text = "1 + 2 = 3; a+b= a + b";
-        assertEquals("[1/m,  /w, +/w,  /w, 2/m,  /w, =/w,  /w, 3/m, ;/w,  /w, a/nx, +/w, b/nx, =/w,  /w, a/nx,  /w, +/w,  /w, b/nx]", HanLP.segment(text).ToString());
+        AssertEquals("[1/m,  /w, +/w,  /w, 2/m,  /w, =/w,  /w, 3/m, ;/w,  /w, a/nx, +/w, b/nx, =/w,  /w, a/nx,  /w, +/w,  /w, b/nx]", HanLP.segment(text).ToString());
     }
     [TestMethod]
 
     public void TestTab() 
     {
-        assertTrue(TextUtility.charType('\t') == CharType.CT_DELIMITER);
-        assertTrue(TextUtility.charType('\r') == CharType.CT_DELIMITER);
-        assertTrue(TextUtility.charType('\0') == CharType.CT_DELIMITER);
+        AssertTrue(TextUtility.charType('\t') == CharType.CT_DELIMITER);
+        AssertTrue(TextUtility.charType('\r') == CharType.CT_DELIMITER);
+        AssertTrue(TextUtility.charType('\0') == CharType.CT_DELIMITER);
 
 //        Console.WriteLine(HanLP.segment("\t"));
     }

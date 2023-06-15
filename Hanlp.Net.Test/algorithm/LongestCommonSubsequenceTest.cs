@@ -10,7 +10,7 @@ public class LongestCommonSubsequenceTest : TestCase
     [TestMethod]
     public void TestCompute()
     {
-        assertEquals(5, LongestCommonSubsequence.compute(a, b));
+        AssertEquals(5, LongestCommonSubsequence.compute(a, b));
     }
 
 }

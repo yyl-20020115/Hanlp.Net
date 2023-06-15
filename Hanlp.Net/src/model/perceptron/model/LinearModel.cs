@@ -9,6 +9,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dependency.nnparser;
 using com.hankcs.hanlp.model.perceptron.common;
@@ -79,14 +80,9 @@ public class LinearModel : ICacheAble
         var featureIdSet = featureMap.entrySet();
         TagSet tagSet = featureMap.tagSet;
         MaxHeap<FeatureSortItem> heap = new MaxHeap<FeatureSortItem>(
-            (int) ((featureIdSet.size() - tagSet.sizeIncludingBos()) * (1.0f - ratio)), new Comparator<FeatureSortItem>()
-        {
-            //@Override
-            public int compare(FeatureSortItem o1, FeatureSortItem o2)
-            {
-                return Float.compare(o1.total, o2.total);
-            }
-        });
+            (int) ((featureIdSet.size() - tagSet.sizeIncludingBos()) * (1.0f - ratio)),
+            new COMP()
+        );
 
         logger.start("裁剪特征...\n");
         int logEvery = (int) Math.ceil(featureMap.size() / 10000f);
@@ -140,7 +136,14 @@ public class LinearModel : ICacheAble
         this.parameter = parameter;
         return this;
     }
-
+    public class COMP :IComparer<FeatureSortItem> 
+    {
+        //@Override
+        public int Compare(FeatureSortItem o1, FeatureSortItem o2)
+        {
+            return float.Compare(o1.total, o2.total);
+        }
+    }
     /**
      * 保存到路径
      *
@@ -166,7 +169,7 @@ public class LinearModel : ICacheAble
         save(modelFile, featureMap.entrySet(), ratio);
     }
 
-    public void save(string modelFile, Set<KeyValuePair<string, int>> featureIdSet, double ratio) 
+    public void save(string modelFile, HashSet<KeyValuePair<string, int>> featureIdSet, double ratio) 
     {
         save(modelFile, featureIdSet, ratio, false);
     }
@@ -180,7 +183,7 @@ public class LinearModel : ICacheAble
      * @param text         是否输出文本以供调试
      * @
      */
-    public void save(string modelFile, Set<KeyValuePair<string, int>> featureIdSet, double ratio, bool text) 
+    public void save(string modelFile, HashSet<KeyValuePair<string, int>> featureIdSet, double ratio, bool text) 
     {
         float[] parameter = this.parameter;
         this.compress(ratio, 1e-3f);
@@ -224,7 +227,7 @@ public class LinearModel : ICacheAble
     public void update(ICollection<int> x, int y)
     {
         //assert y == 1 || y == -1 : "感知机的标签y必须是±1";
-        for (int f : x)
+        foreach (int f in x)
             parameter[f] += y;
     }
 
@@ -234,10 +237,10 @@ public class LinearModel : ICacheAble
      * @param x 特征向量
      * @return sign(wx)
      */
-    public int decode(Collection<int> x)
+    public int decode(ICollection<int> x)
     {
         float y = 0;
-        for (int f : x)
+        foreach (int f in x)
             y += parameter[f];
         return y < 0 ? -1 : 1;
     }
@@ -264,8 +267,8 @@ public class LinearModel : ICacheAble
     {
          int[] allLabel = featureMap.allLabels();
          int bos = featureMap.bosTag();
-         int sentenceLength = instance.tagArray.length;
-         int labelSize = allLabel.length;
+         int sentenceLength = instance.tagArray.Length;
+         int labelSize = allLabel.Length;
 
         int[][] preMatrix = new int[sentenceLength][labelSize];
         double[][] scoreMatrix = new double[2][labelSize];
@@ -275,11 +278,11 @@ public class LinearModel : ICacheAble
             int _i = i & 1;
             int _i_1 = 1 - _i;
             int[] allFeature = instance.getFeatureAt(i);
-             int transitionFeatureIndex = allFeature.length - 1;
+            int transitionFeatureIndex = allFeature.Length - 1;
             if (0 == i)
             {
                 allFeature[transitionFeatureIndex] = bos;
-                for (int j = 0; j < allLabel.length; j++)
+                for (int j = 0; j < allLabel.Length; j++)
                 {
                     preMatrix[0][j] = j;
 
@@ -290,12 +293,12 @@ public class LinearModel : ICacheAble
             }
             else
             {
-                for (int curLabel = 0; curLabel < allLabel.length; curLabel++)
+                for (int curLabel = 0; curLabel < allLabel.Length; curLabel++)
                 {
 
-                    double maxScore = int.MIN_VALUE;
+                    double maxScore = int.MinValue;
 
-                    for (int preLabel = 0; preLabel < allLabel.length; preLabel++)
+                    for (int preLabel = 0; preLabel < allLabel.Length; preLabel++)
                     {
 
                         allFeature[transitionFeatureIndex] = preLabel;
@@ -318,7 +321,7 @@ public class LinearModel : ICacheAble
         int maxIndex = 0;
         double maxScore = scoreMatrix[(sentenceLength - 1) & 1][0];
 
-        for (int index = 1; index < allLabel.length; index++)
+        for (int index = 1; index < allLabel.Length; index++)
         {
             if (maxScore < scoreMatrix[(sentenceLength - 1) & 1][index])
             {
@@ -345,7 +348,7 @@ public class LinearModel : ICacheAble
     public double score(int[] featureVector, int currentTag)
     {
         double score = 0;
-        for (int index : featureVector)
+        foreach (int index in featureVector)
         {
             if (index == -1)
             {
@@ -396,7 +399,7 @@ public class LinearModel : ICacheAble
             featureMap = new ImmutableFeatureMDatMap(featureMap.entrySet(), tagSet());
         }
         featureMap.save(_out);
-        for (float aParameter : this.parameter)
+        foreach (float aParameter in this.parameter)
         {
             _out.writeFloat(aParameter);
         }

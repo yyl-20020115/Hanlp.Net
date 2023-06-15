@@ -9,8 +9,8 @@ public class HanLPTest : TestCase
     [TestMethod]
     public void TestNewSegment() 
     {
-        assertTrue(HanLP.newSegment("维特比") is ViterbiSegment);
-        assertTrue(HanLP.newSegment("感知机") is PerceptronLexicalAnalyzer);
+        AssertTrue(HanLP.newSegment("维特比") is ViterbiSegment);
+        AssertTrue(HanLP.newSegment("感知机") is PerceptronLexicalAnalyzer);
     }
     [TestMethod]
 

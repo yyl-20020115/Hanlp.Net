@@ -11,7 +11,7 @@ public class ByteArrayTest : TestCase
     private File tempFile;
 
     [TestInitialize]
-    public override void setUp() 
+    public override void SetUp() 
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
@@ -26,8 +26,8 @@ public class ByteArrayTest : TestCase
         int i = 3389;
         _out.writeInt(i);
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
-        assertEquals(d, byteArray.nextDouble());
-        assertEquals(i, byteArray.nextInt());
+        AssertEquals(d, byteArray.nextDouble());
+        AssertEquals(i, byteArray.nextInt());
     }
     [TestMethod]
 
@@ -37,7 +37,7 @@ public class ByteArrayTest : TestCase
         String utf = "hankcs你好123";
         _out.writeUTF(utf);
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
-        assertEquals(utf, byteArray.nextUTF());
+        AssertEquals(utf, byteArray.nextUTF());
     }
     [TestMethod]
 
@@ -48,7 +48,7 @@ public class ByteArrayTest : TestCase
         _out.writeByte((byte) ((utflen >>> 8) & 0xFF));
         _out.writeByte((byte) ((utflen >>> 0) & 0xFF));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
-        assertEquals(utflen, byteArray.nextUnsignedShort());
+        AssertEquals(utflen, byteArray.nextUnsignedShort());
     }
     [TestMethod]
 
@@ -59,7 +59,7 @@ public class ByteArrayTest : TestCase
         {
             int n = i;
             char[] twoChar = ByteUtil.convertIntToTwoChar(n);
-            assertEquals(n, ByteUtil.convertTwoCharToInt(twoChar[0], twoChar[1]));
+            AssertEquals(n, ByteUtil.convertTwoCharToInt(twoChar[0], twoChar[1]));
         }
     }
     [TestMethod]
@@ -70,9 +70,9 @@ public class ByteArrayTest : TestCase
         _out.writeBoolean(true);
         _out.writeBoolean(false);
         ByteArray byteArray = ByteArray.createByteArray(tempFile.getAbsolutePath());
-        assertNotNull(byteArray);
-        assertEquals(byteArray.nextBoolean(), true);
-        assertEquals(byteArray.nextBoolean(), false);
+        AssertNotNull(byteArray);
+        AssertEquals(byteArray.nextBoolean(), true);
+        AssertEquals(byteArray.nextBoolean(), false);
         tempFile.deleteOnExit();
     }
     [TestMethod]

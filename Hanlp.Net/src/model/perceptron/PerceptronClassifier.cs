@@ -56,7 +56,7 @@ public abstract class PerceptronClassifier
         for (int it = 0; it < maxIteration; ++it)
         {
             Utility.shuffleArray(instanceList);
-            for (Instance instance : instanceList)
+            foreach (Instance instance in instanceList)
             {
                 int y = model.decode(instance.x);
                 if (y != instance.y) // 误差反馈
@@ -252,7 +252,7 @@ public abstract class PerceptronClassifier
     /**
      * 准确率度量
      */
-     class BinaryClassificationFMeasure
+     public class BinaryClassificationFMeasure
     {
         float P, R, F1;
 

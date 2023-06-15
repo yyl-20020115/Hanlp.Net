@@ -10,7 +10,7 @@ public class MDAGMapTest : TestCase
     MDAGMap<int> mdagMap = new MDAGMap<int>();
     HashSet<String> validKeySet;
     [TestInitialize]
-    public void setUp() 
+    public override void SetUp() 
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/custom/CustomDictionary.txt");
         validKeySet = new ();
@@ -37,7 +37,7 @@ public class MDAGMapTest : TestCase
 //        mdagMap.unSimplify();
         foreach (String word in validKeySet)
         {
-            assertEquals(word.Length, (int) mdagMap.get(word));
+            AssertEquals(word.Length, (int) mdagMap.get(word));
         }
     }
     [TestMethod]
@@ -46,14 +46,14 @@ public class MDAGMapTest : TestCase
     {
         TestPut();
         mdagMap.simplify();
-        assertEquals(null, mdagMap.get("齿轮厂"));
+        AssertEquals(null, mdagMap.get("齿轮厂"));
     }
     [TestMethod]
 
     public void TestCommonPrefixSearch() 
     {
         TestPut();
-        assertEquals("[hankcs=6]", mdagMap.commonPrefixSearchWithValue("hankcs").ToString());
+        AssertEquals("[hankcs=6]", mdagMap.commonPrefixSearchWithValue("hankcs").ToString());
     }
 
 //    public void testBenchmark() 

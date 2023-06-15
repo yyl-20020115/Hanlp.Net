@@ -16,7 +16,7 @@ public class MaxHeapTest : TestCase
     static MaxHeap<int> heap = new (5,new Comparer());
     [TestInitialize]
     //@Override
-    public override void setUp() 
+    public override void SetUp() 
     {
         heap.add(1);
         heap.add(3);
@@ -32,6 +32,6 @@ public class MaxHeapTest : TestCase
     [TestMethod]
     public void TestToList()
     {
-        assertEquals("[9, 8, 7, 6, 5]","["+string.Join(", ", heap.ToList())+"]");
+        AssertEquals("[9, 8, 7, 6, 5]","["+string.Join(", ", heap.ToList())+"]");
     }
 }

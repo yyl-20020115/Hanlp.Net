@@ -20,7 +20,7 @@ namespace com.hankcs.demo;
  */
 public class DemoTextClusteringFMeasure
 {
-    public static readonly string CORPUS_FOLDER = TestUtility.ensureTestData("搜狗文本分类语料库迷你版", "http://hanlp.linrunsoft.com/release/corpus/sogou-text-classification-corpus-mini.zip");
+    public static readonly string CORPUS_FOLDER = TestUtility.EnsureTestData("搜狗文本分类语料库迷你版", "http://hanlp.linrunsoft.com/release/corpus/sogou-text-classification-corpus-mini.zip");
 
     public static void Main(String[] args)
     {

@@ -23,7 +23,7 @@ public class DoubleArrayTrieTest : TestCase
         trie.build(map);
         foreach (String key in map.Keys)
         {
-            assertEquals(key, trie.get(key));
+            AssertEquals(key, trie.get(key));
         }
     }
     [TestMethod]
@@ -47,7 +47,7 @@ public class DoubleArrayTrieTest : TestCase
         while (searcher.next())
         {
 //            Console.printf("[%d, %d)=%s\n", searcher.begin, searcher.begin + searcher.Length, searcher.value);
-            assertEquals(searcher.value, text[searcher.begin .. (searcher.begin + searcher.length)]));
+            AssertEquals(searcher.value, text[searcher.begin .. (searcher.begin + searcher.length)]));
         }
     }
     [TestMethod]
@@ -58,7 +58,7 @@ public class DoubleArrayTrieTest : TestCase
         int index = dat.transition("龙", 1);
         //assertNull(dat.output(index));
         index = dat.transition("窝", index);
-        assertEquals("nz 183 ", dat.output(index).ToString());
+        AssertEquals("nz 183 ", dat.output(index).ToString());
     }
 
     //    public void testCombine() 

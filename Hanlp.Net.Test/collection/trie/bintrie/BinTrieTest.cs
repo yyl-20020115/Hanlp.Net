@@ -6,11 +6,11 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
 [TestClass]
 public class BinTrieTest : TestCase
 {
-    static String DATA_TEST_OUT_BIN;
-    private File tempFile;
+    static string DATA_TEST_OUT_BIN;
+    private string tempFile;
 
     [TestInitialize]
-    public override void setUp()
+    public override void SetUp()
     {
         tempFile = File.createTempFile("hanlp-", ".dat");
         DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
@@ -36,7 +36,7 @@ public class BinTrieTest : TestCase
         public void hit(int begin, int end, String value)
         {
             //                Console.printf("[%d, %d)=%s\n", begin, end, value);
-            assertEquals(value, text[begin .. end]);
+            AssertEquals(value, text[begin .. end]);
         }
     }
     [TestMethod]
@@ -47,7 +47,7 @@ public class BinTrieTest : TestCase
         trie.put("加入", true);
         trie.put("加入", false);
 
-        assertEquals(false, trie.get("加入"));
+        AssertEquals(false, trie.get("加入"));
     }
     [TestMethod]
 
@@ -67,14 +67,14 @@ public class BinTrieTest : TestCase
         trie.put("za", 3);
         trie.put("zb", 4);
         trie.put("zzz", 5);
-        assertTrue(trie.save(DATA_TEST_OUT_BIN));
+        AssertTrue(trie.save(DATA_TEST_OUT_BIN));
         trie = new BinTrie<int>();
         int[] value = new int[100];
         for (int i = 0; i < value.Length; ++i)
         {
             value[i] = i;
         }
-        assertTrue(trie.load(DATA_TEST_OUT_BIN, value));
+        AssertTrue(trie.load(DATA_TEST_OUT_BIN, value));
         var entrySet = trie.entrySet();
         assertEquals("[haha=0, hankcs=1, hello=2, za=3, zb=4, zzz=5]", entrySet.ToString());
     }

@@ -16,7 +16,7 @@ public class CustomDictionaryTest : TestCase
 
     public void TestGet() 
     {
-        assertEquals("nz 1 ", CustomDictionary.get("一个心眼儿").ToString());
+        AssertEquals("nz 1 ", CustomDictionary.get("一个心眼儿").ToString());
     }
 
     /**
@@ -132,7 +132,7 @@ public class CustomDictionaryTest : TestCase
     {
         Nature pcNature1 = Nature.create("电脑品牌");
         Nature pcNature2 = Nature.create("电脑品牌");
-        assertEquals(pcNature1, pcNature2);
+        AssertEquals(pcNature1, pcNature2);
     }
 
     //    public void testIssue234() 

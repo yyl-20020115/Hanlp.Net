@@ -9,6 +9,12 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+using Microsoft.Extensions.Logging;
+using System.Text;
+
 namespace com.hankcs.hanlp.collection.trie.bintrie;
 
 
@@ -33,7 +39,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public BinTrie(Dictionary<string, V> map)
         :this()
     {
-        for (KeyValuePair<string, V> entry : map.entrySet())
+        foreach (KeyValuePair<string, V> entry in map.entrySet())
         {
             put(entry.getKey(), entry.getValue());
         }
@@ -174,9 +180,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      *
      * @return
      */
-    public Set<KeyValuePair<string, V>> entrySet()
+    public HashSet<KeyValuePair<string, V>> entrySet()
     {
-        Set<KeyValuePair<string, V>> entrySet = new TreeSet<KeyValuePair<string, V>>();
+        HashSet<KeyValuePair<string, V>> entrySet = new TreeSet<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder();
         for (BaseNode node : child)
         {
@@ -190,9 +196,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * 键集合
      * @return
      */
-    public Set<string> keySet()
+    public HashSet<string> keySet()
     {
-        TreeSet<string> keySet = new TreeSet<string>();
+        var keySet = new HashSet<string>();
         for (KeyValuePair<string, V> entry : entrySet())
         {
             keySet.add(entry.getKey());
@@ -207,9 +213,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param key 查询串
      * @return 键值对
      */
-    public Set<KeyValuePair<string, V>> prefixSearch(string key)
+    public HashSet<KeyValuePair<string, V>> prefixSearch(string key)
     {
-        Set<KeyValuePair<string, V>> entrySet = new TreeSet<KeyValuePair<string, V>>();
+        HashSet<KeyValuePair<string, V>> entrySet = new HashSet<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder(key.substring(0, key.length() - 1));
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
@@ -387,7 +393,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         }
         catch (Exception e)
         {
-            logger.warning("保存到" + _out + "失败" + TextUtility.exceptionToString(e));
+            Logger.warning("保存到" + _out + "失败" + TextUtility.exceptionToString(e));
             return false;
         }
 
@@ -492,17 +498,18 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     }
 
     //@Override
-    public void readExternal(ObjectInput in) , ClassNotFoundException
+    public void readExternal(ObjectInput _in) 
     {
-        size = in.readInt();
+        size = _in.readInt();
         for (int i = 0; i < child.length; ++i)
         {
-            int flag = in.readInt();
+            int flag = _in.readInt();
             if (flag == 1)
             {
                 child[i] = new Node<V>();
-                child[i].walkToLoad(in);
-            }
+                child[i].walkToLoad(_in);
+
+}
         }
     }
 
@@ -512,7 +519,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseLongestText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseLongestText(string text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
         int length = text.length();
         for (int i = 0; i < length; ++i)
@@ -548,7 +555,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseLongestText(char[] text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseLongestText(char[] text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
         int length = text.length;
         for (int i = 0; i < length; ++i)
@@ -584,7 +591,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseText(string text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseText(string text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
         int length = text.length();
         int begin = 0;
@@ -616,7 +623,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param text      文本
      * @param processor 处理器
      */
-    public void parseText(char[] text, AhoCorasickDoubleArrayTrie.IHit<V> processor)
+    public void parseText(char[] text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
         int length = text.length;
         int begin = 0;

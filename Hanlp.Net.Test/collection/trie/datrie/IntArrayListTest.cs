@@ -8,7 +8,7 @@ public class IntArrayListTest : TestCase
     IntArrayList array = new IntArrayList();
 
     [TestInitialize]
-    public override void setUp() 
+    public override void SetUp() 
     {
         for (int i = 0; i < 64; ++i)
         {
@@ -23,7 +23,7 @@ public class IntArrayListTest : TestCase
         array.load(ByteArray.createByteArray(tempFile.getAbsolutePath()));
         for (int i = 0; i < 64; ++i)
         {
-            assertEquals(i, array.get(i));
+            AssertEquals(i, array.get(i));
         }
     }
 }

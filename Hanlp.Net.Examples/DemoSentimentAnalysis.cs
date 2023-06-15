@@ -27,7 +27,7 @@ public class DemoSentimentAnalysis
     /**
      * 中文情感挖掘语料-ChnSentiCorp 谭松波
      */
-    public static readonly string CORPUS_FOLDER = TestUtility.ensureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
+    public static readonly string CORPUS_FOLDER = TestUtility.EnsureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
 
     public static void Main(String[] args) 
     {

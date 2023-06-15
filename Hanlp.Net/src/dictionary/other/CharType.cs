@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dictionary.other;
 
 
@@ -24,46 +27,46 @@ public class CharType
     /**
      * 单字节
      */
-    public static readonly byte CT_SINGLE = 5;
+    public const byte CT_SINGLE = 5;
 
     /**
      * 分隔符"!,.?()[]{}+=
      */
-    public static readonly byte CT_DELIMITER = CT_SINGLE + 1;
+    public const byte CT_DELIMITER = CT_SINGLE + 1;
 
     /**
      * 中文字符
      */
-    public static readonly byte CT_CHINESE = CT_SINGLE + 2;
+    public const byte CT_CHINESE = CT_SINGLE + 2;
 
     /**
      * 字母
      */
-    public static readonly byte CT_LETTER = CT_SINGLE + 3;
+    public const byte CT_LETTER = CT_SINGLE + 3;
 
     /**
      * 数字
      */
-    public static readonly byte CT_NUM = CT_SINGLE + 4;
+    public const byte CT_NUM = CT_SINGLE + 4;
 
     /**
      * 序号
      */
-    public static readonly byte CT_INDEX = CT_SINGLE + 5;
+    public const byte CT_INDEX = CT_SINGLE + 5;
 
     /**
      * 中文数字
      */
-    public static readonly byte CT_CNUM = CT_SINGLE + 6;
+    public const byte CT_CNUM = CT_SINGLE + 6;
 
     /**
      * 其他
      */
-    public static readonly byte CT_OTHER = CT_SINGLE + 12;
+    public const byte CT_OTHER = CT_SINGLE + 12;
 
     public static byte[] type;
 
-    static
+    static CharType()
     {
         type = new byte[65536];
         logger.info("字符类型对应表开始加载 " + HanLP.Config.CharTypePath);
@@ -97,8 +100,8 @@ public class CharType
     {
         int preType = 5;
         int preChar = 0;
-        List<int[]> typeList = new LinkedList<int[]>();
-        for (int i = 0; i <= Character.MAX_VALUE; ++i)
+        List<int[]> typeList = new ();
+        for (int i = 0; i <= char.MaxValue; ++i)
         {
             int type = TextUtility.charType((char) i);
 //            System._out.printf("%d %d\n", i, TextUtility.charType((char) i));
@@ -108,7 +111,7 @@ public class CharType
                 array[0] = preChar;
                 array[1] = i - 1;
                 array[2] = preType;
-                typeList.add(array);
+                typeList.Add(array);
 //                System._out.printf("%d %d %d\n", array[0], array[1], array[2]);
                 preChar = i;
             }
@@ -117,13 +120,13 @@ public class CharType
         {
             int[] array = new int[3];
             array[0] = preChar;
-            array[1] = (int) Character.MAX_VALUE;
+            array[1] = (int) char.MaxValue;
             array[2] = preType;
-            typeList.add(array);
+            typeList.Add(array);
         }
 //        System._out.print("int[" + typeList.size() + "][3] array = \n");
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(HanLP.Config.CharTypePath));
-        for (int[] array : typeList)
+        foreach (int[] array in typeList)
         {
 //            System._out.printf("%d %d %d\n", array[0], array[1], array[2]);
             _out.writeChar(array[0]);

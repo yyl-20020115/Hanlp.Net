@@ -6,6 +6,6 @@ public class PartOfSpeechTagDictionaryTest : TestCase
     [TestMethod]
     public void TestTranslate() 
     {
-        assertEquals("名词", PartOfSpeechTagDictionary.translate("n"));
+        AssertEquals("名词", PartOfSpeechTagDictionary.translate("n"));
     }
 }

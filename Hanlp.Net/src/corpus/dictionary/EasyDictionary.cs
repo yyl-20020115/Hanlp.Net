@@ -108,14 +108,14 @@ public class EasyDictionary
         private List<KeyValuePair<string, Attribute>> entryList;
 
         protected Searcher(char[] c)
+            :base(c)
         {
-            super(c);
         }
 
         protected Searcher(string text)
+            :base(text)
         {
-            super(text);
-            entryList = new LinkedList<KeyValuePair<string, Attribute>>();
+            entryList = new ();
         }
 
         //@Override
@@ -173,8 +173,8 @@ public class EasyDictionary
         }
 
         public Attribute(Nature nature, int frequency)
+            :this(1)
         {
-            this(1);
             this.nature[0] = nature;
             this.frequency[0] = frequency;
             totalFrequency = frequency;
@@ -186,8 +186,8 @@ public class EasyDictionary
          * @param nature
          */
         public Attribute(Nature nature)
+            :this(nature,1000)
         {
-            this(nature, 1000);
         }
 
         /**
@@ -204,7 +204,7 @@ public class EasyDictionary
                 Nature pos = Nature.create(nature);
                 return getNatureFrequency(pos);
             }
-            catch (IllegalArgumentException e)
+            catch (Exception e)
             {
                 return 0;
             }
@@ -220,7 +220,7 @@ public class EasyDictionary
         {
             int result = 0;
             int i = 0;
-            for (Nature pos in this.nature)
+            foreach (Nature pos in this.nature)
             {
                 if (nature == pos)
                 {

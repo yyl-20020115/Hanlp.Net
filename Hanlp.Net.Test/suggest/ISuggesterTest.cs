@@ -21,10 +21,10 @@ public class ISuggesterTest : TestCase
             suggester.addSentence(title);
         }
 
-        assertEquals(true, suggester.suggest("mayun", 1).Count > 0);
+        AssertEquals(true, suggester.suggest("mayun", 1).Count > 0);
 
         suggester.removeAllSentences();
 
-        assertEquals(0, suggester.suggest("mayun", 1).Count);
+        AssertEquals(0, suggester.suggest("mayun", 1).Count);
     }
 }

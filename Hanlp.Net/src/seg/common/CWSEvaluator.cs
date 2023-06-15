@@ -243,7 +243,7 @@ public class CWSEvaluator
 
     public class Result
     {
-        float P, R, F1, OOV_R, IV_R;
+        public float P, R, F1, OOV_R, IV_R;
 
         public Result(float p, float r, float f1, float OOV_R, float IV_R)
         {
@@ -255,7 +255,7 @@ public class CWSEvaluator
         }
 
         //@Override
-        public string toString()
+        public string ToString()
         {
             return string.format("P:%.2f R:%.2f F1:%.2f OOV-R:%.2f IV-R:%.2f", P, R, F1, OOV_R, IV_R);
         }

@@ -59,7 +59,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testExtendViterbi() 
+    public void TestExtendViterbi() 
     {
         HanLP.Config.enableDebug(false);
         String path = System.getProperty("user.dir") + "/" + "data/dictionary/custom/CustomDictionary.txt;" +
@@ -114,7 +114,7 @@ public class SegmentTest : TestCase
         List<Term> termList = IndexTokenizer.segment(text);
         foreach (Term term in termList)
         {
-            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length()));
+            AssertEquals(term.word, text[term.offset .. (term.offset + term.length())]);
         }
     }
     [TestMethod]
@@ -184,7 +184,7 @@ public class SegmentTest : TestCase
 
     public void TestIssue3() 
     {
-        assertEquals(CharType.CT_DELIMITER, CharType.get('*'));
+        AssertEquals(CharType.CT_DELIMITER, CharType.get('*'));
 //        Console.WriteLine(HanLP.segment("300g*2"));
 //        Console.WriteLine(HanLP.segment("３００ｇ＊２"));
 //        Console.WriteLine(HanLP.segment("鱼300克*2/组"));
@@ -345,7 +345,7 @@ public class SegmentTest : TestCase
     {
 //        Console.WriteLine(CharType.get('\u0000'));
 //        Console.WriteLine(CharType.get(' '));
-        assertEquals(CharTable.convert(' '), ' ');
+        AssertEquals(CharTable.convert(' '), ' ');
 //        Console.WriteLine(CharTable.convert('﹗'));
         HanLP.Config.Normalization = true;
 //        Console.WriteLine(StandardTokenizer.segment("号 "));
@@ -359,7 +359,7 @@ public class SegmentTest : TestCase
 //        Console.WriteLine(attribute);
         List<Term> termList = StandardTokenizer.segment("三年");
 //        Console.WriteLine(termList);
-        assertEquals(attribute.nature[0], termList.get(1).nature);
+        AssertEquals(attribute.nature[0], termList[1].nature);
 //        Console.WriteLine(StandardTokenizer.segment("三元"));
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
 //        Console.WriteLine(StandardTokenizer.segment("三年"));
@@ -418,21 +418,21 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testNLPSegment() 
+    public void TestNLPSegment() 
     {
         String text = "2013年4月27日11时54分";
 //        Console.WriteLine(NLPTokenizer.segment(text));
     }
     [TestMethod]
 
-    public void testTraditionalSegment() 
+    public void TestTraditionalSegment() 
     {
         String text = "吵架吵到快取消結婚了";
 //        Console.WriteLine(TraditionalChineseTokenizer.segment(text));
     }
     [TestMethod]
 
-    public void testIssue290() 
+    public void TestIssue290() 
     {
 //        HanLP.Config.enableDebug();
         String txt = "而其他肢解出去的七个贝尔公司如西南贝尔、太平洋贝尔、大西洋贝尔。";
@@ -441,7 +441,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue343() 
+    public void TestIssue343() 
     {
         CustomDictionary.insert("酷我");
         CustomDictionary.insert("酷我音乐");
@@ -450,7 +450,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue358() 
+    public void TestIssue358() 
     {
 //        HanLP.Config.enableDebug();
         String text = "受约束，需要遵守心理学会所定的道德原则，所需要时须说明该实验与所能得到的知识的关系";
@@ -462,7 +462,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue496() 
+    public void TestIssue496() 
     {
         Segment segment = HanLP.newSegment().enableIndexMode(true);
 //        Console.WriteLine(segment.seg("中医药"));
@@ -470,17 +470,17 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue513() 
+    public void TestIssue513() 
     {
         List<Term> termList = IndexTokenizer.segment("南京市长江大桥");
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
 //            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length()) + "]");
         }
     }
     [TestMethod]
 
-    public void testIssue519() 
+    public void TestIssue519() 
     {
         String[] testCase = new String[]{
             "评审委员会",
@@ -501,7 +501,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue542() 
+    public void TestIssue542() 
     {
         Segment seg = HanLP.newSegment();
         seg.enableAllNamedEntityRecognize(true);
@@ -510,7 +510,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue623() 
+    public void TestIssue623() 
     {
         StandardTokenizer.SEGMENT.enableCustomDictionary(false);
 //        Console.WriteLine(HanLP.segment("赵四158开头的号码"));
@@ -518,7 +518,7 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue633() 
+    public void TestIssue633() 
     {
         CustomDictionary.add("钱管家");
         StandardTokenizer.SEGMENT.enableCustomDictionaryForcing(true);
@@ -526,16 +526,16 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testIssue784() 
+    public void TestIssue784() 
     {
         String s = "苏苏中级会计什么时候更新";
         CustomDictionary.add("苏苏");
         StandardTokenizer.SEGMENT.enableCustomDictionaryForcing(true);
-        assertTrue(HanLP.segment(s).ToString().Contains("苏苏"));
+        AssertTrue(HanLP.segment(s).ToString().Contains("苏苏"));
     }
     [TestMethod]
 
-    public void testIssue790() 
+    public void TestIssue790() 
     {
         Segment seg = HanLP.newSegment();
         seg.enableOrganizationRecognize(true);
@@ -547,13 +547,13 @@ public class SegmentTest : TestCase
     }
     [TestMethod]
 
-    public void testTimeIssue() 
+    public void TestTimeIssue() 
     {
-        assertTrue(HanLP.segment("1月中旬应该会发生什么").ToString().Contains("1月"));
+        AssertTrue(HanLP.segment("1月中旬应该会发生什么").ToString().Contains("1月"));
     }
     [TestMethod]
 
-    public void testIssue932() 
+    public void TestIssue932() 
     {
         Segment segment = new DijkstraSegment().enableOrganizationRecognize(true);
         HanLP.Config.enableDebug();

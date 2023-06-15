@@ -20,9 +20,9 @@ public class VectorsReaderTest : TestCase
 
         VectorsReader reader = new VectorsReader(tempFile.getAbsolutePath());
         reader.readVectorFile();
-        assertEquals(2, reader.words);
-        assertEquals(2, reader.vocab.Length);
-        assertEquals(2, reader.matrix.Length);
-        assertEquals(1f, reader.matrix[1][0]);
+        AssertEquals(2, reader.words);
+        AssertEquals(2, reader.vocab.Length);
+        AssertEquals(2, reader.matrix.Length);
+        AssertEquals(1f, reader.matrix[1][0]);
     }
 }

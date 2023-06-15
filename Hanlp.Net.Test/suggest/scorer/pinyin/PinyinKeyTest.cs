@@ -13,6 +13,6 @@ public class PinyinKeyTest : TestCase
         PinyinKey pinyinKeyB = new PinyinKey("教室资格");
 //        Console.WriteLine(pinyinKeyA);
 //        Console.WriteLine(pinyinKeyB);
-        assertEquals(1, LongestCommonSubstring.compute(pinyinKeyA.getFirstCharArray(), pinyinKeyB.getFirstCharArray()));
+        AssertEquals(1, LongestCommonSubstring.compute(pinyinKeyA.getFirstCharArray(), pinyinKeyB.getFirstCharArray()));
     }
 }

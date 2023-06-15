@@ -13,7 +13,7 @@ public class DijkstraSegmentTest : SegmentTestCase
     {
         Segment segment = new DijkstraSegment();
         List<Term> termList = segment.seg("好像向你借钱的人跑了");
-        assertNoNature(termList, Nature.nr);
+        AssertNoNature(termList, Nature.nr);
 //        Console.WriteLine(termList);
     }
     [TestMethod]
@@ -23,6 +23,6 @@ public class DijkstraSegmentTest : SegmentTestCase
         Segment segment = new DijkstraSegment();
         List<Term> termList = segment.seg("为什么我扔出的瓶子没有人回复？");
 //        Console.WriteLine(termList);
-        assertSegmentationHas(termList, "瓶子 没有");
+        AssertSegmentationHas(termList, "瓶子 没有");
     }
 }

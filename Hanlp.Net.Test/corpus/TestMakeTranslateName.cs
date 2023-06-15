@@ -63,7 +63,7 @@ public class TestMakeTranslateName : TestCase
     [TestMethod]
     public void TestQuery() 
     {
-        assertTrue(TranslatedPersonDictionary.containsKey("汤姆"));
+        AssertTrue(TranslatedPersonDictionary.containsKey("汤姆"));
 //        HanLP.Config.enableDebug();
 //        Console.WriteLine(TranslatedPersonDictionary.containsKey("汤姆"));
 //        Console.WriteLine(TranslatedPersonDictionary.containsKey("汤"));

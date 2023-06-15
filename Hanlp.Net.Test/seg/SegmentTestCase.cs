@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.seg;
 public class SegmentTestCase : TestCase
 {
     
-    public static void assertNoNature(List<Term> termList, Nature nature)
+    public static void AssertNoNature(List<Term> termList, Nature nature)
     {
         foreach (Term term in termList)
         {
@@ -30,14 +30,14 @@ public class SegmentTestCase : TestCase
     }
 
     
-    public static void assertSegmentationHas(List<Term> termList, String part)
+    public static void AssertSegmentationHas(List<Term> termList, String part)
     {
         var sbSentence = new StringBuilder();
         foreach (Term term in termList)
         {
             sbSentence.Append(term.word);
         }
-        assertFalse(sbSentence.ToString().Contains(part));
+        AssertFalse(sbSentence.ToString().Contains(part));
     }
 
 }

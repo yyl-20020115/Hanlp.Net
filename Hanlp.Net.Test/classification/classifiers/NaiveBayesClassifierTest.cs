@@ -10,15 +10,15 @@ namespace com.hankcs.hanlp.classification.classifiers;
 [TestClass]
 public class NaiveBayesClassifierTest : TestCase
 {
-    public static readonly string CORPUS_FOLDER = TestUtility.ensureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
+    public static readonly string CORPUS_FOLDER = TestUtility.EnsureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
 
     private static readonly string MODEL_PATH = "data/test/classification.ser";
     private Dictionary<String, String[]> trainingDataSet;
 
     [TestInitialize]
-    public override void setUp() 
+    public override void SetUp() 
     {
-        base.setUp();
+        base.SetUp();
     }
 
     private void LoadDataSet()

@@ -18,7 +18,7 @@ public class IIOAdapterTest : TestCase
         HanLP.Config.IOAdapter = new IOP();
 
         HanLP.Config.enableDebug(false);
-        assertEquals(true, CoreStopWordDictionary.contains("的"));
+        AssertEquals(true, CoreStopWordDictionary.contains("的"));
     }
 
     public class IOP : FileIOAdapter

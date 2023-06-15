@@ -18,12 +18,12 @@ public class TestUtility
 {
     static TestUtility()
     {
-        ensureFullData();
+        EnsureFullData();
     }
 
-    public static void ensureFullData()
+    public static void EnsureFullData()
     {
-        ensureData("data/model/crf", "http://nlp.hankcs.com/download.php?file=data", ".", false);
+        EnsureData("data/model/crf", "http://nlp.hankcs.com/download.php?file=data", ".", false);
     }
 
     /**
@@ -33,9 +33,9 @@ public class TestUtility
      * @param url  下载地址
      * @return name的绝对路径
      */
-    public static String ensureData(String name, String url)
+    public static String EnsureData(String name, String url)
     {
-        return ensureData(name, url, null, true);
+        return EnsureData(name, url, null, true);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TestUtility
      * @param url  下载地址
      * @return name的绝对路径
      */
-    public static String ensureData(String name, String url, String parentPath, bool overwrite)
+    public static String EnsureData(String name, String url, String parentPath, bool overwrite)
     {
         File target = new File(name);
         if (target.exists()) return target.getAbsolutePath();
@@ -76,7 +76,7 @@ public class TestUtility
      * @param url
      * @return
      */
-    public static String ensureTestData(String name, String url)
+    public static String EnsureTestData(String name, String url)
     {
         return ensureData(String.format("data/test/%s", name), url);
     }
@@ -89,7 +89,7 @@ public class TestUtility
      * @
      * @author www.codejava.net
      */
-    public static String downloadFile(String fileURL, String savePath)
+    public static String DownloadFile(String fileURL, String savePath)
         
     {
         System.err.printf("Downloading %s to %s\n", fileURL, savePath);
@@ -181,7 +181,7 @@ public class TestUtility
         }
     }
 
-    private static void unzip(String zipFilePath, String destDir, bool overwrite)
+    private static void Unzip(String zipFilePath, String destDir, bool overwrite)
     {
         Console.Error.WriteLine("Unzipping to " + destDir);
         File dir = new File(destDir);

@@ -30,7 +30,7 @@ public class MSR
 
     static MSR()
     {
-        SIGHAN05_ROOT = TestUtility.ensureTestData("icwb2-data", "http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip");
+        SIGHAN05_ROOT = TestUtility.EnsureTestData("icwb2-data", "http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip");
         if (!IOUtil.isFileExisted(TRAIN_PATH))
         {
             Console.Error.WriteLine("请下载 http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip 并解压为 data/test/icwb2-data");

@@ -10,9 +10,9 @@ public class SuffixDictionaryTest : TestCase
 {
     SuffixDictionary dictionary = new SuffixDictionary();
     [TestInitialize]
-    public override void setUp() 
+    public override void SetUp() 
     {
-        base.setUp();
+        base.SetUp();
         dictionary.addAll(Predefine.POSTFIX_SINGLE);
         dictionary.addAll(Predefine.POSTFIX_MUTIPLE);
     }
@@ -20,13 +20,13 @@ public class SuffixDictionaryTest : TestCase
     [TestMethod]
     public void TestEndsWith() 
     {
-        assertEquals(true, dictionary.endsWith("黄冈市"));
-        assertEquals(false, dictionary.endsWith("黄冈一二三"));
+        AssertEquals(true, dictionary.endsWith("黄冈市"));
+        AssertEquals(false, dictionary.endsWith("黄冈一二三"));
     }
     [TestMethod]
     public void TestLongest()
     {
-        assertEquals(2, dictionary.getLongestSuffixLength("巴尔干半岛"));
+        AssertEquals(2, dictionary.getLongestSuffixLength("巴尔干半岛"));
     }
     [TestMethod]
     public void TestGet()
@@ -35,11 +35,11 @@ public class SuffixDictionaryTest : TestCase
         for (int i = 0; i < total.Length; ++i)
         {
             String single = (total[i]).ToString();
-            assertEquals(1, dictionary.get(single));
+            AssertEquals(1, dictionary.get(single));
         }
         foreach (String single in Predefine.POSTFIX_MUTIPLE)
         {
-            assertEquals(single.Length, dictionary.get(single));
+            AssertEquals(single.Length, dictionary.get(single));
         }
     }
     //    public void testDump() 
