@@ -21,8 +21,8 @@ public class LongestCommonSubstring
 {
     public static int compute(char[] str1, char[] str2)
     {
-        int size1 = str1.length;
-        int size2 = str2.length;
+        int size1 = str1.Length;
+        int size2 = str2.Length;
         if (size1 == 0 || size2 == 0) return 0;
 
         // the start position of substring in original string

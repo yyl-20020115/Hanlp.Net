@@ -13,6 +13,7 @@ using com.hankcs.hanlp.classification.classifiers;
 using com.hankcs.hanlp.classification.corpus;
 using com.hankcs.hanlp.classification.statistics.evaluations;
 using com.hankcs.hanlp.classification.tokenizers;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.demo;
 
@@ -27,6 +28,7 @@ namespace com.hankcs.demo;
  */
 public class DemoTextClassificationFMeasure
 {
+    public static readonly string CORPUS_FOLDER = TestUtility.ensureTestData("ChnSentiCorp情感分析酒店评论", "http://hanlp.linrunsoft.com/release/corpus/ChnSentiCorp.zip");
 
     public static void Main(String[] args) 
     {

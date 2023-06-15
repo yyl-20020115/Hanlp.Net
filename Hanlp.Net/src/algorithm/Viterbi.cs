@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dictionary.item;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.algorithm;
 
 
@@ -166,7 +171,7 @@ public class Viterbi
      * @param <E>                       EnumItem的具体类型
      * @return 预测结果
      */
-    public static <E : Enum<E>> List<E> computeEnum(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
+    public static  List<E> computeEnum<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
         int length = roleTagList.size() - 1;
         List<E> tagList = new ArrayList<E>(roleTagList.size());
@@ -234,7 +239,7 @@ public class Viterbi
      * @param <E>                       EnumItem的具体类型
      * @return 预测结果
      */
-    public static <E : Enum<E>> List<E> computeEnumSimply(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
+    public static List<E> computeEnumSimply<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
         int length = roleTagList.size() - 1;
         List<E> tagList = new LinkedList<E>();

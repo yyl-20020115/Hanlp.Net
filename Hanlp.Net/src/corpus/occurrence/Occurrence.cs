@@ -10,6 +10,9 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+using System.Text;
 
 namespace com.hankcs.hanlp.corpus.occurrence;
 
@@ -183,20 +186,22 @@ public class Occurrence
 
     public List<PairFrequency> getPhraseByMi()
     {
-        List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
+        List<PairFrequency> pairFrequencyList = new List<PairFrequency>(entrySetPair.size());
         for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
             pairFrequencyList.add(entry.getValue());
         }
-        Collections.sort(pairFrequencyList, new Comparator<PairFrequency>()
-        {
-            //@Override
-            public int compare(PairFrequency o1, PairFrequency o2)
-            {
-                return -Double.compare(o1.mi, o2.mi);
-            }
-        });
+        Collections.sort(pairFrequencyList, new COMP()
+        );
         return pairFrequencyList;
+    }
+    public class COMP:IComparer<PairFrequency>
+    {
+        //@Override
+        public int Compare(PairFrequency o1, PairFrequency o2)
+        {
+            return -Double.compare(o1.mi, o2.mi);
+        }
     }
 
     public List<PairFrequency> getPhraseByLe()
@@ -206,15 +211,17 @@ public class Occurrence
         {
             pairFrequencyList.add(entry.getValue());
         }
-        Collections.sort(pairFrequencyList, new Comparator<PairFrequency>()
-        {
-            //@Override
-            public int compare(PairFrequency o1, PairFrequency o2)
-            {
-                return -Double.compare(o1.le, o2.le);
-            }
-        });
+        Collections.sort(pairFrequencyList, new COMP2()
+        );
         return pairFrequencyList;
+    }
+    public class COMP2 :IComparer<PairFrequency>
+    {
+        //@Override
+        public int Compare(PairFrequency o1, PairFrequency o2)
+        {
+            return -double.compare(o1.le, o2.le);
+        }
     }
 
     public List<PairFrequency> getPhraseByRe()
@@ -224,17 +231,18 @@ public class Occurrence
         {
             pairFrequencyList.add(entry.getValue());
         }
-        Collections.sort(pairFrequencyList, new Comparator<PairFrequency>()
-        {
-            //@Override
-            public int compare(PairFrequency o1, PairFrequency o2)
-            {
-                return -Double.compare(o1.re, o2.re);
-            }
-        });
+        Collections.sort(pairFrequencyList, new COMP3()
+        );
         return pairFrequencyList;
     }
-
+    public class COMP3 :IComparer<PairFrequency>
+    {
+        //@Override
+        public int Compare(PairFrequency o1, PairFrequency o2)
+        {
+            return -Double.compare(o1.re, o2.re);
+        }
+    }
     public List<PairFrequency> getPhraseByScore()
     {
         List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
@@ -242,15 +250,17 @@ public class Occurrence
         {
             pairFrequencyList.add(entry.getValue());
         }
-        Collections.sort(pairFrequencyList, new Comparator<PairFrequency>()
-        {
-            //@Override
-            public int compare(PairFrequency o1, PairFrequency o2)
-            {
-                return -Double.compare(o1.score, o2.score);
-            }
-        });
+        Collections.sort(pairFrequencyList, new COMP4()
+        );
         return pairFrequencyList;
+    }
+    public class COMP4
+    {
+        //@Override
+        public int Compare(PairFrequency o1, PairFrequency o2)
+        {
+            return -Double.compare(o1.score, o2.score);
+        }
     }
 
     public void addAll(List<Term> resultList)
@@ -274,7 +284,7 @@ public class Occurrence
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder("二阶共现：\n");
+         StringBuilder sb = new StringBuilder("二阶共现：\n");
         for (KeyValuePair<string, PairFrequency> entry : triePair.entrySet())
         {
             sb.Append(entry.getValue()).Append('\n');
@@ -305,7 +315,7 @@ public class Occurrence
      */
     public double computeLeftEntropy(PairFrequency pair)
     {
-        Set<KeyValuePair<string, TriaFrequency>> entrySet = trieTria.prefixSearch(pair.getKey() + LEFT);
+        var entrySet = trieTria.prefixSearch(pair.getKey() + LEFT);
         return computeEntropy(entrySet);
     }
 
@@ -317,11 +327,11 @@ public class Occurrence
      */
     public double computeRightEntropy(PairFrequency pair)
     {
-        Set<KeyValuePair<string, TriaFrequency>> entrySet = trieTria.prefixSearch(pair.getKey() + RIGHT);
+        var entrySet = trieTria.prefixSearch(pair.getKey() + RIGHT);
         return computeEntropy(entrySet);
     }
 
-    private double computeEntropy(Set<KeyValuePair<string, TriaFrequency>> entrySet)
+    private double computeEntropy(HashSet<KeyValuePair<string, TriaFrequency>> entrySet)
     {
         double totalFrequency = 0;
         for (KeyValuePair<string, TriaFrequency> entry : entrySet)
@@ -369,7 +379,7 @@ public class Occurrence
      * 获取一阶共现,其实就是词频统计
      * @return
      */
-    public Set<KeyValuePair<string, TermFrequency>> getUniGram()
+    public HashSet<KeyValuePair<string, TermFrequency>> getUniGram()
     {
         return trieSingle.entrySet();
     }
@@ -378,7 +388,7 @@ public class Occurrence
      * 获取二阶共现
      * @return
      */
-    public Set<KeyValuePair<string, PairFrequency>> getBiGram()
+    public HashSet<KeyValuePair<string, PairFrequency>> getBiGram()
     {
         return triePair.entrySet();
     }
@@ -387,7 +397,7 @@ public class Occurrence
      * 获取三阶共现
      * @return
      */
-    public Set<KeyValuePair<string, TriaFrequency>> getTriGram()
+    public HashSet<KeyValuePair<string, TriaFrequency>> getTriGram()
     {
         return trieTria.entrySet();
     }

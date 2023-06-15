@@ -8,7 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
 using com.hankcs.hanlp.mining.word2vec;
+using System.Runtime.InteropServices;
 
 namespace com.hankcs.hanlp.mining.word2vec;
 
@@ -95,16 +97,9 @@ public abstract class AbstractVectorModel<K>
      */
     private List<KeyValuePair<K, float>> nearest(K key, Vector vector, int size)
     {
-        MaxHeap<KeyValuePair<K, Float>> maxHeap = new MaxHeap<KeyValuePair<K, Float>>(size, new Comparator<KeyValuePair<K, Float>>()
-        {
-            //@Override
-            public int compare(KeyValuePair<K, Float> o1, KeyValuePair<K, Float> o2)
-            {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
+        var maxHeap = new MaxHeap<KeyValuePair<K, Float>>(size, new COMP<K>());
 
-        for (KeyValuePair<K, Vector> entry : storage.entrySet())
+        for (KeyValuePair<K, Vector> entry in storage.entrySet())
         {
             if (entry.getKey().equals(key))
             {
@@ -113,6 +108,15 @@ public abstract class AbstractVectorModel<K>
             maxHeap.add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
         }
         return maxHeap.toList();
+    }
+
+    public class COMP<K>:IComparer<KeyValuePair<K, float>>
+    {
+        //@Override
+        public int Compare(KeyValuePair<K, float> o1, KeyValuePair<K, float> o2)
+        {
+            return o1.getValue().compareTo(o2.getValue());
+        }
     }
 
     /**
@@ -124,14 +128,7 @@ public abstract class AbstractVectorModel<K>
      */
     public List<KeyValuePair<K, float>> nearest(Vector vector, int size)
     {
-        MaxHeap<KeyValuePair<K, Float>> maxHeap = new MaxHeap<KeyValuePair<K, Float>>(size, new Comparator<KeyValuePair<K, Float>>()
-        {
-            //@Override
-            public int compare(KeyValuePair<K, Float> o1, KeyValuePair<K, Float> o2)
-            {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
+        MaxHeap<KeyValuePair<K, float>> maxHeap = new MaxHeap<KeyValuePair<K, float>>(size, new COMP2<K>());
 
         for (KeyValuePair<K, Vector> entry : storage.entrySet())
         {
@@ -139,7 +136,14 @@ public abstract class AbstractVectorModel<K>
         }
         return maxHeap.toList();
     }
-
+    public class COMP2<K>: IComparer<KeyValuePair<K, float>>
+    {
+        //@Override
+        public int Compare(KeyValuePair<K, float> o1, KeyValuePair<K, float> o2)
+        {
+            return o1.getValue().compareTo(o2.getValue());
+        }
+    }
     /**
      * 获取与向量最相似的词语（默认10个）
      *

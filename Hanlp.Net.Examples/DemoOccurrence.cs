@@ -31,22 +31,22 @@ public class DemoOccurrence
         var uniGram = occurrence.getUniGram();
         foreach (var entry in uniGram) 
         {
-            TermFrequency termFrequency = entry.getValue();
+            TermFrequency termFrequency = entry.Value; 
             Console.WriteLine(termFrequency);
         }
 
-        Set<Map.Entry<String, PairFrequency>> biGram = occurrence.getBiGram();
-        for (Map.Entry<String, PairFrequency> entry : biGram)
+        var biGram = occurrence.getBiGram();
+        foreach (var entry in biGram)
         {
-            PairFrequency pairFrequency = entry.getValue();
+            PairFrequency pairFrequency = entry.Value;
             if (pairFrequency.isRight())
                 Console.WriteLine(pairFrequency);
         }
 
-        Set<Map.Entry<String, TriaFrequency>> triGram = occurrence.getTriGram();
-        for (Map.Entry<String, TriaFrequency> entry : triGram)
+        var triGram = occurrence.getTriGram();
+        foreach (var entry in triGram)
         {
-            TriaFrequency triaFrequency = entry.getValue();
+            TriaFrequency triaFrequency = entry.Value;
             if (triaFrequency.isRight())
                 Console.WriteLine(triaFrequency);
         }

@@ -48,12 +48,12 @@ public class DemoWordDistance
                         "教师",
                         "会计",
                 };
-        Console.WriteLine("%-5s\t%-5s\t%-10s\t%-5s\n", "词A", "词B", "语义距离", "语义相似度");
+        Console.WriteLine("{0}\t{1}\t{2}\t{3}\n", "词A", "词B", "语义距离", "语义相似度");
         foreach (String a in wordArray)
         {
             foreach (String b in wordArray)
             {
-                Console.WriteLine("%-5s\t%-5s\t%-15d\t%-5.10f\n",
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}\n",
                     a, b, CoreSynonymDictionary.distance(a, b),
                     CoreSynonymDictionary.similarity(a, b));
             }

@@ -86,7 +86,7 @@ public class MaxHeap<E> : IEnumerable<E>
      */
     public List<E> toList()
     {
-        ArrayList<E> list = new ArrayList<E>(queue.size());
+        var list = new List<E>(queue.size());
         while (!queue.isEmpty())
         {
             list.add(0, queue.poll());

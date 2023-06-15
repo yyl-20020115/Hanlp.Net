@@ -62,7 +62,7 @@ public class DemoWord2Vec
         Console.Write("\n                                                Word     Cosine\n------------------------------------------------------------------------\n");
         foreach (var entry in model.nearest(word))
         {
-            Console.Write("%{0}\t\t{1}\n", entry.Key, entry.Value);
+            Console.Write("{0}\t\t{1}\n", entry.Key, entry.Value);
         }
     }
 
@@ -71,13 +71,13 @@ public class DemoWord2Vec
         printHeader(document);
         foreach (var entry in model.nearest(document))
         {
-            Console.Write("%50s\t\t%f\n", documents[entry.Key], entry.Value);
+            Console.Write("{0}\t\t{1}\n", documents[entry.Key], entry.Value);
         }
     }
 
     private static void printHeader(String query)
     {
-        Console.Write("\n%50s          Cosine\n------------------------------------------------------------------------\n", query);
+        Console.Write("\n{0}          Cosine\n------------------------------------------------------------------------\n", query);
     }
 
     static WordVectorModel trainOrLoadModel() 
