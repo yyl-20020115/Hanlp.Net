@@ -207,7 +207,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         string[] wordArray = new string[wordList.Count];
         int offset = 0;
         int id = 0;
-        for (string word in wordList)
+        foreach (string word in wordList)
         {
             wordArray[id] = normalized.substring(offset, offset + word.length());
             ++id;

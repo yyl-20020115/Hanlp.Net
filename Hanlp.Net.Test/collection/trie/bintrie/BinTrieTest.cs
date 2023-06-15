@@ -76,7 +76,7 @@ public class BinTrieTest : TestCase
         }
         AssertTrue(trie.load(DATA_TEST_OUT_BIN, value));
         var entrySet = trie.entrySet();
-        assertEquals("[haha=0, hankcs=1, hello=2, za=3, zb=4, zzz=5]", entrySet.ToString());
+        AssertEquals("[haha=0, hankcs=1, hello=2, za=3, zb=4, zzz=5]", entrySet.ToString());
     }
 
     //    public void testCustomDictionary() 

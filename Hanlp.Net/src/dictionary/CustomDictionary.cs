@@ -383,7 +383,7 @@ public class CustomDictionary
         }
         long lastModified = binFile.lastModified();
         //string path[] = HanLP.Config.CustomDictionaryPath;
-        for (string p in path)
+        foreach (string p in path)
         {
             File f = new File(p);
             string fileName = f.getName();

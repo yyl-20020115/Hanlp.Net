@@ -125,7 +125,7 @@ public class Document : Serializable
     public List<List<IWord>> getComplexSentenceList()
     {
         List<List<IWord>> complexList = new ();
-        for (Sentence sentence in sentenceList)
+        foreach (Sentence sentence in sentenceList)
         {
             complexList.add(sentence.wordList);
         }
@@ -145,13 +145,13 @@ public class Document : Serializable
         foreach (Sentence sentence in sentenceList)
         {
             List<Word> wordList = new ();
-            for (IWord word in sentence.wordList)
+            foreach (IWord word in sentence.wordList)
             {
                 if (word is CompoundWord)
                 {
                     if (spilt)
                     {
-                        for (Word inner in ((CompoundWord) word).innerList)
+                        foreach (Word inner in ((CompoundWord) word).innerList)
                         {
                             wordList.add(inner);
                         }
@@ -181,10 +181,10 @@ public class Document : Serializable
     public List<List<Word>> getSimpleSentenceList(HashSet<string> labelSet)
     {
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
-        for (Sentence sentence in sentenceList)
+        foreach (Sentence sentence in sentenceList)
         {
             List<Word> wordList = new LinkedList<Word>();
-            for (IWord word in sentence.wordList)
+            foreach (IWord word in sentence.wordList)
             {
                 if (word is CompoundWord)
                 {
@@ -215,7 +215,7 @@ public class Document : Serializable
     public string toString()
     {
         StringBuilder sb = new StringBuilder();
-        for (Sentence sentence in sentenceList)
+        foreach (Sentence sentence in sentenceList)
         {
             sb.Append(sentence);
             sb.Append(' ');
@@ -228,7 +228,7 @@ public class Document : Serializable
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file.getAbsolutePath());
         List<Sentence> sentenceList = new LinkedList<Sentence>();
-        for (string line in lineIterator)
+        foreach (string line in lineIterator)
         {
             line = line.trim();
             if (line.isEmpty()) continue;

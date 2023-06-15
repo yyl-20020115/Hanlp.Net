@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document;
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -67,10 +71,10 @@ public abstract class CommonDictionaryMaker : ISaveAble
      */
     public void learn(List<Sentence> sentenceList)
     {
-        List<List<IWord>> s = new ArrayList<List<IWord>>(sentenceList.size());
-        for (Sentence sentence : sentenceList)
+        List<List<IWord>> s = new (sentenceList.Count);
+        foreach (Sentence sentence in sentenceList)
         {
-            s.add(sentence.wordList);
+            s.Add(sentence.wordList);
         }
         compute(s);
     }
@@ -79,9 +83,9 @@ public abstract class CommonDictionaryMaker : ISaveAble
      * 同compute
      * @param sentences
      */
-    public void learn(Sentence ... sentences)
+    public void learn(params Sentence[] sentences)
     {
-        learn(Arrays.asList(sentences));
+        learn((sentences.ToList()));
     }
 
     /**
@@ -90,22 +94,23 @@ public abstract class CommonDictionaryMaker : ISaveAble
      */
     public void train(string corpus)
     {
-        CorpusLoader.walk(corpus, new CorpusLoader.Handler()
-        {
-            //@Override
-            public void handle(Document document)
-            {
-                List<List<Word>> simpleSentenceList = document.getSimpleSentenceList();
-                List<List<IWord>> compatibleList = new LinkedList<List<IWord>>();
-                for (List<Word> wordList : simpleSentenceList)
-                {
-                    compatibleList.add(new LinkedList<IWord>(wordList));
-                }
-                CommonDictionaryMaker.this.compute(compatibleList);
-            }
-        });
+        CorpusLoader.walk(corpus, new CH()
+        );
     }
-
+    public class CH: CorpusLoader.Handler
+    {
+        //@Override
+        public void handle(Document document)
+        {
+            List<List<Word>> simpleSentenceList = document.getSimpleSentenceList();
+            List<List<IWord>> compatibleList = new ();
+            foreach (List<Word> wordList in simpleSentenceList)
+            {
+                compatibleList.Add(new List<IWord>(wordList));
+            }
+            CommonDictionaryMaker.compute(compatibleList);
+        }
+    }
     /**
      * 加入到词典中，允许子类自定义过滤等等，这样比较灵活
      * @param sentenceList

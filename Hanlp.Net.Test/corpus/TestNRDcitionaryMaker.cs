@@ -18,7 +18,7 @@ public class TestNRDcitionaryMaker
     }
     public class NRD : CorpusLoader.Handler
     {
-        EasyDictionary nrDictionaryMaker;
+        NRDictionaryMaker nrDictionaryMaker;
         //@Override
         public void handle(Document document)
         {

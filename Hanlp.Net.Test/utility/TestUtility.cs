@@ -112,7 +112,7 @@ public class TestUtility
                 if (index > 0)
                 {
                     fileName = disposition.substring(index + 10,
-                                                     disposition.Length() - 1);
+                                                     disposition.Length - 1);
                 }
             }
             else

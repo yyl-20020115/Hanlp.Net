@@ -99,7 +99,7 @@ public abstract class AbstractVectorModel<K>
     {
         var maxHeap = new MaxHeap<KeyValuePair<K, Float>>(size, new COMP<K>());
 
-        for (KeyValuePair<K, Vector> entry in storage.entrySet())
+        foreach (KeyValuePair<K, Vector> entry in storage.entrySet())
         {
             if (entry.getKey().equals(key))
             {

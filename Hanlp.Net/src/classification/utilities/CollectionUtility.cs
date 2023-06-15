@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.classification.utilities;
  */
 public class CollectionUtility
 {
-    public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input, final bool desc)
+    public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input, bool desc)
     {
         LinkedHashMap<K, V> output = new LinkedHashMap<K, V>(input.size());
         ArrayList<KeyValuePair<K, V>> entryList = new ArrayList<KeyValuePair<K, V>>(input.size());

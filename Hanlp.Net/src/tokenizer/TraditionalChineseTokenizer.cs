@@ -35,7 +35,7 @@ public class TraditionalChineseTokenizer
         string sText = CharTable.convert(text);
         List<Term> termList = SEGMENT.seg(sText);
         int offset = 0;
-        for (Term term in termList)
+        foreach (Term term in termList)
         {
             term.offset = offset;
             term.word = text.substring(offset, offset + term.length());

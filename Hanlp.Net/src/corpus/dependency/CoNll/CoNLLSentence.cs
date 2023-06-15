@@ -74,7 +74,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     public string[][] getEdgeArray()
     {
         string[][] edge = new string[word.length + 1][word.length + 1];
-        for (CoNLLWord coNLLWord in word)
+        foreach (CoNLLWord coNLLWord in word)
         {
             edge[coNLLWord.ID][coNLLWord.HEAD.ID] = coNLLWord.DEPREL;
         }

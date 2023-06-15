@@ -14,7 +14,7 @@ public class CharTypeTest : TestCase
 //            if (CharType.get((char) i) == CharType.CT_NUM)
 //                Console.WriteLine((char) i);
 //        }
-        assertEquals(CharType.CT_NUM, CharType.get('1'));
+        AssertEquals(CharType.CT_NUM, CharType.get('1'));
 
     }
     [TestMethod]

@@ -24,10 +24,10 @@ namespace com.hankcs.hanlp.collection.trie;
  */
 public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 {
-    private final static int BUF_SIZE = 16384;
-    private final static int UNIT_SIZE = 8; // size of int + int
+    private  static int BUF_SIZE = 16384;
+    private  static int UNIT_SIZE = 8; // size of int + int
 
-    private static class Node
+    private  class Node
     {
         int code;
         int depth;

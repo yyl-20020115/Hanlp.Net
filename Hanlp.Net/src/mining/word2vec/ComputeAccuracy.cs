@@ -108,11 +108,11 @@ public class ComputeAccuracy
             for (a = 0; a < N; a++) bestw[a] = null;
             string line = stdin.readLine();
 
-            string[] params = null;
+            string[] param = null;
             if (line != null && line.length() > 0)
             {
-                params = line.toUpperCase().Split("\\s");
-                st1 = params[0];
+                param = line.toUpperCase().Split("\\s");
+                st1 = param[0];
             }
             if (line == null || line.length() == 0 || st1.equals(":") || st1.equals("EXIT"))
             {
@@ -124,16 +124,16 @@ public class ComputeAccuracy
                 }
                 QID++;
                 if (line == null || line.length() == 0) break;
-                st1 = params[1];
+                st1 = param[1];
                 printf("%s:\n", st1);
                 TCN = 0;
                 CCN = 0;
                 continue;
             }
             if ("EXIT".equals(st1)) break;
-            st2 = params[1];
-            st3 = params[2];
-            st4 = params[3];
+            st2 = param[1];
+            st3 = param[2];
+            st4 = param[3];
             for (b = 0; b < words; b++) if (st1.equals(vocab[b]))break;
             b1 = b;
             for (b = 0; b < words; b++) if (st2.equals(vocab[b]))break;

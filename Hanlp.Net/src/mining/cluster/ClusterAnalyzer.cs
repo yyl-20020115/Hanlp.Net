@@ -69,7 +69,7 @@ public class ClusterAnalyzer<K>
             }
         }
         List<string> wordList = new (termList.size());
-        for (Term term in termList)
+        foreach (Term term in termList)
         {
             wordList.add(term.word);
         }
