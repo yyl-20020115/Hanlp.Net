@@ -55,7 +55,7 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
 //        IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.txt");
 //        while (iterator.hasNext())
 //        {
-//            String line = iterator.next().split("\\s")[0];
+//            String line = iterator.next().Split("\\s")[0];
 //            map.put(line, line);
 //        }
 //

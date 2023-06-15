@@ -170,7 +170,7 @@ public class TestMakePinYinDictionary : TestCase
 //        StringDictionary pyEnumDictionary = new StringDictionary();
 //        for (Map.Entry<String, String> entry : dictionary.entrySet())
 //        {
-//            String[] args = entry.getValue().split(",");
+//            String[] args = entry.getValue().Split(",");
 //            for (String arg : args)
 //            {
 //                pyEnumDictionary.add(arg, arg);
@@ -201,7 +201,7 @@ public class TestMakePinYinDictionary : TestCase
 //        StringDictionary pyEnumDictionary = new StringDictionary();
 //        for (Map.Entry<String, String> entry : dictionary.entrySet())
 //        {
-//            String[] args = entry.getValue().split(",");
+//            String[] args = entry.getValue().Split(",");
 //            for (String arg : args)
 //            {
 //                pyEnumDictionary.add(arg, arg);
@@ -265,7 +265,7 @@ public class TestMakePinYinDictionary : TestCase
 //            {
 //                String word = entry.getKey();
 //                String pinyin = entry.getValue();
-//                String[] pinyinStringArray = entry.getValue().split("[,\\s　]");
+//                String[] pinyinStringArray = entry.getValue().Split("[,\\s　]");
 //                if (word.Length() != pinyinStringArray.Length || !TonePinyinString2PinyinConverter.valid(pinyinStringArray))
 //                {
 //                    Console.WriteLine(entry);
@@ -295,7 +295,7 @@ public class TestMakePinYinDictionary : TestCase
 //        for (String line : IOUtil.readLineList("D:\\Doc\\语料库\\Uni2Pinyin.txt"))
 //        {
 //            if (line.startsWith("#")) continue;
-//            String[] argArray = line.split("\\s");
+//            String[] argArray = line.Split("\\s");
 //            if (argArray.Length == 1) continue;
 //            String py = argArray[1];
 //            for (int i = 2; i < argArray.Length; ++i)

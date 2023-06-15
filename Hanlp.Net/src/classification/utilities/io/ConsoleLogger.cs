@@ -22,25 +22,25 @@ public class ConsoleLogger : ILogger
      * 默认日志
      */
     public static ILogger logger = new ConsoleLogger();
-    long start;
+    long _start;
 
-    public void _out(string format, Object... args)
+    public void _out(string format, params Object[] args)
     {
         System._out.printf(format, args);
     }
 
-    public void err(string format, Object... args)
+    public void err(string format, params Object[] args)
     {
-        System.err.printf(format, args);
+        Console.Error.WriteLine(format, args);
     }
 
-    public void start(string format, Object... args)
+    public void start(string format, params Object[] args)
     {
         _out(format, args);
-        start = DateTime.Now.Microsecond;
+        _start = DateTime.Now.Microsecond;
     }
 
-    public void finish(string format, Object... args)
+    public void finish(string format, params Object[] args)
     {
         _out(string.format("耗时 %d ms", DateTime.Now.Microsecond - start) + format, args);
     }

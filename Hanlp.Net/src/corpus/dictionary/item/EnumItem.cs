@@ -117,7 +117,7 @@ public class EnumItem<E : Enum<E>>
     public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string param)
     {
         if (param == null) return null;
-        string[] array = param.split(" ");
+        string[] array = param.Split(" ");
         return create(array);
     }
 

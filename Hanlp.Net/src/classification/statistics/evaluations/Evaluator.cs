@@ -69,10 +69,10 @@ public class Evaluator
      */
     private static FMeasure calculate(int c, int size, double[] TP, double[] TP_FP, double[] TP_FN)
     {
-        double precision[] = new double[c];
-        double recall[] = new double[c];
-        double f1[] = new double[c];
-        double accuracy[] = new double[c];
+        double[] precision = new double[c];
+        double[] recall = new double[c];
+        double[] f1 = new double[c];
+        double[] accuracy = new double[c];
         FMeasure result = new FMeasure();
         result.size = size;
 

@@ -25,7 +25,7 @@ public class IOUtility : IOUtil
     {
         line = line.trim();
         if (line.length() == 0) return new string[0];
-        return PATTERN_SPACE.split(line);
+        return PATTERN_SPACE.Split(line);
     }
 
     public static int loadInstance(final string path, InstanceHandler handler) 
@@ -85,7 +85,7 @@ public class IOUtility : IOUtil
             evaluate(instances[i], model, stat);
             if (i % 100 == 0 || i == instances.length - 1)
             {
-                System.err.printf("%c进度: %.2f%%", 13, (i + 1) / (float) instances.length * 100);
+                Console.Error.WriteLine("%c进度: %.2f%%", 13, (i + 1) / (float) instances.length * 100);
                 System.err.flush();
             }
         }

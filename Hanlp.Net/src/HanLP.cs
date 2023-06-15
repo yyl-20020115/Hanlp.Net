@@ -233,7 +233,7 @@ public class HanLP
                 CoreSynonymDictionaryDictionaryPath = root + p.getProperty("CoreSynonymDictionaryDictionaryPath", CoreSynonymDictionaryDictionaryPath);
                 PersonDictionaryPath = root + p.getProperty("PersonDictionaryPath", PersonDictionaryPath);
                 PersonDictionaryTrPath = root + p.getProperty("PersonDictionaryTrPath", PersonDictionaryTrPath);
-                string[] pathArray = p.getProperty("CustomDictionaryPath", "data/dictionary/custom/CustomDictionary.txt").split(";");
+                string[] pathArray = p.getProperty("CustomDictionaryPath", "data/dictionary/custom/CustomDictionary.txt").Split(";");
                 string prePath = root;
                 for (int i = 0; i < pathArray.length; ++i)
                 {
@@ -323,7 +323,7 @@ public class HanLP
                         string classPath = (string) System.getProperties().get("java.class.path");
                         if (classPath != null)
                         {
-                            foreach (string path in classPath.split(File.pathSeparator))
+                            foreach (string path in classPath.Split(File.pathSeparator))
                             {
                                 if (new File(path).isDirectory())
                                 {

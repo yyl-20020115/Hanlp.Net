@@ -97,7 +97,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
         deprelTranslater = new TreeMap<string, string>();
         while (iterator.hasNext())
         {
-            string[] args = iterator.next().split("\\s");
+            string[] args = iterator.next().Split("\\s");
             deprelTranslater.put(args[0], args[1]);
         }
         if (deprelTranslater.size() == 0)

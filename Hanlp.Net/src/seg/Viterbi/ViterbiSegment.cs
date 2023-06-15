@@ -186,7 +186,7 @@ public class ViterbiSegment : WordBasedSegment
         }
         logger.info("开始加载自定义词典:" + customPath);
         DoubleArrayTrie<CoreDictionary.Attribute> dat = new DoubleArrayTrie<CoreDictionary.Attribute>();
-        string path[] = customPath.split(";");
+        string path[] = customPath.Split(";");
         string mainPath = path[0];
         StringBuilder combinePath = new StringBuilder();
         for (string aPath : path)

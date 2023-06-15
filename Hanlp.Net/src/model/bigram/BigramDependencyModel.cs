@@ -42,7 +42,7 @@ public class BigramDependencyModel
         TreeMap<string, string> map = new TreeMap<string, string>();
         for (string line : IOUtil.readLineListWithLessMemory(path))
         {
-            string[] param = line.split(" ");
+            string[] param = line.Split(" ");
             if (param[0].endsWith("@"))
             {
                 continue;

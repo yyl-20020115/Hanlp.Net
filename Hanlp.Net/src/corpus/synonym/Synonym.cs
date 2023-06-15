@@ -69,7 +69,7 @@ public class Synonym : ISynonym
     public static List<Synonym> create(string param)
     {
         if (param == null) return null;
-        string[] args = param.split(" ");
+        string[] args = param.Split(" ");
         return create(args);
     }
 

@@ -58,7 +58,7 @@ public class ComputeAccuracy
 
         try
         {
-            string[] params = f.readLine().split("\\s");
+            string[] params = f.readLine().Split("\\s");
             words = int.parseInt(params[0]);
             if (words > threshold) words = threshold;
             size = int.parseInt(params[1]);
@@ -66,7 +66,7 @@ public class ComputeAccuracy
             M = new double[words * size];
             for (b = 0; b < words; b++)
             {
-                params = f.readLine().split("\\s");
+                params = f.readLine().Split("\\s");
                 vocab[b] = params[0].toUpperCase();
                 for (a = 0; a < size; a++)
                 {
@@ -111,7 +111,7 @@ public class ComputeAccuracy
             string[] params = null;
             if (line != null && line.length() > 0)
             {
-                params = line.toUpperCase().split("\\s");
+                params = line.toUpperCase().Split("\\s");
                 st1 = params[0];
             }
             if (line == null || line.length() == 0 || st1.equals(":") || st1.equals("EXIT"))

@@ -56,7 +56,7 @@ public abstract class TransformMatrix
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             // 第一行是矩阵的各个类型
             string line = br.readLine();
-            string[] _param = line.split(",");
+            string[] _param = line.Split(",");
             // 为了制表方便，第一个label是废物，所以要抹掉它
             string[] labels = new string[_param.length - 1];
             System.arraycopy(_param, 1, labels, 0, labels.length);
@@ -79,7 +79,7 @@ public abstract class TransformMatrix
             // 之后就描述了矩阵
             while ((line = br.readLine()) != null)
             {
-                string[] paramArray = line.split(",");
+                string[] paramArray = line.Split(",");
                 int currentOrdinary = ordinal(paramArray[0]);
                 for (int i = 0; i < ordinaryArray.length; ++i)
                 {

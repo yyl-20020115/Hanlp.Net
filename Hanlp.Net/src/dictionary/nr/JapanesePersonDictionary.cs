@@ -56,7 +56,7 @@ public class JapanesePersonDictionary
             TreeMap<string, Character> map = new TreeMap<string, Character>();
             while ((line = br.readLine()) != null)
             {
-                string[] param = line.split(" ", 2);
+                string[] param = line.Split(" ", 2);
                 map.put(param[0], param[1].charAt(0));
             }
             br.close();

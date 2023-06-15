@@ -172,11 +172,11 @@ public class TextRankSentence
     static List<string> splitSentence(string document, string sentence_separator)
     {
         List<string> sentences = new ArrayList<string>();
-        for (string line : document.split("[\r\n]"))
+        for (string line : document.Split("[\r\n]"))
         {
             line = line.trim();
             if (line.length() == 0) continue;
-            for (string sent : line.split(sentence_separator))		// [，,。:：“”？?！!；;]
+            for (string sent : line.Split(sentence_separator))		// [，,。:：“”？?！!；;]
             {
                 sent = sent.trim();
                 if (sent.length() == 0) continue;

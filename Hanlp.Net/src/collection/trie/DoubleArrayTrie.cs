@@ -1435,7 +1435,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
 //        if (HanLP.Config.DEBUG)
 //        {
-//            System.err.printf("释放内存 %d bytes\n", base.length - size - 65535);
+//            Console.Error.WriteLine("释放内存 %d bytes\n", base.length - size - 65535);
 //        }
         int[] nbase = new int[size + 65535];
         System.arraycopy(base, 0, nbase, 0, size);

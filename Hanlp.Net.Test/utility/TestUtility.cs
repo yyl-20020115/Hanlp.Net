@@ -62,8 +62,8 @@ public class TestUtility
         }
         catch (Exception e)
         {
-            System.err.printf("数据下载失败，请尝试手动下载 %s 到 %s 。原因如下：\n", url, target.getAbsolutePath());
-            e.printStackTrace();
+            Console.Error.WriteLine("数据下载失败，请尝试手动下载 %s 到 %s 。原因如下：\n", url, target.getAbsolutePath());
+            //e.printStackTrace();
             Environment.Exit(1);
             return null;
         }
@@ -92,7 +92,7 @@ public class TestUtility
     public static String DownloadFile(String fileURL, String savePath)
         
     {
-        System.err.printf("Downloading %s to %s\n", fileURL, savePath);
+        Console.Error.WriteLine("Downloading %s to %s\n", fileURL, savePath);
         URL url = new URL(fileURL);
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         int responseCode = httpConn.getResponseCode();
@@ -134,7 +134,7 @@ public class TestUtility
             String realPath;
             if (new File(saveFilePath).isFile())
             {
-                System.err.printf("Use cached %s instead.\n", fileName);
+                Console.Error.WriteLine("Use cached %s instead.\n", fileName);
                 realPath = saveFilePath;
             }
             else
@@ -161,7 +161,7 @@ public class TestUtility
                     int minutes = eta / 60;
                     int seconds = eta % 60;
 
-                    System.err.printf("\r%.2f%%, %d MB, %d KB/s, ETA %d min %d s", percent, progress_size / (1024 * 1024), speed, minutes, seconds);
+                    Console.Error.WriteLine("\r%.2f%%, %d MB, %d KB/s, ETA %d min %d s", percent, progress_size / (1024 * 1024), speed, minutes, seconds);
                 }
                 Console.Error.WriteLine();
                 outputStream.close();

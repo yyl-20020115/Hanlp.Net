@@ -89,9 +89,9 @@ public class DictionaryMakerTest : TestCase
 //        while (iterator.hasNext())
 //        {
 //            String line = iterator.next();
-//            String[] params = line.split(" ");
-//            String first = params[0].split("@", 2)[0];
-//            String second = params[0].split("@", 2)[1];
+//            String[] params = line.Split(" ");
+//            String first = params[0].Split("@", 2)[0];
+//            String second = params[0].Split("@", 2)[1];
 ////            if (params.Length != 2)
 ////                Console.Error.WriteLine(line);
 //            int biFrequency = int.parseInt(params[1]);
@@ -114,7 +114,7 @@ public class DictionaryMakerTest : TestCase
 //        while (lineIterator.hasNext())
 //        {
 //            String line = lineIterator.next();
-//            String[] words = line.split("\\s")[0].split("@");
+//            String[] words = line.Split("\\s")[0].Split("@");
 //            if (words[0].equals(Predefine.TAG_PEOPLE))
 //            {
 //                nameFollowers.add(words[1]);

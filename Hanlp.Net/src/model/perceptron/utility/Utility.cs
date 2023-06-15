@@ -379,7 +379,7 @@ return collector;
     Set<string> gold = combineNER(table[2], tagSet);
     for (string p : pred)
     {
-        string type = p.split("\t")[2];
+        string type = p.Split("\t")[2];
         double[] s = scores.get(type);
         if (s == null)
         {
@@ -396,7 +396,7 @@ return collector;
     }
     for (string g : gold)
     {
-        string type = g.split("\t")[2];
+        string type = g.Split("\t")[2];
         double[] s = scores.get(type);
         if (s == null)
         {

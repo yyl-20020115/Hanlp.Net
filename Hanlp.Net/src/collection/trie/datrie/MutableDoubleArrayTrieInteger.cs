@@ -20,7 +20,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubl
     /**
      * 字符串的终止字符（会在传入的字符串末尾添加该字符）
      */
-    private static readonly char UNUSED_CHAR = '\000';
+    private static readonly char UNUSED_CHAR = '\0';
     /**
      * 终止字符的codePoint，这个字符作为叶节点的标识
      */

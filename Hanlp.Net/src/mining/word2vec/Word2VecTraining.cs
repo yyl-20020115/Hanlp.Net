@@ -103,11 +103,11 @@ class Word2VecTraining
                         long cost_time = timeNow - timeStart + 1;
                         if (config.getCallback() == null)
                         {
-                            System.err.printf("%cAlpha: %f  iter: %d  Progress: %.2f%%  Words/thread/sec: %.2fk", 13, alpha, local_iter,
+                            Console.Error.WriteLine("%cAlpha: %f  iter: %d  Progress: %.2f%%  Words/thread/sec: %.2fk", 13, alpha, local_iter,
                                               percent * 100,
                                               wordCountActual / (float) (cost_time));
                             string etd = Utility.humanTime((long) (cost_time / percent * (1.f - percent)));
-                            if (etd.length() > 0) System.err.printf("  ETD: %s", etd);
+                            if (etd.length() > 0) Console.Error.WriteLine("  ETD: %s", etd);
                             System.err.flush();
                         }
                         else

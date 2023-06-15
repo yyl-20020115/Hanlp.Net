@@ -28,7 +28,7 @@ public class TestICWB : TestCase
 //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(PATH + ".bmes.txt")));
 //        for (String line : IOUtil.readLineListWithLessMemory(PATH))
 //        {
-//            String[] wordArray = line.split("\\s");
+//            String[] wordArray = line.Split("\\s");
 //            for (String word : wordArray)
 //            {
 //                if (word.Length() == 1)

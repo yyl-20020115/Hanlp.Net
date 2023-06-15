@@ -6,7 +6,7 @@ public final class WordCluster
 
     static void usage()
     {
-        System.err.printf("Usage: java %s <query-file> <k> <_out-file>\n", WordCluster.class.getName());
+        Console.Error.WriteLine("Usage: java %s <query-file> <k> <_out-file>\n", WordCluster.class.getName());
         Console.Error.WriteLine("\t<query-file> contains word projections in the text format\n");
         Console.Error.WriteLine("\t<k> number of clustering\n");
         Console.Error.WriteLine("\t<_out-file> output file\n");

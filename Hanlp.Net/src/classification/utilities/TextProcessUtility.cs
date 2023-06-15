@@ -68,7 +68,7 @@ public class TextProcessUtility
      */
     public static Dictionary<string, string[]> loadCorpus(string path)
     {
-        Dictionary<string, string[]> dataSet = new TreeMap<string, string[]>();
+        Dictionary<string, string[]> dataSet = new ();
         File root = new File(path);
         File[] folders = root.listFiles();
         if (folders == null) return null;

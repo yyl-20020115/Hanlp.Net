@@ -9,8 +9,8 @@ public class Train : AbstractTrainer
     protected void localUsage()
     {
         paramDesc("-input <file>", "Use text data from <file> to train the model");
-        System.err.printf("\nExamples:\n");
-        System.err.printf("java %s -input corpus.txt -output vectors.txt -size 200 -window 5 -sample 0.0001 -negative 5 -hs 0 -binary -cbow 1 -iter 3\n\n",
+        Console.Error.WriteLine("\nExamples:\n");
+        Console.Error.WriteLine("java %s -input corpus.txt -output vectors.txt -size 200 -window 5 -sample 0.0001 -negative 5 -hs 0 -binary -cbow 1 -iter 3\n\n",
                           Train.class.getName());
     }
 
@@ -25,7 +25,7 @@ public class Train : AbstractTrainer
         if ((i = argPos("-input", args)) >= 0) config.setInputFile(args[i + 1]);
 
         Word2VecTraining w2v = new Word2VecTraining(config);
-        System.err.printf("Starting training using text file %s\nthreads = %d, iter = %d\n",
+        Console.Error.WriteLine("Starting training using text file %s\nthreads = %d, iter = %d\n",
                           config.getInputFile(),
                           config.getNumThreads(),
                           config.getIter());

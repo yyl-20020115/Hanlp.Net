@@ -517,7 +517,7 @@ public class Args
             string string = (string) value;
             if (type.isArray())
             {
-                string[] strings = string.split(delimiter);
+                string[] strings = string.Split(delimiter);
                 type = type.getComponentType();
                 if (type == string.class)
                 {

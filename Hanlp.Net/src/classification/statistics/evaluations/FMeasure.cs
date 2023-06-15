@@ -38,15 +38,15 @@ public class FMeasure : Serializable
     /**
      * 分类准确率
      */
-    public double accuracy[];
+    public double[] accuracy;
     /**
      * 分类精确率
      */
-    public double precision[];
+    public double[] precision;
     /**
      * 分类召回率
      */
-    public double recall[];
+    public double[] recall;
     /**
      * 分类F1
      */

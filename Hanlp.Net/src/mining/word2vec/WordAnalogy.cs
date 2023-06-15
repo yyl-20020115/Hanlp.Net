@@ -12,7 +12,7 @@ public class WordAnalogy : AbstractClosestVectors
 
     static void usage()
     {
-        System.err.printf("Usage: java %s <FILE>\nwhere FILE contains word projections in the text format\n",
+        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE contains word projections in the text format\n",
                           WordAnalogy.class.getName());
         System.exit(0);
     }

@@ -15,6 +15,6 @@ public class POSTrainerTest : TestCase
     public void TestLoad() 
     {
         PerceptronPOSTagger tagger = new PerceptronPOSTagger(Config.POS_MODEL_FILE);
-        Console.WriteLine(string.Join(' ',tagger.tag("中国 交响乐团 谭利华 在 布达拉宫 广场 演出".split(" "))));
+        Console.WriteLine(string.Join(' ',tagger.tag("中国 交响乐团 谭利华 在 布达拉宫 广场 演出".Split(" "))));
     }
 }

@@ -34,7 +34,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     //@Override
     protected KeyValuePair<string, TermFrequency> onGenerateEntry(string line)
     {
-        string[] param = line.split(delimeter);
+        string[] param = line.Split(delimeter);
         return new AbstractMap.SimpleEntry<string, TermFrequency>(param[0], new TermFrequency(param[0], int.valueOf(param[1])));
     }
 

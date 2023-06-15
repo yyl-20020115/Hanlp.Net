@@ -81,7 +81,7 @@ public class Item : SimpleItem
         if (param == null) return null;
         string mark = "\\s";    // 分隔符，历史格式用空格，但是现在觉得用制表符比较好
         if (param.indexOf('\t') > 0) mark = "\t";
-        string[] array = param.split(mark);
+        string[] array = param.Split(mark);
         return create(array);
     }
 

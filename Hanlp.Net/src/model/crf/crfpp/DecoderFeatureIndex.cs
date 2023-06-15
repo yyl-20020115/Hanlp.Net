@@ -144,7 +144,7 @@ public class DecoderFeatureIndex : FeatureIndex
             System._out.println("Done reading templates");
             while ((line = br.readLine()) != null && line.length() > 0)
             {
-                string[] content = line.trim().split(" ");
+                string[] content = line.trim().Split(" ");
                 dat.put(content[1], int.valueOf(content[0]));
             }
             List<Double> alpha = new ArrayList<Double>();

@@ -31,7 +31,7 @@ public class CoNLLLoader
                 lineList = new LinkedList<CoNllLine>();
                 continue;
             }
-            lineList.add(new CoNllLine(line.split("\t")));
+            lineList.add(new CoNllLine(line.Split("\t")));
         }
 
         return result;

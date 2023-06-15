@@ -31,7 +31,7 @@ public class ModelImpl : Model
 
     public bool open(string arg)
     {
-        return open(arg.split(" ", -1));
+        return open(arg.Split(" ", -1));
     }
 
     private static class Option

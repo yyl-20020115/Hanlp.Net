@@ -277,13 +277,13 @@ public class NeuralNetworkParser : ICacheAble
 
     private static Matrix read_matrix(IOUtil.LineIterator lineIterator)
     {
-        string[] rc = lineIterator.next().split("\t");
+        string[] rc = lineIterator.next().Split("\t");
         int rows = int.valueOf(rc[0]);
         int cols = int.valueOf(rc[1]);
         double[][] valueArray = new double[rows][cols];
         for (double[] valueRow : valueArray)
         {
-            string[] args = lineIterator.next().split("\t");
+            string[] args = lineIterator.next().Split("\t");
             for (int i = 0; i < valueRow.length; i++)
             {
                 valueRow[i] = Double.valueOf(args[i]);
@@ -297,7 +297,7 @@ public class NeuralNetworkParser : ICacheAble
     {
         int rows = int.valueOf(lineIterator.next());
         double[][] valueArray = new double[rows][1];
-        string[] args = lineIterator.next().split("\t");
+        string[] args = lineIterator.next().Split("\t");
         for (int i = 0; i < rows; i++)
         {
             valueArray[i][0] = Double.valueOf(args[i]);
@@ -312,7 +312,7 @@ public class NeuralNetworkParser : ICacheAble
         TreeMap<string, int> map = new TreeMap<string, int>();
         for (int i = 0; i < size; i++)
         {
-            string[] args = lineIterator.next().split("\t");
+            string[] args = lineIterator.next().Split("\t");
             map.put(args[0], int.valueOf(args[1]));
         }
 
@@ -328,7 +328,7 @@ public class NeuralNetworkParser : ICacheAble
         Dictionary<int, int> map = new HashMap<int, int>();
         for (int i = 0; i < size; i++)
         {
-            string[] args = lineIterator.next().split("\t");
+            string[] args = lineIterator.next().Split("\t");
             map.put(int.valueOf(args[0]), int.valueOf(args[1]));
         }
 

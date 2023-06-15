@@ -29,7 +29,7 @@ public class CoNLLFixer
                 sbOut.Append('\n');
                 continue;
             }
-            string[] args = line.split("\t");
+            string[] args = line.Split("\t");
             for (int i = 10 - args.length; i > 0; --i)
             {
                 line += "\t_";

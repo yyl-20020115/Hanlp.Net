@@ -179,7 +179,7 @@ public class CustomDictionary
                     line = IOUtil.removeUTF8BOM(line);
                     firstLine = false;
                 }
-                string[] param = line.split(splitter);
+                string[] param = line.Split(splitter);
                 if (param[0].length() == 0) continue;   // 排除空行
                 if (HanLP.Config.Normalization) param[0] = CharTable.convert(param[0]); // 正规化
 

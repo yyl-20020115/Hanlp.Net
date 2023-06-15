@@ -31,7 +31,7 @@ public final class KMeansClustering
             pw = new PrintWriter(w);
 
             // Run K-means on the word vectors
-            System.err.printf("now computing K-means clustering (K=%d)\n", clcn);
+            Console.Error.WriteLine("now computing K-means clustering (K=%d)\n", clcn);
             final int MAX_ITER = 10;
             final int[] centcn = new int[clcn];
             final int[] cl = new int[vocabSize];
@@ -90,7 +90,7 @@ public final class KMeansClustering
                 }
             }
             // Save the K-means classes
-            System.err.printf("now saving the result of K-means clustering to the file %s\n", outFile);
+            Console.Error.WriteLine("now saving the result of K-means clustering to the file %s\n", outFile);
             List<string>[] cluster = new List[clcn];
             for (int i = 0; i < cluster.length; i++)
             {

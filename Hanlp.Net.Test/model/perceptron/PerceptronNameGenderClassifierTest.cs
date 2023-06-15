@@ -28,7 +28,7 @@ public class PerceptronNameGenderClassifierTest : TestCase
     public static void PredictNames(PerceptronNameGenderClassifier classifier)
     {
         String[] names = new String[]{"赵建军", "沈雁冰", "陆雪琪", "李冰冰"};
-        for (String name : names)
+        foreach (String name in names)
         {
             Console.Write("%s=%s\n", name, classifier.predict(name));
         }

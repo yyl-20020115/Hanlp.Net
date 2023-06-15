@@ -9,14 +9,14 @@ public abstract class AbstractTrainer
 
     protected void paramDesc(string param, string desc)
     {
-        System.err.printf("\t%s\n\t\t%s\n", param, desc);
+        Console.Error.WriteLine("\t%s\n\t\t%s\n", param, desc);
     }
 
     protected void usage()
     {
-        System.err.printf("word2vec Java toolkit v 0.1c\n\n");
-        System.err.printf("Options:\n");
-        System.err.printf("Parameters for training:\n");
+        Console.Error.WriteLine("word2vec Java toolkit v 0.1c\n\n");
+        Console.Error.WriteLine("Options:\n");
+        Console.Error.WriteLine("Parameters for training:\n");
         paramDesc("-output <file>", "Use <file> to save the resulting word vectors / word clusters");
         paramDesc("-size <int>", "Set size of word vectors; default is 100");
         paramDesc("-window <int>", "Set max skip length between words; default is 5");

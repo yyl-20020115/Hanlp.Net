@@ -30,7 +30,7 @@ public class CustomDictionaryTest : TestCase
     //        Set<String> fixedDictionary = new TreeSet<String>();
     //        while ((line = br.readLine()) != null)
     //        {
-    //            String[] param = line.split("\\s");
+    //            String[] param = line.Split("\\s");
     //            if (param[0].Length() == 1 || CoreDictionary.Contains(param[0])) continue;
     //            fixedDictionary.add(line);
     //        }
@@ -55,7 +55,7 @@ public class CustomDictionaryTest : TestCase
     //        Set<String> fixedDictionary = new TreeSet<String>();
     //        while ((line = br.readLine()) != null)
     //        {
-    //            String[] param = line.split("\\s");
+    //            String[] param = line.Split("\\s");
     //            if (param[1].equals("nr")) continue;
     //            fixedDictionary.add(line);
     //        }

@@ -48,7 +48,7 @@ public class CommonSynonymDictionaryEx
             BufferedReader bw = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             while ((line = bw.readLine()) != null)
             {
-                string[] args = line.split(" ");
+                string[] args = line.Split(" ");
                 List<Synonym> synonymList = Synonym.create(args);
                 for (Synonym synonym : synonymList)
                 {

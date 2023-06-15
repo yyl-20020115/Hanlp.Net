@@ -140,7 +140,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 {
                     continue;
                 }
-                string[] cols = line.split("[\t ]", -1);
+                string[] cols = line.Split("[\t ]", -1);
                 if (max_size == 0)
                 {
                     max_size = cols.length;
@@ -360,7 +360,7 @@ public class EncoderFeatureIndex : FeatureIndex
             dic_ = new MutableDoubleArrayTrieInteger();
             while ((line = br.readLine()) != null && line.length() > 0)
             {
-                string[] content = line.trim().split(" ");
+                string[] content = line.trim().Split(" ");
                 if (content.length != 2)
                 {
                     Console.Error.WriteLine("feature indices format error");

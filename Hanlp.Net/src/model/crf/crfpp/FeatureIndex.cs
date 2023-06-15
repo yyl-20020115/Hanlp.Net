@@ -147,7 +147,7 @@ public abstract class FeatureIndex
     public string applyRule(string str, int cur, TaggerImpl tagger)
     {
         StringBuilder sb = new StringBuilder();
-        for (string tmp : str.split("%x", -1))
+        for (string tmp : str.Split("%x", -1))
         {
             if (tmp.startsWith("U") || tmp.startsWith("B"))
             {
@@ -155,8 +155,8 @@ public abstract class FeatureIndex
             }
             else if (tmp.length() > 0)
             {
-                string[] tuple = tmp.split("]");
-                string[] idx = tuple[0].replace("[", "").split(",");
+                string[] tuple = tmp.Split("]");
+                string[] idx = tuple[0].replace("[", "").Split(",");
                 string r = getIndex(idx, cur, tagger);
                 if (r != null)
                 {

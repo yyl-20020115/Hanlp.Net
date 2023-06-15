@@ -192,7 +192,7 @@ public abstract class PerceptronClassifier
         List<Instance> instanceList = new ();
         foreach (string line in lineIterator)
         {
-            string[] cells = line.split(",");
+            string[] cells = line.Split(",");
             string text = cells[0], label = cells[1];
             List<int> x = extractFeature(text, featureMap);
             int y = featureMap.tagSet.add(label);

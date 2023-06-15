@@ -111,7 +111,7 @@ public class CompoundWord : IWord, Iterable<Word>
         if (cutIndex <= 2 || cutIndex == param.length() - 1) return null;
         string wordParam  = param.substring(1, cutIndex);
         List<Word> wordList = new LinkedList<Word>();
-        for (string single : wordParam.split("\\s+"))
+        for (string single : wordParam.Split("\\s+"))
         {
             if (single.length() == 0) continue;
             Word word = Word.create(single);

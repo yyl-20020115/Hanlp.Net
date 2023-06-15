@@ -107,7 +107,7 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
         string[] tags = new string[wordTags.length];
         for (int i = 0; i < wordTags.length; i++)
         {
-            string[] wordTag = wordTags[i].split("//");
+            string[] wordTag = wordTags[i].Split("//");
             words[i] = wordTag[0];
             tags[i] = wordTag[1];
         }

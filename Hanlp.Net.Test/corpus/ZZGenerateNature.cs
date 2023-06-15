@@ -147,7 +147,7 @@ public class ZZGenerateNature : TestCase
 //                "wb 百分号千分号，全角：％ ‰   半角：%\n" +
 //                "wh 单位符号，全角：￥ ＄ ￡  °  ℃  半角：$\n" +
 //                "\n";
-//        String[] params = text.split("\\n");
+//        String[] params = text.Split("\\n");
 //        int i = 0;
 //        for (String p : params)
 //        {

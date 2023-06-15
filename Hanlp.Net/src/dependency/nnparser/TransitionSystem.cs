@@ -121,7 +121,7 @@ public class TransitionSystem
         }
         else
         {
-            System.err.printf("unknown transition in transit: %d-%d", act.name(), act.rel());
+            Console.Error.WriteLine("unknown transition in transit: %d-%d", act.name(), act.rel());
         }
     }
 
@@ -167,7 +167,7 @@ public class TransitionSystem
         }
         else
         {
-            System.err.printf("unknown transition in transform(Action): %d-%d", act.name(), act.rel());
+            Console.Error.WriteLine("unknown transition in transform(Action): %d-%d", act.name(), act.rel());
         }
         return -1;
     }
@@ -193,7 +193,7 @@ public class TransitionSystem
         }
         else
         {
-            System.err.printf("unknown transition in transform(int): %d", act);
+            Console.Error.WriteLine("unknown transition in transform(int): %d", act);
         }
         return new Action();
     }

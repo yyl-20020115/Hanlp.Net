@@ -33,7 +33,7 @@ public class DictionaryUtil
 
             while ((line = br.readLine()) != null)
             {
-                string[] param = line.split("\\s");
+                string[] param = line.Split("\\s");
                 map.put(param[0], line);
             }
             br.close();

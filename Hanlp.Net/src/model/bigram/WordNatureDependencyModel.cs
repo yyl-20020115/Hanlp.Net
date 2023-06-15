@@ -43,7 +43,7 @@ public class WordNatureDependencyModel
         TreeMap<string, int> tagMap = new TreeMap<string, int>();
         for (string line : IOUtil.readLineListWithLessMemory(path))
         {
-            string[] param = line.split(" ");
+            string[] param = line.Split(" ");
             if (param[0].endsWith("@"))
             {
                 tagMap.put(param[0], int.parseInt(param[2]));
@@ -63,7 +63,7 @@ public class WordNatureDependencyModel
         for (KeyValuePair<string, Attribute> entry : map.entrySet())
         {
             string key = entry.getKey();
-            string[] param = key.split("@", 2);
+            string[] param = key.Split("@", 2);
             Attribute attribute = entry.getValue();
             int total = tagMap.get(param[0] + "@");
             for (int i = 0; i < attribute.p.length; ++i)

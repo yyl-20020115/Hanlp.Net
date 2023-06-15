@@ -37,7 +37,7 @@ public class StringDictionary : SimpleDictionary<string>
     //@Override
     protected KeyValuePair<string, string> onGenerateEntry(string line)
     {
-        string[] paramArray = line.split(separator, 2);
+        string[] paramArray = line.Split(separator, 2);
         if (paramArray.length != 2)
         {
             logger.warning("词典有一行读取错误： " + line);

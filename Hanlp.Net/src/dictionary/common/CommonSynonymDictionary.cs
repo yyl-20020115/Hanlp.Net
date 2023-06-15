@@ -57,14 +57,14 @@ public class CommonSynonymDictionary
             ArrayList<Synonym> synonymList = null;
             while ((line = bw.readLine()) != null)
             {
-                string[] args = line.split(" ");
+                string[] args = line.Split(" ");
                 synonymList = Synonym.create(args);
                 char type = args[0].charAt(args[0].length() - 1);
                 for (Synonym synonym : synonymList)
                 {
                     treeMap.put(synonym.realWord, new SynonymItem(synonym, synonymList, type));
                     // 这里稍微做个test
-                    //assert synonym.getIdString().startsWith(line.split(" ")[0].substring(0, line.split(" ")[0].length() - 1)) : "词典有问题" + line + synonym.toString();
+                    //assert synonym.getIdString().startsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].length() - 1)) : "词典有问题" + line + synonym.toString();
                 }
             }
             bw.close();

@@ -52,7 +52,7 @@ public abstract class CommonDictionary<V>
             string line;
             while ((line = br.readLine()) != null)
             {
-                string[] paramArray = line.split("\\s");
+                string[] paramArray = line.Split("\\s");
                 map.put(paramArray[0], createValue(paramArray));
             }
             br.close();

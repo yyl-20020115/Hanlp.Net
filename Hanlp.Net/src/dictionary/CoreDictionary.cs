@@ -65,7 +65,7 @@ public class CoreDictionary
             long start = DateTime.Now.Microsecond;
             while ((line = br.readLine()) != null)
             {
-                string param[] = line.split("\\s");
+                string param[] = line.Split("\\s");
                 int natureCount = (param.length - 1) / 2;
                 CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)

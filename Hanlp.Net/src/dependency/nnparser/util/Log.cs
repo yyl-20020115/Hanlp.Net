@@ -18,11 +18,11 @@ public class Log
 {
     public static void ERROR_LOG(string format, Object ... args)
     {
-        System.err.printf(format, args);
+        Console.Error.WriteLine(format, args);
     }
 
     public static void INFO_LOG(string format, Object ... args)
     {
-        System.err.printf(format, args);
+        Console.Error.WriteLine(format, args);
     }
 }

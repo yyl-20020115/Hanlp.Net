@@ -176,7 +176,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             _out.writeInt(base[i]);
             _out.writeInt(check[i]);
             _out.writeInt(fail[i]);
-            int output[] = this.output[i];
+            int[] output = this.output[i];
             if (output == null)
             {
                 _out.writeInt(0);

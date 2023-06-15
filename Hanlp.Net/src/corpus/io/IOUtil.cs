@@ -110,7 +110,7 @@ public class IOUtil
         LinkedList<string> lineList = readLineList(path);
         foreach (string line in lineList)
         {
-            resultList.add(line.split(","));
+            resultList.add(line.Split(","));
         }
         return resultList;
     }
@@ -708,7 +708,7 @@ public class IOUtil
                 line = IOUtil.removeUTF8BOM(line);
                 firstLine = false;
             }
-            string param = line.split(splitter);
+            string param = line.Split(splitter);
 
             int natureCount = (param.length - 1) / 2;
             CoreDictionary.Attribute attribute;

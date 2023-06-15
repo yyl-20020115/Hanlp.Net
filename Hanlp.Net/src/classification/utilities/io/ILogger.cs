@@ -17,8 +17,8 @@ namespace com.hankcs.hanlp.classification.utilities.io;
  */
 public interface ILogger
 {
-    void _out(string format, Object ... args);
-    void err(string format, Object ... args);
-    void start(string format, Object ... args);
-    void finish(string format, Object ... args);
+    void _out(string format, params Object[] args);
+    void err(string format, params Object[] args);
+    void start(string format, params Object[] args);
+    void finish(string format, params Object[] args);
 }

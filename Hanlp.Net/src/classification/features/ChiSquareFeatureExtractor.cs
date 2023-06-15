@@ -49,7 +49,7 @@ public class ChiSquareFeatureExtractor
 
             //计算 N1. (含有该特征的文档数量)
             N1dot = 0;
-            for (int count : categoryList)
+            foreach (int count in categoryList)
             {
                 N1dot += count;
             }
@@ -97,7 +97,7 @@ public class ChiSquareFeatureExtractor
                     return o1.getValue().compareTo(o2.getValue());
                 }
             });
-            for (KeyValuePair<int, Double> entry : selectedFeatures.entrySet())
+            foreach (KeyValuePair<int, Double> entry in selectedFeatures.entrySet())
             {
                 maxHeap.add(entry);
             }

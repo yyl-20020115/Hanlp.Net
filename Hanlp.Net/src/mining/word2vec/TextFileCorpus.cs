@@ -124,7 +124,7 @@ public class TextFileCorpus : Corpus
                 {
                     if (callback == null)
                     {
-                        System.err.printf("%c%.2f%% %dK", 13,
+                        Console.Error.WriteLine("%c%.2f%% %dK", 13,
                                           (1.f - fileInputStream.available() / (float) trainFile.length()) * 100.f,
                                           trainWords / 1000);
                         System.err.flush();
@@ -159,7 +159,7 @@ public class TextFileCorpus : Corpus
 
         if (callback == null)
         {
-            System.err.printf("%c100%% %dK", 13, trainWords / 1000);
+            Console.Error.WriteLine("%c100%% %dK", 13, trainWords / 1000);
             System.err.flush();
         }
         else
@@ -201,7 +201,7 @@ public class TextFileCorpus : Corpus
                 continue;
             }
             cache.writeInt(-3); // mark end of sentence
-            wordsBuffer = line.split("\\s+");
+            wordsBuffer = line.Split("\\s+");
             wbp = 0;
             eoc = false;
         }

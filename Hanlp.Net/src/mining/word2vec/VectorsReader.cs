@@ -42,7 +42,7 @@ public class VectorsReader
             for (int i = 0; i < words; i++)
             {
                 line = br.readLine().trim();
-                string[] _params = line.split("\\s+");
+                string[] _params = line.Split("\\s+");
                 if (_params.length != size + 1)
                 {
                     logger.info("词向量有一行格式不规范（可能是单词含有空格）：" + line);

@@ -103,7 +103,7 @@ public abstract class WordBasedSegment : Segment
             Nature currentNature = current.getNature();
             if (currentNature == Nature.nx && (next.hasNature(Nature.q) || next.hasNature(Nature.n)))
             {
-                string[] param = current.realWord.split("-", 1);
+                string[] param = current.realWord.Split("-", 1);
                 if (param.length == 2)
                 {
                     if (TextUtility.isAllNum(param[0]) && TextUtility.isAllNum(param[1]))

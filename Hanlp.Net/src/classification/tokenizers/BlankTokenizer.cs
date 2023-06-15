@@ -19,6 +19,6 @@ public class BlankTokenizer : ITokenizer
 {
     public string[] segment(string text)
     {
-        return text.split("\\s");
+        return text.Split("\\s");
     }
 }

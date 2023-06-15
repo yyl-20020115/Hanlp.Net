@@ -122,7 +122,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //                value = new TreeSet<String>();
 //                all.put(key, value);
 //            }
-//            for (String v : entry.getValue().split(" "))
+//            for (String v : entry.getValue().Split(" "))
 //            {
 //                if (key.Length() == 1 && key.equals(v))
 //                {
@@ -134,7 +134,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //
 //        for (Map.Entry<String, String> entry : t2s.entrySet())
 //        {
-//            for (String key : entry.getValue().split(" "))
+//            for (String key : entry.getValue().Split(" "))
 //            {
 //                if (key.Length() == 1 && key.equals(entry.getKey()))
 //                {
@@ -162,7 +162,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //            while (lineIterator.hasNext())
 //            {
 //                String line = lineIterator.next();
-//                String[] args = line.split(delimiter);
+//                String[] args = line.Split(delimiter);
 //                if (args.Length != 2)
 //                {
 //                    Console.Error.WriteLine(line);

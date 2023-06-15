@@ -29,7 +29,7 @@ public class SimplifyNGramDictionary : TestCase
 //        String line;
 //        while ((line = br.readLine()) != null)
 //        {
-//            String[] param = line.split("\\s");
+//            String[] param = line.Split("\\s");
 //            map.put(param[0], int.valueOf(param[1]));
 //        }
 //        br.close();
@@ -62,7 +62,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        while (iterator.hasNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            String[] termArray = current.getKey().split("@", 2);
+////            String[] termArray = current.getKey().Split("@", 2);
 ////            if (termArray[0].equals("未##人") && termArray[1].Length() < 2)
 ////            {
 ////                Console.WriteLine("删除 " + current.getKey());
@@ -116,7 +116,7 @@ public class SimplifyNGramDictionary : TestCase
 //        String line;
 //        while ((line = br.readLine()) != null)
 //        {
-//            String[] param = line.split(" ");
+//            String[] param = line.Split(" ");
 //            map.put(param[0], int.valueOf(param[1]));
 //        }
 //        br.close();
@@ -124,7 +124,7 @@ public class SimplifyNGramDictionary : TestCase
 //        while (iterator.hasNext())
 //        {
 //            line = iterator.next();
-//            String[] params = line.split("@", 2);
+//            String[] params = line.Split("@", 2);
 //            String one = params[0];
 //            String two = params[1];
 //            if (!CoreDictionary.Contains(one) || !CoreDictionary.Contains(two))

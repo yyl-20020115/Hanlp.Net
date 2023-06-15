@@ -147,14 +147,14 @@ public class LogLinearModel : LinearModel
         int b = -1;// 转换矩阵的权重位置
         if (matrix != null)
         {
-            string[] args = lineIterator.next().split(" ", 2);    // 0 B
+            string[] args = lineIterator.next().Split(" ", 2);    // 0 B
             b = int.valueOf(args[0]);
             featureFunctionList.put(b, null);
         }
 
         while ((line = lineIterator.next()).length() != 0)
         {
-            string[] args = line.split(" ", 2);
+            string[] args = line.Split(" ", 2);
             char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, sizeOfTagSet);
             featureFunctionMap.put(args[1], featureFunction);
@@ -250,7 +250,7 @@ public class LogLinearModel : LinearModel
         {
             for (string tag : tagSet.tags())
             {
-                string[] parts = tag.split("-");
+                string[] parts = tag.Split("-");
                 if (parts.length > 1)
                 {
                     if (parts[0].length() == 1 && "BMES".contains(parts[0]))

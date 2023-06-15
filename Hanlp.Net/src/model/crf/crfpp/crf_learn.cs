@@ -38,7 +38,7 @@ public class crf_learn
 
     public static bool run(string args)
     {
-        return run(args.split("\\s"));
+        return run(args.Split("\\s"));
     }
 
     public static bool run(string[] args)

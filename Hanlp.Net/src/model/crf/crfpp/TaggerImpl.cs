@@ -522,7 +522,7 @@ public class TaggerImpl : Tagger
 
     public bool add(string line)
     {
-        string[] cols = line.split("[\t ]", -1);
+        string[] cols = line.Split("[\t ]", -1);
         return add(cols);
     }
 
@@ -984,7 +984,7 @@ public class TaggerImpl : Tagger
         }
         catch (IOException e)
         {
-            System.err.printf("model not exits for %s", args[0]);
+            Console.Error.WriteLine("model not exits for %s", args[0]);
             return;
         }
         if (stream != null && !tagger.open(stream, 2, 0, 1.0))

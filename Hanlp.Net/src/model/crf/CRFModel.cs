@@ -114,14 +114,14 @@ public class CRFModel : ICacheAble
         int b = -1;// 转换矩阵的权重位置
         if (CRFModel.matrix != null)
         {
-            string[] args = lineIterator.next().split(" ", 2);    // 0 B
+            string[] args = lineIterator.next().Split(" ", 2);    // 0 B
             b = int.valueOf(args[0]);
             featureFunctionList.put(b, null);
         }
 
         while ((line = lineIterator.next()).length() != 0)
         {
-            string[] args = line.split(" ", 2);
+            string[] args = line.Split(" ", 2);
             char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, size);
             featureFunctionMap.put(args[1], featureFunction);

@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.dictionary.py;
+
 namespace com.hankcs.hanlp.dictionary.py;
 
 
@@ -22,7 +25,7 @@ public class PinyinDictionary
     static AhoCorasickDoubleArrayTrie<Pinyin[]> trie = new AhoCorasickDoubleArrayTrie<Pinyin[]>();
     public static readonly Pinyin[] pinyins = Integer2PinyinConverter.pinyins;
 
-    static
+    static PinyinDictionary()
     {
         long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.PinyinDictionaryPath))
@@ -47,7 +50,7 @@ public class PinyinDictionary
         TreeMap<string, Pinyin[]> map = new TreeMap<string, Pinyin[]>();
         for (KeyValuePair<string, string> entry : dictionary.entrySet())
         {
-            string[] args = entry.getValue().split(",");
+            string[] args = entry.getValue().Split(",");
             Pinyin[] pinyinValue = new Pinyin[args.length];
             for (int i = 0; i < pinyinValue.length; ++i)
             {

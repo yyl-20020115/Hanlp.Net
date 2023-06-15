@@ -1,9 +1,5 @@
 namespace com.hankcs.hanlp.utility;
 
-
-
-
-
 /**
  * 文本工具类
  */

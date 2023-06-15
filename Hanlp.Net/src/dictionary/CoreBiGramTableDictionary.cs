@@ -60,8 +60,8 @@ public class CoreBiGramTableDictionary
             int maxWordId = CoreDictionary.trie.size();
             while ((line = br.readLine()) != null)
             {
-                string[] params = line.split("\\s");
-                string[] twoWord = params[0].split("@", 2);
+                string[] params = line.Split("\\s");
+                string[] twoWord = params[0].Split("@", 2);
                 string a = twoWord[0];
                 int idA = CoreDictionary.trie.exactMatchSearch(a);
                 if (idA == -1)

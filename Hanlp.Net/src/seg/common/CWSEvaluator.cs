@@ -104,9 +104,9 @@ public class CWSEvaluator
      */
     public void compare(string gold, string pred)
     {
-        string[] wordArray = gold.split("\\s+");
+        string[] wordArray = gold.Split("\\s+");
         A_size += wordArray.length;
-        string[] predArray = pred.split("\\s+");
+        string[] predArray = pred.Split("\\s+");
         B_size += predArray.length;
 
         int goldIndex = 0, predIndex = 0;
