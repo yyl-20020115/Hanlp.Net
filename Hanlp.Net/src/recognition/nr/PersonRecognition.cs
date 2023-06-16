@@ -50,7 +50,7 @@ public class PersonRecognition
                 sbLog.Append(nr);
                 sbLog.Append(" ,");
             }
-            if (sbLog.length() > 1) sbLog.delete(sbLog.length() - 2, sbLog.length());
+            if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
             System._out.printf("人名角色标注：%s\n", sbLog.toString());
         }
@@ -80,7 +80,7 @@ public class PersonRecognition
                 if (nature == nr)
                 {
                     // 有些双名实际上可以构成更长的三名
-                    if (vertex.getAttribute().totalFrequency <= 1000 && vertex.realWord.length() == 2)
+                    if (vertex.getAttribute().totalFrequency <= 1000 && vertex.realWord.Length == 2)
                     {
                         nrEnumItem = new EnumItem<NR>();
                         nrEnumItem.labelMap.put(NR.X, 2); // 认为是三字人名前2个字=双字人名的可能性更高

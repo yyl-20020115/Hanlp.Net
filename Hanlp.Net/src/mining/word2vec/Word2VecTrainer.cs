@@ -203,7 +203,7 @@ public class Word2VecTrainer
 //                    long costTime = timeNow - timeStart + 1;
 //                    progress /= 100;
 //                    string etd = Utility.humanTime((long) (costTime / progress * (1.f - progress)));
-//                    if (etd.length() > 0) System._out.printf("  剩余时间：%s", etd);
+//                    if (etd.Length > 0) System._out.printf("  剩余时间：%s", etd);
 //                    System._out.flush();
 //                }
 //            };

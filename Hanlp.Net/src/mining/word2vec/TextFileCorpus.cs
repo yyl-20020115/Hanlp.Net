@@ -125,13 +125,13 @@ public class TextFileCorpus : Corpus
                     if (callback == null)
                     {
                         Console.Error.WriteLine("%c%.2f%% %dK", 13,
-                                          (1.f - fileInputStream.available() / (float) trainFile.length()) * 100.f,
+                                          (1.f - fileInputStream.available() / (float) trainFile.Length) * 100.f,
                                           trainWords / 1000);
                         System.err.flush();
                     }
                     else
                     {
-                        callback.corpusLoading((1.f - fileInputStream.available() / (float) trainFile.length()) * 100.f);
+                        callback.corpusLoading((1.f - fileInputStream.available() / (float) trainFile.Length) * 100.f);
                     }
                 }
                 int idx = searchVocab(word);
@@ -170,7 +170,7 @@ public class TextFileCorpus : Corpus
     }
 
     string[] wordsBuffer = new string[0];
-    int wbp = wordsBuffer.length;
+    int wbp = wordsBuffer.Length;
 
     /**
      * Reads a single word from a file, assuming space + tab + EOL to be word boundaries
@@ -184,7 +184,7 @@ public class TextFileCorpus : Corpus
         while (true)
         {
             // check the buffer first
-            if (wbp < wordsBuffer.length)
+            if (wbp < wordsBuffer.Length)
             {
                 return wordsBuffer[wbp++];
             }
@@ -196,7 +196,7 @@ public class TextFileCorpus : Corpus
                 return null;
             }
             line = line.trim();
-            if (line.length() == 0)
+            if (line.Length == 0)
             {
                 continue;
             }

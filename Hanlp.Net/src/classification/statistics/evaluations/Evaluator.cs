@@ -28,7 +28,7 @@ public class Evaluator
 
     public static FMeasure evaluate(IClassifier classifier, IDataSet testingDataSet)
     {
-        int c = classifier.getModel().catalog.length;
+        int c = classifier.getModel().catalog.Length;
         double[] TP_FP = new double[c]; // 判定为某个类别的数量
         double[] TP_FN = new double[c]; // 某个类别的样本数量
         double[] TP = new double[c];    // 判定为某个类别且判断正确的数量

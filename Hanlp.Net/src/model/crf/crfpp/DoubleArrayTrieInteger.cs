@@ -45,7 +45,7 @@ public class DoubleArrayTrieInteger : Serializable
     private int allocSize;
     private List<string> key;
     private int keySize;
-    private int length[];
+    private int Length[];
     private int value[];
     private int progress;
     private int nextCheckPos;
@@ -80,13 +80,13 @@ public class DoubleArrayTrieInteger : Serializable
 
         for (int i = parent.left; i < parent.right; i++)
         {
-            if ((length != null ? length[i] : key.get(i).length()) < parent.depth)
+            if ((Length != null ? Length[i] : key.get(i).Length) < parent.depth)
                 continue;
 
             string tmp = key.get(i);
 
             int cur = 0;
-            if ((length != null ? length[i] : tmp.length()) != parent.depth)
+            if ((Length != null ? Length[i] : tmp.Length) != parent.depth)
                 cur = (int) tmp.charAt(parent.depth) + 1;
 
             if (prev > cur)
@@ -225,7 +225,7 @@ public class DoubleArrayTrieInteger : Serializable
 
     // set_result omitted
     // the search methods returns (the list of) the value(s) instead
-    // of (the list of) the pair(s) of value(s) and length(s)
+    // of (the list of) the pair(s) of value(s) and Length(s)
 
     // set_array omitted
     // array omitted
@@ -277,7 +277,7 @@ public class DoubleArrayTrieInteger : Serializable
             return 0;
 
         key = _key;
-        length = _length;
+        Length = _length;
         keySize = _keySize;
         value = _value;
         progress = 0;
@@ -310,7 +310,7 @@ public class DoubleArrayTrieInteger : Serializable
         key = new ArrayList<string>();
         List<int> val1 = new ArrayList<int>();
         HashMap<int, List<int>> childIdxMap = new HashMap<int, List<int>>();
-        for (int i = 0; i < check.length; i++)
+        for (int i = 0; i < check.Length; i++)
         {
             if (check[i] <= 0) continue;
             if (!childIdxMap.containsKey(check[i]))
@@ -384,7 +384,7 @@ public class DoubleArrayTrieInteger : Serializable
     public void open(string fileName) 
     {
         File file = new File(fileName);
-        size = (int) file.length() / UNIT_SIZE;
+        size = (int) file.Length / UNIT_SIZE;
         check = new int[size];
         base = new int[size];
 
@@ -435,7 +435,7 @@ public class DoubleArrayTrieInteger : Serializable
     public int exactMatchSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
-            len = key.length();
+            len = key.Length;
         if (nodePos <= 0)
             nodePos = 0;
 
@@ -473,7 +473,7 @@ public class DoubleArrayTrieInteger : Serializable
                                             int nodePos)
     {
         if (len <= 0)
-            len = key.length();
+            len = key.Length;
         if (nodePos <= 0)
             nodePos = 0;
 
@@ -565,12 +565,12 @@ public class DoubleArrayTrieInteger : Serializable
 
     public int[] getLength()
     {
-        return length;
+        return Length;
     }
 
-    public void setLength(int[] length)
+    public void setLength(int[] Length)
     {
-        this.length = length;
+        this.Length = Length;
     }
 
     public void setSize(int size)

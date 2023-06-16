@@ -76,7 +76,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
         TFDictionary dictionaryMain = new TFDictionary();
         dictionaryMain.load(path[0]);
         int preSize = dictionaryMain.trie.size();
-        for (int i = 1; i < path.length; ++i)
+        for (int i = 1; i < path.Length; ++i)
         {
             TFDictionary dictionary = new TFDictionary();
             dictionary.load(path[i]);

@@ -54,15 +54,15 @@ public class HMMNERecognizer : HMMTrainer : NERecognizer
     //@Override
     public string[] recognize(string[] wordArray, string[] posArray)
     {
-        int[] obsArray = new int[wordArray.length];
-        for (int i = 0; i < obsArray.length; i++)
+        int[] obsArray = new int[wordArray.Length];
+        for (int i = 0; i < obsArray.Length; i++)
         {
             obsArray[i] = vocabulary.idOf(wordArray[i]);
         }
-        int[] tagArray = new int[obsArray.length];
+        int[] tagArray = new int[obsArray.Length];
         model.predict(obsArray, tagArray);
-        string[] tags = new string[obsArray.length];
-        for (int i = 0; i < tagArray.length; i++)
+        string[] tags = new string[obsArray.Length];
+        for (int i = 0; i < tagArray.Length; i++)
         {
             tags[i] = tagSet.stringOf(tagArray[i]);
         }

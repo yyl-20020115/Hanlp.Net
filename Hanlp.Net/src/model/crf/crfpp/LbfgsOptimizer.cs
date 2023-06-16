@@ -278,7 +278,7 @@ public class LbfgsOptimizer
 
     public int optimize(double[] x, double f, double[] g)
     {
-        return optimize(diag_.length, x, f, g, false, 1.0);
+        return optimize(diag_.Length, x, f, g, false, 1.0);
     }
 
     public int optimize(int size, double[] x, double f, double[] g, bool orthant, double C)
@@ -296,12 +296,12 @@ public class LbfgsOptimizer
                 xi_ = new double[size];
             }
         }
-        else if (diag_.length != size || v_.length != size)
+        else if (diag_.Length != size || v_.Length != size)
         {
             Console.Error.WriteLine("size of array is different");
             return -1;
         }
-        else if (orthant && v_.length != size)
+        else if (orthant && v_.Length != size)
         {
             Console.Error.WriteLine("size of array is different");
             return -1;

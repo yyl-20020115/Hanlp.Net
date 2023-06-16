@@ -139,7 +139,7 @@ public class CorpusLoaderTest : TestCase
 //                        if (wordList.size() == 0) continue;
 //                        for (IWord word : wordList)
 //                        {
-//                            if (word.getValue().Length() > 1 && word.getValue().charAt(0) == '。')
+//                            if (word.getValue().Length > 1 && word.getValue().charAt(0) == '。')
 //                            {
 //                                bw.write("。/w");
 //                                bw.write(word.getValue().substring(1));
@@ -202,7 +202,7 @@ public class CorpusLoaderTest : TestCase
 //                {
 //                    for (Word word : wordList)
 //                    {
-//                        if(word.value.Length() > 1 && word.value.endsWith("\""))
+//                        if(word.value.Length > 1 && word.value.endsWith("\""))
 //                        {
 //                            Console.WriteLine(word);
 //                        }

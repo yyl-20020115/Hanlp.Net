@@ -86,13 +86,13 @@ public class EasyReader
         {
             if (size-- == 0) break;
             if (file.isDirectory()) continue;
-            if (verbose) System._out.printf("正在处理%s, %d / %d\n", file.getName(), ++n, files.length);
+            if (verbose) System._out.printf("正在处理%s, %d / %d\n", file.getName(), ++n, files.Length);
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file.getAbsolutePath());
             while (lineIterator.hasNext())
             {
                 ++totalAddress;
                 string line = lineIterator.next();
-                if (line.length() == 0) continue;
+                if (line.Length == 0) continue;
                 handler.handle(line);
             }
         }

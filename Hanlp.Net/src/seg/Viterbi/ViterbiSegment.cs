@@ -156,20 +156,20 @@ public class ViterbiSegment : WordBasedSegment
         {
             node.updateFrom(nodes[0].getFirst());
         }
-        for (int i = 1; i < nodes.length - 1; ++i)
+        for (int i = 1; i < nodes.Length - 1; ++i)
         {
             LinkedList<Vertex> nodeArray = nodes[i];
             if (nodeArray == null) continue;
             for (Vertex node : nodeArray)
             {
                 if (node.from == null) continue;
-                for (Vertex to : nodes[i + node.realWord.length()])
+                for (Vertex to : nodes[i + node.realWord.Length])
                 {
                     to.updateFrom(node);
                 }
             }
         }
-        Vertex from = nodes[nodes.length - 1].getFirst();
+        Vertex from = nodes[nodes.Length - 1].getFirst();
         while (from != null)
         {
             vertexList.addFirst(from);
@@ -217,7 +217,7 @@ public class ViterbiSegment : WordBasedSegment
 //            if (node.isNew)
 //                node.updateFrom(nodes[0].getFirst());
 //        }
-//        for (int i = 1; i < nodes.length - 1; ++i)
+//        for (int i = 1; i < nodes.Length - 1; ++i)
 //        {
 //            LinkedList<Vertex> nodeArray = nodes[i];
 //            if (nodeArray == null) continue;
@@ -226,14 +226,14 @@ public class ViterbiSegment : WordBasedSegment
 //                if (node.from == null) continue;
 //                if (node.isNew)
 //                {
-//                    for (Vertex to : nodes[i + node.realWord.length()])
+//                    for (Vertex to : nodes[i + node.realWord.Length])
 //                    {
 //                        to.updateFrom(node);
 //                    }
 //                }
 //            }
 //        }
-//        Vertex from = nodes[nodes.length - 1].getFirst();
+//        Vertex from = nodes[nodes.Length - 1].getFirst();
 //        while (from != null)
 //        {
 //            vertexList.addFirst(from);

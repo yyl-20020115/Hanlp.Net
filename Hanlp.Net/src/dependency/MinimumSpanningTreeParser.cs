@@ -25,14 +25,14 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
         termList.add(0, new Term("##核心##", Nature.begin));
         Node[] nodeArray = new Node[termList.size()];
         Iterator<Term> iterator = termList.iterator();
-        for (int i = 0; i < nodeArray.length; ++i)
+        for (int i = 0; i < nodeArray.Length; ++i)
         {
             nodeArray[i] = new Node(iterator.next(), i);
         }
-        Edge[][] edges = new Edge[nodeArray.length][nodeArray.length];
-        for (int i = 0; i < edges.length; ++i)
+        Edge[][] edges = new Edge[nodeArray.Length][nodeArray.Length];
+        for (int i = 0; i < edges.Length; ++i)
         {
-            for (int j = 0; j < edges[i].length; ++j)
+            for (int j = 0; j < edges[i].Length; ++j)
             {
                 if (i != j)
                 {
@@ -41,7 +41,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
             }
         }
         // 最小生成树Prim算法
-        int max_v = nodeArray.length * (nodeArray.length - 1);
+        int max_v = nodeArray.Length * (nodeArray.Length - 1);
         float[] mincost = new float[max_v];
         Arrays.fill(mincost, Float.MAX_VALUE / 3);
         bool[] used = new bool[max_v];
@@ -85,12 +85,12 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
             }
         }
         CoNLLWord[] wordArray = new CoNLLWord[termList.size() - 1];
-        for (int i = 0; i < wordArray.length; ++i)
+        for (int i = 0; i < wordArray.Length; ++i)
         {
             wordArray[i] = new CoNLLWord(i + 1, nodeArray[i + 1].word, nodeArray[i + 1].label);
             wordArray[i].DEPREL = edgeResult[i].label;
         }
-        for (int i = 0; i < edgeResult.length; ++i)
+        for (int i = 0; i < edgeResult.Length; ++i)
         {
             int index = edgeResult[i].to - 1;
             if (index < 0)

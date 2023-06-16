@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.collection.AhoCorasick;
 
 
@@ -38,7 +40,7 @@ public class State
     /**
      * goto 表，也称转移函数。根据字符串的下一个字符转移到下一个状态
      */
-    private Dictionary<Character, State> success = new TreeMap<Character, State>();
+    private Dictionary<char, State> success = new TreeMap<char, State>();
 
     /**
      * 在双数组中的对应下标
@@ -150,7 +152,7 @@ public class State
      * @param ignoreRootState 是否忽略根节点，如果是根节点自己调用则应该是true，否则为false
      * @return 转移结果
      */
-    private State nextState(Character character, bool ignoreRootState)
+    private State nextState(char character, bool ignoreRootState)
     {
         State nextState = this.success.get(character);
         if (!ignoreRootState && nextState == null && this.depth == 0)
@@ -165,7 +167,7 @@ public class State
      * @param character
      * @return
      */
-    public State nextState(Character character)
+    public State nextState(char character)
     {
         return nextState(character, false);
     }
@@ -175,12 +177,12 @@ public class State
      * @param character
      * @return
      */
-    public State nextStateIgnoreRootState(Character character)
+    public State nextStateIgnoreRootState(char character)
     {
         return nextState(character, true);
     }
 
-    public State addState(Character character)
+    public State addState(char character)
     {
         State nextState = nextStateIgnoreRootState(character);
         if (nextState == null)
@@ -196,15 +198,15 @@ public class State
         return this.success.values();
     }
 
-    public Collection<Character> getTransitions()
+    public Collection<char> getTransitions()
     {
         return this.success.keySet();
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
-        final StringBuilder sb = new StringBuilder("State{");
+        StringBuilder sb = new StringBuilder("State{");
         sb.Append("depth=").Append(depth);
         sb.Append(", ID=").Append(index);
         sb.Append(", emits=").Append(emits);
@@ -219,7 +221,7 @@ public class State
      * 获取goto表
      * @return
      */
-    public Dictionary<Character, State> getSuccess()
+    public Dictionary<char, State> getSuccess()
     {
         return success;
     }

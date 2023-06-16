@@ -23,14 +23,14 @@ public class CoNLLFixer
         StringBuilder sbOut = new StringBuilder();
         for (string line : IOUtil.readLineListWithLessMemory(path))
         {
-            if (line.trim().length() == 0)
+            if (line.trim().Length == 0)
             {
                 sbOut.Append(line);
                 sbOut.Append('\n');
                 continue;
             }
             string[] args = line.Split("\t");
-            for (int i = 10 - args.length; i > 0; --i)
+            for (int i = 10 - args.Length; i > 0; --i)
             {
                 line += "\t_";
             }

@@ -74,7 +74,7 @@ public class EncoderFeatureIndex : FeatureIndex
             string line;
             while ((line = br.readLine()) != null)
             {
-                if (line.length() == 0 || line.charAt(0) == ' ' || line.charAt(0) == '#')
+                if (line.Length == 0 || line.charAt(0) == ' ' || line.charAt(0) == '#')
                 {
                     continue;
                 }
@@ -131,7 +131,7 @@ public class EncoderFeatureIndex : FeatureIndex
             string line;
             while ((line = br.readLine()) != null)
             {
-                if (line.length() == 0)
+                if (line.Length == 0)
                 {
                     continue;
                 }
@@ -143,15 +143,15 @@ public class EncoderFeatureIndex : FeatureIndex
                 string[] cols = line.Split("[\t ]", -1);
                 if (max_size == 0)
                 {
-                    max_size = cols.length;
+                    max_size = cols.Length;
                 }
-                if (max_size != cols.length)
+                if (max_size != cols.Length)
                 {
                     string msg = "inconsistent column size: " + max_size +
-                        " " + cols.length + " " + filename;
+                        " " + cols.Length + " " + filename;
                     throw new RuntimeException(msg);
                 }
-                xsize_ = cols.length - 1;
+                xsize_ = cols.Length - 1;
                 if (y_.indexOf(cols[max_size - 1]) == -1)
                 {
                     y_.add(cols[max_size - 1]);
@@ -333,19 +333,19 @@ public class EncoderFeatureIndex : FeatureIndex
             BufferedReader br = new BufferedReader(isr);
             string line;
 
-            int version = int.valueOf(br.readLine().substring("version: ".length()));
-            costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".length()));
-            maxid_ = int.valueOf(br.readLine().substring("maxid: ".length()));
-            xsize_ = int.valueOf(br.readLine().substring("xsize: ".length()));
+            int version = int.valueOf(br.readLine().substring("version: ".Length));
+            costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".Length));
+            maxid_ = int.valueOf(br.readLine().substring("maxid: ".Length));
+            xsize_ = int.valueOf(br.readLine().substring("xsize: ".Length));
             System._out.println("Done reading meta-info");
             br.readLine();
 
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 y_.add(line);
             }
             System._out.println("Done reading labels");
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 if (line.startsWith("U"))
                 {
@@ -358,10 +358,10 @@ public class EncoderFeatureIndex : FeatureIndex
             }
             System._out.println("Done reading templates");
             dic_ = new MutableDoubleArrayTrieInteger();
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 string[] content = line.trim().Split(" ");
-                if (content.length != 2)
+                if (content.Length != 2)
                 {
                     Console.Error.WriteLine("feature indices format error");
                     return false;
@@ -370,7 +370,7 @@ public class EncoderFeatureIndex : FeatureIndex
             }
             System._out.println("Done reading feature indices");
             List<Double> alpha = new ArrayList<Double>();
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 alpha.add(Double.valueOf(line));
             }
@@ -393,7 +393,7 @@ public class EncoderFeatureIndex : FeatureIndex
 
     public static void main(string[] args)
     {
-        if (args.length < 2)
+        if (args.Length < 2)
         {
             return;
         }

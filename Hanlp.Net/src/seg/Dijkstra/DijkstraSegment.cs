@@ -125,13 +125,13 @@ public class DijkstraSegment : WordBasedSegment
         List<Vertex> resultList = new ();
         Vertex[] vertexes = graph.getVertexes();
         List<EdgeFrom>[] edgesTo = graph.getEdgesTo();
-        double[] d = new double[vertexes.length];
+        double[] d = new double[vertexes.Length];
         Arrays.fill(d, Double.MAX_VALUE);
-        d[d.length - 1] = 0;
-        int[] path = new int[vertexes.length];
+        d[d.Length - 1] = 0;
+        int[] path = new int[vertexes.Length];
         Arrays.fill(path, -1);
         PriorityQueue<State> que = new PriorityQueue<State>();
-        que.add(new State(0, vertexes.length - 1));
+        que.add(new State(0, vertexes.Length - 1));
         while (!que.isEmpty())
         {
             State p = que.poll();

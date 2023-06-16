@@ -103,9 +103,9 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
      */
     public bool learn(params string[] wordTags)
     {
-        string[] words = new string[wordTags.length];
-        string[] tags = new string[wordTags.length];
-        for (int i = 0; i < wordTags.length; i++)
+        string[] words = new string[wordTags.Length];
+        string[] tags = new string[wordTags.Length];
+        for (int i = 0; i < wordTags.Length; i++)
         {
             string[] wordTag = wordTags[i].Split("//");
             words[i] = wordTag[0];

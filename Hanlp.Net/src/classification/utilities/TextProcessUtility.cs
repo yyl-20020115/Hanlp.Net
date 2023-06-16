@@ -29,7 +29,7 @@ public class TextProcessUtility
         List<Term> termList = NotionalTokenizer.segment(text);
         string[] wordArray = new string[termList.size()];
         Iterator<Term> iterator = termList.iterator();
-        for (int i = 0; i < wordArray.length; i++)
+        for (int i = 0; i < wordArray.Length; i++)
         {
             wordArray[i] = iterator.next().word;
         }
@@ -47,7 +47,7 @@ public class TextProcessUtility
         Dictionary<string, int> counts = new HashMap<string, int>();
 
         int counter;
-        for (int i = 0; i < keywordArray.length; ++i)
+        for (int i = 0; i < keywordArray.Length; ++i)
         {
             counter = counts.get(keywordArray[i]);
             if (counter == null)
@@ -77,8 +77,8 @@ public class TextProcessUtility
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
             if (files == null) continue;
-            string[] documents = new string[files.length];
-            for (int i = 0; i < files.length; i++)
+            string[] documents = new string[files.Length];
+            for (int i = 0; i < files.Length; i++)
             {
                 documents[i] = IOUtil.readTxt(files[i].getAbsolutePath());
             }
@@ -110,8 +110,8 @@ public class TextProcessUtility
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
             if (files == null) continue;
-            string[] documents = new string[files.length];
-            for (int i = 0; i < files.length; i++)
+            string[] documents = new string[files.Length];
+            for (int i = 0; i < files.Length; i++)
             {
                 documents[i] = readTxt(files[i], charsetName);
             }
@@ -127,7 +127,7 @@ public class TextProcessUtility
         byte[] targetArray = new byte[is.available()];
         int len;
         int off = 0;
-        while ((len = is.read(targetArray, off, targetArray.length - off)) != -1 && off < targetArray.length)
+        while ((len = is.read(targetArray, off, targetArray.Length - off)) != -1 && off < targetArray.Length)
         {
             off += len;
         }

@@ -114,17 +114,17 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 foreach (Word child in ((CompoundWord) word).innerList)
                 {
                     printWord(child, sb, i, offsetChild, withComment);
-                    offsetChild += child.length();
-                    offsetChild += delimiter.length();
+                    offsetChild += child.Length;
+                    offsetChild += delimiter.Length;
                     ++i;
                 }
-                offset += delimiter.length() * ((CompoundWord) word).innerList.size();
+                offset += delimiter.Length * ((CompoundWord) word).innerList.size();
             }
             else
             {
-                offset += delimiter.length();
+                offset += delimiter.Length;
             }
-            offset += word.length();
+            offset += word.Length;
         }
         return sb.toString();
     }
@@ -176,12 +176,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         char endLine = '\n';
         sb.Append('T').Append(id).Append(delimiter);
         sb.Append(word.getLabel()).Append(delimiter);
-        int length = word.length();
+        int Length = word.Length;
         if (word is CompoundWord)
         {
-            length += ((CompoundWord) word).innerList.size() - 1;
+            Length += ((CompoundWord) word).innerList.size() - 1;
         }
-        sb.Append(offset).Append(delimiter).Append(offset + length).Append(delimiter);
+        sb.Append(offset).Append(delimiter).Append(offset + Length).Append(delimiter);
         sb.Append(word.getValue()).Append(endLine);
         string translated = PartOfSpeechTagDictionary.translate(word.getLabel());
         if (withComment && !word.getLabel().equals(translated))
@@ -249,15 +249,15 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public int length()
+    public int Length
     {
-        int length = 0;
+        int Length = 0;
         foreach (IWord word in this)
         {
-            length += word.getValue().Length;
+            Length += word.getValue().Length;
         }
 
-        return length;
+        return Length;
     }
 
     /**
@@ -408,7 +408,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         List<Word> wordList = toSimpleWordList();
         string[] wordArray = new string[wordList.size()];
         Iterator<Word> iterator = wordList.iterator();
-        for (int i = 0; i < wordArray.length; i++)
+        for (int i = 0; i < wordArray.Length; i++)
         {
             wordArray[i] = iterator.next().value;
         }
@@ -425,7 +425,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         List<Word> wordList = toSimpleWordList();
         string[][] pair = new string[2][wordList.size()];
         Iterator<Word> iterator = wordList.iterator();
-        for (int i = 0; i < pair[0].length; i++)
+        for (int i = 0; i < pair[0].Length; i++)
         {
             Word word = iterator.next();
             pair[0][i] = word.value;
@@ -445,7 +445,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         List<string[]> tupleList = Utility.convertSentenceToNER(this, tagSet);
         string[][] result = new string[3][tupleList.size()];
         Iterator<string[]> iterator = tupleList.iterator();
-        for (int i = 0; i < result[0].length; i++)
+        for (int i = 0; i < result[0].Length; i++)
         {
             string[] tuple = iterator.next();
             for (int j = 0; j < 3; ++j)

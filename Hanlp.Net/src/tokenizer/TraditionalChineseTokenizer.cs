@@ -38,8 +38,8 @@ public class TraditionalChineseTokenizer
         foreach (Term term in termList)
         {
             term.offset = offset;
-            term.word = text.substring(offset, offset + term.length());
-            offset += term.length();
+            term.word = text.substring(offset, offset + term.Length);
+            offset += term.Length;
         }
 
         return termList;

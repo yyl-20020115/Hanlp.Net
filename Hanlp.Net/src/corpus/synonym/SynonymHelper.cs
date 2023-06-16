@@ -24,7 +24,7 @@ public class SynonymHelper
     /**
      * 尾数的长度，表示原子词的index
      */
-    public static readonly int MAX_INDEX_LENGTH = string.valueOf(MAX_WORDS).length();
+    public static readonly int MAX_INDEX_LENGTH = string.valueOf(MAX_WORDS).Length;
     public static long convertString2Id(string idString)
     {
         long id;

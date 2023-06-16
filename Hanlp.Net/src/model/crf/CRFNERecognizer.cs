@@ -93,7 +93,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
             {
                 StringBuilder sbFeature = new StringBuilder();
                 List<int> featureVec = new LinkedList<int>();
-                for (int i = 0; i < featureTemplateArray.length; i++)
+                for (int i = 0; i < featureTemplateArray.Length; i++)
                 {
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
                     Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
@@ -105,8 +105,8 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
                         bool first = offset[1] == 0;
                         if (t < 0)
                             sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
-                        else if (t >= wordArray.length)
-                            sbFeature.Append(FeatureIndex.EOS[t - wordArray.length]);
+                        else if (t >= wordArray.Length)
+                            sbFeature.Append(FeatureIndex.EOS[t - wordArray.Length]);
                         else
                             sbFeature.Append(first ? wordArray[t] : posArray[t]);
                         if (delimiterIterator.hasNext())

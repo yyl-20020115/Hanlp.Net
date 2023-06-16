@@ -22,7 +22,7 @@ public class EditDistanceScorer : BaseScorer<CharArray>
     protected CharArray generateKey(string sentence)
     {
         char[] charArray = sentence.ToCharArray();
-        if (charArray.length == 0) return null;
+        if (charArray.Length == 0) return null;
         return new CharArray(charArray);
     }
 }

@@ -51,7 +51,7 @@ public class OrganizationRecognition
                 sbLog.Append(NT);
                 sbLog.Append(" ,");
             }
-            if (sbLog.length() > 1) sbLog.delete(sbLog.length() - 2, sbLog.length());
+            if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
             System._out.printf("机构名角色标注：%s\n", sbLog.toString());
         }
@@ -96,7 +96,7 @@ public class OrganizationRecognition
                 NTEnumItem = new EnumItem<NT>(NT.Z, OrganizationDictionary.transformMatrixDictionary.getTotalFrequency(NT.Z));
             }
             tagList.add(NTEnumItem);
-//            line += vertex.realWord.length();
+//            line += vertex.realWord.Length;
         }
         return tagList;
     }

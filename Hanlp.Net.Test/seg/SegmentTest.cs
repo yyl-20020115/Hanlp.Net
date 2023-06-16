@@ -106,7 +106,7 @@ public class SegmentTest : TestCase
     public void TestOffset() 
     {
         String text = "中华人民共和国在哪里";
-//        for (int i = 0; i < text.Length(); ++i)
+//        for (int i = 0; i < text.Length; ++i)
 //        {
 //            Console.print(text.charAt(i) + "" + i + " ");
 //        }
@@ -114,7 +114,7 @@ public class SegmentTest : TestCase
         List<Term> termList = IndexTokenizer.segment(text);
         foreach (Term term in termList)
         {
-            AssertEquals(term.word, text[term.offset .. (term.offset + term.length())]);
+            AssertEquals(term.word, text[term.offset .. (term.offset + term.Length)]);
         }
     }
     [TestMethod]
@@ -200,7 +200,7 @@ public class SegmentTest : TestCase
     public void TestQuickAtomSegment() 
     {
         String text = "你好1234abc Good一二三四3.14";
-//        Console.WriteLine(Segment.quickAtomSegment(text.ToCharArray(), 0, text.Length()));
+//        Console.WriteLine(Segment.quickAtomSegment(text.ToCharArray(), 0, text.Length));
     }
     [TestMethod]
 
@@ -225,7 +225,7 @@ public class SegmentTest : TestCase
     //            segment.seg(text);
     //        }
     //        double costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
-    //        Console.printf("分词速度：%.2f字每秒", text.Length() * pressure / costTime);
+    //        Console.printf("分词速度：%.2f字每秒", text.Length * pressure / costTime);
     //    }
     [TestMethod]
 
@@ -283,7 +283,7 @@ public class SegmentTest : TestCase
     //        String text = "江西鄱阳湖干枯，中国最大淡水湖变成大草原。";
     //        Console.WriteLine(segment.seg(text));
     //        int pressure = 100000;
-    //        StringBuilder sbBigText = new StringBuilder(text.Length() * pressure);
+    //        StringBuilder sbBigText = new StringBuilder(text.Length * pressure);
     //        for (int i = 0; i < pressure; i++)
     //        {
     //            sbBigText.append(text);
@@ -292,13 +292,13 @@ public class SegmentTest : TestCase
     //        long start = DateTime.Now.Microsecond;
     //        List<Term> termList1 = segment.seg(text);
     //        double costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
-    //        Console.printf("单线程分词速度：%.2f字每秒\n", text.Length() / costTime);
+    //        Console.printf("单线程分词速度：%.2f字每秒\n", text.Length / costTime);
     //
     //        segment.enableMultithreading(4);
     //        start = DateTime.Now.Microsecond;
     //        List<Term> termList2 = segment.seg(text);
     //        costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
-    //        Console.printf("四线程分词速度：%.2f字每秒\n", text.Length() / costTime);
+    //        Console.printf("四线程分词速度：%.2f字每秒\n", text.Length / costTime);
     //
     //        assertEquals(termList1.size(), termList2.size());
     //        Iterator<Term> iterator1 = termList1.iterator();
@@ -475,7 +475,7 @@ public class SegmentTest : TestCase
         List<Term> termList = IndexTokenizer.segment("南京市长江大桥");
         foreach (Term term in termList)
         {
-//            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length()) + "]");
+//            Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length) + "]");
         }
     }
     [TestMethod]
@@ -494,7 +494,7 @@ public class SegmentTest : TestCase
             List<Term> termList = IndexTokenizer.segment(sentence);
             foreach (Term term in termList)
             {
-//                Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length()) + "]");
+//                Console.WriteLine(term + " [" + term.offset + ":" + (term.offset + term.word.Length) + "]");
             }
 //            Console.WriteLine();
         }

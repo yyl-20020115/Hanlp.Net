@@ -24,7 +24,7 @@ public class IOUtility : IOUtil
     public static string[] readLineToArray(string line)
     {
         line = line.trim();
-        if (line.length() == 0) return new string[0];
+        if (line.Length == 0) return new string[0];
         return PATTERN_SPACE.Split(line);
     }
 
@@ -57,7 +57,7 @@ public class IOUtility : IOUtil
             while ((line = br.readLine()) != null)
             {
                 line = line.trim();
-                if (line.length() == 0)
+                if (line.Length == 0)
                 {
                     continue;
                 }
@@ -80,12 +80,12 @@ public class IOUtility : IOUtil
     public static double[] evaluate(Instance[] instances, LinearModel model)
     {
         int[] stat = new int[2];
-        for (int i = 0; i < instances.length; i++)
+        for (int i = 0; i < instances.Length; i++)
         {
             evaluate(instances[i], model, stat);
-            if (i % 100 == 0 || i == instances.length - 1)
+            if (i % 100 == 0 || i == instances.Length - 1)
             {
-                Console.Error.WriteLine("%c进度: %.2f%%", 13, (i + 1) / (float) instances.length * 100);
+                Console.Error.WriteLine("%c进度: %.2f%%", 13, (i + 1) / (float) instances.Length * 100);
                 System.err.flush();
             }
         }
@@ -94,10 +94,10 @@ public class IOUtility : IOUtil
 
     public static void evaluate(Instance instance, LinearModel model, int[] stat)
     {
-        int[] predLabel = new int[instance.length()];
+        int[] predLabel = new int[instance.Length];
         model.viterbiDecode(instance, predLabel);
-        stat[0] += instance.tagArray.length;
-        for (int i = 0; i < predLabel.length; i++)
+        stat[0] += instance.tagArray.Length;
+        for (int i = 0; i < predLabel.Length; i++)
         {
             if (predLabel[i] == instance.tagArray[i])
             {

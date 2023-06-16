@@ -59,9 +59,9 @@ public class CompoundWord : IWord, Iterable<Word>
     }
 
     //@Override
-    public int length()
+    public int Length
     {
-        return getValue().length();
+        return getValue().Length;
     }
 
     //@Override
@@ -108,12 +108,12 @@ public class CompoundWord : IWord, Iterable<Word>
     {
         if (param == null) return null;
         int cutIndex = param.lastIndexOf(']');
-        if (cutIndex <= 2 || cutIndex == param.length() - 1) return null;
+        if (cutIndex <= 2 || cutIndex == param.Length - 1) return null;
         string wordParam  = param.substring(1, cutIndex);
         List<Word> wordList = new LinkedList<Word>();
         for (string single : wordParam.Split("\\s+"))
         {
-            if (single.length() == 0) continue;
+            if (single.Length == 0) continue;
             Word word = Word.create(single);
             if (word == null)
             {

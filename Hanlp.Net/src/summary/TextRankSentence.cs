@@ -175,11 +175,11 @@ public class TextRankSentence
         for (string line : document.Split("[\r\n]"))
         {
             line = line.trim();
-            if (line.length() == 0) continue;
+            if (line.Length == 0) continue;
             for (string sent : line.Split(sentence_separator))		// [，,。:：“”？?！!；;]
             {
                 sent = sent.trim();
-                if (sent.length() == 0) continue;
+                if (sent.Length == 0) continue;
                 sentences.add(sent);
             }
         }
@@ -271,7 +271,7 @@ public class TextRankSentence
         List<string> sentenceList = splitSentence(document, sentence_separator);
 
         int sentence_count = sentenceList.size();
-        int document_length = document.length();
+        int document_length = document.Length;
         int sentence_length_avg = document_length / sentence_count;
         int size = max_length / sentence_length_avg + 1;
         List<List<string>> docs = convertSentenceListToDocument(sentenceList);
@@ -306,9 +306,9 @@ public class TextRankSentence
         List<string> summary = new ArrayList<string>();
         int count = 0;
         for (string result : resultList) {
-            if (count + result.length() <= max_length) {
+            if (count + result.Length <= max_length) {
                 summary.add(result);
-                count += result.length();
+                count += result.Length;
             }
         }
         return summary;

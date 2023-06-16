@@ -29,8 +29,8 @@ public class CoNllLine
 
     public CoNllLine(string... args)
     {
-        int length = Math.min(args.length, value.length);
-        for (int i = 0; i < length; ++i)
+        int Length = Math.min(args.Length, value.Length);
+        for (int i = 0; i < Length; ++i)
         {
             value[i] = args[i];
         }
@@ -46,6 +46,6 @@ public class CoNllLine
             sb.Append(value);
             sb.Append('\t');
         }
-        return sb.deleteCharAt(sb.length() - 1).toString();
+        return sb.deleteCharAt(sb.Length - 1).toString();
     }
 }

@@ -48,17 +48,17 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     //@Override
     public void segment(string text, string normalized, List<string> output)
     {
-        int[] obsArray = new int[text.length()];
-        for (int i = 0; i < obsArray.length; i++)
+        int[] obsArray = new int[text.Length];
+        for (int i = 0; i < obsArray.Length; i++)
         {
             obsArray[i] = vocabulary.idOf(normalized.substring(i, i + 1));
         }
-        int[] tagArray = new int[text.length()];
+        int[] tagArray = new int[text.Length];
         model.predict(obsArray, tagArray);
         StringBuilder result = new StringBuilder();
         result.Append(text.charAt(0));
 
-        for (int i = 1; i < tagArray.length; i++)
+        for (int i = 1; i < tagArray.Length; i++)
         {
             if (tagArray[i] == tagSet.B || tagArray[i] == tagSet.S)
             {
@@ -67,7 +67,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
             }
             result.Append(text.charAt(i));
         }
-        if (result.length() != 0)
+        if (result.Length != 0)
         {
             output.add(result.toString());
         }
@@ -80,18 +80,18 @@ public class HMMSegmenter : HMMTrainer , Segmenter
         for (Word w : sentence.toSimpleWordList())
         {
             string word = CharTable.convert(w.value);
-            if (word.length() == 1)
+            if (word.Length == 1)
             {
                 charList.add(new string[]{word, "S"});
             }
             else
             {
                 charList.add(new string[]{word.substring(0, 1), "B"});
-                for (int i = 1; i < word.length() - 1; ++i)
+                for (int i = 1; i < word.Length - 1; ++i)
                 {
                     charList.add(new string[]{word.substring(i, i + 1), "M"});
                 }
-                charList.add(new string[]{word.substring(word.length() - 1), "E"});
+                charList.add(new string[]{word.substring(word.Length - 1), "E"});
             }
         }
         return charList;

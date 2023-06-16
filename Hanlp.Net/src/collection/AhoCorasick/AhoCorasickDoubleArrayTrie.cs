@@ -97,13 +97,13 @@ public class AhoCorasickDoubleArrayTrie<V>
     {
         int position = 1;
         int currentState = 0;
-        for (int i = 0; i < text.length(); ++i)
+        for (int i = 0; i < text.Length; ++i)
         {
-            currentState = getState(currentState, text.charAt(i));
+            currentState = getState(currentState, text[(i)]);
             int[] hitArray = output[currentState];
             if (hitArray != null)
             {
-                for (int hit : hitArray)
+                foreach (int hit in hitArray)
                 {
                     processor.hit(position - l[hit], position, v[hit]);
                 }
@@ -183,17 +183,17 @@ public class AhoCorasickDoubleArrayTrie<V>
             }
             else
             {
-                _out.writeInt(output.length);
+                _out.writeInt(output.Length);
                 for (int o : output)
                 {
                     _out.writeInt(o);
                 }
             }
         }
-        _out.writeInt(l.length);
-        for (int length : l)
+        _out.writeInt(l.Length);
+        for (int Length : l)
         {
-            _out.writeInt(length);
+            _out.writeInt(Length);
         }
     }
 
@@ -245,23 +245,23 @@ public class AhoCorasickDoubleArrayTrie<V>
         check = new int[size + 65535];
         fail = new int[size + 65535];
         output = new int[size + 65535][];
-        int length;
+        int Length;
         for (int i = 0; i < size; ++i)
         {
             _base[i] = byteArray.nextInt();
             check[i] = byteArray.nextInt();
             fail[i] = byteArray.nextInt();
-            length = byteArray.nextInt();
-            if (length == 0) continue;
-            output[i] = new int[length];
-            for (int j = 0; j < output[i].length; ++j)
+            Length = byteArray.nextInt();
+            if (Length == 0) continue;
+            output[i] = new int[Length];
+            for (int j = 0; j < output[i].Length; ++j)
             {
                 output[i][j] = byteArray.nextInt();
             }
         }
-        length = byteArray.nextInt();
-        l = new int[length];
-        for (int i = 0; i < l.length; ++i)
+        Length = byteArray.nextInt();
+        l = new int[Length];
+        for (int i = 0; i < l.Length; ++i)
         {
             l[i] = byteArray.nextInt();
         }
@@ -484,7 +484,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             fakeNode.addEmit(parent.getLargestValueId());
             siblings.add(new AbstractMap.SimpleEntry<int, State>(0, fakeNode));
         }
-        for (KeyValuePair<Character, State> entry : parent.getSuccess().entrySet())
+        for (KeyValuePair<char, State> entry : parent.getSuccess().entrySet())
         {
             siblings.add(new AbstractMap.SimpleEntry<int, State>(entry.getKey() + 1, entry.getValue()));
         }
@@ -514,7 +514,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     private int exactMatchSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
-            len = key.length();
+            len = key.Length;
         if (nodePos <= 0)
             nodePos = 0;
 
@@ -585,7 +585,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //    private void dfs(State currentState, string path, IWalker walker)
 //    {
 //        walker.meet(path, currentState);
-//        for (Character _transition : currentState.getTransitions())
+//        for (char _transition : currentState.getTransitions())
 //        {
 //            State targetState = currentState.nextState(_transition);
 //            dfs(targetState, path + _transition, walker);
@@ -608,7 +608,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //    public void debug()
 //    {
 //        System._out.println("base:");
-//        for (int i = 0; i < base.length; i++)
+//        for (int i = 0; i < base.Length; i++)
 //        {
 //            if (base[i] < 0)
 //            {
@@ -617,7 +617,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //        }
 //
 //        System._out.println("output:");
-//        for (int i = 0; i < output.length; i++)
+//        for (int i = 0; i < output.Length; i++)
 //        {
 //            if (output[i] != null)
 //            {
@@ -626,7 +626,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //        }
 //
 //        System._out.println("fail:");
-//        for (int i = 0; i < fail.length; i++)
+//        for (int i = 0; i < fail.Length; i++)
 //        {
 //            if (fail[i] != 0)
 //            {
@@ -644,7 +644,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //        string infoChar = "char = ";
 //        string infoBase = "base = ";
 //        string infoCheck = "check= ";
-//        for (int i = 0; i < Math.min(base.length, 200); ++i)
+//        for (int i = 0; i < Math.min(base.Length, 200); ++i)
 //        {
 //            if (base[i] != 0 || check[i] != 0)
 //            {
@@ -665,7 +665,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 //                "size=" + size +
 //                ", allocSize=" + allocSize +
 //                ", keySize=" + keySize +
-////                ", length=" + Arrays.toString(length) +
+////                ", Length=" + Arrays.toString(Length) +
 ////                ", value=" + Arrays.toString(value) +
 //                ", progress=" + progress +
 //                ", nextCheckPos=" + nextCheckPos
@@ -719,7 +719,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      */
     public int size()
     {
-        return v == null ? 0 : v.length;
+        return v == null ? 0 : v.Length;
     }
 
     /**
@@ -756,11 +756,11 @@ public class AhoCorasickDoubleArrayTrie<V>
          * 由一个排序好的map创建
          */
         
-        public void build(TreeMap<string, V> map)
+        public void build(Dictionary<string, V> map)
         {
             // 把值保存下来
             v = (V[]) map.values().toArray();
-            l = new int[v.length];
+            l = new int[v.Length];
             Set<string> keySet = map.keySet();
             // 构建二分trie树
             addAllKeyword(keySet);
@@ -782,12 +782,12 @@ public class AhoCorasickDoubleArrayTrie<V>
         private void addKeyword(string keyword, int index)
         {
             State currentState = this.rootState;
-            for (Character character : keyword.ToCharArray())
+            for (char character : keyword.ToCharArray())
             {
                 currentState = currentState.addState(character);
             }
             currentState.addEmit(index);
-            l[index] = keyword.length();
+            l[index] = keyword.Length;
         }
 
         /**
@@ -810,9 +810,9 @@ public class AhoCorasickDoubleArrayTrie<V>
         private void constructFailureStates()
         {
             fail = new int[size + 1];
-            fail[1] = base[0];
+            fail[1] = _base[0];
             output = new int[size + 1][];
-            Queue<State> queue = new LinkedBlockingDeque<State>();
+            Queue<State> queue = new ();
 
             // 第一步，将深度为1的节点的failure设为根节点
             for (State depthOneState : this.rootState.getStates())
@@ -827,7 +827,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             {
                 State currentState = queue.remove();
 
-                for (Character transition : currentState.getTransitions())
+                for (char transition : currentState.getTransitions())
                 {
                     State targetState = currentState.nextState(transition);
                     queue.add(targetState);
@@ -854,20 +854,20 @@ public class AhoCorasickDoubleArrayTrie<V>
             if (emit == null || emit.size() == 0) return;
             int output[] = new int[emit.size()];
             Iterator<int> it = emit.iterator();
-            for (int i = 0; i < output.length; ++i)
+            for (int i = 0; i < output.Length; ++i)
             {
                 output[i] = it.next();
             }
             AhoCorasickDoubleArrayTrie.this.output[targetState.getIndex()] = output;
         }
 
-        private void buildDoubleArrayTrie(Set<string> keySet)
+        private void buildDoubleArrayTrie(HashSet<string> keySet)
         {
             progress = 0;
             keySize = keySet.size();
             resize(65536 * 32); // 32个双字节
 
-            base[0] = 1;
+            _base[0] = 1;
             nextCheckPos = 0;
 
             State root_node = this.rootState;
@@ -997,11 +997,11 @@ public class AhoCorasickDoubleArrayTrie<V>
          */
         private void loseWeight()
         {
-            int nbase[] = new int[size + 65535];
-            System.arraycopy(base, 0, nbase, 0, size);
-            base = nbase;
+            int[] _base = new int[size + 65535];
+            System.arraycopy(_base, 0, nbase, 0, size);
+            _base = nbase;
 
-            int ncheck[] = new int[size + 65535];
+            int[] ncheck = new int[size + 65535];
             System.arraycopy(check, 0, ncheck, 0, size);
             check = ncheck;
         }

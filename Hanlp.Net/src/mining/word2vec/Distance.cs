@@ -19,7 +19,7 @@ public class Distance : AbstractClosestVectors
 
     public static void main(string[] args) 
     {
-        if (args.length < 1) usage();
+        if (args.Length < 1) usage();
         new Distance(args[0]).execute();
     }
 

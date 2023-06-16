@@ -79,7 +79,7 @@ public class SString : IComparable<SString>
     }
 
     //@Override
-    public int length()
+    public int Length
     {
         return e - b;
     }
@@ -103,7 +103,7 @@ public class SString : IComparable<SString>
     }
 
     //@Override
-    public int compareTo(SString anotherString)
+    public int CompareTo(SString? anotherString)
     {
         int len1 = value.Length;
         int len2 = anotherString.value.Length;
@@ -139,11 +139,11 @@ public class SString : IComparable<SString>
 
     public SString add(SString other)
     {
-        char[] value = new char[length() + other.length()];
-        System.arraycopy(this.value, b, value, 0, length());
-        System.arraycopy(other.value, other.b, value, length(), other.length());
+        char[] value = new char[Length + other.Length];
+        System.arraycopy(this.value, b, value, 0, Length);
+        System.arraycopy(other.value, other.b, value, Length, other.Length);
         b = 0;
-        e = length() + other.length();
+        e = Length + other.Length;
         this.value = value;
 
         return this;

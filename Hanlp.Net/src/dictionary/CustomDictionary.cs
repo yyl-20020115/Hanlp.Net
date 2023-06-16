@@ -113,7 +113,7 @@ public class CustomDictionary
                 // 缓存用户词性
                 if (customNatureCollector.isEmpty()) // 热更新
                 {
-                    for (int i = Nature.begin.ordinal() + 1; i < Nature.values().length; ++i)
+                    for (int i = Nature.begin.ordinal() + 1; i < Nature.values().Length; ++i)
                     {
                         customNatureCollector.add(Nature.values()[i]);
                     }
@@ -180,7 +180,7 @@ public class CustomDictionary
                     firstLine = false;
                 }
                 string[] param = line.Split(splitter);
-                if (param[0].length() == 0) continue;   // 排除空行
+                if (param[0].Length == 0) continue;   // 排除空行
                 if (HanLP.Config.Normalization) param[0] = CharTable.convert(param[0]); // 正规化
 
                 int natureCount = (param.Length - 1) / 2;
@@ -345,10 +345,10 @@ public class CustomDictionary
             {
                 // 第一个是全部频次，第二个是词性个数
                 int currentTotalFrequency = byteArray.nextInt();
-                int length = byteArray.nextInt();
-                attributes[i] = new CoreDictionary.Attribute(length);
+                int Length = byteArray.nextInt();
+                attributes[i] = new CoreDictionary.Attribute(Length);
                 attributes[i].totalFrequency = currentTotalFrequency;
-                for (int j = 0; j < length; ++j)
+                for (int j = 0; j < Length; ++j)
                 {
                     attributes[i].nature[j] = natureIndexArray[byteArray.nextInt()];
                     attributes[i].frequency[j] = byteArray.nextInt();
@@ -488,7 +488,7 @@ public class CustomDictionary
         return new Searcher(charArray);
     }
 
-    static class Searcher : BaseSearcher<CoreDictionary.Attribute>
+    public class Searcher : BaseSearcher<CoreDictionary.Attribute>
     {
         /**
          * 分词从何处开始，这是一个状态
@@ -498,14 +498,14 @@ public class CustomDictionary
         private LinkedList<KeyValuePair<string, CoreDictionary.Attribute>> entryList;
 
         protected Searcher(char[] c)
+            :base(c)
         {
-            super(c);
             entryList = new LinkedList<KeyValuePair<string, CoreDictionary.Attribute>>();
         }
 
         protected Searcher(string text)
+            : base(c)
         {
-            super(text);
             entryList = new LinkedList<KeyValuePair<string, CoreDictionary.Attribute>>();
         }
 
@@ -513,13 +513,13 @@ public class CustomDictionary
         public KeyValuePair<string, CoreDictionary.Attribute> next()
         {
             // 保证首次调用找到一个词语
-            while (entryList.size() == 0 && begin < c.length)
+            while (entryList.size() == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;
             }
             // 之后调用仅在缓存用完的时候调用一次
-            if (entryList.size() == 0 && begin < c.length)
+            if (entryList.size() == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;
@@ -560,7 +560,7 @@ public class CustomDictionary
         DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(text, 0);
         while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.length, searcher.value);
+            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
         }
     }
 
@@ -579,13 +579,13 @@ public class CustomDictionary
             while ((entry = searcher.next()) != null)
             {
                 offset = searcher.getOffset();
-                processor.hit(offset, offset + entry.getKey().length(), entry.getValue());
+                processor.hit(offset, offset + entry.getKey().Length, entry.getValue());
             }
         }
         DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(text, 0);
         while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.length, searcher.value);
+            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
         }
     }
 
@@ -605,7 +605,7 @@ public class CustomDictionary
             DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(charArray, 0);
             while (searcher.next())
             {
-                lengthArray[searcher.begin] = searcher.length;
+                lengthArray[searcher.begin] = searcher.Length;
                 attributeArray[searcher.begin] = searcher.value;
             }
             trie.parseText(charArray, new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>()
@@ -613,15 +613,15 @@ public class CustomDictionary
                 //@Override
                 public void hit(int begin, int end, CoreDictionary.Attribute value)
                 {
-                    int length = end - begin;
-                    if (length > lengthArray[begin])
+                    int Length = end - begin;
+                    if (Length > lengthArray[begin])
                     {
-                        lengthArray[begin] = length;
+                        lengthArray[begin] = Length;
                         attributeArray[begin] = value;
                     }
                 }
             });
-            for (int i = 0; i < charArray.length;)
+            for (int i = 0; i < charArray.Length;)
             {
                 if (lengthArray[i] == 0)
                 {
@@ -646,7 +646,7 @@ public class CustomDictionary
     public static bool reload()
     {
         string[] path = HanLP.Config.CustomDictionaryPath;
-        if (path == null || path.length == 0) return false;
+        if (path == null || path.Length == 0) return false;
         IOUtil.deleteFile(path[0] + Predefine.BIN_EXT); // 删掉缓存
         return loadMainDictionary(path[0]);
     }

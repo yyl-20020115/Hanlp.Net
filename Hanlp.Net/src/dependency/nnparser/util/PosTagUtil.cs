@@ -205,9 +205,9 @@ public class PosTagUtil
             if (sentence == null) continue;
             string[][] wordTagArray = sentence.toWordTagArray();
             string[] prediction = tagger.tag(wordTagArray[0]);
-            assert prediction.length == wordTagArray[1].length;
-            total += prediction.length;
-            for (int i = 0; i < prediction.length; i++)
+            assert prediction.Length == wordTagArray[1].Length;
+            total += prediction.Length;
+            for (int i = 0; i < prediction.Length; i++)
             {
                 if (prediction[i].equals(wordTagArray[1][i]))
                     ++correct;

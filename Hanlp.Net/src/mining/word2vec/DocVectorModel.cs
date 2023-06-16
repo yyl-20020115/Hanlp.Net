@@ -64,7 +64,7 @@ public class DocVectorModel : AbstractVectorModel<int>
      */
     public Vector query(string content)
     {
-        if (content == null || content.length() == 0) return null;
+        if (content == null || content.Length == 0) return null;
         List<Term> termList = NotionalTokenizer.segment(content);
         Vector result = new Vector(dimension());
         int n = 0;

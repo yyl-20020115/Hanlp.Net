@@ -101,8 +101,8 @@ public class Utf8CharacterMapping : CharacterMapping, Serializable
     //@Override
     public string toString(int[] ids)
     {
-        byte[] bytes = new byte[ids.length];
-        for (int i = 0; i < ids.length; i++)
+        byte[] bytes = new byte[ids.Length];
+        for (int i = 0; i < ids.Length; i++)
         {
             bytes[i] = (byte) ids[i];
         }

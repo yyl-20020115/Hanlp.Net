@@ -400,7 +400,7 @@ public class TaggerImpl : Tagger
                 {
                     return ReadStatus.EOF;
                 }
-                else if (line.length() == 0)
+                else if (line.Length == 0)
                 {
                     break;
                 }
@@ -530,10 +530,10 @@ public class TaggerImpl : Tagger
     public bool add(string[] cols)
     {
         int xsize = feature_index_.getXsize_();
-        if ((mode_ == Mode.LEARN && cols.length < xsize + 1) ||
-            (mode_ == Mode.TEST && cols.length < xsize))
+        if ((mode_ == Mode.LEARN && cols.Length < xsize + 1) ||
+            (mode_ == Mode.TEST && cols.Length < xsize))
         {
-            Console.Error.WriteLine("# x is small: size=" + cols.length + " xsize=" + xsize);
+            Console.Error.WriteLine("# x is small: size=" + cols.Length + " xsize=" + xsize);
             return false;
         }
         x_.add(Arrays.asList(cols));
@@ -971,7 +971,7 @@ public class TaggerImpl : Tagger
 
     public static void main(string[] args)
     {
-        if (args.length < 1)
+        if (args.Length < 1)
         {
             return;
         }
@@ -994,7 +994,7 @@ public class TaggerImpl : Tagger
         }
         System._out.println("Done reading model");
 
-        if (args.length >= 2)
+        if (args.Length >= 2)
         {
             InputStream fis = IOUtil.newInputStream(args[1]);
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");

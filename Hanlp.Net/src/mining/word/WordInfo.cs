@@ -10,11 +10,11 @@ public class WordInfo
     /**
      * 左邻接字集合
      */
-    Dictionary<Character, int[]> left;
+    Dictionary<char, int[]> left;
     /**
      * 右邻接字集合
      */
-    Dictionary<Character, int[]> right;
+    Dictionary<char, int[]> right;
     /**
      * 词语
      */
@@ -38,12 +38,12 @@ public class WordInfo
     WordInfo(string text)
     {
         this.text = text;
-        left = new TreeMap<Character, int[]>();
-        right = new TreeMap<Character, int[]>();
+        left = new TreeMap<char, int[]>();
+        right = new TreeMap<char, int[]>();
         aggregation = Float.MAX_VALUE;
     }
 
-    private static void increaseFrequency(char c, Dictionary<Character, int[]> storage)
+    private static void increaseFrequency(char c, Dictionary<char, int[]> storage)
     {
         int[] freq = storage.get(c);
         if (freq == null)
@@ -57,10 +57,10 @@ public class WordInfo
         }
     }
 
-    private float computeEntropy(Dictionary<Character, int[]> storage)
+    private float computeEntropy(Dictionary<char, int[]> storage)
     {
         float sum = 0;
-        for (KeyValuePair<Character, int[]> entry : storage.entrySet())
+        for (KeyValuePair<char, int[]> entry : storage.entrySet())
         {
             float p = entry.getValue()[0] / (float) frequency;
             sum -= p * Math.log(p);
@@ -75,9 +75,9 @@ public class WordInfo
         increaseFrequency(right, this.right);
     }
 
-    void computeProbabilityEntropy(int length)
+    void computeProbabilityEntropy(int Length)
     {
-        p = frequency / (float) length;
+        p = frequency / (float) Length;
         leftEntropy = computeEntropy(left);
         rightEntropy = computeEntropy(right);
         entropy = Math.min(leftEntropy, rightEntropy);
@@ -85,12 +85,12 @@ public class WordInfo
 
     void computeAggregation(Dictionary<string, WordInfo> word_cands)
     {
-        if (text.length() == 1)
+        if (text.Length == 1)
         {
             aggregation = (float) Math.sqrt(p);
             return;
         }
-        for (int i = 1; i < text.length(); ++i)
+        for (int i = 1; i < text.Length; ++i)
         {
             aggregation = Math.min(aggregation,
                                    p / word_cands.get(text.substring(0, i)).p / word_cands.get(text.substring(i)).p);

@@ -50,13 +50,13 @@ public class NaiveBayesClassifier : AbstractClassifier
         //初始化分类器所用的数据
         model = new NaiveBayesModel();
         model.n = featureData.n; //样本数量
-        model.d = featureData.featureCategoryJointCount.length; //特征数量
+        model.d = featureData.featureCategoryJointCount.Length; //特征数量
 
-        model.c = featureData.categoryCounts.length; //类目数量
+        model.c = featureData.categoryCounts.Length; //类目数量
         model.logPriors = new TreeMap<int, Double>();
 
         int sumCategory;
-        for (int category = 0; category < featureData.categoryCounts.length; category++)
+        for (int category = 0; category < featureData.categoryCounts.Length; category++)
         {
             sumCategory = featureData.categoryCounts[category];
             model.logPriors.put(category, Math.log((double) sumCategory / model.n));
@@ -69,7 +69,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         for (int category : model.logPriors.keySet())
         {
             featureOccSum = 0.0;
-            for (int feature = 0; feature < featureData.featureCategoryJointCount.length; feature++)
+            for (int feature = 0; feature < featureData.featureCategoryJointCount.Length; feature++)
             {
 
                 featureOccSum += featureData.featureCategoryJointCount[feature][category];
@@ -83,7 +83,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         double logLikelihood;
         for (int category : model.logPriors.keySet())
         {
-            for (int feature = 0; feature < featureData.featureCategoryJointCount.length; feature++)
+            for (int feature = 0; feature < featureData.featureCategoryJointCount.Length; feature++)
             {
 
                 featureCategoryCounts = featureData.featureCategoryJointCount[feature];
@@ -134,7 +134,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         int occurrences;
         Double logprob;
 
-        double[] predictionScores = new double[model.catalog.length];
+        double[] predictionScores = new double[model.catalog.Length];
         for (KeyValuePair<int, Double> entry1 : model.logPriors.entrySet())
         {
             category = entry1.getKey();
@@ -188,9 +188,9 @@ public class NaiveBayesClassifier : AbstractClassifier
             featureCategoryJointCount[++p] = featureData.featureCategoryJointCount[feature];
             featureData.wordIdTrie.put(wordIdArray[feature], p);
         }
-        logger.finish(",选中特征数:%d / %d = %.2f%%\n", featureCategoryJointCount.length,
-                      featureData.featureCategoryJointCount.length,
-                      featureCategoryJointCount.length / (double)featureData.featureCategoryJointCount.length * 100.);
+        logger.finish(",选中特征数:%d / %d = %.2f%%\n", featureCategoryJointCount.Length,
+                      featureData.featureCategoryJointCount.Length,
+                      featureCategoryJointCount.Length / (double)featureData.featureCategoryJointCount.Length * 100.);
         featureData.featureCategoryJointCount = featureCategoryJointCount;
 
         return featureData;

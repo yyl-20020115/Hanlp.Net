@@ -58,7 +58,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     //@Override
     public string toString()
     {
-        StringBuilder sb = new StringBuilder(word.length * 50);
+        StringBuilder sb = new StringBuilder(word.Length * 50);
         for (CoNLLWord word : this.word)
         {
             sb.Append(word);
@@ -73,7 +73,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
      */
     public string[][] getEdgeArray()
     {
-        string[][] edge = new string[word.length + 1][word.length + 1];
+        string[][] edge = new string[word.Length + 1][word.Length + 1];
         foreach (CoNLLWord coNLLWord in word)
         {
             edge[coNLLWord.ID][coNLLWord.HEAD.ID] = coNLLWord.DEPREL;
@@ -88,9 +88,9 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
      */
     public CoNLLWord[] getWordArrayWithRoot()
     {
-        CoNLLWord[] wordArray = new CoNLLWord[word.length + 1];
+        CoNLLWord[] wordArray = new CoNLLWord[word.Length + 1];
         wordArray[0] = CoNLLWord.ROOT;
-        System.arraycopy(word, 0, wordArray, 1, word.length);
+        System.arraycopy(word, 0, wordArray, 1, word.Length);
 
         return wordArray;
     }
@@ -109,7 +109,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
             //@Override
             public bool hasNext()
             {
-                return index < word.length;
+                return index < word.Length;
             }
 
             //@Override

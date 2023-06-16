@@ -111,7 +111,7 @@ public abstract class AbstractClassifier : IClassifier
 
         double[] probs = categorize(document);
         Dictionary<string, Double> scoreMap = new ();
-        for (int i = 0; i < probs.length; i++)
+        for (int i = 0; i < probs.Length; i++)
         {
             scoreMap.put(model.catalog[i], probs[i]);
         }
@@ -134,7 +134,7 @@ public abstract class AbstractClassifier : IClassifier
         double[] probs = categorize(document);
         double max = Double.NEGATIVE_INFINITY;
         int best = -1;
-        for (int i = 0; i < probs.length; i++)
+        for (int i = 0; i < probs.Length; i++)
         {
             if (probs[i] > max)
             {

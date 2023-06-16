@@ -19,7 +19,7 @@ public abstract class AbstractTrainer
         Console.Error.WriteLine("Parameters for training:\n");
         paramDesc("-output <file>", "Use <file> to save the resulting word vectors / word clusters");
         paramDesc("-size <int>", "Set size of word vectors; default is 100");
-        paramDesc("-window <int>", "Set max skip length between words; default is 5");
+        paramDesc("-window <int>", "Set max skip Length between words; default is 5");
         paramDesc("-sample <float>", "Set threshold for occurrence of words. Those that appear with higher frequency in the training data" +
                 " will be randomly down-sampled; default is 0.001, useful range is (0, 0.00001)");
         paramDesc("-hs <int>", "Use Hierarchical Softmax; default is 0 (not used)");
@@ -42,11 +42,11 @@ public abstract class AbstractTrainer
 
     protected int argPos(string param, string[] args, bool checkArgNum)
     {
-        for (int i = 0; i < args.length; i++)
+        for (int i = 0; i < args.Length; i++)
         {
             if (param.equals(args[i]))
             {
-                if (checkArgNum && (i == args.length - 1))
+                if (checkArgNum && (i == args.Length - 1))
                     throw new IllegalArgumentException(string.format("Argument missing for %s", param));
                 return i;
             }

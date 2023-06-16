@@ -83,7 +83,7 @@ public class MDAG : ICacheAble
             _out.writeChar(character);
         }
         simplifiedSourceNode.save(_out);
-        _out.writeInt(mdagDataArray.length);
+        _out.writeInt(mdagDataArray.Length);
         foreach (SimpleMDAGNode simpleMDAGNode in mdagDataArray)
         {
             simpleMDAGNode.save(_out);
@@ -93,16 +93,16 @@ public class MDAG : ICacheAble
     //@Override
     public bool load(ByteArray byteArray)
     {
-        int length = byteArray.nextInt();
-        for (int i = 0; i < length; ++i)
+        int Length = byteArray.nextInt();
+        for (int i = 0; i < Length; ++i)
         {
             charTreeSet.add(byteArray.nextChar());
         }
         simplifiedSourceNode = new SimpleMDAGNode();
         simplifiedSourceNode.load(byteArray);
-        length = byteArray.nextInt();
-        mdagDataArray = new SimpleMDAGNode[length];
-        for (int i = 0; i < length; ++i)
+        Length = byteArray.nextInt();
+        mdagDataArray = new SimpleMDAGNode[Length];
+        for (int i = 0; i < Length; ++i)
         {
             mdagDataArray[i] = new SimpleMDAGNode();
             mdagDataArray[i].load(byteArray);
@@ -322,7 +322,7 @@ public class MDAG : ICacheAble
 
 
     /**
-     * Calculates the length of the the sub-path in a _transition path, that is used only by a given string.
+     * Calculates the Length of the the sub-path in a _transition path, that is used only by a given string.
      *
      * @param str a string corresponding to a _transition path from sourceNode
      * @return an int denoting the size of the sub-path in the _transition path
@@ -377,12 +377,12 @@ public class MDAG : ICacheAble
             if (!strEndNode.hasTransitions())
             {
                 int soleInternalTransitionPathLength = calculateSoleTransitionPathLength(str);
-                int internalTransitionPathLength = str.length() - 1;
+                int internalTransitionPathLength = str.Length - 1;
 
                 if (soleInternalTransitionPathLength == internalTransitionPathLength)
                 {
                     sourceNode.removeOutgoingTransition(str.charAt(0));
-                    transitionCount -= str.length();
+                    transitionCount -= str.Length;
                 }
                 else
                 {
@@ -390,7 +390,7 @@ public class MDAG : ICacheAble
                     int toBeRemovedTransitionLabelCharIndex = (internalTransitionPathLength - soleInternalTransitionPathLength);
                     MDAGNode latestNonSoloTransitionPathNode = sourceNode.transition(str.substring(0, toBeRemovedTransitionLabelCharIndex));
                     latestNonSoloTransitionPathNode.removeOutgoingTransition(str.charAt(toBeRemovedTransitionLabelCharIndex));
-                    transitionCount -= str.substring(toBeRemovedTransitionLabelCharIndex).length();
+                    transitionCount -= str.substring(toBeRemovedTransitionLabelCharIndex).Length;
                     /////
 
                     replaceOrRegister(sourceNode, str.substring(0, toBeRemovedTransitionLabelCharIndex));
@@ -435,7 +435,7 @@ public class MDAG : ICacheAble
             //The _transition path of the substring of prevStr from this point will need to be submitted for minimization processing.
             //The substring before this point, however, does not, since currStr will simply be extending the right languages of the 
             //nodes on its _transition path.
-            int shortestStringLength = Math.min(prevStr.length(), currStr.length());
+            int shortestStringLength = Math.min(prevStr.Length, currStr.Length);
             for (mpsIndex = 0; mpsIndex < shortestStringLength && prevStr.charAt(mpsIndex) == currStr.charAt(mpsIndex); mpsIndex++)
             {
             }
@@ -460,7 +460,7 @@ public class MDAG : ICacheAble
     private string determineLongestPrefixInMDAG(string str)
     {
         MDAGNode currentNode = sourceNode;
-        int numberOfChars = str.length();
+        int numberOfChars = str.Length;
         int onePastPrefixEndIndex = 0;
 
         //Loop through the characters in str, using them in sequence to _transition
@@ -488,13 +488,13 @@ public class MDAG : ICacheAble
      * @param originNode the MDAGNode from which the _transition path corresponding to str starts from
      * @param str        a string corresponding to a _transition path in the MDAG
      * @return a HashMap of Strings to Objects containing:
-     * - an int denoting the length of the path to the first confluence node in the _transition path of interest
+     * - an int denoting the Length of the path to the first confluence node in the _transition path of interest
      * - the MDAGNode which is the first confluence node in the _transition path of interest (or null if one does not exist)
      */
     private Dictionary<string, Object> getTransitionPathFirstConfluenceNodeData(MDAGNode originNode, string str)
     {
         int currentIndex = 0;
-        int charCount = str.length();
+        int charCount = str.Length;
         MDAGNode currentNode = originNode;
 
         //Loop thorugh the characters in str, sequentially using them to _transition through the MDAG in search of
@@ -574,7 +574,7 @@ public class MDAG : ICacheAble
         if (!str.isEmpty())
         {
             MDAGNode currentNode = originNode;
-            int charCount = str.length();
+            int charCount = str.Length;
 
             //Loop through the characters in str, iteratevely adding
             // a _transition path corresponding to it from originNode
@@ -603,7 +603,7 @@ public class MDAG : ICacheAble
     {
         MDAGNode currentNode = sourceNode;
 
-        int charCount = str.length();
+        int charCount = str.Length;
 
         for (int i = 0; i < charCount; i++)
         {
@@ -633,9 +633,9 @@ public class MDAG : ICacheAble
         MDAGNode lastClonedNode = null;                                     //Will store the last cloned node
         char lastTransitionLabelChar = '\0';                                //Will store the char which labels the _transition to lastTargetNode from its parent node in the prefixString's _transition path
 
-        //Loop backwards through the indices of str, using each as a boundary to create substrings of str of decreasing length
+        //Loop backwards through the indices of str, using each as a boundary to create substrings of str of decreasing Length
         //which will be used to _transition to, and duplicate the nodes in the _transition path of str from pivotConfluenceNode.
-        for (int i = str.length(); i >= 0; i--)
+        for (int i = str.Length; i >= 0; i--)
         {
             string currentTransitionString = (i > 0 ? str.substring(0, i) : null);
             MDAGNode currentTargetNode = (i > 0 ? pivotConfluenceNode.transition(currentTransitionString) : pivotConfluenceNode);
@@ -644,8 +644,8 @@ public class MDAG : ICacheAble
             if (i == 0)  //if we have reached pivotConfluenceNode
             {
                 //Clone pivotConfluenceNode in a way that reassigns the _transition of its parent node (in transitionStringToConfluenceNode's path) to the clone.
-                string transitionStringToPivotNodeParent = transitionStringToPivotNode.substring(0, transitionStringToPivotNode.length() - 1);
-                char parentTransitionLabelChar = transitionStringToPivotNode.charAt(transitionStringToPivotNode.length() - 1);
+                string transitionStringToPivotNodeParent = transitionStringToPivotNode.substring(0, transitionStringToPivotNode.Length - 1);
+                char parentTransitionLabelChar = transitionStringToPivotNode.charAt(transitionStringToPivotNode.Length - 1);
                 clonedNode = pivotConfluenceNode.clone(sourceNode.transition(transitionStringToPivotNodeParent), parentTransitionLabelChar);
                 /////
             }
@@ -680,7 +680,7 @@ public class MDAG : ICacheAble
     private void addStringInternal(string str)
     {
         string prefixString = determineLongestPrefixInMDAG(str);
-        string suffixString = str.substring(prefixString.length());
+        string suffixString = str.substring(prefixString.Length);
 
         //Retrive the data related to the first confluence node (a node with two or more incoming transitions)
         //in the _transition path from sourceNode corresponding to prefixString.
@@ -781,7 +781,7 @@ public class MDAG : ICacheAble
             sourceNode = new MDAGNode(false);
             equivalenceClassMDAGNodeHashMap = new ();
             MDAGNode[] toNodeArray = new MDAGNode[mdagDataArray.Length];
-            createMDAGNode(simplifiedSourceNode, -1, toNodeArray, new MDAGNode[mdagDataArray.length]);
+            createMDAGNode(simplifiedSourceNode, -1, toNodeArray, new MDAGNode[mdagDataArray.Length]);
             // 构建注册表
             foreach (MDAGNode mdagNode in toNodeArray)
             {
@@ -856,7 +856,7 @@ public class MDAG : ICacheAble
      * @param prefixString          the string corresponding to the currently traversed _transition path
      * @param transitionTreeMap     a TreeMap of Characters to MDAGNodes collectively representing an MDAGNode's _transition set
      */
-    private void getStrings(HashSet<string> strHashSet, SearchCondition searchCondition, string searchConditionString, string prefixString, TreeMap<Character, MDAGNode> transitionTreeMap)
+    private void getStrings(HashSet<string> strHashSet, SearchCondition searchCondition, string searchConditionString, string prefixString, TreeMap<char, MDAGNode> transitionTreeMap)
     {
         //Traverse all the valid _transition paths beginning from each _transition in transitionTreeMap, inserting the
         //corresponding Strings in to strHashSet that have the relationship with conditionString denoted by searchCondition

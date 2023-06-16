@@ -31,31 +31,31 @@ public class CommonSuffixExtractor
         tfDictionary.add(key);
     }
 
-    public List<string> extractSuffixExtended(int length, int size)
+    public List<string> extractSuffixExtended(int Length, int size)
     {
-        return extractSuffix(length, size, true);
+        return extractSuffix(Length, size, true);
     }
 
     /**
      * 提取公共后缀
-     * @param length 公共后缀长度
+     * @param Length 公共后缀长度
      * @param size 频率最高的前多少个公共后缀
-     * @param extend 长度是否拓展为从1到length为止的后缀
+     * @param extend 长度是否拓展为从1到Length为止的后缀
      * @return 公共后缀列表
      */
-    public List<string> extractSuffix(int length, int size, bool extend)
+    public List<string> extractSuffix(int Length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
         for (string key : tfDictionary.keySet())
         {
-            if (key.length() > length)
+            if (key.Length > Length)
             {
-                suffixTreeSet.add(key.substring(key.length() - length, key.length()));
+                suffixTreeSet.add(key.substring(key.Length - Length, key.Length));
                 if (extend)
                 {
-                    for (int l = 1; l < length; ++l)
+                    for (int l = 1; l < Length; ++l)
                     {
-                        suffixTreeSet.add(key.substring(key.length() - l, key.length()));
+                        suffixTreeSet.add(key.substring(key.Length - l, key.Length));
                     }
                 }
             }
@@ -63,7 +63,7 @@ public class CommonSuffixExtractor
 
         if (extend)
         {
-            size *= length;
+            size *= Length;
         }
 
         return extract(suffixTreeSet, size);
@@ -82,24 +82,24 @@ public class CommonSuffixExtractor
     }
 
     /**
-     * 此方法认为后缀一定是整个的词语，所以length是以词语为单位的
-     * @param length
+     * 此方法认为后缀一定是整个的词语，所以Length是以词语为单位的
+     * @param Length
      * @param size
      * @param extend
      * @return
      */
-    public List<string> extractSuffixByWords(int length, int size, bool extend)
+    public List<string> extractSuffixByWords(int Length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
         for (string key : tfDictionary.keySet())
         {
             List<Term> termList = StandardTokenizer.segment(key);
-            if (termList.size() > length)
+            if (termList.size() > Length)
             {
-                suffixTreeSet.add(combine(termList.subList(termList.size() - length, termList.size())));
+                suffixTreeSet.add(combine(termList.subList(termList.size() - Length, termList.size())));
                 if (extend)
                 {
-                    for (int l = 1; l < length; ++l)
+                    for (int l = 1; l < Length; ++l)
                     {
                         suffixTreeSet.add(combine(termList.subList(termList.size() - l, termList.size())));
                     }

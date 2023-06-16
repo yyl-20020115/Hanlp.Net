@@ -58,7 +58,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
         pinyinSize = 0;
         firstCharSize = 0;
         Iterator<Boolean> iterator = booleanList.iterator();
-        for (int i = 0; i < pinyinArray.length; ++i)
+        for (int i = 0; i < pinyinArray.Length; ++i)
         {
             if (iterator.next())
             {
@@ -74,8 +74,8 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     //@Override
     public int compareTo(PinyinKey o)
     {
-        int len1 = pyOrdinalArray.length;
-        int len2 = o.pyOrdinalArray.length;
+        int len1 = pyOrdinalArray.Length;
+        int len2 = o.pyOrdinalArray.Length;
         int lim = Math.min(len1, len2);
         int[] v1 = pyOrdinalArray;
         int[] v2 = o.pyOrdinalArray;
@@ -97,7 +97,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     //@Override
     public Double similarity(PinyinKey other)
     {
-        int firstCharArrayLength = firstCharArray.length + 1;
+        int firstCharArrayLength = firstCharArray.Length + 1;
         return
                 1.0 / (EditDistance.compute(pyOrdinalArray, other.pyOrdinalArray) + 1) +
                 (double)LongestCommonSubstring.compute(firstCharArray, other.firstCharArray) / firstCharArrayLength;
@@ -109,13 +109,13 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
      */
     public int size()
     {
-        int length = 0;
+        int Length = 0;
         for (Pinyin pinyin : pinyinArray)
         {
-            if (pinyin != Pinyin.none5) ++length;
+            if (pinyin != Pinyin.none5) ++Length;
         }
 
-        return length;
+        return Length;
     }
 
     //@Override

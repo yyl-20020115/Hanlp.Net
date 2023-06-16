@@ -107,7 +107,7 @@ class Word2VecTraining
                                               percent * 100,
                                               wordCountActual / (float) (cost_time));
                             string etd = Utility.humanTime((long) (cost_time / percent * (1.f - percent)));
-                            if (etd.length() > 0) Console.Error.WriteLine("  ETD: %s", etd);
+                            if (etd.Length > 0) Console.Error.WriteLine("  ETD: %s", etd);
                             System.err.flush();
                         }
                         else

@@ -110,7 +110,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.next();
                 if (word.getLabel().equals(Nature.nr.toString()))
                 {
-                    switch (word.getValue().length())
+                    switch (word.getValue().Length)
                     {
                         case 2:
                             if (word.getValue().startsWith("大")

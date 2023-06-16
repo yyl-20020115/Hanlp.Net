@@ -42,7 +42,7 @@ public class MDAGNode
     /**
      * 状态转移函数
      */
-    private final TreeMap<Character, MDAGNode> outgoingTransitionTreeMap;
+    private final TreeMap<char, MDAGNode> outgoingTransitionTreeMap;
 
     //The int representing this node's incoming _transition node count
     /**
@@ -73,7 +73,7 @@ public class MDAGNode
     public MDAGNode(bool isAcceptNode)
     {
         this.isAcceptNode = isAcceptNode;     
-        outgoingTransitionTreeMap = new TreeMap<Character, MDAGNode>();
+        outgoingTransitionTreeMap = new TreeMap<char, MDAGNode>();
     }
 
     
@@ -88,11 +88,11 @@ public class MDAGNode
     private MDAGNode(MDAGNode node)
     {
         isAcceptNode = node.isAcceptNode;
-        outgoingTransitionTreeMap = new TreeMap<Character, MDAGNode>(node.outgoingTransitionTreeMap);
+        outgoingTransitionTreeMap = new TreeMap<char, MDAGNode>(node.outgoingTransitionTreeMap);
         
         //Loop through the nodes in this node's outgoing _transition set, incrementing the number of
         //incoming transitions of each by 1 (to account for this newly created node's outgoing transitions)
-        for(Entry<Character, MDAGNode> transitionKeyValuePair : outgoingTransitionTreeMap.entrySet())
+        for(Entry<char, MDAGNode> transitionKeyValuePair : outgoingTransitionTreeMap.entrySet())
             transitionKeyValuePair.getValue().incomingTransitionCount++;
         /////
     }
@@ -271,7 +271,7 @@ public class MDAGNode
      */
     public MDAGNode transition(string str)
     {
-        int charCount = str.length();
+        int charCount = str.Length;
         MDAGNode currentNode = this;
         
         //Iteratively _transition through the MDAG using the chars in str
@@ -287,7 +287,7 @@ public class MDAGNode
 
     public MDAGNode transition(char[] str)
     {
-        int charCount = str.length;
+        int charCount = str.Length;
         MDAGNode currentNode = this;
 
         //Iteratively _transition through the MDAG using the chars in str
@@ -303,7 +303,7 @@ public class MDAGNode
 
     public MDAGNode transition(char[] str, int offset)
     {
-        int charCount = str.length - offset;
+        int charCount = str.Length - offset;
         MDAGNode currentNode = this;
 
         //Iteratively _transition through the MDAG using the chars in str
@@ -331,7 +331,7 @@ public class MDAGNode
         Stack<MDAGNode> nodeStack = new Stack<MDAGNode>();
         
         MDAGNode currentNode = this;
-        int numberOfChars = str.length();
+        int numberOfChars = str.Length;
         
         //Iteratively _transition through the MDAG using the chars in str,
         //putting each encountered node in nodeStack
@@ -353,7 +353,7 @@ public class MDAGNode
      * @return      a TreeMap containing entries collectively representing
      *              all of this node's outgoing transitions
      */
-    public TreeMap<Character, MDAGNode> getOutgoingTransitions()
+    public TreeMap<char, MDAGNode> getOutgoingTransitions()
     {
         return outgoingTransitionTreeMap;
     }
@@ -367,7 +367,7 @@ public class MDAGNode
      */
     public void decrementTargetIncomingTransitionCounts()
     {
-        for(Entry<Character, MDAGNode> transitionKeyValuePair: outgoingTransitionTreeMap.entrySet())
+        for(Entry<char, MDAGNode> transitionKeyValuePair: outgoingTransitionTreeMap.entrySet())
             transitionKeyValuePair.getValue().incomingTransitionCount--;
     }
     
@@ -447,16 +447,16 @@ public class MDAGNode
      */
     public static bool haveSameTransitions(MDAGNode node1, MDAGNode node2)
     {
-        TreeMap<Character, MDAGNode> outgoingTransitionTreeMap1 = node1.outgoingTransitionTreeMap;
-        TreeMap<Character, MDAGNode> outgoingTransitionTreeMap2 = node2.outgoingTransitionTreeMap;
+        TreeMap<char, MDAGNode> outgoingTransitionTreeMap1 = node1.outgoingTransitionTreeMap;
+        TreeMap<char, MDAGNode> outgoingTransitionTreeMap2 = node2.outgoingTransitionTreeMap;
         
         if(outgoingTransitionTreeMap1.size() == outgoingTransitionTreeMap2.size())
         {
             //For each _transition in outgoingTransitionTreeMap1, get the identically lableed _transition
             //in outgoingTransitionTreeMap2 (if present), and test the equality of the transitions' target nodes
-            for(Entry<Character, MDAGNode> transitionKeyValuePair : outgoingTransitionTreeMap1.entrySet())
+            for(Entry<char, MDAGNode> transitionKeyValuePair : outgoingTransitionTreeMap1.entrySet())
             {
-                Character currentCharKey = transitionKeyValuePair.getKey();
+                char currentCharKey = transitionKeyValuePair.getKey();
                 MDAGNode currentTargetNode = transitionKeyValuePair.getValue();
                 
                 if(!outgoingTransitionTreeMap2.containsKey(currentCharKey) || !outgoingTransitionTreeMap2.get(currentCharKey).equals(currentTargetNode))

@@ -284,7 +284,7 @@ public class NeuralNetworkParser : ICacheAble
         for (double[] valueRow : valueArray)
         {
             string[] args = lineIterator.next().Split("\t");
-            for (int i = 0; i < valueRow.length; i++)
+            for (int i = 0; i < valueRow.Length; i++)
             {
                 valueRow[i] = Double.valueOf(args[i]);
             }
@@ -499,7 +499,7 @@ public class NeuralNetworkParser : ICacheAble
 
         int L = data.forms.size();
         State[] states = new State[L * 2];
-        for (int i = 0; i < states.length; i++)
+        for (int i = 0; i < states.Length; i++)
         {
             states[i] = new State();
         }

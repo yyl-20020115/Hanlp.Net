@@ -62,7 +62,7 @@ public class Instance
         {
             return false;
         }
-        for (int i = 0; i < visited.length; ++i)
+        for (int i = 0; i < visited.Length; ++i)
         {
             bool visit = visited[i];
             if (!visit)

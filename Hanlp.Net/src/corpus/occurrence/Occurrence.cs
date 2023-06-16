@@ -178,7 +178,7 @@ public class Occurrence
             }
             first = current;
         }
-        for (int i = 2; i < termList.length; ++i)
+        for (int i = 2; i < termList.Length; ++i)
         {
             addTria(termList[i - 2], termList[i - 1], termList[i]);
         }

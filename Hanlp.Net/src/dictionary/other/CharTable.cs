@@ -43,8 +43,8 @@ public class CharTable
     {
         string binPath = path + Predefine.BIN_EXT;
         if (loadBin(binPath)) return true;
-        CONVERT = new char[Character.MAX_VALUE + 1];
-        for (int i = 0; i < CONVERT.length; i++)
+        CONVERT = new char[char.MAX_VALUE + 1];
+        for (int i = 0; i < CONVERT.Length; i++)
         {
             CONVERT[i] = (char) i;
         }
@@ -53,7 +53,7 @@ public class CharTable
         {
             string line = iterator.next();
             if (line == null) return false;
-            if (line.length() != 3) continue;
+            if (line.Length != 3) continue;
             CONVERT[line.charAt(0)] = CONVERT[line.charAt(2)];
         }
         loadSpace();
@@ -64,8 +64,8 @@ public class CharTable
     }
     
     private static void loadSpace() {
-        for (int i = Character.MIN_CODE_POINT; i <= Character.MAX_CODE_POINT; i++) {
-            if (Character.isWhitespace(i) || Character.isSpaceChar(i)) {
+        for (int i = char.MIN_CODE_POINT; i <= char.MAX_CODE_POINT; i++) {
+            if (char.isWhitespace(i) || char.isSpaceChar(i)) {
                 CONVERT[i] = ' ';
             }
         }
@@ -112,7 +112,7 @@ public class CharTable
     public static string convert(string sentence)
     {
         //assert sentence != null;
-        char[] result = new char[sentence.length()];
+        char[] result = new char[sentence.Length];
         convert(sentence, result);
 
         return new string(result);

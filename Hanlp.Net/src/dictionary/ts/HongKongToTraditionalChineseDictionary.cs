@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+
 namespace com.hankcs.hanlp.dictionary.ts;
 
 
@@ -21,13 +23,13 @@ namespace com.hankcs.hanlp.dictionary.ts;
 public class HongKongToTraditionalChineseDictionary : BaseChineseDictionary
 {
     static AhoCorasickDoubleArrayTrie<string> trie = new AhoCorasickDoubleArrayTrie<string>();
-    static
+    static HongKongToTraditionalChineseDictionary()
     {
         long start = DateTime.Now.Microsecond;
         string datPath = HanLP.Config.tcDictionaryRoot + "hk2t";
         if (!load(datPath, trie))
         {
-            TreeMap<string, string> hk2t = new TreeMap<string, string>();
+            var hk2t = new Dictionary<string, string>();
             if (!load(hk2t, true, HanLP.Config.tcDictionaryRoot + "t2hk.txt"))
             {
                 throw new IllegalArgumentException("香港繁体转繁体加载失败");

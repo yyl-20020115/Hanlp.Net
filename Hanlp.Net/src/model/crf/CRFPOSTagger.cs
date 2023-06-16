@@ -52,16 +52,16 @@ public class CRFPOSTagger : CRFTagger : POSTagger
         }
         string[] words = wordList.toArray(new string[0]);
         Iterator<Word> iterator = simpleWordList.iterator();
-        for (int i = 0; i < words.length; i++)
+        for (int i = 0; i < words.Length; i++)
         {
             string curWord = words[i];
             string[] cells = createCells(true);
             extractFeature(curWord, cells);
             cells[5] = iterator.next().label;
-            for (int j = 0; j < cells.length; j++)
+            for (int j = 0; j < cells.Length; j++)
             {
                 bw.write(cells[j]);
-                if (j != cells.length - 1)
+                if (j != cells.Length - 1)
                     bw.write('\t');
             }
             bw.newLine();
@@ -75,14 +75,14 @@ public class CRFPOSTagger : CRFTagger : POSTagger
 
     private void extractFeature(string curWord, string[] cells)
     {
-        int length = curWord.length();
+        int Length = curWord.Length;
         cells[0] = curWord;
         cells[1] = curWord.substring(0, 1);
-        cells[2] = length > 1 ? curWord.substring(0, 2) : "_";
-        // length > 2 ? curWord.substring(0, 3) : "<>"
-        cells[3] = curWord.substring(length - 1);
-        cells[4] = length > 1 ? curWord.substring(length - 2) : "_";
-        // length > 2 ? curWord.substring(length - 3) : "<>"
+        cells[2] = Length > 1 ? curWord.substring(0, 2) : "_";
+        // Length > 2 ? curWord.substring(0, 3) : "<>"
+        cells[3] = curWord.substring(Length - 1);
+        cells[4] = Length > 1 ? curWord.substring(Length - 2) : "_";
+        // Length > 2 ? curWord.substring(Length - 3) : "<>"
     }
 
     //@Override
@@ -119,8 +119,8 @@ public class CRFPOSTagger : CRFTagger : POSTagger
     private POSInstance createInstance(string[] words)
     {
         final FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
-        final string[][] table = new string[words.length][5];
-        for (int i = 0; i < words.length; i++)
+        final string[][] table = new string[words.Length][5];
+        for (int i = 0; i < words.Length; i++)
         {
             extractFeature(words[i], table[i]);
         }
@@ -132,7 +132,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
             {
                 StringBuilder sbFeature = new StringBuilder();
                 List<int> featureVec = new LinkedList<int>();
-                for (int i = 0; i < featureTemplateArray.length; i++)
+                for (int i = 0; i < featureTemplateArray.Length; i++)
                 {
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
                     Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
@@ -144,8 +144,8 @@ public class CRFPOSTagger : CRFTagger : POSTagger
                         int j = offset[1];
                         if (t < 0)
                             sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
-                        else if (t >= words.length)
-                            sbFeature.Append(FeatureIndex.EOS[t - words.length]);
+                        else if (t >= words.Length)
+                            sbFeature.Append(FeatureIndex.EOS[t - words.Length]);
                         else
                             sbFeature.Append(table[t][j]);
                         if (delimiterIterator.hasNext())

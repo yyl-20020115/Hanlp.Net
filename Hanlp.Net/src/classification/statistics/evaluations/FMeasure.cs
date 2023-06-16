@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.classification.statistics.evaluations;
 
 
@@ -67,22 +69,22 @@ public class FMeasure : Serializable
         int l = -1;
         for (string c : catalog)
         {
-            l = Math.max(l, c.length());
+            l = Math.max(l, c.Length);
         }
-        final int w = 6;
-        final StringBuilder sb = new StringBuilder(10000);
+         int w = 6;
+         StringBuilder sb = new StringBuilder(10000);
 
-        printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".replace('*', Character.forDigit(w, 10)), "P", "R", "F1", "A", "");
-        for (int i = 0; i < catalog.length; i++)
+        printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".replace('*', char.forDigit(w, 10)), "P", "R", "F1", "A", "");
+        for (int i = 0; i < catalog.Length; i++)
         {
-            printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").replace('*', Character.forDigit(w, 10)),
+            printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").replace('*', char.forDigit(w, 10)),
                    precision[i] * 100.,
                    recall[i] * 100.,
                    f1[i] * 100.,
                    accuracy[i] * 100.,
                    catalog[i]);
         }
-        printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").replace('*', Character.forDigit(w, 10)),
+        printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").replace('*', char.forDigit(w, 10)),
                average_precision * 100.,
                average_recall * 100.,
                average_f1 * 100.,

@@ -43,7 +43,7 @@ public class TranslatedPersonDictionary
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
             TreeMap<string, Boolean> map = new TreeMap<string, Boolean>();
-            TreeMap<Character, int> charFrequencyMap = new TreeMap<Character, int>();
+            TreeMap<char, int> charFrequencyMap = new TreeMap<char, int>();
             while ((line = br.readLine()) != null)
             {
                 map.put(line, true);
@@ -62,7 +62,7 @@ public class TranslatedPersonDictionary
 //            map.put(string.valueOf('-'), true);
 //            map.put(string.valueOf('—'), true);
             // 将常用字也加进去
-            for (KeyValuePair<Character, int> entry : charFrequencyMap.entrySet())
+            for (KeyValuePair<char, int> entry : charFrequencyMap.entrySet())
             {
                 if (entry.getValue() < 10) continue;
                 map.put(string.valueOf(entry.getKey()), true);
@@ -106,14 +106,14 @@ public class TranslatedPersonDictionary
     }
 
     /**
-     * 时报包含key，且key至少长length
+     * 时报包含key，且key至少长Length
      * @param key
-     * @param length
+     * @param Length
      * @return
      */
-    public static bool containsKey(string key, int length)
+    public static bool containsKey(string key, int Length)
     {
         if (!trie.containsKey(key)) return false;
-        return key.length() >= length;
+        return key.Length >= Length;
     }
 }

@@ -10,8 +10,10 @@
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
 using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.seg.Other;
 
@@ -66,28 +68,13 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
             logger.warning("还未加载任何词典");
             return Collections.emptyList();
         }
-         int[] wordNet = new int[sentence.length];
+         int[] wordNet = new int[sentence.Length];
         Arrays.fill(wordNet, 1);
-         Nature[] natureArray = config.speechTagging ? new Nature[sentence.length] : null;
-        trie.parseText(sentence, new AhoCorasickDoubleArrayTrie.IHit<CoreDictionary.Attribute>()
-        {
-            //@Override
-            public void hit(int begin, int end, CoreDictionary.Attribute value)
-            {
-                int length = end - begin;
-                if (length > wordNet[begin])
-                {
-                    wordNet[begin] = length;
-                    if (config.speechTagging)
-                    {
-                        natureArray[begin] = value.nature[0];
-                    }
-                }
-            }
-        });
+         Nature[] natureArray = config.speechTagging ? new Nature[sentence.Length] : null;
+        trie.parseText(sentence, new CT());
         LinkedList<Term> termList = new LinkedList<Term>();
         posTag(sentence, wordNet, natureArray);
-        for (int i = 0; i < wordNet.length; )
+        for (int i = 0; i < wordNet.Length; )
         {
             Term term = new Term(new string(sentence, i, wordNet[i]), config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
             term.offset = i;
@@ -96,7 +83,22 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         }
         return termList;
     }
-
+    public class CT: AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
+    {
+        //@Override
+        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        {
+            int Length = end - begin;
+            if (Length > wordNet[begin])
+            {
+                wordNet[begin] = Length;
+                if (config.speechTagging)
+                {
+                    natureArray[begin] = value.nature[0];
+                }
+            }
+        }
+    }
     //@Override
     public Segment enableCustomDictionary(bool enable)
     {

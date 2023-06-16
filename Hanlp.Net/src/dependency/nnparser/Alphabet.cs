@@ -79,7 +79,7 @@ public class Alphabet : ICacheAble
 
     public void save(DataOutputStream _out)
     {
-        _out.writeInt(idToLabelMap.length);
+        _out.writeInt(idToLabelMap.Length);
         for (string value : idToLabelMap)
         {
             TextUtility.writeString(value, _out);
@@ -90,7 +90,7 @@ public class Alphabet : ICacheAble
     {
         idToLabelMap = new string[byteArray.nextInt()];
         TreeMap<string, int> map = new TreeMap<string, int>();
-        for (int i = 0; i < idToLabelMap.length; i++)
+        for (int i = 0; i < idToLabelMap.Length; i++)
         {
             idToLabelMap[i] = byteArray.nextString();
             map.put(idToLabelMap[i], i);

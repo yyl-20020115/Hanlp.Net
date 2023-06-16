@@ -18,7 +18,7 @@ public class TextUtility
      */
     public static int charType(string str)
     {
-        if (str != null && str.length() > 0)
+        if (str != null && str.Length > 0)
         {
             if (Predefine.CHINESE_NUMBERS.contains(str)) return CT_CNUM;
             byte[] b;
@@ -32,7 +32,7 @@ public class TextUtility
                 e.printStackTrace();
             }
             byte b1 = b[0];
-            byte b2 = b.length > 1 ? b[1] : 0;
+            byte b2 = b.Length > 1 ? b[1] : 0;
             int ub1 = getUnsigned(b1);
             int ub2 = getUnsigned(b2);
             if (ub1 < 128)
@@ -79,7 +79,7 @@ public class TextUtility
      */
     public static bool isAllNonChinese(byte[] sString)
     {
-        int nLen = sString.length;
+        int nLen = sString.Length;
         int i = 0;
 
         while (i < nLen)
@@ -102,7 +102,7 @@ public class TextUtility
     public static bool isAllSingleByte(string str)
     {
         assert str != null;
-        for (int i = 0; i < str.length(); i++)
+        for (int i = 0; i < str.Length; i++)
         {
             if (str.charAt(i) >128)
             {
@@ -148,43 +148,43 @@ public class TextUtility
         if ("±+-＋－—".indexOf(str.charAt(0)) != -1)
             i++;
         /** 如果是全角的０１２３４５６７８９ 字符* */
-        while (i < str.length() && "０１２３４５６７８９".indexOf(str.charAt(i)) != -1)
+        while (i < str.Length && "０１２３４５６７８９".indexOf(str.charAt(i)) != -1)
             i++;
         // Get middle delimiter such as .
-        if (i > 0 && i < str.length())
+        if (i > 0 && i < str.Length)
         {
             char ch = str.charAt(i);
             if ("·∶:，,．.／/".indexOf(ch) != -1)
             {// 98．1％
                 i++;
-                while (i < str.length() && "０１２３４５６７８９".indexOf(str.charAt(i)) != -1)
+                while (i < str.Length && "０１２３４５６７８９".indexOf(str.charAt(i)) != -1)
                     i++;
             }
         }
-        if (i >= str.length())
+        if (i >= str.Length)
             return true;
 
         /** 如果是半角的0123456789字符* */
-        while (i < str.length() && "0123456789".indexOf(str.charAt(i)) != -1)
+        while (i < str.Length && "0123456789".indexOf(str.charAt(i)) != -1)
             i++;
         // Get middle delimiter such as .
-        if (i > 0 && i < str.length())
+        if (i > 0 && i < str.Length)
         {
             char ch = str.charAt(i);
             if (',' == ch || '.' == ch || '/' == ch  || ':' == ch || "∶·，．／".indexOf(ch) != -1)
             {// 98．1％
                 i++;
-                while (i < str.length() && "0123456789".indexOf(str.charAt(i)) != -1)
+                while (i < str.Length && "0123456789".indexOf(str.charAt(i)) != -1)
                     i++;
             }
         }
 
-        if (i < str.length())
+        if (i < str.Length)
         {
             if ("百千万亿佰仟%％‰".indexOf(str.charAt(i)) != -1)
                 i++;
         }
-        if (i >= str.length())
+        if (i >= str.Length)
             return true;
 
         return false;
@@ -197,7 +197,7 @@ public class TextUtility
      */
     public static bool isAllIndex(byte[] sString)
     {
-        int nLen = sString.length;
+        int nLen = sString.Length;
         int i = 0;
 
         while (i < nLen - 1 && getUnsigned(sString[i]) == 162)
@@ -229,7 +229,7 @@ public class TextUtility
      */
     public static bool isAllLetter(string text)
     {
-        for (int i = 0; i < text.length(); ++i)
+        for (int i = 0; i < text.Length; ++i)
         {
             char c = text.charAt(i);
             if ((((c < 'a' || c > 'z')) && ((c < 'A' || c > 'Z'))))
@@ -249,7 +249,7 @@ public class TextUtility
      */
     public static bool isAllLetterOrNum(string text)
     {
-        for (int i = 0; i < text.length(); ++i)
+        for (int i = 0; i < text.Length; ++i)
         {
             char c = text.charAt(i);
             if ((((c < 'a' || c > 'z')) && ((c < 'A' || c > 'Z')) && ((c < '0' || c > '9'))))
@@ -268,7 +268,7 @@ public class TextUtility
      */
     public static bool isAllDelimiter(byte[] sString)
     {
-        int nLen = sString.length;
+        int nLen = sString.Length;
         int i = 0;
 
         while (i < nLen - 1 && (getUnsigned(sString[i]) == 161 || getUnsigned(sString[i]) == 163))
@@ -297,7 +297,7 @@ public class TextUtility
             return false;
 
         char[] temp = word.ToCharArray();
-        for (int i = 0; i < temp.length; i++)
+        for (int i = 0; i < temp.Length; i++)
         {
             if (word.startsWith("分之", i))// 百分之五
             {
@@ -309,7 +309,7 @@ public class TextUtility
             {
                 round = true;
             }
-            else if (i == temp.length-1 && !round && surfix.indexOf(tchar) != -1)
+            else if (i == temp.Length-1 && !round && surfix.indexOf(tchar) != -1)
             {
                 round = true;
             }
@@ -334,7 +334,7 @@ public class TextUtility
         if (word != null)
         {
             string temp = word + " ";
-            for (int i = 0; i < word.length(); i++)
+            for (int i = 0; i < word.Length; i++)
             {
                 string s = temp.substring(i, i + 1);
                 if (charSet.indexOf(s) != -1)
@@ -370,7 +370,7 @@ public class TextUtility
     {
         if (snum != null)
         {
-            int len = snum.length();
+            int len = snum.Length;
             string first = snum.substring(0, 1);
 
             // 1992年, 98年,06年
@@ -404,7 +404,7 @@ public class TextUtility
         if (aggr != null && str != null)
         {
             str += "1";
-            for (int i = 0; i < str.length(); i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 string s = str.substring(i, i + 1);
                 if (aggr.indexOf(s) == -1)
@@ -427,20 +427,20 @@ public class TextUtility
         if (str != null)
         {
             str += " ";
-            for (int i = 0; i < str.length(); i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 string s = str.substring(i, i + 1);
-                int length = 0;
+                int Length = 0;
                 try
                 {
-                    length = s.getBytes("GBK").length;
+                    Length = s.getBytes("GBK").Length;
                 }
                 catch (UnsupportedEncodingException e)
                 {
                     e.printStackTrace();
-                    length = s.getBytes().length;
+                    Length = s.getBytes().Length;
                 }
-                if (length != 1)
+                if (Length != 1)
                     return false;
             }
 
@@ -461,20 +461,20 @@ public class TextUtility
         if (str != null)
         {
             str += " ";
-            for (int i = 0; i < str.length(); i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 string s = str.substring(i, i + 1);
-                int length = 0;
+                int Length = 0;
                 try
                 {
-                    length = s.getBytes("GBK").length;
+                    Length = s.getBytes("GBK").Length;
                 }
                 catch (UnsupportedEncodingException e)
                 {
                     e.printStackTrace();
-                    length = s.getBytes().length;
+                    Length = s.getBytes().Length;
                 }
-                if (length != 2)
+                if (Length != 2)
                     return false;
             }
 
@@ -543,7 +543,7 @@ public class TextUtility
     public static string long2String(long x)
     {
         char[] cArray = long2char(x);
-        StringBuilder sbResult = new StringBuilder(cArray.length);
+        StringBuilder sbResult = new StringBuilder(cArray.Length);
         for (char c : cArray)
         {
             sbResult.Append(c);
@@ -587,14 +587,14 @@ public class TextUtility
     public static int count(string keyword, string srcText)
     {
         int count = 0;
-        int leng = srcText.length();
+        int leng = srcText.Length;
         int j = 0;
         for (int i = 0; i < leng; i++)
         {
             if (srcText.charAt(i) == keyword.charAt(j))
             {
                 j++;
-                if (j == keyword.length())
+                if (j == keyword.Length)
                 {
                     count++;
                     j = 0;
@@ -619,7 +619,7 @@ public class TextUtility
      */
     public static void writeString(string s, DataOutputStream _out) 
     {
-        _out.writeInt(s.length());
+        _out.writeInt(s.Length);
         for (char c : s.ToCharArray())
         {
             _out.writeChar(c);
@@ -651,7 +651,7 @@ public class TextUtility
 
     public static string join(string delimiter, Collection<string> stringCollection)
     {
-        StringBuilder sb = new StringBuilder(stringCollection.size() * (16 + delimiter.length()));
+        StringBuilder sb = new StringBuilder(stringCollection.size() * (16 + delimiter.Length));
         for (string str : stringCollection)
         {
             sb.Append(str).Append(delimiter);

@@ -109,7 +109,7 @@ public class Args
                     Object value;
                     string name = getName(argument, field);
                     string alias = getAlias(argument);
-                    arg = arg.substring(prefix.length());
+                    arg = arg.substring(prefix.Length);
                     Class<?> type = field.getType();
                     if (arg.equals(name) || (alias != null && arg.equals(alias)))
                     {
@@ -142,9 +142,9 @@ public class Args
         {
             Object[] os = (Object[]) field.get(target);
             Object[] vs = (Object[]) getValue(type, value, delimiter);
-            Object[] s = (Object[]) Array.newInstance(type.getComponentType(), os.length + vs.length);
-            System.arraycopy(os, 0, s, 0, os.length);
-            System.arraycopy(vs, 0, s, os.length, vs.length);
+            Object[] s = (Object[]) Array.newInstance(type.getComponentType(), os.Length + vs.Length);
+            System.arraycopy(os, 0, s, 0, os.Length);
+            System.arraycopy(vs, 0, s, os.Length, vs.Length);
             field.set(target, s);
         }
         catch (IllegalAccessException iae)
@@ -163,9 +163,9 @@ public class Args
         {
             Object[] os = (Object[]) property.getReadMethod().invoke(target);
             Object[] vs = (Object[]) getValue(type, value, delimiter);
-            Object[] s = (Object[]) Array.newInstance(type.getComponentType(), os.length + vs.length);
-            System.arraycopy(os, 0, s, 0, os.length);
-            System.arraycopy(vs, 0, s, os.length, vs.length);
+            Object[] s = (Object[]) Array.newInstance(type.getComponentType(), os.Length + vs.Length);
+            System.arraycopy(os, 0, s, 0, os.Length);
+            System.arraycopy(vs, 0, s, os.Length, vs.Length);
             property.getWriteMethod().invoke(target, (Object) s);
         }
         catch (IllegalAccessException iae)
@@ -201,7 +201,7 @@ public class Args
                         Object value;
                         string name = getName(argument, property);
                         string alias = getAlias(argument);
-                        arg = arg.substring(prefix.length());
+                        arg = arg.substring(prefix.Length);
                         Class<?> type = property.getPropertyType();
                         if (arg.equals(name) || (alias != null && arg.equals(alias)))
                         {
@@ -510,7 +510,7 @@ public class Args
         }
     }
 
-    private static Object getValue(Class<?> type, Object value, string delimiter) throws NoSuchMethodException
+    private static Object getValue(Class<?> type, Object value, string delimiter) 
     {
         if (type != string.class && type != Boolean.class && type != Boolean.TYPE)
         {
@@ -525,8 +525,8 @@ public class Args
                 }
                 else
                 {
-                    Object[] array = (Object[]) Array.newInstance(type, strings.length);
-                    for (int i = 0; i < array.length; i++)
+                    Object[] array = (Object[]) Array.newInstance(type, strings.Length);
+                    for (int i = 0; i < array.Length; i++)
                     {
                         array[i] = createValue(type, strings[i]);
                     }
@@ -541,7 +541,7 @@ public class Args
         return value;
     }
 
-    private static Object createValue(Class<?> type, string valueAsString) throws NoSuchMethodException
+    private static Object createValue(Class<?> type, string valueAsString) 
     {
         for (ValueCreator valueCreator : valueCreators)
         {

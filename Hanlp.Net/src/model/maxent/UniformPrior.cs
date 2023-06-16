@@ -45,7 +45,7 @@ public class UniformPrior
      */
     public void setLabels(string[] outcomeLabels)
     {
-        this.numOutcomes = outcomeLabels.length;
+        this.numOutcomes = outcomeLabels.Length;
         r = Math.log(1.0 / numOutcomes);
     }
 }

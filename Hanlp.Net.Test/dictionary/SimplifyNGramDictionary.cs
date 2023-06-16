@@ -40,7 +40,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        while (iterator.hasNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            if (current.getKey().Length() - current.getKey().indexOf('@') == 2 && pre.getKey().indexOf(current.getKey()) == 0 && current.getValue() <= 2)
+////            if (current.getKey().Length - current.getKey().indexOf('@') == 2 && pre.getKey().indexOf(current.getKey()) == 0 && current.getValue() <= 2)
 ////            {
 ////                Console.WriteLine("应当删除 " + current + " 保留 " + pre);
 ////                iterator.remove();
@@ -52,7 +52,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        while (iterator.hasNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            if (current.getKey().Length() == 3)
+////            if (current.getKey().Length == 3)
 ////            {
 ////                Console.WriteLine("应当删除 " + current);
 ////            }
@@ -63,7 +63,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
 ////            String[] termArray = current.getKey().Split("@", 2);
-////            if (termArray[0].equals("未##人") && termArray[1].Length() < 2)
+////            if (termArray[0].equals("未##人") && termArray[1].Length < 2)
 ////            {
 ////                Console.WriteLine("删除 " + current.getKey());
 ////                iterator.remove();

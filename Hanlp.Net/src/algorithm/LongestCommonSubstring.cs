@@ -28,7 +28,7 @@ public class LongestCommonSubstring
         // the start position of substring in original string
 //        int start1 = -1;
 //        int start2 = -1;
-        // the longest length of com.hankcs.common substring
+        // the longest Length of com.hankcs.common substring
         int longest = 0;
 
         // record how many comparisons the solution did;
@@ -39,20 +39,20 @@ public class LongestCommonSubstring
         {
             int m = i;
             int n = 0;
-            int length = 0;
+            int Length = 0;
             while (m < size1 && n < size2)
             {
 //                ++comparisons;
                 if (str1[m] != str2[n])
                 {
-                    length = 0;
+                    Length = 0;
                 }
                 else
                 {
-                    ++length;
-                    if (longest < length)
+                    ++Length;
+                    if (longest < Length)
                     {
-                        longest = length;
+                        longest = Length;
 //                        start1 = m - longest + 1;
 //                        start2 = n - longest + 1;
                     }
@@ -68,20 +68,20 @@ public class LongestCommonSubstring
         {
             int m = 0;
             int n = j;
-            int length = 0;
+            int Length = 0;
             while (m < size1 && n < size2)
             {
 //                ++comparisons;
                 if (str1[m] != str2[n])
                 {
-                    length = 0;
+                    Length = 0;
                 }
                 else
                 {
-                    ++length;
-                    if (longest < length)
+                    ++Length;
+                    if (longest < Length)
                     {
-                        longest = length;
+                        longest = Length;
 //                        start1 = m - longest + 1;
 //                        start2 = n - longest + 1;
                     }

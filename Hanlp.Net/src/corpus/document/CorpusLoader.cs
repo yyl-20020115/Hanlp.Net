@@ -38,13 +38,13 @@ public class CorpusLoader
     {
         long start = DateTime.Now.Microsecond;
         List<File> fileList = IOUtil.fileList(folderPath);
-        for (int i = 0; i < threadArray.length - 1; ++i)
+        for (int i = 0; i < threadArray.Length - 1; ++i)
         {
-            threadArray[i].fileList = fileList.subList(fileList.size() / threadArray.length * i, fileList.size() / threadArray.length * (i + 1));
+            threadArray[i].fileList = fileList.subList(fileList.size() / threadArray.Length * i, fileList.size() / threadArray.Length * (i + 1));
             threadArray[i].start();
         }
-        threadArray[threadArray.length - 1].fileList = fileList.subList(fileList.size() / threadArray.length * (threadArray.length - 1), fileList.size());
-        threadArray[threadArray.length - 1].start();
+        threadArray[threadArray.Length - 1].fileList = fileList.subList(fileList.size() / threadArray.Length * (threadArray.Length - 1), fileList.size());
+        threadArray[threadArray.Length - 1].start();
         for (HandlerThread handlerThread : threadArray)
         {
             try

@@ -89,7 +89,7 @@ public class IOUtil
             _in.close();
             // 处理 UTF-8 BOM
             if (read >= 3 && fileContent[0] == -17 && fileContent[1] == -69 && fileContent[2] == -65)
-                return new string(fileContent, 3, fileContent.length - 3, Charset.forName("UTF-8"));
+                return new string(fileContent, 3, fileContent.Length - 3, Charset.forName("UTF-8"));
             return new string(fileContent, Charset.forName("UTF-8"));
         }
         catch (FileNotFoundException e)
@@ -187,7 +187,7 @@ public class IOUtil
         byte[] targetArray = new byte[_is.available()];
         int len;
         int off = 0;
-        while ((len = _is.read(targetArray, off, targetArray.length - off)) != -1 && off < targetArray.length)
+        while ((len = _is.read(targetArray, off, targetArray.Length - off)) != -1 && off < targetArray.Length)
         {
             off += len;
         }
@@ -198,10 +198,10 @@ public class IOUtil
 
     public static string baseName(string path)
     {
-        if (path == null || path.length() == 0)
+        if (path == null || path.Length == 0)
             return "";
         path = path.replaceAll("[/\\\\]+", "/");
-        int len = path.length(),
+        int len = path.Length,
                 upCount = 0;
         while (len > 0)
         {
@@ -228,7 +228,7 @@ public class IOUtil
                 if (upCount == 0)
                     return fileName;
                 upCount--;
-                len -= fileName.length();
+                len -= fileName.Length;
             }
         }
         return "";
@@ -272,10 +272,10 @@ public class IOUtil
     public static int readBytesFromOtherInputStream(InputStream _is, byte[] targetArray) 
     {
         assert targetArray != null;
-        if (targetArray.length == 0) return 0;
+        if (targetArray.Length == 0) return 0;
         int len;
         int off = 0;
-        while (off < targetArray.length && (len = _is.read(targetArray, off, targetArray.length - off)) != -1)
+        while (off < targetArray.Length && (len = _is.read(targetArray, off, targetArray.Length - off)) != -1)
         {
             off += len;
         }
@@ -664,7 +664,7 @@ public class IOUtil
             {
                 string natureString = fileName.substring(natureIndex + 1);
                 path = file.getParent() + File.separator + fileName.substring(0, natureIndex);
-                if (natureString.length() > 0 && !natureString.endsWith(".txt") && !natureString.endsWith(".csv"))
+                if (natureString.Length > 0 && !natureString.endsWith(".txt") && !natureString.endsWith(".csv"))
                 {
                     defaultNature = Nature.create(natureString);
                 }
@@ -700,7 +700,7 @@ public class IOUtil
             }
             string param = line.Split(splitter);
 
-            int natureCount = (param.length - 1) / 2;
+            int natureCount = (param.Length - 1) / 2;
             CoreDictionary.Attribute attribute;
             if (natureCount == 0)
             {

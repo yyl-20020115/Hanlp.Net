@@ -221,7 +221,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                     if (last != null)
                     {
                         last.label = NT.D.toString();
-                        sbPattern.deleteCharAt(sbPattern.length() - 1);
+                        sbPattern.deleteCharAt(sbPattern.Length - 1);
                         sbPattern.Append(last.label);
                         tfDictionary.add(sbPattern.toString());
                         sbPattern.setLength(0);

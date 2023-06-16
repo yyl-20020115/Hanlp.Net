@@ -49,7 +49,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
     public BaseNode<V> transition(string path, int begin)
     {
         BaseNode<V> cur = this;
-        for (int i = begin; i < path.length(); ++i)
+        for (int i = begin; i < path.Length; ++i)
         {
             cur = cur.getChild(path.charAt(i));
             if (cur == null || cur.status == Status.UNDEFINED_0) return null;
@@ -185,7 +185,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         _out.writeChar(c);
         _out.writeInt(status.ordinal());
         int childSize = 0;
-        if (child != null) childSize = child.length;
+        if (child != null) childSize = child.Length;
         _out.writeInt(childSize);
         if (child == null) return;
         for (BaseNode node : child)
@@ -203,7 +203,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
             _out.writeObject(value);
         }
         int childSize = 0;
-        if (child != null) childSize = child.length;
+        if (child != null) childSize = child.Length;
         _out.writeInt(childSize);
         if (child == null) return;
         for (BaseNode node : child)

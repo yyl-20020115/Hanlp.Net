@@ -9,7 +9,7 @@ public class CharTypeTest : TestCase
 
     public void TestNumber()
     {
-//        for (int i = 0; i <= Character.MAX_VALUE; ++i)
+//        for (int i = 0; i <= char.MAX_VALUE; ++i)
 //        {
 //            if (CharType.get((char) i) == CharType.CT_NUM)
 //                Console.WriteLine((char) i);

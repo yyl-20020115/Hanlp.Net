@@ -20,7 +20,7 @@ public class Utf8CharacterMappingTest : TestCase
             for (int i = 0; i < s.Length; i += charCount)
             {
                 int codePoint = char.ConvertToUtf32(s, i);// s.codePointAt(i);
-                charCount = new Rune(codePoint).Utf16SequenceLength;//  Character.charCount(codePoint);
+                charCount = new Rune(codePoint).Utf16SequenceLength;//  char.charCount(codePoint);
 
                 int[] arr = ucm.toIdList(codePoint);
                 for (int j = 0; j < arr.Length; j++, start++)

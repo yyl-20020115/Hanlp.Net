@@ -73,18 +73,18 @@ public class CharacterBasedGenerativeModel : ICacheAble
         for (IWord iWord : wordList)
         {
             string word = iWord.getValue();
-            if (word.length() == 1)
+            if (word.Length == 1)
             {
                 sentence.add(new char[]{word.charAt(0), 's'});
             }
             else
             {
                 sentence.add(new char[]{word.charAt(0), 'b'});
-                for (int i = 1; i < word.length() - 1; ++i)
+                for (int i = 1; i < word.Length - 1; ++i)
                 {
                     sentence.add(new char[]{word.charAt(i), 'm'});
                 }
-                sentence.add(new char[]{word.charAt(word.length() - 1), 'e'});
+                sentence.add(new char[]{word.charAt(word.Length - 1), 'e'});
             }
         }
         // 转换完毕，开始统计
@@ -113,7 +113,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         double tl3 = 0.0;
         for (string key : tf.d.keySet())
         {
-            if (key.length() != 6) continue;    // tri samples
+            if (key.Length != 6) continue;    // tri samples
             char[][] now = new char[][]
                     {
                             {key.charAt(0), key.charAt(1)},
@@ -168,14 +168,14 @@ public class CharacterBasedGenerativeModel : ICacheAble
      */
     public char[] tag(char[] charArray)
     {
-        if (charArray.length == 0) return new char[0];
-        if (charArray.length == 1) return new char[]{'s'};
-        char[] tag = new char[charArray.length];
+        if (charArray.Length == 0) return new char[0];
+        if (charArray.Length == 1) return new char[]{'s'};
+        char[] tag = new char[charArray.Length];
         double[][] now = new double[4][4];
         double[] first = new double[4];
 
         // link[i][s][t] := 第i个节点在前一个状态是s，当前状态是t时，前2个状态的tag的值
-        int[][][] link = new int[charArray.length][4][4];
+        int[][][] link = new int[charArray.Length][4][4];
         // 第一个字，只可能是bs
         for (int s = 0; s < 4; ++s)
         {
@@ -196,7 +196,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
 
         // 第三个字开始，利用TriGram标注
         double[][] pre = new double[4][4];
-        for (int i = 2; i < charArray.length; i++)
+        for (int i = 2; i < charArray.Length; i++)
         {
             // swap(now, pre)
             double[][] _ = pre;
@@ -223,10 +223,10 @@ public class CharacterBasedGenerativeModel : ICacheAble
             }
         }
         // 无法保证最优路径每个状态的概率都是非最小值, 所以回溯路径得分最小值必须小于inf
-        double score = charArray.length*inf;
+        double score = charArray.Length*inf;
         int s = 0;
         int t = 0;
-        for (int i = 0; i < probableTail.length; i++)
+        for (int i = 0; i < probableTail.Length; i++)
         {
             int [] state = probableTail[i];
             if (now[state[0]][state[1]] > score)
@@ -236,7 +236,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
                 t = state[1];
             }
         }
-        for (int i = link.length - 1; i >= 0; --i)
+        for (int i = link.Length - 1; i >= 0; --i)
         {
             tag[i] = id2tag[t];
             int f = link[i][s][t];

@@ -115,7 +115,7 @@ public class CharTableTest : TestCase
 ////        for (Map.Entry<String, String> entry : dictionary.entrySet())
 ////        {
 ////            String key = entry.getKey();
-////            if (key.Length() != 1) continue;
+////            if (key.Length != 1) continue;
 ////            String value = entry.getValue();
 ////            char t = key.charAt(0);
 ////            char s = value.charAt(0);

@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
 
@@ -16,20 +18,20 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
  *
  * @author hankcs
  */
-public class MutableDoubleArrayTrie<V> : SortedMap<string, V>, Iterable<KeyValuePair<string, V>>
+public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<KeyValuePair<string, V>>
 {
     MutableDoubleArrayTrieInteger trie;
-    ArrayList<V> values;
+    List<V> values;
 
     public MutableDoubleArrayTrie()
     {
         trie = new MutableDoubleArrayTrieInteger();
-        values = new ArrayList<V>();
+        values = new ();
     }
 
     public MutableDoubleArrayTrie(Dictionary<string, V> map)
+        :this()
     {
-        this();
         putAll(map);
     }
 
@@ -44,40 +46,42 @@ public class MutableDoubleArrayTrie<V> : SortedMap<string, V>, Iterable<KeyValue
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder("MutableDoubleArrayTrie{");
+        var sb = new StringBuilder("MutableDoubleArrayTrie{");
         sb.Append("size=").Append(size()).Append(',');
         sb.Append("allocated=").Append(trie.getBaseArraySize()).Append(',');
         sb.Append('}');
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override
-    public Comparator<? super string> comparator()
+    public IComparer<string> comparator()
     {
-        return new Comparator<string>()
+        return new CT()
+        ;
+    }
+    public class CT: IComparer<string>
+    {
+        //@Override
+        public int Compare(string o1, string o2)
         {
-            //@Override
-            public int compare(string o1, string o2)
-            {
-                return o1.compareTo(o2);
-            }
-        };
+            return o1.compareTo(o2);
+        }
     }
 
     //@Override
-    public SortedMap<string, V> subMap(string fromKey, string toKey)
+    public SortedDictionary<string, V> subMap(string fromKey, string toKey)
     {
         throw new UnsupportedOperationException();
     }
 
     //@Override
-    public SortedMap<string, V> headMap(string toKey)
+    public SortedDictionary<string, V> headMap(string toKey)
     {
         throw new UnsupportedOperationException();
     }
 
     //@Override
-    public SortedMap<string, V> tailMap(string fromKey)
+    public SortedDictionary<string, V> tailMap(string fromKey)
     {
         throw new UnsupportedOperationException();
     }
@@ -122,7 +126,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<string, V>, Iterable<KeyValue
     //@Override
     public bool containsValue(Object value)
     {
-        return values.contains(value);
+        return values.Contains(value);
     }
 
     //@Override
@@ -190,7 +194,7 @@ public class MutableDoubleArrayTrie<V> : SortedMap<string, V>, Iterable<KeyValue
     }
 
     //@Override
-    public Set<string> keySet()
+    public HashSet<string> keySet()
     {
         return new Set<string>()
         {

@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dictionary.item;
 
 
@@ -16,13 +18,13 @@ namespace com.hankcs.hanlp.corpus.dictionary.item;
  * 对标签-频次的封装
  * @author hankcs
  */
-public class EnumItem<E : Enum<E>>
+public class EnumItem<E>
 {
     public Dictionary<E, int> labelMap;
 
     public EnumItem()
     {
-        labelMap = new TreeMap<E, int>();
+        labelMap = new ();
     }
 
     /**
@@ -40,7 +42,7 @@ public class EnumItem<E : Enum<E>>
      * 创建一个条目，其标签频次都是1，各标签由参数指定
      * @param labels
      */
-    public EnumItem(E... labels)
+    public EnumItem(params E[] labels)
     {
         this();
         for (E label : labels)
@@ -94,26 +96,26 @@ public class EnumItem<E : Enum<E>>
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder();
-        ArrayList<KeyValuePair<E, int>> entries = new ArrayList<KeyValuePair<E, int>>(labelMap.entrySet());
-        Collections.sort(entries, new Comparator<KeyValuePair<E, int>>()
-        {
-            //@Override
-            public int compare(KeyValuePair<E, int> o1, KeyValuePair<E, int> o2)
-            {
-                return -o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        for (KeyValuePair<E, int> entry : entries)
+         StringBuilder sb = new StringBuilder();
+        var entries = new List<KeyValuePair<E, int>>(labelMap.entrySet());
+        Collections.sort(entries, new ST<int>());
+        foreach (KeyValuePair<E, int> entry in entries)
         {
             sb.Append(entry.getKey());
             sb.Append(' ');
             sb.Append(entry.getValue());
             sb.Append(' ');
         }
-        return sb.toString();
+        return sb.ToString();
     }
-
+    public class ST<E> : IComparer<KeyValuePair<E, int>>
+    {
+        //@Override
+        public int Compare(KeyValuePair<E, int> o1, KeyValuePair<E, int> o2)
+        {
+            return -o1.Value.compareTo(o2.Value);
+        }
+    }
     public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string param)
     {
         if (param == null) return null;
@@ -124,8 +126,8 @@ public class EnumItem<E : Enum<E>>
     
     public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string param[])
     {
-        if (param.length % 2 == 0) return null;
-        int natureCount = (param.length - 1) / 2;
+        if (param.Length % 2 == 0) return null;
+        int natureCount = (param.Length - 1) / 2;
         KeyValuePair<string, int>[] entries = (KeyValuePair<string, int>[]) Array.newInstance(KeyValuePair.class, natureCount);
         for (int i = 0; i < natureCount; ++i)
         {

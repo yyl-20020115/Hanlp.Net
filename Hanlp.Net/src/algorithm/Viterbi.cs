@@ -43,8 +43,8 @@ public class Viterbi
             _max_states_value = Math.Max(_max_states_value, s);
         }
         ++_max_states_value;
-        double[][] V = new double[obs.length][_max_states_value];
-        int[][] path = new int[_max_states_value][obs.length];
+        double[][] V = new double[obs.Length][_max_states_value];
+        int[][] path = new int[_max_states_value][obs.Length];
 
         for (int y : states)
         {
@@ -52,9 +52,9 @@ public class Viterbi
             path[y][0] = y;
         }
 
-        for (int t = 1; t < obs.length; ++t)
+        for (int t = 1; t < obs.Length; ++t)
         {
-            int[][] newpath = new int[_max_states_value][obs.length];
+            int[][] newpath = new int[_max_states_value][obs.Length];
 
             for (int y : states)
             {
@@ -83,9 +83,9 @@ public class Viterbi
         int state = 0;
         for (int y : states)
         {
-            if (V[obs.length - 1][y] < prob)
+            if (V[obs.Length - 1][y] < prob)
             {
-                prob = V[obs.length - 1][y];
+                prob = V[obs.Length - 1][y];
                 state = y;
             }
         }
@@ -101,9 +101,9 @@ public class Viterbi
      */
     public static void compute(List<Vertex> vertexList, TransformMatrix transformMatrixDictionary)
     {
-        if (Nature.values().length != transformMatrixDictionary.states.length)
-            transformMatrixDictionary.extend(Nature.values().length);
-        int length = vertexList.size() - 1;
+        if (Nature.values().Length != transformMatrixDictionary.states.Length)
+            transformMatrixDictionary.extend(Nature.values().Length);
+        int Length = vertexList.size() - 1;
         double[][] cost = new double[2][];  // 滚动数组
         Iterator<Vertex> iterator = vertexList.iterator();
         Vertex start = iterator.next();
@@ -115,7 +115,7 @@ public class Viterbi
         Nature[] preTagSet;
         {
             Vertex item = iterator.next();
-            cost[0] = new double[item.attribute.nature.length];
+            cost[0] = new double[item.attribute.nature.Length];
             int j = 0;
             int curIndex = 0;
             for (Nature cur : item.attribute.nature)
@@ -128,12 +128,12 @@ public class Viterbi
             preItem = item;
         }
         // 第三个开始复杂一些
-        for (int i = 1; i < length; ++i)
+        for (int i = 1; i < Length; ++i)
         {
             int index_i = i & 1;
             int index_i_1 = 1 - index_i;
             Vertex item = iterator.next();
-            cost[index_i] = new double[item.attribute.nature.length];
+            cost[index_i] = new double[item.attribute.nature.Length];
             double perfect_cost_line = Double.MAX_VALUE;
             int k = 0;
             Nature[] curTagSet = item.attribute.nature;
@@ -173,7 +173,7 @@ public class Viterbi
      */
     public static  List<E> computeEnum<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
-        int length = roleTagList.size() - 1;
+        int Length = roleTagList.size() - 1;
         List<E> tagList = new ArrayList<E>(roleTagList.size());
         double[][] cost = new double[2][];  // 滚动数组
         Iterator<EnumItem<E>> iterator = roleTagList.iterator();
@@ -195,7 +195,7 @@ public class Viterbi
             preTagSet = item.labelMap.keySet();
         }
         // 第三个开始复杂一些
-        for (int i = 1; i < length; ++i)
+        for (int i = 1; i < Length; ++i)
         {
             int index_i = i & 1;
             int index_i_1 = 1 - index_i;
@@ -241,7 +241,7 @@ public class Viterbi
      */
     public static List<E> computeEnumSimply<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
-        int length = roleTagList.size() - 1;
+        int Length = roleTagList.size() - 1;
         List<E> tagList = new LinkedList<E>();
         Iterator<EnumItem<E>> iterator = roleTagList.iterator();
         EnumItem<E> start = iterator.next();
@@ -249,7 +249,7 @@ public class Viterbi
         E perfect_tag = pre;
         // 第一个是确定的
         tagList.add(pre);
-        for (int i = 0; i < length; ++i)
+        for (int i = 0; i < Length; ++i)
         {
             double perfect_cost = Double.MAX_VALUE;
             EnumItem<E> item = iterator.next();

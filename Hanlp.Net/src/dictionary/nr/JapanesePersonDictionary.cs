@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.dictionary;
+
 namespace com.hankcs.hanlp.dictionary.nr;
 
 
@@ -20,7 +23,7 @@ namespace com.hankcs.hanlp.dictionary.nr;
 public class JapanesePersonDictionary
 {
     static string path = HanLP.Config.JapanesePersonDictionaryPath;
-    static DoubleArrayTrie<Character> trie;
+    static DoubleArrayTrie<char> trie;
     /**
      * 姓
      */
@@ -34,7 +37,7 @@ public class JapanesePersonDictionary
      */
     public static readonly char A = 'A';
 
-    static
+    static JapanesePersonDictionary()
     {
         long start = DateTime.Now.Microsecond;
         if (!load())
@@ -47,13 +50,13 @@ public class JapanesePersonDictionary
 
     static bool load()
     {
-        trie = new DoubleArrayTrie<Character>();
+        trie = new DoubleArrayTrie<char>();
         if (loadDat()) return true;
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
-            TreeMap<string, Character> map = new TreeMap<string, Character>();
+            TreeMap<string, char> map = new TreeMap<string, char>();
             while ((line = br.readLine()) != null)
             {
                 string[] param = line.Split(" ", 2);
@@ -79,13 +82,13 @@ public class JapanesePersonDictionary
      * @param map
      * @return
      */
-    static bool saveDat(TreeMap<string, Character> map)
+    static bool saveDat(Dictionary<string, char> map)
     {
         try
         {
             DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
             _out.writeInt(map.size());
-            for (Character character : map.values())
+            for (char character : map.values())
             {
                 _out.writeChar(character);
             }
@@ -104,8 +107,8 @@ public class JapanesePersonDictionary
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.VALUE_EXT);
         if (byteArray == null) return false;
         int size = byteArray.nextInt();
-        Character[] valueArray = new Character[size];
-        for (int i = 0; i < valueArray.length; ++i)
+        char[] valueArray = new char[size];
+        for (int i = 0; i < valueArray.Length; ++i)
         {
             valueArray[i] = byteArray.nextChar();
         }
@@ -123,23 +126,23 @@ public class JapanesePersonDictionary
     }
 
     /**
-     * 包含key，且key至少长length
+     * 包含key，且key至少长Length
      * @param key
-     * @param length
+     * @param Length
      * @return
      */
-    public static bool containsKey(string key, int length)
+    public static bool containsKey(string key, int Length)
     {
         if (!trie.containsKey(key)) return false;
-        return key.length() >= length;
+        return key.Length >= Length;
     }
 
-    public static Character get(string key)
+    public static char get(string key)
     {
         return trie.get(key);
     }
 
-    public static DoubleArrayTrie<Character>.LongestSearcher getSearcher(char[] charArray)
+    public static DoubleArrayTrie<char>.LongestSearcher getSearcher(char[] charArray)
     {
         return trie.getLongestSearcher(charArray, 0);
     }
@@ -147,35 +150,35 @@ public class JapanesePersonDictionary
     /**
      * 最长分词
      */
-    public static class Searcher : BaseSearcher<Character>
+    public class Searcher : BaseSearcher<char>
     {
         /**
          * 分词从何处开始，这是一个状态
          */
         int begin;
 
-        DoubleArrayTrie<Character> trie;
+        DoubleArrayTrie<char> trie;
 
-        protected Searcher(char[] c, DoubleArrayTrie<Character> trie)
+        protected Searcher(char[] c, DoubleArrayTrie<char> trie)
+            :base(c)
         {
-            super(c);
             this.trie = trie;
         }
 
-        protected Searcher(string text, DoubleArrayTrie<Character> trie)
+        protected Searcher(string text, DoubleArrayTrie<char> trie)
+            : base(c)
         {
-            super(text);
             this.trie = trie;
         }
 
         //@Override
-        public KeyValuePair<string, Character> next()
+        public KeyValuePair<string, char> next()
         {
             // 保证首次调用找到一个词语
-            KeyValuePair<string, Character> result = null;
-            while (begin < c.length)
+            KeyValuePair<string, char> result = null;
+            while (begin < c.Length)
             {
-                LinkedList<KeyValuePair<string, Character>> entryList = trie.commonPrefixSearchWithValue(c, begin);
+                LinkedList<KeyValuePair<string, char>> entryList = trie.commonPrefixSearchWithValue(c, begin);
                 if (entryList.size() == 0)
                 {
                     ++begin;
@@ -184,7 +187,7 @@ public class JapanesePersonDictionary
                 {
                     result = entryList.getLast();
                     offset = begin;
-                    begin += result.getKey().length();
+                    begin += result.getKey().Length;
                     break;
                 }
             }

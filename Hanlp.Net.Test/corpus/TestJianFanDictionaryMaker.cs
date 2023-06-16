@@ -36,7 +36,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //        {
 //            String t = entry.getKey();
 //            String s = entry.getValue();
-//            if (t.Length() == 1) continue;
+//            if (t.Length == 1) continue;
 //            if (HanLP.convertToTraditionalChinese(s).equals(t)) continue;
 //            dictionaryHanLP.add(t, s);
 //        }
@@ -124,7 +124,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //            }
 //            for (String v : entry.getValue().Split(" "))
 //            {
-//                if (key.Length() == 1 && key.equals(v))
+//                if (key.Length == 1 && key.equals(v))
 //                {
 //                    continue;
 //                }
@@ -136,7 +136,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //        {
 //            for (String key : entry.getValue().Split(" "))
 //            {
-//                if (key.Length() == 1 && key.equals(entry.getKey()))
+//                if (key.Length == 1 && key.equals(entry.getKey()))
 //                {
 //                    continue;
 //                }

@@ -34,8 +34,8 @@ public class POSInstance : Instance
         this(termArray, featureMap);
 
         POSTagSet tagSet = (POSTagSet) featureMap.tagSet;
-        tagArray = new int[termArray.length];
-        for (int i = 0; i < termArray.length; i++)
+        tagArray = new int[termArray.Length];
+        for (int i = 0; i < termArray.Length; i++)
         {
             tagArray[i] = tagSet.add(posArray[i]);
         }
@@ -56,10 +56,10 @@ public class POSInstance : Instance
 
         //		System._out.println("cur: " + curWord);
         string nextWord = position <= words.Length - 2 ? words[position + 1] : "_E_";
-//        string next2Word = position <= words.length - 3 ? words[position + 2] : "_E_";
+//        string next2Word = position <= words.Length - 3 ? words[position + 2] : "_E_";
 
         StringBuilder sbFeature = new StringBuilder();
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("U[-2,0]=").Append(pre2Word);
 //        addFeature(sbFeature, featVec, featureMap);
 
@@ -72,82 +72,82 @@ public class POSInstance : Instance
         sbFeature.Append(nextWord).Append('3');
         addFeatureThenClear(sbFeature, featVec, featureMap);
 
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("U[2,0]=").Append(next2Word);
 //        addFeature(sbFeature, featVec, featureMap);
 
         // wiwi+1(i = − 1, 0)
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("B[-1,0]=").Append(preWord).Append("/").Append(curWord);
 //        addFeature(sbFeature, featVec, featureMap);
 //
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("B[0,1]=").Append(curWord).Append("/").Append(nextWord);
 //        addFeature(sbFeature, featVec, featureMap);
 //
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("B[-1,1]=").Append(preWord).Append("/").Append(nextWord);
 //        addFeature(sbFeature, featVec, featureMap);
 
         // last char(w−1)w0
-//        string lastChar = position >= 1 ? "" + words[position - 1].charAt(words[position - 1].length() - 1) : "_BC_";
-//        sbFeature.delete(0, sbFeature.length());
+//        string lastChar = position >= 1 ? "" + words[position - 1].charAt(words[position - 1].Length - 1) : "_BC_";
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("CW[-1,0]=").Append(lastChar).Append("/").Append(curWord);
 //        addFeature(sbFeature, featVec, featureMap);
 //
 //        // w0 ﬁrst_char(w1)
-//        string nextChar = position <= words.length - 2 ? "" + words[position + 1].charAt(0) : "_EC_";
-//        sbFeature.delete(0, sbFeature.length());
+//        string nextChar = position <= words.Length - 2 ? "" + words[position + 1].charAt(0) : "_EC_";
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("CW[1,0]=").Append(curWord).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featVec, featureMap);
 //
-        int length = curWord.Length;
+        int Length = curWord.Length;
 //
 //        // ﬁrstchar(w0)lastchar(w0)
-//        sbFeature.delete(0, sbFeature.length());
-//        sbFeature.Append("BE=").Append(curWord.charAt(0)).Append("/").Append(curWord.charAt(length - 1));
+//        sbFeature.delete(0, sbFeature.Length);
+//        sbFeature.Append("BE=").Append(curWord.charAt(0)).Append("/").Append(curWord.charAt(Length - 1));
 //        addFeature(sbFeature, featVec, featureMap);
 
         // prefix
         sbFeature.Append(curWord[0..1]).Append('4');
         addFeatureThenClear(sbFeature, featVec, featureMap);
 
-        if (length > 1)
+        if (Length > 1)
         {
             sbFeature.Append(curWord[0..2]).Append('4');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
-        if (length > 2)
+        if (Length > 2)
         {
             sbFeature.Append(curWord[0 .. 3]).Append('4');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
         // sufﬁx(w0, i)(i = 1, 2, 3)
-        sbFeature.Append(curWord[(length - 1)]).Append('5');
+        sbFeature.Append(curWord[(Length - 1)]).Append('5');
         addFeatureThenClear(sbFeature, featVec, featureMap);
 
-        if (length > 1)
+        if (Length > 1)
         {
-            sbFeature.Append(curWord.Substring(length - 2)).Append('5');
+            sbFeature.Append(curWord.Substring(Length - 2)).Append('5');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
-        if (length > 2)
+        if (Length > 2)
         {
-            sbFeature.Append(curWord.Substring(length - 3)).Append('5');
+            sbFeature.Append(curWord.Substring(Length - 3)).Append('5');
             addFeatureThenClear(sbFeature, featVec, featureMap);
         }
 
-        // length
-//        if (length >= 5)
+        // Length
+//        if (Length >= 5)
 //        {
 //            addFeature("le=" + 5, featVec, featureMap);
 //        }
 //        else
 //        {
-//            addFeature("le=" + length, featVec, featureMap);
+//            addFeature("le=" + Length, featVec, featureMap);
 //        }
 
         // label feature
@@ -163,25 +163,25 @@ public class POSInstance : Instance
 //
 //        addFeature("BL=" + preLabel, featVec, featureMap);
 
-//        for (int i = 0; i < curWord.length(); i++)
+//        for (int i = 0; i < curWord.Length; i++)
 //        {
 //            string prefix = curWord.substring(0, 1) + curWord.charAt(i) + "";
 //            addFeature("p2f=" + prefix, featVec, featureMap);
-//            string suffix = curWord.substring(curWord.length() - 1) + curWord.charAt(i) + "";
+//            string suffix = curWord.substring(curWord.Length - 1) + curWord.charAt(i) + "";
 //            addFeature("s2f=" + suffix, featVec, featureMap);
 
-//            if ((i < curWord.length() - 1) && (curWord.charAt(i) == curWord.charAt(i + 1)))
+//            if ((i < curWord.Length - 1) && (curWord.charAt(i) == curWord.charAt(i + 1)))
 //            {
 //                addFeature("dulC=" + curWord.substring(i, i + 1), featVec, featureMap);
 //            }
-//            if ((i < curWord.length() - 2) && (curWord.charAt(i) == curWord.charAt(i + 2)))
+//            if ((i < curWord.Length - 2) && (curWord.charAt(i) == curWord.charAt(i + 2)))
 //            {
 //                addFeature("dul2C=" + curWord.substring(i, i + 1), featVec, featureMap);
 //            }
 //        }
 
 //        bool isDigit = true;
-//        for (int i = 0; i < curWord.length(); i++)
+//        for (int i = 0; i < curWord.Length; i++)
 //        {
 //            if (CharType.get(curWord.charAt(i)) != CharType.CT_NUM)
 //            {
@@ -195,7 +195,7 @@ public class POSInstance : Instance
 //        }
 
 //        bool isPunt = true;
-//        for (int i = 0; i < curWord.length(); i++)
+//        for (int i = 0; i < curWord.Length; i++)
 //        {
 //            if (!CharType.punctSet.contains(curWord.charAt(i) + ""))
 //            {
@@ -209,7 +209,7 @@ public class POSInstance : Instance
 //        }
 
 //        bool isLetter = true;
-//        for (int i = 0; i < curWord.length(); i++)
+//        for (int i = 0; i < curWord.Length; i++)
 //        {
 //            if (CharType.get(curWord.charAt(i)) != CharType.CT_LETTER)
 //            {

@@ -31,7 +31,7 @@ public abstract class AbstractClosestVectors
     protected string nextWord()
     {
         string word = scanner.next();
-        return word == null || word.length() == 0 || word.equals("q") ? null : word;
+        return word == null || word.Length == 0 || word.equals("q") ? null : word;
     }
 
     protected abstract Result getTargetVector();

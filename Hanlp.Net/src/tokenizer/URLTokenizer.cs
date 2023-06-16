@@ -46,7 +46,7 @@ public class URLTokenizer
             termList.add(new Term(matcher.group(), Nature.xu));
             begin = matcher.end();
         }
-        if (begin < text.length()) termList.addAll(SEGMENT.seg(text.substring(begin)));
+        if (begin < text.Length) termList.addAll(SEGMENT.seg(text.substring(begin)));
 
         return termList;
     }

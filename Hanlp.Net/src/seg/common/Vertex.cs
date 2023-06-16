@@ -82,7 +82,7 @@ public class Vertex
         this.wordID = wordID;
         this.attribute = attribute;
         if (word == null) word = compileRealWord(realWord, attribute);
-        assert realWord.length() > 0 : "构造空白节点会导致死循环！";
+        assert realWord.Length > 0 : "构造空白节点会导致死循环！";
         this.word = word;
         this.realWord = realWord;
     }
@@ -95,7 +95,7 @@ public class Vertex
      */
     private string compileRealWord(string realWord, CoreDictionary.Attribute attribute)
     {
-        if (attribute.nature.length == 1)
+        if (attribute.nature.Length == 1)
         {
             Nature nature = attribute.nature[0];
             if (nature.startsWith("nr"))
@@ -234,7 +234,7 @@ public class Vertex
      */
     public bool confirmNature(Nature nature)
     {
-        if (attribute.nature.length == 1 && attribute.nature[0] == nature)
+        if (attribute.nature.Length == 1 && attribute.nature[0] == nature)
         {
             return true;
         }
@@ -282,7 +282,7 @@ public class Vertex
      */
     public Nature getNature()
     {
-        if (attribute.nature.length == 1)
+        if (attribute.nature.Length == 1)
         {
             return attribute.nature[0];
         }
@@ -458,9 +458,9 @@ public class Vertex
         return new Vertex(Predefine.TAG_END, " ", new CoreDictionary.Attribute(Nature.end, Predefine.MAX_FREQUENCY / 10), CoreDictionary.getWordID(Predefine.TAG_END));
     }
 
-    public int length()
+    public int Length
     {
-        return realWord.length();
+        return realWord.Length;
     }
 
     //@Override

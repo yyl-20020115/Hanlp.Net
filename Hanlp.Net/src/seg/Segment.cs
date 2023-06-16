@@ -83,14 +83,14 @@ public abstract class Segment
                     nCurType == CharType.CT_DELIMITER || nCurType == CharType.CT_OTHER)
             {
                 string single = string.valueOf(charArray[pCur]);
-                if (single.length() != 0)
+                if (single.Length != 0)
                     atomSegment.add(new AtomNode(single, nCurType));
                 pCur++;
             }
             //如果是字符、数字或者后面跟随了数字的小数点“.”则一直取下去。
             else if (pCur < end - 1 && ((nCurType == CharType.CT_SINGLE) || nCurType == CharType.CT_NUM))
             {
-                sb.delete(0, sb.length());
+                sb.delete(0, sb.Length);
                 sb.Append(charArray[pCur]);
 
                 bool reachEnd = true;
@@ -200,8 +200,8 @@ public abstract class Segment
         Vertex[] wordNet = new Vertex[vertexList.size()];
         vertexList.toArray(wordNet);
         // DAT合并
-        int length = wordNet.length - 1; // 跳过首尾
-        for (int i = 1; i < length; ++i)
+        int Length = wordNet.Length - 1; // 跳过首尾
+        for (int i = 1; i < Length; ++i)
         {
             int state = 1;
             state = dat.transition(wordNet[i].realWord, state);
@@ -210,7 +210,7 @@ public abstract class Segment
                 int to = i + 1;
                 int end = to;
                 CoreDictionary.Attribute value = dat.output(state);
-                for (; to < length; ++to)
+                for (; to < Length; ++to)
                 {
                     state = dat.transition(wordNet[to].realWord, state);
                     if (state < 0) break;
@@ -231,7 +231,7 @@ public abstract class Segment
         // BinTrie合并
         if (CustomDictionary.trie != null)
         {
-            for (int i = 1; i < length; ++i)
+            for (int i = 1; i < Length; ++i)
             {
                 if (wordNet[i] == null) continue;
                 BaseNode<CoreDictionary.Attribute> state = CustomDictionary.trie.transition(wordNet[i].realWord.ToCharArray(), 0);
@@ -240,7 +240,7 @@ public abstract class Segment
                     int to = i + 1;
                     int end = to;
                     CoreDictionary.Attribute value = state.getValue();
-                    for (; to < length; ++to)
+                    for (; to < Length; ++to)
                     {
                         if (wordNet[to] == null) continue;
                         state = state.transition(wordNet[to].realWord.ToCharArray(), 0);
@@ -291,7 +291,7 @@ public abstract class Segment
         int line = 0;
         for (Vertex vertex : outputList)
         {
-            int parentLength = vertex.realWord.length();
+            int parentLength = vertex.realWord.Length;
             int currentLine = line;
             if (parentLength >= 3)
             {
@@ -348,25 +348,25 @@ public abstract class Segment
     {
         assert vertexList != null;
         assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.toString();
-        int length = vertexList.size() - 2;
-        List<Term> resultList = new ArrayList<Term>(length);
+        int Length = vertexList.size() - 2;
+        List<Term> resultList = new ArrayList<Term>(Length);
         Iterator<Vertex> iterator = vertexList.iterator();
         iterator.next();
         if (offsetEnabled)
         {
             int offset = 0;
-            for (int i = 0; i < length; ++i)
+            for (int i = 0; i < Length; ++i)
             {
                 Vertex vertex = iterator.next();
                 Term term = convert(vertex);
                 term.offset = offset;
-                offset += term.length();
+                offset += term.Length;
                 resultList.add(term);
             }
         }
         else
         {
-            for (int i = 0; i < length; ++i)
+            for (int i = 0; i < Length; ++i)
             {
                 Vertex vertex = iterator.next();
                 Term term = convert(vertex);
@@ -409,7 +409,7 @@ public abstract class Segment
                 {
                     sbQuantifier.Append(cur.realWord);
                     iterator.remove();
-                    removeFromWordNet(cur, wordNetAll, line, sbQuantifier.length());
+                    removeFromWordNet(cur, wordNetAll, line, sbQuantifier.Length);
                 }
                 if (cur != null)
                 {
@@ -421,16 +421,16 @@ public abstract class Segment
                         }
                         sbQuantifier.Append(cur.realWord);
                         iterator.remove();
-                        removeFromWordNet(cur, wordNetAll, line, sbQuantifier.length());
+                        removeFromWordNet(cur, wordNetAll, line, sbQuantifier.Length);
                     }
                     else
                     {
-                        line += cur.realWord.length();   // (cur = iterator.next()).hasNature(Nature.m) 最后一个next可能不含q词性
+                        line += cur.realWord.Length;   // (cur = iterator.next()).hasNature(Nature.m) 最后一个next可能不含q词性
                     }
                 }
-                if (sbQuantifier.length() != pre.realWord.length())
+                if (sbQuantifier.Length != pre.realWord.Length)
                 {
-                    for (Vertex vertex : wordNetAll.get(line + pre.realWord.length()))
+                    for (Vertex vertex : wordNetAll.get(line + pre.realWord.Length))
                     {
                         vertex.from = null;
                     }
@@ -442,7 +442,7 @@ public abstract class Segment
                 }
             }
             sbQuantifier.setLength(0);
-            line += pre.realWord.length();
+            line += pre.realWord.Length;
         }
 //        System._out.println(wordNetAll);
     }
@@ -452,18 +452,18 @@ public abstract class Segment
      * @param cur 词语
      * @param wordNetAll 词网
      * @param line 当前扫描的行数
-     * @param length 当前缓冲区的长度
+     * @param Length 当前缓冲区的长度
      */
-    private static void removeFromWordNet(Vertex cur, WordNet wordNetAll, int line, int length)
+    private static void removeFromWordNet(Vertex cur, WordNet wordNetAll, int line, int Length)
     {
         LinkedList<Vertex>[] vertexes = wordNetAll.getVertexes();
         // 将其从wordNet中删除
-        for (Vertex vertex : vertexes[line + length])
+        for (Vertex vertex : vertexes[line + Length])
         {
             if (vertex.from == cur)
                 vertex.from = null;
         }
-        ListIterator<Vertex> iterator = vertexes[line + length - cur.realWord.length()].listIterator();
+        ListIterator<Vertex> iterator = vertexes[line + Length - cur.realWord.Length].listIterator();
         while (iterator.hasNext())
         {
             Vertex vertex = iterator.next();
@@ -485,14 +485,14 @@ public abstract class Segment
         {
             CharTable.normalization(charArray);
         }
-        if (config.threadNumber > 1 && charArray.length > 10000)    // 小文本多线程没意义，反而变慢了
+        if (config.threadNumber > 1 && charArray.Length > 10000)    // 小文本多线程没意义，反而变慢了
         {
             List<string> sentenceList = SentencesUtil.toSentenceList(charArray);
             string[] sentenceArray = new string[sentenceList.size()];
             sentenceList.toArray(sentenceArray);
             //noinspection unchecked
-            List<Term>[] termListArray = new List[sentenceArray.length];
-            final int per = sentenceArray.length / config.threadNumber;
+            List<Term>[] termListArray = new List[sentenceArray.Length];
+            final int per = sentenceArray.Length / config.threadNumber;
             WorkThread[] threadArray = new WorkThread[config.threadNumber];
             for (int i = 0; i < config.threadNumber - 1; ++i)
             {
@@ -500,7 +500,7 @@ public abstract class Segment
                 threadArray[i] = new WorkThread(sentenceArray, termListArray, from, from + per);
                 threadArray[i].start();
             }
-            threadArray[config.threadNumber - 1] = new WorkThread(sentenceArray, termListArray, (config.threadNumber - 1) * per, sentenceArray.length);
+            threadArray[config.threadNumber - 1] = new WorkThread(sentenceArray, termListArray, (config.threadNumber - 1) * per, sentenceArray.Length);
             threadArray[config.threadNumber - 1].start();
             try
             {
@@ -518,14 +518,14 @@ public abstract class Segment
             if (config.offset || config.indexMode > 0)  // 由于分割了句子，所以需要重新校正offset
             {
                 int sentenceOffset = 0;
-                for (int i = 0; i < sentenceArray.length; ++i)
+                for (int i = 0; i < sentenceArray.Length; ++i)
                 {
                     for (Term term : termListArray[i])
                     {
                         term.offset += sentenceOffset;
                         termList.add(term);
                     }
-                    sentenceOffset += sentenceArray[i].length();
+                    sentenceOffset += sentenceArray[i].Length;
                 }
             }
             else
@@ -538,7 +538,7 @@ public abstract class Segment
 
             return termList;
         }
-//        if (text.length() > 10000)  // 针对大文本，先拆成句子，后分词，避免内存峰值太大
+//        if (text.Length > 10000)  // 针对大文本，先拆成句子，后分词，避免内存峰值太大
 //        {
 //            List<Term> termList = new LinkedList<Term>();
 //            if (config.offset || config.indexMode)
@@ -552,7 +552,7 @@ public abstract class Segment
 //                        term.offset += sentenceOffset;
 //                        termList.add(term);
 //                    }
-//                    sentenceOffset += sentence.length();
+//                    sentenceOffset += sentence.Length;
 //                }
 //            }
 //            else

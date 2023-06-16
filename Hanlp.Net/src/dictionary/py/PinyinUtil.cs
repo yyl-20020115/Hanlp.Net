@@ -63,7 +63,7 @@ public class PinyinUtil
             {
 
                 int tuneNumber =
-                        Character.getNumericValue(lowerCasePinyinStr.charAt(lowerCasePinyinStr.length() - 1));
+                        char.getNumericValue(lowerCasePinyinStr.charAt(lowerCasePinyinStr.Length - 1));
 
                 int indexOfA = lowerCasePinyinStr.indexOf(charA);
                 int indexOfE = lowerCasePinyinStr.indexOf(charE);
@@ -86,7 +86,7 @@ public class PinyinUtil
                 }
                 else
                 {
-                    for (int i = lowerCasePinyinStr.length() - 1; i >= 0; i--)
+                    for (int i = lowerCasePinyinStr.Length - 1; i >= 0; i--)
                     {
                         if (string.valueOf(lowerCasePinyinStr.charAt(i)).matches(
                                 "[" + allUnmarkedVowelStr + "]"))
@@ -113,7 +113,7 @@ public class PinyinUtil
                                                                                                          "ü"));
                     resultBuffer.Append(markedVowel);
                     resultBuffer.Append(lowerCasePinyinStr.substring(indexOfUnmarkedVowel + 1,
-                                                                     lowerCasePinyinStr.length() - 1).replaceAll("v", "ü"));
+                                                                     lowerCasePinyinStr.Length - 1).replaceAll("v", "ü"));
 
                     return resultBuffer.toString();
 

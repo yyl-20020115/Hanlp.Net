@@ -310,7 +310,7 @@ public class State
         {
             for (int[] two : one)
             {
-                for (int i = 0; i < two.length; i++)
+                for (int i = 0; i < two.Length; i++)
                 {
                     two[i] = 1024;
                 }

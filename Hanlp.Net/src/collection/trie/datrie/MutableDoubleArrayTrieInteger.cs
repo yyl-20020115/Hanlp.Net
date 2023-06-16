@@ -478,7 +478,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
                 return new();
             }
             int[] ids = this.charMap.toIdList(codePoint);
-            if (ids.length == 0)
+            if (ids.Length == 0)
             {
                 return Collections.emptyList();
             }
@@ -668,11 +668,11 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             return EMPTY_WALK_STATE;
         }
         int[] ids = this.charMap.toIdList(codePoint);
-        if (ids.length == 0)
+        if (ids.Length == 0)
         {
             return EMPTY_WALK_STATE;
         }
-        for (int i = 0; i < ids.length; i++)
+        for (int i = 0; i < ids.Length; i++)
         {
             int c = ids[i];
             if ((getBase(state) + c < getBaseArraySize())
@@ -712,7 +712,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             return -1;
         }
         int[] ids = this.charMap.toIdList(codePoint);
-        if (ids.length == 0)
+        if (ids.Length == 0)
         {
             return -1;
         }
@@ -865,9 +865,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         int curState = 1;
         int[] ids = this.charMap.toIdList(key);
 
-        int[] path = new int[ids.length + 1];
+        int[] path = new int[ids.Length + 1];
         int i = 0;
-        for (; i < ids.length; i++)
+        for (; i < ids.Length; i++)
         {
             int c = ids[i];
             if ((getBase(curState) + c >= getBaseArraySize())
@@ -879,14 +879,14 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             path[i] = curState;
         }
         int ret = -1;
-        if (i == ids.length)
+        if (i == ids.Length)
         {
             if (getCheck(getBase(curState) + UNUSED_CHAR_VALUE) == curState)
             {
                 --this.size;
                 ret = getLeafValue(getBase(getBase(curState) + UNUSED_CHAR_VALUE));
-                path[(path.length - 1)] = (getBase(curState) + UNUSED_CHAR_VALUE);
-                for (int j = path.length - 1; j >= 0; --j)
+                path[(path.Length - 1)] = (getBase(curState) + UNUSED_CHAR_VALUE);
+                for (int j = path.Length - 1; j >= 0; --j)
                 {
                     bool isLeaf = true;
                     int state = path[j];
@@ -1183,14 +1183,14 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             logger.warning("将来需要在构造的时候传入 " + charMap.getClass());
         }
         _out.writeInt(size);
-        base.save(_out);
+        _base.save(_out);
         check.save(_out);
     }
 
     //@Override
     public bool load(ByteArray byteArray)
     {
-        size = byteArray.nextInt();
+        _size = byteArray.nextInt();
         if (!base.load(byteArray)) return false;
         if (!check.load(byteArray)) return false;
         return true;
@@ -1199,13 +1199,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     private void writeObject(ObjectOutputStream _out)
     {
         _out.writeInt(size);
-        _out.writeObject(base);
+        _out.writeObject(_base);
         _out.writeObject(check);
     }
 
     private void readObject(ObjectInputStream _in)
     {
-        size = _in.readInt();
+        _size = _in.readInt();
         _base = (IntArrayList)_in.readObject();
         check = (IntArrayList)_in.readObject();
         charMap = new Utf8CharacterMapping();
@@ -1241,7 +1241,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             path.Append(1); // ROOT
             int from = 1;
             int b = base.get(from);
-            if (size > 0)
+            if (_size > 0)
             {
                 while (true)
                 {

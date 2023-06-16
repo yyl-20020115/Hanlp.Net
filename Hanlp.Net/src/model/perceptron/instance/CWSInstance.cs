@@ -34,16 +34,16 @@ public class CWSInstance : Instance
         string sentence = com.hankcs.hanlp.utility.TextUtility.combine(termArray);
         CWSTagSet tagSet = (CWSTagSet) featureMap.tagSet;
 
-        tagArray = new int[sentence.length()];
-        for (int i = 0, j = 0; i < termArray.length; i++)
+        tagArray = new int[sentence.Length];
+        for (int i = 0, j = 0; i < termArray.Length; i++)
         {
-            assert termArray[i].length() > 0 : "句子中出现了长度为0的单词，不合法：" + sentence;
-            if (termArray[i].length() == 1)
+            assert termArray[i].Length > 0 : "句子中出现了长度为0的单词，不合法：" + sentence;
+            if (termArray[i].Length == 1)
                 tagArray[j++] = tagSet.S;
             else
             {
                 tagArray[j++] = tagSet.B;
-                for (int k = 1; k < termArray[i].length() - 1; k++)
+                for (int k = 1; k < termArray[i].Length - 1; k++)
                     tagArray[j++] = tagSet.M;
                 tagArray[j++] = tagSet.E;
             }
@@ -55,7 +55,7 @@ public class CWSInstance : Instance
     public CWSInstance(string sentence, FeatureMap featureMap)
     {
         initFeatureMatrix(sentence, featureMap);
-        tagArray = new int[sentence.length()];
+        tagArray = new int[sentence.Length];
     }
 
     protected int[] extractFeature(string sentence, FeatureMap featureMap, int position)
@@ -65,62 +65,62 @@ public class CWSInstance : Instance
         char pre2Char = position >= 2 ? sentence.charAt(position - 2) : CHAR_BEGIN;
         char preChar = position >= 1 ? sentence.charAt(position - 1) : CHAR_BEGIN;
         char curChar = sentence.charAt(position);
-        char nextChar = position < sentence.length() - 1 ? sentence.charAt(position + 1) : CHAR_END;
-        char next2Char = position < sentence.length() - 2 ? sentence.charAt(position + 2) : CHAR_END;
+        char nextChar = position < sentence.Length - 1 ? sentence.charAt(position + 1) : CHAR_END;
+        char next2Char = position < sentence.Length - 2 ? sentence.charAt(position + 2) : CHAR_END;
 
         StringBuilder sbFeature = new StringBuilder();
         //char unigram feature
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("U[-2,0]=").Append(pre2Char);
 //        addFeature(sbFeature, featureVec, featureMap);
 
-        sbFeature.delete(0, sbFeature.length());
+        sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(preChar).Append('1');
         addFeature(sbFeature, featureVec, featureMap);
 
-        sbFeature.delete(0, sbFeature.length());
+        sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(curChar).Append('2');
         addFeature(sbFeature, featureVec, featureMap);
 
-        sbFeature.delete(0, sbFeature.length());
+        sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(nextChar).Append('3');
         addFeature(sbFeature, featureVec, featureMap);
 
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("U[2,0]=").Append(next2Char);
 //        addFeature(sbFeature, featureVec, featureMap);
 
         //char bigram feature
-        sbFeature.delete(0, sbFeature.length());
+        sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(pre2Char).Append("/").Append(preChar).Append('4');
         addFeature(sbFeature, featureVec, featureMap);
 
-        sbFeature.delete(0, sbFeature.length());
+        sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(preChar).Append("/").Append(curChar).Append('5');
         addFeature(sbFeature, featureVec, featureMap);
 
-        sbFeature.delete(0, sbFeature.length());
+        sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(curChar).Append("/").Append(nextChar).Append('6');
         addFeature(sbFeature, featureVec, featureMap);
 
-        sbFeature.delete(0, sbFeature.length());
+        sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(nextChar).Append("/").Append(next2Char).Append('7');
         addFeature(sbFeature, featureVec, featureMap);
 
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("B[-2,0]=").Append(pre2Char).Append("/").Append(curChar);
 //        addFeature(sbFeature, featureVec, featureMap);
 //
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("B[-1,1]=").Append(preChar).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featureVec, featureMap);
 //
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("B[0,2]=").Append(curChar).Append("/").Append(next2Char);
 //        addFeature(sbFeature, featureVec, featureMap);
 
         //char trigram feature
-//        sbFeature.delete(0, sbFeature.length());
+//        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("T[-1,0]=").Append(preChar).Append("/").Append(curChar).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featureVec, featureMap);
         sbFeature = null;
@@ -150,7 +150,7 @@ public class CWSInstance : Instance
 //
 //        trigram.Append("/" + CharType.get(sentence.charAt(position)));
 //
-//        if (position < sentence.length() - 1)
+//        if (position < sentence.Length - 1)
 //            trigram.Append("/" + CharType.get(sentence.charAt(position + 1)));
 //        else
 //            trigram.Append("/_EL_");
@@ -158,16 +158,16 @@ public class CWSInstance : Instance
 //        addFeature("cTT=" + trigram, featureVec, featureMap);
 
         //dictionary feature
-//        int[] begin = new int[sentence.length()];
-//        int[] middle = new int[sentence.length()];
-//        int[] end = new int[sentence.length()];
+//        int[] begin = new int[sentence.Length];
+//        int[] middle = new int[sentence.Length];
+//        int[] end = new int[sentence.Length];
 //        // 查词典
-//        for (int i = 0; i < sentence.length(); i++)
+//        for (int i = 0; i < sentence.Length; i++)
 //        {
 //            int maxPre = 0;
 //            int offset = -1;
 //            int state = 1;
-//            while (state > 0 && i + ++offset < sentence.length())
+//            while (state > 0 && i + ++offset < sentence.Length)
 //            {
 //                state = dat.transition(sentence.charAt(i + offset), state);
 //                if (dat.output(state) != null)
@@ -198,8 +198,8 @@ public class CWSInstance : Instance
 
     protected void initFeatureMatrix(string sentence, FeatureMap featureMap)
     {
-        featureMatrix = new int[sentence.length()][];
-        for (int i = 0; i < sentence.length(); i++)
+        featureMatrix = new int[sentence.Length][];
+        for (int i = 0; i < sentence.Length; i++)
         {
             featureMatrix[i] = extractFeature(sentence, featureMap, i);
         }

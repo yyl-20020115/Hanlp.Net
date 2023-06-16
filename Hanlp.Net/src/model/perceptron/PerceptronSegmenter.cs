@@ -120,7 +120,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
      */
     public bool learn(params string[] words)
     {
-//        for (int i = 0; i < words.length; i++) // 防止传入带词性的词语
+//        for (int i = 0; i < words.Length; i++) // 防止传入带词性的词语
 //        {
 //            int index = words[i].indexOf('/');
 //            if (index > 0)

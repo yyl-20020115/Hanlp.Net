@@ -6,14 +6,14 @@ public class BigramTokenizer : ITokenizer
 {
     public string[] segment(string text)
     {
-        if (text.length() == 0) return new string[0];
+        if (text.Length == 0) return new string[0];
         char[] charArray = text.ToCharArray();
         CharTable.normalization(charArray);
 
         // 先拆成字
         List<int[]> atomList = new LinkedList<int[]>();
         int start = 0;
-        int end = charArray.length;
+        int end = charArray.Length;
         int offsetAtom = start;
         byte preType = CharType.get(charArray[offsetAtom]);
         byte curType;

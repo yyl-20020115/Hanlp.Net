@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.dictionary;
+using System.Text;
+
 namespace com.hankcs.hanlp.dictionary.ts;
 
 
@@ -116,7 +121,7 @@ public class BaseChineseDictionary
         if (byteArray == null) return false;
         int size = byteArray.nextInt();
         string[] valueArray = new string[size];
-        for (int i = 0; i < valueArray.length; ++i)
+        for (int i = 0; i < valueArray.Length; ++i)
         {
             valueArray[i] = byteArray.nextString();
         }
@@ -138,7 +143,7 @@ public class BaseChineseDictionary
             for (KeyValuePair<string, string> entry : entrySet)
             {
                 char[] charArray = entry.getValue().ToCharArray();
-                _out.writeInt(charArray.length);
+                _out.writeInt(charArray.Length);
                 for (char c : charArray)
                 {
                     _out.writeChar(c);
@@ -163,7 +168,7 @@ public class BaseChineseDictionary
 
     protected static string segLongest(char[] charArray, DoubleArrayTrie<string> trie)
     {
-        StringBuilder sb = new StringBuilder(charArray.length);
+        StringBuilder sb = new StringBuilder(charArray.Length);
         BaseSearcher searcher = getSearcher(charArray, trie);
         KeyValuePair<string, string> entry;
         int p = 0;  // 当前处理到什么位置
@@ -178,10 +183,10 @@ public class BaseChineseDictionary
                 ++p;
             }
             sb.Append(entry.getValue());
-            p = offset + entry.getKey().length();
+            p = offset + entry.getKey().Length;
         }
         // 补足没查到的词
-        while (p < charArray.length)
+        while (p < charArray.Length)
         {
             sb.Append(charArray[p]);
             ++p;
@@ -191,23 +196,23 @@ public class BaseChineseDictionary
 
     protected static string segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<string> trie)
     {
-        final string[] wordNet = new string[charArray.length];
-        final int[] lengthNet = new int[charArray.length];
-        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<string>()
+         string[] wordNet = new string[charArray.Length];
+         int[] lengthNet = new int[charArray.Length];
+        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie<string>.IHit<string>()
         {
             //@Override
             public void hit(int begin, int end, string value)
             {
-                int length = end - begin;
-                if (length > lengthNet[begin])
+                int Length = end - begin;
+                if (Length > lengthNet[begin])
                 {
                     wordNet[begin] = value;
-                    lengthNet[begin] = length;
+                    lengthNet[begin] = Length;
                 }
             }
         });
-        StringBuilder sb = new StringBuilder(charArray.length);
-        for (int offset = 0; offset < wordNet.length; )
+        StringBuilder sb = new StringBuilder(charArray.Length);
+        for (int offset = 0; offset < wordNet.Length; )
         {
             if (wordNet[offset] == null)
             {
@@ -234,14 +239,14 @@ public class BaseChineseDictionary
         DoubleArrayTrie<string> trie;
 
         protected Searcher(char[] c, DoubleArrayTrie<string> trie)
+        :base(c)
         {
-            super(c);
             this.trie = trie;
         }
 
         protected Searcher(string text, DoubleArrayTrie<string> trie)
+        : base(c)
         {
-            super(text);
             this.trie = trie;
         }
 
@@ -250,7 +255,7 @@ public class BaseChineseDictionary
         {
             // 保证首次调用找到一个词语
             KeyValuePair<string, string> result = null;
-            while (begin < c.length)
+            while (begin < c.Length)
             {
                 LinkedList<KeyValuePair<string, string>> entryList = trie.commonPrefixSearchWithValue(c, begin);
                 if (entryList.size() == 0)
@@ -261,7 +266,7 @@ public class BaseChineseDictionary
                 {
                     result = entryList.getLast();
                     offset = begin;
-                    begin += result.getKey().length();
+                    begin += result.getKey().Length;
                     break;
                 }
             }

@@ -775,7 +775,7 @@ public class Nature
         idMap.put(name, ordinal);
         Nature[] extended = new Nature[idMap.size()];
         if (values != null)
-            System.arraycopy(values, 0, extended, 0, values.length);
+            System.arraycopy(values, 0, extended, 0, values.Length);
         extended[ordinal] = this;
         values = extended;
     }

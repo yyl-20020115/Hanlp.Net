@@ -78,19 +78,19 @@ public class CRFModel : ICacheAble
         if (!lineIterator.hasNext()) return null;
         logger.info(lineIterator.next());   // verson
         logger.info(lineIterator.next());   // cost-factor
-        int maxid = int.parseInt(lineIterator.next().substring("maxid:".length()).trim());
+        int maxid = int.parseInt(lineIterator.next().substring("maxid:".Length).trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
         string line;
         int id = 0;
         CRFModel.tag2id = new HashMap<string, int>();
-        while ((line = lineIterator.next()).length() != 0)
+        while ((line = lineIterator.next()).Length != 0)
         {
             CRFModel.tag2id.put(line, id);
             ++id;
         }
         CRFModel.id2tag = new string[CRFModel.tag2id.size()];
-        final int size = CRFModel.id2tag.length;
+        final int size = CRFModel.id2tag.Length;
         for (KeyValuePair<string, int> entry : CRFModel.tag2id.entrySet())
         {
             CRFModel.id2tag[entry.getValue()] = entry.getKey();
@@ -98,7 +98,7 @@ public class CRFModel : ICacheAble
         TreeMap<string, FeatureFunction> featureFunctionMap = new TreeMap<string, FeatureFunction>();  // 构建trie树的时候用
         TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
         CRFModel.featureTemplateList = new LinkedList<FeatureTemplate>();
-        while ((line = lineIterator.next()).length() != 0)
+        while ((line = lineIterator.next()).Length != 0)
         {
             if (!"B".equals(line))
             {
@@ -119,7 +119,7 @@ public class CRFModel : ICacheAble
             featureFunctionList.put(b, null);
         }
 
-        while ((line = lineIterator.next()).length() != 0)
+        while ((line = lineIterator.next()).Length != 0)
         {
             string[] args = line.Split(" ", 2);
             char[] charArray = args[1].ToCharArray();
@@ -182,7 +182,7 @@ public class CRFModel : ICacheAble
     {
         int size = table.size();
         if (size == 0) return;
-        int tagSize = id2tag.length;
+        int tagSize = id2tag.Length;
         double[][] net = new double[size][tagSize];
         for (int i = 0; i < size; ++i)
         {
@@ -197,7 +197,7 @@ public class CRFModel : ICacheAble
         {
             double maxScore = -1e10;
             int bestTag = 0;
-            for (int tag = 0; tag < net[0].length; ++tag)
+            for (int tag = 0; tag < net[0].Length; ++tag)
             {
                 if (net[0][tag] > maxScore)
                 {
@@ -296,13 +296,13 @@ public class CRFModel : ICacheAble
     //@Override
     public void save(DataOutputStream _out)
     {
-        _out.writeInt(id2tag.length);
+        _out.writeInt(id2tag.Length);
         for (string tag : id2tag)
         {
             _out.writeUTF(tag);
         }
         FeatureFunction[] valueArray = featureFunctionTrie.getValueArray(new FeatureFunction[0]);
-        _out.writeInt(valueArray.length);
+        _out.writeInt(valueArray.Length);
         for (FeatureFunction featureFunction : valueArray)
         {
             featureFunction.save(_out);
@@ -315,7 +315,7 @@ public class CRFModel : ICacheAble
         }
         if (matrix != null)
         {
-            _out.writeInt(matrix.length);
+            _out.writeInt(matrix.Length);
             for (double[] line : matrix)
             {
                 for (double v : line)
@@ -339,13 +339,13 @@ public class CRFModel : ICacheAble
             int size = byteArray.nextInt();
             id2tag = new string[size];
             tag2id = new HashMap<string, int>(size);
-            for (int i = 0; i < id2tag.length; i++)
+            for (int i = 0; i < id2tag.Length; i++)
             {
                 id2tag[i] = byteArray.nextUTF();
                 tag2id.put(id2tag[i], i);
             }
             FeatureFunction[] valueArray = new FeatureFunction[byteArray.nextInt()];
-            for (int i = 0; i < valueArray.length; i++)
+            for (int i = 0; i < valueArray.Length; i++)
             {
                 valueArray[i] = new FeatureFunction();
                 valueArray[i].load(byteArray);

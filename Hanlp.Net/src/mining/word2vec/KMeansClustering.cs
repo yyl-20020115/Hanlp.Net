@@ -92,7 +92,7 @@ public final class KMeansClustering
             // Save the K-means classes
             Console.Error.WriteLine("now saving the result of K-means clustering to the file %s\n", outFile);
             List<string>[] cluster = new List[clcn];
-            for (int i = 0; i < cluster.length; i++)
+            for (int i = 0; i < cluster.Length; i++)
             {
                 cluster[i] = new LinkedList<string>();
             }
@@ -100,7 +100,7 @@ public final class KMeansClustering
             {
                 cluster[cl[i]].add(reader.getWord(i));
             }
-            for (int i = 0; i < cluster.length; i++)
+            for (int i = 0; i < cluster.Length; i++)
             {
                 for (string word : cluster[i])
                 {

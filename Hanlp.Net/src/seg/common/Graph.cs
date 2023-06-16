@@ -33,7 +33,7 @@ public class Graph
      */
     public Graph(Vertex[] vertexes)
     {
-        int size = vertexes.length;
+        int size = vertexes.Length;
         this.vertexes = vertexes;
         edgesTo = new List[size];
         for (int i = 0; i < size; ++i)
@@ -77,7 +77,7 @@ public class Graph
     {
         StringBuffer sb = new StringBuffer();
         sb.Append("========按终点打印========\n");
-        for (int to = 0; to < edgesTo.length; ++to)
+        for (int to = 0; to < edgesTo.Length; ++to)
         {
             List<EdgeFrom> edgeFromList = edgesTo[to];
             for (EdgeFrom edgeFrom : edgeFromList)

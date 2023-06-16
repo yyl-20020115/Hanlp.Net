@@ -216,7 +216,7 @@ public class Encoder
 
         for (int i = 0; i < threadNum; i++)
         {
-            CRFEncoderThread thread = new CRFEncoderThread(alpha.length);
+            CRFEncoderThread thread = new CRFEncoderThread(alpha.Length);
             thread.start_i = i;
             thread.size = x.size();
             thread.threadNum = threadNum;
@@ -458,7 +458,7 @@ public class Encoder
 
     public static void main(string[] args)
     {
-        if (args.length < 3)
+        if (args.Length < 3)
         {
             Console.Error.WriteLine("incorrect No. of args");
             return;

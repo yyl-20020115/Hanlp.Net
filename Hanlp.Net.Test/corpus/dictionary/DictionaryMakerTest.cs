@@ -19,7 +19,7 @@ public class DictionaryMakerTest : TestCase
 //        try
 //        {
 //            String text = IOUtil.readTxt(file.getPath());
-//            int Length = text.Length();
+//            int Length = text.Length;
 //            text = addW(text, "：");
 //            text = addW(text, "？");
 //            text = addW(text, "，");
@@ -39,7 +39,7 @@ public class DictionaryMakerTest : TestCase
 //            text = addW(text, "、");
 //            text = addW(text, "《");
 //            text = addW(text, "》");
-//            if (text.Length() != Length)
+//            if (text.Length != Length)
 //            {
 //                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
 //                bw.write(text);
@@ -96,7 +96,7 @@ public class DictionaryMakerTest : TestCase
 ////                Console.Error.WriteLine(line);
 //            int biFrequency = int.parseInt(params[1]);
 //            CoreDictionary.Attribute attribute = CoreDictionary.get(first + second);
-//            if (attribute != null && (first.Length() == 1 || second.Length() == 1))
+//            if (attribute != null && (first.Length == 1 || second.Length == 1))
 //            {
 //                Console.WriteLine(line);
 //                continue;
@@ -125,7 +125,7 @@ public class DictionaryMakerTest : TestCase
 //        {
 //            String key = entry.getKey();
 //            int dF = entry.getValue().getFrequency("D");
-//            if (key.Length() == 1 && 0 < dF && dF < 100)
+//            if (key.Length == 1 && 0 < dF && dF < 100)
 //            {
 //                CoreDictionary.Attribute attribute = CoreDictionary.get(key);
 //                if (nameFollowers.Contains(key)

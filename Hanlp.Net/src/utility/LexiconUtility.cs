@@ -100,7 +100,7 @@ public class LexiconUtility
     {
         if (natures == null) return false;
 
-        CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natures, new int[natures.length]);
+        CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natures, new int[natures.Length]);
         System.Array.Fill(attribute.frequency, 1);
         return setAttribute(word, attribute);
     }

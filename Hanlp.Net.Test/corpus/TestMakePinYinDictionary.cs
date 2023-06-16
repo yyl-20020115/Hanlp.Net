@@ -214,13 +214,13 @@ public class TestMakePinYinDictionary : TestCase
 //
 //        Iterator<Map.Entry<String, String>> iterator = table.entrySet().iterator();
 //        Map.Entry<String, String> pre = iterator.next();
-//        String prePy = pre.getKey().substring(0, pre.getKey().Length() - 1);
-//        String preYd = pre.getKey().substring(pre.getKey().Length() - 1);
+//        String prePy = pre.getKey().substring(0, pre.getKey().Length - 1);
+//        String preYd = pre.getKey().substring(pre.getKey().Length - 1);
 //        while (iterator.hasNext())
 //        {
 //            Map.Entry<String, String> current = iterator.next();
-//            String currentPy = current.getKey().substring(0, current.getKey().Length() - 1);
-//            String currentYd = current.getKey().substring(current.getKey().Length() - 1);
+//            String currentPy = current.getKey().substring(0, current.getKey().Length - 1);
+//            String currentYd = current.getKey().substring(current.getKey().Length - 1);
 //            // handle it
 //            if (!current.getValue().Contains(","))
 //            {
@@ -266,7 +266,7 @@ public class TestMakePinYinDictionary : TestCase
 //                String word = entry.getKey();
 //                String pinyin = entry.getValue();
 //                String[] pinyinStringArray = entry.getValue().Split("[,\\s　]");
-//                if (word.Length() != pinyinStringArray.Length || !TonePinyinString2PinyinConverter.valid(pinyinStringArray))
+//                if (word.Length != pinyinStringArray.Length || !TonePinyinString2PinyinConverter.valid(pinyinStringArray))
 //                {
 //                    Console.WriteLine(entry);
 //                    return false;

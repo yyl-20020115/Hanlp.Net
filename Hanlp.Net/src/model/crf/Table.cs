@@ -27,7 +27,7 @@ public class Table
     public string toString()
     {
         if (v == null) return "null";
-        final StringBuilder sb = new StringBuilder(v.length * v[0].length * 2);
+        final StringBuilder sb = new StringBuilder(v.Length * v[0].Length * 2);
         for (string[] line : v)
         {
             for (string element : line)
@@ -48,18 +48,18 @@ public class Table
     public string get(int x, int y)
     {
         if (x < 0) return HEAD + x;
-        if (x >= v.length) return HEAD + "+" + (x - v.length + 1);
+        if (x >= v.Length) return HEAD + "+" + (x - v.Length + 1);
 
         return v[x][y];
     }
 
     public void setLast(int x, string t)
     {
-        v[x][v[x].length - 1] = t;
+        v[x][v[x].Length - 1] = t;
     }
 
     public int size()
     {
-        return v.length;
+        return v.Length;
     }
 }

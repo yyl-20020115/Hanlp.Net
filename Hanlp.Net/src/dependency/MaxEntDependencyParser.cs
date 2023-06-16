@@ -79,14 +79,14 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         int index = from;
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
-            Node w = i >= 0 && i < nodeArray.length ? nodeArray[i] : Node.NULL;
+            Node w = i >= 0 && i < nodeArray.Length ? nodeArray[i] : Node.NULL;
             context.add(w.compiledWord + "i" + (i - index));      // 在尾巴上做个标记，不然特征冲突了
             context.add(w.label + "i" + (i - index));
         }
         index = to;
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
-            Node w = i >= 0 && i < nodeArray.length ? nodeArray[i] : Node.NULL;
+            Node w = i >= 0 && i < nodeArray.Length ? nodeArray[i] : Node.NULL;
             context.add(w.compiledWord + "j" + (i - index));      // 在尾巴上做个标记，不然特征冲突了
             context.add(w.label + "j" + (i - index));
         }

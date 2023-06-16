@@ -220,7 +220,7 @@ public class Document : Serializable
             sb.Append(sentence);
             sb.Append(' ');
         }
-        if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
+        if (sb.Length > 0) sb.deleteCharAt(sb.Length - 1);
         return sb.toString();
     }
 

@@ -38,14 +38,14 @@ public class AveragedPerceptron : LinearModel
      */
     public void update(int[] goldIndex, int[] predictIndex, double[] total, int[] timestamp, int current)
     {
-        for (int i = 0; i < goldIndex.length; ++i)
+        for (int i = 0; i < goldIndex.Length; ++i)
         {
             if (goldIndex[i] == predictIndex[i])
                 continue;
             else
             {
                 update(goldIndex[i], 1, total, timestamp, current);
-                if (predictIndex[i] >= 0 && predictIndex[i] < parameter.length)
+                if (predictIndex[i] >= 0 && predictIndex[i] < parameter.Length)
                     update(predictIndex[i], -1, total, timestamp, current);
                 else
                 {
@@ -89,7 +89,7 @@ public class AveragedPerceptron : LinearModel
 
     public void average(double[] total, int[] timestamp, int current)
     {
-        for (int i = 0; i < parameter.length; i++)
+        for (int i = 0; i < parameter.Length; i++)
         {
             parameter[i] = (float) ((total[i] + (current - timestamp[i]) * parameter[i]) / current);
         }

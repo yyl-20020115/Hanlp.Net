@@ -28,8 +28,8 @@ public class Probability : ICacheAble
             //@Override
             public bool load(ByteArray byteArray, _ValueArray valueArray)
             {
-                BaseNode<int>[] nchild = new BaseNode[child.length - 1];    // 兼容旧模型
-                System.arraycopy(child, 0, nchild, 0, nchild.length);
+                BaseNode<int>[] nchild = new BaseNode[child.Length - 1];    // 兼容旧模型
+                System.arraycopy(child, 0, nchild, 0, nchild.Length);
                 child = nchild;
                 return super.load(byteArray, valueArray);
             }
@@ -130,7 +130,7 @@ public class Probability : ICacheAble
 
     static private string convert(char[]... keyArray)
     {
-        StringBuilder sbKey = new StringBuilder(keyArray.length * 2);
+        StringBuilder sbKey = new StringBuilder(keyArray.Length * 2);
         for (char[] key : keyArray)
         {
             sbKey.Append(key[0]);
@@ -144,7 +144,7 @@ public class Probability : ICacheAble
     {
         _out.writeInt(total);
         int[] valueArray = d.getValueArray(new int[0]);
-        _out.writeInt(valueArray.length);
+        _out.writeInt(valueArray.Length);
         for (int v : valueArray)
         {
             _out.writeInt(v);
@@ -158,7 +158,7 @@ public class Probability : ICacheAble
         total = byteArray.nextInt();
         int size = byteArray.nextInt();
         int[] valueArray = new int[size];
-        for (int i = 0; i < valueArray.length; ++i)
+        for (int i = 0; i < valueArray.Length; ++i)
         {
             valueArray[i] = byteArray.nextInt();
         }

@@ -34,7 +34,7 @@ public class CharacterBasedGenerativeModelTest : TestCase
 //    {
 //        CharacterBasedGenerativeModel model = new CharacterBasedGenerativeModel();
 //        model.load(ByteArray.createByteArray(HanLP.Config.HMMSegmentModelPath));
-//        String text = "我实现了一个基于Character Based TriGram的分词器";
+//        String text = "我实现了一个基于char Based TriGram的分词器";
 //        char[] sentence = text.ToCharArray();
 //        char[] tag = model.tag(sentence);
 //
@@ -78,7 +78,7 @@ public class CharacterBasedGenerativeModelTest : TestCase
 //    public void testSegment() 
 //    {
 //        HanLP.Config.ShowTermNature = false;
-//        String text = "我实现了一个基于Character Based TriGram的分词器";
+//        String text = "我实现了一个基于char Based TriGram的分词器";
 //        Segment segment = new HMMSegment();
 //        List<Term> termList = segment.seg(text);
 //        Console.WriteLine(termList);

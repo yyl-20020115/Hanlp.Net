@@ -118,19 +118,19 @@ public class DecoderFeatureIndex : FeatureIndex
             BufferedReader br = new BufferedReader(isr);
             string line;
 
-            int version = int.valueOf(br.readLine().substring("version: ".length()));
-            costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".length()));
-            maxid_ = int.valueOf(br.readLine().substring("maxid: ".length()));
-            xsize_ = int.valueOf(br.readLine().substring("xsize: ".length()));
+            int version = int.valueOf(br.readLine().substring("version: ".Length));
+            costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".Length));
+            maxid_ = int.valueOf(br.readLine().substring("maxid: ".Length));
+            xsize_ = int.valueOf(br.readLine().substring("xsize: ".Length));
             System._out.println("Done reading meta-info");
             br.readLine();
 
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 y_.add(line);
             }
             System._out.println("Done reading labels");
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 if (line.startsWith("U"))
                 {
@@ -142,13 +142,13 @@ public class DecoderFeatureIndex : FeatureIndex
                 }
             }
             System._out.println("Done reading templates");
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 string[] content = line.trim().Split(" ");
                 dat.put(content[1], int.valueOf(content[0]));
             }
             List<Double> alpha = new ArrayList<Double>();
-            while ((line = br.readLine()) != null && line.length() > 0)
+            while ((line = br.readLine()) != null && line.Length > 0)
             {
                 alpha.add(Double.valueOf(line));
             }
@@ -197,7 +197,7 @@ public class DecoderFeatureIndex : FeatureIndex
 
     public static void main(string[] args)
     {
-        if (args.length < 2)
+        if (args.Length < 2)
         {
             return;
         }

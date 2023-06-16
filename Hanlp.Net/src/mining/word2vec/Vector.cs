@@ -31,7 +31,7 @@ public class Vector
 
     public int size()
     {
-        return elementArray.length;
+        return elementArray.Length;
     }
 
     public float dot(Vector other)
@@ -80,7 +80,7 @@ public class Vector
     public Vector minus(Vector other)
     {
         float[] result = new float[size()];
-        for (int i = 0; i < result.length; i++)
+        for (int i = 0; i < result.Length; i++)
         {
             result[i] = elementArray[i] - other.elementArray[i];
         }
@@ -90,7 +90,7 @@ public class Vector
     public Vector add(Vector other)
     {
         float[] result = new float[size()];
-        for (int i = 0; i < result.length; i++)
+        for (int i = 0; i < result.Length; i++)
         {
             result[i] = elementArray[i] + other.elementArray[i];
         }
@@ -99,7 +99,7 @@ public class Vector
 
     public Vector addToSelf(Vector other)
     {
-        for (int i = 0; i < elementArray.length; i++)
+        for (int i = 0; i < elementArray.Length; i++)
         {
             elementArray[i] = elementArray[i] + other.elementArray[i];
         }
@@ -108,7 +108,7 @@ public class Vector
 
     public Vector divideToSelf(int n)
     {
-        for (int i = 0; i < elementArray.length; i++)
+        for (int i = 0; i < elementArray.Length; i++)
         {
             elementArray[i] = elementArray[i] / n;
         }
@@ -117,7 +117,7 @@ public class Vector
 
     public Vector divideToSelf(float f)
     {
-        for (int i = 0; i < elementArray.length; i++)
+        for (int i = 0; i < elementArray.Length; i++)
         {
             elementArray[i] = elementArray[i] / f;
         }

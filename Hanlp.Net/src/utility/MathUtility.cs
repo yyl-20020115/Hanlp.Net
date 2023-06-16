@@ -47,9 +47,9 @@ public class MathUtility
     public static double average(double array[])
     {
         double sum = 0;
-        for (int i = 0; i < array.length; i++)
+        for (int i = 0; i < array.Length; i++)
             sum += array[i];
-        return sum / array.length;
+        return sum / array.Length;
     }
 
     /**
@@ -95,7 +95,7 @@ public class MathUtility
 
         double sum = 0.0;
         //通过减去最大值防止浮点数溢出
-        for (int i = 0; i < predictionScores.length; i++)
+        for (int i = 0; i < predictionScores.Length; i++)
         {
             predictionScores[i] = Math.exp(predictionScores[i] - max);
             sum += predictionScores[i];
@@ -103,7 +103,7 @@ public class MathUtility
 
         if (sum != 0.0)
         {
-            for (int i = 0; i < predictionScores.length; i++)
+            for (int i = 0; i < predictionScores.Length; i++)
             {
                 predictionScores[i] /= sum;
             }

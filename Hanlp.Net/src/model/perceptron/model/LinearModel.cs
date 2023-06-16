@@ -199,7 +199,7 @@ public class LinearModel : ICacheAble
             for (KeyValuePair<string, int> entry : featureIdSet)
             {
                 bw.write(entry.getKey());
-                if (featureIdSet.size() == parameter.length)
+                if (featureIdSet.size() == parameter.Length)
                 {
                     bw.write("\t");
                     bw.write(string.valueOf(parameter[entry.getValue()]));

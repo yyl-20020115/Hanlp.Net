@@ -120,7 +120,7 @@ public abstract class FeatureIndex
         int row = int.valueOf(idxStr[0]);
         int col = int.valueOf(idxStr[1]);
         int pos = row + cur;
-        if (row < -EOS.length || row > EOS.length || col < 0 || col >= tagger.xsize())
+        if (row < -EOS.Length || row > EOS.Length || col < 0 || col >= tagger.xsize())
         {
             return null;
         }
@@ -153,7 +153,7 @@ public abstract class FeatureIndex
             {
                 sb.Append(tmp);
             }
-            else if (tmp.length() > 0)
+            else if (tmp.Length > 0)
             {
                 string[] tuple = tmp.Split("]");
                 string[] idx = tuple[0].replace("[", "").Split(",");
@@ -162,7 +162,7 @@ public abstract class FeatureIndex
                 {
                     sb.Append(r);
                 }
-                if (tuple.length > 1)
+                if (tuple.Length > 1)
                 {
                     sb.Append(tuple[1]);
                 }
@@ -177,7 +177,7 @@ public abstract class FeatureIndex
         for (string tmpl : templs)
         {
             string featureID = applyRule(tmpl, curPos, tagger);
-            if (featureID == null || featureID.length() == 0)
+            if (featureID == null || featureID.Length == 0)
             {
                 Console.Error.WriteLine("format error");
                 return false;

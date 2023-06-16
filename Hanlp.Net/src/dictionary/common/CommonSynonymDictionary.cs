@@ -59,12 +59,12 @@ public class CommonSynonymDictionary
             {
                 string[] args = line.Split(" ");
                 synonymList = Synonym.create(args);
-                char type = args[0].charAt(args[0].length() - 1);
+                char type = args[0].charAt(args[0].Length - 1);
                 for (Synonym synonym : synonymList)
                 {
                     treeMap.put(synonym.realWord, new SynonymItem(synonym, synonymList, type));
                     // 这里稍微做个test
-                    //assert synonym.getIdString().startsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].length() - 1)) : "词典有问题" + line + synonym.toString();
+                    //assert synonym.getIdString().startsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].Length - 1)) : "词典有问题" + line + synonym.toString();
                 }
             }
             bw.close();
@@ -122,9 +122,9 @@ public class CommonSynonymDictionary
     public string rewriteQuickly(string text)
     {
         assert text != null;
-        StringBuilder sbOut = new StringBuilder((int) (text.length() * 1.2));
+        StringBuilder sbOut = new StringBuilder((int) (text.Length * 1.2));
         string preWord = Predefine.TAG_BIGIN;
-        for (int i = 0; i < text.length(); ++i)
+        for (int i = 0; i < text.Length; ++i)
         {
             int state = 1;
             state = trie.transition(text.charAt(i), state);
@@ -134,7 +134,7 @@ public class CommonSynonymDictionary
                 int to = i + 1;
                 int end = - 1;
                 SynonymItem value = null;
-                for (; to < text.length(); ++to)
+                for (; to < text.Length; ++to)
                 {
                     state = trie.transition(text.charAt(to), state);
                     if (state < 0) break;
@@ -179,7 +179,7 @@ public class CommonSynonymDictionary
     public string rewrite(string text)
     {
         List<Term> termList = StandardTokenizer.segment(text.ToCharArray());
-        StringBuilder sbOut = new StringBuilder((int) (text.length() * 1.2));
+        StringBuilder sbOut = new StringBuilder((int) (text.Length * 1.2));
         string preWord = Predefine.TAG_BIGIN;
         for (Term term : termList)
         {

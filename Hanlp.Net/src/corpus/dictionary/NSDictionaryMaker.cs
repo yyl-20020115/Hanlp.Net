@@ -125,7 +125,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 {
                     string value = word.getValue();
                     int longestSuffixLength = PlaceSuffixDictionary.dictionary.getLongestSuffixLength(value);
-                    int wordLength = value.length() - longestSuffixLength;
+                    int wordLength = value.Length - longestSuffixLength;
                     if (longestSuffixLength == 0 || wordLength == 0)
                     {
                         word.setLabel(NS.G.toString());

@@ -8,6 +8,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.summary;
@@ -168,20 +169,19 @@ public class TfIdfCounter : KeywordExtractor
 
     private List<KeyValuePair<string, Double>> topN(Dictionary<string, Double> tfidfs, int size)
     {
-        MaxHeap<KeyValuePair<string, Double>> heap = new MaxHeap<KeyValuePair<string, Double>>(size, new Comparator<KeyValuePair<string, Double>>()
-        {
-            //@Override
-            public int compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
-            {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-
+        MaxHeap<KeyValuePair<string, Double>> heap = new MaxHeap<KeyValuePair<string, Double>>(size, new CT());
         heap.addAll(tfidfs.entrySet());
         return heap.toList();
     }
-
-    public Set<Object> documents()
+    public class CT: IComparer<KeyValuePair<string, Double>>()
+    {
+        //@Override
+        public int Compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
+        {
+            return o1.getValue().compareTo(o2.getValue());
+        }
+    }
+    public HashSet<Object> documents()
     {
         return tfMap.keySet();
     }
@@ -203,10 +203,10 @@ public class TfIdfCounter : KeywordExtractor
 
     public Dictionary<string, Double> allTf()
     {
-        Dictionary<string, Double> result = new HashMap<string, Double>();
-        for (Dictionary<string, Double> d : tfMap.values())
+        Dictionary<string, Double> result = new ();
+        foreach (Dictionary<string, Double> d in tfMap.values())
         {
-            for (KeyValuePair<string, Double> tf : d.entrySet())
+            foreach (KeyValuePair<string, Double> tf in d.entrySet())
             {
                 Double f = result.get(tf.getKey());
                 if (f == null)
@@ -225,23 +225,23 @@ public class TfIdfCounter : KeywordExtractor
 
     private static List<KeyValuePair<string, Double>> sort(Dictionary<string, Double> map)
     {
-        List<KeyValuePair<string, Double>> list = new ArrayList<KeyValuePair<string, Double>>(map.entrySet());
-        Collections.sort(list, new Comparator<KeyValuePair<string, Double>>()
-        {
-            //@Override
-            public int compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
-            {
-                return o2.getValue().compareTo(o1.getValue());
-            }
-        });
+        List<KeyValuePair<string, Double>> list = new (map.entrySet());
+        Collections.sort(list, new CN());
 
         return list;
     }
-
+    public class CN: IComparer<KeyValuePair<string, Double>>
+    {
+        //@Override
+        public int Compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
+        {
+            return o2.getValue().compareTo(o1.getValue());
+        }
+    }
     private static List<KeyValuePair<string, int>> doubleToInteger(List<KeyValuePair<string, Double>> list)
     {
         List<KeyValuePair<string, int>> result = new ArrayList<KeyValuePair<string, int>>(list.size());
-        for (KeyValuePair<string, Double> entry : list)
+        foreach (KeyValuePair<string, Double> entry in list)
         {
             result.add(new AbstractMap.SimpleEntry<string, int>(entry.getKey(), entry.getValue().intValue()));
         }

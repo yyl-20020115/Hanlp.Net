@@ -102,7 +102,7 @@ public class PlaceDictionary
                 int offset = 0;
                 for (int i = 0; i < begin; ++i)
                 {
-                    offset += wordArray[i].realWord.length();
+                    offset += wordArray[i].realWord.Length;
                 }
                 wordNetOptimum.insert(offset, new Vertex(Predefine.TAG_PLACE, name, ATTRIBUTE, WORD_ID), wordNetAll);
             }

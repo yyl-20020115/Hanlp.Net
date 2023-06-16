@@ -49,7 +49,7 @@ public class Word : IWord
     {
         if (param == null) return null;
         int cutIndex = param.lastIndexOf('/');
-        if (cutIndex <= 0 || cutIndex == param.length() - 1)
+        if (cutIndex <= 0 || cutIndex == param.Length - 1)
         {
             logger.warning("使用 " + param + "创建单个单词失败");
             return null;
@@ -83,7 +83,7 @@ public class Word : IWord
     }
 
     //@Override
-    public int length()
+    public int Length
     {
         return value.Length;
     }

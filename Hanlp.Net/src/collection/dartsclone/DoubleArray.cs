@@ -88,7 +88,7 @@ public class DoubleArray : Serializable
         {
             _out = new DataOutputStream(new BufferedOutputStream(
                     stream));
-            for (int i = 0; i < _array.length; ++i)
+            for (int i = 0; i < _array.Length; ++i)
             {
                 _out.writeInt(_array[i]);
             }
@@ -159,7 +159,7 @@ public class DoubleArray : Serializable
 
     /**
      * Returns the keys that begins with the given key and its corresponding values.
-     * The first of the returned pair represents the length of the found key.
+     * The first of the returned pair represents the Length of the found key.
      *
      * @param key
      * @param offset
@@ -175,7 +175,7 @@ public class DoubleArray : Serializable
         int nodePos = 0;
         // nodePos ^= unit.offset();
         nodePos ^= ((unit >>> 10) << ((unit & (1 << 9)) >>> 6));
-        for (int i = offset; i < key.length; ++i)
+        for (int i = offset; i < key.Length; ++i)
         {
             byte b = key[i];
             nodePos ^= (b & 0xff);
@@ -209,7 +209,7 @@ public class DoubleArray : Serializable
      */
     public int size()
     {
-        return _array.length;
+        return _array.Length;
     }
 
     private static readonly int UNIT_SIZE = 4; // sizeof(int)

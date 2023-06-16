@@ -43,7 +43,7 @@ public class Document : BagOfWordsDocument
         // 将其转为数组类型，方便处理
         this.category = catalog.addCategory(category);
         // 统计词频
-        for (int i = 0; i < tokenArray.length; i++)
+        for (int i = 0; i < tokenArray.Length; i++)
         {
             tfMap.add(lexicon.addWord(tokenArray[i]));
         }
@@ -57,7 +57,7 @@ public class Document : BagOfWordsDocument
     public Document(ITrie<int> wordIdTrie, string[] tokenArray)
     {
         super();
-        for (int i = 0; i < tokenArray.length; i++)
+        for (int i = 0; i < tokenArray.Length; i++)
         {
             int id = wordIdTrie.get(tokenArray[i].ToCharArray());
             if (id == null) continue;

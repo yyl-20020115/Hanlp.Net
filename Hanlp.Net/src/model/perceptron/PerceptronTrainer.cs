@@ -110,7 +110,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         logger.start("开始加载训练集...\n");
         Instance[] instances = loadTrainInstances(trainingFile, mutableFeatureMap);
         tagSet._lock();
-        logger.finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.length, mutableFeatureMap.size() * tagSet.size());
+        logger.finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.Length, mutableFeatureMap.size() * tagSet.size());
 
         // 开始训练
         ImmutableFeatureMap immutableFeatureMap = new ImmutableFeatureMap(mutableFeatureMap.featureIdMap, tagSet);
@@ -121,8 +121,8 @@ public abstract class PerceptronTrainer : InstanceConsumer
         {
             AveragedPerceptron model;
             model = new AveragedPerceptron(immutableFeatureMap);
-             double[] total = new double[model.parameter.length];
-             int[] timestamp = new int[model.parameter.length];
+             double[] total = new double[model.parameter.Length];
+             int[] timestamp = new int[model.parameter.Length];
             int current = 0;
             for (int iter = 1; iter <= maxIteration; iter++)
             {
@@ -130,20 +130,20 @@ public abstract class PerceptronTrainer : InstanceConsumer
                 for (Instance instance : instances)
                 {
                     ++current;
-                    int[] guessLabel = new int[instance.length()];
+                    int[] guessLabel = new int[instance.Length];
                     model.viterbiDecode(instance, guessLabel);
-                    for (int i = 0; i < instance.length(); i++)
+                    for (int i = 0; i < instance.Length; i++)
                     {
                         int[] featureVector = instance.getFeatureAt(i);
-                        int[] goldFeature = new int[featureVector.length];
-                        int[] predFeature = new int[featureVector.length];
-                        for (int j = 0; j < featureVector.length - 1; j++)
+                        int[] goldFeature = new int[featureVector.Length];
+                        int[] predFeature = new int[featureVector.Length];
+                        for (int j = 0; j < featureVector.Length - 1; j++)
                         {
                             goldFeature[j] = featureVector[j] * tagSet.size() + instance.tagArray[i];
                             predFeature[j] = featureVector[j] * tagSet.size() + guessLabel[i];
                         }
-                        goldFeature[featureVector.length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.size() + instance.tagArray[i];
-                        predFeature[featureVector.length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.size() + guessLabel[i];
+                        goldFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.size() + instance.tagArray[i];
+                        predFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.size() + guessLabel[i];
                         model.update(goldFeature, predFeature, total, timestamp, current);
                     }
                 }
@@ -167,22 +167,22 @@ public abstract class PerceptronTrainer : InstanceConsumer
         {
             // 多线程用Structure Perceptron
             StructuredPerceptron[] models = new StructuredPerceptron[threadNum];
-            for (int i = 0; i < models.length; i++)
+            for (int i = 0; i < models.Length; i++)
             {
                 models[i] = new StructuredPerceptron(immutableFeatureMap);
             }
 
             TrainingWorker[] workers = new TrainingWorker[threadNum];
-            int job = instances.length / threadNum;
+            int job = instances.Length / threadNum;
             for (int iter = 1; iter <= maxIteration; iter++)
             {
                 Utility.shuffleArray(instances);
                 try
                 {
-                    for (int i = 0; i < workers.length; i++)
+                    for (int i = 0; i < workers.Length; i++)
                     {
                         workers[i] = new TrainingWorker(instances, i * job,
-                                                        i == workers.length - 1 ? instances.length : (i + 1) * job,
+                                                        i == workers.Length - 1 ? instances.Length : (i + 1) * job,
                                                         models[i]);
                         workers[i].start();
                     }
@@ -190,9 +190,9 @@ public abstract class PerceptronTrainer : InstanceConsumer
                     {
                         worker.join();
                     }
-                    for (int j = 0; j < models[0].parameter.length; j++)
+                    for (int j = 0; j < models[0].parameter.Length; j++)
                     {
-                        for (int i = 1; i < models.length; i++)
+                        for (int i = 1; i < models.Length; i++)
                         {
                             models[0].parameter[j] += models[i].parameter[j];
                         }
@@ -331,7 +331,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
             else
             {
                 line = line.trim();
-                if (line.length() != 0)
+                if (line.Length != 0)
                 {
                     storage.add(line);
                 }

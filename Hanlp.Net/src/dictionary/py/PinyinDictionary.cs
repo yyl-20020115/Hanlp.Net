@@ -10,7 +10,11 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.dictionary;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dictionary.py;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.dictionary.py;
 
@@ -47,29 +51,29 @@ public class PinyinDictionary
         // 从文本中载入并且尝试生成dat
         StringDictionary dictionary = new StringDictionary("=");
         if (!dictionary.load(path)) return false;
-        TreeMap<string, Pinyin[]> map = new TreeMap<string, Pinyin[]>();
-        for (KeyValuePair<string, string> entry : dictionary.entrySet())
+        var map = new Dictionary<string, Pinyin[]>();
+        foreach (KeyValuePair<string, string> entry in dictionary)
         {
             string[] args = entry.getValue().Split(",");
-            Pinyin[] pinyinValue = new Pinyin[args.length];
-            for (int i = 0; i < pinyinValue.length; ++i)
+            Pinyin[] pinyinValue = new Pinyin[args.Length];
+            for (int i = 0; i < pinyinValue.Length; ++i)
             {
                 try
                 {
                     Pinyin pinyin = Pinyin.valueOf(args[i]);
                     pinyinValue[i] = pinyin;
                 }
-                catch (IllegalArgumentException e)
+                catch (Exception e)
                 {
                     logger.severe("读取拼音词典" + path + "失败，问题出在【" + entry + "】，异常是" + e);
                     return false;
                 }
             }
-            map.put(entry.getKey(), pinyinValue);
+            map.Add(entry.Key, pinyinValue);
         }
         trie.build(map);
         logger.info("正在缓存双数组" + path);
-        saveDat(path, trie, map.entrySet());
+        saveDat(path, trie, map.ToHashSet());
         return true;
     }
 
@@ -79,11 +83,11 @@ public class PinyinDictionary
         if (byteArray == null) return false;
         int size = byteArray.nextInt();
         Pinyin[][] valueArray = new Pinyin[size][];
-        for (int i = 0; i < valueArray.length; ++i)
+        for (int i = 0; i < valueArray.Length; ++i)
         {
-            int length = byteArray.nextInt();
-            valueArray[i] = new Pinyin[length];
-            for (int j = 0; j < length; ++j)
+            int Length = byteArray.nextInt();
+            valueArray[i] = new Pinyin[Length];
+            for (int j = 0; j < Length; ++j)
             {
                 valueArray[i][j] = pinyins[byteArray.nextInt()];
             }
@@ -96,19 +100,19 @@ public class PinyinDictionary
     {
         try
         {
-            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
+            var _out = new FileStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
             _out.writeInt(entrySet.size());
-            for (KeyValuePair<string, Pinyin[]> entry : entrySet)
+            foreach (KeyValuePair<string, Pinyin[]> entry in entrySet)
             {
                 Pinyin[] value = entry.getValue();
-                _out.writeInt(value.length);
-                for (Pinyin pinyin : value)
+                _out.writeInt(value.Length);
+                foreach (Pinyin pinyin in value)
                 {
                     _out.writeInt(pinyin.ordinal());
                 }
             }
             trie.save(_out);
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -167,41 +171,41 @@ public class PinyinDictionary
 
     protected static List<Pinyin> segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, bool remainNone)
     {
-        final Pinyin[][] wordNet = new Pinyin[charArray.length][];
-        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie.IHit<Pinyin[]>()
-        {
-            //@Override
-            public void hit(int begin, int end, Pinyin[] value)
-            {
-                int length = end - begin;
-                if (wordNet[begin] == null || length > wordNet[begin].length)
-                {
-                    wordNet[begin] = length == 1 ? new Pinyin[]{value[0]} : value;
-                }
-            }
-        });
-        List<Pinyin> pinyinList = new ArrayList<Pinyin>(charArray.length);
-        for (int offset = 0; offset < wordNet.length; )
+        Pinyin[][] wordNet = new Pinyin[charArray.Length][];
+        trie.parseText(charArray, new CT());
+        List<Pinyin> pinyinList = new (charArray.Length);
+        for (int offset = 0; offset < wordNet.Length; )
         {
             if (wordNet[offset] == null)
             {
                 if (remainNone)
                 {
-                    pinyinList.add(Pinyin.none5);
+                    pinyinList.Add(Pinyin.none5);
                 }
                 ++offset;
                 continue;
             }
-            for (Pinyin pinyin : wordNet[offset])
+            foreach (Pinyin pinyin in wordNet[offset])
             {
-                pinyinList.add(pinyin);
+                pinyinList.Add(pinyin);
             }
-            offset += wordNet[offset].length;
+            offset += wordNet[offset].Length;
         }
         return pinyinList;
     }
-
-    public static class Searcher : BaseSearcher<Pinyin[]>
+    public class CT: AhoCorasickDoubleArrayTrie<Pinyin[]>.IHit<Pinyin[]>
+    {
+        //@Override
+        public void hit(int begin, int end, Pinyin[] value)
+        {
+            int Length = end - begin;
+            if (wordNet[begin] == null || Length > wordNet[begin].Length)
+            {
+                wordNet[begin] = Length == 1 ? new Pinyin[] { value[0] } : value;
+            }
+        }
+    }
+    public class Searcher : BaseSearcher<Pinyin[]>
     {
         /**
          * 分词从何处开始，这是一个状态
@@ -211,14 +215,14 @@ public class PinyinDictionary
         DoubleArrayTrie<Pinyin[]> trie;
 
         protected Searcher(char[] c, DoubleArrayTrie<Pinyin[]> trie)
+            :base(c)
         {
-            super(c);
             this.trie = trie;
         }
 
         protected Searcher(string text, DoubleArrayTrie<Pinyin[]> trie)
+            :base(text)
         {
-            super(text);
             this.trie = trie;
         }
 
@@ -227,9 +231,9 @@ public class PinyinDictionary
         {
             // 保证首次调用找到一个词语
             KeyValuePair<string, Pinyin[]> result = null;
-            while (begin < c.length)
+            while (begin < c.Length)
             {
-                LinkedList<KeyValuePair<string, Pinyin[]>> entryList = trie.commonPrefixSearchWithValue(c, begin);
+                List<KeyValuePair<string, Pinyin[]>> entryList = trie.commonPrefixSearchWithValue(c, begin);
                 if (entryList.size() == 0)
                 {
                     ++begin;
@@ -238,13 +242,9 @@ public class PinyinDictionary
                 {
                     result = entryList.getLast();
                     offset = begin;
-                    begin += result.getKey().length();
+                    begin += result.Key.Length;
                     break;
                 }
-            }
-            if (result == null)
-            {
-                return null;
             }
             return result;
         }

@@ -52,13 +52,13 @@ public abstract class HiddenMarkovModel
      */
     protected static double[] logToCdf(float[] log)
     {
-        double[] cdf = new double[log.length];
+        double[] cdf = new double[log.Length];
         cdf[0] = Math.exp(log[0]);
-        for (int i = 1; i < cdf.length - 1; i++)
+        for (int i = 1; i < cdf.Length - 1; i++)
         {
             cdf[i] = cdf[i - 1] + Math.exp(log[i]);
         }
-        cdf[cdf.length - 1] = 1.0;
+        cdf[cdf.Length - 1] = 1.0;
         return cdf;
     }
 
@@ -70,8 +70,8 @@ public abstract class HiddenMarkovModel
      */
     protected static double[][] logToCdf(float[][] log)
     {
-        double[][] cdf = new double[log.length][log[0].length];
-        for (int i = 0; i < log.length; i++)
+        double[][] cdf = new double[log.Length][log[0].Length];
+        for (int i = 0; i < log.Length; i++)
             cdf[i] = logToCdf(log[i]);
         return cdf;
     }
@@ -95,26 +95,26 @@ public abstract class HiddenMarkovModel
     protected void normalize(float[] freq)
     {
         float sum = MathUtility.sum(freq);
-        for (int i = 0; i < freq.length; i++)
+        for (int i = 0; i < freq.Length; i++)
             freq[i] /= sum;
     }
 
     public void unLog()
     {
-        for (int i = 0; i < start_probability.length; i++)
+        for (int i = 0; i < start_probability.Length; i++)
         {
             start_probability[i] = (float) Math.exp(start_probability[i]);
         }
-        for (int i = 0; i < emission_probability.length; i++)
+        for (int i = 0; i < emission_probability.Length; i++)
         {
-            for (int j = 0; j < emission_probability[i].length; j++)
+            for (int j = 0; j < emission_probability[i].Length; j++)
             {
                 emission_probability[i][j] = (float) Math.exp(emission_probability[i][j]);
             }
         }
-        for (int i = 0; i < transition_probability.length; i++)
+        for (int i = 0; i < transition_probability.Length; i++)
         {
-            for (int j = 0; j < transition_probability[i].length; j++)
+            for (int j = 0; j < transition_probability[i].Length; j++)
             {
                 transition_probability[i][j] = (float) Math.exp(transition_probability[i][j]);
             }
@@ -124,12 +124,12 @@ public abstract class HiddenMarkovModel
     protected void toLog()
     {
         if (start_probability == null || transition_probability == null || emission_probability == null) return;
-        for (int i = 0; i < start_probability.length; i++)
+        for (int i = 0; i < start_probability.Length; i++)
         {
             start_probability[i] = (float) Math.log(start_probability[i]);
-            for (int j = 0; j < start_probability.length; j++)
+            for (int j = 0; j < start_probability.Length; j++)
                 transition_probability[i][j] = (float) Math.log(transition_probability[i][j]);
-            for (int j = 0; j < emission_probability[0].length; j++)
+            for (int j = 0; j < emission_probability[0].Length; j++)
                 emission_probability[i][j] = (float) Math.log(emission_probability[i][j]);
         }
     }
@@ -146,7 +146,7 @@ public abstract class HiddenMarkovModel
         int max_obser = 0;
         for (int[][] sample : samples)
         {
-            if (sample.length != 2 || sample[0].length != sample[1].length) throw new IllegalArgumentException("非法样本");
+            if (sample.Length != 2 || sample[0].Length != sample[1].Length) throw new IllegalArgumentException("非法样本");
             for (int o : sample[0])
                 max_obser = Math.max(max_obser, o);
             for (int s : sample[1])
@@ -170,14 +170,14 @@ public abstract class HiddenMarkovModel
         emission_probability = new float[max_state + 1][max_obser + 1];
         for (int[][] sample : samples)
         {
-            for (int i = 0; i < sample[0].length; i++)
+            for (int i = 0; i < sample[0].Length; i++)
             {
                 int o = sample[0][i];
                 int s = sample[1][i];
                 ++emission_probability[s][o];
             }
         }
-        for (int i = 0; i < transition_probability.length; i++)
+        for (int i = 0; i < transition_probability.Length; i++)
             normalize(emission_probability[i]);
     }
 
@@ -193,14 +193,14 @@ public abstract class HiddenMarkovModel
         for (int[][] sample : samples)
         {
             int prev_s = sample[1][0];
-            for (int i = 1; i < sample[0].length; i++)
+            for (int i = 1; i < sample[0].Length; i++)
             {
                 int s = sample[1][i];
                 ++transition_probability[prev_s][s];
                 prev_s = s;
             }
         }
-        for (int i = 0; i < transition_probability.length; i++)
+        for (int i = 0; i < transition_probability.Length; i++)
             normalize(transition_probability[i]);
     }
 
@@ -224,10 +224,10 @@ public abstract class HiddenMarkovModel
     /**
      * 生成样本序列
      *
-     * @param length 序列长度
+     * @param Length 序列长度
      * @return 序列
      */
-    public abstract int[][] generate(int length);
+    public abstract int[][] generate(int Length);
 
 
     /**
@@ -266,9 +266,9 @@ public abstract class HiddenMarkovModel
      */
     public float predict(int[] o, int[] s)
     {
-        int[] states = new int[s.length];
+        int[] states = new int[s.Length];
         float p = predict(o, states);
-        for (int i = 0; i < states.length; i++)
+        for (int i = 0; i < states.Length; i++)
         {
             s[i] = states[i];
         }
@@ -278,7 +278,7 @@ public abstract class HiddenMarkovModel
     public bool similar(HiddenMarkovModel model)
     {
         if (!similar(start_probability, model.start_probability)) return false;
-        for (int i = 0; i < transition_probability.length; i++)
+        for (int i = 0; i < transition_probability.Length; i++)
         {
             if (!similar(transition_probability[i], model.transition_probability[i])) return false;
             if (!similar(emission_probability[i], model.emission_probability[i])) return false;
@@ -289,7 +289,7 @@ public abstract class HiddenMarkovModel
     protected static bool similar(float[] A, float[] B)
     {
         final float eta = 1e-2f;
-        for (int i = 0; i < A.length; i++)
+        for (int i = 0; i < A.Length; i++)
             if (Math.abs(A[i] - B[i]) > eta) return false;
         return true;
     }

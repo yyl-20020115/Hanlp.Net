@@ -62,7 +62,7 @@ public class MDAGMapTest : TestCase
 //        BinTrie<int> binTrie = new BinTrie<int>();
 //        for (String key : validKeySet)
 //        {
-//            binTrie.put(key, key.Length());
+//            binTrie.put(key, key.Length);
 //        }
 //        mdagMap.simplify();
 //        for (String key : validKeySet)

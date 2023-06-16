@@ -33,12 +33,12 @@ public class SuffixDictionary
     public void add(string word)
     {
         word = reverse(word);
-        trie.put(word, word.length());
+        trie.put(word, word.Length);
     }
 
     public void addAll(string total)
     {
-        for (int i = 0; i < total.length(); ++i)
+        for (int i = 0; i < total.Length; ++i)
         {
             add(string.valueOf(total.charAt(i)));
         }
@@ -60,10 +60,10 @@ public class SuffixDictionary
     public int get(string suffix)
     {
         suffix = reverse(suffix);
-        int length = trie.get(suffix);
-        if (length == null) return 0;
+        int Length = trie.get(suffix);
+        if (Length == null) return 0;
 
-        return length;
+        return Length;
     }
 
     /**

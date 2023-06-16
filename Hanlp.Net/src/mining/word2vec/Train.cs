@@ -16,7 +16,7 @@ public class Train : AbstractTrainer
 
     void execute(string[] args) 
     {
-        if (args.length <= 1) usage();
+        if (args.Length <= 1) usage();
 
         Config config = new Config();
 

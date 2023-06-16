@@ -72,7 +72,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         while (iterator.hasNext())
         {
             string key = iterator.next();
-            keySet.add(key.substring(0, key.length() - 3));
+            keySet.add(key.substring(0, key.Length - 3));
         }
         return keySet;
     }
@@ -121,7 +121,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
 
     public class MDAGForMap : MDAG
     {
-        static readonly char DELIMITER = Character.MIN_VALUE;
+        static readonly char DELIMITER = char.MIN_VALUE;
 
         public int getValueIndex(string key)
         {
@@ -161,7 +161,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
             MDAGNode targetNode = currentNode.transition(DELIMITER);
             if (targetNode == null) return -1;
             // 接下来应该是一条单链路
-            TreeMap<Character, MDAGNode> outgoingTransitions = targetNode.getOutgoingTransitions();
+            TreeMap<char, MDAGNode> outgoingTransitions = targetNode.getOutgoingTransitions();
             assert outgoingTransitions.size() == 1 : "不是单链！";
             char high = outgoingTransitions.keySet().iterator().next();
             targetNode = targetNode.transition(high);
@@ -176,7 +176,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
             LinkedList<KeyValuePair<string, int>> result = new LinkedList<KeyValuePair<string, int>>();
             if (sourceNode != null)
             {
-                int charCount = key.length;
+                int charCount = key.Length;
                 MDAGNode currentNode = sourceNode;
                 for (int i = 0; i < charCount; ++i)
                 {
@@ -190,7 +190,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
             }
             else
             {
-                int charCount = key.length;
+                int charCount = key.Length;
                 SimpleMDAGNode currentNode = simplifiedSourceNode;
                 for (int i = 0; i < charCount; ++i)
                 {

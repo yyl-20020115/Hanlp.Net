@@ -48,15 +48,15 @@ public class CommonAhoCorasickSegmentUtil
     public static LinkedList<ResultTerm<V>> segment<V>(char[] charArray, AhoCorasickDoubleArrayTrie<V> trie)
     {
         LinkedList<ResultTerm<V>> termList = new LinkedList<ResultTerm<V>>();
-        ResultTerm<V>[] wordNet = new ResultTerm[charArray.length];
+        ResultTerm<V>[] wordNet = new ResultTerm[charArray.Length];
         trie.parseText(charArray, new CT<char>());
-        for (int i = 0; i < charArray.length;)
+        for (int i = 0; i < charArray.Length;)
         {
             if (wordNet[i] == null)
             {
                 StringBuilder sbTerm = new StringBuilder();
                 int offset = i;
-                while (i < charArray.length && wordNet[i] == null)
+                while (i < charArray.Length && wordNet[i] == null)
                 {
                     sbTerm.Append(charArray[i]);
                     ++i;
@@ -66,7 +66,7 @@ public class CommonAhoCorasickSegmentUtil
             else
             {
                 termList.add(wordNet[i]);
-                i += wordNet[i].word.length();
+                i += wordNet[i].word.Length;
             }
         }
         return termList;
@@ -76,7 +76,7 @@ public class CommonAhoCorasickSegmentUtil
         //@Override
         public void hit(int begin, int end, V value)
         {
-            if (wordNet[begin] == null || wordNet[begin].word.length() < end - begin)
+            if (wordNet[begin] == null || wordNet[begin].word.Length < end - begin)
             {
                 wordNet[begin] = new ResultTerm<V>(new string(charArray, begin, end - begin), value, begin);
             }
@@ -105,9 +105,9 @@ public class CommonAhoCorasickSegmentUtil
     public static LinkedList<ResultTerm<V>> segmentReverseOrder<V>(char[] charArray, AhoCorasickDoubleArrayTrie<V> trie)
     {
         LinkedList<ResultTerm<V>> termList = new LinkedList<ResultTerm<V>>();
-        ResultTerm<V>[] wordNet = new ResultTerm[charArray.length + 1];
+        ResultTerm<V>[] wordNet = new ResultTerm[charArray.Length + 1];
         trie.parseText(charArray, CT2<char>());
-        for (int i = charArray.length; i > 0;)
+        for (int i = charArray.Length; i > 0;)
         {
             if (wordNet[i] == null)
             {
@@ -125,7 +125,7 @@ public class CommonAhoCorasickSegmentUtil
             else
             {
                 termList.addFirst(wordNet[i]);
-                i -= wordNet[i].word.length();
+                i -= wordNet[i].word.Length;
             }
         }
         return termList;
@@ -135,7 +135,7 @@ public class CommonAhoCorasickSegmentUtil
         //@Override
         public void hit(int begin, int end, V value)
         {
-            if (wordNet[end] == null || wordNet[end].word.length() < end - begin)
+            if (wordNet[end] == null || wordNet[end].word.Length < end - begin)
             {
                 wordNet[end] = new ResultTerm<V>(new string(charArray, begin, end - begin), value, begin);
             }

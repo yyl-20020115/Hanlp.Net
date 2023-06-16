@@ -136,16 +136,16 @@ class DawgBuilder
             throw new IllegalArgumentException(
                     "failed to insert key: negative value");
         }
-        if (key.length == 0)
+        if (key.Length == 0)
         {
             throw new IllegalArgumentException(
-                    "failed to inset key: zero-length key");
+                    "failed to inset key: zero-Length key");
         }
 
         int id = 0;
         int keyPos = 0;
 
-        for (; keyPos <= key.length; ++keyPos)
+        for (; keyPos <= key.Length; ++keyPos)
         {
             int childId = _nodes.get(id).child;
             if (childId == 0)
@@ -153,8 +153,8 @@ class DawgBuilder
                 break;
             }
 
-            byte keyLabel = keyPos < key.length ? key[keyPos] : 0;
-            if (keyPos < key.length && keyLabel == 0)
+            byte keyLabel = keyPos < key.Length ? key[keyPos] : 0;
+            if (keyPos < key.Length && keyLabel == 0)
             {
                 throw new IllegalArgumentException(
                         "failed to insert key: invalid null character");
@@ -175,14 +175,14 @@ class DawgBuilder
             id = childId;
         }
 
-        if (keyPos > key.length)
+        if (keyPos > key.Length)
         {
             return;
         }
 
-        for (; keyPos <= key.length; ++keyPos)
+        for (; keyPos <= key.Length; ++keyPos)
         {
-            byte keyLabel = (keyPos < key.length) ? key[keyPos] : 0;
+            byte keyLabel = (keyPos < key.Length) ? key[keyPos] : 0;
             int childId = appendNode();
 
             DawgNode node = _nodes.get(id);
@@ -269,7 +269,7 @@ class DawgBuilder
                 ++numSiblings;
             }
 
-            // make an array of length 1 to emulate pass-by-reference
+            // make an array of Length 1 to emulate pass-by-reference
             int[] matchHashId = findNode(nodeId);
             int matchId = matchHashId[0];
             int hashId = matchHashId[1];

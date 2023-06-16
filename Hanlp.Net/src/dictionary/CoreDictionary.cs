@@ -66,7 +66,7 @@ public class CoreDictionary
             while ((line = br.readLine()) != null)
             {
                 string param[] = line.Split("\\s");
-                int natureCount = (param.length - 1) / 2;
+                int natureCount = (param.Length - 1) / 2;
                 CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)
                 {
@@ -89,8 +89,8 @@ public class CoreDictionary
                 for (CoreDictionary.Attribute attribute : attributeList)
                 {
                     _out.writeInt(attribute.totalFrequency);
-                    _out.writeInt(attribute.nature.length);
-                    for (int i = 0; i < attribute.nature.length; ++i)
+                    _out.writeInt(attribute.nature.Length);
+                    for (int i = 0; i < attribute.nature.Length; ++i)
                     {
                         _out.writeInt(attribute.nature[i].ordinal());
                         _out.writeInt(attribute.frequency[i]);
@@ -138,10 +138,10 @@ public class CoreDictionary
             {
                 // 第一个是全部频次，第二个是词性个数
                 int currentTotalFrequency = byteArray.nextInt();
-                int length = byteArray.nextInt();
-                attributes[i] = new CoreDictionary.Attribute(length);
+                int Length = byteArray.nextInt();
+                attributes[i] = new CoreDictionary.Attribute(Length);
                 attributes[i].totalFrequency = currentTotalFrequency;
-                for (int j = 0; j < length; ++j)
+                for (int j = 0; j < Length; ++j)
                 {
                     attributes[i].nature[j] = natureIndexArray[byteArray.nextInt()];
                     attributes[i].frequency[j] = byteArray.nextInt();
@@ -262,11 +262,11 @@ public class CoreDictionary
             try
             {
                 string[] param = natureWithFrequency.Split(" ");
-                if (param.length % 2 != 0)
+                if (param.Length % 2 != 0)
                 {
                     return new Attribute(Nature.create(natureWithFrequency.trim()), 1); // 儿童锁
                 }
-                int natureCount = param.length / 2;
+                int natureCount = param.Length / 2;
                 Attribute attribute = new Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)
                 {
@@ -292,10 +292,10 @@ public class CoreDictionary
         public static Attribute create(ByteArray byteArray, Nature[] natureIndexArray)
         {
             int currentTotalFrequency = byteArray.nextInt();
-            int length = byteArray.nextInt();
-            Attribute attribute = new Attribute(length);
+            int Length = byteArray.nextInt();
+            Attribute attribute = new Attribute(Length);
             attribute.totalFrequency = currentTotalFrequency;
-            for (int j = 0; j < length; ++j)
+            for (int j = 0; j < Length; ++j)
             {
                 attribute.nature[j] = natureIndexArray[byteArray.nextInt()];
                 attribute.frequency[j] = byteArray.nextInt();
@@ -372,7 +372,7 @@ public class CoreDictionary
         public string toString()
         {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < nature.length; ++i)
+            for (int i = 0; i < nature.Length; ++i)
             {
                 sb.Append(nature[i]).Append(' ').Append(frequency[i]).Append(' ');
             }
@@ -382,8 +382,8 @@ public class CoreDictionary
         public void save(DataOutputStream _out) 
         {
             _out.writeInt(totalFrequency);
-            _out.writeInt(nature.length);
-            for (int i = 0; i < nature.length; ++i)
+            _out.writeInt(nature.Length);
+            for (int i = 0; i < nature.Length; ++i)
             {
                 _out.writeInt(nature[i].ordinal());
                 _out.writeInt(frequency[i]);

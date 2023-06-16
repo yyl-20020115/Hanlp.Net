@@ -47,7 +47,7 @@ public class DoubleArrayTrieTest : TestCase
         while (searcher.next())
         {
 //            Console.printf("[%d, %d)=%s\n", searcher.begin, searcher.begin + searcher.Length, searcher.value);
-            AssertEquals(searcher.value, text[searcher.begin .. (searcher.begin + searcher.length)]);
+            AssertEquals(searcher.value, text[searcher.begin .. (searcher.begin + searcher.Length)]);
         }
     }
     [TestMethod]

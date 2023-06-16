@@ -26,8 +26,8 @@ public class NERInstance : Instance
     {
         this(wordArray, posArray, featureMap);
 
-        tagArray = new int[wordArray.length];
-        for (int i = 0; i < wordArray.length; i++)
+        tagArray = new int[wordArray.Length];
+        for (int i = 0; i < wordArray.Length; i++)
         {
             tagArray[i] = tagSet.add(nerArray[i]);
         }
@@ -40,8 +40,8 @@ public class NERInstance : Instance
 
     private void initFeatureMatrix(string[] wordArray, string[] posArray, FeatureMap featureMap)
     {
-        featureMatrix = new int[wordArray.length][];
-        for (int i = 0; i < featureMatrix.length; i++)
+        featureMatrix = new int[wordArray.Length][];
+        for (int i = 0; i < featureMatrix.Length; i++)
         {
             featureMatrix[i] = extractFeature(wordArray, posArray, featureMap, i);
         }
@@ -63,14 +63,14 @@ public class NERInstance : Instance
         string pre2Word = position >= 2 ? wordArray[position - 2] : "_B_";
         string preWord = position >= 1 ? wordArray[position - 1] : "_B_";
         string curWord = wordArray[position];
-        string nextWord = position <= wordArray.length - 2 ? wordArray[position + 1] : "_E_";
-        string next2Word = position <= wordArray.length - 3 ? wordArray[position + 2] : "_E_";
+        string nextWord = position <= wordArray.Length - 2 ? wordArray[position + 1] : "_E_";
+        string next2Word = position <= wordArray.Length - 3 ? wordArray[position + 2] : "_E_";
 
         string pre2Pos = position >= 2 ? posArray[position - 2] : "_B_";
         string prePos = position >= 1 ? posArray[position - 1] : "_B_";
         string curPos = posArray[position];
-        string nextPos = position <= posArray.length - 2 ? posArray[position + 1] : "_E_";
-        string next2Pos = position <= posArray.length - 3 ? posArray[position + 2] : "_E_";
+        string nextPos = position <= posArray.Length - 2 ? posArray[position + 1] : "_E_";
+        string next2Pos = position <= posArray.Length - 3 ? posArray[position + 2] : "_E_";
 
         StringBuilder sb = new StringBuilder();
         addFeatureThenClear(sb.Append(pre2Word).Append('1'), featVec, featureMap);

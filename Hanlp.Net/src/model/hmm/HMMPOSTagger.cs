@@ -52,15 +52,15 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
     //@Override
     public string[] tag(string... words)
     {
-        int[] obsArray = new int[words.length];
-        for (int i = 0; i < obsArray.length; i++)
+        int[] obsArray = new int[words.Length];
+        for (int i = 0; i < obsArray.Length; i++)
         {
             obsArray[i] = vocabulary.idOf(words[i]);
         }
-        int[] tagArray = new int[obsArray.length];
+        int[] tagArray = new int[obsArray.Length];
         model.predict(obsArray, tagArray);
-        string[] tags = new string[obsArray.length];
-        for (int i = 0; i < tagArray.length; i++)
+        string[] tags = new string[obsArray.Length];
+        for (int i = 0; i < tagArray.Length; i++)
         {
             tags[i] = tagSet.stringOf(tagArray[i]);
         }

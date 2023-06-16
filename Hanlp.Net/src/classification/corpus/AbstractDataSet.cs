@@ -97,7 +97,7 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet load(string folderPath, string charsetName, double percentage) , IOException
+    public IDataSet load(string folderPath, string charsetName, double percentage)
     {
         if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
@@ -120,12 +120,12 @@ public abstract class AbstractDataSet : IDataSet
             if (percentage > 0)
             {
                 b = 0;
-                e = (int) (files.length * percentage);
+                e = (int) (files.Length * percentage);
             }
             else
             {
-                b = (int) (files.length * (1 + percentage));
-                e = files.length;
+                b = (int) (files.Length * (1 + percentage));
+                e = files.Length;
             }
 
             int logEvery = (int) Math.ceil((e - b) / 10000f);
@@ -144,7 +144,7 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet load(string folderPath, double rate) , IOException
+    public IDataSet load(string folderPath, double rate)
     {
         return null;
     }

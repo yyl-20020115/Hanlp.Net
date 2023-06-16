@@ -46,7 +46,7 @@ public class Instance
         return featureMatrix[position];
     }
 
-    public int length()
+    public int Length
     {
         return tagArray.Length;
     }

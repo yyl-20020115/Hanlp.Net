@@ -362,10 +362,10 @@ class Preconditions
         template = string.valueOf(template); // null -> "null"
 
         // start substituting the arguments into the '%s' placeholders
-        StringBuilder builder = new StringBuilder(template.length() + 16 * args.length);
+        StringBuilder builder = new StringBuilder(template.Length + 16 * args.Length);
         int templateStart = 0;
         int i = 0;
-        while (i < args.length)
+        while (i < args.Length)
         {
             int placeholderStart = template.indexOf("%s", templateStart);
             if (placeholderStart == -1)
@@ -379,11 +379,11 @@ class Preconditions
         builder.Append(template.substring(templateStart));
 
         // if we run _out of placeholders, Append the extra args in square braces
-        if (i < args.length)
+        if (i < args.Length)
         {
             builder.Append(" [");
             builder.Append(args[i++]);
-            while (i < args.length)
+            while (i < args.Length)
             {
                 builder.Append(", ");
                 builder.Append(args[i++]);

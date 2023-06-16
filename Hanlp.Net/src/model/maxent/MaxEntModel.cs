@@ -66,9 +66,9 @@ public class MaxEntModel
      */
     public final List<Pair<string, Double>> predict(string[] context)
     {
-        List<Pair<string, Double>> result = new ArrayList<Pair<string, Double>>(outcomeNames.length);
+        List<Pair<string, Double>> result = new ArrayList<Pair<string, Double>>(outcomeNames.Length);
         double[] p = eval(context);
-        for (int i = 0; i < p.length; ++i)
+        for (int i = 0; i < p.Length; ++i)
         {
             result.add(new Pair<string, Double>(outcomeNames[i], p[i]));
         }
@@ -119,8 +119,8 @@ public class MaxEntModel
     public final double[] eval(string[] context, double[] outsums)
     {
         assert context != null;
-        int[] scontexts = new int[context.length];
-        for (int i = 0; i < context.length; i++)
+        int[] scontexts = new int[context.Length];
+        for (int i = 0; i < context.Length; i++)
         {
             int ci = pmap.get(context[i]);
             scontexts[i] = ci == null ? -1 : ci;
@@ -143,14 +143,14 @@ public class MaxEntModel
         int[] activeOutcomes;
         double[] activeParameters;
         double value = 1;
-        for (int ci = 0; ci < context.length; ci++)
+        for (int ci = 0; ci < context.Length; ci++)
         {
             if (context[ci] >= 0)
             {
                 Context predParams = params[context[ci]];
                 activeOutcomes = predParams.getOutcomes();
                 activeParameters = predParams.getParameters();
-                for (int ai = 0; ai < activeOutcomes.length; ai++)
+                for (int ai = 0; ai < activeOutcomes.Length; ai++)
                 {
                     int oid = activeOutcomes[ai];
                     numfeats[oid]++;
@@ -219,7 +219,7 @@ public class MaxEntModel
             {
                 StringTokenizer tok = new StringTokenizer(br.readLine(), " ");
                 int[] infoInts = new int[tok.countTokens()];
-                _out.writeInt(infoInts.length);
+                _out.writeInt(infoInts.Length);
                 for (int j = 0; tok.hasMoreTokens(); j++)
                 {
                     infoInts[j] = int.parseInt(tok.nextToken());
@@ -249,17 +249,17 @@ public class MaxEntModel
             // params
             Context[] params = new Context[NUM_PREDS];
             int pid = 0;
-            for (int i = 0; i < outcomePatterns.length; i++)
+            for (int i = 0; i < outcomePatterns.Length; i++)
             {
-                int[] outcomePattern = new int[outcomePatterns[i].length - 1];
-                for (int k = 1; k < outcomePatterns[i].length; k++)
+                int[] outcomePattern = new int[outcomePatterns[i].Length - 1];
+                for (int k = 1; k < outcomePatterns[i].Length; k++)
                 {
                     outcomePattern[k - 1] = outcomePatterns[i][k];
                 }
                 for (int j = 0; j < outcomePatterns[i][0]; j++)
                 {
-                    double[] contextParameters = new double[outcomePatterns[i].length - 1];
-                    for (int k = 1; k < outcomePatterns[i].length; k++)
+                    double[] contextParameters = new double[outcomePatterns[i].Length - 1];
+                    for (int k = 1; k < outcomePatterns[i].Length; k++)
                     {
                         contextParameters[k - 1] = Double.parseDouble(br.readLine());
                         _out.writeDouble(contextParameters[k - 1]);
@@ -272,7 +272,7 @@ public class MaxEntModel
             m.prior = new UniformPrior();
             m.prior.setLabels(outcomeLabels);
             // eval
-            m.evalParams = new EvalParameters(params, m.correctionParam, m.correctionConstant, outcomeLabels.length);
+            m.evalParams = new EvalParameters(params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
             _out.close();
         }
         catch (Exception e)
@@ -303,9 +303,9 @@ public class MaxEntModel
         int[][] outcomePatterns = new int[numOCTypes][];
         for (int i = 0; i < numOCTypes; i++)
         {
-            int length = byteArray.nextInt();
-            int[] infoInts = new int[length];
-            for (int j = 0; j < length; j++)
+            int Length = byteArray.nextInt();
+            int[] infoInts = new int[Length];
+            for (int j = 0; j < Length; j++)
             {
                 infoInts[j] = byteArray.nextInt();
             }
@@ -320,7 +320,7 @@ public class MaxEntModel
             predLabels[i] = byteArray.nextString();
         }
         int[] v = new int[NUM_PREDS];
-        for (int i = 0; i < v.length; i++)
+        for (int i = 0; i < v.Length; i++)
         {
             v[i] = byteArray.nextInt();
         }
@@ -328,17 +328,17 @@ public class MaxEntModel
         // params
         Context[] params = new Context[NUM_PREDS];
         int pid = 0;
-        for (int i = 0; i < outcomePatterns.length; i++)
+        for (int i = 0; i < outcomePatterns.Length; i++)
         {
-            int[] outcomePattern = new int[outcomePatterns[i].length - 1];
-            for (int k = 1; k < outcomePatterns[i].length; k++)
+            int[] outcomePattern = new int[outcomePatterns[i].Length - 1];
+            for (int k = 1; k < outcomePatterns[i].Length; k++)
             {
                 outcomePattern[k - 1] = outcomePatterns[i][k];
             }
             for (int j = 0; j < outcomePatterns[i][0]; j++)
             {
-                double[] contextParameters = new double[outcomePatterns[i].length - 1];
-                for (int k = 1; k < outcomePatterns[i].length; k++)
+                double[] contextParameters = new double[outcomePatterns[i].Length - 1];
+                for (int k = 1; k < outcomePatterns[i].Length; k++)
                 {
                     contextParameters[k - 1] = byteArray.nextDouble();
                 }
@@ -350,7 +350,7 @@ public class MaxEntModel
         m.prior = new UniformPrior();
         m.prior.setLabels(outcomeLabels);
         // eval
-        m.evalParams = new EvalParameters(params, m.correctionParam, m.correctionConstant, outcomeLabels.length);
+        m.evalParams = new EvalParameters(params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
         return m;
     }
 

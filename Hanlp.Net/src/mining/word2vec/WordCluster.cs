@@ -15,7 +15,7 @@ public final class WordCluster
 
     public static void main(string[] args)
     {
-        if (args.length < 3) usage();
+        if (args.Length < 3) usage();
 
         final string vectorFile = args[0];
         final int k = int.parseInt(args[1]);

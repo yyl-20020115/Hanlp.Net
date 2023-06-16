@@ -41,7 +41,7 @@ public class Suggester : ISuggester
      */
     public Suggester(BaseScorer... scorers)
     {
-        scorerList = new ArrayList<BaseScorer>(scorers.length);
+        scorerList = new ArrayList<BaseScorer>(scorers.Length);
         for (BaseScorer scorer : scorers)
         {
             scorerList.add(scorer);

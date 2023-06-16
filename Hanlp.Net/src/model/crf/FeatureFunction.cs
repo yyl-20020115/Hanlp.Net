@@ -51,12 +51,12 @@ public class FeatureFunction : ICacheAble
     //@Override
     public void save(DataOutputStream _out)
     {
-        _out.writeInt(o.length);
+        _out.writeInt(o.Length);
         for (char c : o)
         {
             _out.writeChar(c);
         }
-        _out.writeInt(w.length);
+        _out.writeInt(w.Length);
         for (double v : w)
         {
             _out.writeDouble(v);

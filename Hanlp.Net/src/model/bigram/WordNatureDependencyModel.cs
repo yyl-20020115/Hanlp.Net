@@ -49,7 +49,7 @@ public class WordNatureDependencyModel
                 tagMap.put(param[0], int.parseInt(param[2]));
                 continue;
             }
-            int natureCount = (param.length - 1) / 2;
+            int natureCount = (param.Length - 1) / 2;
             Attribute attribute = new Attribute(natureCount);
             for (int i = 0; i < natureCount; ++i)
             {
@@ -66,7 +66,7 @@ public class WordNatureDependencyModel
             string[] param = key.Split("@", 2);
             Attribute attribute = entry.getValue();
             int total = tagMap.get(param[0] + "@");
-            for (int i = 0; i < attribute.p.length; ++i)
+            for (int i = 0; i < attribute.p.Length; ++i)
             {
                 attribute.p[i] = (float) -Math.log(attribute.p[i] / total);
             }
@@ -99,11 +99,11 @@ public class WordNatureDependencyModel
             _out.writeInt(attributeList.size());
             for (Attribute attribute : attributeList)
             {
-                _out.writeInt(attribute.p.length);
-                for (int i = 0; i < attribute.p.length; ++i)
+                _out.writeInt(attribute.p.Length);
+                for (int i = 0; i < attribute.p.Length; ++i)
                 {
                     char[] charArray = attribute.dependencyRelation[i].ToCharArray();
-                    _out.writeInt(charArray.length);
+                    _out.writeInt(charArray.Length);
                     for (char c : charArray)
                     {
                         _out.writeChar(c);
@@ -128,11 +128,11 @@ public class WordNatureDependencyModel
         if (byteArray == null) return false;
         int size = byteArray.nextInt();
         Attribute[] attributeArray = new Attribute[size];
-        for (int i = 0; i < attributeArray.length; ++i)
+        for (int i = 0; i < attributeArray.Length; ++i)
         {
-            int length = byteArray.nextInt();
-            Attribute attribute = new Attribute(length);
-            for (int j = 0; j < attribute.dependencyRelation.length; ++j)
+            int Length = byteArray.nextInt();
+            Attribute attribute = new Attribute(Length);
+            for (int j = 0; j < attribute.dependencyRelation.Length; ++j)
             {
                 attribute.dependencyRelation[j] = byteArray.nextString();
                 attribute.p[j] = byteArray.nextFloat();
@@ -207,7 +207,7 @@ public class WordNatureDependencyModel
          */
         public void setBoost(float boost)
         {
-            for (int i = 0; i < p.length; ++i)
+            for (int i = 0; i < p.Length; ++i)
             {
                 p[i] *= boost;
             }
@@ -216,8 +216,8 @@ public class WordNatureDependencyModel
         //@Override
         public string toString()
         {
-            final StringBuilder sb = new StringBuilder(dependencyRelation.length * 10);
-            for (int i = 0; i < dependencyRelation.length; ++i)
+            final StringBuilder sb = new StringBuilder(dependencyRelation.Length * 10);
+            for (int i = 0; i < dependencyRelation.Length; ++i)
             {
                 sb.Append(dependencyRelation[i]).Append(' ').Append(p[i]).Append(' ');
             }

@@ -41,7 +41,7 @@ public abstract class CharacterBasedSegment : Segment
                 else if (Nature.m == term.nature)
                     attribute = CoreDictionary.get(CoreDictionary.M_WORD_ID);
             }
-            else if (term.word.trim().length() == 0)
+            else if (term.word.trim().Length == 0)
                 attribute = new CoreDictionary.Attribute(Nature.x);
             else attribute = new CoreDictionary.Attribute(Nature.nz);
         }
@@ -57,7 +57,7 @@ public abstract class CharacterBasedSegment : Segment
     //@Override
     protected List<Term> segSentence(char[] sentence)
     {
-        if (sentence.length == 0) return Collections.emptyList();
+        if (sentence.Length == 0) return Collections.emptyList();
         List<Term> termList = roughSegSentence(sentence);
         if (!(config.ner || config.useCustomDictionary || config.speechTagging))
             return termList;

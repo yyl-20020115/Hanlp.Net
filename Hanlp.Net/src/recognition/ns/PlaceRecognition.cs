@@ -49,7 +49,7 @@ public class PlaceRecognition
                 sbLog.Append(NS);
                 sbLog.Append(" ,");
             }
-            if (sbLog.length() > 1) sbLog.delete(sbLog.length() - 2, sbLog.length());
+            if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
             System._out.printf("地名角色标注：%s\n", sbLog.toString());
         }
@@ -71,7 +71,7 @@ public class PlaceRecognition
 //            {
 //                string value = vertex.realWord;
 //                int longestSuffixLength = PlaceSuffixDictionary.dictionary.getLongestSuffixLength(value);
-//                int wordLength = value.length() - longestSuffixLength;
+//                int wordLength = value.Length - longestSuffixLength;
 //                if (longestSuffixLength != 0 && wordLength != 0)
 //                {
 //                    listIterator.remove();
@@ -82,13 +82,13 @@ public class PlaceRecognition
 //                    }
 //                    listIterator.add(wordNetAll.get(line + wordLength, longestSuffixLength));
 //                    tagList.add(new EnumItem<>(NS.H, 1000));
-//                    line += vertex.realWord.length();
+//                    line += vertex.realWord.Length;
 //                    continue;
 //                }
 //            }
             if (Nature.ns == vertex.getNature() && vertex.getAttribute().totalFrequency <= 1000)
             {
-                if (vertex.realWord.length() < 3)               // 二字地名，认为其可以再接一个后缀或前缀
+                if (vertex.realWord.Length < 3)               // 二字地名，认为其可以再接一个后缀或前缀
                     tagList.add(new EnumItem<NS>(NS.H, NS.G));
                 else
                     tagList.add(new EnumItem<NS>(NS.G));        // 否则只可以再加后缀
@@ -100,7 +100,7 @@ public class PlaceRecognition
                 NSEnumItem = new EnumItem<NS>(NS.Z, PlaceDictionary.transformMatrixDictionary.getTotalFrequency(NS.Z));
             }
             tagList.add(NSEnumItem);
-//            line += vertex.realWord.length();
+//            line += vertex.realWord.Length;
         }
         return tagList;
     }

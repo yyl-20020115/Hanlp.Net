@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.model.bigram;
 
 
@@ -22,7 +26,7 @@ public class BigramDependencyModel
 {
     static DoubleArrayTrie<string> trie;
 
-    static
+    static BigramDependencyModel()
     {
         long start = DateTime.Now.Microsecond;
         if (load(HanLP.Config.WordNatureModelPath))
@@ -39,11 +43,11 @@ public class BigramDependencyModel
     {
         trie = new DoubleArrayTrie<string>();
         if (loadDat(path + ".bi" + Predefine.BIN_EXT)) return true;
-        TreeMap<string, string> map = new TreeMap<string, string>();
-        for (string line : IOUtil.readLineListWithLessMemory(path))
+        var map = new Dictionary<string, string>();
+        foreach (string line in IOUtil.readLineListWithLessMemory(path))
         {
             string[] param = line.Split(" ");
-            if (param[0].endsWith("@"))
+            if (param[0].EndsWith("@"))
             {
                 continue;
             }
@@ -62,14 +66,14 @@ public class BigramDependencyModel
         if (byteArray == null) return false;
         int size = byteArray.nextInt();
         string[] valueArray = new string[size];
-        for (int i = 0; i < valueArray.length; ++i)
+        for (int i = 0; i < valueArray.Length; ++i)
         {
             valueArray[i] = byteArray.nextUTF();
         }
         return trie.load(byteArray, valueArray);
     }
 
-    static bool saveDat(string path, TreeMap<string, string> map)
+    static bool saveDat(string path, Dictionary<string, string> map)
     {
         Collection<string> dependencyList = map.values();
         // 缓存值文件

@@ -1,5 +1,8 @@
 
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.trie.datrie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
 /**
 * DoubleArrayTrie: Java implementation of Darts (Double-ARray Trie System)
 * <p/>
@@ -27,15 +30,15 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     private  static int BUF_SIZE = 16384;
     private  static int UNIT_SIZE = 8; // size of int + int
 
-    private  class Node
+    public class Node
     {
-        int code;
-        int depth;
-        int left;
-        int right;
+        public int code;
+        public int depth;
+        public int left;
+        public int right;
 
         //@Override
-        public string toString()
+        public override string ToString()
         {
             return "Node{" +
                     "code=" + code +
@@ -48,8 +51,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     ;
 
-    protected int check[];
-    protected int base[];
+    protected int[] check;
+    protected int[] _base;
 
     private BitSet used;
     /**
@@ -59,8 +62,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     private int allocSize;
     private List<string> key;
     private int keySize;
-    private int length[];
-    private int value[];
+    private int[] Length;
+    private int[] value;
     protected V[] v;
     private int progress;
     private int nextCheckPos;
@@ -87,7 +90,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             System.arraycopy(check, 0, check2, 0, allocSize);
         }
 
-        base = base2;
+        _base = base2;
         check = check2;
 
         return allocSize = newSize;
@@ -109,14 +112,14 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         for (int i = parent.left; i < parent.right; i++)
         {
-            if ((length != null ? length[i] : key.get(i).length()) < parent.depth)
+            if ((Length != null ? Length[i] : key.get(i).Length) < parent.depth)
                 continue;
 
             string tmp = key.get(i);
 
             int cur = 0;
-            if ((length != null ? length[i] : tmp.length()) != parent.depth)
-                cur = (int) tmp.charAt(parent.depth) + 1;
+            if ((Length != null ? Length[i] : tmp.Length) != parent.depth)
+                cur = (int) tmp[(parent.depth)] + 1;
 
             if (prev > cur)
             {
@@ -157,7 +160,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             return 0;
 
         int begin = 0;
-        int pos = Math.max(siblings.get(0).code + 1, nextCheckPos) - 1;
+        int pos = Math.Max(siblings.get(0).code + 1, nextCheckPos) - 1;
         int nonzero_num = 0;
         int first = 0;
 
@@ -187,7 +190,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             begin = pos - siblings.get(0).code; // 当前位置离第一个兄弟节点的距离
             if (allocSize <= (begin + siblings.get(siblings.size() - 1).code))
             {
-                resize(begin + siblings.get(siblings.size() - 1).code + Character.MAX_VALUE);
+                resize(begin + siblings.get(siblings.size() - 1).code + char.MAX_VALUE);
             }
 
             //if (used[begin])
@@ -215,7 +218,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         //used[begin] = true;
         used.set(begin);
         
-        size = (size > begin + siblings.get(siblings.size() - 1).code + 1) ? size
+        _size = (_size > begin + siblings.get(siblings.size() - 1).code + 1) ? size
                 : begin + siblings.get(siblings.size() - 1).code + 1;
 
         for (int i = 0; i < siblings.size(); i++)
@@ -226,11 +229,11 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         for (int i = 0; i < siblings.size(); i++)
         {
-            List<Node> new_siblings = new ArrayList<Node>();
+            List<Node> new_siblings = new ();
 
             if (fetch(siblings.get(i), new_siblings) == 0)  // 一个词的终止且不为其他词的前缀
             {
-                base[begin + siblings.get(i).code] = (value != null) ? (-value[siblings
+                _base[begin + siblings.get(i).code] = (value != null) ? (-value[siblings
                         .get(i).left] - 1) : (-siblings.get(i).left - 1);
 //                System._out.println(this);
 
@@ -257,9 +260,9 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public DoubleArrayTrie()
     {
         check = null;
-        base = null;
+        _base = null;
         used = new BitSet();
-        size = 0;
+        _size = 0;
         allocSize = 0;
         // no_delete_ = false;
         error_ = 0;
@@ -270,8 +273,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param buildFrom
      */
     public DoubleArrayTrie(Dictionary<string, V> buildFrom)
+        :this()
     {
-        this();
         if (build(buildFrom) != 0)
         {
             throw new IllegalArgumentException("构造失败");
@@ -282,7 +285,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     // set_result omitted
     // the search methods returns (the list of) the value(s) instead
-    // of (the list of) the pair(s) of value(s) and length(s)
+    // of (the list of) the pair(s) of value(s) and Length(s)
 
     // set_array omitted
     // array omitted
@@ -291,10 +294,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         // if (! no_delete_)
         check = null;
-        base = null;
+        _base = null;
         used = null;
         allocSize = 0;
-        size = 0;
+        _size = 0;
         // no_delete_ = false;
     }
 
@@ -305,18 +308,18 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public int getSize()
     {
-        return size;
+        return _size;
     }
 
     public int getTotalSize()
     {
-        return size * UNIT_SIZE;
+        return _size * UNIT_SIZE;
     }
 
     public int getNonzeroSize()
     {
         int result = 0;
-        for (int i = 0; i < check.length; ++i)
+        for (int i = 0; i < check.Length; ++i)
             if (check[i] != 0)
                 ++result;
         return result;
@@ -326,16 +329,16 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         //assert key.size() == value.size() : "键的个数与值的个数不一样！";
         //assert key.size() > 0 : "键值个数为0！";
-        v = (V[]) value.toArray();
-        return build(key, null, null, key.size());
+        v = (V[]) value.ToArray();
+        return build(key, null, null, key.Count);
     }
 
     public int build(List<string> key, V[] value)
     {
-        //assert key.size() == value.length : "键的个数与值的个数不一样！";
+        //assert key.size() == value.Length : "键的个数与值的个数不一样！";
         //assert key.size() > 0 : "键值个数为0！";
         v = value;
-        return build(key, null, null, key.size());
+        return build(key, null, null, key.Count);
     }
 
     /**
@@ -346,9 +349,9 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public int build(HashSet<KeyValuePair<string, V>> entrySet)
     {
-        List<string> keyList = new ArrayList<string>(entrySet.size());
-        List<V> valueList = new ArrayList<V>(entrySet.size());
-        for (KeyValuePair<string, V> entry : entrySet)
+        List<string> keyList = new (entrySet.size());
+        List<V> valueList = new (entrySet.size());
+        foreach (KeyValuePair<string, V> entry in entrySet)
         {
             keyList.add(entry.getKey());
             valueList.add(entry.getValue());
@@ -387,14 +390,14 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         // progress_func_ = progress_func;
         key = _key;
-        length = _length;
+        Length = _length;
         keySize = _keySize;
         value = _value;
         progress = 0;
 
         resize(65536 * 32); // 32个双字节
 
-        base[0] = 1;
+        _base[0] = 1;
         nextCheckPos = 0;
 
         Node root_node = new Node();
@@ -412,17 +415,17 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         used = null;
         key = null;
-        length = null;
+        Length = null;
 
         return error_;
     }
 
     public void open(string fileName) 
     {
-        File file = new File(fileName);
-        size = (int) file.length() / UNIT_SIZE;
+        var file = (fileName);
+        _size = (int) file.Length / UNIT_SIZE;
         check = new int[size];
-        base = new int[size];
+        _base = new int[size];
 
         DataInputStream _is = null;
         try
@@ -470,12 +473,12 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param _out
      * @return
      */
-    public bool save(DataOutputStream _out)
+    public bool save(Stream _out)
     {
         try
         {
             _out.writeInt(size);
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < _size; i++)
             {
                 _out.writeInt(_base[i]);
                 _out.writeInt(check[i]);
@@ -489,7 +492,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    public void save(ObjectOutputStream _out) 
+    public void save(Stream _out) 
     {
         _out.writeObject(_base);
         _out.writeObject(check);
@@ -528,12 +531,12 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public bool load(ByteArray byteArray, V[] value)
     {
         if (byteArray == null) return false;
-        size = byteArray.nextInt();
-        base = new int[size + 65535];   // 多留一些，防止越界
+        _size = byteArray.nextInt();
+        _base = new int[size + 65535];   // 多留一些，防止越界
         check = new int[size + 65535];
         for (int i = 0; i < size; i++)
         {
-            base[i] = byteArray.nextInt();
+            _base[i] = byteArray.nextInt();
             check[i] = byteArray.nextInt();
         }
         v = value;
@@ -551,13 +554,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public bool load(byte[] bytes, int offset, V[] value)
     {
         if (bytes == null) return false;
-        size = ByteUtil.bytesHighFirstToInt(bytes, offset);
+        _size = ByteUtil.bytesHighFirstToInt(bytes, offset);
         offset += 4;
-        base = new int[size + 65535];   // 多留一些，防止越界
-        check = new int[size + 65535];
-        for (int i = 0; i < size; i++)
+        _base = new int[_size + 65535];   // 多留一些，防止越界
+        check = new int[_size + 65535];
+        for (int i = 0; i < _size; i++)
         {
-            base[i] = ByteUtil.bytesHighFirstToInt(bytes, offset);
+            _base[i] = ByteUtil.bytesHighFirstToInt(bytes, offset);
             offset += 4;
             check[i] = ByteUtil.bytesHighFirstToInt(bytes, offset);
             offset += 4;
@@ -588,17 +591,17 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         try
         {
-            DataInputStream in = new DataInputStream(new BufferedInputStream(IOAdapter == null ?
-                                                                                     new FileInputStream(path) :
+            DataInputStream _in = new DataInputStream(
+                new BufferedInputStream(IOAdapter == null ? new FileInputStream(path) :
                     IOAdapter.open(path)
             ));
-            size = in.readInt();
-            base = new int[size + 65535];   // 多留一些，防止越界
+            _size = _in.readInt();
+            _base = new int[size + 65535];   // 多留一些，防止越界
             check = new int[size + 65535];
             for (int i = 0; i < size; i++)
             {
-                base[i] = in.readInt();
-                check[i] = in.readInt();
+                _base[i] = _in.readInt();
+                check[i] = _in.readInt();
             }
         }
         catch (Exception e)
@@ -634,13 +637,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             fis.close();
 
             int index = 0;
-            size = ByteUtil.bytesHighFirstToInt(bytes, index);
+            _size = ByteUtil.bytesHighFirstToInt(bytes, index);
             index += 4;
-            base = new int[size + 65535];   // 多留一些，防止越界
+            _base = new int[size + 65535];   // 多留一些，防止越界
             check = new int[size + 65535];
             for (int i = 0; i < size; i++)
             {
-                base[i] = ByteUtil.bytesHighFirstToInt(bytes, index);
+                _base[i] = ByteUtil.bytesHighFirstToInt(bytes, index);
                 index += 4;
                 check[i] = ByteUtil.bytesHighFirstToInt(bytes, index);
                 index += 4;
@@ -675,12 +678,12 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return true;
     }
 
-    public static <T> DoubleArrayTrie<T> unSerialize(string path)
+    public static  DoubleArrayTrie<T> unSerialize<T>(string path)
     {
-        ObjectInputStream in;
+        ObjectInputStream _in;
         try
         {
-            in = new ObjectInputStream(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path));
+            _in = new ObjectInputStream(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path));
             return (DoubleArrayTrie<T>) in.readObject();
         }
         catch (Exception e)
@@ -704,26 +707,26 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public int exactMatchSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
-            len = key.length();
+            len = key.Length;
         if (nodePos <= 0)
             nodePos = 0;
 
         int result = -1;
 
-        int b = base[nodePos];
+        int b = _base[nodePos];
         int p;
 
         for (int i = pos; i < len; i++)
         {
             p = b + (int) (key.charAt(i)) + 1;
             if (b == check[p])
-                b = base[p];
+                b = _base[p];
             else
                 return result;
         }
 
         p = b;
-        int n = base[p];
+        int n = _base[p];
         if (b == check[p] && n < 0)
         {
             result = -n - 1;
@@ -744,20 +747,20 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         int result = -1;
 
-        int b = base[nodePos];
+        int b = _base[nodePos];
         int p;
 
         for (int i = pos; i < len; i++)
         {
             p = b + (int) (keyChars[i]) + 1;
             if (b == check[p])
-                b = base[p];
+                b = _base[p];
             else
                 return result;
         }
 
         p = b;
-        int n = base[p];
+        int n = _base[p];
         if (b == check[p] && n < 0)
         {
             result = -n - 1;
@@ -782,15 +785,15 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public List<int> commonPrefixSearch(string key, int pos, int len, int nodePos)
     {
         if (len <= 0)
-            len = key.length();
+            len = key.Length;
         if (nodePos <= 0)
             nodePos = 0;
 
-        List<int> result = new ArrayList<int>();
+        List<int> result = new ();
 
         char[] keyChars = key.ToCharArray();
 
-        int b = base[nodePos];
+        int b = _base[nodePos];
         int n;
         int p;
 
@@ -798,14 +801,14 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         {
             p = b + (int) (keyChars[i]) + 1;    // 状态转移 p = base[char[i-1]] + char[i] + 1
             if (b == check[p])                  // base[char[i-1]] == check[base[char[i-1]] + char[i] + 1]
-                b = base[p];
+                b = _base[p];
             else
                 return result;
             p = b;
-            n = base[p];
+            n = _base[p];
             if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
             {
-                result.add(-n - 1);
+                result.Add(-n - 1);
             }
         }
 
@@ -821,36 +824,36 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
     {
-        int len = key.length();
+        int len = key.Length;
         LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
         char[] keyChars = key.ToCharArray();
-        int b = base[0];
+        int b = _base[0];
         int n;
         int p;
 
         for (int i = 0; i < len; ++i)
         {
             p = b;
-            n = base[p];
+            n = _base[p];
             if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
             {
-                result.add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, 0, i), v[-n - 1]));
+                result.Add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, 0, i), v[-n - 1]));
             }
 
             p = b + (int) (keyChars[i]) + 1;    // 状态转移 p = base[char[i-1]] + char[i] + 1
             // 下面这句可能产生下标越界，不如改为if (p < size && b == check[p])，或者多分配一些内存
             if (b == check[p])                  // base[char[i-1]] == check[base[char[i-1]] + char[i] + 1]
-                b = base[p];
+                b = _base[p];
             else
                 return result;
         }
 
         p = b;
-        n = base[p];
+        n = _base[p];
 
         if (b == check[p] && n < 0)
         {
-            result.add(new AbstractMap.SimpleEntry<string, V>(key, v[-n - 1]));
+            result.Add(new AbstractMap.SimpleEntry<string, V>(key, v[-n - 1]));
         }
 
         return result;
@@ -863,18 +866,18 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param begin
      * @return
      */
-    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] keyChars, int begin)
+    public List<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] keyChars, int begin)
     {
-        int len = keyChars.length;
-        LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
-        int b = base[0];
+        int len = keyChars.Length;
+        List<KeyValuePair<string, V>> result = new List<KeyValuePair<string, V>>();
+        int b = _base[0];
         int n;
         int p;
 
         for (int i = begin; i < len; ++i)
         {
             p = b;
-            n = base[p];
+            n = _base[p];
             if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
             {
                 result.add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, begin, i - begin), v[-n - 1]));
@@ -883,13 +886,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             p = b + (int) (keyChars[i]) + 1;    // 状态转移 p = base[char[i-1]] + char[i] + 1
             // 下面这句可能产生下标越界，不如改为if (p < size && b == check[p])，或者多分配一些内存
             if (b == check[p])                  // base[char[i-1]] == check[base[char[i-1]] + char[i] + 1]
-                b = base[p];
+                b = _base[p];
             else
                 return result;
         }
 
         p = b;
-        n = base[p];
+        n = _base[p];
 
         if (b == check[p] && n < 0)
         {
@@ -906,7 +909,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 //        string infoChar     = "char = ";
 //        string infoBase     = "base = ";
 //        string infoCheck    = "check= ";
-//        for (int i = 0; i < base.length; ++i)
+//        for (int i = 0; i < base.Length; ++i)
 //        {
 //            if (base[i] != 0 || check[i] != 0)
 //            {
@@ -928,7 +931,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                 ", allocSize=" + allocSize +
                 ", key=" + key +
                 ", keySize=" + keySize +
-//                ", length=" + Arrays.toString(length) +
+//                ", Length=" + Arrays.toString(Length) +
 //                ", value=" + Arrays.toString(value) +
                 ", progress=" + progress +
                 ", nextCheckPos=" + nextCheckPos +
@@ -943,7 +946,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public int size()
     {
-        return v.length;
+        return v.Length;
     }
 
     /**
@@ -963,7 +966,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public int[] getBase()
     {
-        return base;
+        return _base;
     }
 
     /**
@@ -991,25 +994,25 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             return getValueAt(index);
         }
 
-        return null;
+        return default;
     }
 
     public V get(char[] key)
     {
-        int index = exactMatchSearch(key, 0, key.length, 0);
+        int index = exactMatchSearch(key, 0, key.Length, 0);
         if (index >= 0)
         {
             return getValueAt(index);
         }
 
-        return null;
+        return default;
     }
 
     public V[] getValueArray(V[] a)
     {
         // I hate this but just have to
-        int size = v.length;
-        if (a.length < size)
+        int size = v.Length;
+        if (a.Length < size)
             a = (V[]) java.lang.reflect.Array.newInstance(
                     a.getClass().getComponentType(), size);
         System.arraycopy(v, 0, a, 0, size);
@@ -1040,14 +1043,14 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     protected int transition(char[] path)
     {
-        int b = base[0];
+        int b = _base[0];
         int p;
 
-        for (int i = 0; i < path.length; ++i)
+        for (int i = 0; i < path.Length; ++i)
         {
             p = b + (int) (path[i]) + 1;
             if (b == check[p])
-                b = base[p];
+                b = _base[p];
             else
                 return -1;
         }
@@ -1068,11 +1071,11 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         int b = from;
         int p;
 
-        for (int i = 0; i < path.length(); ++i)
+        for (int i = 0; i < path.Length; ++i)
         {
             p = b + (int) (path.charAt(i)) + 1;
             if (b == check[p])
-                b = base[p];
+                b = _base[p];
             else
                 return -1;
         }
@@ -1094,7 +1097,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         p = b + (int) (c) + 1;
         if (b == check[p])
-            b = base[p];
+            b = _base[p];
         else
             return -1;
 
@@ -1109,13 +1112,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public V output(int state)
     {
-        if (state < 0) return null;
-        int n = base[state];
+        if (state < 0) return default;
+        int n = _base[state];
         if (state == check[state] && n < 0)
         {
             return v[-n - 1];
         }
-        return null;
+        return default;
     }
 
     /**
@@ -1130,7 +1133,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         /**
          * key的长度
          */
-        public int length;
+        public int Length;
         /**
          * key的字典序坐标
          */
@@ -1167,7 +1170,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             this.charArray = charArray;
             i = offset;
             last = base[0];
-            arrayLength = charArray.length;
+            arrayLength = charArray.Length;
             // A trick，如果文本长度为0的话，调用next()时，会带来越界的问题。
             // 所以我要在第一次调用next()的时候触发begin == arrayLength进而返回false。
             // 当然也可以改成begin >= arrayLength，不过我觉得操作符>=的效率低于==
@@ -1193,24 +1196,24 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                     ++begin;
                     if (begin == arrayLength) break;
                     i = begin;
-                    b = base[0];
+                    b = _base[0];
                 }
                 p = b + (int) (charArray[i]) + 1;   // 状态转移 p = base[char[i-1]] + char[i] + 1
                 if (b == check[p])                  // base[char[i-1]] == check[base[char[i-1]] + char[i] + 1]
-                    b = base[p];                    // 转移成功
+                    b = _base[p];                    // 转移成功
                 else
                 {
                     i = begin;                      // 转移失败，也将起点往前挪一个，重新开始，状态归零
                     ++begin;
                     if (begin == arrayLength) break;
-                    b = base[0];
+                    b = _base[0];
                     continue;
                 }
                 p = b;
-                n = base[p];
+                n = _base[p];
                 if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
                 {
-                    length = i - begin + 1;
+                    Length = i - begin + 1;
                     index = -n - 1;
                     value = v[index];
                     last = b;
@@ -1250,7 +1253,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         /**
          * key的长度
          */
-        public int length;
+        public int Length;
         /**
          * key的字典序坐标
          */
@@ -1293,7 +1296,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
          */
         public bool next()
         {
-            value = null;
+            value = default;
             begin = i;
             int b = _base[0];
             int n;
@@ -1313,7 +1316,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                     if (begin == arrayLength) break;
                     if (value != null)
                     {
-                        i = begin + length;         // 输出最长词后，从该词语的下一个位置恢复扫描
+                        i = begin + Length;         // 输出最长词后，从该词语的下一个位置恢复扫描
                         return true;
                     }
 
@@ -1325,7 +1328,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                 n = _base[p];
                 if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
                 {
-                    length = i - begin + 1;
+                    Length = i - begin + 1;
                     index = -n - 1;
                     value = v[index];
                 }
@@ -1346,7 +1349,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         Searcher searcher = getSearcher(text, 0);
         while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.length, searcher.value);
+            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
         }
     }
 
@@ -1371,7 +1374,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         LongestSearcher searcher = getLongestSearcher(text, 0);
         while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.length, searcher.value);
+            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
         }
     }
 
@@ -1384,12 +1387,12 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     protected int transition(int current, char c)
     {
-        int b = base[current];
+        int b = _base[current];
         int p;
 
         p = b + c + 1;
         if (b == check[p])
-            b = base[p];
+            b = _base[p];
         else
             return -1;
 
@@ -1435,13 +1438,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
 //        if (HanLP.Config.DEBUG)
 //        {
-//            Console.Error.WriteLine("释放内存 %d bytes\n", base.length - size - 65535);
+//            Console.Error.WriteLine("释放内存 %d bytes\n", base.Length - size - 65535);
 //        }
         int[] nbase = new int[size + 65535];
-        System.arraycopy(base, 0, nbase, 0, size);
+        System.arraycopy(_base, 0, nbase, 0, size);
         _base = nbase;
 
-        int ncheck[] = new int[size + 65535];
+        int[] ncheck = new int[size + 65535];
         System.arraycopy(check, 0, ncheck, 0, size);
         check = ncheck;
     }
@@ -1454,13 +1457,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 //    {
 //        System._out.println("size: " + size);
 //        int nonZeroIndex = 0;
-//        for (int i = 0; i < base.length; i++)
+//        for (int i = 0; i < base.Length; i++)
 //        {
 //            if (base[i] != 0) nonZeroIndex = i;
 //        }
 //        System._out.println("BaseUsed: " + nonZeroIndex);
 //        nonZeroIndex = 0;
-//        for (int i = 0; i < check.length; i++)
+//        for (int i = 0; i < check.Length; i++)
 //        {
 //            if (check[i] != 0) nonZeroIndex = i;
 //        }

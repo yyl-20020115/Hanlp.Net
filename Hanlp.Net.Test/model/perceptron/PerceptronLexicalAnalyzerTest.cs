@@ -64,7 +64,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         AssertEquals("[来到/v, 美国纽约现代艺术博物馆/ns, 美国/ns, 纽约/ns, 现代/t, 艺术/n, 博物馆/n, 参观/v]", termList.ToString());
         for (Term term : termList)
         {
-            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length()));
+            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length));
         }
         analyzer.enableIndexMode(false);
     }
@@ -76,7 +76,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         List<Term> termList = analyzer.seg(text);
         for (Term term : termList)
         {
-            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length()));
+            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length));
         }
     }
     [TestMethod]

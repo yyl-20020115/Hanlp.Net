@@ -17,9 +17,9 @@ namespace com.hankcs.hanlp.mining.word2vec;
  */
 public class ComputeAccuracy
 {
-    final static int max_size = 2000;         // max length of strings
-    final static int N = 1;                   // number of closest words
-    final static int max_w = 50;              // max length of vocabulary entries
+    const int max_size = 2000;         // max Length of strings
+    const int N = 1;                   // number of closest words
+    const int max_w = 50;              // max Length of vocabulary entries
 
     public static void main(string[] argv) 
     {
@@ -30,10 +30,10 @@ public class ComputeAccuracy
         double[] bestd = new double[N];
         double[] vec = new double[max_size];
         int words = 0, size = 0, a, b, c, d, b1, b2, b3, threshold = 0;
-        double M[];
-        string vocab[];
+        double[] M;
+        string[] vocab;
         int TCN, CCN = 0, TACN = 0, CACN = 0, SECN = 0, SYCN = 0, SEAC = 0, SYAC = 0, QID = 0, TQ = 0, TQS = 0;
-        if (argv == null || argv.length != 3)
+        if (argv == null || argv.Length != 3)
         {
             printf("Usage: ./compute-accuracy <FILE> <threshold> <QUESTION FILE>\nwhere FILE contains word projections, and threshold is used to reduce vocabulary of the model for fast approximate evaluation (0 = off, otherwise typical value is 30000). Question file contains questions and answers\n");
             return;
@@ -58,23 +58,23 @@ public class ComputeAccuracy
 
         try
         {
-            string[] params = f.readLine().Split("\\s");
-            words = int.parseInt(params[0]);
+            string[] _params = f.readLine().Split("\\s");
+            words = int.parseInt(_params[0]);
             if (words > threshold) words = threshold;
-            size = int.parseInt(params[1]);
+            size = int.parseInt(_params[1]);
             vocab = new string[words];
             M = new double[words * size];
             for (b = 0; b < words; b++)
             {
-                params = f.readLine().Split("\\s");
-                vocab[b] = params[0].toUpperCase();
+                _params = f.readLine().Split("\\s");
+                vocab[b] = _params[0].toUpperCase();
                 for (a = 0; a < size; a++)
                 {
-                    M[a + b * size] = Double.parseDouble(params[1 + a]);
+                    M[a + b * size] = Double.parseDouble(_params[1 + a]);
                 }
                 len = 0;
                 for (a = 0; a < size; a++) len += M[a + b * size] * M[a + b * size];
-                len = Math.sqrt(len);
+                len = Math.Sqrt(len);
                 for (a = 0; a < size; a++) M[a + b * size] /= len;
             }
             f.close();
@@ -109,12 +109,12 @@ public class ComputeAccuracy
             string line = stdin.readLine();
 
             string[] param = null;
-            if (line != null && line.length() > 0)
+            if (line != null && line.Length > 0)
             {
                 param = line.toUpperCase().Split("\\s");
                 st1 = param[0];
             }
-            if (line == null || line.length() == 0 || st1.equals(":") || st1.equals("EXIT"))
+            if (line == null || line.Length == 0 || st1.equals(":") || st1.equals("EXIT"))
             {
                 if (TCN == 0) TCN = 1;
                 if (QID != 0)
@@ -123,7 +123,7 @@ public class ComputeAccuracy
                     printf("Total accuracy: %.2f %%   Semantic accuracy: %.2f %%   Syntactic accuracy: %.2f %% \n", CACN / (double) TACN * 100, SEAC / (double) SECN * 100, SYAC / (double) SYCN * 100);
                 }
                 QID++;
-                if (line == null || line.length() == 0) break;
+                if (line == null || line.Length == 0) break;
                 st1 = param[1];
                 printf("%s:\n", st1);
                 TCN = 0;
@@ -187,7 +187,7 @@ public class ComputeAccuracy
         printf("Questions seen / total: %d %d   %.2f %% \n", TQS, TQ, TQS / (double) TQ * 100);
     }
 
-    private static void printf(string format, Object... args)
+    private static void printf(string format, params Object[] args)
     {
         System._out.printf(format, args);
     }

@@ -94,7 +94,7 @@ public class Main
             {
                 PerceptronLexicalAnalyzer analyzer;
                 string[] models = option.model;
-                switch (models.length)
+                switch (models.Length)
                 {
                     case 1:
                         analyzer = new PerceptronLexicalAnalyzer(models[0]);
@@ -134,7 +134,7 @@ public class Main
                 while (scanner.hasNext() && (line = scanner.nextLine()) != null)
                 {
                     line = line.trim();
-                    if (line.length() == 0) continue;
+                    if (line.Length == 0) continue;
                     Sentence sentence = analyzer.analyze(line);
                     printer.write(sentence.toString());
                     printer.write(lineSeparator);

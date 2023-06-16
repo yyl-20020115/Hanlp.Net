@@ -46,7 +46,7 @@ public class NERTagSet : TagSet
         {
             add(tag);
             string label = NERTagSet.posOf(tag);
-            if (label.length() != tag.length())
+            if (label.Length != tag.Length)
                 nerLabels.add(label);
         }
     }

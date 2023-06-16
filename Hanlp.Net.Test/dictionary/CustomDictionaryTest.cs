@@ -31,7 +31,7 @@ public class CustomDictionaryTest : TestCase
     //        while ((line = br.readLine()) != null)
     //        {
     //            String[] param = line.Split("\\s");
-    //            if (param[0].Length() == 1 || CoreDictionary.Contains(param[0])) continue;
+    //            if (param[0].Length == 1 || CoreDictionary.Contains(param[0])) continue;
     //            fixedDictionary.add(line);
     //        }
     //        br.close();
@@ -104,7 +104,7 @@ public class CustomDictionaryTest : TestCase
     //    public void testRemoveNotNS() 
     //    {
     //        String path = "data/dictionary/custom/全国地名大全.txt";
-    //        final Set<Character> suffixSet = new TreeSet<Character>();
+    //        final Set<char> suffixSet = new TreeSet<char>();
     //        for (char c : Predefine.POSTFIX_SINGLE.ToCharArray())
     //        {
     //            suffixSet.add(c);
@@ -115,7 +115,7 @@ public class CustomDictionaryTest : TestCase
     //            //@Override
     //            public bool onSave(Item item)
     //            {
-    //                if (suffixSet.Contains(item.key.charAt(item.key.Length() - 1))) return true;
+    //                if (suffixSet.Contains(item.key.charAt(item.key.Length - 1))) return true;
     //                List<Term> termList = segment.seg(item.key);
     //                if (termList.size() == 1 && termList.get(0).nature == Nature.nr)
     //                {

@@ -35,7 +35,7 @@ public class CacheCorpus : Corpus
 
     private int nextId() 
     {
-        if (raf.length() - raf.getFilePointer() >= 4)
+        if (raf.Length - raf.getFilePointer() >= 4)
         {
             int id = raf.readInt();
             return id < 0 ? id : table[id];
@@ -48,6 +48,6 @@ public class CacheCorpus : Corpus
     public void rewind(int numThreads, int id) 
     {
         super.rewind(numThreads, id);
-        raf.seek(raf.length() / 4 / numThreads * id * 4);   // spilt by id, not by bytes
+        raf.seek(raf.Length / 4 / numThreads * id * 4);   // spilt by id, not by bytes
     }
 }

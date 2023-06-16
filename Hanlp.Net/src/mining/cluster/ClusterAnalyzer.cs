@@ -368,8 +368,8 @@ public class ClusterAnalyzer<K>
         if (folders == null) return 1.;
         logger.start("根目录:%s\n加载中...\n", folderPath);
         int docSize = 0;
-        int[] ni = new int[folders.length];
-        string[] cat = new string[folders.length];
+        int[] ni = new int[folders.Length];
+        string[] cat = new string[folders.Length];
         int offset = 0;
         for (File folder : folders)
         {
@@ -380,7 +380,7 @@ public class ClusterAnalyzer<K>
             cat[offset] = category;
             logger._out("[%s]...", category);
             int b = 0;
-            int e = files.length;
+            int e = files.Length;
 
             int logEvery = (int) Math.ceil((e - b) / 10000f);
             for (int i = b; i < e; i++)
@@ -396,13 +396,13 @@ public class ClusterAnalyzer<K>
             logger._out(" %d 篇文档\n", e - b);
             ++offset;
         }
-        logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", folders.length, docSize);
+        logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", folders.Length, docSize);
         logger.start(algorithm + "聚类中...");
         List<Set<string>> clusterList = algorithm.replaceAll("[-\\s]", "").toLowerCase().equals("kmeans") ?
-            analyzer.kmeans(ni.length) : analyzer.repeatedBisection(ni.length);
+            analyzer.kmeans(ni.Length) : analyzer.repeatedBisection(ni.Length);
         logger.finish(" 完毕。\n");
-        double[] fi = new double[ni.length];
-        for (int i = 0; i < ni.length; i++)
+        double[] fi = new double[ni.Length];
+        for (int i = 0; i < ni.Length; i++)
         {
             for (Set<string> j : clusterList)
             {
@@ -420,7 +420,7 @@ public class ClusterAnalyzer<K>
             }
         }
         double f = 0;
-        for (int i = 0; i < fi.length; i++)
+        for (int i = 0; i < fi.Length; i++)
         {
             f += fi[i] * ni[i] / docSize;
         }

@@ -38,7 +38,7 @@ public abstract class LineHandler
             tokenList.add(line.substring(start, end));
             start = end + 1;
         }
-        tokenList.add(line.substring(start, line.length()));
+        tokenList.add(line.substring(start, line.Length));
         handle(tokenList.toArray(new string[0]));
     }
 

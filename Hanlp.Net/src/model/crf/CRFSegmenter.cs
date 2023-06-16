@@ -72,7 +72,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
                     bw.write('M');
                     bw.write('\n');
                 }
-                bw.write(word.charAt(word.length() - 1));
+                bw.write(word.charAt(word.Length - 1));
                 bw.write('\t');
                 bw.write('E');
                 bw.write('\n');
@@ -111,7 +111,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
         {
             StringBuilder sbFeature = new StringBuilder();
             List<int> featureVec = new ();
-            for (int i = 0; i < featureTemplateArray.length; i++)
+            for (int i = 0; i < featureTemplateArray.Length; i++)
             {
                 Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
                 Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
@@ -121,8 +121,8 @@ public class CRFSegmenter : CRFTagger , Segmenter
                     int offset = offsetIterator.next()[0] + position;
                     if (offset < 0)
                         sbFeature.Append(FeatureIndex.BOS[-(offset + 1)]);
-                    else if (offset >= sentence.length())
-                        sbFeature.Append(FeatureIndex.EOS[offset - sentence.length()]);
+                    else if (offset >= sentence.Length)
+                        sbFeature.Append(FeatureIndex.EOS[offset - sentence.Length]);
                     else
                         sbFeature.Append(sentence.charAt(offset));
                     if (delimiterIterator.hasNext())

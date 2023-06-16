@@ -42,9 +42,9 @@ public class SentencesUtil
 
         List<string> sentences = new LinkedList<string>();
 
-        for (int i = 0; i < chars.length; ++i)
+        for (int i = 0; i < chars.Length; ++i)
         {
-            if (sb.length() == 0 && (Character.isWhitespace(chars[i]) || chars[i] == ' '))
+            if (sb.Length == 0 && (char.isWhitespace(chars[i]) || chars[i] == ' '))
             {
                 continue;
             }
@@ -53,7 +53,7 @@ public class SentencesUtil
             switch (chars[i])
             {
                 case '.':
-                    if (i < chars.length - 1 && chars[i + 1] > 128)
+                    if (i < chars.Length - 1 && chars[i + 1] > 128)
                     {
                         insertIntoList(sb, sentences);
                         sb = new StringBuilder();
@@ -61,7 +61,7 @@ public class SentencesUtil
                     break;
                 case '…':
                 {
-                    if (i < chars.length - 1 && chars[i + 1] == '…')
+                    if (i < chars.Length - 1 && chars[i + 1] == '…')
                     {
                         sb.Append('…');
                         ++i;
@@ -94,7 +94,7 @@ public class SentencesUtil
             }
         }
 
-        if (sb.length() > 0)
+        if (sb.Length > 0)
         {
             insertIntoList(sb, sentences);
         }
@@ -105,7 +105,7 @@ public class SentencesUtil
     private static void insertIntoList(StringBuilder sb, List<string> sentences)
     {
         string content = sb.toString().trim();
-        if (content.length() > 0)
+        if (content.Length > 0)
         {
             sentences.add(content);
         }

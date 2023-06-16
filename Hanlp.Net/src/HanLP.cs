@@ -225,7 +225,7 @@ public class HanLP
                     else throw e;
                 }
                 string root = p.getProperty("root", "").replaceAll("\\\\", "/");
-                if (root.length() > 0 && !root.endsWith("/")) root += "/";
+                if (root.Length > 0 && !root.endsWith("/")) root += "/";
                 CoreDictionaryPath = root + p.getProperty("CoreDictionaryPath", CoreDictionaryPath);
                 CoreDictionaryTransformMatrixDictionaryPath = root + p.getProperty("CoreDictionaryTransformMatrixDictionaryPath", CoreDictionaryTransformMatrixDictionaryPath);
                 BiGramDictionaryPath = root + p.getProperty("BiGramDictionaryPath", BiGramDictionaryPath);
@@ -235,7 +235,7 @@ public class HanLP
                 PersonDictionaryTrPath = root + p.getProperty("PersonDictionaryTrPath", PersonDictionaryTrPath);
                 string[] pathArray = p.getProperty("CustomDictionaryPath", "data/dictionary/custom/CustomDictionary.txt").Split(";");
                 string prePath = root;
-                for (int i = 0; i < pathArray.length; ++i)
+                for (int i = 0; i < pathArray.Length; ++i)
                 {
                     if (pathArray[i].startsWith(" "))
                     {
@@ -543,8 +543,8 @@ public class HanLP
     public static string convertToPinyinString(string text, string separator, bool remainNone)
     {
         List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, true);
-        int length = pinyinList.size();
-        StringBuilder sb = new StringBuilder(length * (5 + separator.length()));
+        int Length = pinyinList.size();
+        StringBuilder sb = new StringBuilder(Length * (5 + separator.Length));
         int i = 1;
         foreach (Pinyin pinyin in pinyinList)
         {
@@ -554,7 +554,7 @@ public class HanLP
                 sb.Append(text.charAt(i - 1));
             }
             else sb.Append(pinyin.getPinyinWithoutTone());
-            if (i < length)
+            if (i < Length)
             {
                 sb.Append(separator);
             }
@@ -585,13 +585,13 @@ public class HanLP
     public static string convertToPinyinFirstCharString(string text, string separator, bool remainNone)
     {
         List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, remainNone);
-        int length = pinyinList.size();
-        StringBuilder sb = new StringBuilder(length * (1 + separator.length()));
+        int Length = pinyinList.size();
+        StringBuilder sb = new StringBuilder(Length * (1 + separator.Length));
         int i = 1;
         foreach (Pinyin pinyin in pinyinList)
         {
             sb.Append(pinyin.getFirstChar());
-            if (i < length)
+            if (i < Length)
             {
                 sb.Append(separator);
             }
@@ -804,8 +804,8 @@ public class HanLP
      */
     public static string getSummary(string document, int max_length)
     {
-        // Parameter size in this method refers to the string length of the summary required;
-        // The actual length of the summary generated may be short than the required length, but never longer;
+        // Parameter size in this method refers to the string Length of the summary required;
+        // The actual Length of the summary generated may be short than the required Length, but never longer;
         return TextRankSentence.getSummary(document, max_length);
     }
 
@@ -832,8 +832,8 @@ public class HanLP
      */
     public static string getSummary(string document, int max_length, string sentence_separator)
     {
-        // Parameter size in this method refers to the string length of the summary required;
-        // The actual length of the summary generated may be short than the required length, but never longer;
+        // Parameter size in this method refers to the string Length of the summary required;
+        // The actual Length of the summary generated may be short than the required Length, but never longer;
         return TextRankSentence.getSummary(document, max_length, sentence_separator);
     }
 

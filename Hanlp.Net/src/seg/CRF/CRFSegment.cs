@@ -61,7 +61,7 @@ public class CRFSegment : CharacterBasedSegment
     //@Override
     protected List<Term> roughSegSentence(char[] sentence)
     {
-        if (sentence.length == 0) return Collections.emptyList();
+        if (sentence.Length == 0) return Collections.emptyList();
         char[] sentenceConverted = CharTable.convert(sentence);
         Table table = new Table();
         table.v = atomSegmentToTable(sentenceConverted);
@@ -74,7 +74,7 @@ public class CRFSegment : CharacterBasedSegment
         }
         int offset = 0;
         OUTER:
-        for (int i = 0; i < table.v.length; offset += table.v[i][1].length(), ++i)
+        for (int i = 0; i < table.v.Length; offset += table.v[i][1].Length, ++i)
         {
             string[] line = table.v[i];
             switch (line[2].charAt(0))
@@ -84,25 +84,25 @@ public class CRFSegment : CharacterBasedSegment
                     int begin = offset;
                     while (table.v[i][2].charAt(0) != 'E')
                     {
-                        offset += table.v[i][1].length();
+                        offset += table.v[i][1].Length;
                         ++i;
-                        if (i == table.v.length)
+                        if (i == table.v.Length)
                         {
                             break;
                         }
                     }
-                    if (i == table.v.length)
+                    if (i == table.v.Length)
                     {
                         termList.add(new Term(new string(sentence, begin, offset - begin), toDefaultNature(table.v[i][0])));
                         break OUTER;
                     }
                     else
-                        termList.add(new Term(new string(sentence, begin, offset - begin + table.v[i][1].length()), toDefaultNature(table.v[i][0])));
+                        termList.add(new Term(new string(sentence, begin, offset - begin + table.v[i][1].Length), toDefaultNature(table.v[i][0])));
                 }
                 break;
                 default:
                 {
-                    termList.add(new Term(new string(sentence, offset, table.v[i][1].length()), toDefaultNature(table.v[i][0])));
+                    termList.add(new Term(new string(sentence, offset, table.v[i][1].Length), toDefaultNature(table.v[i][0])));
                 }
                 break;
             }
@@ -121,11 +121,11 @@ public class CRFSegment : CharacterBasedSegment
 
     public static List<string> atomSegment(char[] sentence)
     {
-        List<string> atomList = new ArrayList<string>(sentence.length);
-        final int maxLen = sentence.length - 1;
+        List<string> atomList = new ArrayList<string>(sentence.Length);
+        final int maxLen = sentence.Length - 1;
         final StringBuilder sbAtom = new StringBuilder();
         _out:
-        for (int i = 0; i < sentence.length; i++)
+        for (int i = 0; i < sentence.Length; i++)
         {
             if (sentence[i] >= '0' && sentence[i] <= '9')
             {
@@ -188,12 +188,12 @@ public class CRFSegment : CharacterBasedSegment
 
     public static string[][] atomSegmentToTable(char[] sentence)
     {
-        string table[][] = new string[sentence.length][3];
+        string table[][] = new string[sentence.Length][3];
         int size = 0;
-        final int maxLen = sentence.length - 1;
+        final int maxLen = sentence.Length - 1;
         final StringBuilder sbAtom = new StringBuilder();
         _out:
-        for (int i = 0; i < sentence.length; i++)
+        for (int i = 0; i < sentence.Length; i++)
         {
             if (sentence[i] >= '0' && sentence[i] <= '9')
             {
@@ -276,7 +276,7 @@ public class CRFSegment : CharacterBasedSegment
      */
     private static string[][] resizeArray(string[][] array, int size)
     {
-        if (array.length == size) return array;
+        if (array.Length == size) return array;
         string[][] nArray = new string[size][];
         System.arraycopy(array, 0, nArray, 0, size);
         return nArray;

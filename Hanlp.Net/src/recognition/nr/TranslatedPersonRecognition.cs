@@ -72,7 +72,7 @@ public class TranslatedPersonRecognition
                 }
             }
 
-            line += vertex.realWord.length();
+            line += vertex.realWord.Length;
         }
     }
 }

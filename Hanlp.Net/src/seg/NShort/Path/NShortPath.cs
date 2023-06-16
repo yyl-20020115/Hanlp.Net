@@ -60,7 +60,7 @@ public class NShortPath
         N = nValueKind;
 
         // 获取顶点的数目
-        vertexCount = inGraph.vertexes.length;
+        vertexCount = inGraph.vertexes.Length;
 
         fromArray = new CQueue[vertexCount - 1][];  // 不包含起点
         weightArray = new double[vertexCount - 1][];
@@ -197,9 +197,9 @@ public class NShortPath
             {
                 nArray[i] = stack.get(stack.size() - i - 1);
             }
-            aPath = new int[nArray.length];
+            aPath = new int[nArray.Length];
 
-            for (int i = 0; i < aPath.length; i++)
+            for (int i = 0; i < aPath.Length; i++)
                 aPath[i] = nArray[i].from;
 
             result.add(aPath);

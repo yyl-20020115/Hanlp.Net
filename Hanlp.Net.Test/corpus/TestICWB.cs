@@ -31,18 +31,18 @@ public class TestICWB : TestCase
 //            String[] wordArray = line.Split("\\s");
 //            for (String word : wordArray)
 //            {
-//                if (word.Length() == 1)
+//                if (word.Length == 1)
 //                {
 //                    bw.write(word + "\tS\n");
 //                }
-//                else if (word.Length() > 1)
+//                else if (word.Length > 1)
 //                {
 //                    bw.write(word.charAt(0) + "\tB\n");
-//                    for (int i = 1; i < word.Length() - 1; ++i)
+//                    for (int i = 1; i < word.Length - 1; ++i)
 //                    {
 //                        bw.write(word.charAt(i) + "\tM\n");
 //                    }
-//                    bw.write(word.charAt(word.Length() - 1) + "\tE\n");
+//                    bw.write(word.charAt(word.Length - 1) + "\tE\n");
 //                }
 //            }
 //            bw.newLine();

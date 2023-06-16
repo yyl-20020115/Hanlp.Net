@@ -56,7 +56,7 @@ public class HMMSegment : CharacterBasedSegment
         char[] tag = model.tag(sentence);
         List<Term> termList = new LinkedList<Term>();
         int offset = 0;
-        for (int i = 0; i < tag.length; offset += 1, ++i)
+        for (int i = 0; i < tag.Length; offset += 1, ++i)
         {
             switch (tag[i])
             {
@@ -67,12 +67,12 @@ public class HMMSegment : CharacterBasedSegment
                     {
                         offset += 1;
                         ++i;
-                        if (i == tag.length)
+                        if (i == tag.Length)
                         {
                             break;
                         }
                     }
-                    if (i == tag.length)
+                    if (i == tag.Length)
                     {
                         termList.add(new Term(new string(sentence, begin, offset - begin), null));
                     }

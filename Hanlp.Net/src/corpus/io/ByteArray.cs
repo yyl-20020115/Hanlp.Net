@@ -108,7 +108,7 @@ public class ByteArray
 
     public bool hasMore()
     {
-        return offset < bytes.length;
+        return offset < bytes.Length;
     }
 
     /**
@@ -119,7 +119,7 @@ public class ByteArray
     public string nextString()
     {
         char[] buffer = new char[nextInt()];
-        for (int i = 0; i < buffer.length; ++i)
+        for (int i = 0; i < buffer.Length; ++i)
         {
             buffer[i] = nextChar();
         }
@@ -236,7 +236,7 @@ public class ByteArray
 
     public int getLength()
     {
-        return bytes.length;
+        return bytes.Length;
     }
 
     /**

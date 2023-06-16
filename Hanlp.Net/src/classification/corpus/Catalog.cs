@@ -30,7 +30,7 @@ public class Catalog : Serializable
     public Catalog(string[] catalog)
     {
         this();
-        for (int i = 0; i < catalog.length; i++)
+        for (int i = 0; i < catalog.Length; i++)
         {
             categoryId.put(catalog[i], i);
             idCategory.add(catalog[i]);

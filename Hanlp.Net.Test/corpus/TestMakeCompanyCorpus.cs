@@ -30,7 +30,7 @@ public class TestMakeCompanyCorpus : TestCase
 //        while ((line = bw.readLine()) != null && limit-- > 0)
 //        {
 //            if (line.endsWith("）")) continue;
-//            if (line.Length() < 4) continue;
+//            if (line.Length < 4) continue;
 //            if (line.Contains("个体") || line.Contains("个人"))
 //            {
 //                continue;

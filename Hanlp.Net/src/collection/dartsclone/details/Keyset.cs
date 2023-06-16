@@ -27,7 +27,7 @@ public class Keyset
      */
     int numKeys()
     {
-        return _keys.length;
+        return _keys.Length;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Keyset
      */
     byte getKeyByte(int keyId, int byteId)
     {
-        if (byteId >= _keys[keyId].length)
+        if (byteId >= _keys[keyId].Length)
         {
             return 0;
         }

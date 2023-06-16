@@ -56,9 +56,9 @@ public class Term
      * 长度
      * @return
      */
-    public int length()
+    public int Length
     {
-        return word.length();
+        return word.Length;
     }
 
     /**

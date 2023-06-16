@@ -31,7 +31,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public BinTrie()
     {
-        child = new BaseNode[65535 + 1];    // (int)Character.MAX_VALUE
+        child = new BaseNode[65535 + 1];    // (int)char.MAX_VALUE
         _size = 0;
         status = Status.NOT_WORD_1;
     }
@@ -53,17 +53,17 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      */
     public void put(string key, V value)
     {
-        if (key.length() == 0) return;  // 安全起见
+        if (key.Length == 0) return;  // 安全起见
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
-        for (int i = 0; i < chars.length - 1; ++i)
+        for (int i = 0; i < chars.Length - 1; ++i)
         {
             // 除了最后一个字外，都是继续
             branch.addChild(new Node(chars[i], Status.NOT_WORD_1, null));
             branch = branch.getChild(chars[i]);
         }
         // 最后一个字加入时属性为end
-        if (branch.addChild(new Node<V>(chars[chars.length - 1], Status.WORD_END_3, value)))
+        if (branch.addChild(new Node<V>(chars[chars.Length - 1], Status.WORD_END_3, value)))
         {
             ++size; // 维护size
         }
@@ -72,14 +72,14 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public void put(char[] key, V value)
     {
         BaseNode branch = this;
-        for (int i = 0; i < key.length - 1; ++i)
+        for (int i = 0; i < key.Length - 1; ++i)
         {
             // 除了最后一个字外，都是继续
             branch.addChild(new Node(key[i], Status.NOT_WORD_1, null));
             branch = branch.getChild(key[i]);
         }
         // 最后一个字加入时属性为end
-        if (branch.addChild(new Node<V>(key[key.length - 1], Status.WORD_END_3, value)))
+        if (branch.addChild(new Node<V>(key[key.Length - 1], Status.WORD_END_3, value)))
         {
             ++size; // 维护size
         }
@@ -104,14 +104,14 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
-        for (int i = 0; i < chars.length - 1; ++i)
+        for (int i = 0; i < chars.Length - 1; ++i)
         {
             if (branch == null) return;
             branch = branch.getChild(chars[i]);
         }
         if (branch == null) return;
         // 最后一个字设为undefined
-        if (branch.addChild(new Node(chars[chars.length - 1], Status.UNDEFINED_0, value)))
+        if (branch.addChild(new Node(chars[chars.Length - 1], Status.UNDEFINED_0, value)))
         {
             --size;
         }
@@ -164,7 +164,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     //@Override
     public V[] getValueArray(V[] a)
     {
-        if (a.length < size)
+        if (a.Length < size)
             a = (V[]) java.lang.reflect.Array.newInstance(
                     a.getClass().getComponentType(), size);
         int i = 0;
@@ -216,7 +216,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public HashSet<KeyValuePair<string, V>> prefixSearch(string key)
     {
         HashSet<KeyValuePair<string, V>> entrySet = new HashSet<KeyValuePair<string, V>>();
-        StringBuilder sb = new StringBuilder(key.substring(0, key.length() - 1));
+        StringBuilder sb = new StringBuilder(key.substring(0, key.Length - 1));
         BaseNode branch = this;
         char[] chars = key.ToCharArray();
         for (char aChar : chars)
@@ -254,7 +254,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder();
         BaseNode branch = this;
-        for (int i = begin; i < chars.length; ++i)
+        for (int i = begin; i < chars.Length; ++i)
         {
             char aChar = chars[i];
             branch = branch.getChild(aChar);
@@ -413,7 +413,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         if (bytes == null) return false;
         _ValueArray valueArray = new _ValueArray(value);
         ByteArray byteArray = new ByteArray(bytes);
-        for (int i = 0; i < child.length; ++i)
+        for (int i = 0; i < child.Length; ++i)
         {
             int flag = byteArray.nextInt();
             if (flag == 1)
@@ -422,7 +422,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 child[i].walkToLoad(byteArray, valueArray);
             }
         }
-        size = value.length;
+        size = value.Length;
 
         return true;
     }
@@ -439,7 +439,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         if (bytes == null) return false;
         _ValueArray valueArray = new _EmptyValueArray();
         ByteArray byteArray = new ByteArray(bytes);
-        for (int i = 0; i < child.length; ++i)
+        for (int i = 0; i < child.Length; ++i)
         {
             int flag = byteArray.nextInt();
             if (flag == 1)
@@ -455,7 +455,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public bool load(ByteArray byteArray, _ValueArray valueArray)
     {
-        for (int i = 0; i < child.length; ++i)
+        for (int i = 0; i < child.Length; ++i)
         {
             int flag = byteArray.nextInt();
             if (flag == 1)
@@ -464,7 +464,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 child[i].walkToLoad(byteArray, valueArray);
             }
         }
-        size = valueArray.value.length;
+        size = valueArray.value.Length;
 
         return true;
     }
@@ -501,7 +501,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public void readExternal(ObjectInput _in) 
     {
         size = _in.readInt();
-        for (int i = 0; i < child.length; ++i)
+        for (int i = 0; i < child.Length; ++i)
         {
             int flag = _in.readInt();
             if (flag == 1)
@@ -521,8 +521,8 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      */
     public void parseLongestText(string text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
-        int length = text.length();
-        for (int i = 0; i < length; ++i)
+        int Length = text.Length;
+        for (int i = 0; i < Length; ++i)
         {
             BaseNode<V> state = transition(text.charAt(i));
             if (state != null)
@@ -530,7 +530,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 int to = i + 1;
                 int end = to;
                 V value = state.getValue();
-                for (; to < length; ++to)
+                for (; to < Length; ++to)
                 {
                     state = state.transition(text.charAt(to));
                     if (state == null) break;
@@ -557,8 +557,8 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      */
     public void parseLongestText(char[] text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
-        int length = text.length;
-        for (int i = 0; i < length; ++i)
+        int Length = text.Length;
+        for (int i = 0; i < Length; ++i)
         {
             BaseNode<V> state = transition(text[i]);
             if (state != null)
@@ -566,7 +566,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 int to = i + 1;
                 int end = to;
                 V value = state.getValue();
-                for (; to < length; ++to)
+                for (; to < Length; ++to)
                 {
                     state = state.transition(text[to]);
                     if (state == null) break;
@@ -593,11 +593,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      */
     public void parseText(string text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
-        int length = text.length();
+        int Length = text.Length;
         int begin = 0;
         BaseNode<V> state = this;
 
-        for (int i = begin; i < length; ++i)
+        for (int i = begin; i < Length; ++i)
         {
             state = state.transition(text.charAt(i));
             if (state != null)
@@ -625,11 +625,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      */
     public void parseText(char[] text, AhoCorasickDoubleArrayTrie<string>.IHit<V> processor)
     {
-        int length = text.length;
+        int Length = text.Length;
         int begin = 0;
         BaseNode<V> state = this;
 
-        for (int i = begin; i < length; ++i)
+        for (int i = begin; i < Length; ++i)
         {
             state = state.transition(text[i]);
             if (state != null)

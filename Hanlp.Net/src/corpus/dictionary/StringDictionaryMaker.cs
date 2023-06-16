@@ -50,7 +50,7 @@ public class StringDictionaryMaker
     {
         StringDictionary[] dictionaries = args.clone();
         StringDictionary mainDictionary = dictionaries[0];
-        for (int i = 1; i < dictionaries.length; ++i)
+        for (int i = 1; i < dictionaries.Length; ++i)
         {
             mainDictionary.combine(dictionaries[i]);
         }

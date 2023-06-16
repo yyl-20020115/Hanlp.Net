@@ -55,7 +55,7 @@ public class NewWordDiscover
         while ((doc = reader.readLine()) != null)
         {
             doc = delimiter.matcher(doc).replaceAll("\0");
-            int docLength = doc.length();
+            int docLength = doc.Length;
             for (int i = 0; i < docLength; ++i)
             {
                 int end = Math.min(i + 1 + max_word_len, docLength + 1);
@@ -90,7 +90,7 @@ public class NewWordDiscover
         while (listIterator.hasNext())
         {
             WordInfo info = listIterator.next();
-            if (info.text.trim().length() < 2 || info.p < min_freq || info.entropy < min_entropy || info.aggregation < min_aggregation
+            if (info.text.trim().Length < 2 || info.p < min_freq || info.entropy < min_entropy || info.aggregation < min_aggregation
                 || (filter && LexiconUtility.getFrequency(info.text) > 0)
                 )
             {

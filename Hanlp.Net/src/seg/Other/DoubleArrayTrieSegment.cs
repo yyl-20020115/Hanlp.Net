@@ -70,9 +70,9 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
     protected List<Term> segSentence(char[] sentence)
     {
         char[] charArray = sentence;
-         int[] wordNet = new int[charArray.length];
+         int[] wordNet = new int[charArray.Length];
         Arrays.fill(wordNet, 1);
-         Nature[] natureArray = config.speechTagging ? new Nature[charArray.length] : null;
+         Nature[] natureArray = config.speechTagging ? new Nature[charArray.Length] : null;
         matchLongest(sentence, wordNet, natureArray, trie);
         if (config.useCustomDictionary)
         {
@@ -99,10 +99,10 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
         //@Override
         public void hit(int begin, int end, CoreDictionary.Attribute value)
         {
-            int length = end - begin;
-            if (length > wordNet[begin])
+            int Length = end - begin;
+            if (Length > wordNet[begin])
             {
-                wordNet[begin] = length;
+                wordNet[begin] = Length;
                 if (config.speechTagging)
                 {
                     natureArray[begin] = value.nature[0];
@@ -115,7 +115,7 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
         DoubleArrayTrie<CoreDictionary.Attribute>.LongestSearcher searcher = trie.getLongestSearcher(sentence, 0);
         while (searcher.next())
         {
-            wordNet[searcher.begin] = searcher.length;
+            wordNet[searcher.begin] = searcher.Length;
             if (config.speechTagging)
             {
                 natureArray[searcher.begin] = searcher.value.nature[0];

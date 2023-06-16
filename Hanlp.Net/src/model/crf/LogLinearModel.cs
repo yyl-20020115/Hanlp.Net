@@ -104,11 +104,11 @@ public class LogLinearModel : LinearModel
         if (!lineIterator.hasNext()) throw new IOException("空白文件");
         logger.info(lineIterator.next());   // verson
         logger.info(lineIterator.next());   // cost-factor
-        int maxid = int.parseInt(lineIterator.next().substring("maxid:".length()).trim());
+        int maxid = int.parseInt(lineIterator.next().substring("maxid:".Length).trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
         string line;
-        while ((line = lineIterator.next()).length() != 0)
+        while ((line = lineIterator.next()).Length != 0)
         {
             tagSet.add(line);
         }
@@ -130,7 +130,7 @@ public class LogLinearModel : LinearModel
         TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
         ArrayList<FeatureTemplate> featureTemplateList = new ArrayList<FeatureTemplate>();
         float[][] matrix = null;
-        while ((line = lineIterator.next()).length() != 0)
+        while ((line = lineIterator.next()).Length != 0)
         {
             if (!"B".equals(line))
             {
@@ -152,7 +152,7 @@ public class LogLinearModel : LinearModel
             featureFunctionList.put(b, null);
         }
 
-        while ((line = lineIterator.next()).length() != 0)
+        while ((line = lineIterator.next()).Length != 0)
         {
             string[] args = line.Split(" ", 2);
             char[] charArray = args[1].ToCharArray();
@@ -214,7 +214,7 @@ public class LogLinearModel : LinearModel
                 string header = iterator.next();
                 if (feature.startsWith(header))
                 {
-                    int fid = featureMap.idOf(feature.substring(header.length()) + tid);
+                    int fid = featureMap.idOf(feature.substring(header.Length) + tid);
 //                    assert id == sizeOfTagSet * sizeOfTagSet + (fid - sizeOfTagSet - 1) * sizeOfTagSet;
                     for (int i = 0; i < sizeOfTagSet; ++i)
                     {
@@ -251,9 +251,9 @@ public class LogLinearModel : LinearModel
             for (string tag : tagSet.tags())
             {
                 string[] parts = tag.Split("-");
-                if (parts.length > 1)
+                if (parts.Length > 1)
                 {
-                    if (parts[0].length() == 1 && "BMES".contains(parts[0]))
+                    if (parts[0].Length == 1 && "BMES".contains(parts[0]))
                         return TaskType.NER;
                 }
             }

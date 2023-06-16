@@ -47,8 +47,8 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
 
     static AbstractLexicalAnalyzer()
     {
-        typeTable = new byte[CharType.type.length];
-        System.arraycopy(CharType.type, 0, typeTable, 0, typeTable.length);
+        typeTable = new byte[CharType.type.Length];
+        System.arraycopy(CharType.type, 0, typeTable, 0, typeTable.Length);
         foreach (char c in Predefine.CHINESE_NUMBERS.ToCharArray())
         {
             typeTable[c] = CharType.CT_CHINESE;
@@ -100,7 +100,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             int[] offset = new int[] { 0 };
             CustomDictionary.parseLongestText(sentence, new CPT());
-            if (offset[0] != sentence.length())
+            if (offset[0] != sentence.Length)
             {
                 segmentAfterRule(sentence.substring(offset[0]), normalized.substring(offset[0]), wordList);
             }
@@ -134,7 +134,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             int[] offset = new int[] { 0 };
             CustomDictionary.parseLongestText(sentence, new Hit());
-            if (offset[0] != sentence.length())
+            if (offset[0] != sentence.Length)
             {
                 segmentAfterRule(sentence.substring(offset[0]), normalized.substring(offset[0]), wordList);
             }
@@ -209,9 +209,9 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         int id = 0;
         foreach (string word in wordList)
         {
-            wordArray[id] = normalized.substring(offset, offset + word.length());
+            wordArray[id] = normalized.substring(offset, offset + word.Length);
             ++id;
-            offset += word.length();
+            offset += word.Length;
         }
 
         List<IWord> termList = new (wordList.size());
@@ -229,7 +229,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 string prePos = posArray[0];
 
                 NERTagSet tagSet = getNERTagSet();
-                for (int i = 1; i < nerArray.length; i++)
+                for (int i = 1; i < nerArray.Length; i++)
                 {
                     if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
                     {
@@ -255,7 +255,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             {
                 overwriteTag(attributeList, posArray);
                 wordList.toArray(wordArray);
-                for (int i = 0; i < wordArray.length; i++)
+                for (int i = 0; i < wordArray.Length; i++)
                 {
                     termList.add(new Word(wordArray[i], posArray[i]));
                 }
@@ -325,7 +325,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     //@Override
     protected List<Term> segSentence(char[] sentence)
     {
-        if (sentence.length == 0)
+        if (sentence.Length == 0)
         {
             return Collections.emptyList();
         }
@@ -341,7 +341,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             Term term = new Term(word, null);
             term.offset = offset;
-            offset += term.length();
+            offset += term.Length;
             termList.Add(term);
         }
         if (config.speechTagging)
@@ -353,14 +353,14 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 int id = 0;
                 foreach (string word in wordList)
                 {
-                    wordArray[id] = normalized.substring(offset, offset + word.length());
+                    wordArray[id] = normalized.substring(offset, offset + word.Length);
                     ++id;
-                    offset += word.length();
+                    offset += word.Length;
                 }
                 string[] posArray = tag(wordArray);
                 Iterator<Term> iterator = termList.iterator();
                 Iterator<CoreDictionary.Attribute> attributeIterator = attributeList == null ? null : attributeList.iterator();
-                for (int i = 0; i < posArray.length; i++)
+                for (int i = 0; i < posArray.Length; i++)
                 {
                     if (attributeIterator != null && attributeIterator.hasNext())
                     {
@@ -394,14 +394,14 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     string prePos = posArray[0];
                     offset = 0;
 
-                    for (int i = 1; i < nerArray.length; i++)
+                    for (int i = 1; i < nerArray.Length; i++)
                     {
                         NERTagSet tagSet = getNERTagSet();
                         if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
                         {
                             Term term = new Term(result.toString(), Nature.create(prePos));
                             term.offset = offset;
-                            offset += term.length();
+                            offset += term.Length;
                             termList.add(term);
                             if (childrenList != null)
                             {
@@ -409,7 +409,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                                 {
                                     foreach (Term shortTerm in childrenList)
                                     {
-                                        if (shortTerm.length() >= config.indexMode)
+                                        if (shortTerm.Length >= config.indexMode)
                                         {
                                             termList.add(shortTerm);
                                         }
@@ -433,7 +433,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                             prePos = NERTagSet.posOf(nerArray[i]);
                         }
                     }
-                    if (result.length() != 0)
+                    if (result.Length != 0)
                     {
                         Term term = new Term(result.toString(), Nature.create(prePos));
                         term.offset = offset;
@@ -444,7 +444,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                             {
                                 foreach (Term shortTerm in childrenList)
                                 {
-                                    if (shortTerm.length() >= config.indexMode)
+                                    if (shortTerm.Length >= config.indexMode)
                                     {
                                         termList.add(shortTerm);
                                     }
@@ -513,7 +513,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         int end = start;
         byte preType = typeTable[normalized.charAt(end)];
         byte curType;
-        while (++end < normalized.length())
+        while (++end < normalized.Length)
         {
             curType = typeTable[normalized.charAt(end)];
             if (curType != preType)
@@ -523,7 +523,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     // 浮点数识别
                     if ("，,．.".indexOf(normalized.charAt(end)) != -1)
                     {
-                        if (end + 1 < normalized.length())
+                        if (end + 1 < normalized.Length)
                         {
                             if (typeTable[normalized.charAt(end + 1)] == CharType.CT_NUM)
                             {
@@ -542,7 +542,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             }
             preType = curType;
         }
-        if (end == normalized.length())
+        if (end == normalized.Length)
             pushPiece(sentence, normalized, start, end, preType, wordList);
     }
 
@@ -588,11 +588,11 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     {
         string[] wordNet = new string[vertexList.size()];
         vertexList.toArray(wordNet);
-        CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[wordNet.length];
+        CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[wordNet.Length];
         // DAT合并
         DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
-        int length = wordNet.length;
-        for (int i = 0; i < length; ++i)
+        int Length = wordNet.Length;
+        for (int i = 0; i < Length; ++i)
         {
             int state = 1;
             state = dat.transition(wordNet[i], state);
@@ -601,7 +601,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 int to = i + 1;
                 int end = to;
                 CoreDictionary.Attribute value = dat.output(state);
-                for (; to < length; ++to)
+                for (; to < Length; ++to)
                 {
                     state = dat.transition(wordNet[to], state);
                     if (state < 0) break;
@@ -622,7 +622,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         // BinTrie合并
         if (CustomDictionary.trie != null)
         {
-            for (int i = 1; i < length; ++i)
+            for (int i = 1; i < Length; ++i)
             {
                 if (wordNet[i] == null) continue;
                 BaseNode<CoreDictionary.Attribute> state = CustomDictionary.trie.transition(wordNet[i], 0);
@@ -631,7 +631,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     int to = i + 1;
                     int end = to;
                     CoreDictionary.Attribute value = state.getValue();
-                    for (; to < length; ++to)
+                    for (; to < Length; ++to)
                     {
                         if (wordNet[to] == null) continue;
                         state = state.transition(wordNet[to], 0);
@@ -652,7 +652,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
         vertexList.clear();
         List<CoreDictionary.Attribute> attributeList = new ();
-        for (int i = 0; i < wordNet.length; i++)
+        for (int i = 0; i < wordNet.Length; i++)
         {
             if (wordNet[i] != null)
             {

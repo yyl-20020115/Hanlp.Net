@@ -99,7 +99,7 @@ public class DoubleArrayBuilder
 
         _table = new int[dawg.numIntersections()];
         _extras = new DoubleArrayBuilderExtraUnit[NUM_EXTRAS];
-        for (int i = 0; i < _extras.length; ++i)
+        for (int i = 0; i < _extras.Length; ++i)
         {
             _extras[i] = new DoubleArrayBuilderExtraUnit();
         }
@@ -232,7 +232,7 @@ public class DoubleArrayBuilder
         _units.reserve(numUnits);
 
         _extras = new DoubleArrayBuilderExtraUnit[NUM_EXTRAS];
-        for (int i = 0; i < _extras.length; ++i)
+        for (int i = 0; i < _extras.Length; ++i)
         {
             _extras[i] = new DoubleArrayBuilderExtraUnit();
         }
@@ -302,7 +302,7 @@ public class DoubleArrayBuilder
             byte label = keyset.getKeyByte(i, depth);
             if (label == 0)
             {
-                if (depth < keyset.getKey(i).length)
+                if (depth < keyset.getKey(i).Length)
                 {
                     throw new IllegalArgumentException(
                             "failed to build double-array: " +

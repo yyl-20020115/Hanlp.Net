@@ -105,14 +105,14 @@ public class CWSEvaluator
     public void compare(string gold, string pred)
     {
         string[] wordArray = gold.Split("\\s+");
-        A_size += wordArray.length;
+        A_size += wordArray.Length;
         string[] predArray = pred.Split("\\s+");
-        B_size += predArray.length;
+        B_size += predArray.Length;
 
         int goldIndex = 0, predIndex = 0;
         int goldLen = 0, predLen = 0;
 
-        while (goldIndex < wordArray.length && predIndex < predArray.length)
+        while (goldIndex < wordArray.Length && predIndex < predArray.Length)
         {
             if (goldLen == predLen)
             {
@@ -126,27 +126,27 @@ public class CWSEvaluator
                             OOV_R += 1;
                     }
                     A_cap_B_size++;
-                    goldLen += wordArray[goldIndex].length();
-                    predLen += wordArray[goldIndex].length();
+                    goldLen += wordArray[goldIndex].Length;
+                    predLen += wordArray[goldIndex].Length;
                     goldIndex++;
                     predIndex++;
                 }
                 else
                 {
-                    goldLen += wordArray[goldIndex].length();
-                    predLen += predArray[predIndex].length();
+                    goldLen += wordArray[goldIndex].Length;
+                    predLen += predArray[predIndex].Length;
                     goldIndex++;
                     predIndex++;
                 }
             }
             else if (goldLen < predLen)
             {
-                goldLen += wordArray[goldIndex].length();
+                goldLen += wordArray[goldIndex].Length;
                 goldIndex++;
             }
             else
             {
-                predLen += predArray[predIndex].length();
+                predLen += predArray[predIndex].Length;
                 predIndex++;
             }
         }

@@ -152,7 +152,7 @@ public class ZZGenerateNature : TestCase
 //        for (String p : params)
 //        {
 //            p = p.trim();
-//            if (p.Length() == 0) continue;
+//            if (p.Length == 0) continue;
 //            Console.print(++i + " ");
 //            Console.WriteLine(p);
 ////            int cut = p.indexOf(' ');

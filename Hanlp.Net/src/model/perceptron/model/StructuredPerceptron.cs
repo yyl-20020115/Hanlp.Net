@@ -37,14 +37,14 @@ public class StructuredPerceptron : LinearModel
      */
     public void update(int[] goldIndex, int[] predictIndex)
     {
-        for (int i = 0; i < goldIndex.length; ++i)
+        for (int i = 0; i < goldIndex.Length; ++i)
         {
             if (goldIndex[i] == predictIndex[i])
                 continue;
             else // 预测与答案不一致
             {
                 parameter[goldIndex[i]]++; // 奖励正确的特征函数（将它的权值加一）
-                if (predictIndex[i] >= 0 && predictIndex[i] < parameter.length)
+                if (predictIndex[i] >= 0 && predictIndex[i] < parameter.Length)
                     parameter[predictIndex[i]]--; // 惩罚招致错误的特征函数（将它的权值减一）
                 else
                 {
@@ -61,21 +61,21 @@ public class StructuredPerceptron : LinearModel
      */
     public void update(Instance instance)
     {
-        int[] guessLabel = new int[instance.length()];
+        int[] guessLabel = new int[instance.Length];
         viterbiDecode(instance, guessLabel);
         TagSet tagSet = featureMap.tagSet;
-        for (int i = 0; i < instance.length(); i++)
+        for (int i = 0; i < instance.Length; i++)
         {
             int[] featureVector = instance.getFeatureAt(i);
-            int[] goldFeature = new int[featureVector.length]; // 根据答案应当被激活的特征
-            int[] predFeature = new int[featureVector.length]; // 实际预测时激活的特征
-            for (int j = 0; j < featureVector.length - 1; j++)
+            int[] goldFeature = new int[featureVector.Length]; // 根据答案应当被激活的特征
+            int[] predFeature = new int[featureVector.Length]; // 实际预测时激活的特征
+            for (int j = 0; j < featureVector.Length - 1; j++)
             {
                 goldFeature[j] = featureVector[j] * tagSet.size() + instance.tagArray[i];
                 predFeature[j] = featureVector[j] * tagSet.size() + guessLabel[i];
             }
-            goldFeature[featureVector.length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.size() + instance.tagArray[i];
-            predFeature[featureVector.length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.size() + guessLabel[i];
+            goldFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.size() + instance.tagArray[i];
+            predFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.size() + guessLabel[i];
             update(goldFeature, predFeature);
         }
     }

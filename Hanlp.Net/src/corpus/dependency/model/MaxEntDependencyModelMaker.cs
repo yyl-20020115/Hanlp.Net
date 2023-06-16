@@ -30,9 +30,9 @@ public class MaxEntDependencyModelMaker
             System._out.printf("%d / %d...", id++, sentenceList.size());
             string[][] edgeArray = sentence.getEdgeArray();
             CoNLLWord[] word = sentence.getWordArrayWithRoot();
-            for (int i = 0; i < word.length; ++i)
+            for (int i = 0; i < word.Length; ++i)
             {
-                for (int j = 0; j < word.length; ++j)
+                for (int j = 0; j < word.Length; ++j)
                 {
                     if (i == j) continue;
                     // 这就是一个边的实例，从i出发，到j，当然它可能存在也可能不存在，不存在取null照样是一个实例
@@ -64,7 +64,7 @@ public class MaxEntDependencyModelMaker
         Collection<string> context = new LinkedList<string>();
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
-            CoNLLWord w = i >= 0 && i < word.length ? word[i] : CoNLLWord.NULL;
+            CoNLLWord w = i >= 0 && i < word.Length ? word[i] : CoNLLWord.NULL;
             context.add(w.NAME + mark + (i - index));      // 在尾巴上做个标记，不然特征冲突了
             context.add(w.POSTAG + mark + (i - index));
         }

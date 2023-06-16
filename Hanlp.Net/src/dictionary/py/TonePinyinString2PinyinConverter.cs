@@ -64,8 +64,8 @@ public class TonePinyinString2PinyinConverter
 
     public static List<Pinyin> convert(string[] pinyinArray)
     {
-        List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.length);
-        for (int i = 0; i < pinyinArray.length; i++)
+        List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.Length);
+        for (int i = 0; i < pinyinArray.Length; i++)
         {
             pinyinList.add(mapKey.get(pinyinArray[i]));
         }
@@ -114,7 +114,7 @@ public class TonePinyinString2PinyinConverter
 
     public static List<Pinyin> convertFromToneNumber(string[] pinyinArray)
     {
-        List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.length);
+        List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.Length);
         for (string py : pinyinArray)
         {
             pinyinList.add(convertFromToneNumber(py));

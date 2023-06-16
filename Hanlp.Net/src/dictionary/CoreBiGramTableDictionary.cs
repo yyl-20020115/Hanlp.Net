@@ -134,12 +134,12 @@ public class CoreBiGramTableDictionary
         try
         {
 //            DataOutputStream _out = new DataOutputStream(new FileOutputStream(path));
-//            _out.writeInt(start.length);
+//            _out.writeInt(start.Length);
 //            for (int i : start)
 //            {
 //                _out.writeInt(i);
 //            }
-//            _out.writeInt(pair.length);
+//            _out.writeInt(pair.Length);
 //            for (int i : pair)
 //            {
 //                _out.writeInt(i);
@@ -182,7 +182,7 @@ public class CoreBiGramTableDictionary
         {
             ObjectInputStream in = new ObjectInputStream(IOUtil.newInputStream(path));
             start = (int[]) in.readObject();
-            if (CoreDictionary.trie.size() != start.length - 1)     // 目前CoreNatureDictionary.ngram.txt的缓存依赖于CoreNatureDictionary.txt的缓存
+            if (CoreDictionary.trie.size() != start.Length - 1)     // 目前CoreNatureDictionary.ngram.txt的缓存依赖于CoreNatureDictionary.txt的缓存
             {                                                       // 所以这里校验一下二者的一致性，不然可能导致下标越界或者ngram错乱的情况
                 in.close();
                 return false;
@@ -202,14 +202,14 @@ public class CoreBiGramTableDictionary
      * 二分搜索，由于二元接续前一个词固定时，后一个词比较少，所以二分也能取得很高的性能
      * @param a 目标数组
      * @param fromIndex 开始下标
-     * @param length 长度
+     * @param Length 长度
      * @param key 词的id
      * @return 共现频次
      */
-    private static int binarySearch(int[] a, int fromIndex, int length, int key)
+    private static int binarySearch(int[] a, int fromIndex, int Length, int key)
     {
         int low = fromIndex;
-        int high = fromIndex + length - 1;
+        int high = fromIndex + Length - 1;
 
         while (low <= high)
         {

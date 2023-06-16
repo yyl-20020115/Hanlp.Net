@@ -54,7 +54,7 @@ public class EasyDictionary
             while ((line = br.readLine()) != null)
             {
                 string param[] = line.Split("\\s+");
-                int natureCount = (param.length - 1) / 2;
+                int natureCount = (param.Length - 1) / 2;
                 Attribute attribute = new Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)
                 {
@@ -122,13 +122,13 @@ public class EasyDictionary
         public KeyValuePair<string, Attribute> next()
         {
             // 保证首次调用找到一个词语
-            while (entryList.size() == 0 && begin < c.length)
+            while (entryList.size() == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;
             }
             // 之后调用仅在缓存用完的时候调用一次
-            if (entryList.size() == 0 && begin < c.length)
+            if (entryList.size() == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;

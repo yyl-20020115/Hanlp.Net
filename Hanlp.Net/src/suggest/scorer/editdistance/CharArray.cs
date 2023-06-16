@@ -28,8 +28,8 @@ public class CharArray : Comparable<CharArray>, ISentenceKey<CharArray>
     //@Override
     public int compareTo(CharArray other)
     {
-        int len1 = value.length;
-        int len2 = other.value.length;
+        int len1 = value.Length;
+        int len2 = other.value.Length;
         int lim = Math.min(len1, len2);
         char v1[] = value;
         char v2[] = other.value;

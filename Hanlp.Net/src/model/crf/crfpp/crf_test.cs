@@ -60,7 +60,7 @@ public class crf_test
                 return false;
             }
             string[] restArgs = unkownArgs.toArray(new string[0]);
-            if (restArgs.length == 0)
+            if (restArgs.Length == 0)
             {
                 return false;
             }

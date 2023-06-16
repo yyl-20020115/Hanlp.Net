@@ -33,17 +33,17 @@ public class JapanesePersonRecognition
         StringBuilder sbName = new StringBuilder();
         int appendTimes = 0;
         char[] charArray = wordNetAll.charArray;
-        DoubleArrayTrie<Character>.LongestSearcher searcher = JapanesePersonDictionary.getSearcher(charArray);
+        DoubleArrayTrie<char>.LongestSearcher searcher = JapanesePersonDictionary.getSearcher(charArray);
         int activeLine = 1;
         int preOffset = 0;
         while (searcher.next())
         {
-            Character label = searcher.value;
+            char label = searcher.value;
             int offset = searcher.begin;
-            string key = new string(charArray, offset, searcher.length);
+            string key = new string(charArray, offset, searcher.Length);
             if (preOffset != offset)
             {
-                if (appendTimes > 1 && sbName.length() > 2) // 日本人名最短为3字
+                if (appendTimes > 1 && sbName.Length > 2) // 日本人名最短为3字
                 {
                     insertName(sbName.toString(), activeLine, wordNetOptimum, wordNetAll);
                 }
@@ -68,7 +68,7 @@ public class JapanesePersonRecognition
                 }
                 else
                 {
-                    if (appendTimes > 1 && sbName.length() > 2)
+                    if (appendTimes > 1 && sbName.Length > 2)
                     {
                         insertName(sbName.toString(), activeLine, wordNetOptimum, wordNetAll);
                     }
@@ -76,9 +76,9 @@ public class JapanesePersonRecognition
                     appendTimes = 0;
                 }
             }
-            preOffset = offset + key.length();
+            preOffset = offset + key.Length;
         }
-        if (sbName.length() > 0)
+        if (sbName.Length > 0)
         {
             if (appendTimes > 1)
             {
@@ -94,7 +94,7 @@ public class JapanesePersonRecognition
      */
     public static bool isBadCase(string name)
     {
-        Character label = JapanesePersonDictionary.get(name);
+        char label = JapanesePersonDictionary.get(name);
         if (label == null) return false;
         return label.equals(JapanesePersonDictionary.A);
     }

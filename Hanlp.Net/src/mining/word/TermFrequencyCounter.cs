@@ -8,6 +8,12 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.corpus.occurrence;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.summary;
+
 namespace com.hankcs.hanlp.mining.word;
 
 
@@ -17,7 +23,7 @@ namespace com.hankcs.hanlp.mining.word;
  *
  * @author hankcs
  */
-public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
+public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency>
 {
     bool filterStopWord;
     Dictionary<string, TermFrequency> termFrequencyMap;
@@ -32,12 +38,13 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
     {
         this.filterStopWord = filterStopWord;
         this.defaultSegment = segment;
-        termFrequencyMap = new TreeMap<string, TermFrequency>();
+        termFrequencyMap = new ();
     }
 
     public TermFrequencyCounter()
+        : this(HanLP.newSegment(), true)
     {
-        this(HanLP.newSegment(), true);
+       ;
     }
 
     public void add(string document)
@@ -53,7 +60,7 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
         {
             filter(termList);
         }
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             string word = term.word;
             TermFrequency frequency = termFrequencyMap.get(word);
@@ -75,7 +82,7 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
      * @param N
      * @return
      */
-    public Collection<TermFrequency> top(int N)
+    public ICollection<TermFrequency> top(int N)
     {
         MaxHeap<TermFrequency> heap = new MaxHeap<TermFrequency>(N, new Comparator<TermFrequency>()
         {
@@ -170,7 +177,7 @@ public class TermFrequencyCounter : KeywordExtractor : Collection<TermFrequency>
     }
 
     //@Override
-    public bool addAll(Collection<? : TermFrequency> c)
+    public bool addAll(Collection<TermFrequency> c)
     {
         for (TermFrequency termFrequency : c)
         {

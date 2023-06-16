@@ -80,7 +80,7 @@ public class CRFModelTest : TestCase
 //                                              {
 //                                                  word = compiledString;
 //                                              }
-//                                              if (word.Length() == 1 || compiledString != null)
+//                                              if (word.Length == 1 || compiledString != null)
 //                                              {
 //                                                  bw.write(word);
 //                                                  bw.write('\t');
@@ -93,14 +93,14 @@ public class CRFModelTest : TestCase
 //                                                  bw.write('\t');
 //                                                  bw.write('B');
 //                                                  bw.write('\n');
-//                                                  for (int i = 1; i < word.Length() - 1; ++i)
+//                                                  for (int i = 1; i < word.Length - 1; ++i)
 //                                                  {
 //                                                      bw.write(word.charAt(i));
 //                                                      bw.write('\t');
 //                                                      bw.write('M');
 //                                                      bw.write('\n');
 //                                                  }
-//                                                  bw.write(word.charAt(word.Length() - 1));
+//                                                  bw.write(word.charAt(word.Length - 1));
 //                                                  bw.write('\t');
 //                                                  bw.write('E');
 //                                                  bw.write('\n');
@@ -165,10 +165,10 @@ public class CRFModelTest : TestCase
 //        int preLength = 0;
 //        while ((line = br.readLine()) != null)
 //        {
-//            if (preLength == 0 && line.Length() == 0) continue;
+//            if (preLength == 0 && line.Length == 0) continue;
 //            bw.write(line);
 //            bw.newLine();
-//            preLength = line.Length();
+//            preLength = line.Length;
 //        }
 //        bw.close();
 //    }

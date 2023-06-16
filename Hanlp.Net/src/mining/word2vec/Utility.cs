@@ -127,8 +127,8 @@ public class Utility
      */
     public static  T[] shrink<T>(T[] from, T[] to)
     {
-        //assert to.length <= from.length;
-        System.arraycopy(from, 0, to, 0, to.length);
+        //assert to.Length <= from.Length;
+        System.arraycopy(from, 0, to, 0, to.Length);
         return to;
     }
 }

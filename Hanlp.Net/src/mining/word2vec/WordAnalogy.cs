@@ -19,7 +19,7 @@ public class WordAnalogy : AbstractClosestVectors
 
     public static void main(string[] args) 
     {
-        if (args.length < 1) usage();
+        if (args.Length < 1) usage();
         new WordAnalogy(args[0]).execute();
     }
 
@@ -32,9 +32,9 @@ public class WordAnalogy : AbstractClosestVectors
         while ((input = nextWords(3, "Enter 3 words")) != null)
         {
             // linear search the input word in vocabulary
-            int[] bi = new int[input.length];
+            int[] bi = new int[input.Length];
             int found = 0;
-            for (int k = 0; k < input.length; k++)
+            for (int k = 0; k < input.Length; k++)
             {
                 for (int i = 0; i < words; i++)
                 {
@@ -50,7 +50,7 @@ public class WordAnalogy : AbstractClosestVectors
                     System._out.printf("%s : Out of dictionary word!\n", input[k]);
                 }
             }
-            if (found < input.length)
+            if (found < input.Length)
             {
                 continue;
             }

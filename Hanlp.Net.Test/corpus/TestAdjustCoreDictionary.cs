@@ -89,7 +89,7 @@ public class TestAdjustCoreDictionary : TestCase
 //            //@Override
 //            public bool onSave(Item item)
 //            {
-//                if (item.key.Length() == 1 && "0123456789零○〇一二两三四五六七八九十廿百千万亿壹贰叁肆伍陆柒捌玖拾佰仟".indexOf(item.key.charAt(0)) >= 0)
+//                if (item.key.Length == 1 && "0123456789零○〇一二两三四五六七八九十廿百千万亿壹贰叁肆伍陆柒捌玖拾佰仟".indexOf(item.key.charAt(0)) >= 0)
 //                {
 //                    Console.WriteLine(item);
 //                    return false;

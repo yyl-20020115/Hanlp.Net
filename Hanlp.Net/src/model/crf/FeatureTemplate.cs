@@ -62,8 +62,8 @@ public class FeatureTemplate : ICacheAble
             sb.Append(table.get(current + offset[0], offset[1]));
         }
 
-        char[] o = new char[sb.length()];
-        sb.getChars(0, sb.length(), o, 0);
+        char[] o = new char[sb.Length];
+        sb.getChars(0, sb.Length, o, 0);
 
         return o;
     }

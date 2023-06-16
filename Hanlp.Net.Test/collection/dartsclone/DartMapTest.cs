@@ -86,7 +86,7 @@ public class DartMapTest : TestCase
 //        TreeMap<String, int> map = new TreeMap<String, int>();
 //        for (String key : validKeySet)
 //        {
-//            map.put(key, key.Length());
+//            map.put(key, key.Length);
 //        }
 //        trie.build(map);
 //
@@ -94,7 +94,7 @@ public class DartMapTest : TestCase
 //        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
-//            assertEquals(key.Length(), (int)map.get(key));
+//            assertEquals(key.Length, (int)map.get(key));
 //        }
 //        Console.printf("TreeMap: %d ms\n", DateTime.Now.Microsecond - start);
 //        map = null;
@@ -102,7 +102,7 @@ public class DartMapTest : TestCase
 //        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
-//            assertEquals(key.Length(), (int)trie.get(key));
+//            assertEquals(key.Length, (int)trie.get(key));
 //        }
 //        Console.printf("DAT: %d ms\n", DateTime.Now.Microsecond - start);
 //        trie = null;
@@ -110,7 +110,7 @@ public class DartMapTest : TestCase
 //        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
-//            assertEquals(key.Length(), (int)dartMap.get(key));
+//            assertEquals(key.Length, (int)dartMap.get(key));
 //        }
 //        Console.printf("DAWG: %d ms\n", DateTime.Now.Microsecond - start);
 //

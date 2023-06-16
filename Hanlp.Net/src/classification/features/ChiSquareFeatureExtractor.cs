@@ -57,7 +57,7 @@ public class ChiSquareFeatureExtractor
             //还有 N0. (不含该特征的文档数量)
             N0dot = stats.n - N1dot;
 
-            for (int category = 0; category < categoryList.length; category++)
+            for (int category = 0; category < categoryList.Length; category++)
             {
 
                 N11 = categoryList[category]; //N11 是含有该特征并属于该类目的文档数量
@@ -82,7 +82,7 @@ public class ChiSquareFeatureExtractor
         }
         if (selectedFeatures.size() == 0) // 当特征全部无法通过卡方检测时，取全集作为特征
         {
-            for (int feature = 0; feature < stats.featureCategoryJointCount.length; feature++)
+            for (int feature = 0; feature < stats.featureCategoryJointCount.Length; feature++)
             {
                 selectedFeatures.put(feature, 0.);
             }

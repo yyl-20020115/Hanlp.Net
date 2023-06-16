@@ -80,11 +80,11 @@ public class Synonym : ISynonym
      */
     public static ArrayList<Synonym> create(string[] args)
     {
-        ArrayList<Synonym> synonymList = new ArrayList<Synonym>(args.length - 1);
+        ArrayList<Synonym> synonymList = new ArrayList<Synonym>(args.Length - 1);
 
         string idString = args[0];
         Type type;
-        switch (idString.charAt(idString.length() - 1))
+        switch (idString.charAt(idString.Length - 1))
         {
             case '=':
                 type = Type.EQUAL;
@@ -97,7 +97,7 @@ public class Synonym : ISynonym
                 break;
         }
         long startId = SynonymHelper.convertString2IdWithIndex(idString, 0);    // id从这里开始
-        for (int i = 1; i < args.length; ++i)
+        for (int i = 1; i < args.Length; ++i)
         {
             if (type == Type.LIKE)
             {

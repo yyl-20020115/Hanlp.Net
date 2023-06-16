@@ -43,7 +43,7 @@ public class VectorsReader
             {
                 line = br.readLine().trim();
                 string[] _params = line.Split("\\s+");
-                if (_params.length != size + 1)
+                if (_params.Length != size + 1)
                 {
                     logger.info("词向量有一行格式不规范（可能是单词含有空格）：" + line);
                     --words;
@@ -64,7 +64,7 @@ public class VectorsReader
                     matrix[i][j] /= len;
                 }
             }
-            if (words != vocab.length)
+            if (words != vocab.Length)
             {
                 vocab = Utility.shrink(vocab, new string[words]);
                 matrix = Utility.shrink(matrix, new float[words][]);

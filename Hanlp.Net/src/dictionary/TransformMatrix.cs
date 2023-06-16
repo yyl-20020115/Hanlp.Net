@@ -58,11 +58,11 @@ public abstract class TransformMatrix
             string line = br.readLine();
             string[] _param = line.Split(",");
             // 为了制表方便，第一个label是废物，所以要抹掉它
-            string[] labels = new string[_param.length - 1];
-            System.arraycopy(_param, 1, labels, 0, labels.length);
-            int[] ordinaryArray = new int[labels.length];
+            string[] labels = new string[_param.Length - 1];
+            System.arraycopy(_param, 1, labels, 0, labels.Length);
+            int[] ordinaryArray = new int[labels.Length];
             ordinaryMax = 0;
-            for (int i = 0; i < ordinaryArray.length; ++i)
+            for (int i = 0; i < ordinaryArray.Length; ++i)
             {
                 ordinaryArray[i] = ordinal(labels[i]);
                 ordinaryMax = Math.max(ordinaryMax, ordinaryArray[i]);
@@ -81,7 +81,7 @@ public abstract class TransformMatrix
             {
                 string[] paramArray = line.Split(",");
                 int currentOrdinary = ordinal(paramArray[0]);
-                for (int i = 0; i < ordinaryArray.length; ++i)
+                for (int i = 0; i < ordinaryArray.Length; ++i)
                 {
                     matrix[currentOrdinary][ordinaryArray[i]] = int.valueOf(paramArray[1 + i]);
                 }
@@ -146,24 +146,24 @@ public abstract class TransformMatrix
     {
         this.ordinaryMax = ordinaryMax;
         double[][] n_transititon_probability = new double[ordinaryMax][ordinaryMax];
-        for (int i = 0; i < transititon_probability.length; i++)
+        for (int i = 0; i < transititon_probability.Length; i++)
         {
-            System.arraycopy(transititon_probability[i], 0, n_transititon_probability[i], 0, transititon_probability.length);
+            System.arraycopy(transititon_probability[i], 0, n_transititon_probability[i], 0, transititon_probability.Length);
         }
         transititon_probability = n_transititon_probability;
 
         int[] n_total = new int[ordinaryMax];
-        System.arraycopy(total, 0, n_total, 0, total.length);
+        System.arraycopy(total, 0, n_total, 0, total.Length);
         total = n_total;
 
         double[] n_start_probability = new double[ordinaryMax];
-        System.arraycopy(start_probability, 0, n_start_probability, 0, start_probability.length);
+        System.arraycopy(start_probability, 0, n_start_probability, 0, start_probability.Length);
         start_probability = n_start_probability;
 
         int[][] n_matrix = new int[ordinaryMax][ordinaryMax];
-        for (int i = 0; i < matrix.length; i++)
+        for (int i = 0; i < matrix.Length; i++)
         {
-            System.arraycopy(matrix[i], 0, n_matrix[i], 0, matrix.length);
+            System.arraycopy(matrix[i], 0, n_matrix[i], 0, matrix.Length);
         }
         matrix = n_matrix;
     }

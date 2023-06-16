@@ -175,7 +175,7 @@ public abstract class AbstractVectorModel<K>
      */
     List<KeyValuePair<K, Float>> queryNearest(string query, int size)
     {
-        if (query == null || query.length() == 0)
+        if (query == null || query.Length == 0)
         {
             return Collections.emptyList();
         }

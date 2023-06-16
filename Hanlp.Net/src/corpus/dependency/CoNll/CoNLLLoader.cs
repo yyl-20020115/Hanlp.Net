@@ -25,7 +25,7 @@ public class CoNLLLoader
         LinkedList<CoNllLine> lineList = new LinkedList<CoNllLine>();
         for (string line : IOUtil.readLineListWithLessMemory(path))
         {
-            if (line.trim().length() == 0)
+            if (line.trim().Length == 0)
             {
                 result.add(new CoNLLSentence(lineList));
                 lineList = new LinkedList<CoNllLine>();

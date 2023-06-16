@@ -33,15 +33,15 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
     }
 
     //@Override
-    public int[][] generate(int length)
+    public int[][] generate(int Length)
     {
         double[] pi = logToCdf(start_probability);
         double[][] A = logToCdf(transition_probability);
         double[][] B = logToCdf(emission_probability);
-        int xy[][] = new int[2][length];
+        int xy[][] = new int[2][Length];
         xy[1][0] = drawFrom(pi); // 采样首个隐状态
         xy[0][0] = drawFrom(B[xy[1][0]]); // 根据首个隐状态采样它的显状态
-        for (int t = 1; t < length; t++)
+        for (int t = 1; t < Length; t++)
         {
             xy[1][t] = drawFrom(A[xy[1][t - 1]]);
             xy[0][t] = drawFrom(B[xy[1][t]]);
@@ -52,8 +52,8 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
     //@Override
     public float predict(int[] observation, int[] state)
     {
-        final int time = observation.length; // 序列长度
-        final int max_s = start_probability.length; // 状态种数
+        final int time = observation.Length; // 序列长度
+        final int max_s = start_probability.Length; // 状态种数
 
         float[] score = new float[max_s];
 
@@ -67,7 +67,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
 
         // 第二个时刻，使用前一个时刻的概率向量乘以一阶转移矩阵乘以发射概率矩阵
         float[] pre = new float[max_s];
-        for (int t = 1; t < observation.length; t++)
+        for (int t = 1; t < observation.Length; t++)
         {
             // swap(now, pre)
             float[] _ = pre;
@@ -100,7 +100,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
             }
         }
 
-        for (int t = link.length - 1; t >= 0; --t)
+        for (int t = link.Length - 1; t >= 0; --t)
         {
             state[t] = best_s;
             best_s = link[t][best_s];

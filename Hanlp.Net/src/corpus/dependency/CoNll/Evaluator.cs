@@ -30,8 +30,8 @@ public class Evaluator
     public void e(CoNLLSentence right, CoNLLSentence test)
     {
         ++sentenceCount;
-        A += right.word.length;
-        for (int i = 0; i < test.word.length; ++i)
+        A += right.word.Length;
+        for (int i = 0; i < test.word.Length; ++i)
         {
             if (test.word[i].HEAD.ID == right.word[i].HEAD.ID)
             {

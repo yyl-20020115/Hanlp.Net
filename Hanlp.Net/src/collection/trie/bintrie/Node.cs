@@ -63,10 +63,10 @@ public class Node<V> : BaseNode
         }
         else
         {
-            BaseNode newChild[] = new BaseNode[child.length + 1];
+            BaseNode newChild[] = new BaseNode[child.Length + 1];
             int insert = -(index + 1);
             System.arraycopy(child, 0, newChild, 0, insert);
-            System.arraycopy(child, insert, newChild, insert + 1, child.length - insert);
+            System.arraycopy(child, insert, newChild, insert + 1, child.Length - insert);
             newChild[insert] = node;
             child = newChild;
             add = true;

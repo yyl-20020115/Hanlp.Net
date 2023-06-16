@@ -44,7 +44,7 @@ public class Utility
     public static void shuffleArray(int[] ar)
     {
         Random rnd = new Random();
-        for (int i = ar.length - 1; i > 0; i--)
+        for (int i = ar.Length - 1; i > 0; i--)
         {
             int index = rnd.nextInt(i + 1);
             // Simple swap
@@ -57,7 +57,7 @@ public class Utility
     public static  void shuffleArray<T>(T[] ar)
     {
         Random rnd = new Random();
-        for (int i = ar.length - 1; i > 0; i--)
+        for (int i = ar.Length - 1; i > 0; i--)
         {
             int index = rnd.nextInt(i + 1);
             // Simple swap
@@ -245,42 +245,42 @@ return wordArray;
     {
         List<Word> wordList = sentence.toSimpleWordList();
         string[] wordArray = toWordArray(wordList);
-        stat[0] += wordArray.length;
+        stat[0] += wordArray.Length;
         string text = com.hankcs.hanlp.utility.TextUtility.combine(wordArray);
         string[] predArray = segmenter.segment(text).toArray(new string[0]);
-        stat[1] += predArray.length;
+        stat[1] += predArray.Length;
 
         int goldIndex = 0, predIndex = 0;
         int goldLen = 0, predLen = 0;
 
-        while (goldIndex < wordArray.length && predIndex < predArray.length)
+        while (goldIndex < wordArray.Length && predIndex < predArray.Length)
         {
             if (goldLen == predLen)
             {
                 if (wordArray[goldIndex].equals(predArray[predIndex]))
                 {
                     stat[2]++;
-                    goldLen += wordArray[goldIndex].length();
-                    predLen += wordArray[goldIndex].length();
+                    goldLen += wordArray[goldIndex].Length;
+                    predLen += wordArray[goldIndex].Length;
                     goldIndex++;
                     predIndex++;
                 }
                 else
                 {
-                    goldLen += wordArray[goldIndex].length();
-                    predLen += predArray[predIndex].length();
+                    goldLen += wordArray[goldIndex].Length;
+                    predLen += predArray[predIndex].Length;
                     goldIndex++;
                     predIndex++;
                 }
             }
             else if (goldLen < predLen)
             {
-                goldLen += wordArray[goldIndex].length();
+                goldLen += wordArray[goldIndex].Length;
                 goldIndex++;
             }
             else
             {
-                predLen += predArray[predIndex].length();
+                predLen += predArray[predIndex].Length;
                 predIndex++;
             }
         }
@@ -312,11 +312,11 @@ return stat;
         if (nerLabels.contains(word.getLabel()))
         {
             collector.add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
-            for (int i = 1; i < words.length - 1; i++)
+            for (int i = 1; i < words.Length - 1; i++)
             {
                 collector.add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
             }
-            collector.add(new string[]{words[words.length - 1].value, words[words.length - 1].label,
+            collector.add(new string[]{words[words.Length - 1].value, words[words.Length - 1].label,
                         tagSet.E_TAG_PREFIX + word.getLabel()});
         }
         else
@@ -427,7 +427,7 @@ return scores;
     Set<string> result = new LinkedHashSet<string>();
     int begin = 0;
     string prePos = NERTagSet.posOf(nerArray[0]);
-    for (int i = 1; i < nerArray.length; i++)
+    for (int i = 1; i < nerArray.Length; i++)
     {
         if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
         {
@@ -437,9 +437,9 @@ return scores;
         }
         prePos = NERTagSet.posOf(nerArray[i]);
     }
-    if (nerArray.length - 1 - begin > 1)
+    if (nerArray.Length - 1 - begin > 1)
     {
-        result.add(string.format("%d\t%d\t%s", begin, nerArray.length, prePos));
+        result.add(string.format("%d\t%d\t%s", begin, nerArray.Length, prePos));
     }
     return result;
 }
