@@ -19,40 +19,40 @@ public class CollectionUtility
 {
     public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input, bool desc)
     {
-        LinkedHashMap<K, V> output = new LinkedHashMap<K, V>(input.size());
-        ArrayList<KeyValuePair<K, V>> entryList = new ArrayList<KeyValuePair<K, V>>(input.size());
-        Collections.sort(entryList, new Comparator<KeyValuePair<K, V>>()
+        var output = new Dictionary<K, V>(input.Count);
+        var entryList = new List<KeyValuePair<K, V>>(input.Count);
+        Collections.sort(entryList,new ST<K,V>());
+        foreach (KeyValuePair<K, V> entry in entryList)
         {
-            public int compare(KeyValuePair<K, V> o1, KeyValuePair<K, V> o2)
-            {
-                if (desc) return o2.getValue().compareTo(o1.getValue());
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        for (KeyValuePair<K, V> entry : entryList)
-        {
-            output.put(entry.getKey(), entry.getValue());
+            output.Add(entry.Key, entry.Value);
         }
 
         return output;
     }
-
-    public static <K, V : Comparable<V>> Dictionary<K, V> sortMapByValue(Dictionary<K, V> input)
+    public class ST<K,V> : IComparer<KeyValuePair<K, V>>
+    {
+        public int Compare(KeyValuePair<K, V> o1, KeyValuePair<K, V> o2)
+        {
+            if (desc) return o2.getValue().compareTo(o1.getValue());
+            return o1.getValue().compareTo(o2.getValue());
+        }
+    }
+    public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input)
     {
         return sortMapByValue(input, true);
     }
 
     public static string max(Dictionary<string, Double> scoreMap)
     {
-        double max = Double.NEGATIVE_INFINITY;
+        double max = double.NegativeInfinity;
         string best = null;
-        for (KeyValuePair<string, Double> entry : scoreMap.entrySet())
+        foreach (KeyValuePair<string, Double> entry in scoreMap)
         {
-            Double score = entry.getValue();
+            Double score = entry.Value;
             if (score > max)
             {
                 max = score;
-                best = entry.getKey();
+                best = entry.Key;
             }
         }
 
@@ -67,12 +67,12 @@ public class CollectionUtility
      */
     public static string[][] spiltArray(string[] src, double rate)
     {
-        assert 0 <= rate && rate <= 1;
+        //assert 0 <= rate && rate <= 1;
         string[][] output = new string[2][];
-        output[0] = new string[(int) (src.length * rate)];
-        output[1] = new string[src.length - output[0].length];
-        System.arraycopy(src, 0, output[0], 0, output[0].length);
-        System.arraycopy(src, output[0].length, output[1], 0, output[1].length);
+        output[0] = new string[(int)(src.Length * rate)];
+        output[1] = new string[src.Length - output[0].Length];
+        System.arraycopy(src, 0, output[0], 0, output[0].Length);
+        System.arraycopy(src, output[0].Length, output[1], 0, output[1].Length);
         return output;
     }
 
@@ -84,12 +84,12 @@ public class CollectionUtility
      */
     public static Dictionary<string, string[]> splitMap(Dictionary<string, string[]> src, double rate)
     {
-        assert 0 <= rate && rate <= 1;
-        Dictionary<string, string[]> output = new TreeMap<string, string[]>();
-        for (KeyValuePair<string, string[]> entry : src.entrySet())
+        //assert 0 <= rate && rate <= 1;
+        Dictionary<string, string[]> output = new ();
+        foreach (KeyValuePair<string, string[]> entry in src)
         {
-            string[][] array = spiltArray(entry.getValue(), rate);
-            output.put(entry.getKey(), array[0]);
+            string[][] array = spiltArray(entry.Value, rate);
+            output.Add(entry.Key, array[0]);
             entry.setValue(array[1]);
         }
 

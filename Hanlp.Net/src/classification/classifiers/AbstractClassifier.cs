@@ -9,6 +9,12 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.corpus;
+using com.hankcs.hanlp.classification.models;
+using com.hankcs.hanlp.classification.utilities;
+using com.hankcs.hanlp.corpus.document;
+using Document = com.hankcs.hanlp.classification.corpus.Document;
+
 namespace com.hankcs.hanlp.classification.classifiers;
 
 
@@ -93,7 +99,7 @@ public abstract class AbstractClassifier : IClassifier
     //@Override
     public Dictionary<string, Double> predict(Document document)
     {
-        AbstractModel model = getModel();
+        var model = getModel();
         if (model == null)
         {
             throw new IllegalStateException("未训练模型！无法执行预测！");
@@ -104,7 +110,7 @@ public abstract class AbstractClassifier : IClassifier
         }
 
         double[] probs = categorize(document);
-        Dictionary<string, Double> scoreMap = new TreeMap<string, Double>();
+        Dictionary<string, Double> scoreMap = new ();
         for (int i = 0; i < probs.length; i++)
         {
             scoreMap.put(model.catalog[i], probs[i]);
