@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.document.sentence.word;
 
 
@@ -16,7 +18,7 @@ namespace com.hankcs.hanlp.corpus.document.sentence.word;
  * 复合词，由两个或以上的word构成
  * @author hankcs
  */
-public class CompoundWord : IWord, Iterable<Word>
+public class CompoundWord : IWord, IEnumerable<Word>
 {
     /**
      * 由这些词复合而来
@@ -32,11 +34,11 @@ public class CompoundWord : IWord, Iterable<Word>
     public string getValue()
     {
         StringBuilder sb = new StringBuilder();
-        for (Word word : innerList)
+        foreach (Word word in innerList)
         {
             sb.Append(word.value);
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override
@@ -54,12 +56,12 @@ public class CompoundWord : IWord, Iterable<Word>
     //@Override
     public void setValue(string value)
     {
-        innerList.clear();
-        innerList.add(new Word(value, label));
+        innerList.Clear();
+        innerList.Add(new Word(value, label));
     }
 
     //@Override
-    public int Length
+    public int Length()
     {
         return getValue().Length;
     }
@@ -70,7 +72,7 @@ public class CompoundWord : IWord, Iterable<Word>
         StringBuilder sb = new StringBuilder();
         sb.Append('[');
         int i = 1;
-        for (Word word : innerList)
+        foreach (Word word in innerList)
         {
             sb.Append(word.getValue());
             string label = word.getLabel();

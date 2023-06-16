@@ -249,7 +249,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public int Length
+    public int Length()
     {
         int Length = 0;
         foreach (IWord word in this)

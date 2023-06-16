@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
+
 namespace com.hankcs.hanlp.seg.common;
 
 
@@ -45,7 +47,7 @@ public class Term
     }
 
     //@Override
-    public string toString()
+    public string ToString()
     {
         if (HanLP.Config.ShowTermNature)
             return word + "/" + nature;
@@ -56,7 +58,7 @@ public class Term
      * 长度
      * @return
      */
-    public int Length
+    public int Length()
     {
         return word.Length;
     }

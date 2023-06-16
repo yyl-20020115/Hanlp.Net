@@ -114,7 +114,7 @@ public class SegmentTest : TestCase
         List<Term> termList = IndexTokenizer.segment(text);
         foreach (Term term in termList)
         {
-            AssertEquals(term.word, text[term.offset .. (term.offset + term.Length)]);
+            AssertEquals(term.word, text[term.offset .. (term.offset + term.Length())]);
         }
     }
     [TestMethod]
