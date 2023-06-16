@@ -8,8 +8,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
 using com.hankcs.hanlp.model.perceptron.feature;
 using com.hankcs.hanlp.model.perceptron.tagset;
+using System.Text;
 
 namespace com.hankcs.hanlp.model.perceptron.instance;
 
@@ -37,7 +40,7 @@ public class CWSInstance : Instance
         tagArray = new int[sentence.Length];
         for (int i = 0, j = 0; i < termArray.Length; i++)
         {
-            assert termArray[i].Length > 0 : "句子中出现了长度为0的单词，不合法：" + sentence;
+            //assert termArray[i].Length > 0 : "句子中出现了长度为0的单词，不合法：" + sentence;
             if (termArray[i].Length == 1)
                 tagArray[j++] = tagSet.S;
             else
@@ -60,13 +63,13 @@ public class CWSInstance : Instance
 
     protected int[] extractFeature(string sentence, FeatureMap featureMap, int position)
     {
-        List<int> featureVec = new LinkedList<int>();
+        List<int> featureVec = new ();
 
-        char pre2Char = position >= 2 ? sentence.charAt(position - 2) : CHAR_BEGIN;
-        char preChar = position >= 1 ? sentence.charAt(position - 1) : CHAR_BEGIN;
-        char curChar = sentence.charAt(position);
-        char nextChar = position < sentence.Length - 1 ? sentence.charAt(position + 1) : CHAR_END;
-        char next2Char = position < sentence.Length - 2 ? sentence.charAt(position + 2) : CHAR_END;
+        char pre2Char = position >= 2 ? sentence[(position - 2)] : CHAR_BEGIN;
+        char preChar = position >= 1 ? sentence[(position - 1)] : CHAR_BEGIN;
+        char curChar = sentence[(position)];
+        char nextChar = position < sentence.Length - 1 ? sentence[(position + 1)] : CHAR_END;
+        char next2Char = position < sentence.Length - 2 ? sentence[(position + 2)] : CHAR_END;
 
         StringBuilder sbFeature = new StringBuilder();
         //char unigram feature
@@ -76,15 +79,15 @@ public class CWSInstance : Instance
 
         sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(preChar).Append('1');
-        addFeature(sbFeature, featureVec, featureMap);
+        addFeature(sbFeature.ToString(), featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(curChar).Append('2');
-        addFeature(sbFeature, featureVec, featureMap);
+        addFeature(sbFeature.ToString(), featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(nextChar).Append('3');
-        addFeature(sbFeature, featureVec, featureMap);
+        addFeature(sbFeature.ToString(), featureVec, featureMap);
 
 //        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("U[2,0]=").Append(next2Char);
@@ -97,15 +100,15 @@ public class CWSInstance : Instance
 
         sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(preChar).Append("/").Append(curChar).Append('5');
-        addFeature(sbFeature, featureVec, featureMap);
+        addFeature(sbFeature.ToString(), featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(curChar).Append("/").Append(nextChar).Append('6');
-        addFeature(sbFeature, featureVec, featureMap);
+        addFeature(sbFeature.ToString(), featureVec, featureMap);
 
         sbFeature.delete(0, sbFeature.Length);
         sbFeature.Append(nextChar).Append("/").Append(next2Char).Append('7');
-        addFeature(sbFeature, featureVec, featureMap);
+        addFeature(sbFeature.ToString(), featureVec, featureMap);
 
 //        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("B[-2,0]=").Append(pre2Char).Append("/").Append(curChar);
@@ -212,9 +215,9 @@ public class CWSInstance : Instance
             return null;
         }
         List<Word> wordList = sentence.toSimpleWordList();
-        string[] termArray = new string[wordList.size()];
+        string[] termArray = new string[wordList.Count];
         int i = 0;
-        for (Word word : wordList)
+        foreach (Word word in wordList)
         {
             termArray[i] = word.getValue();
             ++i;

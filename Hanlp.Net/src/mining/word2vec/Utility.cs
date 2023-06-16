@@ -1,4 +1,6 @@
 
+using System.Text;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
@@ -14,7 +16,7 @@ public class Utility
 
     static string humanTime(long ms)
     {
-        StringBuffer text = new StringBuffer("");
+        var text = new StringBuilder();
         if (ms > DAY)
         {
             text.Append(ms / DAY).Append(" d ");
@@ -42,7 +44,7 @@ public class Utility
         }
 //        text.Append(ms + " ms");
 
-        return text.toString();
+        return text.ToString();
     }
 
     /**
@@ -73,29 +75,29 @@ public class Utility
         }
     }
 
-    public static void closeQuietly(InputStream is)
+    public static void closeQuietly(Stream _is)
     {
         try
         {
-            if (is != null) is.close();
+            if (_is != null) _is.Close();
         }
         catch (IOException ignored)
         {
         }
     }
 
-    public static void closeQuietly(Reader r)
+    public static void closeQuietly(TextReader r)
     {
         try
         {
-            if (r != null) r.close();
+            if (r != null) r.Close();
         }
         catch (IOException ignored)
         {
         }
     }
 
-    public static void closeQuietly(OutputStream os)
+    public static void closeQuietly(Stream os)
     {
         try
         {
@@ -106,7 +108,7 @@ public class Utility
         }
     }
 
-    public static void closeQuietly(Writer w)
+    public static void closeQuietly(TextWriter w)
     {
         try
         {

@@ -46,7 +46,7 @@ public class Instance
         return featureMatrix[position];
     }
 
-    public int Length
+    public int Length()
     {
         return tagArray.Length;
     }
@@ -74,7 +74,7 @@ public class Instance
         {
             featureVector.Add(id);
         }
-        rawFeature.setLength(0);
+        rawFeature.Length = 0;
     }
 
     /**

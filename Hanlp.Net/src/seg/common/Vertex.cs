@@ -76,8 +76,9 @@ public class Vertex
      * @param attribute 属性
      */
     public Vertex(string word, string realWord, CoreDictionary.Attribute attribute)
+        : this(word, realWord, attribute, attribute == null ? -1 : -attribute.totalFrequency)
     {
-        this(word, realWord, attribute, attribute == null ? -1 : -attribute.totalFrequency);
+        ;
     }
 
     public Vertex(string word, string realWord, CoreDictionary.Attribute attribute, int wordID)
@@ -86,7 +87,7 @@ public class Vertex
         this.wordID = wordID;
         this.attribute = attribute;
         if (word == null) word = compileRealWord(realWord, attribute);
-        assert realWord.Length > 0 : "构造空白节点会导致死循环！";
+        //assert realWord.Length > 0 : "构造空白节点会导致死循环！";
         this.word = word;
         this.realWord = realWord;
     }
@@ -166,13 +167,15 @@ public class Vertex
      * @param attribute
      */
     public Vertex(string realWord, CoreDictionary.Attribute attribute)
+        : this(null, realWord, attribute)
     {
-        this(null, realWord, attribute);
+        ;
     }
 
     public Vertex(string realWord, CoreDictionary.Attribute attribute, int wordID)
+        : this(null, realWord, attribute, wordID)
     {
-        this(null, realWord, attribute, wordID);
+        ;
     }
 
     /**
@@ -181,8 +184,9 @@ public class Vertex
      * @param entry
      */
     public Vertex(KeyValuePair<string, CoreDictionary.Attribute> entry)
+        : this(entry.Key, entry.Value)
     {
-        this(entry.getKey(), entry.getValue());
+        ;
     }
 
     /**
@@ -191,13 +195,15 @@ public class Vertex
      * @param realWord
      */
     public Vertex(string realWord)
+        : this(null, realWord, CoreDictionary.get(realWord))
     {
-        this(null, realWord, CoreDictionary.get(realWord));
+        ;
     }
 
     public Vertex(char realWord, CoreDictionary.Attribute attribute)
+        : this((realWord.ToString()), attribute)
     {
-        this(string.valueOf(realWord), attribute);
+       ;
     }
 
     /**

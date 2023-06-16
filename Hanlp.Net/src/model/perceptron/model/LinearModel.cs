@@ -15,6 +15,7 @@ using com.hankcs.hanlp.dependency.nnparser;
 using com.hankcs.hanlp.model.perceptron.common;
 using com.hankcs.hanlp.model.perceptron.feature;
 using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.model.perceptron.model;
 
@@ -87,7 +88,7 @@ public class LinearModel : ICacheAble
         logger.start("裁剪特征...\n");
         int logEvery = (int) Math.ceil(featureMap.size() / 10000f);
         int n = 0;
-        for (KeyValuePair<string, int> entry : featureIdSet)
+        foreach (KeyValuePair<string, int> entry in featureIdSet)
         {
             if (++n % logEvery == 0 || n == featureMap.size())
             {
@@ -106,7 +107,7 @@ public class LinearModel : ICacheAble
         int size = heap.size() + tagSet.sizeIncludingBos();
         float[] parameter = new float[size * tagSet.size()];
         MutableDoubleArrayTrieInteger mdat = new MutableDoubleArrayTrieInteger();
-        for (KeyValuePair<string, int> tag : tagSet)
+        foreach (KeyValuePair<string, int> tag in tagSet)
         {
             mdat.add("BL=" + tag.getKey());
         }
@@ -116,9 +117,9 @@ public class LinearModel : ICacheAble
             parameter[i] = this.parameter[i];
         }
         logger.start("构建双数组trie树...\n");
-        logEvery = (int) Math.ceil(heap.size() / 10000f);
+        logEvery = (int) Math.Ceil(heap.size() / 10000f);
         n = 0;
-        for (FeatureSortItem item : heap)
+        foreach (FeatureSortItem item in heap)
         {
             if (++n % logEvery == 0 || n == heap.size())
             {
@@ -392,7 +393,7 @@ public class LinearModel : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out) 
+    public void save(Stream _out) 
     {
         if (!(featureMap is ImmutableFeatureMDatMap))
         {

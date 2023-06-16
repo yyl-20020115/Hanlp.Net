@@ -44,10 +44,10 @@ public class MathUtility
 
     public static double percentage(double current, double total)
     {
-        return current / total * 100.;
+        return current / total * 100.0;
     }
 
-    public static double average(double array[])
+    public static double average(double[] array)
     {
         double sum = 0;
         for (int i = 0; i < array.Length; i++)
@@ -71,7 +71,7 @@ public class MathUtility
 
         double sum = 0.0;
         //通过减去最大值防止浮点数溢出
-        for (KeyValuePair<string, Double> entry : entrySet)
+        foreach (KeyValuePair<string, Double> entry in entrySet)
         {
             Double value = Math.exp(entry.getValue() - max);
             entry.setValue(value);
@@ -81,7 +81,7 @@ public class MathUtility
 
         if (sum != 0.0)
         {
-            for (KeyValuePair<string, Double> entry : entrySet)
+            foreach (KeyValuePair<string, Double> entry in entrySet)
             {
                 predictionScores.put(entry.getKey(), entry.getValue() / sum);
             }
@@ -91,16 +91,16 @@ public class MathUtility
     public static void normalizeExp(double[] predictionScores)
     {
         double max = Double.NEGATIVE_INFINITY;
-        for (double value : predictionScores)
+        foreach (double value in predictionScores)
         {
-            max = Math.max(max, value);
+            max = Math.Max(max, value);
         }
 
         double sum = 0.0;
         //通过减去最大值防止浮点数溢出
         for (int i = 0; i < predictionScores.Length; i++)
         {
-            predictionScores[i] = Math.exp(predictionScores[i] - max);
+            predictionScores[i] = Math.Exp(predictionScores[i] - max);
             sum += predictionScores[i];
         }
 
@@ -129,7 +129,7 @@ public class MathUtility
         }
 //        int nTwoWordsFreq = BiGramDictionary.getBiFrequency(from.word, to.word);
         int nTwoWordsFreq = CoreBiGramTableDictionary.getBiFrequency(from.wordID, to.wordID);
-        double value = -Math.log(dSmoothingPara * frequency / (MAX_FREQUENCY) + (1 - dSmoothingPara) * ((1 - dTemp) * nTwoWordsFreq / frequency + dTemp));
+        double value = -Math.Log(dSmoothingPara * frequency / (MAX_FREQUENCY) + (1 - dSmoothingPara) * ((1 - dTemp) * nTwoWordsFreq / frequency + dTemp));
         if (value < 0.0)
         {
             value = -value;

@@ -1,3 +1,7 @@
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using System.Text;
+
 namespace com.hankcs.hanlp.utility;
 
 /**
@@ -101,7 +105,7 @@ public class TextUtility
      */
     public static bool isAllSingleByte(string str)
     {
-        assert str != null;
+        //assert str != null;
         for (int i = 0; i < str.Length; i++)
         {
             if (str.charAt(i) >128)
@@ -145,10 +149,10 @@ public class TextUtility
 
         int i = 0;
         /** 判断开头是否是+-之类的符号 */
-        if ("±+-＋－—".indexOf(str.charAt(0)) != -1)
+        if ("±+-＋－—".IndexOf(str.charAt(0)) != -1)
             i++;
         /** 如果是全角的０１２３４５６７８９ 字符* */
-        while (i < str.Length && "０１２３４５６７８９".indexOf(str.charAt(i)) != -1)
+        while (i < str.Length && "０１２３４５６７８９".IndexOf(str.charAt(i)) != -1)
             i++;
         // Get middle delimiter such as .
         if (i > 0 && i < str.Length)
@@ -299,21 +303,21 @@ public class TextUtility
         char[] temp = word.ToCharArray();
         for (int i = 0; i < temp.Length; i++)
         {
-            if (word.startsWith("分之", i))// 百分之五
+            if (word.StartsWith("分之", i))// 百分之五
             {
                 i += 1;
                 continue;
             }
             char tchar = temp[i];
-            if (i == 0 && prefix.indexOf(tchar) != -1)
+            if (i == 0 && prefix.IndexOf(tchar) != -1)
             {
                 round = true;
             }
-            else if (i == temp.Length-1 && !round && surfix.indexOf(tchar) != -1)
+            else if (i == temp.Length-1 && !round && surfix.IndexOf(tchar) != -1)
             {
                 round = true;
             }
-            else if (chineseNum.indexOf(tchar) == -1)
+            else if (chineseNum.IndexOf(tchar) == -1)
                 return false;
         }
         return true;
@@ -337,7 +341,7 @@ public class TextUtility
             for (int i = 0; i < word.Length; i++)
             {
                 string s = temp.substring(i, i + 1);
-                if (charSet.indexOf(s) != -1)
+                if (charSet.IndexOf(s) != -1)
                     nCount++;
             }
         }
@@ -407,7 +411,7 @@ public class TextUtility
             for (int i = 0; i < str.Length; i++)
             {
                 string s = str.substring(i, i + 1);
-                if (aggr.indexOf(s) == -1)
+                if (aggr.IndexOf(s) == -1)
                     return false;
             }
             return true;
@@ -492,7 +496,7 @@ public class TextUtility
      */
     public static bool isDelimiter(string str)
     {
-        if (str != null && ("-".equals(str) || "－".equals(str)))
+        if (str != null && ("-".Equals(str) || "－".Equals(str)))
             return true;
         else
             return false;
@@ -500,7 +504,7 @@ public class TextUtility
 
     public static bool isUnknownWord(string word)
     {
-        if (word != null && word.indexOf("未##") == 0)
+        if (word != null && word.IndexOf("未##") == 0)
             return true;
         else
             return false;
@@ -544,11 +548,11 @@ public class TextUtility
     {
         char[] cArray = long2char(x);
         StringBuilder sbResult = new StringBuilder(cArray.Length);
-        for (char c : cArray)
+        foreach (char c in cArray)
         {
             sbResult.Append(c);
         }
-        return sbResult.toString();
+        return sbResult.ToString();
     }
 
     /**
@@ -617,10 +621,10 @@ public class TextUtility
      * @param _out
      * @
      */
-    public static void writeString(string s, DataOutputStream _out) 
+    public static void writeString(string s, Stream _out) 
     {
         _out.writeInt(s.Length);
-        for (char c : s.ToCharArray())
+        foreach (char c in s.ToCharArray())
         {
             _out.writeChar(c);
         }
@@ -649,55 +653,55 @@ public class TextUtility
         return true;
     }
 
-    public static string join(string delimiter, Collection<string> stringCollection)
+    public static string join(string delimiter, ICollection<string> stringCollection)
     {
-        StringBuilder sb = new StringBuilder(stringCollection.size() * (16 + delimiter.Length));
-        for (string str : stringCollection)
+        StringBuilder sb = new StringBuilder(stringCollection.Count * (16 + delimiter.Length));
+        foreach (string str in stringCollection)
         {
             sb.Append(str).Append(delimiter);
         }
 
-        return sb.toString();
+        return sb.ToString();
     }
 
-    public static string combine(string... termArray)
+    public static string combine(params string[] termArray)
     {
         StringBuilder sbSentence = new StringBuilder();
         for (string word : termArray)
         {
             sbSentence.Append(word);
         }
-        return sbSentence.toString();
+        return sbSentence.ToString();
     }
 
-    public static string join(Iterable<? : CharSequence> s, string delimiter)
+    public static string join(IEnumerator<string> s, string delimiter)
     {
         Iterator<? : CharSequence> iter = s.iterator();
         if (!iter.hasNext()) return "";
         StringBuilder buffer = new StringBuilder(iter.next());
         while (iter.hasNext()) buffer.Append(delimiter).Append(iter.next());
-        return buffer.toString();
+        return buffer.ToString();
     }
 
     public static string combine(Sentence sentence)
     {
-        StringBuilder sb = new StringBuilder(sentence.wordList.size() * 3);
-        for (IWord word : sentence.wordList)
+        var sb = new StringBuilder(sentence.wordList.Count * 3);
+        foreach (IWord word in sentence.wordList)
         {
             sb.Append(word.getValue());
         }
 
-        return sb.toString();
+        return sb.ToString();
     }
 
     public static string combine(List<Word> wordList)
     {
-        StringBuilder sb = new StringBuilder(wordList.size() * 3);
-        for (IWord word : wordList)
+        var sb = new StringBuilder(wordList.Count * 3);
+        foreach (IWord word in wordList)
         {
             sb.Append(word.getValue());
         }
 
-        return sb.toString();
+        return sb.ToString();
     }
 }

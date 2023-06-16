@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.feature;
+
 namespace com.hankcs.hanlp.model.perceptron.model;
 
 
@@ -21,13 +23,15 @@ namespace com.hankcs.hanlp.model.perceptron.model;
 public class AveragedPerceptron : LinearModel
 {
     public AveragedPerceptron(FeatureMap featureMap, float[] parameter)
+        : base(featureMap, parameter)
     {
-        super(featureMap, parameter);
+       ;
     }
 
     public AveragedPerceptron(FeatureMap featureMap)
+        : base(featureMap)
     {
-        super(featureMap);
+        ;
     }
 
     /**
@@ -49,7 +53,7 @@ public class AveragedPerceptron : LinearModel
                     update(predictIndex[i], -1, total, timestamp, current);
                 else
                 {
-                    throw new IllegalArgumentException("更新参数时传入了非法的下标");
+                    throw new IndexOutOfRangeException("更新参数时传入了非法的下标");
                 }
             }
         }
@@ -64,9 +68,9 @@ public class AveragedPerceptron : LinearModel
      * @param timestamp     每个权值上次更新的时间戳
      * @param current       当前时间戳
      */
-    public void update(Collection<int> featureVector, float value, double[] total, int[] timestamp, int current)
+    public void update(ICollection<int> featureVector, float value, double[] total, int[] timestamp, int current)
     {
-        for (int i : featureVector)
+        foreach (int i in featureVector)
             update(i, value, total, timestamp, current);
     }
 

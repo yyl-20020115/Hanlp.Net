@@ -22,34 +22,35 @@ namespace com.hankcs.hanlp.seg.common;
 public class CWSEvaluator
 {
     private int A_size, B_size, A_cap_B_size, OOV, OOV_R, IV, IV_R;
-    private Set<string> dic;
+    private HashSet<string> dic;
 
     public CWSEvaluator()
     {
     }
 
-    public CWSEvaluator(Set<string> dic)
+    public CWSEvaluator(HashSet<string> dic)
     {
         this.dic = dic;
     }
 
-    public CWSEvaluator(string dictPath) 
+    public CWSEvaluator(string dictPath)
+        : this(new HashSet<string>())
     {
-        this(new TreeSet<string>());
+        ;
         if (dictPath == null) return;
         try
         {
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(dictPath);
-            for (string word : lineIterator)
+            foreach (string word in lineIterator)
             {
-                word = word.trim();
-                if (word.isEmpty()) continue;
-                dic.add(word);
+                var word2 = word.Trim();
+                if (word2.Length == 0) continue;
+                dic.Add(word2);
             }
         }
         catch (Exception e)
         {
-            throw new IOException(e);
+            throw new IOException(e.Message, e);
         }
     }
 
@@ -61,24 +62,24 @@ public class CWSEvaluator
      */
     public Result getResult(bool percentage)
     {
-        float p = A_cap_B_size / (float) B_size;
-        float r = A_cap_B_size / (float) A_size;
+        float p = A_cap_B_size / (float)B_size;
+        float r = A_cap_B_size / (float)A_size;
         if (percentage)
         {
             p *= 100;
             r *= 100;
         }
-        float oov_r = Float.NaN;
+        float oov_r = float.NaN;
         if (OOV > 0)
         {
-            oov_r = OOV_R / (float) OOV;
+            oov_r = OOV_R / (float)OOV;
             if (percentage)
                 oov_r *= 100;
         }
-        float iv_r = Float.NaN;
+        float iv_r = float.NaN;
         if (IV > 0)
         {
-            iv_r = IV_R / (float) IV;
+            iv_r = IV_R / (float)IV;
             if (percentage)
                 iv_r *= 100;
         }
@@ -116,11 +117,11 @@ public class CWSEvaluator
         {
             if (goldLen == predLen)
             {
-                if (wordArray[goldIndex].equals(predArray[predIndex]))
+                if (wordArray[goldIndex].Equals(predArray[predIndex]))
                 {
                     if (dic != null)
                     {
-                        if (dic.contains(wordArray[goldIndex]))
+                        if (dic.Contains(wordArray[goldIndex]))
                             IV_R += 1;
                         else
                             OOV_R += 1;
@@ -153,9 +154,9 @@ public class CWSEvaluator
 
         if (dic != null)
         {
-            for (string word : wordArray)
+            foreach (string word in wordArray)
             {
-                if (dic.contains(word))
+                if (dic.Contains(word))
                     IV += 1;
                 else
                     OOV += 1;
@@ -170,7 +171,7 @@ public class CWSEvaluator
      * @param predFile
      * @return
      */
-    public static Result evaluate(string goldFile, string predFile) 
+    public static Result evaluate(string goldFile, string predFile)
     {
         return evaluate(goldFile, predFile, null);
     }
@@ -185,18 +186,18 @@ public class CWSEvaluator
      * @return 一个储存准确率的结构
      * @
      */
-    public static CWSEvaluator.Result evaluate(Segment segment, string outputPath, string goldFile, string dictPath) 
+    public static CWSEvaluator.Result evaluate(Segment segment, string outputPath, string goldFile, string dictPath)
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(goldFile);
-        BufferedWriter bw = IOUtil.newBufferedWriter(outputPath);
-        for (string line : lineIterator)
+        var bw = IOUtil.newBufferedWriter(outputPath);
+        foreach (string line in lineIterator)
         {
-            List<Term> termList = segment.seg(line.replaceAll("\\s+", "")); // 一些testFile与goldFile根本不匹配，比如MSR的testFile有些行缺少单词，所以用goldFile去掉空格代替
+            List<Term> termList = segment.seg(line.Replace("\\s+", "")); // 一些testFile与goldFile根本不匹配，比如MSR的testFile有些行缺少单词，所以用goldFile去掉空格代替
             int i = 0;
-            for (Term term : termList)
+            foreach (Term term in termList)
             {
                 bw.write(term.word);
-                if (++i != termList.size())
+                if (++i != termList.Count)
                     bw.write("  ");
             }
             bw.newLine();
@@ -217,7 +218,7 @@ public class CWSEvaluator
      * @return 一个储存准确率的结构
      * @
      */
-    public static CWSEvaluator.Result evaluate(Segment segment, string testFile, string outputPath, string goldFile, string dictPath) 
+    public static CWSEvaluator.Result evaluate(Segment segment, string testFile, string outputPath, string goldFile, string dictPath)
     {
         return evaluate(segment, outputPath, goldFile, dictPath);
     }
@@ -229,7 +230,7 @@ public class CWSEvaluator
      * @param predFile
      * @return
      */
-    public static Result evaluate(string goldFile, string predFile, string dictPath) 
+    public static Result evaluate(string goldFile, string predFile, string dictPath)
     {
         IOUtil.LineIterator goldIter = new IOUtil.LineIterator(goldFile);
         IOUtil.LineIterator predIter = new IOUtil.LineIterator(predFile);
@@ -255,9 +256,9 @@ public class CWSEvaluator
         }
 
         //@Override
-        public string ToString()
+        public override string ToString()
         {
-            return string.format("P:%.2f R:%.2f F1:%.2f OOV-R:%.2f IV-R:%.2f", P, R, F1, OOV_R, IV_R);
+            return string.Format("P:%.2f R:%.2f F1:%.2f OOV-R:%.2f IV-R:%.2f", P, R, F1, OOV_R, IV_R);
         }
     }
 }

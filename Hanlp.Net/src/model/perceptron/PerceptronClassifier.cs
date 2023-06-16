@@ -39,7 +39,7 @@ public abstract class PerceptronClassifier
         this.model = model;
     }
 
-    public PerceptronClassifier(string modelPath) 
+    public PerceptronClassifier(string modelPath)
         : this(new LinearModel(modelPath))
     {
     }
@@ -161,7 +161,7 @@ public abstract class PerceptronClassifier
     public BinaryClassificationFMeasure evaluate(Instance[] instanceList)
     {
         int TP = 0, FP = 0, FN = 0;
-        foreach(Instance instance in instanceList)
+        foreach (Instance instance in instanceList)
         {
             int y = model.decode(instance.x);
             if (y == 1)
@@ -174,8 +174,8 @@ public abstract class PerceptronClassifier
             else if (instance.y == 1)
                 ++FN;
         }
-        float p = TP / (float) (TP + FP) * 100;
-        float r = TP / (float) (TP + FN) * 100;
+        float p = TP / (float)(TP + FP) * 100;
+        float r = TP / (float)(TP + FN) * 100;
         return new BinaryClassificationFMeasure(p, r, 2 * p * r / (p + r));
     }
 
@@ -189,7 +189,7 @@ public abstract class PerceptronClassifier
     private Instance[] readInstance(string corpus, FeatureMap featureMap)
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(corpus);
-        List<Instance> instanceList = new ();
+        List<Instance> instanceList = new();
         foreach (string line in lineIterator)
         {
             string[] cells = line.Split(",");
@@ -231,16 +231,16 @@ public abstract class PerceptronClassifier
     /**
      * 样本
      */
-    class Instance
+    public class Instance
     {
         /**
          * 特征向量
          */
-        List<int> x;
+        public List<int> x;
         /**
          * 标签
          */
-        int y;
+        public int y;
 
         public Instance(List<int> x, int y)
         {
@@ -252,9 +252,9 @@ public abstract class PerceptronClassifier
     /**
      * 准确率度量
      */
-     public class BinaryClassificationFMeasure
+    public class BinaryClassificationFMeasure
     {
-        float P, R, F1;
+        public float P, R, F1;
 
         public BinaryClassificationFMeasure(float p, float r, float f1)
         {
@@ -266,7 +266,7 @@ public abstract class PerceptronClassifier
         //@Override
         public override string ToString()
         {
-            return string.format("P=%.2f R=%.2f F1=%.2f", P, R, F1);
+            return string.Format("P=%.2f R=%.2f F1=%.2f", P, R, F1);
         }
     }
 
