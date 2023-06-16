@@ -166,7 +166,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //                if (args.Length != 2)
 //                {
 //                    Console.Error.WriteLine(line);
-//                    System.exit(-1);
+//                    Environment.Exit(-1);
 //                }
 //                storage.put(args[0], args[1]);
 //            }

@@ -10,9 +10,9 @@ public class IOUtilTest : TestCase
     {
         Random random = new Random(DateTime.Now.Microsecond);
         byte[] originalData = new byte[1024 * 1024]; // 1MB
-        random.nextBytes(originalData);
-        ByteArrayInputStream _is = ();
-        byte[] readData = IOUtil.readBytesFromOtherInputStream(_is);
+        random.NextBytes(originalData);
+        using var fs = new FileStream("test.bin", FileMode.Open);
+        byte[] readData = IOUtil.readBytesFromOtherInputStream(fs);
         AssertEquals(originalData.Length, readData.Length);
         for (int i = 0; i < originalData.Length; i++)
         {
@@ -20,19 +20,19 @@ public class IOUtilTest : TestCase
         }
     }
 
-    public class BAI : ByteArrayInputStream//(originalData)
-    {
-        //@Override
-        public /*synchronized*/ int available()
-        {
-            int realAvailable = base.available();
-            if (realAvailable > 0)
-            {
-                return 2048; // 模拟某些网络InputStream
-            }
-            return realAvailable;
-        }
-    }
+    //public class BAI : ByteArrayInputStream//(originalData)
+    //{
+    //    //@Override
+    //    public /*synchronized*/ int available()
+    //    {
+    //        int realAvailable = base.available();
+    //        if (realAvailable > 0)
+    //        {
+    //            return 2048; // 模拟某些网络InputStream
+    //        }
+    //        return realAvailable;
+    //    }
+    //}
     [TestMethod]
     public void TestUTF8BOM() 
     {

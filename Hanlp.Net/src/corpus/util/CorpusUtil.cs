@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+
 namespace com.hankcs.hanlp.corpus.util;
 
 
@@ -67,10 +69,10 @@ public class CorpusUtil
      */
     public static List<List<IWord>> convert2CompatibleList(List<List<Word>> simpleSentenceList)
     {
-        List<List<IWord>> compatibleList = new LinkedList<List<IWord>>();
-        for (List<Word> wordList : simpleSentenceList)
+        List<List<IWord>> compatibleList = new ();
+        foreach (List<Word> wordList in simpleSentenceList)
         {
-            compatibleList.add(new LinkedList<IWord>(wordList));
+            compatibleList.Add(new LinkedList<IWord>(wordList));
         }
         return compatibleList;
     }

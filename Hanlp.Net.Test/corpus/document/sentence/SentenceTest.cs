@@ -12,7 +12,7 @@ public class SentenceTest : TestCase
     public void TestFindFirstWordIteratorByLabel()
     {
         Sentence sentence = Sentence.create("[上海/ns 华安/nz 工业/n （/w 集团/n ）/w 公司/n]/nt 董事长/n 谭旭光/nr 和/c 秘书/n 胡花蕊/nr 来到/v [美国/ns 纽约/ns 现代/t 艺术/n 博物馆/n]/ns 参观/v");
-        ListIterator<IWord> nt = sentence.findFirstWordIteratorByLabel("nt");
+        var nt = sentence.findFirstWordIteratorByLabel("nt");
         AssertNotNull(nt);
         AssertEquals("[上海/ns 华安/nz 工业/n （/w 集团/n ）/w 公司/n]/nt", nt.previous().ToString());
         CompoundWord apple = CompoundWord.create("[苹果/n 公司/n]/nt");
@@ -20,7 +20,7 @@ public class SentenceTest : TestCase
         AssertEquals(sentence.findFirstWordByLabel("nt"), apple);
         nt.remove();
         AssertEquals("董事长/n 谭旭光/nr 和/c 秘书/n 胡花蕊/nr 来到/v [美国/ns 纽约/ns 现代/t 艺术/n 博物馆/n]/ns 参观/v", sentence.ToString());
-        ListIterator<IWord> ns = sentence.findFirstWordIteratorByLabel("ns");
+        var ns = sentence.findFirstWordIteratorByLabel("ns");
         AssertEquals("参观/v", ns.next().ToString());
     }
     [TestMethod]
@@ -40,9 +40,9 @@ public class SentenceTest : TestCase
         String text = "人民网/nz 1月1日/t 讯/ng 据/p 《/w [纽约/nsf 时报/n]/nz 》/w 报道/v ，/w";
         Regex pattern = new Regex("(\\[(.+/[a-z]+)]/[a-z]+)|([^\\s]+/[a-z]+)");
         var matcher = pattern.Matches(text);
-        while (matcher.find())
+        foreach(Match m in matcher)
         {
-            String param = matcher.group();
+            String param = m.Value;
             AssertEquals(param, WordFactory.create(param).ToString());
         }
         AssertEquals(text, Sentence.create(text).ToString());

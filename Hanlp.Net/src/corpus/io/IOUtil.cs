@@ -255,21 +255,11 @@ public class IOUtil
      * @return
      * @
      */
-    public static byte[] readBytesFromOtherInputStream(InputStream _is) 
+    public static byte[] readBytesFromOtherInputStream(FileStream fs) 
     {
-        ByteArrayOutputStream data = new ByteArrayOutputStream();
-
-        int readBytes;
-        byte[] buffer = new byte[Math.max(_is.available(), 4096)]; // 最低4KB的缓冲区
-
-        while ((readBytes = _is.read(buffer, 0, buffer.length)) != -1)
-        {
-            data.write(buffer, 0, readBytes);
-        }
-
-        data.flush();
-
-        return data.toByteArray();
+        var buffer = new byte[fs.Length];
+        fs.Read(buffer);
+        return buffer;
     }
 
     /**

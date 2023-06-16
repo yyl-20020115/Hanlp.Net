@@ -8,13 +8,13 @@ namespace com.hankcs.hanlp.corpus.io;
 public class ByteArrayTest : TestCase
 {
     static String DATA_TEST_OUT_BIN;
-    private File tempFile;
+    private string tempFile;
 
     [TestInitialize]
     public override void SetUp() 
     {
-        tempFile = File.createTempFile("hanlp-", ".dat");
-        DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
+        tempFile = createTempFile("hanlp-", ".dat"); 
+        DATA_TEST_OUT_BIN = tempFile;
     }
     [TestMethod]
 

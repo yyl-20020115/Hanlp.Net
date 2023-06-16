@@ -47,7 +47,7 @@ public class ComputeAccuracy
         catch (FileNotFoundException e)
         {
             printf("Input file not found\n");
-            System.exit(-1);
+            Environment.Exit(-1);
             return;
         }
         catch (UnsupportedEncodingException e)

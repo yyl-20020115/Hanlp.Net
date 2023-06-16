@@ -28,7 +28,7 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
         mdat.load(ByteArray.createByteArray(tempFile.getAbsolutePath()));
         AssertEquals(size, mdat.size());
         for (int i = 0; i < size; ++i)
-        {
+        { 
             AssertEquals(i, mdat.get((i.ToString())));
         }
 

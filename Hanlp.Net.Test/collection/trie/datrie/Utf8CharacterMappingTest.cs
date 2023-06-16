@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
 
@@ -17,8 +19,8 @@ public class Utf8CharacterMappingTest : TestCase
             int start = 0;
             for (int i = 0; i < s.Length; i += charCount)
             {
-                int codePoint = s.codePointAt(i);
-                charCount = Character.charCount(codePoint);
+                int codePoint = char.ConvertToUtf32(s, i);// s.codePointAt(i);
+                charCount = new Rune(codePoint).Utf16SequenceLength;//  Character.charCount(codePoint);
 
                 int[] arr = ucm.toIdList(codePoint);
                 for (int j = 0; j < arr.Length; j++, start++)

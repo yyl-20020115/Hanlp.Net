@@ -24,7 +24,7 @@ public class MDAGSetTest : TestCase
     {
         TestUtility.EnsureFullData();
         tempFile = File.createTempFile("hanlp-", ".bin");
-        DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
+        DATA_TEST_OUT_BIN = tempFile.getAbsolutePath(); 
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/custom/CustomDictionary.txt");
         validKeySet = new ();
         while (iterator.hasNext())

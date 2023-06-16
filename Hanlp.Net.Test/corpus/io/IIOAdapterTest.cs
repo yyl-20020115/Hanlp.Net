@@ -1,4 +1,5 @@
 using com.hankcs.hanlp.dictionary.stopword;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.corpus.io;
 
@@ -31,14 +32,14 @@ public class IIOAdapterTest : TestCase
         public InputStream open(String path)
         {
             if (path.endsWith(Predefine.BIN_EXT)) return null;
-            return super.open(path);
+            return base.open(path);
         }
 
         //@Override
         public OutputStream create(String path)
         {
-            if (path.endsWith(Predefine.BIN_EXT)) return null;
-            return super.create(path);
+            if (path.EndsWith(Predefine.BIN_EXT)) return null;
+            return base.create(path);
         }
     }
 }

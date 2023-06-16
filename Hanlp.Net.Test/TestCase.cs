@@ -3,6 +3,12 @@ namespace com.hankcs.hanlp;
 
 public class TestCase
 {
+    public static string createTempFile(string filename,string extension)
+    {
+        var r = Random.Shared;
+
+        return filename + r.Next() + extension;
+    }
     public virtual void SetUp()
     {
 
