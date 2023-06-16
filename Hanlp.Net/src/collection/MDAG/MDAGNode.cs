@@ -1,25 +1,27 @@
-/**
- * MDAG is a Java library capable of constructing character-sequence-storing,
- * directed acyclic graphs of minimal size. 
- * 
- *  Copyright (C) 2012 Kevin Lawson <Klawson88@gmail.com>
- *
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
+
+using System.Text;
+/**
+* MDAG is a Java library capable of constructing character-sequence-storing,
+* directed acyclic graphs of minimal size. 
+* 
+*  Copyright (C) 2012 Kevin Lawson <Klawson88@gmail.com>
+*
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 namespace com.hankcs.hanlp.collection.MDAG;
 
 
@@ -42,7 +44,7 @@ public class MDAGNode
     /**
      * 状态转移函数
      */
-    private final TreeMap<char, MDAGNode> outgoingTransitionTreeMap;
+    private Dictionary<char, MDAGNode> outgoingTransitionTreeMap;
 
     //The int representing this node's incoming _transition node count
     /**
@@ -497,7 +499,7 @@ public class MDAGNode
     {
         bool areEqual = (this == obj);
         
-        if(!areEqual && obj != null && obj.getClass().equals(MDAGNode.class))
+        if(!areEqual && obj != null && obj.getClass().equals(MDAGNode.s))
         {
             MDAGNode node = (MDAGNode)obj;
             areEqual = (isAcceptNode == node.isAcceptNode && haveSameTransitions(this, node));
@@ -531,15 +533,15 @@ public class MDAGNode
     }
 
     //@Override
-    public string toString()
+    public string ToString()
     {
-        final StringBuilder sb = new StringBuilder("MDAGNode{");
+         StringBuilder sb = new StringBuilder("MDAGNode{");
         sb.Append("isAcceptNode=").Append(isAcceptNode);
         sb.Append(", outgoingTransitionTreeMap=").Append(outgoingTransitionTreeMap.keySet());
         sb.Append(", incomingTransitionCount=").Append(incomingTransitionCount);
 //        sb.Append(", transitionSetBeginIndex=").Append(transitionSetBeginIndex);
 //        sb.Append(", storedHashCode=").Append(storedHashCode);
         sb.Append('}');
-        return sb.toString();
+        return sb.ToString();
     }
 }

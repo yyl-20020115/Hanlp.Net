@@ -47,7 +47,7 @@ public class TraditionalChineseTokenizer
 
     public static List<Term> segment(string text)
     {
-        List<Term> termList = new LinkedList<Term>();
+        List<Term> termList = new ();
         for (string sentence : SentencesUtil.toSentenceList(text))
         {
             termList.addAll(segSentence(sentence));

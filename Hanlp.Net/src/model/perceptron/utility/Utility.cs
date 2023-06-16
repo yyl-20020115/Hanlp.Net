@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.model.perceptron;
 using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.tagset;
@@ -427,9 +428,9 @@ for (double[] s : scores.values())
 return scores;
     }
 
-    public static Set<string> combineNER(string[] nerArray, NERTagSet tagSet)
+    public static HashSet<string> combineNER(string[] nerArray, NERTagSet tagSet)
 {
-    Set<string> result = new LinkedHashSet<string>();
+    HashSet<string> result = new HashSet<string>();
     int begin = 0;
     string prePos = NERTagSet.posOf(nerArray[0]);
     for (int i = 1; i < nerArray.Length; i++)

@@ -11,7 +11,12 @@
  */
 using com.hankcs.hanlp.collection.trie;
 using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.recognition.nr;
+using com.hankcs.hanlp.recognition.ns;
+using com.hankcs.hanlp.recognition.nt;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
+using System.Text;
 
 namespace com.hankcs.hanlp.seg.Viterbi;
 
@@ -156,7 +161,7 @@ public class ViterbiSegment : WordBasedSegment
         // 避免生成对象，优化速度
         LinkedList<Vertex>[] nodes = wordNet.getVertexes();
         LinkedList<Vertex> vertexList = new LinkedList<Vertex>();
-        for (Vertex node : nodes[1])
+        foreach (Vertex node in nodes[1])
         {
             node.updateFrom(nodes[0].getFirst());
         }
@@ -164,16 +169,16 @@ public class ViterbiSegment : WordBasedSegment
         {
             LinkedList<Vertex> nodeArray = nodes[i];
             if (nodeArray == null) continue;
-            for (Vertex node : nodeArray)
+            foreach (Vertex node in nodeArray)
             {
                 if (node.from == null) continue;
-                for (Vertex to : nodes[i + node.realWord.Length])
+                foreach (Vertex to in nodes[i + node.realWord.Length])
                 {
                     to.updateFrom(node);
                 }
             }
         }
-        Vertex from = nodes[nodes.Length - 1].getFirst();
+        Vertex from = nodes[^1].getFirst();
         while (from != null)
         {
             vertexList.addFirst(from);
@@ -190,16 +195,16 @@ public class ViterbiSegment : WordBasedSegment
         }
         logger.info("开始加载自定义词典:" + customPath);
         DoubleArrayTrie<CoreDictionary.Attribute> dat = new DoubleArrayTrie<CoreDictionary.Attribute>();
-        string path[] = customPath.Split(";");
+        string[] path = customPath.Split(";");
         string mainPath = path[0];
         StringBuilder combinePath = new StringBuilder();
-        for (string aPath : path)
+        foreach (string aPath in path)
         {
-            combinePath.Append(aPath.trim());
+            combinePath.Append(aPath.Trim());
         }
-        File file = new File(mainPath);
-        mainPath = file.getParent() + "/" + Math.abs(combinePath.toString().hashCode());
-        mainPath = mainPath.replace("\\", "/");
+        var file = (mainPath);
+        mainPath = file.getParent() + "/" + Math.Abs(combinePath.ToString().GetHashCode());
+        mainPath = mainPath.Replace("\\", "/");
         if (CustomDictionary.loadMainDictionary(mainPath, path, dat, isCache))
         {
             this.setDat(dat);

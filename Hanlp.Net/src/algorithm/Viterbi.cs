@@ -46,7 +46,7 @@ public class Viterbi
         double[][] V = new double[obs.Length][_max_states_value];
         int[][] path = new int[_max_states_value][obs.Length];
 
-        for (int y : states)
+        foreach (int y in states)
         {
             V[0][y] = start_p[y] + emit_p[y][obs[0]];
             path[y][0] = y;
@@ -56,11 +56,11 @@ public class Viterbi
         {
             int[][] newpath = new int[_max_states_value][obs.Length];
 
-            for (int y : states)
+            foreach (int y in states)
             {
                 double prob = Double.MAX_VALUE;
                 int state;
-                for (int y0 : states)
+                foreach (int y0 in states)
                 {
                     double nprob = V[t - 1][y0] + trans_p[y0][y] + emit_p[y][obs[t]];
                     if (nprob < prob)
@@ -81,7 +81,7 @@ public class Viterbi
 
         double prob = Double.MAX_VALUE;
         int state = 0;
-        for (int y : states)
+        foreach (int y in states)
         {
             if (V[obs.Length - 1][y] < prob)
             {
@@ -253,7 +253,7 @@ public class Viterbi
         {
             double perfect_cost = Double.MAX_VALUE;
             EnumItem<E> item = iterator.next();
-            for (E cur : item.labelMap.keySet())
+            for (E cur in item.labelMap.keySet())
             {
                 double now = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                 if (perfect_cost > now)

@@ -225,7 +225,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 wordList.toArray(wordArray);
 
                 List<Word> result = new ();
-                result.add(new Word(wordArray[0], posArray[0]));
+                result.Add(new Word(wordArray[0], posArray[0]));
                 string prePos = posArray[0];
 
                 NERTagSet tagSet = getNERTagSet();
@@ -234,7 +234,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
                     {
                         termList.add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
-                        result = new ArrayList<Word>();
+                        result = new ();
                     }
                     result.add(new Word(wordArray[i], posArray[i]));
                     if (nerArray[i].charAt(0) == tagSet.O_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR)

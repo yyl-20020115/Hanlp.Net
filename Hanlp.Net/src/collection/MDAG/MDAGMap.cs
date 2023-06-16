@@ -87,7 +87,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
     {
         LinkedList<KeyValuePair<string, int>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
         LinkedList<KeyValuePair<string, V>> entryList = new LinkedList<Entry<string, V>>();
-        for (KeyValuePair<string, int> entry : valueIndex)
+        foreach (KeyValuePair<string, int> entry in valueIndex)
         {
             entryList.add(new SimpleEntry<string, V>(entry.getKey(), valueList.get(entry.getValue())));
         }

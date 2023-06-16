@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.seg.common;
