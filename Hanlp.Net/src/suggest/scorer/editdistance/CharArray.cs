@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.suggest.scorer.editdistance;
  * 对字符数组的封装，可以代替string
  * @author hankcs
  */
-public class CharArray : Comparable<CharArray>, ISentenceKey<CharArray>
+public class CharArray : IComparable<CharArray>, ISentenceKey<CharArray>
 {
     char[] value;
 
@@ -26,13 +26,13 @@ public class CharArray : Comparable<CharArray>, ISentenceKey<CharArray>
     }
 
     //@Override
-    public int compareTo(CharArray other)
+    public int CompareTo(CharArray? other)
     {
         int len1 = value.Length;
         int len2 = other.value.Length;
-        int lim = Math.min(len1, len2);
-        char v1[] = value;
-        char v2[] = other.value;
+        int lim = Math.Min(len1, len2);
+        char[] v1 = value;
+        char[] v2 = other.value;
 
         int k = 0;
         while (k < lim)

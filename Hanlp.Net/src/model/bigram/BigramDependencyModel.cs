@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.dependency.model;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.utility;
 

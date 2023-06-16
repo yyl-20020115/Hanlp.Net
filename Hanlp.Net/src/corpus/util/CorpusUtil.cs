@@ -21,16 +21,16 @@ namespace com.hankcs.hanlp.corpus.util;
  */
 public class CorpusUtil
 {
-    public final static string TAG_PLACE = "未##地";
-    public final static string TAG_BIGIN = "始##始";
-    public final static string TAG_OTHER = "未##它";
-    public final static string TAG_GROUP = "未##团";
-    public final static string TAG_NUMBER = "未##数";
-    public final static string TAG_PROPER = "未##专";
-    public final static string TAG_TIME = "未##时";
-    public final static string TAG_CLUSTER = "未##串";
-    public final static string TAG_END = "末##末";
-    public final static string TAG_PEOPLE = "未##人";
+    public const string TAG_PLACE = "未##地";
+    public const string TAG_BIGIN = "始##始";
+    public const string TAG_OTHER = "未##它";
+    public const string TAG_GROUP = "未##团";
+    public const string TAG_NUMBER = "未##数";
+    public const string TAG_PROPER = "未##专";
+    public const string TAG_TIME = "未##时";
+    public const string TAG_CLUSTER = "未##串";
+    public const string TAG_END = "末##末";
+    public const string TAG_PEOPLE = "未##人";
 
     /**
      * 编译单词
@@ -41,10 +41,10 @@ public class CorpusUtil
     public static IWord compile(IWord word)
     {
         string label = word.getLabel();
-        if ("nr".equals(label)) return new Word(word.getValue(), TAG_PEOPLE);
-        else if ("m".equals(label) || "mq".equals(label)) return new Word(word.getValue(), TAG_NUMBER);
-        else if ("t".equals(label)) return new Word(word.getValue(), TAG_TIME);
-        else if ("ns".equals(label)) return new Word(word.getValue(), TAG_PLACE);
+        if ("nr".Equals(label)) return new Word(word.getValue(), TAG_PEOPLE);
+        else if ("m".Equals(label) || "mq".Equals(label)) return new Word(word.getValue(), TAG_NUMBER);
+        else if ("t".Equals(label)) return new Word(word.getValue(), TAG_TIME);
+        else if ("ns".Equals(label)) return new Word(word.getValue(), TAG_PLACE);
 //        switch (word.getLabel())
 //        {
 //            case "nr":
@@ -72,21 +72,21 @@ public class CorpusUtil
         List<List<IWord>> compatibleList = new ();
         foreach (List<Word> wordList in simpleSentenceList)
         {
-            compatibleList.Add(new LinkedList<IWord>(wordList));
+            compatibleList.Add(new (wordList));
         }
         return compatibleList;
     }
 
     public static List<IWord> spilt(List<IWord> wordList)
     {
-        ListIterator<IWord> listIterator = wordList.listIterator();
+        var listIterator = wordList.listIterator();
         while (listIterator.hasNext())
         {
             IWord word = listIterator.next();
             if (word is CompoundWord)
             {
                 listIterator.remove();
-                for (Word inner : ((CompoundWord) word).innerList)
+                foreach (Word inner in ((CompoundWord) word).innerList)
                 {
                     listIterator.add(inner);
                 }

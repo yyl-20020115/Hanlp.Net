@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.seg.Viterbi;
 
 
@@ -150,7 +154,7 @@ public class ViterbiSegment : WordBasedSegment
     private static List<Vertex> viterbi(WordNet wordNet)
     {
         // 避免生成对象，优化速度
-        LinkedList<Vertex> nodes[] = wordNet.getVertexes();
+        LinkedList<Vertex>[] nodes = wordNet.getVertexes();
         LinkedList<Vertex> vertexList = new LinkedList<Vertex>();
         for (Vertex node : nodes[1])
         {

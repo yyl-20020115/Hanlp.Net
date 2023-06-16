@@ -26,7 +26,7 @@ public class State
     /**
      * 模式串的长度，也是这个状态的深度
      */
-    protected final int depth;
+    protected int depth;
 
     /**
      * fail 函数，如果没有匹配到，则跳转到此状态。

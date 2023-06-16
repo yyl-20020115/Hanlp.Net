@@ -250,9 +250,9 @@ public class TfIdf
      * @param <KEY>   map 键类型
      * @param <VALUE> map 值类型
      */
-    static private class KeySetIterable<KEY, VALUE> : Iterable<Iterable<KEY>>
+    private class KeySetIterable<KEY, VALUE> : Iterable<Iterable<KEY>>
     {
-        final private Iterator<Dictionary<KEY, VALUE>> maps;
+        private Iterator<Dictionary<KEY, VALUE>> maps;
 
         public KeySetIterable(Iterable<Dictionary<KEY, VALUE>> maps)
         {

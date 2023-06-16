@@ -53,7 +53,7 @@ public class EasyDictionary
             string line;
             while ((line = br.readLine()) != null)
             {
-                string param[] = line.Split("\\s+");
+                string[] param = line.Split("\\s+");
                 int natureCount = (param.Length - 1) / 2;
                 Attribute attribute = new Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)

@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.seg.common;
+using System.Text;
+
 namespace com.hankcs.hanlp.dictionary.ns;
 
 
@@ -70,7 +75,7 @@ public class PlaceDictionary
      * @param wordNetOptimum 待优化的图
      * @param wordNetAll
      */
-    public static void parsePattern(List<NS> nsList, List<Vertex> vertexList, final WordNet wordNetOptimum, final WordNet wordNetAll)
+    public static void parsePattern(List<NS> nsList, List<Vertex> vertexList,  WordNet wordNetOptimum,  WordNet wordNetAll)
     {
 //        ListIterator<Vertex> listIterator = vertexList.listIterator();
         StringBuilder sbPattern = new StringBuilder(nsList.size());
@@ -79,7 +84,7 @@ public class PlaceDictionary
             sbPattern.Append(ns.toString());
         }
         string pattern = sbPattern.toString();
-        final Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
+         Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
         trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<string>()
         {
             //@Override

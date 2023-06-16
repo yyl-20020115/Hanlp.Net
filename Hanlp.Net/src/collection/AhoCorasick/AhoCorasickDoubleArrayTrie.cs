@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.AhoCorasick;
 
 
@@ -168,7 +170,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param _out 一个DataOutputStream
      * @throws Exception 可能的IO异常等
      */
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeInt(size);
         for (int i = 0; i < size; i++)
@@ -203,7 +205,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @param _out 一个ObjectOutputStream
      * @ 可能的IO异常
      */
-    public void save(ObjectOutputStream _out) 
+    public void save(Stream _out) 
     {
         _out.writeObject(base);
         _out.writeObject(check);
@@ -220,7 +222,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      * @
      * @throws ClassNotFoundException
      */
-    public void load(ObjectInputStream _in, V[] value)
+    public void load(Stream _in, V[] value)
     {
         _base = (int[]) _in.readObject();
         check = (int[]) _in.readObject();
@@ -887,7 +889,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         {
             int[] base2 = new int[newSize];
             int[] check2 = new int[newSize];
-            bool used2[] = new bool[newSize];
+            bool[] used2 = new bool[newSize];
             if (allocSize > 0)
             {
                 System.arraycopy(base, 0, base2, 0, allocSize);

@@ -11,7 +11,10 @@
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
 using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.dictionary;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.utility;
 using System.Text;
 
 namespace com.hankcs.hanlp.dictionary.ts;
@@ -24,9 +27,9 @@ namespace com.hankcs.hanlp.dictionary.ts;
  */
 public class BaseChineseDictionary
 {
-    static void combineChain(TreeMap<string, string> s2t, TreeMap<string, string> t2x)
+    static void combineChain(Dictionary<string, string> s2t, Dictionary<string, string> t2x)
     {
-        for (KeyValuePair<string, string> entry : s2t.entrySet())
+        foreach (KeyValuePair<string, string> entry in s2t.entrySet())
         {
             string x = t2x.get(entry.getValue());
             if (x != null)
@@ -34,7 +37,7 @@ public class BaseChineseDictionary
                 entry.setValue(x);
             }
         }
-        for (KeyValuePair<string, string> entry : t2x.entrySet())
+        foreach (KeyValuePair<string, string> entry in t2x.entrySet())
         {
             string s = CharTable.convert(entry.getKey());
             if (!s2t.containsKey(s))
@@ -44,9 +47,9 @@ public class BaseChineseDictionary
         }
     }
 
-    static void combineReverseChain(TreeMap<string, string> t2s, TreeMap<string, string> tw2t, bool convert)
+    static void combineReverseChain(Dictionary<string, string> t2s, Dictionary<string, string> tw2t, bool convert)
     {
-        for (KeyValuePair<string, string> entry : tw2t.entrySet())
+        foreach (KeyValuePair<string, string> entry in tw2t.entrySet())
         {
             string tw = entry.getKey();
             string s = t2s.get(entry.getValue());
@@ -63,16 +66,16 @@ public class BaseChineseDictionary
      * @param pathArray 路径
      * @return 是否加载成功
      */
-    static bool load(Dictionary<string, string> storage, bool reverse, string... pathArray)
+    static bool load(Dictionary<string, string> storage, bool reverse, params string[] pathArray)
     {
         StringDictionary dictionary = new StringDictionary("=");
-        for (string path : pathArray)
+        foreach (string path in pathArray)
         {
             if (!dictionary.load(path)) return false;
         }
         if (reverse) dictionary = dictionary.reverse();
-        Set<KeyValuePair<string, string>> entrySet = dictionary.entrySet();
-        for (KeyValuePair<string, string> entry : entrySet)
+        HashSet<KeyValuePair<string, string>> entrySet = dictionary.entrySet();
+        foreach (KeyValuePair<string, string> entry in entrySet)
         {
             storage.put(entry.getKey(), entry.getValue());
         }
@@ -106,7 +109,7 @@ public class BaseChineseDictionary
         }
         if (loadDat(datPath, trie)) return true;
         // 从文本中载入并且尝试生成dat
-        TreeMap<string, string> map = new TreeMap<string, string>();
+        var map = new Dictionary<string, string>();
         if (!load(map, reverse, path)) return false;
         logger.info("正在构建AhoCorasickDoubleArrayTrie，来源：" + path);
         trie.build(map);
@@ -129,7 +132,7 @@ public class BaseChineseDictionary
         return true;
     }
 
-    static bool saveDat(string path, AhoCorasickDoubleArrayTrie<string> trie, Set<KeyValuePair<string, string>> entrySet)
+    static bool saveDat(string path, AhoCorasickDoubleArrayTrie<string> trie, HashSet<KeyValuePair<string, string>> entrySet)
     {
         if (trie.size() != entrySet.size())
         {
@@ -140,11 +143,11 @@ public class BaseChineseDictionary
         {
             DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
             _out.writeInt(entrySet.size());
-            for (KeyValuePair<string, string> entry : entrySet)
+            foreach (KeyValuePair<string, string> entry in entrySet)
             {
                 char[] charArray = entry.getValue().ToCharArray();
                 _out.writeInt(charArray.Length);
-                for (char c : charArray)
+                foreach (char c in charArray)
                 {
                     _out.writeChar(c);
                 }
@@ -169,7 +172,7 @@ public class BaseChineseDictionary
     protected static string segLongest(char[] charArray, DoubleArrayTrie<string> trie)
     {
         StringBuilder sb = new StringBuilder(charArray.Length);
-        BaseSearcher searcher = getSearcher(charArray, trie);
+        var searcher = getSearcher(charArray, trie);
         KeyValuePair<string, string> entry;
         int p = 0;  // 当前处理到什么位置
         int offset;
@@ -191,27 +194,15 @@ public class BaseChineseDictionary
             sb.Append(charArray[p]);
             ++p;
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     protected static string segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<string> trie)
     {
          string[] wordNet = new string[charArray.Length];
          int[] lengthNet = new int[charArray.Length];
-        trie.parseText(charArray, new AhoCorasickDoubleArrayTrie<string>.IHit<string>()
-        {
-            //@Override
-            public void hit(int begin, int end, string value)
-            {
-                int Length = end - begin;
-                if (Length > lengthNet[begin])
-                {
-                    wordNet[begin] = value;
-                    lengthNet[begin] = Length;
-                }
-            }
-        });
-        StringBuilder sb = new StringBuilder(charArray.Length);
+        trie.parseText(charArray, new ST());
+        var sb = new StringBuilder(charArray.Length);
         for (int offset = 0; offset < wordNet.Length; )
         {
             if (wordNet[offset] == null)
@@ -223,13 +214,25 @@ public class BaseChineseDictionary
             sb.Append(wordNet[offset]);
             offset += lengthNet[offset];
         }
-        return sb.toString();
+        return sb.ToString();
     }
-
+    public class ST: AhoCorasickDoubleArrayTrie<string>.IHit<string>
+    {
+        //@Override
+        public void hit(int begin, int end, string value)
+        {
+            int Length = end - begin;
+            if (Length > lengthNet[begin])
+            {
+                wordNet[begin] = value;
+                lengthNet[begin] = Length;
+            }
+        }
+    }
     /**
      * 最长分词
      */
-    public static class Searcher : BaseSearcher<string>
+    public class Searcher : BaseSearcher<string>
     {
         /**
          * 分词从何处开始，这是一个状态
@@ -254,7 +257,7 @@ public class BaseChineseDictionary
         public KeyValuePair<string, string> next()
         {
             // 保证首次调用找到一个词语
-            KeyValuePair<string, string> result = null;
+            KeyValuePair<string, string> result;
             while (begin < c.Length)
             {
                 LinkedList<KeyValuePair<string, string>> entryList = trie.commonPrefixSearchWithValue(c, begin);
@@ -269,10 +272,6 @@ public class BaseChineseDictionary
                     begin += result.getKey().Length;
                     break;
                 }
-            }
-            if (result == null)
-            {
-                return null;
             }
             return result;
         }

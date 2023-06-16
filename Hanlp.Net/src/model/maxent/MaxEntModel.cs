@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.model.maxent;
 
 
@@ -53,7 +57,7 @@ public class MaxEntModel
      * @param context 环境
      * @return 概率数组
      */
-    public final double[] eval(string[] context)
+    public double[] eval(string[] context)
     {
         return (eval(context, new double[evalParams.getNumOutcomes()]));
     }
@@ -64,7 +68,7 @@ public class MaxEntModel
      * @param context
      * @return
      */
-    public final List<Pair<string, Double>> predict(string[] context)
+    public List<Pair<string, Double>> predict(string[] context)
     {
         List<Pair<string, Double>> result = new ArrayList<Pair<string, Double>>(outcomeNames.Length);
         double[] p = eval(context);
@@ -81,12 +85,12 @@ public class MaxEntModel
      * @param context
      * @return
      */
-    public final Pair<string, Double> predictBest(string[] context)
+    public KeyValuePair<string, Double> predictBest(string[] context)
     {
-        List<Pair<string, Double>> resultList = predict(context);
+        List<KeyValuePair<string, Double>> resultList = predict(context);
         double bestP = -1.0;
-        Pair<string, Double> bestPair = null;
-        for (Pair<string, Double> pair : resultList)
+        KeyValuePair<string, Double> bestPair;
+        for (KeyValuePair<string, Double> pair : resultList)
         {
             if (pair.getSecond() > bestP)
             {
@@ -104,9 +108,9 @@ public class MaxEntModel
      * @param context
      * @return
      */
-    public final List<Pair<string, Double>> predict(Collection<string> context)
+    public List<KeyValuePair<string, Double>> predict(ICollection<string> context)
     {
-        return predict(context.toArray(new string[0]));
+        return predict(context.ToArray());
     }
 
     /**
@@ -116,7 +120,7 @@ public class MaxEntModel
      * @param outsums 先验分布
      * @return 概率数组
      */
-    public final double[] eval(string[] context, double[] outsums)
+    public double[] eval(string[] context, double[] outsums)
     {
         assert context != null;
         int[] scontexts = new int[context.Length];
@@ -138,8 +142,8 @@ public class MaxEntModel
      */
     public static double[] eval(int[] context, double[] prior, EvalParameters model)
     {
-        Context[] params = model.getParams();
-        int numfeats[] = new int[model.getNumOutcomes()];
+        Context[] _params = model.getParams();
+        int[] numfeats = new int[model.getNumOutcomes()];
         int[] activeOutcomes;
         double[] activeParameters;
         double value = 1;
@@ -147,7 +151,7 @@ public class MaxEntModel
         {
             if (context[ci] >= 0)
             {
-                Context predParams = params[context[ci]];
+                Context predParams = _params[context[ci]];
                 activeOutcomes = predParams.getOutcomes();
                 activeParameters = predParams.getParameters();
                 for (int ai = 0; ai < activeOutcomes.Length; ai++)
@@ -165,14 +169,14 @@ public class MaxEntModel
             if (model.getCorrectionParam() != 0)
             {
                 prior[oid] = Math
-                        .exp(prior[oid]
+                        .Exp(prior[oid]
                                      * model.getConstantInverse()
                                      + ((1.0 - ((double) numfeats[oid] / model
                                 .getCorrectionConstant())) * model.getCorrectionParam()));
             }
             else
             {
-                prior[oid] = Math.exp(prior[oid] * model.getConstantInverse());
+                prior[oid] = Math.Exp(prior[oid] * model.getConstantInverse());
             }
             normal += prior[oid];
         }
@@ -232,11 +236,11 @@ public class MaxEntModel
             _out.writeInt(NUM_PREDS);
             string[] predLabels = new string[NUM_PREDS];
             m.pmap = new DoubleArrayTrie<int>();
-            TreeMap<string, int> tmpMap = new TreeMap<string, int>();
+            var tmpMap = new Dictionary<string, int>();
             for (int i = 0; i < NUM_PREDS; i++)
             {
                 predLabels[i] = br.readLine();
-                assert !tmpMap.containsKey(predLabels[i]) : "重复的键： " + predLabels[i] + " 请使用 -Dfile.encoding=UTF-8 训练";
+                //assert !tmpMap.containsKey(predLabels[i]) : "重复的键： " + predLabels[i] + " 请使用 -Dfile.encoding=UTF-8 训练";
                 TextUtility.writeString(predLabels[i], _out);
                 tmpMap.put(predLabels[i], i);
             }
@@ -247,7 +251,7 @@ public class MaxEntModel
             }
             m.pmap.save(_out);
             // params
-            Context[] params = new Context[NUM_PREDS];
+            Context[] _params = new Context[NUM_PREDS];
             int pid = 0;
             for (int i = 0; i < outcomePatterns.Length; i++)
             {
@@ -264,7 +268,7 @@ public class MaxEntModel
                         contextParameters[k - 1] = Double.parseDouble(br.readLine());
                         _out.writeDouble(contextParameters[k - 1]);
                     }
-                    params[pid] = new Context(outcomePattern, contextParameters);
+                    _params[pid] = new Context(outcomePattern, contextParameters);
                     pid++;
                 }
             }
@@ -272,7 +276,7 @@ public class MaxEntModel
             m.prior = new UniformPrior();
             m.prior.setLabels(outcomeLabels);
             // eval
-            m.evalParams = new EvalParameters(params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
+            m.evalParams = new EvalParameters(_params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
             _out.close();
         }
         catch (Exception e)
@@ -326,7 +330,7 @@ public class MaxEntModel
         }
         m.pmap.load(byteArray, v);
         // params
-        Context[] params = new Context[NUM_PREDS];
+        Context[] _params = new Context[NUM_PREDS];
         int pid = 0;
         for (int i = 0; i < outcomePatterns.Length; i++)
         {
@@ -342,7 +346,7 @@ public class MaxEntModel
                 {
                     contextParameters[k - 1] = byteArray.nextDouble();
                 }
-                params[pid] = new Context(outcomePattern, contextParameters);
+                _params[pid] = new Context(outcomePattern, contextParameters);
                 pid++;
             }
         }
@@ -350,7 +354,7 @@ public class MaxEntModel
         m.prior = new UniformPrior();
         m.prior.setLabels(outcomeLabels);
         // eval
-        m.evalParams = new EvalParameters(params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
+        m.evalParams = new EvalParameters(_params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
         return m;
     }
 

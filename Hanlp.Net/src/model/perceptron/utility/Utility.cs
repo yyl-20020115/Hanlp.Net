@@ -9,7 +9,12 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.model.perceptron.utility;
 
 namespace com.hankcs.hanlp.model.perceptron.utility;
 
@@ -54,7 +59,7 @@ public class Utility
         }
     }
 
-    public static  void shuffleArray<T>(T[] ar)
+    public static void shuffleArray<T>(T[] ar)
     {
         Random rnd = new Random();
         for (int i = ar.Length - 1; i > 0; i--)
@@ -81,7 +86,7 @@ public class Utility
      * @param end
      * @ 转换过程中的IO异常
      */
-    public static void convertPKUtoCWS(string inputFolder, string outputFile, final int begin, final int end)
+    public static void convertPKUtoCWS(string inputFolder, string outputFile,  int begin,  int end)
     {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
         CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
@@ -133,9 +138,9 @@ bw.close();
      * @param end
      * @ 转换过程中的IO异常
      */
-    public static void convertPKUtoPOS(string inputFolder, string outputFile, final int begin, final int end)
+    public static void convertPKUtoPOS(string inputFolder, string outputFile, int begin, int end)
 {
-     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
     CorpusLoader.walk(inputFolder, new CorpusLoader.Handler()
                           {
                               int doc = 0;
@@ -185,10 +190,10 @@ bw.close();
     foreach (IWord iWord in sentence)
     {
         if (iWord is Word)
-                {
+        {
             s.add((Word)iWord);
         }
-                else if (isNer(iWord, nerTag))
+        else if (isNer(iWord, nerTag))
         {
             s.add(new Word(iWord.getValue(), iWord.getLabel()));
         }
@@ -233,10 +238,10 @@ return false;
 return wordArray;
     }
 
-    public static int[] evaluateCWS(string developFile, final PerceptronSegmenter segmenter)
+    public static int[] evaluateCWS(string developFile, PerceptronSegmenter segmenter)
 {
     // int goldTotal = 0, predTotal = 0, correct = 0;
-     int[] stat = new int[3];
+    int[] stat = new int[3];
     Arrays.fill(stat, 0);
     IOUtility.loadInstance(developFile, new InstanceHandler()
     {
@@ -301,11 +306,11 @@ return stat;
     public static List<string[]> convertSentenceToNER(Sentence sentence, NERTagSet tagSet)
 {
     List<string[]> collector = new LinkedList<string[]>();
-    Set<string> nerLabels = tagSet.nerLabels;
+    HashSet<string> nerLabels = tagSet.nerLabels;
     for (IWord word : sentence.wordList)
         {
     if (word is CompoundWord)
-            {
+    {
         List<Word> wordList = ((CompoundWord)word).innerList;
         Word[] words = wordList.toArray(new Word[0]);
 
@@ -327,7 +332,7 @@ return stat;
             }
         }
     }
-            else
+    else
     {
         if (nerLabels.contains(word.getLabel()))
         {
@@ -348,11 +353,11 @@ return collector;
     foreach (IWord word in sentence.wordList)
     {
         if (word is CompoundWord)
-            {
-    for (Word child : ((CompoundWord)word).innerList)
+        {
+            for (Word child : ((CompoundWord)word).innerList)
     {
-        child.setValue(CharTable.convert(child.getValue()));
-    }
+    child.setValue(CharTable.convert(child.getValue()));
+}
 }
             else
 {

@@ -60,8 +60,8 @@ public class CoreBiGramTableDictionary
             int maxWordId = CoreDictionary.trie.size();
             while ((line = br.readLine()) != null)
             {
-                string[] params = line.Split("\\s");
-                string[] twoWord = params[0].Split("@", 2);
+                string[] p = line.Split("\\s");
+                string[] twoWord = p[0].Split("@", 2);
                 string a = twoWord[0];
                 int idA = CoreDictionary.trie.exactMatchSearch(a);
                 if (idA == -1)
@@ -78,7 +78,7 @@ public class CoreBiGramTableDictionary
 //                        logger.warning(line + " 中的 " + b + "不存在于核心词典，将会忽略这一行");
                     continue;
                 }
-                int freq = int.parseInt(params[1]);
+                int freq = int.parseInt(p[1]);
                 TreeMap<int, int> biMap = map.get(idA);
                 if (biMap == null)
                 {

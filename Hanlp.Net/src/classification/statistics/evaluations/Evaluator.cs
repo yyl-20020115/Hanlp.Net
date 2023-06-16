@@ -35,8 +35,8 @@ public class Evaluator
         double time = DateTime.Now.Microsecond;
         for (Document document : testingDataSet)
         {
-            final int _out = classifier.label(document);
-            final int key = document.category;
+            int _out = classifier.label(document);
+            int key = document.category;
             ++TP_FP[_out];
             ++TP_FN[key];
             if (key == _out)

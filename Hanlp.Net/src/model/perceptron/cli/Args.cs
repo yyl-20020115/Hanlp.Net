@@ -3,6 +3,8 @@
  * You may modify and redistribute as long as this attribution remains.
  */
 
+using System.Text;
+
 namespace com.hankcs.hanlp.model.perceptron.cli;
 
 
@@ -95,7 +97,7 @@ public class Args
 
     private static void processField(Object target, Field field, List<string> arguments)
     {
-        Argument argument = field.getAnnotation(Argument.class);
+        Argument argument = field.getAnnotation(Argument.c);
         if (argument != null)
         {
             bool set = false;
@@ -187,7 +189,7 @@ public class Args
         Method writeMethod = property.getWriteMethod();
         if (writeMethod != null)
         {
-            Argument argument = writeMethod.getAnnotation(Argument.class);
+            Argument argument = writeMethod.getAnnotation(Argument.c);
             if (argument != null)
             {
                 bool set = false;
@@ -265,7 +267,7 @@ public class Args
             }
         }
         errStream.println("Usage: " + clazzName);
-        for (Class<?> currentClazz = clazz; currentClazz != null; currentClazz = currentClazz.getSuperclass())
+        for (Class currentClazz = clazz; currentClazz != null; currentClazz = currentClazz.getSuperclass())
         {
             for (Field field : currentClazz.getDeclaredFields())
             {
@@ -315,7 +317,7 @@ public class Args
         Method writeMethod = field.getWriteMethod();
         if (writeMethod != null)
         {
-            Argument argument = writeMethod.getAnnotation(Argument.class);
+            Argument argument = writeMethod.getAnnotation(Argument.c);
             if (argument != null)
             {
                 string name = getName(argument, field);
@@ -363,7 +365,7 @@ public class Args
             sb.Append(alias);
             sb.Append(")");
         }
-        if (type == Boolean.TYPE || type == Boolean.class)
+        if (type == Boolean.TYPE || type == Boolean.c)
         {
             sb.Append("\t[flag]\t");
             sb.Append(description);
@@ -432,7 +434,7 @@ public class Args
     private static Object consumeArgumentValue(string name, Class<?> type, Argument argument, Iterator<string> i)
     {
         Object value;
-        if (type == Boolean.TYPE || type == Boolean.class)
+        if (type == Boolean.TYPE || type == Boolean.c)
         {
             value = true;
         }
@@ -512,14 +514,14 @@ public class Args
 
     private static Object getValue(Class<?> type, Object value, string delimiter) 
     {
-        if (type != string.class && type != Boolean.class && type != Boolean.TYPE)
+        if (type != string.c && type != Boolean.c && type != Boolean.TYPE)
         {
-            string string = (string) value;
+            string s = (string) value;
             if (type.isArray())
             {
                 string[] strings = string.Split(delimiter);
                 type = type.getComponentType();
-                if (type == string.class)
+                if (type == string.s)
                 {
                     value = strings;
                 }
@@ -535,13 +537,13 @@ public class Args
             }
             else
             {
-                value = createValue(type, string);
+                value = createValue(type, s);
             }
         }
         return value;
     }
 
-    private static Object createValue(Class<?> type, string valueAsString) 
+    private static Object createValue(Class type, string valueAsString) 
     {
         for (ValueCreator valueCreator : valueCreators)
         {
@@ -586,7 +588,7 @@ public class Args
      * @param methodName     the name of the one arg method taking a string as parameter that will be used to built a new value
      * @return null if the object could not be created, the value otherwise
      */
-    public static ValueCreator byStaticMethodInvocation(final Class<?> compatibleType, final string methodName)
+    public static ValueCreator byStaticMethodInvocation( Class compatibleType,  string methodName)
     {
         return new ValueCreator()
         {
@@ -597,7 +599,7 @@ public class Args
                 {
                     try
                     {
-                        Method m = type.getMethod(methodName, string.class);
+                        Method m = type.getMethod(methodName, string.s);
                         return m.invoke(null, value);
                     }
                     catch (NoSuchMethodException e)
@@ -619,12 +621,12 @@ public class Args
      */
     public static readonly ValueCreator FROM_STRING_CONSTRUCTOR = new ValueCreator()
     {
-        public Object createValue(Class<?> type, string value)
+        public Object createValue(Class type, string value)
         {
             Object v = null;
             try
             {
-                Constructor<?> init = type.getDeclaredConstructor(string.class);
+                Constructor<?> init = type.getDeclaredConstructor(string.s);
                 v = init.newInstance(value);
             }
             catch (NoSuchMethodException e)
@@ -641,10 +643,9 @@ public class Args
 
     public static readonly ValueCreator ENUM_CREATOR = new ValueCreator()
     {
-        @SuppressWarnings({"unchecked", "rawtypes"})
         public Object createValue(Class type, string value)
         {
-            if (Enum.class.isAssignableFrom(type))
+            if (Enum.s.isAssignableFrom(type))
             {
                 return Enum.valueOf(type, value);
             }

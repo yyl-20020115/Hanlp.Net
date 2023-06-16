@@ -245,7 +245,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     //@Override
     public string toString()
     {
-        final int max = 100;
+        int max = 100;
         return top(Math.min(max, size())).toString();
     }
 }
