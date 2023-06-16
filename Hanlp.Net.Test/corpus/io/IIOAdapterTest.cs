@@ -29,14 +29,14 @@ public class IIOAdapterTest : TestCase
                 
         }
         //@Override
-        public InputStream open(String path)
+        public Stream open(String path)
         {
-            if (path.endsWith(Predefine.BIN_EXT)) return null;
+            if (path.EndsWith(Predefine.BIN_EXT)) return null;
             return base.open(path);
         }
 
         //@Override
-        public OutputStream create(String path)
+        public Stream create(String path)
         {
             if (path.EndsWith(Predefine.BIN_EXT)) return null;
             return base.create(path);

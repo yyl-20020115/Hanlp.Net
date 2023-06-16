@@ -36,14 +36,13 @@ public class IOUtilTest : TestCase
     [TestMethod]
     public void TestUTF8BOM() 
     {
-        File tempFile = File.createTempFile("hanlp-", ".txt");
-        tempFile.deleteOnExit();
-        IOUtil.saveTxt(tempFile.getAbsolutePath(), "\uFEFF第1行\n第2行");
-        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(tempFile.getAbsolutePath());
+        var tempFile = createTempFile("hanlp-", ".txt");
+        IOUtil.saveTxt(tempFile, "\uFEFF第1行\n第2行");
+        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(tempFile);
         int i = 1;
         foreach (String line in lineIterator)
         {
-            AssertEquals(String.format("第%d行", i++), line);
+            AssertEquals(String.Format("第{0}行", i++), line);
         }
     }
 }

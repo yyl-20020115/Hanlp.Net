@@ -8,6 +8,9 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.model;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -24,24 +27,24 @@ public class PerceptronNameGenderClassifier : PerceptronClassifier
     }
 
     public PerceptronNameGenderClassifier(LinearModel model)
+        :base(model)
     {
-        super(model);
     }
 
     public PerceptronNameGenderClassifier(string modelPath) 
+        : base(modelPath) 
     {
-        super(modelPath);
     }
 
     //@Override
     protected List<int> extractFeature(string text, FeatureMap featureMap)
     {
-        List<int> featureList = new LinkedList<int>();
+        List<int> featureList = new ();
         string givenName = extractGivenName(text);
         // 特征模板1：g[0]
-        addFeature("1" + givenName.substring(0, 1), featureMap, featureList);
+        addFeature("1" + givenName[..1], featureMap, featureList);
         // 特征模板2：g[1]
-        addFeature("2" + givenName.substring(1), featureMap, featureList);
+        addFeature("2" + givenName[1..], featureMap, featureList);
         // 特征模板3：g
 //        addFeature("3" + givenName, featureMap, featureList);
         // 偏置特征（代表标签的先验分布，当样本不均衡时有用，但此处的男女预测无用）

@@ -12,8 +12,8 @@ public class BinTrieTest : TestCase
     [TestInitialize]
     public override void SetUp()
     { 
-        tempFile = File.createTempFile("hanlp-", ".dat");
-        DATA_TEST_OUT_BIN = tempFile.getAbsolutePath();
+        tempFile = createTempFile("hanlp-", ".dat");
+        DATA_TEST_OUT_BIN = tempFile;
     }
     [TestMethod]
     public void TestParseText()

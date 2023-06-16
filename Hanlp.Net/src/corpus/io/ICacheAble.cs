@@ -23,7 +23,7 @@ public interface ICacheAble
      * @param _out
      * @throws Exception
      */
-    void save(DataOutputStream _out);
+    void save(Stream _out);
 
     /**
      * 载入

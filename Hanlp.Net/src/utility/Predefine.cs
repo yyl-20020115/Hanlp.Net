@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using Microsoft.Extensions.Logging;
+using System.Text.RegularExpressions;
+
 namespace com.hankcs.hanlp.utility;
 
 
@@ -27,7 +30,7 @@ public class Predefine
     /**
      * 浮点数正则
      */
-    public static readonly Pattern PATTERN_FLOAT_NUMBER = Pattern.compile("^(-?\\d+)(\\.\\d+)?$");
+    public static readonly Regex PATTERN_FLOAT_NUMBER = new("^(-?\\d+)(\\.\\d+)?$");
 
     public static string POSTFIX_SINGLE =
         "坝邦堡城池村单岛道堤店洞渡队峰府冈港阁宫沟国海号河湖环集江礁角街井郡坑口矿里岭楼路门盟庙弄牌派坡铺旗桥区渠泉山省市水寺塔台滩坛堂厅亭屯湾屋溪峡县线乡巷洋窑营屿园苑院闸寨站镇州庄族陂庵町";
@@ -110,7 +113,7 @@ public class Predefine
      * 日志组件
      */
     public static Logger logger = Logger.getLogger("HanLP");
-    static
+    static Predefine()
     {
         logger.setLevel(Level.WARNING);
     }

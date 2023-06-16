@@ -19,7 +19,7 @@ public class IntArrayListTest : TestCase
     public void TestSaveLoad() 
     {
         var tempFile = createTempFile("hanlp", ".intarray");
-        array.save(new DataOutputStream(new FileOutputStream(tempFile)));
+        array.save(new FileStream(tempFile,FileMode.Create));
         array.load(ByteArray.createByteArray(tempFile));
         for (int i = 0; i < 64; ++i)
         {

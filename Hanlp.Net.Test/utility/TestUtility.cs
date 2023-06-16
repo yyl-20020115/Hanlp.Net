@@ -47,18 +47,18 @@ public class TestUtility
      */
     public static String EnsureData(String name, String url, String parentPath, bool overwrite)
     {
-        File target = new File(name);
-        if (target.exists()) return target.getAbsolutePath();
+        var target =Path.Combine(Environment.CurrentDirectory, name);
+        if (File.Exists(target)) return target;
         try
         {
-            File parentFile = parentPath == null ? new File(name).getParentFile() : new File(parentPath);
-            if (!parentFile.exists()) parentFile.mkdirs();
-            String filePath = downloadFile(url, parentFile.getAbsolutePath());
-            if (filePath.endsWith(".zip"))
+            var parentFile = parentPath == null ? (name) : (parentPath);
+            if (!Directory.Exists(parentFile)) Directory.CreateDirectory(parentFile);
+            String filePath = downloadFile(url, parentFile);
+            if (filePath.EndsWith(".zip"))
             {
-                unzip(filePath, parentFile.getAbsolutePath(), overwrite);
+                unzip(filePath, parentFile, overwrite);
             }
-            return target.getAbsolutePath();
+            return target;
         }
         catch (Exception e)
         {
@@ -78,7 +78,7 @@ public class TestUtility
      */
     public static String EnsureTestData(String name, String url)
     {
-        return ensureData(String.format("data/test/%s", name), url);
+        return ensureData(String.Format("data/test/{0}", name), url);
     }
 
     /**
@@ -93,8 +93,8 @@ public class TestUtility
         
     {
         Console.Error.WriteLine("Downloading %s to %s\n", fileURL, savePath);
-        URL url = new URL(fileURL);
-        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        Uri url = new Uri(fileURL);
+        HttpURLConnection httpConn = (HttpURLConnection) url.OpenConnection();
         int responseCode = httpConn.getResponseCode();
 
         // always check HTTP response code first
@@ -108,17 +108,17 @@ public class TestUtility
             if (disposition != null)
             {
                 // extracts file name from header field
-                int index = disposition.indexOf("filename=");
+                int index = disposition.IndexOf("filename=");
                 if (index > 0)
                 {
-                    fileName = disposition.substring(index + 10,
-                                                     disposition.Length - 1);
+                    fileName = disposition[(index + 10)..
+                                                    ( disposition.Length - 1)];
                 }
             }
             else
             {
                 // extracts file name from URL
-                fileName = new File(httpConn.getURL().getPath()).getName();
+                fileName = (httpConn.getURL().getPath()).getName();
             }
 
 //            Console.WriteLine("Content-Type = " + contentType);
@@ -127,12 +127,12 @@ public class TestUtility
 //            Console.WriteLine("fileName = " + fileName);
 
             // opens input stream from the HTTP connection
-            InputStream inputStream = httpConn.getInputStream();
+            Stream inputStream = httpConn.getInputStream();
             String saveFilePath = savePath;
-            if (new File(savePath).isDirectory())
-                saveFilePath = savePath + File.separator + fileName;
+            if (Directory.Exists(savePath))
+                saveFilePath = savePath + Path.DirectorySeparatorChar + fileName;
             String realPath;
-            if (new File(saveFilePath).isFile())
+            if (File.Exists(saveFilePath))
             {
                 Console.Error.WriteLine("Use cached %s instead.\n", fileName);
                 realPath = saveFilePath;
@@ -142,17 +142,17 @@ public class TestUtility
                 saveFilePath += ".downloading";
 
                 // opens an output stream to save into file
-                FileOutputStream outputStream = new FileOutputStream(saveFilePath);
+                var outputStream = new FileStream(saveFilePath, FileMode.Create);
 
                 int bytesRead;
                 byte[] buffer = new byte[4096];
                 long start = DateTime.Now.Microsecond;
                 int progress_size = 0;
-                while ((bytesRead = inputStream.read(buffer)) != -1)
+                while ((bytesRead = inputStream.Read(buffer)) != -1)
                 {
-                    outputStream.write(buffer, 0, bytesRead);
+                    outputStream.Write(buffer, 0, bytesRead);
                     long duration = (DateTime.Now.Microsecond - start) / 1000;
-                    duration = Math.max(duration, 1);
+                    duration = Math.Max(duration, 1);
                     progress_size += bytesRead;
                     int speed = (int) (progress_size / (1024 * duration));
                     float ratio = progress_size / (float) contentLength;
@@ -164,12 +164,14 @@ public class TestUtility
                     Console.Error.WriteLine("\r%.2f%%, %d MB, %d KB/s, ETA %d min %d s", percent, progress_size / (1024 * 1024), speed, minutes, seconds);
                 }
                 Console.Error.WriteLine();
-                outputStream.close();
-                realPath = saveFilePath.substring(0, saveFilePath.Length() - ".downloading".Length());
-                if (!new File(saveFilePath).renameTo(new File(realPath)))
-                    throw new IOException("Failed to move file");
+                outputStream.Close();
+                realPath = saveFilePath[0 .. (saveFilePath.Length - ".downloading".Length)];
+                new FileInfo(saveFilePath).MoveTo((realPath));
+                //if (!)
+                //    throw new IOException("Failed to move file");
             }
-            inputStream.close();
+
+            inputStream.Close();
             httpConn.disconnect();
 
             return realPath;
@@ -184,38 +186,39 @@ public class TestUtility
     private static void Unzip(String zipFilePath, String destDir, bool overwrite)
     {
         Console.Error.WriteLine("Unzipping to " + destDir);
-        File dir = new File(destDir);
+        var dir =  (destDir);
         // create output directory if it doesn't exist
-        if (!dir.exists()) dir.mkdirs();
-        FileInputStream fis;
+        if (!Directory.Exists( dir))Directory.CreateDirectory(dir);
+        FileStream fis;
         //buffer for read and write data to file
         byte[] buffer = new byte[4096];
         try
         {
-            fis = new FileInputStream(zipFilePath);
+            fis = new FileStream(zipFilePath, FileMode.Open);
             ZipInputStream zis = new ZipInputStream(fis);
             ZipEntry ze = zis.getNextEntry();
             while (ze != null)
             {
                 String fileName = ze.getName();
-                File newFile = new File(destDir + File.separator + fileName);
-                if (overwrite || !newFile.exists())
+                var newFile = (destDir + Path.DirectorySeparatorChar + fileName);
+                if (overwrite || !File.Exists(newFile))
                 {
                     if (ze.isDirectory())
                     {
                         //create directories for sub directories in zip
-                        newFile.mkdirs();
+                        //newFile.mkdirs();
+                        Directory.CreateDirectory(newFile);
                     }
                     else
                     {
-                        new File(newFile.getParent()).mkdirs();
-                        FileOutputStream fos = new FileOutputStream(newFile);
+                        Directory.CreateDirectory(newFile.getParent());
+                        var fos = new FileStream(newFile, FileMode.Create);
                         int len;
                         while ((len = zis.read(buffer)) > 0)
                         {
-                            fos.write(buffer, 0, len);
+                            fos.Write(buffer, 0, len);
                         }
-                        fos.close();
+                        fos.Close();
                         //close this ZipEntry
                         zis.closeEntry();
                     }
@@ -225,12 +228,12 @@ public class TestUtility
             //close last ZipEntry
             zis.closeEntry();
             zis.close();
-            fis.close();
-            new File(zipFilePath).delete();
+            fis.Close();
+            File.Delete(zipFilePath);
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }

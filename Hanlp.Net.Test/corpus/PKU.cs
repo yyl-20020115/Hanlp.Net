@@ -42,7 +42,7 @@ public class PKU
             }
             try
             {
-                BufferedWriter bw = IOUtil.newBufferedWriter(PKU199801_TRAIN);
+                var bw = IOUtil.newBufferedWriter(PKU199801_TRAIN);
                 foreach (String line in all.subList(0, (int) (all.size() * 0.9)))
                 {
                     bw.write(line);

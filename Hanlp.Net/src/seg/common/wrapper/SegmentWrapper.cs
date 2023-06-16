@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.seg.common.wrapper;
 
 
@@ -20,7 +22,7 @@ namespace com.hankcs.hanlp.seg.common.wrapper;
  */
 public class SegmentWrapper
 {
-    BufferedReader br;
+    TextReader br;
     Segment segment;
     /**
      * 因为next是单个term出去的，所以在这里做一个记录
@@ -31,7 +33,7 @@ public class SegmentWrapper
      */
     int index;
 
-    public SegmentWrapper(BufferedReader br, Segment segment)
+    public SegmentWrapper(TextReader br, Segment segment)
     {
         this.br = br;
         this.segment = segment;
@@ -42,7 +44,7 @@ public class SegmentWrapper
      *
      * @param br
      */
-    public void reset(BufferedReader br)
+    public void reset(TextReader br)
     {
         this.br = br;
         termArray = null;
@@ -51,17 +53,17 @@ public class SegmentWrapper
 
     public Term next() 
     {
-        if (termArray != null && index < termArray.length) return termArray[index++];
-        string line = br.readLine();
+        if (termArray != null && index < termArray.Length) return termArray[index++];
+        string line = br.ReadLine();
         while (TextUtility.isBlank(line))
         {
             if (line == null) return null;
-            line = br.readLine();
+            line = br.ReadLine();
         }
 
         List<Term> termList = segment.seg(line);
-        if (termList.size() == 0) return null;
-        termArray = termList.toArray(new Term[0]);
+        if (termList.Count == 0) return null;
+        termArray = termList.ToArray();
         index = 0;
 
         return termArray[index++];

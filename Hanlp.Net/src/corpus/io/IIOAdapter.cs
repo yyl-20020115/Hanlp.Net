@@ -26,7 +26,7 @@ public interface IIOAdapter
      * @return 一个输入流
      * @ 任何可能的IO异常
      */
-    InputStream open(string path) ;
+    Stream open(string path) ;
 
     /**
      * 创建一个新文件以供输出
@@ -34,5 +34,5 @@ public interface IIOAdapter
      * @return 一个输出流
      * @ 任何可能的IO异常
      */
-    OutputStream create(string path) ;
+    Stream create(string path) ;
 }

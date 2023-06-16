@@ -62,8 +62,8 @@ public class SegmentTest : TestCase
     public void TestExtendViterbi() 
     {
         HanLP.Config.enableDebug(false);
-        String path = System.getProperty("user.dir") + "/" + "data/dictionary/custom/CustomDictionary.txt;" +
-            System.getProperty("user.dir") + "/" + "data/dictionary/custom/全国地名大全.txt";
+        String path = Environment.GetEnvironmentVariable("user.dir") + "/" + "data/dictionary/custom/CustomDictionary.txt;" +
+            Environment.GetEnvironmentVariable("user.dir") + "/" + "data/dictionary/custom/全国地名大全.txt";
         path = path.Replace("\\", "/");
         String text = "一半天帕克斯曼是走不出丁字桥镇的";
         Segment segment = HanLP.newSegment().enableCustomDictionary(false);
@@ -121,7 +121,7 @@ public class SegmentTest : TestCase
 
     public void TestWrapper() 
     {
-        SegmentWrapper wrapper = new SegmentWrapper(new BufferedReader(new StringReader("中科院预测科学研究中心学术委员会\nhaha")), tokenizer.StandardTokenizer.SEGMENT);
+        SegmentWrapper wrapper = new SegmentWrapper(new StringReader("中科院预测科学研究中心学术委员会\nhaha"), tokenizer.StandardTokenizer.SEGMENT);
         Term fullTerm;
         while ((fullTerm = wrapper.next()) != null)
         {

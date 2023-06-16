@@ -28,7 +28,7 @@ public class Utf8CharacterMappingTest : TestCase
                     if (bytes1[start] != arr[j])
                     {
                         Console.WriteLine("error: " + start + "," + j);
-                        System.exit(-1);
+                        Environment.Exit(-1);
                     }
                 }
             }

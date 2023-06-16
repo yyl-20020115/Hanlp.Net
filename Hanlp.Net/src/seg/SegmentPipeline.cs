@@ -9,8 +9,10 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.tokenizer.pipe;
+using System.Collections;
 
 namespace com.hankcs.hanlp.seg;
 
@@ -19,7 +21,7 @@ namespace com.hankcs.hanlp.seg;
 /**
  * @author hankcs
  */
-public class SegmentPipeline : Segment , Pipe<string, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
+public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
 {
     Pipe<string, List<IWord>> first;
     Pipe<List<IWord>, List<Term>> last;
@@ -31,40 +33,41 @@ public class SegmentPipeline : Segment , Pipe<string, List<Term>>, List<Pipe<Lis
         this.last = last;
         pipeList = new List<Pipe<List<IWord>, List<IWord>>>();
     }
-
-    public SegmentPipeline(Segment _delegate)
+    public class Pipe1 : Pipe<string, List<IWord>>
     {
-        this(new Pipe<string, List<IWord>>()
-             {
-                 //@Override
-                 public List<IWord> flow(string input)
-                 {
-                     List<IWord> task = new LinkedList<IWord>();
-                     task.add(new Word(input, null));
-                     return task;
-                 }
-             },
-             new Pipe<List<IWord>, List<Term>>()
-             {
-                 //@Override
-                 public List<Term> flow(List<IWord> input)
-                 {
-                     List<Term> output = new ArrayList<Term>(input.size());
-                     for (IWord word : input)
-                     {
-                         if (word.getLabel() == null)
-                         {
-                             output.addAll(delegate.seg(word.getValue()));
-                         }
-                         else
-                         {
-                             output.add(new Term(word.getValue(), Nature.create(word.getLabel())));
-                         }
-                     }
-                     return output;
-                 }
-             });
-        config = delegate.config;
+        //@Override
+        public List<IWord> flow(string input)
+        {
+            List<IWord> task = new();
+            task.Add(new Word(input, null));
+            return task;
+        }
+    }
+    public class Pipe2 : Pipe<List<IWord>, List<Term>>
+    {
+        //@Override
+        public List<Term> flow(List<IWord> input)
+        {
+            List<Term> output = new (input.Count);
+            foreach (IWord word in input)
+            {
+                if (word.getLabel() == null)
+                {
+                    output.AddRange(_delegate.seg(word.getValue()));
+                }
+                else
+                {
+                    output.Add(new Term(word.getValue(), Nature.create(word.getLabel())));
+                }
+            }
+            return output;
+        }
+    }
+    public SegmentPipeline(Segment _delegate)
+        : this(new Pipe1(), new Pipe2())
+    {
+        ;
+        config =_delegate.config;
     }
 
 
@@ -110,7 +113,7 @@ public class SegmentPipeline : Segment , Pipe<string, List<Term>>, List<Pipe<Lis
     }
 
     //@Override
-    public Iterator<Pipe<List<IWord>, List<IWord>>> iterator()
+    public IEnumerator<Pipe<List<IWord>, List<IWord>>> iterator()
     {
         return pipeList.iterator();
     }
@@ -118,19 +121,19 @@ public class SegmentPipeline : Segment , Pipe<string, List<Term>>, List<Pipe<Lis
     //@Override
     public Object[] toArray()
     {
-        return pipeList.toArray();
+        return pipeList.ToArray();
     }
 
     //@Override
-    public <T> T[] toArray(T[] a)
+    public  T[] toArray<T>(T[] a)
     {
-        return pipeList.toArray(a);
+        return pipeList.ToArray(a);
     }
 
     //@Override
     public bool add(Pipe<List<IWord>, List<IWord>> pipe)
     {
-        return pipeList.add(pipe);
+        return pipeList.Add(pipe);
     }
 
     //@Override
@@ -140,31 +143,31 @@ public class SegmentPipeline : Segment , Pipe<string, List<Term>>, List<Pipe<Lis
     }
 
     //@Override
-    public bool containsAll(Collection<?> c)
+    public bool containsAll(ICollection c)
     {
         return pipeList.containsAll(c);
     }
 
     //@Override
-    public bool addAll(Collection<? : Pipe<List<IWord>, List<IWord>>> c)
+    public bool addAll(ICollection<? : Pipe<List<IWord>, List<IWord>>> c)
     {
         return pipeList.addAll(c);
     }
 
     //@Override
-    public bool addAll(int index, Collection<? : Pipe<List<IWord>, List<IWord>>> c)
+    public bool addAll(int index, ICollection<Pipe<List<IWord>, List<IWord>>> c)
     {
         return pipeList.addAll(c);
     }
 
     //@Override
-    public bool removeAll(Collection<?> c)
+    public bool removeAll(ICollection<?> c)
     {
         return pipeList.removeAll(c);
     }
 
     //@Override
-    public bool retainAll(Collection<?> c)
+    public bool retainAll(ICollection<?> c)
     {
         return pipeList.retainAll(c);
     }
@@ -230,7 +233,7 @@ public class SegmentPipeline : Segment , Pipe<string, List<Term>>, List<Pipe<Lis
     }
 
     //@Override
-    public ListIterator<Pipe<List<IWord>, List<IWord>>> listIterator(int index)
+    public IEnumerator<Pipe<List<IWord>, List<IWord>>> listIterator(int index)
     {
         return pipeList.listIterator(index);
     }

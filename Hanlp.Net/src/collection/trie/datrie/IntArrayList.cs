@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
 
@@ -12,7 +14,7 @@ public class IntArrayList : Serializable, ICacheAble
     /**
      * 实际size
      */
-    private int size;
+    private int _size;
     /**
      * 线性递增
      */
@@ -51,19 +53,21 @@ public class IntArrayList : Serializable, ICacheAble
     }
 
     public IntArrayList()
+        : this(1024)
     {
-        this(1024);
+        ;
     }
 
     public IntArrayList(int capacity)
+        : this(capacity, 10240)
     {
-        this(capacity, 10240);
+        ;
     }
 
     public IntArrayList(int capacity, int linearExpandFactor)
     {
         this.data = new int[capacity];
-        this.size = 0;
+        this._size = 0;
         this.linearExpandFactor = linearExpandFactor;
     }
 
@@ -71,14 +75,14 @@ public class IntArrayList : Serializable, ICacheAble
     {
         if (!exponentialExpanding)
         {
-            int[] newData = new int[this.data.length + this.linearExpandFactor];
-            System.arraycopy(this.data, 0, newData, 0, this.data.length);
+            int[] newData = new int[this.data.Length + this.linearExpandFactor];
+            System.arraycopy(this.data, 0, newData, 0, this.data.Length);
             this.data = newData;
         }
         else
         {
-            int[] newData = new int[(int) (this.data.length * exponentialExpandFactor)];
-            System.arraycopy(this.data, 0, newData, 0, this.data.length);
+            int[] newData = new int[(int) (this.data.Length * exponentialExpandFactor)];
+            System.arraycopy(this.data, 0, newData, 0, this.data.Length);
             this.data = newData;
         }
     }
@@ -90,12 +94,12 @@ public class IntArrayList : Serializable, ICacheAble
      */
     public void Append(int element)
     {
-        if (this.size == this.data.length)
+        if (this._size == this.data.Length)
         {
             expand();
         }
-        this.data[this.size] = element;
-        this.size += 1;
+        this.data[this._size] = element;
+        this._size += 1;
     }
 
     /**
@@ -103,18 +107,18 @@ public class IntArrayList : Serializable, ICacheAble
      */
     public void loseWeight()
     {
-        if (size == data.length)
+        if (_size == data.Length)
         {
             return;
         }
-        int[] newData = new int[size];
+        int[] newData = new int[_size];
         System.arraycopy(this.data, 0, newData, 0, size);
         this.data = newData;
     }
 
     public int size()
     {
-        return this.size;
+        return this._size;
     }
 
     public int getLinearExpandFactor()
@@ -134,29 +138,29 @@ public class IntArrayList : Serializable, ICacheAble
 
     public void removeLast()
     {
-        --size;
+        --_size;
     }
 
     public int getLast()
     {
-        return data[size - 1];
+        return data[_size - 1];
     }
 
     public void setLast(int value)
     {
-        data[size - 1] = value;
+        data[_size - 1] = value;
     }
 
     public int pop()
     {
-        return data[--size];
+        return data[--_size];
     }
 
     //@Override
-    public void save(DataOutputStream _out) 
+    public void save(Stream _out) 
     {
         _out.writeInt(size);
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < _size; i++)
         {
             _out.writeInt(data[i]);
         }
@@ -172,9 +176,9 @@ public class IntArrayList : Serializable, ICacheAble
         {
             return false;
         }
-        size = byteArray.nextInt();
-        data = new int[size];
-        for (int i = 0; i < size; i++)
+        _size = byteArray.nextInt();
+        data = new int[_size];
+        for (int i = 0; i < _size; i++)
         {
             data[i] = byteArray.nextInt();
         }
@@ -184,7 +188,7 @@ public class IntArrayList : Serializable, ICacheAble
         return true;
     }
 
-    private void writeObject(ObjectOutputStream _out) 
+    private void writeObject(Stream _out) 
     {
         loseWeight();
         _out.writeInt(size);
@@ -194,23 +198,23 @@ public class IntArrayList : Serializable, ICacheAble
         _out.writeDouble(exponentialExpandFactor);
     }
 
-    private void readObject(ObjectInputStream in) , ClassNotFoundException
+    private void readObject(Stream _in)
     {
-        size = in.readInt();
-        data = (int[]) in.readObject();
-        linearExpandFactor = in.readInt();
-        exponentialExpanding = in.readBoolean();
-        exponentialExpandFactor = in.readDouble();
+        _size = _in.readInt();
+        data = (int[])_in.readObject();
+        linearExpandFactor = _in.readInt();
+        exponentialExpanding = _in.readBoolean();
+        exponentialExpandFactor = _in.readDouble();
     }
 
     //@Override
-    public string toString()
+    public string ToString()
     {
-        ArrayList<int> head = new ArrayList<int>(20);
-        for (int i = 0; i < Math.min(size, 20); ++i)
+        var head = new List<int>(20);
+        for (int i = 0; i < Math.Min(_size, 20); ++i)
         {
-            head.add(data[i]);
+            head.Add(data[i]);
         }
-        return head.toString();
+        return head.ToString();
     }
 }

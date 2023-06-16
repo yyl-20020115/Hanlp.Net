@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
 
@@ -22,10 +24,10 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
 
     public void TestSaveLoad() 
     {
-        File tempFile = File.createTempFile("hanlp", ".mdat");
-        mdat.save(new DataOutputStream(new FileOutputStream(tempFile)));
+        var tempFile = createTempFile("hanlp", ".mdat");
+        mdat.save((new FileStream(tempFile,FileMode.Create)));
         mdat = new MutableDoubleArrayTrieInteger();
-        mdat.load(ByteArray.createByteArray(tempFile.getAbsolutePath()));
+        mdat.load(ByteArray.createByteArray(tempFile));
         AssertEquals(size, mdat.size());
         for (int i = 0; i < size; ++i)
         { 

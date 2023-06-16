@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.classification.tokenizers;
 using com.hankcs.hanlp.corpus.io;
 
 namespace com.hankcs.hanlp.collection.trie.datrie;
@@ -8,7 +9,7 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
 /**
  * 可变双数组trie树，重构自：https://github.com/fancyerii/DoubleArrayTrie
  */
-public class MutableDoubleArrayTrieInteger : Serializable, Iterable<MutableDoubleArrayTrieInteger.KeyValuePair>, ICacheAble
+public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDoubleArrayTrieInteger.KeyValuePair>, ICacheAble
 {
     private static readonly long serialVersionUID = 5586394930559218802L;
     /**

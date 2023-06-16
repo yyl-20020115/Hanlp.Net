@@ -1,4 +1,5 @@
 using com.hankcs.hanlp.utility;
+using System.Text;
 
 namespace com.hankcs.hanlp.corpus.io;
 
@@ -20,11 +21,11 @@ public class ByteArrayTest : TestCase
 
     public void TestReadDouble() 
     {
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        var _out = new FileStream(DATA_TEST_OUT_BIN, FileMode.Create);
         double d = 0.123456789;
-        _out.writeDouble(d);
+        _out.Write(BitConverter.GetBytes(d));
         int i = 3389;
-        _out.writeInt(i);
+        _out.Write(BitConverter.GetBytes(i));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         AssertEquals(d, byteArray.nextDouble());
         AssertEquals(i, byteArray.nextInt());
@@ -33,9 +34,9 @@ public class ByteArrayTest : TestCase
 
     public void TestReadUTF() 
     {
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        var _out = (new FileStream(DATA_TEST_OUT_BIN, FileMode.Create));
         String utf = "hankcs你好123";
-        _out.writeUTF(utf);
+        _out.Write(Encoding.UTF8.GetBytes(utf));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         AssertEquals(utf, byteArray.nextUTF());
     }
@@ -43,10 +44,10 @@ public class ByteArrayTest : TestCase
 
     public void TestReadUnsignedShort() 
     {
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        var _out = (new FileStream(DATA_TEST_OUT_BIN,FileMode.Create));
         int utflen = 123;
-        _out.writeByte((byte) ((utflen >>> 8) & 0xFF));
-        _out.writeByte((byte) ((utflen >>> 0) & 0xFF));
+        _out.WriteByte((byte) ((utflen >>> 8) & 0xFF));
+        _out.WriteByte((byte) ((utflen >>> 0) & 0xFF));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         AssertEquals(utflen, byteArray.nextUnsignedShort());
     }
@@ -69,11 +70,11 @@ public class ByteArrayTest : TestCase
         DataOutputStream _out = new DataOutputStream(new FileOutputStream(tempFile));
         _out.writeBoolean(true);
         _out.writeBoolean(false);
-        ByteArray byteArray = ByteArray.createByteArray(tempFile.getAbsolutePath());
+        ByteArray byteArray = ByteArray.createByteArray(tempFile);
         AssertNotNull(byteArray);
         AssertEquals(byteArray.nextBoolean(), true);
         AssertEquals(byteArray.nextBoolean(), false);
-        tempFile.deleteOnExit();
+        //tempFile.deleteOnExit();
     }
     [TestMethod]
 

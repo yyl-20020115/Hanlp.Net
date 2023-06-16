@@ -20,14 +20,14 @@ namespace com.hankcs.hanlp.corpus.io;
 public class FileIOAdapter : IIOAdapter
 {
     //@Override
-    public InputStream open(string path)
+    public Stream open(string path)
     {
-        return new FileInputStream(path);
+        return new FileStream(path, FileMode.Open);
     }
 
     //@Override
-    public OutputStream create(string path) 
+    public Stream create(string path) 
     {
-        return new FileOutputStream(path);
+        return new FileStream(path,FileMode.OpenOrCreate);
     }
 }
