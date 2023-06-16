@@ -178,7 +178,7 @@ public class State
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder("State{");
+        var sb = new StringBuilder("State{");
         sb.Append("depth=").Append(depth);
         sb.Append(", emits=").Append(emits);
         sb.Append(", success=").Append(success.Keys);

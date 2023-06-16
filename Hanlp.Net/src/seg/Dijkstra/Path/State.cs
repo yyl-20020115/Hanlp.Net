@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.seg.Dijkstra.Path;
 /**
  * @author hankcs
  */
-public class State : Comparable<State>
+public class State : IComparable<State>
 {
     /**
      * 路径花费
@@ -26,7 +26,7 @@ public class State : Comparable<State>
     public int vertex;
 
     //@Override
-    public int compareTo(State o)
+    public int CompareTo(State o)
     {
         return Double.compare(cost, o.cost);
     }

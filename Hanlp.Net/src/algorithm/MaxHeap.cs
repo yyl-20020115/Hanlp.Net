@@ -70,9 +70,9 @@ public class MaxHeap<E> : IEnumerable<E>
      * 添加许多元素
      * @param collection
      */
-    public MaxHeap<E> addAll(Collection<E> collection)
+    public MaxHeap<E> addAll(ICollection<E> collection)
     {
-        for (E e : collection)
+        foreach(var e in collection)
         {
             add(e);
         }
@@ -89,14 +89,14 @@ public class MaxHeap<E> : IEnumerable<E>
         var list = new List<E>(queue.size());
         while (!queue.isEmpty())
         {
-            list.add(0, queue.poll());
+            list.Insert(0, queue.poll());
         }
 
         return list;
     }
 
     //@Override
-    public Iterator<E> iterator()
+    public IEnumerator<E> iterator()
     {
         return queue.iterator();
     }

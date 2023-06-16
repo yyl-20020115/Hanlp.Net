@@ -9,7 +9,6 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-using com.hankcs.hanlp.algorithm.ahocorasick.trie;
 using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.algorithm;
@@ -28,22 +27,22 @@ public class Dijkstra
         Vertex[] vertexes = graph.getVertexes();
         List<EdgeFrom>[] edgesTo = graph.getEdgesTo();
         double[] d = new double[vertexes.Length];
-        Arrays.fill(d, double.MaxValue);
+        Array.Fill(d, double.MaxValue);
         d[^1] = 0;
         int[] path = new int[vertexes.Length];
-        Arrays.fill(path, -1);
-        PriorityQueue<State> que = new PriorityQueue<State>();
-        que.add(new State(0, vertexes.Length - 1));
-        while (!que.isEmpty())
+        Array.Fill(path, -1);
+        var que = new Queue< com.hankcs.hanlp.seg.Dijkstra.Path.State>();
+        que.Enqueue(new (0,vertexes.Length - 1));
+        while (que.Count>0)
         {
-            State p = que.poll();
+            var p = que.Dequeue();
             if (d[p.vertex] < p.cost) continue;
             foreach (EdgeFrom edgeFrom in edgesTo[p.vertex])
             {
                 if (d[edgeFrom.from] > d[p.vertex] + edgeFrom.weight)
                 {
                     d[edgeFrom.from] = d[p.vertex] + edgeFrom.weight;
-                    que.add(new State(d[edgeFrom.from], edgeFrom.from));
+                    que.Enqueue(new (d[edgeFrom.from], edgeFrom.from));
                     path[edgeFrom.from] = p.vertex;
                 }
             }

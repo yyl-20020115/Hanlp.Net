@@ -24,10 +24,10 @@ public class ArrayTool
      * @param node 要查找的node
      * @return 数组下标，小于0表示没找到
      */
-    public static int binarySearch(BaseNode[] branches, BaseNode node)
+    public static int binarySearch<E>(BaseNode<E>[] branches, BaseNode<E> node)
     {
-        int high = branches.length - 1;
-        if (branches.length < 1)
+        int high = branches.Length - 1;
+        if (branches.Length < 1)
         {
             return high;
         }
@@ -35,7 +35,7 @@ public class ArrayTool
         while (low <= high)
         {
             int mid = (low + high) >>> 1;
-            int cmp = branches[mid].compareTo(node);
+            int cmp = branches[mid].CompareTo(node);
 
             if (cmp < 0)
                 low = mid + 1;
@@ -47,10 +47,10 @@ public class ArrayTool
         return -(low + 1);
     }
 
-    public static int binarySearch(BaseNode[] branches, char node)
+    public static int binarySearch<E>(BaseNode<E>[] branches, char node)
     {
-        int high = branches.length - 1;
-        if (branches.length < 1)
+        int high = branches.Length - 1;
+        if (branches.Length < 1)
         {
             return high;
         }
@@ -58,7 +58,7 @@ public class ArrayTool
         while (low <= high)
         {
             int mid = (low + high) >>> 1;
-            int cmp = branches[mid].compareTo(node);
+            int cmp = branches[mid].CompareTo(node);
 
             if (cmp < 0)
                 low = mid + 1;

@@ -84,16 +84,16 @@ public class EditDistance
     {
         int m = arrayA.Length;
         int n = arrayB.Length;
-        if (m == 0 || n == 0) return int.MAX_VALUE / 3;
+        if (m == 0 || n == 0) return int.MaxValue / 3;
 
-        int[][] d = new int[m + 1][n + 1];
+        var d = new int[m + 1,n + 1];
         for (int j = 0; j <= n; ++j)
         {
-            d[0][j] = j;
+            d[0,j] = j;
         }
         for (int i = 0; i <= m; ++i)
         {
-            d[i][0] = i;
+            d[i,0] = i;
         }
 
         for (int i = 1; i <= m; ++i)
@@ -104,7 +104,7 @@ public class EditDistance
                 int cj = arrayB[j - 1];
                 if (ci == cj)
                 {
-                    d[i][j] = d[i - 1][j - 1];
+                    d[i,j] = d[i - 1,j - 1];
                 }
 //                else if (i > 1 && j > 1 && ci == arrayA[j - 2] && cj == arrayB[i - 2])
 //                {
@@ -114,12 +114,12 @@ public class EditDistance
                 else
                 {
                     // 等号右边的分别代表 将ci改成cj                                    错串加cj         错串删ci
-                    d[i][j] = Math.min(d[i - 1][j - 1] + Math.abs(ci - cj), Math.min(d[i][j - 1] + cj, d[i - 1][j] + ci));
+                    d[i,j] = Math.Min(d[i - 1,j - 1] + Math.Abs(ci - cj), Math.Min(d[i,j - 1] + cj, d[i - 1,j] + ci));
                 }
             }
         }
 
-        return d[m][n];
+        return d[m,n];
     }
 
     /**
@@ -143,43 +143,43 @@ public class EditDistance
      */
     public static int ed(string wrongWord, string rightWord)
     {
-        int m = wrongWord.length();
-        int n = rightWord.length();
+        int m = wrongWord.Length;
+        int n = rightWord.Length;
 
-        int[][] d = new int[m + 1][n + 1];
+        int[,] d = new int[m + 1,n + 1];
         for (int j = 0; j <= n; ++j)
         {
-            d[0][j] = j;
+            d[0,j] = j;
         }
         for (int i = 0; i <= m; ++i)
         {
-            d[i][0] = i;
+            d[i,0] = i;
         }
 
         for (int i = 1; i <= m; ++i)
         {
-            char ci = wrongWord.charAt(i - 1);
+            char ci = wrongWord[(i - 1)];
             for (int j = 1; j <= n; ++j)
             {
-                char cj = rightWord.charAt(j - 1);
+                char cj = rightWord[(j - 1)];
                 if (ci == cj)
                 {
-                    d[i][j] = d[i - 1][j - 1];
+                    d[i,j] = d[i - 1,j - 1];
                 }
-                else if (i > 1 && j > 1 && ci == rightWord.charAt(j - 2) && cj == wrongWord.charAt(i - 2))
+                else if (i > 1 && j > 1 && ci == rightWord[(j - 2)] && cj == wrongWord[(i - 2)])
                 {
                     // 交错相等
-                    d[i][j] = 1 + Math.min(d[i - 2][j - 2], Math.min(d[i][j - 1], d[i - 1][j]));
+                    d[i,j] = 1 + Math.Min(d[i - 2,j - 2], Math.Min(d[i,j - 1], d[i - 1,j]));
                 }
                 else
                 {
                     // 等号右边的分别代表 将ci改成cj                   错串加cj         错串删ci
-                    d[i][j] = Math.min(d[i - 1][j - 1] + 1, Math.min(d[i][j - 1] + 1, d[i - 1][j] + 1));
+                    d[i,j] = Math.Min(d[i - 1,j - 1] + 1, Math.Min(d[i,j - 1] + 1, d[i - 1,j] + 1));
                 }
             }
         }
 
-        return d[m][n];
+        return d[m,n];
     }
 
     /**
@@ -212,21 +212,21 @@ public class EditDistance
                 char cj = rightWord[j - 1];
                 if (ci == cj)
                 {
-                    d[i][j] = d[i - 1][j - 1];
+                    d[i,j] = d[i - 1,j - 1];
                 }
                 else if (i > 1 && j > 1 && ci == rightWord[j - 2] && cj == wrongWord[i - 2])
                 {
                     // 交错相等
-                    d[i][j] = 1 + Math.Min(d[i - 2][j - 2], Math.Min(d[i][j - 1], d[i - 1][j]));
+                    d[i,j] = 1 + Math.Min(d[i - 2,j - 2], Math.Min(d[i,j - 1], d[i - 1,j]));
                 }
                 else
                 {
                     // 等号右边的分别代表 将ci改成cj                   错串加cj         错串删ci
-                    d[i][j] = Math.Min(d[i - 1][j - 1] + 1, Math.Min(d[i][j - 1] + 1, d[i - 1][j] + 1));
+                    d[i,j] = Math.Min(d[i - 1,j - 1] + 1, Math.Min(d[i,j - 1] + 1, d[i - 1,j] + 1));
                 }
             }
         }
 
-        return d[m][n];
+        return d[m,n];
     }
 }

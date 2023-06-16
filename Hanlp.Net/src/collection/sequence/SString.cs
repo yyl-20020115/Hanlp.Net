@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.collection.sequence;
  *
  * @author hankcs
  */
-public class SString : Comparable<SString>, CharSequence
+public class SString : IComparable<SString>
 {
     public char[] value;
     /**
@@ -47,11 +47,11 @@ public class SString : Comparable<SString>, CharSequence
     {
         value = s.ToCharArray();
         b = 0;
-        e = s.length();
+        e = s.Length;
     }
 
     //@Override
-    public bool equals(Object anObject)
+    public override bool Equals(Object? anObject)
     {
         if (this == anObject)
         {
@@ -60,11 +60,11 @@ public class SString : Comparable<SString>, CharSequence
         if (anObject is SString)
         {
             SString anotherString = (SString) anObject;
-            int n = value.length;
-            if (n == anotherString.value.length)
+            int n = value.Length;
+            if (n == anotherString.value.Length)
             {
-                char v1[] = value;
-                char v2[] = anotherString.value;
+                char[] v1 = value;
+                char[] v2 = anotherString.value;
                 int i = 0;
                 while (n-- != 0)
                 {
@@ -91,13 +91,13 @@ public class SString : Comparable<SString>, CharSequence
     }
 
     //@Override
-    public CharSequence subSequence(int start, int end)
+    public SString subSequence(int start, int end)
     {
         return new SString(value, b + start, b + end);
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return new string(value, b, e - b);
     }
@@ -105,11 +105,11 @@ public class SString : Comparable<SString>, CharSequence
     //@Override
     public int compareTo(SString anotherString)
     {
-        int len1 = value.length;
-        int len2 = anotherString.value.length;
-        int lim = Math.min(len1, len2);
-        char v1[] = value;
-        char v2[] = anotherString.value;
+        int len1 = value.Length;
+        int len2 = anotherString.value.Length;
+        int lim = Math.Min(len1, len2);
+        char []v1 = value;
+        char []v2 = anotherString.value;
 
         int k = 0;
         while (k < lim)

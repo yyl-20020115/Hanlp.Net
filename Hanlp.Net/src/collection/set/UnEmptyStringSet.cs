@@ -16,13 +16,13 @@ namespace com.hankcs.hanlp.collection.set;
  * 一个不接受空白的字符串set
  * @author hankcs
  */
-public class UnEmptyStringSet : TreeSet<string>
+public class UnEmptyStringSet : HashSet<string>
 {
     //@Override
-    public bool add(string s)
+    public bool Add(string s)
     {
-        if (s.trim().length() == 0) return false;
+        if (s.Trim().Length == 0) return false;
 
-        return super.add(s);
+        return base.Add(s);
     }
 }

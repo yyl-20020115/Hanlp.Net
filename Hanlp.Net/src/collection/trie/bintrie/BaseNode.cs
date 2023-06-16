@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.corpus.io;
 using System.Text;
 
@@ -22,7 +23,7 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  * @param <V> 值
  * @author He Han
  */
-public abstract class BaseNode<V> : IComparable<BaseNode>
+public abstract class BaseNode<V> : IComparable<BaseNode<V>>
 {
     /**
      * 状态数组，方便读取的时候用
@@ -59,7 +60,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
     public BaseNode<V> transition(char[] path, int begin)
     {
         BaseNode<V> cur = this;
-        for (int i = begin; i < path.length; ++i)
+        for (int i = begin; i < path.Length; ++i)
         {
             cur = cur.getChild(path[i]);
             if (cur == null || cur.status == Status.UNDEFINED_0) return null;
@@ -85,7 +86,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
      *
      * @return true-新增了节点 false-修改了现有节点
      */
-    protected abstract bool addChild(BaseNode node);
+    protected abstract bool addChild<E>(BaseNode<E> node);
 
     /**
      * 是否含有子节点
@@ -109,7 +110,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
      * @param c 子节点的char
      * @return 子节点
      */
-    public abstract BaseNode getChild(char c);
+    public abstract BaseNode<V> getChild(char c);
 
     /**
      * 获取节点对应的值
@@ -132,9 +133,9 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
     }
 
     //@Override
-    public int compareTo(BaseNode other)
+    public int CompareTo(BaseNode<V> other)
     {
-        return compareTo(other.getChar());
+        return CompareTo(other.getChar());
     }
 
     /**
@@ -142,7 +143,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
      * @param other
      * @return
      */
-    public int compareTo(char other)
+    public int CompareTo(char other)
     {
         if (this.c > other)
         {
@@ -169,17 +170,17 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
         sb.Append(c);
         if (status == Status.WORD_MIDDLE_2 || status == Status.WORD_END_3)
         {
-            entrySet.add(new TrieEntry(sb.toString(), value));
+            entrySet.Add(new TrieEntry(sb.ToString(), value));
         }
         if (child == null) return;
-        for (BaseNode node : child)
+        foreach (BaseNode<V> node in child)
         {
             if (node == null) continue;
-            node.walk(new StringBuilder(sb.toString()), entrySet);
+            node.walk(new StringBuilder(sb.ToString()), entrySet);
         }
     }
 
-    protected void walkToSave(DataOutputStream _out) 
+    protected void walkToSave(Stream _out) 
     {
         _out.writeChar(c);
         _out.writeInt(status.ordinal());
@@ -237,7 +238,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
             value = (V) byteArray.readObject();
         }
         int childSize = byteArray.readInt();
-        child = new BaseNode[childSize];
+        child = new BaseNode<V>[childSize];
         for (int i = 0; i < childSize; ++i)
         {
             child[i] = new Node<V>();
@@ -280,21 +281,17 @@ public abstract class BaseNode<V> : IComparable<BaseNode>
     }
 
     //@Override
-    public string toString()
-    {
-        if (child == null)
-        {
-            return "BaseNode{" + 
+    public override string ToString() 
+        => child == null
+            ? "BaseNode{" +
                      "status=" + status +
                      ", c=" + c +
                      ", value=" + value +
-                    '}';
-        }
-        return "BaseNode{" +
+                    '}'
+            : "BaseNode{" +
                 "child=" + child.Length +
                 ", status=" + status +
                 ", c=" + c +
                 ", value=" + value +
                 '}';
-    }
 }
