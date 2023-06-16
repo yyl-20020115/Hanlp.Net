@@ -289,7 +289,7 @@ public class SimpleMDAGNode : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeChar(letter);
         _out.writeByte(isAcceptNode ? 1 : 0);

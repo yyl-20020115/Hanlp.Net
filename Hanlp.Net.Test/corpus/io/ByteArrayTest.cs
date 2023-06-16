@@ -67,9 +67,11 @@ public class ByteArrayTest : TestCase
 
     public void TestNextBoolean()
     {
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(tempFile));
-        _out.writeBoolean(true);
-        _out.writeBoolean(false);
+        var fs = new FileStream(tempFile, FileMode.Create);
+        var _out = new BinaryWriter(fs);
+        _out.Write(true);
+        _out.Write(false);
+        fs.Close();
         ByteArray byteArray = ByteArray.createByteArray(tempFile);
         AssertNotNull(byteArray);
         AssertEquals(byteArray.nextBoolean(), true);
@@ -80,13 +82,16 @@ public class ByteArrayTest : TestCase
 
     public void TestWriteAndRead()
     {
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
-        _out.writeChar('H');
-        _out.writeChar('e');
-        _out.writeChar('l');
-        _out.writeChar('l');
-        _out.writeChar('o');
-        _out.close();
+        var fs = new FileStream(DATA_TEST_OUT_BIN, FileMode.Create);
+        var _out = new BinaryWriter(fs);
+        _out.Write('H');
+        _out.Write('e');
+        _out.Write('l');
+        _out.Write('l');
+        _out.Write('o');
+        _out.Close();
+        fs.Close();
+
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         while (byteArray.hasMore())
         {
@@ -98,12 +103,14 @@ public class ByteArrayTest : TestCase
 
     public void TestWriteBigFile() 
     {
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        var fs = new FileStream(DATA_TEST_OUT_BIN, FileMode.Create);
+        var _out = new BinaryWriter(fs);
         for (int i = 0; i < 10000; i++)
         {
-            _out.writeInt(i);
+            _out.Write(i);
         }
-        _out.close();
+        _out.Close();
+        fs.Close();
     }
     [TestMethod]
 

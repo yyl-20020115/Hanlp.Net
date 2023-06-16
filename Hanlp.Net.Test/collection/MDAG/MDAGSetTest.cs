@@ -126,9 +126,9 @@ public class MDAGSetTest : TestCase
 
     public void TestSaveAndLoad() 
     {
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(DATA_TEST_OUT_BIN));
+        var _out = new FileStream(DATA_TEST_OUT_BIN,FileMode.Create);
         mdagSet.save(_out);
-        _out.close();
+        _out.Close();
 
         mdagSet = new MDAGSet();
         mdagSet.load(ByteArray.createByteArray(DATA_TEST_OUT_BIN));

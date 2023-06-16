@@ -11,7 +11,4 @@
  */
 namespace com.hankcs.hanlp.classification.tokenizers
 {
-    public interface Serializable
-    {
-    }
 }

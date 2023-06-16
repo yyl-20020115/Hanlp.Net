@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
@@ -19,18 +21,18 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
 public class LockableFeatureMap : ImmutableFeatureMDatMap
 {
     public LockableFeatureMap(TagSet tagSet)
+        :base(tagSet)
     {
-        super(tagSet);
     }
 
     //@Override
-    public int idOf(string string)
+    public int idOf(string s)
     {
-        int id = super.idOf(string); // 查询id
+        int id = base.idOf(s); // 查询id
         if (id == -1 && mutable) // 如果不存在该key且处于可写状态
         {
             id = dat.size();
-            dat.put(string, id); // 则为key分配新id
+            dat.put(s, id); // 则为key分配新id
         }
         return id;
     }

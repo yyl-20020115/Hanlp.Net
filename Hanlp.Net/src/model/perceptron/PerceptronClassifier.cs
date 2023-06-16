@@ -26,7 +26,7 @@ namespace com.hankcs.hanlp.model.perceptron;
  */
 public abstract class PerceptronClassifier
 {
-    LinearModel model;
+    public LinearModel model;
 
     public PerceptronClassifier()
     {
@@ -35,7 +35,7 @@ public abstract class PerceptronClassifier
     public PerceptronClassifier(LinearModel model)
     {
         if (model != null && model.taskType() != TaskType.CLASSIFICATION)
-            throw new IllegalArgumentException("传入的模型并非分类模型");
+            throw new ArgumentException("传入的模型并非分类模型");
         this.model = model;
     }
 
@@ -199,7 +199,7 @@ public abstract class PerceptronClassifier
             if (y == 0)
                 y = -1; // 感知机标签约定为±1
             else if (y > 1)
-                throw new IllegalArgumentException("类别数大于2，目前只支持二分类。");
+                throw new ArgumentException("类别数大于2，目前只支持二分类。");
             instanceList.Add(new Instance(x, y));
         }
         return instanceList.ToArray();

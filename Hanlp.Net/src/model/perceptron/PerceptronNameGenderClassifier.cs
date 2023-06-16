@@ -60,10 +60,10 @@ public class PerceptronNameGenderClassifier : PerceptronClassifier
      */
     public static string extractGivenName(string name)
     {
-        if (name.length() <= 2)
-            return "_" + name.substring(name.length() - 1);
+        if (name.Length <= 2)
+            return "_" + name.Substring(name.Length - 1);
         else
-            return name.substring(name.length() - 2);
+            return name.Substring(name.Length - 2);
 
     }
 }

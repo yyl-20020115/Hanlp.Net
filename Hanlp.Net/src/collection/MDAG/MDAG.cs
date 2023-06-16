@@ -65,7 +65,7 @@ public class MDAG : ICacheAble
     /**
      * 字母表
      */
-    protected HashSet<Character> charTreeSet = new HashSet<Character>();
+    protected HashSet<char> charTreeSet = new HashSet<char>();
 
     //An int denoting the total number of transitions between the nodes of the MDAG
     /**
@@ -74,11 +74,11 @@ public class MDAG : ICacheAble
     protected int transitionCount;
 
     //@Override
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         simplify();
         _out.writeInt(charTreeSet.size());
-        foreach (Character character in charTreeSet)
+        foreach (var character in charTreeSet)
         {
             _out.writeChar(character);
         }

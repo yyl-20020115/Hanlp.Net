@@ -53,16 +53,16 @@ public class TestUtility
         {
             var parentFile = parentPath == null ? (name) : (parentPath);
             if (!Directory.Exists(parentFile)) Directory.CreateDirectory(parentFile);
-            String filePath = downloadFile(url, parentFile);
+            String filePath = DownloadFile(url, parentFile);
             if (filePath.EndsWith(".zip"))
             {
-                unzip(filePath, parentFile, overwrite);
+                Unzip(filePath, parentFile, overwrite);
             }
             return target;
         }
         catch (Exception e)
         {
-            Console.Error.WriteLine("数据下载失败，请尝试手动下载 %s 到 %s 。原因如下：\n", url, target.getAbsolutePath());
+            Console.Error.WriteLine("数据下载失败，请尝试手动下载 %s 到 %s 。原因如下：\n", url, target);
             //e.printStackTrace();
             Environment.Exit(1);
             return null;
@@ -78,7 +78,7 @@ public class TestUtility
      */
     public static String EnsureTestData(String name, String url)
     {
-        return ensureData(String.Format("data/test/{0}", name), url);
+        return EnsureData(String.Format("data/test/{0}", name), url);
     }
 
     /**
@@ -89,151 +89,151 @@ public class TestUtility
      * @
      * @author www.codejava.net
      */
-    public static String DownloadFile(String fileURL, String savePath)
-        
+    public static String DownloadFile(String fileURL, String savePath)        
     {
-        Console.Error.WriteLine("Downloading %s to %s\n", fileURL, savePath);
-        Uri url = new Uri(fileURL);
-        HttpURLConnection httpConn = (HttpURLConnection) url.OpenConnection();
-        int responseCode = httpConn.getResponseCode();
+        return "";
+//        Console.Error.WriteLine("Downloading %s to %s\n", fileURL, savePath);
+//        Uri url = new Uri(fileURL);
+//        HttpURLConnection httpConn = (HttpURLConnection) url.OpenConnection();
+//        int responseCode = httpConn.getResponseCode();
 
-        // always check HTTP response code first
-        if (responseCode == HttpURLConnection.HTTP_OK)
-        {
-            String fileName = "";
-            String disposition = httpConn.getHeaderField("Content-Disposition");
-            String contentType = httpConn.getContentType();
-            int contentLength = httpConn.getContentLength();
+//        // always check HTTP response code first
+//        if (responseCode == HttpURLConnection.HTTP_OK)
+//        {
+//            String fileName = "";
+//            String disposition = httpConn.getHeaderField("Content-Disposition");
+//            String contentType = httpConn.getContentType();
+//            int contentLength = httpConn.getContentLength();
 
-            if (disposition != null)
-            {
-                // extracts file name from header field
-                int index = disposition.IndexOf("filename=");
-                if (index > 0)
-                {
-                    fileName = disposition[(index + 10)..
-                                                    ( disposition.Length - 1)];
-                }
-            }
-            else
-            {
-                // extracts file name from URL
-                fileName = (httpConn.getURL().getPath()).getName();
-            }
+//            if (disposition != null)
+//            {
+//                // extracts file name from header field
+//                int index = disposition.IndexOf("filename=");
+//                if (index > 0)
+//                {
+//                    fileName = disposition[(index + 10)..
+//                                                    ( disposition.Length - 1)];
+//                }
+//            }
+//            else
+//            {
+//                // extracts file name from URL
+//                fileName = (httpConn.getURL().getPath()).getName();
+//            }
 
-//            Console.WriteLine("Content-Type = " + contentType);
-//            Console.WriteLine("Content-Disposition = " + disposition);
-//            Console.WriteLine("Content-Length = " + contentLength);
-//            Console.WriteLine("fileName = " + fileName);
+////            Console.WriteLine("Content-Type = " + contentType);
+////            Console.WriteLine("Content-Disposition = " + disposition);
+////            Console.WriteLine("Content-Length = " + contentLength);
+////            Console.WriteLine("fileName = " + fileName);
 
-            // opens input stream from the HTTP connection
-            Stream inputStream = httpConn.getInputStream();
-            String saveFilePath = savePath;
-            if (Directory.Exists(savePath))
-                saveFilePath = savePath + Path.DirectorySeparatorChar + fileName;
-            String realPath;
-            if (File.Exists(saveFilePath))
-            {
-                Console.Error.WriteLine("Use cached %s instead.\n", fileName);
-                realPath = saveFilePath;
-            }
-            else
-            {
-                saveFilePath += ".downloading";
+//            // opens input stream from the HTTP connection
+//            Stream inputStream = httpConn.getInputStream();
+//            String saveFilePath = savePath;
+//            if (Directory.Exists(savePath))
+//                saveFilePath = savePath + Path.DirectorySeparatorChar + fileName;
+//            String realPath;
+//            if (File.Exists(saveFilePath))
+//            {
+//                Console.Error.WriteLine("Use cached %s instead.\n", fileName);
+//                realPath = saveFilePath;
+//            }
+//            else
+//            {
+//                saveFilePath += ".downloading";
 
-                // opens an output stream to save into file
-                var outputStream = new FileStream(saveFilePath, FileMode.Create);
+//                // opens an output stream to save into file
+//                var outputStream = new FileStream(saveFilePath, FileMode.Create);
 
-                int bytesRead;
-                byte[] buffer = new byte[4096];
-                long start = DateTime.Now.Microsecond;
-                int progress_size = 0;
-                while ((bytesRead = inputStream.Read(buffer)) != -1)
-                {
-                    outputStream.Write(buffer, 0, bytesRead);
-                    long duration = (DateTime.Now.Microsecond - start) / 1000;
-                    duration = Math.Max(duration, 1);
-                    progress_size += bytesRead;
-                    int speed = (int) (progress_size / (1024 * duration));
-                    float ratio = progress_size / (float) contentLength;
-                    float percent = ratio * 100;
-                    int eta = (int) (duration / ratio * (1 - ratio));
-                    int minutes = eta / 60;
-                    int seconds = eta % 60;
+//                int bytesRead;
+//                byte[] buffer = new byte[4096];
+//                long start = DateTime.Now.Microsecond;
+//                int progress_size = 0;
+//                while ((bytesRead = inputStream.Read(buffer)) != -1)
+//                {
+//                    outputStream.Write(buffer, 0, bytesRead);
+//                    long duration = (DateTime.Now.Microsecond - start) / 1000;
+//                    duration = Math.Max(duration, 1);
+//                    progress_size += bytesRead;
+//                    int speed = (int) (progress_size / (1024 * duration));
+//                    float ratio = progress_size / (float) contentLength;
+//                    float percent = ratio * 100;
+//                    int eta = (int) (duration / ratio * (1 - ratio));
+//                    int minutes = eta / 60;
+//                    int seconds = eta % 60;
 
-                    Console.Error.WriteLine("\r%.2f%%, %d MB, %d KB/s, ETA %d min %d s", percent, progress_size / (1024 * 1024), speed, minutes, seconds);
-                }
-                Console.Error.WriteLine();
-                outputStream.Close();
-                realPath = saveFilePath[0 .. (saveFilePath.Length - ".downloading".Length)];
-                new FileInfo(saveFilePath).MoveTo((realPath));
-                //if (!)
-                //    throw new IOException("Failed to move file");
-            }
+//                    Console.Error.WriteLine("\r%.2f%%, %d MB, %d KB/s, ETA %d min %d s", percent, progress_size / (1024 * 1024), speed, minutes, seconds);
+//                }
+//                Console.Error.WriteLine();
+//                outputStream.Close();
+//                realPath = saveFilePath[0 .. (saveFilePath.Length - ".downloading".Length)];
+//                new FileInfo(saveFilePath).MoveTo((realPath));
+//                //if (!)
+//                //    throw new IOException("Failed to move file");
+//            }
 
-            inputStream.Close();
-            httpConn.disconnect();
+//            inputStream.Close();
+//            httpConn.disconnect();
 
-            return realPath;
-        }
-        else
-        {
-            httpConn.disconnect();
-            throw new IOException("No file to download. Server replied HTTP code: " + responseCode);
-        }
+//            return realPath;
+//        }
+//        else
+//        {
+//            httpConn.disconnect();
+//            throw new IOException("No file to download. Server replied HTTP code: " + responseCode);
+//        }
     }
 
     private static void Unzip(String zipFilePath, String destDir, bool overwrite)
     {
-        Console.Error.WriteLine("Unzipping to " + destDir);
-        var dir =  (destDir);
-        // create output directory if it doesn't exist
-        if (!Directory.Exists( dir))Directory.CreateDirectory(dir);
-        FileStream fis;
-        //buffer for read and write data to file
-        byte[] buffer = new byte[4096];
-        try
-        {
-            fis = new FileStream(zipFilePath, FileMode.Open);
-            ZipInputStream zis = new ZipInputStream(fis);
-            ZipEntry ze = zis.getNextEntry();
-            while (ze != null)
-            {
-                String fileName = ze.getName();
-                var newFile = (destDir + Path.DirectorySeparatorChar + fileName);
-                if (overwrite || !File.Exists(newFile))
-                {
-                    if (ze.isDirectory())
-                    {
-                        //create directories for sub directories in zip
-                        //newFile.mkdirs();
-                        Directory.CreateDirectory(newFile);
-                    }
-                    else
-                    {
-                        Directory.CreateDirectory(newFile.getParent());
-                        var fos = new FileStream(newFile, FileMode.Create);
-                        int len;
-                        while ((len = zis.read(buffer)) > 0)
-                        {
-                            fos.Write(buffer, 0, len);
-                        }
-                        fos.Close();
-                        //close this ZipEntry
-                        zis.closeEntry();
-                    }
-                }
-                ze = zis.getNextEntry();
-            }
-            //close last ZipEntry
-            zis.closeEntry();
-            zis.close();
-            fis.Close();
-            File.Delete(zipFilePath);
-        }
-        catch (IOException e)
-        {
-            //e.printStackTrace();
-        }
+        //Console.Error.WriteLine("Unzipping to " + destDir);
+        //var dir =  (destDir);
+        //// create output directory if it doesn't exist
+        //if (!Directory.Exists( dir))Directory.CreateDirectory(dir);
+        //FileStream fis;
+        ////buffer for read and write data to file
+        //byte[] buffer = new byte[4096];
+        //try
+        //{
+        //    fis = new FileStream(zipFilePath, FileMode.Open);
+        //    ZipInputStream zis = new ZipInputStream(fis);
+        //    ZipEntry ze = zis.getNextEntry();
+        //    while (ze != null)
+        //    {
+        //        String fileName = ze.getName();
+        //        var newFile = (destDir + Path.DirectorySeparatorChar + fileName);
+        //        if (overwrite || !File.Exists(newFile))
+        //        {
+        //            if (ze.isDirectory())
+        //            {
+        //                //create directories for sub directories in zip
+        //                //newFile.mkdirs();
+        //                Directory.CreateDirectory(newFile);
+        //            }
+        //            else
+        //            {
+        //                Directory.CreateDirectory(Path.GetDirectoryName(newFile));
+        //                var fos = new FileStream(newFile, FileMode.Create);
+        //                int len;
+        //                while ((len = zis.read(buffer)) > 0)
+        //                {
+        //                    fos.Write(buffer, 0, len);
+        //                }
+        //                fos.Close();
+        //                //close this ZipEntry
+        //                zis.closeEntry();
+        //            }
+        //        }
+        //        ze = zis.getNextEntry();
+        //    }
+        //    //close last ZipEntry
+        //    zis.closeEntry();
+        //    zis.close();
+        //    fis.Close();
+        //    File.Delete(zipFilePath);
+        //}
+        //catch (IOException e)
+        //{
+        //    //e.printStackTrace();
+        //}
     }
 }

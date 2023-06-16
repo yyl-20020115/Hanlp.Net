@@ -51,7 +51,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
         this.mutable = mutable;
     }
 
-    public abstract Set<KeyValuePair<string, int>> entrySet();
+    public abstract HashSet<KeyValuePair<string, int>> entrySet();
 
     public FeatureMap(bool mutable)
     {
@@ -64,7 +64,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out) 
+    public void save(Stream _out) 
     {
         tagSet.save(_out);
         _out.writeInt(size());
@@ -105,5 +105,10 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
                 break;
         }
         tagSet.load(byteArray);
+    }
+
+    public int idOf(string s)
+    {
+        throw new NotImplementedException();
     }
 }

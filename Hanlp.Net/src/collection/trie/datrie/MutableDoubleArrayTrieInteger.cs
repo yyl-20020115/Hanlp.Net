@@ -1,5 +1,8 @@
 using com.hankcs.hanlp.classification.tokenizers;
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.corpus.io;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
@@ -9,14 +12,14 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
 /**
  * 可变双数组trie树，重构自：https://github.com/fancyerii/DoubleArrayTrie
  */
-public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDoubleArrayTrieInteger.KeyValuePair>, ICacheAble
+public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValuePair<string, int>>, ICacheAble
 {
     private static readonly long serialVersionUID = 5586394930559218802L;
     /**
      * 0x40000000
      */
     private static readonly int LEAF_BIT = 1073741824;
-    private static readonly int[] EMPTY_WALK_STATE = {-1, -1};
+    private static readonly int[] EMPTY_WALK_STATE = { -1, -1 };
     CharacterMapping charMap;
     /**
      * 字符串的终止字符（会在传入的字符串末尾添加该字符）
@@ -34,16 +37,17 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
     private int size;
 
     public MutableDoubleArrayTrieInteger(Dictionary<string, int> stringIntegerMap)
+        : this(stringIntegerMap.ToHashSet())
     {
-        this(stringIntegerMap.entrySet());
+        ;
     }
 
-    public MutableDoubleArrayTrieInteger(Set<KeyValuePair<string, int>> entrySet)
+    public MutableDoubleArrayTrieInteger(HashSet<KeyValuePair<string, int>> entrySet)
+        : this()
     {
-        this();
-        for (KeyValuePair<string, int> entry : entrySet)
+        foreach (KeyValuePair<string, int> entry in entrySet)
         {
-            put(entry.getKey(), entry.getValue());
+            put(entry.Key, entry.Value);
         }
     }
 
@@ -52,7 +56,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
      *
      * @param exponentialExpanding
      */
-    public void setExponentialExpanding(bool exponentialExpanding)
+    public override void setExponentialExpanding(bool exponentialExpanding)
     {
         check.setExponentialExpanding(exponentialExpanding);
         base.setExponentialExpanding(exponentialExpanding);
@@ -63,7 +67,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
      *
      * @param exponentialExpandFactor
      */
-    public void setExponentialExpandFactor(double exponentialExpandFactor)
+    public override void setExponentialExpandFactor(double exponentialExpandFactor)
     {
         check.setExponentialExpandFactor(exponentialExpandFactor);
         base.setExponentialExpandFactor(exponentialExpandFactor);
@@ -74,15 +78,16 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
      *
      * @param linearExpandFactor
      */
-    public void setLinearExpandFactor(int linearExpandFactor)
+    public override void setLinearExpandFactor(int linearExpandFactor)
     {
         check.setLinearExpandFactor(linearExpandFactor);
         base.setLinearExpandFactor(linearExpandFactor);
     }
 
     public MutableDoubleArrayTrieInteger()
+        : this(new Utf8CharacterMapping())
     {
-        this(new Utf8CharacterMapping());
+        ;
     }
 
     public MutableDoubleArrayTrieInteger(CharacterMapping charMap)
@@ -93,13 +98,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
 
     public void clear()
     {
-        this.base = new IntArrayList(this.charMap.getInitSize());
+        this._base = new IntArrayList(this.charMap.getInitSize());
         this.check = new IntArrayList(this.charMap.getInitSize());
 
-        this.base.Append(0);
+        this._base.Append(0);
         this.check.Append(0);
 
-        this.base.Append(1);
+        this._base.Append(1);
         this.check.Append(0);
         expandArray(this.charMap.getInitSize());
     }
@@ -151,12 +156,12 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
 
     public int getBaseArraySize()
     {
-        return this.base.size();
+        return this._base.size();
     }
 
     private int getBase(int index)
     {
-        return this.base.get(index);
+        return this._base.get(index);
     }
 
     private int getCheck(int index)
@@ -166,7 +171,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
 
     private void setBase(int index, int value)
     {
-        this.base.set(index, value);
+        this._base.set(index, value);
     }
 
     private void setCheck(int index, int value)
@@ -191,16 +196,16 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
             index = -getCheck(index);
         }
         int oldSize = getBaseArraySize();
-        expandArray(oldSize + this.base.getLinearExpandFactor());
+        expandArray(oldSize + this._base.getLinearExpandFactor());
         return oldSize;
     }
 
     private void addFreeLink(int index)
     {
-        this.check.set(index, this.check.get(-this.base.get(0)));
-        this.check.set(-this.base.get(0), -index);
-        this.base.set(index, this.base.get(0));
-        this.base.set(0, -index);
+        this.check.set(index, this.check.get(-this._base.get(0)));
+        this.check.set(-this._base.get(0), -index);
+        this._base.set(index, this._base.get(0));
+        this._base.set(0, -index);
     }
 
     /**
@@ -210,8 +215,8 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
      */
     private void deleteFreeLink(int index)
     {
-        this.base.set(-this.check.get(index), this.base.get(index));
-        this.check.set(-this.base.get(index), this.check.get(index));
+        this._base.set(-this.check.get(index), this._base.get(index));
+        this.check.set(-this._base.get(index), this.check.get(index));
     }
 
     /**
@@ -232,7 +237,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
         }
         for (int i = curSize; i <= maxSize; ++i)
         {
-            this.base.Append(0);
+            this._base.Append(0);
             this.check.Append(0);
             addFreeLink(i);
         }
@@ -248,7 +253,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
      */
     public bool insert(string key, int value, bool overwrite)
     {
-        if ((null == key) || key.length() == 0 || (key.indexOf(UNUSED_CHAR) != -1))
+        if ((null == key) || key.Length == 0 || (key.indexOf(UNUSED_CHAR) != -1))
         {
             return false;
         }
@@ -264,7 +269,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
         int fromState = 1; // 根节点的index为1
         int toState = 1;
         int index = 0;
-        while (index < ids.length)
+        while (index < ids.Length)
         {
             int c = ids[index];
             toState = getBase(fromState) + c; // to = base[from] + c
@@ -275,7 +280,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
                 deleteFreeLink(toState);
 
                 setCheck(toState, fromState); // check[to] = from
-                if (index == ids.length - 1)  // Leaf
+                if (index == ids.Length - 1)  // Leaf
                 {
                     ++this.size;
                     setBase(toState, value);  // base[to] = value
@@ -318,7 +323,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
             {
                 int base = current - minChild;
                 bool ok = true;
-                for (Iterator<int> it = children.iterator(); it.hasNext(); ) // 检查是否每个子节点的位置都空闲（“连续”区间）
+                for (Iterator<int> it = children.iterator(); it.hasNext();) // 检查是否每个子节点的位置都空闲（“连续”区间）
                 {
                     int to = base + it.next();
                     if (to >= getBaseArraySize())
@@ -408,12 +413,12 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
      */
     public int size()
     {
-        return this.size;
+        return this._size;
     }
 
     public bool isEmpty()
     {
-        return size == 0;
+        return _size == 0;
     }
 
     /**
@@ -460,24 +465,24 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
     public List<string> prefixMatch(string prefix)
     {
         int curState = 1;
-        IntArrayList bytes = new IntArrayList(prefix.length() * 4);
-        for (int i = 0; i < prefix.length(); i++)
+        IntArrayList bytes = new IntArrayList(prefix.Length * 4);
+        for (int i = 0; i < prefix.Length; i++)
         {
-            int codePoint = prefix.charAt(i);
+            int codePoint = prefix[i];
             if (curState < 1)
             {
-                return Collections.emptyList();
+                return new();
             }
             if ((curState != 1) && (isEmpty(curState)))
             {
-                return Collections.emptyList();
+                return new();
             }
             int[] ids = this.charMap.toIdList(codePoint);
             if (ids.length == 0)
             {
                 return Collections.emptyList();
             }
-            for (int j = 0; j < ids.length; j++)
+            for (int j = 0; j < ids.Length; j++)
             {
                 int c = ids[j];
                 if ((getBase(curState) + c < getBaseArraySize())
@@ -488,12 +493,12 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
                 }
                 else
                 {
-                    return Collections.emptyList();
+                    return new();
                 }
             }
 
         }
-        List<string> result = new ArrayList<string>();
+        List<string> result = new();
         recursiveAddSubTree(curState, result, bytes);
 
         return result;
@@ -506,19 +511,19 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
             byte[] array = new byte[bytes.size()];
             for (int i = 0; i < bytes.size(); i++)
             {
-                array[i] = (byte) bytes.get(i);
+                array[i] = (byte)bytes.get(i);
             }
             result.add(new string(array, Utf8CharacterMapping.UTF_8));
         }
-        int base = getBase(curState);
+        int _base = getBase(curState);
         for (int c = 0; c < charMap.getCharsetSize(); c++)
         {
             if (c == UNUSED_CHAR_VALUE) continue;
-            int check = getCheck(base + c);
-            if (base + c < getBaseArraySize() && check == curState)
+            int check = getCheck(_base + c);
+            if (_base + c < getBaseArraySize() && check == curState)
             {
                 bytes.Append(c);
-                recursiveAddSubTree(base + c, result, bytes);
+                recursiveAddSubTree(_base + c, result, bytes);
                 bytes.removeLast();
             }
         }
@@ -531,18 +536,18 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
      * @param start
      * @return (最长长度，对应的值)
      */
-    public int[] findLongest(CharSequence query, int start)
+    public int[] findLongest(string query, int start)
     {
-        if ((query == null) || (start >= query.length()))
+        if ((query == null) || (start >= query.Length))
         {
-            return new int[]{0, -1};
+            return new int[] { 0, -1 };
         }
         int state = 1;
         int maxLength = 0;
         int lastVal = -1;
-        for (int i = start; i < query.length(); i++)
+        for (int i = start; i < query.Length; i++)
         {
-            int[] res = transferValues(state, query.charAt(i));
+            int[] res = transferValues(state, query[i]);
             if (res[0] == -1)
             {
                 break;
@@ -554,20 +559,20 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
                 lastVal = res[1];
             }
         }
-        return new int[]{maxLength, lastVal};
+        return new int[] { maxLength, lastVal };
     }
 
     public int[] findWithSupplementary(string query, int start)
     {
-        if ((query == null) || (start >= query.length()))
+        if ((query == null) || (start >= query.Length))
         {
-            return new int[]{0, -1};
+            return new int[] { 0, -1 };
         }
         int curState = 1;
         int maxLength = 0;
         int lastVal = -1;
         int charCount = 1;
-        for (int i = start; i < query.length(); i += charCount)
+        for (int i = start; i < query.Length; i += charCount)
         {
             int codePoint = query.codePointAt(i);
             charCount = char.charCount(codePoint);
@@ -583,20 +588,20 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
                 lastVal = res[1];
             }
         }
-        return new int[]{maxLength, lastVal};
+        return new int[] { maxLength, lastVal };
 
     }
 
     public List<int[]> findAllWithSupplementary(string query, int start)
     {
         List<int[]> ret = new ArrayList<int[]>(5);
-        if ((query == null) || (start >= query.length()))
+        if ((query == null) || (start >= query.Length))
         {
             return ret;
         }
         int curState = 1;
         int charCount = 1;
-        for (int i = start; i < query.length(); i += charCount)
+        for (int i = start; i < query.Length; i += charCount)
         {
             int codePoint = query.codePointAt(i);
             charCount = char.charCount(codePoint);
@@ -608,7 +613,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
             curState = res[0];
             if (res[1] != -1)
             {
-                ret.add(new int[]{i - start + 1, res[1]});
+                ret.add(new int[] { i - start + 1, res[1] });
             }
         }
         return ret;
@@ -624,14 +629,14 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
     public List<int[]> commonPrefixSearch(string query, int start)
     {
         List<int[]> ret = new ArrayList<int[]>(5);
-        if ((query == null) || (start >= query.length()))
+        if ((query == null) || (start >= query.Length))
         {
             return ret;
         }
         int curState = 1;
-        for (int i = start; i < query.length(); i++)
+        for (int i = start; i < query.Length; i++)
         {
-            int[] res = transferValues(curState, query.charAt(i));
+            int[] res = transferValues(curState, query[i]);
             if (res[0] == -1)
             {
                 break;
@@ -639,7 +644,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
             curState = res[0];
             if (res[1] != -1)
             {
-                ret.add(new int[]{i - start + 1, res[1]});
+                ret.add(new int[] { i - start + 1, res[1] });
             }
         }
         return ret;
@@ -684,9 +689,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
         {
             int value = getLeafValue(getBase(getBase(state)
                                                  + UNUSED_CHAR_VALUE));
-            return new int[]{state, value};
+            return new int[] { state, value };
         }
-        return new int[]{state, -1};
+        return new int[] { state, -1 };
     }
 
     /**
@@ -788,7 +793,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
     public int get(string key, int start)
     {
         assert key != null;
-        assert 0 <= start && start <= key.length();
+        assert 0 <= start && start <= key.Length;
         int state = 1;
         int[] ids = charMap.toIdList(key.substring(start));
         state = transfer(state, ids);
@@ -937,116 +942,118 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
         return LEAF_BIT - 1;
     }
 
-    public Set<KeyValuePair<string, int>> entrySet()
+    public HashSet<KeyValuePair<string, int>> entrySet()
     {
-        return new Set<KeyValuePair<string, int>>()
-        {
-            //@Override
-            public int size()
-            {
-                return MutableDoubleArrayTrieInteger.this.size;
-            }
-
-            //@Override
-            public bool isEmpty()
-            {
-                return MutableDoubleArrayTrieInteger.this.isEmpty();
-            }
-
-            //@Override
-            public bool contains(Object o)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public Iterator<KeyValuePair<string, int>> iterator()
-            {
-                return new Iterator<KeyValuePair<string, int>>()
-                {
-                    KeyValuePair iterator = MutableDoubleArrayTrieInteger.this.iterator();
-
-                    //@Override
-                    public bool hasNext()
-                    {
-                        return iterator.hasNext();
-                    }
-
-                    //@Override
-                    public void remove()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    //@Override
-                    public KeyValuePair<string, int> next()
-                    {
-                        iterator.next();
-                        return new AbstractMap.SimpleEntry<string, int>(iterator.key, iterator.value);
-                    }
-                };
-            }
-
-            //@Override
-            public Object[] toArray()
-            {
-                ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(size);
-                for (KeyValuePair<string, int> entry : this)
-                {
-                    entries.add(entry);
-                }
-                return entries.toArray();
-            }
-
-            //@Override
-            public <T> T[] toArray(T[] a)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool add(KeyValuePair<string, int> stringIntegerEntry)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool remove(Object o)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool containsAll(Collection<?> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool addAll(Collection<? : KeyValuePair<string, int>> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool retainAll(Collection<?> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool removeAll(Collection<?> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public void clear()
-            {
-                throw new UnsupportedOperationException();
-            }
-        };
+        return new ST();
     }
+    public class ST : HashSet<KeyValuePair<string, int>>
+    {
+        //@Override
+        public int size()
+        {
+            return MutableDoubleArrayTrieInteger.size;
+        }
+
+        //@Override
+        public bool isEmpty()
+        {
+            return MutableDoubleArrayTrieInteger.isEmpty();
+        }
+
+        //@Override
+        public bool contains(Object o)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public Iterator<KeyValuePair<string, int>> iterator()
+        {
+            return new SI();
+        }
+        public class SI : IEnumerator<KeyValuePair<string, int>>
+        {
+            KeyValuePair iterator = MutableDoubleArrayTrieInteger.iterator();
+
+            //@Override
+            public bool hasNext()
+            {
+                return iterator.hasNext();
+            }
+
+            //@Override
+            public void remove()
+            {
+                throw new UnsupportedOperationException();
+            }
+
+            //@Override
+            public KeyValuePair<string, int> next()
+            {
+                iterator.next();
+                return new AbstractMap.SimpleEntry<string, int>(iterator.key, iterator.value);
+            }
+        }
+        //@Override
+        public Object[] toArray()
+        {
+            var entries = new List<KeyValuePair<string, int>>(size);
+            foreach (KeyValuePair<string, int> entry in this)
+            {
+                entries.Add(entry);
+            }
+            return entries.toArray();
+        }
+
+        //@Override
+        public T[] toArray<T>(T[] a)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public bool add(KeyValuePair<string, int> stringIntegerEntry)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public bool remove(Object o)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public bool containsAll(Collection<?> c)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public bool addAll(Collection<? : KeyValuePair<string, int>> c)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public bool retainAll(Collection<?> c)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public bool removeAll(Collection<?> c)
+        {
+            throw new UnsupportedOperationException();
+        }
+
+        //@Override
+        public void clear()
+        {
+            throw new UnsupportedOperationException();
+        }
+    }
+
 
     //@Override
     public KeyValuePair iterator()
@@ -1059,55 +1066,58 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
         return get(key) != -1;
     }
 
-    public Set<string> keySet()
+    public HashSet<string> keySet()
     {
-        return new Set<string>()
+        return new HS();
+    }
+
+    public class HS : HashSet<string>
+    {
+        //@Override
+        public int size()
         {
+            return MutableDoubleArrayTrieInteger.size;
+        }
+
+        //@Override
+        public bool isEmpty()
+        {
+            return MutableDoubleArrayTrieInteger.isEmpty();
+        }
+
+        //@Override
+        public bool contains(Object o)
+        {
+            return MutableDoubleArrayTrieInteger.containsKey((string)o);
+        }
+
+        //@Override
+        public IEnumerator<string> iterator()
+        {
+            return new SX();
+        }
+
+        public class SX : IEnumerator<string>
+        {
+            KeyValuePair iterator = MutableDoubleArrayTrieInteger.iterator();
+
             //@Override
-            public int size()
+            public void remove()
             {
-                return MutableDoubleArrayTrieInteger.this.size;
+                throw new UnsupportedOperationException();
             }
 
             //@Override
-            public bool isEmpty()
+            public bool hasNext()
             {
-                return MutableDoubleArrayTrieInteger.this.isEmpty();
+                return iterator.hasNext();
             }
 
             //@Override
-            public bool contains(Object o)
+            public string next()
             {
-                return MutableDoubleArrayTrieInteger.this.containsKey((string) o);
+                return iterator.next().key;
             }
-
-            //@Override
-            public Iterator<string> iterator()
-            {
-                return new Iterator<string>()
-                {
-                    KeyValuePair iterator = MutableDoubleArrayTrieInteger.this.iterator();
-
-                    //@Override
-                    public void remove()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    //@Override
-                    public bool hasNext()
-                    {
-                        return iterator.hasNext();
-                    }
-
-                    //@Override
-                    public string next()
-                    {
-                        return iterator.next().key;
-                    }
-                };
-            }
-
             //@Override
             public Object[] toArray()
             {
@@ -1115,7 +1125,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
             }
 
             //@Override
-            public <T> T[] toArray(T[] a)
+            public T[] toArray<T>(T[] a)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1161,11 +1171,12 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
             {
                 throw new UnsupportedOperationException();
             }
-        };
+        }
     }
 
+
     //@Override
-    public void save(DataOutputStream _out) 
+    public void save(Stream _out)
     {
         if (!(charMap is Utf8CharacterMapping))
         {
@@ -1185,32 +1196,32 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
         return true;
     }
 
-    private void writeObject(ObjectOutputStream _out) 
+    private void writeObject(ObjectOutputStream _out)
     {
         _out.writeInt(size);
         _out.writeObject(base);
         _out.writeObject(check);
     }
 
-    private void readObject(ObjectInputStream in) , ClassNotFoundException
+    private void readObject(ObjectInputStream _in)
     {
-        size = in.readInt();
-        base = (IntArrayList) in.readObject();
-        check = (IntArrayList) in.readObject();
+        size = _in.readInt();
+        _base = (IntArrayList)_in.readObject();
+        check = (IntArrayList)_in.readObject();
         charMap = new Utf8CharacterMapping();
     }
 
-//    /**
-//     * 遍历时无法删除
-//     *
-//     * @return
-//     */
-//    public DATIterator iterator()
-//    {
-//        return new KeyValuePair();
-//    }
+    //    /**
+    //     * 遍历时无法删除
+    //     *
+    //     * @return
+    //     */
+    //    public DATIterator iterator()
+    //    {
+    //        return new KeyValuePair();
+    //    }
 
-    public class KeyValuePair : Iterator<KeyValuePair>
+    public class KeyValuePair : IEnumerable<KeyValuePair>
     {
         /**
          * 储存(index, charPoint)
@@ -1312,8 +1323,8 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
                 while (path.size() > 0)
                 {
                     int charPoint = path.pop();
-                    int base = path.getLast();
-                    int n = getNext(base, charPoint);
+                    int _base = path.getLast();
+                    int n = getNext(_base, charPoint);
                     if (n != -1) break;
                     path.removeLast();
                 }
@@ -1376,7 +1387,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<MutableDo
         //@Override
         public string toString()
         {
-            return key + '=' + value;
+            return key + "=" + value;
         }
     }
 
