@@ -47,7 +47,7 @@ public class Pair<K,V> : Serializable {
      *  @return <code>string</code> representation of this <code>Pair</code>
      */
     //@Override
-    public string toString() {
+    public override string ToString() {
         return key + "=" + value;
     }
 

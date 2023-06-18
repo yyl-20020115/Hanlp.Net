@@ -78,7 +78,7 @@ public class MDAGSetTest : TestCase
 
     public void TestToArray() 
     {
-        String[] keyArray = mdagSet.toArray(new String[0]);
+        String[] keyArray = mdagSet.ToArray(new String[0]);
         AssertEquals(validKeySet.Count, keyArray.Length);
         foreach (String key in keyArray)
         {
@@ -188,7 +188,7 @@ public class MDAGSetTest : TestCase
         mdag.addString("he");
 
         mdag.simplify();
-        AssertTrue(mdag.contains("hers"));
+        AssertTrue(mdag.Contains("hers"));
     }
     [TestMethod]
 

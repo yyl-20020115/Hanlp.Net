@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dictionary.nt;
 
 
@@ -3736,10 +3740,10 @@ public class OrganizationDictionary
         StringBuilder sbPattern = new StringBuilder(ntList.size());
         for (NT nt : ntList)
         {
-            sbPattern.Append(nt.toString());
+            sbPattern.Append(nt.ToString());
         }
-        string pattern = sbPattern.toString();
-        Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
+        string pattern = sbPattern.ToString();
+        Vertex[] wordArray = vertexList.ToArray(new Vertex[0]);
         trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<string>()
         {
             //@Override
@@ -3750,7 +3754,7 @@ public class OrganizationDictionary
                 {
                     sbName.Append(wordArray[i].realWord);
                 }
-                string name = sbName.toString();
+                string name = sbName.ToString();
                 // 对一些bad case做出调整
                 if (isBadCase(name)) return;
 

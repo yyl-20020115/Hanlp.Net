@@ -21,13 +21,13 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
 
     public HMMPOSTagger(HiddenMarkovModel model)
     {
-        super(model);
+        base(model);
         tagSet = new POSTagSet();
     }
 
     public HMMPOSTagger()
     {
-        super();
+        base();
         tagSet = new POSTagSet();
     }
 
@@ -71,6 +71,6 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
     //@Override
     public string[] tag(List<string> wordList)
     {
-        return tag(wordList.toArray(new string[0]));
+        return tag(wordList.ToArray(new string[0]));
     }
 }

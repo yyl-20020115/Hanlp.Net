@@ -69,7 +69,7 @@ public class Suggester : ISuggester
     //@Override
     public List<string> suggest(string key, int size)
     {
-        List<string> resultList = new ArrayList<string>(size);
+        List<string> resultList = new (size);
         Dictionary<string, Double> scoreMap = new Dictionary<string, Double>();
         for (BaseScorer scorer : scorerList)
         {
@@ -126,7 +126,7 @@ public class Suggester : ISuggester
         Double theMax = 0.0;
         for (Double v : map.values())
         {
-            theMax = Math.max(theMax, v);
+            theMax = Math.Max(theMax, v);
         }
 
         return theMax;

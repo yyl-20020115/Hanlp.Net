@@ -173,7 +173,7 @@ public class DoubleArray : Serializable
                                                            int offset,
                                                            int maxResults)
     {
-        ArrayList<Pair<int, int>> result = new ArrayList<Pair<int, int>>();
+        List<Pair<int, int>> result = new ();
         int unit = _array[0];
         int nodePos = 0;
         // nodePos ^= unit.offset();

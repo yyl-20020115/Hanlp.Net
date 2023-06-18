@@ -105,7 +105,7 @@ public class DecoderFeatureIndex : FeatureIndex
             {
                 if (open(IOUtil.newInputStream(binFileName)))
                 {
-                    System._out.println("Found binary model " + binFileName);
+                    Console.WriteLine("Found binary model " + binFileName);
                     return true;
                 }
             }
@@ -122,14 +122,14 @@ public class DecoderFeatureIndex : FeatureIndex
             costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".Length));
             maxid_ = int.valueOf(br.readLine().substring("maxid: ".Length));
             xsize_ = int.valueOf(br.readLine().substring("xsize: ".Length));
-            System._out.println("Done reading meta-info");
+            Console.WriteLine("Done reading meta-info");
             br.readLine();
 
             while ((line = br.readLine()) != null && line.Length > 0)
             {
                 y_.Add(line);
             }
-            System._out.println("Done reading labels");
+            Console.WriteLine("Done reading labels");
             while ((line = br.readLine()) != null && line.Length > 0)
             {
                 if (line.StartsWith("U"))
@@ -141,7 +141,7 @@ public class DecoderFeatureIndex : FeatureIndex
                     bigramTempls_.Add(line);
                 }
             }
-            System._out.println("Done reading templates");
+            Console.WriteLine("Done reading templates");
             while ((line = br.readLine()) != null && line.Length > 0)
             {
                 string[] content = line.trim().Split(" ");
@@ -152,7 +152,7 @@ public class DecoderFeatureIndex : FeatureIndex
             {
                 alpha.Add(Double.valueOf(line));
             }
-            System._out.println("Done reading weights");
+            Console.WriteLine("Done reading weights");
             alpha_ = new double[alpha.size()];
             for (int i = 0; i < alpha.size(); i++)
             {
@@ -162,7 +162,7 @@ public class DecoderFeatureIndex : FeatureIndex
 
             if (cacheBinModel)
             {
-                System._out.println("Writing binary model to " + binFileName);
+                Console.WriteLine("Writing binary model to " + binFileName);
                 ObjectOutputStream oos = new ObjectOutputStream(IOUtil.newOutputStream(binFileName));
                 oos.writeObject(version);
                 oos.writeObject(costFactor_);

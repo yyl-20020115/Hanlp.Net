@@ -67,7 +67,7 @@ public class CoreDictionary
             long start = DateTime.Now.Microsecond;
             while ((line = br.readLine()) != null)
             {
-                string param[] = line.Split("\\s");
+                string[] param = line.Split("\\s");
                 int natureCount = (param.Length - 1) / 2;
                 CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natureCount);
                 for (int i = 0; i < natureCount; ++i)
@@ -197,7 +197,7 @@ public class CoreDictionary
      * @param key
      * @return
      */
-    public static bool contains(string key)
+    public static bool Contains(string key)
     {
         return trie.get(key) != null;
     }
@@ -371,7 +371,7 @@ public class CoreDictionary
         }
 
         //@Override
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < nature.Length; ++i)

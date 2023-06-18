@@ -70,8 +70,8 @@ public class CoreSynonymDictionaryEx
         {
             // 除掉停用词
             if (term.nature == null) continue;
-            string nature = term.nature.toString();
-            char firstChar = nature.charAt(0);
+            string nature = term.nature.ToString();
+            char firstChar = nature[0];
             switch (firstChar)
             {
                 case 'm':
@@ -84,14 +84,14 @@ public class CoreSynonymDictionaryEx
                 }
             }
             // 停用词
-            if (CoreStopWordDictionary.contains(term.word)) continue;
+            if (CoreStopWordDictionary.Contains(term.word)) continue;
             long[] item = get(term.word);
-//            logger.trace("{} {}", wordResult.word, Arrays.toString(item));
+//            logger.trace("{} {}", wordResult.word, Arrays.ToString(item));
             if (item == null)
             {
                 if (withUndefinedItem)
                 {
-                    item = new long[]{long.MAX_VALUE / 3};
+                    item = new long[]{long.MaxValue / 3};
                     synonymItemList.Add(item);
                 }
 

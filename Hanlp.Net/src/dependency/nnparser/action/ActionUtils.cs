@@ -80,12 +80,12 @@ public class ActionUtils : ActionType
                                    List<List<int>> tree,
                                    List<Action> actions)
     {
-        List<int> children = tree.get(root);
+        List<int> children = tree[(root)];
 
         int i;
-        for (i = 0; i < children.size() && children.get(i) < root; ++i)
+        for (i = 0; i < children.Count && children[i] < root; ++i)
         {
-            get_oracle_actions_travel(children.get(i), heads, deprels, tree, actions);
+            get_oracle_actions_travel(children[i], heads, deprels, tree, actions);
         }
 
         actions.Add(ActionFactory.make_shift());
@@ -156,9 +156,9 @@ public class ActionUtils : ActionType
             }
         }
 
-        if (top1 >= 0 && heads.get(top1) == top0)
+        if (top1 >= 0 && heads[(top1)] == top0)
         {
-            actions.Add(ActionFactory.make_left_arc(deprels.get(top1)));
+            actions.Add(ActionFactory.make_left_arc(deprels[(top1)]);
             output.set(top1, top0);
             sigma.Remove(sigma.size() - 1);
             sigma.set(sigma.size() - 1, top0);

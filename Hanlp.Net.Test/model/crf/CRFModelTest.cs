@@ -89,7 +89,7 @@ public class CRFModelTest : TestCase
 //                                              }
 //                                              else
 //                                              {
-//                                                  bw.write(word.charAt(0));
+//                                                  bw.write(word[0]);
 //                                                  bw.write('\t');
 //                                                  bw.write('B');
 //                                                  bw.write('\n');

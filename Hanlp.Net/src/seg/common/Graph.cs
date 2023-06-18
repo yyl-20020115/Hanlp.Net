@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.mining.word2vec;
+
 namespace com.hankcs.hanlp.seg.common;
 
 
@@ -65,11 +67,11 @@ public class Graph
     }
 
     //@Override
-    public string toString()
+    public string ToString()
     {
         return "Graph{" +
-                "vertexes=" + Arrays.toString(vertexes) +
-                ", edgesTo=" + Arrays.toString(edgesTo) +
+                "vertexes=" + Arrays.ToString(vertexes) +
+                ", edgesTo=" + Arrays.ToString(edgesTo) +
                 '}';
     }
 
@@ -80,13 +82,13 @@ public class Graph
         for (int to = 0; to < edgesTo.Length; ++to)
         {
             List<EdgeFrom> edgeFromList = edgesTo[to];
-            for (EdgeFrom edgeFrom : edgeFromList)
+            foreach (EdgeFrom edgeFrom in edgeFromList)
             {
                 sb.Append(string.Format("to:%3d, from:%3d, weight:%05.2f, word:%s\n", to, edgeFrom.from, edgeFrom.weight, edgeFrom.name));
             }
         }
 
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -124,7 +126,7 @@ public class Graph
             sb.Append(v.getRealWord() + " ");
         }
 
-        return sb.toString();
+        return sb.ToString();
     }
 
     public Vertex[] getVertexes()

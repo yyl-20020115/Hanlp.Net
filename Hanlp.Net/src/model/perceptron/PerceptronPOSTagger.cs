@@ -80,7 +80,7 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
     public string[] tag(List<string> wordList)
     {
         string[] termArray = new string[wordList.size()];
-        wordList.toArray(termArray);
+        wordList.ToArray(termArray);
         return tag(termArray);
     }
 

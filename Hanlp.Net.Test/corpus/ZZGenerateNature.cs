@@ -155,7 +155,7 @@ public class ZZGenerateNature : TestCase
 //            if (p.Length == 0) continue;
 //            Console.print(++i + " ");
 //            Console.WriteLine(p);
-////            int cut = p.indexOf(' ');
+////            int cut = p.IndexOf(' ');
 ////            Console.WriteLine("/**\n" +
 ////                                       "* " + p.substring(cut + 1) + "\n" +
 ////                                       "*/\n" +

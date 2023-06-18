@@ -95,7 +95,7 @@ public abstract class CRFTagger
         trainFile = tmpTrain;
         System._out.printf("Java效率低，建议安装CRF++，执行下列等价训练命令（不要终止本进程，否则临时语料库和特征模板将被清除）：\n" +
                               "crf_learn -m %d -f %d -e %f -c %f -p %d -H %d -a %s -t %s %s %s\n", maxitr, freq, eta,
-                          C, threadNum, shrinkingSize, algorithm.toString().replace('_', '-'),
+                          C, threadNum, shrinkingSize, algorithm.ToString().replace('_', '-'),
                           templFile, trainFile, modelFile);
         Encoder encoder = new Encoder();
         if (!encoder.learn(templFile, trainFile, modelFile,

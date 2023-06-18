@@ -10,6 +10,9 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.corpus.util;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 
@@ -37,7 +40,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
         {
             for (IWord word : wordList)
             {
-                if (!word.getLabel().Equals(NT.Z.toString()))
+                if (!word.getLabel().Equals(NT.Z.ToString()))
                 {
                     dictionaryMaker.Add(word);
                 }
@@ -67,13 +70,13 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             Precompiler.compileWithoutNT(wordList);
             if (verbose)
             {
-                System._out.print(++i + " / " + sentenceList.size() + " ");
-                System._out.println("原始语料 " + wordList);
+                Console.Write(++i + " / " + sentenceList.size() + " ");
+                Console.WriteLine("原始语料 " + wordList);
             }
             LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, "S"));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "Z"));
-            if (verbose) System._out.println("添加首尾 " + wordList);
+            if (verbose) Console.WriteLine("添加首尾 " + wordList);
             // 标注上文
             Iterator<IWord> iterator = wordLinkedList.iterator();
             IWord pre = iterator.next();
@@ -82,11 +85,11 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("nt") && !pre.getLabel().StartsWith("nt"))
                 {
-                    pre.setLabel(NT.A.toString());
+                    pre.setLabel(NT.A.ToString());
                 }
                 pre = current;
             }
-            if (verbose) System._out.println("标注上文 " + wordList);
+            if (verbose) Console.WriteLine("标注上文 " + wordList);
             // 标注下文
             iterator = wordLinkedList.descendingIterator();
             pre = iterator.next();
@@ -95,11 +98,11 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("nt") && !pre.getLabel().StartsWith("nt"))
                 {
-                    pre.setLabel(NT.B.toString());
+                    pre.setLabel(NT.B.ToString());
                 }
                 pre = current;
             }
-            if (verbose) System._out.println("标注下文 " + wordList);
+            if (verbose) Console.WriteLine("标注下文 " + wordList);
             // 标注中间
             {
                 iterator = wordLinkedList.iterator();
@@ -110,12 +113,12 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                     IWord third = iterator.next();
                     if (first.getLabel().StartsWith("nt") && third.getLabel().StartsWith("nt") && !second.getLabel().StartsWith("nt"))
                     {
-                        second.setLabel(NT.X.toString());
+                        second.setLabel(NT.X.ToString());
                     }
                     first = second;
                     second = third;
                 }
-                if (verbose) System._out.println("标注中间 " + wordList);
+                if (verbose) Console.WriteLine("标注中间 " + wordList);
             }
             // 处理整个
             ListIterator<IWord> listIterator = wordLinkedList.listIterator();
@@ -139,20 +142,20 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                             if (innerLabel.StartsWith("ns"))
                             {
                                 inner.setValue(Predefine.TAG_PLACE);
-                                inner.setLabel(NT.G.toString());
+                                inner.setLabel(NT.G.ToString());
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if (innerLabel.StartsWith("nt"))
                             {
                                 inner.value = Predefine.TAG_GROUP;
-                                inner.label = NT.K.toString();
+                                inner.label = NT.K.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if (innerLabel.Equals("b") || innerLabel.Equals("ng") || innerLabel.Equals("j"))
                             {
-                                inner.label = NT.J.toString();
+                                inner.label = NT.J.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
@@ -172,76 +175,76 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                                     "z".Equals(innerLabel)
                                     )
                             {
-                                inner.label = NT.C.toString();
+                                inner.label = NT.C.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if ("nz".Equals(innerLabel))
                             {
-                                inner.label = NT.I.toString();
+                                inner.label = NT.I.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if ("m".Equals(innerLabel))
                             {
                                 inner.value = Predefine.TAG_NUMBER;
-                                inner.label = NT.M.toString();
+                                inner.label = NT.M.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if ("w".Equals(innerLabel))
                             {
-                                inner.label = NT.W.toString();
+                                inner.label = NT.W.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if (innerLabel.StartsWith("nr") || "x".Equals(innerLabel) || "nx".Equals(innerLabel))
                             {
                                 inner.value = Predefine.TAG_PEOPLE;
-                                inner.label = NT.F.toString();
+                                inner.label = NT.F.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if (innerLabel.StartsWith("ni"))
                             {
-                                inner.label = NT.D.toString();
+                                inner.label = NT.D.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else if ("f".Equals(innerLabel) || "s".Equals(innerLabel))
                             {
-                                inner.label = NT.L.toString();
+                                inner.label = NT.L.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                             else
                             {
-                                inner.label = NT.P.toString();
+                                inner.label = NT.P.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
                     }
                     if (last != null)
                     {
-                        last.label = NT.D.toString();
+                        last.label = NT.D.ToString();
                         sbPattern.deleteCharAt(sbPattern.Length - 1);
                         sbPattern.Append(last.label);
-                        tfDictionary.Add(sbPattern.toString());
+                        tfDictionary.Add(sbPattern.ToString());
                         sbPattern.setLength(0);
                     }
                 }
                 else
                 {
-                    word.setLabel(NT.K.toString());
+                    word.setLabel(NT.K.ToString());
                 }
             }
             else
             {
-                word.setLabel(NT.Z.toString());
+                word.setLabel(NT.Z.ToString());
             }
         }
-        if (verbose) System._out.println("处理整个 " + wordList);
-        wordLinkedList.getFirst().setLabel(NT.S.toString());
+        if (verbose) Console.WriteLine("处理整个 " + wordList);
+        wordLinkedList.getFirst().setLabel(NT.S.ToString());
     }
 
 }
@@ -249,7 +252,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
     //@Override
     public bool saveTxtTo(string path)
     {
-        if (!super.saveTxtTo(path)) return false;
+        if (!base.saveTxtTo(path)) return false;
         return tfDictionary.saveKeyTo(path + ".pattern.txt");
     }
 }

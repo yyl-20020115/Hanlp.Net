@@ -51,9 +51,9 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public bool containsKey(Object key)
+    public bool ContainsKey(Object key)
     {
-        return containsKey(key.ToString());
+        return ContainsKey(key.ToString());
     }
 
     /**
@@ -62,7 +62,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
      * @param key
      * @return
      */
-    public bool containsKey(string key)
+    public bool ContainsKey(string key)
     {
         return exactMatchSearch(key) != -1;
     }
@@ -172,7 +172,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
         throw new InvalidOperationException("双数组不支持");
     }

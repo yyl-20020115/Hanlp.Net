@@ -24,7 +24,7 @@ public abstract class ByteArrayStream : ByteArray
 
     public ByteArrayStream(byte[] bytes, int bufferSize)
     {
-        super(bytes);
+        base(bytes);
         this.bufferSize = bufferSize;
     }
 
@@ -34,9 +34,9 @@ public abstract class ByteArrayStream : ByteArray
 
         try
         {
-            InputStream is = IOAdapter.open(path);
-            if (is is FileInputStream) return ByteArrayFileStream.createByteArrayFileStream((FileInputStream) is);
-            return ByteArrayOtherStream.createByteArrayOtherStream(is);
+            InputStream @is = IOAdapter.open(path);
+            if (@is is FileInputStream) return ByteArrayFileStream.createByteArrayFileStream((FileInputStream) @is);
+            return ByteArrayOtherStream.createByteArrayOtherStream(@is);
         }
         catch (IOException e)
         {
@@ -49,35 +49,35 @@ public abstract class ByteArrayStream : ByteArray
     public int nextInt()
     {
         ensureAvailableBytes(4);
-        return super.nextInt();
+        return base.nextInt();
     }
 
     //@Override
     public char nextChar()
     {
         ensureAvailableBytes(2);
-        return super.nextChar();
+        return base.nextChar();
     }
 
     //@Override
     public double nextDouble()
     {
         ensureAvailableBytes(8);
-        return super.nextDouble();
+        return base.nextDouble();
     }
 
     //@Override
     public byte nextByte()
     {
         ensureAvailableBytes(1);
-        return super.nextByte();
+        return base.nextByte();
     }
 
     //@Override
     public float nextFloat()
     {
         ensureAvailableBytes(4);
-        return super.nextFloat();
+        return base.nextFloat();
     }
 
     protected abstract void ensureAvailableBytes(int size);

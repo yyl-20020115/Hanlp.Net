@@ -33,9 +33,9 @@ public abstract class FeatureIndex
         checkMaxXsize_ = false;
         max_xsize_ = 0;
         threadNum_ = 1;
-        unigramTempls_ = new ArrayList<string>();
-        bigramTempls_ = new ArrayList<string>();
-        y_ = new ArrayList<string>();
+        unigramTempls_ = new ();
+        bigramTempls_ = new ();
+        y_ = new ();
     }
 
     protected abstract int getID(string s);
@@ -107,7 +107,7 @@ public abstract class FeatureIndex
         {
             sb.Append(temp).Append("\n");
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     public string getTemplate()
@@ -128,7 +128,7 @@ public abstract class FeatureIndex
         //TODO(taku): very dirty workaround
         if (checkMaxXsize_)
         {
-            max_xsize_ = Math.max(max_xsize_, col + 1);
+            max_xsize_ = Math.Max(max_xsize_, col + 1);
         }
         if (pos < 0)
         {
@@ -169,7 +169,7 @@ public abstract class FeatureIndex
             }
         }
 
-        return sb.toString();
+        return sb.ToString();
     }
 
     private bool buildFeatureFromTempl(List<int> feature, List<string> templs, int curPos, TaggerImpl tagger)
@@ -230,7 +230,7 @@ public abstract class FeatureIndex
             for (int i = 0; i < y_.size(); i++)
             {
                 Node n = new Node();
-                n.clear();
+                n.Clear();
                 n.x = cur;
                 n.y = i;
                 n.fVector = f;
@@ -245,7 +245,7 @@ public abstract class FeatureIndex
                 for (int i = 0; i < y_.size(); i++)
                 {
                     Path p = new Path();
-                    p.clear();
+                    p.Clear();
                     p.Add(tagger.node(cur - 1, j), tagger.node(cur, i));
                     p.fvector = f;
                 }
@@ -263,7 +263,7 @@ public abstract class FeatureIndex
         return true;
     }
 
-    public void clear()
+    public void Clear()
     {
 
     }

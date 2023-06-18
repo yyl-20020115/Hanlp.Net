@@ -95,8 +95,8 @@ public class PersonDictionary
                         listIterator = vertexList.listIterator(index);
                         backUp = true;
                     }
-                    sbPattern.Append(NR.K.toString());
-                    sbPattern.Append(NR.B.toString());
+                    sbPattern.Append(NR.K.ToString());
+                    sbPattern.Append(NR.B.ToString());
                     preNR = B;
                     listIterator.previous();
                     string nowK = current.realWord.substring(0, current.realWord.Length - 1);
@@ -114,7 +114,7 @@ public class PersonDictionary
                     }
                     if (preNR == B)
                     {
-                        sbPattern.Append(NR.E.toString());  //BE
+                        sbPattern.Append(NR.E.ToString());  //BE
                     }
                     else
                     {
@@ -163,15 +163,15 @@ public class PersonDictionary
             {
                 sbName.Append(wordArray[i].realWord);
             }
-            string name = sbName.toString();
+            string name = sbName.ToString();
             //            logger.trace("识别出：{}", name);
             // 对一些bad case做出调整
             switch (value)
             {
                 case BCD:
-                    if (name.charAt(0) == name.charAt(2)) return; // 姓和最后一个名不可能相等的
+                    if (name[0] == name.charAt(2)) return; // 姓和最后一个名不可能相等的
                                                                   //                        string cd = name.substring(1);
-                                                                  //                        if (CoreDictionary.contains(cd))
+                                                                  //                        if (CoreDictionary.Contains(cd))
                                                                   //                        {
                                                                   //                            EnumItem<NR> item = PersonDictionary.dictionary.get(cd);
                                                                   //                            if (item == null || !item.containsLabel(Z)) return; // 三字名字但是后两个字不在词典中，有很大可能性是误命中

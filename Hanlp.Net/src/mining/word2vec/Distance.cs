@@ -7,12 +7,12 @@ public class Distance : AbstractClosestVectors
 
     public Distance(string file)
     {
-        super(file);
+        base(file);
     }
 
     static void usage()
     {
-        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE contains word projections in the text Format\n",
+        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE Contains word projections in the text Format\n",
                           Distance.class.getName());
         System.exit(0);
     }

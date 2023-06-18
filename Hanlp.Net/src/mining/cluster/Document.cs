@@ -76,7 +76,7 @@ public class Document<K>
     /**
      * Clear features.
      */
-    void clear()
+    void Clear()
     {
         feature_.Clear();
     }
@@ -103,7 +103,7 @@ public class Document<K>
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Document<?> document = (Document<?>) o;
+        Document document = (Document) o;
 
         return id_ != null ? id_.Equals(document.id_) : document.id_ == null;
     }

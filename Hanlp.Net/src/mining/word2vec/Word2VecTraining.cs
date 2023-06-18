@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
@@ -8,7 +10,7 @@ class Word2VecTraining
     static readonly int MAX_EXP = 6;
     static readonly int TABLE_SIZE = 100000000;
     static readonly int MAX_SENTENCE_LENGTH = 1000;
-    static readonly Charset ENCODING = Charset.forName("UTF-8");
+    static readonly Encoding ENCODING = Encoding.UTF8;
 
     long timeStart;
     static double[] syn0, syn1, syn1neg;
@@ -18,11 +20,11 @@ class Word2VecTraining
 
     static readonly double[] expTable = new double[EXP_TABLE_SIZE + 1];
 
-    static
+    static Word2VecTraining()
     {
         for (int i = 0; i < EXP_TABLE_SIZE; i++)
         {
-            expTable[i] = Math.exp((i / (double) EXP_TABLE_SIZE * 2 - 1) * MAX_EXP); // Precompute the exp() table
+            expTable[i] = Math.Exp((i / (double) EXP_TABLE_SIZE * 2 - 1) * MAX_EXP); // Precompute the exp() table
             expTable[i] = expTable[i] / (expTable[i] + 1);                          // Precompute f(x) = x / (x + 1)
         }
     }
@@ -46,7 +48,8 @@ class Word2VecTraining
         float alpha;
         float startingAlpha;
         float trainWords;    // #19
-        int id, vocabSize;
+        int id;
+        int vocabSize;
         long timeStart;
         int[] table;
         VocabWord[] vocab;
@@ -303,7 +306,7 @@ class Word2VecTraining
                 throw new RuntimeException(e);
             }
             // exit from thread
-            synchronized (vec)
+            lock (vec)
             {
                 vec.threadCount--;
                 vec.notify();
@@ -341,7 +344,7 @@ class Word2VecTraining
             new TrainModelThread(this, new CacheCorpus(corpus), config, i).start();
         }
         corpus.shutdown();
-        synchronized (this)
+        lock (this)
         {
             while (threadCount > 0)
             {

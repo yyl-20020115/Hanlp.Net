@@ -40,7 +40,7 @@ class CRFSegmentModel : CRFModel
      */
     public CRFSegmentModel(ITrie<FeatureFunction> featureFunctionTrie)
     {
-        super(featureFunctionTrie);
+        base(featureFunctionTrie);
     }
 
     /**
@@ -56,7 +56,7 @@ class CRFSegmentModel : CRFModel
     //@Override
     public bool load(ByteArray byteArray)
     {
-        bool result = super.load(byteArray);
+        bool result = base.load(byteArray);
         if (result)
         {
             initTagSet();
@@ -68,7 +68,7 @@ class CRFSegmentModel : CRFModel
     //@Override
     protected void onLoadTxtFinished()
     {
-        super.onLoadTxtFinished();
+        base.onLoadTxtFinished();
         initTagSet();
     }
 

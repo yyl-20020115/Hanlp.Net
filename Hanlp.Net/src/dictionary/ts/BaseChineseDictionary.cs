@@ -14,6 +14,7 @@ using com.hankcs.hanlp.collection.trie;
 using com.hankcs.hanlp.corpus.dictionary;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.utility;
 using System.Text;
 
@@ -40,7 +41,7 @@ public class BaseChineseDictionary
         foreach (KeyValuePair<string, string> entry in t2x.entrySet())
         {
             string s = CharTable.convert(entry.getKey());
-            if (!s2t.containsKey(s))
+            if (!s2t.ContainsKey(s))
             {
                 s2t.put(s, entry.getValue());
             }

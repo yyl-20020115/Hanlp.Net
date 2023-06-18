@@ -34,7 +34,7 @@ public class PlaceRecognition
                 sbLog.Append(NSEnumItem);
                 sbLog.Append(']');
             }
-            System._out.printf("地名角色观察：%s\n", sbLog.toString());
+            System._out.printf("地名角色观察：%s\n", sbLog.ToString());
         }
         List<NS> NSList = viterbiCompute(roleTagList);
         if (HanLP.Config.DEBUG)
@@ -51,7 +51,7 @@ public class PlaceRecognition
             }
             if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
-            System._out.printf("地名角色标注：%s\n", sbLog.toString());
+            System._out.printf("地名角色标注：%s\n", sbLog.ToString());
         }
 
         PlaceDictionary.parsePattern(NSList, pWordSegResult, wordNetOptimum, wordNetAll);

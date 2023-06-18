@@ -57,7 +57,7 @@ public class WordNatureWeightModelMaker
         {
             sb.Append("case \"" + pos + "\":\n");
         }
-        IOUtil.saveTxt("data/model/dependency/pos-thu.txt", sb.toString());
+        IOUtil.saveTxt("data/model/dependency/pos-thu.txt", sb.ToString());
         return dictionaryMaker.saveTxtTo(modelSavePath);
     }
 

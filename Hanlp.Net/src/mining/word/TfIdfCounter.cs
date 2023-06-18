@@ -144,8 +144,8 @@ public class TfIdfCounter : KeywordExtractor
     public Dictionary<Object, Dictionary<string, Double>> compute()
     {
         idf = TfIdf.idfFromTfs(tfMap.values());
-        tfidfMap = new HashMap<Object, Dictionary<string, Double>>(idf.size());
-        for (KeyValuePair<Object, Dictionary<string, Double>> entry : tfMap.entrySet())
+        tfidfMap = new (idf.size());
+        foreach (KeyValuePair<Object, Dictionary<string, Double>> entry in tfMap.entrySet())
         {
             Dictionary<string, Double> tfidf = TfIdf.tfIdf(entry.getValue(), idf);
             tfidfMap.put(entry.getKey(), tfidf);
@@ -171,7 +171,7 @@ public class TfIdfCounter : KeywordExtractor
     {
         MaxHeap<KeyValuePair<string, Double>> heap = new MaxHeap<KeyValuePair<string, Double>>(size, new CT());
         heap.addAll(tfidfs.entrySet());
-        return heap.toList();
+        return heap.ToList();
     }
     public class CT: IComparer<KeyValuePair<string, Double>>()
     {

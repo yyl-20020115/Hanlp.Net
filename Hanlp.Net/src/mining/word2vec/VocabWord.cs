@@ -24,7 +24,7 @@ public class VocabWord implements Comparable<VocabWord>
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         sb.Append(string.Format("[%s] cn=%d, codelen=%d, ", word, cn, codelen));
@@ -41,7 +41,7 @@ public class VocabWord implements Comparable<VocabWord>
             sb.Append(point[i]);
         }
         sb.Append(")");
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override

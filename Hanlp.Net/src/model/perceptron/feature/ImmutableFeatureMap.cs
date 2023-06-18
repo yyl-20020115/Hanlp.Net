@@ -22,13 +22,13 @@ public class ImmutableFeatureMap : FeatureMap
 
     public ImmutableFeatureMap(Dictionary<string, int> featureIdMap, TagSet tagSet)
     {
-        super(tagSet);
+        base(tagSet);
         this.featureIdMap = featureIdMap;
     }
 
     public ImmutableFeatureMap(Set<KeyValuePair<string, int>> entrySet, TagSet tagSet)
     {
-        super(tagSet);
+        base(tagSet);
         this.featureIdMap = new HashMap<string, int>();
         for (KeyValuePair<string, int> entry : entrySet)
         {

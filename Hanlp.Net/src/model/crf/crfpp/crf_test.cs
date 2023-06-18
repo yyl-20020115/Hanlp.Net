@@ -59,7 +59,7 @@ public class crf_test
                 Console.Error.WriteLine("open error");
                 return false;
             }
-            string[] restArgs = unkownArgs.toArray(new string[0]);
+            string[] restArgs = unkownArgs.ToArray(new string[0]);
             if (restArgs.Length == 0)
             {
                 return false;
@@ -95,11 +95,11 @@ public class crf_test
                     }
                     if (osw == null)
                     {
-                        System._out.print(tagger.toString());
+                        Console.Write(tagger.ToString());
                     }
                     else
                     {
-                        osw.write(tagger.toString());
+                        osw.write(tagger.ToString());
                     }
                 }
                 if (osw != null)

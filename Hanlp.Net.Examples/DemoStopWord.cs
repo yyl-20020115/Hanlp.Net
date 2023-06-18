@@ -55,7 +55,7 @@ public class DemoStopWord
         {
             if (term.nature == nz)
             {
-                return !CoreStopWordDictionary.contains(term.word);
+                return !CoreStopWordDictionary.Contains(term.word);
             }
             return false;
         }

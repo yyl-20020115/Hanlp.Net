@@ -17,1465 +17,1465 @@ namespace com.hankcs.hanlp.dictionary.py;
  */
 public class Pinyin
 {
-    a1(Shengmu.none, Yunmu.a, 1, "ā", "a", Head.a, 'a'),
-    a2(Shengmu.none, Yunmu.a, 2, "á", "a", Head.a, 'a'),
-    a3(Shengmu.none, Yunmu.a, 3, "ǎ", "a", Head.a, 'a'),
-    a4(Shengmu.none, Yunmu.a, 4, "à", "a", Head.a, 'a'),
-    a5(Shengmu.none, Yunmu.a, 5, "a", "a", Head.a, 'a'),
-    ai1(Shengmu.none, Yunmu.ai, 1, "āi", "ai", Head.a, 'a'),
-    ai2(Shengmu.none, Yunmu.ai, 2, "ái", "ai", Head.a, 'a'),
-    ai3(Shengmu.none, Yunmu.ai, 3, "ǎi", "ai", Head.a, 'a'),
-    ai4(Shengmu.none, Yunmu.ai, 4, "ài", "ai", Head.a, 'a'),
-    an1(Shengmu.none, Yunmu.an, 1, "ān", "an", Head.a, 'a'),
-    an2(Shengmu.none, Yunmu.an, 2, "án", "an", Head.a, 'a'),
-    an3(Shengmu.none, Yunmu.an, 3, "ǎn", "an", Head.a, 'a'),
-    an4(Shengmu.none, Yunmu.an, 4, "àn", "an", Head.a, 'a'),
-    ang1(Shengmu.none, Yunmu.ang, 1, "āng", "ang", Head.a, 'a'),
-    ang2(Shengmu.none, Yunmu.ang, 2, "áng", "ang", Head.a, 'a'),
-    ang3(Shengmu.none, Yunmu.ang, 3, "ǎng", "ang", Head.a, 'a'),
-    ang4(Shengmu.none, Yunmu.ang, 4, "àng", "ang", Head.a, 'a'),
-    ao1(Shengmu.none, Yunmu.ao, 1, "āo", "ao", Head.a, 'a'),
-    ao2(Shengmu.none, Yunmu.ao, 2, "áo", "ao", Head.a, 'a'),
-    ao3(Shengmu.none, Yunmu.ao, 3, "ǎo", "ao", Head.a, 'a'),
-    ao4(Shengmu.none, Yunmu.ao, 4, "ào", "ao", Head.a, 'a'),
-    ba1(Shengmu.b, Yunmu.a, 1, "bā", "ba", Head.b, 'b'),
-    ba2(Shengmu.b, Yunmu.a, 2, "bá", "ba", Head.b, 'b'),
-    ba3(Shengmu.b, Yunmu.a, 3, "bǎ", "ba", Head.b, 'b'),
-    ba4(Shengmu.b, Yunmu.a, 4, "bà", "ba", Head.b, 'b'),
-    ba5(Shengmu.b, Yunmu.a, 5, "ba", "ba", Head.b, 'b'),
-    bai1(Shengmu.b, Yunmu.ai, 1, "bāi", "bai", Head.b, 'b'),
-    bai2(Shengmu.b, Yunmu.ai, 2, "bái", "bai", Head.b, 'b'),
-    bai3(Shengmu.b, Yunmu.ai, 3, "bǎi", "bai", Head.b, 'b'),
-    bai4(Shengmu.b, Yunmu.ai, 4, "bài", "bai", Head.b, 'b'),
-    ban1(Shengmu.b, Yunmu.an, 1, "bān", "ban", Head.b, 'b'),
-    ban3(Shengmu.b, Yunmu.an, 3, "bǎn", "ban", Head.b, 'b'),
-    ban4(Shengmu.b, Yunmu.an, 4, "bàn", "ban", Head.b, 'b'),
-    bang1(Shengmu.b, Yunmu.ang, 1, "bāng", "bang", Head.b, 'b'),
-    bang3(Shengmu.b, Yunmu.ang, 3, "bǎng", "bang", Head.b, 'b'),
-    bang4(Shengmu.b, Yunmu.ang, 4, "bàng", "bang", Head.b, 'b'),
-    bao1(Shengmu.b, Yunmu.ao, 1, "bāo", "bao", Head.b, 'b'),
-    bao2(Shengmu.b, Yunmu.ao, 2, "báo", "bao", Head.b, 'b'),
-    bao3(Shengmu.b, Yunmu.ao, 3, "bǎo", "bao", Head.b, 'b'),
-    bao4(Shengmu.b, Yunmu.ao, 4, "bào", "bao", Head.b, 'b'),
-    bei1(Shengmu.b, Yunmu.ei, 1, "bēi", "bei", Head.b, 'b'),
-    bei3(Shengmu.b, Yunmu.ei, 3, "běi", "bei", Head.b, 'b'),
-    bei4(Shengmu.b, Yunmu.ei, 4, "bèi", "bei", Head.b, 'b'),
-    bei5(Shengmu.b, Yunmu.ei, 5, "bei", "bei", Head.b, 'b'),
-    ben1(Shengmu.b, Yunmu.en, 1, "bēn", "ben", Head.b, 'b'),
-    ben3(Shengmu.b, Yunmu.en, 3, "běn", "ben", Head.b, 'b'),
-    ben4(Shengmu.b, Yunmu.en, 4, "bèn", "ben", Head.b, 'b'),
-    beng1(Shengmu.b, Yunmu.eng, 1, "bēng", "beng", Head.b, 'b'),
-    beng2(Shengmu.b, Yunmu.eng, 2, "béng", "beng", Head.b, 'b'),
-    beng3(Shengmu.b, Yunmu.eng, 3, "běng", "beng", Head.b, 'b'),
-    beng4(Shengmu.b, Yunmu.eng, 4, "bèng", "beng", Head.b, 'b'),
-    bi1(Shengmu.b, Yunmu.i, 1, "bī", "bi", Head.b, 'b'),
-    bi2(Shengmu.b, Yunmu.i, 2, "bí", "bi", Head.b, 'b'),
-    bi3(Shengmu.b, Yunmu.i, 3, "bǐ", "bi", Head.b, 'b'),
-    bi4(Shengmu.b, Yunmu.i, 4, "bì", "bi", Head.b, 'b'),
-    bian1(Shengmu.b, Yunmu.ian, 1, "biān", "bian", Head.b, 'b'),
-    bian3(Shengmu.b, Yunmu.ian, 3, "biǎn", "bian", Head.b, 'b'),
-    bian4(Shengmu.b, Yunmu.ian, 4, "biàn", "bian", Head.b, 'b'),
-    bian5(Shengmu.b, Yunmu.ian, 5, "bian", "bian", Head.b, 'b'),
-    biao1(Shengmu.b, Yunmu.iao, 1, "biāo", "biao", Head.b, 'b'),
-    biao2(Shengmu.b, Yunmu.iao, 2, "biáo", "biao", Head.b, 'b'),
-    biao3(Shengmu.b, Yunmu.iao, 3, "biǎo", "biao", Head.b, 'b'),
-    biao4(Shengmu.b, Yunmu.iao, 4, "biào", "biao", Head.b, 'b'),
-    bie1(Shengmu.b, Yunmu.ie, 1, "biē", "bie", Head.b, 'b'),
-    bie2(Shengmu.b, Yunmu.ie, 2, "bié", "bie", Head.b, 'b'),
-    bie3(Shengmu.b, Yunmu.ie, 3, "biě", "bie", Head.b, 'b'),
-    bie4(Shengmu.b, Yunmu.ie, 4, "biè", "bie", Head.b, 'b'),
-    bin1(Shengmu.b, Yunmu.in, 1, "bīn", "bin", Head.b, 'b'),
-    bin3(Shengmu.b, Yunmu.in, 3, "bǐn", "bin", Head.b, 'b'),
-    bin4(Shengmu.b, Yunmu.in, 4, "bìn", "bin", Head.b, 'b'),
-    bing1(Shengmu.b, Yunmu.ing, 1, "bīng", "bing", Head.b, 'b'),
-    bing3(Shengmu.b, Yunmu.ing, 3, "bǐng", "bing", Head.b, 'b'),
-    bing4(Shengmu.b, Yunmu.ing, 4, "bìng", "bing", Head.b, 'b'),
-    bo1(Shengmu.b, Yunmu.o, 1, "bō", "bo", Head.b, 'b'),
-    bo2(Shengmu.b, Yunmu.o, 2, "bó", "bo", Head.b, 'b'),
-    bo3(Shengmu.b, Yunmu.o, 3, "bǒ", "bo", Head.b, 'b'),
-    bo4(Shengmu.b, Yunmu.o, 4, "bò", "bo", Head.b, 'b'),
-    bo5(Shengmu.b, Yunmu.o, 5, "bo", "bo", Head.b, 'b'),
-    bu1(Shengmu.b, Yunmu.u, 1, "bū", "bu", Head.b, 'b'),
-    bu2(Shengmu.b, Yunmu.u, 2, "bú", "bu", Head.b, 'b'),
-    bu3(Shengmu.b, Yunmu.u, 3, "bǔ", "bu", Head.b, 'b'),
-    bu4(Shengmu.b, Yunmu.u, 4, "bù", "bu", Head.b, 'b'),
-    ca1(Shengmu.c, Yunmu.a, 1, "cā", "ca", Head.c, 'c'),
-    ca3(Shengmu.c, Yunmu.a, 3, "cǎ", "ca", Head.c, 'c'),
-    ca4(Shengmu.c, Yunmu.a, 4, "cà", "ca", Head.c, 'c'),
-    cai1(Shengmu.c, Yunmu.ai, 1, "cāi", "cai", Head.c, 'c'),
-    cai2(Shengmu.c, Yunmu.ai, 2, "cái", "cai", Head.c, 'c'),
-    cai3(Shengmu.c, Yunmu.ai, 3, "cǎi", "cai", Head.c, 'c'),
-    cai4(Shengmu.c, Yunmu.ai, 4, "cài", "cai", Head.c, 'c'),
-    can1(Shengmu.c, Yunmu.an, 1, "cān", "can", Head.c, 'c'),
-    can2(Shengmu.c, Yunmu.an, 2, "cán", "can", Head.c, 'c'),
-    can3(Shengmu.c, Yunmu.an, 3, "cǎn", "can", Head.c, 'c'),
-    can4(Shengmu.c, Yunmu.an, 4, "càn", "can", Head.c, 'c'),
-    cang1(Shengmu.c, Yunmu.ang, 1, "cāng", "cang", Head.c, 'c'),
-    cang2(Shengmu.c, Yunmu.ang, 2, "cáng", "cang", Head.c, 'c'),
-    cang3(Shengmu.c, Yunmu.ang, 3, "cǎng", "cang", Head.c, 'c'),
-    cang4(Shengmu.c, Yunmu.ang, 4, "càng", "cang", Head.c, 'c'),
-    cao1(Shengmu.c, Yunmu.ao, 1, "cāo", "cao", Head.c, 'c'),
-    cao2(Shengmu.c, Yunmu.ao, 2, "cáo", "cao", Head.c, 'c'),
-    cao3(Shengmu.c, Yunmu.ao, 3, "cǎo", "cao", Head.c, 'c'),
-    cao4(Shengmu.c, Yunmu.ao, 4, "cào", "cao", Head.c, 'c'),
-    ce4(Shengmu.c, Yunmu.e, 4, "cè", "ce", Head.c, 'c'),
-    cen1(Shengmu.c, Yunmu.en, 1, "cēn", "cen", Head.c, 'c'),
-    cen2(Shengmu.c, Yunmu.en, 2, "cén", "cen", Head.c, 'c'),
-    ceng1(Shengmu.c, Yunmu.eng, 1, "cēng", "ceng", Head.c, 'c'),
-    ceng2(Shengmu.c, Yunmu.eng, 2, "céng", "ceng", Head.c, 'c'),
-    ceng4(Shengmu.c, Yunmu.eng, 4, "cèng", "ceng", Head.c, 'c'),
-    cha1(Shengmu.ch, Yunmu.a, 1, "chā", "cha", Head.ch, 'c'),
-    cha2(Shengmu.ch, Yunmu.a, 2, "chá", "cha", Head.ch, 'c'),
-    cha3(Shengmu.ch, Yunmu.a, 3, "chǎ", "cha", Head.ch, 'c'),
-    cha4(Shengmu.ch, Yunmu.a, 4, "chà", "cha", Head.ch, 'c'),
-    cha5(Shengmu.ch, Yunmu.a, 5, "cha", "cha", Head.ch, 'c'),
-    chai1(Shengmu.ch, Yunmu.ai, 1, "chāi", "chai", Head.ch, 'c'),
-    chai2(Shengmu.ch, Yunmu.ai, 2, "chái", "chai", Head.ch, 'c'),
-    chai3(Shengmu.ch, Yunmu.ai, 3, "chǎi", "chai", Head.ch, 'c'),
-    chai4(Shengmu.ch, Yunmu.ai, 4, "chài", "chai", Head.ch, 'c'),
-    chan1(Shengmu.ch, Yunmu.an, 1, "chān", "chan", Head.ch, 'c'),
-    chan2(Shengmu.ch, Yunmu.an, 2, "chán", "chan", Head.ch, 'c'),
-    chan3(Shengmu.ch, Yunmu.an, 3, "chǎn", "chan", Head.ch, 'c'),
-    chan4(Shengmu.ch, Yunmu.an, 4, "chàn", "chan", Head.ch, 'c'),
-    chang1(Shengmu.ch, Yunmu.ang, 1, "chāng", "chang", Head.ch, 'c'),
-    chang2(Shengmu.ch, Yunmu.ang, 2, "cháng", "chang", Head.ch, 'c'),
-    chang3(Shengmu.ch, Yunmu.ang, 3, "chǎng", "chang", Head.ch, 'c'),
-    chang4(Shengmu.ch, Yunmu.ang, 4, "chàng", "chang", Head.ch, 'c'),
-    chang5(Shengmu.ch, Yunmu.ang, 5, "chang", "chang", Head.ch, 'c'),
-    chao1(Shengmu.ch, Yunmu.ao, 1, "chāo", "chao", Head.ch, 'c'),
-    chao2(Shengmu.ch, Yunmu.ao, 2, "cháo", "chao", Head.ch, 'c'),
-    chao3(Shengmu.ch, Yunmu.ao, 3, "chǎo", "chao", Head.ch, 'c'),
-    chao4(Shengmu.ch, Yunmu.ao, 4, "chào", "chao", Head.ch, 'c'),
-    che1(Shengmu.ch, Yunmu.e, 1, "chē", "che", Head.ch, 'c'),
-    che3(Shengmu.ch, Yunmu.e, 3, "chě", "che", Head.ch, 'c'),
-    che4(Shengmu.ch, Yunmu.e, 4, "chè", "che", Head.ch, 'c'),
-    chen1(Shengmu.ch, Yunmu.en, 1, "chēn", "chen", Head.ch, 'c'),
-    chen2(Shengmu.ch, Yunmu.en, 2, "chén", "chen", Head.ch, 'c'),
-    chen3(Shengmu.ch, Yunmu.en, 3, "chěn", "chen", Head.ch, 'c'),
-    chen4(Shengmu.ch, Yunmu.en, 4, "chèn", "chen", Head.ch, 'c'),
-    chen5(Shengmu.ch, Yunmu.en, 5, "chen", "chen", Head.ch, 'c'),
-    cheng1(Shengmu.ch, Yunmu.eng, 1, "chēng", "cheng", Head.ch, 'c'),
-    cheng2(Shengmu.ch, Yunmu.eng, 2, "chéng", "cheng", Head.ch, 'c'),
-    cheng3(Shengmu.ch, Yunmu.eng, 3, "chěng", "cheng", Head.ch, 'c'),
-    cheng4(Shengmu.ch, Yunmu.eng, 4, "chèng", "cheng", Head.ch, 'c'),
-    chi1(Shengmu.ch, Yunmu.i, 1, "chī", "chi", Head.ch, 'c'),
-    chi2(Shengmu.ch, Yunmu.i, 2, "chí", "chi", Head.ch, 'c'),
-    chi3(Shengmu.ch, Yunmu.i, 3, "chǐ", "chi", Head.ch, 'c'),
-    chi4(Shengmu.ch, Yunmu.i, 4, "chì", "chi", Head.ch, 'c'),
-    chi5(Shengmu.ch, Yunmu.i, 5, "chi", "chi", Head.ch, 'c'),
-    chong1(Shengmu.ch, Yunmu.ong, 1, "chōng", "chong", Head.ch, 'c'),
-    chong2(Shengmu.ch, Yunmu.ong, 2, "chóng", "chong", Head.ch, 'c'),
-    chong3(Shengmu.ch, Yunmu.ong, 3, "chǒng", "chong", Head.ch, 'c'),
-    chong4(Shengmu.ch, Yunmu.ong, 4, "chòng", "chong", Head.ch, 'c'),
-    chou1(Shengmu.ch, Yunmu.ou, 1, "chōu", "chou", Head.ch, 'c'),
-    chou2(Shengmu.ch, Yunmu.ou, 2, "chóu", "chou", Head.ch, 'c'),
-    chou3(Shengmu.ch, Yunmu.ou, 3, "chǒu", "chou", Head.ch, 'c'),
-    chou4(Shengmu.ch, Yunmu.ou, 4, "chòu", "chou", Head.ch, 'c'),
-    chou5(Shengmu.ch, Yunmu.ou, 5, "chou", "chou", Head.ch, 'c'),
-    chu1(Shengmu.ch, Yunmu.u, 1, "chū", "chu", Head.ch, 'c'),
-    chu2(Shengmu.ch, Yunmu.u, 2, "chú", "chu", Head.ch, 'c'),
-    chu3(Shengmu.ch, Yunmu.u, 3, "chǔ", "chu", Head.ch, 'c'),
-    chu4(Shengmu.ch, Yunmu.u, 4, "chù", "chu", Head.ch, 'c'),
-    chu5(Shengmu.ch, Yunmu.u, 5, "chu", "chu", Head.ch, 'c'),
-    chua1(Shengmu.ch, Yunmu.ua, 1, "chuā", "chua", Head.ch, 'c'),
-    chuai1(Shengmu.ch, Yunmu.uai, 1, "chuāi", "chuai", Head.ch, 'c'),
-    chuai2(Shengmu.ch, Yunmu.uai, 2, "chuái", "chuai", Head.ch, 'c'),
-    chuai3(Shengmu.ch, Yunmu.uai, 3, "chuǎi", "chuai", Head.ch, 'c'),
-    chuai4(Shengmu.ch, Yunmu.uai, 4, "chuài", "chuai", Head.ch, 'c'),
-    chuan1(Shengmu.ch, Yunmu.uan, 1, "chuān", "chuan", Head.ch, 'c'),
-    chuan2(Shengmu.ch, Yunmu.uan, 2, "chuán", "chuan", Head.ch, 'c'),
-    chuan3(Shengmu.ch, Yunmu.uan, 3, "chuǎn", "chuan", Head.ch, 'c'),
-    chuan4(Shengmu.ch, Yunmu.uan, 4, "chuàn", "chuan", Head.ch, 'c'),
-    chuang1(Shengmu.ch, Yunmu.uang, 1, "chuāng", "chuang", Head.ch, 'c'),
-    chuang2(Shengmu.ch, Yunmu.uang, 2, "chuáng", "chuang", Head.ch, 'c'),
-    chuang3(Shengmu.ch, Yunmu.uang, 3, "chuǎng", "chuang", Head.ch, 'c'),
-    chuang4(Shengmu.ch, Yunmu.uang, 4, "chuàng", "chuang", Head.ch, 'c'),
-    chui1(Shengmu.ch, Yunmu.ui, 1, "chuī", "chui", Head.ch, 'c'),
-    chui2(Shengmu.ch, Yunmu.ui, 2, "chuí", "chui", Head.ch, 'c'),
-    chui4(Shengmu.ch, Yunmu.ui, 4, "chuì", "chui", Head.ch, 'c'),
-    chun1(Shengmu.ch, Yunmu.un, 1, "chūn", "chun", Head.ch, 'c'),
-    chun2(Shengmu.ch, Yunmu.un, 2, "chún", "chun", Head.ch, 'c'),
-    chun3(Shengmu.ch, Yunmu.un, 3, "chǔn", "chun", Head.ch, 'c'),
-    chuo1(Shengmu.ch, Yunmu.uo, 1, "chuō", "chuo", Head.ch, 'c'),
-    chuo2(Shengmu.ch, Yunmu.uo, 2, "chuó", "chuo", Head.ch, 'c'),
-    chuo4(Shengmu.ch, Yunmu.uo, 4, "chuò", "chuo", Head.ch, 'c'),
-    chuo5(Shengmu.ch, Yunmu.uo, 5, "chuo", "chuo", Head.ch, 'c'),
-    ci1(Shengmu.c, Yunmu.i, 1, "cī", "ci", Head.c, 'c'),
-    ci2(Shengmu.c, Yunmu.i, 2, "cí", "ci", Head.c, 'c'),
-    ci3(Shengmu.c, Yunmu.i, 3, "cǐ", "ci", Head.c, 'c'),
-    ci4(Shengmu.c, Yunmu.i, 4, "cì", "ci", Head.c, 'c'),
-    cong1(Shengmu.c, Yunmu.ong, 1, "cōng", "cong", Head.c, 'c'),
-    cong2(Shengmu.c, Yunmu.ong, 2, "cóng", "cong", Head.c, 'c'),
-    cong4(Shengmu.c, Yunmu.ong, 4, "còng", "cong", Head.c, 'c'),
-    cou3(Shengmu.c, Yunmu.ou, 3, "cǒu", "cou", Head.c, 'c'),
-    cou4(Shengmu.c, Yunmu.ou, 4, "còu", "cou", Head.c, 'c'),
-    cu1(Shengmu.c, Yunmu.u, 1, "cū", "cu", Head.c, 'c'),
-    cu2(Shengmu.c, Yunmu.u, 2, "cú", "cu", Head.c, 'c'),
-    cu3(Shengmu.c, Yunmu.u, 3, "cǔ", "cu", Head.c, 'c'),
-    cu4(Shengmu.c, Yunmu.u, 4, "cù", "cu", Head.c, 'c'),
-    cuan1(Shengmu.c, Yunmu.uan, 1, "cuān", "cuan", Head.c, 'c'),
-    cuan2(Shengmu.c, Yunmu.uan, 2, "cuán", "cuan", Head.c, 'c'),
-    cuan4(Shengmu.c, Yunmu.uan, 4, "cuàn", "cuan", Head.c, 'c'),
-    cui1(Shengmu.c, Yunmu.ui, 1, "cuī", "cui", Head.c, 'c'),
-    cui2(Shengmu.c, Yunmu.ui, 2, "cuí", "cui", Head.c, 'c'),
-    cui3(Shengmu.c, Yunmu.ui, 3, "cuǐ", "cui", Head.c, 'c'),
-    cui4(Shengmu.c, Yunmu.ui, 4, "cuì", "cui", Head.c, 'c'),
-    cun1(Shengmu.c, Yunmu.un, 1, "cūn", "cun", Head.c, 'c'),
-    cun2(Shengmu.c, Yunmu.un, 2, "cún", "cun", Head.c, 'c'),
-    cun3(Shengmu.c, Yunmu.un, 3, "cǔn", "cun", Head.c, 'c'),
-    cun4(Shengmu.c, Yunmu.un, 4, "cùn", "cun", Head.c, 'c'),
-    cuo1(Shengmu.c, Yunmu.uo, 1, "cuō", "cuo", Head.c, 'c'),
-    cuo2(Shengmu.c, Yunmu.uo, 2, "cuó", "cuo", Head.c, 'c'),
-    cuo3(Shengmu.c, Yunmu.uo, 3, "cuǒ", "cuo", Head.c, 'c'),
-    cuo4(Shengmu.c, Yunmu.uo, 4, "cuò", "cuo", Head.c, 'c'),
-    da1(Shengmu.d, Yunmu.a, 1, "dā", "da", Head.d, 'd'),
-    da2(Shengmu.d, Yunmu.a, 2, "dá", "da", Head.d, 'd'),
-    da3(Shengmu.d, Yunmu.a, 3, "dǎ", "da", Head.d, 'd'),
-    da4(Shengmu.d, Yunmu.a, 4, "dà", "da", Head.d, 'd'),
-    da5(Shengmu.d, Yunmu.a, 5, "da", "da", Head.d, 'd'),
-    dai1(Shengmu.d, Yunmu.ai, 1, "dāi", "dai", Head.d, 'd'),
-    dai3(Shengmu.d, Yunmu.ai, 3, "dǎi", "dai", Head.d, 'd'),
-    dai4(Shengmu.d, Yunmu.ai, 4, "dài", "dai", Head.d, 'd'),
-    dan1(Shengmu.d, Yunmu.an, 1, "dān", "dan", Head.d, 'd'),
-    dan2(Shengmu.d, Yunmu.an, 2, "dán", "dan", Head.d, 'd'),
-    dan3(Shengmu.d, Yunmu.an, 3, "dǎn", "dan", Head.d, 'd'),
-    dan4(Shengmu.d, Yunmu.an, 4, "dàn", "dan", Head.d, 'd'),
-    dang1(Shengmu.d, Yunmu.ang, 1, "dāng", "dang", Head.d, 'd'),
-    dang3(Shengmu.d, Yunmu.ang, 3, "dǎng", "dang", Head.d, 'd'),
-    dang4(Shengmu.d, Yunmu.ang, 4, "dàng", "dang", Head.d, 'd'),
-    dao1(Shengmu.d, Yunmu.ao, 1, "dāo", "dao", Head.d, 'd'),
-    dao2(Shengmu.d, Yunmu.ao, 2, "dáo", "dao", Head.d, 'd'),
-    dao3(Shengmu.d, Yunmu.ao, 3, "dǎo", "dao", Head.d, 'd'),
-    dao4(Shengmu.d, Yunmu.ao, 4, "dào", "dao", Head.d, 'd'),
-    de1(Shengmu.d, Yunmu.e, 1, "dē", "de", Head.d, 'd'),
-    de2(Shengmu.d, Yunmu.e, 2, "dé", "de", Head.d, 'd'),
-    de5(Shengmu.d, Yunmu.e, 5, "de", "de", Head.d, 'd'),
-    dei1(Shengmu.d, Yunmu.ei, 1, "dēi", "dei", Head.d, 'd'),
-    dei3(Shengmu.d, Yunmu.ei, 3, "děi", "dei", Head.d, 'd'),
-    den1(Shengmu.d, Yunmu.en, 1, "dēn", "den", Head.d, 'd'),
-    den4(Shengmu.d, Yunmu.en, 4, "dèn", "den", Head.d, 'd'),
-    deng1(Shengmu.d, Yunmu.eng, 1, "dēng", "deng", Head.d, 'd'),
-    deng3(Shengmu.d, Yunmu.eng, 3, "děng", "deng", Head.d, 'd'),
-    deng4(Shengmu.d, Yunmu.eng, 4, "dèng", "deng", Head.d, 'd'),
-    di1(Shengmu.d, Yunmu.i, 1, "dī", "di", Head.d, 'd'),
-    di2(Shengmu.d, Yunmu.i, 2, "dí", "di", Head.d, 'd'),
-    di3(Shengmu.d, Yunmu.i, 3, "dǐ", "di", Head.d, 'd'),
-    di4(Shengmu.d, Yunmu.i, 4, "dì", "di", Head.d, 'd'),
-    dia3(Shengmu.d, Yunmu.ia, 3, "diǎ", "dia", Head.d, 'd'),
-    dian1(Shengmu.d, Yunmu.ian, 1, "diān", "dian", Head.d, 'd'),
-    dian3(Shengmu.d, Yunmu.ian, 3, "diǎn", "dian", Head.d, 'd'),
-    dian4(Shengmu.d, Yunmu.ian, 4, "diàn", "dian", Head.d, 'd'),
-    diao1(Shengmu.d, Yunmu.iao, 1, "diāo", "diao", Head.d, 'd'),
-    diao3(Shengmu.d, Yunmu.iao, 3, "diǎo", "diao", Head.d, 'd'),
-    diao4(Shengmu.d, Yunmu.iao, 4, "diào", "diao", Head.d, 'd'),
-    die1(Shengmu.d, Yunmu.ie, 1, "diē", "die", Head.d, 'd'),
-    die2(Shengmu.d, Yunmu.ie, 2, "dié", "die", Head.d, 'd'),
-    die4(Shengmu.d, Yunmu.ie, 4, "diè", "die", Head.d, 'd'),
-    ding1(Shengmu.d, Yunmu.ing, 1, "dīng", "ding", Head.d, 'd'),
-    ding2(Shengmu.d, Yunmu.ing, 2, "díng", "ding", Head.d, 'd'),
-    ding3(Shengmu.d, Yunmu.ing, 3, "dǐng", "ding", Head.d, 'd'),
-    ding4(Shengmu.d, Yunmu.ing, 4, "dìng", "ding", Head.d, 'd'),
-    diu1(Shengmu.d, Yunmu.iu, 1, "diū", "diu", Head.d, 'd'),
-    dong1(Shengmu.d, Yunmu.ong, 1, "dōng", "dong", Head.d, 'd'),
-    dong3(Shengmu.d, Yunmu.ong, 3, "dǒng", "dong", Head.d, 'd'),
-    dong4(Shengmu.d, Yunmu.ong, 4, "dòng", "dong", Head.d, 'd'),
-    dou1(Shengmu.d, Yunmu.ou, 1, "dōu", "dou", Head.d, 'd'),
-    dou2(Shengmu.d, Yunmu.ou, 2, "dóu", "dou", Head.d, 'd'),
-    dou3(Shengmu.d, Yunmu.ou, 3, "dǒu", "dou", Head.d, 'd'),
-    dou4(Shengmu.d, Yunmu.ou, 4, "dòu", "dou", Head.d, 'd'),
-    du1(Shengmu.d, Yunmu.u, 1, "dū", "du", Head.d, 'd'),
-    du2(Shengmu.d, Yunmu.u, 2, "dú", "du", Head.d, 'd'),
-    du3(Shengmu.d, Yunmu.u, 3, "dǔ", "du", Head.d, 'd'),
-    du4(Shengmu.d, Yunmu.u, 4, "dù", "du", Head.d, 'd'),
-    duan1(Shengmu.d, Yunmu.uan, 1, "duān", "duan", Head.d, 'd'),
-    duan3(Shengmu.d, Yunmu.uan, 3, "duǎn", "duan", Head.d, 'd'),
-    duan4(Shengmu.d, Yunmu.uan, 4, "duàn", "duan", Head.d, 'd'),
-    dui1(Shengmu.d, Yunmu.ui, 1, "duī", "dui", Head.d, 'd'),
-    dui3(Shengmu.d, Yunmu.ui, 3, "duǐ", "dui", Head.d, 'd'),
-    dui4(Shengmu.d, Yunmu.ui, 4, "duì", "dui", Head.d, 'd'),
-    dun1(Shengmu.d, Yunmu.un, 1, "dūn", "dun", Head.d, 'd'),
-    dun2(Shengmu.d, Yunmu.un, 2, "dún", "dun", Head.d, 'd'),
-    dun3(Shengmu.d, Yunmu.un, 3, "dǔn", "dun", Head.d, 'd'),
-    dun4(Shengmu.d, Yunmu.un, 4, "dùn", "dun", Head.d, 'd'),
-    duo1(Shengmu.d, Yunmu.uo, 1, "duō", "duo", Head.d, 'd'),
-    duo2(Shengmu.d, Yunmu.uo, 2, "duó", "duo", Head.d, 'd'),
-    duo3(Shengmu.d, Yunmu.uo, 3, "duǒ", "duo", Head.d, 'd'),
-    duo4(Shengmu.d, Yunmu.uo, 4, "duò", "duo", Head.d, 'd'),
-    duo5(Shengmu.d, Yunmu.uo, 5, "duo", "duo", Head.d, 'd'),
-    e1(Shengmu.none, Yunmu.e, 1, "ē", "e", Head.e, 'e'),
-    e2(Shengmu.none, Yunmu.e, 2, "é", "e", Head.e, 'e'),
-    e3(Shengmu.none, Yunmu.e, 3, "ě", "e", Head.e, 'e'),
-    e4(Shengmu.none, Yunmu.e, 4, "è", "e", Head.e, 'e'),
-    ei1(Shengmu.none, Yunmu.ei, 1, "ēi", "ei", Head.e, 'e'),
-    ei2(Shengmu.none, Yunmu.ei, 2, "éi", "ei", Head.e, 'e'),
-    ei3(Shengmu.none, Yunmu.ei, 3, "ěi", "ei", Head.e, 'e'),
-    ei4(Shengmu.none, Yunmu.ei, 4, "èi", "ei", Head.e, 'e'),
-    en1(Shengmu.none, Yunmu.en, 1, "ēn", "en", Head.e, 'e'),
-    en3(Shengmu.none, Yunmu.en, 3, "ěn", "en", Head.e, 'e'),
-    en4(Shengmu.none, Yunmu.en, 4, "èn", "en", Head.e, 'e'),
-    eng1(Shengmu.none, Yunmu.eng, 1, "ēng", "eng", Head.e, 'e'),
-    er2(Shengmu.none, Yunmu.er, 2, "ér", "er", Head.e, 'e'),
-    er3(Shengmu.none, Yunmu.er, 3, "ěr", "er", Head.e, 'e'),
-    er4(Shengmu.none, Yunmu.er, 4, "èr", "er", Head.e, 'e'),
-    er5(Shengmu.none, Yunmu.er, 5, "er", "er", Head.e, 'e'),
-    fa1(Shengmu.f, Yunmu.a, 1, "fā", "fa", Head.f, 'f'),
-    fa2(Shengmu.f, Yunmu.a, 2, "fá", "fa", Head.f, 'f'),
-    fa3(Shengmu.f, Yunmu.a, 3, "fǎ", "fa", Head.f, 'f'),
-    fa4(Shengmu.f, Yunmu.a, 4, "fà", "fa", Head.f, 'f'),
-    fan1(Shengmu.f, Yunmu.an, 1, "fān", "fan", Head.f, 'f'),
-    fan2(Shengmu.f, Yunmu.an, 2, "fán", "fan", Head.f, 'f'),
-    fan3(Shengmu.f, Yunmu.an, 3, "fǎn", "fan", Head.f, 'f'),
-    fan4(Shengmu.f, Yunmu.an, 4, "fàn", "fan", Head.f, 'f'),
-    fang1(Shengmu.f, Yunmu.ang, 1, "fāng", "fang", Head.f, 'f'),
-    fang2(Shengmu.f, Yunmu.ang, 2, "fáng", "fang", Head.f, 'f'),
-    fang3(Shengmu.f, Yunmu.ang, 3, "fǎng", "fang", Head.f, 'f'),
-    fang4(Shengmu.f, Yunmu.ang, 4, "fàng", "fang", Head.f, 'f'),
-    fang5(Shengmu.f, Yunmu.ang, 5, "fang", "fang", Head.f, 'f'),
-    fei1(Shengmu.f, Yunmu.ei, 1, "fēi", "fei", Head.f, 'f'),
-    fei2(Shengmu.f, Yunmu.ei, 2, "féi", "fei", Head.f, 'f'),
-    fei3(Shengmu.f, Yunmu.ei, 3, "fěi", "fei", Head.f, 'f'),
-    fei4(Shengmu.f, Yunmu.ei, 4, "fèi", "fei", Head.f, 'f'),
-    fen1(Shengmu.f, Yunmu.en, 1, "fēn", "fen", Head.f, 'f'),
-    fen2(Shengmu.f, Yunmu.en, 2, "fén", "fen", Head.f, 'f'),
-    fen3(Shengmu.f, Yunmu.en, 3, "fěn", "fen", Head.f, 'f'),
-    fen4(Shengmu.f, Yunmu.en, 4, "fèn", "fen", Head.f, 'f'),
-    feng1(Shengmu.f, Yunmu.eng, 1, "fēng", "feng", Head.f, 'f'),
-    feng2(Shengmu.f, Yunmu.eng, 2, "féng", "feng", Head.f, 'f'),
-    feng3(Shengmu.f, Yunmu.eng, 3, "fěng", "feng", Head.f, 'f'),
-    feng4(Shengmu.f, Yunmu.eng, 4, "fèng", "feng", Head.f, 'f'),
-    fiao4(Shengmu.f, Yunmu.iao, 4, "fiào", "fiao", Head.f, 'f'),
-    fo2(Shengmu.f, Yunmu.o, 2, "fó", "fo", Head.f, 'f'),
-    fou1(Shengmu.f, Yunmu.ou, 1, "fōu", "fou", Head.f, 'f'),
-    fou2(Shengmu.f, Yunmu.ou, 2, "fóu", "fou", Head.f, 'f'),
-    fou3(Shengmu.f, Yunmu.ou, 3, "fǒu", "fou", Head.f, 'f'),
-    fou4(Shengmu.f, Yunmu.ou, 4, "fòu", "fou", Head.f, 'f'),
-    fu1(Shengmu.f, Yunmu.u, 1, "fū", "fu", Head.f, 'f'),
-    fu2(Shengmu.f, Yunmu.u, 2, "fú", "fu", Head.f, 'f'),
-    fu3(Shengmu.f, Yunmu.u, 3, "fǔ", "fu", Head.f, 'f'),
-    fu4(Shengmu.f, Yunmu.u, 4, "fù", "fu", Head.f, 'f'),
-    fu5(Shengmu.f, Yunmu.u, 5, "fu", "fu", Head.f, 'f'),
-    ga1(Shengmu.g, Yunmu.a, 1, "gā", "ga", Head.g, 'g'),
-    ga2(Shengmu.g, Yunmu.a, 2, "gá", "ga", Head.g, 'g'),
-    ga3(Shengmu.g, Yunmu.a, 3, "gǎ", "ga", Head.g, 'g'),
-    ga4(Shengmu.g, Yunmu.a, 4, "gà", "ga", Head.g, 'g'),
-    gai1(Shengmu.g, Yunmu.ai, 1, "gāi", "gai", Head.g, 'g'),
-    gai3(Shengmu.g, Yunmu.ai, 3, "gǎi", "gai", Head.g, 'g'),
-    gai4(Shengmu.g, Yunmu.ai, 4, "gài", "gai", Head.g, 'g'),
-    gan1(Shengmu.g, Yunmu.an, 1, "gān", "gan", Head.g, 'g'),
-    gan2(Shengmu.g, Yunmu.an, 2, "gán", "gan", Head.g, 'g'),
-    gan3(Shengmu.g, Yunmu.an, 3, "gǎn", "gan", Head.g, 'g'),
-    gan4(Shengmu.g, Yunmu.an, 4, "gàn", "gan", Head.g, 'g'),
-    gang1(Shengmu.g, Yunmu.ang, 1, "gāng", "gang", Head.g, 'g'),
-    gang3(Shengmu.g, Yunmu.ang, 3, "gǎng", "gang", Head.g, 'g'),
-    gang4(Shengmu.g, Yunmu.ang, 4, "gàng", "gang", Head.g, 'g'),
-    gao1(Shengmu.g, Yunmu.ao, 1, "gāo", "gao", Head.g, 'g'),
-    gao3(Shengmu.g, Yunmu.ao, 3, "gǎo", "gao", Head.g, 'g'),
-    gao4(Shengmu.g, Yunmu.ao, 4, "gào", "gao", Head.g, 'g'),
-    ge1(Shengmu.g, Yunmu.e, 1, "gē", "ge", Head.g, 'g'),
-    ge2(Shengmu.g, Yunmu.e, 2, "gé", "ge", Head.g, 'g'),
-    ge3(Shengmu.g, Yunmu.e, 3, "gě", "ge", Head.g, 'g'),
-    ge4(Shengmu.g, Yunmu.e, 4, "gè", "ge", Head.g, 'g'),
-    gei3(Shengmu.g, Yunmu.ei, 3, "gěi", "gei", Head.g, 'g'),
-    gen1(Shengmu.g, Yunmu.en, 1, "gēn", "gen", Head.g, 'g'),
-    gen2(Shengmu.g, Yunmu.en, 2, "gén", "gen", Head.g, 'g'),
-    gen3(Shengmu.g, Yunmu.en, 3, "gěn", "gen", Head.g, 'g'),
-    gen4(Shengmu.g, Yunmu.en, 4, "gèn", "gen", Head.g, 'g'),
-    geng1(Shengmu.g, Yunmu.eng, 1, "gēng", "geng", Head.g, 'g'),
-    geng3(Shengmu.g, Yunmu.eng, 3, "gěng", "geng", Head.g, 'g'),
-    geng4(Shengmu.g, Yunmu.eng, 4, "gèng", "geng", Head.g, 'g'),
-    gong1(Shengmu.g, Yunmu.ong, 1, "gōng", "gong", Head.g, 'g'),
-    gong3(Shengmu.g, Yunmu.ong, 3, "gǒng", "gong", Head.g, 'g'),
-    gong4(Shengmu.g, Yunmu.ong, 4, "gòng", "gong", Head.g, 'g'),
-    gou1(Shengmu.g, Yunmu.ou, 1, "gōu", "gou", Head.g, 'g'),
-    gou3(Shengmu.g, Yunmu.ou, 3, "gǒu", "gou", Head.g, 'g'),
-    gou4(Shengmu.g, Yunmu.ou, 4, "gòu", "gou", Head.g, 'g'),
-    gu1(Shengmu.g, Yunmu.u, 1, "gū", "gu", Head.g, 'g'),
-    gu2(Shengmu.g, Yunmu.u, 2, "gú", "gu", Head.g, 'g'),
-    gu3(Shengmu.g, Yunmu.u, 3, "gǔ", "gu", Head.g, 'g'),
-    gu4(Shengmu.g, Yunmu.u, 4, "gù", "gu", Head.g, 'g'),
-    gua1(Shengmu.g, Yunmu.ua, 1, "guā", "gua", Head.g, 'g'),
-    gua3(Shengmu.g, Yunmu.ua, 3, "guǎ", "gua", Head.g, 'g'),
-    gua4(Shengmu.g, Yunmu.ua, 4, "guà", "gua", Head.g, 'g'),
-    guai1(Shengmu.g, Yunmu.uai, 1, "guāi", "guai", Head.g, 'g'),
-    guai2(Shengmu.g, Yunmu.uai, 2, "guái", "guai", Head.g, 'g'),
-    guai3(Shengmu.g, Yunmu.uai, 3, "guǎi", "guai", Head.g, 'g'),
-    guai4(Shengmu.g, Yunmu.uai, 4, "guài", "guai", Head.g, 'g'),
-    guan1(Shengmu.g, Yunmu.uan, 1, "guān", "guan", Head.g, 'g'),
-    guan3(Shengmu.g, Yunmu.uan, 3, "guǎn", "guan", Head.g, 'g'),
-    guan4(Shengmu.g, Yunmu.uan, 4, "guàn", "guan", Head.g, 'g'),
-    guang1(Shengmu.g, Yunmu.uang, 1, "guāng", "guang", Head.g, 'g'),
-    guang3(Shengmu.g, Yunmu.uang, 3, "guǎng", "guang", Head.g, 'g'),
-    guang4(Shengmu.g, Yunmu.uang, 4, "guàng", "guang", Head.g, 'g'),
-    gui1(Shengmu.g, Yunmu.ui, 1, "guī", "gui", Head.g, 'g'),
-    gui2(Shengmu.g, Yunmu.ui, 2, "guí", "gui", Head.g, 'g'),
-    gui3(Shengmu.g, Yunmu.ui, 3, "guǐ", "gui", Head.g, 'g'),
-    gui4(Shengmu.g, Yunmu.ui, 4, "guì", "gui", Head.g, 'g'),
-    gun1(Shengmu.g, Yunmu.un, 1, "gūn", "gun", Head.g, 'g'),
-    gun3(Shengmu.g, Yunmu.un, 3, "gǔn", "gun", Head.g, 'g'),
-    gun4(Shengmu.g, Yunmu.un, 4, "gùn", "gun", Head.g, 'g'),
-    guo1(Shengmu.g, Yunmu.uo, 1, "guō", "guo", Head.g, 'g'),
-    guo2(Shengmu.g, Yunmu.uo, 2, "guó", "guo", Head.g, 'g'),
-    guo3(Shengmu.g, Yunmu.uo, 3, "guǒ", "guo", Head.g, 'g'),
-    guo4(Shengmu.g, Yunmu.uo, 4, "guò", "guo", Head.g, 'g'),
-    guo5(Shengmu.g, Yunmu.uo, 5, "guo", "guo", Head.g, 'g'),
-    ha1(Shengmu.h, Yunmu.a, 1, "hā", "ha", Head.h, 'h'),
-    ha2(Shengmu.h, Yunmu.a, 2, "há", "ha", Head.h, 'h'),
-    ha3(Shengmu.h, Yunmu.a, 3, "hǎ", "ha", Head.h, 'h'),
-    ha4(Shengmu.h, Yunmu.a, 4, "hà", "ha", Head.h, 'h'),
-    hai1(Shengmu.h, Yunmu.ai, 1, "hāi", "hai", Head.h, 'h'),
-    hai2(Shengmu.h, Yunmu.ai, 2, "hái", "hai", Head.h, 'h'),
-    hai3(Shengmu.h, Yunmu.ai, 3, "hǎi", "hai", Head.h, 'h'),
-    hai4(Shengmu.h, Yunmu.ai, 4, "hài", "hai", Head.h, 'h'),
-    han1(Shengmu.h, Yunmu.an, 1, "hān", "han", Head.h, 'h'),
-    han2(Shengmu.h, Yunmu.an, 2, "hán", "han", Head.h, 'h'),
-    han3(Shengmu.h, Yunmu.an, 3, "hǎn", "han", Head.h, 'h'),
-    han4(Shengmu.h, Yunmu.an, 4, "hàn", "han", Head.h, 'h'),
-    han5(Shengmu.h, Yunmu.an, 5, "han", "han", Head.h, 'h'),
-    hang1(Shengmu.h, Yunmu.ang, 1, "hāng", "hang", Head.h, 'h'),
-    hang2(Shengmu.h, Yunmu.ang, 2, "háng", "hang", Head.h, 'h'),
-    hang3(Shengmu.h, Yunmu.ang, 3, "hǎng", "hang", Head.h, 'h'),
-    hang4(Shengmu.h, Yunmu.ang, 4, "hàng", "hang", Head.h, 'h'),
-    hao1(Shengmu.h, Yunmu.ao, 1, "hāo", "hao", Head.h, 'h'),
-    hao2(Shengmu.h, Yunmu.ao, 2, "háo", "hao", Head.h, 'h'),
-    hao3(Shengmu.h, Yunmu.ao, 3, "hǎo", "hao", Head.h, 'h'),
-    hao4(Shengmu.h, Yunmu.ao, 4, "hào", "hao", Head.h, 'h'),
-    he1(Shengmu.h, Yunmu.e, 1, "hē", "he", Head.h, 'h'),
-    he2(Shengmu.h, Yunmu.e, 2, "hé", "he", Head.h, 'h'),
-    he4(Shengmu.h, Yunmu.e, 4, "hè", "he", Head.h, 'h'),
-    hei1(Shengmu.h, Yunmu.ei, 1, "hēi", "hei", Head.h, 'h'),
-    hen1(Shengmu.h, Yunmu.en, 1, "hēn", "hen", Head.h, 'h'),
-    hen2(Shengmu.h, Yunmu.en, 2, "hén", "hen", Head.h, 'h'),
-    hen3(Shengmu.h, Yunmu.en, 3, "hěn", "hen", Head.h, 'h'),
-    hen4(Shengmu.h, Yunmu.en, 4, "hèn", "hen", Head.h, 'h'),
-    heng1(Shengmu.h, Yunmu.eng, 1, "hēng", "heng", Head.h, 'h'),
-    heng2(Shengmu.h, Yunmu.eng, 2, "héng", "heng", Head.h, 'h'),
-    heng4(Shengmu.h, Yunmu.eng, 4, "hèng", "heng", Head.h, 'h'),
-    hong1(Shengmu.h, Yunmu.ong, 1, "hōng", "hong", Head.h, 'h'),
-    hong2(Shengmu.h, Yunmu.ong, 2, "hóng", "hong", Head.h, 'h'),
-    hong3(Shengmu.h, Yunmu.ong, 3, "hǒng", "hong", Head.h, 'h'),
-    hong4(Shengmu.h, Yunmu.ong, 4, "hòng", "hong", Head.h, 'h'),
-    hou1(Shengmu.h, Yunmu.ou, 1, "hōu", "hou", Head.h, 'h'),
-    hou2(Shengmu.h, Yunmu.ou, 2, "hóu", "hou", Head.h, 'h'),
-    hou3(Shengmu.h, Yunmu.ou, 3, "hǒu", "hou", Head.h, 'h'),
-    hou4(Shengmu.h, Yunmu.ou, 4, "hòu", "hou", Head.h, 'h'),
-    hu1(Shengmu.h, Yunmu.u, 1, "hū", "hu", Head.h, 'h'),
-    hu2(Shengmu.h, Yunmu.u, 2, "hú", "hu", Head.h, 'h'),
-    hu3(Shengmu.h, Yunmu.u, 3, "hǔ", "hu", Head.h, 'h'),
-    hu4(Shengmu.h, Yunmu.u, 4, "hù", "hu", Head.h, 'h'),
-    hua1(Shengmu.h, Yunmu.ua, 1, "huā", "hua", Head.h, 'h'),
-    hua2(Shengmu.h, Yunmu.ua, 2, "huá", "hua", Head.h, 'h'),
-    hua3(Shengmu.h, Yunmu.ua, 3, "huǎ", "hua", Head.h, 'h'),
-    hua4(Shengmu.h, Yunmu.ua, 4, "huà", "hua", Head.h, 'h'),
-    huai1(Shengmu.h, Yunmu.uai, 1, "huāi", "huai", Head.h, 'h'),
-    huai2(Shengmu.h, Yunmu.uai, 2, "huái", "huai", Head.h, 'h'),
-    huai4(Shengmu.h, Yunmu.uai, 4, "huài", "huai", Head.h, 'h'),
-    huan1(Shengmu.h, Yunmu.uan, 1, "huān", "huan", Head.h, 'h'),
-    huan2(Shengmu.h, Yunmu.uan, 2, "huán", "huan", Head.h, 'h'),
-    huan3(Shengmu.h, Yunmu.uan, 3, "huǎn", "huan", Head.h, 'h'),
-    huan4(Shengmu.h, Yunmu.uan, 4, "huàn", "huan", Head.h, 'h'),
-    huang1(Shengmu.h, Yunmu.uang, 1, "huāng", "huang", Head.h, 'h'),
-    huang2(Shengmu.h, Yunmu.uang, 2, "huáng", "huang", Head.h, 'h'),
-    huang3(Shengmu.h, Yunmu.uang, 3, "huǎng", "huang", Head.h, 'h'),
-    huang4(Shengmu.h, Yunmu.uang, 4, "huàng", "huang", Head.h, 'h'),
-    hui1(Shengmu.h, Yunmu.ui, 1, "huī", "hui", Head.h, 'h'),
-    hui2(Shengmu.h, Yunmu.ui, 2, "huí", "hui", Head.h, 'h'),
-    hui3(Shengmu.h, Yunmu.ui, 3, "huǐ", "hui", Head.h, 'h'),
-    hui4(Shengmu.h, Yunmu.ui, 4, "huì", "hui", Head.h, 'h'),
-    hun1(Shengmu.h, Yunmu.un, 1, "hūn", "hun", Head.h, 'h'),
-    hun2(Shengmu.h, Yunmu.un, 2, "hún", "hun", Head.h, 'h'),
-    hun3(Shengmu.h, Yunmu.un, 3, "hǔn", "hun", Head.h, 'h'),
-    hun4(Shengmu.h, Yunmu.un, 4, "hùn", "hun", Head.h, 'h'),
-    huo1(Shengmu.h, Yunmu.uo, 1, "huō", "huo", Head.h, 'h'),
-    huo2(Shengmu.h, Yunmu.uo, 2, "huó", "huo", Head.h, 'h'),
-    huo3(Shengmu.h, Yunmu.uo, 3, "huǒ", "huo", Head.h, 'h'),
-    huo4(Shengmu.h, Yunmu.uo, 4, "huò", "huo", Head.h, 'h'),
-    huo5(Shengmu.h, Yunmu.uo, 5, "huo", "huo", Head.h, 'h'),
-    ja4(Shengmu.j, Yunmu.a, 4, "jà", "ja", Head.j, 'j'),
-    ji1(Shengmu.j, Yunmu.i, 1, "jī", "ji", Head.j, 'j'),
-    ji2(Shengmu.j, Yunmu.i, 2, "jí", "ji", Head.j, 'j'),
-    ji3(Shengmu.j, Yunmu.i, 3, "jǐ", "ji", Head.j, 'j'),
-    ji4(Shengmu.j, Yunmu.i, 4, "jì", "ji", Head.j, 'j'),
-    ji5(Shengmu.j, Yunmu.i, 5, "ji", "ji", Head.j, 'j'),
-    jia1(Shengmu.j, Yunmu.ia, 1, "jiā", "jia", Head.j, 'j'),
-    jia2(Shengmu.j, Yunmu.ia, 2, "jiá", "jia", Head.j, 'j'),
-    jia3(Shengmu.j, Yunmu.ia, 3, "jiǎ", "jia", Head.j, 'j'),
-    jia4(Shengmu.j, Yunmu.ia, 4, "jià", "jia", Head.j, 'j'),
-    jia5(Shengmu.j, Yunmu.ia, 5, "jia", "jia", Head.j, 'j'),
-    jian1(Shengmu.j, Yunmu.ian, 1, "jiān", "jian", Head.j, 'j'),
-    jian3(Shengmu.j, Yunmu.ian, 3, "jiǎn", "jian", Head.j, 'j'),
-    jian4(Shengmu.j, Yunmu.ian, 4, "jiàn", "jian", Head.j, 'j'),
-    jiang1(Shengmu.j, Yunmu.iang, 1, "jiāng", "jiang", Head.j, 'j'),
-    jiang3(Shengmu.j, Yunmu.iang, 3, "jiǎng", "jiang", Head.j, 'j'),
-    jiang4(Shengmu.j, Yunmu.iang, 4, "jiàng", "jiang", Head.j, 'j'),
-    jiao1(Shengmu.j, Yunmu.iao, 1, "jiāo", "jiao", Head.j, 'j'),
-    jiao2(Shengmu.j, Yunmu.iao, 2, "jiáo", "jiao", Head.j, 'j'),
-    jiao3(Shengmu.j, Yunmu.iao, 3, "jiǎo", "jiao", Head.j, 'j'),
-    jiao4(Shengmu.j, Yunmu.iao, 4, "jiào", "jiao", Head.j, 'j'),
-    jie1(Shengmu.j, Yunmu.ie, 1, "jiē", "jie", Head.j, 'j'),
-    jie2(Shengmu.j, Yunmu.ie, 2, "jié", "jie", Head.j, 'j'),
-    jie3(Shengmu.j, Yunmu.ie, 3, "jiě", "jie", Head.j, 'j'),
-    jie4(Shengmu.j, Yunmu.ie, 4, "jiè", "jie", Head.j, 'j'),
-    jie5(Shengmu.j, Yunmu.ie, 5, "jie", "jie", Head.j, 'j'),
-    jin1(Shengmu.j, Yunmu.in, 1, "jīn", "jin", Head.j, 'j'),
-    jin3(Shengmu.j, Yunmu.in, 3, "jǐn", "jin", Head.j, 'j'),
-    jin4(Shengmu.j, Yunmu.in, 4, "jìn", "jin", Head.j, 'j'),
-    jing1(Shengmu.j, Yunmu.ing, 1, "jīng", "jing", Head.j, 'j'),
-    jing3(Shengmu.j, Yunmu.ing, 3, "jǐng", "jing", Head.j, 'j'),
-    jing4(Shengmu.j, Yunmu.ing, 4, "jìng", "jing", Head.j, 'j'),
-    jiong1(Shengmu.j, Yunmu.iong, 1, "jiōng", "jiong", Head.j, 'j'),
-    jiong3(Shengmu.j, Yunmu.iong, 3, "jiǒng", "jiong", Head.j, 'j'),
-    jiong4(Shengmu.j, Yunmu.iong, 4, "jiòng", "jiong", Head.j, 'j'),
-    jiu1(Shengmu.j, Yunmu.iu, 1, "jiū", "jiu", Head.j, 'j'),
-    jiu3(Shengmu.j, Yunmu.iu, 3, "jiǔ", "jiu", Head.j, 'j'),
-    jiu4(Shengmu.j, Yunmu.iu, 4, "jiù", "jiu", Head.j, 'j'),
-    ju1(Shengmu.j, Yunmu.u, 1, "jū", "ju", Head.j, 'j'),
-    ju2(Shengmu.j, Yunmu.u, 2, "jú", "ju", Head.j, 'j'),
-    ju3(Shengmu.j, Yunmu.u, 3, "jǔ", "ju", Head.j, 'j'),
-    ju4(Shengmu.j, Yunmu.u, 4, "jù", "ju", Head.j, 'j'),
-    ju5(Shengmu.j, Yunmu.u, 5, "ju", "ju", Head.j, 'j'),
-    juan1(Shengmu.j, Yunmu.uan, 1, "juān", "juan", Head.j, 'j'),
-    juan2(Shengmu.j, Yunmu.uan, 2, "juán", "juan", Head.j, 'j'),
-    juan3(Shengmu.j, Yunmu.uan, 3, "juǎn", "juan", Head.j, 'j'),
-    juan4(Shengmu.j, Yunmu.uan, 4, "juàn", "juan", Head.j, 'j'),
-    jue1(Shengmu.j, Yunmu.ue, 1, "juē", "jue", Head.j, 'j'),
-    jue2(Shengmu.j, Yunmu.ue, 2, "jué", "jue", Head.j, 'j'),
-    jue3(Shengmu.j, Yunmu.ue, 3, "juě", "jue", Head.j, 'j'),
-    jue4(Shengmu.j, Yunmu.ue, 4, "juè", "jue", Head.j, 'j'),
-    jun1(Shengmu.j, Yunmu.un, 1, "jūn", "jun", Head.j, 'j'),
-    jun3(Shengmu.j, Yunmu.un, 3, "jǔn", "jun", Head.j, 'j'),
-    jun4(Shengmu.j, Yunmu.un, 4, "jùn", "jun", Head.j, 'j'),
-    ka1(Shengmu.k, Yunmu.a, 1, "kā", "ka", Head.k, 'k'),
-    ka3(Shengmu.k, Yunmu.a, 3, "kǎ", "ka", Head.k, 'k'),
-    ka4(Shengmu.k, Yunmu.a, 4, "kà", "ka", Head.k, 'k'),
-    kai1(Shengmu.k, Yunmu.ai, 1, "kāi", "kai", Head.k, 'k'),
-    kai3(Shengmu.k, Yunmu.ai, 3, "kǎi", "kai", Head.k, 'k'),
-    kai4(Shengmu.k, Yunmu.ai, 4, "kài", "kai", Head.k, 'k'),
-    kan1(Shengmu.k, Yunmu.an, 1, "kān", "kan", Head.k, 'k'),
-    kan3(Shengmu.k, Yunmu.an, 3, "kǎn", "kan", Head.k, 'k'),
-    kan4(Shengmu.k, Yunmu.an, 4, "kàn", "kan", Head.k, 'k'),
-    kang1(Shengmu.k, Yunmu.ang, 1, "kāng", "kang", Head.k, 'k'),
-    kang2(Shengmu.k, Yunmu.ang, 2, "káng", "kang", Head.k, 'k'),
-    kang3(Shengmu.k, Yunmu.ang, 3, "kǎng", "kang", Head.k, 'k'),
-    kang4(Shengmu.k, Yunmu.ang, 4, "kàng", "kang", Head.k, 'k'),
-    kao1(Shengmu.k, Yunmu.ao, 1, "kāo", "kao", Head.k, 'k'),
-    kao2(Shengmu.k, Yunmu.ao, 2, "káo", "kao", Head.k, 'k'),
-    kao3(Shengmu.k, Yunmu.ao, 3, "kǎo", "kao", Head.k, 'k'),
-    kao4(Shengmu.k, Yunmu.ao, 4, "kào", "kao", Head.k, 'k'),
-    ke1(Shengmu.k, Yunmu.e, 1, "kē", "ke", Head.k, 'k'),
-    ke2(Shengmu.k, Yunmu.e, 2, "ké", "ke", Head.k, 'k'),
-    ke3(Shengmu.k, Yunmu.e, 3, "kě", "ke", Head.k, 'k'),
-    ke4(Shengmu.k, Yunmu.e, 4, "kè", "ke", Head.k, 'k'),
-    ke5(Shengmu.k, Yunmu.e, 5, "ke", "ke", Head.k, 'k'),
-    kei1(Shengmu.k, Yunmu.ei, 1, "kēi", "kei", Head.k, 'k'),
-    ken3(Shengmu.k, Yunmu.en, 3, "kěn", "ken", Head.k, 'k'),
-    ken4(Shengmu.k, Yunmu.en, 4, "kèn", "ken", Head.k, 'k'),
-    keng1(Shengmu.k, Yunmu.eng, 1, "kēng", "keng", Head.k, 'k'),
-    keng3(Shengmu.k, Yunmu.eng, 3, "kěng", "keng", Head.k, 'k'),
-    kong1(Shengmu.k, Yunmu.ong, 1, "kōng", "kong", Head.k, 'k'),
-    kong3(Shengmu.k, Yunmu.ong, 3, "kǒng", "kong", Head.k, 'k'),
-    kong4(Shengmu.k, Yunmu.ong, 4, "kòng", "kong", Head.k, 'k'),
-    kou1(Shengmu.k, Yunmu.ou, 1, "kōu", "kou", Head.k, 'k'),
-    kou3(Shengmu.k, Yunmu.ou, 3, "kǒu", "kou", Head.k, 'k'),
-    kou4(Shengmu.k, Yunmu.ou, 4, "kòu", "kou", Head.k, 'k'),
-    ku1(Shengmu.k, Yunmu.u, 1, "kū", "ku", Head.k, 'k'),
-    ku3(Shengmu.k, Yunmu.u, 3, "kǔ", "ku", Head.k, 'k'),
-    ku4(Shengmu.k, Yunmu.u, 4, "kù", "ku", Head.k, 'k'),
-    kua1(Shengmu.k, Yunmu.ua, 1, "kuā", "kua", Head.k, 'k'),
-    kua3(Shengmu.k, Yunmu.ua, 3, "kuǎ", "kua", Head.k, 'k'),
-    kua4(Shengmu.k, Yunmu.ua, 4, "kuà", "kua", Head.k, 'k'),
-    kuai1(Shengmu.k, Yunmu.uai, 1, "kuāi", "kuai", Head.k, 'k'),
-    kuai3(Shengmu.k, Yunmu.uai, 3, "kuǎi", "kuai", Head.k, 'k'),
-    kuai4(Shengmu.k, Yunmu.uai, 4, "kuài", "kuai", Head.k, 'k'),
-    kuan1(Shengmu.k, Yunmu.uan, 1, "kuān", "kuan", Head.k, 'k'),
-    kuan3(Shengmu.k, Yunmu.uan, 3, "kuǎn", "kuan", Head.k, 'k'),
-    kuang1(Shengmu.k, Yunmu.uang, 1, "kuāng", "kuang", Head.k, 'k'),
-    kuang2(Shengmu.k, Yunmu.uang, 2, "kuáng", "kuang", Head.k, 'k'),
-    kuang3(Shengmu.k, Yunmu.uang, 3, "kuǎng", "kuang", Head.k, 'k'),
-    kuang4(Shengmu.k, Yunmu.uang, 4, "kuàng", "kuang", Head.k, 'k'),
-    kui1(Shengmu.k, Yunmu.ui, 1, "kuī", "kui", Head.k, 'k'),
-    kui2(Shengmu.k, Yunmu.ui, 2, "kuí", "kui", Head.k, 'k'),
-    kui3(Shengmu.k, Yunmu.ui, 3, "kuǐ", "kui", Head.k, 'k'),
-    kui4(Shengmu.k, Yunmu.ui, 4, "kuì", "kui", Head.k, 'k'),
-    kun1(Shengmu.k, Yunmu.un, 1, "kūn", "kun", Head.k, 'k'),
-    kun3(Shengmu.k, Yunmu.un, 3, "kǔn", "kun", Head.k, 'k'),
-    kun4(Shengmu.k, Yunmu.un, 4, "kùn", "kun", Head.k, 'k'),
-    kuo3(Shengmu.k, Yunmu.uo, 3, "kuǒ", "kuo", Head.k, 'k'),
-    kuo4(Shengmu.k, Yunmu.uo, 4, "kuò", "kuo", Head.k, 'k'),
-    la1(Shengmu.l, Yunmu.a, 1, "lā", "la", Head.l, 'l'),
-    la2(Shengmu.l, Yunmu.a, 2, "lá", "la", Head.l, 'l'),
-    la3(Shengmu.l, Yunmu.a, 3, "lǎ", "la", Head.l, 'l'),
-    la4(Shengmu.l, Yunmu.a, 4, "là", "la", Head.l, 'l'),
-    la5(Shengmu.l, Yunmu.a, 5, "la", "la", Head.l, 'l'),
-    lai2(Shengmu.l, Yunmu.ai, 2, "lái", "lai", Head.l, 'l'),
-    lai3(Shengmu.l, Yunmu.ai, 3, "lǎi", "lai", Head.l, 'l'),
-    lai4(Shengmu.l, Yunmu.ai, 4, "lài", "lai", Head.l, 'l'),
-    lan2(Shengmu.l, Yunmu.an, 2, "lán", "lan", Head.l, 'l'),
-    lan3(Shengmu.l, Yunmu.an, 3, "lǎn", "lan", Head.l, 'l'),
-    lan4(Shengmu.l, Yunmu.an, 4, "làn", "lan", Head.l, 'l'),
-    lan5(Shengmu.l, Yunmu.an, 5, "lan", "lan", Head.l, 'l'),
-    lang1(Shengmu.l, Yunmu.ang, 1, "lāng", "lang", Head.l, 'l'),
-    lang2(Shengmu.l, Yunmu.ang, 2, "láng", "lang", Head.l, 'l'),
-    lang3(Shengmu.l, Yunmu.ang, 3, "lǎng", "lang", Head.l, 'l'),
-    lang4(Shengmu.l, Yunmu.ang, 4, "làng", "lang", Head.l, 'l'),
-    lao1(Shengmu.l, Yunmu.ao, 1, "lāo", "lao", Head.l, 'l'),
-    lao2(Shengmu.l, Yunmu.ao, 2, "láo", "lao", Head.l, 'l'),
-    lao3(Shengmu.l, Yunmu.ao, 3, "lǎo", "lao", Head.l, 'l'),
-    lao4(Shengmu.l, Yunmu.ao, 4, "lào", "lao", Head.l, 'l'),
-    le1(Shengmu.l, Yunmu.e, 1, "lē", "le", Head.l, 'l'),
-    le4(Shengmu.l, Yunmu.e, 4, "lè", "le", Head.l, 'l'),
-    le5(Shengmu.l, Yunmu.e, 5, "le", "le", Head.l, 'l'),
-    lei1(Shengmu.l, Yunmu.ei, 1, "lēi", "lei", Head.l, 'l'),
-    lei2(Shengmu.l, Yunmu.ei, 2, "léi", "lei", Head.l, 'l'),
-    lei3(Shengmu.l, Yunmu.ei, 3, "lěi", "lei", Head.l, 'l'),
-    lei4(Shengmu.l, Yunmu.ei, 4, "lèi", "lei", Head.l, 'l'),
-    lei5(Shengmu.l, Yunmu.ei, 5, "lei", "lei", Head.l, 'l'),
-    leng1(Shengmu.l, Yunmu.eng, 1, "lēng", "leng", Head.l, 'l'),
-    leng2(Shengmu.l, Yunmu.eng, 2, "léng", "leng", Head.l, 'l'),
-    leng3(Shengmu.l, Yunmu.eng, 3, "lěng", "leng", Head.l, 'l'),
-    leng4(Shengmu.l, Yunmu.eng, 4, "lèng", "leng", Head.l, 'l'),
-    li1(Shengmu.l, Yunmu.i, 1, "lī", "li", Head.l, 'l'),
-    li2(Shengmu.l, Yunmu.i, 2, "lí", "li", Head.l, 'l'),
-    li3(Shengmu.l, Yunmu.i, 3, "lǐ", "li", Head.l, 'l'),
-    li4(Shengmu.l, Yunmu.i, 4, "lì", "li", Head.l, 'l'),
-    li5(Shengmu.l, Yunmu.i, 5, "li", "li", Head.l, 'l'),
-    lia3(Shengmu.l, Yunmu.ia, 3, "liǎ", "lia", Head.l, 'l'),
-    lian1(Shengmu.l, Yunmu.ian, 1, "liān", "lian", Head.l, 'l'),
-    lian2(Shengmu.l, Yunmu.ian, 2, "lián", "lian", Head.l, 'l'),
-    lian3(Shengmu.l, Yunmu.ian, 3, "liǎn", "lian", Head.l, 'l'),
-    lian4(Shengmu.l, Yunmu.ian, 4, "liàn", "lian", Head.l, 'l'),
-    liang2(Shengmu.l, Yunmu.iang, 2, "liáng", "liang", Head.l, 'l'),
-    liang3(Shengmu.l, Yunmu.iang, 3, "liǎng", "liang", Head.l, 'l'),
-    liang4(Shengmu.l, Yunmu.iang, 4, "liàng", "liang", Head.l, 'l'),
-    liang5(Shengmu.l, Yunmu.iang, 5, "liang", "liang", Head.l, 'l'),
-    liao1(Shengmu.l, Yunmu.iao, 1, "liāo", "liao", Head.l, 'l'),
-    liao2(Shengmu.l, Yunmu.iao, 2, "liáo", "liao", Head.l, 'l'),
-    liao3(Shengmu.l, Yunmu.iao, 3, "liǎo", "liao", Head.l, 'l'),
-    liao4(Shengmu.l, Yunmu.iao, 4, "liào", "liao", Head.l, 'l'),
-    lie1(Shengmu.l, Yunmu.ie, 1, "liē", "lie", Head.l, 'l'),
-    lie2(Shengmu.l, Yunmu.ie, 2, "lié", "lie", Head.l, 'l'),
-    lie3(Shengmu.l, Yunmu.ie, 3, "liě", "lie", Head.l, 'l'),
-    lie4(Shengmu.l, Yunmu.ie, 4, "liè", "lie", Head.l, 'l'),
-    lie5(Shengmu.l, Yunmu.ie, 5, "lie", "lie", Head.l, 'l'),
-    lin1(Shengmu.l, Yunmu.in, 1, "līn", "lin", Head.l, 'l'),
-    lin2(Shengmu.l, Yunmu.in, 2, "lín", "lin", Head.l, 'l'),
-    lin3(Shengmu.l, Yunmu.in, 3, "lǐn", "lin", Head.l, 'l'),
-    lin4(Shengmu.l, Yunmu.in, 4, "lìn", "lin", Head.l, 'l'),
-    ling1(Shengmu.l, Yunmu.ing, 1, "līng", "ling", Head.l, 'l'),
-    ling2(Shengmu.l, Yunmu.ing, 2, "líng", "ling", Head.l, 'l'),
-    ling3(Shengmu.l, Yunmu.ing, 3, "lǐng", "ling", Head.l, 'l'),
-    ling4(Shengmu.l, Yunmu.ing, 4, "lìng", "ling", Head.l, 'l'),
-    liu1(Shengmu.l, Yunmu.iu, 1, "liū", "liu", Head.l, 'l'),
-    liu2(Shengmu.l, Yunmu.iu, 2, "liú", "liu", Head.l, 'l'),
-    liu3(Shengmu.l, Yunmu.iu, 3, "liǔ", "liu", Head.l, 'l'),
-    liu4(Shengmu.l, Yunmu.iu, 4, "liù", "liu", Head.l, 'l'),
-    lo5(Shengmu.l, Yunmu.o, 5, "lo", "lo", Head.l, 'l'),
-    long1(Shengmu.l, Yunmu.ong, 1, "lōng", "long", Head.l, 'l'),
-    long2(Shengmu.l, Yunmu.ong, 2, "lóng", "long", Head.l, 'l'),
-    long3(Shengmu.l, Yunmu.ong, 3, "lǒng", "long", Head.l, 'l'),
-    long4(Shengmu.l, Yunmu.ong, 4, "lòng", "long", Head.l, 'l'),
-    lou1(Shengmu.l, Yunmu.ou, 1, "lōu", "lou", Head.l, 'l'),
-    lou2(Shengmu.l, Yunmu.ou, 2, "lóu", "lou", Head.l, 'l'),
-    lou3(Shengmu.l, Yunmu.ou, 3, "lǒu", "lou", Head.l, 'l'),
-    lou4(Shengmu.l, Yunmu.ou, 4, "lòu", "lou", Head.l, 'l'),
-    lou5(Shengmu.l, Yunmu.ou, 5, "lou", "lou", Head.l, 'l'),
-    lu1(Shengmu.l, Yunmu.u, 1, "lū", "lu", Head.l, 'l'),
-    lu2(Shengmu.l, Yunmu.u, 2, "lú", "lu", Head.l, 'l'),
-    lu3(Shengmu.l, Yunmu.u, 3, "lǔ", "lu", Head.l, 'l'),
-    lu4(Shengmu.l, Yunmu.u, 4, "lù", "lu", Head.l, 'l'),
-    lu5(Shengmu.l, Yunmu.u, 5, "lu", "lu", Head.l, 'l'),
-    luan2(Shengmu.l, Yunmu.uan, 2, "luán", "luan", Head.l, 'l'),
-    luan3(Shengmu.l, Yunmu.uan, 3, "luǎn", "luan", Head.l, 'l'),
-    luan4(Shengmu.l, Yunmu.uan, 4, "luàn", "luan", Head.l, 'l'),
-    lun1(Shengmu.l, Yunmu.un, 1, "lūn", "lun", Head.l, 'l'),
-    lun2(Shengmu.l, Yunmu.un, 2, "lún", "lun", Head.l, 'l'),
-    lun3(Shengmu.l, Yunmu.un, 3, "lǔn", "lun", Head.l, 'l'),
-    lun4(Shengmu.l, Yunmu.un, 4, "lùn", "lun", Head.l, 'l'),
-    luo1(Shengmu.l, Yunmu.uo, 1, "luō", "luo", Head.l, 'l'),
-    luo2(Shengmu.l, Yunmu.uo, 2, "luó", "luo", Head.l, 'l'),
-    luo3(Shengmu.l, Yunmu.uo, 3, "luǒ", "luo", Head.l, 'l'),
-    luo4(Shengmu.l, Yunmu.uo, 4, "luò", "luo", Head.l, 'l'),
-    luo5(Shengmu.l, Yunmu.uo, 5, "luo", "luo", Head.l, 'l'),
-    lv2(Shengmu.l, Yunmu.u, 2, "lǘ", "lv", Head.l, 'l'),
-    lv3(Shengmu.l, Yunmu.v, 3, "lǚ", "lv", Head.l, 'l'),
-    lv4(Shengmu.l, Yunmu.v, 4, "lǜ", "lv", Head.l, 'l'),
-    lve3(Shengmu.l, Yunmu.ve, 3, "lüě", "lve", Head.l, 'l'),
-    lve4(Shengmu.l, Yunmu.ue, 4, "lüè", "lve", Head.l, 'l'),
-    ma1(Shengmu.m, Yunmu.a, 1, "mā", "ma", Head.m, 'm'),
-    ma2(Shengmu.m, Yunmu.a, 2, "má", "ma", Head.m, 'm'),
-    ma3(Shengmu.m, Yunmu.a, 3, "mǎ", "ma", Head.m, 'm'),
-    ma4(Shengmu.m, Yunmu.a, 4, "mà", "ma", Head.m, 'm'),
-    ma5(Shengmu.m, Yunmu.a, 5, "ma", "ma", Head.m, 'm'),
-    mai2(Shengmu.m, Yunmu.ai, 2, "mái", "mai", Head.m, 'm'),
-    mai3(Shengmu.m, Yunmu.ai, 3, "mǎi", "mai", Head.m, 'm'),
-    mai4(Shengmu.m, Yunmu.ai, 4, "mài", "mai", Head.m, 'm'),
-    man1(Shengmu.m, Yunmu.an, 1, "mān", "man", Head.m, 'm'),
-    man2(Shengmu.m, Yunmu.an, 2, "mán", "man", Head.m, 'm'),
-    man3(Shengmu.m, Yunmu.an, 3, "mǎn", "man", Head.m, 'm'),
-    man4(Shengmu.m, Yunmu.an, 4, "màn", "man", Head.m, 'm'),
-    mang1(Shengmu.m, Yunmu.ang, 1, "māng", "mang", Head.m, 'm'),
-    mang2(Shengmu.m, Yunmu.ang, 2, "máng", "mang", Head.m, 'm'),
-    mang3(Shengmu.m, Yunmu.ang, 3, "mǎng", "mang", Head.m, 'm'),
-    mao1(Shengmu.m, Yunmu.ao, 1, "māo", "mao", Head.m, 'm'),
-    mao2(Shengmu.m, Yunmu.ao, 2, "máo", "mao", Head.m, 'm'),
-    mao3(Shengmu.m, Yunmu.ao, 3, "mǎo", "mao", Head.m, 'm'),
-    mao4(Shengmu.m, Yunmu.ao, 4, "mào", "mao", Head.m, 'm'),
-    me1(Shengmu.m, Yunmu.e, 1, "mē", "me", Head.m, 'm'),
-    me4(Shengmu.m, Yunmu.e, 4, "mè", "me", Head.m, 'm'),
-    me5(Shengmu.m, Yunmu.e, 5, "me", "me", Head.m, 'm'),
-    mei2(Shengmu.m, Yunmu.ei, 2, "méi", "mei", Head.m, 'm'),
-    mei3(Shengmu.m, Yunmu.ei, 3, "měi", "mei", Head.m, 'm'),
-    mei4(Shengmu.m, Yunmu.ei, 4, "mèi", "mei", Head.m, 'm'),
-    men1(Shengmu.m, Yunmu.en, 1, "mēn", "men", Head.m, 'm'),
-    men2(Shengmu.m, Yunmu.en, 2, "mén", "men", Head.m, 'm'),
-    men3(Shengmu.m, Yunmu.en, 3, "měn", "men", Head.m, 'm'),
-    men4(Shengmu.m, Yunmu.en, 4, "mèn", "men", Head.m, 'm'),
-    men5(Shengmu.m, Yunmu.en, 5, "men", "men", Head.m, 'm'),
-    meng1(Shengmu.m, Yunmu.eng, 1, "mēng", "meng", Head.m, 'm'),
-    meng2(Shengmu.m, Yunmu.eng, 2, "méng", "meng", Head.m, 'm'),
-    meng3(Shengmu.m, Yunmu.eng, 3, "měng", "meng", Head.m, 'm'),
-    meng4(Shengmu.m, Yunmu.eng, 4, "mèng", "meng", Head.m, 'm'),
-    mi1(Shengmu.m, Yunmu.i, 1, "mī", "mi", Head.m, 'm'),
-    mi2(Shengmu.m, Yunmu.i, 2, "mí", "mi", Head.m, 'm'),
-    mi3(Shengmu.m, Yunmu.i, 3, "mǐ", "mi", Head.m, 'm'),
-    mi4(Shengmu.m, Yunmu.i, 4, "mì", "mi", Head.m, 'm'),
-    mian2(Shengmu.m, Yunmu.ian, 2, "mián", "mian", Head.m, 'm'),
-    mian3(Shengmu.m, Yunmu.ian, 3, "miǎn", "mian", Head.m, 'm'),
-    mian4(Shengmu.m, Yunmu.ian, 4, "miàn", "mian", Head.m, 'm'),
-    miao1(Shengmu.m, Yunmu.iao, 1, "miāo", "miao", Head.m, 'm'),
-    miao2(Shengmu.m, Yunmu.iao, 2, "miáo", "miao", Head.m, 'm'),
-    miao3(Shengmu.m, Yunmu.iao, 3, "miǎo", "miao", Head.m, 'm'),
-    miao4(Shengmu.m, Yunmu.iao, 4, "miào", "miao", Head.m, 'm'),
-    mie1(Shengmu.m, Yunmu.ie, 1, "miē", "mie", Head.m, 'm'),
-    mie4(Shengmu.m, Yunmu.ie, 4, "miè", "mie", Head.m, 'm'),
-    min2(Shengmu.m, Yunmu.in, 2, "mín", "min", Head.m, 'm'),
-    min3(Shengmu.m, Yunmu.in, 3, "mǐn", "min", Head.m, 'm'),
-    ming2(Shengmu.m, Yunmu.ing, 2, "míng", "ming", Head.m, 'm'),
-    ming3(Shengmu.m, Yunmu.ing, 3, "mǐng", "ming", Head.m, 'm'),
-    ming4(Shengmu.m, Yunmu.ing, 4, "mìng", "ming", Head.m, 'm'),
-    miu4(Shengmu.m, Yunmu.iu, 4, "miù", "miu", Head.m, 'm'),
-    mo1(Shengmu.m, Yunmu.o, 1, "mō", "mo", Head.m, 'm'),
-    mo2(Shengmu.m, Yunmu.o, 2, "mó", "mo", Head.m, 'm'),
-    mo3(Shengmu.m, Yunmu.o, 3, "mǒ", "mo", Head.m, 'm'),
-    mo4(Shengmu.m, Yunmu.o, 4, "mò", "mo", Head.m, 'm'),
-    mo5(Shengmu.m, Yunmu.o, 5, "mo", "mo", Head.m, 'm'),
-    mou1(Shengmu.m, Yunmu.ou, 1, "mōu", "mou", Head.m, 'm'),
-    mou2(Shengmu.m, Yunmu.ou, 2, "móu", "mou", Head.m, 'm'),
-    mou3(Shengmu.m, Yunmu.ou, 3, "mǒu", "mou", Head.m, 'm'),
-    mou4(Shengmu.m, Yunmu.ou, 4, "mòu", "mou", Head.m, 'm'),
-    mu2(Shengmu.m, Yunmu.u, 2, "mú", "mu", Head.m, 'm'),
-    mu3(Shengmu.m, Yunmu.u, 3, "mǔ", "mu", Head.m, 'm'),
-    mu4(Shengmu.m, Yunmu.u, 4, "mù", "mu", Head.m, 'm'),
-    na1(Shengmu.n, Yunmu.a, 1, "nā", "na", Head.n, 'n'),
-    na2(Shengmu.n, Yunmu.a, 2, "ná", "na", Head.n, 'n'),
-    na3(Shengmu.n, Yunmu.a, 3, "nǎ", "na", Head.n, 'n'),
-    na4(Shengmu.n, Yunmu.a, 4, "nà", "na", Head.n, 'n'),
-    na5(Shengmu.n, Yunmu.a, 5, "na", "na", Head.n, 'n'),
-    nai2(Shengmu.n, Yunmu.ai, 2, "nái", "nai", Head.n, 'n'),
-    nai3(Shengmu.n, Yunmu.ai, 3, "nǎi", "nai", Head.n, 'n'),
-    nai4(Shengmu.n, Yunmu.ai, 4, "nài", "nai", Head.n, 'n'),
-    nan1(Shengmu.n, Yunmu.an, 1, "nān", "nan", Head.n, 'n'),
-    nan2(Shengmu.n, Yunmu.an, 2, "nán", "nan", Head.n, 'n'),
-    nan3(Shengmu.n, Yunmu.an, 3, "nǎn", "nan", Head.n, 'n'),
-    nan4(Shengmu.n, Yunmu.an, 4, "nàn", "nan", Head.n, 'n'),
-    nang1(Shengmu.n, Yunmu.ang, 1, "nāng", "nang", Head.n, 'n'),
-    nang2(Shengmu.n, Yunmu.ang, 2, "náng", "nang", Head.n, 'n'),
-    nang3(Shengmu.n, Yunmu.ang, 3, "nǎng", "nang", Head.n, 'n'),
-    nang4(Shengmu.n, Yunmu.ang, 4, "nàng", "nang", Head.n, 'n'),
-    nao1(Shengmu.n, Yunmu.ao, 1, "nāo", "nao", Head.n, 'n'),
-    nao2(Shengmu.n, Yunmu.ao, 2, "náo", "nao", Head.n, 'n'),
-    nao3(Shengmu.n, Yunmu.ao, 3, "nǎo", "nao", Head.n, 'n'),
-    nao4(Shengmu.n, Yunmu.ao, 4, "nào", "nao", Head.n, 'n'),
-    ne2(Shengmu.n, Yunmu.e, 2, "né", "ne", Head.n, 'n'),
-    ne4(Shengmu.n, Yunmu.e, 4, "nè", "ne", Head.n, 'n'),
-    ne5(Shengmu.n, Yunmu.e, 5, "ne", "ne", Head.n, 'n'),
-    nei3(Shengmu.n, Yunmu.ei, 3, "něi", "nei", Head.n, 'n'),
-    nei4(Shengmu.n, Yunmu.ei, 4, "nèi", "nei", Head.n, 'n'),
-    nen1(Shengmu.n, Yunmu.en, 1, "nēn", "nen", Head.n, 'n'),
-    nen3(Shengmu.n, Yunmu.en, 3, "něn", "nen", Head.n, 'n'),
-    nen4(Shengmu.n, Yunmu.en, 4, "nèn", "nen", Head.n, 'n'),
-    neng2(Shengmu.n, Yunmu.eng, 2, "néng", "neng", Head.n, 'n'),
-    neng3(Shengmu.n, Yunmu.eng, 3, "něng", "neng", Head.n, 'n'),
-    ni1(Shengmu.n, Yunmu.i, 1, "nī", "ni", Head.n, 'n'),
-    ni2(Shengmu.n, Yunmu.i, 2, "ní", "ni", Head.n, 'n'),
-    ni3(Shengmu.n, Yunmu.i, 3, "nǐ", "ni", Head.n, 'n'),
-    ni4(Shengmu.n, Yunmu.i, 4, "nì", "ni", Head.n, 'n'),
-    nian1(Shengmu.n, Yunmu.ian, 1, "niān", "nian", Head.n, 'n'),
-    nian2(Shengmu.n, Yunmu.ian, 2, "nián", "nian", Head.n, 'n'),
-    nian3(Shengmu.n, Yunmu.ian, 3, "niǎn", "nian", Head.n, 'n'),
-    nian4(Shengmu.n, Yunmu.ian, 4, "niàn", "nian", Head.n, 'n'),
-    niang2(Shengmu.n, Yunmu.iang, 2, "niáng", "niang", Head.n, 'n'),
-    niang4(Shengmu.n, Yunmu.iang, 4, "niàng", "niang", Head.n, 'n'),
-    niao3(Shengmu.n, Yunmu.iao, 3, "niǎo", "niao", Head.n, 'n'),
-    niao4(Shengmu.n, Yunmu.iao, 4, "niào", "niao", Head.n, 'n'),
-    nie1(Shengmu.n, Yunmu.ie, 1, "niē", "nie", Head.n, 'n'),
-    nie2(Shengmu.n, Yunmu.ie, 2, "nié", "nie", Head.n, 'n'),
-    nie3(Shengmu.n, Yunmu.ie, 3, "niě", "nie", Head.n, 'n'),
-    nie4(Shengmu.n, Yunmu.ie, 4, "niè", "nie", Head.n, 'n'),
-    nin2(Shengmu.n, Yunmu.in, 2, "nín", "nin", Head.n, 'n'),
-    nin3(Shengmu.n, Yunmu.in, 3, "nǐn", "nin", Head.n, 'n'),
-    ning2(Shengmu.n, Yunmu.ing, 2, "níng", "ning", Head.n, 'n'),
-    ning3(Shengmu.n, Yunmu.ing, 3, "nǐng", "ning", Head.n, 'n'),
-    ning4(Shengmu.n, Yunmu.ing, 4, "nìng", "ning", Head.n, 'n'),
-    niu1(Shengmu.n, Yunmu.iu, 1, "niū", "niu", Head.n, 'n'),
-    niu2(Shengmu.n, Yunmu.iu, 2, "niú", "niu", Head.n, 'n'),
-    niu3(Shengmu.n, Yunmu.iu, 3, "niǔ", "niu", Head.n, 'n'),
-    niu4(Shengmu.n, Yunmu.iu, 4, "niù", "niu", Head.n, 'n'),
-    nong2(Shengmu.n, Yunmu.ong, 2, "nóng", "nong", Head.n, 'n'),
-    nong3(Shengmu.n, Yunmu.ong, 3, "nǒng", "nong", Head.n, 'n'),
-    nong4(Shengmu.n, Yunmu.ong, 4, "nòng", "nong", Head.n, 'n'),
-    nou2(Shengmu.n, Yunmu.ou, 2, "nóu", "nou", Head.n, 'n'),
-    nou4(Shengmu.n, Yunmu.ou, 4, "nòu", "nou", Head.n, 'n'),
-    nu2(Shengmu.n, Yunmu.u, 2, "nú", "nu", Head.n, 'n'),
-    nu3(Shengmu.n, Yunmu.u, 3, "nǔ", "nu", Head.n, 'n'),
-    nu4(Shengmu.n, Yunmu.u, 4, "nù", "nu", Head.n, 'n'),
-    nuan2(Shengmu.n, Yunmu.uan, 2, "nuán", "nuan", Head.n, 'n'),
-    nuan3(Shengmu.n, Yunmu.uan, 3, "nuǎn", "nuan", Head.n, 'n'),
-    nuan4(Shengmu.n, Yunmu.uan, 4, "nuàn", "nuan", Head.n, 'n'),
-    nun2(Shengmu.n, Yunmu.un, 2, "nún", "nun", Head.n, 'n'),
-    nun4(Shengmu.n, Yunmu.un, 4, "nùn", "nun", Head.n, 'n'),
-    nuo2(Shengmu.n, Yunmu.uo, 2, "nuó", "nuo", Head.n, 'n'),
-    nuo3(Shengmu.n, Yunmu.uo, 3, "nuǒ", "nuo", Head.n, 'n'),
-    nuo4(Shengmu.n, Yunmu.uo, 4, "nuò", "nuo", Head.n, 'n'),
-    nv3(Shengmu.n, Yunmu.v, 3, "nǚ", "nv", Head.n, 'n'),
-    nv4(Shengmu.n, Yunmu.v, 4, "nǜ", "nv", Head.n, 'n'),
-    nve4(Shengmu.n, Yunmu.ue, 4, "nüè", "nve", Head.n, 'n'),
-    o1(Shengmu.none, Yunmu.o, 1, "ō", "o", Head.o, 'o'),
-    o2(Shengmu.none, Yunmu.o, 2, "ó", "o", Head.o, 'o'),
-    o3(Shengmu.none, Yunmu.o, 3, "ǒ", "o", Head.o, 'o'),
-    o4(Shengmu.none, Yunmu.o, 4, "ò", "o", Head.o, 'o'),
-    o5(Shengmu.none, Yunmu.o, 5, "o", "o", Head.o, 'o'),
-    ou1(Shengmu.none, Yunmu.ou, 1, "ōu", "ou", Head.o, 'o'),
-    ou2(Shengmu.none, Yunmu.ou, 2, "óu", "ou", Head.o, 'o'),
-    ou3(Shengmu.none, Yunmu.ou, 3, "ǒu", "ou", Head.o, 'o'),
-    ou4(Shengmu.none, Yunmu.ou, 4, "òu", "ou", Head.o, 'o'),
-    ou5(Shengmu.none, Yunmu.ou, 5, "ou", "ou", Head.o, 'o'),
-    pa1(Shengmu.p, Yunmu.a, 1, "pā", "pa", Head.p, 'p'),
-    pa2(Shengmu.p, Yunmu.a, 2, "pá", "pa", Head.p, 'p'),
-    pa4(Shengmu.p, Yunmu.a, 4, "pà", "pa", Head.p, 'p'),
-    pai1(Shengmu.p, Yunmu.ai, 1, "pāi", "pai", Head.p, 'p'),
-    pai2(Shengmu.p, Yunmu.ai, 2, "pái", "pai", Head.p, 'p'),
-    pai3(Shengmu.p, Yunmu.ai, 3, "pǎi", "pai", Head.p, 'p'),
-    pai4(Shengmu.p, Yunmu.ai, 4, "pài", "pai", Head.p, 'p'),
-    pan1(Shengmu.p, Yunmu.an, 1, "pān", "pan", Head.p, 'p'),
-    pan2(Shengmu.p, Yunmu.an, 2, "pán", "pan", Head.p, 'p'),
-    pan3(Shengmu.p, Yunmu.an, 3, "pǎn", "pan", Head.p, 'p'),
-    pan4(Shengmu.p, Yunmu.an, 4, "pàn", "pan", Head.p, 'p'),
-    pang1(Shengmu.p, Yunmu.ang, 1, "pāng", "pang", Head.p, 'p'),
-    pang2(Shengmu.p, Yunmu.ang, 2, "páng", "pang", Head.p, 'p'),
-    pang3(Shengmu.p, Yunmu.ang, 3, "pǎng", "pang", Head.p, 'p'),
-    pang4(Shengmu.p, Yunmu.ang, 4, "pàng", "pang", Head.p, 'p'),
-    pang5(Shengmu.p, Yunmu.ang, 5, "pang", "pang", Head.p, 'p'),
-    pao1(Shengmu.p, Yunmu.ao, 1, "pāo", "pao", Head.p, 'p'),
-    pao2(Shengmu.p, Yunmu.ao, 2, "páo", "pao", Head.p, 'p'),
-    pao3(Shengmu.p, Yunmu.ao, 3, "pǎo", "pao", Head.p, 'p'),
-    pao4(Shengmu.p, Yunmu.ao, 4, "pào", "pao", Head.p, 'p'),
-    pei1(Shengmu.p, Yunmu.ei, 1, "pēi", "pei", Head.p, 'p'),
-    pei2(Shengmu.p, Yunmu.ei, 2, "péi", "pei", Head.p, 'p'),
-    pei3(Shengmu.p, Yunmu.ei, 3, "pěi", "pei", Head.p, 'p'),
-    pei4(Shengmu.p, Yunmu.ei, 4, "pèi", "pei", Head.p, 'p'),
-    pen1(Shengmu.p, Yunmu.en, 1, "pēn", "pen", Head.p, 'p'),
-    pen2(Shengmu.p, Yunmu.en, 2, "pén", "pen", Head.p, 'p'),
-    pen3(Shengmu.p, Yunmu.en, 3, "pěn", "pen", Head.p, 'p'),
-    pen4(Shengmu.p, Yunmu.en, 4, "pèn", "pen", Head.p, 'p'),
-    pen5(Shengmu.p, Yunmu.en, 5, "pen", "pen", Head.p, 'p'),
-    peng1(Shengmu.p, Yunmu.eng, 1, "pēng", "peng", Head.p, 'p'),
-    peng2(Shengmu.p, Yunmu.eng, 2, "péng", "peng", Head.p, 'p'),
-    peng3(Shengmu.p, Yunmu.eng, 3, "pěng", "peng", Head.p, 'p'),
-    peng4(Shengmu.p, Yunmu.eng, 4, "pèng", "peng", Head.p, 'p'),
-    pi1(Shengmu.p, Yunmu.i, 1, "pī", "pi", Head.p, 'p'),
-    pi2(Shengmu.p, Yunmu.i, 2, "pí", "pi", Head.p, 'p'),
-    pi3(Shengmu.p, Yunmu.i, 3, "pǐ", "pi", Head.p, 'p'),
-    pi4(Shengmu.p, Yunmu.i, 4, "pì", "pi", Head.p, 'p'),
-    pi5(Shengmu.p, Yunmu.i, 5, "pi", "pi", Head.p, 'p'),
-    pian1(Shengmu.p, Yunmu.ian, 1, "piān", "pian", Head.p, 'p'),
-    pian2(Shengmu.p, Yunmu.ian, 2, "pián", "pian", Head.p, 'p'),
-    pian3(Shengmu.p, Yunmu.ian, 3, "piǎn", "pian", Head.p, 'p'),
-    pian4(Shengmu.p, Yunmu.ian, 4, "piàn", "pian", Head.p, 'p'),
-    piao1(Shengmu.p, Yunmu.iao, 1, "piāo", "piao", Head.p, 'p'),
-    piao2(Shengmu.p, Yunmu.iao, 2, "piáo", "piao", Head.p, 'p'),
-    piao3(Shengmu.p, Yunmu.iao, 3, "piǎo", "piao", Head.p, 'p'),
-    piao4(Shengmu.p, Yunmu.iao, 4, "piào", "piao", Head.p, 'p'),
-    pie1(Shengmu.p, Yunmu.ie, 1, "piē", "pie", Head.p, 'p'),
-    pie3(Shengmu.p, Yunmu.ie, 3, "piě", "pie", Head.p, 'p'),
-    pie4(Shengmu.p, Yunmu.ie, 4, "piè", "pie", Head.p, 'p'),
-    pin1(Shengmu.p, Yunmu.in, 1, "pīn", "pin", Head.p, 'p'),
-    pin2(Shengmu.p, Yunmu.in, 2, "pín", "pin", Head.p, 'p'),
-    pin3(Shengmu.p, Yunmu.in, 3, "pǐn", "pin", Head.p, 'p'),
-    pin4(Shengmu.p, Yunmu.in, 4, "pìn", "pin", Head.p, 'p'),
-    ping1(Shengmu.p, Yunmu.ing, 1, "pīng", "ping", Head.p, 'p'),
-    ping2(Shengmu.p, Yunmu.ing, 2, "píng", "ping", Head.p, 'p'),
-    ping3(Shengmu.p, Yunmu.ing, 3, "pǐng", "ping", Head.p, 'p'),
-    ping4(Shengmu.p, Yunmu.ing, 4, "pìng", "ping", Head.p, 'p'),
-    po1(Shengmu.p, Yunmu.o, 1, "pō", "po", Head.p, 'p'),
-    po2(Shengmu.p, Yunmu.o, 2, "pó", "po", Head.p, 'p'),
-    po3(Shengmu.p, Yunmu.o, 3, "pǒ", "po", Head.p, 'p'),
-    po4(Shengmu.p, Yunmu.o, 4, "pò", "po", Head.p, 'p'),
-    po5(Shengmu.p, Yunmu.o, 5, "po", "po", Head.p, 'p'),
-    pou1(Shengmu.p, Yunmu.ou, 1, "pōu", "pou", Head.p, 'p'),
-    pou2(Shengmu.p, Yunmu.ou, 2, "póu", "pou", Head.p, 'p'),
-    pou3(Shengmu.p, Yunmu.ou, 3, "pǒu", "pou", Head.p, 'p'),
-    pou4(Shengmu.p, Yunmu.ou, 4, "pòu", "pou", Head.p, 'p'),
-    pu1(Shengmu.p, Yunmu.u, 1, "pū", "pu", Head.p, 'p'),
-    pu2(Shengmu.p, Yunmu.u, 2, "pú", "pu", Head.p, 'p'),
-    pu3(Shengmu.p, Yunmu.u, 3, "pǔ", "pu", Head.p, 'p'),
-    pu4(Shengmu.p, Yunmu.u, 4, "pù", "pu", Head.p, 'p'),
-    qi1(Shengmu.q, Yunmu.i, 1, "qī", "qi", Head.q, 'q'),
-    qi2(Shengmu.q, Yunmu.i, 2, "qí", "qi", Head.q, 'q'),
-    qi3(Shengmu.q, Yunmu.i, 3, "qǐ", "qi", Head.q, 'q'),
-    qi4(Shengmu.q, Yunmu.i, 4, "qì", "qi", Head.q, 'q'),
-    qi5(Shengmu.q, Yunmu.i, 5, "qi", "qi", Head.q, 'q'),
-    qia1(Shengmu.q, Yunmu.ia, 1, "qiā", "qia", Head.q, 'q'),
-    qia3(Shengmu.q, Yunmu.ia, 3, "qiǎ", "qia", Head.q, 'q'),
-    qia4(Shengmu.q, Yunmu.ia, 4, "qià", "qia", Head.q, 'q'),
-    qian1(Shengmu.q, Yunmu.ian, 1, "qiān", "qian", Head.q, 'q'),
-    qian2(Shengmu.q, Yunmu.ian, 2, "qián", "qian", Head.q, 'q'),
-    qian3(Shengmu.q, Yunmu.ian, 3, "qiǎn", "qian", Head.q, 'q'),
-    qian4(Shengmu.q, Yunmu.ian, 4, "qiàn", "qian", Head.q, 'q'),
-    qian5(Shengmu.q, Yunmu.ian, 5, "qian", "qian", Head.q, 'q'),
-    qiang1(Shengmu.q, Yunmu.iang, 1, "qiāng", "qiang", Head.q, 'q'),
-    qiang2(Shengmu.q, Yunmu.iang, 2, "qiáng", "qiang", Head.q, 'q'),
-    qiang3(Shengmu.q, Yunmu.iang, 3, "qiǎng", "qiang", Head.q, 'q'),
-    qiang4(Shengmu.q, Yunmu.iang, 4, "qiàng", "qiang", Head.q, 'q'),
-    qiao1(Shengmu.q, Yunmu.iao, 1, "qiāo", "qiao", Head.q, 'q'),
-    qiao2(Shengmu.q, Yunmu.iao, 2, "qiáo", "qiao", Head.q, 'q'),
-    qiao3(Shengmu.q, Yunmu.iao, 3, "qiǎo", "qiao", Head.q, 'q'),
-    qiao4(Shengmu.q, Yunmu.iao, 4, "qiào", "qiao", Head.q, 'q'),
-    qie1(Shengmu.q, Yunmu.ie, 1, "qiē", "qie", Head.q, 'q'),
-    qie2(Shengmu.q, Yunmu.ie, 2, "qié", "qie", Head.q, 'q'),
-    qie3(Shengmu.q, Yunmu.ie, 3, "qiě", "qie", Head.q, 'q'),
-    qie4(Shengmu.q, Yunmu.ie, 4, "qiè", "qie", Head.q, 'q'),
-    qin1(Shengmu.q, Yunmu.in, 1, "qīn", "qin", Head.q, 'q'),
-    qin2(Shengmu.q, Yunmu.in, 2, "qín", "qin", Head.q, 'q'),
-    qin3(Shengmu.q, Yunmu.in, 3, "qǐn", "qin", Head.q, 'q'),
-    qin4(Shengmu.q, Yunmu.in, 4, "qìn", "qin", Head.q, 'q'),
-    qing1(Shengmu.q, Yunmu.ing, 1, "qīng", "qing", Head.q, 'q'),
-    qing2(Shengmu.q, Yunmu.ing, 2, "qíng", "qing", Head.q, 'q'),
-    qing3(Shengmu.q, Yunmu.ing, 3, "qǐng", "qing", Head.q, 'q'),
-    qing4(Shengmu.q, Yunmu.ing, 4, "qìng", "qing", Head.q, 'q'),
-    qiong1(Shengmu.q, Yunmu.iong, 1, "qiōng", "qiong", Head.q, 'q'),
-    qiong2(Shengmu.q, Yunmu.iong, 2, "qióng", "qiong", Head.q, 'q'),
-    qiong3(Shengmu.q, Yunmu.iong, 3, "qiǒng", "qiong", Head.q, 'q'),
-    qiu1(Shengmu.q, Yunmu.iu, 1, "qiū", "qiu", Head.q, 'q'),
-    qiu2(Shengmu.q, Yunmu.iu, 2, "qiú", "qiu", Head.q, 'q'),
-    qiu3(Shengmu.q, Yunmu.iu, 3, "qiǔ", "qiu", Head.q, 'q'),
-    qiu4(Shengmu.q, Yunmu.iu, 4, "qiù", "qiu", Head.q, 'q'),
-    qu1(Shengmu.q, Yunmu.u, 1, "qū", "qu", Head.q, 'q'),
-    qu2(Shengmu.q, Yunmu.u, 2, "qú", "qu", Head.q, 'q'),
-    qu3(Shengmu.q, Yunmu.u, 3, "qǔ", "qu", Head.q, 'q'),
-    qu4(Shengmu.q, Yunmu.u, 4, "qù", "qu", Head.q, 'q'),
-    quan1(Shengmu.q, Yunmu.uan, 1, "quān", "quan", Head.q, 'q'),
-    quan2(Shengmu.q, Yunmu.uan, 2, "quán", "quan", Head.q, 'q'),
-    quan3(Shengmu.q, Yunmu.uan, 3, "quǎn", "quan", Head.q, 'q'),
-    quan4(Shengmu.q, Yunmu.uan, 4, "quàn", "quan", Head.q, 'q'),
-    que1(Shengmu.q, Yunmu.ue, 1, "quē", "que", Head.q, 'q'),
-    que2(Shengmu.q, Yunmu.ue, 2, "qué", "que", Head.q, 'q'),
-    que4(Shengmu.q, Yunmu.ue, 4, "què", "que", Head.q, 'q'),
-    qun1(Shengmu.q, Yunmu.un, 1, "qūn", "qun", Head.q, 'q'),
-    qun2(Shengmu.q, Yunmu.un, 2, "qún", "qun", Head.q, 'q'),
-    qun3(Shengmu.q, Yunmu.un, 3, "qǔn", "qun", Head.q, 'q'),
-    ran2(Shengmu.r, Yunmu.an, 2, "rán", "ran", Head.r, 'r'),
-    ran3(Shengmu.r, Yunmu.an, 3, "rǎn", "ran", Head.r, 'r'),
-    rang1(Shengmu.r, Yunmu.ang, 1, "rāng", "rang", Head.r, 'r'),
-    rang2(Shengmu.r, Yunmu.ang, 2, "ráng", "rang", Head.r, 'r'),
-    rang3(Shengmu.r, Yunmu.ang, 3, "rǎng", "rang", Head.r, 'r'),
-    rang4(Shengmu.r, Yunmu.ang, 4, "ràng", "rang", Head.r, 'r'),
-    rao2(Shengmu.r, Yunmu.ao, 2, "ráo", "rao", Head.r, 'r'),
-    rao3(Shengmu.r, Yunmu.ao, 3, "rǎo", "rao", Head.r, 'r'),
-    rao4(Shengmu.r, Yunmu.ao, 4, "rào", "rao", Head.r, 'r'),
-    re2(Shengmu.r, Yunmu.e, 2, "ré", "re", Head.r, 'r'),
-    re3(Shengmu.r, Yunmu.e, 3, "rě", "re", Head.r, 'r'),
-    re4(Shengmu.r, Yunmu.e, 4, "rè", "re", Head.r, 'r'),
-    ren2(Shengmu.r, Yunmu.en, 2, "rén", "ren", Head.r, 'r'),
-    ren3(Shengmu.r, Yunmu.en, 3, "rěn", "ren", Head.r, 'r'),
-    ren4(Shengmu.r, Yunmu.en, 4, "rèn", "ren", Head.r, 'r'),
-    reng1(Shengmu.r, Yunmu.eng, 1, "rēng", "reng", Head.r, 'r'),
-    reng2(Shengmu.r, Yunmu.eng, 2, "réng", "reng", Head.r, 'r'),
-    reng4(Shengmu.r, Yunmu.eng, 4, "rèng", "reng", Head.r, 'r'),
-    ri4(Shengmu.r, Yunmu.i, 4, "rì", "ri", Head.r, 'r'),
-    rong2(Shengmu.r, Yunmu.ong, 2, "róng", "rong", Head.r, 'r'),
-    rong3(Shengmu.r, Yunmu.ong, 3, "rǒng", "rong", Head.r, 'r'),
-    rong4(Shengmu.r, Yunmu.ong, 4, "ròng", "rong", Head.r, 'r'),
-    rou2(Shengmu.r, Yunmu.ou, 2, "róu", "rou", Head.r, 'r'),
-    rou3(Shengmu.r, Yunmu.ou, 3, "rǒu", "rou", Head.r, 'r'),
-    rou4(Shengmu.r, Yunmu.ou, 4, "ròu", "rou", Head.r, 'r'),
-    ru1(Shengmu.r, Yunmu.u, 1, "rū", "ru", Head.r, 'r'),
-    ru2(Shengmu.r, Yunmu.u, 2, "rú", "ru", Head.r, 'r'),
-    ru3(Shengmu.r, Yunmu.u, 3, "rǔ", "ru", Head.r, 'r'),
-    ru4(Shengmu.r, Yunmu.u, 4, "rù", "ru", Head.r, 'r'),
-    ruan2(Shengmu.r, Yunmu.uan, 2, "ruán", "ruan", Head.r, 'r'),
-    ruan3(Shengmu.r, Yunmu.uan, 3, "ruǎn", "ruan", Head.r, 'r'),
-    ruan4(Shengmu.r, Yunmu.uan, 4, "ruàn", "ruan", Head.r, 'r'),
-    rui2(Shengmu.r, Yunmu.ui, 2, "ruí", "rui", Head.r, 'r'),
-    rui3(Shengmu.r, Yunmu.ui, 3, "ruǐ", "rui", Head.r, 'r'),
-    rui4(Shengmu.r, Yunmu.ui, 4, "ruì", "rui", Head.r, 'r'),
-    run2(Shengmu.r, Yunmu.un, 2, "rún", "run", Head.r, 'r'),
-    run4(Shengmu.r, Yunmu.un, 4, "rùn", "run", Head.r, 'r'),
-    ruo2(Shengmu.r, Yunmu.uo, 2, "ruó", "ruo", Head.r, 'r'),
-    ruo4(Shengmu.r, Yunmu.uo, 4, "ruò", "ruo", Head.r, 'r'),
-    sa1(Shengmu.s, Yunmu.a, 1, "sā", "sa", Head.s, 's'),
-    sa3(Shengmu.s, Yunmu.a, 3, "sǎ", "sa", Head.s, 's'),
-    sa4(Shengmu.s, Yunmu.a, 4, "sà", "sa", Head.s, 's'),
-    sai1(Shengmu.s, Yunmu.ai, 1, "sāi", "sai", Head.s, 's'),
-    sai3(Shengmu.s, Yunmu.ai, 3, "sǎi", "sai", Head.s, 's'),
-    sai4(Shengmu.s, Yunmu.ai, 4, "sài", "sai", Head.s, 's'),
-    sai5(Shengmu.s, Yunmu.ai, 5, "sai", "sai", Head.s, 's'),
-    san1(Shengmu.s, Yunmu.an, 1, "sān", "san", Head.s, 's'),
-    san3(Shengmu.s, Yunmu.an, 3, "sǎn", "san", Head.s, 's'),
-    san4(Shengmu.s, Yunmu.an, 4, "sàn", "san", Head.s, 's'),
-    san5(Shengmu.s, Yunmu.an, 5, "san", "san", Head.s, 's'),
-    sang1(Shengmu.s, Yunmu.ang, 1, "sāng", "sang", Head.s, 's'),
-    sang3(Shengmu.s, Yunmu.ang, 3, "sǎng", "sang", Head.s, 's'),
-    sang4(Shengmu.s, Yunmu.ang, 4, "sàng", "sang", Head.s, 's'),
-    sang5(Shengmu.s, Yunmu.ang, 5, "sang", "sang", Head.s, 's'),
-    sao1(Shengmu.s, Yunmu.ao, 1, "sāo", "sao", Head.s, 's'),
-    sao3(Shengmu.s, Yunmu.ao, 3, "sǎo", "sao", Head.s, 's'),
-    sao4(Shengmu.s, Yunmu.ao, 4, "sào", "sao", Head.s, 's'),
-    se1(Shengmu.s, Yunmu.e, 1, "sē", "se", Head.s, 's'),
-    se4(Shengmu.s, Yunmu.e, 4, "sè", "se", Head.s, 's'),
-    sen1(Shengmu.s, Yunmu.en, 1, "sēn", "sen", Head.s, 's'),
-    sen3(Shengmu.s, Yunmu.en, 3, "sěn", "sen", Head.s, 's'),
-    seng1(Shengmu.s, Yunmu.eng, 1, "sēng", "seng", Head.s, 's'),
-    sha1(Shengmu.sh, Yunmu.a, 1, "shā", "sha", Head.sh, 's'),
-    sha2(Shengmu.sh, Yunmu.a, 2, "shá", "sha", Head.sh, 's'),
-    sha3(Shengmu.sh, Yunmu.a, 3, "shǎ", "sha", Head.sh, 's'),
-    sha4(Shengmu.sh, Yunmu.a, 4, "shà", "sha", Head.sh, 's'),
-    shai1(Shengmu.sh, Yunmu.ai, 1, "shāi", "shai", Head.sh, 's'),
-    shai3(Shengmu.sh, Yunmu.ai, 3, "shǎi", "shai", Head.sh, 's'),
-    shai4(Shengmu.sh, Yunmu.ai, 4, "shài", "shai", Head.sh, 's'),
-    shan1(Shengmu.sh, Yunmu.an, 1, "shān", "shan", Head.sh, 's'),
-    shan2(Shengmu.sh, Yunmu.an, 2, "shán", "shan", Head.sh, 's'),
-    shan3(Shengmu.sh, Yunmu.an, 3, "shǎn", "shan", Head.sh, 's'),
-    shan4(Shengmu.sh, Yunmu.an, 4, "shàn", "shan", Head.sh, 's'),
-    shang1(Shengmu.sh, Yunmu.ang, 1, "shāng", "shang", Head.sh, 's'),
-    shang2(Shengmu.sh, Yunmu.ang, 2, "sháng", "shang", Head.sh, 's'),
-    shang3(Shengmu.sh, Yunmu.ang, 3, "shǎng", "shang", Head.sh, 's'),
-    shang4(Shengmu.sh, Yunmu.ang, 4, "shàng", "shang", Head.sh, 's'),
-    shang5(Shengmu.sh, Yunmu.ang, 5, "shang", "shang", Head.sh, 's'),
-    shao1(Shengmu.sh, Yunmu.ao, 1, "shāo", "shao", Head.sh, 's'),
-    shao2(Shengmu.sh, Yunmu.ao, 2, "sháo", "shao", Head.sh, 's'),
-    shao3(Shengmu.sh, Yunmu.ao, 3, "shǎo", "shao", Head.sh, 's'),
-    shao4(Shengmu.sh, Yunmu.ao, 4, "shào", "shao", Head.sh, 's'),
-    she1(Shengmu.sh, Yunmu.e, 1, "shē", "she", Head.sh, 's'),
-    she2(Shengmu.sh, Yunmu.e, 2, "shé", "she", Head.sh, 's'),
-    she3(Shengmu.sh, Yunmu.e, 3, "shě", "she", Head.sh, 's'),
-    she4(Shengmu.sh, Yunmu.e, 4, "shè", "she", Head.sh, 's'),
-    shei2(Shengmu.sh, Yunmu.ei, 2, "shéi", "shei", Head.sh, 's'),
-    shen1(Shengmu.sh, Yunmu.en, 1, "shēn", "shen", Head.sh, 's'),
-    shen2(Shengmu.sh, Yunmu.en, 2, "shén", "shen", Head.sh, 's'),
-    shen3(Shengmu.sh, Yunmu.en, 3, "shěn", "shen", Head.sh, 's'),
-    shen4(Shengmu.sh, Yunmu.en, 4, "shèn", "shen", Head.sh, 's'),
-    sheng1(Shengmu.sh, Yunmu.eng, 1, "shēng", "sheng", Head.sh, 's'),
-    sheng2(Shengmu.sh, Yunmu.eng, 2, "shéng", "sheng", Head.sh, 's'),
-    sheng3(Shengmu.sh, Yunmu.eng, 3, "shěng", "sheng", Head.sh, 's'),
-    sheng4(Shengmu.sh, Yunmu.eng, 4, "shèng", "sheng", Head.sh, 's'),
-    shi1(Shengmu.sh, Yunmu.i, 1, "shī", "shi", Head.sh, 's'),
-    shi2(Shengmu.sh, Yunmu.i, 2, "shí", "shi", Head.sh, 's'),
-    shi3(Shengmu.sh, Yunmu.i, 3, "shǐ", "shi", Head.sh, 's'),
-    shi4(Shengmu.sh, Yunmu.i, 4, "shì", "shi", Head.sh, 's'),
-    shi5(Shengmu.sh, Yunmu.i, 5, "shi", "shi", Head.sh, 's'),
-    shou1(Shengmu.sh, Yunmu.ou, 1, "shōu", "shou", Head.sh, 's'),
-    shou2(Shengmu.sh, Yunmu.ou, 2, "shóu", "shou", Head.sh, 's'),
-    shou3(Shengmu.sh, Yunmu.ou, 3, "shǒu", "shou", Head.sh, 's'),
-    shou4(Shengmu.sh, Yunmu.ou, 4, "shòu", "shou", Head.sh, 's'),
-    shu1(Shengmu.sh, Yunmu.u, 1, "shū", "shu", Head.sh, 's'),
-    shu2(Shengmu.sh, Yunmu.u, 2, "shú", "shu", Head.sh, 's'),
-    shu3(Shengmu.sh, Yunmu.u, 3, "shǔ", "shu", Head.sh, 's'),
-    shu4(Shengmu.sh, Yunmu.u, 4, "shù", "shu", Head.sh, 's'),
-    shua1(Shengmu.sh, Yunmu.ua, 1, "shuā", "shua", Head.sh, 's'),
-    shua3(Shengmu.sh, Yunmu.ua, 3, "shuǎ", "shua", Head.sh, 's'),
-    shua4(Shengmu.sh, Yunmu.ua, 4, "shuà", "shua", Head.sh, 's'),
-    shuai1(Shengmu.sh, Yunmu.uai, 1, "shuāi", "shuai", Head.sh, 's'),
-    shuai3(Shengmu.sh, Yunmu.uai, 3, "shuǎi", "shuai", Head.sh, 's'),
-    shuai4(Shengmu.sh, Yunmu.uai, 4, "shuài", "shuai", Head.sh, 's'),
-    shuan1(Shengmu.sh, Yunmu.uan, 1, "shuān", "shuan", Head.sh, 's'),
-    shuan4(Shengmu.sh, Yunmu.uan, 4, "shuàn", "shuan", Head.sh, 's'),
-    shuang1(Shengmu.sh, Yunmu.uang, 1, "shuāng", "shuang", Head.sh, 's'),
-    shuang3(Shengmu.sh, Yunmu.uang, 3, "shuǎng", "shuang", Head.sh, 's'),
-    shuang4(Shengmu.sh, Yunmu.uang, 4, "shuàng", "shuang", Head.sh, 's'),
-    shui2(Shengmu.sh, Yunmu.ui, 2, "shuí", "shui", Head.sh, 's'),
-    shui3(Shengmu.sh, Yunmu.ui, 3, "shuǐ", "shui", Head.sh, 's'),
-    shui4(Shengmu.sh, Yunmu.ui, 4, "shuì", "shui", Head.sh, 's'),
-    shun1(Shengmu.sh, Yunmu.un, 1, "shūn", "shun", Head.sh, 's'),
-    shun3(Shengmu.sh, Yunmu.un, 3, "shǔn", "shun", Head.sh, 's'),
-    shun4(Shengmu.sh, Yunmu.un, 4, "shùn", "shun", Head.sh, 's'),
-    shuo1(Shengmu.sh, Yunmu.uo, 1, "shuō", "shuo", Head.sh, 's'),
-    shuo2(Shengmu.sh, Yunmu.uo, 2, "shuó", "shuo", Head.sh, 's'),
-    shuo4(Shengmu.sh, Yunmu.uo, 4, "shuò", "shuo", Head.sh, 's'),
-    si1(Shengmu.s, Yunmu.i, 1, "sī", "si", Head.s, 's'),
-    si3(Shengmu.s, Yunmu.i, 3, "sǐ", "si", Head.s, 's'),
-    si4(Shengmu.s, Yunmu.i, 4, "sì", "si", Head.s, 's'),
-    song1(Shengmu.s, Yunmu.ong, 1, "sōng", "song", Head.s, 's'),
-    song3(Shengmu.s, Yunmu.ong, 3, "sǒng", "song", Head.s, 's'),
-    song4(Shengmu.s, Yunmu.ong, 4, "sòng", "song", Head.s, 's'),
-    sou1(Shengmu.s, Yunmu.ou, 1, "sōu", "sou", Head.s, 's'),
-    sou3(Shengmu.s, Yunmu.ou, 3, "sǒu", "sou", Head.s, 's'),
-    sou4(Shengmu.s, Yunmu.ou, 4, "sòu", "sou", Head.s, 's'),
-    su1(Shengmu.s, Yunmu.u, 1, "sū", "su", Head.s, 's'),
-    su2(Shengmu.s, Yunmu.u, 2, "sú", "su", Head.s, 's'),
-    su4(Shengmu.s, Yunmu.u, 4, "sù", "su", Head.s, 's'),
-    suan1(Shengmu.s, Yunmu.uan, 1, "suān", "suan", Head.s, 's'),
-    suan3(Shengmu.s, Yunmu.uan, 3, "suǎn", "suan", Head.s, 's'),
-    suan4(Shengmu.s, Yunmu.uan, 4, "suàn", "suan", Head.s, 's'),
-    sui1(Shengmu.s, Yunmu.ui, 1, "suī", "sui", Head.s, 's'),
-    sui2(Shengmu.s, Yunmu.ui, 2, "suí", "sui", Head.s, 's'),
-    sui3(Shengmu.s, Yunmu.ui, 3, "suǐ", "sui", Head.s, 's'),
-    sui4(Shengmu.s, Yunmu.ui, 4, "suì", "sui", Head.s, 's'),
-    sun1(Shengmu.s, Yunmu.un, 1, "sūn", "sun", Head.s, 's'),
-    sun3(Shengmu.s, Yunmu.un, 3, "sǔn", "sun", Head.s, 's'),
-    sun4(Shengmu.s, Yunmu.un, 4, "sùn", "sun", Head.s, 's'),
-    suo1(Shengmu.s, Yunmu.uo, 1, "suō", "suo", Head.s, 's'),
-    suo3(Shengmu.s, Yunmu.uo, 3, "suǒ", "suo", Head.s, 's'),
-    suo4(Shengmu.s, Yunmu.uo, 4, "suò", "suo", Head.s, 's'),
-    ta1(Shengmu.t, Yunmu.a, 1, "tā", "ta", Head.t, 't'),
-    ta3(Shengmu.t, Yunmu.a, 3, "tǎ", "ta", Head.t, 't'),
-    ta4(Shengmu.t, Yunmu.a, 4, "tà", "ta", Head.t, 't'),
-    ta5(Shengmu.t, Yunmu.a, 5, "ta", "ta", Head.t, 't'),
-    tai1(Shengmu.t, Yunmu.ai, 1, "tāi", "tai", Head.t, 't'),
-    tai2(Shengmu.t, Yunmu.ai, 2, "tái", "tai", Head.t, 't'),
-    tai3(Shengmu.t, Yunmu.ai, 3, "tǎi", "tai", Head.t, 't'),
-    tai4(Shengmu.t, Yunmu.ai, 4, "tài", "tai", Head.t, 't'),
-    tan1(Shengmu.t, Yunmu.an, 1, "tān", "tan", Head.t, 't'),
-    tan2(Shengmu.t, Yunmu.an, 2, "tán", "tan", Head.t, 't'),
-    tan3(Shengmu.t, Yunmu.an, 3, "tǎn", "tan", Head.t, 't'),
-    tan4(Shengmu.t, Yunmu.an, 4, "tàn", "tan", Head.t, 't'),
-    tang1(Shengmu.t, Yunmu.ang, 1, "tāng", "tang", Head.t, 't'),
-    tang2(Shengmu.t, Yunmu.ang, 2, "táng", "tang", Head.t, 't'),
-    tang3(Shengmu.t, Yunmu.ang, 3, "tǎng", "tang", Head.t, 't'),
-    tang4(Shengmu.t, Yunmu.ang, 4, "tàng", "tang", Head.t, 't'),
-    tao1(Shengmu.t, Yunmu.ao, 1, "tāo", "tao", Head.t, 't'),
-    tao2(Shengmu.t, Yunmu.ao, 2, "táo", "tao", Head.t, 't'),
-    tao3(Shengmu.t, Yunmu.ao, 3, "tǎo", "tao", Head.t, 't'),
-    tao4(Shengmu.t, Yunmu.ao, 4, "tào", "tao", Head.t, 't'),
-    te4(Shengmu.t, Yunmu.e, 4, "tè", "te", Head.t, 't'),
-    teng1(Shengmu.t, Yunmu.eng, 1, "tēng", "teng", Head.t, 't'),
-    teng2(Shengmu.t, Yunmu.eng, 2, "téng", "teng", Head.t, 't'),
-    teng4(Shengmu.t, Yunmu.eng, 4, "tèng", "teng", Head.t, 't'),
-    ti1(Shengmu.t, Yunmu.i, 1, "tī", "ti", Head.t, 't'),
-    ti2(Shengmu.t, Yunmu.i, 2, "tí", "ti", Head.t, 't'),
-    ti3(Shengmu.t, Yunmu.i, 3, "tǐ", "ti", Head.t, 't'),
-    ti4(Shengmu.t, Yunmu.i, 4, "tì", "ti", Head.t, 't'),
-    tian1(Shengmu.t, Yunmu.ian, 1, "tiān", "tian", Head.t, 't'),
-    tian2(Shengmu.t, Yunmu.ian, 2, "tián", "tian", Head.t, 't'),
-    tian3(Shengmu.t, Yunmu.ian, 3, "tiǎn", "tian", Head.t, 't'),
-    tian4(Shengmu.t, Yunmu.ian, 4, "tiàn", "tian", Head.t, 't'),
-    tian5(Shengmu.t, Yunmu.ian, 5, "tian", "tian", Head.t, 't'),
-    tiao1(Shengmu.t, Yunmu.iao, 1, "tiāo", "tiao", Head.t, 't'),
-    tiao2(Shengmu.t, Yunmu.iao, 2, "tiáo", "tiao", Head.t, 't'),
-    tiao3(Shengmu.t, Yunmu.iao, 3, "tiǎo", "tiao", Head.t, 't'),
-    tiao4(Shengmu.t, Yunmu.iao, 4, "tiào", "tiao", Head.t, 't'),
-    tie1(Shengmu.t, Yunmu.ie, 1, "tiē", "tie", Head.t, 't'),
-    tie2(Shengmu.t, Yunmu.ie, 2, "tié", "tie", Head.t, 't'),
-    tie3(Shengmu.t, Yunmu.ie, 3, "tiě", "tie", Head.t, 't'),
-    tie4(Shengmu.t, Yunmu.ie, 4, "tiè", "tie", Head.t, 't'),
-    ting1(Shengmu.t, Yunmu.ing, 1, "tīng", "ting", Head.t, 't'),
-    ting2(Shengmu.t, Yunmu.ing, 2, "tíng", "ting", Head.t, 't'),
-    ting3(Shengmu.t, Yunmu.ing, 3, "tǐng", "ting", Head.t, 't'),
-    ting4(Shengmu.t, Yunmu.ing, 4, "tìng", "ting", Head.t, 't'),
-    tong1(Shengmu.t, Yunmu.ong, 1, "tōng", "tong", Head.t, 't'),
-    tong2(Shengmu.t, Yunmu.ong, 2, "tóng", "tong", Head.t, 't'),
-    tong3(Shengmu.t, Yunmu.ong, 3, "tǒng", "tong", Head.t, 't'),
-    tong4(Shengmu.t, Yunmu.ong, 4, "tòng", "tong", Head.t, 't'),
-    tou1(Shengmu.t, Yunmu.ou, 1, "tōu", "tou", Head.t, 't'),
-    tou2(Shengmu.t, Yunmu.ou, 2, "tóu", "tou", Head.t, 't'),
-    tou3(Shengmu.t, Yunmu.ou, 3, "tǒu", "tou", Head.t, 't'),
-    tou4(Shengmu.t, Yunmu.ou, 4, "tòu", "tou", Head.t, 't'),
-    tou5(Shengmu.t, Yunmu.ou, 5, "tou", "tou", Head.t, 't'),
-    tu1(Shengmu.t, Yunmu.u, 1, "tū", "tu", Head.t, 't'),
-    tu2(Shengmu.t, Yunmu.u, 2, "tú", "tu", Head.t, 't'),
-    tu3(Shengmu.t, Yunmu.u, 3, "tǔ", "tu", Head.t, 't'),
-    tu4(Shengmu.t, Yunmu.u, 4, "tù", "tu", Head.t, 't'),
-    tu5(Shengmu.t, Yunmu.u, 5, "tu", "tu", Head.t, 't'),
-    tuan1(Shengmu.t, Yunmu.uan, 1, "tuān", "tuan", Head.t, 't'),
-    tuan2(Shengmu.t, Yunmu.uan, 2, "tuán", "tuan", Head.t, 't'),
-    tuan3(Shengmu.t, Yunmu.uan, 3, "tuǎn", "tuan", Head.t, 't'),
-    tuan4(Shengmu.t, Yunmu.uan, 4, "tuàn", "tuan", Head.t, 't'),
-    tui1(Shengmu.t, Yunmu.ui, 1, "tuī", "tui", Head.t, 't'),
-    tui2(Shengmu.t, Yunmu.ui, 2, "tuí", "tui", Head.t, 't'),
-    tui3(Shengmu.t, Yunmu.ui, 3, "tuǐ", "tui", Head.t, 't'),
-    tui4(Shengmu.t, Yunmu.ui, 4, "tuì", "tui", Head.t, 't'),
-    tun1(Shengmu.t, Yunmu.un, 1, "tūn", "tun", Head.t, 't'),
-    tun2(Shengmu.t, Yunmu.un, 2, "tún", "tun", Head.t, 't'),
-    tun3(Shengmu.t, Yunmu.un, 3, "tǔn", "tun", Head.t, 't'),
-    tun4(Shengmu.t, Yunmu.un, 4, "tùn", "tun", Head.t, 't'),
-    tun5(Shengmu.t, Yunmu.un, 5, "tun", "tun", Head.t, 't'),
-    tuo1(Shengmu.t, Yunmu.uo, 1, "tuō", "tuo", Head.t, 't'),
-    tuo2(Shengmu.t, Yunmu.uo, 2, "tuó", "tuo", Head.t, 't'),
-    tuo3(Shengmu.t, Yunmu.uo, 3, "tuǒ", "tuo", Head.t, 't'),
-    tuo4(Shengmu.t, Yunmu.uo, 4, "tuò", "tuo", Head.t, 't'),
-    wa1(Shengmu.w, Yunmu.a, 1, "wā", "wa", Head.w, 'w'),
-    wa2(Shengmu.w, Yunmu.a, 2, "wá", "wa", Head.w, 'w'),
-    wa3(Shengmu.w, Yunmu.a, 3, "wǎ", "wa", Head.w, 'w'),
-    wa4(Shengmu.w, Yunmu.a, 4, "wà", "wa", Head.w, 'w'),
-    wa5(Shengmu.w, Yunmu.a, 5, "wa", "wa", Head.w, 'w'),
-    wai1(Shengmu.w, Yunmu.ai, 1, "wāi", "wai", Head.w, 'w'),
-    wai3(Shengmu.w, Yunmu.ai, 3, "wǎi", "wai", Head.w, 'w'),
-    wai4(Shengmu.w, Yunmu.ai, 4, "wài", "wai", Head.w, 'w'),
-    wan1(Shengmu.w, Yunmu.an, 1, "wān", "wan", Head.w, 'w'),
-    wan2(Shengmu.w, Yunmu.an, 2, "wán", "wan", Head.w, 'w'),
-    wan3(Shengmu.w, Yunmu.an, 3, "wǎn", "wan", Head.w, 'w'),
-    wan4(Shengmu.w, Yunmu.an, 4, "wàn", "wan", Head.w, 'w'),
-    wang1(Shengmu.w, Yunmu.ang, 1, "wāng", "wang", Head.w, 'w'),
-    wang2(Shengmu.w, Yunmu.ang, 2, "wáng", "wang", Head.w, 'w'),
-    wang3(Shengmu.w, Yunmu.ang, 3, "wǎng", "wang", Head.w, 'w'),
-    wang4(Shengmu.w, Yunmu.ang, 4, "wàng", "wang", Head.w, 'w'),
-    wei1(Shengmu.w, Yunmu.ei, 1, "wēi", "wei", Head.w, 'w'),
-    wei2(Shengmu.w, Yunmu.ei, 2, "wéi", "wei", Head.w, 'w'),
-    wei3(Shengmu.w, Yunmu.ei, 3, "wěi", "wei", Head.w, 'w'),
-    wei4(Shengmu.w, Yunmu.ei, 4, "wèi", "wei", Head.w, 'w'),
-    wen1(Shengmu.w, Yunmu.en, 1, "wēn", "wen", Head.w, 'w'),
-    wen2(Shengmu.w, Yunmu.en, 2, "wén", "wen", Head.w, 'w'),
-    wen3(Shengmu.w, Yunmu.en, 3, "wěn", "wen", Head.w, 'w'),
-    wen4(Shengmu.w, Yunmu.en, 4, "wèn", "wen", Head.w, 'w'),
-    weng1(Shengmu.w, Yunmu.eng, 1, "wēng", "weng", Head.w, 'w'),
-    weng3(Shengmu.w, Yunmu.eng, 3, "wěng", "weng", Head.w, 'w'),
-    weng4(Shengmu.w, Yunmu.eng, 4, "wèng", "weng", Head.w, 'w'),
-    wo1(Shengmu.w, Yunmu.o, 1, "wō", "wo", Head.w, 'w'),
-    wo3(Shengmu.w, Yunmu.o, 3, "wǒ", "wo", Head.w, 'w'),
-    wo4(Shengmu.w, Yunmu.o, 4, "wò", "wo", Head.w, 'w'),
-    wu1(Shengmu.w, Yunmu.u, 1, "wū", "wu", Head.w, 'w'),
-    wu2(Shengmu.w, Yunmu.u, 2, "wú", "wu", Head.w, 'w'),
-    wu3(Shengmu.w, Yunmu.u, 3, "wǔ", "wu", Head.w, 'w'),
-    wu4(Shengmu.w, Yunmu.u, 4, "wù", "wu", Head.w, 'w'),
-    xi1(Shengmu.x, Yunmu.i, 1, "xī", "xi", Head.x, 'x'),
-    xi2(Shengmu.x, Yunmu.i, 2, "xí", "xi", Head.x, 'x'),
-    xi3(Shengmu.x, Yunmu.i, 3, "xǐ", "xi", Head.x, 'x'),
-    xi4(Shengmu.x, Yunmu.i, 4, "xì", "xi", Head.x, 'x'),
-    xia1(Shengmu.x, Yunmu.ia, 1, "xiā", "xia", Head.x, 'x'),
-    xia2(Shengmu.x, Yunmu.ia, 2, "xiá", "xia", Head.x, 'x'),
-    xia3(Shengmu.x, Yunmu.ia, 3, "xiǎ", "xia", Head.x, 'x'),
-    xia4(Shengmu.x, Yunmu.ia, 4, "xià", "xia", Head.x, 'x'),
-    xian1(Shengmu.x, Yunmu.ian, 1, "xiān", "xian", Head.x, 'x'),
-    xian2(Shengmu.x, Yunmu.ian, 2, "xián", "xian", Head.x, 'x'),
-    xian3(Shengmu.x, Yunmu.ian, 3, "xiǎn", "xian", Head.x, 'x'),
-    xian4(Shengmu.x, Yunmu.ian, 4, "xiàn", "xian", Head.x, 'x'),
-    xiang1(Shengmu.x, Yunmu.iang, 1, "xiāng", "xiang", Head.x, 'x'),
-    xiang2(Shengmu.x, Yunmu.iang, 2, "xiáng", "xiang", Head.x, 'x'),
-    xiang3(Shengmu.x, Yunmu.iang, 3, "xiǎng", "xiang", Head.x, 'x'),
-    xiang4(Shengmu.x, Yunmu.iang, 4, "xiàng", "xiang", Head.x, 'x'),
-    xiao1(Shengmu.x, Yunmu.iao, 1, "xiāo", "xiao", Head.x, 'x'),
-    xiao2(Shengmu.x, Yunmu.iao, 2, "xiáo", "xiao", Head.x, 'x'),
-    xiao3(Shengmu.x, Yunmu.iao, 3, "xiǎo", "xiao", Head.x, 'x'),
-    xiao4(Shengmu.x, Yunmu.iao, 4, "xiào", "xiao", Head.x, 'x'),
-    xie1(Shengmu.x, Yunmu.ie, 1, "xiē", "xie", Head.x, 'x'),
-    xie2(Shengmu.x, Yunmu.ie, 2, "xié", "xie", Head.x, 'x'),
-    xie3(Shengmu.x, Yunmu.ie, 3, "xiě", "xie", Head.x, 'x'),
-    xie4(Shengmu.x, Yunmu.ie, 4, "xiè", "xie", Head.x, 'x'),
-    xin1(Shengmu.x, Yunmu.in, 1, "xīn", "xin", Head.x, 'x'),
-    xin2(Shengmu.x, Yunmu.in, 2, "xín", "xin", Head.x, 'x'),
-    xin3(Shengmu.x, Yunmu.in, 3, "xǐn", "xin", Head.x, 'x'),
-    xin4(Shengmu.x, Yunmu.in, 4, "xìn", "xin", Head.x, 'x'),
-    xing1(Shengmu.x, Yunmu.ing, 1, "xīng", "xing", Head.x, 'x'),
-    xing2(Shengmu.x, Yunmu.ing, 2, "xíng", "xing", Head.x, 'x'),
-    xing3(Shengmu.x, Yunmu.ing, 3, "xǐng", "xing", Head.x, 'x'),
-    xing4(Shengmu.x, Yunmu.ing, 4, "xìng", "xing", Head.x, 'x'),
-    xiong1(Shengmu.x, Yunmu.iong, 1, "xiōng", "xiong", Head.x, 'x'),
-    xiong2(Shengmu.x, Yunmu.iong, 2, "xióng", "xiong", Head.x, 'x'),
-    xiong3(Shengmu.x, Yunmu.iong, 3, "xiǒng", "xiong", Head.x, 'x'),
-    xiong4(Shengmu.x, Yunmu.iong, 4, "xiòng", "xiong", Head.x, 'x'),
-    xiu1(Shengmu.x, Yunmu.iu, 1, "xiū", "xiu", Head.x, 'x'),
-    xiu2(Shengmu.x, Yunmu.iu, 2, "xiú", "xiu", Head.x, 'x'),
-    xiu3(Shengmu.x, Yunmu.iu, 3, "xiǔ", "xiu", Head.x, 'x'),
-    xiu4(Shengmu.x, Yunmu.iu, 4, "xiù", "xiu", Head.x, 'x'),
-    xu1(Shengmu.x, Yunmu.u, 1, "xū", "xu", Head.x, 'x'),
-    xu2(Shengmu.x, Yunmu.u, 2, "xú", "xu", Head.x, 'x'),
-    xu3(Shengmu.x, Yunmu.u, 3, "xǔ", "xu", Head.x, 'x'),
-    xu4(Shengmu.x, Yunmu.u, 4, "xù", "xu", Head.x, 'x'),
-    xu5(Shengmu.x, Yunmu.u, 5, "xu", "xu", Head.x, 'x'),
-    xuan1(Shengmu.x, Yunmu.uan, 1, "xuān", "xuan", Head.x, 'x'),
-    xuan2(Shengmu.x, Yunmu.uan, 2, "xuán", "xuan", Head.x, 'x'),
-    xuan3(Shengmu.x, Yunmu.uan, 3, "xuǎn", "xuan", Head.x, 'x'),
-    xuan4(Shengmu.x, Yunmu.uan, 4, "xuàn", "xuan", Head.x, 'x'),
-    xue1(Shengmu.x, Yunmu.ue, 1, "xuē", "xue", Head.x, 'x'),
-    xue2(Shengmu.x, Yunmu.ue, 2, "xué", "xue", Head.x, 'x'),
-    xue3(Shengmu.x, Yunmu.ue, 3, "xuě", "xue", Head.x, 'x'),
-    xue4(Shengmu.x, Yunmu.ue, 4, "xuè", "xue", Head.x, 'x'),
-    xun1(Shengmu.x, Yunmu.un, 1, "xūn", "xun", Head.x, 'x'),
-    xun2(Shengmu.x, Yunmu.un, 2, "xún", "xun", Head.x, 'x'),
-    xun4(Shengmu.x, Yunmu.un, 4, "xùn", "xun", Head.x, 'x'),
-    ya1(Shengmu.y, Yunmu.a, 1, "yā", "ya", Head.y, 'y'),
-    ya2(Shengmu.y, Yunmu.a, 2, "yá", "ya", Head.y, 'y'),
-    ya3(Shengmu.y, Yunmu.a, 3, "yǎ", "ya", Head.y, 'y'),
-    ya4(Shengmu.y, Yunmu.a, 4, "yà", "ya", Head.y, 'y'),
-    ya5(Shengmu.y, Yunmu.a, 5, "ya", "ya", Head.y, 'y'),
-    yai2(Shengmu.y, Yunmu.ai, 2, "yái", "yai", Head.y, 'y'),
-    yan1(Shengmu.y, Yunmu.an, 1, "yān", "yan", Head.y, 'y'),
-    yan2(Shengmu.y, Yunmu.an, 2, "yán", "yan", Head.y, 'y'),
-    yan3(Shengmu.y, Yunmu.an, 3, "yǎn", "yan", Head.y, 'y'),
-    yan4(Shengmu.y, Yunmu.an, 4, "yàn", "yan", Head.y, 'y'),
-    yang1(Shengmu.y, Yunmu.ang, 1, "yāng", "yang", Head.y, 'y'),
-    yang2(Shengmu.y, Yunmu.ang, 2, "yáng", "yang", Head.y, 'y'),
-    yang3(Shengmu.y, Yunmu.ang, 3, "yǎng", "yang", Head.y, 'y'),
-    yang4(Shengmu.y, Yunmu.ang, 4, "yàng", "yang", Head.y, 'y'),
-    yao1(Shengmu.y, Yunmu.ao, 1, "yāo", "yao", Head.y, 'y'),
-    yao2(Shengmu.y, Yunmu.ao, 2, "yáo", "yao", Head.y, 'y'),
-    yao3(Shengmu.y, Yunmu.ao, 3, "yǎo", "yao", Head.y, 'y'),
-    yao4(Shengmu.y, Yunmu.ao, 4, "yào", "yao", Head.y, 'y'),
-    ye1(Shengmu.y, Yunmu.e, 1, "yē", "ye", Head.y, 'y'),
-    ye2(Shengmu.y, Yunmu.e, 2, "yé", "ye", Head.y, 'y'),
-    ye3(Shengmu.y, Yunmu.e, 3, "yě", "ye", Head.y, 'y'),
-    ye4(Shengmu.y, Yunmu.e, 4, "yè", "ye", Head.y, 'y'),
-    ye5(Shengmu.y, Yunmu.e, 5, "ye", "ye", Head.y, 'y'),
-    yi1(Shengmu.y, Yunmu.i, 1, "yī", "yi", Head.y, 'y'),
-    yi2(Shengmu.y, Yunmu.i, 2, "yí", "yi", Head.y, 'y'),
-    yi3(Shengmu.y, Yunmu.i, 3, "yǐ", "yi", Head.y, 'y'),
-    yi4(Shengmu.y, Yunmu.i, 4, "yì", "yi", Head.y, 'y'),
-    yi5(Shengmu.y, Yunmu.i, 5, "yi", "yi", Head.y, 'y'),
-    yin1(Shengmu.y, Yunmu.in, 1, "yīn", "yin", Head.y, 'y'),
-    yin2(Shengmu.y, Yunmu.in, 2, "yín", "yin", Head.y, 'y'),
-    yin3(Shengmu.y, Yunmu.in, 3, "yǐn", "yin", Head.y, 'y'),
-    yin4(Shengmu.y, Yunmu.in, 4, "yìn", "yin", Head.y, 'y'),
-    ying1(Shengmu.y, Yunmu.ing, 1, "yīng", "ying", Head.y, 'y'),
-    ying2(Shengmu.y, Yunmu.ing, 2, "yíng", "ying", Head.y, 'y'),
-    ying3(Shengmu.y, Yunmu.ing, 3, "yǐng", "ying", Head.y, 'y'),
-    ying4(Shengmu.y, Yunmu.ing, 4, "yìng", "ying", Head.y, 'y'),
-    yo1(Shengmu.y, Yunmu.o, 1, "yō", "yo", Head.y, 'y'),
-    yo5(Shengmu.y, Yunmu.o, 5, "yo", "yo", Head.y, 'y'),
-    yong1(Shengmu.y, Yunmu.ong, 1, "yōng", "yong", Head.y, 'y'),
-    yong2(Shengmu.y, Yunmu.ong, 2, "yóng", "yong", Head.y, 'y'),
-    yong3(Shengmu.y, Yunmu.ong, 3, "yǒng", "yong", Head.y, 'y'),
-    yong4(Shengmu.y, Yunmu.ong, 4, "yòng", "yong", Head.y, 'y'),
-    you1(Shengmu.y, Yunmu.ou, 1, "yōu", "you", Head.y, 'y'),
-    you2(Shengmu.y, Yunmu.ou, 2, "yóu", "you", Head.y, 'y'),
-    you3(Shengmu.y, Yunmu.ou, 3, "yǒu", "you", Head.y, 'y'),
-    you4(Shengmu.y, Yunmu.ou, 4, "yòu", "you", Head.y, 'y'),
-    yu1(Shengmu.y, Yunmu.u, 1, "yū", "yu", Head.y, 'y'),
-    yu2(Shengmu.y, Yunmu.u, 2, "yú", "yu", Head.y, 'y'),
-    yu3(Shengmu.y, Yunmu.u, 3, "yǔ", "yu", Head.y, 'y'),
-    yu4(Shengmu.y, Yunmu.u, 4, "yù", "yu", Head.y, 'y'),
-    yuan1(Shengmu.y, Yunmu.uan, 1, "yuān", "yuan", Head.y, 'y'),
-    yuan2(Shengmu.y, Yunmu.uan, 2, "yuán", "yuan", Head.y, 'y'),
-    yuan3(Shengmu.y, Yunmu.uan, 3, "yuǎn", "yuan", Head.y, 'y'),
-    yuan4(Shengmu.y, Yunmu.uan, 4, "yuàn", "yuan", Head.y, 'y'),
-    yue1(Shengmu.y, Yunmu.ue, 1, "yuē", "yue", Head.y, 'y'),
-    yue3(Shengmu.y, Yunmu.ue, 3, "yuě", "yue", Head.y, 'y'),
-    yue4(Shengmu.y, Yunmu.ue, 4, "yuè", "yue", Head.y, 'y'),
-    yun1(Shengmu.y, Yunmu.un, 1, "yūn", "yun", Head.y, 'y'),
-    yun2(Shengmu.y, Yunmu.un, 2, "yún", "yun", Head.y, 'y'),
-    yun3(Shengmu.y, Yunmu.un, 3, "yǔn", "yun", Head.y, 'y'),
-    yun4(Shengmu.y, Yunmu.un, 4, "yùn", "yun", Head.y, 'y'),
-    za1(Shengmu.z, Yunmu.a, 1, "zā", "za", Head.z, 'z'),
-    za2(Shengmu.z, Yunmu.a, 2, "zá", "za", Head.z, 'z'),
-    za3(Shengmu.z, Yunmu.a, 3, "zǎ", "za", Head.z, 'z'),
-    zai1(Shengmu.z, Yunmu.ai, 1, "zāi", "zai", Head.z, 'z'),
-    zai3(Shengmu.z, Yunmu.ai, 3, "zǎi", "zai", Head.z, 'z'),
-    zai4(Shengmu.z, Yunmu.ai, 4, "zài", "zai", Head.z, 'z'),
-    zan1(Shengmu.z, Yunmu.an, 1, "zān", "zan", Head.z, 'z'),
-    zan2(Shengmu.z, Yunmu.an, 2, "zán", "zan", Head.z, 'z'),
-    zan3(Shengmu.z, Yunmu.an, 3, "zǎn", "zan", Head.z, 'z'),
-    zan4(Shengmu.z, Yunmu.an, 4, "zàn", "zan", Head.z, 'z'),
-    zang1(Shengmu.z, Yunmu.ang, 1, "zāng", "zang", Head.z, 'z'),
-    zang2(Shengmu.z, Yunmu.ang, 2, "záng", "zang", Head.z, 'z'),
-    zang3(Shengmu.z, Yunmu.ang, 3, "zǎng", "zang", Head.z, 'z'),
-    zang4(Shengmu.z, Yunmu.ang, 4, "zàng", "zang", Head.z, 'z'),
-    zao1(Shengmu.z, Yunmu.ao, 1, "zāo", "zao", Head.z, 'z'),
-    zao2(Shengmu.z, Yunmu.ao, 2, "záo", "zao", Head.z, 'z'),
-    zao3(Shengmu.z, Yunmu.ao, 3, "zǎo", "zao", Head.z, 'z'),
-    zao4(Shengmu.z, Yunmu.ao, 4, "zào", "zao", Head.z, 'z'),
-    ze2(Shengmu.z, Yunmu.e, 2, "zé", "ze", Head.z, 'z'),
-    ze4(Shengmu.z, Yunmu.e, 4, "zè", "ze", Head.z, 'z'),
-    zei2(Shengmu.z, Yunmu.ei, 2, "zéi", "zei", Head.z, 'z'),
-    zen1(Shengmu.z, Yunmu.en, 1, "zēn", "zen", Head.z, 'z'),
-    zen3(Shengmu.z, Yunmu.en, 3, "zěn", "zen", Head.z, 'z'),
-    zen4(Shengmu.z, Yunmu.en, 4, "zèn", "zen", Head.z, 'z'),
-    zeng1(Shengmu.z, Yunmu.eng, 1, "zēng", "zeng", Head.z, 'z'),
-    zeng4(Shengmu.z, Yunmu.eng, 4, "zèng", "zeng", Head.z, 'z'),
-    zha1(Shengmu.zh, Yunmu.a, 1, "zhā", "zha", Head.zh, 'z'),
-    zha2(Shengmu.zh, Yunmu.a, 2, "zhá", "zha", Head.zh, 'z'),
-    zha3(Shengmu.zh, Yunmu.a, 3, "zhǎ", "zha", Head.zh, 'z'),
-    zha4(Shengmu.zh, Yunmu.a, 4, "zhà", "zha", Head.zh, 'z'),
-    zhai1(Shengmu.zh, Yunmu.ai, 1, "zhāi", "zhai", Head.zh, 'z'),
-    zhai2(Shengmu.zh, Yunmu.ai, 2, "zhái", "zhai", Head.zh, 'z'),
-    zhai3(Shengmu.zh, Yunmu.ai, 3, "zhǎi", "zhai", Head.zh, 'z'),
-    zhai4(Shengmu.zh, Yunmu.ai, 4, "zhài", "zhai", Head.zh, 'z'),
-    zhan1(Shengmu.zh, Yunmu.an, 1, "zhān", "zhan", Head.zh, 'z'),
-    zhan2(Shengmu.zh, Yunmu.an, 2, "zhán", "zhan", Head.zh, 'z'),
-    zhan3(Shengmu.zh, Yunmu.an, 3, "zhǎn", "zhan", Head.zh, 'z'),
-    zhan4(Shengmu.zh, Yunmu.an, 4, "zhàn", "zhan", Head.zh, 'z'),
-    zhang1(Shengmu.zh, Yunmu.ang, 1, "zhāng", "zhang", Head.zh, 'z'),
-    zhang3(Shengmu.zh, Yunmu.ang, 3, "zhǎng", "zhang", Head.zh, 'z'),
-    zhang4(Shengmu.zh, Yunmu.ang, 4, "zhàng", "zhang", Head.zh, 'z'),
-    zhao1(Shengmu.zh, Yunmu.ao, 1, "zhāo", "zhao", Head.zh, 'z'),
-    zhao2(Shengmu.zh, Yunmu.ao, 2, "zháo", "zhao", Head.zh, 'z'),
-    zhao3(Shengmu.zh, Yunmu.ao, 3, "zhǎo", "zhao", Head.zh, 'z'),
-    zhao4(Shengmu.zh, Yunmu.ao, 4, "zhào", "zhao", Head.zh, 'z'),
-    zhe1(Shengmu.zh, Yunmu.e, 1, "zhē", "zhe", Head.zh, 'z'),
-    zhe2(Shengmu.zh, Yunmu.e, 2, "zhé", "zhe", Head.zh, 'z'),
-    zhe3(Shengmu.zh, Yunmu.e, 3, "zhě", "zhe", Head.zh, 'z'),
-    zhe4(Shengmu.zh, Yunmu.e, 4, "zhè", "zhe", Head.zh, 'z'),
-    zhe5(Shengmu.zh, Yunmu.e, 5, "zhe", "zhe", Head.zh, 'z'),
-    zhei4(Shengmu.zh, Yunmu.ei, 4, "zhèi", "zhei", Head.zh, 'z'),
-    zhen1(Shengmu.zh, Yunmu.en, 1, "zhēn", "zhen", Head.zh, 'z'),
-    zhen3(Shengmu.zh, Yunmu.en, 3, "zhěn", "zhen", Head.zh, 'z'),
-    zhen4(Shengmu.zh, Yunmu.en, 4, "zhèn", "zhen", Head.zh, 'z'),
-    zheng1(Shengmu.zh, Yunmu.eng, 1, "zhēng", "zheng", Head.zh, 'z'),
-    zheng3(Shengmu.zh, Yunmu.eng, 3, "zhěng", "zheng", Head.zh, 'z'),
-    zheng4(Shengmu.zh, Yunmu.eng, 4, "zhèng", "zheng", Head.zh, 'z'),
-    zhi1(Shengmu.zh, Yunmu.i, 1, "zhī", "zhi", Head.zh, 'z'),
-    zhi2(Shengmu.zh, Yunmu.i, 2, "zhí", "zhi", Head.zh, 'z'),
-    zhi3(Shengmu.zh, Yunmu.i, 3, "zhǐ", "zhi", Head.zh, 'z'),
-    zhi4(Shengmu.zh, Yunmu.i, 4, "zhì", "zhi", Head.zh, 'z'),
-    zhong1(Shengmu.zh, Yunmu.ong, 1, "zhōng", "zhong", Head.zh, 'z'),
-    zhong3(Shengmu.zh, Yunmu.ong, 3, "zhǒng", "zhong", Head.zh, 'z'),
-    zhong4(Shengmu.zh, Yunmu.ong, 4, "zhòng", "zhong", Head.zh, 'z'),
-    zhou1(Shengmu.zh, Yunmu.ou, 1, "zhōu", "zhou", Head.zh, 'z'),
-    zhou2(Shengmu.zh, Yunmu.ou, 2, "zhóu", "zhou", Head.zh, 'z'),
-    zhou3(Shengmu.zh, Yunmu.ou, 3, "zhǒu", "zhou", Head.zh, 'z'),
-    zhou4(Shengmu.zh, Yunmu.ou, 4, "zhòu", "zhou", Head.zh, 'z'),
-    zhu1(Shengmu.zh, Yunmu.u, 1, "zhū", "zhu", Head.zh, 'z'),
-    zhu2(Shengmu.zh, Yunmu.u, 2, "zhú", "zhu", Head.zh, 'z'),
-    zhu3(Shengmu.zh, Yunmu.u, 3, "zhǔ", "zhu", Head.zh, 'z'),
-    zhu4(Shengmu.zh, Yunmu.u, 4, "zhù", "zhu", Head.zh, 'z'),
-    zhua1(Shengmu.zh, Yunmu.ua, 1, "zhuā", "zhua", Head.zh, 'z'),
-    zhua3(Shengmu.zh, Yunmu.ua, 3, "zhuǎ", "zhua", Head.zh, 'z'),
-    zhuai1(Shengmu.zh, Yunmu.uai, 1, "zhuāi", "zhuai", Head.zh, 'z'),
-    zhuai3(Shengmu.zh, Yunmu.uai, 3, "zhuǎi", "zhuai", Head.zh, 'z'),
-    zhuai4(Shengmu.zh, Yunmu.uai, 4, "zhuài", "zhuai", Head.zh, 'z'),
-    zhuan1(Shengmu.zh, Yunmu.uan, 1, "zhuān", "zhuan", Head.zh, 'z'),
-    zhuan3(Shengmu.zh, Yunmu.uan, 3, "zhuǎn", "zhuan", Head.zh, 'z'),
-    zhuan4(Shengmu.zh, Yunmu.uan, 4, "zhuàn", "zhuan", Head.zh, 'z'),
-    zhuang1(Shengmu.zh, Yunmu.uang, 1, "zhuāng", "zhuang", Head.zh, 'z'),
-    zhuang3(Shengmu.zh, Yunmu.uang, 3, "zhuǎng", "zhuang", Head.zh, 'z'),
-    zhuang4(Shengmu.zh, Yunmu.uang, 4, "zhuàng", "zhuang", Head.zh, 'z'),
-    zhui1(Shengmu.zh, Yunmu.ui, 1, "zhuī", "zhui", Head.zh, 'z'),
-    zhui3(Shengmu.zh, Yunmu.ui, 3, "zhuǐ", "zhui", Head.zh, 'z'),
-    zhui4(Shengmu.zh, Yunmu.ui, 4, "zhuì", "zhui", Head.zh, 'z'),
-    zhun1(Shengmu.zh, Yunmu.un, 1, "zhūn", "zhun", Head.zh, 'z'),
-    zhun3(Shengmu.zh, Yunmu.un, 3, "zhǔn", "zhun", Head.zh, 'z'),
-    zhun4(Shengmu.zh, Yunmu.un, 4, "zhùn", "zhun", Head.zh, 'z'),
-    zhuo1(Shengmu.zh, Yunmu.uo, 1, "zhuō", "zhuo", Head.zh, 'z'),
-    zhuo2(Shengmu.zh, Yunmu.uo, 2, "zhuó", "zhuo", Head.zh, 'z'),
-    zhuo3(Shengmu.zh, Yunmu.uo, 3, "zhuǒ", "zhuo", Head.zh, 'z'),
-    zhuo4(Shengmu.zh, Yunmu.uo, 4, "zhuò", "zhuo", Head.zh, 'z'),
-    zi1(Shengmu.z, Yunmu.i, 1, "zī", "zi", Head.z, 'z'),
-    zi2(Shengmu.z, Yunmu.i, 2, "zí", "zi", Head.z, 'z'),
-    zi3(Shengmu.z, Yunmu.i, 3, "zǐ", "zi", Head.z, 'z'),
-    zi4(Shengmu.z, Yunmu.i, 4, "zì", "zi", Head.z, 'z'),
-    zi5(Shengmu.z, Yunmu.i, 5, "zi", "zi", Head.z, 'z'),
-    zong1(Shengmu.z, Yunmu.ong, 1, "zōng", "zong", Head.z, 'z'),
-    zong3(Shengmu.z, Yunmu.ong, 3, "zǒng", "zong", Head.z, 'z'),
-    zong4(Shengmu.z, Yunmu.ong, 4, "zòng", "zong", Head.z, 'z'),
-    zou1(Shengmu.z, Yunmu.ou, 1, "zōu", "zou", Head.z, 'z'),
-    zou3(Shengmu.z, Yunmu.ou, 3, "zǒu", "zou", Head.z, 'z'),
-    zou4(Shengmu.z, Yunmu.ou, 4, "zòu", "zou", Head.z, 'z'),
-    zu1(Shengmu.z, Yunmu.u, 1, "zū", "zu", Head.z, 'z'),
-    zu2(Shengmu.z, Yunmu.u, 2, "zú", "zu", Head.z, 'z'),
-    zu3(Shengmu.z, Yunmu.u, 3, "zǔ", "zu", Head.z, 'z'),
-    zu4(Shengmu.z, Yunmu.u, 4, "zù", "zu", Head.z, 'z'),
-    zuan1(Shengmu.z, Yunmu.uan, 1, "zuān", "zuan", Head.z, 'z'),
-    zuan3(Shengmu.z, Yunmu.uan, 3, "zuǎn", "zuan", Head.z, 'z'),
-    zuan4(Shengmu.z, Yunmu.uan, 4, "zuàn", "zuan", Head.z, 'z'),
-    zui1(Shengmu.z, Yunmu.ui, 1, "zuī", "zui", Head.z, 'z'),
-    zui3(Shengmu.z, Yunmu.ui, 3, "zuǐ", "zui", Head.z, 'z'),
-    zui4(Shengmu.z, Yunmu.ui, 4, "zuì", "zui", Head.z, 'z'),
-    zun1(Shengmu.z, Yunmu.un, 1, "zūn", "zun", Head.z, 'z'),
-    zun3(Shengmu.z, Yunmu.un, 3, "zǔn", "zun", Head.z, 'z'),
-    zun4(Shengmu.z, Yunmu.un, 4, "zùn", "zun", Head.z, 'z'),
-    zuo1(Shengmu.z, Yunmu.uo, 1, "zuō", "zuo", Head.z, 'z'),
-    zuo2(Shengmu.z, Yunmu.uo, 2, "zuó", "zuo", Head.z, 'z'),
-    zuo3(Shengmu.z, Yunmu.uo, 3, "zuǒ", "zuo", Head.z, 'z'),
-    zuo4(Shengmu.z, Yunmu.uo, 4, "zuò", "zuo", Head.z, 'z'),
-    zuo5(Shengmu.z, Yunmu.uo, 5, "zuo", "zuo", Head.z, 'z'),
-    none5(Shengmu.none, Yunmu.none, 5, "none", "none", Head.none, ' '),
+    public static readonly Pinyin a1 = new(Shengmu.none, Yunmu.a, 1, "ā", "a", Head.a, 'a');
+    public static readonly Pinyin a2 = new(Shengmu.none, Yunmu.a, 2, "á", "a", Head.a, 'a');
+    public static readonly Pinyin a3 = new(Shengmu.none, Yunmu.a, 3, "ǎ", "a", Head.a, 'a');
+    public static readonly Pinyin a4 = new(Shengmu.none, Yunmu.a, 4, "à", "a", Head.a, 'a');
+    public static readonly Pinyin a5 = new(Shengmu.none, Yunmu.a, 5, "a", "a", Head.a, 'a');
+    public static readonly Pinyin ai1 = new(Shengmu.none, Yunmu.ai, 1, "āi", "ai", Head.a, 'a');
+    public static readonly Pinyin ai2 = new(Shengmu.none, Yunmu.ai, 2, "ái", "ai", Head.a, 'a');
+    public static readonly Pinyin ai3 = new(Shengmu.none, Yunmu.ai, 3, "ǎi", "ai", Head.a, 'a');
+    public static readonly Pinyin ai4 = new(Shengmu.none, Yunmu.ai, 4, "ài", "ai", Head.a, 'a');
+    public static readonly Pinyin an1 = new(Shengmu.none, Yunmu.an, 1, "ān", "an", Head.a, 'a');
+    public static readonly Pinyin an2 = new(Shengmu.none, Yunmu.an, 2, "án", "an", Head.a, 'a');
+    public static readonly Pinyin an3 = new(Shengmu.none, Yunmu.an, 3, "ǎn", "an", Head.a, 'a');
+    public static readonly Pinyin an4 = new(Shengmu.none, Yunmu.an, 4, "àn", "an", Head.a, 'a');
+    public static readonly Pinyin ang1 = new(Shengmu.none, Yunmu.ang, 1, "āng", "ang", Head.a, 'a');
+    public static readonly Pinyin ang2 = new(Shengmu.none, Yunmu.ang, 2, "áng", "ang", Head.a, 'a');
+    public static readonly Pinyin ang3 = new(Shengmu.none, Yunmu.ang, 3, "ǎng", "ang", Head.a, 'a');
+    public static readonly Pinyin ang4 = new(Shengmu.none, Yunmu.ang, 4, "àng", "ang", Head.a, 'a');
+    public static readonly Pinyin ao1 = new(Shengmu.none, Yunmu.ao, 1, "āo", "ao", Head.a, 'a');
+    public static readonly Pinyin ao2 = new(Shengmu.none, Yunmu.ao, 2, "áo", "ao", Head.a, 'a');
+    public static readonly Pinyin ao3 = new(Shengmu.none, Yunmu.ao, 3, "ǎo", "ao", Head.a, 'a');
+    public static readonly Pinyin ao4 = new(Shengmu.none, Yunmu.ao, 4, "ào", "ao", Head.a, 'a');
+    public static readonly Pinyin ba1 = new(Shengmu.b, Yunmu.a, 1, "bā", "ba", Head.b, 'b');
+    public static readonly Pinyin ba2 = new(Shengmu.b, Yunmu.a, 2, "bá", "ba", Head.b, 'b');
+    public static readonly Pinyin ba3 = new(Shengmu.b, Yunmu.a, 3, "bǎ", "ba", Head.b, 'b');
+    public static readonly Pinyin ba4 = new(Shengmu.b, Yunmu.a, 4, "bà", "ba", Head.b, 'b');
+    public static readonly Pinyin ba5 = new(Shengmu.b, Yunmu.a, 5, "ba", "ba", Head.b, 'b');
+    public static readonly Pinyin bai1 = new(Shengmu.b, Yunmu.ai, 1, "bāi", "bai", Head.b, 'b');
+    public static readonly Pinyin bai2 = new(Shengmu.b, Yunmu.ai, 2, "bái", "bai", Head.b, 'b');
+    public static readonly Pinyin bai3 = new(Shengmu.b, Yunmu.ai, 3, "bǎi", "bai", Head.b, 'b');
+    public static readonly Pinyin bai4 = new(Shengmu.b, Yunmu.ai, 4, "bài", "bai", Head.b, 'b');
+    public static readonly Pinyin ban1 = new(Shengmu.b, Yunmu.an, 1, "bān", "ban", Head.b, 'b');
+    public static readonly Pinyin ban3 = new(Shengmu.b, Yunmu.an, 3, "bǎn", "ban", Head.b, 'b');
+    public static readonly Pinyin ban4 = new(Shengmu.b, Yunmu.an, 4, "bàn", "ban", Head.b, 'b');
+    public static readonly Pinyin bang1 = new(Shengmu.b, Yunmu.ang, 1, "bāng", "bang", Head.b, 'b');
+    public static readonly Pinyin bang3 = new(Shengmu.b, Yunmu.ang, 3, "bǎng", "bang", Head.b, 'b');
+    public static readonly Pinyin bang4 = new(Shengmu.b, Yunmu.ang, 4, "bàng", "bang", Head.b, 'b');
+    public static readonly Pinyin bao1 = new(Shengmu.b, Yunmu.ao, 1, "bāo", "bao", Head.b, 'b');
+    public static readonly Pinyin bao2 = new(Shengmu.b, Yunmu.ao, 2, "báo", "bao", Head.b, 'b');
+    public static readonly Pinyin bao3 = new(Shengmu.b, Yunmu.ao, 3, "bǎo", "bao", Head.b, 'b');
+    public static readonly Pinyin bao4 = new(Shengmu.b, Yunmu.ao, 4, "bào", "bao", Head.b, 'b');
+    public static readonly Pinyin bei1 = new(Shengmu.b, Yunmu.ei, 1, "bēi", "bei", Head.b, 'b');
+    public static readonly Pinyin bei3 = new(Shengmu.b, Yunmu.ei, 3, "běi", "bei", Head.b, 'b');
+    public static readonly Pinyin bei4 = new(Shengmu.b, Yunmu.ei, 4, "bèi", "bei", Head.b, 'b');
+    public static readonly Pinyin bei5 = new(Shengmu.b, Yunmu.ei, 5, "bei", "bei", Head.b, 'b');
+    public static readonly Pinyin ben1 = new(Shengmu.b, Yunmu.en, 1, "bēn", "ben", Head.b, 'b');
+    public static readonly Pinyin ben3 = new(Shengmu.b, Yunmu.en, 3, "běn", "ben", Head.b, 'b');
+    public static readonly Pinyin ben4 = new(Shengmu.b, Yunmu.en, 4, "bèn", "ben", Head.b, 'b');
+    public static readonly Pinyin beng1 = new(Shengmu.b, Yunmu.eng, 1, "bēng", "beng", Head.b, 'b');
+    public static readonly Pinyin beng2 = new(Shengmu.b, Yunmu.eng, 2, "béng", "beng", Head.b, 'b');
+    public static readonly Pinyin beng3 = new(Shengmu.b, Yunmu.eng, 3, "běng", "beng", Head.b, 'b');
+    public static readonly Pinyin beng4 = new(Shengmu.b, Yunmu.eng, 4, "bèng", "beng", Head.b, 'b');
+    public static readonly Pinyin bi1 = new(Shengmu.b, Yunmu.i, 1, "bī", "bi", Head.b, 'b');
+    public static readonly Pinyin bi2 = new(Shengmu.b, Yunmu.i, 2, "bí", "bi", Head.b, 'b');
+    public static readonly Pinyin bi3 = new(Shengmu.b, Yunmu.i, 3, "bǐ", "bi", Head.b, 'b');
+    public static readonly Pinyin bi4 = new(Shengmu.b, Yunmu.i, 4, "bì", "bi", Head.b, 'b');
+    public static readonly Pinyin bian1 = new(Shengmu.b, Yunmu.ian, 1, "biān", "bian", Head.b, 'b');
+    public static readonly Pinyin bian3 = new(Shengmu.b, Yunmu.ian, 3, "biǎn", "bian", Head.b, 'b');
+    public static readonly Pinyin bian4 = new(Shengmu.b, Yunmu.ian, 4, "biàn", "bian", Head.b, 'b');
+    public static readonly Pinyin bian5 = new(Shengmu.b, Yunmu.ian, 5, "bian", "bian", Head.b, 'b');
+    public static readonly Pinyin biao1 = new(Shengmu.b, Yunmu.iao, 1, "biāo", "biao", Head.b, 'b');
+    public static readonly Pinyin biao2 = new(Shengmu.b, Yunmu.iao, 2, "biáo", "biao", Head.b, 'b');
+    public static readonly Pinyin biao3 = new(Shengmu.b, Yunmu.iao, 3, "biǎo", "biao", Head.b, 'b');
+    public static readonly Pinyin biao4 = new(Shengmu.b, Yunmu.iao, 4, "biào", "biao", Head.b, 'b');
+    public static readonly Pinyin bie1 = new(Shengmu.b, Yunmu.ie, 1, "biē", "bie", Head.b, 'b');
+    public static readonly Pinyin bie2 = new(Shengmu.b, Yunmu.ie, 2, "bié", "bie", Head.b, 'b');
+    public static readonly Pinyin bie3 = new(Shengmu.b, Yunmu.ie, 3, "biě", "bie", Head.b, 'b');
+    public static readonly Pinyin bie4 = new(Shengmu.b, Yunmu.ie, 4, "biè", "bie", Head.b, 'b');
+    public static readonly Pinyin bin1 = new(Shengmu.b, Yunmu.@in, 1, "bīn", "bin", Head.b, 'b');
+    public static readonly Pinyin bin3 = new(Shengmu.b, Yunmu.@in, 3, "bǐn", "bin", Head.b, 'b');
+    public static readonly Pinyin bin4 = new(Shengmu.b, Yunmu.@in, 4, "bìn", "bin", Head.b, 'b');
+    public static readonly Pinyin bing1 = new(Shengmu.b, Yunmu.ing, 1, "bīng", "bing", Head.b, 'b');
+    public static readonly Pinyin bing3 = new(Shengmu.b, Yunmu.ing, 3, "bǐng", "bing", Head.b, 'b');
+    public static readonly Pinyin bing4 = new(Shengmu.b, Yunmu.ing, 4, "bìng", "bing", Head.b, 'b');
+    public static readonly Pinyin bo1 = new(Shengmu.b, Yunmu.o, 1, "bō", "bo", Head.b, 'b');
+    public static readonly Pinyin bo2 = new(Shengmu.b, Yunmu.o, 2, "bó", "bo", Head.b, 'b');
+    public static readonly Pinyin bo3 = new(Shengmu.b, Yunmu.o, 3, "bǒ", "bo", Head.b, 'b');
+    public static readonly Pinyin bo4 = new(Shengmu.b, Yunmu.o, 4, "bò", "bo", Head.b, 'b');
+    public static readonly Pinyin bo5 = new(Shengmu.b, Yunmu.o, 5, "bo", "bo", Head.b, 'b');
+    public static readonly Pinyin bu1 = new(Shengmu.b, Yunmu.u, 1, "bū", "bu", Head.b, 'b');
+    public static readonly Pinyin bu2 = new(Shengmu.b, Yunmu.u, 2, "bú", "bu", Head.b, 'b');
+    public static readonly Pinyin bu3 = new(Shengmu.b, Yunmu.u, 3, "bǔ", "bu", Head.b, 'b');
+    public static readonly Pinyin bu4 = new(Shengmu.b, Yunmu.u, 4, "bù", "bu", Head.b, 'b');
+    public static readonly Pinyin ca1 = new(Shengmu.c, Yunmu.a, 1, "cā", "ca", Head.c, 'c');
+    public static readonly Pinyin ca3 = new(Shengmu.c, Yunmu.a, 3, "cǎ", "ca", Head.c, 'c');
+    public static readonly Pinyin ca4 = new(Shengmu.c, Yunmu.a, 4, "cà", "ca", Head.c, 'c');
+    public static readonly Pinyin cai1 = new(Shengmu.c, Yunmu.ai, 1, "cāi", "cai", Head.c, 'c');
+    public static readonly Pinyin cai2 = new(Shengmu.c, Yunmu.ai, 2, "cái", "cai", Head.c, 'c');
+    public static readonly Pinyin cai3 = new(Shengmu.c, Yunmu.ai, 3, "cǎi", "cai", Head.c, 'c');
+    public static readonly Pinyin cai4 = new(Shengmu.c, Yunmu.ai, 4, "cài", "cai", Head.c, 'c');
+    public static readonly Pinyin can1 = new(Shengmu.c, Yunmu.an, 1, "cān", "can", Head.c, 'c');
+    public static readonly Pinyin can2 = new(Shengmu.c, Yunmu.an, 2, "cán", "can", Head.c, 'c');
+    public static readonly Pinyin can3 = new(Shengmu.c, Yunmu.an, 3, "cǎn", "can", Head.c, 'c');
+    public static readonly Pinyin can4 = new(Shengmu.c, Yunmu.an, 4, "càn", "can", Head.c, 'c');
+    public static readonly Pinyin cang1 = new(Shengmu.c, Yunmu.ang, 1, "cāng", "cang", Head.c, 'c');
+    public static readonly Pinyin cang2 = new(Shengmu.c, Yunmu.ang, 2, "cáng", "cang", Head.c, 'c');
+    public static readonly Pinyin cang3 = new(Shengmu.c, Yunmu.ang, 3, "cǎng", "cang", Head.c, 'c');
+    public static readonly Pinyin cang4 = new(Shengmu.c, Yunmu.ang, 4, "càng", "cang", Head.c, 'c');
+    public static readonly Pinyin cao1 = new(Shengmu.c, Yunmu.ao, 1, "cāo", "cao", Head.c, 'c');
+    public static readonly Pinyin cao2 = new(Shengmu.c, Yunmu.ao, 2, "cáo", "cao", Head.c, 'c');
+    public static readonly Pinyin cao3 = new(Shengmu.c, Yunmu.ao, 3, "cǎo", "cao", Head.c, 'c');
+    public static readonly Pinyin cao4 = new(Shengmu.c, Yunmu.ao, 4, "cào", "cao", Head.c, 'c');
+    public static readonly Pinyin ce4 = new(Shengmu.c, Yunmu.e, 4, "cè", "ce", Head.c, 'c');
+    public static readonly Pinyin cen1 = new(Shengmu.c, Yunmu.en, 1, "cēn", "cen", Head.c, 'c');
+    public static readonly Pinyin cen2 = new(Shengmu.c, Yunmu.en, 2, "cén", "cen", Head.c, 'c');
+    public static readonly Pinyin ceng1 = new(Shengmu.c, Yunmu.eng, 1, "cēng", "ceng", Head.c, 'c');
+    public static readonly Pinyin ceng2 = new(Shengmu.c, Yunmu.eng, 2, "céng", "ceng", Head.c, 'c');
+    public static readonly Pinyin ceng4 = new(Shengmu.c, Yunmu.eng, 4, "cèng", "ceng", Head.c, 'c');
+    public static readonly Pinyin cha1 = new(Shengmu.ch, Yunmu.a, 1, "chā", "cha", Head.ch, 'c');
+    public static readonly Pinyin cha2 = new(Shengmu.ch, Yunmu.a, 2, "chá", "cha", Head.ch, 'c');
+    public static readonly Pinyin cha3 = new(Shengmu.ch, Yunmu.a, 3, "chǎ", "cha", Head.ch, 'c');
+    public static readonly Pinyin cha4 = new(Shengmu.ch, Yunmu.a, 4, "chà", "cha", Head.ch, 'c');
+    public static readonly Pinyin cha5 = new(Shengmu.ch, Yunmu.a, 5, "cha", "cha", Head.ch, 'c');
+    public static readonly Pinyin chai1 = new(Shengmu.ch, Yunmu.ai, 1, "chāi", "chai", Head.ch, 'c');
+    public static readonly Pinyin chai2 = new(Shengmu.ch, Yunmu.ai, 2, "chái", "chai", Head.ch, 'c');
+    public static readonly Pinyin chai3 = new(Shengmu.ch, Yunmu.ai, 3, "chǎi", "chai", Head.ch, 'c');
+    public static readonly Pinyin chai4 = new(Shengmu.ch, Yunmu.ai, 4, "chài", "chai", Head.ch, 'c');
+    public static readonly Pinyin chan1 = new(Shengmu.ch, Yunmu.an, 1, "chān", "chan", Head.ch, 'c');
+    public static readonly Pinyin chan2 = new(Shengmu.ch, Yunmu.an, 2, "chán", "chan", Head.ch, 'c');
+    public static readonly Pinyin chan3 = new(Shengmu.ch, Yunmu.an, 3, "chǎn", "chan", Head.ch, 'c');
+    public static readonly Pinyin chan4 = new(Shengmu.ch, Yunmu.an, 4, "chàn", "chan", Head.ch, 'c');
+    public static readonly Pinyin chang1 = new(Shengmu.ch, Yunmu.ang, 1, "chāng", "chang", Head.ch, 'c');
+    public static readonly Pinyin chang2 = new(Shengmu.ch, Yunmu.ang, 2, "cháng", "chang", Head.ch, 'c');
+    public static readonly Pinyin chang3 = new(Shengmu.ch, Yunmu.ang, 3, "chǎng", "chang", Head.ch, 'c');
+    public static readonly Pinyin chang4 = new(Shengmu.ch, Yunmu.ang, 4, "chàng", "chang", Head.ch, 'c');
+    public static readonly Pinyin chang5 = new(Shengmu.ch, Yunmu.ang, 5, "chang", "chang", Head.ch, 'c');
+    public static readonly Pinyin chao1 = new(Shengmu.ch, Yunmu.ao, 1, "chāo", "chao", Head.ch, 'c');
+    public static readonly Pinyin chao2 = new(Shengmu.ch, Yunmu.ao, 2, "cháo", "chao", Head.ch, 'c');
+    public static readonly Pinyin chao3 = new(Shengmu.ch, Yunmu.ao, 3, "chǎo", "chao", Head.ch, 'c');
+    public static readonly Pinyin chao4 = new(Shengmu.ch, Yunmu.ao, 4, "chào", "chao", Head.ch, 'c');
+    public static readonly Pinyin che1 = new(Shengmu.ch, Yunmu.e, 1, "chē", "che", Head.ch, 'c');
+    public static readonly Pinyin che3 = new(Shengmu.ch, Yunmu.e, 3, "chě", "che", Head.ch, 'c');
+    public static readonly Pinyin che4 = new(Shengmu.ch, Yunmu.e, 4, "chè", "che", Head.ch, 'c');
+    public static readonly Pinyin chen1 = new(Shengmu.ch, Yunmu.en, 1, "chēn", "chen", Head.ch, 'c');
+    public static readonly Pinyin chen2 = new(Shengmu.ch, Yunmu.en, 2, "chén", "chen", Head.ch, 'c');
+    public static readonly Pinyin chen3 = new(Shengmu.ch, Yunmu.en, 3, "chěn", "chen", Head.ch, 'c');
+    public static readonly Pinyin chen4 = new(Shengmu.ch, Yunmu.en, 4, "chèn", "chen", Head.ch, 'c');
+    public static readonly Pinyin chen5 = new(Shengmu.ch, Yunmu.en, 5, "chen", "chen", Head.ch, 'c');
+    public static readonly Pinyin cheng1 = new(Shengmu.ch, Yunmu.eng, 1, "chēng", "cheng", Head.ch, 'c');
+    public static readonly Pinyin cheng2 = new(Shengmu.ch, Yunmu.eng, 2, "chéng", "cheng", Head.ch, 'c');
+    public static readonly Pinyin cheng3 = new(Shengmu.ch, Yunmu.eng, 3, "chěng", "cheng", Head.ch, 'c');
+    public static readonly Pinyin cheng4 = new(Shengmu.ch, Yunmu.eng, 4, "chèng", "cheng", Head.ch, 'c');
+    public static readonly Pinyin chi1 = new(Shengmu.ch, Yunmu.i, 1, "chī", "chi", Head.ch, 'c');
+    public static readonly Pinyin chi2 = new(Shengmu.ch, Yunmu.i, 2, "chí", "chi", Head.ch, 'c');
+    public static readonly Pinyin chi3 = new(Shengmu.ch, Yunmu.i, 3, "chǐ", "chi", Head.ch, 'c');
+    public static readonly Pinyin chi4 = new(Shengmu.ch, Yunmu.i, 4, "chì", "chi", Head.ch, 'c');
+    public static readonly Pinyin chi5 = new(Shengmu.ch, Yunmu.i, 5, "chi", "chi", Head.ch, 'c');
+    public static readonly Pinyin chong1 = new(Shengmu.ch, Yunmu.ong, 1, "chōng", "chong", Head.ch, 'c');
+    public static readonly Pinyin chong2 = new(Shengmu.ch, Yunmu.ong, 2, "chóng", "chong", Head.ch, 'c');
+    public static readonly Pinyin chong3 = new(Shengmu.ch, Yunmu.ong, 3, "chǒng", "chong", Head.ch, 'c');
+    public static readonly Pinyin chong4 = new(Shengmu.ch, Yunmu.ong, 4, "chòng", "chong", Head.ch, 'c');
+    public static readonly Pinyin chou1 = new(Shengmu.ch, Yunmu.ou, 1, "chōu", "chou", Head.ch, 'c');
+    public static readonly Pinyin chou2 = new(Shengmu.ch, Yunmu.ou, 2, "chóu", "chou", Head.ch, 'c');
+    public static readonly Pinyin chou3 = new(Shengmu.ch, Yunmu.ou, 3, "chǒu", "chou", Head.ch, 'c');
+    public static readonly Pinyin chou4 = new(Shengmu.ch, Yunmu.ou, 4, "chòu", "chou", Head.ch, 'c');
+    public static readonly Pinyin chou5 = new(Shengmu.ch, Yunmu.ou, 5, "chou", "chou", Head.ch, 'c');
+    public static readonly Pinyin chu1 = new(Shengmu.ch, Yunmu.u, 1, "chū", "chu", Head.ch, 'c');
+    public static readonly Pinyin chu2 = new(Shengmu.ch, Yunmu.u, 2, "chú", "chu", Head.ch, 'c');
+    public static readonly Pinyin chu3 = new(Shengmu.ch, Yunmu.u, 3, "chǔ", "chu", Head.ch, 'c');
+    public static readonly Pinyin chu4 = new(Shengmu.ch, Yunmu.u, 4, "chù", "chu", Head.ch, 'c');
+    public static readonly Pinyin chu5 = new(Shengmu.ch, Yunmu.u, 5, "chu", "chu", Head.ch, 'c');
+    public static readonly Pinyin chua1 = new(Shengmu.ch, Yunmu.ua, 1, "chuā", "chua", Head.ch, 'c');
+    public static readonly Pinyin chuai1 = new(Shengmu.ch, Yunmu.uai, 1, "chuāi", "chuai", Head.ch, 'c');
+    public static readonly Pinyin chuai2 = new(Shengmu.ch, Yunmu.uai, 2, "chuái", "chuai", Head.ch, 'c');
+    public static readonly Pinyin chuai3 = new(Shengmu.ch, Yunmu.uai, 3, "chuǎi", "chuai", Head.ch, 'c');
+    public static readonly Pinyin chuai4 = new(Shengmu.ch, Yunmu.uai, 4, "chuài", "chuai", Head.ch, 'c');
+    public static readonly Pinyin chuan1 = new(Shengmu.ch, Yunmu.uan, 1, "chuān", "chuan", Head.ch, 'c');
+    public static readonly Pinyin chuan2 = new(Shengmu.ch, Yunmu.uan, 2, "chuán", "chuan", Head.ch, 'c');
+    public static readonly Pinyin chuan3 = new(Shengmu.ch, Yunmu.uan, 3, "chuǎn", "chuan", Head.ch, 'c');
+    public static readonly Pinyin chuan4 = new(Shengmu.ch, Yunmu.uan, 4, "chuàn", "chuan", Head.ch, 'c');
+    public static readonly Pinyin chuang1 = new(Shengmu.ch, Yunmu.uang, 1, "chuāng", "chuang", Head.ch, 'c');
+    public static readonly Pinyin chuang2 = new(Shengmu.ch, Yunmu.uang, 2, "chuáng", "chuang", Head.ch, 'c');
+    public static readonly Pinyin chuang3 = new(Shengmu.ch, Yunmu.uang, 3, "chuǎng", "chuang", Head.ch, 'c');
+    public static readonly Pinyin chuang4 = new(Shengmu.ch, Yunmu.uang, 4, "chuàng", "chuang", Head.ch, 'c');
+    public static readonly Pinyin chui1 = new(Shengmu.ch, Yunmu.ui, 1, "chuī", "chui", Head.ch, 'c');
+    public static readonly Pinyin chui2 = new(Shengmu.ch, Yunmu.ui, 2, "chuí", "chui", Head.ch, 'c');
+    public static readonly Pinyin chui4 = new(Shengmu.ch, Yunmu.ui, 4, "chuì", "chui", Head.ch, 'c');
+    public static readonly Pinyin chun1 = new(Shengmu.ch, Yunmu.un, 1, "chūn", "chun", Head.ch, 'c');
+    public static readonly Pinyin chun2 = new(Shengmu.ch, Yunmu.un, 2, "chún", "chun", Head.ch, 'c');
+    public static readonly Pinyin chun3 = new(Shengmu.ch, Yunmu.un, 3, "chǔn", "chun", Head.ch, 'c');
+    public static readonly Pinyin chuo1 = new(Shengmu.ch, Yunmu.uo, 1, "chuō", "chuo", Head.ch, 'c');
+    public static readonly Pinyin chuo2 = new(Shengmu.ch, Yunmu.uo, 2, "chuó", "chuo", Head.ch, 'c');
+    public static readonly Pinyin chuo4 = new(Shengmu.ch, Yunmu.uo, 4, "chuò", "chuo", Head.ch, 'c');
+    public static readonly Pinyin chuo5 = new(Shengmu.ch, Yunmu.uo, 5, "chuo", "chuo", Head.ch, 'c');
+    public static readonly Pinyin ci1 = new(Shengmu.c, Yunmu.i, 1, "cī", "ci", Head.c, 'c');
+    public static readonly Pinyin ci2 = new(Shengmu.c, Yunmu.i, 2, "cí", "ci", Head.c, 'c');
+    public static readonly Pinyin ci3 = new(Shengmu.c, Yunmu.i, 3, "cǐ", "ci", Head.c, 'c');
+    public static readonly Pinyin ci4 = new(Shengmu.c, Yunmu.i, 4, "cì", "ci", Head.c, 'c');
+    public static readonly Pinyin cong1 = new(Shengmu.c, Yunmu.ong, 1, "cōng", "cong", Head.c, 'c');
+    public static readonly Pinyin cong2 = new(Shengmu.c, Yunmu.ong, 2, "cóng", "cong", Head.c, 'c');
+    public static readonly Pinyin cong4 = new(Shengmu.c, Yunmu.ong, 4, "còng", "cong", Head.c, 'c');
+    public static readonly Pinyin cou3 = new(Shengmu.c, Yunmu.ou, 3, "cǒu", "cou", Head.c, 'c');
+    public static readonly Pinyin cou4 = new(Shengmu.c, Yunmu.ou, 4, "còu", "cou", Head.c, 'c');
+    public static readonly Pinyin cu1 = new(Shengmu.c, Yunmu.u, 1, "cū", "cu", Head.c, 'c');
+    public static readonly Pinyin cu2 = new(Shengmu.c, Yunmu.u, 2, "cú", "cu", Head.c, 'c');
+    public static readonly Pinyin cu3 = new(Shengmu.c, Yunmu.u, 3, "cǔ", "cu", Head.c, 'c');
+    public static readonly Pinyin cu4 = new(Shengmu.c, Yunmu.u, 4, "cù", "cu", Head.c, 'c');
+    public static readonly Pinyin cuan1 = new(Shengmu.c, Yunmu.uan, 1, "cuān", "cuan", Head.c, 'c');
+    public static readonly Pinyin cuan2 = new(Shengmu.c, Yunmu.uan, 2, "cuán", "cuan", Head.c, 'c');
+    public static readonly Pinyin cuan4 = new(Shengmu.c, Yunmu.uan, 4, "cuàn", "cuan", Head.c, 'c');
+    public static readonly Pinyin cui1 = new(Shengmu.c, Yunmu.ui, 1, "cuī", "cui", Head.c, 'c');
+    public static readonly Pinyin cui2 = new(Shengmu.c, Yunmu.ui, 2, "cuí", "cui", Head.c, 'c');
+    public static readonly Pinyin cui3 = new(Shengmu.c, Yunmu.ui, 3, "cuǐ", "cui", Head.c, 'c');
+    public static readonly Pinyin cui4 = new(Shengmu.c, Yunmu.ui, 4, "cuì", "cui", Head.c, 'c');
+    public static readonly Pinyin cun1 = new(Shengmu.c, Yunmu.un, 1, "cūn", "cun", Head.c, 'c');
+    public static readonly Pinyin cun2 = new(Shengmu.c, Yunmu.un, 2, "cún", "cun", Head.c, 'c');
+    public static readonly Pinyin cun3 = new(Shengmu.c, Yunmu.un, 3, "cǔn", "cun", Head.c, 'c');
+    public static readonly Pinyin cun4 = new(Shengmu.c, Yunmu.un, 4, "cùn", "cun", Head.c, 'c');
+    public static readonly Pinyin cuo1 = new(Shengmu.c, Yunmu.uo, 1, "cuō", "cuo", Head.c, 'c');
+    public static readonly Pinyin cuo2 = new(Shengmu.c, Yunmu.uo, 2, "cuó", "cuo", Head.c, 'c');
+    public static readonly Pinyin cuo3 = new(Shengmu.c, Yunmu.uo, 3, "cuǒ", "cuo", Head.c, 'c');
+    public static readonly Pinyin cuo4 = new(Shengmu.c, Yunmu.uo, 4, "cuò", "cuo", Head.c, 'c');
+    public static readonly Pinyin da1 = new(Shengmu.d, Yunmu.a, 1, "dā", "da", Head.d, 'd');
+    public static readonly Pinyin da2 = new(Shengmu.d, Yunmu.a, 2, "dá", "da", Head.d, 'd');
+    public static readonly Pinyin da3 = new(Shengmu.d, Yunmu.a, 3, "dǎ", "da", Head.d, 'd');
+    public static readonly Pinyin da4 = new(Shengmu.d, Yunmu.a, 4, "dà", "da", Head.d, 'd');
+    public static readonly Pinyin da5 = new(Shengmu.d, Yunmu.a, 5, "da", "da", Head.d, 'd');
+    public static readonly Pinyin dai1 = new(Shengmu.d, Yunmu.ai, 1, "dāi", "dai", Head.d, 'd');
+    public static readonly Pinyin dai3 = new(Shengmu.d, Yunmu.ai, 3, "dǎi", "dai", Head.d, 'd');
+    public static readonly Pinyin dai4 = new(Shengmu.d, Yunmu.ai, 4, "dài", "dai", Head.d, 'd');
+    public static readonly Pinyin dan1 = new(Shengmu.d, Yunmu.an, 1, "dān", "dan", Head.d, 'd');
+    public static readonly Pinyin dan2 = new(Shengmu.d, Yunmu.an, 2, "dán", "dan", Head.d, 'd');
+    public static readonly Pinyin dan3 = new(Shengmu.d, Yunmu.an, 3, "dǎn", "dan", Head.d, 'd');
+    public static readonly Pinyin dan4 = new(Shengmu.d, Yunmu.an, 4, "dàn", "dan", Head.d, 'd');
+    public static readonly Pinyin dang1 = new(Shengmu.d, Yunmu.ang, 1, "dāng", "dang", Head.d, 'd');
+    public static readonly Pinyin dang3 = new(Shengmu.d, Yunmu.ang, 3, "dǎng", "dang", Head.d, 'd');
+    public static readonly Pinyin dang4 = new(Shengmu.d, Yunmu.ang, 4, "dàng", "dang", Head.d, 'd');
+    public static readonly Pinyin dao1 = new(Shengmu.d, Yunmu.ao, 1, "dāo", "dao", Head.d, 'd');
+    public static readonly Pinyin dao2 = new(Shengmu.d, Yunmu.ao, 2, "dáo", "dao", Head.d, 'd');
+    public static readonly Pinyin dao3 = new(Shengmu.d, Yunmu.ao, 3, "dǎo", "dao", Head.d, 'd');
+    public static readonly Pinyin dao4 = new(Shengmu.d, Yunmu.ao, 4, "dào", "dao", Head.d, 'd');
+    public static readonly Pinyin de1 = new(Shengmu.d, Yunmu.e, 1, "dē", "de", Head.d, 'd');
+    public static readonly Pinyin de2 = new(Shengmu.d, Yunmu.e, 2, "dé", "de", Head.d, 'd');
+    public static readonly Pinyin de5 = new(Shengmu.d, Yunmu.e, 5, "de", "de", Head.d, 'd');
+    public static readonly Pinyin dei1 = new(Shengmu.d, Yunmu.ei, 1, "dēi", "dei", Head.d, 'd');
+    public static readonly Pinyin dei3 = new(Shengmu.d, Yunmu.ei, 3, "děi", "dei", Head.d, 'd');
+    public static readonly Pinyin den1 = new(Shengmu.d, Yunmu.en, 1, "dēn", "den", Head.d, 'd');
+    public static readonly Pinyin den4 = new(Shengmu.d, Yunmu.en, 4, "dèn", "den", Head.d, 'd');
+    public static readonly Pinyin deng1 = new(Shengmu.d, Yunmu.eng, 1, "dēng", "deng", Head.d, 'd');
+    public static readonly Pinyin deng3 = new(Shengmu.d, Yunmu.eng, 3, "děng", "deng", Head.d, 'd');
+    public static readonly Pinyin deng4 = new(Shengmu.d, Yunmu.eng, 4, "dèng", "deng", Head.d, 'd');
+    public static readonly Pinyin di1 = new(Shengmu.d, Yunmu.i, 1, "dī", "di", Head.d, 'd');
+    public static readonly Pinyin di2 = new(Shengmu.d, Yunmu.i, 2, "dí", "di", Head.d, 'd');
+    public static readonly Pinyin di3 = new(Shengmu.d, Yunmu.i, 3, "dǐ", "di", Head.d, 'd');
+    public static readonly Pinyin di4 = new(Shengmu.d, Yunmu.i, 4, "dì", "di", Head.d, 'd');
+    public static readonly Pinyin dia3 = new(Shengmu.d, Yunmu.ia, 3, "diǎ", "dia", Head.d, 'd');
+    public static readonly Pinyin dian1 = new(Shengmu.d, Yunmu.ian, 1, "diān", "dian", Head.d, 'd');
+    public static readonly Pinyin dian3 = new(Shengmu.d, Yunmu.ian, 3, "diǎn", "dian", Head.d, 'd');
+    public static readonly Pinyin dian4 = new(Shengmu.d, Yunmu.ian, 4, "diàn", "dian", Head.d, 'd');
+    public static readonly Pinyin diao1 = new(Shengmu.d, Yunmu.iao, 1, "diāo", "diao", Head.d, 'd');
+    public static readonly Pinyin diao3 = new(Shengmu.d, Yunmu.iao, 3, "diǎo", "diao", Head.d, 'd');
+    public static readonly Pinyin diao4 = new(Shengmu.d, Yunmu.iao, 4, "diào", "diao", Head.d, 'd');
+    public static readonly Pinyin die1 = new(Shengmu.d, Yunmu.ie, 1, "diē", "die", Head.d, 'd');
+    public static readonly Pinyin die2 = new(Shengmu.d, Yunmu.ie, 2, "dié", "die", Head.d, 'd');
+    public static readonly Pinyin die4 = new(Shengmu.d, Yunmu.ie, 4, "diè", "die", Head.d, 'd');
+    public static readonly Pinyin ding1 = new(Shengmu.d, Yunmu.ing, 1, "dīng", "ding", Head.d, 'd');
+    public static readonly Pinyin ding2 = new(Shengmu.d, Yunmu.ing, 2, "díng", "ding", Head.d, 'd');
+    public static readonly Pinyin ding3 = new(Shengmu.d, Yunmu.ing, 3, "dǐng", "ding", Head.d, 'd');
+    public static readonly Pinyin ding4 = new(Shengmu.d, Yunmu.ing, 4, "dìng", "ding", Head.d, 'd');
+    public static readonly Pinyin diu1 = new(Shengmu.d, Yunmu.iu, 1, "diū", "diu", Head.d, 'd');
+    public static readonly Pinyin dong1 = new(Shengmu.d, Yunmu.ong, 1, "dōng", "dong", Head.d, 'd');
+    public static readonly Pinyin dong3 = new(Shengmu.d, Yunmu.ong, 3, "dǒng", "dong", Head.d, 'd');
+    public static readonly Pinyin dong4 = new(Shengmu.d, Yunmu.ong, 4, "dòng", "dong", Head.d, 'd');
+    public static readonly Pinyin dou1 = new(Shengmu.d, Yunmu.ou, 1, "dōu", "dou", Head.d, 'd');
+    public static readonly Pinyin dou2 = new(Shengmu.d, Yunmu.ou, 2, "dóu", "dou", Head.d, 'd');
+    public static readonly Pinyin dou3 = new(Shengmu.d, Yunmu.ou, 3, "dǒu", "dou", Head.d, 'd');
+    public static readonly Pinyin dou4 = new(Shengmu.d, Yunmu.ou, 4, "dòu", "dou", Head.d, 'd');
+    public static readonly Pinyin du1 = new(Shengmu.d, Yunmu.u, 1, "dū", "du", Head.d, 'd');
+    public static readonly Pinyin du2 = new(Shengmu.d, Yunmu.u, 2, "dú", "du", Head.d, 'd');
+    public static readonly Pinyin du3 = new(Shengmu.d, Yunmu.u, 3, "dǔ", "du", Head.d, 'd');
+    public static readonly Pinyin du4 = new(Shengmu.d, Yunmu.u, 4, "dù", "du", Head.d, 'd');
+    public static readonly Pinyin duan1 = new(Shengmu.d, Yunmu.uan, 1, "duān", "duan", Head.d, 'd');
+    public static readonly Pinyin duan3 = new(Shengmu.d, Yunmu.uan, 3, "duǎn", "duan", Head.d, 'd');
+    public static readonly Pinyin duan4 = new(Shengmu.d, Yunmu.uan, 4, "duàn", "duan", Head.d, 'd');
+    public static readonly Pinyin dui1 = new(Shengmu.d, Yunmu.ui, 1, "duī", "dui", Head.d, 'd');
+    public static readonly Pinyin dui3 = new(Shengmu.d, Yunmu.ui, 3, "duǐ", "dui", Head.d, 'd');
+    public static readonly Pinyin dui4 = new(Shengmu.d, Yunmu.ui, 4, "duì", "dui", Head.d, 'd');
+    public static readonly Pinyin dun1 = new(Shengmu.d, Yunmu.un, 1, "dūn", "dun", Head.d, 'd');
+    public static readonly Pinyin dun2 = new(Shengmu.d, Yunmu.un, 2, "dún", "dun", Head.d, 'd');
+    public static readonly Pinyin dun3 = new(Shengmu.d, Yunmu.un, 3, "dǔn", "dun", Head.d, 'd');
+    public static readonly Pinyin dun4 = new(Shengmu.d, Yunmu.un, 4, "dùn", "dun", Head.d, 'd');
+    public static readonly Pinyin duo1 = new(Shengmu.d, Yunmu.uo, 1, "duō", "duo", Head.d, 'd');
+    public static readonly Pinyin duo2 = new(Shengmu.d, Yunmu.uo, 2, "duó", "duo", Head.d, 'd');
+    public static readonly Pinyin duo3 = new(Shengmu.d, Yunmu.uo, 3, "duǒ", "duo", Head.d, 'd');
+    public static readonly Pinyin duo4 = new(Shengmu.d, Yunmu.uo, 4, "duò", "duo", Head.d, 'd');
+    public static readonly Pinyin duo5 = new(Shengmu.d, Yunmu.uo, 5, "duo", "duo", Head.d, 'd');
+    public static readonly Pinyin e1 = new(Shengmu.none, Yunmu.e, 1, "ē", "e", Head.e, 'e');
+    public static readonly Pinyin e2 = new(Shengmu.none, Yunmu.e, 2, "é", "e", Head.e, 'e');
+    public static readonly Pinyin e3 = new(Shengmu.none, Yunmu.e, 3, "ě", "e", Head.e, 'e');
+    public static readonly Pinyin e4 = new(Shengmu.none, Yunmu.e, 4, "è", "e", Head.e, 'e');
+    public static readonly Pinyin ei1 = new(Shengmu.none, Yunmu.ei, 1, "ēi", "ei", Head.e, 'e');
+    public static readonly Pinyin ei2 = new(Shengmu.none, Yunmu.ei, 2, "éi", "ei", Head.e, 'e');
+    public static readonly Pinyin ei3 = new(Shengmu.none, Yunmu.ei, 3, "ěi", "ei", Head.e, 'e');
+    public static readonly Pinyin ei4 = new(Shengmu.none, Yunmu.ei, 4, "èi", "ei", Head.e, 'e');
+    public static readonly Pinyin en1 = new(Shengmu.none, Yunmu.en, 1, "ēn", "en", Head.e, 'e');
+    public static readonly Pinyin en3 = new(Shengmu.none, Yunmu.en, 3, "ěn", "en", Head.e, 'e');
+    public static readonly Pinyin en4 = new(Shengmu.none, Yunmu.en, 4, "èn", "en", Head.e, 'e');
+    public static readonly Pinyin eng1 = new(Shengmu.none, Yunmu.eng, 1, "ēng", "eng", Head.e, 'e');
+    public static readonly Pinyin er2 = new(Shengmu.none, Yunmu.er, 2, "ér", "er", Head.e, 'e');
+    public static readonly Pinyin er3 = new(Shengmu.none, Yunmu.er, 3, "ěr", "er", Head.e, 'e');
+    public static readonly Pinyin er4 = new(Shengmu.none, Yunmu.er, 4, "èr", "er", Head.e, 'e');
+    public static readonly Pinyin er5 = new(Shengmu.none, Yunmu.er, 5, "er", "er", Head.e, 'e');
+    public static readonly Pinyin fa1 = new(Shengmu.f, Yunmu.a, 1, "fā", "fa", Head.f, 'f');
+    public static readonly Pinyin fa2 = new(Shengmu.f, Yunmu.a, 2, "fá", "fa", Head.f, 'f');
+    public static readonly Pinyin fa3 = new(Shengmu.f, Yunmu.a, 3, "fǎ", "fa", Head.f, 'f');
+    public static readonly Pinyin fa4 = new(Shengmu.f, Yunmu.a, 4, "fà", "fa", Head.f, 'f');
+    public static readonly Pinyin fan1 = new(Shengmu.f, Yunmu.an, 1, "fān", "fan", Head.f, 'f');
+    public static readonly Pinyin fan2 = new(Shengmu.f, Yunmu.an, 2, "fán", "fan", Head.f, 'f');
+    public static readonly Pinyin fan3 = new(Shengmu.f, Yunmu.an, 3, "fǎn", "fan", Head.f, 'f');
+    public static readonly Pinyin fan4 = new(Shengmu.f, Yunmu.an, 4, "fàn", "fan", Head.f, 'f');
+    public static readonly Pinyin fang1 = new(Shengmu.f, Yunmu.ang, 1, "fāng", "fang", Head.f, 'f');
+    public static readonly Pinyin fang2 = new(Shengmu.f, Yunmu.ang, 2, "fáng", "fang", Head.f, 'f');
+    public static readonly Pinyin fang3 = new(Shengmu.f, Yunmu.ang, 3, "fǎng", "fang", Head.f, 'f');
+    public static readonly Pinyin fang4 = new(Shengmu.f, Yunmu.ang, 4, "fàng", "fang", Head.f, 'f');
+    public static readonly Pinyin fang5 = new(Shengmu.f, Yunmu.ang, 5, "fang", "fang", Head.f, 'f');
+    public static readonly Pinyin fei1 = new(Shengmu.f, Yunmu.ei, 1, "fēi", "fei", Head.f, 'f');
+    public static readonly Pinyin fei2 = new(Shengmu.f, Yunmu.ei, 2, "féi", "fei", Head.f, 'f');
+    public static readonly Pinyin fei3 = new(Shengmu.f, Yunmu.ei, 3, "fěi", "fei", Head.f, 'f');
+    public static readonly Pinyin fei4 = new(Shengmu.f, Yunmu.ei, 4, "fèi", "fei", Head.f, 'f');
+    public static readonly Pinyin fen1 = new(Shengmu.f, Yunmu.en, 1, "fēn", "fen", Head.f, 'f');
+    public static readonly Pinyin fen2 = new(Shengmu.f, Yunmu.en, 2, "fén", "fen", Head.f, 'f');
+    public static readonly Pinyin fen3 = new(Shengmu.f, Yunmu.en, 3, "fěn", "fen", Head.f, 'f');
+    public static readonly Pinyin fen4 = new(Shengmu.f, Yunmu.en, 4, "fèn", "fen", Head.f, 'f');
+    public static readonly Pinyin feng1 = new(Shengmu.f, Yunmu.eng, 1, "fēng", "feng", Head.f, 'f');
+    public static readonly Pinyin feng2 = new(Shengmu.f, Yunmu.eng, 2, "féng", "feng", Head.f, 'f');
+    public static readonly Pinyin feng3 = new(Shengmu.f, Yunmu.eng, 3, "fěng", "feng", Head.f, 'f');
+    public static readonly Pinyin feng4 = new(Shengmu.f, Yunmu.eng, 4, "fèng", "feng", Head.f, 'f');
+    public static readonly Pinyin fiao4 = new(Shengmu.f, Yunmu.iao, 4, "fiào", "fiao", Head.f, 'f');
+    public static readonly Pinyin fo2 = new(Shengmu.f, Yunmu.o, 2, "fó", "fo", Head.f, 'f');
+    public static readonly Pinyin fou1 = new(Shengmu.f, Yunmu.ou, 1, "fōu", "fou", Head.f, 'f');
+    public static readonly Pinyin fou2 = new(Shengmu.f, Yunmu.ou, 2, "fóu", "fou", Head.f, 'f');
+    public static readonly Pinyin fou3 = new(Shengmu.f, Yunmu.ou, 3, "fǒu", "fou", Head.f, 'f');
+    public static readonly Pinyin fou4 = new(Shengmu.f, Yunmu.ou, 4, "fòu", "fou", Head.f, 'f');
+    public static readonly Pinyin fu1 = new(Shengmu.f, Yunmu.u, 1, "fū", "fu", Head.f, 'f');
+    public static readonly Pinyin fu2 = new(Shengmu.f, Yunmu.u, 2, "fú", "fu", Head.f, 'f');
+    public static readonly Pinyin fu3 = new(Shengmu.f, Yunmu.u, 3, "fǔ", "fu", Head.f, 'f');
+    public static readonly Pinyin fu4 = new(Shengmu.f, Yunmu.u, 4, "fù", "fu", Head.f, 'f');
+    public static readonly Pinyin fu5 = new(Shengmu.f, Yunmu.u, 5, "fu", "fu", Head.f, 'f');
+    public static readonly Pinyin ga1 = new(Shengmu.g, Yunmu.a, 1, "gā", "ga", Head.g, 'g');
+    public static readonly Pinyin ga2 = new(Shengmu.g, Yunmu.a, 2, "gá", "ga", Head.g, 'g');
+    public static readonly Pinyin ga3 = new(Shengmu.g, Yunmu.a, 3, "gǎ", "ga", Head.g, 'g');
+    public static readonly Pinyin ga4 = new(Shengmu.g, Yunmu.a, 4, "gà", "ga", Head.g, 'g');
+    public static readonly Pinyin gai1 = new(Shengmu.g, Yunmu.ai, 1, "gāi", "gai", Head.g, 'g');
+    public static readonly Pinyin gai3 = new(Shengmu.g, Yunmu.ai, 3, "gǎi", "gai", Head.g, 'g');
+    public static readonly Pinyin gai4 = new(Shengmu.g, Yunmu.ai, 4, "gài", "gai", Head.g, 'g');
+    public static readonly Pinyin gan1 = new(Shengmu.g, Yunmu.an, 1, "gān", "gan", Head.g, 'g');
+    public static readonly Pinyin gan2 = new(Shengmu.g, Yunmu.an, 2, "gán", "gan", Head.g, 'g');
+    public static readonly Pinyin gan3 = new(Shengmu.g, Yunmu.an, 3, "gǎn", "gan", Head.g, 'g');
+    public static readonly Pinyin gan4 = new(Shengmu.g, Yunmu.an, 4, "gàn", "gan", Head.g, 'g');
+    public static readonly Pinyin gang1 = new(Shengmu.g, Yunmu.ang, 1, "gāng", "gang", Head.g, 'g');
+    public static readonly Pinyin gang3 = new(Shengmu.g, Yunmu.ang, 3, "gǎng", "gang", Head.g, 'g');
+    public static readonly Pinyin gang4 = new(Shengmu.g, Yunmu.ang, 4, "gàng", "gang", Head.g, 'g');
+    public static readonly Pinyin gao1 = new(Shengmu.g, Yunmu.ao, 1, "gāo", "gao", Head.g, 'g');
+    public static readonly Pinyin gao3 = new(Shengmu.g, Yunmu.ao, 3, "gǎo", "gao", Head.g, 'g');
+    public static readonly Pinyin gao4 = new(Shengmu.g, Yunmu.ao, 4, "gào", "gao", Head.g, 'g');
+    public static readonly Pinyin ge1 = new(Shengmu.g, Yunmu.e, 1, "gē", "ge", Head.g, 'g');
+    public static readonly Pinyin ge2 = new(Shengmu.g, Yunmu.e, 2, "gé", "ge", Head.g, 'g');
+    public static readonly Pinyin ge3 = new(Shengmu.g, Yunmu.e, 3, "gě", "ge", Head.g, 'g');
+    public static readonly Pinyin ge4 = new(Shengmu.g, Yunmu.e, 4, "gè", "ge", Head.g, 'g');
+    public static readonly Pinyin gei3 = new(Shengmu.g, Yunmu.ei, 3, "gěi", "gei", Head.g, 'g');
+    public static readonly Pinyin gen1 = new(Shengmu.g, Yunmu.en, 1, "gēn", "gen", Head.g, 'g');
+    public static readonly Pinyin gen2 = new(Shengmu.g, Yunmu.en, 2, "gén", "gen", Head.g, 'g');
+    public static readonly Pinyin gen3 = new(Shengmu.g, Yunmu.en, 3, "gěn", "gen", Head.g, 'g');
+    public static readonly Pinyin gen4 = new(Shengmu.g, Yunmu.en, 4, "gèn", "gen", Head.g, 'g');
+    public static readonly Pinyin geng1 = new(Shengmu.g, Yunmu.eng, 1, "gēng", "geng", Head.g, 'g');
+    public static readonly Pinyin geng3 = new(Shengmu.g, Yunmu.eng, 3, "gěng", "geng", Head.g, 'g');
+    public static readonly Pinyin geng4 = new(Shengmu.g, Yunmu.eng, 4, "gèng", "geng", Head.g, 'g');
+    public static readonly Pinyin gong1 = new(Shengmu.g, Yunmu.ong, 1, "gōng", "gong", Head.g, 'g');
+    public static readonly Pinyin gong3 = new(Shengmu.g, Yunmu.ong, 3, "gǒng", "gong", Head.g, 'g');
+    public static readonly Pinyin gong4 = new(Shengmu.g, Yunmu.ong, 4, "gòng", "gong", Head.g, 'g');
+    public static readonly Pinyin gou1 = new(Shengmu.g, Yunmu.ou, 1, "gōu", "gou", Head.g, 'g');
+    public static readonly Pinyin gou3 = new(Shengmu.g, Yunmu.ou, 3, "gǒu", "gou", Head.g, 'g');
+    public static readonly Pinyin gou4 = new(Shengmu.g, Yunmu.ou, 4, "gòu", "gou", Head.g, 'g');
+    public static readonly Pinyin gu1 = new(Shengmu.g, Yunmu.u, 1, "gū", "gu", Head.g, 'g');
+    public static readonly Pinyin gu2 = new(Shengmu.g, Yunmu.u, 2, "gú", "gu", Head.g, 'g');
+    public static readonly Pinyin gu3 = new(Shengmu.g, Yunmu.u, 3, "gǔ", "gu", Head.g, 'g');
+    public static readonly Pinyin gu4 = new(Shengmu.g, Yunmu.u, 4, "gù", "gu", Head.g, 'g');
+    public static readonly Pinyin gua1 = new(Shengmu.g, Yunmu.ua, 1, "guā", "gua", Head.g, 'g');
+    public static readonly Pinyin gua3 = new(Shengmu.g, Yunmu.ua, 3, "guǎ", "gua", Head.g, 'g');
+    public static readonly Pinyin gua4 = new(Shengmu.g, Yunmu.ua, 4, "guà", "gua", Head.g, 'g');
+    public static readonly Pinyin guai1 = new(Shengmu.g, Yunmu.uai, 1, "guāi", "guai", Head.g, 'g');
+    public static readonly Pinyin guai2 = new(Shengmu.g, Yunmu.uai, 2, "guái", "guai", Head.g, 'g');
+    public static readonly Pinyin guai3 = new(Shengmu.g, Yunmu.uai, 3, "guǎi", "guai", Head.g, 'g');
+    public static readonly Pinyin guai4 = new(Shengmu.g, Yunmu.uai, 4, "guài", "guai", Head.g, 'g');
+    public static readonly Pinyin guan1 = new(Shengmu.g, Yunmu.uan, 1, "guān", "guan", Head.g, 'g');
+    public static readonly Pinyin guan3 = new(Shengmu.g, Yunmu.uan, 3, "guǎn", "guan", Head.g, 'g');
+    public static readonly Pinyin guan4 = new(Shengmu.g, Yunmu.uan, 4, "guàn", "guan", Head.g, 'g');
+    public static readonly Pinyin guang1 = new(Shengmu.g, Yunmu.uang, 1, "guāng", "guang", Head.g, 'g');
+    public static readonly Pinyin guang3 = new(Shengmu.g, Yunmu.uang, 3, "guǎng", "guang", Head.g, 'g');
+    public static readonly Pinyin guang4 = new(Shengmu.g, Yunmu.uang, 4, "guàng", "guang", Head.g, 'g');
+    public static readonly Pinyin gui1 = new(Shengmu.g, Yunmu.ui, 1, "guī", "gui", Head.g, 'g');
+    public static readonly Pinyin gui2 = new(Shengmu.g, Yunmu.ui, 2, "guí", "gui", Head.g, 'g');
+    public static readonly Pinyin gui3 = new(Shengmu.g, Yunmu.ui, 3, "guǐ", "gui", Head.g, 'g');
+    public static readonly Pinyin gui4 = new(Shengmu.g, Yunmu.ui, 4, "guì", "gui", Head.g, 'g');
+    public static readonly Pinyin gun1 = new(Shengmu.g, Yunmu.un, 1, "gūn", "gun", Head.g, 'g');
+    public static readonly Pinyin gun3 = new(Shengmu.g, Yunmu.un, 3, "gǔn", "gun", Head.g, 'g');
+    public static readonly Pinyin gun4 = new(Shengmu.g, Yunmu.un, 4, "gùn", "gun", Head.g, 'g');
+    public static readonly Pinyin guo1 = new(Shengmu.g, Yunmu.uo, 1, "guō", "guo", Head.g, 'g');
+    public static readonly Pinyin guo2 = new(Shengmu.g, Yunmu.uo, 2, "guó", "guo", Head.g, 'g');
+    public static readonly Pinyin guo3 = new(Shengmu.g, Yunmu.uo, 3, "guǒ", "guo", Head.g, 'g');
+    public static readonly Pinyin guo4 = new(Shengmu.g, Yunmu.uo, 4, "guò", "guo", Head.g, 'g');
+    public static readonly Pinyin guo5 = new(Shengmu.g, Yunmu.uo, 5, "guo", "guo", Head.g, 'g');
+    public static readonly Pinyin ha1 = new(Shengmu.h, Yunmu.a, 1, "hā", "ha", Head.h, 'h');
+    public static readonly Pinyin ha2 = new(Shengmu.h, Yunmu.a, 2, "há", "ha", Head.h, 'h');
+    public static readonly Pinyin ha3 = new(Shengmu.h, Yunmu.a, 3, "hǎ", "ha", Head.h, 'h');
+    public static readonly Pinyin ha4 = new(Shengmu.h, Yunmu.a, 4, "hà", "ha", Head.h, 'h');
+    public static readonly Pinyin hai1 = new(Shengmu.h, Yunmu.ai, 1, "hāi", "hai", Head.h, 'h');
+    public static readonly Pinyin hai2 = new(Shengmu.h, Yunmu.ai, 2, "hái", "hai", Head.h, 'h');
+    public static readonly Pinyin hai3 = new(Shengmu.h, Yunmu.ai, 3, "hǎi", "hai", Head.h, 'h');
+    public static readonly Pinyin hai4 = new(Shengmu.h, Yunmu.ai, 4, "hài", "hai", Head.h, 'h');
+    public static readonly Pinyin han1 = new(Shengmu.h, Yunmu.an, 1, "hān", "han", Head.h, 'h');
+    public static readonly Pinyin han2 = new(Shengmu.h, Yunmu.an, 2, "hán", "han", Head.h, 'h');
+    public static readonly Pinyin han3 = new(Shengmu.h, Yunmu.an, 3, "hǎn", "han", Head.h, 'h');
+    public static readonly Pinyin han4 = new(Shengmu.h, Yunmu.an, 4, "hàn", "han", Head.h, 'h');
+    public static readonly Pinyin han5 = new(Shengmu.h, Yunmu.an, 5, "han", "han", Head.h, 'h');
+    public static readonly Pinyin hang1 = new(Shengmu.h, Yunmu.ang, 1, "hāng", "hang", Head.h, 'h');
+    public static readonly Pinyin hang2 = new(Shengmu.h, Yunmu.ang, 2, "háng", "hang", Head.h, 'h');
+    public static readonly Pinyin hang3 = new(Shengmu.h, Yunmu.ang, 3, "hǎng", "hang", Head.h, 'h');
+    public static readonly Pinyin hang4 = new(Shengmu.h, Yunmu.ang, 4, "hàng", "hang", Head.h, 'h');
+    public static readonly Pinyin hao1 = new(Shengmu.h, Yunmu.ao, 1, "hāo", "hao", Head.h, 'h');
+    public static readonly Pinyin hao2 = new(Shengmu.h, Yunmu.ao, 2, "háo", "hao", Head.h, 'h');
+    public static readonly Pinyin hao3 = new(Shengmu.h, Yunmu.ao, 3, "hǎo", "hao", Head.h, 'h');
+    public static readonly Pinyin hao4 = new(Shengmu.h, Yunmu.ao, 4, "hào", "hao", Head.h, 'h');
+    public static readonly Pinyin he1 = new(Shengmu.h, Yunmu.e, 1, "hē", "he", Head.h, 'h');
+    public static readonly Pinyin he2 = new(Shengmu.h, Yunmu.e, 2, "hé", "he", Head.h, 'h');
+    public static readonly Pinyin he4 = new(Shengmu.h, Yunmu.e, 4, "hè", "he", Head.h, 'h');
+    public static readonly Pinyin hei1 = new(Shengmu.h, Yunmu.ei, 1, "hēi", "hei", Head.h, 'h');
+    public static readonly Pinyin hen1 = new(Shengmu.h, Yunmu.en, 1, "hēn", "hen", Head.h, 'h');
+    public static readonly Pinyin hen2 = new(Shengmu.h, Yunmu.en, 2, "hén", "hen", Head.h, 'h');
+    public static readonly Pinyin hen3 = new(Shengmu.h, Yunmu.en, 3, "hěn", "hen", Head.h, 'h');
+    public static readonly Pinyin hen4 = new(Shengmu.h, Yunmu.en, 4, "hèn", "hen", Head.h, 'h');
+    public static readonly Pinyin heng1 = new(Shengmu.h, Yunmu.eng, 1, "hēng", "heng", Head.h, 'h');
+    public static readonly Pinyin heng2 = new(Shengmu.h, Yunmu.eng, 2, "héng", "heng", Head.h, 'h');
+    public static readonly Pinyin heng4 = new(Shengmu.h, Yunmu.eng, 4, "hèng", "heng", Head.h, 'h');
+    public static readonly Pinyin hong1 = new(Shengmu.h, Yunmu.ong, 1, "hōng", "hong", Head.h, 'h');
+    public static readonly Pinyin hong2 = new(Shengmu.h, Yunmu.ong, 2, "hóng", "hong", Head.h, 'h');
+    public static readonly Pinyin hong3 = new(Shengmu.h, Yunmu.ong, 3, "hǒng", "hong", Head.h, 'h');
+    public static readonly Pinyin hong4 = new(Shengmu.h, Yunmu.ong, 4, "hòng", "hong", Head.h, 'h');
+    public static readonly Pinyin hou1 = new(Shengmu.h, Yunmu.ou, 1, "hōu", "hou", Head.h, 'h');
+    public static readonly Pinyin hou2 = new(Shengmu.h, Yunmu.ou, 2, "hóu", "hou", Head.h, 'h');
+    public static readonly Pinyin hou3 = new(Shengmu.h, Yunmu.ou, 3, "hǒu", "hou", Head.h, 'h');
+    public static readonly Pinyin hou4 = new(Shengmu.h, Yunmu.ou, 4, "hòu", "hou", Head.h, 'h');
+    public static readonly Pinyin hu1 = new(Shengmu.h, Yunmu.u, 1, "hū", "hu", Head.h, 'h');
+    public static readonly Pinyin hu2 = new(Shengmu.h, Yunmu.u, 2, "hú", "hu", Head.h, 'h');
+    public static readonly Pinyin hu3 = new(Shengmu.h, Yunmu.u, 3, "hǔ", "hu", Head.h, 'h');
+    public static readonly Pinyin hu4 = new(Shengmu.h, Yunmu.u, 4, "hù", "hu", Head.h, 'h');
+    public static readonly Pinyin hua1 = new(Shengmu.h, Yunmu.ua, 1, "huā", "hua", Head.h, 'h');
+    public static readonly Pinyin hua2 = new(Shengmu.h, Yunmu.ua, 2, "huá", "hua", Head.h, 'h');
+    public static readonly Pinyin hua3 = new(Shengmu.h, Yunmu.ua, 3, "huǎ", "hua", Head.h, 'h');
+    public static readonly Pinyin hua4 = new(Shengmu.h, Yunmu.ua, 4, "huà", "hua", Head.h, 'h');
+    public static readonly Pinyin huai1 = new(Shengmu.h, Yunmu.uai, 1, "huāi", "huai", Head.h, 'h');
+    public static readonly Pinyin huai2 = new(Shengmu.h, Yunmu.uai, 2, "huái", "huai", Head.h, 'h');
+    public static readonly Pinyin huai4 = new(Shengmu.h, Yunmu.uai, 4, "huài", "huai", Head.h, 'h');
+    public static readonly Pinyin huan1 = new(Shengmu.h, Yunmu.uan, 1, "huān", "huan", Head.h, 'h');
+    public static readonly Pinyin huan2 = new(Shengmu.h, Yunmu.uan, 2, "huán", "huan", Head.h, 'h');
+    public static readonly Pinyin huan3 = new(Shengmu.h, Yunmu.uan, 3, "huǎn", "huan", Head.h, 'h');
+    public static readonly Pinyin huan4 = new(Shengmu.h, Yunmu.uan, 4, "huàn", "huan", Head.h, 'h');
+    public static readonly Pinyin huang1 = new(Shengmu.h, Yunmu.uang, 1, "huāng", "huang", Head.h, 'h');
+    public static readonly Pinyin huang2 = new(Shengmu.h, Yunmu.uang, 2, "huáng", "huang", Head.h, 'h');
+    public static readonly Pinyin huang3 = new(Shengmu.h, Yunmu.uang, 3, "huǎng", "huang", Head.h, 'h');
+    public static readonly Pinyin huang4 = new(Shengmu.h, Yunmu.uang, 4, "huàng", "huang", Head.h, 'h');
+    public static readonly Pinyin hui1 = new(Shengmu.h, Yunmu.ui, 1, "huī", "hui", Head.h, 'h');
+    public static readonly Pinyin hui2 = new(Shengmu.h, Yunmu.ui, 2, "huí", "hui", Head.h, 'h');
+    public static readonly Pinyin hui3 = new(Shengmu.h, Yunmu.ui, 3, "huǐ", "hui", Head.h, 'h');
+    public static readonly Pinyin hui4 = new(Shengmu.h, Yunmu.ui, 4, "huì", "hui", Head.h, 'h');
+    public static readonly Pinyin hun1 = new(Shengmu.h, Yunmu.un, 1, "hūn", "hun", Head.h, 'h');
+    public static readonly Pinyin hun2 = new(Shengmu.h, Yunmu.un, 2, "hún", "hun", Head.h, 'h');
+    public static readonly Pinyin hun3 = new(Shengmu.h, Yunmu.un, 3, "hǔn", "hun", Head.h, 'h');
+    public static readonly Pinyin hun4 = new(Shengmu.h, Yunmu.un, 4, "hùn", "hun", Head.h, 'h');
+    public static readonly Pinyin huo1 = new(Shengmu.h, Yunmu.uo, 1, "huō", "huo", Head.h, 'h');
+    public static readonly Pinyin huo2 = new(Shengmu.h, Yunmu.uo, 2, "huó", "huo", Head.h, 'h');
+    public static readonly Pinyin huo3 = new(Shengmu.h, Yunmu.uo, 3, "huǒ", "huo", Head.h, 'h');
+    public static readonly Pinyin huo4 = new(Shengmu.h, Yunmu.uo, 4, "huò", "huo", Head.h, 'h');
+    public static readonly Pinyin huo5 = new(Shengmu.h, Yunmu.uo, 5, "huo", "huo", Head.h, 'h');
+    public static readonly Pinyin ja4 = new(Shengmu.j, Yunmu.a, 4, "jà", "ja", Head.j, 'j');
+    public static readonly Pinyin ji1 = new(Shengmu.j, Yunmu.i, 1, "jī", "ji", Head.j, 'j');
+    public static readonly Pinyin ji2 = new(Shengmu.j, Yunmu.i, 2, "jí", "ji", Head.j, 'j');
+    public static readonly Pinyin ji3 = new(Shengmu.j, Yunmu.i, 3, "jǐ", "ji", Head.j, 'j');
+    public static readonly Pinyin ji4 = new(Shengmu.j, Yunmu.i, 4, "jì", "ji", Head.j, 'j');
+    public static readonly Pinyin ji5 = new(Shengmu.j, Yunmu.i, 5, "ji", "ji", Head.j, 'j');
+    public static readonly Pinyin jia1 = new(Shengmu.j, Yunmu.ia, 1, "jiā", "jia", Head.j, 'j');
+    public static readonly Pinyin jia2 = new(Shengmu.j, Yunmu.ia, 2, "jiá", "jia", Head.j, 'j');
+    public static readonly Pinyin jia3 = new(Shengmu.j, Yunmu.ia, 3, "jiǎ", "jia", Head.j, 'j');
+    public static readonly Pinyin jia4 = new(Shengmu.j, Yunmu.ia, 4, "jià", "jia", Head.j, 'j');
+    public static readonly Pinyin jia5 = new(Shengmu.j, Yunmu.ia, 5, "jia", "jia", Head.j, 'j');
+    public static readonly Pinyin jian1 = new(Shengmu.j, Yunmu.ian, 1, "jiān", "jian", Head.j, 'j');
+    public static readonly Pinyin jian3 = new(Shengmu.j, Yunmu.ian, 3, "jiǎn", "jian", Head.j, 'j');
+    public static readonly Pinyin jian4 = new(Shengmu.j, Yunmu.ian, 4, "jiàn", "jian", Head.j, 'j');
+    public static readonly Pinyin jiang1 = new(Shengmu.j, Yunmu.iang, 1, "jiāng", "jiang", Head.j, 'j');
+    public static readonly Pinyin jiang3 = new(Shengmu.j, Yunmu.iang, 3, "jiǎng", "jiang", Head.j, 'j');
+    public static readonly Pinyin jiang4 = new(Shengmu.j, Yunmu.iang, 4, "jiàng", "jiang", Head.j, 'j');
+    public static readonly Pinyin jiao1 = new(Shengmu.j, Yunmu.iao, 1, "jiāo", "jiao", Head.j, 'j');
+    public static readonly Pinyin jiao2 = new(Shengmu.j, Yunmu.iao, 2, "jiáo", "jiao", Head.j, 'j');
+    public static readonly Pinyin jiao3 = new(Shengmu.j, Yunmu.iao, 3, "jiǎo", "jiao", Head.j, 'j');
+    public static readonly Pinyin jiao4 = new(Shengmu.j, Yunmu.iao, 4, "jiào", "jiao", Head.j, 'j');
+    public static readonly Pinyin jie1 = new(Shengmu.j, Yunmu.ie, 1, "jiē", "jie", Head.j, 'j');
+    public static readonly Pinyin jie2 = new(Shengmu.j, Yunmu.ie, 2, "jié", "jie", Head.j, 'j');
+    public static readonly Pinyin jie3 = new(Shengmu.j, Yunmu.ie, 3, "jiě", "jie", Head.j, 'j');
+    public static readonly Pinyin jie4 = new(Shengmu.j, Yunmu.ie, 4, "jiè", "jie", Head.j, 'j');
+    public static readonly Pinyin jie5 = new(Shengmu.j, Yunmu.ie, 5, "jie", "jie", Head.j, 'j');
+    public static readonly Pinyin jin1 = new(Shengmu.j, Yunmu.@in, 1, "jīn", "jin", Head.j, 'j');
+    public static readonly Pinyin jin3 = new(Shengmu.j, Yunmu.@in, 3, "jǐn", "jin", Head.j, 'j');
+    public static readonly Pinyin jin4 = new(Shengmu.j, Yunmu.@in, 4, "jìn", "jin", Head.j, 'j');
+    public static readonly Pinyin jing1 = new(Shengmu.j, Yunmu.ing, 1, "jīng", "jing", Head.j, 'j');
+    public static readonly Pinyin jing3 = new(Shengmu.j, Yunmu.ing, 3, "jǐng", "jing", Head.j, 'j');
+    public static readonly Pinyin jing4 = new(Shengmu.j, Yunmu.ing, 4, "jìng", "jing", Head.j, 'j');
+    public static readonly Pinyin jiong1 = new(Shengmu.j, Yunmu.iong, 1, "jiōng", "jiong", Head.j, 'j');
+    public static readonly Pinyin jiong3 = new(Shengmu.j, Yunmu.iong, 3, "jiǒng", "jiong", Head.j, 'j');
+    public static readonly Pinyin jiong4 = new(Shengmu.j, Yunmu.iong, 4, "jiòng", "jiong", Head.j, 'j');
+    public static readonly Pinyin jiu1 = new(Shengmu.j, Yunmu.iu, 1, "jiū", "jiu", Head.j, 'j');
+    public static readonly Pinyin jiu3 = new(Shengmu.j, Yunmu.iu, 3, "jiǔ", "jiu", Head.j, 'j');
+    public static readonly Pinyin jiu4 = new(Shengmu.j, Yunmu.iu, 4, "jiù", "jiu", Head.j, 'j');
+    public static readonly Pinyin ju1 = new(Shengmu.j, Yunmu.u, 1, "jū", "ju", Head.j, 'j');
+    public static readonly Pinyin ju2 = new(Shengmu.j, Yunmu.u, 2, "jú", "ju", Head.j, 'j');
+    public static readonly Pinyin ju3 = new(Shengmu.j, Yunmu.u, 3, "jǔ", "ju", Head.j, 'j');
+    public static readonly Pinyin ju4 = new(Shengmu.j, Yunmu.u, 4, "jù", "ju", Head.j, 'j');
+    public static readonly Pinyin ju5 = new(Shengmu.j, Yunmu.u, 5, "ju", "ju", Head.j, 'j');
+    public static readonly Pinyin juan1 = new(Shengmu.j, Yunmu.uan, 1, "juān", "juan", Head.j, 'j');
+    public static readonly Pinyin juan2 = new(Shengmu.j, Yunmu.uan, 2, "juán", "juan", Head.j, 'j');
+    public static readonly Pinyin juan3 = new(Shengmu.j, Yunmu.uan, 3, "juǎn", "juan", Head.j, 'j');
+    public static readonly Pinyin juan4 = new(Shengmu.j, Yunmu.uan, 4, "juàn", "juan", Head.j, 'j');
+    public static readonly Pinyin jue1 = new(Shengmu.j, Yunmu.ue, 1, "juē", "jue", Head.j, 'j');
+    public static readonly Pinyin jue2 = new(Shengmu.j, Yunmu.ue, 2, "jué", "jue", Head.j, 'j');
+    public static readonly Pinyin jue3 = new(Shengmu.j, Yunmu.ue, 3, "juě", "jue", Head.j, 'j');
+    public static readonly Pinyin jue4 = new(Shengmu.j, Yunmu.ue, 4, "juè", "jue", Head.j, 'j');
+    public static readonly Pinyin jun1 = new(Shengmu.j, Yunmu.un, 1, "jūn", "jun", Head.j, 'j');
+    public static readonly Pinyin jun3 = new(Shengmu.j, Yunmu.un, 3, "jǔn", "jun", Head.j, 'j');
+    public static readonly Pinyin jun4 = new(Shengmu.j, Yunmu.un, 4, "jùn", "jun", Head.j, 'j');
+    public static readonly Pinyin ka1 = new(Shengmu.k, Yunmu.a, 1, "kā", "ka", Head.k, 'k');
+    public static readonly Pinyin ka3 = new(Shengmu.k, Yunmu.a, 3, "kǎ", "ka", Head.k, 'k');
+    public static readonly Pinyin ka4 = new(Shengmu.k, Yunmu.a, 4, "kà", "ka", Head.k, 'k');
+    public static readonly Pinyin kai1 = new(Shengmu.k, Yunmu.ai, 1, "kāi", "kai", Head.k, 'k');
+    public static readonly Pinyin kai3 = new(Shengmu.k, Yunmu.ai, 3, "kǎi", "kai", Head.k, 'k');
+    public static readonly Pinyin kai4 = new(Shengmu.k, Yunmu.ai, 4, "kài", "kai", Head.k, 'k');
+    public static readonly Pinyin kan1 = new(Shengmu.k, Yunmu.an, 1, "kān", "kan", Head.k, 'k');
+    public static readonly Pinyin kan3 = new(Shengmu.k, Yunmu.an, 3, "kǎn", "kan", Head.k, 'k');
+    public static readonly Pinyin kan4 = new(Shengmu.k, Yunmu.an, 4, "kàn", "kan", Head.k, 'k');
+    public static readonly Pinyin kang1 = new(Shengmu.k, Yunmu.ang, 1, "kāng", "kang", Head.k, 'k');
+    public static readonly Pinyin kang2 = new(Shengmu.k, Yunmu.ang, 2, "káng", "kang", Head.k, 'k');
+    public static readonly Pinyin kang3 = new(Shengmu.k, Yunmu.ang, 3, "kǎng", "kang", Head.k, 'k');
+    public static readonly Pinyin kang4 = new(Shengmu.k, Yunmu.ang, 4, "kàng", "kang", Head.k, 'k');
+    public static readonly Pinyin kao1 = new(Shengmu.k, Yunmu.ao, 1, "kāo", "kao", Head.k, 'k');
+    public static readonly Pinyin kao2 = new(Shengmu.k, Yunmu.ao, 2, "káo", "kao", Head.k, 'k');
+    public static readonly Pinyin kao3 = new(Shengmu.k, Yunmu.ao, 3, "kǎo", "kao", Head.k, 'k');
+    public static readonly Pinyin kao4 = new(Shengmu.k, Yunmu.ao, 4, "kào", "kao", Head.k, 'k');
+    public static readonly Pinyin ke1 = new(Shengmu.k, Yunmu.e, 1, "kē", "ke", Head.k, 'k');
+    public static readonly Pinyin ke2 = new(Shengmu.k, Yunmu.e, 2, "ké", "ke", Head.k, 'k');
+    public static readonly Pinyin ke3 = new(Shengmu.k, Yunmu.e, 3, "kě", "ke", Head.k, 'k');
+    public static readonly Pinyin ke4 = new(Shengmu.k, Yunmu.e, 4, "kè", "ke", Head.k, 'k');
+    public static readonly Pinyin ke5 = new(Shengmu.k, Yunmu.e, 5, "ke", "ke", Head.k, 'k');
+    public static readonly Pinyin kei1 = new(Shengmu.k, Yunmu.ei, 1, "kēi", "kei", Head.k, 'k');
+    public static readonly Pinyin ken3 = new(Shengmu.k, Yunmu.en, 3, "kěn", "ken", Head.k, 'k');
+    public static readonly Pinyin ken4 = new(Shengmu.k, Yunmu.en, 4, "kèn", "ken", Head.k, 'k');
+    public static readonly Pinyin keng1 = new(Shengmu.k, Yunmu.eng, 1, "kēng", "keng", Head.k, 'k');
+    public static readonly Pinyin keng3 = new(Shengmu.k, Yunmu.eng, 3, "kěng", "keng", Head.k, 'k');
+    public static readonly Pinyin kong1 = new(Shengmu.k, Yunmu.ong, 1, "kōng", "kong", Head.k, 'k');
+    public static readonly Pinyin kong3 = new(Shengmu.k, Yunmu.ong, 3, "kǒng", "kong", Head.k, 'k');
+    public static readonly Pinyin kong4 = new(Shengmu.k, Yunmu.ong, 4, "kòng", "kong", Head.k, 'k');
+    public static readonly Pinyin kou1 = new(Shengmu.k, Yunmu.ou, 1, "kōu", "kou", Head.k, 'k');
+    public static readonly Pinyin kou3 = new(Shengmu.k, Yunmu.ou, 3, "kǒu", "kou", Head.k, 'k');
+    public static readonly Pinyin kou4 = new(Shengmu.k, Yunmu.ou, 4, "kòu", "kou", Head.k, 'k');
+    public static readonly Pinyin ku1 = new(Shengmu.k, Yunmu.u, 1, "kū", "ku", Head.k, 'k');
+    public static readonly Pinyin ku3 = new(Shengmu.k, Yunmu.u, 3, "kǔ", "ku", Head.k, 'k');
+    public static readonly Pinyin ku4 = new(Shengmu.k, Yunmu.u, 4, "kù", "ku", Head.k, 'k');
+    public static readonly Pinyin kua1 = new(Shengmu.k, Yunmu.ua, 1, "kuā", "kua", Head.k, 'k');
+    public static readonly Pinyin kua3 = new(Shengmu.k, Yunmu.ua, 3, "kuǎ", "kua", Head.k, 'k');
+    public static readonly Pinyin kua4 = new(Shengmu.k, Yunmu.ua, 4, "kuà", "kua", Head.k, 'k');
+    public static readonly Pinyin kuai1 = new(Shengmu.k, Yunmu.uai, 1, "kuāi", "kuai", Head.k, 'k');
+    public static readonly Pinyin kuai3 = new(Shengmu.k, Yunmu.uai, 3, "kuǎi", "kuai", Head.k, 'k');
+    public static readonly Pinyin kuai4 = new(Shengmu.k, Yunmu.uai, 4, "kuài", "kuai", Head.k, 'k');
+    public static readonly Pinyin kuan1 = new(Shengmu.k, Yunmu.uan, 1, "kuān", "kuan", Head.k, 'k');
+    public static readonly Pinyin kuan3 = new(Shengmu.k, Yunmu.uan, 3, "kuǎn", "kuan", Head.k, 'k');
+    public static readonly Pinyin kuang1 = new(Shengmu.k, Yunmu.uang, 1, "kuāng", "kuang", Head.k, 'k');
+    public static readonly Pinyin kuang2 = new(Shengmu.k, Yunmu.uang, 2, "kuáng", "kuang", Head.k, 'k');
+    public static readonly Pinyin kuang3 = new(Shengmu.k, Yunmu.uang, 3, "kuǎng", "kuang", Head.k, 'k');
+    public static readonly Pinyin kuang4 = new(Shengmu.k, Yunmu.uang, 4, "kuàng", "kuang", Head.k, 'k');
+    public static readonly Pinyin kui1 = new(Shengmu.k, Yunmu.ui, 1, "kuī", "kui", Head.k, 'k');
+    public static readonly Pinyin kui2 = new(Shengmu.k, Yunmu.ui, 2, "kuí", "kui", Head.k, 'k');
+    public static readonly Pinyin kui3 = new(Shengmu.k, Yunmu.ui, 3, "kuǐ", "kui", Head.k, 'k');
+    public static readonly Pinyin kui4 = new(Shengmu.k, Yunmu.ui, 4, "kuì", "kui", Head.k, 'k');
+    public static readonly Pinyin kun1 = new(Shengmu.k, Yunmu.un, 1, "kūn", "kun", Head.k, 'k');
+    public static readonly Pinyin kun3 = new(Shengmu.k, Yunmu.un, 3, "kǔn", "kun", Head.k, 'k');
+    public static readonly Pinyin kun4 = new(Shengmu.k, Yunmu.un, 4, "kùn", "kun", Head.k, 'k');
+    public static readonly Pinyin kuo3 = new(Shengmu.k, Yunmu.uo, 3, "kuǒ", "kuo", Head.k, 'k');
+    public static readonly Pinyin kuo4 = new(Shengmu.k, Yunmu.uo, 4, "kuò", "kuo", Head.k, 'k');
+    public static readonly Pinyin la1 = new(Shengmu.l, Yunmu.a, 1, "lā", "la", Head.l, 'l');
+    public static readonly Pinyin la2 = new(Shengmu.l, Yunmu.a, 2, "lá", "la", Head.l, 'l');
+    public static readonly Pinyin la3 = new(Shengmu.l, Yunmu.a, 3, "lǎ", "la", Head.l, 'l');
+    public static readonly Pinyin la4 = new(Shengmu.l, Yunmu.a, 4, "là", "la", Head.l, 'l');
+    public static readonly Pinyin la5 = new(Shengmu.l, Yunmu.a, 5, "la", "la", Head.l, 'l');
+    public static readonly Pinyin lai2 = new(Shengmu.l, Yunmu.ai, 2, "lái", "lai", Head.l, 'l');
+    public static readonly Pinyin lai3 = new(Shengmu.l, Yunmu.ai, 3, "lǎi", "lai", Head.l, 'l');
+    public static readonly Pinyin lai4 = new(Shengmu.l, Yunmu.ai, 4, "lài", "lai", Head.l, 'l');
+    public static readonly Pinyin lan2 = new(Shengmu.l, Yunmu.an, 2, "lán", "lan", Head.l, 'l');
+    public static readonly Pinyin lan3 = new(Shengmu.l, Yunmu.an, 3, "lǎn", "lan", Head.l, 'l');
+    public static readonly Pinyin lan4 = new(Shengmu.l, Yunmu.an, 4, "làn", "lan", Head.l, 'l');
+    public static readonly Pinyin lan5 = new(Shengmu.l, Yunmu.an, 5, "lan", "lan", Head.l, 'l');
+    public static readonly Pinyin lang1 = new(Shengmu.l, Yunmu.ang, 1, "lāng", "lang", Head.l, 'l');
+    public static readonly Pinyin lang2 = new(Shengmu.l, Yunmu.ang, 2, "láng", "lang", Head.l, 'l');
+    public static readonly Pinyin lang3 = new(Shengmu.l, Yunmu.ang, 3, "lǎng", "lang", Head.l, 'l');
+    public static readonly Pinyin lang4 = new(Shengmu.l, Yunmu.ang, 4, "làng", "lang", Head.l, 'l');
+    public static readonly Pinyin lao1 = new(Shengmu.l, Yunmu.ao, 1, "lāo", "lao", Head.l, 'l');
+    public static readonly Pinyin lao2 = new(Shengmu.l, Yunmu.ao, 2, "láo", "lao", Head.l, 'l');
+    public static readonly Pinyin lao3 = new(Shengmu.l, Yunmu.ao, 3, "lǎo", "lao", Head.l, 'l');
+    public static readonly Pinyin lao4 = new(Shengmu.l, Yunmu.ao, 4, "lào", "lao", Head.l, 'l');
+    public static readonly Pinyin le1 = new(Shengmu.l, Yunmu.e, 1, "lē", "le", Head.l, 'l');
+    public static readonly Pinyin le4 = new(Shengmu.l, Yunmu.e, 4, "lè", "le", Head.l, 'l');
+    public static readonly Pinyin le5 = new(Shengmu.l, Yunmu.e, 5, "le", "le", Head.l, 'l');
+    public static readonly Pinyin lei1 = new(Shengmu.l, Yunmu.ei, 1, "lēi", "lei", Head.l, 'l');
+    public static readonly Pinyin lei2 = new(Shengmu.l, Yunmu.ei, 2, "léi", "lei", Head.l, 'l');
+    public static readonly Pinyin lei3 = new(Shengmu.l, Yunmu.ei, 3, "lěi", "lei", Head.l, 'l');
+    public static readonly Pinyin lei4 = new(Shengmu.l, Yunmu.ei, 4, "lèi", "lei", Head.l, 'l');
+    public static readonly Pinyin lei5 = new(Shengmu.l, Yunmu.ei, 5, "lei", "lei", Head.l, 'l');
+    public static readonly Pinyin leng1 = new(Shengmu.l, Yunmu.eng, 1, "lēng", "leng", Head.l, 'l');
+    public static readonly Pinyin leng2 = new(Shengmu.l, Yunmu.eng, 2, "léng", "leng", Head.l, 'l');
+    public static readonly Pinyin leng3 = new(Shengmu.l, Yunmu.eng, 3, "lěng", "leng", Head.l, 'l');
+    public static readonly Pinyin leng4 = new(Shengmu.l, Yunmu.eng, 4, "lèng", "leng", Head.l, 'l');
+    public static readonly Pinyin li1 = new(Shengmu.l, Yunmu.i, 1, "lī", "li", Head.l, 'l');
+    public static readonly Pinyin li2 = new(Shengmu.l, Yunmu.i, 2, "lí", "li", Head.l, 'l');
+    public static readonly Pinyin li3 = new(Shengmu.l, Yunmu.i, 3, "lǐ", "li", Head.l, 'l');
+    public static readonly Pinyin li4 = new(Shengmu.l, Yunmu.i, 4, "lì", "li", Head.l, 'l');
+    public static readonly Pinyin li5 = new(Shengmu.l, Yunmu.i, 5, "li", "li", Head.l, 'l');
+    public static readonly Pinyin lia3 = new(Shengmu.l, Yunmu.ia, 3, "liǎ", "lia", Head.l, 'l');
+    public static readonly Pinyin lian1 = new(Shengmu.l, Yunmu.ian, 1, "liān", "lian", Head.l, 'l');
+    public static readonly Pinyin lian2 = new(Shengmu.l, Yunmu.ian, 2, "lián", "lian", Head.l, 'l');
+    public static readonly Pinyin lian3 = new(Shengmu.l, Yunmu.ian, 3, "liǎn", "lian", Head.l, 'l');
+    public static readonly Pinyin lian4 = new(Shengmu.l, Yunmu.ian, 4, "liàn", "lian", Head.l, 'l');
+    public static readonly Pinyin liang2 = new(Shengmu.l, Yunmu.iang, 2, "liáng", "liang", Head.l, 'l');
+    public static readonly Pinyin liang3 = new(Shengmu.l, Yunmu.iang, 3, "liǎng", "liang", Head.l, 'l');
+    public static readonly Pinyin liang4 = new(Shengmu.l, Yunmu.iang, 4, "liàng", "liang", Head.l, 'l');
+    public static readonly Pinyin liang5 = new(Shengmu.l, Yunmu.iang, 5, "liang", "liang", Head.l, 'l');
+    public static readonly Pinyin liao1 = new(Shengmu.l, Yunmu.iao, 1, "liāo", "liao", Head.l, 'l');
+    public static readonly Pinyin liao2 = new(Shengmu.l, Yunmu.iao, 2, "liáo", "liao", Head.l, 'l');
+    public static readonly Pinyin liao3 = new(Shengmu.l, Yunmu.iao, 3, "liǎo", "liao", Head.l, 'l');
+    public static readonly Pinyin liao4 = new(Shengmu.l, Yunmu.iao, 4, "liào", "liao", Head.l, 'l');
+    public static readonly Pinyin lie1 = new(Shengmu.l, Yunmu.ie, 1, "liē", "lie", Head.l, 'l');
+    public static readonly Pinyin lie2 = new(Shengmu.l, Yunmu.ie, 2, "lié", "lie", Head.l, 'l');
+    public static readonly Pinyin lie3 = new(Shengmu.l, Yunmu.ie, 3, "liě", "lie", Head.l, 'l');
+    public static readonly Pinyin lie4 = new(Shengmu.l, Yunmu.ie, 4, "liè", "lie", Head.l, 'l');
+    public static readonly Pinyin lie5 = new(Shengmu.l, Yunmu.ie, 5, "lie", "lie", Head.l, 'l');
+    public static readonly Pinyin lin1 = new(Shengmu.l, Yunmu.@in, 1, "līn", "lin", Head.l, 'l');
+    public static readonly Pinyin lin2 = new(Shengmu.l, Yunmu.@in, 2, "lín", "lin", Head.l, 'l');
+    public static readonly Pinyin lin3 = new(Shengmu.l, Yunmu.@in, 3, "lǐn", "lin", Head.l, 'l');
+    public static readonly Pinyin lin4 = new(Shengmu.l, Yunmu.@in, 4, "lìn", "lin", Head.l, 'l');
+    public static readonly Pinyin ling1 = new(Shengmu.l, Yunmu.ing, 1, "līng", "ling", Head.l, 'l');
+    public static readonly Pinyin ling2 = new(Shengmu.l, Yunmu.ing, 2, "líng", "ling", Head.l, 'l');
+    public static readonly Pinyin ling3 = new(Shengmu.l, Yunmu.ing, 3, "lǐng", "ling", Head.l, 'l');
+    public static readonly Pinyin ling4 = new(Shengmu.l, Yunmu.ing, 4, "lìng", "ling", Head.l, 'l');
+    public static readonly Pinyin liu1 = new(Shengmu.l, Yunmu.iu, 1, "liū", "liu", Head.l, 'l');
+    public static readonly Pinyin liu2 = new(Shengmu.l, Yunmu.iu, 2, "liú", "liu", Head.l, 'l');
+    public static readonly Pinyin liu3 = new(Shengmu.l, Yunmu.iu, 3, "liǔ", "liu", Head.l, 'l');
+    public static readonly Pinyin liu4 = new(Shengmu.l, Yunmu.iu, 4, "liù", "liu", Head.l, 'l');
+    public static readonly Pinyin lo5 = new(Shengmu.l, Yunmu.o, 5, "lo", "lo", Head.l, 'l');
+    public static readonly Pinyin long1 = new(Shengmu.l, Yunmu.ong, 1, "lōng", "long", Head.l, 'l');
+    public static readonly Pinyin long2 = new(Shengmu.l, Yunmu.ong, 2, "lóng", "long", Head.l, 'l');
+    public static readonly Pinyin long3 = new(Shengmu.l, Yunmu.ong, 3, "lǒng", "long", Head.l, 'l');
+    public static readonly Pinyin long4 = new(Shengmu.l, Yunmu.ong, 4, "lòng", "long", Head.l, 'l');
+    public static readonly Pinyin lou1 = new(Shengmu.l, Yunmu.ou, 1, "lōu", "lou", Head.l, 'l');
+    public static readonly Pinyin lou2 = new(Shengmu.l, Yunmu.ou, 2, "lóu", "lou", Head.l, 'l');
+    public static readonly Pinyin lou3 = new(Shengmu.l, Yunmu.ou, 3, "lǒu", "lou", Head.l, 'l');
+    public static readonly Pinyin lou4 = new(Shengmu.l, Yunmu.ou, 4, "lòu", "lou", Head.l, 'l');
+    public static readonly Pinyin lou5 = new(Shengmu.l, Yunmu.ou, 5, "lou", "lou", Head.l, 'l');
+    public static readonly Pinyin lu1 = new(Shengmu.l, Yunmu.u, 1, "lū", "lu", Head.l, 'l');
+    public static readonly Pinyin lu2 = new(Shengmu.l, Yunmu.u, 2, "lú", "lu", Head.l, 'l');
+    public static readonly Pinyin lu3 = new(Shengmu.l, Yunmu.u, 3, "lǔ", "lu", Head.l, 'l');
+    public static readonly Pinyin lu4 = new(Shengmu.l, Yunmu.u, 4, "lù", "lu", Head.l, 'l');
+    public static readonly Pinyin lu5 = new(Shengmu.l, Yunmu.u, 5, "lu", "lu", Head.l, 'l');
+    public static readonly Pinyin luan2 = new(Shengmu.l, Yunmu.uan, 2, "luán", "luan", Head.l, 'l');
+    public static readonly Pinyin luan3 = new(Shengmu.l, Yunmu.uan, 3, "luǎn", "luan", Head.l, 'l');
+    public static readonly Pinyin luan4 = new(Shengmu.l, Yunmu.uan, 4, "luàn", "luan", Head.l, 'l');
+    public static readonly Pinyin lun1 = new(Shengmu.l, Yunmu.un, 1, "lūn", "lun", Head.l, 'l');
+    public static readonly Pinyin lun2 = new(Shengmu.l, Yunmu.un, 2, "lún", "lun", Head.l, 'l');
+    public static readonly Pinyin lun3 = new(Shengmu.l, Yunmu.un, 3, "lǔn", "lun", Head.l, 'l');
+    public static readonly Pinyin lun4 = new(Shengmu.l, Yunmu.un, 4, "lùn", "lun", Head.l, 'l');
+    public static readonly Pinyin luo1 = new(Shengmu.l, Yunmu.uo, 1, "luō", "luo", Head.l, 'l');
+    public static readonly Pinyin luo2 = new(Shengmu.l, Yunmu.uo, 2, "luó", "luo", Head.l, 'l');
+    public static readonly Pinyin luo3 = new(Shengmu.l, Yunmu.uo, 3, "luǒ", "luo", Head.l, 'l');
+    public static readonly Pinyin luo4 = new(Shengmu.l, Yunmu.uo, 4, "luò", "luo", Head.l, 'l');
+    public static readonly Pinyin luo5 = new(Shengmu.l, Yunmu.uo, 5, "luo", "luo", Head.l, 'l');
+    public static readonly Pinyin lv2 = new(Shengmu.l, Yunmu.u, 2, "lǘ", "lv", Head.l, 'l');
+    public static readonly Pinyin lv3 = new(Shengmu.l, Yunmu.v, 3, "lǚ", "lv", Head.l, 'l');
+    public static readonly Pinyin lv4 = new(Shengmu.l, Yunmu.v, 4, "lǜ", "lv", Head.l, 'l');
+    public static readonly Pinyin lve3 = new(Shengmu.l, Yunmu.ve, 3, "lüě", "lve", Head.l, 'l');
+    public static readonly Pinyin lve4 = new(Shengmu.l, Yunmu.ue, 4, "lüè", "lve", Head.l, 'l');
+    public static readonly Pinyin ma1 = new(Shengmu.m, Yunmu.a, 1, "mā", "ma", Head.m, 'm');
+    public static readonly Pinyin ma2 = new(Shengmu.m, Yunmu.a, 2, "má", "ma", Head.m, 'm');
+    public static readonly Pinyin ma3 = new(Shengmu.m, Yunmu.a, 3, "mǎ", "ma", Head.m, 'm');
+    public static readonly Pinyin ma4 = new(Shengmu.m, Yunmu.a, 4, "mà", "ma", Head.m, 'm');
+    public static readonly Pinyin ma5 = new(Shengmu.m, Yunmu.a, 5, "ma", "ma", Head.m, 'm');
+    public static readonly Pinyin mai2 = new(Shengmu.m, Yunmu.ai, 2, "mái", "mai", Head.m, 'm');
+    public static readonly Pinyin mai3 = new(Shengmu.m, Yunmu.ai, 3, "mǎi", "mai", Head.m, 'm');
+    public static readonly Pinyin mai4 = new(Shengmu.m, Yunmu.ai, 4, "mài", "mai", Head.m, 'm');
+    public static readonly Pinyin man1 = new(Shengmu.m, Yunmu.an, 1, "mān", "man", Head.m, 'm');
+    public static readonly Pinyin man2 = new(Shengmu.m, Yunmu.an, 2, "mán", "man", Head.m, 'm');
+    public static readonly Pinyin man3 = new(Shengmu.m, Yunmu.an, 3, "mǎn", "man", Head.m, 'm');
+    public static readonly Pinyin man4 = new(Shengmu.m, Yunmu.an, 4, "màn", "man", Head.m, 'm');
+    public static readonly Pinyin mang1 = new(Shengmu.m, Yunmu.ang, 1, "māng", "mang", Head.m, 'm');
+    public static readonly Pinyin mang2 = new(Shengmu.m, Yunmu.ang, 2, "máng", "mang", Head.m, 'm');
+    public static readonly Pinyin mang3 = new(Shengmu.m, Yunmu.ang, 3, "mǎng", "mang", Head.m, 'm');
+    public static readonly Pinyin mao1 = new(Shengmu.m, Yunmu.ao, 1, "māo", "mao", Head.m, 'm');
+    public static readonly Pinyin mao2 = new(Shengmu.m, Yunmu.ao, 2, "máo", "mao", Head.m, 'm');
+    public static readonly Pinyin mao3 = new(Shengmu.m, Yunmu.ao, 3, "mǎo", "mao", Head.m, 'm');
+    public static readonly Pinyin mao4 = new(Shengmu.m, Yunmu.ao, 4, "mào", "mao", Head.m, 'm');
+    public static readonly Pinyin me1 = new(Shengmu.m, Yunmu.e, 1, "mē", "me", Head.m, 'm');
+    public static readonly Pinyin me4 = new(Shengmu.m, Yunmu.e, 4, "mè", "me", Head.m, 'm');
+    public static readonly Pinyin me5 = new(Shengmu.m, Yunmu.e, 5, "me", "me", Head.m, 'm');
+    public static readonly Pinyin mei2 = new(Shengmu.m, Yunmu.ei, 2, "méi", "mei", Head.m, 'm');
+    public static readonly Pinyin mei3 = new(Shengmu.m, Yunmu.ei, 3, "měi", "mei", Head.m, 'm');
+    public static readonly Pinyin mei4 = new(Shengmu.m, Yunmu.ei, 4, "mèi", "mei", Head.m, 'm');
+    public static readonly Pinyin men1 = new(Shengmu.m, Yunmu.en, 1, "mēn", "men", Head.m, 'm');
+    public static readonly Pinyin men2 = new(Shengmu.m, Yunmu.en, 2, "mén", "men", Head.m, 'm');
+    public static readonly Pinyin men3 = new(Shengmu.m, Yunmu.en, 3, "měn", "men", Head.m, 'm');
+    public static readonly Pinyin men4 = new(Shengmu.m, Yunmu.en, 4, "mèn", "men", Head.m, 'm');
+    public static readonly Pinyin men5 = new(Shengmu.m, Yunmu.en, 5, "men", "men", Head.m, 'm');
+    public static readonly Pinyin meng1 = new(Shengmu.m, Yunmu.eng, 1, "mēng", "meng", Head.m, 'm');
+    public static readonly Pinyin meng2 = new(Shengmu.m, Yunmu.eng, 2, "méng", "meng", Head.m, 'm');
+    public static readonly Pinyin meng3 = new(Shengmu.m, Yunmu.eng, 3, "měng", "meng", Head.m, 'm');
+    public static readonly Pinyin meng4 = new(Shengmu.m, Yunmu.eng, 4, "mèng", "meng", Head.m, 'm');
+    public static readonly Pinyin mi1 = new(Shengmu.m, Yunmu.i, 1, "mī", "mi", Head.m, 'm');
+    public static readonly Pinyin mi2 = new(Shengmu.m, Yunmu.i, 2, "mí", "mi", Head.m, 'm');
+    public static readonly Pinyin mi3 = new(Shengmu.m, Yunmu.i, 3, "mǐ", "mi", Head.m, 'm');
+    public static readonly Pinyin mi4 = new(Shengmu.m, Yunmu.i, 4, "mì", "mi", Head.m, 'm');
+    public static readonly Pinyin mian2 = new(Shengmu.m, Yunmu.ian, 2, "mián", "mian", Head.m, 'm');
+    public static readonly Pinyin mian3 = new(Shengmu.m, Yunmu.ian, 3, "miǎn", "mian", Head.m, 'm');
+    public static readonly Pinyin mian4 = new(Shengmu.m, Yunmu.ian, 4, "miàn", "mian", Head.m, 'm');
+    public static readonly Pinyin miao1 = new(Shengmu.m, Yunmu.iao, 1, "miāo", "miao", Head.m, 'm');
+    public static readonly Pinyin miao2 = new(Shengmu.m, Yunmu.iao, 2, "miáo", "miao", Head.m, 'm');
+    public static readonly Pinyin miao3 = new(Shengmu.m, Yunmu.iao, 3, "miǎo", "miao", Head.m, 'm');
+    public static readonly Pinyin miao4 = new(Shengmu.m, Yunmu.iao, 4, "miào", "miao", Head.m, 'm');
+    public static readonly Pinyin mie1 = new(Shengmu.m, Yunmu.ie, 1, "miē", "mie", Head.m, 'm');
+    public static readonly Pinyin mie4 = new(Shengmu.m, Yunmu.ie, 4, "miè", "mie", Head.m, 'm');
+    public static readonly Pinyin min2 = new(Shengmu.m, Yunmu.@in, 2, "mín", "min", Head.m, 'm');
+    public static readonly Pinyin min3 = new(Shengmu.m, Yunmu.@in, 3, "mǐn", "min", Head.m, 'm');
+    public static readonly Pinyin ming2 = new(Shengmu.m, Yunmu.ing, 2, "míng", "ming", Head.m, 'm');
+    public static readonly Pinyin ming3 = new(Shengmu.m, Yunmu.ing, 3, "mǐng", "ming", Head.m, 'm');
+    public static readonly Pinyin ming4 = new(Shengmu.m, Yunmu.ing, 4, "mìng", "ming", Head.m, 'm');
+    public static readonly Pinyin miu4 = new(Shengmu.m, Yunmu.iu, 4, "miù", "miu", Head.m, 'm');
+    public static readonly Pinyin mo1 = new(Shengmu.m, Yunmu.o, 1, "mō", "mo", Head.m, 'm');
+    public static readonly Pinyin mo2 = new(Shengmu.m, Yunmu.o, 2, "mó", "mo", Head.m, 'm');
+    public static readonly Pinyin mo3 = new(Shengmu.m, Yunmu.o, 3, "mǒ", "mo", Head.m, 'm');
+    public static readonly Pinyin mo4 = new(Shengmu.m, Yunmu.o, 4, "mò", "mo", Head.m, 'm');
+    public static readonly Pinyin mo5 = new(Shengmu.m, Yunmu.o, 5, "mo", "mo", Head.m, 'm');
+    public static readonly Pinyin mou1 = new(Shengmu.m, Yunmu.ou, 1, "mōu", "mou", Head.m, 'm');
+    public static readonly Pinyin mou2 = new(Shengmu.m, Yunmu.ou, 2, "móu", "mou", Head.m, 'm');
+    public static readonly Pinyin mou3 = new(Shengmu.m, Yunmu.ou, 3, "mǒu", "mou", Head.m, 'm');
+    public static readonly Pinyin mou4 = new(Shengmu.m, Yunmu.ou, 4, "mòu", "mou", Head.m, 'm');
+    public static readonly Pinyin mu2 = new(Shengmu.m, Yunmu.u, 2, "mú", "mu", Head.m, 'm');
+    public static readonly Pinyin mu3 = new(Shengmu.m, Yunmu.u, 3, "mǔ", "mu", Head.m, 'm');
+    public static readonly Pinyin mu4 = new(Shengmu.m, Yunmu.u, 4, "mù", "mu", Head.m, 'm');
+    public static readonly Pinyin na1 = new(Shengmu.n, Yunmu.a, 1, "nā", "na", Head.n, 'n');
+    public static readonly Pinyin na2 = new(Shengmu.n, Yunmu.a, 2, "ná", "na", Head.n, 'n');
+    public static readonly Pinyin na3 = new(Shengmu.n, Yunmu.a, 3, "nǎ", "na", Head.n, 'n');
+    public static readonly Pinyin na4 = new(Shengmu.n, Yunmu.a, 4, "nà", "na", Head.n, 'n');
+    public static readonly Pinyin na5 = new(Shengmu.n, Yunmu.a, 5, "na", "na", Head.n, 'n');
+    public static readonly Pinyin nai2 = new(Shengmu.n, Yunmu.ai, 2, "nái", "nai", Head.n, 'n');
+    public static readonly Pinyin nai3 = new(Shengmu.n, Yunmu.ai, 3, "nǎi", "nai", Head.n, 'n');
+    public static readonly Pinyin nai4 = new(Shengmu.n, Yunmu.ai, 4, "nài", "nai", Head.n, 'n');
+    public static readonly Pinyin nan1 = new(Shengmu.n, Yunmu.an, 1, "nān", "nan", Head.n, 'n');
+    public static readonly Pinyin nan2 = new(Shengmu.n, Yunmu.an, 2, "nán", "nan", Head.n, 'n');
+    public static readonly Pinyin nan3 = new(Shengmu.n, Yunmu.an, 3, "nǎn", "nan", Head.n, 'n');
+    public static readonly Pinyin nan4 = new(Shengmu.n, Yunmu.an, 4, "nàn", "nan", Head.n, 'n');
+    public static readonly Pinyin nang1 = new(Shengmu.n, Yunmu.ang, 1, "nāng", "nang", Head.n, 'n');
+    public static readonly Pinyin nang2 = new(Shengmu.n, Yunmu.ang, 2, "náng", "nang", Head.n, 'n');
+    public static readonly Pinyin nang3 = new(Shengmu.n, Yunmu.ang, 3, "nǎng", "nang", Head.n, 'n');
+    public static readonly Pinyin nang4 = new(Shengmu.n, Yunmu.ang, 4, "nàng", "nang", Head.n, 'n');
+    public static readonly Pinyin nao1 = new(Shengmu.n, Yunmu.ao, 1, "nāo", "nao", Head.n, 'n');
+    public static readonly Pinyin nao2 = new(Shengmu.n, Yunmu.ao, 2, "náo", "nao", Head.n, 'n');
+    public static readonly Pinyin nao3 = new(Shengmu.n, Yunmu.ao, 3, "nǎo", "nao", Head.n, 'n');
+    public static readonly Pinyin nao4 = new(Shengmu.n, Yunmu.ao, 4, "nào", "nao", Head.n, 'n');
+    public static readonly Pinyin ne2 = new(Shengmu.n, Yunmu.e, 2, "né", "ne", Head.n, 'n');
+    public static readonly Pinyin ne4 = new(Shengmu.n, Yunmu.e, 4, "nè", "ne", Head.n, 'n');
+    public static readonly Pinyin ne5 = new(Shengmu.n, Yunmu.e, 5, "ne", "ne", Head.n, 'n');
+    public static readonly Pinyin nei3 = new(Shengmu.n, Yunmu.ei, 3, "něi", "nei", Head.n, 'n');
+    public static readonly Pinyin nei4 = new(Shengmu.n, Yunmu.ei, 4, "nèi", "nei", Head.n, 'n');
+    public static readonly Pinyin nen1 = new(Shengmu.n, Yunmu.en, 1, "nēn", "nen", Head.n, 'n');
+    public static readonly Pinyin nen3 = new(Shengmu.n, Yunmu.en, 3, "něn", "nen", Head.n, 'n');
+    public static readonly Pinyin nen4 = new(Shengmu.n, Yunmu.en, 4, "nèn", "nen", Head.n, 'n');
+    public static readonly Pinyin neng2 = new(Shengmu.n, Yunmu.eng, 2, "néng", "neng", Head.n, 'n');
+    public static readonly Pinyin neng3 = new(Shengmu.n, Yunmu.eng, 3, "něng", "neng", Head.n, 'n');
+    public static readonly Pinyin ni1 = new(Shengmu.n, Yunmu.i, 1, "nī", "ni", Head.n, 'n');
+    public static readonly Pinyin ni2 = new(Shengmu.n, Yunmu.i, 2, "ní", "ni", Head.n, 'n');
+    public static readonly Pinyin ni3 = new(Shengmu.n, Yunmu.i, 3, "nǐ", "ni", Head.n, 'n');
+    public static readonly Pinyin ni4 = new(Shengmu.n, Yunmu.i, 4, "nì", "ni", Head.n, 'n');
+    public static readonly Pinyin nian1 = new(Shengmu.n, Yunmu.ian, 1, "niān", "nian", Head.n, 'n');
+    public static readonly Pinyin nian2 = new(Shengmu.n, Yunmu.ian, 2, "nián", "nian", Head.n, 'n');
+    public static readonly Pinyin nian3 = new(Shengmu.n, Yunmu.ian, 3, "niǎn", "nian", Head.n, 'n');
+    public static readonly Pinyin nian4 = new(Shengmu.n, Yunmu.ian, 4, "niàn", "nian", Head.n, 'n');
+    public static readonly Pinyin niang2 = new(Shengmu.n, Yunmu.iang, 2, "niáng", "niang", Head.n, 'n');
+    public static readonly Pinyin niang4 = new(Shengmu.n, Yunmu.iang, 4, "niàng", "niang", Head.n, 'n');
+    public static readonly Pinyin niao3 = new(Shengmu.n, Yunmu.iao, 3, "niǎo", "niao", Head.n, 'n');
+    public static readonly Pinyin niao4 = new(Shengmu.n, Yunmu.iao, 4, "niào", "niao", Head.n, 'n');
+    public static readonly Pinyin nie1 = new(Shengmu.n, Yunmu.ie, 1, "niē", "nie", Head.n, 'n');
+    public static readonly Pinyin nie2 = new(Shengmu.n, Yunmu.ie, 2, "nié", "nie", Head.n, 'n');
+    public static readonly Pinyin nie3 = new(Shengmu.n, Yunmu.ie, 3, "niě", "nie", Head.n, 'n');
+    public static readonly Pinyin nie4 = new(Shengmu.n, Yunmu.ie, 4, "niè", "nie", Head.n, 'n');
+    public static readonly Pinyin nin2 = new(Shengmu.n, Yunmu.@in, 2, "nín", "nin", Head.n, 'n');
+    public static readonly Pinyin nin3 = new(Shengmu.n, Yunmu.@in, 3, "nǐn", "nin", Head.n, 'n');
+    public static readonly Pinyin ning2 = new(Shengmu.n, Yunmu.ing, 2, "níng", "ning", Head.n, 'n');
+    public static readonly Pinyin ning3 = new(Shengmu.n, Yunmu.ing, 3, "nǐng", "ning", Head.n, 'n');
+    public static readonly Pinyin ning4 = new(Shengmu.n, Yunmu.ing, 4, "nìng", "ning", Head.n, 'n');
+    public static readonly Pinyin niu1 = new(Shengmu.n, Yunmu.iu, 1, "niū", "niu", Head.n, 'n');
+    public static readonly Pinyin niu2 = new(Shengmu.n, Yunmu.iu, 2, "niú", "niu", Head.n, 'n');
+    public static readonly Pinyin niu3 = new(Shengmu.n, Yunmu.iu, 3, "niǔ", "niu", Head.n, 'n');
+    public static readonly Pinyin niu4 = new(Shengmu.n, Yunmu.iu, 4, "niù", "niu", Head.n, 'n');
+    public static readonly Pinyin nong2 = new(Shengmu.n, Yunmu.ong, 2, "nóng", "nong", Head.n, 'n');
+    public static readonly Pinyin nong3 = new(Shengmu.n, Yunmu.ong, 3, "nǒng", "nong", Head.n, 'n');
+    public static readonly Pinyin nong4 = new(Shengmu.n, Yunmu.ong, 4, "nòng", "nong", Head.n, 'n');
+    public static readonly Pinyin nou2 = new(Shengmu.n, Yunmu.ou, 2, "nóu", "nou", Head.n, 'n');
+    public static readonly Pinyin nou4 = new(Shengmu.n, Yunmu.ou, 4, "nòu", "nou", Head.n, 'n');
+    public static readonly Pinyin nu2 = new(Shengmu.n, Yunmu.u, 2, "nú", "nu", Head.n, 'n');
+    public static readonly Pinyin nu3 = new(Shengmu.n, Yunmu.u, 3, "nǔ", "nu", Head.n, 'n');
+    public static readonly Pinyin nu4 = new(Shengmu.n, Yunmu.u, 4, "nù", "nu", Head.n, 'n');
+    public static readonly Pinyin nuan2 = new(Shengmu.n, Yunmu.uan, 2, "nuán", "nuan", Head.n, 'n');
+    public static readonly Pinyin nuan3 = new(Shengmu.n, Yunmu.uan, 3, "nuǎn", "nuan", Head.n, 'n');
+    public static readonly Pinyin nuan4 = new(Shengmu.n, Yunmu.uan, 4, "nuàn", "nuan", Head.n, 'n');
+    public static readonly Pinyin nun2 = new(Shengmu.n, Yunmu.un, 2, "nún", "nun", Head.n, 'n');
+    public static readonly Pinyin nun4 = new(Shengmu.n, Yunmu.un, 4, "nùn", "nun", Head.n, 'n');
+    public static readonly Pinyin nuo2 = new(Shengmu.n, Yunmu.uo, 2, "nuó", "nuo", Head.n, 'n');
+    public static readonly Pinyin nuo3 = new(Shengmu.n, Yunmu.uo, 3, "nuǒ", "nuo", Head.n, 'n');
+    public static readonly Pinyin nuo4 = new(Shengmu.n, Yunmu.uo, 4, "nuò", "nuo", Head.n, 'n');
+    public static readonly Pinyin nv3 = new(Shengmu.n, Yunmu.v, 3, "nǚ", "nv", Head.n, 'n');
+    public static readonly Pinyin nv4 = new(Shengmu.n, Yunmu.v, 4, "nǜ", "nv", Head.n, 'n');
+    public static readonly Pinyin nve4 = new(Shengmu.n, Yunmu.ue, 4, "nüè", "nve", Head.n, 'n');
+    public static readonly Pinyin o1 = new(Shengmu.none, Yunmu.o, 1, "ō", "o", Head.o, 'o');
+    public static readonly Pinyin o2 = new(Shengmu.none, Yunmu.o, 2, "ó", "o", Head.o, 'o');
+    public static readonly Pinyin o3 = new(Shengmu.none, Yunmu.o, 3, "ǒ", "o", Head.o, 'o');
+    public static readonly Pinyin o4 = new(Shengmu.none, Yunmu.o, 4, "ò", "o", Head.o, 'o');
+    public static readonly Pinyin o5 = new(Shengmu.none, Yunmu.o, 5, "o", "o", Head.o, 'o');
+    public static readonly Pinyin ou1 = new(Shengmu.none, Yunmu.ou, 1, "ōu", "ou", Head.o, 'o');
+    public static readonly Pinyin ou2 = new(Shengmu.none, Yunmu.ou, 2, "óu", "ou", Head.o, 'o');
+    public static readonly Pinyin ou3 = new(Shengmu.none, Yunmu.ou, 3, "ǒu", "ou", Head.o, 'o');
+    public static readonly Pinyin ou4 = new(Shengmu.none, Yunmu.ou, 4, "òu", "ou", Head.o, 'o');
+    public static readonly Pinyin ou5 = new(Shengmu.none, Yunmu.ou, 5, "ou", "ou", Head.o, 'o');
+    public static readonly Pinyin pa1 = new(Shengmu.p, Yunmu.a, 1, "pā", "pa", Head.p, 'p');
+    public static readonly Pinyin pa2 = new(Shengmu.p, Yunmu.a, 2, "pá", "pa", Head.p, 'p');
+    public static readonly Pinyin pa4 = new(Shengmu.p, Yunmu.a, 4, "pà", "pa", Head.p, 'p');
+    public static readonly Pinyin pai1 = new(Shengmu.p, Yunmu.ai, 1, "pāi", "pai", Head.p, 'p');
+    public static readonly Pinyin pai2 = new(Shengmu.p, Yunmu.ai, 2, "pái", "pai", Head.p, 'p');
+    public static readonly Pinyin pai3 = new(Shengmu.p, Yunmu.ai, 3, "pǎi", "pai", Head.p, 'p');
+    public static readonly Pinyin pai4 = new(Shengmu.p, Yunmu.ai, 4, "pài", "pai", Head.p, 'p');
+    public static readonly Pinyin pan1 = new(Shengmu.p, Yunmu.an, 1, "pān", "pan", Head.p, 'p');
+    public static readonly Pinyin pan2 = new(Shengmu.p, Yunmu.an, 2, "pán", "pan", Head.p, 'p');
+    public static readonly Pinyin pan3 = new(Shengmu.p, Yunmu.an, 3, "pǎn", "pan", Head.p, 'p');
+    public static readonly Pinyin pan4 = new(Shengmu.p, Yunmu.an, 4, "pàn", "pan", Head.p, 'p');
+    public static readonly Pinyin pang1 = new(Shengmu.p, Yunmu.ang, 1, "pāng", "pang", Head.p, 'p');
+    public static readonly Pinyin pang2 = new(Shengmu.p, Yunmu.ang, 2, "páng", "pang", Head.p, 'p');
+    public static readonly Pinyin pang3 = new(Shengmu.p, Yunmu.ang, 3, "pǎng", "pang", Head.p, 'p');
+    public static readonly Pinyin pang4 = new(Shengmu.p, Yunmu.ang, 4, "pàng", "pang", Head.p, 'p');
+    public static readonly Pinyin pang5 = new(Shengmu.p, Yunmu.ang, 5, "pang", "pang", Head.p, 'p');
+    public static readonly Pinyin pao1 = new(Shengmu.p, Yunmu.ao, 1, "pāo", "pao", Head.p, 'p');
+    public static readonly Pinyin pao2 = new(Shengmu.p, Yunmu.ao, 2, "páo", "pao", Head.p, 'p');
+    public static readonly Pinyin pao3 = new(Shengmu.p, Yunmu.ao, 3, "pǎo", "pao", Head.p, 'p');
+    public static readonly Pinyin pao4 = new(Shengmu.p, Yunmu.ao, 4, "pào", "pao", Head.p, 'p');
+    public static readonly Pinyin pei1 = new(Shengmu.p, Yunmu.ei, 1, "pēi", "pei", Head.p, 'p');
+    public static readonly Pinyin pei2 = new(Shengmu.p, Yunmu.ei, 2, "péi", "pei", Head.p, 'p');
+    public static readonly Pinyin pei3 = new(Shengmu.p, Yunmu.ei, 3, "pěi", "pei", Head.p, 'p');
+    public static readonly Pinyin pei4 = new(Shengmu.p, Yunmu.ei, 4, "pèi", "pei", Head.p, 'p');
+    public static readonly Pinyin pen1 = new(Shengmu.p, Yunmu.en, 1, "pēn", "pen", Head.p, 'p');
+    public static readonly Pinyin pen2 = new(Shengmu.p, Yunmu.en, 2, "pén", "pen", Head.p, 'p');
+    public static readonly Pinyin pen3 = new(Shengmu.p, Yunmu.en, 3, "pěn", "pen", Head.p, 'p');
+    public static readonly Pinyin pen4 = new(Shengmu.p, Yunmu.en, 4, "pèn", "pen", Head.p, 'p');
+    public static readonly Pinyin pen5 = new(Shengmu.p, Yunmu.en, 5, "pen", "pen", Head.p, 'p');
+    public static readonly Pinyin peng1 = new(Shengmu.p, Yunmu.eng, 1, "pēng", "peng", Head.p, 'p');
+    public static readonly Pinyin peng2 = new(Shengmu.p, Yunmu.eng, 2, "péng", "peng", Head.p, 'p');
+    public static readonly Pinyin peng3 = new(Shengmu.p, Yunmu.eng, 3, "pěng", "peng", Head.p, 'p');
+    public static readonly Pinyin peng4 = new(Shengmu.p, Yunmu.eng, 4, "pèng", "peng", Head.p, 'p');
+    public static readonly Pinyin pi1 = new(Shengmu.p, Yunmu.i, 1, "pī", "pi", Head.p, 'p');
+    public static readonly Pinyin pi2 = new(Shengmu.p, Yunmu.i, 2, "pí", "pi", Head.p, 'p');
+    public static readonly Pinyin pi3 = new(Shengmu.p, Yunmu.i, 3, "pǐ", "pi", Head.p, 'p');
+    public static readonly Pinyin pi4 = new(Shengmu.p, Yunmu.i, 4, "pì", "pi", Head.p, 'p');
+    public static readonly Pinyin pi5 = new(Shengmu.p, Yunmu.i, 5, "pi", "pi", Head.p, 'p');
+    public static readonly Pinyin pian1 = new(Shengmu.p, Yunmu.ian, 1, "piān", "pian", Head.p, 'p');
+    public static readonly Pinyin pian2 = new(Shengmu.p, Yunmu.ian, 2, "pián", "pian", Head.p, 'p');
+    public static readonly Pinyin pian3 = new(Shengmu.p, Yunmu.ian, 3, "piǎn", "pian", Head.p, 'p');
+    public static readonly Pinyin pian4 = new(Shengmu.p, Yunmu.ian, 4, "piàn", "pian", Head.p, 'p');
+    public static readonly Pinyin piao1 = new(Shengmu.p, Yunmu.iao, 1, "piāo", "piao", Head.p, 'p');
+    public static readonly Pinyin piao2 = new(Shengmu.p, Yunmu.iao, 2, "piáo", "piao", Head.p, 'p');
+    public static readonly Pinyin piao3 = new(Shengmu.p, Yunmu.iao, 3, "piǎo", "piao", Head.p, 'p');
+    public static readonly Pinyin piao4 = new(Shengmu.p, Yunmu.iao, 4, "piào", "piao", Head.p, 'p');
+    public static readonly Pinyin pie1 = new(Shengmu.p, Yunmu.ie, 1, "piē", "pie", Head.p, 'p');
+    public static readonly Pinyin pie3 = new(Shengmu.p, Yunmu.ie, 3, "piě", "pie", Head.p, 'p');
+    public static readonly Pinyin pie4 = new(Shengmu.p, Yunmu.ie, 4, "piè", "pie", Head.p, 'p');
+    public static readonly Pinyin pin1 = new(Shengmu.p, Yunmu.@in, 1, "pīn", "pin", Head.p, 'p');
+    public static readonly Pinyin pin2 = new(Shengmu.p, Yunmu.@in, 2, "pín", "pin", Head.p, 'p');
+    public static readonly Pinyin pin3 = new(Shengmu.p, Yunmu.@in, 3, "pǐn", "pin", Head.p, 'p');
+    public static readonly Pinyin pin4 = new(Shengmu.p, Yunmu.@in, 4, "pìn", "pin", Head.p, 'p');
+    public static readonly Pinyin ping1 = new(Shengmu.p, Yunmu.ing, 1, "pīng", "ping", Head.p, 'p');
+    public static readonly Pinyin ping2 = new(Shengmu.p, Yunmu.ing, 2, "píng", "ping", Head.p, 'p');
+    public static readonly Pinyin ping3 = new(Shengmu.p, Yunmu.ing, 3, "pǐng", "ping", Head.p, 'p');
+    public static readonly Pinyin ping4 = new(Shengmu.p, Yunmu.ing, 4, "pìng", "ping", Head.p, 'p');
+    public static readonly Pinyin po1 = new(Shengmu.p, Yunmu.o, 1, "pō", "po", Head.p, 'p');
+    public static readonly Pinyin po2 = new(Shengmu.p, Yunmu.o, 2, "pó", "po", Head.p, 'p');
+    public static readonly Pinyin po3 = new(Shengmu.p, Yunmu.o, 3, "pǒ", "po", Head.p, 'p');
+    public static readonly Pinyin po4 = new(Shengmu.p, Yunmu.o, 4, "pò", "po", Head.p, 'p');
+    public static readonly Pinyin po5 = new(Shengmu.p, Yunmu.o, 5, "po", "po", Head.p, 'p');
+    public static readonly Pinyin pou1 = new(Shengmu.p, Yunmu.ou, 1, "pōu", "pou", Head.p, 'p');
+    public static readonly Pinyin pou2 = new(Shengmu.p, Yunmu.ou, 2, "póu", "pou", Head.p, 'p');
+    public static readonly Pinyin pou3 = new(Shengmu.p, Yunmu.ou, 3, "pǒu", "pou", Head.p, 'p');
+    public static readonly Pinyin pou4 = new(Shengmu.p, Yunmu.ou, 4, "pòu", "pou", Head.p, 'p');
+    public static readonly Pinyin pu1 = new(Shengmu.p, Yunmu.u, 1, "pū", "pu", Head.p, 'p');
+    public static readonly Pinyin pu2 = new(Shengmu.p, Yunmu.u, 2, "pú", "pu", Head.p, 'p');
+    public static readonly Pinyin pu3 = new(Shengmu.p, Yunmu.u, 3, "pǔ", "pu", Head.p, 'p');
+    public static readonly Pinyin pu4 = new(Shengmu.p, Yunmu.u, 4, "pù", "pu", Head.p, 'p');
+    public static readonly Pinyin qi1 = new(Shengmu.q, Yunmu.i, 1, "qī", "qi", Head.q, 'q');
+    public static readonly Pinyin qi2 = new(Shengmu.q, Yunmu.i, 2, "qí", "qi", Head.q, 'q');
+    public static readonly Pinyin qi3 = new(Shengmu.q, Yunmu.i, 3, "qǐ", "qi", Head.q, 'q');
+    public static readonly Pinyin qi4 = new(Shengmu.q, Yunmu.i, 4, "qì", "qi", Head.q, 'q');
+    public static readonly Pinyin qi5 = new(Shengmu.q, Yunmu.i, 5, "qi", "qi", Head.q, 'q');
+    public static readonly Pinyin qia1 = new(Shengmu.q, Yunmu.ia, 1, "qiā", "qia", Head.q, 'q');
+    public static readonly Pinyin qia3 = new(Shengmu.q, Yunmu.ia, 3, "qiǎ", "qia", Head.q, 'q');
+    public static readonly Pinyin qia4 = new(Shengmu.q, Yunmu.ia, 4, "qià", "qia", Head.q, 'q');
+    public static readonly Pinyin qian1 = new(Shengmu.q, Yunmu.ian, 1, "qiān", "qian", Head.q, 'q');
+    public static readonly Pinyin qian2 = new(Shengmu.q, Yunmu.ian, 2, "qián", "qian", Head.q, 'q');
+    public static readonly Pinyin qian3 = new(Shengmu.q, Yunmu.ian, 3, "qiǎn", "qian", Head.q, 'q');
+    public static readonly Pinyin qian4 = new(Shengmu.q, Yunmu.ian, 4, "qiàn", "qian", Head.q, 'q');
+    public static readonly Pinyin qian5 = new(Shengmu.q, Yunmu.ian, 5, "qian", "qian", Head.q, 'q');
+    public static readonly Pinyin qiang1 = new(Shengmu.q, Yunmu.iang, 1, "qiāng", "qiang", Head.q, 'q');
+    public static readonly Pinyin qiang2 = new(Shengmu.q, Yunmu.iang, 2, "qiáng", "qiang", Head.q, 'q');
+    public static readonly Pinyin qiang3 = new(Shengmu.q, Yunmu.iang, 3, "qiǎng", "qiang", Head.q, 'q');
+    public static readonly Pinyin qiang4 = new(Shengmu.q, Yunmu.iang, 4, "qiàng", "qiang", Head.q, 'q');
+    public static readonly Pinyin qiao1 = new(Shengmu.q, Yunmu.iao, 1, "qiāo", "qiao", Head.q, 'q');
+    public static readonly Pinyin qiao2 = new(Shengmu.q, Yunmu.iao, 2, "qiáo", "qiao", Head.q, 'q');
+    public static readonly Pinyin qiao3 = new(Shengmu.q, Yunmu.iao, 3, "qiǎo", "qiao", Head.q, 'q');
+    public static readonly Pinyin qiao4 = new(Shengmu.q, Yunmu.iao, 4, "qiào", "qiao", Head.q, 'q');
+    public static readonly Pinyin qie1 = new(Shengmu.q, Yunmu.ie, 1, "qiē", "qie", Head.q, 'q');
+    public static readonly Pinyin qie2 = new(Shengmu.q, Yunmu.ie, 2, "qié", "qie", Head.q, 'q');
+    public static readonly Pinyin qie3 = new(Shengmu.q, Yunmu.ie, 3, "qiě", "qie", Head.q, 'q');
+    public static readonly Pinyin qie4 = new(Shengmu.q, Yunmu.ie, 4, "qiè", "qie", Head.q, 'q');
+    public static readonly Pinyin qin1 = new(Shengmu.q, Yunmu.@in, 1, "qīn", "qin", Head.q, 'q');
+    public static readonly Pinyin qin2 = new(Shengmu.q, Yunmu.@in, 2, "qín", "qin", Head.q, 'q');
+    public static readonly Pinyin qin3 = new(Shengmu.q, Yunmu.@in, 3, "qǐn", "qin", Head.q, 'q');
+    public static readonly Pinyin qin4 = new(Shengmu.q, Yunmu.@in, 4, "qìn", "qin", Head.q, 'q');
+    public static readonly Pinyin qing1 = new(Shengmu.q, Yunmu.ing, 1, "qīng", "qing", Head.q, 'q');
+    public static readonly Pinyin qing2 = new(Shengmu.q, Yunmu.ing, 2, "qíng", "qing", Head.q, 'q');
+    public static readonly Pinyin qing3 = new(Shengmu.q, Yunmu.ing, 3, "qǐng", "qing", Head.q, 'q');
+    public static readonly Pinyin qing4 = new(Shengmu.q, Yunmu.ing, 4, "qìng", "qing", Head.q, 'q');
+    public static readonly Pinyin qiong1 = new(Shengmu.q, Yunmu.iong, 1, "qiōng", "qiong", Head.q, 'q');
+    public static readonly Pinyin qiong2 = new(Shengmu.q, Yunmu.iong, 2, "qióng", "qiong", Head.q, 'q');
+    public static readonly Pinyin qiong3 = new(Shengmu.q, Yunmu.iong, 3, "qiǒng", "qiong", Head.q, 'q');
+    public static readonly Pinyin qiu1 = new(Shengmu.q, Yunmu.iu, 1, "qiū", "qiu", Head.q, 'q');
+    public static readonly Pinyin qiu2 = new(Shengmu.q, Yunmu.iu, 2, "qiú", "qiu", Head.q, 'q');
+    public static readonly Pinyin qiu3 = new(Shengmu.q, Yunmu.iu, 3, "qiǔ", "qiu", Head.q, 'q');
+    public static readonly Pinyin qiu4 = new(Shengmu.q, Yunmu.iu, 4, "qiù", "qiu", Head.q, 'q');
+    public static readonly Pinyin qu1 = new(Shengmu.q, Yunmu.u, 1, "qū", "qu", Head.q, 'q');
+    public static readonly Pinyin qu2 = new(Shengmu.q, Yunmu.u, 2, "qú", "qu", Head.q, 'q');
+    public static readonly Pinyin qu3 = new(Shengmu.q, Yunmu.u, 3, "qǔ", "qu", Head.q, 'q');
+    public static readonly Pinyin qu4 = new(Shengmu.q, Yunmu.u, 4, "qù", "qu", Head.q, 'q');
+    public static readonly Pinyin quan1 = new(Shengmu.q, Yunmu.uan, 1, "quān", "quan", Head.q, 'q');
+    public static readonly Pinyin quan2 = new(Shengmu.q, Yunmu.uan, 2, "quán", "quan", Head.q, 'q');
+    public static readonly Pinyin quan3 = new(Shengmu.q, Yunmu.uan, 3, "quǎn", "quan", Head.q, 'q');
+    public static readonly Pinyin quan4 = new(Shengmu.q, Yunmu.uan, 4, "quàn", "quan", Head.q, 'q');
+    public static readonly Pinyin que1 = new(Shengmu.q, Yunmu.ue, 1, "quē", "que", Head.q, 'q');
+    public static readonly Pinyin que2 = new(Shengmu.q, Yunmu.ue, 2, "qué", "que", Head.q, 'q');
+    public static readonly Pinyin que4 = new(Shengmu.q, Yunmu.ue, 4, "què", "que", Head.q, 'q');
+    public static readonly Pinyin qun1 = new(Shengmu.q, Yunmu.un, 1, "qūn", "qun", Head.q, 'q');
+    public static readonly Pinyin qun2 = new(Shengmu.q, Yunmu.un, 2, "qún", "qun", Head.q, 'q');
+    public static readonly Pinyin qun3 = new(Shengmu.q, Yunmu.un, 3, "qǔn", "qun", Head.q, 'q');
+    public static readonly Pinyin ran2 = new(Shengmu.r, Yunmu.an, 2, "rán", "ran", Head.r, 'r');
+    public static readonly Pinyin ran3 = new(Shengmu.r, Yunmu.an, 3, "rǎn", "ran", Head.r, 'r');
+    public static readonly Pinyin rang1 = new(Shengmu.r, Yunmu.ang, 1, "rāng", "rang", Head.r, 'r');
+    public static readonly Pinyin rang2 = new(Shengmu.r, Yunmu.ang, 2, "ráng", "rang", Head.r, 'r');
+    public static readonly Pinyin rang3 = new(Shengmu.r, Yunmu.ang, 3, "rǎng", "rang", Head.r, 'r');
+    public static readonly Pinyin rang4 = new(Shengmu.r, Yunmu.ang, 4, "ràng", "rang", Head.r, 'r');
+    public static readonly Pinyin rao2 = new(Shengmu.r, Yunmu.ao, 2, "ráo", "rao", Head.r, 'r');
+    public static readonly Pinyin rao3 = new(Shengmu.r, Yunmu.ao, 3, "rǎo", "rao", Head.r, 'r');
+    public static readonly Pinyin rao4 = new(Shengmu.r, Yunmu.ao, 4, "rào", "rao", Head.r, 'r');
+    public static readonly Pinyin re2 = new(Shengmu.r, Yunmu.e, 2, "ré", "re", Head.r, 'r');
+    public static readonly Pinyin re3 = new(Shengmu.r, Yunmu.e, 3, "rě", "re", Head.r, 'r');
+    public static readonly Pinyin re4 = new(Shengmu.r, Yunmu.e, 4, "rè", "re", Head.r, 'r');
+    public static readonly Pinyin ren2 = new(Shengmu.r, Yunmu.en, 2, "rén", "ren", Head.r, 'r');
+    public static readonly Pinyin ren3 = new(Shengmu.r, Yunmu.en, 3, "rěn", "ren", Head.r, 'r');
+    public static readonly Pinyin ren4 = new(Shengmu.r, Yunmu.en, 4, "rèn", "ren", Head.r, 'r');
+    public static readonly Pinyin reng1 = new(Shengmu.r, Yunmu.eng, 1, "rēng", "reng", Head.r, 'r');
+    public static readonly Pinyin reng2 = new(Shengmu.r, Yunmu.eng, 2, "réng", "reng", Head.r, 'r');
+    public static readonly Pinyin reng4 = new(Shengmu.r, Yunmu.eng, 4, "rèng", "reng", Head.r, 'r');
+    public static readonly Pinyin ri4 = new(Shengmu.r, Yunmu.i, 4, "rì", "ri", Head.r, 'r');
+    public static readonly Pinyin rong2 = new(Shengmu.r, Yunmu.ong, 2, "róng", "rong", Head.r, 'r');
+    public static readonly Pinyin rong3 = new(Shengmu.r, Yunmu.ong, 3, "rǒng", "rong", Head.r, 'r');
+    public static readonly Pinyin rong4 = new(Shengmu.r, Yunmu.ong, 4, "ròng", "rong", Head.r, 'r');
+    public static readonly Pinyin rou2 = new(Shengmu.r, Yunmu.ou, 2, "róu", "rou", Head.r, 'r');
+    public static readonly Pinyin rou3 = new(Shengmu.r, Yunmu.ou, 3, "rǒu", "rou", Head.r, 'r');
+    public static readonly Pinyin rou4 = new(Shengmu.r, Yunmu.ou, 4, "ròu", "rou", Head.r, 'r');
+    public static readonly Pinyin ru1 = new(Shengmu.r, Yunmu.u, 1, "rū", "ru", Head.r, 'r');
+    public static readonly Pinyin ru2 = new(Shengmu.r, Yunmu.u, 2, "rú", "ru", Head.r, 'r');
+    public static readonly Pinyin ru3 = new(Shengmu.r, Yunmu.u, 3, "rǔ", "ru", Head.r, 'r');
+    public static readonly Pinyin ru4 = new(Shengmu.r, Yunmu.u, 4, "rù", "ru", Head.r, 'r');
+    public static readonly Pinyin ruan2 = new(Shengmu.r, Yunmu.uan, 2, "ruán", "ruan", Head.r, 'r');
+    public static readonly Pinyin ruan3 = new(Shengmu.r, Yunmu.uan, 3, "ruǎn", "ruan", Head.r, 'r');
+    public static readonly Pinyin ruan4 = new(Shengmu.r, Yunmu.uan, 4, "ruàn", "ruan", Head.r, 'r');
+    public static readonly Pinyin rui2 = new(Shengmu.r, Yunmu.ui, 2, "ruí", "rui", Head.r, 'r');
+    public static readonly Pinyin rui3 = new(Shengmu.r, Yunmu.ui, 3, "ruǐ", "rui", Head.r, 'r');
+    public static readonly Pinyin rui4 = new(Shengmu.r, Yunmu.ui, 4, "ruì", "rui", Head.r, 'r');
+    public static readonly Pinyin run2 = new(Shengmu.r, Yunmu.un, 2, "rún", "run", Head.r, 'r');
+    public static readonly Pinyin run4 = new(Shengmu.r, Yunmu.un, 4, "rùn", "run", Head.r, 'r');
+    public static readonly Pinyin ruo2 = new(Shengmu.r, Yunmu.uo, 2, "ruó", "ruo", Head.r, 'r');
+    public static readonly Pinyin ruo4 = new(Shengmu.r, Yunmu.uo, 4, "ruò", "ruo", Head.r, 'r');
+    public static readonly Pinyin sa1 = new(Shengmu.s, Yunmu.a, 1, "sā", "sa", Head.s, 's');
+    public static readonly Pinyin sa3 = new(Shengmu.s, Yunmu.a, 3, "sǎ", "sa", Head.s, 's');
+    public static readonly Pinyin sa4 = new(Shengmu.s, Yunmu.a, 4, "sà", "sa", Head.s, 's');
+    public static readonly Pinyin sai1 = new(Shengmu.s, Yunmu.ai, 1, "sāi", "sai", Head.s, 's');
+    public static readonly Pinyin sai3 = new(Shengmu.s, Yunmu.ai, 3, "sǎi", "sai", Head.s, 's');
+    public static readonly Pinyin sai4 = new(Shengmu.s, Yunmu.ai, 4, "sài", "sai", Head.s, 's');
+    public static readonly Pinyin sai5 = new(Shengmu.s, Yunmu.ai, 5, "sai", "sai", Head.s, 's');
+    public static readonly Pinyin san1 = new(Shengmu.s, Yunmu.an, 1, "sān", "san", Head.s, 's');
+    public static readonly Pinyin san3 = new(Shengmu.s, Yunmu.an, 3, "sǎn", "san", Head.s, 's');
+    public static readonly Pinyin san4 = new(Shengmu.s, Yunmu.an, 4, "sàn", "san", Head.s, 's');
+    public static readonly Pinyin san5 = new(Shengmu.s, Yunmu.an, 5, "san", "san", Head.s, 's');
+    public static readonly Pinyin sang1 = new(Shengmu.s, Yunmu.ang, 1, "sāng", "sang", Head.s, 's');
+    public static readonly Pinyin sang3 = new(Shengmu.s, Yunmu.ang, 3, "sǎng", "sang", Head.s, 's');
+    public static readonly Pinyin sang4 = new(Shengmu.s, Yunmu.ang, 4, "sàng", "sang", Head.s, 's');
+    public static readonly Pinyin sang5 = new(Shengmu.s, Yunmu.ang, 5, "sang", "sang", Head.s, 's');
+    public static readonly Pinyin sao1 = new(Shengmu.s, Yunmu.ao, 1, "sāo", "sao", Head.s, 's');
+    public static readonly Pinyin sao3 = new(Shengmu.s, Yunmu.ao, 3, "sǎo", "sao", Head.s, 's');
+    public static readonly Pinyin sao4 = new(Shengmu.s, Yunmu.ao, 4, "sào", "sao", Head.s, 's');
+    public static readonly Pinyin se1 = new(Shengmu.s, Yunmu.e, 1, "sē", "se", Head.s, 's');
+    public static readonly Pinyin se4 = new(Shengmu.s, Yunmu.e, 4, "sè", "se", Head.s, 's');
+    public static readonly Pinyin sen1 = new(Shengmu.s, Yunmu.en, 1, "sēn", "sen", Head.s, 's');
+    public static readonly Pinyin sen3 = new(Shengmu.s, Yunmu.en, 3, "sěn", "sen", Head.s, 's');
+    public static readonly Pinyin seng1 = new(Shengmu.s, Yunmu.eng, 1, "sēng", "seng", Head.s, 's');
+    public static readonly Pinyin sha1 = new(Shengmu.sh, Yunmu.a, 1, "shā", "sha", Head.sh, 's');
+    public static readonly Pinyin sha2 = new(Shengmu.sh, Yunmu.a, 2, "shá", "sha", Head.sh, 's');
+    public static readonly Pinyin sha3 = new(Shengmu.sh, Yunmu.a, 3, "shǎ", "sha", Head.sh, 's');
+    public static readonly Pinyin sha4 = new(Shengmu.sh, Yunmu.a, 4, "shà", "sha", Head.sh, 's');
+    public static readonly Pinyin shai1 = new(Shengmu.sh, Yunmu.ai, 1, "shāi", "shai", Head.sh, 's');
+    public static readonly Pinyin shai3 = new(Shengmu.sh, Yunmu.ai, 3, "shǎi", "shai", Head.sh, 's');
+    public static readonly Pinyin shai4 = new(Shengmu.sh, Yunmu.ai, 4, "shài", "shai", Head.sh, 's');
+    public static readonly Pinyin shan1 = new(Shengmu.sh, Yunmu.an, 1, "shān", "shan", Head.sh, 's');
+    public static readonly Pinyin shan2 = new(Shengmu.sh, Yunmu.an, 2, "shán", "shan", Head.sh, 's');
+    public static readonly Pinyin shan3 = new(Shengmu.sh, Yunmu.an, 3, "shǎn", "shan", Head.sh, 's');
+    public static readonly Pinyin shan4 = new(Shengmu.sh, Yunmu.an, 4, "shàn", "shan", Head.sh, 's');
+    public static readonly Pinyin shang1 = new(Shengmu.sh, Yunmu.ang, 1, "shāng", "shang", Head.sh, 's');
+    public static readonly Pinyin shang2 = new(Shengmu.sh, Yunmu.ang, 2, "sháng", "shang", Head.sh, 's');
+    public static readonly Pinyin shang3 = new(Shengmu.sh, Yunmu.ang, 3, "shǎng", "shang", Head.sh, 's');
+    public static readonly Pinyin shang4 = new(Shengmu.sh, Yunmu.ang, 4, "shàng", "shang", Head.sh, 's');
+    public static readonly Pinyin shang5 = new(Shengmu.sh, Yunmu.ang, 5, "shang", "shang", Head.sh, 's');
+    public static readonly Pinyin shao1 = new(Shengmu.sh, Yunmu.ao, 1, "shāo", "shao", Head.sh, 's');
+    public static readonly Pinyin shao2 = new(Shengmu.sh, Yunmu.ao, 2, "sháo", "shao", Head.sh, 's');
+    public static readonly Pinyin shao3 = new(Shengmu.sh, Yunmu.ao, 3, "shǎo", "shao", Head.sh, 's');
+    public static readonly Pinyin shao4 = new(Shengmu.sh, Yunmu.ao, 4, "shào", "shao", Head.sh, 's');
+    public static readonly Pinyin she1 = new(Shengmu.sh, Yunmu.e, 1, "shē", "she", Head.sh, 's');
+    public static readonly Pinyin she2 = new(Shengmu.sh, Yunmu.e, 2, "shé", "she", Head.sh, 's');
+    public static readonly Pinyin she3 = new(Shengmu.sh, Yunmu.e, 3, "shě", "she", Head.sh, 's');
+    public static readonly Pinyin she4 = new(Shengmu.sh, Yunmu.e, 4, "shè", "she", Head.sh, 's');
+    public static readonly Pinyin shei2 = new(Shengmu.sh, Yunmu.ei, 2, "shéi", "shei", Head.sh, 's');
+    public static readonly Pinyin shen1 = new(Shengmu.sh, Yunmu.en, 1, "shēn", "shen", Head.sh, 's');
+    public static readonly Pinyin shen2 = new(Shengmu.sh, Yunmu.en, 2, "shén", "shen", Head.sh, 's');
+    public static readonly Pinyin shen3 = new(Shengmu.sh, Yunmu.en, 3, "shěn", "shen", Head.sh, 's');
+    public static readonly Pinyin shen4 = new(Shengmu.sh, Yunmu.en, 4, "shèn", "shen", Head.sh, 's');
+    public static readonly Pinyin sheng1 = new(Shengmu.sh, Yunmu.eng, 1, "shēng", "sheng", Head.sh, 's');
+    public static readonly Pinyin sheng2 = new(Shengmu.sh, Yunmu.eng, 2, "shéng", "sheng", Head.sh, 's');
+    public static readonly Pinyin sheng3 = new(Shengmu.sh, Yunmu.eng, 3, "shěng", "sheng", Head.sh, 's');
+    public static readonly Pinyin sheng4 = new(Shengmu.sh, Yunmu.eng, 4, "shèng", "sheng", Head.sh, 's');
+    public static readonly Pinyin shi1 = new(Shengmu.sh, Yunmu.i, 1, "shī", "shi", Head.sh, 's');
+    public static readonly Pinyin shi2 = new(Shengmu.sh, Yunmu.i, 2, "shí", "shi", Head.sh, 's');
+    public static readonly Pinyin shi3 = new(Shengmu.sh, Yunmu.i, 3, "shǐ", "shi", Head.sh, 's');
+    public static readonly Pinyin shi4 = new(Shengmu.sh, Yunmu.i, 4, "shì", "shi", Head.sh, 's');
+    public static readonly Pinyin shi5 = new(Shengmu.sh, Yunmu.i, 5, "shi", "shi", Head.sh, 's');
+    public static readonly Pinyin shou1 = new(Shengmu.sh, Yunmu.ou, 1, "shōu", "shou", Head.sh, 's');
+    public static readonly Pinyin shou2 = new(Shengmu.sh, Yunmu.ou, 2, "shóu", "shou", Head.sh, 's');
+    public static readonly Pinyin shou3 = new(Shengmu.sh, Yunmu.ou, 3, "shǒu", "shou", Head.sh, 's');
+    public static readonly Pinyin shou4 = new(Shengmu.sh, Yunmu.ou, 4, "shòu", "shou", Head.sh, 's');
+    public static readonly Pinyin shu1 = new(Shengmu.sh, Yunmu.u, 1, "shū", "shu", Head.sh, 's');
+    public static readonly Pinyin shu2 = new(Shengmu.sh, Yunmu.u, 2, "shú", "shu", Head.sh, 's');
+    public static readonly Pinyin shu3 = new(Shengmu.sh, Yunmu.u, 3, "shǔ", "shu", Head.sh, 's');
+    public static readonly Pinyin shu4 = new(Shengmu.sh, Yunmu.u, 4, "shù", "shu", Head.sh, 's');
+    public static readonly Pinyin shua1 = new(Shengmu.sh, Yunmu.ua, 1, "shuā", "shua", Head.sh, 's');
+    public static readonly Pinyin shua3 = new(Shengmu.sh, Yunmu.ua, 3, "shuǎ", "shua", Head.sh, 's');
+    public static readonly Pinyin shua4 = new(Shengmu.sh, Yunmu.ua, 4, "shuà", "shua", Head.sh, 's');
+    public static readonly Pinyin shuai1 = new(Shengmu.sh, Yunmu.uai, 1, "shuāi", "shuai", Head.sh, 's');
+    public static readonly Pinyin shuai3 = new(Shengmu.sh, Yunmu.uai, 3, "shuǎi", "shuai", Head.sh, 's');
+    public static readonly Pinyin shuai4 = new(Shengmu.sh, Yunmu.uai, 4, "shuài", "shuai", Head.sh, 's');
+    public static readonly Pinyin shuan1 = new(Shengmu.sh, Yunmu.uan, 1, "shuān", "shuan", Head.sh, 's');
+    public static readonly Pinyin shuan4 = new(Shengmu.sh, Yunmu.uan, 4, "shuàn", "shuan", Head.sh, 's');
+    public static readonly Pinyin shuang1 = new(Shengmu.sh, Yunmu.uang, 1, "shuāng", "shuang", Head.sh, 's');
+    public static readonly Pinyin shuang3 = new(Shengmu.sh, Yunmu.uang, 3, "shuǎng", "shuang", Head.sh, 's');
+    public static readonly Pinyin shuang4 = new(Shengmu.sh, Yunmu.uang, 4, "shuàng", "shuang", Head.sh, 's');
+    public static readonly Pinyin shui2 = new(Shengmu.sh, Yunmu.ui, 2, "shuí", "shui", Head.sh, 's');
+    public static readonly Pinyin shui3 = new(Shengmu.sh, Yunmu.ui, 3, "shuǐ", "shui", Head.sh, 's');
+    public static readonly Pinyin shui4 = new(Shengmu.sh, Yunmu.ui, 4, "shuì", "shui", Head.sh, 's');
+    public static readonly Pinyin shun1 = new(Shengmu.sh, Yunmu.un, 1, "shūn", "shun", Head.sh, 's');
+    public static readonly Pinyin shun3 = new(Shengmu.sh, Yunmu.un, 3, "shǔn", "shun", Head.sh, 's');
+    public static readonly Pinyin shun4 = new(Shengmu.sh, Yunmu.un, 4, "shùn", "shun", Head.sh, 's');
+    public static readonly Pinyin shuo1 = new(Shengmu.sh, Yunmu.uo, 1, "shuō", "shuo", Head.sh, 's');
+    public static readonly Pinyin shuo2 = new(Shengmu.sh, Yunmu.uo, 2, "shuó", "shuo", Head.sh, 's');
+    public static readonly Pinyin shuo4 = new(Shengmu.sh, Yunmu.uo, 4, "shuò", "shuo", Head.sh, 's');
+    public static readonly Pinyin si1 = new(Shengmu.s, Yunmu.i, 1, "sī", "si", Head.s, 's');
+    public static readonly Pinyin si3 = new(Shengmu.s, Yunmu.i, 3, "sǐ", "si", Head.s, 's');
+    public static readonly Pinyin si4 = new(Shengmu.s, Yunmu.i, 4, "sì", "si", Head.s, 's');
+    public static readonly Pinyin song1 = new(Shengmu.s, Yunmu.ong, 1, "sōng", "song", Head.s, 's');
+    public static readonly Pinyin song3 = new(Shengmu.s, Yunmu.ong, 3, "sǒng", "song", Head.s, 's');
+    public static readonly Pinyin song4 = new(Shengmu.s, Yunmu.ong, 4, "sòng", "song", Head.s, 's');
+    public static readonly Pinyin sou1 = new(Shengmu.s, Yunmu.ou, 1, "sōu", "sou", Head.s, 's');
+    public static readonly Pinyin sou3 = new(Shengmu.s, Yunmu.ou, 3, "sǒu", "sou", Head.s, 's');
+    public static readonly Pinyin sou4 = new(Shengmu.s, Yunmu.ou, 4, "sòu", "sou", Head.s, 's');
+    public static readonly Pinyin su1 = new(Shengmu.s, Yunmu.u, 1, "sū", "su", Head.s, 's');
+    public static readonly Pinyin su2 = new(Shengmu.s, Yunmu.u, 2, "sú", "su", Head.s, 's');
+    public static readonly Pinyin su4 = new(Shengmu.s, Yunmu.u, 4, "sù", "su", Head.s, 's');
+    public static readonly Pinyin suan1 = new(Shengmu.s, Yunmu.uan, 1, "suān", "suan", Head.s, 's');
+    public static readonly Pinyin suan3 = new(Shengmu.s, Yunmu.uan, 3, "suǎn", "suan", Head.s, 's');
+    public static readonly Pinyin suan4 = new(Shengmu.s, Yunmu.uan, 4, "suàn", "suan", Head.s, 's');
+    public static readonly Pinyin sui1 = new(Shengmu.s, Yunmu.ui, 1, "suī", "sui", Head.s, 's');
+    public static readonly Pinyin sui2 = new(Shengmu.s, Yunmu.ui, 2, "suí", "sui", Head.s, 's');
+    public static readonly Pinyin sui3 = new(Shengmu.s, Yunmu.ui, 3, "suǐ", "sui", Head.s, 's');
+    public static readonly Pinyin sui4 = new(Shengmu.s, Yunmu.ui, 4, "suì", "sui", Head.s, 's');
+    public static readonly Pinyin sun1 = new(Shengmu.s, Yunmu.un, 1, "sūn", "sun", Head.s, 's');
+    public static readonly Pinyin sun3 = new(Shengmu.s, Yunmu.un, 3, "sǔn", "sun", Head.s, 's');
+    public static readonly Pinyin sun4 = new(Shengmu.s, Yunmu.un, 4, "sùn", "sun", Head.s, 's');
+    public static readonly Pinyin suo1 = new(Shengmu.s, Yunmu.uo, 1, "suō", "suo", Head.s, 's');
+    public static readonly Pinyin suo3 = new(Shengmu.s, Yunmu.uo, 3, "suǒ", "suo", Head.s, 's');
+    public static readonly Pinyin suo4 = new(Shengmu.s, Yunmu.uo, 4, "suò", "suo", Head.s, 's');
+    public static readonly Pinyin ta1 = new(Shengmu.t, Yunmu.a, 1, "tā", "ta", Head.t, 't');
+    public static readonly Pinyin ta3 = new(Shengmu.t, Yunmu.a, 3, "tǎ", "ta", Head.t, 't');
+    public static readonly Pinyin ta4 = new(Shengmu.t, Yunmu.a, 4, "tà", "ta", Head.t, 't');
+    public static readonly Pinyin ta5 = new(Shengmu.t, Yunmu.a, 5, "ta", "ta", Head.t, 't');
+    public static readonly Pinyin tai1 = new(Shengmu.t, Yunmu.ai, 1, "tāi", "tai", Head.t, 't');
+    public static readonly Pinyin tai2 = new(Shengmu.t, Yunmu.ai, 2, "tái", "tai", Head.t, 't');
+    public static readonly Pinyin tai3 = new(Shengmu.t, Yunmu.ai, 3, "tǎi", "tai", Head.t, 't');
+    public static readonly Pinyin tai4 = new(Shengmu.t, Yunmu.ai, 4, "tài", "tai", Head.t, 't');
+    public static readonly Pinyin tan1 = new(Shengmu.t, Yunmu.an, 1, "tān", "tan", Head.t, 't');
+    public static readonly Pinyin tan2 = new(Shengmu.t, Yunmu.an, 2, "tán", "tan", Head.t, 't');
+    public static readonly Pinyin tan3 = new(Shengmu.t, Yunmu.an, 3, "tǎn", "tan", Head.t, 't');
+    public static readonly Pinyin tan4 = new(Shengmu.t, Yunmu.an, 4, "tàn", "tan", Head.t, 't');
+    public static readonly Pinyin tang1 = new(Shengmu.t, Yunmu.ang, 1, "tāng", "tang", Head.t, 't');
+    public static readonly Pinyin tang2 = new(Shengmu.t, Yunmu.ang, 2, "táng", "tang", Head.t, 't');
+    public static readonly Pinyin tang3 = new(Shengmu.t, Yunmu.ang, 3, "tǎng", "tang", Head.t, 't');
+    public static readonly Pinyin tang4 = new(Shengmu.t, Yunmu.ang, 4, "tàng", "tang", Head.t, 't');
+    public static readonly Pinyin tao1 = new(Shengmu.t, Yunmu.ao, 1, "tāo", "tao", Head.t, 't');
+    public static readonly Pinyin tao2 = new(Shengmu.t, Yunmu.ao, 2, "táo", "tao", Head.t, 't');
+    public static readonly Pinyin tao3 = new(Shengmu.t, Yunmu.ao, 3, "tǎo", "tao", Head.t, 't');
+    public static readonly Pinyin tao4 = new(Shengmu.t, Yunmu.ao, 4, "tào", "tao", Head.t, 't');
+    public static readonly Pinyin te4 = new(Shengmu.t, Yunmu.e, 4, "tè", "te", Head.t, 't');
+    public static readonly Pinyin teng1 = new(Shengmu.t, Yunmu.eng, 1, "tēng", "teng", Head.t, 't');
+    public static readonly Pinyin teng2 = new(Shengmu.t, Yunmu.eng, 2, "téng", "teng", Head.t, 't');
+    public static readonly Pinyin teng4 = new(Shengmu.t, Yunmu.eng, 4, "tèng", "teng", Head.t, 't');
+    public static readonly Pinyin ti1 = new(Shengmu.t, Yunmu.i, 1, "tī", "ti", Head.t, 't');
+    public static readonly Pinyin ti2 = new(Shengmu.t, Yunmu.i, 2, "tí", "ti", Head.t, 't');
+    public static readonly Pinyin ti3 = new(Shengmu.t, Yunmu.i, 3, "tǐ", "ti", Head.t, 't');
+    public static readonly Pinyin ti4 = new(Shengmu.t, Yunmu.i, 4, "tì", "ti", Head.t, 't');
+    public static readonly Pinyin tian1 = new(Shengmu.t, Yunmu.ian, 1, "tiān", "tian", Head.t, 't');
+    public static readonly Pinyin tian2 = new(Shengmu.t, Yunmu.ian, 2, "tián", "tian", Head.t, 't');
+    public static readonly Pinyin tian3 = new(Shengmu.t, Yunmu.ian, 3, "tiǎn", "tian", Head.t, 't');
+    public static readonly Pinyin tian4 = new(Shengmu.t, Yunmu.ian, 4, "tiàn", "tian", Head.t, 't');
+    public static readonly Pinyin tian5 = new(Shengmu.t, Yunmu.ian, 5, "tian", "tian", Head.t, 't');
+    public static readonly Pinyin tiao1 = new(Shengmu.t, Yunmu.iao, 1, "tiāo", "tiao", Head.t, 't');
+    public static readonly Pinyin tiao2 = new(Shengmu.t, Yunmu.iao, 2, "tiáo", "tiao", Head.t, 't');
+    public static readonly Pinyin tiao3 = new(Shengmu.t, Yunmu.iao, 3, "tiǎo", "tiao", Head.t, 't');
+    public static readonly Pinyin tiao4 = new(Shengmu.t, Yunmu.iao, 4, "tiào", "tiao", Head.t, 't');
+    public static readonly Pinyin tie1 = new(Shengmu.t, Yunmu.ie, 1, "tiē", "tie", Head.t, 't');
+    public static readonly Pinyin tie2 = new(Shengmu.t, Yunmu.ie, 2, "tié", "tie", Head.t, 't');
+    public static readonly Pinyin tie3 = new(Shengmu.t, Yunmu.ie, 3, "tiě", "tie", Head.t, 't');
+    public static readonly Pinyin tie4 = new(Shengmu.t, Yunmu.ie, 4, "tiè", "tie", Head.t, 't');
+    public static readonly Pinyin ting1 = new(Shengmu.t, Yunmu.ing, 1, "tīng", "ting", Head.t, 't');
+    public static readonly Pinyin ting2 = new(Shengmu.t, Yunmu.ing, 2, "tíng", "ting", Head.t, 't');
+    public static readonly Pinyin ting3 = new(Shengmu.t, Yunmu.ing, 3, "tǐng", "ting", Head.t, 't');
+    public static readonly Pinyin ting4 = new(Shengmu.t, Yunmu.ing, 4, "tìng", "ting", Head.t, 't');
+    public static readonly Pinyin tong1 = new(Shengmu.t, Yunmu.ong, 1, "tōng", "tong", Head.t, 't');
+    public static readonly Pinyin tong2 = new(Shengmu.t, Yunmu.ong, 2, "tóng", "tong", Head.t, 't');
+    public static readonly Pinyin tong3 = new(Shengmu.t, Yunmu.ong, 3, "tǒng", "tong", Head.t, 't');
+    public static readonly Pinyin tong4 = new(Shengmu.t, Yunmu.ong, 4, "tòng", "tong", Head.t, 't');
+    public static readonly Pinyin tou1 = new(Shengmu.t, Yunmu.ou, 1, "tōu", "tou", Head.t, 't');
+    public static readonly Pinyin tou2 = new(Shengmu.t, Yunmu.ou, 2, "tóu", "tou", Head.t, 't');
+    public static readonly Pinyin tou3 = new(Shengmu.t, Yunmu.ou, 3, "tǒu", "tou", Head.t, 't');
+    public static readonly Pinyin tou4 = new(Shengmu.t, Yunmu.ou, 4, "tòu", "tou", Head.t, 't');
+    public static readonly Pinyin tou5 = new(Shengmu.t, Yunmu.ou, 5, "tou", "tou", Head.t, 't');
+    public static readonly Pinyin tu1 = new(Shengmu.t, Yunmu.u, 1, "tū", "tu", Head.t, 't');
+    public static readonly Pinyin tu2 = new(Shengmu.t, Yunmu.u, 2, "tú", "tu", Head.t, 't');
+    public static readonly Pinyin tu3 = new(Shengmu.t, Yunmu.u, 3, "tǔ", "tu", Head.t, 't');
+    public static readonly Pinyin tu4 = new(Shengmu.t, Yunmu.u, 4, "tù", "tu", Head.t, 't');
+    public static readonly Pinyin tu5 = new(Shengmu.t, Yunmu.u, 5, "tu", "tu", Head.t, 't');
+    public static readonly Pinyin tuan1 = new(Shengmu.t, Yunmu.uan, 1, "tuān", "tuan", Head.t, 't');
+    public static readonly Pinyin tuan2 = new(Shengmu.t, Yunmu.uan, 2, "tuán", "tuan", Head.t, 't');
+    public static readonly Pinyin tuan3 = new(Shengmu.t, Yunmu.uan, 3, "tuǎn", "tuan", Head.t, 't');
+    public static readonly Pinyin tuan4 = new(Shengmu.t, Yunmu.uan, 4, "tuàn", "tuan", Head.t, 't');
+    public static readonly Pinyin tui1 = new(Shengmu.t, Yunmu.ui, 1, "tuī", "tui", Head.t, 't');
+    public static readonly Pinyin tui2 = new(Shengmu.t, Yunmu.ui, 2, "tuí", "tui", Head.t, 't');
+    public static readonly Pinyin tui3 = new(Shengmu.t, Yunmu.ui, 3, "tuǐ", "tui", Head.t, 't');
+    public static readonly Pinyin tui4 = new(Shengmu.t, Yunmu.ui, 4, "tuì", "tui", Head.t, 't');
+    public static readonly Pinyin tun1 = new(Shengmu.t, Yunmu.un, 1, "tūn", "tun", Head.t, 't');
+    public static readonly Pinyin tun2 = new(Shengmu.t, Yunmu.un, 2, "tún", "tun", Head.t, 't');
+    public static readonly Pinyin tun3 = new(Shengmu.t, Yunmu.un, 3, "tǔn", "tun", Head.t, 't');
+    public static readonly Pinyin tun4 = new(Shengmu.t, Yunmu.un, 4, "tùn", "tun", Head.t, 't');
+    public static readonly Pinyin tun5 = new(Shengmu.t, Yunmu.un, 5, "tun", "tun", Head.t, 't');
+    public static readonly Pinyin tuo1 = new(Shengmu.t, Yunmu.uo, 1, "tuō", "tuo", Head.t, 't');
+    public static readonly Pinyin tuo2 = new(Shengmu.t, Yunmu.uo, 2, "tuó", "tuo", Head.t, 't');
+    public static readonly Pinyin tuo3 = new(Shengmu.t, Yunmu.uo, 3, "tuǒ", "tuo", Head.t, 't');
+    public static readonly Pinyin tuo4 = new(Shengmu.t, Yunmu.uo, 4, "tuò", "tuo", Head.t, 't');
+    public static readonly Pinyin wa1 = new(Shengmu.w, Yunmu.a, 1, "wā", "wa", Head.w, 'w');
+    public static readonly Pinyin wa2 = new(Shengmu.w, Yunmu.a, 2, "wá", "wa", Head.w, 'w');
+    public static readonly Pinyin wa3 = new(Shengmu.w, Yunmu.a, 3, "wǎ", "wa", Head.w, 'w');
+    public static readonly Pinyin wa4 = new(Shengmu.w, Yunmu.a, 4, "wà", "wa", Head.w, 'w');
+    public static readonly Pinyin wa5 = new(Shengmu.w, Yunmu.a, 5, "wa", "wa", Head.w, 'w');
+    public static readonly Pinyin wai1 = new(Shengmu.w, Yunmu.ai, 1, "wāi", "wai", Head.w, 'w');
+    public static readonly Pinyin wai3 = new(Shengmu.w, Yunmu.ai, 3, "wǎi", "wai", Head.w, 'w');
+    public static readonly Pinyin wai4 = new(Shengmu.w, Yunmu.ai, 4, "wài", "wai", Head.w, 'w');
+    public static readonly Pinyin wan1 = new(Shengmu.w, Yunmu.an, 1, "wān", "wan", Head.w, 'w');
+    public static readonly Pinyin wan2 = new(Shengmu.w, Yunmu.an, 2, "wán", "wan", Head.w, 'w');
+    public static readonly Pinyin wan3 = new(Shengmu.w, Yunmu.an, 3, "wǎn", "wan", Head.w, 'w');
+    public static readonly Pinyin wan4 = new(Shengmu.w, Yunmu.an, 4, "wàn", "wan", Head.w, 'w');
+    public static readonly Pinyin wang1 = new(Shengmu.w, Yunmu.ang, 1, "wāng", "wang", Head.w, 'w');
+    public static readonly Pinyin wang2 = new(Shengmu.w, Yunmu.ang, 2, "wáng", "wang", Head.w, 'w');
+    public static readonly Pinyin wang3 = new(Shengmu.w, Yunmu.ang, 3, "wǎng", "wang", Head.w, 'w');
+    public static readonly Pinyin wang4 = new(Shengmu.w, Yunmu.ang, 4, "wàng", "wang", Head.w, 'w');
+    public static readonly Pinyin wei1 = new(Shengmu.w, Yunmu.ei, 1, "wēi", "wei", Head.w, 'w');
+    public static readonly Pinyin wei2 = new(Shengmu.w, Yunmu.ei, 2, "wéi", "wei", Head.w, 'w');
+    public static readonly Pinyin wei3 = new(Shengmu.w, Yunmu.ei, 3, "wěi", "wei", Head.w, 'w');
+    public static readonly Pinyin wei4 = new(Shengmu.w, Yunmu.ei, 4, "wèi", "wei", Head.w, 'w');
+    public static readonly Pinyin wen1 = new(Shengmu.w, Yunmu.en, 1, "wēn", "wen", Head.w, 'w');
+    public static readonly Pinyin wen2 = new(Shengmu.w, Yunmu.en, 2, "wén", "wen", Head.w, 'w');
+    public static readonly Pinyin wen3 = new(Shengmu.w, Yunmu.en, 3, "wěn", "wen", Head.w, 'w');
+    public static readonly Pinyin wen4 = new(Shengmu.w, Yunmu.en, 4, "wèn", "wen", Head.w, 'w');
+    public static readonly Pinyin weng1 = new(Shengmu.w, Yunmu.eng, 1, "wēng", "weng", Head.w, 'w');
+    public static readonly Pinyin weng3 = new(Shengmu.w, Yunmu.eng, 3, "wěng", "weng", Head.w, 'w');
+    public static readonly Pinyin weng4 = new(Shengmu.w, Yunmu.eng, 4, "wèng", "weng", Head.w, 'w');
+    public static readonly Pinyin wo1 = new(Shengmu.w, Yunmu.o, 1, "wō", "wo", Head.w, 'w');
+    public static readonly Pinyin wo3 = new(Shengmu.w, Yunmu.o, 3, "wǒ", "wo", Head.w, 'w');
+    public static readonly Pinyin wo4 = new(Shengmu.w, Yunmu.o, 4, "wò", "wo", Head.w, 'w');
+    public static readonly Pinyin wu1 = new(Shengmu.w, Yunmu.u, 1, "wū", "wu", Head.w, 'w');
+    public static readonly Pinyin wu2 = new(Shengmu.w, Yunmu.u, 2, "wú", "wu", Head.w, 'w');
+    public static readonly Pinyin wu3 = new(Shengmu.w, Yunmu.u, 3, "wǔ", "wu", Head.w, 'w');
+    public static readonly Pinyin wu4 = new(Shengmu.w, Yunmu.u, 4, "wù", "wu", Head.w, 'w');
+    public static readonly Pinyin xi1 = new(Shengmu.x, Yunmu.i, 1, "xī", "xi", Head.x, 'x');
+    public static readonly Pinyin xi2 = new(Shengmu.x, Yunmu.i, 2, "xí", "xi", Head.x, 'x');
+    public static readonly Pinyin xi3 = new(Shengmu.x, Yunmu.i, 3, "xǐ", "xi", Head.x, 'x');
+    public static readonly Pinyin xi4 = new(Shengmu.x, Yunmu.i, 4, "xì", "xi", Head.x, 'x');
+    public static readonly Pinyin xia1 = new(Shengmu.x, Yunmu.ia, 1, "xiā", "xia", Head.x, 'x');
+    public static readonly Pinyin xia2 = new(Shengmu.x, Yunmu.ia, 2, "xiá", "xia", Head.x, 'x');
+    public static readonly Pinyin xia3 = new(Shengmu.x, Yunmu.ia, 3, "xiǎ", "xia", Head.x, 'x');
+    public static readonly Pinyin xia4 = new(Shengmu.x, Yunmu.ia, 4, "xià", "xia", Head.x, 'x');
+    public static readonly Pinyin xian1 = new(Shengmu.x, Yunmu.ian, 1, "xiān", "xian", Head.x, 'x');
+    public static readonly Pinyin xian2 = new(Shengmu.x, Yunmu.ian, 2, "xián", "xian", Head.x, 'x');
+    public static readonly Pinyin xian3 = new(Shengmu.x, Yunmu.ian, 3, "xiǎn", "xian", Head.x, 'x');
+    public static readonly Pinyin xian4 = new(Shengmu.x, Yunmu.ian, 4, "xiàn", "xian", Head.x, 'x');
+    public static readonly Pinyin xiang1 = new(Shengmu.x, Yunmu.iang, 1, "xiāng", "xiang", Head.x, 'x');
+    public static readonly Pinyin xiang2 = new(Shengmu.x, Yunmu.iang, 2, "xiáng", "xiang", Head.x, 'x');
+    public static readonly Pinyin xiang3 = new(Shengmu.x, Yunmu.iang, 3, "xiǎng", "xiang", Head.x, 'x');
+    public static readonly Pinyin xiang4 = new(Shengmu.x, Yunmu.iang, 4, "xiàng", "xiang", Head.x, 'x');
+    public static readonly Pinyin xiao1 = new(Shengmu.x, Yunmu.iao, 1, "xiāo", "xiao", Head.x, 'x');
+    public static readonly Pinyin xiao2 = new(Shengmu.x, Yunmu.iao, 2, "xiáo", "xiao", Head.x, 'x');
+    public static readonly Pinyin xiao3 = new(Shengmu.x, Yunmu.iao, 3, "xiǎo", "xiao", Head.x, 'x');
+    public static readonly Pinyin xiao4 = new(Shengmu.x, Yunmu.iao, 4, "xiào", "xiao", Head.x, 'x');
+    public static readonly Pinyin xie1 = new(Shengmu.x, Yunmu.ie, 1, "xiē", "xie", Head.x, 'x');
+    public static readonly Pinyin xie2 = new(Shengmu.x, Yunmu.ie, 2, "xié", "xie", Head.x, 'x');
+    public static readonly Pinyin xie3 = new(Shengmu.x, Yunmu.ie, 3, "xiě", "xie", Head.x, 'x');
+    public static readonly Pinyin xie4 = new(Shengmu.x, Yunmu.ie, 4, "xiè", "xie", Head.x, 'x');
+    public static readonly Pinyin xin1 = new(Shengmu.x, Yunmu.@in, 1, "xīn", "xin", Head.x, 'x');
+    public static readonly Pinyin xin2 = new(Shengmu.x, Yunmu.@in, 2, "xín", "xin", Head.x, 'x');
+    public static readonly Pinyin xin3 = new(Shengmu.x, Yunmu.@in, 3, "xǐn", "xin", Head.x, 'x');
+    public static readonly Pinyin xin4 = new(Shengmu.x, Yunmu.@in, 4, "xìn", "xin", Head.x, 'x');
+    public static readonly Pinyin xing1 = new(Shengmu.x, Yunmu.ing, 1, "xīng", "xing", Head.x, 'x');
+    public static readonly Pinyin xing2 = new(Shengmu.x, Yunmu.ing, 2, "xíng", "xing", Head.x, 'x');
+    public static readonly Pinyin xing3 = new(Shengmu.x, Yunmu.ing, 3, "xǐng", "xing", Head.x, 'x');
+    public static readonly Pinyin xing4 = new(Shengmu.x, Yunmu.ing, 4, "xìng", "xing", Head.x, 'x');
+    public static readonly Pinyin xiong1 = new(Shengmu.x, Yunmu.iong, 1, "xiōng", "xiong", Head.x, 'x');
+    public static readonly Pinyin xiong2 = new(Shengmu.x, Yunmu.iong, 2, "xióng", "xiong", Head.x, 'x');
+    public static readonly Pinyin xiong3 = new(Shengmu.x, Yunmu.iong, 3, "xiǒng", "xiong", Head.x, 'x');
+    public static readonly Pinyin xiong4 = new(Shengmu.x, Yunmu.iong, 4, "xiòng", "xiong", Head.x, 'x');
+    public static readonly Pinyin xiu1 = new(Shengmu.x, Yunmu.iu, 1, "xiū", "xiu", Head.x, 'x');
+    public static readonly Pinyin xiu2 = new(Shengmu.x, Yunmu.iu, 2, "xiú", "xiu", Head.x, 'x');
+    public static readonly Pinyin xiu3 = new(Shengmu.x, Yunmu.iu, 3, "xiǔ", "xiu", Head.x, 'x');
+    public static readonly Pinyin xiu4 = new(Shengmu.x, Yunmu.iu, 4, "xiù", "xiu", Head.x, 'x');
+    public static readonly Pinyin xu1 = new(Shengmu.x, Yunmu.u, 1, "xū", "xu", Head.x, 'x');
+    public static readonly Pinyin xu2 = new(Shengmu.x, Yunmu.u, 2, "xú", "xu", Head.x, 'x');
+    public static readonly Pinyin xu3 = new(Shengmu.x, Yunmu.u, 3, "xǔ", "xu", Head.x, 'x');
+    public static readonly Pinyin xu4 = new(Shengmu.x, Yunmu.u, 4, "xù", "xu", Head.x, 'x');
+    public static readonly Pinyin xu5 = new(Shengmu.x, Yunmu.u, 5, "xu", "xu", Head.x, 'x');
+    public static readonly Pinyin xuan1 = new(Shengmu.x, Yunmu.uan, 1, "xuān", "xuan", Head.x, 'x');
+    public static readonly Pinyin xuan2 = new(Shengmu.x, Yunmu.uan, 2, "xuán", "xuan", Head.x, 'x');
+    public static readonly Pinyin xuan3 = new(Shengmu.x, Yunmu.uan, 3, "xuǎn", "xuan", Head.x, 'x');
+    public static readonly Pinyin xuan4 = new(Shengmu.x, Yunmu.uan, 4, "xuàn", "xuan", Head.x, 'x');
+    public static readonly Pinyin xue1 = new(Shengmu.x, Yunmu.ue, 1, "xuē", "xue", Head.x, 'x');
+    public static readonly Pinyin xue2 = new(Shengmu.x, Yunmu.ue, 2, "xué", "xue", Head.x, 'x');
+    public static readonly Pinyin xue3 = new(Shengmu.x, Yunmu.ue, 3, "xuě", "xue", Head.x, 'x');
+    public static readonly Pinyin xue4 = new(Shengmu.x, Yunmu.ue, 4, "xuè", "xue", Head.x, 'x');
+    public static readonly Pinyin xun1 = new(Shengmu.x, Yunmu.un, 1, "xūn", "xun", Head.x, 'x');
+    public static readonly Pinyin xun2 = new(Shengmu.x, Yunmu.un, 2, "xún", "xun", Head.x, 'x');
+    public static readonly Pinyin xun4 = new(Shengmu.x, Yunmu.un, 4, "xùn", "xun", Head.x, 'x');
+    public static readonly Pinyin ya1 = new(Shengmu.y, Yunmu.a, 1, "yā", "ya", Head.y, 'y');
+    public static readonly Pinyin ya2 = new(Shengmu.y, Yunmu.a, 2, "yá", "ya", Head.y, 'y');
+    public static readonly Pinyin ya3 = new(Shengmu.y, Yunmu.a, 3, "yǎ", "ya", Head.y, 'y');
+    public static readonly Pinyin ya4 = new(Shengmu.y, Yunmu.a, 4, "yà", "ya", Head.y, 'y');
+    public static readonly Pinyin ya5 = new(Shengmu.y, Yunmu.a, 5, "ya", "ya", Head.y, 'y');
+    public static readonly Pinyin yai2 = new(Shengmu.y, Yunmu.ai, 2, "yái", "yai", Head.y, 'y');
+    public static readonly Pinyin yan1 = new(Shengmu.y, Yunmu.an, 1, "yān", "yan", Head.y, 'y');
+    public static readonly Pinyin yan2 = new(Shengmu.y, Yunmu.an, 2, "yán", "yan", Head.y, 'y');
+    public static readonly Pinyin yan3 = new(Shengmu.y, Yunmu.an, 3, "yǎn", "yan", Head.y, 'y');
+    public static readonly Pinyin yan4 = new(Shengmu.y, Yunmu.an, 4, "yàn", "yan", Head.y, 'y');
+    public static readonly Pinyin yang1 = new(Shengmu.y, Yunmu.ang, 1, "yāng", "yang", Head.y, 'y');
+    public static readonly Pinyin yang2 = new(Shengmu.y, Yunmu.ang, 2, "yáng", "yang", Head.y, 'y');
+    public static readonly Pinyin yang3 = new(Shengmu.y, Yunmu.ang, 3, "yǎng", "yang", Head.y, 'y');
+    public static readonly Pinyin yang4 = new(Shengmu.y, Yunmu.ang, 4, "yàng", "yang", Head.y, 'y');
+    public static readonly Pinyin yao1 = new(Shengmu.y, Yunmu.ao, 1, "yāo", "yao", Head.y, 'y');
+    public static readonly Pinyin yao2 = new(Shengmu.y, Yunmu.ao, 2, "yáo", "yao", Head.y, 'y');
+    public static readonly Pinyin yao3 = new(Shengmu.y, Yunmu.ao, 3, "yǎo", "yao", Head.y, 'y');
+    public static readonly Pinyin yao4 = new(Shengmu.y, Yunmu.ao, 4, "yào", "yao", Head.y, 'y');
+    public static readonly Pinyin ye1 = new(Shengmu.y, Yunmu.e, 1, "yē", "ye", Head.y, 'y');
+    public static readonly Pinyin ye2 = new(Shengmu.y, Yunmu.e, 2, "yé", "ye", Head.y, 'y');
+    public static readonly Pinyin ye3 = new(Shengmu.y, Yunmu.e, 3, "yě", "ye", Head.y, 'y');
+    public static readonly Pinyin ye4 = new(Shengmu.y, Yunmu.e, 4, "yè", "ye", Head.y, 'y');
+    public static readonly Pinyin ye5 = new(Shengmu.y, Yunmu.e, 5, "ye", "ye", Head.y, 'y');
+    public static readonly Pinyin yi1 = new(Shengmu.y, Yunmu.i, 1, "yī", "yi", Head.y, 'y');
+    public static readonly Pinyin yi2 = new(Shengmu.y, Yunmu.i, 2, "yí", "yi", Head.y, 'y');
+    public static readonly Pinyin yi3 = new(Shengmu.y, Yunmu.i, 3, "yǐ", "yi", Head.y, 'y');
+    public static readonly Pinyin yi4 = new(Shengmu.y, Yunmu.i, 4, "yì", "yi", Head.y, 'y');
+    public static readonly Pinyin yi5 = new(Shengmu.y, Yunmu.i, 5, "yi", "yi", Head.y, 'y');
+    public static readonly Pinyin yin1 = new(Shengmu.y, Yunmu.@in, 1, "yīn", "yin", Head.y, 'y');
+    public static readonly Pinyin yin2 = new(Shengmu.y, Yunmu.@in, 2, "yín", "yin", Head.y, 'y');
+    public static readonly Pinyin yin3 = new(Shengmu.y, Yunmu.@in, 3, "yǐn", "yin", Head.y, 'y');
+    public static readonly Pinyin yin4 = new(Shengmu.y, Yunmu.@in, 4, "yìn", "yin", Head.y, 'y');
+    public static readonly Pinyin ying1 = new(Shengmu.y, Yunmu.ing, 1, "yīng", "ying", Head.y, 'y');
+    public static readonly Pinyin ying2 = new(Shengmu.y, Yunmu.ing, 2, "yíng", "ying", Head.y, 'y');
+    public static readonly Pinyin ying3 = new(Shengmu.y, Yunmu.ing, 3, "yǐng", "ying", Head.y, 'y');
+    public static readonly Pinyin ying4 = new(Shengmu.y, Yunmu.ing, 4, "yìng", "ying", Head.y, 'y');
+    public static readonly Pinyin yo1 = new(Shengmu.y, Yunmu.o, 1, "yō", "yo", Head.y, 'y');
+    public static readonly Pinyin yo5 = new(Shengmu.y, Yunmu.o, 5, "yo", "yo", Head.y, 'y');
+    public static readonly Pinyin yong1 = new(Shengmu.y, Yunmu.ong, 1, "yōng", "yong", Head.y, 'y');
+    public static readonly Pinyin yong2 = new(Shengmu.y, Yunmu.ong, 2, "yóng", "yong", Head.y, 'y');
+    public static readonly Pinyin yong3 = new(Shengmu.y, Yunmu.ong, 3, "yǒng", "yong", Head.y, 'y');
+    public static readonly Pinyin yong4 = new(Shengmu.y, Yunmu.ong, 4, "yòng", "yong", Head.y, 'y');
+    public static readonly Pinyin you1 = new(Shengmu.y, Yunmu.ou, 1, "yōu", "you", Head.y, 'y');
+    public static readonly Pinyin you2 = new(Shengmu.y, Yunmu.ou, 2, "yóu", "you", Head.y, 'y');
+    public static readonly Pinyin you3 = new(Shengmu.y, Yunmu.ou, 3, "yǒu", "you", Head.y, 'y');
+    public static readonly Pinyin you4 = new(Shengmu.y, Yunmu.ou, 4, "yòu", "you", Head.y, 'y');
+    public static readonly Pinyin yu1 = new(Shengmu.y, Yunmu.u, 1, "yū", "yu", Head.y, 'y');
+    public static readonly Pinyin yu2 = new(Shengmu.y, Yunmu.u, 2, "yú", "yu", Head.y, 'y');
+    public static readonly Pinyin yu3 = new(Shengmu.y, Yunmu.u, 3, "yǔ", "yu", Head.y, 'y');
+    public static readonly Pinyin yu4 = new(Shengmu.y, Yunmu.u, 4, "yù", "yu", Head.y, 'y');
+    public static readonly Pinyin yuan1 = new(Shengmu.y, Yunmu.uan, 1, "yuān", "yuan", Head.y, 'y');
+    public static readonly Pinyin yuan2 = new(Shengmu.y, Yunmu.uan, 2, "yuán", "yuan", Head.y, 'y');
+    public static readonly Pinyin yuan3 = new(Shengmu.y, Yunmu.uan, 3, "yuǎn", "yuan", Head.y, 'y');
+    public static readonly Pinyin yuan4 = new(Shengmu.y, Yunmu.uan, 4, "yuàn", "yuan", Head.y, 'y');
+    public static readonly Pinyin yue1 = new(Shengmu.y, Yunmu.ue, 1, "yuē", "yue", Head.y, 'y');
+    public static readonly Pinyin yue3 = new(Shengmu.y, Yunmu.ue, 3, "yuě", "yue", Head.y, 'y');
+    public static readonly Pinyin yue4 = new(Shengmu.y, Yunmu.ue, 4, "yuè", "yue", Head.y, 'y');
+    public static readonly Pinyin yun1 = new(Shengmu.y, Yunmu.un, 1, "yūn", "yun", Head.y, 'y');
+    public static readonly Pinyin yun2 = new(Shengmu.y, Yunmu.un, 2, "yún", "yun", Head.y, 'y');
+    public static readonly Pinyin yun3 = new(Shengmu.y, Yunmu.un, 3, "yǔn", "yun", Head.y, 'y');
+    public static readonly Pinyin yun4 = new(Shengmu.y, Yunmu.un, 4, "yùn", "yun", Head.y, 'y');
+    public static readonly Pinyin za1 = new(Shengmu.z, Yunmu.a, 1, "zā", "za", Head.z, 'z');
+    public static readonly Pinyin za2 = new(Shengmu.z, Yunmu.a, 2, "zá", "za", Head.z, 'z');
+    public static readonly Pinyin za3 = new(Shengmu.z, Yunmu.a, 3, "zǎ", "za", Head.z, 'z');
+    public static readonly Pinyin zai1 = new(Shengmu.z, Yunmu.ai, 1, "zāi", "zai", Head.z, 'z');
+    public static readonly Pinyin zai3 = new(Shengmu.z, Yunmu.ai, 3, "zǎi", "zai", Head.z, 'z');
+    public static readonly Pinyin zai4 = new(Shengmu.z, Yunmu.ai, 4, "zài", "zai", Head.z, 'z');
+    public static readonly Pinyin zan1 = new(Shengmu.z, Yunmu.an, 1, "zān", "zan", Head.z, 'z');
+    public static readonly Pinyin zan2 = new(Shengmu.z, Yunmu.an, 2, "zán", "zan", Head.z, 'z');
+    public static readonly Pinyin zan3 = new(Shengmu.z, Yunmu.an, 3, "zǎn", "zan", Head.z, 'z');
+    public static readonly Pinyin zan4 = new(Shengmu.z, Yunmu.an, 4, "zàn", "zan", Head.z, 'z');
+    public static readonly Pinyin zang1 = new(Shengmu.z, Yunmu.ang, 1, "zāng", "zang", Head.z, 'z');
+    public static readonly Pinyin zang2 = new(Shengmu.z, Yunmu.ang, 2, "záng", "zang", Head.z, 'z');
+    public static readonly Pinyin zang3 = new(Shengmu.z, Yunmu.ang, 3, "zǎng", "zang", Head.z, 'z');
+    public static readonly Pinyin zang4 = new(Shengmu.z, Yunmu.ang, 4, "zàng", "zang", Head.z, 'z');
+    public static readonly Pinyin zao1 = new(Shengmu.z, Yunmu.ao, 1, "zāo", "zao", Head.z, 'z');
+    public static readonly Pinyin zao2 = new(Shengmu.z, Yunmu.ao, 2, "záo", "zao", Head.z, 'z');
+    public static readonly Pinyin zao3 = new(Shengmu.z, Yunmu.ao, 3, "zǎo", "zao", Head.z, 'z');
+    public static readonly Pinyin zao4 = new(Shengmu.z, Yunmu.ao, 4, "zào", "zao", Head.z, 'z');
+    public static readonly Pinyin ze2 = new(Shengmu.z, Yunmu.e, 2, "zé", "ze", Head.z, 'z');
+    public static readonly Pinyin ze4 = new(Shengmu.z, Yunmu.e, 4, "zè", "ze", Head.z, 'z');
+    public static readonly Pinyin zei2 = new(Shengmu.z, Yunmu.ei, 2, "zéi", "zei", Head.z, 'z');
+    public static readonly Pinyin zen1 = new(Shengmu.z, Yunmu.en, 1, "zēn", "zen", Head.z, 'z');
+    public static readonly Pinyin zen3 = new(Shengmu.z, Yunmu.en, 3, "zěn", "zen", Head.z, 'z');
+    public static readonly Pinyin zen4 = new(Shengmu.z, Yunmu.en, 4, "zèn", "zen", Head.z, 'z');
+    public static readonly Pinyin zeng1 = new(Shengmu.z, Yunmu.eng, 1, "zēng", "zeng", Head.z, 'z');
+    public static readonly Pinyin zeng4 = new(Shengmu.z, Yunmu.eng, 4, "zèng", "zeng", Head.z, 'z');
+    public static readonly Pinyin zha1 = new(Shengmu.zh, Yunmu.a, 1, "zhā", "zha", Head.zh, 'z');
+    public static readonly Pinyin zha2 = new(Shengmu.zh, Yunmu.a, 2, "zhá", "zha", Head.zh, 'z');
+    public static readonly Pinyin zha3 = new(Shengmu.zh, Yunmu.a, 3, "zhǎ", "zha", Head.zh, 'z');
+    public static readonly Pinyin zha4 = new(Shengmu.zh, Yunmu.a, 4, "zhà", "zha", Head.zh, 'z');
+    public static readonly Pinyin zhai1 = new(Shengmu.zh, Yunmu.ai, 1, "zhāi", "zhai", Head.zh, 'z');
+    public static readonly Pinyin zhai2 = new(Shengmu.zh, Yunmu.ai, 2, "zhái", "zhai", Head.zh, 'z');
+    public static readonly Pinyin zhai3 = new(Shengmu.zh, Yunmu.ai, 3, "zhǎi", "zhai", Head.zh, 'z');
+    public static readonly Pinyin zhai4 = new(Shengmu.zh, Yunmu.ai, 4, "zhài", "zhai", Head.zh, 'z');
+    public static readonly Pinyin zhan1 = new(Shengmu.zh, Yunmu.an, 1, "zhān", "zhan", Head.zh, 'z');
+    public static readonly Pinyin zhan2 = new(Shengmu.zh, Yunmu.an, 2, "zhán", "zhan", Head.zh, 'z');
+    public static readonly Pinyin zhan3 = new(Shengmu.zh, Yunmu.an, 3, "zhǎn", "zhan", Head.zh, 'z');
+    public static readonly Pinyin zhan4 = new(Shengmu.zh, Yunmu.an, 4, "zhàn", "zhan", Head.zh, 'z');
+    public static readonly Pinyin zhang1 = new(Shengmu.zh, Yunmu.ang, 1, "zhāng", "zhang", Head.zh, 'z');
+    public static readonly Pinyin zhang3 = new(Shengmu.zh, Yunmu.ang, 3, "zhǎng", "zhang", Head.zh, 'z');
+    public static readonly Pinyin zhang4 = new(Shengmu.zh, Yunmu.ang, 4, "zhàng", "zhang", Head.zh, 'z');
+    public static readonly Pinyin zhao1 = new(Shengmu.zh, Yunmu.ao, 1, "zhāo", "zhao", Head.zh, 'z');
+    public static readonly Pinyin zhao2 = new(Shengmu.zh, Yunmu.ao, 2, "zháo", "zhao", Head.zh, 'z');
+    public static readonly Pinyin zhao3 = new(Shengmu.zh, Yunmu.ao, 3, "zhǎo", "zhao", Head.zh, 'z');
+    public static readonly Pinyin zhao4 = new(Shengmu.zh, Yunmu.ao, 4, "zhào", "zhao", Head.zh, 'z');
+    public static readonly Pinyin zhe1 = new(Shengmu.zh, Yunmu.e, 1, "zhē", "zhe", Head.zh, 'z');
+    public static readonly Pinyin zhe2 = new(Shengmu.zh, Yunmu.e, 2, "zhé", "zhe", Head.zh, 'z');
+    public static readonly Pinyin zhe3 = new(Shengmu.zh, Yunmu.e, 3, "zhě", "zhe", Head.zh, 'z');
+    public static readonly Pinyin zhe4 = new(Shengmu.zh, Yunmu.e, 4, "zhè", "zhe", Head.zh, 'z');
+    public static readonly Pinyin zhe5 = new(Shengmu.zh, Yunmu.e, 5, "zhe", "zhe", Head.zh, 'z');
+    public static readonly Pinyin zhei4 = new(Shengmu.zh, Yunmu.ei, 4, "zhèi", "zhei", Head.zh, 'z');
+    public static readonly Pinyin zhen1 = new(Shengmu.zh, Yunmu.en, 1, "zhēn", "zhen", Head.zh, 'z');
+    public static readonly Pinyin zhen3 = new(Shengmu.zh, Yunmu.en, 3, "zhěn", "zhen", Head.zh, 'z');
+    public static readonly Pinyin zhen4 = new(Shengmu.zh, Yunmu.en, 4, "zhèn", "zhen", Head.zh, 'z');
+    public static readonly Pinyin zheng1 = new(Shengmu.zh, Yunmu.eng, 1, "zhēng", "zheng", Head.zh, 'z');
+    public static readonly Pinyin zheng3 = new(Shengmu.zh, Yunmu.eng, 3, "zhěng", "zheng", Head.zh, 'z');
+    public static readonly Pinyin zheng4 = new(Shengmu.zh, Yunmu.eng, 4, "zhèng", "zheng", Head.zh, 'z');
+    public static readonly Pinyin zhi1 = new(Shengmu.zh, Yunmu.i, 1, "zhī", "zhi", Head.zh, 'z');
+    public static readonly Pinyin zhi2 = new(Shengmu.zh, Yunmu.i, 2, "zhí", "zhi", Head.zh, 'z');
+    public static readonly Pinyin zhi3 = new(Shengmu.zh, Yunmu.i, 3, "zhǐ", "zhi", Head.zh, 'z');
+    public static readonly Pinyin zhi4 = new(Shengmu.zh, Yunmu.i, 4, "zhì", "zhi", Head.zh, 'z');
+    public static readonly Pinyin zhong1 = new(Shengmu.zh, Yunmu.ong, 1, "zhōng", "zhong", Head.zh, 'z');
+    public static readonly Pinyin zhong3 = new(Shengmu.zh, Yunmu.ong, 3, "zhǒng", "zhong", Head.zh, 'z');
+    public static readonly Pinyin zhong4 = new(Shengmu.zh, Yunmu.ong, 4, "zhòng", "zhong", Head.zh, 'z');
+    public static readonly Pinyin zhou1 = new(Shengmu.zh, Yunmu.ou, 1, "zhōu", "zhou", Head.zh, 'z');
+    public static readonly Pinyin zhou2 = new(Shengmu.zh, Yunmu.ou, 2, "zhóu", "zhou", Head.zh, 'z');
+    public static readonly Pinyin zhou3 = new(Shengmu.zh, Yunmu.ou, 3, "zhǒu", "zhou", Head.zh, 'z');
+    public static readonly Pinyin zhou4 = new(Shengmu.zh, Yunmu.ou, 4, "zhòu", "zhou", Head.zh, 'z');
+    public static readonly Pinyin zhu1 = new(Shengmu.zh, Yunmu.u, 1, "zhū", "zhu", Head.zh, 'z');
+    public static readonly Pinyin zhu2 = new(Shengmu.zh, Yunmu.u, 2, "zhú", "zhu", Head.zh, 'z');
+    public static readonly Pinyin zhu3 = new(Shengmu.zh, Yunmu.u, 3, "zhǔ", "zhu", Head.zh, 'z');
+    public static readonly Pinyin zhu4 = new(Shengmu.zh, Yunmu.u, 4, "zhù", "zhu", Head.zh, 'z');
+    public static readonly Pinyin zhua1 = new(Shengmu.zh, Yunmu.ua, 1, "zhuā", "zhua", Head.zh, 'z');
+    public static readonly Pinyin zhua3 = new(Shengmu.zh, Yunmu.ua, 3, "zhuǎ", "zhua", Head.zh, 'z');
+    public static readonly Pinyin zhuai1 = new(Shengmu.zh, Yunmu.uai, 1, "zhuāi", "zhuai", Head.zh, 'z');
+    public static readonly Pinyin zhuai3 = new(Shengmu.zh, Yunmu.uai, 3, "zhuǎi", "zhuai", Head.zh, 'z');
+    public static readonly Pinyin zhuai4 = new(Shengmu.zh, Yunmu.uai, 4, "zhuài", "zhuai", Head.zh, 'z');
+    public static readonly Pinyin zhuan1 = new(Shengmu.zh, Yunmu.uan, 1, "zhuān", "zhuan", Head.zh, 'z');
+    public static readonly Pinyin zhuan3 = new(Shengmu.zh, Yunmu.uan, 3, "zhuǎn", "zhuan", Head.zh, 'z');
+    public static readonly Pinyin zhuan4 = new(Shengmu.zh, Yunmu.uan, 4, "zhuàn", "zhuan", Head.zh, 'z');
+    public static readonly Pinyin zhuang1 = new(Shengmu.zh, Yunmu.uang, 1, "zhuāng", "zhuang", Head.zh, 'z');
+    public static readonly Pinyin zhuang3 = new(Shengmu.zh, Yunmu.uang, 3, "zhuǎng", "zhuang", Head.zh, 'z');
+    public static readonly Pinyin zhuang4 = new(Shengmu.zh, Yunmu.uang, 4, "zhuàng", "zhuang", Head.zh, 'z');
+    public static readonly Pinyin zhui1 = new(Shengmu.zh, Yunmu.ui, 1, "zhuī", "zhui", Head.zh, 'z');
+    public static readonly Pinyin zhui3 = new(Shengmu.zh, Yunmu.ui, 3, "zhuǐ", "zhui", Head.zh, 'z');
+    public static readonly Pinyin zhui4 = new(Shengmu.zh, Yunmu.ui, 4, "zhuì", "zhui", Head.zh, 'z');
+    public static readonly Pinyin zhun1 = new(Shengmu.zh, Yunmu.un, 1, "zhūn", "zhun", Head.zh, 'z');
+    public static readonly Pinyin zhun3 = new(Shengmu.zh, Yunmu.un, 3, "zhǔn", "zhun", Head.zh, 'z');
+    public static readonly Pinyin zhun4 = new(Shengmu.zh, Yunmu.un, 4, "zhùn", "zhun", Head.zh, 'z');
+    public static readonly Pinyin zhuo1 = new(Shengmu.zh, Yunmu.uo, 1, "zhuō", "zhuo", Head.zh, 'z');
+    public static readonly Pinyin zhuo2 = new(Shengmu.zh, Yunmu.uo, 2, "zhuó", "zhuo", Head.zh, 'z');
+    public static readonly Pinyin zhuo3 = new(Shengmu.zh, Yunmu.uo, 3, "zhuǒ", "zhuo", Head.zh, 'z');
+    public static readonly Pinyin zhuo4 = new(Shengmu.zh, Yunmu.uo, 4, "zhuò", "zhuo", Head.zh, 'z');
+    public static readonly Pinyin zi1 = new(Shengmu.z, Yunmu.i, 1, "zī", "zi", Head.z, 'z');
+    public static readonly Pinyin zi2 = new(Shengmu.z, Yunmu.i, 2, "zí", "zi", Head.z, 'z');
+    public static readonly Pinyin zi3 = new(Shengmu.z, Yunmu.i, 3, "zǐ", "zi", Head.z, 'z');
+    public static readonly Pinyin zi4 = new(Shengmu.z, Yunmu.i, 4, "zì", "zi", Head.z, 'z');
+    public static readonly Pinyin zi5 = new(Shengmu.z, Yunmu.i, 5, "zi", "zi", Head.z, 'z');
+    public static readonly Pinyin zong1 = new(Shengmu.z, Yunmu.ong, 1, "zōng", "zong", Head.z, 'z');
+    public static readonly Pinyin zong3 = new(Shengmu.z, Yunmu.ong, 3, "zǒng", "zong", Head.z, 'z');
+    public static readonly Pinyin zong4 = new(Shengmu.z, Yunmu.ong, 4, "zòng", "zong", Head.z, 'z');
+    public static readonly Pinyin zou1 = new(Shengmu.z, Yunmu.ou, 1, "zōu", "zou", Head.z, 'z');
+    public static readonly Pinyin zou3 = new(Shengmu.z, Yunmu.ou, 3, "zǒu", "zou", Head.z, 'z');
+    public static readonly Pinyin zou4 = new(Shengmu.z, Yunmu.ou, 4, "zòu", "zou", Head.z, 'z');
+    public static readonly Pinyin zu1 = new(Shengmu.z, Yunmu.u, 1, "zū", "zu", Head.z, 'z');
+    public static readonly Pinyin zu2 = new(Shengmu.z, Yunmu.u, 2, "zú", "zu", Head.z, 'z');
+    public static readonly Pinyin zu3 = new(Shengmu.z, Yunmu.u, 3, "zǔ", "zu", Head.z, 'z');
+    public static readonly Pinyin zu4 = new(Shengmu.z, Yunmu.u, 4, "zù", "zu", Head.z, 'z');
+    public static readonly Pinyin zuan1 = new(Shengmu.z, Yunmu.uan, 1, "zuān", "zuan", Head.z, 'z');
+    public static readonly Pinyin zuan3 = new(Shengmu.z, Yunmu.uan, 3, "zuǎn", "zuan", Head.z, 'z');
+    public static readonly Pinyin zuan4 = new(Shengmu.z, Yunmu.uan, 4, "zuàn", "zuan", Head.z, 'z');
+    public static readonly Pinyin zui1 = new(Shengmu.z, Yunmu.ui, 1, "zuī", "zui", Head.z, 'z');
+    public static readonly Pinyin zui3 = new(Shengmu.z, Yunmu.ui, 3, "zuǐ", "zui", Head.z, 'z');
+    public static readonly Pinyin zui4 = new(Shengmu.z, Yunmu.ui, 4, "zuì", "zui", Head.z, 'z');
+    public static readonly Pinyin zun1 = new(Shengmu.z, Yunmu.un, 1, "zūn", "zun", Head.z, 'z');
+    public static readonly Pinyin zun3 = new(Shengmu.z, Yunmu.un, 3, "zǔn", "zun", Head.z, 'z');
+    public static readonly Pinyin zun4 = new(Shengmu.z, Yunmu.un, 4, "zùn", "zun", Head.z, 'z');
+    public static readonly Pinyin zuo1 = new(Shengmu.z, Yunmu.uo, 1, "zuō", "zuo", Head.z, 'z');
+    public static readonly Pinyin zuo2 = new(Shengmu.z, Yunmu.uo, 2, "zuó", "zuo", Head.z, 'z');
+    public static readonly Pinyin zuo3 = new(Shengmu.z, Yunmu.uo, 3, "zuǒ", "zuo", Head.z, 'z');
+    public static readonly Pinyin zuo4 = new(Shengmu.z, Yunmu.uo, 4, "zuò", "zuo", Head.z, 'z');
+    public static readonly Pinyin zuo5 = new(Shengmu.z, Yunmu.uo, 5, "zuo", "zuo", Head.z, 'z');
+    public static readonly Pinyin none5 = new(Shengmu.none, Yunmu.none, 5, "none", "none", Head.none, ' ');
 
     ;
 
@@ -1583,7 +1583,7 @@ public class Pinyin
      */
     public string getHeadString()
     {
-        return head.toString();
+        return head.ToString();
     }
 
     /**

@@ -43,7 +43,7 @@ public class CharTable
     {
         string binPath = path + Predefine.BIN_EXT;
         if (loadBin(binPath)) return true;
-        CONVERT = new char[char.MAX_VALUE + 1];
+        CONVERT = new char[char.MaxValue + 1];
         for (int i = 0; i < CONVERT.Length; i++)
         {
             CONVERT[i] = (char) i;
@@ -54,7 +54,7 @@ public class CharTable
             string line = iterator.next();
             if (line == null) return false;
             if (line.Length != 3) continue;
-            CONVERT[line.charAt(0)] = CONVERT[line.charAt(2)];
+            CONVERT[line[0]] = CONVERT[line.charAt(2)];
         }
         loadSpace();
         logger.info("正在缓存字符正规化表到" + binPath);

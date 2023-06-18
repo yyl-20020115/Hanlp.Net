@@ -102,7 +102,7 @@ public class ChiSquareFeatureExtractor
             {
                 maxHeap.Add(entry);
             }
-            selectedFeatures.clear();
+            selectedFeatures.Clear();
             for (KeyValuePair<int, Double> entry : maxHeap)
             {
                 selectedFeatures.put(entry.getKey(), entry.getValue());

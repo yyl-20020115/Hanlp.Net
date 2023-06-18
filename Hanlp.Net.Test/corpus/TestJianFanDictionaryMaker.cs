@@ -99,7 +99,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //        for (Map.Entry<String, String> entry : storage.entrySet())
 //        {
 //            String line = entry.ToString();
-//            int firstBlank = line.indexOf(' ');
+//            int firstBlank = line.IndexOf(' ');
 //            if (firstBlank != -1)
 //            {
 //                line = line.substring(0, firstBlank);

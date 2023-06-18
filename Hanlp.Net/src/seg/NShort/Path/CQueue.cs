@@ -92,7 +92,7 @@ public class CQueue
     /**
      * 清除所有元素
      */
-    public void clear()
+    public void Clear()
     {
         pHead = null;
         pLastAccess = null;

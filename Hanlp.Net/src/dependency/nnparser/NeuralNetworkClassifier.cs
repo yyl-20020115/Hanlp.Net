@@ -243,7 +243,7 @@ public class NeuralNetworkClassifier
 
         Matrix output = W2.times(new Matrix (hidden_layer.cube())); // 立方激活函数
 //        retval.resize(nr_classes, 0.);
-        retval.clear();
+        retval.Clear();
         for (int i = 0; i < nr_classes; ++i)
         {
             retval.Add(output.get(i, 0));

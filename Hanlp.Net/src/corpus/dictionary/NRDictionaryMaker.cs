@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.corpus.document.sentence.word;
 using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 
@@ -32,13 +33,13 @@ public class NRDictionaryMaker : CommonDictionaryMaker
     protected void addToDictionary(List<List<IWord>> sentenceList)
     {
         if (verbose)
-            System._out.println("开始制作词典");
+            Console.WriteLine("开始制作词典");
         // 将非A的词语保存下来
         for (List<IWord> wordList : sentenceList)
         {
             for (IWord word : wordList)
             {
-                if (!word.getLabel().Equals(NR.A.toString()))
+                if (!word.getLabel().Equals(NR.A.ToString()))
                 {
                     dictionaryMaker.Add(word);
                 }
@@ -63,14 +64,14 @@ public class NRDictionaryMaker : CommonDictionaryMaker
     protected void roleTag(List<List<IWord>> sentenceList)
     {
         if (verbose)
-            System._out.println("开始标注角色");
+            Console.WriteLine("开始标注角色");
         int i = 0;
         for (List<IWord> wordList : sentenceList)
         {
             if (verbose)
             {
-                System._out.println(++i + " / " + sentenceList.size());
-                System._out.println("原始语料 " + wordList);
+                Console.WriteLine(++i + " / " + sentenceList.size());
+                Console.WriteLine("原始语料 " + wordList);
             }
             // 先标注A和K
             IWord pre = new Word("##始##", "begin");
@@ -78,26 +79,26 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.hasNext())
             {
                 IWord word = listIterator.next();
-                if (!word.getLabel().Equals(Nature.nr.toString()))
+                if (!word.getLabel().Equals(Nature.nr.ToString()))
                 {
-                    word.setLabel(NR.A.toString());
+                    word.setLabel(NR.A.ToString());
                 }
                 else
                 {
-                    if (!pre.getLabel().Equals(Nature.nr.toString()))
+                    if (!pre.getLabel().Equals(Nature.nr.ToString()))
                     {
-                        pre.setLabel(NR.K.toString());
+                        pre.setLabel(NR.K.ToString());
                     }
                 }
                 pre = word;
             }
-            if (verbose) System._out.println("标注非前 " + wordList);
+            if (verbose) Console.WriteLine("标注非前 " + wordList);
             // 然后标注LM
             IWord next = new Word("##末##", "end");
             while (listIterator.hasPrevious())
             {
                 IWord word = listIterator.previous();
-                if (word.getLabel().Equals(Nature.nr.toString()))
+                if (word.getLabel().Equals(Nature.nr.ToString()))
                 {
                     string label = next.getLabel();
                     if (label.Equals("A")) next.setLabel("L");
@@ -105,13 +106,13 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 next = word;
             }
-            if (verbose) System._out.println("标注中后 " + wordList);
+            if (verbose) Console.WriteLine("标注中后 " + wordList);
             // 拆分名字
             listIterator = wordList.listIterator();
             while (listIterator.hasNext())
             {
                 IWord word = listIterator.next();
-                if (word.getLabel().Equals(Nature.nr.toString()))
+                if (word.getLabel().Equals(Nature.nr.ToString()))
                 {
                     switch (word.getValue().Length)
                     {
@@ -121,9 +122,9 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                                     || word.getValue().StartsWith("小")
                                     )
                             {
-                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.B.toString()));
+                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.B.ToString()));
                                 word.setValue(word.getValue().substring(0, 1));
-                                word.setLabel(NR.F.toString());
+                                word.setLabel(NR.F.ToString());
                             }
                             else if (word.getValue().EndsWith("哥")
                                     || word.getValue().EndsWith("公")
@@ -136,39 +137,39 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                                     )
 
                             {
-                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.G.toString()));
+                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.G.ToString()));
                                 word.setValue(word.getValue().substring(0, 1));
-                                word.setLabel(NR.B.toString());
+                                word.setLabel(NR.B.ToString());
                             }
                             else
                             {
-                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.E.toString()));
+                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.E.ToString()));
                                 word.setValue(word.getValue().substring(0, 1));
-                                word.setLabel(NR.B.toString());
+                                word.setLabel(NR.B.ToString());
                             }
                             break;
                         case 3:
-                            listIterator.Add(new Word(word.getValue().substring(1, 2), NR.C.toString()));
-                            listIterator.Add(new Word(word.getValue().substring(2, 3), NR.D.toString()));
+                            listIterator.Add(new Word(word.getValue().substring(1, 2), NR.C.ToString()));
+                            listIterator.Add(new Word(word.getValue().substring(2, 3), NR.D.ToString()));
                             word.setValue(word.getValue().substring(0, 1));
-                            word.setLabel(NR.B.toString());
+                            word.setLabel(NR.B.ToString());
                             break;
                         default:
-                            word.setLabel(NR.A.toString()); // 非中国人名
+                            word.setLabel(NR.A.ToString()); // 非中国人名
                     }
                 }
             }
-            if (verbose) System._out.println("姓名拆分 " + wordList);
+            if (verbose) Console.WriteLine("姓名拆分 " + wordList);
             // 上文成词
             listIterator = wordList.listIterator();
             pre = new Word("##始##", "begin");
             while (listIterator.hasNext())
             {
                 IWord word = listIterator.next();
-                if (word.getLabel().Equals(NR.B.toString()))
+                if (word.getLabel().Equals(NR.B.ToString()))
                 {
                     string combine = pre.getValue() + word.getValue();
-                    if (dictionary.contains(combine))
+                    if (dictionary.Contains(combine))
                     {
                         pre.setValue(combine);
                         pre.setLabel("U");
@@ -177,65 +178,65 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 }
                 pre = word;
             }
-            if (verbose) System._out.println("上文成词 " + wordList);
+            if (verbose) Console.WriteLine("上文成词 " + wordList);
             // 头部成词
             next = new Word("##末##", "end");
             while (listIterator.hasPrevious())
             {
                 IWord word = listIterator.previous();
-                if (word.getLabel().Equals(NR.B.toString()))
+                if (word.getLabel().Equals(NR.B.ToString()))
                 {
                     string combine = word.getValue() + next.getValue();
-                    if (dictionary.contains(combine))
+                    if (dictionary.Contains(combine))
                     {
                         next.setValue(combine);
-                        next.setLabel(next.getLabel().Equals(NR.C.toString()) ? NR.X.toString() : NR.Y.toString());
+                        next.setLabel(next.getLabel().Equals(NR.C.ToString()) ? NR.X.ToString() : NR.Y.ToString());
                         listIterator.Remove();
                     }
                 }
                 next = word;
             }
-            if (verbose) System._out.println("头部成词 " + wordList);
+            if (verbose) Console.WriteLine("头部成词 " + wordList);
             // 尾部成词
             pre = new Word("##始##", "begin");
             while (listIterator.hasNext())
             {
                 IWord word = listIterator.next();
-                if (word.getLabel().Equals(NR.D.toString()))
+                if (word.getLabel().Equals(NR.D.ToString()))
                 {
                     string combine = pre.getValue() + word.getValue();
-                    if (dictionary.contains(combine))
+                    if (dictionary.Contains(combine))
                     {
                         pre.setValue(combine);
-                        pre.setLabel(NR.Z.toString());
+                        pre.setLabel(NR.Z.ToString());
                         listIterator.Remove();
                     }
                 }
                 pre = word;
             }
-            if (verbose) System._out.println("尾部成词 " + wordList);
+            if (verbose) Console.WriteLine("尾部成词 " + wordList);
             // 下文成词
             next = new Word("##末##", "end");
             while (listIterator.hasPrevious())
             {
                 IWord word = listIterator.previous();
-                if (word.getLabel().Equals(NR.D.toString()))
+                if (word.getLabel().Equals(NR.D.ToString()))
                 {
                     string combine = word.getValue() + next.getValue();
-                    if (dictionary.contains(combine))
+                    if (dictionary.Contains(combine))
                     {
                         next.setValue(combine);
-                        next.setLabel(NR.V.toString());
+                        next.setLabel(NR.V.ToString());
                         listIterator.Remove();
                     }
                 }
                 next = word;
             }
-            if (verbose) System._out.println("头部成词 " + wordList);
+            if (verbose) Console.WriteLine("头部成词 " + wordList);
             LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, "S"));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "A"));
-            if (verbose) System._out.println("添加首尾 " + wordList);
+            if (verbose) Console.WriteLine("添加首尾 " + wordList);
         }
     }
 }

@@ -8,6 +8,12 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.perceptron.common;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.model;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -27,18 +33,18 @@ public class LogLinearModel : LinearModel
 
     private LogLinearModel(FeatureMap featureMap, float[] parameter)
     {
-        super(featureMap, parameter);
+        base(featureMap, parameter);
     }
 
     private LogLinearModel(FeatureMap featureMap)
     {
-        super(featureMap);
+        base(featureMap);
     }
 
     //@Override
     public bool load(ByteArray byteArray)
     {
-        if (!super.load(byteArray)) return false;
+        if (!base.load(byteArray)) return false;
         int size = byteArray.nextInt();
         featureTemplateArray = new FeatureTemplate[size];
         for (int i = 0; i < size; ++i)
@@ -60,7 +66,7 @@ public class LogLinearModel : LinearModel
      */
     public LogLinearModel(string modelFile) 
     {
-        super(null, null);
+        base(null, null);
         if (modelFile.EndsWith(BIN_EXT))
         {
             load(modelFile); // model.bin
@@ -93,7 +99,7 @@ public class LogLinearModel : LinearModel
      */
     public LogLinearModel(string txtFile, string binFile) 
     {
-        super(null, null);
+        base(null, null);
         convert(txtFile, binFile);
     }
 
@@ -142,7 +148,7 @@ public class LogLinearModel : LinearModel
                 matrix = new float[sizeOfTagSet][sizeOfTagSet];
             }
         }
-        this.featureTemplateArray = featureTemplateList.toArray(new FeatureTemplate[0]);
+        this.featureTemplateArray = featureTemplateList.ToArray(new FeatureTemplate[0]);
 
         int b = -1;// 转换矩阵的权重位置
         if (matrix != null)
@@ -161,7 +167,7 @@ public class LogLinearModel : LinearModel
             featureFunctionList.put(int.parseInt(args[0]), featureFunction);
         }
 
-        for (KeyValuePair<int, FeatureFunction> entry : featureFunctionList.entrySet())
+        foreach (KeyValuePair<int, FeatureFunction> entry in featureFunctionList.entrySet())
         {
             int fid = entry.getKey();
             FeatureFunction featureFunction = entry.getValue();
@@ -171,7 +177,7 @@ public class LogLinearModel : LinearModel
                 {
                     for (int j = 0; j < sizeOfTagSet; j++)
                     {
-                        matrix[i][j] = Float.parseFloat(lineIterator.next());
+                        matrix[i][j] = float.parseFloat(lineIterator.next());
                     }
                 }
             }
@@ -201,7 +207,7 @@ public class LogLinearModel : LinearModel
                 }
             }
         }
-        for (KeyValuePair<int, FeatureFunction> entry : featureFunctionList.entrySet())
+        foreach (KeyValuePair<int, FeatureFunction> entry in featureFunctionList.entrySet())
         {
             int id = entry.getKey();
             FeatureFunction f = entry.getValue();
@@ -227,7 +233,7 @@ public class LogLinearModel : LinearModel
         DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(binFile));
         save(_out);
         _out.writeInt(featureTemplateList.size());
-        for (FeatureTemplate template : featureTemplateList)
+        foreach (FeatureTemplate template in featureTemplateList)
         {
             template.save(_out);
         }
@@ -248,12 +254,12 @@ public class LogLinearModel : LinearModel
         }
         if (tagSet.idOf("O") != -1)
         {
-            for (string tag : tagSet.tags())
+            foreach (string tag in tagSet.tags())
             {
                 string[] parts = tag.Split("-");
                 if (parts.Length > 1)
                 {
-                    if (parts[0].Length == 1 && "BMES".contains(parts[0]))
+                    if (parts[0].Length == 1 && "BMES".Contains(parts[0]))
                         return TaskType.NER;
                 }
             }

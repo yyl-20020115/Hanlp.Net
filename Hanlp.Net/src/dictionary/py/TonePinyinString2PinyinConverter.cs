@@ -36,7 +36,7 @@ public class TonePinyinString2PinyinConverter
         mapKey = new Dictionary<string, Pinyin>();
         foreach (Pinyin pinyin in Integer2PinyinConverter.pinyins)
         {
-            mapNumberKey.put(pinyin.toString(), pinyin);
+            mapNumberKey.put(pinyin.ToString(), pinyin);
             string pinyinWithToneMark = pinyin.getPinyinWithToneMark();
             string pinyinWithoutTone = pinyin.getPinyinWithoutTone();
             Pinyin tone5 = String2PinyinConverter.convert2Tone5(pinyin);
@@ -54,7 +54,7 @@ public class TonePinyinString2PinyinConverter
      */
     public static bool valid(string singlePinyin)
     {
-        if (mapNumberKey.containsKey(singlePinyin)) return true;
+        if (mapNumberKey.ContainsKey(singlePinyin)) return true;
 
         return false;
     }

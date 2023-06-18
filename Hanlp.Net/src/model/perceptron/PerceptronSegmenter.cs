@@ -36,7 +36,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
     public PerceptronSegmenter(LinearModel cwsModel)
         :base(cwsModel)
     {
-        //super(cwsModel);
+        //base(cwsModel);
         if (cwsModel.featureMap.tagSet.type != TaskType.CWS)
         {
             throw new ArgumentException(string.Format("错误的模型类型: 传入的不是分词模型，而是 %s 模型", cwsModel.featureMap.tagSet.type));
@@ -122,7 +122,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
     {
 //        for (int i = 0; i < words.Length; i++) // 防止传入带词性的词语
 //        {
-//            int index = words[i].indexOf('/');
+//            int index = words[i].IndexOf('/');
 //            if (index > 0)
 //            {
 //                words[i] = words[i].substring(0, index);

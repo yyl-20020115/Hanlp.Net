@@ -88,7 +88,7 @@ public class EasyDictionary
         return trie.get(key);
     }
 
-    public bool contains(string key)
+    public bool Contains(string key)
     {
         return GetWordInfo(key) != null;
     }
@@ -232,11 +232,11 @@ public class EasyDictionary
         }
 
         //@Override
-        public string toString()
+        public override string ToString()
         {
             return "Attribute{" +
-                    "nature=" + Arrays.toString(nature) +
-                    ", frequency=" + Arrays.toString(frequency) +
+                    "nature=" + String.Join(',',nature) +
+                    ", frequency=" + String.Join(',',frequency) +
                     '}';
         }
     }

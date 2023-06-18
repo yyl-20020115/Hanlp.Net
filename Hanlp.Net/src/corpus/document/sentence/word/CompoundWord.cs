@@ -67,7 +67,7 @@ public class CompoundWord : IWord, IEnumerable<Word>
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         sb.Append('[');
@@ -88,7 +88,7 @@ public class CompoundWord : IWord, IEnumerable<Word>
         }
         sb.Append("]/");
         sb.Append(label);
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**

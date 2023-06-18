@@ -12,7 +12,7 @@ public class TextFileCorpus : Corpus
 
     public TextFileCorpus(Config config) 
     {
-        super(config);
+        base(config);
     }
 
     //@Override
@@ -25,7 +25,7 @@ public class TextFileCorpus : Corpus
     //@Override
     public void rewind(int numThreads, int id) 
     {
-        super.rewind(numThreads, id);
+        base.rewind(numThreads, id);
     }
 
     //@Override
@@ -88,7 +88,7 @@ public class TextFileCorpus : Corpus
         }
         table = null;
         vocabSize = j;
-        vocabIndexMap.clear();
+        vocabIndexMap.Clear();
         for (int i = 0; i < vocabSize; i++)
         {
             vocabIndexMap.put(vocab[i].word, i);

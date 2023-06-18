@@ -170,7 +170,7 @@ public abstract class Tagger
         return true;
     }
 
-    public bool clear()
+    public bool Clear()
     {
         return true;
     }
@@ -185,12 +185,12 @@ public abstract class Tagger
         return "";
     }
 
-    public string toString()
+    public override string ToString()
     {
         return "";
     }
 
-    public string toString(string result, int size)
+    public override string ToString(string result, int size)
     {
         return "";
     }

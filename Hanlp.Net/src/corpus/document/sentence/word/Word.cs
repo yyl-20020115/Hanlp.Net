@@ -27,7 +27,7 @@ public class Word : IWord
     public string label;
 
     ////@Override
-    public string ToString()
+    public override string ToString()
     {
         if (label == null)
             return value;

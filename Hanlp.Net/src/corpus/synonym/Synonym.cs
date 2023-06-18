@@ -114,7 +114,7 @@ public class Synonym : ISynonym
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         sb.Append(realWord);

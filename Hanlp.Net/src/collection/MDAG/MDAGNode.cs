@@ -232,7 +232,7 @@ public class MDAGNode
      */
     public bool hasOutgoingTransition(char letter)
     {
-        return outgoingTransitionTreeMap.containsKey(letter);
+        return outgoingTransitionTreeMap.ContainsKey(letter);
     }
     
     
@@ -456,12 +456,12 @@ public class MDAGNode
         {
             //For each _transition in outgoingTransitionTreeMap1, get the identically lableed _transition
             //in outgoingTransitionTreeMap2 (if present), and test the equality of the transitions' target nodes
-            for(Entry<char, MDAGNode> transitionKeyValuePair : outgoingTransitionTreeMap1.entrySet())
+            foreach (Entry<char, MDAGNode> transitionKeyValuePair in outgoingTransitionTreeMap1.entrySet())
             {
                 char currentCharKey = transitionKeyValuePair.getKey();
                 MDAGNode currentTargetNode = transitionKeyValuePair.getValue();
                 
-                if(!outgoingTransitionTreeMap2.containsKey(currentCharKey) || !outgoingTransitionTreeMap2.get(currentCharKey).Equals(currentTargetNode))
+                if(!outgoingTransitionTreeMap2.ContainsKey(currentCharKey) || !outgoingTransitionTreeMap2.get(currentCharKey).Equals(currentTargetNode))
                     return false;
             }
             /////
@@ -533,7 +533,7 @@ public class MDAGNode
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
          StringBuilder sb = new StringBuilder("MDAGNode{");
         sb.Append("isAcceptNode=").Append(isAcceptNode);

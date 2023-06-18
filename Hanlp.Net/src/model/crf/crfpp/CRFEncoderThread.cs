@@ -22,7 +22,7 @@ public class CRFEncoderThread : Callable<int>
         {
             this.wSize = wsize;
             expected = new double[wsize];
-            Arrays.fill(expected, 0.0);
+            Array.Fill(expected, 0.0);
         }
     }
 
@@ -34,7 +34,7 @@ public class CRFEncoderThread : Callable<int>
         {
             expected = new double[wSize];
         }
-        Arrays.fill(expected, 0.0);
+        Array.Fill(expected, 0.0);
         for (int i = start_i; i < size; i = i + threadNum)
         {
             obj += x.get(i).gradient(expected);

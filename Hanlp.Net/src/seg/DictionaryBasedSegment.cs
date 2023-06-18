@@ -29,7 +29,7 @@ public abstract class DictionaryBasedSegment : Segment
      */
     public Segment enablePartOfSpeechTagging(bool enable)
     {
-        return super.enablePartOfSpeechTagging(enable);
+        return base.enablePartOfSpeechTagging(enable);
     }
 
     /**
@@ -79,6 +79,6 @@ public abstract class DictionaryBasedSegment : Segment
         {
             logger.warning("为基于词典的分词器开启用户词典太浪费了，建议直接将所有词典的路径传入构造函数，这样速度更快、内存更省");
         }
-        return super.enableCustomDictionary(enable);
+        return base.enableCustomDictionary(enable);
     }
 }

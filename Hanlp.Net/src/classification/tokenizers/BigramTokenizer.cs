@@ -68,7 +68,7 @@ public class BigramTokenizer : ITokenizer
 //        string[] result = bws.segment("@hankcs你好，广阔的世界2０16！\u0000\u0000\t\n\r\n慶祝Coding worlds!");
 //        for (string str : result)
 //        {
-//            System._out.println(str);
+//            Console.WriteLine(str);
 //        }
 //    }
 

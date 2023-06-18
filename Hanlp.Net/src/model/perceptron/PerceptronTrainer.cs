@@ -270,7 +270,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         List<Instance> instanceList = new LinkedList<Instance>();
         IOUtility.loadInstance(trainingFile, new Ins());
         Instance[] instances = new Instance[instanceList.size()];
-        instanceList.toArray(instances);
+        instanceList.ToArray(instances);
         return instances;
     }
 

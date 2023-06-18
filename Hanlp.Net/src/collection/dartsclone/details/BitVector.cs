@@ -103,7 +103,7 @@ class BitVector
     /**
      * 清空
      */
-    void clear()
+    void Clear()
     {
         _units.Clear();
         _ranks = null;

@@ -47,8 +47,9 @@ public class GlobalObjectPool
      * @param <T>
      * @return
      */
-    public synchronized static <T> T put(Object id, T value)
+    public  static T put<T>(Object id, T value)
     {
+        //synchronized
         SoftReference old = pool.put(id, new SoftReference(value));
         return old == null ? null : (T) old.get();
     }
@@ -56,9 +57,9 @@ public class GlobalObjectPool
     /**
      * 清空全局变量
      */
-    public  static void clear()
+    public  static void Clear()
     {
         //synchronized
-        pool.clear();
+        pool.Clear();
     }
 }

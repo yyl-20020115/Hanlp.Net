@@ -15,10 +15,10 @@ public class Path
 
     public Path()
     {
-        clear();
+        Clear();
     }
 
-    public void clear()
+    public void Clear()
     {
         rnode = lnode = null;
         fvector = null;

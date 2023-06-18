@@ -1,9 +1,11 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
 public class KMeansClustering
 {
-    static readonly Charset ENCODING = Charset.forName("UTF-8");
+    static readonly Encoding ENCODING = Encoding.UTF8;
     private VectorsReader reader;
     private int clcn;
     private string outFile;
@@ -94,7 +96,7 @@ public class KMeansClustering
             List<string>[] cluster = new List[clcn];
             for (int i = 0; i < cluster.Length; i++)
             {
-                cluster[i] = new LinkedList<string>();
+                cluster[i] = new ();
             }
             for (int i = 0; i < vocabSize; i++)
             {
@@ -102,7 +104,7 @@ public class KMeansClustering
             }
             for (int i = 0; i < cluster.Length; i++)
             {
-                for (string word : cluster[i])
+                foreach (string word in cluster[i])
                 {
                     pw.printf("%s\t%d\n", word, i);
                 }

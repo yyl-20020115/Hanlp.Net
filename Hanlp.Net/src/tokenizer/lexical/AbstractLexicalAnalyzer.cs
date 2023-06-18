@@ -196,7 +196,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     //@Override
     public Sentence analyze(string sentence)
     {
-        if (sentence.isEmpty())
+        if (sentence.Length==0)
         {
             return new Sentence(new List<corpus.document.sentence.word.IWord>());
         }
@@ -222,7 +222,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             {
                 string[] nerArray = neRecognizer.recognize(wordArray, posArray);
                 overwriteTag(attributeList, posArray);
-                wordList.toArray(wordArray);
+                wordList.ToArray(wordArray);
 
                 List<Word> result = new ();
                 result.Add(new Word(wordArray[0], posArray[0]));
@@ -231,13 +231,13 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 NERTagSet tagSet = getNERTagSet();
                 for (int i = 1; i < nerArray.Length; i++)
                 {
-                    if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
+                    if (nerArray[i][0] == tagSet.B_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR || nerArray[i][0] == tagSet.O_TAG_CHAR)
                     {
                         termList.Add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
                         result = new ();
                     }
                     result.Add(new Word(wordArray[i], posArray[i]));
-                    if (nerArray[i].charAt(0) == tagSet.O_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR)
+                    if (nerArray[i][0] == tagSet.O_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR)
                     {
                         prePos = posArray[i];
                     }
@@ -254,7 +254,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             else
             {
                 overwriteTag(attributeList, posArray);
-                wordList.toArray(wordArray);
+                wordList.ToArray(wordArray);
                 for (int i = 0; i < wordArray.Length; i++)
                 {
                     termList.Add(new Word(wordArray[i], posArray[i]));
@@ -263,8 +263,8 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
         else
         {
-            wordList.toArray(wordArray);
-            for (string word : wordArray)
+            wordList.ToArray(wordArray);
+            foreach (string word in wordArray)
             {
                 termList.Add(new Word(word, null));
             }
@@ -282,7 +282,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             foreach (CoreDictionary.Attribute attribute in attributeList)
             {
                 if (attribute != null)
-                    posArray[id] = attribute.nature[0].toString();
+                    posArray[id] = attribute.nature[0].ToString();
                 ++id;
             }
         }
@@ -384,7 +384,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     }
                     termList = new ArrayList<Term>(termList.size());
                     string[] nerArray = recognize(wordArray, posArray);
-                    wordList.toArray(wordArray);
+                    wordList.ToArray(wordArray);
                     StringBuilder result = new StringBuilder();
                     result.Append(wordArray[0]);
                     if (childrenList != null)
@@ -397,15 +397,15 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     for (int i = 1; i < nerArray.Length; i++)
                     {
                         NERTagSet tagSet = getNERTagSet();
-                        if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
+                        if (nerArray[i][0] == tagSet.B_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR || nerArray[i][0] == tagSet.O_TAG_CHAR)
                         {
-                            Term term = new Term(result.toString(), Nature.create(prePos));
+                            Term term = new Term(result.ToString(), Nature.create(prePos));
                             term.offset = offset;
-                            offset += term.Length;
+                            offset += term.Length();
                             termList.Add(term);
                             if (childrenList != null)
                             {
-                                if (childrenList.size() > 1)
+                                if (childrenList.Count > 1)
                                 {
                                     foreach (Term shortTerm in childrenList)
                                     {
@@ -415,7 +415,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                                         }
                                     }
                                 }
-                                childrenList.clear();
+                                childrenList.Clear();
                             }
                             result.setLength(0);
                         }
@@ -424,7 +424,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         {
                             childrenList.Add(iterator.next());
                         }
-                        if (nerArray[i].charAt(0) == tagSet.O_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR)
+                        if (nerArray[i][0] == tagSet.O_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR)
                         {
                             prePos = posArray[i];
                         }
@@ -435,7 +435,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     }
                     if (result.Length != 0)
                     {
-                        Term term = new Term(result.toString(), Nature.create(prePos));
+                        Term term = new Term(result.ToString(), Nature.create(prePos));
                         term.offset = offset;
                         termList.Add(term);
                         if (childrenList != null)
@@ -521,7 +521,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 if (preType == CharType.CT_NUM)
                 {
                     // 浮点数识别
-                    if ("，,．.".indexOf(normalized.charAt(end)) != -1)
+                    if ("，,．.".IndexOf(normalized.charAt(end)) != -1)
                     {
                         if (end + 1 < normalized.Length)
                         {
@@ -531,7 +531,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                             }
                         }
                     }
-                    else if ("年月日时分秒".indexOf(normalized.charAt(end)) != -1)
+                    else if ("年月日时分秒".IndexOf(normalized.charAt(end)) != -1)
                     {
                         preType = curType; // 交给统计分词
                         continue;
@@ -587,7 +587,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     protected static List<CoreDictionary.Attribute> combineWithCustomDictionary(List<string> vertexList)
     {
         string[] wordNet = new string[vertexList.size()];
-        vertexList.toArray(wordNet);
+        vertexList.ToArray(wordNet);
         CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[wordNet.Length];
         // DAT合并
         DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
@@ -650,7 +650,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 }
             }
         }
-        vertexList.clear();
+        vertexList.Clear();
         List<CoreDictionary.Attribute> attributeList = new ();
         for (int i = 0; i < wordNet.Length; i++)
         {

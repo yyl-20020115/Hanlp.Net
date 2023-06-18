@@ -56,7 +56,7 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
         CoNLLWord[] wordArray = new CoNLLWord[termList.size()];
         for (int i = 0; i < wordArray.Length; ++i)
         {
-            wordArray[i] = new CoNLLWord(i + 1, wordList.get(i), posTagList.get(i), termList.get(i).nature.toString());
+            wordArray[i] = new CoNLLWord(i + 1, wordList.get(i), posTagList.get(i), termList.get(i).nature.ToString());
             wordArray[i].DEPREL = deprels.get(i);
         }
         for (int i = 0; i < wordArray.Length; ++i)

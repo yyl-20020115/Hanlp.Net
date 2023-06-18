@@ -69,6 +69,6 @@ public class StringDictionaryMaker
             dictionaryList.Add(dictionary);
         }
 
-        return combine(dictionaryList.toArray(new StringDictionary[0]));
+        return combine(dictionaryList.ToArray(new StringDictionary[0]));
     }
 }

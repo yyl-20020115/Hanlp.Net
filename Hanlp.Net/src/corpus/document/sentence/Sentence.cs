@@ -37,7 +37,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder(size() * 4);
         int i = 1;
@@ -107,7 +107,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         int offset = 0;
         foreach (IWord word in wordList)
         {
-            //assert text.charAt(offset) == word.getValue().charAt(0);
+            //assert text.charAt(offset) == word.getValue()[0];
             printWord(word, sb, i, offset, withComment);
             ++i;
             if (word is CompoundWord)

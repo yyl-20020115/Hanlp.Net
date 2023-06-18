@@ -48,7 +48,7 @@ public class Evaluator
         time = DateTime.Now.Microsecond - time;
 
         FMeasure result = calculate(c, testingDataSet.size(), TP, TP_FP, TP_FN);
-        result.catalog = testingDataSet.getCatalog().toArray();
+        result.catalog = testingDataSet.getCatalog().ToArray();
         result.speed = result.size / (time / 1000.0);
 
         return result;

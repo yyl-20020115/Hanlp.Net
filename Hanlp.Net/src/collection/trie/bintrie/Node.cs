@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using static com.hankcs.hanlp.collection.trie.bintrie.BaseNode<V>;
+
 namespace com.hankcs.hanlp.collection.trie.bintrie;
 
 
@@ -18,20 +20,20 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  *
  * @author He Han
  */
-public class Node<V> : BaseNode
+public class Node<V> : BaseNode<V>
 {
     //@Override
-    protected bool addChild(BaseNode node)
+    protected bool addChild(BaseNode<V> node)
     {
         bool Add = false;
         if (child == null)
         {
-            child = new BaseNode[0];
+            child = new BaseNode<V>[0];
         }
         int index = ArrayTool.binarySearch(child, node);
         if (index >= 0)
         {
-            BaseNode target = child[index];
+            BaseNode<V> target = child[index];
             switch (node.status)
             {
                 case UNDEFINED_0:
@@ -63,7 +65,7 @@ public class Node<V> : BaseNode
         }
         else
         {
-            BaseNode newChild[] = new BaseNode[child.Length + 1];
+            BaseNode<V>[] newChild = new BaseNode<V>[child.Length + 1];
             int insert = -(index + 1);
             System.arraycopy(child, 0, newChild, 0, insert);
             System.arraycopy(child, insert, newChild, insert + 1, child.Length - insert);
@@ -91,7 +93,7 @@ public class Node<V> : BaseNode
     }
 
     //@Override
-    public BaseNode getChild(char c)
+    public override BaseNode<V> getChild(char c)
     {
         if (child == null) return null;
         int index = ArrayTool.binarySearch(child, c);

@@ -15,6 +15,7 @@ using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.seg.NShort.Path;
+using com.hankcs.hanlp.utility;
 using System.Text;
 
 namespace com.hankcs.hanlp.seg;
@@ -107,7 +108,7 @@ public abstract class Segment
                         break;
                     }
                 }
-                atomSegment.Add(new AtomNode(sb.toString(), nCurType));
+                atomSegment.Add(new AtomNode(sb.ToString(), nCurType));
                 if (reachEnd)
                     pCur++;
             }
@@ -157,7 +158,7 @@ public abstract class Segment
             if (curType != preType)
             {
                 // 浮点数识别
-                if (preType == CharType.CT_NUM && "，,．.".indexOf(charArray[offsetAtom]) != -1)
+                if (preType == CharType.CT_NUM && "，,．.".IndexOf(charArray[offsetAtom]) != -1)
                 {
                     if (offsetAtom+1 < end)
                     {
@@ -199,7 +200,7 @@ public abstract class Segment
     {
         //assert vertexList.size() >= 2 : "vertexList至少包含 始##始 和 末##末";
         Vertex[] wordNet = new Vertex[vertexList.size()];
-        vertexList.toArray(wordNet);
+        vertexList.ToArray(wordNet);
         // DAT合并
         int Length = wordNet.Length - 1; // 跳过首尾
         for (int i = 1; i < Length; ++i)
@@ -260,7 +261,7 @@ public abstract class Segment
                 }
             }
         }
-        vertexList.clear();
+        vertexList.Clear();
         for (Vertex vertex : wordNet)
         {
             if (vertex != null) vertexList.Add(vertex);
@@ -334,7 +335,7 @@ public abstract class Segment
                 sbTerm.Append(realWord);
                 wordNet[j] = null;
             }
-            wordNet[start] = new Vertex(sbTerm.toString(), value);
+            wordNet[start] = new Vertex(sbTerm.ToString(), value);
         }
     }
 
@@ -348,7 +349,7 @@ public abstract class Segment
     protected static List<Term> convert(List<Vertex> vertexList, bool offsetEnabled)
     {
         assert vertexList != null;
-        assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.toString();
+        assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.ToString();
         int Length = vertexList.size() - 2;
         List<Term> resultList = new ArrayList<Term>(Length);
         Iterator<Vertex> iterator = vertexList.iterator();
@@ -418,7 +419,7 @@ public abstract class Segment
                     {
                         if (config.indexMode > 0)
                         {
-                            wordNetAll.Add(line, new Vertex(sbQuantifier.toString(), new CoreDictionary.Attribute(Nature.m)));
+                            wordNetAll.Add(line, new Vertex(sbQuantifier.ToString(), new CoreDictionary.Attribute(Nature.m)));
                         }
                         sbQuantifier.Append(cur.realWord);
                         iterator.Remove();
@@ -435,7 +436,7 @@ public abstract class Segment
                     {
                         vertex.from = null;
                     }
-                    pre.realWord = sbQuantifier.toString();
+                    pre.realWord = sbQuantifier.ToString();
                     pre.word = Predefine.TAG_NUMBER;
                     pre.attribute = new CoreDictionary.Attribute(Nature.mq);
                     pre.wordID = CoreDictionary.M_WORD_ID;
@@ -445,7 +446,7 @@ public abstract class Segment
             sbQuantifier.setLength(0);
             line += pre.realWord.Length;
         }
-//        System._out.println(wordNetAll);
+//        Console.WriteLine(wordNetAll);
     }
 
     /**
@@ -490,7 +491,7 @@ public abstract class Segment
         {
             List<string> sentenceList = SentencesUtil.toSentenceList(charArray);
             string[] sentenceArray = new string[sentenceList.size()];
-            sentenceList.toArray(sentenceArray);
+            sentenceList.ToArray(sentenceArray);
             //noinspection unchecked
             List<Term>[] termListArray = new List[sentenceArray.Length];
             int per = sentenceArray.Length / config.threadNumber;
@@ -605,9 +606,9 @@ public abstract class Segment
      */
     public List<List<Term>> seg2sentence(string text, bool shortest)
     {
-        List<List<Term>> resultList = new LinkedList<List<Term>>();
+        List<List<Term>> resultList = new ();
         {
-            for (string sentence : SentencesUtil.toSentenceList(text, shortest))
+            foreach (string sentence in SentencesUtil.toSentenceList(text, shortest))
             {
                 resultList.Add(segSentence(sentence.ToCharArray()));
             }

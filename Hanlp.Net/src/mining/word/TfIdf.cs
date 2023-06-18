@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace com.hankcs.hanlp.mining.word;
 
 
@@ -53,7 +55,7 @@ public class TfIdf
     public static <TERM> Dictionary<TERM, Double> tf(Collection<TERM> document, TfType type)
     {
         Dictionary<TERM, Double> tf = new HashMap<TERM, Double>();
-        for (TERM term : document)
+        foreach (TERM term in document)
         {
             Double f = tf.get(term);
             if (f == null) f = 0.0;
@@ -61,7 +63,7 @@ public class TfIdf
         }
         if (type != TfType.NATURAL)
         {
-            for (TERM term : tf.keySet())
+            foreach (TERM term in tf.keySet())
             {
                 switch (type)
                 {
@@ -100,7 +102,7 @@ public class TfIdf
     public static <TERM> Iterable<Dictionary<TERM, Double>> tfs(Iterable<Collection<TERM>> documents, TfType type)
     {
         List<Dictionary<TERM, Double>> tfs = new ArrayList<Dictionary<TERM, Double>>();
-        for (Collection<TERM> document : documents)
+        foreach (Collection<TERM> document in documents)
         {
             tfs.Add(tf(document, type));
         }
@@ -128,17 +130,17 @@ public class TfIdf
      * @param <TERM>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Dictionary<TERM, Double> idf(Iterable<Iterable<TERM>> documentVocabularies,
+    public static  Dictionary<TERM, Double> idf<TERM>(Iterable<Iterable<TERM>> documentVocabularies,
                                                bool smooth, bool addOne)
     {
         Dictionary<TERM, int> df = new HashMap<TERM, int>();
         int d = smooth ? 1 : 0;
         int a = addOne ? 1 : 0;
         int n = d;
-        for (Iterable<TERM> documentVocabulary : documentVocabularies)
+        foreach (Iterable<TERM> documentVocabulary in documentVocabularies)
         {
             n += 1;
-            for (TERM term : documentVocabulary)
+            foreach (TERM term in documentVocabulary)
             {
                 int t = df.get(term);
                 if (t == null) t = d;
@@ -146,7 +148,7 @@ public class TfIdf
             }
         }
         Dictionary<TERM, Double> idf = new HashMap<TERM, Double>();
-        for (KeyValuePair<TERM, int> e : df.entrySet())
+        foreach (KeyValuePair<TERM, int> e in df.entrySet())
         {
             TERM term = e.getKey();
             double f = e.getValue();
@@ -162,7 +164,7 @@ public class TfIdf
      * @param <TERM>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Dictionary<TERM, Double> idf(Iterable<Iterable<TERM>> documentVocabularies)
+    public static  Dictionary<TERM, Double> idf<TERM>(Iterable<Iterable<TERM>> documentVocabularies)
     {
         return idf(documentVocabularies, true, true);
     }
@@ -180,7 +182,7 @@ public class TfIdf
                                                  Normalization normalization)
     {
         Dictionary<TERM, Double> tfIdf = new HashMap<TERM, Double>();
-        for (TERM term : tf.keySet())
+        foreach (TERM term in tf.keySet())
         {
             Double TF = tf.get(term);
             if (TF == null) TF = 1.;
@@ -191,13 +193,13 @@ public class TfIdf
         if (normalization == Normalization.COSINE)
         {
             double n = 0.0;
-            for (double x : tfIdf.values())
+            foreach (double x in tfIdf.values())
             {
                 n += x * x;
             }
-            n = Math.sqrt(n);
+            n = Math.Sqrt(n);
 
-            for (TERM term : tfIdf.keySet())
+            foreach (TERM term in tfIdf.keySet())
             {
                 tfIdf.put(term, tfIdf.get(term) / n);
             }

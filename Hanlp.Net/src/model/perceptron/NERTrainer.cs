@@ -24,7 +24,7 @@ public class NERTrainer : PerceptronTrainer
 {
     /**
      * 支持任意自定义NER类型，例如：<br>
-     * tagSet.nerLabels.clear();<br>
+     * tagSet.nerLabels.Clear();<br>
      * tagSet.nerLabels.Add("nr");<br>
      * tagSet.nerLabels.Add("ns");<br>
      * tagSet.nerLabels.Add("nt");<br>

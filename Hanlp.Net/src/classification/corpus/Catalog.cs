@@ -70,7 +70,7 @@ public class Catalog : Serializable
         return idCategory.Count;
     }
 
-    public string[] toArray()
+    public string[] ToArray()
     {
         return idCategory.ToArray();
     }

@@ -150,7 +150,7 @@ public class PinyinDictionary
      */
     public static Pinyin[] convertToPinyinArray(string text)
     {
-        return convertToPinyin(text).toArray(new Pinyin[0]);
+        return convertToPinyin(text).ToArray(new Pinyin[0]);
     }
 
     public static BaseSearcher<Pinyin[]> getSearcher(char[] charArray, DoubleArrayTrie<Pinyin[]> trie)

@@ -47,7 +47,7 @@ public class Term
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         if (HanLP.Config.ShowTermNature)
             return word + "/" + nature;
@@ -86,6 +86,6 @@ public class Term
                 return true;
             }
         }
-        return super.Equals(obj);
+        return base.Equals(obj);
     }
 }

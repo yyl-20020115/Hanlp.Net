@@ -47,7 +47,7 @@ public class TMDictionaryMaker : ISaveAble
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         HashSet<string> labelSet = new TreeSet<string>();
         for (KeyValuePair<string, Dictionary<string, int>> first : transferMatrix.entrySet())
@@ -86,7 +86,7 @@ public class TMDictionaryMaker : ISaveAble
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
-            bw.write(toString());
+            bw.write(ToString());
             bw.close();
         }
         catch (Exception e)

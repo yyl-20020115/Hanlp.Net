@@ -21,12 +21,12 @@ public class StructuredPerceptron : LinearModel
 {
     public StructuredPerceptron(FeatureMap featureMap, float[] parameter)
     {
-        super(featureMap, parameter);
+        base(featureMap, parameter);
     }
 
     public StructuredPerceptron(FeatureMap featureMap)
     {
-        super(featureMap);
+        base(featureMap);
     }
 
     /**

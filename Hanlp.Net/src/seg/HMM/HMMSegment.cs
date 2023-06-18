@@ -10,6 +10,7 @@
  */
 using com.hankcs.hanlp.model.trigram;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.seg.HMM;
 

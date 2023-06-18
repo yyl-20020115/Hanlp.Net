@@ -52,7 +52,7 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
         documentList.Clear();
     }

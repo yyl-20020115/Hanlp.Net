@@ -26,7 +26,7 @@ public class TestMakeCompanyCorpus : TestCase
 //        String line = null;
 //        BufferedReader bw = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\Doc\\语料库\\company.dic")));
 //        BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/test/nt/company.txt")));
-//        int limit = int.MAX_VALUE;
+//        int limit = int.MaxValue;
 //        while ((line = bw.readLine()) != null && limit-- > 0)
 //        {
 //            if (line.EndsWith("）")) continue;

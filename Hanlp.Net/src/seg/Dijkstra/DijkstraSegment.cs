@@ -48,7 +48,7 @@ public class DijkstraSegment : WordBasedSegment
 
         if (HanLP.Config.DEBUG)
         {
-            System._out.println("粗分结果" + convert(vertexList, false));
+            Console.WriteLine("粗分结果" + convert(vertexList, false));
         }
 
         // 数字识别
@@ -83,7 +83,7 @@ public class DijkstraSegment : WordBasedSegment
                 // 层叠隐马模型——生成输出作为下一级隐马输入
                 graph = generateBiGraph(wordNetOptimum);
                 vertexList = dijkstra(graph);
-                wordNetOptimum.clear();
+                wordNetOptimum.Clear();
                 wordNetOptimum.addAll(vertexList);
                 preSize = wordNetOptimum.size();
                 OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
@@ -126,17 +126,17 @@ public class DijkstraSegment : WordBasedSegment
         Vertex[] vertexes = graph.getVertexes();
         List<EdgeFrom>[] edgesTo = graph.getEdgesTo();
         double[] d = new double[vertexes.Length];
-        Arrays.fill(d, Double.MAX_VALUE);
+        Array.Fill(d, Double.MaxValue);
         d[d.Length - 1] = 0;
         int[] path = new int[vertexes.Length];
-        Arrays.fill(path, -1);
+        Array.Fill(path, -1);
         PriorityQueue<State> que = new PriorityQueue<State>();
         que.Add(new State(0, vertexes.Length - 1));
         while (!que.isEmpty())
         {
             State p = que.poll();
             if (d[p.vertex] < p.cost) continue;
-            for (EdgeFrom edgeFrom : edgesTo[p.vertex])
+            foreach (EdgeFrom edgeFrom in edgesTo[p.vertex])
             {
                 if (d[edgeFrom.from] > d[p.vertex] + edgeFrom.weight)
                 {

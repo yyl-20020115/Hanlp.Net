@@ -67,7 +67,7 @@ public class EditDistance
 //                else if (i > 1 && j > 1 && ci == arrayA[j - 2] && cj == arrayB[i - 2])
 //                {
 //                    // 交错相等
-//                    d[i][j] = 1 + Math.min(d[i - 2][j - 2], Math.min(d[i][j - 1], d[i - 1][j]));
+//                    d[i][j] = 1 + Math.Min(d[i - 2][j - 2], Math.Min(d[i][j - 1], d[i - 1][j]));
 //                }
                 else
                 {
@@ -109,7 +109,7 @@ public class EditDistance
 //                else if (i > 1 && j > 1 && ci == arrayA[j - 2] && cj == arrayB[i - 2])
 //                {
 //                    // 交错相等
-//                    d[i][j] = 1 + Math.min(d[i - 2][j - 2], Math.min(d[i][j - 1], d[i - 1][j]));
+//                    d[i][j] = 1 + Math.Min(d[i - 2][j - 2], Math.Min(d[i][j - 1], d[i - 1][j]));
 //                }
                 else
                 {

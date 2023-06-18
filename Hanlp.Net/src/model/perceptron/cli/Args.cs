@@ -49,12 +49,12 @@ public class Args
      */
     public static List<string> parse(Object target, string[] args, bool failOnExtraFlags)
     {
-        List<string> arguments = new ArrayList<string>();
+        List<string> arguments = new ();
         arguments.addAll(Arrays.asList(args));
-        Class<?> clazz;
-        if (target is Class)
+        Type clazz;
+        if (target is Type)
         {
-            clazz = (Class) target;
+            clazz = (Type) target;
         }
         else
         {
@@ -62,7 +62,7 @@ public class Args
             try
             {
                 BeanInfo info = Introspector.getBeanInfo(clazz);
-                for (PropertyDescriptor pd : info.getPropertyDescriptors())
+                foreach (PropertyDescriptor pd in info.getPropertyDescriptors())
                 {
                     processProperty(target, pd, arguments);
                 }
@@ -74,9 +74,9 @@ public class Args
         }
 
         // Check fields of 'target' class and its superclasses
-        for (Class<?> currentClazz = clazz; currentClazz != null; currentClazz = currentClazz.getSuperclass())
+        for (Type currentClazz = clazz; currentClazz != null; currentClazz = currentClazz.getSuperclass())
         {
-            for (Field field : currentClazz.getDeclaredFields())
+            foreach (Field field in currentClazz.getDeclaredFields())
             {
                 processField(target, field, arguments);
             }
@@ -84,7 +84,7 @@ public class Args
 
         if (failOnExtraFlags)
         {
-            for (string argument : arguments)
+            foreach (string argument in arguments)
             {
                 if (argument.StartsWith("-"))
                 {
@@ -112,7 +112,7 @@ public class Args
                     string name = getName(argument, field);
                     string alias = getAlias(argument);
                     arg = arg.substring(prefix.Length);
-                    Class<?> type = field.getType();
+                    Type type = field.getType();
                     if (arg.Equals(name) || (alias != null && arg.Equals(alias)))
                     {
                         i.Remove();
@@ -138,7 +138,7 @@ public class Args
         }
     }
 
-    private static void addArgument(Class type, Field field, Object target, Object value, string delimiter)
+    private static void addArgument(Type type, Field field, Object target, Object value, string delimiter)
     {
         try
         {
@@ -159,7 +159,7 @@ public class Args
         }
     }
 
-    private static void addPropertyArgument(Class type, PropertyDescriptor property, Object target, Object value, string delimiter)
+    private static void addPropertyArgument(Type type, PropertyDescriptor property, Object target, Object value, string delimiter)
     {
         try
         {
@@ -204,7 +204,7 @@ public class Args
                         string name = getName(argument, property);
                         string alias = getAlias(argument);
                         arg = arg.substring(prefix.Length);
-                        Class<?> type = property.getPropertyType();
+                        Type type = property.getPropertyType();
                         if (arg.Equals(name) || (alias != null && arg.Equals(alias)))
                         {
                             i.Remove();
@@ -249,10 +249,10 @@ public class Args
      */
     public static void usage(PrintStream errStream, Object target)
     {
-        Class<?> clazz;
-        if (target is Class)
+        Type clazz;
+        if (target is Type)
         {
-            clazz = (Class) target;
+            clazz = (Type) target;
         }
         else
         {
@@ -267,9 +267,9 @@ public class Args
             }
         }
         errStream.println("Usage: " + clazzName);
-        for (Class currentClazz = clazz; currentClazz != null; currentClazz = currentClazz.getSuperclass())
+        for (Type currentClazz = clazz; currentClazz != null; currentClazz = currentClazz.getSuperclass())
         {
-            for (Field field : currentClazz.getDeclaredFields())
+            foreach (Field field in currentClazz.getDeclaredFields())
             {
                 fieldUsage(errStream, target, field);
             }
@@ -277,7 +277,7 @@ public class Args
         try
         {
             BeanInfo info = Introspector.getBeanInfo(clazz);
-            for (PropertyDescriptor pd : info.getPropertyDescriptors())
+            foreach (PropertyDescriptor pd in info.getPropertyDescriptors())
             {
                 propertyUsage(errStream, target, pd);
             }
@@ -290,7 +290,7 @@ public class Args
 
     private static void fieldUsage(PrintStream errStream, Object target, Field field)
     {
-        Argument argument = field.getAnnotation(Argument.class);
+        Argument argument = field.getAnnotation(Argument.s);
         if (argument != null)
         {
             string name = getName(argument, field);
@@ -302,7 +302,7 @@ public class Args
             try
             {
                 Object defaultValue = field.get(target);
-                Class<?> type = field.getType();
+                Type type = field.getType();
                 propertyUsage(errStream, prefix, name, alias, type, delimiter, description, defaultValue);
             }
             catch (IllegalAccessException e)
@@ -337,7 +337,7 @@ public class Args
                     {
                         defaultValue = readMethod.invoke(target, (Object[]) null);
                     }
-                    Class<?> type = field.getPropertyType();
+                    Type type = field.getPropertyType();
                     propertyUsage(errStream, prefix, name, alias, type, delimiter, description, defaultValue);
                 }
                 catch (IllegalAccessException e)
@@ -353,7 +353,7 @@ public class Args
 
     }
 
-    private static void propertyUsage(PrintStream errStream, string prefix, string name, string alias, Class<?> type, string delimiter, string description, Object defaultValue)
+    private static void propertyUsage(PrintStream errStream, string prefix, string name, string alias, Type type, string delimiter, string description, Object defaultValue)
     {
         StringBuilder sb = new StringBuilder("  ");
         sb.Append(prefix);
@@ -412,7 +412,7 @@ public class Args
         errStream.println(sb);
     }
 
-    private static string getTypeName(Class<?> type)
+    private static string getTypeName(Type type)
     {
         string typeName = type.getName();
         int beginIndex = typeName.lastIndexOf(".");
@@ -431,7 +431,7 @@ public class Args
 
     }
 
-    private static Object consumeArgumentValue(string name, Class<?> type, Argument argument, Iterator<string> i)
+    private static Object consumeArgumentValue(string name, Type type, Argument argument, Iterator<string> i)
     {
         Object value;
         if (type == Boolean.TYPE || type == Boolean.c)
@@ -453,7 +453,7 @@ public class Args
         return value;
     }
 
-    static void setProperty(Class<?> type, PropertyDescriptor property, Object target, Object value, string delimiter)
+    static void setProperty(Type type, PropertyDescriptor property, Object target, Object value, string delimiter)
     {
         try
         {
@@ -494,7 +494,7 @@ public class Args
         return name;
     }
 
-    static void setField(Class<?> type, Field field, Object target, Object value, string delimiter)
+    static void setField(Type type, Field field, Object target, Object value, string delimiter)
     {
         makeAccessible(field);
         try
@@ -512,7 +512,7 @@ public class Args
         }
     }
 
-    private static Object getValue(Class<?> type, Object value, string delimiter) 
+    private static Object getValue(Type type, Object value, string delimiter) 
     {
         if (type != string.c && type != Boolean.c && type != Boolean.TYPE)
         {
@@ -543,9 +543,9 @@ public class Args
         return value;
     }
 
-    private static Object createValue(Class type, string valueAsString) 
+    private static Object createValue(Type type, string valueAsString) 
     {
-        for (ValueCreator valueCreator : valueCreators)
+        foreach (ValueCreator valueCreator in valueCreators)
         {
             Object createdValue = valueCreator.createValue(type, valueAsString);
             if (createdValue != null)
@@ -553,7 +553,7 @@ public class Args
                 return createdValue;
             }
         }
-        throw new ArgumentException(string.Format("cannot instanciate any %s object using %s value", type.toString(), valueAsString));
+        throw new ArgumentException(string.Format("cannot instanciate any %s object using %s value", type.ToString(), valueAsString));
     }
 
     private static void makeAccessible(AccessibleObject ao)
@@ -577,7 +577,7 @@ public class Args
          * @param value the string represented value of the object to create
          * @return null if the object could not be created, the value otherwise
          */
-        public Object createValue(Class<?> type, string value);
+        public Object createValue(Type type, string value);
     }
 
     /**
@@ -588,11 +588,11 @@ public class Args
      * @param methodName     the name of the one arg method taking a string as parameter that will be used to built a new value
      * @return null if the object could not be created, the value otherwise
      */
-    public static ValueCreator byStaticMethodInvocation( Class compatibleType,  string methodName)
+    public static ValueCreator byStaticMethodInvocation( Type compatibleType,  string methodName)
     {
         return new ValueCreator()
         {
-            public Object createValue(Class<?> type, string value)
+            public Object createValue(Type type, string value)
             {
                 Object v = null;
                 if (compatibleType.isAssignableFrom(type))
@@ -608,7 +608,7 @@ public class Args
                     }
                     catch (Exception e)
                     {
-                        throw new ArgumentException(string.Format("could not invoke %s#%s to create an obejct from %s", type.toString(), methodName, value));
+                        throw new ArgumentException(string.Format("could not invoke %s#%s to create an obejct from %s", type.ToString(), methodName, value));
                     }
                 }
                 return v;
@@ -621,12 +621,12 @@ public class Args
      */
     public static readonly ValueCreator FROM_STRING_CONSTRUCTOR = new ValueCreator()
     {
-        public Object createValue(Class type, string value)
+        public Object createValue(Type type, string value)
         {
             Object v = null;
             try
             {
-                Constructor<?> init = type.getDeclaredConstructor(string.s);
+                Constructor init = type.getDeclaredConstructor(string.s);
                 v = init.newInstance(value);
             }
             catch (NoSuchMethodException e)
@@ -643,7 +643,7 @@ public class Args
 
     public static readonly ValueCreator ENUM_CREATOR = new ValueCreator()
     {
-        public Object createValue(Class type, string value)
+        public Object createValue(Type type, string value)
         {
             if (Enum.s.isAssignableFrom(type))
             {
@@ -671,7 +671,7 @@ public class Args
      */
     public static void resetValueCreators()
     {
-        valueCreators.clear();
+        valueCreators.Clear();
         valueCreators.addAll(DEFAULT_VALUE_CREATORS);
     }
 }

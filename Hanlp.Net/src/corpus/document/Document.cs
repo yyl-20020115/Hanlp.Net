@@ -188,7 +188,7 @@ public class Document : Serializable
             {
                 if (word is CompoundWord)
                 {
-                    if (labelSet.contains(word.getLabel()))
+                    if (labelSet.Contains(word.getLabel()))
                     {
                         for (Word inner : ((CompoundWord) word).innerList)
                         {
@@ -212,7 +212,7 @@ public class Document : Serializable
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         foreach (Sentence sentence in sentenceList)
@@ -221,7 +221,7 @@ public class Document : Serializable
             sb.Append(' ');
         }
         if (sb.Length > 0) sb.deleteCharAt(sb.Length - 1);
-        return sb.toString();
+        return sb.ToString();
     }
 
     public static Document create(File file)

@@ -5,14 +5,14 @@ namespace com.hankcs.hanlp.dependency.nnparser;
 /**
  * Jama = Java Matrix class.
  * <p/>
- * The Java Matrix Class provides the fundamental operations of numerical
+ * The Java Matrix Type provides the fundamental operations of numerical
  * linear algebra.  Various constructors create Matrices from two dimensional
  * arrays of double precision floating point numbers.  Various "gets" and
  * "sets" provide access to submatrices and matrix elements.  Several methods
  * implement basic matrix arithmetic, including matrix addition and
  * multiplication, matrix norms, and element-by-element array operations.
  * Methods for reading and printing matrices are also included.  All the
- * operations in this version of the Matrix Class involve real matrices.
+ * operations in this version of the Matrix Type involve real matrices.
  * Complex matrices may be handled in a future version.
  * <p/>
  * Five fundamental matrix decompositions, which consist of pairs or triples
@@ -49,7 +49,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 {
 
 /* ------------------------
-   Class variables
+   Type variables
  * ------------------------ */
 
     /**
@@ -152,7 +152,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @ Array Length must be a multiple of m.
      */
 
-    public Matrix(double vals[], int m)
+    public Matrix(double[] vals, int m)
     {
         this.m = m;
         n = (m != 0 ? vals.Length / m : 0);
@@ -624,7 +624,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
             {
                 s += Math.abs(A[i][j]);
             }
-            f = Math.max(f, s);
+            f = Math.Max(f, s);
         }
         return f;
     }
@@ -645,7 +645,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
             {
                 s += Math.abs(A[i][j]);
             }
-            f = Math.max(f, s);
+            f = Math.Max(f, s);
         }
         return f;
     }
@@ -967,7 +967,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
     public double trace()
     {
         double t = 0;
-        for (int i = 0; i < Math.min(m, n); i++)
+        for (int i = 0; i < Math.Min(m, n); i++)
         {
             t += A[i][i];
         }
@@ -1095,7 +1095,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
             for (int j = 0; j < n; j++)
             {
                 string s = Format.Format(A[i][j]); // Format the number
-                int padding = Math.max(1, width - s.Length); // At _least_ 1 space
+                int padding = Math.Max(1, width - s.Length); // At _least_ 1 space
                 for (int k = 0; k < padding; k++)
                     output.print(' ');
                 output.print(s);
@@ -1186,6 +1186,8 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
     }
 
     private static readonly long serialVersionUID = 1;
+
+    public static object StreamTokenizer { get; private set; }
 
     public static Matrix zero(int m, int n)
     {

@@ -44,8 +44,8 @@ public class Alphabet : ICacheAble
 
     public int build(Dictionary<string, int> keyValueMap)
     {
-        idToLabelMap = new string[keyValueMap.size()];
-        for (KeyValuePair<string, int> entry : keyValueMap.entrySet())
+        idToLabelMap = new string[keyValueMap.Count];
+        for (KeyValuePair<string, int> entry in keyValueMap.entrySet())
         {
             idToLabelMap[entry.getValue()] = entry.getKey();
         }

@@ -56,7 +56,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder(word.Length * 50);
         for (CoNLLWord word : this.word)
@@ -64,7 +64,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
             sb.Append(word);
             sb.Append('\n');
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -121,7 +121,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
             //@Override
             public void Remove()
             {
-                throw new UnsupportedOperationException("CoNLLSentence是只读对象，不允许删除");
+                throw new InvalidOperationException("CoNLLSentence是只读对象，不允许删除");
             }
         };
     }

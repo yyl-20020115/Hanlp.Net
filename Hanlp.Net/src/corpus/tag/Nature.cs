@@ -769,7 +769,7 @@ public class Nature
     private Nature(string name)
     {
         if (idMap == null) idMap = new ();
-        //assert !idMap.containsKey(name);
+        //assert !idMap.ContainsKey(name);
         this.name = name;
         ordinal = idMap.size();
         idMap.Add(name, ordinal);

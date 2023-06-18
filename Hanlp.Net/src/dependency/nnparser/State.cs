@@ -71,7 +71,7 @@ public class State
     {
         this._ref = _ref;
         stack = new s(_ref.size());
-        clear();
+        Clear();
         int L = ref.size();
         heads = std.create(L, -1);
         deprels = std.create(L, 0);
@@ -83,14 +83,14 @@ public class State
         right_2nd_most_child = std.create(L, -1);
     }
 
-    void clear()
+    void Clear()
     {
         score = 0;
         previous = null;
         top0 = -1;
         top1 = -1;
         buffer = 0;
-        stack.clear();
+        stack.Clear();
         std.fill(heads, -1);
         std.fill(deprels, 0);
         std.fill(nr_left_children, 0);
@@ -322,7 +322,7 @@ public class State
         T[0][0][len_l - 1] = 0;
         for (int d = 0; d < len_l + len_r - 1; ++d)
         {
-            for (int j = Math.max(0, d - len_l + 1); j < Math.min(d + 1, len_r); ++j)
+            for (int j = Math.Max(0, d - len_l + 1); j < Math.Min(d + 1, len_r); ++j)
             {
                 int i = d - j;
                 if (i < len_l - 1)
@@ -333,18 +333,18 @@ public class State
                     {
                         int h = sigma_l.get(rank);
                         int h_rank = rank;
-                        T[i + 1][j][h_rank] = Math.min(T[i + 1][j][h_rank],
+                        T[i + 1][j][h_rank] = Math.Min(T[i + 1][j][h_rank],
                                                        T[i][j][h_rank] + (gold_heads.get(i_1) == h ? 0 : 2));
-                        T[i + 1][j][i_1_rank] = Math.min(T[i + 1][j][i_1_rank],
+                        T[i + 1][j][i_1_rank] = Math.Min(T[i + 1][j][i_1_rank],
                                                          T[i][j][h_rank] + (gold_heads.get(h) == i_1 ? 0 : 2));
                     }
                     for (int rank = 1; rank < j + 1; ++rank)
                     {
                         int h = sigma_r.get(rank);
                         int h_rank = len_l + rank - 1;
-                        T[i + 1][j][h_rank] = Math.min(T[i + 1][j][h_rank],
+                        T[i + 1][j][h_rank] = Math.Min(T[i + 1][j][h_rank],
                                                        T[i][j][h_rank] + (gold_heads.get(i_1) == h ? 0 : 2));
-                        T[i + 1][j][i_1_rank] = Math.min(T[i + 1][j][i_1_rank],
+                        T[i + 1][j][i_1_rank] = Math.Min(T[i + 1][j][i_1_rank],
                                                          T[i][j][h_rank] + (gold_heads.get(h) == i_1 ? 0 : 2));
                     }
                 }
@@ -356,18 +356,18 @@ public class State
                     {
                         int h = sigma_l.get(rank);
                         int h_rank = rank;
-                        T[i][j + 1][h_rank] = Math.min(T[i][j + 1][h_rank],
+                        T[i][j + 1][h_rank] = Math.Min(T[i][j + 1][h_rank],
                                                        T[i][j][h_rank] + (gold_heads.get(j_1) == h ? 0 : 2));
-                        T[i][j + 1][j_1_rank] = Math.min(T[i][j + 1][j_1_rank],
+                        T[i][j + 1][j_1_rank] = Math.Min(T[i][j + 1][j_1_rank],
                                                          T[i][j][h_rank] + (gold_heads.get(h) == j_1 ? 0 : 2));
                     }
                     for (int rank = 1; rank < j + 1; ++rank)
                     {
                         int h = sigma_r.get(rank);
                         int h_rank = len_l + rank - 1;
-                        T[i][j + 1][h_rank] = Math.min(T[i][j + 1][h_rank],
+                        T[i][j + 1][h_rank] = Math.Min(T[i][j + 1][h_rank],
                                                        T[i][j][h_rank] + (gold_heads.get(j_1) == h ? 0 : 2));
-                        T[i][j + 1][j_1_rank] = Math.min(T[i][j + 1][j_1_rank],
+                        T[i][j + 1][j_1_rank] = Math.Min(T[i][j + 1][j_1_rank],
                                                          T[i][j][h_rank] + (gold_heads.get(h) == j_1 ? 0 : 2));
                     }
                 }

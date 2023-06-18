@@ -19,6 +19,6 @@ public class POSTagSet : TagSet
 {
     public POSTagSet()
     {
-        super(TaskType.POS);
+        base(TaskType.POS);
     }
 }

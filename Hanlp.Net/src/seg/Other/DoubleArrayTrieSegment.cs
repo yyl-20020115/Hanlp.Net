@@ -71,7 +71,7 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
     {
         char[] charArray = sentence;
          int[] wordNet = new int[charArray.Length];
-        Arrays.fill(wordNet, 1);
+        Array.Fill(wordNet, 1);
          Nature[] natureArray = config.speechTagging ? new Nature[charArray.Length] : null;
         matchLongest(sentence, wordNet, natureArray, trie);
         if (config.useCustomDictionary)

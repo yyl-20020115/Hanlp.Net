@@ -75,8 +75,8 @@ public class WordVectorModel : AbstractVectorModel<string>
             return Collections.emptyList();
         }
 
-        List<KeyValuePair<string, Float>> resultList = nearest(a.minus(b).Add(c), size + 3);
-        ListIterator<KeyValuePair<string, Float>> listIterator = resultList.listIterator();
+        List<KeyValuePair<string, float>> resultList = nearest(a.minus(b).Add(c), size + 3);
+        ListIterator<KeyValuePair<string, float>> listIterator = resultList.listIterator();
         while (listIterator.hasNext())
         {
             string key = listIterator.next().getKey();

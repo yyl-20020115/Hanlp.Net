@@ -86,9 +86,9 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
     }
 
     //@Override
-    public int idOf(string string)
+    public int idOf(string s)
     {
-        int id = stringIdMap.get(string);
+        int id = stringIdMap.get(s);
         if (id == null) id = -1;
         return id;
     }
@@ -137,8 +137,8 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
 
     public void load(DataInputStream _in)
     {
-        idStringMap.clear();
-        stringIdMap.clear();
+        idStringMap.Clear();
+        stringIdMap.Clear();
         int size = _in.readInt();
         for (int i = 0; i < size; i++)
         {

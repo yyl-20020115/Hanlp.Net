@@ -95,10 +95,10 @@ public class Document : BagOfWordsDocument
     }
 
     //    //@Override
-//    public string toString()
+//    public override string ToString()
 //    {
 //        StringBuilder sb = new StringBuilder(tfMap.size() * 5);
-//        sb.Append('《').Append(super.toString()).Append('》').Append('\t');
+//        sb.Append('《').Append(base.ToString()).Append('》').Append('\t');
 //        sb.Append(catalog.getCategory(category));
 //        sb.Append('\n');
 //        for (KeyValuePair<int, int[]> entry : tfMap.entrySet())
@@ -108,7 +108,7 @@ public class Document : BagOfWordsDocument
 //            sb.Append(entry.getValue()[0]);
 //            sb.Append('\n');
 //        }
-//        return sb.toString();
+//        return sb.ToString();
 //    }
 
 }

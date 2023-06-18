@@ -9,6 +9,12 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.model;
+using com.hankcs.hanlp.model.crf;
+using com.hankcs.hanlp.seg.common;
+using System.Text;
+
 namespace com.hankcs.hanlp.seg.CRF;
 
 
@@ -66,23 +72,23 @@ public class CRFSegment : CharacterBasedSegment
         Table table = new Table();
         table.v = atomSegmentToTable(sentenceConverted);
         crfModel.tag(table);
-        List<Term> termList = new LinkedList<Term>();
+        List<Term> termList = new ();
         if (HanLP.Config.DEBUG)
         {
-            System._out.println("CRF标注结果");
-            System._out.println(table);
+            Console.WriteLine("CRF标注结果");
+            Console.WriteLine(table);
         }
         int offset = 0;
         OUTER:
         for (int i = 0; i < table.v.Length; offset += table.v[i][1].Length, ++i)
         {
             string[] line = table.v[i];
-            switch (line[2].charAt(0))
+            switch (line[2][0])
             {
                 case 'B':
                 {
                     int begin = offset;
-                    while (table.v[i][2].charAt(0) != 'E')
+                    while (table.v[i][2][0] != 'E')
                     {
                         offset += table.v[i][1].Length;
                         ++i;
@@ -121,7 +127,7 @@ public class CRFSegment : CharacterBasedSegment
 
     public static List<string> atomSegment(char[] sentence)
     {
-        List<string> atomList = new ArrayList<string>(sentence.Length);
+        List<string> atomList = new (sentence.Length);
         int maxLen = sentence.Length - 1;
         StringBuilder sbAtom = new StringBuilder();
         _out:
@@ -132,7 +138,7 @@ public class CRFSegment : CharacterBasedSegment
                 sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
-                    atomList.Add(sbAtom.toString());
+                    atomList.Add(sbAtom.ToString());
                     sbAtom.setLength(0);
                     break;
                 }
@@ -142,13 +148,13 @@ public class CRFSegment : CharacterBasedSegment
                     sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
-                        atomList.Add(sbAtom.toString());
+                        atomList.Add(sbAtom.ToString());
                         sbAtom.setLength(0);
                         break _out;
                     }
                     c = sentence[++i];
                 }
-                atomList.Add(sbAtom.toString());
+                atomList.Add(sbAtom.ToString());
                 sbAtom.setLength(0);
                 --i;
             }
@@ -157,7 +163,7 @@ public class CRFSegment : CharacterBasedSegment
                 sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
-                    atomList.Add(sbAtom.toString());
+                    atomList.Add(sbAtom.ToString());
                     sbAtom.setLength(0);
                     break;
                 }
@@ -167,13 +173,13 @@ public class CRFSegment : CharacterBasedSegment
                     sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
-                        atomList.Add(sbAtom.toString());
+                        atomList.Add(sbAtom.ToString());
                         sbAtom.setLength(0);
                         break _out;
                     }
                     c = sentence[++i];
                 }
-                atomList.Add(sbAtom.toString());
+                atomList.Add(sbAtom.ToString());
                 sbAtom.setLength(0);
                 --i;
             }
@@ -188,7 +194,7 @@ public class CRFSegment : CharacterBasedSegment
 
     public static string[][] atomSegmentToTable(char[] sentence)
     {
-        string table[][] = new string[sentence.Length][3];
+        string[][] table = new string[sentence.Length][3];
         int size = 0;
         int maxLen = sentence.Length - 1;
         StringBuilder sbAtom = new StringBuilder();
@@ -201,7 +207,7 @@ public class CRFSegment : CharacterBasedSegment
                 if (i == maxLen)
                 {
                     table[size][0] = "M";
-                    table[size][1] = sbAtom.toString();
+                    table[size][1] = sbAtom.ToString();
                     ++size;
                     sbAtom.setLength(0);
                     break;
@@ -213,7 +219,7 @@ public class CRFSegment : CharacterBasedSegment
                     if (i == maxLen)
                     {
                         table[size][0] = "M";
-                        table[size][1] = sbAtom.toString();
+                        table[size][1] = sbAtom.ToString();
                         ++size;
                         sbAtom.setLength(0);
                         break _out;
@@ -221,7 +227,7 @@ public class CRFSegment : CharacterBasedSegment
                     c = sentence[++i];
                 }
                 table[size][0] = "M";
-                table[size][1] = sbAtom.toString();
+                table[size][1] = sbAtom.ToString();
                 ++size;
                 sbAtom.setLength(0);
                 --i;
@@ -232,7 +238,7 @@ public class CRFSegment : CharacterBasedSegment
                 if (i == maxLen)
                 {
                     table[size][0] = "W";
-                    table[size][1] = sbAtom.toString();
+                    table[size][1] = sbAtom.ToString();
                     ++size;
                     sbAtom.setLength(0);
                     break;
@@ -244,7 +250,7 @@ public class CRFSegment : CharacterBasedSegment
                     if (i == maxLen)
                     {
                         table[size][0] = "W";
-                        table[size][1] = sbAtom.toString();
+                        table[size][1] = sbAtom.ToString();
                         ++size;
                         sbAtom.setLength(0);
                         break _out;
@@ -252,7 +258,7 @@ public class CRFSegment : CharacterBasedSegment
                     c = sentence[++i];
                 }
                 table[size][0] = "W";
-                table[size][1] = sbAtom.toString();
+                table[size][1] = sbAtom.ToString();
                 ++size;
                 sbAtom.setLength(0);
                 --i;
@@ -285,8 +291,8 @@ public class CRFSegment : CharacterBasedSegment
     //@Override
     public Segment enableNumberQuantifierRecognize(bool enable)
     {
-        throw new UnsupportedOperationException("暂不支持");
+        throw new InvalidOperationException("暂不支持");
 //        enablePartOfSpeechTagging(enable);
-//        return super.enableNumberQuantifierRecognize(enable);
+//        return base.enableNumberQuantifierRecognize(enable);
     }
 }

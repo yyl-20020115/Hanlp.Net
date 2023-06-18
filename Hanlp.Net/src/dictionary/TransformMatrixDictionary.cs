@@ -85,13 +85,13 @@ public class TransformMatrixDictionary<E> : TransformMatrix
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder("TransformMatrixDictionary{");
         sb.Append("enumType=").Append(enumType);
         sb.Append(", ordinaryMax=").Append(ordinaryMax);
-        sb.Append(", matrix=").Append(Arrays.toString(matrix));
-        sb.Append(", total=").Append(Arrays.toString(total));
+        sb.Append(", matrix=").Append(Arrays.ToString(matrix));
+        sb.Append(", total=").Append(Arrays.ToString(total));
         sb.Append(", totalFrequency=").Append(totalFrequency);
         sb.Append('}');
         return sb.ToString();

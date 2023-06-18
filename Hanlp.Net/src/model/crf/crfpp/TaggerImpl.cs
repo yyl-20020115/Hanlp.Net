@@ -73,7 +73,7 @@ public class TaggerImpl : Tagger
                 {
                     if (n.get(i) != null)
                     {
-                        n.get(i).clear();
+                        n.get(i).Clear();
                         n.set(i, null);
                     }
                 }
@@ -212,7 +212,7 @@ public class TaggerImpl : Tagger
                 }
             });
         }
-        agenda_.clear();
+        agenda_.Clear();
         int k = x_.size() - 1;
         for (int i = 0; i < ysize_; i++)
         {
@@ -389,7 +389,7 @@ public class TaggerImpl : Tagger
 
     public ReadStatus read(BufferedReader br)
     {
-        clear();
+        Clear();
         ReadStatus status = ReadStatus.SUCCESS;
         try
         {
@@ -420,7 +420,7 @@ public class TaggerImpl : Tagger
         return status;
     }
 
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         if (nbest_ < 1)
@@ -490,7 +490,7 @@ public class TaggerImpl : Tagger
                 sb.Append('\n');
             }
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     public bool open(FeatureIndex featureIndex)
@@ -732,18 +732,18 @@ public class TaggerImpl : Tagger
     }
 
 
-    public bool clear()
+    public bool Clear()
     {
         if (mode_ == Mode.TEST)
         {
-            feature_index_.clear();
+            feature_index_.Clear();
         }
         lastError = null;
-        x_.clear();
-        node_.clear();
-        answer_.clear();
-        result_.clear();
-        featureCache_.clear();
+        x_.Clear();
+        node_.Clear();
+        answer_.Clear();
+        result_.Clear();
+        featureCache_.Clear();
         Z_ = cost_ = 0.0;
         return true;
     }
@@ -992,7 +992,7 @@ public class TaggerImpl : Tagger
             Console.Error.WriteLine("open error");
             return;
         }
-        System._out.println("Done reading model");
+        Console.WriteLine("Done reading model");
 
         if (args.Length >= 2)
         {
@@ -1021,7 +1021,7 @@ public class TaggerImpl : Tagger
                     Console.Error.WriteLine("parse error");
                     return;
                 }
-                System._out.print(tagger.toString());
+                Console.Write(tagger.ToString());
             }
             br.close();
         }

@@ -27,6 +27,6 @@ public interface ITrie<V>
     V get(char[] key);
     V get(string key);
     V[] getValueArray(V[] a);
-    bool containsKey(string key);
+    bool ContainsKey(string key);
     int size();
 }

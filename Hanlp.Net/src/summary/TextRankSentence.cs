@@ -81,7 +81,7 @@ public class TextRankSentence
         for (List<string> sentence : docs)
         {
             double[] scores = bm25.simAll(sentence);
-//            System._out.println(Arrays.toString(scores));
+//            Console.WriteLine(Arrays.ToString(scores));
             weight[cnt] = scores;
             weight_sum[cnt] = sum(scores) - scores[cnt]; // 减掉自己，自己跟自己肯定最相似
             vertex[cnt] = 1.0;
@@ -124,7 +124,7 @@ public class TextRankSentence
     public int[] getTopSentence(int size)
     {
         Collection<int> values = top.values();
-        size = Math.min(size, values.size());
+        size = Math.Min(size, values.size());
         int[] indexArray = new int[size];
         Iterator<int> it = values.iterator();
         for (int i = 0; i < size; ++i)
@@ -171,7 +171,7 @@ public class TextRankSentence
      */
     static List<string> splitSentence(string document, string sentence_separator)
     {
-        List<string> sentences = new ArrayList<string>();
+        List<string> sentences = new ();
         for (string line : document.Split("[\r\n]"))
         {
             line = line.trim();
@@ -293,8 +293,8 @@ public class TextRankSentence
         Collections.sort(resultList, new Comparator<string>() {
             //@Override
             public int compare(string o1, string o2) {
-                int num1 = sentenceList.indexOf(o1);
-                int num2 = sentenceList.indexOf(o2);
+                int num1 = sentenceList.IndexOf(o1);
+                int num2 = sentenceList.IndexOf(o2);
                 return num1.compareTo(num2);
             }
         });
@@ -303,7 +303,7 @@ public class TextRankSentence
 
     private static List<string> pick_sentences(List<string> resultList, int max_length)
     {
-        List<string> summary = new ArrayList<string>();
+        List<string> summary = new ();
         int count = 0;
         for (string result : resultList) {
             if (count + result.Length <= max_length) {

@@ -25,7 +25,7 @@ public class Node
     {
         lpath = new ArrayList<Path>();
         rpath = new ArrayList<Path>();
-        clear();
+        Clear();
         bestCost = 0.0;
         prev = null;
     }
@@ -36,8 +36,8 @@ public class Node
         {
             return y;
         }
-        double vmin = Math.min(x, y);
-        double vmax = Math.max(x, y);
+        double vmin = Math.Min(x, y);
+        double vmax = Math.Max(x, y);
         if (vmax > vmin + MINUS_LOG_EPSILON)
         {
             return vmax;
@@ -89,13 +89,13 @@ public class Node
         }
     }
 
-    public void clear()
+    public void Clear()
     {
         x = y = 0;
         alpha = beta = cost = 0;
         prev = null;
         fVector = null;
-        lpath.clear();
-        rpath.clear();
+        lpath.Clear();
+        rpath.Clear();
     }
 }

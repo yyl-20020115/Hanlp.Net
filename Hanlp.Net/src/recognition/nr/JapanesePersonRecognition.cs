@@ -45,7 +45,7 @@ public class JapanesePersonRecognition
             {
                 if (appendTimes > 1 && sbName.Length > 2) // 日本人名最短为3字
                 {
-                    insertName(sbName.toString(), activeLine, wordNetOptimum, wordNetAll);
+                    insertName(sbName.ToString(), activeLine, wordNetOptimum, wordNetAll);
                 }
                 sbName.setLength(0);
                 appendTimes = 0;
@@ -70,7 +70,7 @@ public class JapanesePersonRecognition
                 {
                     if (appendTimes > 1 && sbName.Length > 2)
                     {
-                        insertName(sbName.toString(), activeLine, wordNetOptimum, wordNetAll);
+                        insertName(sbName.ToString(), activeLine, wordNetOptimum, wordNetAll);
                     }
                     sbName.setLength(0);
                     appendTimes = 0;
@@ -82,7 +82,7 @@ public class JapanesePersonRecognition
         {
             if (appendTimes > 1)
             {
-                insertName(sbName.toString(), activeLine, wordNetOptimum, wordNetAll);
+                insertName(sbName.ToString(), activeLine, wordNetOptimum, wordNetAll);
             }
         }
     }

@@ -1,3 +1,6 @@
+using com.hankcs.hanlp.collection.trie.datrie;
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
@@ -9,7 +12,7 @@ public class EncoderFeatureIndex : FeatureIndex
 {
     private MutableDoubleArrayTrieInteger dic_;
     private IntArrayList frequency;
-    private int bId = int.MAX_VALUE;
+    private int bId = int.MaxValue;
 
     public EncoderFeatureIndex(int n)
     {
@@ -26,7 +29,7 @@ public class EncoderFeatureIndex : FeatureIndex
             dic_.put(key, maxid_);
             frequency.Append(1);
             int n = maxid_;
-            if (key.charAt(0) == 'U')
+            if (key[0] == 'U')
             {
                 maxid_ += y_.size();
             }
@@ -74,15 +77,15 @@ public class EncoderFeatureIndex : FeatureIndex
             string line;
             while ((line = br.readLine()) != null)
             {
-                if (line.Length == 0 || line.charAt(0) == ' ' || line.charAt(0) == '#')
+                if (line.Length == 0 || line[0] == ' ' || line[0] == '#')
                 {
                     continue;
                 }
-                else if (line.charAt(0) == 'U')
+                else if (line[0] == 'U')
                 {
                     unigramTempls_.Add(line.trim());
                 }
-                else if (line.charAt(0) == 'B')
+                else if (line[0] == 'B')
                 {
                     bigramTempls_.Add(line.trim());
                 }
@@ -123,7 +126,7 @@ public class EncoderFeatureIndex : FeatureIndex
     {
         int max_size = 0;
         InputStreamReader isr = null;
-        y_.clear();
+        y_.Clear();
         try
         {
             isr = new InputStreamReader(IOUtil.newInputStream(filename), "UTF-8");
@@ -135,7 +138,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 {
                     continue;
                 }
-                char firstChar = line.charAt(0);
+                char firstChar = line[0];
                 if (firstChar == '\0' || firstChar == ' ' || firstChar == '\t')
                 {
                     continue;
@@ -152,7 +155,7 @@ public class EncoderFeatureIndex : FeatureIndex
                     throw new RuntimeException(msg);
                 }
                 xsize_ = cols.Length - 1;
-                if (y_.indexOf(cols[max_size - 1]) == -1)
+                if (y_.IndexOf(cols[max_size - 1]) == -1)
                 {
                     y_.Add(cols[max_size - 1]);
                 }
@@ -195,14 +198,14 @@ public class EncoderFeatureIndex : FeatureIndex
             oos.writeObject(maxid_);
             if (max_xsize_ > 0)
             {
-                xsize_ = Math.min(xsize_, max_xsize_);
+                xsize_ = Math.Min(xsize_, max_xsize_);
             }
             oos.writeObject(xsize_);
             oos.writeObject(y_);
             oos.writeObject(unigramTempls_);
             oos.writeObject(bigramTempls_);
             oos.writeObject(dic_);
-//            List<string> keyList = new ArrayList<string>(dic_.size());
+//            List<string> keyList = new (dic_.size());
 //            int[] values = new int[dic_.size()];
 //            int i = 0;
 //            for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
@@ -224,21 +227,21 @@ public class EncoderFeatureIndex : FeatureIndex
                 osw.write("maxid: " + maxid_ + "\n");
                 osw.write("xsize: " + xsize_ + "\n");
                 osw.write("\n");
-                for (string y : y_)
+                foreach (string y in y_)
                 {
                     osw.write(y + "\n");
                 }
                 osw.write("\n");
-                for (string utempl : unigramTempls_)
+                foreach (string utempl in unigramTempls_)
                 {
                     osw.write(utempl + "\n");
                 }
-                for (string bitempl : bigramTempls_)
+                foreach (string bitempl in bigramTempls_)
                 {
                     osw.write(bitempl + "\n");
                 }
                 osw.write("\n");
-                for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
+                foreach (MutableDoubleArrayTrieInteger.KeyValuePair pair in dic_)
                 {
                     osw.write(pair.getValue() + " " + pair.getKey() + "\n");
                 }
@@ -261,7 +264,7 @@ public class EncoderFeatureIndex : FeatureIndex
         return true;
     }
 
-    public void clear()
+    public void Clear()
     {
 
     }
@@ -274,10 +277,10 @@ public class EncoderFeatureIndex : FeatureIndex
         }
         int newMaxId = 0;
         Dictionary<int, int> old2new = new Dictionary<int, int>();
-        List<string> deletedKeys = new ArrayList<string>(dic_.size() / 8);
+        List<string> deletedKeys = new (dic_.size() / 8);
         List<KeyValuePair<string, int>> l = new LinkedList<KeyValuePair<string, int>>(dic_.entrySet());
         // update dictionary in key order, to make result compatible with crfpp
-        for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
+        foreach(MutableDoubleArrayTrieInteger.KeyValuePair pair in dic_)
         {
             string key = pair.key();
             int id = pair.value();
@@ -287,26 +290,26 @@ public class EncoderFeatureIndex : FeatureIndex
             {
                 old2new.put(id, newMaxId);
                 pair.setValue(newMaxId);
-                newMaxId += (key.charAt(0) == 'U' ? y_.size() : y_.size() * y_.size());
+                newMaxId += (key[0] == 'U' ? y_.size() : y_.size() * y_.size());
             }
             else
             {
                 deletedKeys.Add(key);
             }
         }
-        for (string key : deletedKeys)
+        foreach (string key in deletedKeys)
         {
             dic_.Remove(key);
         }
 
-        for (TaggerImpl tagger : taggers)
+        foreach (TaggerImpl tagger in taggers)
         {
             List<List<int>> featureCache = tagger.getFeatureCache_();
             for (int k = 0; k < featureCache.size(); k++)
             {
                 List<int> featureCacheItem = featureCache.get(k);
                 List<int> newCache = new ArrayList<int>();
-                for (int it : featureCacheItem)
+                foreach (int it in featureCacheItem)
                 {
                     if (it == -1)
                     {
@@ -337,14 +340,14 @@ public class EncoderFeatureIndex : FeatureIndex
             costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".Length));
             maxid_ = int.valueOf(br.readLine().substring("maxid: ".Length));
             xsize_ = int.valueOf(br.readLine().substring("xsize: ".Length));
-            System._out.println("Done reading meta-info");
+            Console.WriteLine("Done reading meta-info");
             br.readLine();
 
             while ((line = br.readLine()) != null && line.Length > 0)
             {
                 y_.Add(line);
             }
-            System._out.println("Done reading labels");
+            Console.WriteLine("Done reading labels");
             while ((line = br.readLine()) != null && line.Length > 0)
             {
                 if (line.StartsWith("U"))
@@ -356,7 +359,7 @@ public class EncoderFeatureIndex : FeatureIndex
                     bigramTempls_.Add(line);
                 }
             }
-            System._out.println("Done reading templates");
+            Console.WriteLine("Done reading templates");
             dic_ = new MutableDoubleArrayTrieInteger();
             while ((line = br.readLine()) != null && line.Length > 0)
             {
@@ -368,20 +371,20 @@ public class EncoderFeatureIndex : FeatureIndex
                 }
                 dic_.put(content[1], int.valueOf(content[0]));
             }
-            System._out.println("Done reading feature indices");
+            Console.WriteLine("Done reading feature indices");
             List<Double> alpha = new ArrayList<Double>();
             while ((line = br.readLine()) != null && line.Length > 0)
             {
                 alpha.Add(Double.valueOf(line));
             }
-            System._out.println("Done reading weights");
+            Console.WriteLine("Done reading weights");
             alpha_ = new double[alpha.size()];
             for (int i = 0; i < alpha.size(); i++)
             {
                 alpha_[i] = alpha.get(i);
             }
             br.close();
-            System._out.println("Writing binary model to " + binarymodel);
+            Console.WriteLine("Writing binary model to " + binarymodel);
             return save(binarymodel, false);
         }
         catch (Exception e)

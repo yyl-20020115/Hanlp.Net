@@ -99,7 +99,7 @@ public class Utf8CharacterMapping : CharacterMapping, Serializable
     }
 
     //@Override
-    public string toString(int[] ids)
+    public override string ToString(int[] ids)
     {
         byte[] bytes = new byte[ids.Length];
         for (int i = 0; i < ids.Length; i++)

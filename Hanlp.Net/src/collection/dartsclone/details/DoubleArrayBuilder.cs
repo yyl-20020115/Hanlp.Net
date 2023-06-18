@@ -22,7 +22,7 @@ public class DoubleArrayBuilder
             DawgBuilder dawgBuilder = new DawgBuilder();
             buildDawg(keyset, dawgBuilder);
             buildFromDawg(dawgBuilder);
-            dawgBuilder.clear();
+            dawgBuilder.Clear();
         }
         else
         {
@@ -37,11 +37,11 @@ public class DoubleArrayBuilder
         return ret;
     }
 
-    void clear()
+    void Clear()
     {
         _units = null;
         _extras = null;
-        _labels.clear();
+        _labels.Clear();
         _table = null;
         _extrasHead = 0;
     }
@@ -121,7 +121,7 @@ public class DoubleArrayBuilder
         fixAllBlocks();
 
         _extras = null;
-        _labels.clear();
+        _labels.Clear();
         _table = null;
     }
 
@@ -254,7 +254,7 @@ public class DoubleArrayBuilder
         fixAllBlocks();
 
         _extras = null;
-        _labels.clear();
+        _labels.Clear();
     }
 
     private void buildFromKeyset(Keyset keyset, int begin, int end, int depth,

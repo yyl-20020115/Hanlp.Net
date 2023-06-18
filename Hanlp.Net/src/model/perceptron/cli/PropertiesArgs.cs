@@ -16,10 +16,10 @@ public class PropertiesArgs
      */
     public static void parse(Object target, Properties arguments)
     {
-        Class clazz;
-        if (target is Class)
+        Type clazz;
+        if (target is Type)
         {
-            clazz = (Class) target;
+            clazz = (Type) target;
         }
         else
         {
@@ -50,7 +50,7 @@ public class PropertiesArgs
         {
             string name = Args.getName(argument, field);
             string alias = Args.getAlias(argument);
-            Class type = field.getType();
+            Type type = field.getType();
             Object value = arguments.get(name);
             if (value == null && alias != null)
             {
@@ -91,7 +91,7 @@ public class PropertiesArgs
                 }
                 if (value != null)
                 {
-                    Class type = property.getPropertyType();
+                    Type type = property.getPropertyType();
                     if (type == Boolean.TYPE || type == Boolean.class)
                     {
                         value = true;

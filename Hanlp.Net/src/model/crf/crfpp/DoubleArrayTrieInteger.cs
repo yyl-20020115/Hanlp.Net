@@ -230,7 +230,7 @@ public class DoubleArrayTrieInteger : Serializable
     // set_array omitted
     // array omitted
 
-    void clear()
+    void Clear()
     {
         // if (! no_delete_)
         check = null;
@@ -270,7 +270,7 @@ public class DoubleArrayTrieInteger : Serializable
         return build(key, null, null, key.size());
     }
 
-    public int build(List<string> _key, int _length[], int _value[],
+    public int build(List<string> _key, int[] _length, int[] _value,
                      int _keySize)
     {
         if (_keySize > _key.size() || _key == null)
@@ -307,13 +307,13 @@ public class DoubleArrayTrieInteger : Serializable
      */
     public void recoverKeyValue()
     {
-        key = new ArrayList<string>();
+        key = new ();
         List<int> val1 = new ArrayList<int>();
-        HashMap<int, List<int>> childIdxMap = new HashMap<int, List<int>>();
+        Dictionary<int, List<int>> childIdxMap = new ();
         for (int i = 0; i < check.Length; i++)
         {
             if (check[i] <= 0) continue;
-            if (!childIdxMap.containsKey(check[i]))
+            if (!childIdxMap.ContainsKey(check[i]))
             {
                 List<int> childList = new ArrayList<int>();
                 childIdxMap.put(check[i], childList);
@@ -395,8 +395,8 @@ public class DoubleArrayTrieInteger : Serializable
                 new FileInputStream(file), BUF_SIZE));
             for (int i = 0; i < size; i++)
             {
-                base[i] = is.readInt();
-                check[i] = is.readInt();
+                base[i] = @is.readInt();
+                check[i] = @is.readInt();
             }
         }
         finally

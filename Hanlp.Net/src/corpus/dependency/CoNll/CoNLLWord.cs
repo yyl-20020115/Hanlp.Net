@@ -109,7 +109,7 @@ public class CoNLLWord
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         // ID为0时为根节点，ID为-1时为空白节点
@@ -122,6 +122,6 @@ public class CoNLLWord
                 .Append(POSTAG).Append('\t').Append('_').Append('\t').Append('_').Append('\t').Append(DEPREL).Append('\t')
                 .Append('_').Append('\t').Append('_');  
         }
-        return sb.toString();
+        return sb.ToString();
     }
 }

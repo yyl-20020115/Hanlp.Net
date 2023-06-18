@@ -68,7 +68,7 @@ public class String2PinyinConverter
     {
         List<Pinyin> pinyinList = new ();
         ICollection<Token> tokenize = trie.tokenize(complexText);
-//        System._out.println(tokenize);
+//        Console.WriteLine(tokenize);
         for (Token token : tokenize)
         {
             string fragment = token.getFragment();

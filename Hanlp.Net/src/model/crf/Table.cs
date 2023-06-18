@@ -24,7 +24,7 @@ public class Table
     static readonly string HEAD = "_B";
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         if (v == null) return "null";
         StringBuilder sb = new StringBuilder(v.Length * v[0].Length * 2);
@@ -36,7 +36,7 @@ public class Table
             }
             sb.Append('\n');
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**

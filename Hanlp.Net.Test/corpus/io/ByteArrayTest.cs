@@ -55,7 +55,7 @@ public class ByteArrayTest : TestCase
 
     public void TestConvertCharToInt() 
     {
-//        for (int i = 0; i < int.MAX_VALUE; ++i)
+//        for (int i = 0; i < int.MaxValue; ++i)
         for (int i = 0; i < 1024; ++i)
         {
             int n = i;

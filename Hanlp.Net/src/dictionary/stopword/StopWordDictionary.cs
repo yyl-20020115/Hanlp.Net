@@ -37,12 +37,12 @@ public class StopWordDictionary : MDAGSet , Filter
 
     public StopWordDictionary(string stopWordDictionaryPath) 
     {
-        super(stopWordDictionaryPath);
+        base(stopWordDictionaryPath);
     }
 
     //@Override
     public bool shouldInclude(Term term)
     {
-        return contains(term.word);
+        return Contains(term.word);
     }
 }

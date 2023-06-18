@@ -36,7 +36,7 @@ public class LearnOption : BasicOption
     public int batch_size;               //! The Size of batch.
     int nr_precomputed;           //! The number of precomputed features
     int evaluation_stops;         //!
-    int clear_gradient_per_iter;  //! clear gradient each iteration.
+    int clear_gradient_per_iter;  //! Clear gradient each iteration.
     bool save_intermediate;       //! Save model whenever see an improved UAS.
     public bool fix_embeddings;          //! Not tune the embedding when learning the parameters
     bool use_distance;            //! Specify to use distance feature.

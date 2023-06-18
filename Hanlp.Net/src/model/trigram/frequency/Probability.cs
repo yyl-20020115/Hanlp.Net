@@ -31,14 +31,14 @@ public class Probability : ICacheAble
                 BaseNode<int>[] nchild = new BaseNode[child.Length - 1];    // 兼容旧模型
                 System.arraycopy(child, 0, nchild, 0, nchild.Length);
                 child = nchild;
-                return super.load(byteArray, valueArray);
+                return base.load(byteArray, valueArray);
             }
         };
     }
 
     public bool exists(string key)
     {
-        return d.containsKey(key);
+        return d.ContainsKey(key);
     }
 
     public int getsum()
@@ -125,7 +125,7 @@ public class Probability : ICacheAble
             sbKey.Append(key[0]);
             sbKey.Append(key[1]);
         }
-        return sbKey.toString();
+        return sbKey.ToString();
     }
 
     static private string convert(char[]... keyArray)
@@ -136,7 +136,7 @@ public class Probability : ICacheAble
             sbKey.Append(key[0]);
             sbKey.Append(key[1]);
         }
-        return sbKey.toString();
+        return sbKey.ToString();
     }
 
     //@Override

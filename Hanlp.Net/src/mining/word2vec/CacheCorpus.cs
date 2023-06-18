@@ -12,7 +12,7 @@ public class CacheCorpus : Corpus
 
     public CacheCorpus(Corpus cloneSrc) 
     {
-        super(cloneSrc);
+        base(cloneSrc);
         raf = new RandomAccessFile(((TextFileCorpus) cloneSrc).cacheFile, "r");
     }
 
@@ -47,7 +47,7 @@ public class CacheCorpus : Corpus
     //@Override
     public void rewind(int numThreads, int id) 
     {
-        super.rewind(numThreads, id);
+        base.rewind(numThreads, id);
         raf.seek(raf.Length / 4 / numThreads * id * 4);   // spilt by id, not by bytes
     }
 }

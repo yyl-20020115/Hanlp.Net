@@ -100,7 +100,7 @@ public class PlaceDictionary
             {
                 sbName.Append(wordArray[i].realWord);
             }
-            string name = sbName.toString();
+            string name = sbName.ToString();
             // 对一些bad case做出调整
             if (isBadCase(name)) return;
 

@@ -24,7 +24,7 @@ public class DocVectorModel : AbstractVectorModel<int>
 
     public DocVectorModel(WordVectorModel wordVectorModel)
     {
-        super();
+        base();
         this.wordVectorModel = wordVectorModel;
     }
 
@@ -50,7 +50,7 @@ public class DocVectorModel : AbstractVectorModel<int>
      * @param query 查询语句（或者说一个文档的内容）
      * @return
      */
-    public List<KeyValuePair<int, Float>> nearest(string query)
+    public List<KeyValuePair<int, float>> nearest(string query)
     {
         return queryNearest(query, 10);
     }

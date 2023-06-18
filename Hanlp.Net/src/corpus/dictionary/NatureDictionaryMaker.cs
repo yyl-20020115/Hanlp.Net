@@ -61,8 +61,8 @@ public class NatureDictionaryMaker : CommonDictionaryMaker
                 Precompiler.compile(word);  // 编译为等效字符串
             }
             LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
-            wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, Nature.begin.toString()));
-            wordLinkedList.addLast(new Word(Predefine.TAG_END, Nature.end.toString()));
+            wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, Nature.begin.ToString()));
+            wordLinkedList.addLast(new Word(Predefine.TAG_END, Nature.end.ToString()));
         }
     }
 

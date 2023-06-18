@@ -76,7 +76,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     {
         int len1 = pyOrdinalArray.Length;
         int len2 = o.pyOrdinalArray.Length;
-        int lim = Math.min(len1, len2);
+        int lim = Math.Min(len1, len2);
         int[] v1 = pyOrdinalArray;
         int[] v2 = o.pyOrdinalArray;
 
@@ -119,14 +119,14 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder("PinyinKey{");
-        sb.Append("pinyinArray=").Append(Arrays.toString(pinyinArray));
-        sb.Append(", pyOrdinalArray=").Append(Arrays.toString(pyOrdinalArray));
-        sb.Append(", firstCharArray=").Append(Arrays.toString(firstCharArray));
+        sb.Append("pinyinArray=").Append(Arrays.ToString(pinyinArray));
+        sb.Append(", pyOrdinalArray=").Append(Arrays.ToString(pyOrdinalArray));
+        sb.Append(", firstCharArray=").Append(Arrays.ToString(firstCharArray));
         sb.Append('}');
-        return sb.toString();
+        return sb.ToString();
     }
 
     public char[] getFirstCharArray()

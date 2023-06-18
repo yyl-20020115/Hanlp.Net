@@ -265,7 +265,7 @@ public class Occurrence
 
     public void addAll(List<Term> resultList)
     {
-//        System._out.println(resultList);
+//        Console.WriteLine(resultList);
         string[] termList = new string[resultList.Count];
         int i = 0;
         foreach (Term word in resultList)
@@ -282,7 +282,7 @@ public class Occurrence
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
          StringBuilder sb = new StringBuilder("二阶共现：\n");
         foreach (KeyValuePair<string, PairFrequency> entry in triePair.entrySet())
@@ -294,7 +294,7 @@ public class Occurrence
         {
             sb.Append(entry.getValue()).Append('\n');
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     public double computeMutualInformation(string first, string second)
@@ -304,7 +304,7 @@ public class Occurrence
 
     public double computeMutualInformation(PairFrequency pair)
     {
-        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, pair.getValue() / totalPair) / Math.max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
+        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, pair.getValue() / totalPair) / Math.Max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
     }
 
     /**
@@ -426,7 +426,7 @@ public class Occurrence
 //                                  "另外数据挖掘、互联网搜索算法也成为当今的热门方向。\n" +
 //                                  "算法工程师逐渐往人工智能方向发展。");
 //        occurrence.compute();
-//        System._out.println(occurrence);
-//        System._out.println(occurrence.getPhraseByScore());
+//        Console.WriteLine(occurrence);
+//        Console.WriteLine(occurrence.getPhraseByScore());
 //    }
 }

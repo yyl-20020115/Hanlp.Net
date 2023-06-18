@@ -96,7 +96,7 @@ public class FeatureTemplate : ICacheAble
             offsetList.Add(new int[]{byteArray.nextInt(), byteArray.nextInt()});
         }
         size = byteArray.nextInt();
-        delimiterList = new ArrayList<string>(size);
+        delimiterList = new (size);
         for (int i = 0; i < size; ++i)
         {
             delimiterList.Add(byteArray.nextUTF());
@@ -105,13 +105,13 @@ public class FeatureTemplate : ICacheAble
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder("FeatureTemplate{");
         sb.Append("template='").Append(template).Append('\'');
         sb.Append(", delimiterList=").Append(delimiterList);
         sb.Append('}');
-        return sb.toString();
+        return sb.ToString();
     }
 
     public string getTemplate()

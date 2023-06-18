@@ -208,7 +208,7 @@ public class IntArrayList : Serializable, ICacheAble
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         var head = new List<int>(20);
         for (int i = 0; i < Math.Min(_size, 20); ++i)

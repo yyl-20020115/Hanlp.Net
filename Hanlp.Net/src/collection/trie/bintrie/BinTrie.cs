@@ -31,7 +31,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public BinTrie()
     {
-        child = new BaseNode<V>[65535 + 1];    // (int)char.MAX_VALUE
+        child = new BaseNode<V>[65535 + 1];    // (int)char.MaxValue
         _size = 0;
         status = Status.NOT_WORD_1;
     }
@@ -117,7 +117,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         }
     }
 
-    public bool containsKey(string key)
+    public bool ContainsKey(string key)
     {
         BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
@@ -262,7 +262,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             sb.Append(aChar);
             if (branch.status == Status.WORD_MIDDLE_2 || branch.status == Status.WORD_END_3)
             {
-                result.Add(new AbstractMap.SimpleEntry<string, V>(sb.toString(), (V) branch.value));
+                result.Add(new AbstractMap.SimpleEntry<string, V>(sb.ToString(), (V) branch.value));
             }
         }
 

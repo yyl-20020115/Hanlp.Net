@@ -93,10 +93,10 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     public MutableDoubleArrayTrieInteger(CharacterMapping charMap)
     {
         this.charMap = charMap;
-        clear();
+        Clear();
     }
 
-    public void clear()
+    public void Clear()
     {
         this._base = new IntArrayList(this.charMap.getInitSize());
         this.check = new IntArrayList(this.charMap.getInitSize());
@@ -253,7 +253,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      */
     public bool insert(string key, int value, bool overwrite)
     {
-        if ((null == key) || key.Length == 0 || (key.indexOf(UNUSED_CHAR) != -1))
+        if ((null == key) || key.Length == 0 || (key.IndexOf(UNUSED_CHAR) != -1))
         {
             return false;
         }
@@ -594,7 +594,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
 
     public List<int[]> findAllWithSupplementary(string query, int start)
     {
-        List<int[]> ret = new ArrayList<int[]>(5);
+        List<int[]> ret = new (5);
         if ((query == null) || (start >= query.Length))
         {
             return ret;
@@ -961,9 +961,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public bool contains(Object o)
+        public bool Contains(Object o)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
@@ -984,7 +984,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             //@Override
             public void Remove()
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
@@ -995,62 +995,62 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             }
         }
         //@Override
-        public Object[] toArray()
+        public Object[] ToArray()
         {
             var entries = new List<KeyValuePair<string, int>>(size);
             foreach (KeyValuePair<string, int> entry in this)
             {
                 entries.Add(entry);
             }
-            return entries.toArray();
+            return entries.ToArray();
         }
 
         //@Override
-        public T[] toArray<T>(T[] a)
+        public T[] ToArray<T>(T[] a)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
         public bool Add(KeyValuePair<string, int> stringIntegerEntry)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
         public bool Remove(Object o)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
-        public bool containsAll(Collection<?> c)
+        public bool containsAll(Collection c)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
-        public bool addAll(Collection<? : KeyValuePair<string, int>> c)
+        public bool addAll(Collection<KeyValuePair<string, int>> c)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
-        public bool retainAll(Collection<?> c)
+        public bool retainAll(Collection c)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
-        public bool removeAll(Collection<?> c)
+        public bool removeAll(Collection c)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
-        public void clear()
+        public void Clear()
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
     }
 
@@ -1061,7 +1061,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         return new KeyValuePair();
     }
 
-    public bool containsKey(string key)
+    public bool ContainsKey(string key)
     {
         return get(key) != -1;
     }
@@ -1086,9 +1086,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public bool contains(Object o)
+        public bool Contains(Object o)
         {
-            return MutableDoubleArrayTrieInteger.containsKey((string)o);
+            return MutableDoubleArrayTrieInteger.ContainsKey((string)o);
         }
 
         //@Override
@@ -1104,7 +1104,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             //@Override
             public void Remove()
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
@@ -1119,57 +1119,57 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
                 return iterator.next().key;
             }
             //@Override
-            public Object[] toArray()
+            public Object[] ToArray()
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
-            public T[] toArray<T>(T[] a)
+            public T[] ToArray<T>(T[] a)
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
             public bool Add(string s)
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
             public bool Remove(Object o)
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
-            public bool containsAll(Collection<?> c)
+            public bool containsAll(Collection c)
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
-            public bool addAll(Collection<? : string> c)
+            public bool addAll(Collection<string> c)
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
-            public bool retainAll(Collection<?> c)
+            public bool retainAll(Collection c)
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
-            public bool removeAll(Collection<?> c)
+            public bool removeAll(Collection c)
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
 
             //@Override
-            public void clear()
+            public void Clear()
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
         }
     }
@@ -1263,7 +1263,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
                                 {
                                     ids[k] = path.get(j);
                                 }
-                                key = charMap.toString(ids);
+                                key = charMap.ToString(ids);
                                 path.Append(UNUSED_CHAR_VALUE);
                                 currentBase = b;
                                 return;
@@ -1337,7 +1337,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         //@Override
         public void Remove()
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         /**
@@ -1370,7 +1370,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
                         {
                             ids[k] = path.get(j);
                         }
-                        key = charMap.toString(ids);
+                        key = charMap.ToString(ids);
                         path.Append(UNUSED_CHAR_VALUE);
                         currentBase = baseParent;
                         return from;
@@ -1385,7 +1385,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public string toString()
+        public override string ToString()
         {
             return key + "=" + value;
         }

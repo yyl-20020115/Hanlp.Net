@@ -63,13 +63,13 @@ public class TestMakeTranslateName : TestCase
     [TestMethod]
     public void TestQuery() 
     {
-        AssertTrue(TranslatedPersonDictionary.containsKey("汤姆"));
+        AssertTrue(TranslatedPersonDictionary.ContainsKey("汤姆"));
 //        HanLP.Config.enableDebug();
-//        Console.WriteLine(TranslatedPersonDictionary.containsKey("汤姆"));
-//        Console.WriteLine(TranslatedPersonDictionary.containsKey("汤"));
-//        Console.WriteLine(TranslatedPersonDictionary.containsKey("姆"));
-//        Console.WriteLine(TranslatedPersonDictionary.containsKey("点"));
-//        Console.WriteLine(TranslatedPersonDictionary.containsKey("·"));
+//        Console.WriteLine(TranslatedPersonDictionary.ContainsKey("汤姆"));
+//        Console.WriteLine(TranslatedPersonDictionary.ContainsKey("汤"));
+//        Console.WriteLine(TranslatedPersonDictionary.ContainsKey("姆"));
+//        Console.WriteLine(TranslatedPersonDictionary.ContainsKey("点"));
+//        Console.WriteLine(TranslatedPersonDictionary.ContainsKey("·"));
     }
 //
 //    public void testSeg() 

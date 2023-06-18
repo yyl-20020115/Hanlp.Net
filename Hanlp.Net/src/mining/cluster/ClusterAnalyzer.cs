@@ -9,6 +9,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie.datrie;
+using com.hankcs.hanlp.dictionary.stopword;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 
@@ -61,7 +62,7 @@ public class ClusterAnalyzer<K>
         while (listIterator.hasNext())
         {
             Term term = listIterator.next();
-            if (CoreStopWordDictionary.contains(term.word) ||
+            if (CoreStopWordDictionary.Contains(term.word) ||
                 term.nature.StartsWith("w")
                 )
             {
@@ -203,7 +204,7 @@ public class ClusterAnalyzer<K>
         cluster.section(2);
         refine_clusters(cluster.sectioned_clusters());
         cluster.set_sectioned_gain();
-        cluster.composite_vector().clear();
+        cluster.composite_vector().Clear();
         que.Add(cluster);
 
         while (!que.isEmpty())
@@ -227,10 +228,10 @@ public class ClusterAnalyzer<K>
                 {
                     for (Cluster<K> sub : c.sectioned_clusters())
                     {
-                        sub.clear();
+                        sub.Clear();
                     }
                 }
-                c.composite_vector().clear();
+                c.composite_vector().Clear();
                 que.Add(c);
             }
         }
@@ -416,7 +417,7 @@ public class ClusterAnalyzer<K>
                 double p = nij / (double) (j.size());
                 double r = nij / (double) (ni[i]);
                 double f = 2 * p * r / (p + r);
-                fi[i] = Math.max(fi[i], f);
+                fi[i] = Math.Max(fi[i], f);
             }
         }
         double f = 0;

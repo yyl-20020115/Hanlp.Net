@@ -122,9 +122,9 @@ public class JapanesePersonDictionary
      * @param key
      * @return
      */
-    public static bool containsKey(string key)
+    public static bool ContainsKey(string key)
     {
-        return trie.containsKey(key);
+        return trie.ContainsKey(key);
     }
 
     /**
@@ -133,9 +133,9 @@ public class JapanesePersonDictionary
      * @param Length
      * @return
      */
-    public static bool containsKey(string key, int Length)
+    public static bool ContainsKey(string key, int Length)
     {
-        if (!trie.containsKey(key)) return false;
+        if (!trie.ContainsKey(key)) return false;
         return key.Length >= Length;
     }
 

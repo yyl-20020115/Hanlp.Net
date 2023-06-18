@@ -107,9 +107,9 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public bool contains(Object o)
+    public bool Contains(Object o)
     {
-        return pipeList.contains(o);
+        return pipeList.Contains(o);
     }
 
     //@Override
@@ -119,13 +119,13 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public Object[] toArray()
+    public Object[] ToArray()
     {
         return pipeList.ToArray();
     }
 
     //@Override
-    public  T[] toArray<T>(T[] a)
+    public  T[] ToArray<T>(T[] a)
     {
         return pipeList.ToArray(a);
     }
@@ -149,7 +149,7 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public bool addAll(ICollection<? : Pipe<List<IWord>, List<IWord>>> c)
+    public bool addAll(ICollection<Pipe<List<IWord>, List<IWord>>> c)
     {
         return pipeList.addAll(c);
     }
@@ -161,21 +161,21 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public bool removeAll(ICollection<?> c)
+    public bool removeAll(ICollection c)
     {
         return pipeList.removeAll(c);
     }
 
     //@Override
-    public bool retainAll(ICollection<?> c)
+    public bool retainAll(ICollection c)
     {
         return pipeList.retainAll(c);
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
-        pipeList.clear();
+        pipeList.Clear();
     }
 
     //@Override
@@ -215,9 +215,9 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public int indexOf(Object o)
+    public int IndexOf(Object o)
     {
-        return pipeList.indexOf(o);
+        return pipeList.IndexOf(o);
     }
 
     //@Override

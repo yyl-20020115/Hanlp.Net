@@ -28,7 +28,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
 
     public FirstOrderHiddenMarkovModel(float[] start_probability, float[][] transition_probability, float[][] emission_probability)
     {
-        super(start_probability, transition_probability, emission_probability);
+        base(start_probability, transition_probability, emission_probability);
         toLog();
     }
 

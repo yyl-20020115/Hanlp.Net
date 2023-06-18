@@ -64,7 +64,7 @@ public class CommonSynonymDictionary
                 {
                     treeMap.put(synonym.realWord, new SynonymItem(synonym, synonymList, type));
                     // 这里稍微做个test
-                    //assert synonym.getIdString().StartsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].Length - 1)) : "词典有问题" + line + synonym.toString();
+                    //assert synonym.getIdString().StartsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].Length - 1)) : "词典有问题" + line + synonym.ToString();
                 }
             }
             bw.close();
@@ -112,9 +112,9 @@ public class CommonSynonymDictionary
     public long distance(string a, string b)
     {
         SynonymItem itemA = get(a);
-        if (itemA == null) return long.MAX_VALUE / 3;
+        if (itemA == null) return long.MaxValue / 3;
         SynonymItem itemB = get(b);
-        if (itemB == null) return long.MAX_VALUE / 3;
+        if (itemB == null) return long.MaxValue / 3;
 
         return itemA.distance(itemB);
     }
@@ -173,7 +173,7 @@ public class CommonSynonymDictionary
             }
         }
 
-        return sbOut.toString();
+        return sbOut.ToString();
     }
 
     public string rewrite(string text)
@@ -190,9 +190,9 @@ public class CommonSynonymDictionary
                 sbOut.Append(synonym.realWord);
             }
             else sbOut.Append(term.word);
-            preWord = PosTagCompiler.compile(term.nature.toString(), term.word);
+            preWord = PosTagCompiler.compile(term.nature.ToString(), term.word);
         }
-        return sbOut.toString();
+        return sbOut.ToString();
     }
 
     /**
@@ -263,7 +263,7 @@ public class CommonSynonymDictionary
         }
 
         //@Override
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(entry);
@@ -271,7 +271,7 @@ public class CommonSynonymDictionary
             sb.Append(type);
             sb.Append(' ');
             sb.Append(synonymList);
-            return sb.toString();
+            return sb.ToString();
         }
 
         /**
@@ -293,7 +293,7 @@ public class CommonSynonymDictionary
          */
         public static SynonymItem createUndefined(string word)
         {
-            SynonymItem item = new SynonymItem(new Synonym(word, word.GetHashCode() * 1000000 + long.MAX_VALUE / 3), null, Type.UNDEFINED);
+            SynonymItem item = new SynonymItem(new Synonym(word, word.GetHashCode() * 1000000 + long.MaxValue / 3), null, Type.UNDEFINED);
             return item;
         }
     }

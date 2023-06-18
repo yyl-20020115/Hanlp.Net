@@ -35,7 +35,7 @@ public class ComputeAccuracy
         int TCN, CCN = 0, TACN = 0, CACN = 0, SECN = 0, SYCN = 0, SEAC = 0, SYAC = 0, QID = 0, TQ = 0, TQS = 0;
         if (argv == null || argv.Length != 3)
         {
-            printf("Usage: ./compute-accuracy <FILE> <threshold> <QUESTION FILE>\nwhere FILE contains word projections, and threshold is used to reduce vocabulary of the model for fast approximate evaluation (0 = off, otherwise typical value is 30000). Question file contains questions and answers\n");
+            printf("Usage: ./compute-accuracy <FILE> <threshold> <QUESTION FILE>\nwhere FILE Contains word projections, and threshold is used to reduce vocabulary of the model for fast approximate evaluation (0 = off, otherwise typical value is 30000). Question file Contains questions and answers\n");
             return;
         }
         string file_name = argv[0];

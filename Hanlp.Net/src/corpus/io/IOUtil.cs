@@ -89,8 +89,8 @@ public class IOUtil
             _in.close();
             // 处理 UTF-8 BOM
             if (read >= 3 && fileContent[0] == -17 && fileContent[1] == -69 && fileContent[2] == -65)
-                return new string(fileContent, 3, fileContent.Length - 3, Charset.forName("UTF-8"));
-            return new string(fileContent, Charset.forName("UTF-8"));
+                return new string(fileContent, 3, fileContent.Length - 3, Encoding.forName("UTF-8"));
+            return new string(fileContent, Encoding.forName("UTF-8"));
         }
         catch (FileNotFoundException e)
         {
@@ -242,7 +242,7 @@ public class IOUtil
         channel.read(byteBuffer);
         byteBuffer.flip();
         byte[] bytes = byteBuffer.array();
-        byteBuffer.clear();
+        byteBuffer.Clear();
         channel.close();
         fis.close();
         return bytes;
@@ -315,7 +315,7 @@ public class IOUtil
                 if (first)
                 {
                     first = false;
-                    if (!line.isEmpty() && line.charAt(0) == '\uFEFF')
+                    if (!line.isEmpty() && line[0] == '\uFEFF')
                         line = line.substring(1);
                 }
                 result.Add(line);
@@ -351,7 +351,7 @@ public class IOUtil
             sbOut.Append(entry.getValue());
             sbOut.Append('\n');
         }
-        return saveTxt(path, sbOut.toString());
+        return saveTxt(path, sbOut.ToString());
     }
 
     /**
@@ -554,7 +554,7 @@ public class IOUtil
         //@Override
         public void Remove()
         {
-            throw new UnsupportedOperationException("只读，不可写！");
+            throw new InvalidOperationException("只读，不可写！");
         }
 
         //@Override
@@ -727,7 +727,7 @@ public class IOUtil
         _out.writeInt(-customNatureCollector.size());
         foreach (Nature nature in customNatureCollector)
         {
-            TextUtility.writeString(nature.toString(), _out);
+            TextUtility.writeString(nature.ToString(), _out);
         }
     }
 

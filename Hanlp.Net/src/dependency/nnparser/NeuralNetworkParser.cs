@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.dependency.nnparser.option;
 using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.dependency.nnparser;

@@ -73,14 +73,14 @@ public class ViterbiSegment : WordBasedSegment
         ////////////////生成词网////////////////////
         generateWordNet(wordNetAll);
         ///////////////生成词图////////////////////
-//        System._out.println("构图：" + (DateTime.Now.Microsecond - start));
+//        Console.WriteLine("构图：" + (DateTime.Now.Microsecond - start));
         if (HanLP.Config.DEBUG)
         {
             System._out.printf("粗分词网：\n%s\n", wordNetAll);
         }
 //        start = DateTime.Now.Microsecond;
         List<Vertex> vertexList = viterbi(wordNetAll);
-//        System._out.println("最短路：" + (DateTime.Now.Microsecond - start));
+//        Console.WriteLine("最短路：" + (DateTime.Now.Microsecond - start));
 
         if (config.useCustomDictionary)
         {
@@ -91,7 +91,7 @@ public class ViterbiSegment : WordBasedSegment
 
         if (HanLP.Config.DEBUG)
         {
-            System._out.println("粗分结果" + convert(vertexList, false));
+            Console.WriteLine("粗分结果" + convert(vertexList, false));
         }
 
         // 数字识别
@@ -126,7 +126,7 @@ public class ViterbiSegment : WordBasedSegment
                 // 层叠隐马模型——生成输出作为下一级隐马输入
                 wordNetOptimum.clean();
                 vertexList = viterbi(wordNetOptimum);
-                wordNetOptimum.clear();
+                wordNetOptimum.Clear();
                 wordNetOptimum.addAll(vertexList);
                 preSize = wordNetOptimum.size();
                 OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);

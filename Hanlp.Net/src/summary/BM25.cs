@@ -118,7 +118,7 @@ public class BM25
         double score = 0;
         for (string word : sentence)
         {
-            if (!f[index].containsKey(word)) continue;
+            if (!f[index].ContainsKey(word)) continue;
             int d = docs.get(index).size();
             int tf = f[index].get(word);
             score += (idf.get(word) * tf * (k1 + 1)

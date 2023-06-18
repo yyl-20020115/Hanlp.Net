@@ -40,7 +40,7 @@ public class CoNllLine
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         foreach (string value in this.value)
@@ -48,6 +48,6 @@ public class CoNllLine
             sb.Append(value);
             sb.Append('\t');
         }
-        return sb.deleteCharAt(sb.Length - 1).toString();
+        return sb.deleteCharAt(sb.Length - 1).ToString();
     }
 }

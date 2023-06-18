@@ -9,12 +9,12 @@ public class CoreStopWordDictionaryTest : TestCase
     [TestMethod]
     public void TestContains()
     {
-        AssertTrue(CoreStopWordDictionary.contains("这就是说"));
+        AssertTrue(CoreStopWordDictionary.Contains("这就是说"));
     }
     [TestMethod]
     public void TestContainsSomeWords()
     {
-        AssertEquals(true, CoreStopWordDictionary.contains("可以"));
+        AssertEquals(true, CoreStopWordDictionary.Contains("可以"));
     }
     [TestMethod]
 

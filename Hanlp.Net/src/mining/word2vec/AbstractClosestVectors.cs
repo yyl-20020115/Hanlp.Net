@@ -15,7 +15,7 @@ public abstract class AbstractClosestVectors
 
     protected string[] nextWords(int n, string msg)
     {
-        System._out.println(msg + " ('q' to break): ");
+        Console.WriteLine(msg + " ('q' to break): ");
         string[] words = new string[n];
 
         for (int i = 0; i < n; i++)
@@ -44,7 +44,7 @@ public abstract class AbstractClosestVectors
 
         try
         {
-            scanner = new Scanner(System.in);
+            scanner = new Scanner(System._in);
             Result result = null;
             while ((result = getTargetVector()) != null)
             {
@@ -54,7 +54,7 @@ public abstract class AbstractClosestVectors
                 next_word:
                 for (int i = 0; i < words; i++)
                 {
-                    for (int bi : result.bi)
+                    foreach (int bi in result.bi)
                     {
                         if (i == bi) continue next_word;
                     }

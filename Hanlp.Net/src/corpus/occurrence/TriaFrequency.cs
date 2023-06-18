@@ -73,7 +73,7 @@ public class TriaFrequency : PairFrequency
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         sb.Append(getKey().replace(Occurrence.LEFT, '←').replace(Occurrence.RIGHT, '→'));

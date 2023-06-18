@@ -167,7 +167,7 @@ public class WordNatureDependencyModel
         }
         if (HanLP.Config.DEBUG)
         {
-            System._out.println(from + " 到 " + to + " : " + attribute);
+            Console.WriteLine(from + " 到 " + to + " : " + attribute);
         }
         return new Edge(from.id, to.id, attribute.dependencyRelation[0], attribute.p[0]);
     }
@@ -214,14 +214,14 @@ public class WordNatureDependencyModel
         }
 
         //@Override
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder(dependencyRelation.Length * 10);
             for (int i = 0; i < dependencyRelation.Length; ++i)
             {
                 sb.Append(dependencyRelation[i]).Append(' ').Append(p[i]).Append(' ');
             }
-            return sb.toString();
+            return sb.ToString();
         }
     }
 }

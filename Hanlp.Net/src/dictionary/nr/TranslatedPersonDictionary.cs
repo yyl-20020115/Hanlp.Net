@@ -54,7 +54,7 @@ public class TranslatedPersonDictionary
                 for (char c : line.ToCharArray())
                 {
                     // 排除一些过于常用的字
-                    if ("不赞".indexOf(c) >= 0) continue;
+                    if ("不赞".IndexOf(c) >= 0) continue;
                     int f = charFrequencyMap.get(c);
                     if (f == null) f = 0;
                     charFrequencyMap.put(c, f + 1);
@@ -103,9 +103,9 @@ public class TranslatedPersonDictionary
      * @param key
      * @return
      */
-    public static bool containsKey(string key)
+    public static bool ContainsKey(string key)
     {
-        return trie.containsKey(key);
+        return trie.ContainsKey(key);
     }
 
     /**
@@ -114,9 +114,9 @@ public class TranslatedPersonDictionary
      * @param Length
      * @return
      */
-    public static bool containsKey(string key, int Length)
+    public static bool ContainsKey(string key, int Length)
     {
-        if (!trie.containsKey(key)) return false;
+        if (!trie.ContainsKey(key)) return false;
         return key.Length >= Length;
     }
 }

@@ -8,6 +8,9 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.model.trigram.frequency;
+
 namespace com.hankcs.hanlp.model.trigram;
 
 
@@ -47,7 +50,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
      * 最后两个字的状态
      * 只可能是 "be" "me" "es" "ss"
      */
-    static readonly int[][] probableTail = {{0,2},{1,2},{2,3},{3,3}};
+    static readonly int[][] probableTail = { new int[]{0,2}, new int[] { 1,2}, new int[] { 2,3}, new int[] { 3,3}};
 
     public CharacterBasedGenerativeModel()
     {
@@ -56,11 +59,11 @@ public class CharacterBasedGenerativeModel : ICacheAble
         // 矩阵的数值根据《人民日报》语料估算 
         int [] nullArray = {0, 0, 0, 0, 0};
         transMatrix = new int[5][][];
-        transMatrix[0] = new int[][]{nullArray, {0, 150, 330, 0, 0}, {160, 0, 0, 168, 20}, nullArray, nullArray};
-        transMatrix[1] = new int[][]{nullArray, {0, 35, 150, 0, 0}, {210, 0, 0, 263, 3}, nullArray, nullArray};
-        transMatrix[2] = new int[][]{{0, 200, 1600, 0, 0}, nullArray, nullArray, {1080, 0, 0, 650, 205}, nullArray};
-        transMatrix[3] = new int[][]{{0, 200, 1600, 0, 0}, nullArray, nullArray, {640, 0, 0, 700, 63}, nullArray};
-        transMatrix[4] = new int[][]{{0, 30, 150, 0, 0}, nullArray, nullArray, {60, 0, 0, 50, 3}, {180, 0, 0, 120, 0}};
+        transMatrix[0] = new int[][]{nullArray, new int[] { 0, 150, 330, 0, 0}, new int[] { 160, 0, 0, 168, 20}, nullArray, nullArray};
+        transMatrix[1] = new int[][]{nullArray, new int[] { 0, 35, 150, 0, 0}, new int[] { 210, 0, 0, 263, 3}, nullArray, nullArray};
+        transMatrix[2] = new int[][]{ new int[] { 0, 200, 1600, 0, 0}, nullArray, nullArray, new int[] { 1080, 0, 0, 650, 205}, nullArray};
+        transMatrix[3] = new int[][]{ new int[] { 0, 200, 1600, 0, 0}, nullArray, nullArray, new int[] { 640, 0, 0, 700, 63}, nullArray};
+        transMatrix[4] = new int[][]{ new int[] { 0, 30, 150, 0, 0}, nullArray, nullArray, new int[] { 60, 0, 0, 50, 3}, new int[] { 180, 0, 0, 120, 0}};
    }
 
     /**
@@ -70,16 +73,16 @@ public class CharacterBasedGenerativeModel : ICacheAble
     public void learn(List<Word> wordList)
     {
         LinkedList<char[]> sentence = new LinkedList<char[]>();
-        for (IWord iWord : wordList)
+        for (IWord iWord in wordList)
         {
             string word = iWord.getValue();
             if (word.Length == 1)
             {
-                sentence.Add(new char[]{word.charAt(0), 's'});
+                sentence.Add(new char[]{word[0], 's'});
             }
             else
             {
-                sentence.Add(new char[]{word.charAt(0), 'b'});
+                sentence.Add(new char[]{word[0], 'b'});
                 for (int i = 1; i < word.Length - 1; ++i)
                 {
                     sentence.Add(new char[]{word.charAt(i), 'm'});
@@ -93,7 +96,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         now[2] = bos;
         tf.Add(1, bos, bos);
         tf.Add(2, bos);
-        for (char[] i : sentence)
+        foreach (char[] i in sentence)
         {
             System.arraycopy(now, 1, now, 0, 2);
             now[2] = i;
@@ -111,14 +114,14 @@ public class CharacterBasedGenerativeModel : ICacheAble
         double tl1 = 0.0;
         double tl2 = 0.0;
         double tl3 = 0.0;
-        for (string key : tf.d.keySet())
+        foreach (string key in tf.d.keySet())
         {
             if (key.Length != 6) continue;    // tri samples
             char[][] now = new char[][]
                     {
-                            {key.charAt(0), key.charAt(1)},
-                            {key.charAt(2), key.charAt(3)},
-                            {key.charAt(4), key.charAt(5)},
+                            new char[]{key[0], key[1] },
+                            new char[]{key[2], key[3] },
+                            new char[]{key[4], key[5] },
                     };
             double c3 = div(tf.get(now) - 1, tf.get(now[0], now[1]) - 1);
             double c2 = div(tf.get(now[1], now[2]) - 1, tf.get(now[1]) - 1);

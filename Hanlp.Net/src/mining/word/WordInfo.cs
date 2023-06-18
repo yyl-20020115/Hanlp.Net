@@ -40,7 +40,7 @@ public class WordInfo
         this.text = text;
         left = new Dictionary<char, int[]>();
         right = new Dictionary<char, int[]>();
-        aggregation = Float.MAX_VALUE;
+        aggregation = float.MaxValue;
     }
 
     private static void increaseFrequency(char c, Dictionary<char, int[]> storage)
@@ -80,7 +80,7 @@ public class WordInfo
         p = frequency / (float) Length;
         leftEntropy = computeEntropy(left);
         rightEntropy = computeEntropy(right);
-        entropy = Math.min(leftEntropy, rightEntropy);
+        entropy = Math.Min(leftEntropy, rightEntropy);
     }
 
     void computeAggregation(Dictionary<string, WordInfo> word_cands)
@@ -92,13 +92,13 @@ public class WordInfo
         }
         for (int i = 1; i < text.Length; ++i)
         {
-            aggregation = Math.min(aggregation,
+            aggregation = Math.Min(aggregation,
                                    p / word_cands.get(text.substring(0, i)).p / word_cands.get(text.substring(i)).p);
         }
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return text;
     }

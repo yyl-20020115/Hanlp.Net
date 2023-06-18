@@ -54,7 +54,7 @@ public class POSInstance : Instance
         string preWord = position >= 1 ? words[position - 1] : "_B_";
         string curWord = words[position];
 
-        //		System._out.println("cur: " + curWord);
+        //		Console.WriteLine("cur: " + curWord);
         string nextWord = position <= words.Length - 2 ? words[position + 1] : "_E_";
 //        string next2Word = position <= words.Length - 3 ? words[position + 2] : "_E_";
 
@@ -96,7 +96,7 @@ public class POSInstance : Instance
 //        addFeature(sbFeature, featVec, featureMap);
 //
 //        // w0 ﬁrst_char(w1)
-//        string nextChar = position <= words.Length - 2 ? "" + words[position + 1].charAt(0) : "_EC_";
+//        string nextChar = position <= words.Length - 2 ? "" + words[position + 1][0] : "_EC_";
 //        sbFeature.delete(0, sbFeature.Length);
 //        sbFeature.Append("CW[1,0]=").Append(curWord).Append("/").Append(nextChar);
 //        addFeature(sbFeature, featVec, featureMap);
@@ -105,7 +105,7 @@ public class POSInstance : Instance
 //
 //        // ﬁrstchar(w0)lastchar(w0)
 //        sbFeature.delete(0, sbFeature.Length);
-//        sbFeature.Append("BE=").Append(curWord.charAt(0)).Append("/").Append(curWord.charAt(Length - 1));
+//        sbFeature.Append("BE=").Append(curWord[0]).Append("/").Append(curWord.charAt(Length - 1));
 //        addFeature(sbFeature, featVec, featureMap);
 
         // prefix
@@ -197,7 +197,7 @@ public class POSInstance : Instance
 //        bool isPunt = true;
 //        for (int i = 0; i < curWord.Length; i++)
 //        {
-//            if (!CharType.punctSet.contains(curWord.charAt(i) + ""))
+//            if (!CharType.punctSet.Contains(curWord.charAt(i) + ""))
 //            {
 //                isPunt = false;
 //                break;

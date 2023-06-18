@@ -95,7 +95,7 @@ public class SuffixDictionary
 
     private static string reverse(string word)
     {
-        return new StringBuilder(word).reverse().toString();
+        return new StringBuilder(word).reverse().ToString();
     }
 
     /**

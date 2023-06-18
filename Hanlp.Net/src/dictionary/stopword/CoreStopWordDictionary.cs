@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.dictionary.stopword;
 
@@ -49,9 +50,9 @@ public class CoreStopWordDictionary
         }
     }
 
-    public static bool contains(string key)
+    public static bool Contains(string key)
     {
-        return dictionary.contains(key);
+        return dictionary.Contains(key);
     }
 
     /**
@@ -64,8 +65,8 @@ public class CoreStopWordDictionary
         public bool shouldInclude(Term term)
         {
             // 除掉停用词
-            string nature = term.nature != null ? term.nature.toString() : "空";
-            char firstChar = nature.charAt(0);
+            string nature = term.nature != null ? term.nature.ToString() : "空";
+            char firstChar = nature[0];
             switch (firstChar)
             {
                 case 'm':
@@ -85,7 +86,7 @@ public class CoreStopWordDictionary
                 }
                 default:
                 {
-                    if (!CoreStopWordDictionary.contains(term.word))
+                    if (!CoreStopWordDictionary.Contains(term.word))
                     {
                         return true;
                     }

@@ -64,7 +64,7 @@ public class MathUtility
     {
         HashSet<KeyValuePair<string, Double>> entrySet = predictionScores.entrySet();
         double max = Double.NEGATIVE_INFINITY;
-        for (KeyValuePair<string, Double> entry : entrySet)
+        foreach (KeyValuePair<string, Double> entry in entrySet)
         {
             max = Math.Max(max, entry.getValue());
         }

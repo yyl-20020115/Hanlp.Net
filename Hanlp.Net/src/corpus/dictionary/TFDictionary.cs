@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.corpus.occurrence;
 
@@ -44,7 +45,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
     /**
      * 合并自己（主词典）和某个词频词典
      * @param dictionary 某个词频词典
-     * @param limit 如果该词频词典试图引入一个词语，其词频不得超过此limit（如果不需要使用limit功能，可以传入int.MAX_VALUE）
+     * @param limit 如果该词频词典试图引入一个词语，其词频不得超过此limit（如果不需要使用limit功能，可以传入int.MaxValue）
      * @param Add 设为true则是词频叠加模式，否则是词频覆盖模式
      * @return 词条的增量
      */
@@ -56,13 +57,13 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
             TermFrequency termFrequency = trie.get(entry.getKey());
             if (termFrequency == null)
             {
-                trie.put(entry.getKey(), new TermFrequency(entry.getKey(), Math.min(limit, entry.getValue().getValue())));
+                trie.put(entry.getKey(), new TermFrequency(entry.getKey(), Math.Min(limit, entry.getValue().getValue())));
             }
             else
             {
                 if (Add)
                 {
-                    termFrequency.setValue(termFrequency.getValue() + Math.min(limit, entry.getValue().getValue()));
+                    termFrequency.setValue(termFrequency.getValue() + Math.Min(limit, entry.getValue().getValue()));
                 }
             }
         }

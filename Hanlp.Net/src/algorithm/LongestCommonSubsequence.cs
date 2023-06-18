@@ -36,16 +36,16 @@ public class LongestCommonSubsequence
                     opt[i, j] = Math.Max(opt[i + 1, j], opt[i, j + 1]);// 状态转移方程
             }
         }
-//        System._out.println("substring1:" + new string(str1));
-//        System._out.println("substring2:" + new string(str2));
-//        System._out.print("LCS:");
+//        Console.WriteLine("substring1:" + new string(str1));
+//        Console.WriteLine("substring2:" + new string(str2));
+//        Console.Write("LCS:");
 
 //        int i = 0, j = 0;
 //        while (i < substringLength1 && j < substringLength2)
 //        {
 //            if (str1[i] == str2[j])
 //            {
-//                System._out.print(str1[i]);
+//                Console.Write(str1[i]);
 //                i++;
 //                j++;
 //            }
@@ -54,7 +54,7 @@ public class LongestCommonSubsequence
 //            else
 //                j++;
 //        }
-//        System._out.println();
+//        Console.WriteLine();
         return opt[0, 0];
     }
 

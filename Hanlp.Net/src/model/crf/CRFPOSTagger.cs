@@ -26,7 +26,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
 
     public CRFPOSTagger(string modelPath) 
     {
-        super(modelPath);
+        base(modelPath);
         if (modelPath != null)
         {
             perceptronPOSTagger = new PerceptronPOSTagger(this.model);
@@ -45,12 +45,12 @@ public class CRFPOSTagger : CRFTagger : POSTagger
     protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
     {
         List<Word> simpleWordList = sentence.toSimpleWordList();
-        List<string> wordList = new ArrayList<string>(simpleWordList.size());
+        List<string> wordList = new (simpleWordList.size());
         for (Word word : simpleWordList)
         {
             wordList.Add(word.value);
         }
-        string[] words = wordList.toArray(new string[0]);
+        string[] words = wordList.ToArray(new string[0]);
         Iterator<Word> iterator = simpleWordList.iterator();
         for (int i = 0; i < words.Length; i++)
         {
@@ -106,7 +106,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
     public string[] tag(List<string> wordList)
     {
         string[] words = new string[wordList.size()];
-        wordList.toArray(words);
+        wordList.ToArray(words);
         return tag(words);
     }
 

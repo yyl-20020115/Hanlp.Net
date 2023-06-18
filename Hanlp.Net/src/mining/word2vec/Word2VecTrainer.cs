@@ -15,7 +15,7 @@ public class Word2VecTrainer
     private int negativeSamples = 25;
     private bool useHierarchicalSoftmax;
     private int minFrequency = 5;
-    private Float initialLearningRate;
+    private float initialLearningRate;
     private float downSampleRate = 0.0001f;
     private int iterations = 15;
     private NeuralNetworkType type = NeuralNetworkType.CBOW;
@@ -190,7 +190,7 @@ public class Word2VecTrainer
 //
 //                public void corpusLoaded(int vocWords, int trainWords, int totalWords)
 //                {
-//                    System._out.println();
+//                    Console.WriteLine();
 //                    System._out.printf("词表大小：%d\n", vocWords);
 //                    System._out.printf("训练词数：%d\n", trainWords);
 //                    System._out.printf("语料词数：%d\n", totalWords);
@@ -213,7 +213,7 @@ public class Word2VecTrainer
         try
         {
             model.trainModel();
-            System._out.println();
+            Console.WriteLine();
             System._out.printf("训练结束，一共耗时：%s\n", Utility.humanTime(DateTime.Now.Microsecond - timeStart));
             return new WordVectorModel(modelFileName);
         }

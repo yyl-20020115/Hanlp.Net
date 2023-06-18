@@ -66,7 +66,7 @@ public class Mcsrch
         double p, q, s, d1, d2, d3, r, gamma, theta, stpq, stpc, stpf;
         info[0] = 0;
 
-        if (brackt[0] && ((stp[0] <= Math.min(stx[0], sty[0]) || stp[0] >= Math.max(stx[0], sty[0])) ||
+        if (brackt[0] && ((stp[0] <= Math.Min(stx[0], sty[0]) || stp[0] >= Math.Max(stx[0], sty[0])) ||
                 dx[0] * (stp[0] - stx[0]) >= 0.0 || stpmax < stpmin))
         {
             return;
@@ -81,9 +81,9 @@ public class Mcsrch
             theta = (fx[0] - fp) * 3 / (stp[0] - stx[0]) + dx[0] + dp;
             d1 = Math.abs(theta);
             d2 = Math.abs(dx[0]);
-            d1 = Math.max(d1, d2);
+            d1 = Math.Max(d1, d2);
             d2 = Math.abs(dp);
-            s = Math.max(d1, d2);
+            s = Math.Max(d1, d2);
             d1 = theta / s;
             gamma = s * Math.sqrt(d1 * d1 - dx[0] / s * (dp / s));
             if (stp[0] < stx[0])
@@ -115,9 +115,9 @@ public class Mcsrch
             theta = (fx[0] - fp) * 3 / (stp[0] - stx[0]) + dx[0] + dp;
             d1 = Math.abs(theta);
             d2 = Math.abs(dx[0]);
-            d1 = Math.max(d1, d2);
+            d1 = Math.Max(d1, d2);
             d2 = Math.abs(dp);
-            s = Math.max(d1, d2);
+            s = Math.Max(d1, d2);
             d1 = theta / s;
             gamma = s * Math.sqrt(d1 * d1 - dx[0] / s * (dp / s));
             if (stp[0] > stx[0])
@@ -148,13 +148,13 @@ public class Mcsrch
             theta = (fx[0] - fp) * 3 / (stp[0] - stx[0]) + dx[0] + dp;
             d1 = Math.abs(theta);
             d2 = Math.abs(dx[0]);
-            d1 = Math.max(d1, d2);
+            d1 = Math.Max(d1, d2);
             d2 = Math.abs(dp);
-            s = Math.max(d1, d2);
+            s = Math.Max(d1, d2);
             d3 = theta / s;
             d1 = 0.0;
             d2 = d3 * d3 - dx[0] / s * (dp / s);
-            gamma = s * Math.sqrt((Math.max(d1, d2)));
+            gamma = s * Math.sqrt((Math.Max(d1, d2)));
             if (stp[0] > stx[0])
             {
                 gamma = -gamma;
@@ -211,9 +211,9 @@ public class Mcsrch
                 theta = (fp - fy[0]) * 3 / (sty[0] - stp[0]) + dy[0] + dp;
                 d1 = Math.abs(theta);
                 d2 = Math.abs(dy[0]);
-                d1 = Math.max(d1, d2);
+                d1 = Math.Max(d1, d2);
                 d2 = Math.abs(dp);
-                s = Math.max(d1, d2);
+                s = Math.Max(d1, d2);
                 d1 = theta / s;
                 gamma = s * Math.sqrt(d1 * d1 - dy[0] / s * (dp / s));
                 if (stp[0] > sty[0])
@@ -255,20 +255,20 @@ public class Mcsrch
             dx[0] = dp;
         }
 
-        stpf = Math.min(stpmax, stpf);
-        stpf = Math.max(stpmin, stpf);
+        stpf = Math.Min(stpmax, stpf);
+        stpf = Math.Max(stpmin, stpf);
         stp[0] = stpf;
         if (brackt[0] && bound)
         {
             if (sty[0] > stx[0])
             {
                 d1 = stx[0] + (sty[0] - stx[0]) * 0.66;
-                stp[0] = Math.min(d1, stp[0]);
+                stp[0] = Math.Min(d1, stp[0]);
             }
             else
             {
                 d1 = stx[0] + (sty[0] - stx[0]) * 0.66;
-                stp[0] = Math.max(d1, stp[0]);
+                stp[0] = Math.Max(d1, stp[0]);
             }
         }
 
@@ -326,8 +326,8 @@ public class Mcsrch
             {
                 if (brackt)
                 {
-                    stmin = Math.min(stx, sty);
-                    stmax = Math.max(stx, sty);
+                    stmin = Math.Min(stx, sty);
+                    stmax = Math.Max(stx, sty);
                 }
                 else
                 {
@@ -335,8 +335,8 @@ public class Mcsrch
                     stmax = stp[0] + xtrapf * (stp[0] - stx);
                 }
 
-                stp[0] = Math.max(stp[0], lb3_1_stpmin);
-                stp[0] = Math.min(stp[0], lb3_1_stpmax);
+                stp[0] = Math.Max(stp[0], lb3_1_stpmin);
+                stp[0] = Math.Min(stp[0], lb3_1_stpmax);
 
                 if ((brackt && ((stp[0] <= stmin || stp[0] >= stmax) ||
                         nfev[0] >= maxfev - 1 || infoc == 0)) ||
@@ -387,7 +387,7 @@ public class Mcsrch
                 return;
             }
 
-            if (stage1 && f <= ftest1 && dg >= Math.min(ftol, lb3_1_gtol) * dginit)
+            if (stage1 && f <= ftest1 && dg >= Math.Min(ftol, lb3_1_gtol) * dginit)
             {
                 stage1 = false;
             }

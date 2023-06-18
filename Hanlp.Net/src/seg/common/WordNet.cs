@@ -137,7 +137,7 @@ public class WordNet
         vertexes[line].Add(vertex);
         ++size;
         // 保证这个词语前面直连
-        int start = Math.max(0, line - 5); // 效率起见，只扫描前4行
+        int start = Math.Max(0, line - 5); // 效率起见，只扫描前4行
         for (int l = line - 1; l > start; --l)
         {
             LinkedList<Vertex> all = wordNetAll.get(l);
@@ -329,18 +329,18 @@ public class WordNet
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
 //        return "Graph{" +
-//                "vertexes=" + Arrays.toString(vertexes) +
+//                "vertexes=" + Arrays.ToString(vertexes) +
 //                '}';
         StringBuilder sb = new StringBuilder();
         int line = 0;
         for (List<Vertex> vertexList : vertexes)
         {
-            sb.Append(string.valueOf(line++) + ':' + vertexList.toString()).Append("\n");
+            sb.Append(string.valueOf(line++) + ':' + vertexList.ToString()).Append("\n");
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -380,11 +380,11 @@ public class WordNet
     /**
      * 清空词图
      */
-    public void clear()
+    public void Clear()
     {
         for (List<Vertex> vertexList : vertexes)
         {
-            vertexList.clear();
+            vertexList.Clear();
         }
         size = 0;
     }

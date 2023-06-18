@@ -30,7 +30,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
      */
     private SecondOrderHiddenMarkovModel(float[] start_probability, float[][] transition_probability, float[][] emission_probability)
     {
-        super(start_probability, transition_probability, emission_probability);
+        base(start_probability, transition_probability, emission_probability);
     }
 
     public SecondOrderHiddenMarkovModel(float[] start_probability, float[][] transition_probability, float[][] emission_probability, float[][][] transition_probability2)
@@ -108,7 +108,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
     //@Override
     protected void toLog()
     {
-        super.toLog();
+        base.toLog();
         if (transition_probability2 != null)
         {
             for (float[][] m : transition_probability2)
@@ -224,7 +224,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
     //@Override
     public void unLog()
     {
-        super.unLog();
+        base.unLog();
         for (float[][] m : transition_probability2)
         {
             for (float[] v : m)
@@ -250,6 +250,6 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
                     return false;
             }
         }
-        return super.similar(model);
+        return base.similar(model);
     }
 }

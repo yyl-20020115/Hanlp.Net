@@ -70,10 +70,10 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
             return Collections.emptyList();
         }
          int[] wordNet = new int[sentence.Length];
-        Arrays.fill(wordNet, 1);
+        Array.Fill(wordNet, 1);
          Nature[] natureArray = config.speechTagging ? new Nature[sentence.Length] : null;
         trie.parseText(sentence, new CT());
-        LinkedList<Term> termList = new LinkedList<Term>();
+        List<Term> termList = new ();
         posTag(sentence, wordNet, natureArray);
         for (int i = 0; i < wordNet.Length; )
         {
@@ -103,7 +103,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
     //@Override
     public Segment enableCustomDictionary(bool enable)
     {
-        throw new UnsupportedOperationException("AhoCorasickDoubleArrayTrieSegment暂时不支持用户词典。");
+        throw new InvalidOperationException("AhoCorasickDoubleArrayTrieSegment暂时不支持用户词典。");
     }
 
     public AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute> getTrie()

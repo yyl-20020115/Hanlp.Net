@@ -46,8 +46,8 @@ public class Node
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
-        return vertex.toString();
+        return vertex.ToString();
     }
 }

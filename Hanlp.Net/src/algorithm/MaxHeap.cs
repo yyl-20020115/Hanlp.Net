@@ -84,7 +84,7 @@ public class MaxHeap<E> : IEnumerable<E>
      * 转为有序列表，自毁性操作
      * @return
      */
-    public List<E> toList()
+    public List<E> ToList()
     {
         var list = new List<E>(queue.Count);
         while (queue.Count>0)

@@ -33,7 +33,7 @@ public class CommonSynonymDictionaryEx
             return dictionary;
         }
 
-//        TreeSet<Float> set = new TreeSet<Float>();
+//        TreeSet<float> set = new TreeSet<float>();
 
         return null;
     }
@@ -62,7 +62,7 @@ public class CommonSynonymDictionaryEx
                 }
             }
             bw.close();
-            List<string> keyList = new ArrayList<string>(treeMap.size());
+            List<string> keyList = new (treeMap.size());
             for (string key : treeMap.keySet())
             {
                 keyList.Add(key);
@@ -70,7 +70,7 @@ public class CommonSynonymDictionaryEx
             List<long[]> valueList = new ArrayList<long[]>(treeMap.size());
             for (Set<long> idSet : treeMap.values())
             {
-                valueList.Add(idSet.toArray(new long[0]));
+                valueList.Add(idSet.ToArray(new long[0]));
             }
             int resultCode = trie.build(keyList, valueList);
             if (resultCode != 0)
@@ -101,9 +101,9 @@ public class CommonSynonymDictionaryEx
     public long distance(string a, string b)
     {
         long[] itemA = get(a);
-        if (itemA == null) return long.MAX_VALUE / 3;
+        if (itemA == null) return long.MaxValue / 3;
         long[] itemB = get(b);
-        if (itemB == null) return long.MAX_VALUE / 3;
+        if (itemB == null) return long.MaxValue / 3;
 
         return ArrayDistance.computeAverageDistance(itemA, itemB);
     }
@@ -120,18 +120,18 @@ public class CommonSynonymDictionaryEx
 
         public SynonymItem(Synonym entry, Dictionary<string, Synonym> synonymMap)
         {
-            super(entry.realWord, entry.id, entry.type);
+            base(entry.realWord, entry.id, entry.type);
             this.synonymMap = synonymMap;
         }
 
         //@Override
-        public string toString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(super.toString());
+            sb.Append(base.ToString());
             sb.Append(' ');
             sb.Append(synonymMap);
-            return sb.toString();
+            return sb.ToString();
         }
     }
 }

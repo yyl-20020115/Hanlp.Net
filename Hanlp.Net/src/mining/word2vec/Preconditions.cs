@@ -367,7 +367,7 @@ class Preconditions
         int i = 0;
         while (i < args.Length)
         {
-            int placeholderStart = template.indexOf("%s", templateStart);
+            int placeholderStart = template.IndexOf("%s", templateStart);
             if (placeholderStart == -1)
             {
                 break;
@@ -391,6 +391,6 @@ class Preconditions
             builder.Append(']');
         }
 
-        return builder.toString();
+        return builder.ToString();
     }
 }

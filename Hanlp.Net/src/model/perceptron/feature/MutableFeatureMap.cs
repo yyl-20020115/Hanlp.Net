@@ -26,7 +26,7 @@ public class MutableFeatureMap : FeatureMap
 
     public MutableFeatureMap(TagSet tagSet)
     {
-        super(tagSet, true);
+        base(tagSet, true);
         featureIdMap = new Dictionary<string, int>();
         addTransitionFeatures(tagSet);
     }
@@ -42,7 +42,7 @@ public class MutableFeatureMap : FeatureMap
 
     public MutableFeatureMap(TagSet tagSet, Dictionary<string, int> featureIdMap)
     {
-        super(tagSet);
+        base(tagSet);
         this.featureIdMap = featureIdMap;
         addTransitionFeatures(tagSet);
     }

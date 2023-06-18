@@ -40,7 +40,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        while (iterator.hasNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            if (current.getKey().Length - current.getKey().indexOf('@') == 2 && pre.getKey().indexOf(current.getKey()) == 0 && current.getValue() <= 2)
+////            if (current.getKey().Length - current.getKey().IndexOf('@') == 2 && pre.getKey().IndexOf(current.getKey()) == 0 && current.getValue() <= 2)
 ////            {
 ////                Console.WriteLine("应当删除 " + current + " 保留 " + pre);
 ////                iterator.Remove();

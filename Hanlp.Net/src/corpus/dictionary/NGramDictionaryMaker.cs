@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 

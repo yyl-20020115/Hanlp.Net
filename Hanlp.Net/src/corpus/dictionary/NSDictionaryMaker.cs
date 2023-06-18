@@ -10,7 +10,9 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.corpus.util;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 
@@ -33,21 +35,21 @@ public class NSDictionaryMaker : CommonDictionaryMaker
     {
 //        logger.warning("开始制作词典");
         // 将非A的词语保存下来
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
-                if (!word.getLabel().Equals(NS.Z.toString()))
+                if (!word.getLabel().Equals(NS.Z.ToString()))
                 {
                     dictionaryMaker.Add(word);
                 }
             }
         }
         // 制作NGram词典
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             IWord pre = null;
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
                 if (pre != null)
                 {
@@ -67,13 +69,13 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             Precompiler.compileWithoutNS(wordList);
             if (verbose)
             {
-                System._out.print(++i + " / " + sentenceList.size() + " ");
-                System._out.println("原始语料 " + wordList);
+                Console.Write(++i + " / " + sentenceList.size() + " ");
+                Console.WriteLine("原始语料 " + wordList);
             }
             LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, "S"));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "Z"));
-            if (verbose) System._out.println("添加首尾 " + wordList);
+            if (verbose) Console.WriteLine("添加首尾 " + wordList);
             // 标注上文
             Iterator<IWord> iterator = wordLinkedList.iterator();
             IWord pre = iterator.next();
@@ -82,11 +84,11 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
                 {
-                    pre.setLabel(NS.A.toString());
+                    pre.setLabel(NS.A.ToString());
                 }
                 pre = current;
             }
-            if (verbose) System._out.println("标注上文 " + wordList);
+            if (verbose) Console.WriteLine("标注上文 " + wordList);
             // 标注下文
             iterator = wordLinkedList.descendingIterator();
             pre = iterator.next();
@@ -95,11 +97,11 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
                 {
-                    pre.setLabel(NS.B.toString());
+                    pre.setLabel(NS.B.ToString());
                 }
                 pre = current;
             }
-            if (verbose) System._out.println("标注下文 " + wordList);
+            if (verbose) Console.WriteLine("标注下文 " + wordList);
             // 标注中间
             iterator = wordLinkedList.iterator();
             IWord first = iterator.next();
@@ -109,15 +111,15 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 IWord third = iterator.next();
                 if (first.getLabel().StartsWith("ns") && third.getLabel().StartsWith("ns") && !second.getLabel().StartsWith("ns"))
                 {
-                    second.setLabel(NS.X.toString());
+                    second.setLabel(NS.X.ToString());
                 }
                 first = second;
                 second = third;
             }
-            if (verbose) System._out.println("标注中间 " + wordList);
+            if (verbose) Console.WriteLine("标注中间 " + wordList);
             // 拆分地名
             CorpusUtil.spilt(wordList);
-            if (verbose) System._out.println("拆分地名 " + wordList);
+            if (verbose) Console.WriteLine("拆分地名 " + wordList);
             // 处理整个
             ListIterator<IWord> listIterator = wordLinkedList.listIterator();
             while (listIterator.hasNext())
@@ -132,28 +134,28 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                     int wordLength = value.Length - longestSuffixLength;
                     if (longestSuffixLength == 0 || wordLength == 0)
                     {
-                        word.setLabel(NS.G.toString());
+                        word.setLabel(NS.G.ToString());
                         continue;
                     }
                     listIterator.Remove();
                     if (wordLength > 3)
                     {
-                        listIterator.Add(new Word(value.substring(0, wordLength), NS.G.toString()));
-                        listIterator.Add(new Word(value.substring(wordLength), NS.H.toString()));
+                        listIterator.Add(new Word(value.substring(0, wordLength), NS.G.ToString()));
+                        listIterator.Add(new Word(value.substring(wordLength), NS.H.ToString()));
                         continue;
                     }
                     for (int l = 1, tag = NS.C.ordinal(); l <= wordLength; ++l, ++tag)
                     {
-                        listIterator.Add(new Word(value.substring(l - 1, l), NS.values()[tag].toString()));
+                        listIterator.Add(new Word(value.substring(l - 1, l), NS.values()[tag].ToString()));
                     }
-                    listIterator.Add(new Word(value.substring(wordLength), NS.H.toString()));
+                    listIterator.Add(new Word(value.substring(wordLength), NS.H.ToString()));
                 }
                 else
                 {
-                    word.setLabel(NS.Z.toString());
+                    word.setLabel(NS.Z.ToString());
                 }
             }
-            if (verbose) System._out.println("处理整个 " + wordList);
+            if (verbose) Console.WriteLine("处理整个 " + wordList);
         }
     }
 }

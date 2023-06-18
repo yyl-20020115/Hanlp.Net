@@ -9,7 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.recognition.nr;
 using com.hankcs.hanlp.recognition.ns;
+using com.hankcs.hanlp.recognition.nt;
 using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.seg.NShort;
@@ -33,11 +35,11 @@ public class NShortSegment : WordBasedSegment
         // 粗分
         List<List<Vertex>> coarseResult = biSegment(sentence, 2, wordNetOptimum, wordNetAll);
         bool NERexists = false;
-        for (List<Vertex> vertexList : coarseResult)
+        foreach (List<Vertex> vertexList in coarseResult)
         {
             if (HanLP.Config.DEBUG)
             {
-                System._out.println("粗分结果" + convert(vertexList, false));
+                Console.WriteLine("粗分结果" + convert(vertexList, false));
             }
             // 实体命名识别
             if (config.ner)
@@ -131,7 +133,7 @@ public class NShortSegment : WordBasedSegment
 //        logger.trace("打印词网：\n" + wordNetAll);
         ///////////////生成词图////////////////////
         Graph graph = generateBiGraph(wordNetAll);
-//        logger.trace(graph.toString());
+//        logger.trace(graph.ToString());
         if (HanLP.Config.DEBUG)
         {
             System._out.printf("打印词图：%s\n", graph.printByTo());
@@ -143,13 +145,13 @@ public class NShortSegment : WordBasedSegment
         {
             throw new RuntimeException(nKind + "-最短路径求解失败，请检查上面的词网是否存在负圈或悬孤节点");
         }
-//        logger.trace(nKind + "-最短路径");
-//        for (int[] path : spResult)
-//        {
-//            logger.trace(Graph.parseResult(graph.parsePath(path)));
-//        }
+        //        logger.trace(nKind + "-最短路径");
+        //        for (int[] path : spResult)
+        //        {
+        //            logger.trace(Graph.parseResult(graph.parsePath(path)));
+        //        }
         //////////////日期、数字合并策略
-        for (int[] path : spResult)
+        foreach (int[] path in spResult)
         {
             List<Vertex> vertexes = graph.parsePath(path);
             generateWord(vertexes, wordNetOptimum);

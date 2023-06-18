@@ -126,7 +126,7 @@ public class Encoder
                 }
                 if (++lineNo % 100 == 0)
                 {
-                    System._out.print(lineNo + ".. ");
+                    Console.Write(lineNo + ".. ");
                 }
             }
             br.close();
@@ -139,16 +139,16 @@ public class Encoder
         featureIndex.shrink(freq, x);
 
         double[] alpha = new double[featureIndex.size()];
-        Arrays.fill(alpha, 0.0);
+        Array.Fill(alpha, 0.0);
         featureIndex.setAlpha_(alpha);
 
-        System._out.println("Number of sentences: " + x.size());
-        System._out.println("Number of features:  " + featureIndex.size());
-        System._out.println("Number of thread(s): " + threadNum);
-        System._out.println("Freq:                " + freq);
-        System._out.println("eta:                 " + eta);
-        System._out.println("C:                   " + C);
-        System._out.println("shrinking size:      " + shrinkingSize);
+        Console.WriteLine("Number of sentences: " + x.size());
+        Console.WriteLine("Number of features:  " + featureIndex.size());
+        Console.WriteLine("Number of thread(s): " + threadNum);
+        Console.WriteLine("Freq:                " + freq);
+        Console.WriteLine("eta:                 " + eta);
+        Console.WriteLine("C:                   " + C);
+        Console.WriteLine("shrinking size:      " + shrinkingSize);
 
         switch (algorithm)
         {
@@ -181,7 +181,7 @@ public class Encoder
         {
             Console.Error.WriteLine("Failed to save model");
         }
-        System._out.println("Done!");
+        Console.WriteLine("Done!");
         return true;
     }
 
@@ -233,7 +233,7 @@ public class Encoder
         ExecutorService executor = Executors.newFixedThreadPool(threadNum);
         for (int itr = 0; itr < maxItr; itr++)
         {
-            featureIndex.clear();
+            featureIndex.Clear();
 
             try
             {
@@ -293,7 +293,7 @@ public class Encoder
             b.Append(" act=").Append(numNonZero);
             b.Append(" obj=").Append(threads.get(0).obj);
             b.Append(" diff=").Append(diff);
-            System._out.println(b.toString());
+            Console.WriteLine(b.ToString());
 
             oldObj = threads.get(0).obj;
 
@@ -340,10 +340,10 @@ public class Encoder
                            int threadNum)
     {
         int[] shrinkArr = new int[x.size()];
-        Arrays.fill(shrinkArr, 0);
+        Array.Fill(shrinkArr, 0);
         List<int> shrink = Arrays.asList(shrinkArr);
         Double[] upperArr = new Double[x.size()];
-        Arrays.fill(upperArr, 0.0);
+        Array.Fill(upperArr, 0.0);
         List<Double> upperBound = Arrays.asList(upperArr);
         Double[] expectArr = new Double[featureIndex.size()];
         List<Double> expected = Arrays.asList(expectArr);
@@ -397,7 +397,7 @@ public class Encoder
                     {
                         s += expected.get(k) * expected.get(k);
                     }
-                    double mu = Math.max(0.0, (errorNum - costDiff) / s);
+                    double mu = Math.Max(0.0, (errorNum - costDiff) / s);
 
                     if (upperBound.get(i) + mu > C)
                     {
@@ -406,13 +406,13 @@ public class Encoder
                     }
                     else
                     {
-                        maxKktViolation = Math.max(errorNum - costDiff, maxKktViolation);
+                        maxKktViolation = Math.Max(errorNum - costDiff, maxKktViolation);
                     }
 
                     if (mu > 1e-10)
                     {
                         upperBound.set(i, upperBound.get(i) + mu);
-                        upperBound.set(i, Math.min(C, upperBound.get(i)));
+                        upperBound.set(i, Math.Min(C, upperBound.get(i)));
                         for (int k = 0; k < expected.size(); k++)
                         {
                             alpha[k] += mu * expected.get(k);
@@ -434,7 +434,7 @@ public class Encoder
             b.Append(" uact=").Append(upperActiveSet);
             b.Append(" obj=").Append(obj);
             b.Append(" kkt=").Append(maxKktViolation);
-            System._out.println(b.toString());
+            Console.WriteLine(b.ToString());
 
             if (maxKktViolation <= 0.0)
             {
@@ -473,6 +473,6 @@ public class Encoder
             Console.Error.WriteLine("error training model");
             return;
         }
-        System._out.println(new Date().getTime() - time1);
+        Console.WriteLine(new Date().getTime() - time1);
     }
 }

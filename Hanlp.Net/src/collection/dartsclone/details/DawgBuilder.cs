@@ -121,7 +121,7 @@ class DawgBuilder
         _units.set(0, _nodes.get(0).unit());
         _labels.set(0, _nodes.get(0).label);
 
-        _nodes.clear();
+        _nodes.Clear();
         _table.Clear();
         _nodeStack.Clear();
         _recycleBin.Clear();
@@ -202,15 +202,15 @@ class DawgBuilder
         _nodes.get(id).setValue(value);
     }
 
-    void clear()
+    void Clear()
     {
-        _nodes.clear();
-        _units.clear();
-        _labels.clear();
-        _isIntersections.clear();
-        _table.clear();
-        _nodeStack.clear();
-        _recycleBin.clear();
+        _nodes.Clear();
+        _units.Clear();
+        _labels.Clear();
+        _isIntersections.Clear();
+        _table.Clear();
+        _nodeStack.Clear();
+        _recycleBin.Clear();
         _numStates = 0;
     }
 
@@ -310,7 +310,7 @@ class DawgBuilder
     private void expandTable()
     {
         int tableSize = _table.size() << 1;
-        _table.clear();
+        _table.Clear();
         _table.resize(tableSize, 0);
 
         for (int id = 1; id < _units.size(); ++id)

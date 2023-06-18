@@ -148,9 +148,9 @@ public abstract class HiddenMarkovModel
         {
             if (sample.Length != 2 || sample[0].Length != sample[1].Length) throw new ArgumentException("非法样本");
             for (int o : sample[0])
-                max_obser = Math.max(max_obser, o);
+                max_obser = Math.Max(max_obser, o);
             for (int s : sample[1])
-                max_state = Math.max(max_state, s);
+                max_state = Math.Max(max_state, s);
         }
         estimateStartProbability(samples, max_state);
         estimateTransitionProbability(samples, max_state);

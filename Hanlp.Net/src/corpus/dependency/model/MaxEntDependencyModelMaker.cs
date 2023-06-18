@@ -55,7 +55,7 @@ public class MaxEntDependencyModelMaker
                     bw.newLine();
                 }
             }
-            System._out.println("done.");
+            Console.WriteLine("done.");
         }
         bw.close();
         return true;

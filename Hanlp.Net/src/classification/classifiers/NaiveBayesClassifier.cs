@@ -104,7 +104,7 @@ public class NaiveBayesClassifier : AbstractClassifier
             }
         }
         logger._out("贝叶斯统计结束\n");
-        model.catalog = dataSet.getCatalog().toArray();
+        model.catalog = dataSet.getCatalog().ToArray();
         model.tokenizer = dataSet.getTokenizer();
         model.wordIdTrie = featureData.wordIdTrie;
     }

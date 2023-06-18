@@ -72,19 +72,19 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     //@Override
     public SortedDictionary<string, V> subMap(string fromKey, string toKey)
     {
-        throw new UnsupportedOperationException();
+        throw new InvalidOperationException();
     }
 
     //@Override
     public SortedDictionary<string, V> headMap(string toKey)
     {
-        throw new UnsupportedOperationException();
+        throw new InvalidOperationException();
     }
 
     //@Override
     public SortedDictionary<string, V> tailMap(string fromKey)
     {
-        throw new UnsupportedOperationException();
+        throw new InvalidOperationException();
     }
 
     //@Override
@@ -117,11 +117,11 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public bool containsKey(Object key)
+    public bool ContainsKey(Object key)
     {
         if (key == null || !(key is string))
             return false;
-        return trie.containsKey((string)key);
+        return trie.ContainsKey((string)key);
     }
 
     //@Override
@@ -142,7 +142,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         }
         else
         {
-            id = trie.get(key.toString());
+            id = trie.get(key.ToString());
         }
         if (id == -1)
             return null;
@@ -171,7 +171,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     public V Remove(Object key)
     {
         if (key == null) return null;
-        int id = trie.Remove(key is string ? (string)key : key.toString());
+        int id = trie.Remove(key is string ? (string)key : key.ToString());
         if (id == -1)
             return null;
         trie.decreaseValues(id);
@@ -188,10 +188,10 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
-        trie.clear();
-        values.clear();
+        trie.Clear();
+        values.Clear();
     }
 
     //@Override
@@ -217,9 +217,9 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         }
 
         //@Override
-        public bool contains(Object o)
+        public bool Contains(Object o)
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
 
         //@Override
@@ -242,27 +242,27 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
             //@Override
             public void Remove()
             {
-                throw new UnsupportedOperationException();
+                throw new InvalidOperationException();
             }
         };
     }
 
     //@Override
-    public Object[] toArray()
+    public Object[] ToArray()
     {
-        return values.toArray();
+        return values.ToArray();
     }
 
     //@Override
-    public T[] toArray<T>(T[] a)
+    public T[] ToArray<T>(T[] a)
     {
-        return values.toArray(a);
+        return values.ToArray(a);
     }
 
     //@Override
     public bool Add(string s)
     {
-        throw new UnsupportedOperationException();
+        throw new InvalidOperationException();
     }
 
     //@Override
@@ -272,30 +272,30 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public bool containsAll(Collection<?> c)
+    public bool containsAll(Collection c)
     {
         for (Object o : c)
         {
-            if (!trie.containsKey((string)o))
+            if (!trie.ContainsKey((string)o))
                 return false;
         }
         return true;
     }
 
     //@Override
-    public bool addAll(Collection<? : string> c)
+    public bool addAll(Collection<string> c)
     {
-        throw new UnsupportedOperationException();
+        throw new InvalidOperationException();
     }
 
     //@Override
-    public bool retainAll(Collection<?> c)
+    public bool retainAll(Collection c)
     {
-        throw new UnsupportedOperationException();
+        throw new InvalidOperationException();
     }
 
     //@Override
-    public bool removeAll(Collection<?> c)
+    public bool removeAll(Collection c)
     {
         bool changed = false;
         for (Object o : c)
@@ -307,9 +307,9 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
-        MutableDoubleArrayTrie.this.clear();
+        MutableDoubleArrayTrie.this.Clear();
     }
 }
 
@@ -337,9 +337,9 @@ public HashSet<Entry<string, V>> entrySet()
     }
 
     //@Override
-    public bool contains(Object o)
+    public bool Contains(Object o)
     {
-        throw new UnsupportedOperationException();
+        throw new InvalidOperationException();
     }
 
     //@Override
@@ -365,63 +365,63 @@ public HashSet<Entry<string, V>> entrySet()
         //@Override
         public void Remove()
         {
-            throw new UnsupportedOperationException();
+            throw new InvalidOperationException();
         }
     };
 }
 
 //@Override
-public Object[] toArray()
+public Object[] ToArray()
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
-public <T> T[] toArray(T[] a)
+public <T> T[] ToArray(T[] a)
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
 public bool Add(Entry<string, V> stringVEntry)
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
 public bool Remove(Object o)
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
-public bool containsAll(Collection<?> c)
+public bool containsAll(Collection c)
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
-public bool addAll(Collection<? : Entry<string, V>> c)
+public bool addAll(Collection<Entry<string, V>> c)
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
-public bool retainAll(Collection<?> c)
+public bool retainAll(Collection c)
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
-public bool removeAll(Collection<?> c)
+public bool removeAll(Collection c)
 {
-    throw new UnsupportedOperationException();
+    throw new InvalidOperationException();
 }
 
 //@Override
-public void clear()
+public void Clear()
 {
-    MutableDoubleArrayTrie.this.clear();
+    MutableDoubleArrayTrie.s.Clear();
 }
         };
     }

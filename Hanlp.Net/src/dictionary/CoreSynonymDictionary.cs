@@ -87,7 +87,7 @@ public class CoreSynonymDictionary
     {
         CommonSynonymDictionary.SynonymItem itemA = get(A);
         CommonSynonymDictionary.SynonymItem itemB = get(B);
-        if (itemA == null || itemB == null) return long.MAX_VALUE;
+        if (itemA == null || itemB == null) return long.MaxValue;
 
         return distance(itemA, itemB);
     }

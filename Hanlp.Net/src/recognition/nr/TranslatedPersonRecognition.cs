@@ -39,7 +39,7 @@ public class TranslatedPersonRecognition
             Vertex vertex = listIterator.next();
             if (appendTimes > 0)
             {
-                if (vertex.guessNature() == Nature.nrf || TranslatedPersonDictionary.containsKey(vertex.realWord))
+                if (vertex.guessNature() == Nature.nrf || TranslatedPersonDictionary.ContainsKey(vertex.realWord))
                 {
                     sbName.Append(vertex.realWord);
                     ++appendTimes;
@@ -51,9 +51,9 @@ public class TranslatedPersonRecognition
                     {
                         if (HanLP.Config.DEBUG)
                         {
-                            System._out.println("音译人名识别出：" + sbName.toString());
+                            Console.WriteLine("音译人名识别出：" + sbName.ToString());
                         }
-                        wordNetOptimum.insert(activeLine, new Vertex(Predefine.TAG_PEOPLE, sbName.toString(), new CoreDictionary.Attribute(Nature.nrf), WORD_ID), wordNetAll);
+                        wordNetOptimum.insert(activeLine, new Vertex(Predefine.TAG_PEOPLE, sbName.ToString(), new CoreDictionary.Attribute(Nature.nrf), WORD_ID), wordNetAll);
                     }
                     sbName.setLength(0);
                     appendTimes = 0;
@@ -63,7 +63,7 @@ public class TranslatedPersonRecognition
             {
                 // nrf触发识别
                 if (vertex.guessNature() == Nature.nrf
-//                        || TranslatedPersonDictionary.containsKey(vertex.realWord)
+//                        || TranslatedPersonDictionary.ContainsKey(vertex.realWord)
                         )
                 {
                     sbName.Append(vertex.realWord);

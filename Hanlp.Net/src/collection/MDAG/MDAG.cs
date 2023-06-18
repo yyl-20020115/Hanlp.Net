@@ -47,7 +47,7 @@ public class MDAG : ICacheAble
      */
     protected SimpleMDAGNode simplifiedSourceNode;
 
-    //HashMap which contains the MDAGNodes collectively representing the all unique equivalence classes in the MDAG. 
+    //HashMap which Contains the MDAGNodes collectively representing the all unique equivalence classes in the MDAG. 
     //Uniqueness is defined by the types of transitions allowed from, and number and type of nodes reachable
     //from the node of interest. Since there are no duplicate nodes in an MDAG, # of equivalence classes == # of nodes.
     /**
@@ -116,12 +116,12 @@ public class MDAG : ICacheAble
     /**
      * 几种搜索模式
      */
-    private class SearchCondition
+    public class SearchCondition
     {
-        NO_SEARCH_CONDITION, 
-        PREFIX_SEARCH_CONDITION, 
-        SUBSTRING_SEARCH_CONDITION,
-        SUFFIX_SEARCH_CONDITION;
+        public static SearchCondition NO_SEARCH_CONDITION = new();
+        public static SearchCondition PREFIX_SEARCH_CONDITION = new();
+        public static SearchCondition SUBSTRING_SEARCH_CONDITION = new();
+        public static SearchCondition SUFFIX_SEARCH_CONDITION = new();
 
         /**
          * 判断两个字符串是否满足关系<br>
@@ -141,7 +141,7 @@ public class MDAG : ICacheAble
                     satisfiesSearchCondition = (str1.StartsWith(str2));
                     break;
                 case SUBSTRING_SEARCH_CONDITION:
-                    satisfiesSearchCondition = (str1.contains(str2));
+                    satisfiesSearchCondition = (str1.Contains(str2));
                     break;
                 case SUFFIX_SEARCH_CONDITION:
                     satisfiesSearchCondition = (str1.EndsWith(str2));
@@ -381,7 +381,7 @@ public class MDAG : ICacheAble
 
                 if (soleInternalTransitionPathLength == internalTransitionPathLength)
                 {
-                    sourceNode.removeOutgoingTransition(str.charAt(0));
+                    sourceNode.removeOutgoingTransition(str[0]);
                     transitionCount -= str.Length;
                 }
                 else
@@ -435,7 +435,7 @@ public class MDAG : ICacheAble
             //The _transition path of the substring of prevStr from this point will need to be submitted for minimization processing.
             //The substring before this point, however, does not, since currStr will simply be extending the right languages of the 
             //nodes on its _transition path.
-            int shortestStringLength = Math.min(prevStr.Length, currStr.Length);
+            int shortestStringLength = Math.Min(prevStr.Length, currStr.Length);
             for (mpsIndex = 0; mpsIndex < shortestStringLength && prevStr.charAt(mpsIndex) == currStr.charAt(mpsIndex); mpsIndex++)
             {
             }
@@ -536,7 +536,7 @@ public class MDAG : ICacheAble
      */
     private void replaceOrRegister(MDAGNode originNode, string str)
     {
-        char transitionLabelChar = str.charAt(0);
+        char transitionLabelChar = str[0];
         MDAGNode relevantTargetNode = originNode.transition(transitionLabelChar);
 
         //If relevantTargetNode has transitions and there is at least one char left to process, recursively call 
@@ -612,7 +612,7 @@ public class MDAG : ICacheAble
                 equivalenceClassMDAGNodeHashMap.Remove(currentNode);
 
             //The GetHashCode of an MDAGNode is cached the first time a hash is performed without a cache value present.
-            //Since we just hashed currentNode, we must clear this regardless of its presence in equivalenceClassMDAGNodeHashMap
+            //Since we just hashed currentNode, we must Clear this regardless of its presence in equivalenceClassMDAGNodeHashMap
             //since we're not actually declaring equivalence class representatives here.
             if (currentNode != null) currentNode.clearStoredHashCode();
         }
@@ -829,7 +829,7 @@ public class MDAG : ICacheAble
      * @param str the string to be searched for
      * @return true if {@code str} is present in the MDAG, and false otherwise
      */
-    public bool contains(string str)
+    public bool Contains(string str)
     {
         if (sourceNode != null)      //if the MDAG hasn't been simplified
         {
@@ -1053,7 +1053,7 @@ public class MDAG : ICacheAble
     {
         if (nodeObj != null)
         {
-            Class nodeObjClass = nodeObj.getClass();
+            Type nodeObjClass = nodeObj.getClass();
 
             if (nodeObjClass.Equals(MDAGNode.c))
                 return ((MDAGNode) nodeObj).isAcceptNode();
@@ -1066,17 +1066,17 @@ public class MDAG : ICacheAble
     }
 
 //    //@Override
-//    public string toString()
+//    public string ToString()
 //    {
 //        StringBuilder sb = new StringBuilder("MDAG{");
 //        sb.Append("sourceNode=").Append(sourceNode);
 //        sb.Append(", simplifiedSourceNode=").Append(simplifiedSourceNode);
 //        sb.Append(", equivalenceClassMDAGNodeHashMap=").Append(equivalenceClassMDAGNodeHashMap);
-//        sb.Append(", mdagDataArray=").Append(Arrays.toString(mdagDataArray));
+//        sb.Append(", mdagDataArray=").Append(Arrays.ToString(mdagDataArray));
 //        sb.Append(", charTreeSet=").Append(charTreeSet);
 //        sb.Append(", transitionCount=").Append(transitionCount);
 //        sb.Append('}');
-//        return sb.toString();
+//        return sb.ToString();
 //    }
 
     /**

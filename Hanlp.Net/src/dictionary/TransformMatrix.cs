@@ -65,7 +65,7 @@ public abstract class TransformMatrix
             for (int i = 0; i < ordinaryArray.Length; ++i)
             {
                 ordinaryArray[i] = ordinal(labels[i]);
-                ordinaryMax = Math.max(ordinaryMax, ordinaryArray[i]);
+                ordinaryMax = Math.Max(ordinaryMax, ordinaryArray[i]);
             }
             ++ordinaryMax;
             matrix = new int[ordinaryMax][ordinaryMax];
@@ -126,7 +126,7 @@ public abstract class TransformMatrix
                 {
                     double frequency = matrix[from][to] + 1e-8;
                     transititon_probability[from][to] = -Math.log(frequency / total[from]);
-//                    System._out.println("from" + NR.values()[from] + " to" + NR.values()[to] + " = " + transititon_probability[from][to]);
+//                    Console.WriteLine("from" + NR.values()[from] + " to" + NR.values()[to] + " = " + transititon_probability[from][to]);
                 }
             }
         }

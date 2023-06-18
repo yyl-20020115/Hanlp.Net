@@ -13,6 +13,7 @@ using com.hankcs.hanlp.corpus.occurrence;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.summary;
+using System.Collections.ObjectModel;
 
 namespace com.hankcs.hanlp.mining.word;
 
@@ -84,24 +85,25 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
      */
     public ICollection<TermFrequency> top(int N)
     {
-        MaxHeap<TermFrequency> heap = new MaxHeap<TermFrequency>(N, new Comparator<TermFrequency>()
-        {
-            //@Override
-            public int compare(TermFrequency o1, TermFrequency o2)
-            {
-                return o1.compareTo(o2);
-            }
-        });
+        MaxHeap<TermFrequency> heap = new MaxHeap<TermFrequency>(N, new CMP());
         heap.addAll(termFrequencyMap.values());
-        return heap.toList();
+        return heap.ToList();
     }
 
+    public class CMP : IComparer<TermFrequency>
+    {
+        //@Override
+        public int Compare(TermFrequency o1, TermFrequency o2)
+        {
+            return o1.compareTo(o2);
+        }
+    }
     /**
      * 所有词汇的频次
      *
      * @return
      */
-    public Collection<TermFrequency> all()
+    public ICollection<TermFrequency> all()
     {
         return termFrequencyMap.values();
     }
@@ -119,10 +121,10 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool contains(Object o)
+    public bool Contains(Object o)
     {
         if (o is string)
-            return termFrequencyMap.containsKey(o);
+            return termFrequencyMap.ContainsKey(o);
         else if (o is TermFrequency)
             return termFrequencyMap.containsValue(o);
         return false;
@@ -135,15 +137,15 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public Object[] toArray()
+    public Object[] ToArray()
     {
-        return termFrequencyMap.values().toArray();
+        return termFrequencyMap.values().ToArray();
     }
 
     //@Override
-    public <T> T[] toArray(T[] a)
+    public <T> T[] ToArray(T[] a)
     {
-        return termFrequencyMap.values().toArray(a);
+        return termFrequencyMap.values().ToArray(a);
     }
 
     //@Override
@@ -166,11 +168,11 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool containsAll(Collection<?> c)
+    public bool containsAll(Collection c)
     {
-        for (Object o : c)
+        foreach (Object o in c)
         {
-            if (!contains(o))
+            if (!Contains(o))
                 return false;
         }
         return true;
@@ -179,7 +181,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     //@Override
     public bool addAll(Collection<TermFrequency> c)
     {
-        for (TermFrequency termFrequency : c)
+        foreach (TermFrequency termFrequency in c)
         {
             Add(termFrequency);
         }
@@ -187,9 +189,9 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool removeAll(Collection<?> c)
+    public bool removeAll(Collection c)
     {
-        for (Object o : c)
+        foreach (Object o in c)
         {
             if (!Remove(o))
                 return false;
@@ -198,15 +200,15 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool retainAll(Collection<?> c)
+    public bool retainAll(Collection c)
     {
         return termFrequencyMap.values().retainAll(c);
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
-        termFrequencyMap.clear();
+        termFrequencyMap.Clear();
     }
 
     /**
@@ -219,11 +221,11 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     //@Override
     public List<string> getKeywords(List<Term> termList, int size)
     {
-        clear();
+        Clear();
         Add(termList);
         Collection<TermFrequency> topN = top(size);
-        List<string> r = new ArrayList<string>(topN.size());
-        for (TermFrequency termFrequency : topN)
+        List<string> r = new (topN.size());
+        foreach (TermFrequency termFrequency in topN)
         {
             r.Add(termFrequency.getTerm());
         }
@@ -243,9 +245,9 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         int max = 100;
-        return top(Math.min(max, size())).toString();
+        return top(Math.Min(max, size())).ToString();
     }
 }

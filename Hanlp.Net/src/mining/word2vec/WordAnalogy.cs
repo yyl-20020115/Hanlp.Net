@@ -7,12 +7,12 @@ public class WordAnalogy : AbstractClosestVectors
 
     protected WordAnalogy(string file)
     {
-        super(file);
+        base(file);
     }
 
     static void usage()
     {
-        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE contains word projections in the text Format\n",
+        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE Contains word projections in the text Format\n",
                           WordAnalogy.class.getName());
         System.exit(0);
     }

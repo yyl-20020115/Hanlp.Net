@@ -109,6 +109,6 @@ public class EasyReader
      */
     public void read(LineHandler handler)
     {
-        read(handler, int.MAX_VALUE);
+        read(handler, int.MaxValue);
     }
 }

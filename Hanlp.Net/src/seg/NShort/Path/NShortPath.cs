@@ -99,7 +99,7 @@ public class NShortPath
 
             // 初始化当前结点所有边的eWeight值
             for (int i = 0; i < N; ++i)
-                weightArray[nCurNode - 1][i] = Double.MAX_VALUE;
+                weightArray[nCurNode - 1][i] = Double.MaxValue;
 
             // 将queWork中的内容装入fromArray
             tmpElement = queWork.deQueue();
@@ -135,7 +135,7 @@ public class NShortPath
         double eWeight;
         List<EdgeFrom> pEdgeToList;
 
-        queWork.clear();
+        queWork.Clear();
         pEdgeToList = graph.getEdgeListTo(nCurNode);
 
         // Get all the edgesFrom
@@ -154,7 +154,7 @@ public class NShortPath
                 }
 
                 // 如果PreNode的Weight == INFINITE_VALUE，则没有必要继续下去了
-                if (weightArray[nPreNode - 1][i] == Double.MAX_VALUE)
+                if (weightArray[nPreNode - 1][i] == Double.MaxValue)
                     break;
 
                 queWork.enQueue(new QueueElement(nPreNode, i, eWeight + weightArray[nPreNode - 1][i]));
@@ -189,7 +189,7 @@ public class NShortPath
             while (curNode != 0)
             {
                 element = fromArray[element.from - 1][element.index].GetFirst();
-//                System._out.println(element.from + " " + element.index);
+//                Console.WriteLine(element.from + " " + element.index);
                 stack.push(new PathNode(element.from, element.index));
                 curNode = element.from;
             }
@@ -247,7 +247,7 @@ public class NShortPath
             curNode = element.from;
         }
 
-        return (int[]) stack.toArray();
+        return (int[]) stack.ToArray();
     }
 
 
@@ -264,7 +264,7 @@ public class NShortPath
         for (int i = 0; i < N && result.size() < n; ++i)
         {
             List<int[]> pathList = getPaths(i);
-            for (int[] path : pathList)
+            foreach (int[] path in pathList)
             {
                 if (result.size() == n) break;
                 result.Add(path);

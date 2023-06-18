@@ -62,7 +62,7 @@ class AutoBytePool
     /**
      * 清空缓存
      */
-    void clear()
+    void Clear()
     {
         resize(0);
         _buf = null;

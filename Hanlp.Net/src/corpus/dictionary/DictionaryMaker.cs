@@ -279,11 +279,11 @@ public class DictionaryMaker : ISaveAble
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder("词条数量：");
         sb.Append(trie.size());
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override
@@ -296,7 +296,7 @@ public class DictionaryMaker : ISaveAble
             var entries = trie.entrySet();
             foreach (KeyValuePair<string, Item> entry in entries)
             {
-                bw.write(entry.Value.toString());
+                bw.write(entry.Value.ToString());
                 bw.newLine();
             }
             bw.close();
@@ -343,7 +343,7 @@ public class DictionaryMaker : ISaveAble
             {
                 if (filter.onSave(entry.Value))
                 {
-                    bw.write(entry.Value.toString());
+                    bw.write(entry.Value.ToString());
                     bw.newLine();
                 }
             }

@@ -73,7 +73,7 @@ public class SimpleItem
 
     public bool containsLabel(string label)
     {
-        return labelMap.containsKey(label);
+        return labelMap.ContainsKey(label);
     }
 
     public int getFrequency(string label)
@@ -84,7 +84,7 @@ public class SimpleItem
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
         ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(labelMap.entrySet());
@@ -96,7 +96,7 @@ public class SimpleItem
             sb.Append(entry.getValue());
             sb.Append(' ');
         }
-        return sb.toString();
+        return sb.ToString();
     }
     public class CT : Comparator<KeyValuePair<string, int>>
     {

@@ -38,7 +38,7 @@ public class Item : SimpleItem
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         var sb = new StringBuilder(key);
         ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(labelMap.entrySet());
@@ -80,7 +80,7 @@ public class Item : SimpleItem
     {
         if (param == null) return null;
         string mark = "\\s";    // 分隔符，历史格式用空格，但是现在觉得用制表符比较好
-        if (param.indexOf('\t') > 0) mark = "\t";
+        if (param.IndexOf('\t') > 0) mark = "\t";
         string[] array = param.Split(mark);
         return create(array);
     }

@@ -68,7 +68,7 @@ public abstract class CommonDictionary<V>
         }
         onLoaded(map);
         HashSet<KeyValuePair<string, V>> entrySet = map.entrySet();
-        List<string> keyList = new ArrayList<string>(entrySet.size());
+        List<string> keyList = new (entrySet.size());
         List<V> valueList = new ArrayList<V>(entrySet.size());
         for (KeyValuePair<string, V> entry : entrySet)
         {
@@ -156,7 +156,7 @@ public abstract class CommonDictionary<V>
      * @param key
      * @return
      */
-    public bool contains(string key)
+    public bool Contains(string key)
     {
         return get(key) != null;
     }

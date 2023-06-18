@@ -21,7 +21,7 @@ public class HMMNERecognizer : HMMTrainer : NERecognizer
 
     public HMMNERecognizer(HiddenMarkovModel model)
     {
-        super(model);
+        base(model);
         tagSet = new NERTagSet();
         tagSet.nerLabels.Add("nr");
         tagSet.nerLabels.Add("ns");

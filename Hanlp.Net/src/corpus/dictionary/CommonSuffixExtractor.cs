@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.occurrence;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -71,8 +75,8 @@ public class CommonSuffixExtractor
 
     private static List<string> extract(TFDictionary suffixTreeSet, int size)
     {
-        List<string> suffixList = new ArrayList<string>(size);
-        for (TermFrequency termFrequency : suffixTreeSet.values())
+        List<string> suffixList = new (size);
+        foreach (TermFrequency termFrequency in suffixTreeSet.values())
         {
             if (suffixList.size() >= size) break;
             suffixList.Add(termFrequency.getKey());
@@ -119,6 +123,6 @@ public class CommonSuffixExtractor
             sbResult.Append(term.word);
         }
 
-        return sbResult.toString();
+        return sbResult.ToString();
     }
 }

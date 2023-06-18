@@ -41,7 +41,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      */
     void set_composite_vector()
     {
-        composite_.clear();
+        composite_.Clear();
         for (Document<K> document : documents_)
         {
             composite_.add_vector(document.feature());
@@ -51,14 +51,14 @@ public class Cluster<K> : IComparable<Cluster<K>>
     /**
      * Clear status.
      */
-    void clear()
+    void Clear()
     {
-        documents_.clear();
-        composite_.clear();
+        documents_.Clear();
+        composite_.Clear();
         if (centroid_ != null)
-            centroid_.clear();
+            centroid_.Clear();
         if (sectioned_clusters_ != null)
-            sectioned_clusters_.clear();
+            sectioned_clusters_.Clear();
         sectioned_gain_ = 0.0;
     }
 

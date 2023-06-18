@@ -37,7 +37,7 @@ class AutoIntPool
         return _size;
     }
 
-    void clear()
+    void Clear()
     {
         resize(0);
         _buf = null;

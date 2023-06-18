@@ -91,7 +91,7 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
         size = 0;
     }
@@ -101,7 +101,7 @@ public class FileDataSet : AbstractDataSet
     {
         try
         {
-            clear();
+            Clear();
             Iterator<Document> iterator = iterator();
             initCache();
             while (iterator.hasNext())

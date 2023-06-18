@@ -62,9 +62,9 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public bool contains(Object o)
+    public bool Contains(Object o)
     {
-        return pipeList.contains(o);
+        return pipeList.Contains(o);
     }
 
     //@Override
@@ -74,15 +74,15 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public Object[] toArray()
+    public Object[] ToArray()
     {
-        return pipeList.toArray();
+        return pipeList.ToArray();
     }
 
     //@Override
-    public  T[] toArray<T>(T[] a)
+    public  T[] ToArray<T>(T[] a)
     {
-        return pipeList.toArray(a);
+        return pipeList.ToArray(a);
     }
 
     //@Override
@@ -98,7 +98,7 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public bool containsAll(Collection<?> c)
+    public bool containsAll(Collection c)
     {
         return pipeList.containsAll(c);
     }
@@ -116,21 +116,21 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public bool removeAll(Collection<?> c)
+    public bool removeAll(Collection c)
     {
         return pipeList.removeAll(c);
     }
 
     //@Override
-    public bool retainAll(Collection<?> c)
+    public bool retainAll(Collection c)
     {
         return pipeList.retainAll(c);
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
-        pipeList.clear();
+        pipeList.Clear();
     }
 
     //@Override
@@ -190,9 +190,9 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public int indexOf(Object o)
+    public int IndexOf(Object o)
     {
-        return pipeList.indexOf(o);
+        return pipeList.IndexOf(o);
     }
 
     //@Override

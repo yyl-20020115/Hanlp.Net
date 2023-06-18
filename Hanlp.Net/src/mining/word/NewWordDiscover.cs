@@ -58,11 +58,11 @@ public class NewWordDiscover
             int docLength = doc.Length;
             for (int i = 0; i < docLength; ++i)
             {
-                int end = Math.min(i + 1 + max_word_len, docLength + 1);
+                int end = Math.Min(i + 1 + max_word_len, docLength + 1);
                 for (int j = i + 1; j < end; ++j)
                 {
                     string word = doc.substring(i, j);
-                    if (word.indexOf('\0') >= 0)
+                    if (word.IndexOf('\0') >= 0)
                         continue; // 含有分隔符的不认为是词语
                     WordInfo info = word_cands.get(word);
                     if (info == null)
@@ -102,12 +102,12 @@ public class NewWordDiscover
         {
             public int compare(WordInfo o1, WordInfo o2)
             {
-                return Float.compare(o1.p, o2.p);
+                return float.compare(o1.p, o2.p);
             }
         });
         topN.addAll(wordInfoList);
 
-        return topN.toList();
+        return topN.ToList();
     }
 
     /**

@@ -282,7 +282,7 @@ public class HanLP
                 {
                     try
                     {
-                        Class clazz = Class.forName(ioAdapterClassName);
+                        Type clazz = Type.forName(ioAdapterClassName);
                         Constructor ctor = clazz.getConstructor();
                         Object instance = ctor.newInstance();
                         if (instance != null) IOAdapter = (IIOAdapter) instance;
@@ -560,7 +560,7 @@ public class HanLP
             }
             ++i;
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -597,7 +597,7 @@ public class HanLP
             }
             ++i;
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**

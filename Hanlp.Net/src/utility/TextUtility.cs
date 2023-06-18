@@ -24,7 +24,7 @@ public class TextUtility
     {
         if (str != null && str.Length > 0)
         {
-            if (Predefine.CHINESE_NUMBERS.contains(str)) return CT_CNUM;
+            if (Predefine.CHINESE_NUMBERS.Contains(str)) return CT_CNUM;
             byte[] b;
             try
             {
@@ -44,9 +44,9 @@ public class TextUtility
                 if (ub1 < 32) return CT_DELIMITER; // NON PRINTABLE CHARACTERS
                 if (' ' == b1) return CT_OTHER;
                 if ('\n' == b1) return CT_DELIMITER;
-                if ("*\"!,.?()[]{}+=/\\;:|".indexOf((char) b1) != -1)
+                if ("*\"!,.?()[]{}+=/\\;:|".IndexOf((char) b1) != -1)
                     return CT_DELIMITER;
-                if ("0123456789".indexOf((char)b1) != -1)
+                if ("0123456789".IndexOf((char)b1) != -1)
                     return CT_NUM;
                 return CT_SINGLE;
             }
@@ -149,7 +149,7 @@ public class TextUtility
 
         int i = 0;
         /** 判断开头是否是+-之类的符号 */
-        if ("±+-＋－—".IndexOf(str.charAt(0)) != -1)
+        if ("±+-＋－—".IndexOf(str[0]) != -1)
             i++;
         /** 如果是全角的０１２３４５６７８９ 字符* */
         while (i < str.Length && "０１２３４５６７８９".IndexOf(str.charAt(i)) != -1)
@@ -158,10 +158,10 @@ public class TextUtility
         if (i > 0 && i < str.Length)
         {
             char ch = str.charAt(i);
-            if ("·∶:，,．.／/".indexOf(ch) != -1)
+            if ("·∶:，,．.／/".IndexOf(ch) != -1)
             {// 98．1％
                 i++;
-                while (i < str.Length && "０１２３４５６７８９".indexOf(str.charAt(i)) != -1)
+                while (i < str.Length && "０１２３４５６７８９".IndexOf(str.charAt(i)) != -1)
                     i++;
             }
         }
@@ -169,23 +169,23 @@ public class TextUtility
             return true;
 
         /** 如果是半角的0123456789字符* */
-        while (i < str.Length && "0123456789".indexOf(str.charAt(i)) != -1)
+        while (i < str.Length && "0123456789".IndexOf(str.charAt(i)) != -1)
             i++;
         // Get middle delimiter such as .
         if (i > 0 && i < str.Length)
         {
             char ch = str.charAt(i);
-            if (',' == ch || '.' == ch || '/' == ch  || ':' == ch || "∶·，．／".indexOf(ch) != -1)
+            if (',' == ch || '.' == ch || '/' == ch  || ':' == ch || "∶·，．／".IndexOf(ch) != -1)
             {// 98．1％
                 i++;
-                while (i < str.Length && "0123456789".indexOf(str.charAt(i)) != -1)
+                while (i < str.Length && "0123456789".IndexOf(str.charAt(i)) != -1)
                     i++;
             }
         }
 
         if (i < str.Length)
         {
-            if ("百千万亿佰仟%％‰".indexOf(str.charAt(i)) != -1)
+            if ("百千万亿佰仟%％‰".IndexOf(str.charAt(i)) != -1)
                 i++;
         }
         if (i >= str.Length)
@@ -381,7 +381,7 @@ public class TextUtility
             if (isAllSingleByte(snum)
                     && (len == 4 || len == 2 && (cint(first) > 4 || cint(first) == 0)))
                 return true;
-            if (isAllNum(snum) && (len >= 3 || len == 2 && "０５６７８９".indexOf(first) != -1))
+            if (isAllNum(snum) && (len >= 3 || len == 2 && "０５６７８９".IndexOf(first) != -1))
                 return true;
             if (getCharCount("零○一二三四五六七八九壹贰叁肆伍陆柒捌玖", snum) == len && len >= 2)
                 return true;
@@ -566,7 +566,7 @@ public class TextUtility
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
-        return sw.toString();
+        return sw.ToString();
     }
 
     /**
@@ -676,7 +676,7 @@ public class TextUtility
 
     public static string join(IEnumerator<string> s, string delimiter)
     {
-        Iterator<? : CharSequence> iter = s.iterator();
+        Iterator<CharSequence> iter = s.iterator();
         if (!iter.hasNext()) return "";
         StringBuilder buffer = new StringBuilder(iter.next());
         while (iter.hasNext()) buffer.Append(delimiter).Append(iter.next());

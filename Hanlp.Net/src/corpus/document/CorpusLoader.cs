@@ -30,9 +30,9 @@ public class CorpusLoader
         int i = 0;
         for (File file : fileList)
         {
-            System._out.print(file);
+            Console.Write(file);
             Document document = convert2Document(file);
-            System._out.println(" " + ++i + " / " + fileList.size());
+            Console.WriteLine(" " + ++i + " / " + fileList.size());
             handler.handle(document);
         }
         System._out.printf("花费时间%d ms\n", DateTime.Now.Microsecond - start);
@@ -83,14 +83,14 @@ public class CorpusLoader
         int i = 0;
         for (File file : fileList)
         {
-            if (verbose) System._out.print(file);
+            if (verbose) Console.Write(file);
             Document document = convert2Document(file);
             documentList.Add(document);
-            if (verbose) System._out.println(" " + ++i + " / " + fileList.size());
+            if (verbose) Console.WriteLine(" " + ++i + " / " + fileList.size());
         }
         if (verbose)
         {
-            System._out.println(documentList.size());
+            Console.WriteLine(documentList.size());
             System._out.printf("花费时间%d ms\n", DateTime.Now.Microsecond - start);
         }
         return documentList;
@@ -192,9 +192,9 @@ public class CorpusLoader
             int i = 0;
             for (File file : fileList)
             {
-                System._out.print(file);
+                Console.Write(file);
                 Document document = convert2Document(file);
-                System._out.println(" " + ++i + " / " + fileList.size());
+                Console.WriteLine(" " + ++i + " / " + fileList.size());
                 handle(document);
             }
             System._out.printf("线程#%s 运行完毕，耗时%dms\n", getName(), DateTime.Now.Microsecond - start);

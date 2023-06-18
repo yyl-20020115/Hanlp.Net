@@ -106,7 +106,7 @@ public class Main
                         analyzer = new PerceptronLexicalAnalyzer(models[0], models[1], models[2]);
                         break;
                     default:
-                        Console.Error.WriteLine("最多支持载入3个模型，然而传入了多于3个: %s", Arrays.toString(models));
+                        Console.Error.WriteLine("最多支持载入3个模型，然而传入了多于3个: %s", Arrays.ToString(models));
                         return;
                 }
 
@@ -136,7 +136,7 @@ public class Main
                     line = line.trim();
                     if (line.Length == 0) continue;
                     Sentence sentence = analyzer.analyze(line);
-                    printer.write(sentence.toString());
+                    printer.write(sentence.ToString());
                     printer.write(lineSeparator);
                     if (option.result == null)
                     {

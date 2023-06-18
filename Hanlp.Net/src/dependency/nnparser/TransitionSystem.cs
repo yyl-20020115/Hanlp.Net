@@ -70,7 +70,7 @@ public class TransitionSystem
             Console.Error.WriteLine("decoder: not initialized, please check if the root dependency relation is correct set by --root.");
             return;
         }
-        actions.clear();
+        actions.Clear();
 
         if (!source.buffer_empty())
         {
@@ -138,7 +138,7 @@ public class TransitionSystem
     void transform(List<Action> actions,
                    List<int> classes)
     {
-        classes.clear();
+        classes.Clear();
         for (int i = 0; i < actions.size(); ++i)
         {
             classes.Add(transform(actions.get(i)));

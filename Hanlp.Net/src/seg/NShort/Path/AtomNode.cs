@@ -75,7 +75,7 @@ public class AtomNode
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return "AtomNode{" +
                 "word='" + sWord + '\'' +

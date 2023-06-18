@@ -56,20 +56,20 @@ public class HMMSegmenter : HMMTrainer , Segmenter
         int[] tagArray = new int[text.Length];
         model.predict(obsArray, tagArray);
         StringBuilder result = new StringBuilder();
-        result.Append(text.charAt(0));
+        result.Append(text[0]);
 
         for (int i = 1; i < tagArray.Length; i++)
         {
             if (tagArray[i] == tagSet.B || tagArray[i] == tagSet.S)
             {
-                output.Add(result.toString());
+                output.Add(result.ToString());
                 result.setLength(0);
             }
             result.Append(text.charAt(i));
         }
         if (result.Length != 0)
         {
-            output.Add(result.toString());
+            output.Add(result.ToString());
         }
     }
 

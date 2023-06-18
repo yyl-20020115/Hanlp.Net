@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.suggest.scorer;
  * @param <T> 这是储存器map中key的类型，具有相同key的句子会存入同一个entry
  * @author hankcs
  */
-public abstract class BaseScorer<T : ISentenceKey> : IScorer
+public abstract class BaseScorer<T> : IScorer where T: ISentenceKey<T>
 {
     public BaseScorer()
     {
@@ -39,7 +39,7 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
      * @param boost
      * @return
      */
-    public BaseScorer setBoost(double boost)
+    public BaseScorer<T> setBoost(double boost)
     {
         this.boost = boost;
         return this;
@@ -53,8 +53,8 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
         HashSet<string> set = storage.get(key);
         if (set == null)
         {
-            set = new TreeSet<string>();
-            storage.put(key, set);
+            set = new ();
+            storage.Add(key, set);
         }
         set.Add(sentence);
     }
@@ -87,6 +87,6 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
     //@Override
     public void removeAllSentences()
     {
-        storage.clear();
+        storage.Clear();
     }
 }

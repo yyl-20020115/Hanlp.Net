@@ -40,7 +40,7 @@ public class Pair<T, U>
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return first + "=" + second;
     }

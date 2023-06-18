@@ -48,10 +48,10 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public bool contains(Object o)
+    public bool Contains(Object o)
     {
         if (o.getClass() != string.s) return false;
-        return contains((string) o);
+        return Contains((string) o);
     }
 
     //@Override
@@ -61,15 +61,15 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public Object[] toArray()
+    public Object[] ToArray()
     {
-        return getAllStrings().toArray();
+        return getAllStrings().ToArray();
     }
 
     //@Override
-    public T[] toArray<T>(T[] a)
+    public T[] ToArray<T>(T[] a)
     {
-        return getAllStrings().toArray(a);
+        return getAllStrings().ToArray(a);
     }
 
     //@Override
@@ -88,16 +88,16 @@ public class MDAGSet : MDAG , ISet<string>
         }
         else
         {
-            removeString(o.toString());
+            removeString(o.ToString());
         }
         return true;
     }
 
     //@Override
-    public bool containsAll(ICollection<?> c)
+    public bool containsAll(ICollection c)
     {
         for (Object e : c)
-            if (!contains(e))
+            if (!Contains(e))
                 return false;
         return true;
     }
@@ -119,7 +119,7 @@ public class MDAGSet : MDAG , ISet<string>
         Iterator<string> it = iterator();
         while (it.hasNext())
         {
-            if (!c.contains(it.next()))
+            if (!c.Contains(it.next()))
             {
                 it.Remove();
                 modified = true;
@@ -132,10 +132,10 @@ public class MDAGSet : MDAG , ISet<string>
     public bool removeAll<T>(ICollection<T> c)
     {
         bool modified = false;
-        Iterator<?> it = iterator();
+        Iterator it = iterator();
         while (it.hasNext())
         {
-            if (c.contains(it.next()))
+            if (c.Contains(it.next()))
             {
                 it.Remove();
                 modified = true;
@@ -145,7 +145,7 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public void clear()
+    public void Clear()
     {
         sourceNode = new MDAGNode(false);
         simplifiedSourceNode = null;

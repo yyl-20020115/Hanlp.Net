@@ -35,7 +35,7 @@ public class PersonRecognition
                 sbLog.Append(nrEnumItem);
                 sbLog.Append(']');
             }
-            System._out.printf("人名角色观察：%s\n", sbLog.toString());
+            System._out.printf("人名角色观察：%s\n", sbLog.ToString());
         }
         List<NR> nrList = viterbiComputeSimply(roleTagList);
         if (HanLP.Config.DEBUG)
@@ -52,7 +52,7 @@ public class PersonRecognition
             }
             if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
-            System._out.printf("人名角色标注：%s\n", sbLog.toString());
+            System._out.printf("人名角色标注：%s\n", sbLog.ToString());
         }
 
         PersonDictionary.parsePattern(nrList, pWordSegResult, wordNetOptimum, wordNetAll);

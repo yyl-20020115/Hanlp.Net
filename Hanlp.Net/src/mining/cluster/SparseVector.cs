@@ -19,7 +19,7 @@ public class SparseVector : Dictionary<int, double>
     //@Override
     public Double get(Object key)
     {
-        Double v = super.get(key);
+        Double v = base.get(key);
         if (v == null) return 0.0f;
         return v;
     }
@@ -74,7 +74,7 @@ public class SparseVector : Dictionary<int, double>
     void add_vector(SparseVector vec)
     {
 
-        for (KeyValuePair<int, Double> entry : vec.entrySet())
+        foreach (KeyValuePair<int, Double> entry in vec.entrySet())
         {
             Double v = get(entry.getKey());
             if (v == null)

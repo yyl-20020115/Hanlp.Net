@@ -67,9 +67,9 @@ public class PinyinUtil
                 int tuneNumber =
                         char.getNumericValue(lowerCasePinyinStr.charAt(lowerCasePinyinStr.Length - 1));
 
-                int indexOfA = lowerCasePinyinStr.indexOf(charA);
-                int indexOfE = lowerCasePinyinStr.indexOf(charE);
-                int ouIndex = lowerCasePinyinStr.indexOf(ouStr);
+                int indexOfA = lowerCasePinyinStr.IndexOf(charA);
+                int indexOfE = lowerCasePinyinStr.IndexOf(charE);
+                int ouIndex = lowerCasePinyinStr.IndexOf(ouStr);
 
                 if (-1 != indexOfA)
                 {
@@ -84,7 +84,7 @@ public class PinyinUtil
                 else if (-1 != ouIndex)
                 {
                     indexOfUnmarkedVowel = ouIndex;
-                    unmarkedVowel = ouStr.charAt(0);
+                    unmarkedVowel = ouStr[0];
                 }
                 else
                 {
@@ -102,7 +102,7 @@ public class PinyinUtil
 
                 if ((defautlCharValue != unmarkedVowel) && (defautlIndexValue != indexOfUnmarkedVowel))
                 {
-                    int rowIndex = allUnmarkedVowelStr.indexOf(unmarkedVowel);
+                    int rowIndex = allUnmarkedVowelStr.IndexOf(unmarkedVowel);
                     int columnIndex = tuneNumber - 1;
 
                     int vowelLocation = rowIndex * 5 + columnIndex;

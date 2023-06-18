@@ -36,7 +36,7 @@ public class OrganizationRecognition
                 sbLog.Append(NTEnumItem);
                 sbLog.Append(']');
             }
-            System._out.printf("机构名角色观察：%s\n", sbLog.toString());
+            System._out.printf("机构名角色观察：%s\n", sbLog.ToString());
         }
         List<NT> NTList = viterbiCompute(roleTagList);
         if (HanLP.Config.DEBUG)
@@ -53,7 +53,7 @@ public class OrganizationRecognition
             }
             if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
-            System._out.printf("机构名角色标注：%s\n", sbLog.toString());
+            System._out.printf("机构名角色标注：%s\n", sbLog.ToString());
         }
 
         OrganizationDictionary.parsePattern(NTList, pWordSegResult, wordNetOptimum, wordNetAll);

@@ -110,7 +110,7 @@ public abstract class WordBasedSegment : Segment
         while (listIterator.hasNext())
         {
             next = listIterator.next();
-//            System._out.println("current:" + current + " next:" + next);
+//            Console.WriteLine("current:" + current + " next:" + next);
             Nature currentNature = current.getNature();
             if (currentNature == Nature.nx && (next.hasNature(Nature.q) || next.hasNature(Nature.n)))
             {
@@ -158,7 +158,7 @@ public abstract class WordBasedSegment : Segment
             {
                 //===== 1、如果当前词是数字，下一个词是“月、日、时、分、秒、月份”中的一个，则合并且当前词词性是时间
                 string nextWord = next.realWord;
-                if ((nextWord.Length == 1 && "月日时分秒".contains(nextWord)) || (nextWord.Length == 2 && nextWord.Equals("月份")))
+                if ((nextWord.Length == 1 && "月日时分秒".Contains(nextWord)) || (nextWord.Length == 2 && nextWord.Equals("月份")))
                 {
                     mergeDate(listIterator, next, current);
                 }
@@ -187,7 +187,7 @@ public abstract class WordBasedSegment : Segment
                         char[] tmpCharArray = current.realWord.ToCharArray();
                         string lastChar = string.valueOf(tmpCharArray[tmpCharArray.Length - 1]);
                         //===== 4、如果当前串最后一个汉字不是"∶·．／"和半角的'.''/'，那么是数
-                        if (!"∶·．／./".contains(lastChar))
+                        if (!"∶·．／./".Contains(lastChar))
                         {
                             current.confirmNature(Nature.m, true);
                         }
@@ -258,7 +258,7 @@ public abstract class WordBasedSegment : Segment
         {
             throw new RuntimeException("start=" + start + " < end=" + end);
         }
-        List<AtomNode> atomSegment = new ArrayList<AtomNode>();
+        List<AtomNode> atomSegment = new ();
         int pCur = 0, nCurType, nNextType;
         StringBuilder sb = new StringBuilder();
         char c;
@@ -319,7 +319,7 @@ public abstract class WordBasedSegment : Segment
                         break;
                     }
                 }
-                atomSegment.Add(new AtomNode(sb.toString(), nCurType));
+                atomSegment.Add(new AtomNode(sb.ToString(), nCurType));
                 if (reachEnd)
                     pCur++;
             }
@@ -351,7 +351,7 @@ public abstract class WordBasedSegment : Segment
         while (listIterator.hasNext())
         {
             next = listIterator.next();
-//            System._out.println("current:" + current + " next:" + next);
+//            Console.WriteLine("current:" + current + " next:" + next);
             if ((TextUtility.isAllNum(current.realWord) || TextUtility.isAllChineseNum(current.realWord)) && (TextUtility.isAllNum(next.realWord) || TextUtility.isAllChineseNum(next.realWord)))
             {
                 /////////// 这部分从逻辑上等同于current.realWord = current.realWord + next.realWord;
@@ -363,9 +363,9 @@ public abstract class WordBasedSegment : Segment
                 listIterator.next();
                 listIterator.next();
                 /////////// end 这部分
-//                System._out.println("before:" + linkedArray);
+//                Console.WriteLine("before:" + linkedArray);
                 listIterator.Remove();
-//                System._out.println("after:" + linkedArray);
+//                Console.WriteLine("after:" + linkedArray);
             }
             else
             {

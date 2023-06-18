@@ -37,7 +37,7 @@ public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
     {
         int len1 = idArrayList.size();
         int len2 = o.idArrayList.size();
-        int lim = Math.min(len1, len2);
+        int lim = Math.Min(len1, len2);
         Iterator<long[]> iterator1 = idArrayList.iterator();
         Iterator<long[]> iterator2 = o.idArrayList.iterator();
 

@@ -103,7 +103,7 @@ public class State
      */
     public void addEmit(ICollection<int> emits)
     {
-        for (int emit : emits)
+        foreach (int emit in emits)
         {
             addEmit(emit);
         }
@@ -140,7 +140,7 @@ public class State
      * 设置failure状态
      * @param failState
      */
-    public void setFailure(State failState, int fail[])
+    public void setFailure(State failState, int[] fail)
     {
         this.failure = failState;
         fail[index] = failState.index;
@@ -214,7 +214,7 @@ public class State
         sb.Append(", failureID=").Append(failure == null ? "-1" : failure.index);
         sb.Append(", failure=").Append(failure);
         sb.Append('}');
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**

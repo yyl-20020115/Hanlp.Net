@@ -122,7 +122,7 @@ public interface IDataSet : IEnumerable<Document>
     /**
      * 清空数据集
      */
-    void clear();
+    void Clear();
 
     /**
      * 是否是测试集

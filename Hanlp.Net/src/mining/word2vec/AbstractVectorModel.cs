@@ -97,17 +97,17 @@ public abstract class AbstractVectorModel<K>
      */
     private List<KeyValuePair<K, float>> nearest(K key, Vector vector, int size)
     {
-        var maxHeap = new MaxHeap<KeyValuePair<K, Float>>(size, new COMP<K>());
+        var maxHeap = new MaxHeap<KeyValuePair<K, float>>(size, new COMP<K>());
 
-        foreach (KeyValuePair<K, Vector> entry in storage.entrySet())
+        foreach (KeyValuePair<K, Vector> entry in storage)
         {
-            if (entry.getKey().Equals(key))
+            if (entry.Key.Equals(key))
             {
                 continue;
             }
-            maxHeap.Add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
+            maxHeap.Add(new AbstractMap.SimpleEntry<K, float>(entry.Key, entry.Value.cosineForUnitVector(vector)));
         }
-        return maxHeap.toList();
+        return maxHeap.ToList();
     }
 
     public class COMP<K>:IComparer<KeyValuePair<K, float>>
@@ -115,7 +115,7 @@ public abstract class AbstractVectorModel<K>
         //@Override
         public int Compare(KeyValuePair<K, float> o1, KeyValuePair<K, float> o2)
         {
-            return o1.getValue().compareTo(o2.getValue());
+            return o1.Value.compareTo(o2.Value);
         }
     }
 
@@ -130,11 +130,11 @@ public abstract class AbstractVectorModel<K>
     {
         MaxHeap<KeyValuePair<K, float>> maxHeap = new MaxHeap<KeyValuePair<K, float>>(size, new COMP2<K>());
 
-        for (KeyValuePair<K, Vector> entry : storage.entrySet())
+        for (KeyValuePair<K, Vector> entry in storage.entrySet())
         {
-            maxHeap.Add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
+            maxHeap.Add(new AbstractMap.SimpleEntry<K, float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
         }
-        return maxHeap.toList();
+        return maxHeap.ToList();
     }
     public class COMP2<K>: IComparer<KeyValuePair<K, float>>
     {
@@ -173,7 +173,7 @@ public abstract class AbstractVectorModel<K>
      * @param size  需要返回前多少个对象
      * @return
      */
-    List<KeyValuePair<K, Float>> queryNearest(string query, int size)
+    List<KeyValuePair<K, float>> queryNearest(string query, int size)
     {
         if (query == null || query.Length == 0)
         {
@@ -214,7 +214,7 @@ public abstract class AbstractVectorModel<K>
      */
     public int dimension()
     {
-        if (storage == null || storage.isEmpty())
+        if (storage == null || storage.Count==0)
         {
             return 0;
         }

@@ -90,7 +90,7 @@ public class MaxEntModel
         List<KeyValuePair<string, Double>> resultList = predict(context);
         double bestP = -1.0;
         KeyValuePair<string, Double> bestPair;
-        for (KeyValuePair<string, Double> pair : resultList)
+        foreach (KeyValuePair<string, Double> pair in resultList)
         {
             if (pair.getSecond() > bestP)
             {
@@ -240,12 +240,12 @@ public class MaxEntModel
             for (int i = 0; i < NUM_PREDS; i++)
             {
                 predLabels[i] = br.readLine();
-                //assert !tmpMap.containsKey(predLabels[i]) : "重复的键： " + predLabels[i] + " 请使用 -Dfile.encoding=UTF-8 训练";
+                //assert !tmpMap.ContainsKey(predLabels[i]) : "重复的键： " + predLabels[i] + " 请使用 -Dfile.encoding=UTF-8 训练";
                 TextUtility.writeString(predLabels[i], _out);
                 tmpMap.put(predLabels[i], i);
             }
             m.pmap.build(tmpMap);
-            for (KeyValuePair<string, int> entry : tmpMap.entrySet())
+            foreach (KeyValuePair<string, int> entry in tmpMap.entrySet())
             {
                 _out.writeInt(entry.getValue());
             }

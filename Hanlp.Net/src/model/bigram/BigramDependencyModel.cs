@@ -82,7 +82,7 @@ public class BigramDependencyModel
         {
             DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path +  ".bi" + Predefine.BIN_EXT));
             _out.writeInt(dependencyList.size());
-            for (string dependency : dependencyList)
+            foreach (string dependency in dependencyList)
             {
                 _out.writeUTF(dependency);
             }

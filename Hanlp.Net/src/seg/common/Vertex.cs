@@ -468,13 +468,13 @@ public class Vertex
         return new Vertex(Predefine.TAG_END, " ", new CoreDictionary.Attribute(Nature.end, Predefine.MAX_FREQUENCY / 10), CoreDictionary.getWordID(Predefine.TAG_END));
     }
 
-    public int Length
+    public int Length()
     {
         return realWord.Length;
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return realWord;
 //        return "WordNode{" +

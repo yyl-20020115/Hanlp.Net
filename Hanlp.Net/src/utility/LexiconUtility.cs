@@ -42,7 +42,7 @@ public class LexiconUtility
      * @param word
      * @return
      */
-    public static bool contains(string word)
+    public static bool Contains(string word)
     {
         return getAttribute(word) != null;
     }

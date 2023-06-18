@@ -109,7 +109,7 @@ public class NotionalTokenizer
                 if (filterArrayChain != null)
                 {
                     Term term = listIterator.next();
-                    for (Filter filter : filterArrayChain)
+                    for (Filter filter in filterArrayChain)
                     {
                         if (!filter.shouldInclude(term))
                         {

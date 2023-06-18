@@ -57,23 +57,23 @@ public class EvalParameters
      * @param correctionConstant 一个事件中最多包含的特征数
      * @param numOutcomes        事件的可能label数
      */
-    public EvalParameters(Context[] params, double correctionParam, double correctionConstant, int numOutcomes)
+    public EvalParameters(Context[] _params, double correctionParam, double correctionConstant, int numOutcomes)
     {
-        this.params = params;
+        this._params = _params;
         this.correctionParam = correctionParam;
         this.numOutcomes = numOutcomes;
         this.correctionConstant = correctionConstant;
         this.constantInverse = 1.0 / correctionConstant;
     }
 
-    public EvalParameters(Context[] params, int numOutcomes)
+    public EvalParameters(Context[] _params, int numOutcomes)
     {
-        this(params, 0, 0, numOutcomes);
+        this(_params, 0, 0, numOutcomes);
     }
 
     public Context[] getParams()
     {
-        return params;
+        return _params;
     }
 
     public int getNumOutcomes()

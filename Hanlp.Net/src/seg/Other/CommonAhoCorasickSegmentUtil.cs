@@ -61,7 +61,7 @@ public class CommonAhoCorasickSegmentUtil
                     sbTerm.Append(charArray[i]);
                     ++i;
                 }
-                termList.Add(new ResultTerm<V>(sbTerm.toString(), null, offset));
+                termList.Add(new ResultTerm<V>(sbTerm.ToString(), null, offset));
             }
             else
             {
@@ -120,7 +120,7 @@ public class CommonAhoCorasickSegmentUtil
                     preCharType = CharType.get(charArray[i - 1]);
                     --i;
                 }
-                termList.addFirst(new ResultTerm<V>(sbTerm.reverse().toString(), null, offset));
+                termList.addFirst(new ResultTerm<V>(sbTerm.reverse().ToString(), null, offset));
             }
             else
             {

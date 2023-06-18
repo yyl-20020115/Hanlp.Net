@@ -15,5 +15,5 @@ public interface CharacterMapping
 
     int[] toIdList(int codePoint);
 
-    string toString(int[] ids);
+    string ToString(int[] ids);
 }

@@ -37,7 +37,7 @@ public class TestICWB : TestCase
 //                }
 //                else if (word.Length > 1)
 //                {
-//                    bw.write(word.charAt(0) + "\tB\n");
+//                    bw.write(word[0] + "\tB\n");
 //                    for (int i = 1; i < word.Length - 1; ++i)
 //                    {
 //                        bw.write(word.charAt(i) + "\tM\n");

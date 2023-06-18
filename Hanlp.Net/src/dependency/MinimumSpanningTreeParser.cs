@@ -47,16 +47,16 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
         // 最小生成树Prim算法
         int max_v = nodeArray.Length * (nodeArray.Length - 1);
         float[] mincost = new float[max_v];
-        Arrays.fill(mincost, Float.MAX_VALUE / 3);
+        Array.Fill(mincost, float.MaxValue / 3);
         bool[] used = new bool[max_v];
-        Arrays.fill(used, false);
+        Array.Fill(used, false);
         used[0] = true;
         PriorityQueue<State> que = new PriorityQueue<State>();
         // 找虚根的唯一孩子
-        float minCostToRoot = Float.MAX_VALUE;
+        float minCostToRoot = float.MaxValue;
         Edge firstEdge = null;
         Edge[] edgeResult = new Edge[termList.size() - 1];
-        for (Edge edge : edges[0])
+        for (Edge edge in edges[0])
         {
             if (edge == null) continue;
             if (minCostToRoot > edge.cost)
@@ -75,7 +75,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
             used[v] = true;
             if (p.edge != null)
             {
-//                System._out.println(p.edge.from + " " + p.edge.to + p.edge.label);
+//                Console.WriteLine(p.edge.from + " " + p.edge.to + p.edge.label);
                 edgeResult[p.edge.from - 1] = p.edge;
             }
             for (Edge e : edges[v])

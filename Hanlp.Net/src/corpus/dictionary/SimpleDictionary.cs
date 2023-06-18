@@ -79,7 +79,7 @@ public abstract class SimpleDictionary<V>
         }
         for (KeyValuePair<string, V> entry : other.trie.entrySet())
         {
-            if (trie.containsKey(entry.getKey())) continue;
+            if (trie.ContainsKey(entry.getKey())) continue;
             trie.put(entry.getKey(), entry.getValue());
         }
     }

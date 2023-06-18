@@ -1,5 +1,6 @@
 
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.utility;
@@ -190,7 +191,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             begin = pos - siblings.get(0).code; // 当前位置离第一个兄弟节点的距离
             if (allocSize <= (begin + siblings.get(siblings.size() - 1).code))
             {
-                resize(begin + siblings.get(siblings.size() - 1).code + char.MAX_VALUE);
+                resize(begin + siblings.get(siblings.size() - 1).code + char.MaxValue);
             }
 
             //if (used[begin])
@@ -224,7 +225,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         for (int i = 0; i < siblings.size(); i++)
         {
             check[begin + siblings.get(i).code] = begin;
-//            System._out.println(this);
+//            Console.WriteLine(this);
         }
 
         for (int i = 0; i < siblings.size(); i++)
@@ -235,7 +236,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             {
                 _base[begin + siblings.get(i).code] = (value != null) ? (-value[siblings
                         .get(i).left] - 1) : (-siblings.get(i).left - 1);
-//                System._out.println(this);
+//                Console.WriteLine(this);
 
                 if (value != null && (-value[siblings.get(i).left] - 1) >= 0)
                 {
@@ -251,7 +252,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             {
                 int h = insert(new_siblings);   // dfs
                 base[begin + siblings.get(i).code] = h;
-//                System._out.println(this);
+//                Console.WriteLine(this);
             }
         }
         return begin;
@@ -290,7 +291,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     // set_array omitted
     // array omitted
 
-    void clear()
+    void Clear()
     {
         // if (! no_delete_)
         check = null;
@@ -532,9 +533,9 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         if (byteArray == null) return false;
         _size = byteArray.nextInt();
-        _base = new int[size + 65535];   // 多留一些，防止越界
-        check = new int[size + 65535];
-        for (int i = 0; i < size; i++)
+        _base = new int[_size + 65535];   // 多留一些，防止越界
+        check = new int[_size + 65535];
+        for (int i = 0; i < _size; i++)
         {
             _base[i] = byteArray.nextInt();
             check[i] = byteArray.nextInt();
@@ -596,9 +597,9 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                     IOAdapter.open(path)
             ));
             _size = _in.readInt();
-            _base = new int[size + 65535];   // 多留一些，防止越界
-            check = new int[size + 65535];
-            for (int i = 0; i < size; i++)
+            _base = new int[_size + 65535];   // 多留一些，防止越界
+            check = new int[_size + 65535];
+            for (int i = 0; i < _size; i++)
             {
                 _base[i] = _in.readInt();
                 check[i] = _in.readInt();
@@ -631,7 +632,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             // 有几种方式可以操作ByteBuffer
             // 可以将当前Buffer包含的字节数组全部读取出来
             byte[] bytes = byteBuffer.array();
-            byteBuffer.clear();
+            byteBuffer.Clear();
             // 关闭通道和文件流
             channel.close();
             fis.close();
@@ -684,7 +685,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         try
         {
             _in = new ObjectInputStream(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path));
-            return (DoubleArrayTrie<T>) in.readObject();
+            return (DoubleArrayTrie<T>) @in.readObject();
         }
         catch (Exception e)
         {
@@ -903,7 +904,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
 //        string infoIndex    = "i    = ";
 //        string infoChar     = "char = ";
@@ -924,15 +925,15 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 //                "\n" + infoIndex +
 //                "\n" + infoBase +
 //                "\n" + infoCheck + "\n" +
-//                "check=" + Arrays.toString(check) +
-//                ", base=" + Arrays.toString(base) +
-//                ", used=" + Arrays.toString(used) +
+//                "check=" + String.Join(',',check) +
+//                ", base=" + String.Join(',',base) +
+//                ", used=" + String.Join(',',used) +
                 "size=" + size +
                 ", allocSize=" + allocSize +
                 ", key=" + key +
                 ", keySize=" + keySize +
-//                ", Length=" + Arrays.toString(Length) +
-//                ", value=" + Arrays.toString(value) +
+//                ", Length=" + String.Join(',',Length) +
+//                ", value=" + String.Join(',',value) +
                 ", progress=" + progress +
                 ", nextCheckPos=" + nextCheckPos +
                 ", error_=" + error_ +
@@ -1019,7 +1020,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         return a;
     }
 
-    public bool containsKey(string key)
+    public bool ContainsKey(string key)
     {
         return exactMatchSearch(key) >= 0;
     }
@@ -1440,11 +1441,11 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 //        {
 //            Console.Error.WriteLine("释放内存 %d bytes\n", base.Length - size - 65535);
 //        }
-        int[] nbase = new int[size + 65535];
+        int[] nbase = new int[_size + 65535];
         System.arraycopy(_base, 0, nbase, 0, size);
         _base = nbase;
 
-        int[] ncheck = new int[size + 65535];
+        int[] ncheck = new int[_size + 65535];
         System.arraycopy(check, 0, ncheck, 0, size);
         check = ncheck;
     }
@@ -1455,18 +1456,18 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
 //    public void report()
 //    {
-//        System._out.println("size: " + size);
+//        Console.WriteLine("size: " + size);
 //        int nonZeroIndex = 0;
 //        for (int i = 0; i < base.Length; i++)
 //        {
 //            if (base[i] != 0) nonZeroIndex = i;
 //        }
-//        System._out.println("BaseUsed: " + nonZeroIndex);
+//        Console.WriteLine("BaseUsed: " + nonZeroIndex);
 //        nonZeroIndex = 0;
 //        for (int i = 0; i < check.Length; i++)
 //        {
 //            if (check[i] != 0) nonZeroIndex = i;
 //        }
-//        System._out.println("CheckUsed: " + nonZeroIndex);
+//        Console.WriteLine("CheckUsed: " + nonZeroIndex);
 //    }
 }

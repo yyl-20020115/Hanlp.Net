@@ -22,7 +22,7 @@ public class ImmutableFeatureDatMap : FeatureMap
 
     public ImmutableFeatureDatMap(Dictionary<string, int> featureIdMap, TagSet tagSet)
     {
-        super(tagSet);
+        base(tagSet);
         dat = new DoubleArrayTrie<int>();
         dat.build(featureIdMap);
     }
@@ -42,6 +42,6 @@ public class ImmutableFeatureDatMap : FeatureMap
     //@Override
     public HashSet<KeyValuePair<string, int>> entrySet()
     {
-        throw new UnsupportedOperationException("这份DAT实现不支持遍历");
+        throw new InvalidOperationException("这份DAT实现不支持遍历");
     }
 }

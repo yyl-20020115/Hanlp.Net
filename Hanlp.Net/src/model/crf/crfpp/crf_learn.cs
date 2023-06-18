@@ -58,7 +58,7 @@ public class crf_learn
 
         bool convert = option.convert;
         bool convertToText = option.convert_to_text;
-        string[] restArgs = unkownArgs.toArray(new string[0]);
+        string[] restArgs = unkownArgs.ToArray(new string[0]);
         if (option.help || ((convertToText || convert) && restArgs.Length != 2) ||
             (!convert && !convertToText && restArgs.Length != 3))
         {

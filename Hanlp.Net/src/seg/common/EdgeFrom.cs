@@ -21,12 +21,12 @@ public class EdgeFrom : Edge
 
     public EdgeFrom(int from, double weight, string name)
     {
-        super(weight, name);
+        base(weight, name);
         this.from = from;
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return "EdgeFrom{" +
                 "from=" + from +

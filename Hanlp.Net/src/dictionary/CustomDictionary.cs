@@ -44,7 +44,7 @@ public class CustomDictionary
         long start = DateTime.Now.Microsecond;
         if (!loadMainDictionary(path[0]))
         {
-            logger.warning("自定义词典" + Arrays.toString(path) + "加载失败");
+            logger.warning("自定义词典" + Arrays.ToString(path) + "加载失败");
         }
         else
         {
@@ -258,7 +258,7 @@ public class CustomDictionary
      */
     public static bool Add(string word, string natureWithFrequency)
     {
-        if (contains(word)) return false;
+        if (Contains(word)) return false;
         return insert(word, natureWithFrequency);
     }
 
@@ -272,7 +272,7 @@ public class CustomDictionary
     public static bool Add(string word)
     {
         if (HanLP.Config.Normalization) word = CharTable.convert(word);
-        if (contains(word)) return false;
+        if (Contains(word)) return false;
         return insert(word, null);
     }
 
@@ -371,7 +371,7 @@ public class CustomDictionary
     private static bool isDicNeedUpdate(string mainPath, string[] path)
     {
         if (HanLP.Config.IOAdapter != null &&
-            !HanLP.Config.IOAdapter.getClass().getName().contains("com.hankcs.hanlp.corpus.io.FileIOAdapter"))
+            !HanLP.Config.IOAdapter.getClass().getName().Contains("com.hankcs.hanlp.corpus.io.FileIOAdapter"))
         {
             return false;
         }
@@ -460,7 +460,7 @@ public class CustomDictionary
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return "CustomDictionary{" +
                 "trie=" + trie +
@@ -472,10 +472,10 @@ public class CustomDictionary
      * @param key 词语
      * @return 是否包含
      */
-    public static bool contains(string key)
+    public static bool Contains(string key)
     {
         if (dat.exactMatchSearch(key) >= 0) return true;
-        return trie != null && trie.containsKey(key);
+        return trie != null && trie.ContainsKey(key);
     }
 
     /**

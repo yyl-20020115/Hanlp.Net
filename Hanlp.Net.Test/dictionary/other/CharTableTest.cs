@@ -117,8 +117,8 @@ public class CharTableTest : TestCase
 ////            String key = entry.getKey();
 ////            if (key.Length != 1) continue;
 ////            String value = entry.getValue();
-////            char t = key.charAt(0);
-////            char s = value.charAt(0);
+////            char t = key[0];
+////            char s = value[0];
 //////            if (CONVERT[t] != s)
 //////            {
 //////                Console.printf("%s\t%c=%c\n", entry, t, CONVERT[t]);

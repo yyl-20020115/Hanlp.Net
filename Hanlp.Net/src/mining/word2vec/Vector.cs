@@ -26,7 +26,7 @@ public class Vector
     public Vector(int size)
     {
         elementArray = new float[size];
-        Arrays.fill(elementArray, 0);
+        Array.Fill(elementArray, 0);
     }
 
     public int size()

@@ -130,7 +130,7 @@ public class LbfgsOptimizer
                     w[i] = -v[i];
                 }
 
-                bound = Math.min(iter - 1, msize);
+                bound = Math.Min(iter - 1, msize);
 
                 cp = point;
                 for (int i = 0; i < bound; ++i)
@@ -234,7 +234,7 @@ public class LbfgsOptimizer
             if (point == msize) point = 0;
 
             double gnorm = Math.sqrt(Mcsrch.ddot_(size, v, 0, v, 0));
-            double xnorm = Math.max(1.0, Math.sqrt(Mcsrch.ddot_(size, x, 0, x, 0)));
+            double xnorm = Math.Max(1.0, Math.sqrt(Mcsrch.ddot_(size, x, 0, x, 0)));
             if (gnorm / xnorm <= Mcsrch.eps)
             {
                 return 0; // OK terminated
@@ -252,7 +252,7 @@ public class LbfgsOptimizer
         mcsrch_ = null;
     }
 
-    public void clear()
+    public void Clear()
     {
         iflag_ = iscn = nfev = iycn = point = npt =
             iter = info = ispt = isyt = iypt = 0;
@@ -270,7 +270,7 @@ public class LbfgsOptimizer
         int size = n;
         iflag_ = 0;
         w_ = new double[size * (2 * msize + 1) + 2 * msize];
-        Arrays.fill(w_, 0.0);
+        Array.Fill(w_, 0.0);
         diag_ = new double[size];
         v_ = new double[size];
         return 0;
@@ -288,7 +288,7 @@ public class LbfgsOptimizer
         {
             iflag_ = 0;
             w_ = new double[size * (2 * msize + 1) + 2 * msize];
-            Arrays.fill(w_, 0.0);
+            Array.Fill(w_, 0.0);
             diag_ = new double[size];
             v_ = new double[size];
             if (orthant)
@@ -329,7 +329,7 @@ public class LbfgsOptimizer
 
         if (iflag == 0)
         {
-            clear();
+            Clear();
             return 0;   // terminate
         }
 

@@ -54,7 +54,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
         CoNLLSentence output = parse(segment.seg(sentence.ToCharArray()));
         if (enableDeprelTranslater && deprelTranslater != null)
         {
-            for (CoNLLWord word : output)
+            foreach (CoNLLWord word in output)
             {
                 string translatedDeprel = deprelTranslater.get(word.DEPREL);
                 word.DEPREL = translatedDeprel;

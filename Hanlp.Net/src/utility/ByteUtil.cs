@@ -85,7 +85,7 @@ public class ByteUtil
      */
     public static float bytesToFloat(byte[] b)
     {
-        return Float.intBitsToFloat(bytesToInt(b));
+        return float.intBitsToFloat(bytesToInt(b));
     }
 
     /**
@@ -172,7 +172,7 @@ public class ByteUtil
      */
     public static byte[] floatToBytes(float f)
     {
-        return intToBytes(Float.floatToIntBits(f));
+        return intToBytes(float.floatToIntBits(f));
     }
 
     /**
@@ -264,7 +264,7 @@ public class ByteUtil
     public static float bytesHighFirstToFloat(byte[] bytes, int start)
     {
         int l = bytesHighFirstToInt(bytes, start);
-        return Float.intBitsToFloat(l);
+        return float.intBitsToFloat(l);
     }
 
     /**

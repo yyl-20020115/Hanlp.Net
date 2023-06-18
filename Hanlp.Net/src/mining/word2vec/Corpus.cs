@@ -12,7 +12,7 @@ public abstract class Corpus
     protected VocabWord[] vocab;
     protected Dictionary<string, int> vocabIndexMap;
     protected bool eoc = true;    // end of corpus
-    protected Charset encoding = Charset.forName("UTF-8");
+    protected Encoding encoding = Encoding.forName("UTF-8");
     protected int[] table;
 
     public Corpus(Config config) 
@@ -194,7 +194,7 @@ public abstract class Corpus
         for (int i = 0; i < vocabSize; i++)
             count[i] = vocab[i].cn;
         for (int i = vocabSize; i < vocabSize * 2; i++)
-            count[i] = int.MAX_VALUE;
+            count[i] = int.MaxValue;
         int pos1 = vocabSize - 1;
         int pos2 = vocabSize;
         // Following algorithm constructs the Huffman tree by adding one node at a time

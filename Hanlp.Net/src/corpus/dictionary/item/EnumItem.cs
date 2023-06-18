@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.MDAG;
 using System.Text;
 
 namespace com.hankcs.hanlp.corpus.dictionary.item;
@@ -83,7 +84,7 @@ public class EnumItem<E>
 
     public bool containsLabel(E label)
     {
-        return labelMap.containsKey(label);
+        return labelMap.ContainsKey(label);
     }
 
     public int getFrequency(E label)
@@ -94,7 +95,7 @@ public class EnumItem<E>
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
          StringBuilder sb = new StringBuilder();
         var entries = new List<KeyValuePair<E, int>>(labelMap.entrySet());
@@ -124,11 +125,11 @@ public class EnumItem<E>
     }
 
     
-    public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string param[])
+    public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string[] param)
     {
         if (param.Length % 2 == 0) return null;
         int natureCount = (param.Length - 1) / 2;
-        KeyValuePair<string, int>[] entries = (KeyValuePair<string, int>[]) Array.newInstance(KeyValuePair.class, natureCount);
+        KeyValuePair<string, int>[] entries = (KeyValuePair<string, int>[]) Array.newInstance(KeyValuePair.c, natureCount);
         for (int i = 0; i < natureCount; ++i)
         {
             entries[i] = new AbstractMap.SimpleEntry<string, int>(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));

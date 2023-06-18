@@ -43,7 +43,7 @@ public class SimpleMDAGNode : ICacheAble
     //The int denoting the size of this node's outgoing _transition set
     private int transitionSetSize;
 
-    //The int denoting the index (in the array which contains this node) at which this node's _transition set begins
+    //The int denoting the index (in the array which Contains this node) at which this node's _transition set begins
     private int transitionSetBeginIndex;
 
 
@@ -262,7 +262,7 @@ public class SimpleMDAGNode : ICacheAble
      */
     public static SimpleMDAGNode traverseMDAG(SimpleMDAGNode[] mdagDataArray, SimpleMDAGNode sourceNode, string str)
     {
-//        char firstLetter = str.charAt(0);
+//        char firstLetter = str[0];
 
         //Loop through the SimpleMDAGNodes in the processing MDAG's source node's _transition set,
         //searching for the the one with a letter (char) equal to the first char of str.
@@ -279,7 +279,7 @@ public class SimpleMDAGNode : ICacheAble
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         StringBuilder sb = new StringBuilder("SimpleMDAGNode{");
         sb.Append("letter=").Append(letter);
@@ -287,7 +287,7 @@ public class SimpleMDAGNode : ICacheAble
         sb.Append(", transitionSetSize=").Append(transitionSetSize);
         sb.Append(", transitionSetBeginIndex=").Append(transitionSetBeginIndex);
         sb.Append('}');
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override
