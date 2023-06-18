@@ -79,8 +79,8 @@ public class FirstOrderHiddenMarkovModelTest : TestCase
         float prob = (float) Math.exp(model.predict(observations, pred));
         int[] answer = {Healthy.ordinal(), Healthy.ordinal(), Fever.ordinal()};
         assertEquals(Arrays.ToString(answer), Arrays.ToString(pred));
-//        assertEquals("0.01512", String.format("%.5f", prob));
-        assertEquals("0.015", String.format("%.3f", prob));
+//        assertEquals("0.01512", String.Format("%.5f", prob));
+        assertEquals("0.015", String.Format("%.3f", prob));
 
         pred = new int[]{pred[0], pred[1]};
         answer = new int[]{answer[0], answer[1]};

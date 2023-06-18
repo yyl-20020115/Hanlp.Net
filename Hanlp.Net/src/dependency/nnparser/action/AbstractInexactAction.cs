@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.action;
 /**
  * @author hankcs
  */
-public class AbstractInexactAction : Comparable<AbstractInexactAction>
+public class AbstractInexactAction : IComparable<AbstractInexactAction>
 {
     int seed;
 
@@ -30,18 +30,18 @@ public class AbstractInexactAction : Comparable<AbstractInexactAction>
      * @param name The name for the action.
      * @param rel  The dependency relation.
      */
-    AbstractInexactAction(int name, int rel)
+    public AbstractInexactAction(int name, int rel)
     {
         seed = rel << 6 | name;
     }
 
-    public int compareTo(AbstractInexactAction o)
+    public int CompareTo(AbstractInexactAction o)
     {
-        return new int(seed).compareTo(o.seed);
+        return (seed).compareTo(o.seed);
     }
 
     //@Override
-    public bool equals(Object obj)
+    public override bool Equals(Object obj)
     {
         if (!(obj is AbstractInexactAction)) return false;
         AbstractInexactAction o = (AbstractInexactAction) obj;

@@ -45,7 +45,7 @@ class AutoIntPool
         _capacity = 0;
     }
 
-    void add(int value)
+    void Add(int value)
     {
         if (_size == _capacity)
         {
@@ -106,7 +106,8 @@ class AutoIntPool
         int[] buf = new int[capacity];
         if (_size > 0)
         {
-            System.arraycopy(_buf, 0, buf, 0, _size);
+           // System.arraycopy(_buf, 0, buf, 0, _size);
+            Array.Copy(_buf,0,buf, 0, _size);
         }
         _buf = buf;
         _capacity = capacity;

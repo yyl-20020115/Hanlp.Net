@@ -71,7 +71,7 @@ public class ImmutableFeatureMDatMap : FeatureMap
     }
 
     //@Override
-    public Set<KeyValuePair<string, int>> entrySet()
+    public HashSet<KeyValuePair<string, int>> entrySet()
     {
         return dat.entrySet();
     }

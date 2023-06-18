@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.corpus.document;
 
 
@@ -22,7 +26,7 @@ public class CorpusLoader
     public static void walk(string folderPath, Handler handler)
     {
         long start = DateTime.Now.Microsecond;
-        List<File> fileList = IOUtil.fileList(folderPath);
+        List<string> fileList = IOUtil.fileList(folderPath);
         int i = 0;
         for (File file : fileList)
         {
@@ -37,7 +41,7 @@ public class CorpusLoader
     public static void walk(string folderPath, HandlerThread[] threadArray)
     {
         long start = DateTime.Now.Microsecond;
-        List<File> fileList = IOUtil.fileList(folderPath);
+        List<string> fileList = IOUtil.fileList(folderPath);
         for (int i = 0; i < threadArray.Length - 1; ++i)
         {
             threadArray[i].fileList = fileList.subList(fileList.size() / threadArray.Length * i, fileList.size() / threadArray.Length * (i + 1));
@@ -74,14 +78,14 @@ public class CorpusLoader
     public static List<Document> convert2DocumentList(string folderPath, bool verbose)
     {
         long start = DateTime.Now.Microsecond;
-        List<File> fileList = IOUtil.fileList(folderPath);
-        List<Document> documentList = new LinkedList<Document>();
+        List<string> fileList = IOUtil.fileList(folderPath);
+        List<Document> documentList = new ();
         int i = 0;
         for (File file : fileList)
         {
             if (verbose) System._out.print(file);
             Document document = convert2Document(file);
-            documentList.add(document);
+            documentList.Add(document);
             if (verbose) System._out.println(" " + ++i + " / " + fileList.size());
         }
         if (verbose)
@@ -115,12 +119,12 @@ public class CorpusLoader
     public static List<List<IWord>> convert2SentenceList(string path)
     {
         List<Document> documentList = CorpusLoader.convert2DocumentList(path);
-        List<List<IWord>> simpleList = new LinkedList<List<IWord>>();
-        for (Document document : documentList)
+        List<List<IWord>> simpleList = new ();
+        foreach (Document document in documentList)
         {
-            for (Sentence sentence : document.sentenceList)
+            foreach (Sentence sentence in document.sentenceList)
             {
-                simpleList.add(sentence.wordList);
+                simpleList.Add(sentence.wordList);
             }
         }
 
@@ -130,8 +134,8 @@ public class CorpusLoader
     public static List<List<Word>> convert2SimpleSentenceList(string path)
     {
         List<Document> documentList = CorpusLoader.convert2DocumentList(path);
-        List<List<Word>> simpleList = new LinkedList<List<Word>>();
-        for (Document document : documentList)
+        List<List<Word>> simpleList = new ();
+        foreach (Document document in documentList)
         {
             simpleList.addAll(document.getSimpleSentenceList());
         }
@@ -139,7 +143,7 @@ public class CorpusLoader
         return simpleList;
     }
 
-    public static Document convert2Document(File file)
+    public static Document convert2Document(string file)
     {
 //        try
 //        {
@@ -150,7 +154,7 @@ public class CorpusLoader
             }
             else
             {
-                throw new IllegalArgumentException(file.getPath() + "读取失败");
+                throw new ArgumentException(file.getPath() + "读取失败");
             }
 //        }
 //        catch (IOException e)
@@ -160,7 +164,7 @@ public class CorpusLoader
 //        return null;
     }
 
-    public static interface Handler
+    public interface Handler
     {
         void handle(Document document);
     }
@@ -168,16 +172,16 @@ public class CorpusLoader
     /**
      * 多线程任务
      */
-    public static abstract class HandlerThread : Thread : Handler
+    public abstract class HandlerThread : Thread , Handler
     {
         /**
          * 这个线程负责处理这些事情
          */
-        public List<File> fileList;
+        public List<string> fileList;
 
         public HandlerThread(string name)
+            :base(name)
         {
-            super(name);
         }
 
         //@Override

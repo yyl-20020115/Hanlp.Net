@@ -48,7 +48,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
         List<string> wordList = new ArrayList<string>(simpleWordList.size());
         for (Word word : simpleWordList)
         {
-            wordList.add(word.value);
+            wordList.Add(word.value);
         }
         string[] words = wordList.toArray(new string[0]);
         Iterator<Word> iterator = simpleWordList.iterator();
@@ -118,8 +118,8 @@ public class CRFPOSTagger : CRFTagger : POSTagger
 
     private POSInstance createInstance(string[] words)
     {
-        final FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
-        final string[][] table = new string[words.Length][5];
+        FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
+        string[][] table = new string[words.Length][5];
         for (int i = 0; i < words.Length; i++)
         {
             extractFeature(words[i], table[i]);

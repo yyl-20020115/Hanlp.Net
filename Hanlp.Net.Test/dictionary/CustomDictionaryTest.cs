@@ -27,12 +27,12 @@ public class CustomDictionaryTest : TestCase
     //    {
     //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("data/dictionary/CustomDictionary.txt")));
     //        String line;
-    //        Set<String> fixedDictionary = new TreeSet<String>();
+    //        HashSet<String> fixedDictionary = new TreeSet<String>();
     //        while ((line = br.readLine()) != null)
     //        {
     //            String[] param = line.Split("\\s");
     //            if (param[0].Length == 1 || CoreDictionary.Contains(param[0])) continue;
-    //            fixedDictionary.add(line);
+    //            fixedDictionary.Add(line);
     //        }
     //        br.close();
     //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/dictionary/CustomDictionary.txt")));
@@ -52,12 +52,12 @@ public class CustomDictionaryTest : TestCase
     //    {
     //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("data/dictionary/CustomDictionary.txt")));
     //        String line;
-    //        Set<String> fixedDictionary = new TreeSet<String>();
+    //        HashSet<String> fixedDictionary = new TreeSet<String>();
     //        while ((line = br.readLine()) != null)
     //        {
     //            String[] param = line.Split("\\s");
-    //            if (param[1].equals("nr")) continue;
-    //            fixedDictionary.add(line);
+    //            if (param[1].Equals("nr")) continue;
+    //            fixedDictionary.Add(line);
     //        }
     //        br.close();
     //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/dictionary/CustomDictionary.txt")));
@@ -104,10 +104,10 @@ public class CustomDictionaryTest : TestCase
     //    public void testRemoveNotNS() 
     //    {
     //        String path = "data/dictionary/custom/全国地名大全.txt";
-    //        final Set<char> suffixSet = new TreeSet<char>();
+    //        HashSet<char> suffixSet = new TreeSet<char>();
     //        for (char c : Predefine.POSTFIX_SINGLE.ToCharArray())
     //        {
-    //            suffixSet.add(c);
+    //            suffixSet.Add(c);
     //        }
     //        DictionaryMaker.load(path).saveTxtTo(path, new DictionaryMaker.Filter()
     //        {
@@ -143,12 +143,12 @@ public class CustomDictionaryTest : TestCase
     //        Console.WriteLine("CustomDictionary.get(customTerm)=" + CustomDictionary.get(customTerm));
     //        Console.WriteLine(HanLP.segment(text));
     //        // 动态增加
-    //        CustomDictionary.add(customTerm);
+    //        CustomDictionary.Add(customTerm);
     //        Console.WriteLine("添加自定义词组分词结果");
     //        Console.WriteLine("CustomDictionary.get(customTerm)=" + CustomDictionary.get(customTerm));
     //        Console.WriteLine(HanLP.segment(text));
     //        // 删除词语
-    //        CustomDictionary.remove(customTerm);
+    //        CustomDictionary.Remove(customTerm);
     //        Console.WriteLine("删除自定义词组分词结果");
     //        Console.WriteLine("CustomDictionary.get(customTerm)=" + CustomDictionary.get(customTerm));
     //        Console.WriteLine(HanLP.segment(text));
@@ -156,9 +156,9 @@ public class CustomDictionaryTest : TestCase
     [TestMethod]
     public void TtestIssue540() 
     {
-        CustomDictionary.add("123");
-        CustomDictionary.add("摩根");
-        CustomDictionary.remove("123");
-        CustomDictionary.remove("摩根");
+        CustomDictionary.Add("123");
+        CustomDictionary.Add("摩根");
+        CustomDictionary.Remove("123");
+        CustomDictionary.Remove("摩根");
     }
 }

@@ -11,6 +11,8 @@
  */
 using com.hankcs.hanlp.classification.models;
 using com.hankcs.hanlp.classification.tokenizers;
+using com.hankcs.hanlp.classification.utilities;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.classification.corpus;
 
@@ -81,7 +83,7 @@ public abstract class AbstractDataSet : IDataSet
     //@Override
     public IDataSet load(string folderPath, string charsetName) 
     {
-        return load(folderPath, charsetName, 1.);
+        return load(folderPath, charsetName, 1.0);
     }
 
     //@Override
@@ -99,17 +101,17 @@ public abstract class AbstractDataSet : IDataSet
     //@Override
     public IDataSet load(string folderPath, string charsetName, double percentage)
     {
-        if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
-        File root = new File(folderPath);
-        if (!root.exists()) throw new IllegalArgumentException(string.format("目录 %s 不存在", root.getAbsolutePath()));
+        if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
+        string root = (folderPath);
+        if (!root.exists()) throw new ArgumentException(string.Format("目录 %s 不存在", root));
         if (!root.isDirectory())
-            throw new IllegalArgumentException(string.format("目录 %s 不是一个目录", root.getAbsolutePath()));
-        if (percentage > 1.0 || percentage < -1.0) throw new IllegalArgumentException("percentage 的绝对值必须介于[0, 1]之间");
+            throw new ArgumentException(string.Format("目录 %s 不是一个目录", root));
+        if (percentage > 1.0 || percentage < -1.0) throw new ArgumentException("percentage 的绝对值必须介于[0, 1]之间");
 
         File[] folders = root.listFiles();
         if (folders == null) return null;
         logger.start("模式:%s\n文本编码:%s\n根目录:%s\n加载中...\n", testingDataSet ? "测试集" : "训练集", charsetName, folderPath);
-        for (File folder : folders)
+        foreach (File folder in folders)
         {
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
@@ -131,7 +133,7 @@ public abstract class AbstractDataSet : IDataSet
             int logEvery = (int) Math.ceil((e - b) / 10000f);
             for (int i = b; i < e; i++)
             {
-                add(folder.getName(), TextProcessUtility.readTxt(files[i], charsetName));
+                Add(folder.getName(), TextProcessUtility.readTxt(files[i], charsetName));
                 if (i % logEvery == 0)
                 {
                     logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
@@ -150,15 +152,16 @@ public abstract class AbstractDataSet : IDataSet
     }
 
     //@Override
-    public IDataSet add(Dictionary<string, string[]> testingDataSet)
+    public IDataSet Add(Dictionary<string, string[]> testingDataSet)
     {
-        for (KeyValuePair<string, string[]> entry : testingDataSet.entrySet())
+        foreach (KeyValuePair<string, string[]> entry in testingDataSet)
         {
-            for (string document : entry.getValue())
+            foreach (string document in entry.Value)
             {
-                add(entry.getKey(), document);
+                Add(entry.Key, document);
             }
         }
         return this;
     }
+    public abstract Document Add(string category, string text);
 }

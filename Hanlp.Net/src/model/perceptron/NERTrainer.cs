@@ -25,9 +25,9 @@ public class NERTrainer : PerceptronTrainer
     /**
      * 支持任意自定义NER类型，例如：<br>
      * tagSet.nerLabels.clear();<br>
-     * tagSet.nerLabels.add("nr");<br>
-     * tagSet.nerLabels.add("ns");<br>
-     * tagSet.nerLabels.add("nt");<br>
+     * tagSet.nerLabels.Add("nr");<br>
+     * tagSet.nerLabels.Add("ns");<br>
+     * tagSet.nerLabels.Add("nt");<br>
      */
     public NERTagSet tagSet;
 
@@ -39,17 +39,17 @@ public class NERTrainer : PerceptronTrainer
     public NERTrainer()
     {
         tagSet = new NERTagSet();
-        tagSet.nerLabels.add("nr");
-        tagSet.nerLabels.add("ns");
-        tagSet.nerLabels.add("nt");
+        tagSet.nerLabels.Add("nr");
+        tagSet.nerLabels.Add("ns");
+        tagSet.nerLabels.Add("nt");
     }
 
     /**
      * 重载此方法以支持任意自定义NER类型，例如：<br>
      * NERTagSet tagSet = new NERTagSet();<br>
-     * tagSet.nerLabels.add("nr");<br>
-     * tagSet.nerLabels.add("ns");<br>
-     * tagSet.nerLabels.add("nt");<br>
+     * tagSet.nerLabels.Add("nr");<br>
+     * tagSet.nerLabels.Add("ns");<br>
+     * tagSet.nerLabels.Add("nt");<br>
      * return tagSet;<br>
      * @return
      */

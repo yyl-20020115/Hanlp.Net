@@ -37,8 +37,8 @@ public class TestJianFanDictionaryMaker : TestCase
 //            String t = entry.getKey();
 //            String s = entry.getValue();
 //            if (t.Length == 1) continue;
-//            if (HanLP.convertToTraditionalChinese(s).equals(t)) continue;
-//            dictionaryHanLP.add(t, s);
+//            if (HanLP.convertToTraditionalChinese(s).Equals(t)) continue;
+//            dictionaryHanLP.Add(t, s);
 //        }
 //
 //        dictionaryHanLP.save(HanLP.Config.t2sDictionaryPath);
@@ -58,12 +58,12 @@ public class TestJianFanDictionaryMaker : TestCase
 //    public void testImportOpenCC() 
 //    {
 //        // 转换OpenCC的词库
-//        Map<String, String> s2t = new TreeMap<String, String>();
+//        Map<String, String> s2t = new Dictionary<String, String>();
 //        combine("\t", s2t, cc + "STCharacters.txt",
 //                cc + "STPhrases.txt"
 //        );
 //        save(s2t, "data/dictionary/tc/s2t.txt");
-//        Map<String, String> t2s = new TreeMap<String, String>();
+//        Map<String, String> t2s = new Dictionary<String, String>();
 //        combine("=", t2s, "data/dictionary/tc/TraditionalChinese.txt");
 //        combine("\t", t2s, cc + "TSCharacters.txt",
 //                cc + "TSPhrases.txt"
@@ -73,7 +73,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //
 //    public void testMakeHK() 
 //    {
-//        Map<String, String> t2hk = new TreeMap<String, String>();
+//        Map<String, String> t2hk = new Dictionary<String, String>();
 //        combine("\t", t2hk,
 //                cc + "HKVariantsPhrases.txt",
 //                cc + "HKVariants.txt"
@@ -83,7 +83,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //
 //    public void testMakeTW() 
 //    {
-//        Map<String, String> t2tw = new TreeMap<String, String>();
+//        Map<String, String> t2tw = new Dictionary<String, String>();
 //        combine("\t", t2tw,
 //                cc + "TWPhrasesIT.txt",
 //                cc + "TWPhrasesName.txt",
@@ -110,13 +110,13 @@ public class TestJianFanDictionaryMaker : TestCase
 //        bw.close();
 //    }
 //
-//    private Map<String, Set<String>> combine(Map<String, String> s2t, Map<String, String> t2s)
+//    private Map<String, HashSet<String>> combine(Map<String, String> s2t, Map<String, String> t2s)
 //    {
-//        Map<String, Set<String>> all = new TreeMap<String, Set<String>>();
+//        Map<String, HashSet<String>> all = new Dictionary<String, HashSet<String>>();
 //        for (Map.Entry<String, String> entry : s2t.entrySet())
 //        {
 //            String key = entry.getKey();
-//            Set<String> value = all.get(key);
+//            HashSet<String> value = all.get(key);
 //            if (value == null)
 //            {
 //                value = new TreeSet<String>();
@@ -124,11 +124,11 @@ public class TestJianFanDictionaryMaker : TestCase
 //            }
 //            for (String v : entry.getValue().Split(" "))
 //            {
-//                if (key.Length == 1 && key.equals(v))
+//                if (key.Length == 1 && key.Equals(v))
 //                {
 //                    continue;
 //                }
-//                value.add(v);
+//                value.Add(v);
 //            }
 //        }
 //
@@ -136,18 +136,18 @@ public class TestJianFanDictionaryMaker : TestCase
 //        {
 //            for (String key : entry.getValue().Split(" "))
 //            {
-//                if (key.Length == 1 && key.equals(entry.getKey()))
+//                if (key.Length == 1 && key.Equals(entry.getKey()))
 //                {
 //                    continue;
 //                }
-//                Set<String> value = all.get(key);
+//                HashSet<String> value = all.get(key);
 //                if (value == null)
 //                {
 //                    value = new TreeSet<String>();
 //                    all.put(key, value);
 //                }
 //
-//                value.add(entry.getKey());
+//                value.Add(entry.getKey());
 //            }
 //        }
 //

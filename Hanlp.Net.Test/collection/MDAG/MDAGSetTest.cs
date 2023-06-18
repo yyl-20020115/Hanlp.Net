@@ -92,7 +92,7 @@ public class MDAGSetTest : TestCase
         String[] keyArray = mdagSet.ToArray();
         foreach (String key in keyArray)
         {
-            mdagSet.remove(key);
+            mdagSet.Remove(key);
             AssertEquals(false, mdagSet.Contains(key));
         }
     }
@@ -100,7 +100,7 @@ public class MDAGSetTest : TestCase
 
     public void TestAdd() 
     {
-        AssertEquals(true, mdagSet.add("成功啦"));
+        AssertEquals(true, mdagSet.Add("成功啦"));
         AssertEquals(true, mdagSet.Contains("成功啦"));
     }
     [TestMethod]

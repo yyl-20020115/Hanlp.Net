@@ -44,10 +44,10 @@ public abstract class AbstractTrainer
     {
         for (int i = 0; i < args.Length; i++)
         {
-            if (param.equals(args[i]))
+            if (param.Equals(args[i]))
             {
                 if (checkArgNum && (i == args.Length - 1))
-                    throw new IllegalArgumentException(string.format("Argument missing for %s", param));
+                    throw new ArgumentException(string.Format("Argument missing for %s", param));
                 return i;
             }
         }

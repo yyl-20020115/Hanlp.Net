@@ -138,7 +138,7 @@ public class EasyDictionary
                 return null;
             }
             KeyValuePair<string, Attribute> result = entryList.get(0);
-            entryList.remove(0);
+            entryList.Remove(0);
             offset = begin - 1;
             return result;
         }

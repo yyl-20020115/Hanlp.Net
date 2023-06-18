@@ -79,7 +79,7 @@ public class SString : IComparable<SString>
     }
 
     //@Override
-    public int Length
+    public int Length()
     {
         return e - b;
     }
@@ -137,7 +137,7 @@ public class SString : IComparable<SString>
         return s;
     }
 
-    public SString add(SString other)
+    public SString Add(SString other)
     {
         char[] value = new char[Length + other.Length];
         System.arraycopy(this.value, b, value, 0, Length);

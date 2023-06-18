@@ -761,19 +761,19 @@ public class Nature
      */
     public static readonly Nature begin = new Nature("begin");
 
-    private static TreeMap<string, int> idMap;
+    private static Dictionary<string, int> idMap;
     private static Nature[] values;
     private int ordinal;
-    private final string name;
+    private string name;
 
     private Nature(string name)
     {
-        if (idMap == null) idMap = new TreeMap<string, int>();
-        assert !idMap.containsKey(name);
+        if (idMap == null) idMap = new ();
+        //assert !idMap.containsKey(name);
         this.name = name;
         ordinal = idMap.size();
-        idMap.put(name, ordinal);
-        Nature[] extended = new Nature[idMap.size()];
+        idMap.Add(name, ordinal);
+        Nature[] extended = new Nature[idMap.Count];
         if (values != null)
             System.arraycopy(values, 0, extended, 0, values.Length);
         extended[ordinal] = this;
@@ -787,9 +787,9 @@ public class Nature
      * @param prefix 前缀
      * @return 是否以该前缀开头
      */
-    public bool startsWith(string prefix)
+    public bool StartsWith(string prefix)
     {
-        return name.startsWith(prefix);
+        return name.StartsWith(prefix);
     }
 
     /**
@@ -799,9 +799,9 @@ public class Nature
      * @param prefix 前缀
      * @return 是否以该前缀开头
      */
-    public bool startsWith(char prefix)
+    public bool StartsWith(char prefix)
     {
-        return name.charAt(0) == prefix;
+        return name[0] == prefix;
     }
 
     /**
@@ -812,7 +812,7 @@ public class Nature
      */
     public char firstChar()
     {
-        return name.charAt(0);
+        return name[0];
     }
 
     /**
@@ -821,7 +821,7 @@ public class Nature
      * @param name 字符串词性
      * @return Enum词性
      */
-    public static readonly Nature fromString(string name)
+    public static Nature fromString(string name)
     {
         int id = idMap.get(name);
         if (id == null)
@@ -835,15 +835,14 @@ public class Nature
      * @param name 字符串词性
      * @return Enum词性
      */
-    public static readonly Nature create(string name)
+    public static Nature create(string name)
     {
         Nature nature = fromString(name);
         if (nature == null)
             return new Nature(name);
         return nature;
     }
-    public:
-
+    
     //@Override
     public override string ToString()
     {

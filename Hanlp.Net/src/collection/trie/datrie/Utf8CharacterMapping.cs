@@ -11,7 +11,7 @@ public class Utf8CharacterMapping : CharacterMapping, Serializable
     private static readonly long serialVersionUID = -6529481088518753872L;
     private static readonly int N = 256;
     private static readonly int[] EMPTYLIST = new int[0];
-    public static readonly Encoding UTF_8 = Charset.forName("UTF-8");
+    public static readonly Encoding UTF_8 = Encoding.UTF8;
 
     //@Override
     public int getInitSize()

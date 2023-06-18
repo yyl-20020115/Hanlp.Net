@@ -29,7 +29,7 @@ public class TraditionalChineseDictionary : BaseChineseDictionary
         long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.tcDictionaryRoot + "t2s.txt", trie, false))
         {
-            throw new IllegalArgumentException("繁简词典" + HanLP.Config.tcDictionaryRoot + "t2s.txt" + "加载失败");
+            throw new ArgumentException("繁简词典" + HanLP.Config.tcDictionaryRoot + "t2s.txt" + "加载失败");
         }
 
         logger.info("繁简词典" + HanLP.Config.tcDictionaryRoot + "t2s.txt" + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");

@@ -101,11 +101,11 @@ public abstract class AbstractVectorModel<K>
 
         foreach (KeyValuePair<K, Vector> entry in storage.entrySet())
         {
-            if (entry.getKey().equals(key))
+            if (entry.getKey().Equals(key))
             {
                 continue;
             }
-            maxHeap.add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
+            maxHeap.Add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
         }
         return maxHeap.toList();
     }
@@ -132,7 +132,7 @@ public abstract class AbstractVectorModel<K>
 
         for (KeyValuePair<K, Vector> entry : storage.entrySet())
         {
-            maxHeap.add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
+            maxHeap.Add(new AbstractMap.SimpleEntry<K, Float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
         }
         return maxHeap.toList();
     }
@@ -227,8 +227,8 @@ public abstract class AbstractVectorModel<K>
      * @param key
      * @return
      */
-    public Vector remove(K key)
+    public Vector Remove(K key)
     {
-        return storage.remove(key);
+        return storage.Remove(key);
     }
 }

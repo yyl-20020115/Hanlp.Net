@@ -1,12 +1,12 @@
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
-public final class KMeansClustering
+public class KMeansClustering
 {
     static readonly Charset ENCODING = Charset.forName("UTF-8");
-    private final VectorsReader reader;
-    private final int clcn;
-    private final string outFile;
+    private VectorsReader reader;
+    private int clcn;
+    private string outFile;
 
     public KMeansClustering(VectorsReader reader, int k, string outFile)
     {
@@ -17,8 +17,8 @@ public final class KMeansClustering
 
     public void clustering() 
     {
-        final int vocabSize = reader.getNumWords();
-        final int layer1Size = reader.getSize();
+        int vocabSize = reader.getNumWords();
+        int layer1Size = reader.getSize();
 
         OutputStream os = null;
         Writer w = null;
@@ -32,11 +32,11 @@ public final class KMeansClustering
 
             // Run K-means on the word vectors
             Console.Error.WriteLine("now computing K-means clustering (K=%d)\n", clcn);
-            final int MAX_ITER = 10;
-            final int[] centcn = new int[clcn];
-            final int[] cl = new int[vocabSize];
-            final int centSize = clcn * layer1Size;
-            final double[] cent = new double[centSize];
+            int MAX_ITER = 10;
+            int[] centcn = new int[clcn];
+            int[] cl = new int[vocabSize];
+            int centSize = clcn * layer1Size;
+            double[] cent = new double[centSize];
 
             for (int i = 0; i < vocabSize; i++)
                 cl[i] = i % clcn;
@@ -98,7 +98,7 @@ public final class KMeansClustering
             }
             for (int i = 0; i < vocabSize; i++)
             {
-                cluster[cl[i]].add(reader.getWord(i));
+                cluster[cl[i]].Add(reader.getWord(i));
             }
             for (int i = 0; i < cluster.Length; i++)
             {

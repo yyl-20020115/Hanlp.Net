@@ -1,4 +1,8 @@
+using com.hankcs.hanlp.classification.corpus;
+using com.hankcs.hanlp.classification.features;
 using com.hankcs.hanlp.classification.models;
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.classification.classifiers;
 
@@ -27,8 +31,9 @@ public class NaiveBayesClassifier : AbstractClassifier
      * 构造一个空白的贝叶斯分类器，通常准备用来进行训练
      */
     public NaiveBayesClassifier()
+        : this(null)
     {
-        this(null);
+        ;
     }
 
     /**
@@ -53,20 +58,20 @@ public class NaiveBayesClassifier : AbstractClassifier
         model.d = featureData.featureCategoryJointCount.Length; //特征数量
 
         model.c = featureData.categoryCounts.Length; //类目数量
-        model.logPriors = new TreeMap<int, Double>();
+        model.logPriors = new ();
 
         int sumCategory;
         for (int category = 0; category < featureData.categoryCounts.Length; category++)
         {
             sumCategory = featureData.categoryCounts[category];
-            model.logPriors.put(category, Math.log((double) sumCategory / model.n));
+            model.logPriors.Add(category, Math.Log((double) sumCategory / model.n));
         }
 
         //拉普拉斯平滑处理（又称加一平滑），这时需要估计每个类目下的实例
-        Dictionary<int, Double> featureOccurrencesInCategory = new TreeMap<int, Double>();
+        Dictionary<int, Double> featureOccurrencesInCategory = new ();
 
         Double featureOccSum;
-        for (int category : model.logPriors.keySet())
+        foreach (int category in model.logPriors.Keys)
         {
             featureOccSum = 0.0;
             for (int feature = 0; feature < featureData.featureCategoryJointCount.Length; feature++)
@@ -74,14 +79,14 @@ public class NaiveBayesClassifier : AbstractClassifier
 
                 featureOccSum += featureData.featureCategoryJointCount[feature][category];
             }
-            featureOccurrencesInCategory.put(category, featureOccSum);
+            featureOccurrencesInCategory.Add(category, featureOccSum);
         }
 
         //对数似然估计
         int count;
         int[] featureCategoryCounts;
         double logLikelihood;
-        for (int category : model.logPriors.keySet())
+        foreach (int category in model.logPriors.Keys)
         {
             for (int feature = 0; feature < featureData.featureCategoryJointCount.Length; feature++)
             {
@@ -90,10 +95,10 @@ public class NaiveBayesClassifier : AbstractClassifier
 
                 count = featureCategoryCounts[category];
 
-                logLikelihood = Math.log((count + 1.0) / (featureOccurrencesInCategory.get(category) + model.d));
-                if (!model.logLikelihoods.containsKey(feature))
+                logLikelihood = Math.Log((count + 1.0) / (featureOccurrencesInCategory.get(category) + model.d));
+                if (!model.logLikelihoods.ContainsKey(feature))
                 {
-                    model.logLikelihoods.put(feature, new TreeMap<int, Double>());
+                    model.logLikelihoods.Add(feature, new ());
                 }
                 model.logLikelihoods.get(feature).put(category, logLikelihood);
             }
@@ -113,11 +118,11 @@ public class NaiveBayesClassifier : AbstractClassifier
     {
         if (model == null)
         {
-            throw new IllegalStateException("未训练模型！无法执行预测！");
+            throw new InvalidOperationException("未训练模型！无法执行预测！");
         }
         if (text == null)
         {
-            throw new IllegalArgumentException("参数 text == null");
+            throw new InvalidOperationException("参数 text == null");
         }
 
         //分词，创建文档
@@ -135,22 +140,22 @@ public class NaiveBayesClassifier : AbstractClassifier
         Double logprob;
 
         double[] predictionScores = new double[model.catalog.Length];
-        for (KeyValuePair<int, Double> entry1 : model.logPriors.entrySet())
+        foreach (KeyValuePair<int, Double> entry1 in model.logPriors)
         {
-            category = entry1.getKey();
-            logprob = entry1.getValue(); //用类目的对数似然初始化概率
+            category = entry1.Key;
+            logprob = entry1.Value; //用类目的对数似然初始化概率
 
             //对文档中的每个特征
-            for (KeyValuePair<int, int[]> entry2 : document.tfMap.entrySet())
+            foreach (KeyValuePair<int, int[]> entry2 in document.tfMap)
             {
-                feature = entry2.getKey();
+                feature = entry2.Key;
 
-                if (!model.logLikelihoods.containsKey(feature))
+                if (!model.logLikelihoods.ContainsKey(feature))
                 {
                     continue; //如果在模型中找不到就跳过了
                 }
 
-                occurrences = entry2.getValue()[0]; //获取其在文档中的频次
+                occurrences = entry2.Value[0]; //获取其在文档中的频次
 
                 logprob += occurrences * model.logLikelihoods.get(feature).get(category); //将对数似然乘上频次
             }
@@ -183,14 +188,14 @@ public class NaiveBayesClassifier : AbstractClassifier
         featureData.wordIdTrie = new BinTrie<int>();
         string[] wordIdArray = dataSet.getLexicon().getWordIdArray();
         int p = -1;
-        for (int feature : selectedFeatures.keySet())
+        foreach (int feature in selectedFeatures.Keys)
         {
             featureCategoryJointCount[++p] = featureData.featureCategoryJointCount[feature];
             featureData.wordIdTrie.put(wordIdArray[feature], p);
         }
         logger.finish(",选中特征数:%d / %d = %.2f%%\n", featureCategoryJointCount.Length,
                       featureData.featureCategoryJointCount.Length,
-                      featureCategoryJointCount.Length / (double)featureData.featureCategoryJointCount.Length * 100.);
+                      featureCategoryJointCount.Length / (double)featureData.featureCategoryJointCount.Length * 100.0);
         featureData.featureCategoryJointCount = featureCategoryJointCount;
 
         return featureData;

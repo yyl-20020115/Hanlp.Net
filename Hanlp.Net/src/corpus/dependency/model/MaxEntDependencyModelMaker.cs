@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+
 namespace com.hankcs.hanlp.corpus.dependency.model;
 
 
@@ -25,7 +27,7 @@ public class MaxEntDependencyModelMaker
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(modelSavePath)));
         LinkedList<CoNLLSentence> sentenceList = CoNLLLoader.loadSentenceList(corpusLoadPath);
         int id = 1;
-        for (CoNLLSentence sentence : sentenceList)
+        foreach (CoNLLSentence sentence in sentenceList)
         {
             System._out.printf("%d / %d...", id++, sentenceList.size());
             string[][] edgeArray = sentence.getEdgeArray();
@@ -36,7 +38,7 @@ public class MaxEntDependencyModelMaker
                 {
                     if (i == j) continue;
                     // 这就是一个边的实例，从i出发，到j，当然它可能存在也可能不存在，不存在取null照样是一个实例
-                    List<string> contextList = new LinkedList<string>();
+                    List<string> contextList = new ();
                     // 先生成i和j的原子特征
                     contextList.addAll(generateSingleWordContext(word, i, "i"));
                     contextList.addAll(generateSingleWordContext(word, j, "j"));
@@ -59,32 +61,32 @@ public class MaxEntDependencyModelMaker
         return true;
     }
 
-    public static Collection<string> generateSingleWordContext(CoNLLWord[] word, int index, string mark)
+    public static ICollection<string> generateSingleWordContext(CoNLLWord[] word, int index, string mark)
     {
-        Collection<string> context = new LinkedList<string>();
+        ICollection<string> context = new LinkedList<string>();
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
             CoNLLWord w = i >= 0 && i < word.Length ? word[i] : CoNLLWord.NULL;
-            context.add(w.NAME + mark + (i - index));      // 在尾巴上做个标记，不然特征冲突了
-            context.add(w.POSTAG + mark + (i - index));
+            context.Add(w.NAME + mark + (i - index));      // 在尾巴上做个标记，不然特征冲突了
+            context.Add(w.POSTAG + mark + (i - index));
         }
 
         return context;
     }
 
-    public static Collection<string> generateUniContext(CoNLLWord[] word, int i, int j)
+    public static ICollection<string> generateUniContext(CoNLLWord[] word, int i, int j)
     {
-        Collection<string> context = new LinkedList<string>();
-        context.add(word[i].NAME + '→' + word[j].NAME);
-        context.add(word[i].POSTAG + '→' + word[j].POSTAG);
-        context.add(word[i].NAME + '→' + word[j].NAME + (i - j));
-        context.add(word[i].POSTAG + '→' + word[j].POSTAG + (i - j));
+        var context = new List<string>();
+        context.Add(word[i].NAME + '→' + word[j].NAME);
+        context.Add(word[i].POSTAG + '→' + word[j].POSTAG);
+        context.Add(word[i].NAME + '→' + word[j].NAME + (i - j));
+        context.Add(word[i].POSTAG + '→' + word[j].POSTAG + (i - j));
         CoNLLWord wordBeforeI = i - 1 >= 0 ? word[i - 1] : CoNLLWord.NULL;
         CoNLLWord wordBeforeJ = j - 1 >= 0 ? word[j - 1] : CoNLLWord.NULL;
-        context.add(wordBeforeI.NAME + '@' + word[i].NAME + '→' + word[j].NAME);
-        context.add(word[i].NAME + '→' + wordBeforeJ.NAME + '@' + word[j].NAME);
-        context.add(wordBeforeI.POSTAG + '@' + word[i].POSTAG + '→' + word[j].POSTAG);
-        context.add(word[i].POSTAG + '→' + wordBeforeJ.POSTAG + '@' + word[j].POSTAG);
+        context.Add(wordBeforeI.NAME + '@' + word[i].NAME + '→' + word[j].NAME);
+        context.Add(word[i].NAME + '→' + wordBeforeJ.NAME + '@' + word[j].NAME);
+        context.Add(wordBeforeI.POSTAG + '@' + word[i].POSTAG + '→' + word[j].POSTAG);
+        context.Add(word[i].POSTAG + '→' + wordBeforeJ.POSTAG + '@' + word[j].POSTAG);
         return context;
     }
 }

@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dependency.nnparser.action;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -31,7 +33,7 @@ public class State
      * 上一个状态
      */
     State previous;    //! The pointer to the previous state.
-    Dependency ref;    //! The pointer to the dependency tree.
+    Dependency _ref;    //! The pointer to the dependency tree.
     double score;             //! The score.
     /**
      * 上一次动作
@@ -65,10 +67,10 @@ public class State
     {
     }
 
-    public State(Dependency ref)
+    public State(Dependency _ref)
     {
-        this.ref = ref;
-        stack = new ArrayList<int>(ref.size());
+        this._ref = _ref;
+        stack = new s(_ref.size());
         clear();
         int L = ref.size();
         heads = std.create(L, -1);
@@ -174,7 +176,7 @@ public class State
         }
 
         this.copy(source);
-        stack.add(this.buffer);
+        stack.Add(this.buffer);
         refresh_stack_information();
         ++this.buffer;
 
@@ -191,7 +193,7 @@ public class State
         }
 
         this.copy(source);
-        stack.remove(stack.size() - 1);
+        stack.Remove(stack.size() - 1);
         stack.set(stack.size() - 1, top0);
 
         heads.set(top1, top0);
@@ -257,19 +259,19 @@ public class State
     int cost(List<int> gold_heads,
              List<int> gold_deprels)
     {
-        List<List<int>> tree = new ArrayList<List<int>>(gold_heads.size());
+        List<List<int>> tree = new (gold_heads.size());
         for (int i = 0; i < gold_heads.size(); ++i)
         {
             int h = gold_heads.get(i);
             if (h >= 0)
             {
-                tree.get(h).add(i);
+                tree.get(h).Add(i);
             }
         }
 
         List<int> sigma_l = stack;
-        List<int> sigma_r = new ArrayList<int>();
-        sigma_r.add(stack.get(stack.size() - 1));
+        List<int> sigma_r = new ();
+        sigma_r.Add(stack.get(stack.size() - 1));
 
         bool[] sigma_l_mask = new bool[gold_heads.size()];
         bool[] sigma_r_mask = new bool[gold_heads.size()];
@@ -282,7 +284,7 @@ public class State
         {
             if (gold_heads.get(i) < buffer)
             {
-                sigma_r.add(i);
+                sigma_r.Add(i);
                 sigma_r_mask[i] = true;
                 continue;
             }
@@ -292,7 +294,7 @@ public class State
             {
                 if (sigma_l_mask[node.get(d)] || sigma_r_mask[node.get(d)])
                 {
-                    sigma_r.add(i);
+                    sigma_r.Add(i);
                     sigma_r_mask[i] = true;
                     break;
                 }
@@ -395,7 +397,7 @@ public class State
      */
     bool buffer_empty()
     {
-        return (this.buffer == this.ref.size());
+        return (this.buffer == this._ref.size());
     }
 
     /**
@@ -404,6 +406,6 @@ public class State
      */
     int stack_size()
     {
-        return (this.stack.size());
+        return (this.stack.Count);
     }
 }

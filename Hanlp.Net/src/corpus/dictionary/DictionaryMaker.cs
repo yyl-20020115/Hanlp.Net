@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.dictionary.item;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -32,7 +36,7 @@ public class DictionaryMaker : ISaveAble
      *
      * @param word 词语
      */
-    public void add(IWord word)
+    public void Add(IWord word)
     {
         Item item = trie.get(word.getValue());
         if (item == null)
@@ -46,18 +50,18 @@ public class DictionaryMaker : ISaveAble
         }
     }
 
-    public void add(string value, string label)
+    public void Add(string value, string label)
     {
-        add(new Word(value, label));
+        Add(new Word(value, label));
     }
 
     /**
      * 删除一个词条
      * @param value
      */
-    public void remove(string value)
+    public void Remove(string value)
     {
-        trie.remove(value);
+        trie.Remove(value);
     }
 
     public Item get(string key)
@@ -70,10 +74,10 @@ public class DictionaryMaker : ISaveAble
         return get(word.getValue());
     }
 
-    public TreeSet<string> labelSet()
+    public HashSet<string> labelSet()
     {
-        TreeSet<string> labelSet = new TreeSet<string>();
-        for (KeyValuePair<string, Item> entry : entrySet())
+        HashSet<string> labelSet = new ();
+        foreach (KeyValuePair<string, Item> entry in entrySet())
         {
             labelSet.addAll(entry.getValue().labelMap.keySet());
         }
@@ -104,7 +108,7 @@ public class DictionaryMaker : ISaveAble
                     return null;
 //                    continue;
                 }
-                itemList.add(item);
+                itemList.Add(item);
             }
         }
         catch (Exception e)
@@ -138,7 +142,7 @@ public class DictionaryMaker : ISaveAble
     {
         for (Item item : itemList)
         {
-            add(item);
+            Add(item);
         }
     }
 
@@ -160,7 +164,7 @@ public class DictionaryMaker : ISaveAble
      *
      * @param item
      */
-    public void add(Item item)
+    public void Add(Item item)
     {
         Item innerItem = trie.get(item.key);
         if (innerItem == null)
@@ -178,12 +182,12 @@ public class DictionaryMaker : ISaveAble
      * 浏览所有词条
      * @return
      */
-    public Set<KeyValuePair<string, Item>> entrySet()
+    public HashSet<KeyValuePair<string, Item>> entrySet()
     {
         return trie.entrySet();
     }
 
-    public Set<string> keySet()
+    public HashSet<string> keySet()
     {
         return trie.keySet();
     }
@@ -225,7 +229,7 @@ public class DictionaryMaker : ISaveAble
      * @param pathArray
      * @return
      */
-    public static DictionaryMaker combine(string... pathArray)
+    public static DictionaryMaker combine(params string[] pathArray)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         for (string path : pathArray)
@@ -277,7 +281,7 @@ public class DictionaryMaker : ISaveAble
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder("词条数量：");
+        StringBuilder sb = new StringBuilder("词条数量：");
         sb.Append(trie.size());
         return sb.toString();
     }
@@ -289,10 +293,10 @@ public class DictionaryMaker : ISaveAble
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
-            Set<KeyValuePair<string, Item>> entries = trie.entrySet();
-            for (KeyValuePair<string, Item> entry : entries)
+            var entries = trie.entrySet();
+            foreach (KeyValuePair<string, Item> entry in entries)
             {
-                bw.write(entry.getValue().toString());
+                bw.write(entry.Value.toString());
                 bw.newLine();
             }
             bw.close();
@@ -306,13 +310,13 @@ public class DictionaryMaker : ISaveAble
         return true;
     }
 
-    public void add(string param)
+    public void Add(string param)
     {
         Item item = Item.create(param);
-        if (item != null) add(item);
+        if (item != null) Add(item);
     }
 
-    public static interface Filter
+    public interface Filter
     {
         /**
          * 是否保存这个条目
@@ -334,12 +338,12 @@ public class DictionaryMaker : ISaveAble
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
-            Set<KeyValuePair<string, Item>> entries = trie.entrySet();
-            for (KeyValuePair<string, Item> entry : entries)
+            var entries = trie.entrySet();
+            foreach (KeyValuePair<string, Item> entry in entries)
             {
-                if (filter.onSave(entry.getValue()))
+                if (filter.onSave(entry.Value))
                 {
-                    bw.write(entry.getValue().toString());
+                    bw.write(entry.Value.toString());
                     bw.newLine();
                 }
             }
@@ -365,16 +369,9 @@ public class DictionaryMaker : ISaveAble
         for (Item item : itemList)
         {
             ArrayList<KeyValuePair<string, int>> entryArray = new ArrayList<KeyValuePair<string, int>>(item.labelMap.entrySet());
-            Collections.sort(entryArray, new Comparator<KeyValuePair<string, int>>()
-            {
-                //@Override
-                public int compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
-                {
-                    return o1.getValue().compareTo(o2.getValue());
-                }
-            });
+            Collections.sort(entryArray, new CT());
             int index = 1;
-            for (KeyValuePair<string, int> pair : entryArray)
+            foreach (KeyValuePair<string, int> pair in entryArray)
             {
                 item.labelMap.put(pair.getKey(), index);
                 ++index;
@@ -382,4 +379,14 @@ public class DictionaryMaker : ISaveAble
         }
         return itemList;
     }
+    public class CT: IComparer<KeyValuePair<string, int>>
+    {
+        //@Override
+        public int Compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
+        {
+            return o1.Value.compareTo(o2.Value);
+        }
+    }
 }
+
+

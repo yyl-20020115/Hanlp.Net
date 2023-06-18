@@ -68,7 +68,7 @@ public class SimpleItem
      */
     public void removeLabel(string label)
     {
-        labelMap.remove(label);
+        labelMap.Remove(label);
     }
 
     public bool containsLabel(string label)
@@ -86,7 +86,7 @@ public class SimpleItem
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(labelMap.entrySet());
         Collections.sort(entries, new CT(());
         for (KeyValuePair<string, int> entry : entries)

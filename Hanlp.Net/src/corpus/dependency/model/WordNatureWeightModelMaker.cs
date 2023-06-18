@@ -9,6 +9,12 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.dictionary;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dependency.model;
 
 
@@ -22,32 +28,32 @@ public class WordNatureWeightModelMaker
 {
     public static bool makeModel(string corpusLoadPath, string modelSavePath)
     {
-        Set<string> posSet = new TreeSet<string>();
+        HashSet<string> posSet = new ();
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
-        for (CoNLLSentence sentence : CoNLLLoader.loadSentenceList(corpusLoadPath))
+        foreach (CoNLLSentence sentence in CoNLLLoader.loadSentenceList(corpusLoadPath))
         {
-            for (CoNLLWord word : sentence.word)
+            foreach (CoNLLWord word in sentence.word)
             {
                 addPair(word.NAME, word.HEAD.NAME, word.DEPREL, dictionaryMaker);
                 addPair(word.NAME, wrapTag(word.HEAD.POSTAG ), word.DEPREL, dictionaryMaker);
                 addPair(wrapTag(word.POSTAG), word.HEAD.NAME, word.DEPREL, dictionaryMaker);
                 addPair(wrapTag(word.POSTAG), wrapTag(word.HEAD.POSTAG), word.DEPREL, dictionaryMaker);
-                posSet.add(word.POSTAG);
+                posSet.Add(word.POSTAG);
             }
         }
-        for (CoNLLSentence sentence : CoNLLLoader.loadSentenceList(corpusLoadPath))
+        foreach (CoNLLSentence sentence in CoNLLLoader.loadSentenceList(corpusLoadPath))
         {
-            for (CoNLLWord word : sentence.word)
+            foreach (CoNLLWord word in sentence.word)
             {
                 addPair(word.NAME, word.HEAD.NAME, word.DEPREL, dictionaryMaker);
                 addPair(word.NAME, wrapTag(word.HEAD.POSTAG ), word.DEPREL, dictionaryMaker);
                 addPair(wrapTag(word.POSTAG), word.HEAD.NAME, word.DEPREL, dictionaryMaker);
                 addPair(wrapTag(word.POSTAG), wrapTag(word.HEAD.POSTAG), word.DEPREL, dictionaryMaker);
-                posSet.add(word.POSTAG);
+                posSet.Add(word.POSTAG);
             }
         }
         StringBuilder sb = new StringBuilder();
-        for (string pos : posSet)
+        foreach (string pos in posSet)
         {
             sb.Append("case \"" + pos + "\":\n");
         }
@@ -57,8 +63,8 @@ public class WordNatureWeightModelMaker
 
     private static void addPair(string from, string to, string label, DictionaryMaker dictionaryMaker)
     {
-        dictionaryMaker.add(new Word(from + "@" + to, label));
-        dictionaryMaker.add(new Word(from + "@", "频次"));
+        dictionaryMaker.Add(new Word(from + "@" + to, label));
+        dictionaryMaker.Add(new Word(from + "@", "频次"));
     }
 
     /**

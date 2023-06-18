@@ -32,7 +32,7 @@ public class HongKongToTraditionalChineseDictionary : BaseChineseDictionary
             var hk2t = new Dictionary<string, string>();
             if (!load(hk2t, true, HanLP.Config.tcDictionaryRoot + "t2hk.txt"))
             {
-                throw new IllegalArgumentException("香港繁体转繁体加载失败");
+                throw new ArgumentException("香港繁体转繁体加载失败");
             }
             trie.build(hk2t);
             saveDat(datPath, trie, hk2t.ToHashSet());

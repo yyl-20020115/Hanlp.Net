@@ -34,7 +34,7 @@ public class CharTable
         long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.CharTablePath))
         {
-            throw new IllegalArgumentException("字符正规化表加载失败");
+            throw new ArgumentException("字符正规化表加载失败");
         }
         logger.info("字符正规化表加载成功：" + (DateTime.Now.Microsecond - start) + " ms");
     }

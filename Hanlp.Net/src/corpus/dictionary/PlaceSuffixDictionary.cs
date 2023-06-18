@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -19,7 +21,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
 public class PlaceSuffixDictionary
 {
     public static SuffixDictionary dictionary = new SuffixDictionary();
-    static
+    static PlaceSuffixDictionary()
     {
         dictionary.addAll(Predefine.POSTFIX_SINGLE);
         dictionary.addAll(Predefine.POSTFIX_MUTIPLE);

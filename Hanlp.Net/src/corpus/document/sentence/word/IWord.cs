@@ -46,5 +46,5 @@ public interface IWord : Serializable
      * 单词长度
      * @return
      */
-    int Length;
+    int Length();
 }

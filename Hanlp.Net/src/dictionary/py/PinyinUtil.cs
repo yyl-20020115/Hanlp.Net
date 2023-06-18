@@ -41,23 +41,23 @@ public class PinyinUtil
      * @param pinyinStr the ascii represention with tone numbers
      * @return the unicode represention with tone marks
      */
-    public static string convertToneNumber2ToneMark(final string pinyinStr)
+    public static string convertToneNumber2ToneMark(string pinyinStr)
     {
         string lowerCasePinyinStr = pinyinStr.toLowerCase();
 
         if (lowerCasePinyinStr.matches("[a-z]*[1-5]?"))
         {
-            final char defautlCharValue = '$';
-            final int defautlIndexValue = -1;
+            char defautlCharValue = '$';
+            int defautlIndexValue = -1;
 
             char unmarkedVowel = defautlCharValue;
             int indexOfUnmarkedVowel = defautlIndexValue;
 
-            final char charA = 'a';
-            final char charE = 'e';
-            final string ouStr = "ou";
-            final string allUnmarkedVowelStr = "aeiouv";
-            final string allMarkedVowelStr = "āáǎàaēéěèeīíǐìiōóǒòoūúǔùuǖǘǚǜü";
+            char charA = 'a';
+            char charE = 'e';
+            string ouStr = "ou";
+            string allUnmarkedVowelStr = "aeiouv";
+            string allMarkedVowelStr = "āáǎàaēéěèeīíǐìiōóǒòoūúǔùuǖǘǚǜü";
 
             if (lowerCasePinyinStr.matches("[a-z]*[1-5]"))
             {
@@ -132,7 +132,7 @@ public class PinyinUtil
             }
         }
         else
-        // bad format
+        // bad Format
         {
             return lowerCasePinyinStr;
         }
@@ -163,7 +163,7 @@ public class PinyinUtil
         List<string> tonePinyinList = new ArrayList<string>(pinyinList.size());
         for (Pinyin pinyin : pinyinList)
         {
-            tonePinyinList.add(pinyin.getPinyinWithToneMark());
+            tonePinyinList.Add(pinyin.getPinyinWithToneMark());
         }
 
         return tonePinyinList;

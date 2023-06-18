@@ -20,11 +20,11 @@ namespace com.hankcs.hanlp.classification.corpus;
  */
 public class FileDataSet : AbstractDataSet
 {
-    File cache;
-    DataOutputStream _out;
+    string cache;
+    Stream _out;
     int size;
 
-    public FileDataSet(AbstractModel model, File cache) 
+    public FileDataSet(AbstractModel model, string cache) 
         :base(model)
     {
         initCache(cache);
@@ -57,12 +57,12 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public Document add(string category, string text)
+    public Document Add(string category, string text)
     {
         Document document = convert(category, text);
         try
         {
-            add(document);
+            Add(document);
         }
         catch (IOException e)
         {
@@ -71,10 +71,10 @@ public class FileDataSet : AbstractDataSet
         return document;
     }
 
-    private void add(Document document) 
+    private void Add(Document document) 
     {
         _out.writeInt(document.category);
-        Set<KeyValuePair<int, int[]>> entrySet = document.tfMap.entrySet();
+        HashSet<KeyValuePair<int, int[]>> entrySet = document.tfMap.entrySet();
         _out.writeInt(entrySet.size());
         for (KeyValuePair<int, int[]> entry : entrySet)
         {
@@ -117,7 +117,7 @@ public class FileDataSet : AbstractDataSet
                 // 检查是否是空白文档
                 if (tfMap.size() == 0) continue;
                 document.tfMap = tfMap;
-                add(document);
+                Add(document);
             }
         }
         catch (IOException e)
@@ -134,11 +134,11 @@ public class FileDataSet : AbstractDataSet
         try
         {
             _out.close();
-            final DataInputStream _in  = new DataInputStream(new FileInputStream(cache));
+            DataInputStream _in  = new DataInputStream(new FileInputStream(cache));
             return new Iterator<Document>()
             {
                 //@Override
-                public void remove()
+                public void Remove()
                 {
                     throw new RuntimeException("不支持的操作");
                 }

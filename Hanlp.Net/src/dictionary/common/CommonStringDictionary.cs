@@ -49,12 +49,12 @@ public class CommonStringDictionary
         return trie.load(path);
     }
 
-    public Set<string> keySet()
+    public HashSet<string> keySet()
     {
-        Set<string> keySet = new LinkedHashSet<string>();
+        HashSet<string> keySet = new LinkedHashSet<string>();
         for (KeyValuePair<string, Byte> entry : trie.entrySet())
         {
-            keySet.add(entry.getKey());
+            keySet.Add(entry.getKey());
         }
 
         return keySet;

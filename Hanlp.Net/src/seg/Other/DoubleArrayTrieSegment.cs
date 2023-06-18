@@ -89,7 +89,7 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
             Term term = new Term(new string(charArray, i, wordNet[i]), 
                 config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
             term.offset = i;
-            termList.add(term);
+            termList.Add(term);
             i += wordNet[i];
         }
         return termList;

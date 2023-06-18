@@ -38,7 +38,7 @@ public class CoreBiGramTableDictionary
         long start = DateTime.Now.Microsecond;
         if (!load(path))
         {
-            throw new IllegalArgumentException("二元词典加载失败");
+            throw new ArgumentException("二元词典加载失败");
         }
         else
         {
@@ -79,10 +79,10 @@ public class CoreBiGramTableDictionary
                     continue;
                 }
                 int freq = int.parseInt(p[1]);
-                TreeMap<int, int> biMap = map.get(idA);
+                Dictionary<int, int> biMap = map.get(idA);
                 if (biMap == null)
                 {
-                    biMap = new TreeMap<int, int>();
+                    biMap = new Dictionary<int, int>();
                     map.put(idA, biMap);
                 }
                 biMap.put(idB, freq);
@@ -95,7 +95,7 @@ public class CoreBiGramTableDictionary
 
             for (int i = 0; i < maxWordId; ++i)
             {
-                TreeMap<int, int> bMap = map.get(i);
+                Dictionary<int, int> bMap = map.get(i);
                 if (bMap != null)
                 {
                     for (KeyValuePair<int, int> entry : bMap.entrySet())

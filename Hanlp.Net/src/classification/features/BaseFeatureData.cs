@@ -18,7 +18,7 @@ public class BaseFeatureData
     /**
      * 一个特征在类目中分别出现几次(键是特征,值的键是类目)
      */
-    public int[][] featureCategoryJointCount;
+    public int[,] featureCategoryJointCount;
 
     /**
      * 每个类目中的文档数量
@@ -38,7 +38,7 @@ public class BaseFeatureData
         Catalog catalog = dataSet.getCatalog();
         Lexicon lexicon = dataSet.getLexicon();
         n = dataSet.size();
-        featureCategoryJointCount = new int[lexicon.size()][catalog.size()];
+        featureCategoryJointCount = new int[lexicon.size(),catalog.size()];
         categoryCounts = new int[catalog.size()];
 
         // 执行统计
@@ -46,9 +46,9 @@ public class BaseFeatureData
         {
             ++categoryCounts[document.category];
 
-            foreach (KeyValuePair<int, int[]> entry in document.tfMap.entrySet())
+            foreach (KeyValuePair<int, int[]> entry in document.tfMap)
             {
-                featureCategoryJointCount[entry.getKey()][document.category] += 1;
+                featureCategoryJointCount[entry.Key,document.category] += 1;
             }
         }
     }

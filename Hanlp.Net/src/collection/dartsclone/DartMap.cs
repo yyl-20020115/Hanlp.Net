@@ -160,7 +160,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public V remove(Object key)
+    public V Remove(Object key)
     {
         throw new InvalidOperationException("双数组不支持删除");
     }

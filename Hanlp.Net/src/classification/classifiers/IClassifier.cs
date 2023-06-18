@@ -39,14 +39,14 @@ public interface IClassifier
      * @ 参数错误
      * @throws IllegalStateException    未训练模型
      */
-    Dictionary<string, Double> predict(string text) ;
+    Dictionary<string, double> predict(string text) ;
 
     /**
      * 预测分类
      * @param document
      * @return
      */
-    Dictionary<string, Double> predict(Document document) ;
+    Dictionary<string, double> predict(Document document) ;
 
     /**
      * 预测分类

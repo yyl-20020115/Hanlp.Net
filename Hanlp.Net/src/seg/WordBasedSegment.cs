@@ -87,7 +87,7 @@ public abstract class WordBasedSegment : Segment
     {
         for (Vertex vertex : linkedArray)
         {
-            if (vertex.realWord.equals("－－") || vertex.realWord.equals("—") || vertex.realWord.equals("-"))
+            if (vertex.realWord.Equals("－－") || vertex.realWord.Equals("—") || vertex.realWord.Equals("-"))
             {
                 vertex.confirmNature(Nature.w);
             }
@@ -126,8 +126,8 @@ public abstract class WordBasedSegment : Segment
                         listIterator.previous();
                         listIterator.set(current);
                         listIterator.next();
-                        listIterator.add(Vertex.newPunctuationInstance("-"));
-                        listIterator.add(Vertex.newNumberInstance(param[1]));
+                        listIterator.Add(Vertex.newPunctuationInstance("-"));
+                        listIterator.Add(Vertex.newNumberInstance(param[1]));
                     }
                 }
             }
@@ -158,12 +158,12 @@ public abstract class WordBasedSegment : Segment
             {
                 //===== 1、如果当前词是数字，下一个词是“月、日、时、分、秒、月份”中的一个，则合并且当前词词性是时间
                 string nextWord = next.realWord;
-                if ((nextWord.Length == 1 && "月日时分秒".contains(nextWord)) || (nextWord.Length == 2 && nextWord.equals("月份")))
+                if ((nextWord.Length == 1 && "月日时分秒".contains(nextWord)) || (nextWord.Length == 2 && nextWord.Equals("月份")))
                 {
                     mergeDate(listIterator, next, current);
                 }
                 //===== 2、如果当前词是可以作为年份的数字，下一个词是“年”，则合并，词性为时间，否则为数字。
-                else if (nextWord.equals("年"))
+                else if (nextWord.Equals("年"))
                 {
                     if (TextUtility.isYearTime(current.realWord))
                     {
@@ -178,7 +178,7 @@ public abstract class WordBasedSegment : Segment
                 else
                 {
                     //===== 3、如果最后一个汉字是"点" ，则认为当前数字是时间
-                    if (current.realWord.endsWith("点"))
+                    if (current.realWord.EndsWith("点"))
                     {
                         current.confirmNature(Nature.t, true);
                     }
@@ -200,7 +200,7 @@ public abstract class WordBasedSegment : Segment
                             listIterator.previous();
                             listIterator.set(current);
                             listIterator.next();
-                            listIterator.add(Vertex.newPunctuationInstance(string.valueOf(last)));
+                            listIterator.Add(Vertex.newPunctuationInstance(string.valueOf(last)));
                         }
                     }
                 }
@@ -218,7 +218,7 @@ public abstract class WordBasedSegment : Segment
         listIterator.set(current);
         listIterator.next();
         listIterator.next();
-        listIterator.remove();
+        listIterator.Remove();
     }
 
     /**
@@ -297,7 +297,7 @@ public abstract class WordBasedSegment : Segment
             {
                 string single = string.valueOf(charArray[pCur]);
                 if (single.Length != 0)
-                    atomSegment.add(new AtomNode(single, nCurType));
+                    atomSegment.Add(new AtomNode(single, nCurType));
                 pCur++;
             }
             //如果是字符、数字或者后面跟随了数字的小数点“.”则一直取下去。
@@ -319,14 +319,14 @@ public abstract class WordBasedSegment : Segment
                         break;
                     }
                 }
-                atomSegment.add(new AtomNode(sb.toString(), nCurType));
+                atomSegment.Add(new AtomNode(sb.toString(), nCurType));
                 if (reachEnd)
                     pCur++;
             }
             // 对于所有其它情况
             else
             {
-                atomSegment.add(new AtomNode(charArray[pCur], nCurType));
+                atomSegment.Add(new AtomNode(charArray[pCur], nCurType));
                 pCur++;
             }
         }
@@ -364,7 +364,7 @@ public abstract class WordBasedSegment : Segment
                 listIterator.next();
                 /////////// end 这部分
 //                System._out.println("before:" + linkedArray);
-                listIterator.remove();
+                listIterator.Remove();
 //                System._out.println("after:" + linkedArray);
             }
             else
@@ -389,7 +389,7 @@ public abstract class WordBasedSegment : Segment
         DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = CoreDictionary.trie.getSearcher(charArray, 0);
         while (searcher.next())
         {
-            wordNetStorage.add(searcher.begin + 1, new Vertex(new string(charArray, searcher.begin, searcher.Length), searcher.value, searcher.index));
+            wordNetStorage.Add(searcher.begin + 1, new Vertex(new string(charArray, searcher.begin, searcher.Length), searcher.value, searcher.index));
         }
         // 强制用户词典查询
         if (config.forceCustomDictionary)
@@ -407,7 +407,7 @@ public abstract class WordBasedSegment : Segment
                 {
                     if (!vertexes[j].isEmpty()) break;
                 }
-                wordNetStorage.add(i, quickAtomSegment(charArray, i - 1, j - 1));
+                wordNetStorage.Add(i, quickAtomSegment(charArray, i - 1, j - 1));
                 i = j;
             }
             else i += vertexes[i].getLast().realWord.Length;
@@ -418,7 +418,7 @@ public abstract class WordBasedSegment : Segment
         //@Override
         public void hit(int begin, int end, CoreDictionary.Attribute value)
         {
-            wordNetStorage.add(begin + 1, new Vertex(new string(charArray, begin, end - begin), value));
+            wordNetStorage.Add(begin + 1, new Vertex(new string(charArray, begin, end - begin), value));
         }
     }
 
@@ -439,7 +439,7 @@ public abstract class WordBasedSegment : Segment
         {
             Vertex vertex = listIterator.next();
             Term termMain = convert(vertex);
-            termList.add(termMain);
+            termList.Add(termMain);
             termMain.offset = line - 1;
             if (vertex.realWord.Length > 2)
             {
@@ -458,10 +458,10 @@ public abstract class WordBasedSegment : Segment
                                 && currentLine + smallVertex.realWord.Length <= line + vertex.realWord.Length // 防止超出边界
                             )
                         {
-                            listIterator.add(smallVertex);
+                            listIterator.Add(smallVertex);
                             Term termSub = convert(smallVertex);
                             termSub.offset = currentLine - 1;
-                            termList.add(termSub);
+                            termList.Add(termSub);
                         }
                     }
                     ++currentLine;

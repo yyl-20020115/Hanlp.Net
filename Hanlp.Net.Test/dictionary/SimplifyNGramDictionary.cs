@@ -25,7 +25,7 @@ public class SimplifyNGramDictionary : TestCase
 //    public void testSimplify() 
 //    {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
-//        TreeMap<String, int> map = new TreeMap<String, int>();
+//        Dictionary<String, int> map = new Dictionary<String, int>();
 //        String line;
 //        while ((line = br.readLine()) != null)
 //        {
@@ -33,7 +33,7 @@ public class SimplifyNGramDictionary : TestCase
 //            map.put(param[0], int.valueOf(param[1]));
 //        }
 //        br.close();
-//        Set<Map.Entry<String, int>> entrySet = map.descendingMap().entrySet();
+//        HashSet<Map.Entry<String, int>> entrySet = map.descendingMap().entrySet();
 //        Iterator<Map.Entry<String, int>> iterator = entrySet.iterator();
 //        // 第一步去包含
 ////        Map.Entry<String, int> pre = new AbstractMap.SimpleEntry<>(" @ ", 1);
@@ -43,7 +43,7 @@ public class SimplifyNGramDictionary : TestCase
 ////            if (current.getKey().Length - current.getKey().indexOf('@') == 2 && pre.getKey().indexOf(current.getKey()) == 0 && current.getValue() <= 2)
 ////            {
 ////                Console.WriteLine("应当删除 " + current + " 保留 " + pre);
-////                iterator.remove();
+////                iterator.Remove();
 ////            }
 ////            pre = current;
 ////        }
@@ -63,10 +63,10 @@ public class SimplifyNGramDictionary : TestCase
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
 ////            String[] termArray = current.getKey().Split("@", 2);
-////            if (termArray[0].equals("未##人") && termArray[1].Length < 2)
+////            if (termArray[0].Equals("未##人") && termArray[1].Length < 2)
 ////            {
 ////                Console.WriteLine("删除 " + current.getKey());
-////                iterator.remove();
+////                iterator.Remove();
 ////            }
 ////        }
 //        // 第四步，人名接续对识别产生太多误命中影响，也删除
@@ -77,7 +77,7 @@ public class SimplifyNGramDictionary : TestCase
 ////            if (current.getKey().Contains("未##人") && current.getValue() < 10)
 ////            {
 ////                Console.WriteLine("删除 " + current.getKey());
-////                iterator.remove();
+////                iterator.Remove();
 ////            }
 ////        }
 //        // 对人名的终极调优
@@ -90,7 +90,7 @@ public class SimplifyNGramDictionary : TestCase
 //            if (current.getKey().Contains("未##人") && dictionary.getFrequency(current.getKey()) < 10)
 //            {
 //                Console.WriteLine("删除 " + current.getKey());
-//                iterator.remove();
+//                iterator.Remove();
 //            }
 //        }
 //        // 输出
@@ -112,7 +112,7 @@ public class SimplifyNGramDictionary : TestCase
 //    public void testLoseWeight() 
 //    {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-//        TreeMap<String, int> map = new TreeMap<String, int>();
+//        Dictionary<String, int> map = new Dictionary<String, int>();
 //        String line;
 //        while ((line = br.readLine()) != null)
 //        {
@@ -128,7 +128,7 @@ public class SimplifyNGramDictionary : TestCase
 //            String one = params[0];
 //            String two = params[1];
 //            if (!CoreDictionary.Contains(one) || !CoreDictionary.Contains(two))
-//                iterator.remove();
+//                iterator.Remove();
 //        }
 //
 //        // 输出

@@ -80,11 +80,11 @@ public class EncoderFeatureIndex : FeatureIndex
                 }
                 else if (line.charAt(0) == 'U')
                 {
-                    unigramTempls_.add(line.trim());
+                    unigramTempls_.Add(line.trim());
                 }
                 else if (line.charAt(0) == 'B')
                 {
-                    bigramTempls_.add(line.trim());
+                    bigramTempls_.Add(line.trim());
                 }
                 else
                 {
@@ -154,7 +154,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 xsize_ = cols.Length - 1;
                 if (y_.indexOf(cols[max_size - 1]) == -1)
                 {
-                    y_.add(cols[max_size - 1]);
+                    y_.Add(cols[max_size - 1]);
                 }
             }
             Collections.sort(y_);
@@ -207,7 +207,7 @@ public class EncoderFeatureIndex : FeatureIndex
 //            int i = 0;
 //            for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
 //            {
-//                keyList.add(pair.key());
+//                keyList.Add(pair.key());
 //                values[i++] = pair.value();
 //            }
 //            DoubleArray doubleArray = new DoubleArray();
@@ -246,7 +246,7 @@ public class EncoderFeatureIndex : FeatureIndex
 
                 for (int k = 0; k < maxid_; k++)
                 {
-                    string val = new DecimalFormat("0.0000000000000000").format(alpha_[k]);
+                    string val = new DecimalFormat("0.0000000000000000").Format(alpha_[k]);
                     osw.write(val + "\n");
                 }
                 osw.close();
@@ -273,7 +273,7 @@ public class EncoderFeatureIndex : FeatureIndex
             return;
         }
         int newMaxId = 0;
-        Dictionary<int, int> old2new = new TreeMap<int, int>();
+        Dictionary<int, int> old2new = new Dictionary<int, int>();
         List<string> deletedKeys = new ArrayList<string>(dic_.size() / 8);
         List<KeyValuePair<string, int>> l = new LinkedList<KeyValuePair<string, int>>(dic_.entrySet());
         // update dictionary in key order, to make result compatible with crfpp
@@ -291,12 +291,12 @@ public class EncoderFeatureIndex : FeatureIndex
             }
             else
             {
-                deletedKeys.add(key);
+                deletedKeys.Add(key);
             }
         }
         for (string key : deletedKeys)
         {
-            dic_.remove(key);
+            dic_.Remove(key);
         }
 
         for (TaggerImpl tagger : taggers)
@@ -315,10 +315,10 @@ public class EncoderFeatureIndex : FeatureIndex
                     int nid = old2new.get(it);
                     if (nid != null)
                     {
-                        newCache.add(nid);
+                        newCache.Add(nid);
                     }
                 }
-                newCache.add(-1);
+                newCache.Add(-1);
                 featureCache.set(k, newCache);
             }
         }
@@ -342,18 +342,18 @@ public class EncoderFeatureIndex : FeatureIndex
 
             while ((line = br.readLine()) != null && line.Length > 0)
             {
-                y_.add(line);
+                y_.Add(line);
             }
             System._out.println("Done reading labels");
             while ((line = br.readLine()) != null && line.Length > 0)
             {
-                if (line.startsWith("U"))
+                if (line.StartsWith("U"))
                 {
-                    unigramTempls_.add(line);
+                    unigramTempls_.Add(line);
                 }
-                else if (line.startsWith("B"))
+                else if (line.StartsWith("B"))
                 {
-                    bigramTempls_.add(line);
+                    bigramTempls_.Add(line);
                 }
             }
             System._out.println("Done reading templates");
@@ -363,7 +363,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 string[] content = line.trim().Split(" ");
                 if (content.Length != 2)
                 {
-                    Console.Error.WriteLine("feature indices format error");
+                    Console.Error.WriteLine("feature indices Format error");
                     return false;
                 }
                 dic_.put(content[1], int.valueOf(content[0]));
@@ -372,7 +372,7 @@ public class EncoderFeatureIndex : FeatureIndex
             List<Double> alpha = new ArrayList<Double>();
             while ((line = br.readLine()) != null && line.Length > 0)
             {
-                alpha.add(Double.valueOf(line));
+                alpha.Add(Double.valueOf(line));
             }
             System._out.println("Done reading weights");
             alpha_ = new double[alpha.size()];

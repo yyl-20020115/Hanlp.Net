@@ -122,10 +122,10 @@ public class CompoundWord : IWord, IEnumerable<Word>
                 logger.warning("使用参数" + single + "构造单词时发生错误");
                 return null;
             }
-            wordList.add(word);
+            wordList.Add(word);
         }
         string labelParam = param.substring(cutIndex + 1);
-        if (labelParam.startsWith("/"))
+        if (labelParam.StartsWith("/"))
         {
             labelParam = labelParam.substring(1);
         }

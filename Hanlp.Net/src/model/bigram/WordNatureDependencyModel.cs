@@ -31,7 +31,7 @@ public class WordNatureDependencyModel
         }
         else
         {
-            throw new IllegalArgumentException("加载依存句法生成模型" + path + "失败，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
+            throw new ArgumentException("加载依存句法生成模型" + path + "失败，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
         }
     }
 
@@ -39,12 +39,12 @@ public class WordNatureDependencyModel
     {
         trie = new DoubleArrayTrie<Attribute>();
         if (loadDat(path)) return true;
-        TreeMap<string, Attribute> map = new TreeMap<string, Attribute>();
-        TreeMap<string, int> tagMap = new TreeMap<string, int>();
+        Dictionary<string, Attribute> map = new Dictionary<string, Attribute>();
+        Dictionary<string, int> tagMap = new Dictionary<string, int>();
         for (string line : IOUtil.readLineListWithLessMemory(path))
         {
             string[] param = line.Split(" ");
-            if (param[0].endsWith("@"))
+            if (param[0].EndsWith("@"))
             {
                 tagMap.put(param[0], int.parseInt(param[2]));
                 continue;
@@ -72,11 +72,11 @@ public class WordNatureDependencyModel
             }
             // 必须降低平滑处理的权重
             float boost = 1.0f;
-            if (key.startsWith("<"))
+            if (key.StartsWith("<"))
             {
                 boost *= 10.0f;
             }
-            if (key.endsWith(">"))
+            if (key.EndsWith(">"))
             {
                 boost *= 10.0f;
             }
@@ -89,7 +89,7 @@ public class WordNatureDependencyModel
         return true;
     }
 
-    bool saveDat(string path, TreeMap<string, Attribute> map)
+    bool saveDat(string path, Dictionary<string, Attribute> map)
     {
         Collection<Attribute> attributeList = map.values();
         // 缓存值文件
@@ -179,7 +179,7 @@ public class WordNatureDependencyModel
 
     static class Attribute
     {
-        final static Attribute NULL = new Attribute("未知", 10000.0f);
+        static Attribute NULL = new Attribute("未知", 10000.0f);
         /**
          * 依存关系
          */
@@ -216,7 +216,7 @@ public class WordNatureDependencyModel
         //@Override
         public string toString()
         {
-            final StringBuilder sb = new StringBuilder(dependencyRelation.Length * 10);
+            StringBuilder sb = new StringBuilder(dependencyRelation.Length * 10);
             for (int i = 0; i < dependencyRelation.Length; ++i)
             {
                 sb.Append(dependencyRelation[i]).Append(' ').Append(p[i]).Append(' ');

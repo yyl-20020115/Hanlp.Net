@@ -1,3 +1,7 @@
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.classification.utilities;
 
 
@@ -15,7 +19,7 @@ public class TextProcessUtility
      */
     public static string preprocess(string text)
     {
-        return text.replaceAll("\\p{P}", " ").replaceAll("\\s+", " ").toLowerCase(Locale.getDefault());
+        return text.Replace("\\p{P}", " ").Replace("\\s+", " ").ToLower();
     }
 
     /**
@@ -44,7 +48,7 @@ public class TextProcessUtility
      */
     public static Dictionary<string, int> getKeywordCounts(string[] keywordArray)
     {
-        Dictionary<string, int> counts = new HashMap<string, int>();
+        Dictionary<string, int> counts = new ();
 
         int counter;
         for (int i = 0; i < keywordArray.Length; ++i)
@@ -54,7 +58,7 @@ public class TextProcessUtility
             {
                 counter = 0;
             }
-            counts.put(keywordArray[i], ++counter); //增加词频
+            counts.Add(keywordArray[i], ++counter); //增加词频
         }
 
         return counts;
@@ -80,7 +84,7 @@ public class TextProcessUtility
             string[] documents = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                documents[i] = IOUtil.readTxt(files[i].getAbsolutePath());
+                documents[i] = IOUtil.readTxt(files[i]);
             }
             dataSet.put(folder.getName(), documents);
         }
@@ -96,16 +100,16 @@ public class TextProcessUtility
      */
     public static Dictionary<string, string[]> loadCorpusWithException(string folderPath, string charsetName) 
     {
-        if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
+        if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
-        if (!root.exists()) throw new IllegalArgumentException(string.format("目录 %s 不存在", root.getAbsolutePath()));
+        if (!root.exists()) throw new ArgumentException(string.Format("目录 %s 不存在", root));
         if (!root.isDirectory())
-            throw new IllegalArgumentException(string.format("目录 %s 不是一个目录", root.getAbsolutePath()));
+            throw new ArgumentException(string.Format("目录 %s 不是一个目录", root));
 
-        Dictionary<string, string[]> dataSet = new TreeMap<string, string[]>();
+        Dictionary<string, string[]> dataSet = new Dictionary<string, string[]>();
         File[] folders = root.listFiles();
         if (folders == null) return null;
-        for (File folder : folders)
+        foreach (File folder in folders)
         {
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
@@ -123,15 +127,15 @@ public class TextProcessUtility
 
     public static string readTxt(File file, string charsetName) 
     {
-        FileInputStream is = new FileInputStream(file);
-        byte[] targetArray = new byte[is.available()];
+        Stream _is = new Stream(file);
+        byte[] targetArray = new byte[_is.available()];
         int len;
         int off = 0;
-        while ((len = is.read(targetArray, off, targetArray.Length - off)) != -1 && off < targetArray.Length)
+        while ((len = _is.read(targetArray, off, targetArray.Length - off)) != -1 && off < targetArray.Length)
         {
             off += len;
         }
-        is.close();
+        _is.close();
 
         return new string(targetArray, charsetName);
     }

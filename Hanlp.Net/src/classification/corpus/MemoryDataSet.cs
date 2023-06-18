@@ -38,7 +38,7 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public Document add(string category, string text)
+    public Document Add(string category, string text)
     {
         if (editMode) return null;
         Document document = convert(category, text);
@@ -65,14 +65,14 @@ public class MemoryDataSet : AbstractDataSet
         {
             Document document = iterator.next();
             FrequencyMap<int> tfMap = new FrequencyMap<int>();
-            foreach (KeyValuePair<int, int[]> entry in document.tfMap.entrySet())
+            foreach (KeyValuePair<int, int[]> entry in document.tfMap)
             {
-                int feature = entry.getKey();
+                int feature = entry.Key;
                 if (idMap[feature] == -1) continue;
-                tfMap.put(idMap[feature], entry.getValue());
+                tfMap.Add(idMap[feature], entry.Value);
             }
             // 检查是否是空白文档
-            if (tfMap.size() == 0) iterator.remove();
+            if (tfMap.Count == 0) iterator.Remove();
             else document.tfMap = tfMap;
         }
         return this;

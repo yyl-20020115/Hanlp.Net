@@ -9,6 +9,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.collections;
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.collection.trie.bintrie;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -33,19 +37,19 @@ public class Document : BagOfWordsDocument
      * @param tokenArray
      */
     public Document(Catalog catalog, Lexicon lexicon, string category, string[] tokenArray)
+        :base()
     {
-        super();
-        assert catalog != null;
-        assert lexicon != null;
-//        this.catalog = catalog;
-//        this.lexicon = lexicon;
+        //assert catalog != null;
+        //assert lexicon != null;
+        //        this.catalog = catalog;
+        //        this.lexicon = lexicon;
 
         // 将其转为数组类型，方便处理
         this.category = catalog.addCategory(category);
         // 统计词频
         for (int i = 0; i < tokenArray.Length; i++)
         {
-            tfMap.add(lexicon.addWord(tokenArray[i]));
+            tfMap.Add(lexicon.addWord(tokenArray[i]));
         }
     }
 
@@ -55,13 +59,13 @@ public class Document : BagOfWordsDocument
      * @param tokenArray
      */
     public Document(ITrie<int> wordIdTrie, string[] tokenArray)
+        :base()
     {
-        super();
         for (int i = 0; i < tokenArray.Length; i++)
         {
             int id = wordIdTrie.get(tokenArray[i].ToCharArray());
             if (id == null) continue;
-            tfMap.add(id);
+            tfMap.Add(id);
         }
     }
 
@@ -73,28 +77,27 @@ public class Document : BagOfWordsDocument
      * @param tokenArray
      */
     public Document(Dictionary<string, int> categoryId, BinTrie<int> wordId, string category, string[] tokenArray)
+        : this(wordId, tokenArray)
     {
-        this(wordId, tokenArray);
-        int id = categoryId.get(category);
-        if (id == null) id = -1;
+        if (!categoryId.TryGetValue(category,out var id)) id = -1;
         this.category = id;
     }
 
-    public Document(DataInputStream in) 
+    public Document(Stream _in) 
     {
-        category = in.readInt();
-        int size = in.readInt();
+        category = _in.readInt();
+        int size = _in.readInt();
         tfMap = new FrequencyMap<int>();
         for (int i = 0; i < size; i++)
         {
-            tfMap.put(in.readInt(), new int[]{in.readInt()});
+            tfMap.Add(_in.readInt(), new int[]{ _in.readInt()});
         }
     }
 
     //    //@Override
 //    public string toString()
 //    {
-//        final StringBuilder sb = new StringBuilder(tfMap.size() * 5);
+//        StringBuilder sb = new StringBuilder(tfMap.size() * 5);
 //        sb.Append('《').Append(super.toString()).Append('》').Append('\t');
 //        sb.Append(catalog.getCategory(category));
 //        sb.Append('\n');

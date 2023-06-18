@@ -29,7 +29,7 @@ public class NERInstance : Instance
         tagArray = new int[wordArray.Length];
         for (int i = 0; i < wordArray.Length; i++)
         {
-            tagArray[i] = tagSet.add(nerArray[i]);
+            tagArray[i] = tagSet.Add(nerArray[i]);
         }
     }
 

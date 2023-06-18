@@ -24,14 +24,14 @@ public class TextRankSentence
     /**
      * 阻尼系数（ＤａｍｐｉｎｇＦａｃｔｏｒ），一般取值为0.85
      */
-    final static double d = 0.85;
+    static double d = 0.85;
     /**
      * 最大迭代次数
      */
-    final static int max_iter = 200;
-    final static double min_diff = 0.001;
+    static int max_iter = 200;
+    static double min_diff = 0.001;
     
-    final static string default_sentence_separator = "[，,。:：“”？?！!；;]";
+    static string default_sentence_separator = "[，,。:：“”？?！!；;]";
     /**
      * 文档句子的个数
      */
@@ -43,7 +43,7 @@ public class TextRankSentence
     /**
      * 排序后的最终结果 score <-> index
      */
-    TreeMap<Double, int> top;
+    Dictionary<Double, int> top;
 
     /**
      * 句子和其他句子的相关程度
@@ -71,7 +71,7 @@ public class TextRankSentence
         weight = new double[D][D];
         weight_sum = new double[D];
         vertex = new double[D];
-        top = new TreeMap<Double, int>(Collections.reverseOrder());
+        top = new Dictionary<Double, int>(Collections.reverseOrder());
         solve();
     }
 
@@ -180,7 +180,7 @@ public class TextRankSentence
             {
                 sent = sent.trim();
                 if (sent.Length == 0) continue;
-                sentences.add(sent);
+                sentences.Add(sent);
             }
         }
 
@@ -204,10 +204,10 @@ public class TextRankSentence
             {
                 if (CoreStopWordDictionary.shouldInclude(term))
                 {
-                    wordList.add(term.word);
+                    wordList.Add(term.word);
                 }
             }
-            docs.add(wordList);
+            docs.Add(wordList);
         }
         return docs;
     }
@@ -241,7 +241,7 @@ public class TextRankSentence
         List<string> resultList = new LinkedList<string>();
         for (int i : topSentence)
         {
-            resultList.add(sentenceList.get(i));
+            resultList.Add(sentenceList.get(i));
         }
         return resultList;
     }
@@ -280,7 +280,7 @@ public class TextRankSentence
         List<string> resultList = new LinkedList<string>();
         for (int i : topSentence)
         {
-            resultList.add(sentenceList.get(i));
+            resultList.Add(sentenceList.get(i));
         }
 
         resultList = permutation(resultList, sentenceList);
@@ -288,7 +288,7 @@ public class TextRankSentence
         return TextUtility.join("。", resultList);
     }
 
-    private static List<string> permutation(List<string> resultList, final List<string> sentenceList)
+    private static List<string> permutation(List<string> resultList, List<string> sentenceList)
     {
         Collections.sort(resultList, new Comparator<string>() {
             //@Override
@@ -307,7 +307,7 @@ public class TextRankSentence
         int count = 0;
         for (string result : resultList) {
             if (count + result.Length <= max_length) {
-                summary.add(result);
+                summary.Add(result);
                 count += result.Length;
             }
         }

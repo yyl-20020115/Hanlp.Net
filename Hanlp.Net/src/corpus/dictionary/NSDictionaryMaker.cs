@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.util;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -20,8 +23,9 @@ namespace com.hankcs.hanlp.corpus.dictionary;
 public class NSDictionaryMaker : CommonDictionaryMaker
 {
     public NSDictionaryMaker(EasyDictionary dictionary)
+        : base(dictionary)
     {
-        super(dictionary);
+        ;
     }
 
     //@Override
@@ -33,9 +37,9 @@ public class NSDictionaryMaker : CommonDictionaryMaker
         {
             for (IWord word : wordList)
             {
-                if (!word.getLabel().equals(NS.Z.toString()))
+                if (!word.getLabel().Equals(NS.Z.toString()))
                 {
-                    dictionaryMaker.add(word);
+                    dictionaryMaker.Add(word);
                 }
             }
         }
@@ -76,7 +80,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (iterator.hasNext())
             {
                 IWord current = iterator.next();
-                if (current.getLabel().startsWith("ns") && !pre.getLabel().startsWith("ns"))
+                if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
                 {
                     pre.setLabel(NS.A.toString());
                 }
@@ -89,7 +93,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (iterator.hasNext())
             {
                 IWord current = iterator.next();
-                if (current.getLabel().startsWith("ns") && !pre.getLabel().startsWith("ns"))
+                if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
                 {
                     pre.setLabel(NS.B.toString());
                 }
@@ -103,7 +107,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (iterator.hasNext())
             {
                 IWord third = iterator.next();
-                if (first.getLabel().startsWith("ns") && third.getLabel().startsWith("ns") && !second.getLabel().startsWith("ns"))
+                if (first.getLabel().StartsWith("ns") && third.getLabel().StartsWith("ns") && !second.getLabel().StartsWith("ns"))
                 {
                     second.setLabel(NS.X.toString());
                 }
@@ -120,8 +124,8 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             {
                 IWord word = listIterator.next();
                 string label = word.getLabel();
-                if (label.equals(label.toUpperCase())) continue;
-                if (label.startsWith("ns"))
+                if (label.Equals(label.toUpperCase())) continue;
+                if (label.StartsWith("ns"))
                 {
                     string value = word.getValue();
                     int longestSuffixLength = PlaceSuffixDictionary.dictionary.getLongestSuffixLength(value);
@@ -131,18 +135,18 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                         word.setLabel(NS.G.toString());
                         continue;
                     }
-                    listIterator.remove();
+                    listIterator.Remove();
                     if (wordLength > 3)
                     {
-                        listIterator.add(new Word(value.substring(0, wordLength), NS.G.toString()));
-                        listIterator.add(new Word(value.substring(wordLength), NS.H.toString()));
+                        listIterator.Add(new Word(value.substring(0, wordLength), NS.G.toString()));
+                        listIterator.Add(new Word(value.substring(wordLength), NS.H.toString()));
                         continue;
                     }
                     for (int l = 1, tag = NS.C.ordinal(); l <= wordLength; ++l, ++tag)
                     {
-                        listIterator.add(new Word(value.substring(l - 1, l), NS.values()[tag].toString()));
+                        listIterator.Add(new Word(value.substring(l - 1, l), NS.values()[tag].toString()));
                     }
-                    listIterator.add(new Word(value.substring(wordLength), NS.H.toString()));
+                    listIterator.Add(new Word(value.substring(wordLength), NS.H.toString()));
                 }
                 else
                 {

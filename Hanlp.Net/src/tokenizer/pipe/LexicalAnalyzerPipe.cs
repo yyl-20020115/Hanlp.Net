@@ -41,11 +41,11 @@ public class LexicalAnalyzerPipe : Pipe<List<IWord>, List<IWord>>
             IWord wordOrSentence = listIterator.next();
             if (wordOrSentence.getLabel() != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
-            listIterator.remove(); // 否则是句子
+            listIterator.Remove(); // 否则是句子
             string sentence = wordOrSentence.getValue();
             foreach (IWord word in analyzer.analyze(sentence))
             {
-                listIterator.add(word);
+                listIterator.Add(word);
             }
         }
         return input;

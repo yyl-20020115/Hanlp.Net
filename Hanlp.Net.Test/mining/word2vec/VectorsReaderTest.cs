@@ -10,7 +10,7 @@ public class VectorsReaderTest : TestCase
     {
         File tempFile = File.createTempFile("hanlp-vector", ".txt");
         tempFile.deleteOnExit();
-        BufferedWriter bw = IOUtil.newBufferedWriter(tempFile.getAbsolutePath());
+        BufferedWriter bw = IOUtil.newBufferedWriter(tempFile);
         bw.write("3 1\n" +
                      "cat 1.1\n" +
                      " 2.2\n" +
@@ -18,7 +18,7 @@ public class VectorsReaderTest : TestCase
         );
         bw.close();
 
-        VectorsReader reader = new VectorsReader(tempFile.getAbsolutePath());
+        VectorsReader reader = new VectorsReader(tempFile);
         reader.readVectorFile();
         AssertEquals(2, reader.words);
         AssertEquals(2, reader.vocab.Length);

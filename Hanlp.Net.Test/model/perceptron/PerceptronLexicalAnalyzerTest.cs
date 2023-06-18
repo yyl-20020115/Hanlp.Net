@@ -44,7 +44,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     {
         analyzer.enableCustomDictionary(true);
         AssertTrue(CustomDictionary.Contains("一字长蛇阵"));
-        final String text = "张飞摆出一字长蛇阵如入无人之境，孙权惊呆了";
+        String text = "张飞摆出一字长蛇阵如入无人之境，孙权惊呆了";
 //        Console.WriteLine(analyzer.analyze(text));
         AssertTrue(analyzer.analyze(text).ToString().Contains(" 一字长蛇阵/"));
     }
@@ -99,7 +99,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         Sentence sentence = analyzer.analyze("\"你好， 我想知道： 风是从哪里来; \t雷是从哪里来； 雨是从哪里来？\"");
         for (IWord word : sentence)
         {
-            if (!word.getLabel().equals("w"))
+            if (!word.getLabel().Equals("w"))
             {
                 AssertFalse(word.getValue().Contains(" "));
                 AssertFalse(word.getValue().Contains("\t"));

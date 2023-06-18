@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.synonym;
 
 
@@ -22,14 +24,14 @@ public class Synonym : ISynonym
     public long id;
     public Type type;
 
-    @Deprecated
+    
     public Synonym(string realWord, string idString)
     {
         this.realWord = realWord;
         id = SynonymHelper.convertString2Id(idString);
     }
 
-    @Deprecated
+    
     public Synonym(string realWord, long id)
     {
         this.realWord = realWord;
@@ -78,13 +80,13 @@ public class Synonym : ISynonym
      * @param args
      * @return
      */
-    public static ArrayList<Synonym> create(string[] args)
+    public static List<Synonym> create(string[] args)
     {
-        ArrayList<Synonym> synonymList = new ArrayList<Synonym>(args.Length - 1);
+        List<Synonym> synonymList = new (args.Length - 1);
 
         string idString = args[0];
         Type type;
-        switch (idString.charAt(idString.Length - 1))
+        switch (idString[(idString.Length - 1)])
         {
             case '=':
                 type = Type.EQUAL;
@@ -101,11 +103,11 @@ public class Synonym : ISynonym
         {
             if (type == Type.LIKE)
             {
-                synonymList.add(new Synonym(args[i], startId + i, type));             // 如果不同则id递增
+                synonymList.Add(new Synonym(args[i], startId + i, type));             // 如果不同则id递增
             }
             else
             {
-                synonymList.add(new Synonym(args[i], startId, type));             // 如果相同则不变
+                synonymList.Add(new Synonym(args[i], startId, type));             // 如果相同则不变
             }
         }
         return synonymList;
@@ -114,26 +116,26 @@ public class Synonym : ISynonym
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.Append(realWord);
         switch (type)
         {
 
-            case EQUAL:
+            case Type.EQUAL:
                 sb.Append('=');
                 break;
-            case LIKE:
+            case Type.LIKE:
                 sb.Append('#');
                 break;
-            case SINGLE:
+            case Type.SINGLE:
                 sb.Append('@');
                 break;
-            case UNDEFINED:
+            case Type.UNDEFINED:
                 sb.Append('?');
                 break;
         }
         sb.Append(getIdString());
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -143,7 +145,7 @@ public class Synonym : ISynonym
      */
     public long distance(Synonym other)
     {
-        return Math.abs(id - other.id);
+        return Math.Abs(id - other.id);
     }
 
     public enum Type

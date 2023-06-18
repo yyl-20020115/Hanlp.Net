@@ -38,7 +38,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     /**
      * 输出表
      */
-    int[,] output;
+    int[][] output;
     /**
      * 保存value
      */
@@ -124,13 +124,13 @@ public class AhoCorasickDoubleArrayTrie<V>
     {
         int position = 1;
         int currentState = 0;
-        for (char c : text)
+        foreach (char c in text)
         {
             currentState = getState(currentState, c);
             int[] hitArray = output[currentState];
             if (hitArray != null)
             {
-                for (int hit : hitArray)
+                foreach (int hit in hitArray)
                 {
                     processor.hit(position - l[hit], position, v[hit]);
                 }
@@ -149,13 +149,13 @@ public class AhoCorasickDoubleArrayTrie<V>
     {
         int position = 1;
         int currentState = 0;
-        for (char c : text)
+        foreach (char c in text)
         {
             currentState = getState(currentState, c);
             int[] hitArray = output[currentState];
             if (hitArray != null)
             {
-                for (int hit : hitArray)
+                foreach (int hit in hitArray)
                 {
                     processor.hit(position - l[hit], position, v[hit], hit);
                 }
@@ -207,7 +207,7 @@ public class AhoCorasickDoubleArrayTrie<V>
      */
     public void save(Stream _out) 
     {
-        _out.writeObject(base);
+        _out.writeObject(_base);
         _out.writeObject(check);
         _out.writeObject(fail);
         _out.writeObject(output);
@@ -377,7 +377,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         //@Override
         public string toString()
         {
-            return string.format("[%d:%d]=%s", begin, end, value);
+            return string.Format("[%d:%d]=%s", begin, end, value);
         }
     }
 
@@ -413,7 +413,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         {
             for (int hit : hitArray)
             {
-                collectedEmits.add(new Hit<V>(position - l[hit], position, v[hit]));
+                collectedEmits.Add(new Hit<V>(position - l[hit], position, v[hit]));
             }
         }
     }
@@ -484,11 +484,11 @@ public class AhoCorasickDoubleArrayTrie<V>
         {
             State fakeNode = new State(-(parent.getDepth() + 1));  // 此节点是parent的子节点，同时具备parent的输出
             fakeNode.addEmit(parent.getLargestValueId());
-            siblings.add(new AbstractMap.SimpleEntry<int, State>(0, fakeNode));
+            siblings.Add(new AbstractMap.SimpleEntry<int, State>(0, fakeNode));
         }
         for (KeyValuePair<char, State> entry : parent.getSuccess().entrySet())
         {
-            siblings.add(new AbstractMap.SimpleEntry<int, State>(entry.getKey() + 1, entry.getValue()));
+            siblings.Add(new AbstractMap.SimpleEntry<int, State>(entry.getKey() + 1, entry.getValue()));
         }
         return siblings.size();
     }
@@ -651,9 +651,9 @@ public class AhoCorasickDoubleArrayTrie<V>
 //            if (base[i] != 0 || check[i] != 0)
 //            {
 //                infoChar += "    " + (i == check[i] ? " ×" : (char) (i - check[i] - 1));
-//                infoIndex += " " + string.format("%5d", i);
-//                infoBase += " " + string.format("%5d", base[i]);
-//                infoCheck += " " + string.format("%5d", check[i]);
+//                infoIndex += " " + string.Format("%5d", i);
+//                infoBase += " " + string.Format("%5d", base[i]);
+//                infoCheck += " " + string.Format("%5d", check[i]);
 //            }
 //        }
 //        return "DoubleArrayTrie：" +
@@ -681,7 +681,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     {
         Dictionary<string, string> nameValueMap = new LinkedHashMap<string, string>();
 
-        public void add(string name, int value)
+        public void Add(string name, int value)
         {
             string valueInMap = nameValueMap.get(name);
             if (valueInMap == null)
@@ -689,7 +689,7 @@ public class AhoCorasickDoubleArrayTrie<V>
                 valueInMap = "";
             }
 
-            valueInMap += " " + string.format("%5d", value);
+            valueInMap += " " + string.Format("%5d", value);
 
             nameValueMap.put(name, valueInMap);
         }
@@ -702,7 +702,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             {
                 string name = entry.getKey();
                 string value = entry.getValue();
-                text += string.format("%-5s", name) + "= " + value + '\n';
+                text += string.Format("%-5s", name) + "= " + value + '\n';
             }
 
             return text;
@@ -763,7 +763,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             // 把值保存下来
             v = (V[]) map.values().toArray();
             l = new int[v.Length];
-            Set<string> keySet = map.keySet();
+            HashSet<string> keySet = map.keySet();
             // 构建二分trie树
             addAllKeyword(keySet);
             // 在二分trie树的基础上构建双数组trie树
@@ -820,19 +820,19 @@ public class AhoCorasickDoubleArrayTrie<V>
             for (State depthOneState : this.rootState.getStates())
             {
                 depthOneState.setFailure(this.rootState, fail);
-                queue.add(depthOneState);
+                queue.Add(depthOneState);
                 constructOutput(depthOneState);
             }
 
             // 第二步，为深度 > 1 的节点建立failure表，这是一个bfs
             while (!queue.isEmpty())
             {
-                State currentState = queue.remove();
+                State currentState = queue.Remove();
 
                 for (char transition : currentState.getTransitions())
                 {
                     State targetState = currentState.nextState(transition);
-                    queue.add(targetState);
+                    queue.Add(targetState);
 
                     State traceFailureState = currentState.failure();
                     while (traceFailureState.nextState(transition) == null)

@@ -110,7 +110,7 @@ public class IOUtil
         LinkedList<string> lineList = readLineList(path);
         foreach (string line in lineList)
         {
-            resultList.add(line.Split(","));
+            resultList.Add(line.Split(","));
         }
         return resultList;
     }
@@ -133,7 +133,7 @@ public class IOUtil
         catch (Exception e)
         {
             logger.throwing("IOUtil", "saveTxt", e);
-            logger.warning("IOUtil saveTxt 到" + path + "失败" + e.toString());
+            logger.warning("IOUtil saveTxt 到" + path + "失败" + e.ToString());
             return false;
         }
         return true;
@@ -165,11 +165,11 @@ public class IOUtil
     {
         try
         {
-            if (IOAdapter == null) return readBytesFromFileInputStream(new FileInputStream(path));
+            if (IOAdapter == null) return readBytesFromFileInputStream(new FileStream(path));
 
             InputStream _is = IOAdapter.open(path);
             if (_is is FileInputStream)
-                return readBytesFromFileInputStream((FileInputStream)_is);
+                return readBytesFromFileInputStream((FileStream)_is);
             else
                 return readBytesFromOtherInputStream(_is);
         }
@@ -200,25 +200,25 @@ public class IOUtil
     {
         if (path == null || path.Length == 0)
             return "";
-        path = path.replaceAll("[/\\\\]+", "/");
+        path = path.Replace("[/\\\\]+", "/");
         int len = path.Length,
                 upCount = 0;
         while (len > 0)
         {
-            //remove trailing separator
-            if (path.charAt(len - 1) == '/')
+            //Remove trailing separator
+            if (path[(len - 1)] == '/')
             {
                 len--;
                 if (len == 0)
                     return "";
             }
-            int lastInd = path.lastIndexOf('/', len - 1);
+            int lastInd = path.LastIndexOf('/', len - 1);
             string fileName = path.substring(lastInd + 1, len);
-            if (fileName.equals("."))
+            if (fileName.Equals("."))
             {
                 len--;
             }
-            else if (fileName.equals(".."))
+            else if (fileName.Equals(".."))
             {
                 len -= 2;
                 upCount++;
@@ -234,7 +234,7 @@ public class IOUtil
         return "";
     }
 
-    private static byte[] readBytesFromFileInputStream(FileInputStream fis) 
+    private static byte[] readBytesFromFileInputStream(FileStream fis) 
     {
         FileChannel channel = fis.getChannel();
         int fileSize = (int) channel.size();
@@ -269,9 +269,9 @@ public class IOUtil
      * @return 实际读取了多少字节，返回0表示遇到了文件尾部
      * @
      */
-    public static int readBytesFromOtherInputStream(InputStream _is, byte[] targetArray) 
+    public static int readBytesFromOtherInputStream(Stream _is, byte[] targetArray) 
     {
-        assert targetArray != null;
+        //assert targetArray != null;
         if (targetArray.Length == 0) return 0;
         int len;
         int off = 0;
@@ -290,7 +290,7 @@ public class IOUtil
         StringTokenizer tokenizer = new StringTokenizer(txt, "\n");
         while (tokenizer.hasMoreTokens())
         {
-            result.add(tokenizer.nextToken());
+            result.Add(tokenizer.nextToken());
         }
 
         return result;
@@ -318,7 +318,7 @@ public class IOUtil
                     if (!line.isEmpty() && line.charAt(0) == '\uFEFF')
                         line = line.substring(1);
                 }
-                result.add(line);
+                result.Add(line);
             }
             bw.close();
         }
@@ -337,7 +337,7 @@ public class IOUtil
 
     public static bool saveMapToTxt(Dictionary<Object, Object> map, string path, string separator)
     {
-        map = new TreeMap<Object, Object>(map);
+        map = new (map);
         return saveEntrySetToTxt(map.entrySet(), path, separator);
     }
 
@@ -389,7 +389,7 @@ public class IOUtil
      */
     public static string removeUTF8BOM(string line)
     {
-        if (line != null && line.startsWith("\uFEFF")) // UTF-8 byte order mark (EF BB BF)
+        if (line != null && line.StartsWith("\uFEFF")) // UTF-8 byte order mark (EF BB BF)
         {
             line = line.substring(1);
         }
@@ -409,7 +409,7 @@ public class IOUtil
         if (folder.isDirectory())
             enumerate(folder, fileList);
         else
-            fileList.add(folder); // 兼容路径为文件的情况
+            fileList.Add(folder); // 兼容路径为文件的情况
         return fileList;
     }
 
@@ -426,9 +426,9 @@ public class IOUtil
         {
             for (File file : fileArray)
             {
-                if (file.isFile() && !file.getName().startsWith(".")) // 过滤隐藏文件
+                if (file.isFile() && !file.getName().StartsWith(".")) // 过滤隐藏文件
                 {
-                    fileList.add(file);
+                    fileList.Add(file);
                 }
                 else
                 {
@@ -552,7 +552,7 @@ public class IOUtil
         }
 
         //@Override
-        public void remove()
+        public void Remove()
         {
             throw new UnsupportedOperationException("只读，不可写！");
         }
@@ -653,7 +653,7 @@ public class IOUtil
      */
     public static Dictionary<string, CoreDictionary.Attribute> loadDictionary(params string[] pathArray) 
     {
-        var map = new TreeMap<string, CoreDictionary.Attribute>();
+        var map = new Dictionary<string, CoreDictionary.Attribute>();
         for (string path : pathArray)
         {
             File file = new File(path);
@@ -664,13 +664,13 @@ public class IOUtil
             {
                 string natureString = fileName.substring(natureIndex + 1);
                 path = file.getParent() + File.separator + fileName.substring(0, natureIndex);
-                if (natureString.Length > 0 && !natureString.endsWith(".txt") && !natureString.endsWith(".csv"))
+                if (natureString.Length > 0 && !natureString.EndsWith(".txt") && !natureString.EndsWith(".csv"))
                 {
                     defaultNature = Nature.create(natureString);
                 }
             }
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            loadDictionary(br, map, path.endsWith(".csv"), defaultNature);
+            loadDictionary(br, map, path.EndsWith(".csv"), defaultNature);
         }
 
         return map;

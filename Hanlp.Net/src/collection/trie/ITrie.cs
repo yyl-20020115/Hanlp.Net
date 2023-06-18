@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.collection.trie;
 
 
@@ -19,8 +21,8 @@ namespace com.hankcs.hanlp.collection.trie;
  */
 public interface ITrie<V>
 {
-    int build(TreeMap<string, V> keyValueMap);
-    bool save(DataOutputStream _out);
+    int build(Dictionary<string, V> keyValueMap);
+    bool save(Stream _out);
     bool load(ByteArray byteArray, V[] value);
     V get(char[] key);
     V get(string key);

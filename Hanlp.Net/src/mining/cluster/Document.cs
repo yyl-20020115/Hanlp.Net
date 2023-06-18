@@ -97,14 +97,14 @@ public class Document<K>
     }
 
     //@Override
-    public bool equals(Object o)
+    public bool Equals(Object o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Document<?> document = (Document<?>) o;
 
-        return id_ != null ? id_.equals(document.id_) : document.id_ == null;
+        return id_ != null ? id_.Equals(document.id_) : document.id_ == null;
     }
 
     //@Override

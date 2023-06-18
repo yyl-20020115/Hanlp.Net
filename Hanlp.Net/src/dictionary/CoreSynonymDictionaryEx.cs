@@ -30,7 +30,7 @@ public class CoreSynonymDictionaryEx
         catch (Exception e)
         {
             logger.severe("载入核心同义词词典失败");
-            throw new IllegalArgumentException(e);
+            throw new ArgumentException(e);
         }
     }
 
@@ -85,13 +85,13 @@ public class CoreSynonymDictionaryEx
                 if (withUndefinedItem)
                 {
                     item = new long[]{long.MAX_VALUE / 3};
-                    synonymItemList.add(item);
+                    synonymItemList.Add(item);
                 }
 
             }
             else
             {
-                synonymItemList.add(item);
+                synonymItemList.Add(item);
             }
         }
 

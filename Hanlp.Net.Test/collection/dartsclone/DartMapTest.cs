@@ -83,20 +83,20 @@ public class DartMapTest : TestCase
 //
 //        }
 //        DoubleArrayTrie<int> trie = new DoubleArrayTrie<int>();
-//        TreeMap<String, int> map = new TreeMap<String, int>();
+//        Dictionary<String, int> map = new Dictionary<String, int>();
 //        for (String key : validKeySet)
 //        {
 //            map.put(key, key.Length);
 //        }
 //        trie.build(map);
 //
-//        // TreeMap
+//        // Dictionary
 //        start = DateTime.Now.Microsecond;
 //        for (String key : validKeySet)
 //        {
 //            assertEquals(key.Length, (int)map.get(key));
 //        }
-//        Console.printf("TreeMap: %d ms\n", DateTime.Now.Microsecond - start);
+//        Console.printf("Dictionary: %d ms\n", DateTime.Now.Microsecond - start);
 //        map = null;
 //        // DAT
 //        start = DateTime.Now.Microsecond;
@@ -116,7 +116,7 @@ public class DartMapTest : TestCase
 //
 //        /**
 //         * result:
-//         * TreeMap: 677 ms
+//         * Dictionary: 677 ms
 //         * DAT: 310 ms
 //         * DAWG: 858 ms
 //         *

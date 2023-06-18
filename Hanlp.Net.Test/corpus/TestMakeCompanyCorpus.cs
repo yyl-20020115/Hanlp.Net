@@ -29,7 +29,7 @@ public class TestMakeCompanyCorpus : TestCase
 //        int limit = int.MAX_VALUE;
 //        while ((line = bw.readLine()) != null && limit-- > 0)
 //        {
-//            if (line.endsWith("）")) continue;
+//            if (line.EndsWith("）")) continue;
 //            if (line.Length < 4) continue;
 //            if (line.Contains("个体") || line.Contains("个人"))
 //            {
@@ -56,7 +56,7 @@ public class TestMakeCompanyCorpus : TestCase
 //    public void testParse() 
 //    {
 //        EasyDictionary dictionary = EasyDictionary.create("data/dictionary/2014_dictionary.txt");
-//        final NTDictionaryMaker nsDictionaryMaker = new NTDictionaryMaker(dictionary);
+//        NTDictionaryMaker nsDictionaryMaker = new NTDictionaryMaker(dictionary);
 //        // CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014\\", new CorpusLoader.Handler()
 //        CorpusLoader.walk("data/test/nt/part/", new CorpusLoader.Handler()
 //        {

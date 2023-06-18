@@ -20,7 +20,7 @@ public class ImmutableFeatureDatMap : FeatureMap
 {
     DoubleArrayTrie<int> dat;
 
-    public ImmutableFeatureDatMap(TreeMap<string, int> featureIdMap, TagSet tagSet)
+    public ImmutableFeatureDatMap(Dictionary<string, int> featureIdMap, TagSet tagSet)
     {
         super(tagSet);
         dat = new DoubleArrayTrie<int>();
@@ -40,7 +40,7 @@ public class ImmutableFeatureDatMap : FeatureMap
     }
 
     //@Override
-    public Set<KeyValuePair<string, int>> entrySet()
+    public HashSet<KeyValuePair<string, int>> entrySet()
     {
         throw new UnsupportedOperationException("这份DAT实现不支持遍历");
     }

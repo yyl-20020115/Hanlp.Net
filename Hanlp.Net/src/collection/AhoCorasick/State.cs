@@ -40,7 +40,7 @@ public class State
     /**
      * goto 表，也称转移函数。根据字符串的下一个字符转移到下一个状态
      */
-    private Dictionary<char, State> success = new TreeMap<char, State>();
+    private Dictionary<char, State> success = new ();
 
     /**
      * 在双数组中的对应下标
@@ -51,8 +51,8 @@ public class State
      * 构造深度为0的节点
      */
     public State()
+        :this(0)
     {
-        this(0);
     }
 
     /**
@@ -81,9 +81,9 @@ public class State
     {
         if (this.emits == null)
         {
-            this.emits = new TreeSet<int>(Collections.reverseOrder());
+            this.emits = new (Collections.reverseOrder());
         }
-        this.emits.add(keyword);
+        this.emits.Add(keyword);
     }
 
     /**
@@ -101,7 +101,7 @@ public class State
      * 添加一些匹配到的模式串
      * @param emits
      */
-    public void addEmit(Collection<int> emits)
+    public void addEmit(ICollection<int> emits)
     {
         for (int emit : emits)
         {
@@ -113,9 +113,9 @@ public class State
      * 获取这个节点代表的模式串（们）
      * @return
      */
-    public Collection<int> emit()
+    public ICollection<int> emit()
     {
-        return this.emits == null ? Collections.<int>emptyList() : this.emits;
+        return this.emits == null ? new() : this.emits;
     }
 
     /**

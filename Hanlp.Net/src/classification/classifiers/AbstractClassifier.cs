@@ -13,6 +13,7 @@ using com.hankcs.hanlp.classification.corpus;
 using com.hankcs.hanlp.classification.models;
 using com.hankcs.hanlp.classification.utilities;
 using com.hankcs.hanlp.corpus.document;
+using com.hankcs.hanlp.utility;
 using Document = com.hankcs.hanlp.classification.corpus.Document;
 
 namespace com.hankcs.hanlp.classification.classifiers;
@@ -34,7 +35,8 @@ public abstract class AbstractClassifier : IClassifier
     /**
      * 是否计算概率
      */
-    bool configProbabilityEnabled = true;
+    public bool configProbabilityEnabled = true;
+    public abstract AbstractModel getModel();
 
     /**
      * 使用一个训练出来的分类器来预测分类
@@ -75,13 +77,13 @@ public abstract class AbstractClassifier : IClassifier
         logger.start("正在构造训练数据集...");
         int total = trainingDataSet.size();
         int cur = 0;
-        for (KeyValuePair<string, string[]> entry : trainingDataSet.entrySet())
+        foreach (KeyValuePair<string, string[]> entry in trainingDataSet)
         {
-            string category = entry.getKey();
+            string category = entry.Key;
             logger._out("[%s]...", category);
-            for (string doc : entry.getValue())
+            foreach (string doc in entry.Value)
             {
-                dataSet.add(category, doc);
+                dataSet.Add(category, doc);
             }
             ++cur;
             logger._out("%.2f%%...", MathUtility.percentage(cur, total));
@@ -102,18 +104,18 @@ public abstract class AbstractClassifier : IClassifier
         var model = getModel();
         if (model == null)
         {
-            throw new IllegalStateException("未训练模型！无法执行预测！");
+            throw new InvalidOperationException("未训练模型！无法执行预测！");
         }
         if (document == null)
         {
-            throw new IllegalArgumentException("参数 text == null");
+            throw new InvalidOperationException("参数 text == null");
         }
 
         double[] probs = categorize(document);
         Dictionary<string, Double> scoreMap = new ();
         for (int i = 0; i < probs.Length; i++)
         {
-            scoreMap.put(model.catalog[i], probs[i]);
+            scoreMap.Add(model.catalog[i], probs[i]);
         }
         return scoreMap;
     }
@@ -124,15 +126,15 @@ public abstract class AbstractClassifier : IClassifier
         AbstractModel model = getModel();
         if (model == null)
         {
-            throw new IllegalStateException("未训练模型！无法执行预测！");
+            throw new InvalidOperationException("未训练模型！无法执行预测！");
         }
         if (document == null)
         {
-            throw new IllegalArgumentException("参数 text == null");
+            throw new InvalidOperationException("参数 text == null");
         }
 
         double[] probs = categorize(document);
-        double max = Double.NEGATIVE_INFINITY;
+        double max = double.NegativeInfinity;
         int best = -1;
         for (int i = 0; i < probs.Length; i++)
         {

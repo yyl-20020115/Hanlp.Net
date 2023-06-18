@@ -49,7 +49,7 @@ public class NewWordDiscover
     public List<WordInfo> discover(BufferedReader reader, int size) 
     {
         string doc;
-        Dictionary<string, WordInfo> word_cands = new TreeMap<string, WordInfo>();
+        Dictionary<string, WordInfo> word_cands = new Dictionary<string, WordInfo>();
         int totalLength = 0;
         Pattern delimiter = Pattern.compile("[\\s\\d,.<>/?:;'\"\\[\\]{}()\\|~!@#$%^&*\\-_=+，。《》、？：；“”‘’｛｝【】（）…￥！—┄－]+");
         while ((doc = reader.readLine()) != null)
@@ -94,7 +94,7 @@ public class NewWordDiscover
                 || (filter && LexiconUtility.getFrequency(info.text) > 0)
                 )
             {
-                listIterator.remove();
+                listIterator.Remove();
             }
         }
         // 按照频率排序

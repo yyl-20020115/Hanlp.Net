@@ -84,12 +84,12 @@ public class Probability : ICacheAble
         return f / (double) total;
     }
 
-    public Set<string> samples()
+    public HashSet<string> samples()
     {
         return d.keySet();
     }
 
-    void add(string key, int value)
+    void Add(string key, int value)
     {
         int f = get(key);
         if (f == null) f = 0;
@@ -98,7 +98,7 @@ public class Probability : ICacheAble
         total += value;
     }
 
-    void add(int value, char... key)
+    void Add(int value, char... key)
     {
         int f = d.get(key);
         if (f == null) f = 0;
@@ -107,14 +107,14 @@ public class Probability : ICacheAble
         total += value;
     }
 
-    public void add(int value, char[]... keyArray)
+    public void Add(int value, char[]... keyArray)
     {
-        add(convert(keyArray), value);
+        Add(convert(keyArray), value);
     }
 
-    public void add(int value, Collection<char[]> keyArray)
+    public void Add(int value, Collection<char[]> keyArray)
     {
-        add(convert(keyArray), value);
+        Add(convert(keyArray), value);
     }
 
     private string convert(Collection<char[]> keyArray)

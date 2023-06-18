@@ -96,9 +96,9 @@ public class NeuralNetworkClassifier
             int _nr_objects,
             int _nr_classes,
             int _nr_feature_types,
-            final LearnOption opt,
-            final List<List<Double>> embeddings,
-            final List<int> precomputed_features
+            LearnOption opt,
+            List<List<Double>> embeddings,
+            List<int> precomputed_features
     )
     {
         if (initialized)
@@ -140,7 +140,7 @@ public class NeuralNetworkClassifier
 
         for (int i = 0; i < embeddings.size(); ++i)
         {
-            final List<Double> embedding = embeddings.get(i);
+            List<Double> embedding = embeddings.get(i);
             int id = embedding.get(0).intValue();
             for (int j = 1; j < embedding.size(); ++j)
             {
@@ -215,7 +215,7 @@ public class NeuralNetworkClassifier
      * @param attributes 属性
      * @param retval 返回各个类别的得分
      */
-    void score(final List<int> attributes,
+    void score(List<int> attributes,
                List<Double> retval)
     {
         Map <int,int >   encoder = precomputation_id_encoder;
@@ -246,7 +246,7 @@ public class NeuralNetworkClassifier
         retval.clear();
         for (int i = 0; i < nr_classes; ++i)
         {
-            retval.add(output.get(i, 0));
+            retval.Add(output.get(i, 0));
         }
     }
 
@@ -261,7 +261,7 @@ public class NeuralNetworkClassifier
 //        }
 //
 //        // precomputing
-//        Set<int> precomputed_features = new TreeSet<int>();
+//        HashSet<int> precomputed_features = new TreeSet<int>();
 //        get_precomputed_features(begin, end, precomputed_features);
 //        precomputing(precomputed_features);
 //
@@ -271,7 +271,7 @@ public class NeuralNetworkClassifier
 //        compute_gradient(begin, end, end - begin);
 //        compute_saved_gradient(precomputed_features);
 //
-//        // add regularizer.
+//        // Add regularizer.
 //        add_l2_regularization();
 //    }
 
@@ -306,9 +306,9 @@ public class NeuralNetworkClassifier
 //    void get_precomputed_features(
 //            int begin,
 //            int end,
-//            Set<int> retval)
+//            HashSet<int> retval)
 //    {
-//        final std.unordered_map <int,int >   encoder = precomputation_id_encoder;
+//        std.unordered_map <int,int >   encoder = precomputation_id_encoder;
 //        for (List < Sample >.final_iterator sample = begin;
 //        sample != end;
 //        ++sample){
@@ -327,7 +327,7 @@ public class NeuralNetworkClassifier
 
 //    void precomputing(Set<int> precomputed_features)
 //    {
-//        final std.unordered_map <int,int >   encoder = precomputation_id_encoder;
+//        std.unordered_map <int,int >   encoder = precomputation_id_encoder;
 //        std.unordered_set <int>features;
 //        for (std.unordered_map <int,int >.final_iterator rep = encoder.begin();
 //        rep != encoder.end();
@@ -338,7 +338,7 @@ public class NeuralNetworkClassifier
 //    }
 
 //    void precomputing(
-//            final std.unordered_set<int> features)
+//            std.unordered_set<int> features)
 //    {
 //        saved.setZero();
 //        for (std.unordered_set <int>.final_iterator rep = features.begin();
@@ -358,7 +358,7 @@ public class NeuralNetworkClassifier
 //            int end,
 //            int batch_size)
 //    {
-//        final std.unordered_map <int,int >   encoder = precomputation_id_encoder;
+//        std.unordered_map <int,int >   encoder = precomputation_id_encoder;
 //
 //        grad_W1.setZero();
 //        grad_b1.setZero();
@@ -373,8 +373,8 @@ public class NeuralNetworkClassifier
 //        for (List < Sample >.final_iterator sample = begin;
 //        sample != end;
 //        ++sample){
-//        final List <int> attributes = sample -> attributes;
-//        final List <double> classes = sample -> classes;
+//        List <int> attributes = sample -> attributes;
+//        List <double> classes = sample -> classes;
 //
 //        Matrix Y = Matrix.Map(   classes[0], classes.size());
 //        Matrix _ = (Eigen.ArrayXd.Random (hidden_layer_size) > mask_prob).select(
@@ -469,7 +469,7 @@ public class NeuralNetworkClassifier
 //    }
 
 //    void compute_saved_gradient(
-//            final Set<int> features)
+//            HashSet<int> features)
 //    {
 //        std.unordered_map <int,int >   encoder = precomputation_id_encoder;
 //        for (std.unordered_set <int>.final_iterator rep = features.begin();

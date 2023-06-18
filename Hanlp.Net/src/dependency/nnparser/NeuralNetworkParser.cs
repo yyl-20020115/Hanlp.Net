@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -145,9 +148,9 @@ public class NeuralNetworkParser : ICacheAble
         model_header = lineIterator.next();
         if (model_header == null) return false;
         root = lineIterator.next();
-        use_distance = "1".equals(lineIterator.next());
-        use_valency = "1".equals(lineIterator.next());
-        use_cluster = "1".equals(lineIterator.next());
+        use_distance = "1".Equals(lineIterator.next());
+        use_valency = "1".Equals(lineIterator.next());
+        use_cluster = "1".Equals(lineIterator.next());
 
         W1 = read_matrix(lineIterator);
         W2 = read_matrix(lineIterator);
@@ -172,7 +175,7 @@ public class NeuralNetworkParser : ICacheAble
             form_to_cluster = read_map(lineIterator);
         }
 
-        assert !lineIterator.hasNext() : "文件有残留，可能是读取逻辑不对";
+        //assert !lineIterator.hasNext() : "文件有残留，可能是读取逻辑不对";
 
         classifier = new NeuralNetworkClassifier(W1, W2, E, b1, saved, precomputation_id_encoder);
         classifier.canonical();
@@ -309,7 +312,7 @@ public class NeuralNetworkParser : ICacheAble
     private static Alphabet read_alphabet(IOUtil.LineIterator lineIterator)
     {
         int size = int.valueOf(lineIterator.next());
-        TreeMap<string, int> map = new TreeMap<string, int>();
+        Dictionary<string, int> map = new Dictionary<string, int>();
         for (int i = 0; i < size; i++)
         {
             string[] args = lineIterator.next().Split("\t");
@@ -433,7 +436,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param dependency 输出的依存树
      * @param with_dependencies 是否输出依存关系（仅在解析后才有意义）
      */
-    void transduce_instance_to_dependency(final Instance data,
+    void transduce_instance_to_dependency(Instance data,
                                           Dependency dependency, bool with_dependencies)
     {
         int L = data.forms.size();
@@ -448,10 +451,10 @@ public class NeuralNetworkParser : ICacheAble
             if (postag == null) postag = postags_alphabet.idOf(SpecialOption.UNKNOWN);
             int deprel = (with_dependencies ? deprels_alphabet.idOf(data.deprels.get(i)) : -1);
 
-            dependency.forms.add(form);
-            dependency.postags.add(postag);
-            dependency.heads.add(with_dependencies ? data.heads.get(i) : -1);
-            dependency.deprels.add(with_dependencies ? deprel : -1);
+            dependency.forms.Add(form);
+            dependency.postags.Add(postag);
+            dependency.heads.Add(with_dependencies ? data.heads.get(i) : -1);
+            dependency.deprels.Add(with_dependencies ? deprel : -1);
         }
     }
 
@@ -462,7 +465,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param cluster6
      * @param cluster
      */
-    void get_cluster_from_dependency(final Dependency data,
+    void get_cluster_from_dependency(Dependency data,
                                      List<int> cluster4,
                                      List<int> cluster6,
                                      List<int> cluster)
@@ -473,11 +476,11 @@ public class NeuralNetworkParser : ICacheAble
             for (int i = 0; i < L; ++i)
             {
                 int form = data.forms.get(i);
-                cluster4.add(i == 0 ?
+                cluster4.Add(i == 0 ?
                                      cluster4_types_alphabet.idOf(SpecialOption.ROOT) : form_to_cluster4.get(form));
-                cluster6.add(i == 0 ?
+                cluster6.Add(i == 0 ?
                                      cluster6_types_alphabet.idOf(SpecialOption.ROOT) : form_to_cluster6.get(form));
-                cluster.add(i == 0 ?
+                cluster.Add(i == 0 ?
                                     cluster_types_alphabet.idOf(SpecialOption.ROOT) : form_to_cluster.get(form));
             }
         }
@@ -489,7 +492,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param heads 依存指向的储存位置
      * @param deprels 依存关系的储存位置
      */
-    void predict(final Instance data, List<int> heads,
+    void predict(Instance data, List<int> heads,
                  List<string> deprels)
     {
         Dependency dependency = new Dependency();
@@ -541,8 +544,8 @@ public class NeuralNetworkParser : ICacheAble
 //        deprels.resize(L);
         for (int i = 0; i < L; ++i)
         {
-            heads.add(states[L * 2 - 1].heads.get(i));
-            deprels.add(deprels_alphabet.labelOf(states[L * 2 - 1].deprels.get(i)));
+            heads.Add(states[L * 2 - 1].heads.get(i));
+            deprels.Add(deprels_alphabet.labelOf(states[L * 2 - 1].deprels.get(i)));
         }
     }
 
@@ -551,7 +554,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param s 状态
      * @param ctx 上下文
      */
-    void get_context(final State s, Context ctx)
+    void get_context(State s, Context ctx)
     {
         ctx.S0 = (s.stack.size() > 0 ? s.stack.get(s.stack.size() - 1) : -1);
         ctx.S1 = (s.stack.size() > 1 ? s.stack.get(s.stack.size() - 2) : -1);
@@ -575,7 +578,7 @@ public class NeuralNetworkParser : ICacheAble
         ctx.S1RR = (ctx.S1R >= 0 ? s.right_most_child.get(ctx.S1R) : -1);
     }
 
-    void get_features(final State s,
+    void get_features(State s,
                       List<int> features)
     {
         Context ctx = new Context();
@@ -593,10 +596,10 @@ public class NeuralNetworkParser : ICacheAble
      * @param cluster
      * @param features 输出特征
      */
-    void get_features(final State s,
-                      final List<int> cluster4,
-                      final List<int> cluster6,
-                      final List<int> cluster,
+    void get_features(State s,
+                      List<int> cluster4,
+                      List<int> cluster6,
+                      List<int> cluster,
                       List<int> features)
     {
         Context ctx = new Context();
@@ -613,7 +616,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param id 单词下标
      * @return 单词
      */
-    int FORM(final List<int> forms, int id)
+    int FORM(List<int> forms, int id)
     {
         return ((id != -1) ? (forms.get(id)) : kNilForm);
     }
@@ -624,7 +627,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param id 词性下标
      * @return 词性
      */
-    int POSTAG(final List<int> postags, int id)
+    int POSTAG(List<int> postags, int id)
     {
         return ((id != -1) ? (postags.get(id) + kPostagInFeaturespace) : kNilPostag);
     }
@@ -635,7 +638,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param id 依存下标
      * @return 依存
      */
-    int DEPREL(final List<int> deprels, int id)
+    int DEPREL(List<int> deprels, int id)
     {
         return ((id != -1) ? (deprels.get(id) + kDeprelInFeaturespace) : kNilDeprel);
     }
@@ -647,7 +650,7 @@ public class NeuralNetworkParser : ICacheAble
      */
     void PUSH(List<int> features, int feat)
     {
-        features.add(feat);
+        features.Add(feat);
     }
 
     /**
@@ -658,10 +661,10 @@ public class NeuralNetworkParser : ICacheAble
      * @param deprels 依存
      * @param features 输出特征的储存位置
      */
-    void get_basic_features(final Context ctx,
-                            final List<int> forms,
-                            final List<int> postags,
-                            final List<int> deprels,
+    void get_basic_features(Context ctx,
+                            List<int> forms,
+                            List<int> postags,
+                            List<int> deprels,
                             List<int> features)
     {
         PUSH(features, FORM(forms, ctx.S0));
@@ -719,7 +722,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param ctx 当前特征
      * @param features 输出特征
      */
-    void get_distance_features(final Context ctx,
+    void get_distance_features(Context ctx,
                                List<int> features)
     {
         if (!use_distance)
@@ -736,7 +739,7 @@ public class NeuralNetworkParser : ICacheAble
                 dist = 7;
             }
         }
-        features.add(dist + kDistanceInFeaturespace);
+        features.Add(dist + kDistanceInFeaturespace);
     }
 
     /**
@@ -746,9 +749,9 @@ public class NeuralNetworkParser : ICacheAble
      * @param nr_right_children 右孩子数量列表
      * @param features 输出特征
      */
-    void get_valency_features(final Context ctx,
-                              final List<int> nr_left_children,
-                              final List<int> nr_right_children,
+    void get_valency_features(Context ctx,
+                              List<int> nr_left_children,
+                              List<int> nr_right_children,
                               List<int> features)
     {
         if (!use_valency)
@@ -771,8 +774,8 @@ public class NeuralNetworkParser : ICacheAble
                 rvc = 7;
             }
         }
-        features.add(lvc + kValencyInFeaturespace);
-        features.add(rvc + kValencyInFeaturespace);
+        features.Add(lvc + kValencyInFeaturespace);
+        features.Add(rvc + kValencyInFeaturespace);
 
         lvc = 8;
         rvc = 8;
@@ -789,21 +792,21 @@ public class NeuralNetworkParser : ICacheAble
                 rvc = 7;
             }
         }
-        features.add(lvc + kValencyInFeaturespace);
-        features.add(rvc + kValencyInFeaturespace);
+        features.Add(lvc + kValencyInFeaturespace);
+        features.Add(rvc + kValencyInFeaturespace);
     }
 
-    int CLUSTER(final List<int> cluster, int id)
+    int CLUSTER(List<int> cluster, int id)
     {
         return (id >= 0 ? (cluster.get(id) + kClusterInFeaturespace) : kNilCluster);
     }
 
-    int CLUSTER4(final List<int> cluster4, int id)
+    int CLUSTER4(List<int> cluster4, int id)
     {
         return (id >= 0 ? (cluster4.get(id) + kCluster4InFeaturespace) : kNilCluster4);
     }
 
-    int CLUSTER6(final List<int> cluster6, int id)
+    int CLUSTER6(List<int> cluster6, int id)
     {
         return (id >= 0 ? (cluster6.get(id) + kCluster6InFeaturespace) : kNilCluster6);
     }
@@ -816,10 +819,10 @@ public class NeuralNetworkParser : ICacheAble
      * @param cluster
      * @param features 输出特征
      */
-    void get_cluster_features(final Context ctx,
-                              final List<int> cluster4,
-                              final List<int> cluster6,
-                              final List<int> cluster,
+    void get_cluster_features(Context ctx,
+                              List<int> cluster4,
+                              List<int> cluster6,
+                              List<int> cluster,
                               List<int> features)
     {
         if (!use_cluster)

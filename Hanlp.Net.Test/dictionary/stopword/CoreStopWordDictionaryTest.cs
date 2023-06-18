@@ -25,9 +25,9 @@ public class CoreStopWordDictionaryTest : TestCase
         wordList.Add("hello");
         wordList.Add("world");
         MDAGSet set = new MDAGSet(wordList);
-        set.add("bee");
+        set.Add("bee");
         AssertEquals(true, set.Contains("bee"));
-        set.remove("bee");
+        set.Remove("bee");
         AssertEquals(false, set.Contains("bee"));
     }
 

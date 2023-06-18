@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.dependency;
 
 
@@ -22,7 +26,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
     public CoNLLSentence parse(List<Term> termList)
     {
         if (termList == null || termList.size() == 0) return null;
-        termList.add(0, new Term("##核心##", Nature.begin));
+        termList.Add(0, new Term("##核心##", Nature.begin));
         Node[] nodeArray = new Node[termList.size()];
         Iterator<Term> iterator = termList.iterator();
         for (int i = 0; i < nodeArray.Length; ++i)
@@ -62,7 +66,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
             }
         }
         if (firstEdge == null) return null;
-        que.add(new State(minCostToRoot, firstEdge.from, firstEdge));
+        que.Add(new State(minCostToRoot, firstEdge.from, firstEdge));
         while (!que.isEmpty())
         {
             State p = que.poll();
@@ -80,7 +84,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
                 if (mincost[e.from] > e.cost)
                 {
                     mincost[e.from] = e.cost;
-                    que.add(new State(mincost[e.from], e.from, e));
+                    que.Add(new State(mincost[e.from], e.from, e));
                 }
             }
         }

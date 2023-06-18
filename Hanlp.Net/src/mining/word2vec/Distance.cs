@@ -12,7 +12,7 @@ public class Distance : AbstractClosestVectors
 
     static void usage()
     {
-        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE contains word projections in the text format\n",
+        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE contains word projections in the text Format\n",
                           Distance.class.getName());
         System.exit(0);
     }
@@ -25,8 +25,8 @@ public class Distance : AbstractClosestVectors
 
     protected Result getTargetVector()
     {
-        final int words = vectorsReader.getNumWords();
-        final int size = vectorsReader.getSize();
+        int words = vectorsReader.getNumWords();
+        int size = vectorsReader.getSize();
 
         string[] input = null;
         while ((input = nextWords(1, "Enter a word")) != null)
@@ -37,7 +37,7 @@ public class Distance : AbstractClosestVectors
             double len = 0;
             for (int i = 0; i < words; i++)
             {
-                if (input[0].equals(vectorsReader.getWord(i)))
+                if (input[0].Equals(vectorsReader.getWord(i)))
                 {
                     bi = i;
                     System._out.printf("\nWord: %s  Position in vocabulary: %d\n", input[0], bi);

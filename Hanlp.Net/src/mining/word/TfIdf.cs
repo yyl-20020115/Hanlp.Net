@@ -102,7 +102,7 @@ public class TfIdf
         List<Dictionary<TERM, Double>> tfs = new ArrayList<Dictionary<TERM, Double>>();
         for (Collection<TERM> document : documents)
         {
-            tfs.add(tf(document, type));
+            tfs.Add(tf(document, type));
         }
         return tfs;
     }
@@ -277,7 +277,7 @@ public class TfIdf
                 }
 
                 //@Override
-                public void remove()
+                public void Remove()
                 {
 
                 }

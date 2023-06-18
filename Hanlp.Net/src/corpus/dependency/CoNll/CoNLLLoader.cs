@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
 
@@ -19,19 +21,19 @@ namespace com.hankcs.hanlp.corpus.dependency.CoNll;
  */
 public class CoNLLLoader
 {
-    public static LinkedList<CoNLLSentence> loadSentenceList(string path)
+    public static List<CoNLLSentence> loadSentenceList(string path)
     {
-        LinkedList<CoNLLSentence> result = new LinkedList<CoNLLSentence>();
-        LinkedList<CoNllLine> lineList = new LinkedList<CoNllLine>();
-        for (string line : IOUtil.readLineListWithLessMemory(path))
+        List<CoNLLSentence> result = new ();
+        List<CoNllLine> lineList = new ();
+        foreach (string line in IOUtil.readLineListWithLessMemory(path))
         {
-            if (line.trim().Length == 0)
+            if (line.Trim().Length == 0)
             {
-                result.add(new CoNLLSentence(lineList));
-                lineList = new LinkedList<CoNllLine>();
+                result.Add(new CoNLLSentence(lineList));
+                lineList = new ();
                 continue;
             }
-            lineList.add(new CoNllLine(line.Split("\t")));
+            lineList.Add(new CoNllLine(line.Split("\t")));
         }
 
         return result;

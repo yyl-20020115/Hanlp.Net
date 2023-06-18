@@ -72,7 +72,7 @@ public interface IDataSet : IEnumerable<Document>
      * @param text     文本
      * @return
      */
-    Document add(string category, string text);
+    Document Add(string category, string text);
 
     /**
      * 利用本数据集的词表和类目表将文本形式的文档转换为内部通用的文档
@@ -131,7 +131,7 @@ public interface IDataSet : IEnumerable<Document>
      */
     bool isTestingDataSet();
 
-    IDataSet add(Dictionary<string, string[]> testingDataSet);
+    IDataSet Add(Dictionary<string, string[]> testingDataSet);
 
     IDataSet shrink(int[] idMap);
 

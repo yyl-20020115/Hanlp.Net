@@ -120,9 +120,9 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 segmentAfterRule(sentence.substring(offset[0], begin), normalized.substring(offset[0], begin), wordList);
             }
             while (attributeList.size() < wordList.size())
-                attributeList.add(null);
-            wordList.add(sentence.substring(begin, end));
-            attributeList.add(value);
+                attributeList.Add(null);
+            wordList.Add(sentence.substring(begin, end));
+            attributeList.Add(value);
             assert wordList.size() == attributeList.size() : "词语列表与属性列表不等长";
             offset[0] = end;
         }
@@ -153,7 +153,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             {
                 segmentAfterRule(sentence.substring(offset[0], begin), normalized.substring(offset[0], begin), wordList);
             }
-            wordList.add(sentence.substring(begin, end));
+            wordList.Add(sentence.substring(begin, end));
             offset[0] = end;
         }
     }
@@ -233,10 +233,10 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 {
                     if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
                     {
-                        termList.add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
+                        termList.Add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
                         result = new ();
                     }
-                    result.add(new Word(wordArray[i], posArray[i]));
+                    result.Add(new Word(wordArray[i], posArray[i]));
                     if (nerArray[i].charAt(0) == tagSet.O_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR)
                     {
                         prePos = posArray[i];
@@ -248,7 +248,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 }
                 if (result.size() != 0)
                 {
-                    termList.add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
+                    termList.Add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
                 }
             }
             else
@@ -257,7 +257,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 wordList.toArray(wordArray);
                 for (int i = 0; i < wordArray.Length; i++)
                 {
-                    termList.add(new Word(wordArray[i], posArray[i]));
+                    termList.Add(new Word(wordArray[i], posArray[i]));
                 }
             }
         }
@@ -266,7 +266,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             wordList.toArray(wordArray);
             for (string word : wordArray)
             {
-                termList.add(new Word(word, null));
+                termList.Add(new Word(word, null));
             }
         }
 
@@ -389,7 +389,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     result.Append(wordArray[0]);
                     if (childrenList != null)
                     {
-                        childrenList.add(iterator.next());
+                        childrenList.Add(iterator.next());
                     }
                     string prePos = posArray[0];
                     offset = 0;
@@ -402,7 +402,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                             Term term = new Term(result.toString(), Nature.create(prePos));
                             term.offset = offset;
                             offset += term.Length;
-                            termList.add(term);
+                            termList.Add(term);
                             if (childrenList != null)
                             {
                                 if (childrenList.size() > 1)
@@ -411,7 +411,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                                     {
                                         if (shortTerm.Length >= config.indexMode)
                                         {
-                                            termList.add(shortTerm);
+                                            termList.Add(shortTerm);
                                         }
                                     }
                                 }
@@ -422,7 +422,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         result.Append(wordArray[i]);
                         if (childrenList != null)
                         {
-                            childrenList.add(iterator.next());
+                            childrenList.Add(iterator.next());
                         }
                         if (nerArray[i].charAt(0) == tagSet.O_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR)
                         {
@@ -437,7 +437,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     {
                         Term term = new Term(result.toString(), Nature.create(prePos));
                         term.offset = offset;
-                        termList.add(term);
+                        termList.Add(term);
                         if (childrenList != null)
                         {
                             if (childrenList.size() > 1)
@@ -446,7 +446,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                                 {
                                     if (shortTerm.Length >= config.indexMode)
                                     {
-                                        termList.add(shortTerm);
+                                        termList.Add(shortTerm);
                                     }
                                 }
                             }
@@ -491,7 +491,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
         else
         {
-            wordList.add(sentence.substring(start, end));
+            wordList.Add(sentence.substring(start, end));
         }
     }
 
@@ -656,8 +656,8 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             if (wordNet[i] != null)
             {
-                vertexList.add(wordNet[i]);
-                attributeList.add(attributeArray[i]);
+                vertexList.Add(wordNet[i]);
+                attributeList.Add(attributeArray[i]);
             }
         }
         return attributeList;

@@ -87,7 +87,7 @@ public class Vector
         return new Vector(result);
     }
 
-    public Vector add(Vector other)
+    public Vector Add(Vector other)
     {
         float[] result = new float[size()];
         for (int i = 0; i < result.Length; i++)

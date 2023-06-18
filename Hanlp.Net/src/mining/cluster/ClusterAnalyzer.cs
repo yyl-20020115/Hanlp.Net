@@ -62,16 +62,16 @@ public class ClusterAnalyzer<K>
         {
             Term term = listIterator.next();
             if (CoreStopWordDictionary.contains(term.word) ||
-                term.nature.startsWith("w")
+                term.nature.StartsWith("w")
                 )
             {
-                listIterator.remove();
+                listIterator.Remove();
             }
         }
         List<string> wordList = new (termList.size());
         foreach (Term term in termList)
         {
-            wordList.add(term.word);
+            wordList.Add(term.word);
         }
         return wordList;
     }
@@ -141,7 +141,7 @@ public class ClusterAnalyzer<K>
         for (Cluster<K> s : cluster.sectioned_clusters())
         {
             s.refresh();
-            clusters_.add(s);
+            clusters_.Add(s);
         }
         return toResult(clusters_);
     }
@@ -154,9 +154,9 @@ public class ClusterAnalyzer<K>
             HashSet<K> s = new HashSet<K>();
             for (Document<K> d : c.documents_)
             {
-                s.add(d.id_);
+                s.Add(d.id_);
             }
-            result.add(s);
+            result.Add(s);
         }
         return result;
     }
@@ -204,7 +204,7 @@ public class ClusterAnalyzer<K>
         refine_clusters(cluster.sectioned_clusters());
         cluster.set_sectioned_gain();
         cluster.composite_vector().clear();
-        que.add(cluster);
+        que.Add(cluster);
 
         while (!que.isEmpty())
         {
@@ -231,12 +231,12 @@ public class ClusterAnalyzer<K>
                     }
                 }
                 c.composite_vector().clear();
-                que.add(c);
+                que.Add(c);
             }
         }
         while (!que.isEmpty())
         {
-            clusters_.add(0, que.poll());
+            clusters_.Add(0, que.poll());
         }
         return toResult(clusters_);
     }
@@ -265,7 +265,7 @@ public class ClusterAnalyzer<K>
             {
                 for (int j = 0; j < clusters.get(i).documents().size(); j++)
                 {
-                    items.add(new int[]{i, j});
+                    items.Add(new int[]{i, j});
                 }
             }
             Collections.shuffle(items);
@@ -357,11 +357,11 @@ public class ClusterAnalyzer<K>
      */
     public static double evaluate(string folderPath, string algorithm)
     {
-        if (folderPath == null) throw new IllegalArgumentException("参数 folderPath == null");
+        if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
         File root = new File(folderPath);
-        if (!root.exists()) throw new IllegalArgumentException(string.format("目录 %s 不存在", root.getAbsolutePath()));
+        if (!root.exists()) throw new ArgumentException(string.Format("目录 %s 不存在", root));
         if (!root.isDirectory())
-            throw new IllegalArgumentException(string.format("目录 %s 不是一个目录", root.getAbsolutePath()));
+            throw new ArgumentException(string.Format("目录 %s 不是一个目录", root));
 
         ClusterAnalyzer<string> analyzer = new ClusterAnalyzer<string>();
         File[] folders = root.listFiles();
@@ -385,7 +385,7 @@ public class ClusterAnalyzer<K>
             int logEvery = (int) Math.ceil((e - b) / 10000f);
             for (int i = b; i < e; i++)
             {
-                analyzer.addDocument(folder.getName() + " " + files[i].getName(), IOUtil.readTxt(files[i].getAbsolutePath()));
+                analyzer.addDocument(folder.getName() + " " + files[i].getName(), IOUtil.readTxt(files[i]));
                 if (i % logEvery == 0)
                 {
                     logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
@@ -398,7 +398,7 @@ public class ClusterAnalyzer<K>
         }
         logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", folders.Length, docSize);
         logger.start(algorithm + "聚类中...");
-        List<Set<string>> clusterList = algorithm.replaceAll("[-\\s]", "").toLowerCase().equals("kmeans") ?
+        List<Set<string>> clusterList = algorithm.replaceAll("[-\\s]", "").toLowerCase().Equals("kmeans") ?
             analyzer.kmeans(ni.Length) : analyzer.repeatedBisection(ni.Length);
         logger.finish(" 完毕。\n");
         double[] fi = new double[ni.Length];
@@ -409,7 +409,7 @@ public class ClusterAnalyzer<K>
                 int nij = 0;
                 for (string d : j)
                 {
-                    if (d.startsWith(cat[i]))
+                    if (d.StartsWith(cat[i]))
                         ++nij;
                 }
                 if (nij == 0) continue;

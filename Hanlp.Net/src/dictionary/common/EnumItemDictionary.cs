@@ -54,7 +54,7 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
     protected abstract EnumItem<E> newItem();
 
     //@Override
-    final protected EnumItem<E>[] loadValueArray(ByteArray byteArray)
+    protected EnumItem<E>[] loadValueArray(ByteArray byteArray)
     {
         if (byteArray == null)
         {

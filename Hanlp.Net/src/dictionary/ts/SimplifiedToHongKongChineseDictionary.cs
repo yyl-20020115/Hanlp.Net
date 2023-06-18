@@ -29,12 +29,12 @@ public class SimplifiedToHongKongChineseDictionary : BaseChineseDictionary
         string datPath = HanLP.Config.tcDictionaryRoot + "s2hk";
         if (!load(datPath, trie))
         {
-            TreeMap<string, string> s2t = new TreeMap<string, string>();
-            TreeMap<string, string> t2hk = new TreeMap<string, string>();
+            Dictionary<string, string> s2t = new Dictionary<string, string>();
+            Dictionary<string, string> t2hk = new Dictionary<string, string>();
             if (!load(s2t, false, HanLP.Config.tcDictionaryRoot + "s2t.txt") ||
                     !load(t2hk, false, HanLP.Config.tcDictionaryRoot + "t2hk.txt"))
             {
-                throw new IllegalArgumentException("简体转香港繁体词典加载失败");
+                throw new ArgumentException("简体转香港繁体词典加载失败");
             }
             combineChain(s2t, t2hk);
             trie.build(s2t);

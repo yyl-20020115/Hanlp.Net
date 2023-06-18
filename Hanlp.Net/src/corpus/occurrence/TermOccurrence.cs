@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+
 namespace com.hankcs.hanlp.corpus.occurrence;
 
 
@@ -30,7 +32,7 @@ public class TermOccurrence
         trieSingle = new BinTrie<TermFrequency>();
     }
 
-    public void add(string term)
+    public void Add(string term)
     {
         TermFrequency value = trieSingle.get(term);
         if (value == null)
@@ -47,13 +49,13 @@ public class TermOccurrence
 
     public void addAll(List<string> termList)
     {
-        for (string s : termList)
+        foreach (string s in termList)
         {
-            add(s);
+            Add(s);
         }
     }
 
-    public java.util.Set<java.util.KeyValuePair<string, TermFrequency>> getEntrySet()
+    public HashSet<KeyValuePair<string, TermFrequency>> getEntrySet()
     {
         return trieSingle.entrySet();
     }

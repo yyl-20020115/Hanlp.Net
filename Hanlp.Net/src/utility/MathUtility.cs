@@ -62,7 +62,7 @@ public class MathUtility
      */
     public static void normalizeExp(Dictionary<string, Double> predictionScores)
     {
-        Set<KeyValuePair<string, Double>> entrySet = predictionScores.entrySet();
+        HashSet<KeyValuePair<string, Double>> entrySet = predictionScores.entrySet();
         double max = Double.NEGATIVE_INFINITY;
         for (KeyValuePair<string, Double> entry : entrySet)
         {
@@ -134,7 +134,7 @@ public class MathUtility
         {
             value = -value;
         }
-//        logger.info(string.format("%5s frequency:%6d, %s nTwoWordsFreq:%3d, weight:%.2f", from.word, frequency, from.word + "@" + to.word, nTwoWordsFreq, value));
+//        logger.info(string.Format("%5s frequency:%6d, %s nTwoWordsFreq:%3d, weight:%.2f", from.word, frequency, from.word + "@" + to.word, nTwoWordsFreq, value));
         return value;
     }
 

@@ -75,7 +75,7 @@ public class LinearModel : ICacheAble
     {
         if (ratio < 0 || ratio >= 1)
         {
-            throw new IllegalArgumentException("压缩比必须介于 0 和 1 之间");
+            throw new ArgumentException("压缩比必须介于 0 和 1 之间");
         }
         if (ratio == 0) return this;
         var featureIdSet = featureMap.entrySet();
@@ -100,7 +100,7 @@ public class LinearModel : ICacheAble
             }
             FeatureSortItem item = new FeatureSortItem(entry, this.parameter, tagSet.size());
             if (item.total < threshold) continue;
-            heap.add(item);
+            heap.Add(item);
         }
         logger.finish("\n裁剪完毕\n");
 
@@ -109,9 +109,9 @@ public class LinearModel : ICacheAble
         MutableDoubleArrayTrieInteger mdat = new MutableDoubleArrayTrieInteger();
         foreach (KeyValuePair<string, int> tag in tagSet)
         {
-            mdat.add("BL=" + tag.getKey());
+            mdat.Add("BL=" + tag.getKey());
         }
-        mdat.add("BL=_BL_");
+        mdat.Add("BL=_BL_");
         for (int i = 0; i < tagSet.size() * tagSet.sizeIncludingBos(); i++)
         {
             parameter[i] = this.parameter[i];
@@ -357,7 +357,7 @@ public class LinearModel : ICacheAble
             }
             else if (index < -1 || index >= featureMap.size())
             {
-                throw new IllegalArgumentException("在打分时传入了非法的下标");
+                throw new ArgumentException("在打分时传入了非法的下标");
             }
             else
             {
@@ -381,7 +381,7 @@ public class LinearModel : ICacheAble
         ByteArrayStream byteArray = ByteArrayStream.createByteArrayStream(modelFile);
         if (!load(byteArray))
         {
-            throw new IOException(string.format("%s 加载失败", modelFile));
+            throw new IOException(string.Format("%s 加载失败", modelFile));
         }
         if (HanLP.Config.DEBUG)
             logger.finish(" 加载完毕\n");

@@ -29,12 +29,12 @@ public class TaiwanToHongKongChineseDictionary : BaseChineseDictionary
         string datPath = HanLP.Config.tcDictionaryRoot + "tw2hk";
         if (!loadDat(datPath, trie))
         {
-            TreeMap<string, string> t2hk = new TreeMap<string, string>();
-            TreeMap<string, string> tw2t = new TreeMap<string, string>();
+            Dictionary<string, string> t2hk = new Dictionary<string, string>();
+            Dictionary<string, string> tw2t = new Dictionary<string, string>();
             if (!load(t2hk, false, HanLP.Config.tcDictionaryRoot + "t2hk.txt") ||
                     !load(tw2t, true, HanLP.Config.tcDictionaryRoot + "t2tw.txt"))
             {
-                throw new IllegalArgumentException("台湾繁体转香港繁体词典加载失败");
+                throw new ArgumentException("台湾繁体转香港繁体词典加载失败");
             }
             combineReverseChain(t2hk, tw2t, false);
             trie.build(t2hk);

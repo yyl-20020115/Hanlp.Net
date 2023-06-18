@@ -47,7 +47,7 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
             IWord wordOrSentence = listIterator.next();
             if (wordOrSentence.getLabel() != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
-            listIterator.remove(); // 否则是句子
+            listIterator.Remove(); // 否则是句子
             string sentence = wordOrSentence.getValue();
             var matcher = pattern.matcher(sentence);
             int begin = 0;
@@ -55,11 +55,11 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
             while (matcher.find())
             {
                 end = matcher.start();
-                listIterator.add(new Word(sentence.substring(begin, end), null)); // 未拦截的部分
-                listIterator.add(new Word(matcher.group(), label)); // 拦截到的部分
+                listIterator.Add(new Word(sentence.substring(begin, end), null)); // 未拦截的部分
+                listIterator.Add(new Word(matcher.group(), label)); // 拦截到的部分
                 begin = matcher.end();
             }
-            if (begin < sentence.Length) listIterator.add(new Word(sentence.substring(begin), null));
+            if (begin < sentence.Length) listIterator.Add(new Word(sentence.substring(begin), null));
         }
         return input;
     }

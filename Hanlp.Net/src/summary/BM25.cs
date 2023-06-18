@@ -51,12 +51,12 @@ public class BM25
     /**
      * 调节因子
      */
-    final static float k1 = 1.5f;
+    static float k1 = 1.5f;
 
     /**
      * 调节因子
      */
-    final static float b = 0.75f;
+    static float b = 0.75f;
 
     public BM25(List<List<string>> docs)
     {
@@ -68,8 +68,8 @@ public class BM25
         }
         avgdl /= D;
         f = new Map[D];
-        df = new TreeMap<string, int>();
-        idf = new TreeMap<string, Double>();
+        df = new Dictionary<string, int>();
+        idf = new Dictionary<string, Double>();
         init();
     }
 
@@ -81,7 +81,7 @@ public class BM25
         int index = 0;
         for (List<string> sentence : docs)
         {
-            Dictionary<string, int> tf = new TreeMap<string, int>();
+            Dictionary<string, int> tf = new Dictionary<string, int>();
             for (string word : sentence)
             {
                 int freq = tf.get(word);

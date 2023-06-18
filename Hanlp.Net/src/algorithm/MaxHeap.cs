@@ -22,7 +22,7 @@ public class MaxHeap<E> : IEnumerable<E>
     /**
      * 优先队列
      */
-    private PriorityQueue<E> queue;
+    private PriorityQueue<E, E> queue;
     /**
      * 堆的最大容量
      */
@@ -36,9 +36,9 @@ public class MaxHeap<E> : IEnumerable<E>
     public MaxHeap(int maxSize, IComparer<E> comparator)
     {
         if (maxSize <= 0)
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         this.maxSize = maxSize;
-        this.queue = new PriorityQueue<E>(maxSize, comparator);
+        this.queue = new PriorityQueue<E,E>(maxSize, comparator);
     }
 
     /**
@@ -46,20 +46,20 @@ public class MaxHeap<E> : IEnumerable<E>
      * @param e 元素
      * @return 是否添加成功
      */
-    public bool add(E e)
+    public bool Add(E e)
     {
-        if (queue.size() < maxSize)
+        if (queue.Count < maxSize)
         { // 未达到最大容量，直接添加
-            queue.add(e);
+            queue.Enqueue(e,e);
             return true;
         }
         else
         { // 队列已满
-            E peek = queue.peek();
-            if (queue.comparator().compare(e, peek) > 0)
+            E peek = queue.Peek();
+            if (queue.Comparer.Compare(e, peek) > 0)
             { // 将新元素与当前堆顶元素比较，保留较小的元素
-                queue.poll();
-                queue.add(e);
+                queue.Dequeue();
+                queue.Enqueue(e, e);
                 return true;
             }
         }
@@ -74,7 +74,7 @@ public class MaxHeap<E> : IEnumerable<E>
     {
         foreach(var e in collection)
         {
-            add(e);
+            Add(e);
         }
 
         return this;
@@ -86,10 +86,10 @@ public class MaxHeap<E> : IEnumerable<E>
      */
     public List<E> toList()
     {
-        var list = new List<E>(queue.size());
-        while (!queue.isEmpty())
+        var list = new List<E>(queue.Count);
+        while (queue.Count>0)
         {
-            list.Insert(0, queue.poll());
+            list.Insert(0, queue.Dequeue());
         }
 
         return list;
@@ -98,11 +98,11 @@ public class MaxHeap<E> : IEnumerable<E>
     //@Override
     public IEnumerator<E> iterator()
     {
-        return queue.iterator();
+        return queue.GetEnumerator()();
     }
 
     public int size()
     {
-        return queue.size();
+        return queue.Count;
     }
 }

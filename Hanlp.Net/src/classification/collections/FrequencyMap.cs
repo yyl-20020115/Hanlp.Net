@@ -23,7 +23,7 @@ public class FrequencyMap<K> : Dictionary<K, int[]>
      * @param key
      * @return
      */
-    public int add(K key)
+    public int Add(K key)
     {
         if (!this.TryGetValue(key,out var f))
         {

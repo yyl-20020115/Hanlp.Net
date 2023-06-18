@@ -38,13 +38,13 @@ public class HMMSegment : CharacterBasedSegment
             ByteArray byteArray = ByteArray.createByteArray(modelPath);
             if (byteArray == null)
             {
-                throw new IllegalArgumentException("HMM分词模型[ " + modelPath + " ]不存在");
+                throw new ArgumentException("HMM分词模型[ " + modelPath + " ]不存在");
             }
             model.load(byteArray);
         }
         catch (Exception e)
         {
-            throw new IllegalArgumentException("发生了异常：" + TextUtility.exceptionToString(e));
+            throw new ArgumentException("发生了异常：" + TextUtility.exceptionToString(e));
         }
         logger.info("加载成功，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
         GlobalObjectPool.put(modelPath, model);
@@ -74,15 +74,15 @@ public class HMMSegment : CharacterBasedSegment
                     }
                     if (i == tag.Length)
                     {
-                        termList.add(new Term(new string(sentence, begin, offset - begin), null));
+                        termList.Add(new Term(new string(sentence, begin, offset - begin), null));
                     }
                     else
-                        termList.add(new Term(new string(sentence, begin, offset - begin + 1), null));
+                        termList.Add(new Term(new string(sentence, begin, offset - begin + 1), null));
                 }
                 break;
                 default:
                 {
-                    termList.add(new Term(new string(sentence, offset, 1), null));
+                    termList.Add(new Term(new string(sentence, offset, 1), null));
                 }
                 break;
             }

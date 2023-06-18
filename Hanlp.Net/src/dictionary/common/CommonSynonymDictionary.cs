@@ -49,7 +49,7 @@ public class CommonSynonymDictionary
     public bool load(InputStream inputStream)
     {
         trie = new DoubleArrayTrie<SynonymItem>();
-        TreeMap<string, SynonymItem> treeMap = new TreeMap<string, SynonymItem>();
+        Dictionary<string, SynonymItem> treeMap = new Dictionary<string, SynonymItem>();
         string line = null;
         try
         {
@@ -64,7 +64,7 @@ public class CommonSynonymDictionary
                 {
                     treeMap.put(synonym.realWord, new SynonymItem(synonym, synonymList, type));
                     // 这里稍微做个test
-                    //assert synonym.getIdString().startsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].Length - 1)) : "词典有问题" + line + synonym.toString();
+                    //assert synonym.getIdString().StartsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].Length - 1)) : "词典有问题" + line + synonym.toString();
                 }
             }
             bw.close();
@@ -251,7 +251,7 @@ public class CommonSynonymDictionary
             if (type != null) while (listIterator.hasNext())
             {
                 Synonym synonym = listIterator.next();
-                if (synonym.type != type || (preWord != null && CoreBiGramTableDictionary.getBiFrequency(preWord, synonym.realWord) == 0)) listIterator.remove();
+                if (synonym.type != type || (preWord != null && CoreBiGramTableDictionary.getBiFrequency(preWord, synonym.realWord) == 0)) listIterator.Remove();
             }
             if (synonymArrayList.Count == 0) return null;
             return synonymArrayList.get((int) (DateTime.Now.Microsecond % (long)synonymArrayList.Count));
@@ -265,7 +265,7 @@ public class CommonSynonymDictionary
         //@Override
         public string toString()
         {
-            final StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append(entry);
             sb.Append(' ');
             sb.Append(type);

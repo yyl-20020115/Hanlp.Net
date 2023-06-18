@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -36,7 +38,7 @@ public class parser_dll
         logger.info("开始加载神经网络依存句法模型：" + modelPath);
         if (!parser.load(modelPath))
         {
-            throw new IllegalArgumentException("加载神经网络依存句法模型[" + modelPath + "]失败！");
+            throw new ArgumentException("加载神经网络依存句法模型[" + modelPath + "]失败！");
         }
         logger.info("加载神经网络依存句法模型[" + modelPath + "]成功，耗时 " + (DateTime.Now.Microsecond - start) + " ms");
         parser.setup_system();
@@ -56,18 +58,18 @@ public class parser_dll
     public int parse(List<string> words, List<string> postags, List<int> heads, List<string> deprels)
     {
         Instance inst = new Instance();
-        inst.forms.add(SpecialOption.ROOT);
-        inst.postags.add(SpecialOption.ROOT);
+        inst.forms.Add(SpecialOption.ROOT);
+        inst.postags.Add(SpecialOption.ROOT);
 
         for (int i = 0; i < words.size(); i++)
         {
-            inst.forms.add(words.get(i));
-            inst.postags.add(postags.get(i));
+            inst.forms.Add(words.get(i));
+            inst.postags.Add(postags.get(i));
         }
 
         parser.predict(inst, heads, deprels);
-        heads.remove(0);
-        deprels.remove(0);
+        heads.Remove(0);
+        deprels.Remove(0);
 
         return heads.size();
     }

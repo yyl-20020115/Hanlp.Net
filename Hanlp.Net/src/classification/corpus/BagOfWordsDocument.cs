@@ -46,6 +46,6 @@ public class BagOfWordsDocument : ITermFrequencyHolder
      */
     public bool isEmpty()
     {
-        return tfMap.isEmpty();
+        return tfMap.Count>0;
     }
 }

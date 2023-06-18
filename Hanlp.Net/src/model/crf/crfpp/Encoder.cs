@@ -18,19 +18,19 @@ public class Encoder
         public static Algorithm fromString(string algorithm)
         {
             algorithm = algorithm.toLowerCase();
-            if (algorithm.equals("crf") || algorithm.equals("crf-l2"))
+            if (algorithm.Equals("crf") || algorithm.Equals("crf-l2"))
             {
                 return Encoder.Algorithm.CRF_L2;
             }
-            else if (algorithm.equals("crf-l1"))
+            else if (algorithm.Equals("crf-l1"))
             {
                 return Encoder.Algorithm.CRF_L1;
             }
-            else if (algorithm.equals("mira"))
+            else if (algorithm.Equals("mira"))
             {
                 return Encoder.Algorithm.MIRA;
             }
-            throw new IllegalArgumentException("invalid algorithm: " + algorithm);
+            throw new ArgumentException("invalid algorithm: " + algorithm);
         }
     }
 
@@ -114,7 +114,7 @@ public class Encoder
                         return false;
                     }
                     tagger.setThread_id_(lineNo % threadNum);
-                    x.add(tagger);
+                    x.Add(tagger);
                 }
                 else if (status == TaggerImpl.ReadStatus.EOF)
                 {
@@ -221,7 +221,7 @@ public class Encoder
             thread.size = x.size();
             thread.threadNum = threadNum;
             thread.x = x;
-            threads.add(thread);
+            threads.Add(thread);
         }
 
         int all = 0;

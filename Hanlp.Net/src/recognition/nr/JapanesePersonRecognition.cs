@@ -96,7 +96,7 @@ public class JapanesePersonRecognition
     {
         char label = JapanesePersonDictionary.get(name);
         if (label == null) return false;
-        return label.equals(JapanesePersonDictionary.A);
+        return label.Equals(JapanesePersonDictionary.A);
     }
 
     /**

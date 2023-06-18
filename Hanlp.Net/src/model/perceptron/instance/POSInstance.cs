@@ -37,7 +37,7 @@ public class POSInstance : Instance
         tagArray = new int[termArray.Length];
         for (int i = 0; i < termArray.Length; i++)
         {
-            tagArray[i] = tagSet.add(posArray[i]);
+            tagArray[i] = tagSet.Add(posArray[i]);
         }
     }
 
@@ -205,7 +205,7 @@ public class POSInstance : Instance
 //        }
 //        if (isPunt)
 //        {
-//            featVec.add("wT=p");
+//            featVec.Add("wT=p");
 //        }
 
 //        bool isLetter = true;

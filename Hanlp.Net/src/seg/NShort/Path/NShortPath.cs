@@ -202,7 +202,7 @@ public class NShortPath
             for (int i = 0; i < aPath.Length; i++)
                 aPath[i] = nArray[i].from;
 
-            result.add(aPath);
+            result.Add(aPath);
 
             // -------------- 出栈以检查是否还有其它路径 --------------
             do
@@ -264,7 +264,7 @@ public class NShortPath
             for (int[] path : pathList)
             {
                 if (result.size() == n) break;
-                result.add(path);
+                result.Add(path);
             }
         }
 

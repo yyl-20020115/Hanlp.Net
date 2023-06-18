@@ -26,9 +26,9 @@ public class CommonSuffixExtractor
         tfDictionary = new TFDictionary();
     }
 
-    public void add(string key)
+    public void Add(string key)
     {
-        tfDictionary.add(key);
+        tfDictionary.Add(key);
     }
 
     public List<string> extractSuffixExtended(int Length, int size)
@@ -50,12 +50,12 @@ public class CommonSuffixExtractor
         {
             if (key.Length > Length)
             {
-                suffixTreeSet.add(key.substring(key.Length - Length, key.Length));
+                suffixTreeSet.Add(key.substring(key.Length - Length, key.Length));
                 if (extend)
                 {
                     for (int l = 1; l < Length; ++l)
                     {
-                        suffixTreeSet.add(key.substring(key.Length - l, key.Length));
+                        suffixTreeSet.Add(key.substring(key.Length - l, key.Length));
                     }
                 }
             }
@@ -75,7 +75,7 @@ public class CommonSuffixExtractor
         for (TermFrequency termFrequency : suffixTreeSet.values())
         {
             if (suffixList.size() >= size) break;
-            suffixList.add(termFrequency.getKey());
+            suffixList.Add(termFrequency.getKey());
         }
 
         return suffixList;
@@ -96,12 +96,12 @@ public class CommonSuffixExtractor
             List<Term> termList = StandardTokenizer.segment(key);
             if (termList.size() > Length)
             {
-                suffixTreeSet.add(combine(termList.subList(termList.size() - Length, termList.size())));
+                suffixTreeSet.Add(combine(termList.subList(termList.size() - Length, termList.size())));
                 if (extend)
                 {
                     for (int l = 1; l < Length; ++l)
                     {
-                        suffixTreeSet.add(combine(termList.subList(termList.size() - l, termList.size())));
+                        suffixTreeSet.Add(combine(termList.subList(termList.size() - l, termList.size())));
                     }
                 }
             }

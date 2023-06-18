@@ -9,6 +9,13 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.dependency.nnparser.option;
+using com.hankcs.hanlp.dependency.nnparser.util;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -37,13 +44,13 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
     public CoNLLSentence parse(List<Term> termList)
     {
         List<string> posTagList = PosTagUtil.to863(termList);
-        List<string> wordList = new ArrayList<string>(termList.size());
+        List<string> wordList = new (termList.size());
         for (Term term : termList)
         {
-            wordList.add(term.word);
+            wordList.Add(term.word);
         }
-        List<int> heads = new ArrayList<int>(termList.size());
-        List<string> deprels = new ArrayList<string>(termList.size());
+        List<int> heads = new (termList.size());
+        List<string> deprels = new (termList.size());
         parser_dll.parse(wordList, posTagList, heads, deprels);
 
         CoNLLWord[] wordArray = new CoNLLWord[termList.size()];

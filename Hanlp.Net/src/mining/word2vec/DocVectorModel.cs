@@ -20,7 +20,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
  */
 public class DocVectorModel : AbstractVectorModel<int>
 {
-    private final WordVectorModel wordVectorModel;
+    private WordVectorModel wordVectorModel;
 
     public DocVectorModel(WordVectorModel wordVectorModel)
     {

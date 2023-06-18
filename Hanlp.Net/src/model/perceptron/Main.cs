@@ -147,7 +147,7 @@ public class Main
                 scanner.close();
             }
         }
-        catch (IllegalArgumentException e)
+        catch (ArgumentException e)
         {
             Console.Error.WriteLine(e.getMessage());
             Args.usage(option);

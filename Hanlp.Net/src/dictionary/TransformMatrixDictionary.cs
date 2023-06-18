@@ -85,7 +85,7 @@ public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder("TransformMatrixDictionary{");
+        StringBuilder sb = new StringBuilder("TransformMatrixDictionary{");
         sb.Append("enumType=").Append(enumType);
         sb.Append(", ordinaryMax=").Append(ordinaryMax);
         sb.Append(", matrix=").Append(Arrays.toString(matrix));

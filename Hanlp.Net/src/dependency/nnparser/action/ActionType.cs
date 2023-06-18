@@ -20,17 +20,17 @@ public interface ActionType
     /**
      * 无效动作，正常情况下不会用到
      */
-    int kNone = 0;  //! Placeholder for illegal action.
+    const int kNone = 0;  //! Placeholder for illegal action.
     /**
      * 不建立依存关系，只转移句法分析的焦点，即新的左焦点词是原来的右焦点词，依此类推。
      */
-    int kShift = 1;     //! The index of shift action.
+    const int kShift = 1;     //! The index of shift action.
     /**
      * 建立右焦点词依存于左焦点词的依存关系
      */
-    int kLeftArc = 2;   //! The index of arc left action.
+    const int kLeftArc = 2;   //! The index of arc left action.
     /**
      * 建立左焦点词依存于右焦点词的依存关系
      */
-    int kRightArc = 3;   //! The index of arc right action.
+    const int kRightArc = 3;   //! The index of arc right action.
 }

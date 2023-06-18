@@ -29,7 +29,7 @@ public class SimplifiedChineseDictionary : BaseChineseDictionary
         long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.tcDictionaryRoot + "s2t.txt", trie, false))
         {
-            throw new IllegalArgumentException("简繁词典" + HanLP.Config.tcDictionaryRoot + "s2t.txt" + Predefine.BIN_EXT + "加载失败");
+            throw new ArgumentException("简繁词典" + HanLP.Config.tcDictionaryRoot + "s2t.txt" + Predefine.BIN_EXT + "加载失败");
         }
 
         logger.info("简繁词典" + HanLP.Config.tcDictionaryRoot + "s2t.txt" + Predefine.BIN_EXT + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");

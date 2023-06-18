@@ -75,14 +75,14 @@ public class WordVectorModel : AbstractVectorModel<string>
             return Collections.emptyList();
         }
 
-        List<KeyValuePair<string, Float>> resultList = nearest(a.minus(b).add(c), size + 3);
+        List<KeyValuePair<string, Float>> resultList = nearest(a.minus(b).Add(c), size + 3);
         ListIterator<KeyValuePair<string, Float>> listIterator = resultList.listIterator();
         while (listIterator.hasNext())
         {
             string key = listIterator.next().getKey();
-            if (key.equals(A) || key.equals(B) || key.equals(C))
+            if (key.Equals(A) || key.Equals(B) || key.Equals(C))
             {
-                listIterator.remove();
+                listIterator.Remove();
             }
         }
 

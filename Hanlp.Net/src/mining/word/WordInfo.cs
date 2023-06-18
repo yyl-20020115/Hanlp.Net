@@ -38,8 +38,8 @@ public class WordInfo
     WordInfo(string text)
     {
         this.text = text;
-        left = new TreeMap<char, int[]>();
-        right = new TreeMap<char, int[]>();
+        left = new Dictionary<char, int[]>();
+        right = new Dictionary<char, int[]>();
         aggregation = Float.MAX_VALUE;
     }
 

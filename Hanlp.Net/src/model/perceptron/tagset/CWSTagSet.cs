@@ -38,7 +38,7 @@ public class CWSTagSet : TagSet
         id2tag[s] = "S";
         foreach (string tag in id2tag)
         {
-            add(tag);
+            Add(tag);
         }
         _lock();
     }
@@ -46,10 +46,10 @@ public class CWSTagSet : TagSet
     public CWSTagSet()
         : base(TaskType.CWS)
     {
-        B = add("B");
-        M = add("M");
-        E = add("E");
-        S = add("S");
+        B = Add("B");
+        M = Add("M");
+        E = Add("E");
+        S = Add("S");
         _lock();
     }
 }

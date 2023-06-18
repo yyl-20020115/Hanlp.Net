@@ -54,7 +54,7 @@ public class Instance
             }
             else
             {
-                tree.get(head).add(modifier);
+                tree.get(head).Add(modifier);
             }
         }
         bool[] visited = new bool[heads.size()];

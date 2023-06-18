@@ -27,7 +27,7 @@ public class Table
     public string toString()
     {
         if (v == null) return "null";
-        final StringBuilder sb = new StringBuilder(v.Length * v[0].Length * 2);
+        StringBuilder sb = new StringBuilder(v.Length * v[0].Length * 2);
         for (string[] line : v)
         {
             for (string element : line)

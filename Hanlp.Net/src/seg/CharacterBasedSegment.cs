@@ -97,14 +97,14 @@ public abstract class CharacterBasedSegment : Segment
     protected List<Vertex> toVertexList(List<Term> wordList, bool appendStart)
     {
         ArrayList<Vertex> vertexList = new ArrayList<Vertex>(wordList.size() + 2);
-        if (appendStart) vertexList.add(Vertex.newB());
+        if (appendStart) vertexList.Add(Vertex.newB());
         for (Term word : wordList)
         {
             CoreDictionary.Attribute attribute = guessAttribute(word);
             Vertex vertex = new Vertex(word.word, attribute);
-            vertexList.add(vertex);
+            vertexList.Add(vertex);
         }
-        if (appendStart) vertexList.add(Vertex.newE());
+        if (appendStart) vertexList.Add(Vertex.newE());
         return vertexList;
     }
 

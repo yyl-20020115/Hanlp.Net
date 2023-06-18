@@ -27,12 +27,12 @@ public class TestMakePinYinDictionary : TestCase
 //
 ////        StringDictionary dictionaryAnsj = new StringDictionary();
 ////        dictionaryAnsj.load("D:\\JavaProjects\\jpinyin\\data\\ansj.txt");
-////        Console.WriteLine(dictionaryAnsj.remove(new SimpleDictionary.Filter()
+////        Console.WriteLine(dictionaryAnsj.Remove(new SimpleDictionary.Filter()
 ////        {
 ////            //@Override
-////            public bool remove(Map.Entry entry)
+////            public bool Remove(Map.Entry entry)
 ////            {
-////                return entry.getValue().ToString().endsWith("0");
+////                return entry.getValue().ToString().EndsWith("0");
 ////            }
 ////        }));
 //
@@ -75,7 +75,7 @@ public class TestMakePinYinDictionary : TestCase
 //            String pyyd = py + yd;
 //            // 过滤
 //            if (!TextUtility.isAllChinese(word)) continue;
-//            dictionarySingle.add(word, pyyd);
+//            dictionarySingle.Add(word, pyyd);
 //        }
 //        dictionarySingle.save("data/dictionary/pinyin/single.txt");
 //    }
@@ -96,7 +96,7 @@ public class TestMakePinYinDictionary : TestCase
 //            String pyyd = py + yd;
 //            // 过滤
 //            if (!TextUtility.isAllChinese(word)) continue;
-//            dictionarySingle.add(pyyd, sm + "," + ym + "," + yd);
+//            dictionarySingle.Add(pyyd, sm + "," + ym + "," + yd);
 //        }
 //        dictionarySingle.save("data/dictionary/pinyin/sm-ym-table.txt");
 //    }
@@ -173,7 +173,7 @@ public class TestMakePinYinDictionary : TestCase
 //            String[] args = entry.getValue().Split(",");
 //            for (String arg : args)
 //            {
-//                pyEnumDictionary.add(arg, arg);
+//                pyEnumDictionary.Add(arg, arg);
 //            }
 //        }
 //
@@ -204,7 +204,7 @@ public class TestMakePinYinDictionary : TestCase
 //            String[] args = entry.getValue().Split(",");
 //            for (String arg : args)
 //            {
-//                pyEnumDictionary.add(arg, arg);
+//                pyEnumDictionary.Add(arg, arg);
 //            }
 //        }
 //
@@ -224,9 +224,9 @@ public class TestMakePinYinDictionary : TestCase
 //            // handle it
 //            if (!current.getValue().Contains(","))
 //            {
-//                if (currentPy.equals(prePy))
+//                if (currentPy.Equals(prePy))
 //                {
-//                    table.add(current.getKey(), pre.getValue().replace(preYd, currentYd));
+//                    table.Add(current.getKey(), pre.getValue().replace(preYd, currentYd));
 //                }
 //                else
 //                {
@@ -258,10 +258,10 @@ public class TestMakePinYinDictionary : TestCase
 //    {
 //        StringDictionary dictionaryAnsj = new StringDictionary();
 //        dictionaryAnsj.load("D:\\JavaProjects\\jpinyin\\data\\ansj.txt");
-//        Console.WriteLine(dictionaryAnsj.remove(new SimpleDictionary.Filter<String>()
+//        Console.WriteLine(dictionaryAnsj.Remove(new SimpleDictionary.Filter<String>()
 //        {
 //            //@Override
-//            public bool remove(Map.Entry<String, String> entry)
+//            public bool Remove(Map.Entry<String, String> entry)
 //            {
 //                String word = entry.getKey();
 //                String pinyin = entry.getValue();
@@ -294,7 +294,7 @@ public class TestMakePinYinDictionary : TestCase
 //        StringDictionary dictionary = new StringDictionary("=");
 //        for (String line : IOUtil.readLineList("D:\\Doc\\语料库\\Uni2Pinyin.txt"))
 //        {
-//            if (line.startsWith("#")) continue;
+//            if (line.StartsWith("#")) continue;
 //            String[] argArray = line.Split("\\s");
 //            if (argArray.Length == 1) continue;
 //            String py = argArray[1];
@@ -303,7 +303,7 @@ public class TestMakePinYinDictionary : TestCase
 //                py += ',';
 //                py += argArray[i];
 //            }
-//            dictionary.add(String.valueOf((char)(int.parseInt(argArray[0], 16))), py);
+//            dictionary.Add(String.valueOf((char)(int.parseInt(argArray[0], 16))), py);
 //        }
 //        dictionary.save("D:\\Doc\\语料库\\Hanzi2Pinyin.txt");
 //    }

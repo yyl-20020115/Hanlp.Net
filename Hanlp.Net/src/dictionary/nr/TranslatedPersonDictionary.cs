@@ -28,7 +28,7 @@ public class TranslatedPersonDictionary
         long start = DateTime.Now.Microsecond;
         if (!load())
         {
-            throw new IllegalArgumentException("音译人名词典" + path + "加载失败");
+            throw new ArgumentException("音译人名词典" + path + "加载失败");
         }
 
         logger.info("音译人名词典" + path + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
@@ -42,8 +42,8 @@ public class TranslatedPersonDictionary
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
-            TreeMap<string, Boolean> map = new TreeMap<string, Boolean>();
-            TreeMap<char, int> charFrequencyMap = new TreeMap<char, int>();
+            Dictionary<string, Boolean> map = new Dictionary<string, Boolean>();
+            Dictionary<char, int> charFrequencyMap = new Dictionary<char, int>();
             while ((line = br.readLine()) != null)
             {
                 map.put(line, true);

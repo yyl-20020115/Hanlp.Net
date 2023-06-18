@@ -13,12 +13,12 @@ public class TextRankKeyword : KeywordExtractor
     /**
      * 阻尼系数（ＤａｍｐｉｎｇＦａｃｔｏｒ），一般取值为0.85
      */
-    final static float d = 0.85f;
+    static float d = 0.85f;
     /**
      * 最大迭代次数
      */
     public static int max_iter = 200;
-    final static float min_diff = 0.001f;
+    static float min_diff = 0.001f;
 
     public TextRankKeyword(Segment defaultSegment)
     {
@@ -113,11 +113,11 @@ public class TextRankKeyword : KeywordExtractor
         {
             if (shouldInclude(t))
             {
-                wordList.add(t.word);
+                wordList.Add(t.word);
             }
         }
 //        System._out.println(wordList);
-        Dictionary<string, Set<string>> words = new TreeMap<string, Set<string>>();
+        Dictionary<string, HashSet<string>> words = new Dictionary<string, HashSet<string>>();
         Queue<string> que = new LinkedList<string>();
         for (string w : wordList)
         {
@@ -132,20 +132,20 @@ public class TextRankKeyword : KeywordExtractor
             }
             for (string qWord : que)
             {
-                if (w.equals(qWord))
+                if (w.Equals(qWord))
                 {
                     continue;
                 }
                 //既然是邻居,那么关系是相互的,遍历一遍即可
-                words.get(w).add(qWord);
-                words.get(qWord).add(w);
+                words.get(w).Add(qWord);
+                words.get(qWord).Add(w);
             }
             que.offer(w);
         }
 //        System._out.println(words);
         Dictionary<string, Float> score = new HashMap<string, Float>();
         //依据TF来设置初值
-        for (KeyValuePair<string, Set<string>> entry : words.entrySet())
+        for (KeyValuePair<string, HashSet<string>> entry : words.entrySet())
         {
             score.put(entry.getKey(), sigMoid(entry.getValue().size()));
         }
@@ -153,15 +153,15 @@ public class TextRankKeyword : KeywordExtractor
         {
             Dictionary<string, Float> m = new HashMap<string, Float>();
             float max_diff = 0;
-            for (KeyValuePair<string, Set<string>> entry : words.entrySet())
+            for (KeyValuePair<string, HashSet<string>> entry : words.entrySet())
             {
                 string key = entry.getKey();
-                Set<string> value = entry.getValue();
+                HashSet<string> value = entry.getValue();
                 m.put(key, 1 - d);
                 for (string element : value)
                 {
                     int size = words.get(element).size();
-                    if (key.equals(element) || size == 0) continue;
+                    if (key.Equals(element) || size == 0) continue;
                     m.put(key, m.get(key) + d / size * (score.get(element) == null ? 0 : score.get(element)));
                 }
                 max_diff = Math.max(max_diff, Math.abs(m.get(key) - (score.get(key) == null ? 0 : score.get(key))));
@@ -187,11 +187,11 @@ public class TextRankKeyword : KeywordExtractor
     //@Override
     public List<string> getKeywords(List<Term> termList, int size)
     {
-        Set<KeyValuePair<string, Float>> entrySet = top(size, getTermAndRank(termList)).entrySet();
+        HashSet<KeyValuePair<string, Float>> entrySet = top(size, getTermAndRank(termList)).entrySet();
         List<string> result = new ArrayList<string>(entrySet.size());
         for (KeyValuePair<string, Float> entry : entrySet)
         {
-            result.add(entry.getKey());
+            result.Add(entry.getKey());
         }
         return result;
     }

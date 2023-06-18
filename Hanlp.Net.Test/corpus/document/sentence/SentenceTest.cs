@@ -18,7 +18,7 @@ public class SentenceTest : TestCase
         CompoundWord apple = CompoundWord.create("[苹果/n 公司/n]/nt");
         nt.set(apple);
         AssertEquals(sentence.findFirstWordByLabel("nt"), apple);
-        nt.remove();
+        nt.Remove();
         AssertEquals("董事长/n 谭旭光/nr 和/c 秘书/n 胡花蕊/nr 来到/v [美国/ns 纽约/ns 现代/t 艺术/n 博物馆/n]/ns 参观/v", sentence.ToString());
         var ns = sentence.findFirstWordIteratorByLabel("ns");
         AssertEquals("参观/v", ns.next().ToString());

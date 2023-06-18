@@ -14,7 +14,7 @@ class Word2VecTraining
     static double[] syn0, syn1, syn1neg;
     int[] table;
 
-    private final Config config;
+    private Config config;
 
     static readonly double[] expTable = new double[EXP_TABLE_SIZE + 1];
 
@@ -40,16 +40,16 @@ class Word2VecTraining
 
     static class TrainModelThread : Thread
     {
-        final Word2VecTraining vec;
-        final Corpus corpus;
-        final Config config;
+        Word2VecTraining vec;
+        Corpus corpus;
+        Config config;
         float alpha;
-        final float startingAlpha;
-        final float trainWords;    // #19
-        final int id, vocabSize;
-        final long timeStart;
-        final int[] table;
-        final VocabWord[] vocab;
+        float startingAlpha;
+        float trainWords;    // #19
+        int id, vocabSize;
+        long timeStart;
+        int[] table;
+        VocabWord[] vocab;
         static int wordCountActual = 0;
 
         public TrainModelThread(Word2VecTraining vec, Corpus corpus, Config config, int id)
@@ -69,14 +69,14 @@ class Word2VecTraining
 
         public void run()
         {
-            final float iter = config.getIter();     // #19
-            final int layer1Size = config.getLayer1Size();
-            final int numThreads = config.getNumThreads();
-            final int window = config.getWindow();
-            final int negative = config.getNegative();
-            final bool cbow = config.useContinuousBagOfWords();
-            final bool hs = config.useHierarchicalSoftmax();
-            final float sample = config.getSample();
+            float iter = config.getIter();     // #19
+            int layer1Size = config.getLayer1Size();
+            int numThreads = config.getNumThreads();
+            int window = config.getWindow();
+            int negative = config.getNegative();
+            bool cbow = config.useContinuousBagOfWords();
+            bool hs = config.useHierarchicalSoftmax();
+            float sample = config.getSample();
 
             try
             {
@@ -315,15 +315,15 @@ class Word2VecTraining
 
     public void trainModel() 
     {
-        final int layer1Size = config.getLayer1Size();
+        int layer1Size = config.getLayer1Size();
         TextFileCorpus corpus = new TextFileCorpus(config);
 
         logger.info("learning vocabulary");
         corpus.learnVocab();
         logger.info("sorting vocabulary");
         corpus.sortVocab();
-        final int vocabSize = corpus.getVocabSize();
-        final VocabWord[] vocab = corpus.getVocab();
+        int vocabSize = corpus.getVocabSize();
+        VocabWord[] vocab = corpus.getVocab();
         logger.info("Vocab size: " + vocabSize);
         logger.info("Words in train file: " + corpus.getTrainWords());
 
@@ -356,7 +356,7 @@ class Word2VecTraining
         }
 
         Console.Error.WriteLine();
-        logger.info(string.format("finished training in %s", Utility.humanTime(DateTime.Now.Microsecond - timeStart)));
+        logger.info(string.Format("finished training in %s", Utility.humanTime(DateTime.Now.Microsecond - timeStart)));
         // lose weight
         syn1 = null;
         table = null;
@@ -407,8 +407,8 @@ class Word2VecTraining
 
     void initUnigramTable(Corpus corpus)
     {
-        final int vocabSize = corpus.getVocabSize();
-        final VocabWord[] vocab = corpus.getVocab();
+        int vocabSize = corpus.getVocabSize();
+        VocabWord[] vocab = corpus.getVocab();
         long trainWordsPow = 0;
         double d1, power = 0.75;
         table = new int[TABLE_SIZE];
@@ -433,8 +433,8 @@ class Word2VecTraining
 
     void initNet(Corpus corpus)
     {
-        final int layer1Size = config.getLayer1Size();
-        final int vocabSize = corpus.getVocabSize();
+        int layer1Size = config.getLayer1Size();
+        int vocabSize = corpus.getVocabSize();
 
         syn0 = posixMemAlign128(vocabSize * layer1Size);
 
@@ -476,7 +476,7 @@ class Word2VecTraining
 
     static double[] posixMemAlign128(int size)
     {
-        final int surplus = size % 128;
+        int surplus = size % 128;
         if (surplus > 0)
         {
             int div = size / 128;

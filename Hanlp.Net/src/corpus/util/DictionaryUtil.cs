@@ -28,7 +28,7 @@ public class DictionaryUtil
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            TreeMap<string, string> map = new TreeMap<string, string>();
+            Dictionary map = new ();
             string line;
 
             while ((line = br.readLine()) != null)
@@ -48,7 +48,7 @@ public class DictionaryUtil
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
 

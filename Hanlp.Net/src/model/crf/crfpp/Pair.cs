@@ -86,12 +86,12 @@ public class Pair<K,V> : Serializable {
      * equal to this <code>Pair</code> else <code>false</code>
      */
     //@Override
-    public bool equals(Object o) {
+    public bool Equals(Object o) {
         if (this == o) return true;
         if (o is Pair) {
             Pair pair = (Pair) o;
-            if (key != null ? !key.equals(pair.key) : pair.key != null) return false;
-            if (value != null ? !value.equals(pair.value) : pair.value != null) return false;
+            if (key != null ? !key.Equals(pair.key) : pair.key != null) return false;
+            if (value != null ? !value.Equals(pair.value) : pair.value != null) return false;
             return true;
         }
         return false;

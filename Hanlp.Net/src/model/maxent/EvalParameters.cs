@@ -34,7 +34,7 @@ public class EvalParameters
     /**
      * 一共有几种输出
      */
-    private final int numOutcomes;
+    private int numOutcomes;
     /**
      * 一个事件中最多包含的特征数
      */
@@ -43,7 +43,7 @@ public class EvalParameters
     /**
      * correctionConstant的倒数
      */
-    private final double constantInverse;
+    private double constantInverse;
     /**
      * 修正参数
      */

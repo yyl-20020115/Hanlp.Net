@@ -36,7 +36,7 @@ public class _ValueArray<V>
     {
     }
 
-    public _ValueArray setValue(V[] value)
+    public _ValueArray<V> setValue(V[] value)
     {
         this.value = value;
         return this;

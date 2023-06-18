@@ -90,20 +90,20 @@ public class CRFModel : ICacheAble
             ++id;
         }
         CRFModel.id2tag = new string[CRFModel.tag2id.size()];
-        final int size = CRFModel.id2tag.Length;
+        int size = CRFModel.id2tag.Length;
         for (KeyValuePair<string, int> entry : CRFModel.tag2id.entrySet())
         {
             CRFModel.id2tag[entry.getValue()] = entry.getKey();
         }
-        TreeMap<string, FeatureFunction> featureFunctionMap = new TreeMap<string, FeatureFunction>();  // 构建trie树的时候用
-        TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
+        Dictionary<string, FeatureFunction> featureFunctionMap = new Dictionary<string, FeatureFunction>();  // 构建trie树的时候用
+        Dictionary<int, FeatureFunction> featureFunctionList = new Dictionary<int, FeatureFunction>(); // 读取权值的时候用
         CRFModel.featureTemplateList = new LinkedList<FeatureTemplate>();
         while ((line = lineIterator.next()).Length != 0)
         {
-            if (!"B".equals(line))
+            if (!"B".Equals(line))
             {
                 FeatureTemplate featureTemplate = FeatureTemplate.create(line);
-                CRFModel.featureTemplateList.add(featureTemplate);
+                CRFModel.featureTemplateList.Add(featureTemplate);
             }
             else
             {
@@ -270,7 +270,7 @@ public class CRFModel : ICacheAble
             char[] o = featureTemplate.generateParameter(table, current);
             FeatureFunction featureFunction = featureFunctionTrie.get(o);
             if (featureFunction == null) continue;
-            scoreList.add(featureFunction.w);
+            scoreList.Add(featureFunction.w);
         }
 
         return scoreList;
@@ -357,7 +357,7 @@ public class CRFModel : ICacheAble
             {
                 FeatureTemplate featureTemplate = new FeatureTemplate();
                 featureTemplate.load(byteArray);
-                featureTemplateList.add(featureTemplate);
+                featureTemplateList.Add(featureTemplate);
             }
             size = byteArray.nextInt();
             if (size == 0) return true;

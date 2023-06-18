@@ -121,7 +121,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder("PinyinKey{");
+        StringBuilder sb = new StringBuilder("PinyinKey{");
         sb.Append("pinyinArray=").Append(Arrays.toString(pinyinArray));
         sb.Append(", pyOrdinalArray=").Append(Arrays.toString(pyOrdinalArray));
         sb.Append(", firstCharArray=").Append(Arrays.toString(firstCharArray));

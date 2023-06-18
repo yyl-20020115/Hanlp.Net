@@ -38,7 +38,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     public LexicalAnalyzerPipeline(LexicalAnalyzerPipe analyzer)
         : this(new PL(), new PW())
     {
-        add(analyzer);
+        Add(analyzer);
     }
 
     public class PL : Pipe<string, List<IWord>>

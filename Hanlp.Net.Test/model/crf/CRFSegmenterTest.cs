@@ -34,9 +34,9 @@ public class CRFSegmenterTest : TestCase
     [TestMethod]
     public void TestOutput() 
     {
-//        final CRFSegmenter segmenter = new CRFSegmenter(CWS_MODEL_PATH);
+//        CRFSegmenter segmenter = new CRFSegmenter(CWS_MODEL_PATH);
 //
-//        final BufferedWriter bw = IOUtil.newBufferedWriter("data/test/crf/cws/mdat.txt");
+//        BufferedWriter bw = IOUtil.newBufferedWriter("data/test/crf/cws/mdat.txt");
 //        IOUtility.loadInstance("data/test/pku98/199801.txt", new InstanceHandler()
 //        {
 //            //@Override

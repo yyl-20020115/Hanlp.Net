@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.synonym;
 
 /**
@@ -28,13 +30,13 @@ public class SynonymHelper
     public static long convertString2Id(string idString)
     {
         long id;
-        id =    (idString.charAt(0) - 'A') * 26L * 10 * 10 * 26 * 10 * 10 +
-                (idString.charAt(1) - 'a') * 10 * 10 * 26 * 10 * 10 +
-                (idString.charAt(2) - '0') * 10 * 26 * 10 * 10 +
-                (idString.charAt(3) - '0') * 26 * 10 * 10 +
-                (idString.charAt(4) - 'A') * 10 * 10 +
-                (idString.charAt(5) - '0') * 10 +
-                (idString.charAt(6) - '0') ;    // 编码等号前面的
+        id =    (idString[0] - 'A') * 26L * 10 * 10 * 26 * 10 * 10 +
+                (idString[1] - 'a') * 10 * 10 * 26 * 10 * 10 +
+                (idString[2] - '0') * 10 * 26 * 10 * 10 +
+                (idString[3] - '0') * 26 * 10 * 10 +
+                (idString[4] - 'A') * 10 * 10 +
+                (idString[5] - '0') * 10 +
+                (idString[6] - '0') ;    // 编码等号前面的
         return id;
     }
 
@@ -48,7 +50,7 @@ public class SynonymHelper
         sbId.Append((char)(id % (26 * 10 * 10)                  / (10 * 10) + 'A'));
         sbId.Append((char)(id % (10 * 10)                       / (10) + '0'));
         sbId.Append((char)(id % (10)                            / (1) + '0'));
-        return sbId.toString();
+        return sbId.ToString();
     }
 
     public static long convertString2IdWithIndex(string idString, long index)
@@ -67,6 +69,6 @@ public class SynonymHelper
     {
         string idString = convertId2String(id / MAX_WORDS);
         long index = id % MAX_WORDS;
-        return string.format("%s%0" + MAX_INDEX_LENGTH + "d", idString, index);
+        return string.Format("%s%0" + MAX_INDEX_LENGTH + "d", idString, index);
     }
 }

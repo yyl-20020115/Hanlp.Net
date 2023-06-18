@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus.io;
 
 
@@ -248,7 +250,7 @@ public class ByteArray
     }
 
     //@Override
-    protected void finalize() throws Throwable
+    protected void finalize()
     {
         // 如果忘记close，则在垃圾回收器释放内存的时候close，总好过完全不close
         close();

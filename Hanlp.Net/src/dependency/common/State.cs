@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.dependency.common;
 /**
  * @author hankcs
  */
-public class State : Comparable<State>
+public class State : IComparable<State>
 {
     public float cost;
     public int id;
@@ -28,7 +28,7 @@ public class State : Comparable<State>
     }
 
     //@Override
-    public int compareTo(State o)
+    public int CompareTo(State o)
     {
         return Float.compare(cost, o.cost);
     }

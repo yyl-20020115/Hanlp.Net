@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.datrie;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -18,8 +20,8 @@ namespace com.hankcs.hanlp.classification.corpus;
  */
 public class Catalog : Serializable
 {
-    Dictionary<string, int> categoryId;
-    List<string> idCategory;
+    public Dictionary<string, int> categoryId;
+    public List<string> idCategory;
 
     public Catalog()
     {
@@ -28,24 +30,23 @@ public class Catalog : Serializable
     }
 
     public Catalog(string[] catalog)
+        :this()
     {
-        this();
         for (int i = 0; i < catalog.Length; i++)
         {
-            categoryId.put(catalog[i], i);
-            idCategory.add(catalog[i]);
+            categoryId.Add(catalog[i], i);
+            idCategory.Add(catalog[i]);
         }
     }
 
     public int addCategory(string category)
     {
-        int id = categoryId.get(category);
-        if (id == null)
+        if (!categoryId.TryGetValue(category,out var id))
         {
-            id = categoryId.size();
-            categoryId.put(category, id);
-            assert idCategory.size() == id;
-            idCategory.add(category);
+            id = categoryId.Count;
+            categoryId.Add(category, id);
+            //assert idCategory.size() == id;
+            idCategory.Add(category);
         }
 
         return id;
@@ -53,27 +54,24 @@ public class Catalog : Serializable
 
     public int getId(string category)
     {
-        return categoryId.get(category);
+        return categoryId.TryGetValue(category,out var id)?id:-1;
     }
 
     public string getCategory(int id)
     {
-        assert 0 <= id;
-        assert id < idCategory.size();
+        //assert 0 <= id;
+        //assert id < idCategory.size();
 
-        return idCategory.get(id);
+        return idCategory[id];
     }
 
     public int size()
     {
-        return idCategory.size();
+        return idCategory.Count;
     }
 
     public string[] toArray()
     {
-        string[] catalog = new string[idCategory.size()];
-        idCategory.toArray(catalog);
-
-        return catalog;
+        return idCategory.ToArray();
     }
 }

@@ -23,8 +23,8 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 public class DoubleArrayTrieInteger : Serializable
 {
 
-    private final static int BUF_SIZE = 16384;
-    private final static int UNIT_SIZE = 8; // size of int + int
+    private static int BUF_SIZE = 16384;
+    private static int UNIT_SIZE = 8; // size of int + int
     private static readonly long serialVersionUID = -4908582458604586299L;
 
     private static class Node
@@ -104,7 +104,7 @@ public class DoubleArrayTrieInteger : Serializable
                 if (siblings.size() != 0)
                     siblings.get(siblings.size() - 1).right = i;
 
-                siblings.add(tmp_node);
+                siblings.Add(tmp_node);
             }
 
             prev = cur;
@@ -318,10 +318,10 @@ public class DoubleArrayTrieInteger : Serializable
                 List<int> childList = new ArrayList<int>();
                 childIdxMap.put(check[i], childList);
             }
-            childIdxMap.get(check[i]).add(i);
+            childIdxMap.get(check[i]).Add(i);
         }
         Stack<int[]> s = new Stack<int[]>();
-        s.add(new int[]{1, -1});
+        s.Add(new int[]{1, -1});
 
         List<int> charBuf = new ArrayList<int>();
         while (true)
@@ -339,7 +339,7 @@ public class DoubleArrayTrieInteger : Serializable
                 {
                     if (!charBuf.isEmpty())
                     {
-                        charBuf.remove(charBuf.size() - 1);
+                        charBuf.Remove(charBuf.size() - 1);
                     }
                     continue;
                 }
@@ -352,8 +352,8 @@ public class DoubleArrayTrieInteger : Serializable
             int code = (c - 1 - pair[0]);
             if (base[c] > 0)
             {
-                s.add(new int[]{base[c], -1});
-                charBuf.add(code);
+                s.Add(new int[]{base[c], -1});
+                charBuf.Add(code);
                 continue;
             }
             else if (base[c] < 0)
@@ -365,8 +365,8 @@ public class DoubleArrayTrieInteger : Serializable
                     {
                         chars[i] = (char) (int) charBuf.get(i);
                     }
-                    key.add(new string(chars));
-                    val1.add(-base[c] - 1);
+                    key.Add(new string(chars));
+                    val1.Add(-base[c] - 1);
                 }
                 continue;
             }
@@ -492,7 +492,7 @@ public class DoubleArrayTrieInteger : Serializable
 
             if (b == check[p] && n < 0)
             {
-                result.add(-n - 1);
+                result.Add(-n - 1);
             }
 
             p = b + (int) (keyChars[i]) + 1;
@@ -507,7 +507,7 @@ public class DoubleArrayTrieInteger : Serializable
 
         if (b == check[p] && n < 0)
         {
-            result.add(-n - 1);
+            result.Add(-n - 1);
         }
 
         return result;

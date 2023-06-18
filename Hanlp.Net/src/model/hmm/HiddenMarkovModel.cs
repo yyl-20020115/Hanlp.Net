@@ -146,7 +146,7 @@ public abstract class HiddenMarkovModel
         int max_obser = 0;
         for (int[][] sample : samples)
         {
-            if (sample.Length != 2 || sample[0].Length != sample[1].Length) throw new IllegalArgumentException("非法样本");
+            if (sample.Length != 2 || sample[0].Length != sample[1].Length) throw new ArgumentException("非法样本");
             for (int o : sample[0])
                 max_obser = Math.max(max_obser, o);
             for (int s : sample[1])
@@ -243,7 +243,7 @@ public abstract class HiddenMarkovModel
         List<int[][]> samples = new ArrayList<int[][]>(size);
         for (int i = 0; i < size; i++)
         {
-            samples.add(generate((int) (Math.floor(Math.random() * (maxLength - minLength)) + minLength)));
+            samples.Add(generate((int) (Math.floor(Math.random() * (maxLength - minLength)) + minLength)));
         }
         return samples;
     }
@@ -288,7 +288,7 @@ public abstract class HiddenMarkovModel
 
     protected static bool similar(float[] A, float[] B)
     {
-        final float eta = 1e-2f;
+        float eta = 1e-2f;
         for (int i = 0; i < A.Length; i++)
             if (Math.abs(A[i] - B[i]) > eta) return false;
         return true;

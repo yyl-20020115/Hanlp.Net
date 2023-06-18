@@ -59,8 +59,8 @@ public class WordNet
         {
             vertexes[i] = new LinkedList<Vertex>();
         }
-        vertexes[0].add(Vertex.newB());
-        vertexes[vertexes.Length - 1].add(Vertex.newE());
+        vertexes[0].Add(Vertex.newB());
+        vertexes[vertexes.Length - 1].Add(Vertex.newE());
         size = 2;
     }
 
@@ -75,7 +75,7 @@ public class WordNet
         int i = 0;
         for (Vertex vertex : vertexList)
         {
-            vertexes[i].add(vertex);
+            vertexes[i].Add(vertex);
             ++size;
             i += vertex.realWord.Length;
         }
@@ -87,14 +87,14 @@ public class WordNet
      * @param line   行号
      * @param vertex 顶点
      */
-    public void add(int line, Vertex vertex)
+    public void Add(int line, Vertex vertex)
     {
         for (Vertex oldVertex : vertexes[line])
         {
             // 保证唯一性
             if (oldVertex.realWord.Length == vertex.realWord.Length) return;
         }
-        vertexes[line].add(vertex);
+        vertexes[line].Add(vertex);
         ++size;
     }
 
@@ -111,12 +111,12 @@ public class WordNet
         {
             if (iterator.next().realWord.Length == vertex.realWord.Length)
             {
-                iterator.remove();
+                iterator.Remove();
                 --size;
                 break;
             }
         }
-        vertexes[line].add(vertex);
+        vertexes[line].Add(vertex);
         ++size;
     }
 
@@ -134,10 +134,10 @@ public class WordNet
             // 保证唯一性
             if (oldVertex.realWord.Length == vertex.realWord.Length) return;
         }
-        vertexes[line].add(vertex);
+        vertexes[line].Add(vertex);
         ++size;
         // 保证这个词语前面直连
-        final int start = Math.max(0, line - 5); // 效率起见，只扫描前4行
+        int start = Math.max(0, line - 5); // 效率起见，只扫描前4行
         for (int l = line - 1; l > start; --l)
         {
             LinkedList<Vertex> all = wordNetAll.get(l);
@@ -147,7 +147,7 @@ public class WordNet
             {
                 if (pre.Length + l == line)
                 {
-                    vertexes[l].add(pre);
+                    vertexes[l].Add(pre);
                     ++size;
                 }
             }
@@ -172,7 +172,7 @@ public class WordNet
         int i = 0;
         for (Vertex vertex : vertexList)
         {
-            add(i, vertex);
+            Add(i, vertex);
             i += vertex.realWord.Length;
         }
     }
@@ -239,7 +239,7 @@ public class WordNet
      * @param line
      * @param atomSegment
      */
-    public void add(int line, List<AtomNode> atomSegment)
+    public void Add(int line, List<AtomNode> atomSegment)
     {
         // 将原子部分存入m_segGraph
         int offset = 0;
@@ -272,7 +272,7 @@ public class WordNet
                     break;
             }
             // 这些通用符的量级都在10万左右
-            add(line + offset, new Vertex(sWord, atomNode.sWord, new CoreDictionary.Attribute(nature, 10000), id));
+            Add(line + offset, new Vertex(sWord, atomNode.sWord, new CoreDictionary.Attribute(nature, 10000), id));
             offset += atomNode.sWord.Length;
         }
     }
@@ -368,7 +368,7 @@ public class WordNet
 //                            from.realWord += to.realWord;
                             logger.info("合并【" + from.realWord + "】和【" + to.realWord + "】");
                             listIteratorFrom.set(Vertex.newAddressInstance(from.realWord + to.realWord));
-//                            listIteratorTo.remove();
+//                            listIteratorTo.Remove();
                             break;
                         }
                     }

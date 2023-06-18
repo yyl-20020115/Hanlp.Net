@@ -68,7 +68,7 @@ public class PropertiesArgs
             {
                 if (argument.required())
                 {
-                    throw new IllegalArgumentException("You must set argument " + name);
+                    throw new ArgumentException("You must set argument " + name);
                 }
             }
         }
@@ -102,7 +102,7 @@ public class PropertiesArgs
                 {
                     if (argument.required())
                     {
-                        throw new IllegalArgumentException("You must set argument " + name);
+                        throw new ArgumentException("You must set argument " + name);
                     }
                 }
             }

@@ -85,7 +85,7 @@ public abstract class Segment
             {
                 string single = string.valueOf(charArray[pCur]);
                 if (single.Length != 0)
-                    atomSegment.add(new AtomNode(single, nCurType));
+                    atomSegment.Add(new AtomNode(single, nCurType));
                 pCur++;
             }
             //如果是字符、数字或者后面跟随了数字的小数点“.”则一直取下去。
@@ -107,14 +107,14 @@ public abstract class Segment
                         break;
                     }
                 }
-                atomSegment.add(new AtomNode(sb.toString(), nCurType));
+                atomSegment.Add(new AtomNode(sb.toString(), nCurType));
                 if (reachEnd)
                     pCur++;
             }
             // 对于所有其它情况
             else
             {
-                atomSegment.add(new AtomNode(charArray[pCur], nCurType));
+                atomSegment.Add(new AtomNode(charArray[pCur], nCurType));
                 pCur++;
             }
         }
@@ -133,7 +133,7 @@ public abstract class Segment
     protected static List<AtomNode> simpleAtomSegment(char[] charArray, int start, int end)
     {
         List<AtomNode> atomNodeList = new ();
-        atomNodeList.add(new AtomNode(new string(charArray, start, end - start), CharType.CT_LETTER));
+        atomNodeList.Add(new AtomNode(new string(charArray, start, end - start), CharType.CT_LETTER));
         return atomNodeList;
     }
 
@@ -168,13 +168,13 @@ public abstract class Segment
                         }
                     }
                 }
-                atomNodeList.add(new AtomNode(new string(charArray, start, offsetAtom - start), preType));
+                atomNodeList.Add(new AtomNode(new string(charArray, start, offsetAtom - start), preType));
                 start = offsetAtom;
             }
             preType = curType;
         }
         if (offsetAtom == end)
-            atomNodeList.add(new AtomNode(new string(charArray, start, offsetAtom - start), preType));
+            atomNodeList.Add(new AtomNode(new string(charArray, start, offsetAtom - start), preType));
 
         return atomNodeList;
     }
@@ -263,7 +263,7 @@ public abstract class Segment
         vertexList.clear();
         for (Vertex vertex : wordNet)
         {
-            if (vertex != null) vertexList.add(vertex);
+            if (vertex != null) vertexList.Add(vertex);
         }
         return vertexList;
     }
@@ -274,7 +274,7 @@ public abstract class Segment
      * @param wordNetAll 收集用户词语到全词图中
      * @return 合并后的结果
      */
-    protected static List<Vertex> combineByCustomDictionary(List<Vertex> vertexList, final WordNet wordNetAll)
+    protected static List<Vertex> combineByCustomDictionary(List<Vertex> vertexList, WordNet wordNetAll)
     {
         return combineByCustomDictionary(vertexList, CustomDictionary.dat, wordNetAll);
     }
@@ -286,7 +286,7 @@ public abstract class Segment
      * @param wordNetAll 收集用户词语到全词图中
      * @return 合并后的结果
      */
-    protected static List<Vertex> combineByCustomDictionary(List<Vertex> vertexList, DoubleArrayTrie<CoreDictionary.Attribute> dat, final WordNet wordNetAll)
+    protected static List<Vertex> combineByCustomDictionary(List<Vertex> vertexList, DoubleArrayTrie<CoreDictionary.Attribute> dat, WordNet wordNetAll)
     {
         List<Vertex> outputList = combineByCustomDictionary(vertexList, dat);
         int line = 0;
@@ -308,7 +308,7 @@ public abstract class Segment
         public void hit(int begin, int end, CoreDictionary.Attribute value)
         {
             if (end - begin == parentLength) return;
-            wordNetAll.add(currentLine + begin, new Vertex(vertex.realWord.substring(begin, end), value));
+            wordNetAll.Add(currentLine + begin, new Vertex(vertex.realWord.substring(begin, end), value));
         }
     }
     /**
@@ -362,7 +362,7 @@ public abstract class Segment
                 Term term = convert(vertex);
                 term.offset = offset;
                 offset += term.Length;
-                resultList.add(term);
+                resultList.Add(term);
             }
         }
         else
@@ -371,7 +371,7 @@ public abstract class Segment
             {
                 Vertex vertex = iterator.next();
                 Term term = convert(vertex);
-                resultList.add(term);
+                resultList.Add(term);
             }
         }
         return resultList;
@@ -409,7 +409,7 @@ public abstract class Segment
                 while (iterator.hasNext() && (cur = iterator.next()).hasNature(Nature.m))
                 {
                     sbQuantifier.Append(cur.realWord);
-                    iterator.remove();
+                    iterator.Remove();
                     removeFromWordNet(cur, wordNetAll, line, sbQuantifier.Length);
                 }
                 if (cur != null)
@@ -418,10 +418,10 @@ public abstract class Segment
                     {
                         if (config.indexMode > 0)
                         {
-                            wordNetAll.add(line, new Vertex(sbQuantifier.toString(), new CoreDictionary.Attribute(Nature.m)));
+                            wordNetAll.Add(line, new Vertex(sbQuantifier.toString(), new CoreDictionary.Attribute(Nature.m)));
                         }
                         sbQuantifier.Append(cur.realWord);
-                        iterator.remove();
+                        iterator.Remove();
                         removeFromWordNet(cur, wordNetAll, line, sbQuantifier.Length);
                     }
                     else
@@ -468,7 +468,7 @@ public abstract class Segment
         while (iterator.hasNext())
         {
             Vertex vertex = iterator.next();
-            if (vertex == cur) iterator.remove();
+            if (vertex == cur) iterator.Remove();
         }
     }
 
@@ -493,7 +493,7 @@ public abstract class Segment
             sentenceList.toArray(sentenceArray);
             //noinspection unchecked
             List<Term>[] termListArray = new List[sentenceArray.Length];
-            final int per = sentenceArray.Length / config.threadNumber;
+            int per = sentenceArray.Length / config.threadNumber;
             WorkThread[] threadArray = new WorkThread[config.threadNumber];
             for (int i = 0; i < config.threadNumber - 1; ++i)
             {
@@ -524,7 +524,7 @@ public abstract class Segment
                     for (Term term : termListArray[i])
                     {
                         term.offset += sentenceOffset;
-                        termList.add(term);
+                        termList.Add(term);
                     }
                     sentenceOffset += sentenceArray[i].Length;
                 }
@@ -551,7 +551,7 @@ public abstract class Segment
 //                    for (Term term : termOfSentence)
 //                    {
 //                        term.offset += sentenceOffset;
-//                        termList.add(term);
+//                        termList.Add(term);
 //                    }
 //                    sentenceOffset += sentence.Length;
 //                }
@@ -609,7 +609,7 @@ public abstract class Segment
         {
             for (string sentence : SentencesUtil.toSentenceList(text, shortest))
             {
-                resultList.add(segSentence(sentence.ToCharArray()));
+                resultList.Add(segSentence(sentence.ToCharArray()));
             }
         }
 
@@ -643,7 +643,7 @@ public abstract class Segment
      */
     public Segment enableIndexMode(int minimalLength)
     {
-        if (minimalLength < 1) throw new IllegalArgumentException("最小长度应当大于等于1");
+        if (minimalLength < 1) throw new ArgumentException("最小长度应当大于等于1");
         config.indexMode = minimalLength;
 
         return this;

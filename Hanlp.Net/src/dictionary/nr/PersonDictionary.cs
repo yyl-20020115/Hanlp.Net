@@ -51,7 +51,7 @@ public class PersonDictionary
         dictionary = new NRDictionary();
         if (!dictionary.load(HanLP.Config.PersonDictionaryPath))
         {
-            throw new IllegalArgumentException("人名词典加载失败：" + HanLP.Config.PersonDictionaryPath);
+            throw new ArgumentException("人名词典加载失败：" + HanLP.Config.PersonDictionaryPath);
         }
         transformMatrixDictionary = new TransformMatrixDictionary<NR>(typeof(NR));
         transformMatrixDictionary.load(HanLP.Config.PersonDictionaryTrPath);
@@ -103,7 +103,7 @@ public class PersonDictionary
                     string nowB = current.realWord.substring(current.realWord.Length - 1);
                     listIterator.set(new Vertex(nowK));
                     listIterator.next();
-                    listIterator.add(new Vertex(nowB));
+                    listIterator.Add(new Vertex(nowB));
                     continue;
                 case V:
                     if (!backUp)
@@ -127,7 +127,7 @@ public class PersonDictionary
                     string L = current.realWord.substring(1, current.realWord.Length);
                     listIterator.set(new Vertex(EorD));
                     listIterator.next();
-                    listIterator.add(new Vertex(L));
+                    listIterator.Add(new Vertex(L));
                     continue;
                 default:
                     sbPattern.Append(nr.ToString());

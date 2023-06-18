@@ -178,7 +178,7 @@ public class Word2VecTrainer
         settings.setMinCount(minFrequency);
         settings.setOutputFile(modelFileName);
         Word2VecTraining model = new Word2VecTraining(settings);
-        final long timeStart = DateTime.Now.Microsecond;
+        long timeStart = DateTime.Now.Microsecond;
 //        if (callback == null)
 //        {
 //            callback = new TrainingCallback()

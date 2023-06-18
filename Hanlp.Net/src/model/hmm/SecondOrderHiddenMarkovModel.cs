@@ -127,8 +127,8 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
     //@Override
     public float predict(int[] observation, int[] state)
     {
-        final int time = observation.Length; // 序列长度
-        final int max_s = start_probability.Length; // 状态种数
+        int time = observation.Length; // 序列长度
+        int max_s = start_probability.Length; // 状态种数
 
         float[][] score = new float[max_s][max_s];
         float[] first = new float[max_s];

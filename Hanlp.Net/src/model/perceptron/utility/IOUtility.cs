@@ -28,7 +28,7 @@ public class IOUtility : IOUtil
         return PATTERN_SPACE.Split(line);
     }
 
-    public static int loadInstance(final string path, InstanceHandler handler) 
+    public static int loadInstance(string path, InstanceHandler handler) 
     {
         ConsoleLogger logger = new ConsoleLogger();
         int size = 0;
@@ -41,7 +41,7 @@ public class IOUtility : IOUtil
                 //@Override
                 public bool accept(File pathname)
                 {
-                    return pathname.isFile() && pathname.getName().endsWith(".txt");
+                    return pathname.isFile() && pathname.getName().EndsWith(".txt");
                 }
             });
         }

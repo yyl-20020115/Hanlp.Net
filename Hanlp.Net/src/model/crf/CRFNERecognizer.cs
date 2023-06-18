@@ -51,9 +51,9 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
 
     protected void addDefaultNERLabels()
     {
-        tagSet.nerLabels.add("nr");
-        tagSet.nerLabels.add("ns");
-        tagSet.nerLabels.add("nt");
+        tagSet.nerLabels.Add("nr");
+        tagSet.nerLabels.Add("ns");
+        tagSet.nerLabels.Add("nt");
     }
 
     //@Override

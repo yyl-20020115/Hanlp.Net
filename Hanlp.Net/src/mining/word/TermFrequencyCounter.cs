@@ -47,14 +47,14 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
        ;
     }
 
-    public void add(string document)
+    public void Add(string document)
     {
         if (document == null || document.isEmpty()) return;
         List<Term> termList = defaultSegment.seg(document);
-        add(termList);
+        Add(termList);
     }
 
-    public void add(List<Term> termList)
+    public void Add(List<Term> termList)
     {
         if (filterStopWord)
         {
@@ -147,7 +147,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool add(TermFrequency termFrequency)
+    public bool Add(TermFrequency termFrequency)
     {
         TermFrequency tf = termFrequencyMap.get(termFrequency.getTerm());
         if (tf == null)
@@ -160,9 +160,9 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool remove(Object o)
+    public bool Remove(Object o)
     {
-        return termFrequencyMap.remove(o) != null;
+        return termFrequencyMap.Remove(o) != null;
     }
 
     //@Override
@@ -181,7 +181,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     {
         for (TermFrequency termFrequency : c)
         {
-            add(termFrequency);
+            Add(termFrequency);
         }
         return !c.isEmpty();
     }
@@ -191,7 +191,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     {
         for (Object o : c)
         {
-            if (!remove(o))
+            if (!Remove(o))
                 return false;
         }
         return true;
@@ -220,12 +220,12 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     public List<string> getKeywords(List<Term> termList, int size)
     {
         clear();
-        add(termList);
+        Add(termList);
         Collection<TermFrequency> topN = top(size);
         List<string> r = new ArrayList<string>(topN.size());
         for (TermFrequency termFrequency : topN)
         {
-            r.add(termFrequency.getTerm());
+            r.Add(termFrequency.getTerm());
         }
         return r;
     }

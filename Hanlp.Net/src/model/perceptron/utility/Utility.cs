@@ -192,22 +192,22 @@ bw.close();
     {
         if (iWord is Word)
         {
-            s.add((Word)iWord);
+            s.Add((Word)iWord);
         }
         else if (isNer(iWord, nerTag))
         {
-            s.add(new Word(iWord.getValue(), iWord.getLabel()));
+            s.Add(new Word(iWord.getValue(), iWord.getLabel()));
         }
         else
         {
             for (Word word : ((CompoundWord)iWord).innerList)
             {
                 isNer(word, nerTag);
-                s.add(word);
+                s.Add(word);
             }
         }
     }
-    output.add(s);
+    output.Add(s);
 }
 
 return output;
@@ -217,7 +217,7 @@ return output;
 {
     for (string tag : nerTag)
         {
-    if (word.getLabel().startsWith(tag))
+    if (word.getLabel().StartsWith(tag))
     {
         word.setLabel(tag);
         return true;
@@ -263,7 +263,7 @@ return wordArray;
         {
             if (goldLen == predLen)
             {
-                if (wordArray[goldIndex].equals(predArray[predIndex]))
+                if (wordArray[goldIndex].Equals(predArray[predIndex]))
                 {
                     stat[2]++;
                     goldLen += wordArray[goldIndex].Length;
@@ -317,19 +317,19 @@ return stat;
 
         if (nerLabels.contains(word.getLabel()))
         {
-            collector.add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
+            collector.Add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
             for (int i = 1; i < words.Length - 1; i++)
             {
-                collector.add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
+                collector.Add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
             }
-            collector.add(new string[]{words[words.Length - 1].value, words[words.Length - 1].label,
+            collector.Add(new string[]{words[words.Length - 1].value, words[words.Length - 1].label,
                         tagSet.E_TAG_PREFIX + word.getLabel()});
         }
         else
         {
             for (Word w : words)
             {
-                collector.add(new string[] { w.value, w.label, tagSet.O_TAG });
+                collector.Add(new string[] { w.value, w.label, tagSet.O_TAG });
             }
         }
     }
@@ -338,11 +338,11 @@ return stat;
         if (nerLabels.contains(word.getLabel()))
         {
             // 单个实体
-            collector.add(new string[] { word.getValue(), word.getLabel(), tagSet.S_TAG });
+            collector.Add(new string[] { word.getValue(), word.getLabel(), tagSet.S_TAG });
         }
         else
         {
-            collector.add(new string[] { word.getValue(), word.getLabel(), tagSet.O_TAG });
+            collector.Add(new string[] { word.getValue(), word.getLabel(), tagSet.O_TAG });
         }
     }
 }
@@ -369,7 +369,7 @@ return collector;
 
     public static Dictionary<string, double[]> evaluateNER(NERecognizer recognizer, string goldFile)
 {
-    Dictionary<string, double[]> scores = new TreeMap<string, double[]>();
+    Dictionary<string, double[]> scores = new Dictionary<string, double[]>();
     double[] avg = new double[] { 0, 0, 0 };
     scores.put("avg.", avg);
     NERTagSet tagSet = recognizer.getNERTagSet();
@@ -381,8 +381,8 @@ return collector;
     Sentence sentence = Sentence.create(line);
     if (sentence == null) continue;
     string[][] table = reshapeNER(convertSentenceToNER(sentence, tagSet));
-    Set<string> pred = combineNER(recognizer.recognize(table[0], table[1]), tagSet);
-    Set<string> gold = combineNER(table[2], tagSet);
+    HashSet<string> pred = combineNER(recognizer.recognize(table[0], table[1]), tagSet);
+    HashSet<string> gold = combineNER(table[2], tagSet);
     for (string p : pred)
     {
         string type = p.Split("\t")[2];
@@ -438,14 +438,14 @@ return scores;
         if (nerArray[i].charAt(0) == tagSet.B_TAG_CHAR || nerArray[i].charAt(0) == tagSet.S_TAG_CHAR || nerArray[i].charAt(0) == tagSet.O_TAG_CHAR)
         {
             if (i - begin > 1)
-                result.add(string.format("%d\t%d\t%s", begin, i, prePos));
+                result.Add(string.Format("%d\t%d\t%s", begin, i, prePos));
             begin = i;
         }
         prePos = NERTagSet.posOf(nerArray[i]);
     }
     if (nerArray.Length - 1 - begin > 1)
     {
-        result.add(string.format("%d\t%d\t%s", begin, nerArray.Length, prePos));
+        result.Add(string.Format("%d\t%d\t%s", begin, nerArray.Length, prePos));
     }
     return result;
 }

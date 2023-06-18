@@ -23,7 +23,7 @@ public class Node<V> : BaseNode
     //@Override
     protected bool addChild(BaseNode node)
     {
-        bool add = false;
+        bool Add = false;
         if (child == null)
         {
             child = new BaseNode[0];
@@ -39,7 +39,7 @@ public class Node<V> : BaseNode
                     {
                         target.status = Status.NOT_WORD_1;
                         target.value = null;
-                        add = true;
+                        Add = true;
                     }
                     break;
                 case NOT_WORD_1:
@@ -55,7 +55,7 @@ public class Node<V> : BaseNode
                     }
                     if (target.getValue() == null)
                     {
-                        add = true;
+                        Add = true;
                     }
                     target.setValue(node.getValue());
                     break;
@@ -69,9 +69,9 @@ public class Node<V> : BaseNode
             System.arraycopy(child, insert, newChild, insert + 1, child.Length - insert);
             newChild[insert] = node;
             child = newChild;
-            add = true;
+            Add = true;
         }
-        return add;
+        return Add;
     }
 
     /**

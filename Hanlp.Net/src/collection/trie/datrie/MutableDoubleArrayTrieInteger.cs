@@ -359,8 +359,8 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     {
         // 找出parent的所有子节点
         TreeSet<int> children = new TreeSet<int>();
-        children.add(newChild);
-        final int charsetSize = this.charMap.getCharsetSize();
+        children.Add(newChild);
+        int charsetSize = this.charMap.getCharsetSize();
         for (int c = 0; c < charsetSize; ++c)
         {
             int next = getBase(parent) + c;
@@ -370,12 +370,12 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             }
             if (getCheck(next) == parent)
             {
-                children.add(c);
+                children.Add(c);
             }
         }
         // 移动旧子节点到新的位置
         int newBase = searchFreeBase(children);
-        children.remove(newChild);
+        children.Remove(newChild);
         for (int c : children)
         {
             int child = newBase + c;
@@ -440,7 +440,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      * @param value
      * @return
      */
-    public bool add(string key, int value)
+    public bool Add(string key, int value)
     {
         return insert(key, value, false);
     }
@@ -451,9 +451,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      * @param key
      * @return
      */
-    public bool add(string key)
+    public bool Add(string key)
     {
-        return add(key, size);
+        return Add(key, size);
     }
 
     /**
@@ -513,7 +513,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             {
                 array[i] = (byte)bytes.get(i);
             }
-            result.add(new string(array, Utf8CharacterMapping.UTF_8));
+            result.Add(new string(array, Utf8CharacterMapping.UTF_8));
         }
         int _base = getBase(curState);
         for (int c = 0; c < charMap.getCharsetSize(); c++)
@@ -613,7 +613,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             curState = res[0];
             if (res[1] != -1)
             {
-                ret.add(new int[] { i - start + 1, res[1] });
+                ret.Add(new int[] { i - start + 1, res[1] });
             }
         }
         return ret;
@@ -644,7 +644,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             curState = res[0];
             if (res[1] != -1)
             {
-                ret.add(new int[] { i - start + 1, res[1] });
+                ret.Add(new int[] { i - start + 1, res[1] });
             }
         }
         return ret;
@@ -845,7 +845,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      * @param key
      * @return 值
      */
-    public int remove(string key)
+    public int Remove(string key)
     {
         return delete(key);
     }
@@ -982,7 +982,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             }
 
             //@Override
-            public void remove()
+            public void Remove()
             {
                 throw new UnsupportedOperationException();
             }
@@ -1012,13 +1012,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public bool add(KeyValuePair<string, int> stringIntegerEntry)
+        public bool Add(KeyValuePair<string, int> stringIntegerEntry)
         {
             throw new UnsupportedOperationException();
         }
 
         //@Override
-        public bool remove(Object o)
+        public bool Remove(Object o)
         {
             throw new UnsupportedOperationException();
         }
@@ -1102,7 +1102,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             KeyValuePair iterator = MutableDoubleArrayTrieInteger.iterator();
 
             //@Override
-            public void remove()
+            public void Remove()
             {
                 throw new UnsupportedOperationException();
             }
@@ -1131,13 +1131,13 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             }
 
             //@Override
-            public bool add(string s)
+            public bool Add(string s)
             {
                 throw new UnsupportedOperationException();
             }
 
             //@Override
-            public bool remove(Object o)
+            public bool Remove(Object o)
             {
                 throw new UnsupportedOperationException();
             }
@@ -1335,7 +1335,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public void remove()
+        public void Remove()
         {
             throw new UnsupportedOperationException();
         }

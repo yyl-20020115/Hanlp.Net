@@ -9,6 +9,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.dependency.nnparser.util;
 
 
@@ -18,137 +23,137 @@ namespace com.hankcs.hanlp.dependency.nnparser.util;
  */
 public class PosTagUtil
 {
-    private static Dictionary<string, string> posConverter = new TreeMap<string, string>();
+    private static Dictionary<string, string> posConverter = new ();
 
-    static
+    static PosTagUtil()
     {
-        posConverter.put("Mg", "m");
-        posConverter.put("Rg", "r");
-        posConverter.put("ad", "a");
-        posConverter.put("ag", "a");
-        posConverter.put("al", "a");
-        posConverter.put("an", "a");
-        posConverter.put("begin", "x");
-        posConverter.put("bg", "b");
-        posConverter.put("bl", "b");
-        posConverter.put("cc", "c");
-        posConverter.put("dg", "d");
-        posConverter.put("dl", "d");
-        posConverter.put("end", "x");
-        posConverter.put("f", "nd");
-        posConverter.put("g", "nz");
-        posConverter.put("gb", "nz");
-        posConverter.put("gbc", "nz");
-        posConverter.put("gc", "nz");
-        posConverter.put("gg", "nz");
-        posConverter.put("gi", "nz");
-        posConverter.put("gm", "nz");
-        posConverter.put("gp", "nz");
-        posConverter.put("l", "i");
-        posConverter.put("mg", "m");
-        posConverter.put("mq", "m");
-        posConverter.put("nb", "nz");
-        posConverter.put("nba", "nz");
-        posConverter.put("nbc", "nz");
-        posConverter.put("nbp", "nz");
-        posConverter.put("nf", "n");
-        posConverter.put("ng", "n");
-        posConverter.put("nh", "nz");
-        posConverter.put("nhd", "nz");
-        posConverter.put("nhm", "nz");
-        posConverter.put("ni", "n");
-        posConverter.put("nic", "nt");
-        posConverter.put("nis", "nt");
-        posConverter.put("nit", "nt");
-        posConverter.put("nl", "n");
-        posConverter.put("nm", "nz");
-        posConverter.put("nmc", "nz");
-        posConverter.put("nn", "nz");
-        posConverter.put("nnd", "nz");
-        posConverter.put("nnt", "nz");
-        posConverter.put("nr", "nh");
-        posConverter.put("nr1", "nh");
-        posConverter.put("nr2", "nh");
-        posConverter.put("nrf", "nh");
-        posConverter.put("nrj", "nh");
-        posConverter.put("nsf", "ns");
-        posConverter.put("nt", "ni");
-        posConverter.put("ntc", "ni");
-        posConverter.put("ntcb", "ni");
-        posConverter.put("ntcf", "ni");
-        posConverter.put("ntch", "ni");
-        posConverter.put("nth", "ni");
-        posConverter.put("nto", "ni");
-        posConverter.put("nts", "ni");
-        posConverter.put("ntu", "ni");
-        posConverter.put("nx", "ws");
-        posConverter.put("pba", "p");
-        posConverter.put("pbei", "p");
-        posConverter.put("qg", "q");
-        posConverter.put("qt", "q");
-        posConverter.put("qv", "q");
-        posConverter.put("rg", "r");
-        posConverter.put("rr", "r");
-        posConverter.put("ry", "r");
-        posConverter.put("rys", "r");
-        posConverter.put("ryt", "r");
-        posConverter.put("ryv", "r");
-        posConverter.put("rz", "r");
-        posConverter.put("rzs", "r");
-        posConverter.put("rzt", "r");
-        posConverter.put("rzv", "r");
-        posConverter.put("s", "nl");
-        posConverter.put("t", "nt");
-        posConverter.put("tg", "nt");
-        posConverter.put("ud", "u");
-        posConverter.put("ude1", "u");
-        posConverter.put("ude2", "u");
-        posConverter.put("ude3", "u");
-        posConverter.put("udeng", "u");
-        posConverter.put("udh", "u");
-        posConverter.put("ug", "u");
-        posConverter.put("uguo", "u");
-        posConverter.put("uj", "u");
-        posConverter.put("ul", "u");
-        posConverter.put("ule", "u");
-        posConverter.put("ulian", "u");
-        posConverter.put("uls", "u");
-        posConverter.put("usuo", "u");
-        posConverter.put("uv", "u");
-        posConverter.put("uyy", "u");
-        posConverter.put("uz", "u");
-        posConverter.put("uzhe", "u");
-        posConverter.put("uzhi", "u");
-        posConverter.put("vd", "v");
-        posConverter.put("vf", "v");
-        posConverter.put("vg", "v");
-        posConverter.put("vi", "v");
-        posConverter.put("vl", "v");
-        posConverter.put("vn", "v");
-        posConverter.put("vshi", "v");
-        posConverter.put("vx", "v");
-        posConverter.put("vyou", "v");
-        posConverter.put("w", "wp");
-        posConverter.put("wb", "wp");
-        posConverter.put("wd", "wp");
-        posConverter.put("wf", "wp");
-        posConverter.put("wh", "wp");
-        posConverter.put("wj", "wp");
-        posConverter.put("wky", "wp");
-        posConverter.put("wkz", "wp");
-        posConverter.put("wm", "wp");
-        posConverter.put("wn", "wp");
-        posConverter.put("ws", "wp");
-        posConverter.put("wt", "wp");
-        posConverter.put("ww", "wp");
-        posConverter.put("wyy", "wp");
-        posConverter.put("wyz", "wp");
-        posConverter.put("xu", "x");
-        posConverter.put("xx", "x");
-        posConverter.put("y", "e");
-        posConverter.put("yg", "u");
-        posConverter.put("z", "u");
-        posConverter.put("zg", "u");
+        posConverter.Add("Mg", "m");
+        posConverter.Add("Rg", "r");
+        posConverter.Add("ad", "a");
+        posConverter.Add("ag", "a");
+        posConverter.Add("al", "a");
+        posConverter.Add("an", "a");
+        posConverter.Add("begin", "x");
+        posConverter.Add("bg", "b");
+        posConverter.Add("bl", "b");
+        posConverter.Add("cc", "c");
+        posConverter.Add("dg", "d");
+        posConverter.Add("dl", "d");
+        posConverter.Add("end", "x");
+        posConverter.Add("f", "nd");
+        posConverter.Add("g", "nz");
+        posConverter.Add("gb", "nz");
+        posConverter.Add("gbc", "nz");
+        posConverter.Add("gc", "nz");
+        posConverter.Add("gg", "nz");
+        posConverter.Add("gi", "nz");
+        posConverter.Add("gm", "nz");
+        posConverter.Add("gp", "nz");
+        posConverter.Add("l", "i");
+        posConverter.Add("mg", "m");
+        posConverter.Add("mq", "m");
+        posConverter.Add("nb", "nz");
+        posConverter.Add("nba", "nz");
+        posConverter.Add("nbc", "nz");
+        posConverter.Add("nbp", "nz");
+        posConverter.Add("nf", "n");
+        posConverter.Add("ng", "n");
+        posConverter.Add("nh", "nz");
+        posConverter.Add("nhd", "nz");
+        posConverter.Add("nhm", "nz");
+        posConverter.Add("ni", "n");
+        posConverter.Add("nic", "nt");
+        posConverter.Add("nis", "nt");
+        posConverter.Add("nit", "nt");
+        posConverter.Add("nl", "n");
+        posConverter.Add("nm", "nz");
+        posConverter.Add("nmc", "nz");
+        posConverter.Add("nn", "nz");
+        posConverter.Add("nnd", "nz");
+        posConverter.Add("nnt", "nz");
+        posConverter.Add("nr", "nh");
+        posConverter.Add("nr1", "nh");
+        posConverter.Add("nr2", "nh");
+        posConverter.Add("nrf", "nh");
+        posConverter.Add("nrj", "nh");
+        posConverter.Add("nsf", "ns");
+        posConverter.Add("nt", "ni");
+        posConverter.Add("ntc", "ni");
+        posConverter.Add("ntcb", "ni");
+        posConverter.Add("ntcf", "ni");
+        posConverter.Add("ntch", "ni");
+        posConverter.Add("nth", "ni");
+        posConverter.Add("nto", "ni");
+        posConverter.Add("nts", "ni");
+        posConverter.Add("ntu", "ni");
+        posConverter.Add("nx", "ws");
+        posConverter.Add("pba", "p");
+        posConverter.Add("pbei", "p");
+        posConverter.Add("qg", "q");
+        posConverter.Add("qt", "q");
+        posConverter.Add("qv", "q");
+        posConverter.Add("rg", "r");
+        posConverter.Add("rr", "r");
+        posConverter.Add("ry", "r");
+        posConverter.Add("rys", "r");
+        posConverter.Add("ryt", "r");
+        posConverter.Add("ryv", "r");
+        posConverter.Add("rz", "r");
+        posConverter.Add("rzs", "r");
+        posConverter.Add("rzt", "r");
+        posConverter.Add("rzv", "r");
+        posConverter.Add("s", "nl");
+        posConverter.Add("t", "nt");
+        posConverter.Add("tg", "nt");
+        posConverter.Add("ud", "u");
+        posConverter.Add("ude1", "u");
+        posConverter.Add("ude2", "u");
+        posConverter.Add("ude3", "u");
+        posConverter.Add("udeng", "u");
+        posConverter.Add("udh", "u");
+        posConverter.Add("ug", "u");
+        posConverter.Add("uguo", "u");
+        posConverter.Add("uj", "u");
+        posConverter.Add("ul", "u");
+        posConverter.Add("ule", "u");
+        posConverter.Add("ulian", "u");
+        posConverter.Add("uls", "u");
+        posConverter.Add("usuo", "u");
+        posConverter.Add("uv", "u");
+        posConverter.Add("uyy", "u");
+        posConverter.Add("uz", "u");
+        posConverter.Add("uzhe", "u");
+        posConverter.Add("uzhi", "u");
+        posConverter.Add("vd", "v");
+        posConverter.Add("vf", "v");
+        posConverter.Add("vg", "v");
+        posConverter.Add("vi", "v");
+        posConverter.Add("vl", "v");
+        posConverter.Add("vn", "v");
+        posConverter.Add("vshi", "v");
+        posConverter.Add("vx", "v");
+        posConverter.Add("vyou", "v");
+        posConverter.Add("w", "wp");
+        posConverter.Add("wb", "wp");
+        posConverter.Add("wd", "wp");
+        posConverter.Add("wf", "wp");
+        posConverter.Add("wh", "wp");
+        posConverter.Add("wj", "wp");
+        posConverter.Add("wky", "wp");
+        posConverter.Add("wkz", "wp");
+        posConverter.Add("wm", "wp");
+        posConverter.Add("wn", "wp");
+        posConverter.Add("ws", "wp");
+        posConverter.Add("wt", "wp");
+        posConverter.Add("ww", "wp");
+        posConverter.Add("wyy", "wp");
+        posConverter.Add("wyz", "wp");
+        posConverter.Add("xu", "x");
+        posConverter.Add("xx", "x");
+        posConverter.Add("y", "e");
+        posConverter.Add("yg", "u");
+        posConverter.Add("z", "u");
+        posConverter.Add("zg", "u");
     }
 
     /**
@@ -176,13 +181,13 @@ public class PosTagUtil
      */
     public static List<string> to863(List<Term> termList)
     {
-        List<string> posTagList = new ArrayList<string>(termList.size());
-        for (Term term : termList)
+        List<string> posTagList = new (termList.Count);
+        foreach (Term term in termList)
         {
-            string posTag = posConverter.get(term.nature.toString());
+            string posTag = posConverter.get(term.nature.ToString());
             if (posTag == null)
-                posTag = term.nature.toString();
-            posTagList.add(posTag);
+                posTag = term.nature.ToString();
+            posTagList.Add(posTag);
         }
 
         return posTagList;
@@ -205,11 +210,11 @@ public class PosTagUtil
             if (sentence == null) continue;
             string[][] wordTagArray = sentence.toWordTagArray();
             string[] prediction = tagger.tag(wordTagArray[0]);
-            assert prediction.Length == wordTagArray[1].Length;
+            //assert prediction.Length == wordTagArray[1].Length;
             total += prediction.Length;
             for (int i = 0; i < prediction.Length; i++)
             {
-                if (prediction[i].equals(wordTagArray[1][i]))
+                if (prediction[i].Equals(wordTagArray[1][i]))
                     ++correct;
             }
         }

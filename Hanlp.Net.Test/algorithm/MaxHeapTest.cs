@@ -18,16 +18,16 @@ public class MaxHeapTest : TestCase
     //@Override
     public override void SetUp() 
     {
-        heap.add(1);
-        heap.add(3);
-        heap.add(5);
-        heap.add(7);
-        heap.add(9);
-        heap.add(8);
-        heap.add(6);
-        heap.add(4);
-        heap.add(2);
-        heap.add(0);
+        heap.Add(1);
+        heap.Add(3);
+        heap.Add(5);
+        heap.Add(7);
+        heap.Add(9);
+        heap.Add(8);
+        heap.Add(6);
+        heap.Add(4);
+        heap.Add(2);
+        heap.Add(0);
     }
     [TestMethod]
     public void TestToList()

@@ -20,8 +20,8 @@ public class SuffixDictionaryTest : TestCase
     [TestMethod]
     public void TestEndsWith() 
     {
-        AssertEquals(true, dictionary.endsWith("黄冈市"));
-        AssertEquals(false, dictionary.endsWith("黄冈一二三"));
+        AssertEquals(true, dictionary.EndsWith("黄冈市"));
+        AssertEquals(false, dictionary.EndsWith("黄冈一二三"));
     }
     [TestMethod]
     public void TestLongest()
@@ -47,7 +47,7 @@ public class SuffixDictionaryTest : TestCase
     //        DictionaryMaker dictionaryMaker = new DictionaryMaker();
     //        for (Map.Entry<String, int> entry : PlaceSuffixDictionary.dictionary.entrySet())
     //        {
-    //            dictionaryMaker.add(entry.getKey(), NS.H.ToString());
+    //            dictionaryMaker.Add(entry.getKey(), NS.H.ToString());
     //        }
     //        dictionaryMaker.saveTxtTo("data/dictionary/place/suffix.txt");
     //    }

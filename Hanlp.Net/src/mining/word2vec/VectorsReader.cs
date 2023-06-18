@@ -21,7 +21,7 @@ public class VectorsReader
 
     public void readVectorFile() 
     {
-        logger.info(string.format("reading %s file. please wait...\n", file));
+        logger.info(string.Format("reading %s file. please wait...\n", file));
 
         InputStream _is = null;
         Reader r = null;

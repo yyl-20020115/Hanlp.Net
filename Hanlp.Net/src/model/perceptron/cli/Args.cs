@@ -25,7 +25,7 @@ public class Args
         {
             return parse(target, args);
         }
-        catch (IllegalArgumentException e)
+        catch (ArgumentException e)
         {
             Console.Error.WriteLine(e.getMessage());
             Args.usage(target);
@@ -44,7 +44,7 @@ public class Args
      *
      * @param target           Either an instance or a class
      * @param args             The arguments you want to parse and populate
-     * @param failOnExtraFlags Throw an IllegalArgumentException if extra flags are present
+     * @param failOnExtraFlags Throw an ArgumentException if extra flags are present
      * @return The list of arguments that were not consumed
      */
     public static List<string> parse(Object target, string[] args, bool failOnExtraFlags)
@@ -86,9 +86,9 @@ public class Args
         {
             for (string argument : arguments)
             {
-                if (argument.startsWith("-"))
+                if (argument.StartsWith("-"))
                 {
-                    throw new IllegalArgumentException("无效参数: " + argument);
+                    throw new ArgumentException("无效参数: " + argument);
                 }
             }
         }
@@ -106,16 +106,16 @@ public class Args
                 string arg = i.next();
                 string prefix = argument.prefix();
                 string delimiter = argument.delimiter();
-                if (arg.startsWith(prefix))
+                if (arg.StartsWith(prefix))
                 {
                     Object value;
                     string name = getName(argument, field);
                     string alias = getAlias(argument);
                     arg = arg.substring(prefix.Length);
                     Class<?> type = field.getType();
-                    if (arg.equals(name) || (alias != null && arg.equals(alias)))
+                    if (arg.Equals(name) || (alias != null && arg.Equals(alias)))
                     {
-                        i.remove();
+                        i.Remove();
                         value = consumeArgumentValue(name, type, argument, i);
                         if (!set)
                         {
@@ -133,7 +133,7 @@ public class Args
             if (!set && argument.required())
             {
                 string name = getName(argument, field);
-                throw new IllegalArgumentException("缺少必需参数: " + argument.prefix() + name);
+                throw new ArgumentException("缺少必需参数: " + argument.prefix() + name);
             }
         }
     }
@@ -151,11 +151,11 @@ public class Args
         }
         catch (IllegalAccessException iae)
         {
-            throw new IllegalArgumentException("Could not set field " + field, iae);
+            throw new ArgumentException("Could not set field " + field, iae);
         }
         catch (NoSuchMethodException e)
         {
-            throw new IllegalArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
         }
     }
 
@@ -172,15 +172,15 @@ public class Args
         }
         catch (IllegalAccessException iae)
         {
-            throw new IllegalArgumentException("Could not set property " + property, iae);
+            throw new ArgumentException("Could not set property " + property, iae);
         }
         catch (NoSuchMethodException e)
         {
-            throw new IllegalArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
         }
         catch (InvocationTargetException e)
         {
-            throw new IllegalArgumentException("Failed to validate argument " + value + " for " + property);
+            throw new ArgumentException("Failed to validate argument " + value + " for " + property);
         }
     }
 
@@ -198,16 +198,16 @@ public class Args
                     string arg = i.next();
                     string prefix = argument.prefix();
                     string delimiter = argument.delimiter();
-                    if (arg.startsWith(prefix))
+                    if (arg.StartsWith(prefix))
                     {
                         Object value;
                         string name = getName(argument, property);
                         string alias = getAlias(argument);
                         arg = arg.substring(prefix.Length);
                         Class<?> type = property.getPropertyType();
-                        if (arg.equals(name) || (alias != null && arg.equals(alias)))
+                        if (arg.Equals(name) || (alias != null && arg.Equals(alias)))
                         {
-                            i.remove();
+                            i.Remove();
                             value = consumeArgumentValue(name, type, argument, i);
                             if (!set)
                             {
@@ -225,7 +225,7 @@ public class Args
                 if (!set && argument.required())
                 {
                     string name = getName(argument, property);
-                    throw new IllegalArgumentException("You must set argument " + name);
+                    throw new ArgumentException("You must set argument " + name);
                 }
             }
         }
@@ -307,7 +307,7 @@ public class Args
             }
             catch (IllegalAccessException e)
             {
-                throw new IllegalArgumentException("Could not use thie field " + field + " as an argument field", e);
+                throw new ArgumentException("Could not use thie field " + field + " as an argument field", e);
             }
         }
     }
@@ -342,11 +342,11 @@ public class Args
                 }
                 catch (IllegalAccessException e)
                 {
-                    throw new IllegalArgumentException("Could not use thie field " + field + " as an argument field", e);
+                    throw new ArgumentException("Could not use thie field " + field + " as an argument field", e);
                 }
                 catch (InvocationTargetException e)
                 {
-                    throw new IllegalArgumentException("Could not get default value for " + field, e);
+                    throw new ArgumentException("Could not get default value for " + field, e);
                 }
             }
         }
@@ -397,7 +397,7 @@ public class Args
                     int len = Array.getLength(defaultValue);
                     for (int i = 0; i < len; i++)
                     {
-                        list.add(Array.get(defaultValue, i));
+                        list.Add(Array.get(defaultValue, i));
                     }
                     sb.Append(list);
                 }
@@ -423,7 +423,7 @@ public class Args
     static string getName(Argument argument, PropertyDescriptor property)
     {
         string name = argument.value();
-        if (name.equals(""))
+        if (name.Equals(""))
         {
             name = property.getName();
         }
@@ -443,11 +443,11 @@ public class Args
             if (i.hasNext())
             {
                 value = i.next();
-                i.remove();
+                i.Remove();
             }
             else
             {
-                throw new IllegalArgumentException("非flag参数必须指定值: " + argument.prefix() + name);
+                throw new ArgumentException("非flag参数必须指定值: " + argument.prefix() + name);
             }
         }
         return value;
@@ -462,22 +462,22 @@ public class Args
         }
         catch (IllegalAccessException iae)
         {
-            throw new IllegalArgumentException("Could not set property " + property, iae);
+            throw new ArgumentException("Could not set property " + property, iae);
         }
         catch (NoSuchMethodException e)
         {
-            throw new IllegalArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
         }
         catch (InvocationTargetException e)
         {
-            throw new IllegalArgumentException("Failed to validate argument " + value + " for " + property);
+            throw new ArgumentException("Failed to validate argument " + value + " for " + property);
         }
     }
 
     static string getAlias(Argument argument)
     {
         string alias = argument.alias();
-        if (alias.equals(""))
+        if (alias.Equals(""))
         {
             alias = null;
         }
@@ -487,7 +487,7 @@ public class Args
     static string getName(Argument argument, Field field)
     {
         string name = argument.value();
-        if (name.equals(""))
+        if (name.Equals(""))
         {
             name = field.getName();
         }
@@ -504,11 +504,11 @@ public class Args
         }
         catch (IllegalAccessException iae)
         {
-            throw new IllegalArgumentException("Could not set field " + field, iae);
+            throw new ArgumentException("Could not set field " + field, iae);
         }
         catch (NoSuchMethodException e)
         {
-            throw new IllegalArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
         }
     }
 
@@ -553,7 +553,7 @@ public class Args
                 return createdValue;
             }
         }
-        throw new IllegalArgumentException(string.format("cannot instanciate any %s object using %s value", type.toString(), valueAsString));
+        throw new ArgumentException(string.Format("cannot instanciate any %s object using %s value", type.toString(), valueAsString));
     }
 
     private static void makeAccessible(AccessibleObject ao)
@@ -608,7 +608,7 @@ public class Args
                     }
                     catch (Exception e)
                     {
-                        throw new IllegalArgumentException(string.format("could not invoke %s#%s to create an obejct from %s", type.toString(), methodName, value));
+                        throw new ArgumentException(string.Format("could not invoke %s#%s to create an obejct from %s", type.toString(), methodName, value));
                     }
                 }
                 return v;
@@ -635,7 +635,7 @@ public class Args
             }
             catch (Exception e)
             {
-                throw new IllegalArgumentException("Failed to convertPKUtoCWS " + value + " to type " + type.getName(), e);
+                throw new ArgumentException("Failed to convertPKUtoCWS " + value + " to type " + type.getName(), e);
             }
             return v;
         }
@@ -663,7 +663,7 @@ public class Args
      */
     public static void registerValueCreator(ValueCreator vc)
     {
-        valueCreators.add(vc);
+        valueCreators.Add(vc);
     }
 
     /**

@@ -58,7 +58,7 @@ public class CRFModelTest : TestCase
      */
 //    public void testPrepareCRFTrainingCorpus() 
 //    {
-//        final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("e:\\2014.txt"), "UTF-8"));
+//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("e:\\2014.txt"), "UTF-8"));
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs", new CorpusLoader.Handler()
 //                          {
 //                              //@Override

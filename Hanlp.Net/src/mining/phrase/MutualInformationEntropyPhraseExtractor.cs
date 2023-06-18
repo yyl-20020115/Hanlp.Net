@@ -76,7 +76,7 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
         for (PairFrequency phrase : occurrence.getPhraseByScore())
         {
             if (phraseList.size() == size) break;
-            phraseList.add(phrase.first + phrase.second);
+            phraseList.Add(phrase.first + phrase.second);
         }
         return phraseList;
     }

@@ -27,10 +27,10 @@ public class TraditionalToHongKongChineseDictionary : BaseChineseDictionary
         string datPath = HanLP.Config.tcDictionaryRoot + "t2hk";
         if (!loadDat(datPath, trie))
         {
-            TreeMap<string, string> t2hk = new TreeMap<string, string>();
+            Dictionary<string, string> t2hk = new Dictionary<string, string>();
             if (!load(t2hk, false, HanLP.Config.tcDictionaryRoot + "t2hk.txt"))
             {
-                throw new IllegalArgumentException("繁体转香港繁体加载失败");
+                throw new ArgumentException("繁体转香港繁体加载失败");
             }
             trie.build(t2hk);
             saveDat(datPath, trie, t2hk.entrySet());

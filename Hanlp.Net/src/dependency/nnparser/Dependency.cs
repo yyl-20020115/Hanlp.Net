@@ -22,9 +22,9 @@ public class Dependency
     public List<int> heads;
     public List<int> deprels;
 
-    private static ArrayList<int> allocate()
+    private static List<int> allocate()
     {
-        return new ArrayList<int>();
+        return new ();
     }
 
     public Dependency()
@@ -37,6 +37,6 @@ public class Dependency
 
     int size()
     {
-        return forms.size();
+        return forms.Count;
     }
 }

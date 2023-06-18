@@ -131,15 +131,15 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public bool add(Pipe<List<IWord>, List<IWord>> pipe)
+    public bool Add(Pipe<List<IWord>, List<IWord>> pipe)
     {
         return pipeList.Add(pipe);
     }
 
     //@Override
-    public bool remove(Object o)
+    public bool Remove(Object o)
     {
-        return pipeList.remove(o);
+        return pipeList.Remove(o);
     }
 
     //@Override
@@ -179,9 +179,9 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public bool equals(Object o)
+    public bool Equals(Object o)
     {
-        return pipeList.equals(o);
+        return pipeList.Equals(o);
     }
 
     //@Override
@@ -203,15 +203,15 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public void add(int index, Pipe<List<IWord>, List<IWord>> element)
+    public void Add(int index, Pipe<List<IWord>, List<IWord>> element)
     {
-        pipeList.add(index, element);
+        pipeList.Add(index, element);
     }
 
     //@Override
-    public Pipe<List<IWord>, List<IWord>> remove(int index)
+    public Pipe<List<IWord>, List<IWord>> Remove(int index)
     {
-        return pipeList.remove(index);
+        return pipeList.Remove(index);
     }
 
     //@Override

@@ -61,7 +61,7 @@ public class DictionaryMakerTest : TestCase
 //
 //    public void testPlay() 
 //    {
-//        final TFDictionary tfDictionary = new TFDictionary();
+//        TFDictionary tfDictionary = new TFDictionary();
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -71,9 +71,9 @@ public class DictionaryMakerTest : TestCase
 //                {
 //                    for (IWord word : wordList)
 //                    {
-//                        if (word instanceof CompoundWord && word.getLabel().equals("ns"))
+//                        if (word instanceof CompoundWord && word.getLabel().Equals("ns"))
 //                        {
-//                            tfDictionary.add(word.ToString());
+//                            tfDictionary.Add(word.ToString());
 //                        }
 //                    }
 //                }
@@ -109,15 +109,15 @@ public class DictionaryMakerTest : TestCase
 //
 //    public void testRemoveLabelD() 
 //    {
-//        Set<String> nameFollowers = new TreeSet<String>();
+//        HashSet<String> nameFollowers = new TreeSet<String>();
 //        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(HanLP.Config.BiGramDictionaryPath);
 //        while (lineIterator.hasNext())
 //        {
 //            String line = lineIterator.next();
 //            String[] words = line.Split("\\s")[0].Split("@");
-//            if (words[0].equals(Predefine.TAG_PEOPLE))
+//            if (words[0].Equals(Predefine.TAG_PEOPLE))
 //            {
-//                nameFollowers.add(words[1]);
+//                nameFollowers.Add(words[1]);
 //            }
 //        }
 //        DictionaryMaker dictionary = DictionaryMaker.load(HanLP.Config.PersonDictionaryPath);
@@ -159,27 +159,27 @@ public class DictionaryMakerTest : TestCase
 //                for (Word inner : ((CompoundWord)word).innerList)
 //                {
 //                    // 暂时不统计人名
-//                    if (inner.getLabel().equals("nr"))
+//                    if (inner.getLabel().Equals("nr"))
 //                    {
 //                        continue;
 //                    }
 //                    // 如果需要人名，注销上面这句即可
-//                    dictionaryMaker.add(inner);
+//                    dictionaryMaker.Add(inner);
 //                }
 //            }
 //            // 暂时不统计人名
-//            if (word.getLabel().equals("nr"))
+//            if (word.getLabel().Equals("nr"))
 //            {
 //                continue;
 //            }
 //            // 如果需要人名，注销上面这句即可
-//            dictionaryMaker.add(word);
+//            dictionaryMaker.Add(word);
 //        }
 //    }
 //
 //    public void testMakeDictionary() 
 //    {
-//        final DictionaryMaker dictionaryMaker = new DictionaryMaker();
+//        DictionaryMaker dictionaryMaker = new DictionaryMaker();
 //        CorpusLoader.walk("data/2014", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -194,7 +194,7 @@ public class DictionaryMakerTest : TestCase
 //    public void testLoadItemList() 
 //    {
 //        List<Item> itemList = DictionaryMaker.loadAsItemList("data/2014_dictionary.txt");
-//        Map<String, int> labelMap = new TreeMap<String, int>();
+//        Map<String, int> labelMap = new Dictionary<String, int>();
 //        for (Item item : itemList)
 //        {
 //            for (Map.Entry<String, int> entry : item.labelMap.entrySet())

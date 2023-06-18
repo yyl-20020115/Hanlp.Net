@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace com.hankcs.hanlp.collection.trie.datrie;
@@ -18,7 +20,7 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
  *
  * @author hankcs
  */
-public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<KeyValuePair<string, V>>
+public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerable<KeyValuePair<string, V>>
 {
     MutableDoubleArrayTrieInteger trie;
     List<V> values;
@@ -26,11 +28,11 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
     public MutableDoubleArrayTrie()
     {
         trie = new MutableDoubleArrayTrieInteger();
-        values = new ();
+        values = new();
     }
 
     public MutableDoubleArrayTrie(Dictionary<string, V> map)
-        :this()
+        : this()
     {
         putAll(map);
     }
@@ -44,7 +46,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         var sb = new StringBuilder("MutableDoubleArrayTrie{");
         sb.Append("size=").Append(size()).Append(',');
@@ -56,15 +58,14 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
     //@Override
     public IComparer<string> comparator()
     {
-        return new CT()
-        ;
+        return new CT();
     }
-    public class CT: IComparer<string>
+    public class CT : IComparer<string>
     {
         //@Override
         public int Compare(string o1, string o2)
         {
-            return o1.compareTo(o2);
+            return o1.CompareTo(o2);
         }
     }
 
@@ -120,7 +121,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
     {
         if (key == null || !(key is string))
             return false;
-        return trie.containsKey((string) key);
+        return trie.containsKey((string)key);
     }
 
     //@Override
@@ -137,7 +138,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
         int id;
         if (key is string)
         {
-            id = trie.get((string) key);
+            id = trie.get((string)key);
         }
         else
         {
@@ -155,7 +156,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
         if (id == -1)
         {
             trie.set(key, values.size());
-            values.add(value);
+            values.Add(value);
             return null;
         }
         else
@@ -167,20 +168,20 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
     }
 
     //@Override
-    public V remove(Object key)
+    public V Remove(Object key)
     {
         if (key == null) return null;
-        int id = trie.remove(key is string ? (string) key : key.toString());
+        int id = trie.Remove(key is string ? (string)key : key.toString());
         if (id == -1)
             return null;
         trie.decreaseValues(id);
-        return values.remove(id);
+        return values.Remove(id);
     }
 
     //@Override
-    public void putAll(Dictionary<? : string, ? : V> m)
+    public void putAll(Dictionary<string, V> m)
     {
-        for (Entry<? : string, ? : V> entry : m.entrySet())
+        for (var entry : m.entrySet())
         {
             put(entry.getKey(), entry.getValue());
         }
@@ -196,236 +197,238 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, Iterable<K
     //@Override
     public HashSet<string> keySet()
     {
-        return new Set<string>()
+        return new HashSet<string>();
+    }
+
+    public class HS : HashSet<string>
+    {
+        MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
+
+        //@Override
+        public int size()
         {
-            MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
+            return trie.size();
+        }
 
-            //@Override
-            public int size()
-            {
-                return trie.size();
-            }
+        //@Override
+        public bool isEmpty()
+        {
+            return trie.isEmpty();
+        }
 
-            //@Override
-            public bool isEmpty()
-            {
-                return trie.isEmpty();
-            }
+        //@Override
+        public bool contains(Object o)
+        {
+            throw new UnsupportedOperationException();
+        }
 
-            //@Override
-            public bool contains(Object o)
+        //@Override
+        public IEnumerator<string> iterator()
+        {
+            return new IEnumerator<string>()
             {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public Iterator<string> iterator()
-            {
-                return new Iterator<string>()
-                {
                     //@Override
                     public bool hasNext()
-                    {
-                        return iterator.hasNext();
-                    }
-
-                    //@Override
-                    public string next()
-                    {
-                        return iterator.next().key();
-                    }
-
-                    //@Override
-                    public void remove()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-                };
-            }
-
-            //@Override
-            public Object[] toArray()
             {
-                return values.toArray();
+                return iterator.hasNext();
             }
 
             //@Override
-            public <T> T[] toArray(T[] a)
+            public string next()
             {
-                return values.toArray(a);
+                return iterator.next().key();
             }
 
             //@Override
-            public bool add(string s)
+            public void Remove()
             {
                 throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool remove(Object o)
-            {
-                return trie.remove((string) o) != -1;
-            }
-
-            //@Override
-            public bool containsAll(Collection<?> c)
-            {
-                for (Object o : c)
-                {
-                    if (!trie.containsKey((string) o))
-                        return false;
-                }
-                return true;
-            }
-
-            //@Override
-            public bool addAll(Collection<? : string> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool retainAll(Collection<?> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool removeAll(Collection<?> c)
-            {
-                bool changed = false;
-                for (Object o : c)
-                {
-                    if (!changed)
-                        changed = MutableDoubleArrayTrie.this.remove(o) != null;
-                }
-                return changed;
-            }
-
-            //@Override
-            public void clear()
-            {
-                MutableDoubleArrayTrie.this.clear();
             }
         };
     }
 
     //@Override
-    public Collection<V> values()
+    public Object[] toArray()
     {
-        return values;
+        return values.toArray();
     }
 
     //@Override
-    public Set<Entry<string, V>> entrySet()
+    public T[] toArray<T>(T[] a)
     {
-        return new Set<Entry<string, V>>()
+        return values.toArray(a);
+    }
+
+    //@Override
+    public bool Add(string s)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    //@Override
+    public bool Remove(Object o)
+    {
+        return trie.Remove((string)o) != -1;
+    }
+
+    //@Override
+    public bool containsAll(Collection<?> c)
+    {
+        for (Object o : c)
         {
+            if (!trie.containsKey((string)o))
+                return false;
+        }
+        return true;
+    }
+
+    //@Override
+    public bool addAll(Collection<? : string> c)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    //@Override
+    public bool retainAll(Collection<?> c)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    //@Override
+    public bool removeAll(Collection<?> c)
+    {
+        bool changed = false;
+        for (Object o : c)
+        {
+            if (!changed)
+                changed = MutableDoubleArrayTrie.Remove(o) != null;
+        }
+        return changed;
+    }
+
+    //@Override
+    public void clear()
+    {
+        MutableDoubleArrayTrie.this.clear();
+    }
+}
+
+//@Override
+public Collection<V> values()
+{
+    return values;
+}
+
+//@Override
+public HashSet<Entry<string, V>> entrySet()
+{
+    return new HashSet<Entry<string, V>>()
+    {
             //@Override
             public int size()
-            {
-                return trie.size();
-            }
+    {
+        return trie.size();
+    }
 
-            //@Override
-            public bool isEmpty()
-            {
-                return trie.isEmpty();
-            }
+    //@Override
+    public bool isEmpty()
+    {
+        return trie.isEmpty();
+    }
 
-            //@Override
-            public bool contains(Object o)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public Iterator<Entry<string, V>> iterator()
-            {
-                return new Iterator<Entry<string, V>>()
-                {
-                    MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
-
-                    //@Override
-                    public bool hasNext()
-                    {
-                        return iterator.hasNext();
-                    }
-
-                    //@Override
-                    public Entry<string, V> next()
-                    {
-                        iterator.next();
-                        return new AbstractMap.SimpleEntry<string, V>(iterator.key(), values.get(iterator.value()));
-                    }
-
-                    //@Override
-                    public void remove()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-                };
-            }
-
-            //@Override
-            public Object[] toArray()
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public <T> T[] toArray(T[] a)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool add(Entry<string, V> stringVEntry)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool remove(Object o)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool containsAll(Collection<?> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool addAll(Collection<? : Entry<string, V>> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool retainAll(Collection<?> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public bool removeAll(Collection<?> c)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            //@Override
-            public void clear()
-            {
-                MutableDoubleArrayTrie.this.clear();
-            }
-        };
+    //@Override
+    public bool contains(Object o)
+    {
+        throw new UnsupportedOperationException();
     }
 
     //@Override
     public Iterator<Entry<string, V>> iterator()
     {
-        return entrySet().iterator();
+        return new Iterator<Entry<string, V>>()
+                {
+                    MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
+
+        //@Override
+        public bool hasNext()
+        {
+            return iterator.hasNext();
+        }
+
+        //@Override
+        public Entry<string, V> next()
+        {
+            iterator.next();
+            return new AbstractMap.SimpleEntry<string, V>(iterator.key(), values.get(iterator.value()));
+        }
+
+        //@Override
+        public void Remove()
+        {
+            throw new UnsupportedOperationException();
+        }
+    };
+}
+
+//@Override
+public Object[] toArray()
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public <T> T[] toArray(T[] a)
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public bool Add(Entry<string, V> stringVEntry)
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public bool Remove(Object o)
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public bool containsAll(Collection<?> c)
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public bool addAll(Collection<? : Entry<string, V>> c)
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public bool retainAll(Collection<?> c)
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public bool removeAll(Collection<?> c)
+{
+    throw new UnsupportedOperationException();
+}
+
+//@Override
+public void clear()
+{
+    MutableDoubleArrayTrie.this.clear();
+}
+        };
     }
+
+    //@Override
+    public Iterator<Entry<string, V>> iterator()
+{
+    return entrySet().iterator();
+}
 }

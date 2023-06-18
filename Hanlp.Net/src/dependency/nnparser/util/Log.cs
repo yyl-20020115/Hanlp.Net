@@ -16,13 +16,13 @@ namespace com.hankcs.hanlp.dependency.nnparser.util;
  */
 public class Log
 {
-    public static void ERROR_LOG(string format, Object ... args)
+    public static void ERROR_LOG(string Format, params Object[] args)
     {
-        Console.Error.WriteLine(format, args);
+        Console.Error.WriteLine(Format, args);
     }
 
-    public static void INFO_LOG(string format, Object ... args)
+    public static void INFO_LOG(string Format, params Object[] args)
     {
-        Console.Error.WriteLine(format, args);
+        Console.Error.WriteLine(Format, args);
     }
 }

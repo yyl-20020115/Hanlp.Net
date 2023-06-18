@@ -34,7 +34,7 @@ public class crf_test
         {
             unkownArgs = Args.parse(cmd, args, false);
         }
-        catch (IllegalArgumentException e)
+        catch (ArgumentException e)
         {
             Args.usage(cmd);
             return false;

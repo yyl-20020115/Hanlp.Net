@@ -123,9 +123,9 @@ public class CoreStopWordDictionary
      * @param stopWord 停用词
      * @return 词典是否发生了改变
      */
-    public static bool add(string stopWord)
+    public static bool Add(string stopWord)
     {
-        return dictionary.add(stopWord);
+        return dictionary.Add(stopWord);
     }
 
     /**
@@ -133,9 +133,9 @@ public class CoreStopWordDictionary
      * @param stopWord 停用词
      * @return 词典是否发生了改变
      */
-    public static bool remove(string stopWord)
+    public static bool Remove(string stopWord)
     {
-        return dictionary.remove(stopWord);
+        return dictionary.Remove(stopWord);
     }
 
     /**
@@ -147,7 +147,7 @@ public class CoreStopWordDictionary
         ListIterator<Term> listIterator = termList.listIterator();
         while (listIterator.hasNext())
         {
-            if (shouldRemove(listIterator.next())) listIterator.remove();
+            if (shouldRemove(listIterator.next())) listIterator.Remove();
         }
     }
 }

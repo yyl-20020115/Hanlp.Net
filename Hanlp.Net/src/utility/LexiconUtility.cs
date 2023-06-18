@@ -84,7 +84,7 @@ public class LexiconUtility
         if (CustomDictionary.dat.set(word, attribute)) return true;
         if (CustomDictionary.trie == null)
         {
-            CustomDictionary.add(word);
+            CustomDictionary.Add(word);
         }
         CustomDictionary.trie.put(word, attribute);
         return true;

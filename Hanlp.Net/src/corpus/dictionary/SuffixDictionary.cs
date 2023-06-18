@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -30,7 +33,7 @@ public class SuffixDictionary
      * 添加一个词语
      * @param word
      */
-    public void add(string word)
+    public void Add(string word)
     {
         word = reverse(word);
         trie.put(word, word.Length);
@@ -40,7 +43,7 @@ public class SuffixDictionary
     {
         for (int i = 0; i < total.Length; ++i)
         {
-            add(string.valueOf(total.charAt(i)));
+            Add(string.valueOf(total[(i)]));
         }
     }
 
@@ -48,7 +51,7 @@ public class SuffixDictionary
     {
         for (string single : total)
         {
-            add(single);
+            Add(single);
         }
     }
 
@@ -71,10 +74,10 @@ public class SuffixDictionary
      * @param word
      * @return
      */
-    public bool endsWith(string word)
+    public bool EndsWith(string word)
     {
         word = reverse(word);
-        return trie.commonPrefixSearchWithValue(word).size() > 0;
+        return trie.commonPrefixSearchWithValue(word).Count > 0;
     }
 
     /**
@@ -86,7 +89,7 @@ public class SuffixDictionary
     {
         word = reverse(word);
         LinkedList<KeyValuePair<string, int>> suffixList = trie.commonPrefixSearchWithValue(word);
-        if (suffixList.size() == 0) return 0;
+        if (suffixList.Count == 0) return 0;
         return suffixList.getLast().getValue();
     }
 
@@ -99,12 +102,12 @@ public class SuffixDictionary
      * 键值对
      * @return
      */
-    public Set<KeyValuePair<string, int>> entrySet()
+    public HashSet<KeyValuePair<string, int>> entrySet()
     {
-        Set<KeyValuePair<string, int>> treeSet = new LinkedHashSet<KeyValuePair<string, int>>();
+        HashSet<KeyValuePair<string, int>> treeSet = new ();
         for (KeyValuePair<string, int> entry : trie.entrySet())
         {
-            treeSet.add(new AbstractMap.SimpleEntry<string, int>(reverse(entry.getKey()), entry.getValue()));
+            treeSet.Add(new AbstractMap.SimpleEntry<string, int>(reverse(entry.getKey()), entry.getValue()));
         }
 
         return treeSet;

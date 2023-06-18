@@ -37,7 +37,7 @@ public class Document : Serializable
     {
         var pattern = Pattern.compile(".+?((。/w)|(！/w )|(？/w )|\\n|$)");
         var matcher = pattern.matcher(param);
-        List<Sentence> sentenceList = new LinkedList<Sentence>();
+        List<Sentence> sentenceList = new ();
         while (matcher.find())
         {
             string single = matcher.group();
@@ -47,7 +47,7 @@ public class Document : Serializable
                 logger.warning("使用" + single + "构建句子失败");
                 return null;
             }
-            sentenceList.add(sentence);
+            sentenceList.Add(sentence);
         }
         return new Document(sentenceList);
     }
@@ -79,7 +79,7 @@ public class Document : Serializable
             }
             else
             {
-                simpleWordList.add((Word) word);
+                simpleWordList.Add((Word) word);
             }
         }
 
@@ -127,7 +127,7 @@ public class Document : Serializable
         List<List<IWord>> complexList = new ();
         foreach (Sentence sentence in sentenceList)
         {
-            complexList.add(sentence.wordList);
+            complexList.Add(sentence.wordList);
         }
 
         return complexList;
@@ -153,20 +153,20 @@ public class Document : Serializable
                     {
                         foreach (Word inner in ((CompoundWord) word).innerList)
                         {
-                            wordList.add(inner);
+                            wordList.Add(inner);
                         }
                     }
                     else
                     {
-                        wordList.add(((CompoundWord) word).toWord());
+                        wordList.Add(((CompoundWord) word).toWord());
                     }
                 }
                 else
                 {
-                    wordList.add((Word) word);
+                    wordList.Add((Word) word);
                 }
             }
-            simpleList.add(wordList);
+            simpleList.Add(wordList);
         }
 
         return simpleList;
@@ -192,20 +192,20 @@ public class Document : Serializable
                     {
                         for (Word inner : ((CompoundWord) word).innerList)
                         {
-                            wordList.add(inner);
+                            wordList.Add(inner);
                         }
                     }
                     else
                     {
-                        wordList.add(((CompoundWord) word).toWord());
+                        wordList.Add(((CompoundWord) word).toWord());
                     }
                 }
                 else
                 {
-                    wordList.add((Word) word);
+                    wordList.Add((Word) word);
                 }
             }
-            simpleList.add(wordList);
+            simpleList.Add(wordList);
         }
 
         return simpleList;
@@ -226,8 +226,8 @@ public class Document : Serializable
 
     public static Document create(File file)
     {
-        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file.getAbsolutePath());
-        List<Sentence> sentenceList = new LinkedList<Sentence>();
+        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file);
+        List<Sentence> sentenceList = new ();
         foreach (string line in lineIterator)
         {
             line = line.trim();
@@ -238,7 +238,7 @@ public class Document : Serializable
                 logger.warning("使用 " + line + " 创建句子失败");
                 return null;
             }
-            sentenceList.add(sentence);
+            sentenceList.Add(sentence);
         }
         return new Document(sentenceList);
     }

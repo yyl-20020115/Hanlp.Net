@@ -41,7 +41,7 @@ public class CommonSynonymDictionaryEx
     public bool load(InputStream inputStream)
     {
         trie = new DoubleArrayTrie<long[]>();
-        TreeMap<string, Set<long>> treeMap = new TreeMap<string, Set<long>>();
+        Dictionary<string, HashSet<long>> treeMap = new Dictionary<string, HashSet<long>>();
         string line = null;
         try
         {
@@ -52,25 +52,25 @@ public class CommonSynonymDictionaryEx
                 List<Synonym> synonymList = Synonym.create(args);
                 for (Synonym synonym : synonymList)
                 {
-                    Set<long> idSet = treeMap.get(synonym.realWord);
+                    HashSet<long> idSet = treeMap.get(synonym.realWord);
                     if (idSet == null)
                     {
                         idSet = new TreeSet<long>();
                         treeMap.put(synonym.realWord, idSet);
                     }
-                    idSet.add(synonym.id);
+                    idSet.Add(synonym.id);
                 }
             }
             bw.close();
             List<string> keyList = new ArrayList<string>(treeMap.size());
             for (string key : treeMap.keySet())
             {
-                keyList.add(key);
+                keyList.Add(key);
             }
             List<long[]> valueList = new ArrayList<long[]>(treeMap.size());
             for (Set<long> idSet : treeMap.values())
             {
-                valueList.add(idSet.toArray(new long[0]));
+                valueList.Add(idSet.toArray(new long[0]));
             }
             int resultCode = trie.build(keyList, valueList);
             if (resultCode != 0)
@@ -127,7 +127,7 @@ public class CommonSynonymDictionaryEx
         //@Override
         public string toString()
         {
-            final StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append(super.toString());
             sb.Append(' ');
             sb.Append(synonymMap);

@@ -27,10 +27,10 @@ public class TraditionalToTaiwanChineseDictionary : BaseChineseDictionary
         string datPath = HanLP.Config.tcDictionaryRoot + "t2tw";
         if (!loadDat(datPath, trie))
         {
-            TreeMap<string, string> t2tw = new TreeMap<string, string>();
+            Dictionary<string, string> t2tw = new Dictionary<string, string>();
             if (!load(t2tw, false, HanLP.Config.tcDictionaryRoot + "t2tw.txt"))
             {
-                throw new IllegalArgumentException("繁体转台湾繁体加载失败");
+                throw new ArgumentException("繁体转台湾繁体加载失败");
             }
             trie.build(t2tw);
             saveDat(datPath, trie, t2tw.entrySet());

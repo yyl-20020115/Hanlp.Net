@@ -84,7 +84,7 @@ public class TfIdfCounter : KeywordExtractor
         return topN(tfIdf, size);
     }
 
-    public void add(Object id, List<Term> termList)
+    public void Add(Object id, List<Term> termList)
     {
         List<string> words = convert(termList);
         Dictionary<string, Double> tf = TfIdf.tf(words);
@@ -102,9 +102,9 @@ public class TfIdfCounter : KeywordExtractor
         return words;
     }
 
-    public void add(List<Term> termList)
+    public void Add(List<Term> termList)
     {
-        add(tfMap.size(), termList);
+        Add(tfMap.size(), termList);
     }
 
     /**
@@ -113,10 +113,10 @@ public class TfIdfCounter : KeywordExtractor
      * @param id   文档id
      * @param text 文档内容
      */
-    public void add(Object id, string text)
+    public void Add(Object id, string text)
     {
         List<Term> termList = preprocess(text);
-        add(id, termList);
+        Add(id, termList);
     }
 
     private List<Term> preprocess(string text)
@@ -134,10 +134,10 @@ public class TfIdfCounter : KeywordExtractor
      *
      * @param text
      */
-    public int add(string text)
+    public int Add(string text)
     {
         int id = tfMap.size();
-        add(id, text);
+        Add(id, text);
         return id;
     }
 
@@ -243,7 +243,7 @@ public class TfIdfCounter : KeywordExtractor
         List<KeyValuePair<string, int>> result = new ArrayList<KeyValuePair<string, int>>(list.size());
         foreach (KeyValuePair<string, Double> entry in list)
         {
-            result.add(new AbstractMap.SimpleEntry<string, int>(entry.getKey(), entry.getValue().intValue()));
+            result.Add(new AbstractMap.SimpleEntry<string, int>(entry.getKey(), entry.getValue().intValue()));
         }
 
         return result;

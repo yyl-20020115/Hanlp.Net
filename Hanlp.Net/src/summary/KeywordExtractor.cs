@@ -93,7 +93,7 @@ public abstract class KeywordExtractor
         while (listIterator.hasNext())
         {
             if (!shouldInclude(listIterator.next()))
-                listIterator.remove();
+                listIterator.Remove();
         }
     }
 

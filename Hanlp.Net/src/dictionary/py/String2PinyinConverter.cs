@@ -34,7 +34,7 @@ public class String2PinyinConverter
     {
         // TODO:什么时候有空了升级到双数组吧
         trie = new Trie().remainLongest();
-        map = new TreeMap<string, Pinyin>();
+        map = new Dictionary<string, Pinyin>();
         int end = Pinyin.none5.ordinal();
         for (int i = 0; i < end; ++i)
         {
@@ -75,7 +75,7 @@ public class String2PinyinConverter
             if (token.isMatch())
             {
                 // 是拼音或拼音的一部分，用map转
-                pinyinList.add(convertSingle(fragment));
+                pinyinList.Add(convertSingle(fragment));
             }
             else
             {
@@ -120,14 +120,14 @@ public class String2PinyinConverter
             {
                 // 是拼音或拼音的一部分，用map转
                 Pinyin pinyin = convertSingle(fragment);
-                pinyinList.add(pinyin);
+                pinyinList.Add(pinyin);
                 if (fragment.Length == pinyin.getPinyinWithoutTone().Length)
                 {
-                    booleanList.add(true);
+                    booleanList.Add(true);
                 }
                 else
                 {
-                    booleanList.add(false);
+                    booleanList.Add(false);
                 }
             }
             else
@@ -136,7 +136,7 @@ public class String2PinyinConverter
                 pinyinList.addAll(pinyinListFragment);
                 for (int i = 0; i < pinyinListFragment.size(); ++i)
                 {
-                    booleanList.add(true);
+                    booleanList.Add(true);
                 }
             }
         }

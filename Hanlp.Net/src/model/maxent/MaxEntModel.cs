@@ -74,7 +74,7 @@ public class MaxEntModel
         double[] p = eval(context);
         for (int i = 0; i < p.Length; ++i)
         {
-            result.add(new Pair<string, Double>(outcomeNames[i], p[i]));
+            result.Add(new Pair<string, Double>(outcomeNames[i], p[i]));
         }
         return result;
     }

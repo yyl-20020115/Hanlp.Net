@@ -86,15 +86,15 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public bool add(Pipe<M, M> pipe)
+    public bool Add(Pipe<M, M> pipe)
     {
-        return pipeList.add(pipe);
+        return pipeList.Add(pipe);
     }
 
     //@Override
-    public bool remove(Object o)
+    public bool Remove(Object o)
     {
-        return pipeList.remove(o);
+        return pipeList.Remove(o);
     }
 
     //@Override
@@ -134,9 +134,9 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public bool equals(Object o)
+    public bool Equals(Object o)
     {
-        return pipeList.equals(o);
+        return pipeList.Equals(o);
     }
 
     //@Override
@@ -158,9 +158,9 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public void add(int index, Pipe<M, M> element)
+    public void Add(int index, Pipe<M, M> element)
     {
-        pipeList.add(index, element);
+        pipeList.Add(index, element);
     }
 
     /**
@@ -184,9 +184,9 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public Pipe<M, M> remove(int index)
+    public Pipe<M, M> Remove(int index)
     {
-        return pipeList.remove(index);
+        return pipeList.Remove(index);
     }
 
     //@Override

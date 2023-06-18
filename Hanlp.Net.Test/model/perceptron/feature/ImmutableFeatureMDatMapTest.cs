@@ -22,7 +22,7 @@ public class ImmutableFeatureMDatMapTest : TestCase
         Console.WriteLine(featureMap.size());
         Console.WriteLine(featureMap.entrySet().size());
         Console.WriteLine(featureMap.idOf("\u0001/\u00014"));
-        TreeMap<String, int> map = new TreeMap<String, int>();
+        Dictionary<String, int> map = new Dictionary<String, int>();
         for (Map.Entry<String, int> entry : dat.entrySet())
         {
             map.put(entry.getKey(), entry.getValue());

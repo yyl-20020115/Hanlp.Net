@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.corpus.io;
 
 
@@ -64,7 +66,7 @@ public class EasyReader
                 //@Override
                 public bool accept(File pathname)
                 {
-                    return pathname.isFile() && !pathname.getName().endsWith(".bin");
+                    return pathname.isFile() && !pathname.getName().EndsWith(".bin");
                 }
             });
             if (files == null)
@@ -87,7 +89,7 @@ public class EasyReader
             if (size-- == 0) break;
             if (file.isDirectory()) continue;
             if (verbose) System._out.printf("正在处理%s, %d / %d\n", file.getName(), ++n, files.Length);
-            IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file.getAbsolutePath());
+            IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file);
             while (lineIterator.hasNext())
             {
                 ++totalAddress;

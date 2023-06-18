@@ -30,8 +30,9 @@ public class StringDictionary : SimpleDictionary<string>
     }
 
     public StringDictionary()
+        : this("=")
     {
-        this("=");
+        ;
     }
 
     //@Override

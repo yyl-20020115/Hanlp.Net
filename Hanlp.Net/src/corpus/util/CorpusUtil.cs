@@ -85,10 +85,10 @@ public class CorpusUtil
             IWord word = listIterator.next();
             if (word is CompoundWord)
             {
-                listIterator.remove();
+                listIterator.Remove();
                 foreach (Word inner in ((CompoundWord) word).innerList)
                 {
-                    listIterator.add(inner);
+                    listIterator.Add(inner);
                 }
             }
         }

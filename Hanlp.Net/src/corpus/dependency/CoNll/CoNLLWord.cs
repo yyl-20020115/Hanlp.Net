@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
 /**
@@ -107,9 +109,9 @@ public class CoNLLWord
     }
 
     //@Override
-    public string toString()
+    public string ToString()
     {
-        final StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         // ID为0时为根节点，ID为-1时为空白节点
         if (ID!=0 && ID!=-1){
             sb.Append(ID).Append('\t').Append(LEMMA).Append('\t').Append(LEMMA).Append('\t').Append(CPOSTAG).Append('\t')

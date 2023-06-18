@@ -85,14 +85,14 @@ public abstract class CRFTagger
         string templFile = null;
         File tmpTemplate = File.createTempFile("crfpp-template-" + new Date().getTime(), ".txt");
         tmpTemplate.deleteOnExit();
-        templFile = tmpTemplate.getAbsolutePath();
+        templFile = tmpTemplate;
         string template = getDefaultFeatureTemplate();
         IOUtil.saveTxt(templFile, template);
 
         File tmpTrain = File.createTempFile("crfpp-train-" + new Date().getTime(), ".txt");
         tmpTrain.deleteOnExit();
-        convertCorpus(trainFile, tmpTrain.getAbsolutePath());
-        trainFile = tmpTrain.getAbsolutePath();
+        convertCorpus(trainFile, tmpTrain);
+        trainFile = tmpTrain;
         System._out.printf("Java效率低，建议安装CRF++，执行下列等价训练命令（不要终止本进程，否则临时语料库和特征模板将被清除）：\n" +
                               "crf_learn -m %d -f %d -e %f -c %f -p %d -H %d -a %s -t %s %s %s\n", maxitr, freq, eta,
                           C, threadNum, shrinkingSize, algorithm.toString().replace('_', '-'),

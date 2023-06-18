@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dependency.nnparser.action;
+using Action = com.hankcs.hanlp.dependency.nnparser.action.Action;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -71,14 +74,14 @@ public class TransitionSystem
 
         if (!source.buffer_empty())
         {
-            actions.add(ActionFactory.make_shift());
+            actions.Add(ActionFactory.make_shift());
         }
 
         if (source.stack_size() == 2)
         {
             if (source.buffer_empty())
             {
-                actions.add(ActionFactory.make_right_arc(R));
+                actions.Add(ActionFactory.make_right_arc(R));
             }
         }
         else if (source.stack_size() > 2)
@@ -89,8 +92,8 @@ public class TransitionSystem
                 {
                     continue;
                 }
-                actions.add(ActionFactory.make_left_arc(l));
-                actions.add(ActionFactory.make_right_arc(l));
+                actions.Add(ActionFactory.make_left_arc(l));
+                actions.Add(ActionFactory.make_right_arc(l));
             }
         }
     }
@@ -138,7 +141,7 @@ public class TransitionSystem
         classes.clear();
         for (int i = 0; i < actions.size(); ++i)
         {
-            classes.add(transform(actions.get(i)));
+            classes.Add(transform(actions.get(i)));
         }
     }
 

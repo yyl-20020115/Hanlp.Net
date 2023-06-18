@@ -59,7 +59,7 @@ public class TestAdjustCoreDictionary : TestCase
 //
 //    public void testSimplifyNZ() 
 //    {
-//        final DictionaryMaker nzDictionary = new DictionaryMaker();
+//        DictionaryMaker nzDictionary = new DictionaryMaker();
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -69,9 +69,9 @@ public class TestAdjustCoreDictionary : TestCase
 //                {
 //                    for (IWord word : sentence)
 //                    {
-//                        if (word instanceof CompoundWord && "nz".equals(word.getLabel()))
+//                        if (word instanceof CompoundWord && "nz".Equals(word.getLabel()))
 //                        {
-//                            nzDictionary.add(word);
+//                            nzDictionary.Add(word);
 //                        }
 //                    }
 //                }

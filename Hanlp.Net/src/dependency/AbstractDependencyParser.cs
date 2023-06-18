@@ -9,6 +9,12 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.tokenizer;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dependency;
 
 
@@ -44,7 +50,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     //@Override
     public CoNLLSentence parse(string sentence)
     {
-        assert sentence != null;
+        //assert sentence != null;
         CoNLLSentence output = parse(segment.seg(sentence.ToCharArray()));
         if (enableDeprelTranslater && deprelTranslater != null)
         {
@@ -94,13 +100,13 @@ public abstract class AbstractDependencyParser : IDependencyParser
         if (deprelTranslater != null) return this;
 
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(deprelTranslatorPath);
-        deprelTranslater = new TreeMap<string, string>();
+        deprelTranslater = new ();
         while (iterator.hasNext())
         {
             string[] args = iterator.next().Split("\\s");
-            deprelTranslater.put(args[0], args[1]);
+            deprelTranslater.Add(args[0], args[1]);
         }
-        if (deprelTranslater.size() == 0)
+        if (deprelTranslater.Count == 0)
         {
             deprelTranslater = null;
         }

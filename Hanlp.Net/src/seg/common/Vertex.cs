@@ -103,13 +103,13 @@ public class Vertex
         if (attribute.nature.Length == 1)
         {
             Nature nature = attribute.nature[0];
-            if (nature.startsWith("nr"))
+            if (nature.StartsWith("nr"))
             {
                 wordID = CoreDictionary.NR_WORD_ID;
 //                    this.attribute = CoreDictionary.get(CoreDictionary.NR_WORD_ID);
                 return Predefine.TAG_PEOPLE;
             }
-            else if (nature.startsWith("ns"))
+            else if (nature.StartsWith("ns"))
             {
                 wordID = CoreDictionary.NS_WORD_ID;
                 // 在地名识别的时候,希望类似"河镇"的词语保持自己的词性,而不是未##地的词性
@@ -125,19 +125,19 @@ public class Vertex
 //                    this.attribute = CoreDictionary.get(wordID);
                 return Predefine.TAG_PROPER;
             }
-            else if (nature.startsWith("nt") || nature == Nature.nit)
+            else if (nature.StartsWith("nt") || nature == Nature.nit)
             {
                 wordID = CoreDictionary.NT_WORD_ID;
 //                    this.attribute = CoreDictionary.get(CoreDictionary.NT_WORD_ID);
                 return Predefine.TAG_GROUP;
             }
-            else if (nature.startsWith('m'))
+            else if (nature.StartsWith('m'))
             {
                 wordID = CoreDictionary.M_WORD_ID;
                 this.attribute = CoreDictionary.get(CoreDictionary.M_WORD_ID);
                 return Predefine.TAG_NUMBER;
             }
-            else if (nature.startsWith('x'))
+            else if (nature.StartsWith('x'))
             {
                 wordID = CoreDictionary.X_WORD_ID;
                 this.attribute = CoreDictionary.get(CoreDictionary.X_WORD_ID);
@@ -479,7 +479,7 @@ public class Vertex
         return realWord;
 //        return "WordNode{" +
 //                "word='" + word + '\'' +
-//                (word.equals(realWord) ? "" : (", realWord='" + realWord + '\'')) +
+//                (word.Equals(realWord) ? "" : (", realWord='" + realWord + '\'')) +
 ////                ", attribute=" + attribute +
 //                '}';
     }

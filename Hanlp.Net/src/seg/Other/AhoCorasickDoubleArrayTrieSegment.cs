@@ -78,7 +78,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         {
             Term term = new Term(new string(sentence, i, wordNet[i]), config.speechTagging ? (natureArray[i] == null ? Nature.nz : natureArray[i]) : null);
             term.offset = i;
-            termList.add(term);
+            termList.Add(term);
             i += wordNet[i];
         }
         return termList;
@@ -118,7 +118,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
     public AhoCorasickDoubleArrayTrieSegment loadDictionary(string... pathArray)
     {
         trie = new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>();
-        TreeMap<string, CoreDictionary.Attribute> map = null;
+        Dictionary<string, CoreDictionary.Attribute> map = null;
         try
         {
             map = IOUtil.loadDictionary(pathArray);

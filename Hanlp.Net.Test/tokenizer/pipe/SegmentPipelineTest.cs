@@ -15,8 +15,8 @@ public class SegmentPipelineTest : TestCase
     public void TestSegment() 
     {
         SegmentPipeline pipeline = new SegmentPipeline(new CRFLexicalAnalyzer());
-        pipeline.add(new RegexRecognizePipe(EMAIL, "【邮件】"));
-        pipeline.add(new RegexRecognizePipe(WEB_URL, "【网址】"));
+        pipeline.Add(new RegexRecognizePipe(EMAIL, "【邮件】"));
+        pipeline.Add(new RegexRecognizePipe(WEB_URL, "【网址】"));
         String text = "HanLP的项目地址是https://github.com/hankcs/HanLP，" +
             "联系邮箱abc@def.com";
         Console.WriteLine(pipeline.seg(text));

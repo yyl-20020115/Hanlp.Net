@@ -111,7 +111,7 @@ class DawgBuilder
         _numStates = 1;
 
         _nodes.get(0).label = (byte) 0xFF;
-        _nodeStack.add(0);
+        _nodeStack.Add(0);
     }
 
     void finish()
@@ -122,9 +122,9 @@ class DawgBuilder
         _labels.set(0, _nodes.get(0).label);
 
         _nodes.clear();
-        _table.clear();
-        _nodeStack.clear();
-        _recycleBin.clear();
+        _table.Clear();
+        _nodeStack.Clear();
+        _recycleBin.Clear();
 
         _isIntersections.build();
     }
@@ -133,12 +133,12 @@ class DawgBuilder
     {
         if (value < 0)
         {
-            throw new IllegalArgumentException(
+            throw new ArgumentException(
                     "failed to insert key: negative value");
         }
         if (key.Length == 0)
         {
-            throw new IllegalArgumentException(
+            throw new ArgumentException(
                     "failed to inset key: zero-Length key");
         }
 
@@ -156,14 +156,14 @@ class DawgBuilder
             byte keyLabel = keyPos < key.Length ? key[keyPos] : 0;
             if (keyPos < key.Length && keyLabel == 0)
             {
-                throw new IllegalArgumentException(
+                throw new ArgumentException(
                         "failed to insert key: invalid null character");
             }
 
             byte unitLabel = _nodes.get(childId).label;
             if ((keyLabel & 0xFF) < (unitLabel & 0xFF))
             {
-                throw new IllegalArgumentException(
+                throw new ArgumentException(
                         "failed to insert key: wrong key order");
             }
             else if ((keyLabel & 0xFF) > (unitLabel & 0xFF))
@@ -195,7 +195,7 @@ class DawgBuilder
             child.sibling = node.child;
             child.label = keyLabel;
             node.child = childId;
-            _nodeStack.add(childId);
+            _nodeStack.Add(childId);
 
             id = childId;
         }
@@ -440,8 +440,8 @@ class DawgBuilder
     private int appendUnit()
     {
         _isIntersections.Append();
-        _units.add(0);
-        _labels.add((byte) 0);
+        _units.Add(0);
+        _labels.Add((byte) 0);
 
         return _isIntersections.size() - 1;
     }
@@ -452,7 +452,7 @@ class DawgBuilder
         if (_recycleBin.empty())
         {
             id = _nodes.size();
-            _nodes.add(new DawgNode());
+            _nodes.Add(new DawgNode());
         }
         else
         {
@@ -465,7 +465,7 @@ class DawgBuilder
 
     private void freeNode(int id)
     {
-        _recycleBin.add(id);
+        _recycleBin.Add(id);
     }
 
     private static int hash(int key)

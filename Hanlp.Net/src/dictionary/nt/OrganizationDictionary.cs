@@ -42,7 +42,7 @@ public class OrganizationDictionary
      */
     static readonly CoreDictionary.Attribute ATTRIBUTE = CoreDictionary.get(WORD_ID);
 
-    private static void addKeyword(TreeMap<string, string> patternMap, string keyword)
+    private static void addKeyword(Dictionary<string, string> patternMap, string keyword)
     {
         patternMap.put(keyword, keyword);
     }
@@ -53,11 +53,11 @@ public class OrganizationDictionary
         if (dictionary.load(HanLP.Config.OrganizationDictionaryPath))
             logger.info(HanLP.Config.OrganizationDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         else
-            throw new IllegalArgumentException(HanLP.Config.OrganizationDictionaryPath + "加载失败");
+            throw new ArgumentException(HanLP.Config.OrganizationDictionaryPath + "加载失败");
         transformMatrixDictionary = new TransformMatrixDictionary<NT>(NT.class);
         transformMatrixDictionary.load(HanLP.Config.OrganizationDictionaryTrPath);
         trie = new AhoCorasickDoubleArrayTrie<string>();
-        TreeMap<string, string> patternMap = new TreeMap<string, string>();
+        Dictionary<string, string> patternMap = new Dictionary<string, string>();
         addKeyword(patternMap, "CCCCCCCCD");
         addKeyword(patternMap, "CCCCCCCD");
         addKeyword(patternMap, "CCCCCCD");
@@ -3730,7 +3730,7 @@ public class OrganizationDictionary
      * @param wordNetOptimum 待优化的图
      * @param wordNetAll
      */
-    public static void parsePattern(List<NT> ntList, List<Vertex> vertexList, final WordNet wordNetOptimum, final WordNet wordNetAll)
+    public static void parsePattern(List<NT> ntList, List<Vertex> vertexList, WordNet wordNetOptimum, WordNet wordNetAll)
     {
 //        ListIterator<Vertex> listIterator = vertexList.listIterator();
         StringBuilder sbPattern = new StringBuilder(ntList.size());
@@ -3739,7 +3739,7 @@ public class OrganizationDictionary
             sbPattern.Append(nt.toString());
         }
         string pattern = sbPattern.toString();
-        final Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
+        Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
         trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<string>()
         {
             //@Override

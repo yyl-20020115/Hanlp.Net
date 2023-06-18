@@ -58,7 +58,7 @@ public class StringDictionaryMaker
         return mainDictionary;
     }
 
-    public static StringDictionary combine(string... args)
+    public static StringDictionary combine(params string[] args)
     {
         string[] pathArray = args.clone();
         List<StringDictionary> dictionaryList = new LinkedList<StringDictionary>();
@@ -66,7 +66,7 @@ public class StringDictionaryMaker
         {
             StringDictionary dictionary = load(path);
             if (dictionary == null) continue;
-            dictionaryList.add(dictionary);
+            dictionaryList.Add(dictionary);
         }
 
         return combine(dictionaryList.toArray(new StringDictionary[0]));

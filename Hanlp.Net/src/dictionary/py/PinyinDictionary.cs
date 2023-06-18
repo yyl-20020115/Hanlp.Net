@@ -34,7 +34,7 @@ public class PinyinDictionary
         long start = DateTime.Now.Microsecond;
         if (!load(HanLP.Config.PinyinDictionaryPath))
         {
-            throw new IllegalArgumentException("拼音词典" + HanLP.Config.PinyinDictionaryPath + "加载失败");
+            throw new ArgumentException("拼音词典" + HanLP.Config.PinyinDictionaryPath + "加载失败");
         }
 
         logger.info("拼音词典" + HanLP.Config.PinyinDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
@@ -96,7 +96,7 @@ public class PinyinDictionary
         return true;
     }
 
-    static bool saveDat(string path, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, Set<KeyValuePair<string, Pinyin[]>> entrySet)
+    static bool saveDat(string path, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, HashSet<KeyValuePair<string, Pinyin[]>> entrySet)
     {
         try
         {

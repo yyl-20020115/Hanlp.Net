@@ -17,7 +17,7 @@ class Preconditions
     {
         if (!expression)
         {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
     }
 
@@ -33,7 +33,7 @@ class Preconditions
     {
         if (!expression)
         {
-            throw new IllegalArgumentException(string.valueOf(errorMessage));
+            throw new ArgumentException(string.valueOf(errorMessage));
         }
     }
 
@@ -58,7 +58,7 @@ class Preconditions
     {
         if (!expression)
         {
-            throw new IllegalArgumentException(format(errorMessageTemplate, errorMessageArgs));
+            throw new ArgumentException(Format(errorMessageTemplate, errorMessageArgs));
         }
     }
 
@@ -116,7 +116,7 @@ class Preconditions
     {
         if (!expression)
         {
-            throw new IllegalStateException(format(errorMessageTemplate, errorMessageArgs));
+            throw new IllegalStateException(Format(errorMessageTemplate, errorMessageArgs));
         }
     }
 
@@ -175,7 +175,7 @@ class Preconditions
         if (reference == null)
         {
             // If either of these parameters is null, the right thing happens anyway
-            throw new NullPointerException(format(errorMessageTemplate, errorMessageArgs));
+            throw new NullPointerException(Format(errorMessageTemplate, errorMessageArgs));
         }
         return reference;
     }
@@ -247,15 +247,15 @@ class Preconditions
     {
         if (index < 0)
         {
-            return format("%s (%s) must not be negative", desc, index);
+            return Format("%s (%s) must not be negative", desc, index);
         }
         else if (size < 0)
         {
-            throw new IllegalArgumentException("negative size: " + size);
+            throw new ArgumentException("negative size: " + size);
         }
         else
         { // index >= size
-            return format("%s (%s) must be less than size (%s)", desc, index, size);
+            return Format("%s (%s) must be less than size (%s)", desc, index, size);
         }
     }
 
@@ -299,15 +299,15 @@ class Preconditions
     {
         if (index < 0)
         {
-            return format("%s (%s) must not be negative", desc, index);
+            return Format("%s (%s) must not be negative", desc, index);
         }
         else if (size < 0)
         {
-            throw new IllegalArgumentException("negative size: " + size);
+            throw new ArgumentException("negative size: " + size);
         }
         else
         { // index > size
-            return format("%s (%s) must not be greater than size (%s)", desc, index, size);
+            return Format("%s (%s) must not be greater than size (%s)", desc, index, size);
         }
     }
 
@@ -343,7 +343,7 @@ class Preconditions
             return badPositionIndex(end, size, "end index");
         }
         // end < start
-        return format("end index (%s) must not be less than start index (%s)", end, start);
+        return Format("end index (%s) must not be less than start index (%s)", end, start);
     }
 
     /**
@@ -357,7 +357,7 @@ class Preconditions
      *                 to strings using {@link string#valueOf(Object)}. Arguments can be null.
      */
     // Note that this is somewhat-improperly used from Verify.java as well.
-    static string format(string template, Object... args)
+    static string Format(string template, Object... args)
     {
         template = string.valueOf(template); // null -> "null"
 

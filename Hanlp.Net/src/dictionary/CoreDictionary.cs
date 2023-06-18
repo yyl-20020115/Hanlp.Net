@@ -34,7 +34,7 @@ public class CoreDictionary
         long start = DateTime.Now.Microsecond;
         if (!load(path))
         {
-            throw new IllegalArgumentException("核心词典" + path + "加载失败");
+            throw new ArgumentException("核心词典" + path + "加载失败");
         }
         else
         {
@@ -55,7 +55,7 @@ public class CoreDictionary
     {
         logger.info("核心词典开始加载:" + path);
         if (loadDat(path)) return true;
-        TreeMap<string, CoreDictionary.Attribute> map = new TreeMap<string, Attribute>();
+        Dictionary<string, CoreDictionary.Attribute> map = new Dictionary<string, Attribute>();
         BufferedReader br = null;
         try
         {
@@ -133,7 +133,7 @@ public class CoreDictionary
             if (byteArray == null) return false;
             int size = byteArray.nextInt();
             CoreDictionary.Attribute[] attributes = new CoreDictionary.Attribute[size];
-            final Nature[] natureIndexArray = Nature.values();
+            Nature[] natureIndexArray = Nature.values();
             for (int i = 0; i < size; ++i)
             {
                 // 第一个是全部频次，第二个是词性个数
@@ -318,7 +318,7 @@ public class CoreDictionary
                 Nature pos = Nature.create(nature);
                 return getNatureFrequency(pos);
             }
-            catch (IllegalArgumentException e)
+            catch (ArgumentException e)
             {
                 return 0;
             }
@@ -363,7 +363,7 @@ public class CoreDictionary
         {
             foreach (Nature n in nature)
             {
-                if (n.startsWith(prefix)) return true;
+                if (n.StartsWith(prefix)) return true;
             }
             return false;
         }

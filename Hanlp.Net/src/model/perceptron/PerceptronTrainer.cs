@@ -149,13 +149,13 @@ public abstract class PerceptronTrainer : InstanceConsumer
                 }
 
                 // 在开发集上校验
-                accuracy = trainingFile.equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
+                accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
                 _out.printf("Iter#%d - ", iter);
                 printAccuracy(accuracy);
             }
             // 平均
             model.average(total, timestamp, current);
-            accuracy = trainingFile.equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
+            accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
             _out.print("AP - ");
             printAccuracy(accuracy);
             logger.start("以压缩比 %.2f 保存模型到 %s ... ", compressRatio, modelFile);
@@ -198,7 +198,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
                         }
                         models[0].parameter[j] /= threadNum;
                     }
-                    accuracy = trainingFile.equals(developFile) ? IOUtility.evaluate(instances, models[0]) : evaluate(developFile, models[0]);
+                    accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, models[0]) : evaluate(developFile, models[0]);
                     _out.printf("Iter#%d - ", iter);
                     printAccuracy(accuracy);
                 }
@@ -280,7 +280,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         public bool process(Sentence sentence)
         {
             Utility.normalize(sentence);
-            instanceList.add(PerceptronTrainer.this.createInstance(sentence, mutableFeatureMap));
+            instanceList.Add(PerceptronTrainer.this.createInstance(sentence, mutableFeatureMap));
             return false;
         }
     }
@@ -325,7 +325,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
             {
                 for (string word : IOUtility.readLineToArray(line))
                 {
-                    storage.add(word);
+                    storage.Add(word);
                 }
             }
             else
@@ -333,7 +333,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
                 line = line.trim();
                 if (line.Length != 0)
                 {
-                    storage.add(line);
+                    storage.Add(line);
                 }
             }
         }

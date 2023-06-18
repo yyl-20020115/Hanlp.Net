@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.dependency.nnparser.action;
 /**
  * @author hankcs
  */
-public class Action : AbstractInexactAction : ActionType
+public class Action : AbstractInexactAction , ActionType
 {
     public Action()
     {
@@ -26,7 +26,7 @@ public class Action : AbstractInexactAction : ActionType
      * @param rel 依存关系
      */
     public Action(int name, int rel)
+        :base(name,rel)
     {
-        super(name, rel);
     }
 }

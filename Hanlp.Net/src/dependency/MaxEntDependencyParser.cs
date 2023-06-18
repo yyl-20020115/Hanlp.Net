@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.maxent;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dependency;
 
 
@@ -80,33 +87,33 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
             Node w = i >= 0 && i < nodeArray.Length ? nodeArray[i] : Node.NULL;
-            context.add(w.compiledWord + "i" + (i - index));      // 在尾巴上做个标记，不然特征冲突了
-            context.add(w.label + "i" + (i - index));
+            context.Add(w.compiledWord + "i" + (i - index));      // 在尾巴上做个标记，不然特征冲突了
+            context.Add(w.label + "i" + (i - index));
         }
         index = to;
         for (int i = index - 2; i < index + 2 + 1; ++i)
         {
             Node w = i >= 0 && i < nodeArray.Length ? nodeArray[i] : Node.NULL;
-            context.add(w.compiledWord + "j" + (i - index));      // 在尾巴上做个标记，不然特征冲突了
-            context.add(w.label + "j" + (i - index));
+            context.Add(w.compiledWord + "j" + (i - index));      // 在尾巴上做个标记，不然特征冲突了
+            context.Add(w.label + "j" + (i - index));
         }
-        context.add(nodeArray[from].compiledWord + '→' + nodeArray[to].compiledWord);
-        context.add(nodeArray[from].label + '→' + nodeArray[to].label);
-        context.add(nodeArray[from].compiledWord + '→' + nodeArray[to].compiledWord + (from - to));
-        context.add(nodeArray[from].label + '→' + nodeArray[to].label + (from - to));
+        context.Add(nodeArray[from].compiledWord + '→' + nodeArray[to].compiledWord);
+        context.Add(nodeArray[from].label + '→' + nodeArray[to].label);
+        context.Add(nodeArray[from].compiledWord + '→' + nodeArray[to].compiledWord + (from - to));
+        context.Add(nodeArray[from].label + '→' + nodeArray[to].label + (from - to));
         Node wordBeforeI = from - 1 >= 0 ? nodeArray[from - 1] : Node.NULL;
         Node wordBeforeJ = to - 1 >= 0 ? nodeArray[to - 1] : Node.NULL;
-        context.add(wordBeforeI.compiledWord + '@' + nodeArray[from].compiledWord + '→' + nodeArray[to].compiledWord);
-        context.add(nodeArray[from].compiledWord + '→' + wordBeforeJ.compiledWord + '@' + nodeArray[to].compiledWord);
-        context.add(wordBeforeI.label + '@' + nodeArray[from].label + '→' + nodeArray[to].label);
-        context.add(nodeArray[from].label + '→' + wordBeforeJ.label + '@' + nodeArray[to].label);
+        context.Add(wordBeforeI.compiledWord + '@' + nodeArray[from].compiledWord + '→' + nodeArray[to].compiledWord);
+        context.Add(nodeArray[from].compiledWord + '→' + wordBeforeJ.compiledWord + '@' + nodeArray[to].compiledWord);
+        context.Add(wordBeforeI.label + '@' + nodeArray[from].label + '→' + nodeArray[to].label);
+        context.Add(nodeArray[from].label + '→' + wordBeforeJ.label + '@' + nodeArray[to].label);
         List<Pair<string, Double>> pairList = model.predict(context.toArray(new string[0]));
         Pair<string, Double> maxPair = new Pair<string, Double>("null", -1.0);
 //        System._out.println(context);
 //        System._out.println(pairList);
         for (Pair<string, Double> pair : pairList)
         {
-            if (pair.getValue() > maxPair.getValue() && !"null".equals(pair.getKey()))
+            if (pair.getValue() > maxPair.getValue() && !"null".Equals(pair.getKey()))
             {
                 maxPair = pair;
             }

@@ -62,14 +62,14 @@ public class HMMSegmenter : HMMTrainer , Segmenter
         {
             if (tagArray[i] == tagSet.B || tagArray[i] == tagSet.S)
             {
-                output.add(result.toString());
+                output.Add(result.toString());
                 result.setLength(0);
             }
             result.Append(text.charAt(i));
         }
         if (result.Length != 0)
         {
-            output.add(result.toString());
+            output.Add(result.toString());
         }
     }
 
@@ -82,16 +82,16 @@ public class HMMSegmenter : HMMTrainer , Segmenter
             string word = CharTable.convert(w.value);
             if (word.Length == 1)
             {
-                charList.add(new string[]{word, "S"});
+                charList.Add(new string[]{word, "S"});
             }
             else
             {
-                charList.add(new string[]{word.substring(0, 1), "B"});
+                charList.Add(new string[]{word.substring(0, 1), "B"});
                 for (int i = 1; i < word.Length - 1; ++i)
                 {
-                    charList.add(new string[]{word.substring(i, i + 1), "M"});
+                    charList.Add(new string[]{word.substring(i, i + 1), "M"});
                 }
-                charList.add(new string[]{word.substring(word.Length - 1), "E"});
+                charList.Add(new string[]{word.substring(word.Length - 1), "E"});
             }
         }
         return charList;
@@ -121,7 +121,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
             List<Term> termList = new LinkedList<Term>();
             for (string word : wordList)
             {
-                termList.add(new Term(word, null));
+                termList.Add(new Term(word, null));
             }
             return termList;
         }

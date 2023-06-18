@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.algorithm;
 using com.hankcs.hanlp.classification.corpus;
 
 namespace com.hankcs.hanlp.classification.features;
@@ -99,7 +100,7 @@ public class ChiSquareFeatureExtractor
             });
             foreach (KeyValuePair<int, Double> entry in selectedFeatures.entrySet())
             {
-                maxHeap.add(entry);
+                maxHeap.Add(entry);
             }
             selectedFeatures.clear();
             for (KeyValuePair<int, Double> entry : maxHeap)

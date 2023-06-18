@@ -38,7 +38,7 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
         List<string[]> xyList = new ArrayList<string[]>(wordList.size());
         for (Word word : wordList)
         {
-            xyList.add(new string[]{word.getValue(), word.getLabel()});
+            xyList.Add(new string[]{word.getValue(), word.getLabel()});
         }
         return xyList;
     }

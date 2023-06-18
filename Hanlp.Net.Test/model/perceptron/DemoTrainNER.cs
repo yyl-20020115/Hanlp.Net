@@ -36,9 +36,9 @@ public class DemoTrainNER
         protected override TagSet createTagSet()
         {
             NERTagSet tagSet = new NERTagSet();
-            tagSet.nerLabels.add("YourNER1");
-            tagSet.nerLabels.add("YourNER2");
-            tagSet.nerLabels.add("YourNER3");
+            tagSet.nerLabels.Add("YourNER1");
+            tagSet.nerLabels.Add("YourNER2");
+            tagSet.nerLabels.Add("YourNER3");
             return tagSet;
         }
     }

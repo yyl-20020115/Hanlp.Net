@@ -53,7 +53,7 @@ public class ModelImpl : Model
         {
             Args.parse(cmd, args);
         }
-        catch (IllegalArgumentException e)
+        catch (ArgumentException e)
         {
             Console.Error.WriteLine("invalid arguments");
             return false;

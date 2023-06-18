@@ -51,7 +51,7 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
      */
 //    public void testSegment() 
 //    {
-//        TreeMap<String, String> map = new TreeMap<String, String>();
+//        Dictionary<String, String> map = new Dictionary<String, String>();
 //        IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.txt");
 //        while (iterator.hasNext())
 //        {

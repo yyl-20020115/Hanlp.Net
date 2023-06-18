@@ -42,7 +42,7 @@ public class JapanesePersonDictionary
         long start = DateTime.Now.Microsecond;
         if (!load())
         {
-            throw new IllegalArgumentException("日本人名词典" + path + "加载失败");
+            throw new ArgumentException("日本人名词典" + path + "加载失败");
         }
 
         logger.info("日本人名词典" + HanLP.Config.PinyinDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
@@ -56,7 +56,7 @@ public class JapanesePersonDictionary
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
-            TreeMap<string, char> map = new TreeMap<string, char>();
+            Dictionary<string, char> map = new Dictionary<string, char>();
             while ((line = br.readLine()) != null)
             {
                 string[] param = line.Split(" ", 2);

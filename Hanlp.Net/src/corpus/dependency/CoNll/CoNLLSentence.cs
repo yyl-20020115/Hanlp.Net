@@ -119,7 +119,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
             }
 
             //@Override
-            public void remove()
+            public void Remove()
             {
                 throw new UnsupportedOperationException("CoNLLSentence是只读对象，不允许删除");
             }

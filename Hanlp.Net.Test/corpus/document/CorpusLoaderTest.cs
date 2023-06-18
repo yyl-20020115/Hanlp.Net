@@ -36,7 +36,7 @@ public class CorpusLoaderTest : TestCase
 //
 //    public void testCombineToTxt() 
 //    {
-//        final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Doc\\语料库\\2014_cn.txt"), "UTF-8"));
+//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Doc\\语料库\\2014_cn.txt"), "UTF-8"));
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -72,7 +72,7 @@ public class CorpusLoaderTest : TestCase
 //
 //    public void testMakePersonCustomDictionary() 
 //    {
-//        final DictionaryMaker dictionaryMaker = new DictionaryMaker();
+//        DictionaryMaker dictionaryMaker = new DictionaryMaker();
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -83,9 +83,9 @@ public class CorpusLoaderTest : TestCase
 //                {
 //                    for (IWord word : wordList)
 //                    {
-//                        if (word.getLabel().startsWith("nr"))
+//                        if (word.getLabel().StartsWith("nr"))
 //                        {
-//                            dictionaryMaker.add(word);
+//                            dictionaryMaker.Add(word);
 //                        }
 //                    }
 //                }
@@ -96,7 +96,7 @@ public class CorpusLoaderTest : TestCase
 //
 //    public void testMakeOrganizationCustomDictionary() 
 //    {
-//        final DictionaryMaker dictionaryMaker = new DictionaryMaker();
+//        DictionaryMaker dictionaryMaker = new DictionaryMaker();
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -107,9 +107,9 @@ public class CorpusLoaderTest : TestCase
 //                {
 //                    for (IWord word : wordList)
 //                    {
-//                        if (word.getLabel().startsWith("nt"))
+//                        if (word.getLabel().StartsWith("nt"))
 //                        {
-//                            dictionaryMaker.add(word);
+//                            dictionaryMaker.Add(word);
 //                        }
 //                    }
 //                }
@@ -202,7 +202,7 @@ public class CorpusLoaderTest : TestCase
 //                {
 //                    for (Word word : wordList)
 //                    {
-//                        if(word.value.Length > 1 && word.value.endsWith("\""))
+//                        if(word.value.Length > 1 && word.value.EndsWith("\""))
 //                        {
 //                            Console.WriteLine(word);
 //                        }

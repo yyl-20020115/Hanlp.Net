@@ -136,7 +136,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                 if (siblings.size() != 0)
                     siblings.get(siblings.size() - 1).right = i;
 
-                siblings.add(tmp_node);
+                siblings.Add(tmp_node);
             }
 
             prev = cur;
@@ -269,7 +269,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     }
 
     /**
-     * 从TreeMap构造
+     * 从Dictionary构造
      * @param buildFrom
      */
     public DoubleArrayTrie(Dictionary<string, V> buildFrom)
@@ -277,7 +277,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         if (build(buildFrom) != 0)
         {
-            throw new IllegalArgumentException("构造失败");
+            throw new ArgumentException("构造失败");
         }
     }
 
@@ -353,8 +353,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         List<V> valueList = new (entrySet.size());
         foreach (KeyValuePair<string, V> entry in entrySet)
         {
-            keyList.add(entry.getKey());
-            valueList.add(entry.getValue());
+            keyList.Add(entry.getKey());
+            valueList.Add(entry.getValue());
         }
 
         return build(keyList, valueList);
@@ -880,7 +880,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             n = _base[p];
             if (b == check[p] && n < 0)         // base[p] == check[p] && base[p] < 0 查到一个词
             {
-                result.add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, begin, i - begin), v[-n - 1]));
+                result.Add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, begin, i - begin), v[-n - 1]));
             }
 
             p = b + (int) (keyChars[i]) + 1;    // 状态转移 p = base[char[i-1]] + char[i] + 1
@@ -896,7 +896,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         if (b == check[p] && n < 0)
         {
-            result.add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, begin, len - begin), v[-n - 1]));
+            result.Add(new AbstractMap.SimpleEntry<string, V>(new string(keyChars, begin, len - begin), v[-n - 1]));
         }
 
         return result;
@@ -914,9 +914,9 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 //            if (base[i] != 0 || check[i] != 0)
 //            {
 //                infoChar  += "    " + (i == check[i] ? " ×" : (char)(i - check[i] - 1));
-//                infoIndex += " " + string.format("%5d", i);
-//                infoBase  += " " +  string.format("%5d", base[i]);
-//                infoCheck += " " + string.format("%5d", check[i]);
+//                infoIndex += " " + string.Format("%5d", i);
+//                infoBase  += " " +  string.Format("%5d", base[i]);
+//                infoCheck += " " + string.Format("%5d", check[i]);
 //            }
 //        }
         return "DoubleArrayTrie{" +

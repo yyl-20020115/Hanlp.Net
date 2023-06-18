@@ -52,7 +52,7 @@ public class SegmentTest : TestCase
     public void TestViterbi() 
     {
 //        HanLP.Config.enableDebug(true);
-        CustomDictionary.add("网剧");
+        CustomDictionary.Add("网剧");
         Segment seg = new DijkstraSegment();
         List<Term> termList = seg.seg("优酷总裁魏明介绍了优酷2015年的内容战略，表示要以“大电影、大网剧、大综艺”为关键词");
 //        Console.WriteLine(termList);
@@ -520,7 +520,7 @@ public class SegmentTest : TestCase
 
     public void TestIssue633() 
     {
-        CustomDictionary.add("钱管家");
+        CustomDictionary.Add("钱管家");
         StandardTokenizer.SEGMENT.enableCustomDictionaryForcing(true);
 //        Console.WriteLine(HanLP.segment("钱管家中怎么绑定网银"));
     }
@@ -529,7 +529,7 @@ public class SegmentTest : TestCase
     public void TestIssue784() 
     {
         String s = "苏苏中级会计什么时候更新";
-        CustomDictionary.add("苏苏");
+        CustomDictionary.Add("苏苏");
         StandardTokenizer.SEGMENT.enableCustomDictionaryForcing(true);
         AssertTrue(HanLP.segment(s).ToString().Contains("苏苏"));
     }

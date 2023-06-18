@@ -55,7 +55,7 @@ public class DoubleArrayBuilder
 
     private static readonly int OFFSET_MASK = (1 << 31) | (1 << 8) | 0xFF;
 
-    static class DoubleArrayBuilderExtraUnit
+    class DoubleArrayBuilderExtraUnit
     {
         int prev;
         int next;
@@ -180,7 +180,7 @@ public class DoubleArrayBuilder
         int dawgChildId = dawg.child(dawgId);
         while (dawgChildId != 0)
         {
-            _labels.add(dawg.label(dawgChildId));
+            _labels.Add(dawg.label(dawgChildId));
             dawgChildId = dawg.sibling(dawgChildId);
         }
 
@@ -304,13 +304,13 @@ public class DoubleArrayBuilder
             {
                 if (depth < keyset.getKey(i).Length)
                 {
-                    throw new IllegalArgumentException(
+                    throw new ArgumentException(
                             "failed to build double-array: " +
                                     "invalid null character");
                 }
                 else if (keyset.getValue(i) < 0)
                 {
-                    throw new IllegalArgumentException(
+                    throw new ArgumentException(
                             "failed to build double-array: negative value");
                 }
 
@@ -322,16 +322,16 @@ public class DoubleArrayBuilder
 
             if (_labels.empty())
             {
-                _labels.add(label);
+                _labels.Add(label);
             }
             else if (label != _labels.get(_labels.size() - 1))
             {
                 if ((label & 0xFF) < (_labels.get(_labels.size() - 1) & 0xFF))
                 {
-                    throw new IllegalArgumentException(
+                    throw new ArgumentException(
                             "failed to build double-array: wrong key order");
                 }
-                _labels.add(label);
+                _labels.Add(label);
             }
         }
 

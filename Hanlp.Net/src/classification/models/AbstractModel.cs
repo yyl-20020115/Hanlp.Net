@@ -9,7 +9,11 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-namespace com.hankcs.hanlp.classification.models;
+using com.hankcs.hanlp.classification.tokenizers;
+using com.hankcs.hanlp.collection.trie.bintrie;
+using System.Runtime.Serialization;
+
+//namespace com.hankcs.hanlp.classification.models;
 
 
 

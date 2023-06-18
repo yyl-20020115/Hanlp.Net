@@ -74,14 +74,14 @@ public class PlaceRecognition
 //                int wordLength = value.Length - longestSuffixLength;
 //                if (longestSuffixLength != 0 && wordLength != 0)
 //                {
-//                    listIterator.remove();
+//                    listIterator.Remove();
 //                    for (int l = 0, tag = NS.D.ordinal(); l < wordLength; ++l, ++tag)
 //                    {
-//                        listIterator.add(wordNetAll.getFirst(line + l));
-//                        tagList.add(new EnumItem<>(NS.values()[tag], 1000));
+//                        listIterator.Add(wordNetAll.getFirst(line + l));
+//                        tagList.Add(new EnumItem<>(NS.values()[tag], 1000));
 //                    }
-//                    listIterator.add(wordNetAll.get(line + wordLength, longestSuffixLength));
-//                    tagList.add(new EnumItem<>(NS.H, 1000));
+//                    listIterator.Add(wordNetAll.get(line + wordLength, longestSuffixLength));
+//                    tagList.Add(new EnumItem<>(NS.H, 1000));
 //                    line += vertex.realWord.Length;
 //                    continue;
 //                }
@@ -89,9 +89,9 @@ public class PlaceRecognition
             if (Nature.ns == vertex.getNature() && vertex.getAttribute().totalFrequency <= 1000)
             {
                 if (vertex.realWord.Length < 3)               // 二字地名，认为其可以再接一个后缀或前缀
-                    tagList.add(new EnumItem<NS>(NS.H, NS.G));
+                    tagList.Add(new EnumItem<NS>(NS.H, NS.G));
                 else
-                    tagList.add(new EnumItem<NS>(NS.G));        // 否则只可以再加后缀
+                    tagList.Add(new EnumItem<NS>(NS.G));        // 否则只可以再加后缀
                 continue;
             }
             EnumItem<NS> NSEnumItem = PlaceDictionary.dictionary.get(vertex.word);  // 此处用等效词，更加精准
@@ -99,7 +99,7 @@ public class PlaceRecognition
             {
                 NSEnumItem = new EnumItem<NS>(NS.Z, PlaceDictionary.transformMatrixDictionary.getTotalFrequency(NS.Z));
             }
-            tagList.add(NSEnumItem);
+            tagList.Add(NSEnumItem);
 //            line += vertex.realWord.Length;
         }
         return tagList;

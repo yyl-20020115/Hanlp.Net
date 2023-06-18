@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
 
@@ -21,22 +24,23 @@ public class CoNLLFixer
     public static bool fix(string path)
     {
         StringBuilder sbOut = new StringBuilder();
-        for (string line : IOUtil.readLineListWithLessMemory(path))
+        foreach (string line in IOUtil.readLineListWithLessMemory(path))
         {
-            if (line.trim().Length == 0)
+            if (line.Trim().Length == 0)
             {
                 sbOut.Append(line);
                 sbOut.Append('\n');
                 continue;
             }
             string[] args = line.Split("\t");
+            string ln = line;
             for (int i = 10 - args.Length; i > 0; --i)
             {
-                line += "\t_";
+                ln += "\t_";
             }
-            sbOut.Append(line);
+            sbOut.Append(ln);
             sbOut.Append('\n');
         }
-        return IOUtil.saveTxt(path + ".fixed.txt", sbOut.toString());
+        return IOUtil.saveTxt(path + ".fixed.txt", sbOut.ToString());
     }
 }

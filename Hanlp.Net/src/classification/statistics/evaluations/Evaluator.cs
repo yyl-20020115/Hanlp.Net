@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.classification.classifiers;
 using com.hankcs.hanlp.classification.corpus;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.classification.statistics.evaluations;
 
@@ -33,7 +34,7 @@ public class Evaluator
         double[] TP_FN = new double[c]; // 某个类别的样本数量
         double[] TP = new double[c];    // 判定为某个类别且判断正确的数量
         double time = DateTime.Now.Microsecond;
-        for (Document document : testingDataSet)
+        foreach (Document document in testingDataSet)
         {
             int _out = classifier.label(document);
             int key = document.category;
@@ -48,14 +49,14 @@ public class Evaluator
 
         FMeasure result = calculate(c, testingDataSet.size(), TP, TP_FP, TP_FN);
         result.catalog = testingDataSet.getCatalog().toArray();
-        result.speed = result.size / (time / 1000.);
+        result.speed = result.size / (time / 1000.0);
 
         return result;
     }
 
     public static FMeasure evaluate(IClassifier classifier, Dictionary<string, string[]> testingDataSet)
     {
-        return evaluate(classifier, new MemoryDataSet(classifier.getModel()).add(testingDataSet));
+        return evaluate(classifier, new MemoryDataSet(classifier.getModel()).Add(testingDataSet));
     }
 
     /**

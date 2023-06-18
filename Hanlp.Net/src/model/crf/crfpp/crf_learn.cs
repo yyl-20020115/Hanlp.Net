@@ -49,7 +49,7 @@ public class crf_learn
         {
             unkownArgs = Args.parse(option, args, false);
         }
-        catch (IllegalArgumentException e)
+        catch (ArgumentException e)
         {
             Console.Error.WriteLine(e.getMessage());
             Args.usage(option);
@@ -80,15 +80,15 @@ public class crf_learn
         string algorithm = option.algorithm;
         algorithm = algorithm.toLowerCase();
         Encoder.Algorithm algo = Encoder.Algorithm.CRF_L2;
-        if (algorithm.equals("crf") || algorithm.equals("crf-l2"))
+        if (algorithm.Equals("crf") || algorithm.Equals("crf-l2"))
         {
             algo = Encoder.Algorithm.CRF_L2;
         }
-        else if (algorithm.equals("crf-l1"))
+        else if (algorithm.Equals("crf-l1"))
         {
             algo = Encoder.Algorithm.CRF_L1;
         }
-        else if (algorithm.equals("mira"))
+        else if (algorithm.Equals("mira"))
         {
             algo = Encoder.Algorithm.MIRA;
         }

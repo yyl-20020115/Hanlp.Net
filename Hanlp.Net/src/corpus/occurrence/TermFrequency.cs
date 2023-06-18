@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.corpus.occurrence;
  * 词与词频的简单封装
  * @author hankcs
  */
-public class TermFrequency : AbstractMap<string,int>.SimpleEntry<string, int> , IComparable<TermFrequency>
+public class TermFrequency : AbstractMap<string,int>.SimpleEntry<string, int> , IComparer<TermFrequency>
 {
     public TermFrequency(string term)
         : this(term, 1)
@@ -63,7 +63,7 @@ public class TermFrequency : AbstractMap<string,int>.SimpleEntry<string, int> , 
     }
 
     //@Override
-    public int compareTo(TermFrequency o)
+    public int CompareTo(TermFrequency o)
     {
         if (this.getFrequency().CompareTo(o.getFrequency()) == 0) 
             return getKey().CompareTo(o.getKey());

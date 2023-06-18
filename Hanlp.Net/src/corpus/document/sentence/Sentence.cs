@@ -10,6 +10,8 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.model.perceptron.tagset;
 using System.Text;
 
 namespace com.hankcs.hanlp.corpus.document.sentence;
@@ -42,7 +44,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         foreach (IWord word in wordList)
         {
             sb.Append(word);
-            if (i != wordList.size()) sb.Append(' ');
+            if (i != wordList.Count) sb.Append(' ');
             ++i;
         }
         return sb.ToString();
@@ -65,20 +67,20 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 foreach (Word w in ((CompoundWord) word).innerList)
                 {
                     sb.Append(w.getValue());
-                    if (++j != ((CompoundWord) word).innerList.size())
+                    if (++j != ((CompoundWord) word).innerList.Count)
                         sb.Append(' ');
                 }
             }
             else
                 sb.Append(word.getValue());
-            if (i != wordList.size()) sb.Append(' ');
+            if (i != wordList.Count) sb.Append(' ');
             ++i;
         }
         return sb.ToString();
     }
 
     /**
-     * brat standoff format<br>
+     * brat standoff Format<br>
      * http://brat.nlplab.org/standoff.html
      *
      * @return
@@ -89,7 +91,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     }
 
     /**
-     * brat standoff format<br>
+     * brat standoff Format<br>
      * http://brat.nlplab.org/standoff.html
      *
      * @param withComment
@@ -114,19 +116,19 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 foreach (Word child in ((CompoundWord) word).innerList)
                 {
                     printWord(child, sb, i, offsetChild, withComment);
-                    offsetChild += child.Length;
+                    offsetChild += child.Length();
                     offsetChild += delimiter.Length;
                     ++i;
                 }
-                offset += delimiter.Length * ((CompoundWord) word).innerList.size();
+                offset += delimiter.Length * ((CompoundWord) word).innerList.Count;
             }
             else
             {
                 offset += delimiter.Length;
             }
-            offset += word.Length;
+            offset += word.Length();
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     /**
@@ -179,12 +181,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         int Length = word.Length;
         if (word is CompoundWord)
         {
-            Length += ((CompoundWord) word).innerList.size() - 1;
+            Length += ((CompoundWord) word).innerList.Count - 1;
         }
         sb.Append(offset).Append(delimiter).Append(offset + Length).Append(delimiter);
         sb.Append(word.getValue()).Append(endLine);
         string translated = PartOfSpeechTagDictionary.translate(word.getLabel());
-        if (withComment && !word.getLabel().equals(translated))
+        if (withComment && !word.getLabel().Equals(translated))
         {
             sb.Append('#').Append(id).Append(delimiter).Append("AnnotatorNotes").Append(delimiter)
                 .Append('T').Append(id).Append(delimiter).Append(translated)
@@ -204,14 +206,14 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         {
             return null;
         }
-        param = param.trim();
+        param = param.Trim();
         if (param.isEmpty())
         {
             return null;
         }
         Pattern pattern = Pattern.compile("(\\[(([^\\s]+/[0-9a-zA-Z]+)\\s+)+?([^\\s]+/[0-9a-zA-Z]+)]/?[0-9a-zA-Z]+)|([^\\s]+/[0-9a-zA-Z]+)");
         Matcher matcher = pattern.matcher(param);
-        List<IWord> wordList = new LinkedList<IWord>();
+        List<IWord> wordList = new ();
         while (matcher.find())
         {
             string single = matcher.group();
@@ -221,13 +223,13 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 logger.warning("在用 " + single + " 构造单词时失败，句子构造参数为 " + param);
                 return null;
             }
-            wordList.add(word);
+            wordList.Add(word);
         }
-        if (wordList.isEmpty()) // 按照无词性来解析
+        if (wordList.Count==0) // 按照无词性来解析
         {
             foreach (string w in param.Split("\\s+"))
             {
-                wordList.add(new Word(w, null));
+                wordList.Add(new Word(w, null));
             }
         }
 
@@ -241,7 +243,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public int size()
     {
-        return wordList.size();
+        return wordList.Count;
     }
 
     /**
@@ -316,9 +318,9 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         List<IWord> wordList = new ();
         foreach (IWord word in this)
         {
-            if (label.equals(word.getLabel()))
+            if (label.Equals(word.getLabel()))
             {
-                wordList.add(word);
+                wordList.Add(word);
             }
         }
         return wordList;
@@ -345,7 +347,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     /**
      * 找出第一个词性为label的单词的指针（不检查复合词内部的简单词）<br>
      * 若要查看该单词，请调用 previous<br>
-     * 若要删除该单词，请调用 remove<br>
+     * 若要删除该单词，请调用 Remove<br>
      *
      * @param label
      * @return
@@ -356,7 +358,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         while (listIterator.hasNext())
         {
             IWord word = listIterator.next();
-            if (label.equals(word.getLabel()))
+            if (label.Equals(word.getLabel()))
             {
                 return listIterator;
             }
@@ -391,7 +393,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
             }
             else
             {
-                wordList.add((Word) word);
+                wordList.Add((Word) word);
             }
         }
 
@@ -471,7 +473,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     }
 
     //@Override
-    public bool equals(Object o)
+    public override bool Equals(Object? o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

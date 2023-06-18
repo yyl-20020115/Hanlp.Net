@@ -20,7 +20,7 @@ public class OrganizationRecognitionTest : TestCase
 //        CommonStringDictionary commonStringDictionary = new CommonStringDictionary();
 //        commonStringDictionary.load("data/dictionary/organization/nt.pattern.txt");
 //        StringBuilder sb = new StringBuilder();
-//        Set<String> keySet = commonStringDictionary.Keys;
+//        HashSet<String> keySet = commonStringDictionary.Keys;
 //        CommonStringDictionary secondDictionary = new CommonStringDictionary();
 //        secondDictionary.load("data/dictionary/organization/outerNT.pattern.txt");
 //        keySet.addAll(secondDictionary.Keys);

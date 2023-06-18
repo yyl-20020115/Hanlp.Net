@@ -33,7 +33,7 @@ public class CoreSynonymDictionary
         }
         catch (Exception e)
         {
-            throw new IllegalArgumentException("载入核心同义词词典失败" + e);
+            throw new ArgumentException("载入核心同义词词典失败" + e);
         }
     }
 
@@ -120,13 +120,13 @@ public class CoreSynonymDictionary
                 if (withUndefinedItem)
                 {
                     item = CommonSynonymDictionary.SynonymItem.createUndefined(term.word);
-                    synonymItemList.add(item);
+                    synonymItemList.Add(item);
                 }
 
             }
             else
             {
-                synonymItemList.add(item);
+                synonymItemList.Add(item);
             }
         }
 

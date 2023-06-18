@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -85,7 +87,7 @@ public abstract class SimpleDictionary<V>
      * 获取键值对集合
      * @return
      */
-    public Set<KeyValuePair<string, V>> entrySet()
+    public HashSet<KeyValuePair<string, V>> entrySet()
     {
         return trie.entrySet();
     }
@@ -94,13 +96,13 @@ public abstract class SimpleDictionary<V>
      * 键集合
      * @return
      */
-    public Set<string> keySet()
+    public HashSet<string> keySet()
     {
         TreeSet<string> keySet = new TreeSet<string>();
 
         for (KeyValuePair<string, V> entry : entrySet())
         {
-            keySet.add(entry.getKey());
+            keySet.Add(entry.getKey());
         }
 
         return keySet;
@@ -111,14 +113,14 @@ public abstract class SimpleDictionary<V>
      * @param filter 过滤器
      * @return 删除了多少条
      */
-    public int remove(Filter filter)
+    public int Remove(Filter filter)
     {
         int size = trie.size();
         for (KeyValuePair<string, V> entry : entrySet())
         {
-            if (filter.remove(entry))
+            if (filter.Remove(entry))
             {
-                trie.remove(entry.getKey());
+                trie.Remove(entry.getKey());
             }
         }
 
@@ -127,14 +129,14 @@ public abstract class SimpleDictionary<V>
 
     public interface Filter<V>
     {
-        bool remove(KeyValuePair<string, V> entry);
+        bool Remove(KeyValuePair<string, V> entry);
     }
     /**
      * 向中加入单词
      * @param key
      * @param value
      */
-    public void add(string key, V value)
+    public void Add(string key, V value)
     {
         trie.put(key, value);
     }

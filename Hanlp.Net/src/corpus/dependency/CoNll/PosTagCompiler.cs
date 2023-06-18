@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
 
@@ -26,14 +28,14 @@ public class PosTagCompiler
      */
     public static string compile(string tag, string name)
     {
-        if (tag.startsWith("m")) return Predefine.TAG_NUMBER;
-        else if (tag.startsWith("nr")) return Predefine.TAG_PEOPLE;
-        else if (tag.startsWith("ns")) return Predefine.TAG_PLACE;
-        else if (tag.startsWith("nt")) return Predefine.TAG_GROUP;
-        else if (tag.startsWith("t")) return Predefine.TAG_TIME;
-        else if (tag.equals("x")) return Predefine.TAG_CLUSTER;
-        else if (tag.equals("nx")) return Predefine.TAG_PROPER;
-        else if (tag.equals("xx")) return Predefine.TAG_OTHER;
+        if (tag.StartsWith("m")) return Predefine.TAG_NUMBER;
+        else if (tag.StartsWith("nr")) return Predefine.TAG_PEOPLE;
+        else if (tag.StartsWith("ns")) return Predefine.TAG_PLACE;
+        else if (tag.StartsWith("nt")) return Predefine.TAG_GROUP;
+        else if (tag.StartsWith("t")) return Predefine.TAG_TIME;
+        else if (tag.Equals("x")) return Predefine.TAG_CLUSTER;
+        else if (tag.Equals("nx")) return Predefine.TAG_PROPER;
+        else if (tag.Equals("xx")) return Predefine.TAG_OTHER;
 
 //        switch (tag)
 //        {

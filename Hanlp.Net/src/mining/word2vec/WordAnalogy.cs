@@ -12,7 +12,7 @@ public class WordAnalogy : AbstractClosestVectors
 
     static void usage()
     {
-        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE contains word projections in the text format\n",
+        Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE contains word projections in the text Format\n",
                           WordAnalogy.class.getName());
         System.exit(0);
     }
@@ -25,8 +25,8 @@ public class WordAnalogy : AbstractClosestVectors
 
     protected Result getTargetVector()
     {
-        final int words = vectorsReader.getNumWords();
-        final int size = vectorsReader.getSize();
+        int words = vectorsReader.getNumWords();
+        int size = vectorsReader.getSize();
 
         string[] input = null;
         while ((input = nextWords(3, "Enter 3 words")) != null)
@@ -38,7 +38,7 @@ public class WordAnalogy : AbstractClosestVectors
             {
                 for (int i = 0; i < words; i++)
                 {
-                    if (input[k].equals(vectorsReader.getWord(i)))
+                    if (input[k].Equals(vectorsReader.getWord(i)))
                     {
                         bi[k] = i;
                         System._out.printf("\nWord: %s  Position in vocabulary: %d\n", input[k], bi[k]);

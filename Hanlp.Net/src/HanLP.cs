@@ -225,7 +225,7 @@ public class HanLP
                     else throw e;
                 }
                 string root = p.getProperty("root", "").replaceAll("\\\\", "/");
-                if (root.Length > 0 && !root.endsWith("/")) root += "/";
+                if (root.Length > 0 && !root.EndsWith("/")) root += "/";
                 CoreDictionaryPath = root + p.getProperty("CoreDictionaryPath", CoreDictionaryPath);
                 CoreDictionaryTransformMatrixDictionaryPath = root + p.getProperty("CoreDictionaryTransformMatrixDictionaryPath", CoreDictionaryTransformMatrixDictionaryPath);
                 BiGramDictionaryPath = root + p.getProperty("BiGramDictionaryPath", BiGramDictionaryPath);
@@ -237,7 +237,7 @@ public class HanLP
                 string prePath = root;
                 for (int i = 0; i < pathArray.Length; ++i)
                 {
-                    if (pathArray[i].startsWith(" "))
+                    if (pathArray[i].StartsWith(" "))
                     {
                         pathArray[i] = prePath + pathArray[i].trim();
                     }
@@ -253,7 +253,7 @@ public class HanLP
                 }
                 CustomDictionaryPath = pathArray;
                 tcDictionaryRoot = root + p.getProperty("tcDictionaryRoot", tcDictionaryRoot);
-                if (!tcDictionaryRoot.endsWith("/")) tcDictionaryRoot += '/';
+                if (!tcDictionaryRoot.EndsWith("/")) tcDictionaryRoot += '/';
                 PinyinDictionaryPath = root + p.getProperty("PinyinDictionaryPath", PinyinDictionaryPath);
                 TranslatedPersonDictionaryPath = root + p.getProperty("TranslatedPersonDictionaryPath", TranslatedPersonDictionaryPath);
                 JapanesePersonDictionaryPath = root + p.getProperty("JapanesePersonDictionaryPath", JapanesePersonDictionaryPath);
@@ -275,8 +275,8 @@ public class HanLP
                 PerceptronCWSModelPath = root + p.getProperty("PerceptronCWSModelPath", PerceptronCWSModelPath);
                 PerceptronPOSModelPath = root + p.getProperty("PerceptronPOSModelPath", PerceptronPOSModelPath);
                 PerceptronNERModelPath = root + p.getProperty("PerceptronNERModelPath", PerceptronNERModelPath);
-                ShowTermNature = "true".equals(p.getProperty("ShowTermNature", "true"));
-                Normalization = "true".equals(p.getProperty("Normalization", "false"));
+                ShowTermNature = "true".Equals(p.getProperty("ShowTermNature", "true"));
+                Normalization = "true".Equals(p.getProperty("Normalization", "false"));
                 string ioAdapterClassName = p.getProperty("IOAdapter");
                 if (ioAdapterClassName != null)
                 {
@@ -289,19 +289,19 @@ public class HanLP
                     }
                     catch (ClassNotFoundException e)
                     {
-                        logger.warning(string.format("找不到IO适配器类： %s ，请检查第三方插件jar包", ioAdapterClassName));
+                        logger.warning(string.Format("找不到IO适配器类： %s ，请检查第三方插件jar包", ioAdapterClassName));
                     }
                     catch (NoSuchMethodException e)
                     {
-                        logger.warning(string.format("工厂类[%s]没有默认构造方法，不符合要求", ioAdapterClassName));
+                        logger.warning(string.Format("工厂类[%s]没有默认构造方法，不符合要求", ioAdapterClassName));
                     }
                     catch (SecurityException e)
                     {
-                        logger.warning(string.format("工厂类[%s]默认构造方法无法访问，不符合要求", ioAdapterClassName));
+                        logger.warning(string.Format("工厂类[%s]默认构造方法无法访问，不符合要求", ioAdapterClassName));
                     }
                     catch (Exception e)
                     {
-                        logger.warning(string.format("工厂类[%s]构造失败：%s\n", ioAdapterClassName, TextUtility.exceptionToString(e)));
+                        logger.warning(string.Format("工厂类[%s]构造失败：%s\n", ioAdapterClassName, TextUtility.exceptionToString(e)));
                     }
                 }
             }
@@ -641,16 +641,16 @@ public class HanLP
     {
         if (algorithm == null)
         {
-            throw new IllegalArgumentException(string.format("非法参数 algorithm == %s", algorithm));
+            throw new ArgumentException(string.Format("非法参数 algorithm == %s", algorithm));
         }
         algorithm = algorithm.toLowerCase();
-        if ("viterbi".equals(algorithm) || "维特比".equals(algorithm))
+        if ("viterbi".Equals(algorithm) || "维特比".Equals(algorithm))
             return new ViterbiSegment();   // Viterbi分词器是目前效率和效果的最佳平衡
-        else if ("dat".equals(algorithm) || "双数组trie树".equals(algorithm))
+        else if ("dat".Equals(algorithm) || "双数组trie树".Equals(algorithm))
             return new DoubleArrayTrieSegment();
-        else if ("nshort".equals(algorithm) || "n最短路".equals(algorithm))
+        else if ("nshort".Equals(algorithm) || "n最短路".Equals(algorithm))
             return new NShortSegment();
-        else if ("crf".equals(algorithm) || "条件随机场".equals(algorithm))
+        else if ("crf".Equals(algorithm) || "条件随机场".Equals(algorithm))
             try
             {
                 return new CRFLexicalAnalyzer();
@@ -660,7 +660,7 @@ public class HanLP
                 logger.warning("CRF模型加载失败");
                 throw new RuntimeException(e);
             }
-        else if ("perceptron".equals(algorithm) || "感知机".equals(algorithm))
+        else if ("perceptron".Equals(algorithm) || "感知机".Equals(algorithm))
         {
             try
             {
@@ -672,7 +672,7 @@ public class HanLP
                 throw new RuntimeException(e);
             }
         }
-        throw new IllegalArgumentException(string.format("非法参数 algorithm == %s", algorithm));
+        throw new ArgumentException(string.Format("非法参数 algorithm == %s", algorithm));
     }
 
     /**

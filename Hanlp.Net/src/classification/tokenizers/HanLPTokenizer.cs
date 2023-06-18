@@ -31,7 +31,7 @@ public class HanLPTokenizer : ITokenizer
             Term term = listIterator.next();
             if (term.word.IndexOf('\u0000') >= 0)
             {
-                listIterator.remove();
+                listIterator.Remove();
             }
         }
         string[] termArray = new string[termList.Count];

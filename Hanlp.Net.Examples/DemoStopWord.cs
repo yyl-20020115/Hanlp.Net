@@ -30,9 +30,9 @@ public class DemoStopWord
     {
         String text = "小区居民有的反对喂养流浪猫，而有的居民却赞成喂养这些小宝贝";
         // 可以动态修改停用词词典
-        CoreStopWordDictionary.add("居民");
+        CoreStopWordDictionary.Add("居民");
         Console.WriteLine(NotionalTokenizer.segment(text));
-        CoreStopWordDictionary.remove("居民");
+        CoreStopWordDictionary.Remove("居民");
         Console.WriteLine(NotionalTokenizer.segment(text));
         // 可以对任意分词器的结果执行过滤
         List<Term> termList = BasicTokenizer.segment(text);

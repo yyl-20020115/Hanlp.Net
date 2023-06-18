@@ -45,7 +45,7 @@ public class CRFSegment : CharacterBasedSegment
         {
             string error = "CRF分词模型加载 " + modelPath + " 失败，耗时 " + (DateTime.Now.Microsecond - start) + " ms";
             logger.severe(error);
-            throw new IllegalArgumentException(error);
+            throw new ArgumentException(error);
         }
         else
             logger.info("CRF分词模型加载 " + modelPath + " 成功，耗时 " + (DateTime.Now.Microsecond - start) + " ms");
@@ -93,16 +93,16 @@ public class CRFSegment : CharacterBasedSegment
                     }
                     if (i == table.v.Length)
                     {
-                        termList.add(new Term(new string(sentence, begin, offset - begin), toDefaultNature(table.v[i][0])));
+                        termList.Add(new Term(new string(sentence, begin, offset - begin), toDefaultNature(table.v[i][0])));
                         break OUTER;
                     }
                     else
-                        termList.add(new Term(new string(sentence, begin, offset - begin + table.v[i][1].Length), toDefaultNature(table.v[i][0])));
+                        termList.Add(new Term(new string(sentence, begin, offset - begin + table.v[i][1].Length), toDefaultNature(table.v[i][0])));
                 }
                 break;
                 default:
                 {
-                    termList.add(new Term(new string(sentence, offset, table.v[i][1].Length), toDefaultNature(table.v[i][0])));
+                    termList.Add(new Term(new string(sentence, offset, table.v[i][1].Length), toDefaultNature(table.v[i][0])));
                 }
                 break;
             }
@@ -112,9 +112,9 @@ public class CRFSegment : CharacterBasedSegment
 
     protected static Nature toDefaultNature(string compiledChar)
     {
-        if (compiledChar.equals("M"))
+        if (compiledChar.Equals("M"))
             return Nature.m;
-        if (compiledChar.equals("W"))
+        if (compiledChar.Equals("W"))
             return Nature.nx;
         return null;
     }
@@ -122,8 +122,8 @@ public class CRFSegment : CharacterBasedSegment
     public static List<string> atomSegment(char[] sentence)
     {
         List<string> atomList = new ArrayList<string>(sentence.Length);
-        final int maxLen = sentence.Length - 1;
-        final StringBuilder sbAtom = new StringBuilder();
+        int maxLen = sentence.Length - 1;
+        StringBuilder sbAtom = new StringBuilder();
         _out:
         for (int i = 0; i < sentence.Length; i++)
         {
@@ -132,7 +132,7 @@ public class CRFSegment : CharacterBasedSegment
                 sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
-                    atomList.add(sbAtom.toString());
+                    atomList.Add(sbAtom.toString());
                     sbAtom.setLength(0);
                     break;
                 }
@@ -142,13 +142,13 @@ public class CRFSegment : CharacterBasedSegment
                     sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
-                        atomList.add(sbAtom.toString());
+                        atomList.Add(sbAtom.toString());
                         sbAtom.setLength(0);
                         break _out;
                     }
                     c = sentence[++i];
                 }
-                atomList.add(sbAtom.toString());
+                atomList.Add(sbAtom.toString());
                 sbAtom.setLength(0);
                 --i;
             }
@@ -157,7 +157,7 @@ public class CRFSegment : CharacterBasedSegment
                 sbAtom.Append(sentence[i]);
                 if (i == maxLen)
                 {
-                    atomList.add(sbAtom.toString());
+                    atomList.Add(sbAtom.toString());
                     sbAtom.setLength(0);
                     break;
                 }
@@ -167,19 +167,19 @@ public class CRFSegment : CharacterBasedSegment
                     sbAtom.Append(sentence[i]);
                     if (i == maxLen)
                     {
-                        atomList.add(sbAtom.toString());
+                        atomList.Add(sbAtom.toString());
                         sbAtom.setLength(0);
                         break _out;
                     }
                     c = sentence[++i];
                 }
-                atomList.add(sbAtom.toString());
+                atomList.Add(sbAtom.toString());
                 sbAtom.setLength(0);
                 --i;
             }
             else
             {
-                atomList.add(string.valueOf(sentence[i]));
+                atomList.Add(string.valueOf(sentence[i]));
             }
         }
 
@@ -190,8 +190,8 @@ public class CRFSegment : CharacterBasedSegment
     {
         string table[][] = new string[sentence.Length][3];
         int size = 0;
-        final int maxLen = sentence.Length - 1;
-        final StringBuilder sbAtom = new StringBuilder();
+        int maxLen = sentence.Length - 1;
+        StringBuilder sbAtom = new StringBuilder();
         _out:
         for (int i = 0; i < sentence.Length; i++)
         {

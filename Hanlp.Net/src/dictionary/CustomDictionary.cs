@@ -107,7 +107,7 @@ public class CustomDictionary
                 List<CoreDictionary.Attribute> attributeList = new LinkedList<CoreDictionary.Attribute>();
                 for (KeyValuePair<string, CoreDictionary.Attribute> entry : map.entrySet())
                 {
-                    attributeList.add(entry.getValue());
+                    attributeList.Add(entry.getValue());
                 }
                 DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(mainPath + Predefine.BIN_EXT)));
                 // 缓存用户词性
@@ -115,7 +115,7 @@ public class CustomDictionary
                 {
                     for (int i = Nature.begin.ordinal() + 1; i < Nature.values().Length; ++i)
                     {
-                        customNatureCollector.add(Nature.values()[i]);
+                        customNatureCollector.Add(Nature.values()[i]);
                     }
                 }
                 IOUtil.writeCustomNature(_out, customNatureCollector);
@@ -165,7 +165,7 @@ public class CustomDictionary
         try
         {
             string splitter = "\\s";
-            if (path.endsWith(".csv"))
+            if (path.EndsWith(".csv"))
             {
                 splitter = ",";
             }
@@ -256,7 +256,7 @@ public class CustomDictionary
      * @param natureWithFrequency 词性和其对应的频次，比如“nz 1 v 2”，null时表示“nz 1”
      * @return 是否插入成功（失败的原因可能是不覆盖、natureWithFrequency有问题等，后者可以通过调试模式了解原因）
      */
-    public static bool add(string word, string natureWithFrequency)
+    public static bool Add(string word, string natureWithFrequency)
     {
         if (contains(word)) return false;
         return insert(word, natureWithFrequency);
@@ -269,7 +269,7 @@ public class CustomDictionary
      * @param word                新词 如“裸婚”
      * @return 是否插入成功（失败的原因可能是不覆盖等，可以通过调试模式了解原因）
      */
-    public static bool add(string word)
+    public static bool Add(string word)
     {
         if (HanLP.Config.Normalization) word = CharTable.convert(word);
         if (contains(word)) return false;
@@ -340,7 +340,7 @@ public class CustomDictionary
                 size = byteArray.nextInt();
             }
             CoreDictionary.Attribute[] attributes = new CoreDictionary.Attribute[size];
-            final Nature[] natureIndexArray = Nature.values();
+            Nature[] natureIndexArray = Nature.values();
             for (int i = 0; i < size; ++i)
             {
                 // 第一个是全部频次，第二个是词性个数
@@ -424,11 +424,11 @@ public class CustomDictionary
      *
      * @param key
      */
-    public static void remove(string key)
+    public static void Remove(string key)
     {
         if (HanLP.Config.Normalization) key = CharTable.convert(key);
         if (trie == null) return;
-        trie.remove(key);
+        trie.Remove(key);
     }
 
     /**

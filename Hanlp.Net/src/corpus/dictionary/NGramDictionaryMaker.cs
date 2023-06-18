@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -67,9 +70,9 @@ public class NGramDictionaryMaker
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
-            for (KeyValuePair<string, int> entry : trie.entrySet())
+            foreach (KeyValuePair<string, int> entry in trie)
             {
-                bw.write(entry.getKey() + " " + entry.getValue());
+                bw.write(entry.Key + " " + entry.Value);
                 bw.newLine();
             }
             bw.close();

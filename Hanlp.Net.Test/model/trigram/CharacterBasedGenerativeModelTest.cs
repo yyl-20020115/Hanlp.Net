@@ -7,7 +7,7 @@ public class CharacterBasedGenerativeModelTest : TestCase
 {
 //    public void testTrainAndSegment() 
 //    {
-//        final CharacterBasedGenerativeModel model = new CharacterBasedGenerativeModel();
+//        CharacterBasedGenerativeModel model = new CharacterBasedGenerativeModel();
 //        CorpusLoader.walk("D:\\JavaProjects\\HanLP\\data\\test\\cbgm", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -58,15 +58,15 @@ public class CharacterBasedGenerativeModelTest : TestCase
 //                    }
 //                    if (i == tag.Length)
 //                    {
-//                        termList.add(new String(sentence, begin, offset - begin));
+//                        termList.Add(new String(sentence, begin, offset - begin));
 //                    }
 //                    else
-//                        termList.add(new String(sentence, begin, offset - begin + 1));
+//                        termList.Add(new String(sentence, begin, offset - begin + 1));
 //                }
 //                break;
 //                default:
 //                {
-//                    termList.add(new String(sentence, offset, 1));
+//                    termList.Add(new String(sentence, offset, 1));
 //                }
 //                break;
 //            }

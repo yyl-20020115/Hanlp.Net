@@ -30,16 +30,16 @@ public abstract class LineHandler
 
     public void handle(string line)
     {
-        List<string> tokenList = new LinkedList<string>();
+        List<string> tokenList = new ();
         int start = 0;
         int end;
-        while ((end = line.indexOf(delimiter, start)) != -1)
+        while ((end = line.IndexOf(delimiter, start)) != -1)
         {
-            tokenList.add(line.substring(start, end));
+            tokenList.Add(line.substring(start, end));
             start = end + 1;
         }
-        tokenList.add(line.substring(start, line.Length));
-        handle(tokenList.toArray(new string[0]));
+        tokenList.Add(line.substring(start, line.Length));
+        handle(tokenList.ToArray());
     }
 
     public void done() 
@@ -47,5 +47,5 @@ public abstract class LineHandler
         // do noting
     }
 
-    public abstract void handle(string[] params) ;
+    public abstract void handle(string[] _params) ;
 }

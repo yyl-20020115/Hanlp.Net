@@ -30,8 +30,8 @@ public class TonePinyinString2PinyinConverter
     static Trie trie;
     static TonePinyinString2PinyinConverter()
     {
-        mapNumberKey = new TreeMap<string, Pinyin>();
-        mapKey = new TreeMap<string, Pinyin>();
+        mapNumberKey = new Dictionary<string, Pinyin>();
+        mapKey = new Dictionary<string, Pinyin>();
         for (Pinyin pinyin : Integer2PinyinConverter.pinyins)
         {
             mapNumberKey.put(pinyin.toString(), pinyin);
@@ -67,7 +67,7 @@ public class TonePinyinString2PinyinConverter
         List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.Length);
         for (int i = 0; i < pinyinArray.Length; i++)
         {
-            pinyinList.add(mapKey.get(pinyinArray[i]));
+            pinyinList.Add(mapKey.get(pinyinArray[i]));
         }
 
         return pinyinList;
@@ -91,7 +91,7 @@ public class TonePinyinString2PinyinConverter
         {
             Pinyin pinyin = mapKey.get(token.getFragment());
             if (removeNull && pinyin == null) continue;
-            pinyinList.add(pinyin);
+            pinyinList.Add(pinyin);
         }
 
         return pinyinList;
@@ -117,7 +117,7 @@ public class TonePinyinString2PinyinConverter
         List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.Length);
         for (string py : pinyinArray)
         {
-            pinyinList.add(convertFromToneNumber(py));
+            pinyinList.Add(convertFromToneNumber(py));
         }
         return pinyinList;
     }

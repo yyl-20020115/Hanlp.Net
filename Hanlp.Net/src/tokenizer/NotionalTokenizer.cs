@@ -48,7 +48,7 @@ public class NotionalTokenizer
         {
             if (!CoreStopWordDictionary.shouldInclude(listIterator.next()))
             {
-                listIterator.remove();
+                listIterator.Remove();
             }
         }
 
@@ -71,7 +71,7 @@ public class NotionalTokenizer
             {
                 if (!CoreStopWordDictionary.shouldInclude(listIterator.next()))
                 {
-                    listIterator.remove();
+                    listIterator.Remove();
                 }
             }
         }
@@ -113,7 +113,7 @@ public class NotionalTokenizer
                     {
                         if (!filter.shouldInclude(term))
                         {
-                            listIterator.remove();
+                            listIterator.Remove();
                             break;
                         }
                     }

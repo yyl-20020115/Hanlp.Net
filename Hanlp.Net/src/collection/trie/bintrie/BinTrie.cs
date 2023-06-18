@@ -31,7 +31,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public BinTrie()
     {
-        child = new BaseNode[65535 + 1];    // (int)char.MAX_VALUE
+        child = new BaseNode<V>[65535 + 1];    // (int)char.MAX_VALUE
         _size = 0;
         status = Status.NOT_WORD_1;
     }
@@ -39,9 +39,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public BinTrie(Dictionary<string, V> map)
         :this()
     {
-        foreach (KeyValuePair<string, V> entry in map.entrySet())
+        foreach (KeyValuePair<string, V> entry in map)
         {
-            put(entry.getKey(), entry.getValue());
+            put(entry.Key, entry.Value);
         }
     }
 
@@ -54,12 +54,12 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public void put(string key, V value)
     {
         if (key.Length == 0) return;  // 安全起见
-        BaseNode branch = this;
+        BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
         for (int i = 0; i < chars.Length - 1; ++i)
         {
             // 除了最后一个字外，都是继续
-            branch.addChild(new Node(chars[i], Status.NOT_WORD_1, null));
+            branch.addChild(new Node<V>(chars[i], Status.NOT_WORD_1, null));
             branch = branch.getChild(chars[i]);
         }
         // 最后一个字加入时属性为end
@@ -71,11 +71,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public void put(char[] key, V value)
     {
-        BaseNode branch = this;
+        BaseNode<V> branch = this;
         for (int i = 0; i < key.Length - 1; ++i)
         {
             // 除了最后一个字外，都是继续
-            branch.addChild(new Node(key[i], Status.NOT_WORD_1, null));
+            branch.addChild(new Node<V>(key[i], Status.NOT_WORD_1, null));
             branch = branch.getChild(key[i]);
         }
         // 最后一个字加入时属性为end
@@ -100,9 +100,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      *
      * @param key
      */
-    public void remove(string key)
+    public void Remove(string key)
     {
-        BaseNode branch = this;
+        BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
         for (int i = 0; i < chars.Length - 1; ++i)
         {
@@ -111,7 +111,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         }
         if (branch == null) return;
         // 最后一个字设为undefined
-        if (branch.addChild(new Node(chars[chars.Length - 1], Status.UNDEFINED_0, value)))
+        if (branch.addChild(new Node<V>(chars[chars.Length - 1], Status.UNDEFINED_0, value)))
         {
             --size;
         }
@@ -119,9 +119,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public bool containsKey(string key)
     {
-        BaseNode branch = this;
+        BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
-        for (char aChar : chars)
+        foreach (char aChar in chars)
         {
             if (branch == null) return false;
             branch = branch.getChild(aChar);
@@ -132,15 +132,15 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public V get(string key)
     {
-        BaseNode branch = this;
+        BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
-        for (char aChar : chars)
+        foreach (char aChar in chars)
         {
-            if (branch == null) return null;
+            if (branch == null) return default;
             branch = branch.getChild(aChar);
         }
 
-        if (branch == null) return null;
+        if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
         if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
         return (V) branch.getValue();
@@ -148,14 +148,14 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public V get(char[] key)
     {
-        BaseNode branch = this;
-        for (char aChar : key)
+        BaseNode<V> branch = this;
+        foreach (char aChar in key)
         {
-            if (branch == null) return null;
+            if (branch == null) return default;
             branch = branch.getChild(aChar);
         }
 
-        if (branch == null) return null;
+        if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
         if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
         return (V) branch.getValue();
@@ -168,9 +168,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             a = (V[]) java.lang.reflect.Array.newInstance(
                     a.getClass().getComponentType(), size);
         int i = 0;
-        for (KeyValuePair<string, V> entry : entrySet())
+        foreach (KeyValuePair<string, V> entry in this)
         {
-            a[i++] = entry.getValue();
+            a[i++] = entry.Value;
         }
         return a;
     }
@@ -182,12 +182,12 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      */
     public HashSet<KeyValuePair<string, V>> entrySet()
     {
-        HashSet<KeyValuePair<string, V>> entrySet = new TreeSet<KeyValuePair<string, V>>();
+        HashSet<KeyValuePair<string, V>> entrySet = new ();
         StringBuilder sb = new StringBuilder();
-        for (BaseNode node : child)
+        foreach (BaseNode<V> node in child)
         {
             if (node == null) continue;
-            node.walk(new StringBuilder(sb.toString()), entrySet);
+            node.walk(new StringBuilder(sb.ToString()), entrySet);
         }
         return entrySet;
     }
@@ -199,9 +199,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public HashSet<string> keySet()
     {
         var keySet = new HashSet<string>();
-        for (KeyValuePair<string, V> entry : entrySet())
+        foreach (KeyValuePair<string, V> entry in entrySet())
         {
-            keySet.add(entry.getKey());
+            keySet.Add(entry.getKey());
         }
 
         return keySet;
@@ -217,7 +217,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         HashSet<KeyValuePair<string, V>> entrySet = new HashSet<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder(key.substring(0, key.Length - 1));
-        BaseNode branch = this;
+        BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
         for (char aChar : chars)
         {
@@ -253,7 +253,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
         StringBuilder sb = new StringBuilder();
-        BaseNode branch = this;
+        BaseNode<V> branch = this;
         for (int i = begin; i < chars.Length; ++i)
         {
             char aChar = chars[i];
@@ -262,7 +262,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             sb.Append(aChar);
             if (branch.status == Status.WORD_MIDDLE_2 || branch.status == Status.WORD_END_3)
             {
-                result.add(new AbstractMap.SimpleEntry<string, V>(sb.toString(), (V) branch.value));
+                result.Add(new AbstractMap.SimpleEntry<string, V>(sb.toString(), (V) branch.value));
             }
         }
 
@@ -270,15 +270,15 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     }
 
     //@Override
-    protected bool addChild(BaseNode node)
+    protected bool addChild(BaseNode<V> node)
     {
-        bool add = false;
+        bool Add = false;
         char c = node.getChar();
-        BaseNode target = getChild(c);
+        BaseNode<V> target = getChild(c);
         if (target == null)
         {
             child[c] = node;
-            add = true;
+            Add = true;
         }
         else
         {
@@ -288,7 +288,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                     if (target.status != Status.NOT_WORD_1)
                     {
                         target.status = Status.NOT_WORD_1;
-                        add = true;
+                        Add = true;
                     }
                     break;
                 case NOT_WORD_1:
@@ -304,13 +304,13 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                     }
                     if (target.getValue() == null)
                     {
-                        add = true;
+                        Add = true;
                     }
                     target.setValue(node.getValue());
                     break;
             }
         }
-        return add;
+        return Add;
     }
 
     public int size()
@@ -321,11 +321,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     //@Override
     protected char getChar()
     {
-        return 0;   // 根节点没有char
+        return '\0';   // 根节点没有char
     }
 
     //@Override
-    public BaseNode getChild(char c)
+    public BaseNode<V> getChild(char c)
     {
         return child[c];
     }
@@ -334,7 +334,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         try
         {
-            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path));
+            Stream _out = new Stream(IOUtil.newOutputStream(path));
             for (BaseNode node : child)
             {
                 if (node == null)
@@ -359,11 +359,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     }
 
     //@Override
-    public int build(TreeMap<string, V> keyValueMap)
+    public int build(Dictionary<string, V> keyValueMap)
     {
-        for (KeyValuePair<string, V> entry : keyValueMap.entrySet())
+        foreach (KeyValuePair<string, V> entry in keyValueMap)
         {
-            put(entry.getKey(), entry.getValue());
+            put(entry.Key, entry.Value);
         }
         return 0;
     }
@@ -374,11 +374,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param _out
      * @return
      */
-    public bool save(DataOutputStream _out)
+    public bool save(Stream _out)
     {
         try
         {
-            for (BaseNode node : child)
+            foreach (BaseNode<V> node in child)
             {
                 if (node == null)
                 {
@@ -483,7 +483,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public void writeExternal(ObjectOutput _out) 
     {
         _out.writeInt(size);
-        for (BaseNode node : child)
+        foreach (BaseNode<V> node in child)
         {
             if (node == null)
             {
@@ -524,7 +524,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         int Length = text.Length;
         for (int i = 0; i < Length; ++i)
         {
-            BaseNode<V> state = transition(text.charAt(i));
+            BaseNode<V> state = transition(text[i]);
             if (state != null)
             {
                 int to = i + 1;
@@ -532,7 +532,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 V value = state.getValue();
                 for (; to < Length; ++to)
                 {
-                    state = state.transition(text.charAt(to));
+                    state = state.transition(text[to]);
                     if (state == null) break;
                     if (state.getValue() != null)
                     {
@@ -599,7 +599,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
         for (int i = begin; i < Length; ++i)
         {
-            state = state.transition(text.charAt(i));
+            state = state.transition(text[i]);
             if (state != null)
             {
                 V value = state.getValue();

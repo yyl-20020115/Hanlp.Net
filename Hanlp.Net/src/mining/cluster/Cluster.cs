@@ -115,7 +115,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
     void add_document(Document doc)
     {
         doc.feature().normalize();
-        documents_.add(doc);
+        documents_.Add(doc);
         composite_.add_vector(doc.feature());
     }
 
@@ -141,7 +141,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
     {
         for (Document<K> document : documents_)
         {
-            if (document.equals(doc))
+            if (document.Equals(doc))
             {
                 remove_document(doc);
                 return;
@@ -159,7 +159,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
         while (listIterator.hasNext())
         {
             if (listIterator.next() == null)
-                listIterator.remove();
+                listIterator.Remove();
         }
     }
 
@@ -238,7 +238,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
         int index, count = 0;
 
         index = random.nextInt(siz);  // initial center
-        docs.add(documents_.get(index));
+        docs.Add(documents_.get(index));
         ++count;
         double potential = 0.0;
         for (int i = 0; i < documents_.size(); i++)
@@ -262,7 +262,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
             }
             if (index == documents_.size())
                 index--;
-            docs.add(documents_.get(index));
+            docs.Add(documents_.get(index));
             ++count;
 
             double new_potential = 0.0;
@@ -298,7 +298,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
         for (int i = 0; i < centroids.size(); i++)
         {
             Cluster<K> cluster = new Cluster<K>();
-            sectioned_clusters_.add(cluster);
+            sectioned_clusters_.Add(cluster);
         }
 
         for (Document<K> d : documents_)

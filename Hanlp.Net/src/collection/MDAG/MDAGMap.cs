@@ -28,7 +28,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         V origin = get(key);
         if (origin == null)
         {
-            valueList.add(value);
+            valueList.Add(value);
             char[] twoChar = ByteUtil.convertIntToTwoChar(valueList.size() - 1);
             mdag.addString(key + MDAGForMap.DELIMITER + twoChar[0] + twoChar[1]);
         }
@@ -72,7 +72,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         while (iterator.hasNext())
         {
             string key = iterator.next();
-            keySet.add(key.substring(0, key.Length - 3));
+            keySet.Add(key.substring(0, key.Length - 3));
         }
         return keySet;
     }
@@ -89,7 +89,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         LinkedList<KeyValuePair<string, V>> entryList = new LinkedList<Entry<string, V>>();
         foreach (KeyValuePair<string, int> entry in valueIndex)
         {
-            entryList.add(new SimpleEntry<string, V>(entry.getKey(), valueList.get(entry.getValue())));
+            entryList.Add(new SimpleEntry<string, V>(entry.getKey(), valueList.get(entry.getValue())));
         }
 
         return entryList;
@@ -147,10 +147,10 @@ public class MDAGMap<V> : AbstractMap<string, V>
             if (targetNode == null) return -1;
             // 接下来应该是一条单链路
             int transitionSetBeginIndex = targetNode.getTransitionSetBeginIndex();
-            assert targetNode.getOutgoingTransitionSetSize() == 1 : "不是单链！";
+            //assert targetNode.getOutgoingTransitionSetSize() == 1 : "不是单链！";
             char high = mdagDataArray[transitionSetBeginIndex].getLetter();
             targetNode = targetNode.transition(mdagDataArray, high);
-            assert targetNode.getOutgoingTransitionSetSize() == 1 : "不是单链！";
+            //assert targetNode.getOutgoingTransitionSetSize() == 1 : "不是单链！";
             transitionSetBeginIndex = targetNode.getTransitionSetBeginIndex();
             char low = mdagDataArray[transitionSetBeginIndex].getLetter();
             return ByteUtil.convertTwoCharToInt(high, low);
@@ -161,7 +161,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
             MDAGNode targetNode = currentNode.transition(DELIMITER);
             if (targetNode == null) return -1;
             // 接下来应该是一条单链路
-            TreeMap<char, MDAGNode> outgoingTransitions = targetNode.getOutgoingTransitions();
+            Dictionary<char, MDAGNode> outgoingTransitions = targetNode.getOutgoingTransitions();
             assert outgoingTransitions.size() == 1 : "不是单链！";
             char high = outgoingTransitions.keySet().iterator().next();
             targetNode = targetNode.transition(high);
@@ -184,7 +184,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
                     if (currentNode == null) break;
                     {
                         int index = getValueIndex(currentNode);
-                        if (index != -1) result.add(new SimpleEntry<string, int>(new string(key, begin, i + 1), index));
+                        if (index != -1) result.Add(new SimpleEntry<string, int>(new string(key, begin, i + 1), index));
                     }
                 }
             }
@@ -198,7 +198,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
                     if (currentNode == null) break;
                     {
                         int index = getValueIndex(currentNode);
-                        if (index != -1) result.add(new SimpleEntry<string, int>(new string(key, begin, i + 1), index));
+                        if (index != -1) result.Add(new SimpleEntry<string, int>(new string(key, begin, i + 1), index));
                     }
                 }
             }

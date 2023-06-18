@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dictionary.common;
 
 
@@ -45,7 +49,7 @@ public abstract class CommonDictionary<V>
         {
             return true;
         }
-        TreeMap<string, V> map = new TreeMap<string, V>();
+        Dictionary<string, V> map = new Dictionary<string, V>();
         try
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
@@ -63,13 +67,13 @@ public abstract class CommonDictionary<V>
             return false;
         }
         onLoaded(map);
-        Set<KeyValuePair<string, V>> entrySet = map.entrySet();
+        HashSet<KeyValuePair<string, V>> entrySet = map.entrySet();
         List<string> keyList = new ArrayList<string>(entrySet.size());
         List<V> valueList = new ArrayList<V>(entrySet.size());
         for (KeyValuePair<string, V> entry : entrySet)
         {
-            keyList.add(entry.getKey());
-            valueList.add(entry.getValue());
+            keyList.Add(entry.getKey());
+            valueList.Add(entry.getValue());
         }
         int resultCode = trie.build(keyList, valueList);
         if (resultCode != 0)
@@ -173,14 +177,14 @@ public abstract class CommonDictionary<V>
      * @param params 第一个元素为键，请注意跳过
      * @return
      */
-    protected abstract V createValue(string[] params);
+    protected abstract V createValue(string[] _params);
 
     /**
      * 文本词典加载完毕的回调函数
      *
      * @param map
      */
-    protected void onLoaded(TreeMap<string, V> map)
+    protected void onLoaded(Dictionary<string, V> map)
     {
     }
 }

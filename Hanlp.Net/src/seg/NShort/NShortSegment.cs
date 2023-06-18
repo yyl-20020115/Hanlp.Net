@@ -152,7 +152,7 @@ public class NShortSegment : WordBasedSegment
         {
             List<Vertex> vertexes = graph.parsePath(path);
             generateWord(vertexes, wordNetOptimum);
-            coarseResult.add(vertexes);
+            coarseResult.Add(vertexes);
         }
         return coarseResult;
     }

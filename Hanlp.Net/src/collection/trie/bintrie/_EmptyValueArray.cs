@@ -22,6 +22,6 @@ public class _EmptyValueArray<V> : _ValueArray<V>
     //@Override
     public V nextValue()
     {
-        return null;
+        return default;
     }
 }

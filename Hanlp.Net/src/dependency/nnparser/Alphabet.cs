@@ -9,6 +9,10 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -38,7 +42,7 @@ public class Alphabet : ICacheAble
     }
 
 
-    public int build(TreeMap<string, int> keyValueMap)
+    public int build(Dictionary<string, int> keyValueMap)
     {
         idToLabelMap = new string[keyValueMap.size()];
         for (KeyValuePair<string, int> entry : keyValueMap.entrySet())
@@ -77,7 +81,7 @@ public class Alphabet : ICacheAble
         return trie.size();
     }
 
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeInt(idToLabelMap.Length);
         for (string value : idToLabelMap)
@@ -89,11 +93,11 @@ public class Alphabet : ICacheAble
     public bool load(ByteArray byteArray)
     {
         idToLabelMap = new string[byteArray.nextInt()];
-        TreeMap<string, int> map = new TreeMap<string, int>();
+        var map = new Dictionary<string, int>();
         for (int i = 0; i < idToLabelMap.Length; i++)
         {
             idToLabelMap[i] = byteArray.nextString();
-            map.put(idToLabelMap[i], i);
+            map.Add(idToLabelMap[i], i);
         }
 
         return trie.build(map) == 0;

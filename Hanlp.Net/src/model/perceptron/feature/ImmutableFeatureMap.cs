@@ -51,7 +51,7 @@ public class ImmutableFeatureMap : FeatureMap
     }
 
     //@Override
-    public Set<KeyValuePair<string, int>> entrySet()
+    public HashSet<KeyValuePair<string, int>> entrySet()
     {
         return featureIdMap.entrySet();
     }

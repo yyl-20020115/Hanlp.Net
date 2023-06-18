@@ -25,9 +25,9 @@ public class Suggester : ISuggester
     public Suggester()
     {
         scorerList = new List<BaseScorer>();
-        scorerList.add(new IdVectorScorer());
-        scorerList.add(new EditDistanceScorer());
-        scorerList.add(new PinyinScorer());
+        scorerList.Add(new IdVectorScorer());
+        scorerList.Add(new EditDistanceScorer());
+        scorerList.Add(new PinyinScorer());
     }
 
     public Suggester(List<BaseScorer> scorerList)
@@ -44,7 +44,7 @@ public class Suggester : ISuggester
         scorerList = new ArrayList<BaseScorer>(scorers.Length);
         for (BaseScorer scorer : scorers)
         {
-            scorerList.add(scorer);
+            scorerList.Add(scorer);
         }
     }
 
@@ -70,7 +70,7 @@ public class Suggester : ISuggester
     public List<string> suggest(string key, int size)
     {
         List<string> resultList = new ArrayList<string>(size);
-        TreeMap<string, Double> scoreMap = new TreeMap<string, Double>();
+        Dictionary<string, Double> scoreMap = new Dictionary<string, Double>();
         for (BaseScorer scorer : scorerList)
         {
             Dictionary<string, Double> map = scorer.computeScore(key);
@@ -82,12 +82,12 @@ public class Suggester : ISuggester
                 scoreMap.put(entry.getKey(), score / max + entry.getValue() * scorer.boost);
             }
         }
-        for (KeyValuePair<Double, Set<string>> entry : sortScoreMap(scoreMap).entrySet())
+        for (KeyValuePair<Double, HashSet<string>> entry : sortScoreMap(scoreMap).entrySet())
         {
             for (string sentence : entry.getValue())
             {
                 if (resultList.size() >= size) return resultList;
-                resultList.add(sentence);
+                resultList.Add(sentence);
             }
         }
 
@@ -99,18 +99,18 @@ public class Suggester : ISuggester
      * @param scoreMap
      * @return
      */
-    private static TreeMap<Double ,Set<string>> sortScoreMap(TreeMap<string, Double> scoreMap)
+    private static Dictionary<Double ,Set<string>> sortScoreMap(Dictionary<string, Double> scoreMap)
     {
-        TreeMap<Double, Set<string>> result = new TreeMap<Double, Set<string>>(Collections.reverseOrder());
+        Dictionary<Double, HashSet<string>> result = new Dictionary<Double, HashSet<string>>(Collections.reverseOrder());
         for (KeyValuePair<string, Double> entry : scoreMap.entrySet())
         {
-            Set<string> sentenceSet = result.get(entry.getValue());
+            HashSet<string> sentenceSet = result.get(entry.getValue());
             if (sentenceSet == null)
             {
                 sentenceSet = new HashSet<string>();
                 result.put(entry.getValue(), sentenceSet);
             }
-            sentenceSet.add(entry.getKey());
+            sentenceSet.Add(entry.getKey());
         }
 
         return result;

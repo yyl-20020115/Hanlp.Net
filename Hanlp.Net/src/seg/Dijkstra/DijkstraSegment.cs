@@ -131,7 +131,7 @@ public class DijkstraSegment : WordBasedSegment
         int[] path = new int[vertexes.Length];
         Arrays.fill(path, -1);
         PriorityQueue<State> que = new PriorityQueue<State>();
-        que.add(new State(0, vertexes.Length - 1));
+        que.Add(new State(0, vertexes.Length - 1));
         while (!que.isEmpty())
         {
             State p = que.poll();
@@ -141,14 +141,14 @@ public class DijkstraSegment : WordBasedSegment
                 if (d[edgeFrom.from] > d[p.vertex] + edgeFrom.weight)
                 {
                     d[edgeFrom.from] = d[p.vertex] + edgeFrom.weight;
-                    que.add(new State(d[edgeFrom.from], edgeFrom.from));
+                    que.Add(new State(d[edgeFrom.from], edgeFrom.from));
                     path[edgeFrom.from] = p.vertex;
                 }
             }
         }
         for (int t = 0; t != -1; t = path[t])
         {
-            resultList.add(vertexes[t]);
+            resultList.Add(vertexes[t]);
         }
         return resultList;
     }

@@ -23,7 +23,7 @@ public class CoNLLLoaderTest : TestCase
 //        {
 //            for (CoNLLWord coNLLWord : coNLLSentence.word)
 //            {
-//                dictionaryMaker.add(new Item(coNLLWord.POSTAG, coNLLWord.CPOSTAG));
+//                dictionaryMaker.Add(new Item(coNLLWord.POSTAG, coNLLWord.CPOSTAG));
 //            }
 //        }
 //        Console.WriteLine(dictionaryMaker.entrySet());
@@ -54,7 +54,7 @@ public class CoNLLLoaderTest : TestCase
 //                {
 //                    for (int i = 1; i < d; ++i)
 //                    {
-//                        if (coNLLSentence.word[coNLLWord.ID - 1 + i].CPOSTAG.equals(coNLLWord.HEAD.CPOSTAG))
+//                        if (coNLLSentence.word[coNLLWord.ID - 1 + i].CPOSTAG.Equals(coNLLWord.HEAD.CPOSTAG))
 //                        {
 //                            ++posDistance;
 //                        }
@@ -64,7 +64,7 @@ public class CoNLLLoaderTest : TestCase
 //                {
 //                    for (int i = 1; i < -d; ++i)    // 在前面
 //                    {
-//                        if (coNLLSentence.word[coNLLWord.ID - 1 - i].CPOSTAG.equals(coNLLWord.HEAD.CPOSTAG))
+//                        if (coNLLSentence.word[coNLLWord.ID - 1 - i].CPOSTAG.Equals(coNLLWord.HEAD.CPOSTAG))
 //                        {
 //                            ++posDistance;
 //                        }
@@ -87,22 +87,22 @@ public class CoNLLLoaderTest : TestCase
 //     */
 //    public void testMakeCRFTemplate() 
 //    {
-//        Set<String> templateList = new LinkedHashSet<String>();
+//        HashSet<String> templateList = new LinkedHashSet<String>();
 //        int maxDistance = 4;
 //        // 字特征
 //        for (int i = -maxDistance; i <= maxDistance; ++i)
 //        {
-//            templateList.add("%x[" + i + ",0]");
+//            templateList.Add("%x[" + i + ",0]");
 //        }
 //        // 细词性特征
 //        for (int i = -maxDistance; i <= maxDistance; ++i)
 //        {
-//            templateList.add("%x[" + i + ",1]");
+//            templateList.Add("%x[" + i + ",1]");
 //        }
 //        // 粗词性特征
 //        for (int i = -maxDistance; i <= maxDistance; ++i)
 //        {
-//            templateList.add("%x[" + i + ",2]");
+//            templateList.Add("%x[" + i + ",2]");
 //        }
 //        // 组合字特征
 //        String[] before = new String[maxDistance + 1];
@@ -118,7 +118,7 @@ public class CoNLLLoaderTest : TestCase
 //        {
 //            for (int j = 0; j <= maxDistance; ++j)
 //            {
-//                templateList.add(before[i]  + after[j]);
+//                templateList.Add(before[i]  + after[j]);
 //            }
 //        }
 //        // 组合粗词性特征
@@ -133,7 +133,7 @@ public class CoNLLLoaderTest : TestCase
 //        {
 //            for (int j = 0; j <= maxDistance; ++j)
 //            {
-//                templateList.add(before[i]  + after[j]);
+//                templateList.Add(before[i]  + after[j]);
 //            }
 //        }
 //        // 组合细词性特征
@@ -148,7 +148,7 @@ public class CoNLLLoaderTest : TestCase
 //        {
 //            for (int j = 0; j <= maxDistance; ++j)
 //            {
-//                templateList.add(before[i]  + after[j]);
+//                templateList.Add(before[i]  + after[j]);
 //            }
 //        }
 //
@@ -156,7 +156,7 @@ public class CoNLLLoaderTest : TestCase
 //        StringBuilder sb = new StringBuilder();
 //        for (String template : templateList)
 //        {
-//            sb.append(String.format("U%d:%s\n", id, template));
+//            sb.append(String.Format("U%d:%s\n", id, template));
 //            ++id;
 //        }
 //        Console.WriteLine(sb.ToString());
@@ -165,41 +165,41 @@ public class CoNLLLoaderTest : TestCase
 //
 //    public void testMakeSimpleCRFTemplate() 
 //    {
-//        Set<String> templateList = new LinkedHashSet<String>();
+//        HashSet<String> templateList = new LinkedHashSet<String>();
 //        int maxDistance = 4;
 //        // 字特征
 //        for (int i = -maxDistance; i <= maxDistance; ++i)
 //        {
-//            templateList.add("%x[" + i + ",0]");
+//            templateList.Add("%x[" + i + ",0]");
 //        }
 //        // 细词性特征
 //        for (int i = -maxDistance; i <= maxDistance; ++i)
 //        {
-//            templateList.add("%x[" + i + ",1]");
+//            templateList.Add("%x[" + i + ",1]");
 //        }
 //        // 粗词性特征
 //        for (int i = -maxDistance; i <= maxDistance; ++i)
 //        {
-//            templateList.add("%x[" + i + ",2]");
+//            templateList.Add("%x[" + i + ",2]");
 //        }
 //        // 组合特征
 //        for (int i = 1; i <= maxDistance; ++i)
 //        {
-//            templateList.add("%x[-" + i + ",0]/" + "%x[0,0]");
-//            templateList.add("%x[0,0]/" + "%x[" + i + ",0]");
+//            templateList.Add("%x[-" + i + ",0]/" + "%x[0,0]");
+//            templateList.Add("%x[0,0]/" + "%x[" + i + ",0]");
 //
-//            templateList.add("%x[-" + i + ",1]/" + "%x[0,1]");
-//            templateList.add("%x[0,1]/" + "%x[" + i + ",1]");
+//            templateList.Add("%x[-" + i + ",1]/" + "%x[0,1]");
+//            templateList.Add("%x[0,1]/" + "%x[" + i + ",1]");
 //
-//            templateList.add("%x[-" + i + ",2]/" + "%x[0,2]");
-//            templateList.add("%x[0,2]/" + "%x[" + i + ",2]");
+//            templateList.Add("%x[-" + i + ",2]/" + "%x[0,2]");
+//            templateList.Add("%x[0,2]/" + "%x[" + i + ",2]");
 //        }
 //
 //        int id = 0;
 //        StringBuilder sb = new StringBuilder();
 //        for (String template : templateList)
 //        {
-//            sb.append(String.format("U%d:%s\n", id, template));
+//            sb.append(String.Format("U%d:%s\n", id, template));
 //            ++id;
 //        }
 //        Console.WriteLine(sb.ToString());

@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.dependency.common;
 
 
@@ -19,85 +23,82 @@ namespace com.hankcs.hanlp.dependency.common;
  */
 public class Node
 {
-    private final static Dictionary<string, string> natureConverter = new TreeMap<string, string>();
-    static
+    private static Dictionary<string, string> natureConverter = new ();
+    static Node()
     {
-        natureConverter.put("begin", "root");
-        natureConverter.put("bg", "b");
-        natureConverter.put("e", "y");
-        natureConverter.put("g", "nz");
-        natureConverter.put("gb", "nz");
-        natureConverter.put("gbc", "nz");
-        natureConverter.put("gc", "nz");
-        natureConverter.put("gg", "nz");
-        natureConverter.put("gi", "nz");
-        natureConverter.put("gm", "nz");
-        natureConverter.put("gp", "nz");
-        natureConverter.put("i", "nz");
-        natureConverter.put("j", "nz");
-        natureConverter.put("l", "nz");
-        natureConverter.put("mg", "Mg");
-        natureConverter.put("nb", "nz");
-        natureConverter.put("nba", "nz");
-        natureConverter.put("nbc", "nz");
-        natureConverter.put("nbp", "nz");
-        natureConverter.put("nf", "n");
-        natureConverter.put("nh", "nz");
-        natureConverter.put("nhd", "nz");
-        natureConverter.put("nhm", "nz");
-        natureConverter.put("ni", "nt");
-        natureConverter.put("nic", "nt");
-        natureConverter.put("nis", "n");
-        natureConverter.put("nit", "nt");
-        natureConverter.put("nm", "n");
-        natureConverter.put("nmc", "nz");
-        natureConverter.put("nn", "n");
-        natureConverter.put("nnd", "n");
-        natureConverter.put("nnt", "n");
-        natureConverter.put("ntc", "nt");
-        natureConverter.put("ntcb", "nt");
-        natureConverter.put("ntcf", "nt");
-        natureConverter.put("ntch", "nt");
-        natureConverter.put("nth", "nt");
-        natureConverter.put("nto", "nt");
-        natureConverter.put("nts", "nt");
-        natureConverter.put("ntu", "nt");
-        natureConverter.put("nx", "x");
-        natureConverter.put("qg", "q");
-        natureConverter.put("rg", "Rg");
-        natureConverter.put("ud", "u");
-        natureConverter.put("udh", "u");
-        natureConverter.put("ug", "uguo");
-        natureConverter.put("uj", "u");
-        natureConverter.put("ul", "ulian");
-        natureConverter.put("uv", "u");
-        natureConverter.put("uz", "uzhe");
-        natureConverter.put("w", "x");
-        natureConverter.put("wb", "x");
-        natureConverter.put("wd", "x");
-        natureConverter.put("wf", "x");
-        natureConverter.put("wh", "x");
-        natureConverter.put("wj", "x");
-        natureConverter.put("wky", "x");
-        natureConverter.put("wkz", "x");
-        natureConverter.put("wm", "x");
-        natureConverter.put("wn", "x");
-        natureConverter.put("wp", "x");
-        natureConverter.put("ws", "x");
-        natureConverter.put("wt", "x");
-        natureConverter.put("ww", "x");
-        natureConverter.put("wyy", "x");
-        natureConverter.put("wyz", "x");
-        natureConverter.put("xu", "x");
-        natureConverter.put("xx", "x");
-        natureConverter.put("yg", "y");
-        natureConverter.put("zg", "z");
-    }
-    public final static Node NULL = new Node(new Term(CoNLLWord.NULL.NAME, Nature.n), -1);
-    static
-    {
+        natureConverter.Add("begin", "root");
+        natureConverter.Add("bg", "b");
+        natureConverter.Add("e", "y");
+        natureConverter.Add("g", "nz");
+        natureConverter.Add("gb", "nz");
+        natureConverter.Add("gbc", "nz");
+        natureConverter.Add("gc", "nz");
+        natureConverter.Add("gg", "nz");
+        natureConverter.Add("gi", "nz");
+        natureConverter.Add("gm", "nz");
+        natureConverter.Add("gp", "nz");
+        natureConverter.Add("i", "nz");
+        natureConverter.Add("j", "nz");
+        natureConverter.Add("l", "nz");
+        natureConverter.Add("mg", "Mg");
+        natureConverter.Add("nb", "nz");
+        natureConverter.Add("nba", "nz");
+        natureConverter.Add("nbc", "nz");
+        natureConverter.Add("nbp", "nz");
+        natureConverter.Add("nf", "n");
+        natureConverter.Add("nh", "nz");
+        natureConverter.Add("nhd", "nz");
+        natureConverter.Add("nhm", "nz");
+        natureConverter.Add("ni", "nt");
+        natureConverter.Add("nic", "nt");
+        natureConverter.Add("nis", "n");
+        natureConverter.Add("nit", "nt");
+        natureConverter.Add("nm", "n");
+        natureConverter.Add("nmc", "nz");
+        natureConverter.Add("nn", "n");
+        natureConverter.Add("nnd", "n");
+        natureConverter.Add("nnt", "n");
+        natureConverter.Add("ntc", "nt");
+        natureConverter.Add("ntcb", "nt");
+        natureConverter.Add("ntcf", "nt");
+        natureConverter.Add("ntch", "nt");
+        natureConverter.Add("nth", "nt");
+        natureConverter.Add("nto", "nt");
+        natureConverter.Add("nts", "nt");
+        natureConverter.Add("ntu", "nt");
+        natureConverter.Add("nx", "x");
+        natureConverter.Add("qg", "q");
+        natureConverter.Add("rg", "Rg");
+        natureConverter.Add("ud", "u");
+        natureConverter.Add("udh", "u");
+        natureConverter.Add("ug", "uguo");
+        natureConverter.Add("uj", "u");
+        natureConverter.Add("ul", "ulian");
+        natureConverter.Add("uv", "u");
+        natureConverter.Add("uz", "uzhe");
+        natureConverter.Add("w", "x");
+        natureConverter.Add("wb", "x");
+        natureConverter.Add("wd", "x");
+        natureConverter.Add("wf", "x");
+        natureConverter.Add("wh", "x");
+        natureConverter.Add("wj", "x");
+        natureConverter.Add("wky", "x");
+        natureConverter.Add("wkz", "x");
+        natureConverter.Add("wm", "x");
+        natureConverter.Add("wn", "x");
+        natureConverter.Add("wp", "x");
+        natureConverter.Add("ws", "x");
+        natureConverter.Add("wt", "x");
+        natureConverter.Add("ww", "x");
+        natureConverter.Add("wyy", "x");
+        natureConverter.Add("wyz", "x");
+        natureConverter.Add("xu", "x");
+        natureConverter.Add("xx", "x");
+        natureConverter.Add("yg", "y");
+        natureConverter.Add("zg", "z");
         NULL.label = "null";
     }
+    public static Node NULL = new Node(new Term(CoNLLWord.NULL.NAME, Nature.n), -1);
     public string word;
     public string compiledWord;
     public string label;
@@ -107,14 +108,13 @@ public class Node
     {
         this.id = id;
         word = term.word;
-        label = natureConverter.get(term.nature.toString());
-        if (label == null)
-            label = term.nature.toString();
+        if (!natureConverter.TryGetValue(term.nature.ToString(),out this.label))
+            label = term.nature.ToString();
         compiledWord = PosTagCompiler.compile(label, word);
     }
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         return word + "/" + label;
     }

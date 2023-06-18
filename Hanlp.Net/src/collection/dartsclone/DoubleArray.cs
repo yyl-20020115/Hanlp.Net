@@ -2,6 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+using com.hankcs.hanlp.collection.dartsclone.details;
+using System.Text;
+
 namespace com.hankcs.hanlp.collection.dartsclone;
 
 
@@ -14,7 +17,7 @@ namespace com.hankcs.hanlp.collection.dartsclone;
  */
 public class DoubleArray : Serializable
 {
-    static Charset utf8 = Charset.forName("UTF-8");
+    static Encoding utf8 = Encoding.UTF8;
 
     /**
      * 构建
@@ -50,25 +53,25 @@ public class DoubleArray : Serializable
      * @param stream
      * @throws java.io.IOException
      */
-    public void open(InputStream stream) 
+    public void open(Stream stream) 
     {
 
         int size = (int) (stream.available() / UNIT_SIZE);
         _array = new int[size];
 
-        DataInputStream in = null;
+        DataInputStream _in = null;
         try
         {
-            in = new DataInputStream(new BufferedInputStream(
+            _in = new DataInputStream(new BufferedInputStream(
                     stream));
             for (int i = 0; i < size; ++i)
             {
-                _array[i] = in.readInt();
+                _array[i] = _in.readInt();
             }
         }
         finally
         {
-            if (in != null)
+            if (_in != null)
             {
                 in.close();
             }
@@ -81,7 +84,7 @@ public class DoubleArray : Serializable
      * @param stream
      * @throws java.io.IOException
      */
-    public void save(OutputStream stream) 
+    public void save(Stream stream) 
     {
         DataOutputStream _out = null;
         try
@@ -194,8 +197,8 @@ public class DoubleArray : Serializable
             {
                 if (result.size() < maxResults)
                 {
-                    // result.add(new Pair<i, _array[nodePos].value());
-                    result.add(new Pair<int, int>(i + 1, _array[nodePos] & ((1 << 31) - 1)));
+                    // result.Add(new Pair<i, _array[nodePos].value());
+                    result.Add(new Pair<int, int>(i + 1, _array[nodePos] & ((1 << 31) - 1)));
                 }
             }
         }

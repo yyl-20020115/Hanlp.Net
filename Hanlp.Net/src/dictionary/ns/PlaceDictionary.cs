@@ -55,11 +55,11 @@ public class PlaceDictionary
         if (dictionary.load(HanLP.Config.PlaceDictionaryPath))
             logger.info(HanLP.Config.PlaceDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         else
-            throw new IllegalArgumentException(HanLP.Config.PlaceDictionaryPath + "加载失败");
+            throw new ArgumentException(HanLP.Config.PlaceDictionaryPath + "加载失败");
         transformMatrixDictionary = new TransformMatrixDictionary<NS>(NS.class);
         transformMatrixDictionary.load(HanLP.Config.PlaceDictionaryTrPath);
         trie = new AhoCorasickDoubleArrayTrie<string>();
-        TreeMap<string, string> patternMap = new TreeMap<string, string>();
+        Dictionary<string, string> patternMap = new Dictionary<string, string>();
         patternMap.put("CH", "CH");
         patternMap.put("CDH", "CDH");
         patternMap.put("CDEH", "CDEH");

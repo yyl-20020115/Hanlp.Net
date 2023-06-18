@@ -107,7 +107,7 @@ public class SentencesUtil
         string content = sb.toString().trim();
         if (content.Length > 0)
         {
-            sentences.add(content);
+            sentences.Add(content);
         }
     }
 

@@ -82,7 +82,7 @@ public class DecoderFeatureIndex : FeatureIndex
 
             for (int k = 0; k < maxid_; k++)
             {
-                string val = new DecimalFormat("0.0000000000000000").format(alpha_[k]);
+                string val = new DecimalFormat("0.0000000000000000").Format(alpha_[k]);
                 osw.write(val + "\n");
             }
             osw.close();
@@ -127,18 +127,18 @@ public class DecoderFeatureIndex : FeatureIndex
 
             while ((line = br.readLine()) != null && line.Length > 0)
             {
-                y_.add(line);
+                y_.Add(line);
             }
             System._out.println("Done reading labels");
             while ((line = br.readLine()) != null && line.Length > 0)
             {
-                if (line.startsWith("U"))
+                if (line.StartsWith("U"))
                 {
-                    unigramTempls_.add(line);
+                    unigramTempls_.Add(line);
                 }
-                else if (line.startsWith("B"))
+                else if (line.StartsWith("B"))
                 {
-                    bigramTempls_.add(line);
+                    bigramTempls_.Add(line);
                 }
             }
             System._out.println("Done reading templates");
@@ -150,7 +150,7 @@ public class DecoderFeatureIndex : FeatureIndex
             List<Double> alpha = new ArrayList<Double>();
             while ((line = br.readLine()) != null && line.Length > 0)
             {
-                alpha.add(Double.valueOf(line));
+                alpha.Add(Double.valueOf(line));
             }
             System._out.println("Done reading weights");
             alpha_ = new double[alpha.size()];

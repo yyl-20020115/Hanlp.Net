@@ -54,7 +54,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         tf = new Probability();
         // 构建有限转移矩阵
         // 矩阵的数值根据《人民日报》语料估算 
-        final int [] nullArray = {0, 0, 0, 0, 0};
+        int [] nullArray = {0, 0, 0, 0, 0};
         transMatrix = new int[5][][];
         transMatrix[0] = new int[][]{nullArray, {0, 150, 330, 0, 0}, {160, 0, 0, 168, 20}, nullArray, nullArray};
         transMatrix[1] = new int[][]{nullArray, {0, 35, 150, 0, 0}, {210, 0, 0, 263, 3}, nullArray, nullArray};
@@ -75,31 +75,31 @@ public class CharacterBasedGenerativeModel : ICacheAble
             string word = iWord.getValue();
             if (word.Length == 1)
             {
-                sentence.add(new char[]{word.charAt(0), 's'});
+                sentence.Add(new char[]{word.charAt(0), 's'});
             }
             else
             {
-                sentence.add(new char[]{word.charAt(0), 'b'});
+                sentence.Add(new char[]{word.charAt(0), 'b'});
                 for (int i = 1; i < word.Length - 1; ++i)
                 {
-                    sentence.add(new char[]{word.charAt(i), 'm'});
+                    sentence.Add(new char[]{word.charAt(i), 'm'});
                 }
-                sentence.add(new char[]{word.charAt(word.Length - 1), 'e'});
+                sentence.Add(new char[]{word.charAt(word.Length - 1), 'e'});
             }
         }
         // 转换完毕，开始统计
         char[][] now = new char[3][];   // 定长3的队列
         now[1] = bos;
         now[2] = bos;
-        tf.add(1, bos, bos);
-        tf.add(2, bos);
+        tf.Add(1, bos, bos);
+        tf.Add(2, bos);
         for (char[] i : sentence)
         {
             System.arraycopy(now, 1, now, 0, 2);
             now[2] = i;
-            tf.add(1, i);   // uni
-            tf.add(1, now[1], now[2]);   // bi
-            tf.add(1, now);   // tri
+            tf.Add(1, i);   // uni
+            tf.Add(1, now[1], now[2]);   // bi
+            tf.Add(1, now);   // tri
         }
     }
 

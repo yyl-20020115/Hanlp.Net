@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
 /**
@@ -27,9 +29,9 @@ public class CoNllLine
      */
     public int id;
 
-    public CoNllLine(string... args)
+    public CoNllLine(params string[] args)
     {
-        int Length = Math.min(args.Length, value.Length);
+        int Length = Math.Min(args.Length, value.Length);
         for (int i = 0; i < Length; ++i)
         {
             value[i] = args[i];
@@ -38,10 +40,10 @@ public class CoNllLine
     }
 
     //@Override
-    public string toString()
+    public string ToString()
     {
-        final StringBuilder sb = new StringBuilder();
-        for (string value : this.value)
+        StringBuilder sb = new StringBuilder();
+        foreach (string value in this.value)
         {
             sb.Append(value);
             sb.Append('\t');

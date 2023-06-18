@@ -23,7 +23,7 @@ public class MaxEntDependencyParserTest : TestCase
 //            List<Term> termList = new LinkedList<Term>();
 //            for (CoNLLWord word : sentence.word)
 //            {
-//                termList.add(new Term(word.LEMMA, Nature.valueOf(word.POSTAG)));
+//                termList.Add(new Term(word.LEMMA, Nature.valueOf(word.POSTAG)));
 //            }
 //            CoNLLSentence _out = CRFDependencyParser.compute(termList);
 //            evaluator.e(sentence, _out);

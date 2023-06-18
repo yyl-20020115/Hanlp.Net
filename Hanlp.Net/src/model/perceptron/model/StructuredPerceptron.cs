@@ -48,7 +48,7 @@ public class StructuredPerceptron : LinearModel
                     parameter[predictIndex[i]]--; // 惩罚招致错误的特征函数（将它的权值减一）
                 else
                 {
-                    throw new IllegalArgumentException("更新参数时传入了非法的下标");
+                    throw new ArgumentException("更新参数时传入了非法的下标");
                 }
             }
         }

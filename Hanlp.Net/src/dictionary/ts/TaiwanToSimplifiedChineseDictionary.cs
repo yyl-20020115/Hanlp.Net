@@ -32,7 +32,7 @@ public class TaiwanToSimplifiedChineseDictionary : BaseChineseDictionary
             if (!load(t2s, false, HanLP.Config.tcDictionaryRoot + "t2s.txt") ||
                     !load(tw2t, true, HanLP.Config.tcDictionaryRoot + "t2tw.txt"))
             {
-                throw new IllegalArgumentException("台湾繁体转简体词典加载失败");
+                throw new ArgumentException("台湾繁体转简体词典加载失败");
             }
             combineReverseChain(t2s, tw2t, true);
             trie.build(t2s);

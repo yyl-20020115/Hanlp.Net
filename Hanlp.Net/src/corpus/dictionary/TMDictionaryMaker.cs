@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -23,7 +25,7 @@ public class TMDictionaryMaker : ISaveAble
 
     public TMDictionaryMaker()
     {
-        transferMatrix = new TreeMap<string, Dictionary<string, int>>();
+        transferMatrix = new ();
     }
 
     /**
@@ -36,24 +38,24 @@ public class TMDictionaryMaker : ISaveAble
         Dictionary<string, int> firstMatrix = transferMatrix.get(first);
         if (firstMatrix == null)
         {
-            firstMatrix = new TreeMap<string, int>();
+            firstMatrix = new ();
             transferMatrix.put(first, firstMatrix);
         }
         int frequency = firstMatrix.get(second);
         if (frequency == null) frequency = 0;
-        firstMatrix.put(second, frequency + 1);
+        firstMatrix.Add(second, frequency + 1);
     }
 
     //@Override
     public string toString()
     {
-        Set<string> labelSet = new TreeSet<string>();
+        HashSet<string> labelSet = new TreeSet<string>();
         for (KeyValuePair<string, Dictionary<string, int>> first : transferMatrix.entrySet())
         {
-            labelSet.add(first.getKey());
+            labelSet.Add(first.getKey());
             labelSet.addAll(first.getValue().keySet());
         }
-        final StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.Append(' ');
         for (string key : labelSet)
         {
@@ -64,7 +66,7 @@ public class TMDictionaryMaker : ISaveAble
         for (string first : labelSet)
         {
             Dictionary<string, int> firstMatrix = transferMatrix.get(first);
-            if (firstMatrix == null) firstMatrix = new TreeMap<string, int>();
+            if (firstMatrix == null) firstMatrix = new ();
             sb.Append(first);
             for (string second : labelSet)
             {
@@ -75,7 +77,7 @@ public class TMDictionaryMaker : ISaveAble
             }
             sb.Append('\n');
         }
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override

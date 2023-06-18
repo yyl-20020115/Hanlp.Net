@@ -96,7 +96,7 @@ public class MDAG : ICacheAble
         int Length = byteArray.nextInt();
         for (int i = 0; i < Length; ++i)
         {
-            charTreeSet.add(byteArray.nextChar());
+            charTreeSet.Add(byteArray.nextChar());
         }
         simplifiedSourceNode = new SimpleMDAGNode();
         simplifiedSourceNode.load(byteArray);
@@ -138,13 +138,13 @@ public class MDAG : ICacheAble
             switch (this)
             {
                 case PREFIX_SEARCH_CONDITION:
-                    satisfiesSearchCondition = (str1.startsWith(str2));
+                    satisfiesSearchCondition = (str1.StartsWith(str2));
                     break;
                 case SUBSTRING_SEARCH_CONDITION:
                     satisfiesSearchCondition = (str1.contains(str2));
                     break;
                 case SUFFIX_SEARCH_CONDITION:
-                    satisfiesSearchCondition = (str1.endsWith(str2));
+                    satisfiesSearchCondition = (str1.EndsWith(str2));
                     break;
                 default:
                     satisfiesSearchCondition = true;
@@ -192,7 +192,7 @@ public class MDAG : ICacheAble
         string currentString = "";
         string previousString = "";
 
-        //Read all the lines in dataFile and add the string contained in each to the MDAG.
+        //Read all the lines in dataFile and Add the string contained in each to the MDAG.
         while ((currentString = dataFileBufferedReader.readLine()) != null)
         {
             int mpsIndex = calculateMinimizationProcessingStartIndex(previousString, currentString);
@@ -429,7 +429,7 @@ public class MDAG : ICacheAble
     {
         int mpsIndex;
 
-        if (!currStr.startsWith(prevStr))
+        if (!currStr.StartsWith(prevStr))
         {
             //Loop through the corresponding indices of both Strings in search of the first index containing differing characters.
             //The _transition path of the substring of prevStr from this point will need to be submitted for minimization processing.
@@ -584,7 +584,7 @@ public class MDAG : ICacheAble
                 bool isLastChar = (i == charCount - 1);
                 currentNode = currentNode.addOutgoingTransition(currentChar, isLastChar);
 
-                charTreeSet.add(currentChar);
+                charTreeSet.Add(currentChar);
             }
             /////
         }
@@ -609,7 +609,7 @@ public class MDAG : ICacheAble
         {
             currentNode = currentNode.transition(str.charAt(i));
             if (equivalenceClassMDAGNodeHashMap.get(currentNode) == currentNode)
-                equivalenceClassMDAGNodeHashMap.remove(currentNode);
+                equivalenceClassMDAGNodeHashMap.Remove(currentNode);
 
             //The hashCode of an MDAGNode is cached the first time a hash is performed without a cache value present.
             //Since we just hashed currentNode, we must clear this regardless of its presence in equivalenceClassMDAGNodeHashMap
@@ -691,11 +691,11 @@ public class MDAG : ICacheAble
 
         //Remove the register entries of all the nodes in the prefixString _transition path up to the first confluence node
         //(those past the confluence node will not need to be removed since they will be cloned and unaffected by the 
-        //addition of suffixString). If there is no confluence node in prefixString, then remove the register entries in prefixString's entire _transition path
+        //addition of suffixString). If there is no confluence node in prefixString, then Remove the register entries in prefixString's entire _transition path
         removeTransitionPathRegisterEntries((toFirstConfluenceNodeTransitionCharIndex == null ? prefixString : prefixString.substring(0, toFirstConfluenceNodeTransitionCharIndex)));
 
         //If there is a confluence node in the prefix, we must duplicate the _transition path
-        //of the prefix starting from that node, before we add suffixString (to the duplicate path).
+        //of the prefix starting from that node, before we Add suffixString (to the duplicate path).
         //This ensures that we do not disturb the other _transition paths containing this node.
         if (firstConfluenceNodeInPrefix != null)
         {
@@ -854,9 +854,9 @@ public class MDAG : ICacheAble
      * @param searchConditionString the string that all Strings in the MDAG must be related with in the fashion denoted
      *                              by {@code searchCondition} in order to be included in the result set
      * @param prefixString          the string corresponding to the currently traversed _transition path
-     * @param transitionTreeMap     a TreeMap of Characters to MDAGNodes collectively representing an MDAGNode's _transition set
+     * @param transitionTreeMap     a Dictionary of Characters to MDAGNodes collectively representing an MDAGNode's _transition set
      */
-    private void getStrings(HashSet<string> strHashSet, SearchCondition searchCondition, string searchConditionString, string prefixString, TreeMap<char, MDAGNode> transitionTreeMap)
+    private void getStrings(HashSet<string> strHashSet, SearchCondition searchCondition, string searchConditionString, string prefixString, Dictionary<char, MDAGNode> transitionTreeMap)
     {
         //Traverse all the valid _transition paths beginning from each _transition in transitionTreeMap, inserting the
         //corresponding Strings in to strHashSet that have the relationship with conditionString denoted by searchCondition
@@ -1055,20 +1055,20 @@ public class MDAG : ICacheAble
         {
             Class nodeObjClass = nodeObj.getClass();
 
-            if (nodeObjClass.equals(MDAGNode.c))
+            if (nodeObjClass.Equals(MDAGNode.c))
                 return ((MDAGNode) nodeObj).isAcceptNode();
-            else if (nodeObjClass.equals(SimpleMDAGNode.c))
+            else if (nodeObjClass.Equals(SimpleMDAGNode.c))
                 return ((SimpleMDAGNode) nodeObj).isAcceptNode();
 
         }
 
-        throw new IllegalArgumentException("Argument is not an MDAGNode or SimpleMDAGNode");
+        throw new ArgumentException("Argument is not an MDAGNode or SimpleMDAGNode");
     }
 
 //    //@Override
 //    public string toString()
 //    {
-//        final StringBuilder sb = new StringBuilder("MDAG{");
+//        StringBuilder sb = new StringBuilder("MDAG{");
 //        sb.Append("sourceNode=").Append(sourceNode);
 //        sb.Append(", simplifiedSourceNode=").Append(simplifiedSourceNode);
 //        sb.Append(", equivalenceClassMDAGNodeHashMap=").Append(equivalenceClassMDAGNodeHashMap);

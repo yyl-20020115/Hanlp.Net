@@ -114,7 +114,7 @@ public class ComputeAccuracy
                 param = line.toUpperCase().Split("\\s");
                 st1 = param[0];
             }
-            if (line == null || line.Length == 0 || st1.equals(":") || st1.equals("EXIT"))
+            if (line == null || line.Length == 0 || st1.Equals(":") || st1.Equals("EXIT"))
             {
                 if (TCN == 0) TCN = 1;
                 if (QID != 0)
@@ -130,15 +130,15 @@ public class ComputeAccuracy
                 CCN = 0;
                 continue;
             }
-            if ("EXIT".equals(st1)) break;
+            if ("EXIT".Equals(st1)) break;
             st2 = param[1];
             st3 = param[2];
             st4 = param[3];
-            for (b = 0; b < words; b++) if (st1.equals(vocab[b]))break;
+            for (b = 0; b < words; b++) if (st1.Equals(vocab[b]))break;
             b1 = b;
-            for (b = 0; b < words; b++) if (st2.equals(vocab[b]))break;
+            for (b = 0; b < words; b++) if (st2.Equals(vocab[b]))break;
             b2 = b;
-            for (b = 0; b < words; b++) if (st3.equals(vocab[b]))break;
+            for (b = 0; b < words; b++) if (st3.Equals(vocab[b]))break;
             b3 = b;
             for (a = 0; a < N; a++) bestd[a] = 0;
             for (a = 0; a < N; a++) bestw[a] = null;
@@ -146,7 +146,7 @@ public class ComputeAccuracy
             if (b1 == words) continue;
             if (b2 == words) continue;
             if (b3 == words) continue;
-            for (b = 0; b < words; b++) if (st4.equals(vocab[b]))break;
+            for (b = 0; b < words; b++) if (st4.Equals(vocab[b]))break;
             if (b == words) continue;
             for (a = 0; a < size; a++) vec[a] = (M[a + b2 * size] - M[a + b1 * size]) + M[a + b3 * size];
             TQS++;
@@ -172,7 +172,7 @@ public class ComputeAccuracy
                     }
                 }
             }
-            if (st4.equals(bestw[0]))
+            if (st4.Equals(bestw[0]))
             {
                 CCN++;
                 CACN++;
@@ -187,8 +187,8 @@ public class ComputeAccuracy
         printf("Questions seen / total: %d %d   %.2f %% \n", TQS, TQ, TQS / (double) TQ * 100);
     }
 
-    private static void printf(string format, params Object[] args)
+    private static void printf(string Format, params Object[] args)
     {
-        System._out.printf(format, args);
+        System._out.printf(Format, args);
     }
 }

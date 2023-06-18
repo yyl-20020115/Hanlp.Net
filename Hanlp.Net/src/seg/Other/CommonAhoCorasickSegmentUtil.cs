@@ -61,11 +61,11 @@ public class CommonAhoCorasickSegmentUtil
                     sbTerm.Append(charArray[i]);
                     ++i;
                 }
-                termList.add(new ResultTerm<V>(sbTerm.toString(), null, offset));
+                termList.Add(new ResultTerm<V>(sbTerm.toString(), null, offset));
             }
             else
             {
-                termList.add(wordNet[i]);
+                termList.Add(wordNet[i]);
                 i += wordNet[i].word.Length;
             }
         }

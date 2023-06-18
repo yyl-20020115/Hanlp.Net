@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+
 namespace com.hankcs.hanlp.corpus.util;
 
 
@@ -98,9 +101,9 @@ public class Precompiler
      */
     public static void compileWithoutNS(List<IWord> wordList)
     {
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
-            if (word.getLabel().startsWith("ns")) continue;
+            if (word.getLabel().StartsWith("ns")) continue;
             word.setValue(PosTagCompiler.compile(word.getLabel(), word.getValue()));
 //            switch (word.getLabel())
 //            {
@@ -158,9 +161,9 @@ public class Precompiler
      */
     public static void compileWithoutNT(List<IWord> wordList)
     {
-        for (IWord word : wordList)
+        foreach (IWord word in wordList)
         {
-            if (word.getLabel().startsWith("nt")) continue;
+            if (word.getLabel().StartsWith("nt")) continue;
             word.setValue(PosTagCompiler.compile(word.getLabel(), word.getValue()));
         }
     }

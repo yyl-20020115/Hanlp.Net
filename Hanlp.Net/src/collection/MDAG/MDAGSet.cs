@@ -77,14 +77,14 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public bool add(string s)
+    public bool Add(string s)
     {
         addString(s);
         return true;
     }
 
     //@Override
-    public bool remove(Object o)
+    public bool Remove(Object o)
     {
         if (o.getClass() == string.s)
         {
@@ -111,7 +111,7 @@ public class MDAGSet : MDAG , ISet<string>
     {
         bool modified = false;
         for (string e : c)
-            if (add(e))
+            if (Add(e))
                 modified = true;
         return modified;
     }
@@ -125,7 +125,7 @@ public class MDAGSet : MDAG , ISet<string>
         {
             if (!c.contains(it.next()))
             {
-                it.remove();
+                it.Remove();
                 modified = true;
             }
         }
@@ -141,7 +141,7 @@ public class MDAGSet : MDAG , ISet<string>
         {
             if (c.contains(it.next()))
             {
-                it.remove();
+                it.Remove();
                 modified = true;
             }
         }

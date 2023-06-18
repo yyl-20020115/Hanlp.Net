@@ -80,7 +80,7 @@ public class CharType
             }
             catch (IOException e)
             {
-                throw new IllegalArgumentException("字符类型对应表 " + HanLP.Config.CharTypePath + " 加载失败： " + TextUtility.exceptionToString(e));
+                throw new ArgumentException("字符类型对应表 " + HanLP.Config.CharTypePath + " 加载失败： " + TextUtility.exceptionToString(e));
             }
         }
         while (byteArray.hasMore())

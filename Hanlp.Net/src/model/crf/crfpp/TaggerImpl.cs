@@ -88,7 +88,7 @@ public class TaggerImpl : Tagger
             for (int s = 0; s < node_.size(); s++)
             {
                 List<Double> penaltys = Arrays.asList(new Double[ysize_]);
-                penalty_.add(penaltys);
+                penalty_.Add(penaltys);
             }
         }
         penalty_.get(i).set(j, penalty);
@@ -221,7 +221,7 @@ public class TaggerImpl : Tagger
             eos.fx = -node_.get(k).get(i).bestCost;
             eos.gx = -node_.get(k).get(i).cost;
             eos.next = null;
-            agenda_.add(eos);
+            agenda_.Add(eos);
         }
         return true;
     }
@@ -241,7 +241,7 @@ public class TaggerImpl : Tagger
         int err = 0;
         for (int i = 0; i < x_.size(); i++)
         {
-            if (!answer_.get(i).equals(result_.get(i)))
+            if (!answer_.get(i).Equals(result_.get(i)))
             {
                 err++;
             }
@@ -314,7 +314,7 @@ public class TaggerImpl : Tagger
         int num = 0;
         for (int i = 0; i < x_.size(); i++)
         {
-            if (answer_.get(i).equals(result_.get(i)))
+            if (answer_.get(i).Equals(result_.get(i)))
             {
                 num++;
             }
@@ -404,9 +404,9 @@ public class TaggerImpl : Tagger
                 {
                     break;
                 }
-                if (!add(line))
+                if (!Add(line))
                 {
-                    Console.Error.WriteLine("fail to add line: " + line);
+                    Console.Error.WriteLine("fail to Add line: " + line);
                     return ReadStatus.ERROR;
                 }
             }
@@ -520,14 +520,14 @@ public class TaggerImpl : Tagger
     {
     }
 
-    public bool add(string line)
+    public bool Add(string line)
     {
         string[] cols = line.Split("[\t ]", -1);
-        return add(cols);
+        return Add(cols);
     }
 
     //@Override
-    public bool add(string[] cols)
+    public bool Add(string[] cols)
     {
         int xsize = feature_index_.getXsize_();
         if ((mode_ == Mode.LEARN && cols.Length < xsize + 1) ||
@@ -536,15 +536,15 @@ public class TaggerImpl : Tagger
             Console.Error.WriteLine("# x is small: size=" + cols.Length + " xsize=" + xsize);
             return false;
         }
-        x_.add(Arrays.asList(cols));
-        result_.add(0);
+        x_.Add(Arrays.asList(cols));
+        result_.Add(0);
         int tmpAnswer = 0;
         if (mode_ == Mode.LEARN)
         {
             int r = ysize_;
             for (int i = 0; i < ysize_; i++)
             {
-                if (cols[xsize].equals(yname(i)))
+                if (cols[xsize].Equals(yname(i)))
                 {
                     r = i;
                 }
@@ -556,9 +556,9 @@ public class TaggerImpl : Tagger
             }
             tmpAnswer = r;
         }
-        answer_.add(tmpAnswer);
+        answer_.Add(tmpAnswer);
         List<Node> l = Arrays.asList(new Node[ysize_]);
-        node_.add(l);
+        node_.Add(l);
         return true;
     }
 
@@ -754,7 +754,7 @@ public class TaggerImpl : Tagger
         {
             QueueElement top = agenda_.peek();
             Node rnode = top.node;
-            agenda_.remove(top);
+            agenda_.Remove(top);
             if (rnode.x == 0)
             {
                 for (QueueElement n = top; n != null; n = n.next)
@@ -771,7 +771,7 @@ public class TaggerImpl : Tagger
                 n.gx = -p.lnode.cost - p.cost + top.gx;
                 n.fx = -p.lnode.bestCost - p.cost + top.gx;
                 n.next = top;
-                agenda_.add(n);
+                agenda_.Add(n);
             }
         }
         return false;

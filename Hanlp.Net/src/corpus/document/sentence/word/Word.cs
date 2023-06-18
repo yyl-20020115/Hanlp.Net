@@ -83,7 +83,7 @@ public class Word : IWord
     }
 
     //@Override
-    public int Length
+    public int Length()
     {
         return value.Length;
     }

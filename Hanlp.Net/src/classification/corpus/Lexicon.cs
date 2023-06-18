@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+
 namespace com.hankcs.hanlp.classification.corpus;
 
 
@@ -26,8 +28,8 @@ public class Lexicon
 
     public Lexicon()
     {
-        wordId = new BinTrie<int>();
-        idWord = new LinkedList<string>();
+        wordId = new ();
+        idWord = new ();
     }
 
     public Lexicon(BinTrie<int> wordIdTrie)
@@ -37,15 +39,15 @@ public class Lexicon
 
     public int addWord(string word)
     {
-        assert word != null;
+        //assert word != null;
         char[] charArray = word.ToCharArray();
         int id = wordId.get(charArray);
         if (id == null)
         {
             id = wordId.size();
             wordId.put(charArray, id);
-            idWord.add(word);
-            assert idWord.size() == wordId.size();
+            idWord.Add(word);
+            //assert idWord.size() == wordId.size();
         }
 
         return id;

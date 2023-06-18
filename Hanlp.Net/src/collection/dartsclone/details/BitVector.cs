@@ -80,7 +80,7 @@ class BitVector
     {
         if ((_size % UNIT_SIZE) == 0)
         {
-            _units.add(0);
+            _units.Add(0);
         }
         ++_size;
     }
@@ -105,7 +105,7 @@ class BitVector
      */
     void clear()
     {
-        _units.clear();
+        _units.Clear();
         _ranks = null;
     }
 

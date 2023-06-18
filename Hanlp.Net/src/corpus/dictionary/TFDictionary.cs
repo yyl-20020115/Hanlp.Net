@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.corpus.occurrence;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -17,7 +20,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  * 词频词典
  * @author hankcs
  */
-public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
+public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
 {
     string delimeter;
 
@@ -27,8 +30,8 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     }
 
     public TFDictionary()
+        :this("=")
     {
-        this("=");
     }
 
     //@Override
@@ -42,10 +45,10 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
      * 合并自己（主词典）和某个词频词典
      * @param dictionary 某个词频词典
      * @param limit 如果该词频词典试图引入一个词语，其词频不得超过此limit（如果不需要使用limit功能，可以传入int.MAX_VALUE）
-     * @param add 设为true则是词频叠加模式，否则是词频覆盖模式
+     * @param Add 设为true则是词频叠加模式，否则是词频覆盖模式
      * @return 词条的增量
      */
-    public int combine(TFDictionary dictionary, int limit, bool add)
+    public int combine(TFDictionary dictionary, int limit, bool Add)
     {
         int preSize = trie.size();
         for (KeyValuePair<string, TermFrequency> entry : dictionary.trie.entrySet())
@@ -57,7 +60,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
             }
             else
             {
-                if (add)
+                if (Add)
                 {
                     termFrequency.setValue(termFrequency.getValue() + Math.min(limit, entry.getValue().getValue()));
                 }
@@ -71,7 +74,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
      * @param path 多个词典的路径，第一个是主词典。主词典与其他词典的区别详见com.hankcs.hanlp.corpus.dictionary.TFDictionary#combine(com.hankcs.hanlp.corpus.dictionary.TFDictionary, int, bool)
      * @return 词条的增量
      */
-    public static int combine(string... path)
+    public static int combine(params string[] path)
     {
         TFDictionary dictionaryMain = new TFDictionary();
         dictionaryMain.load(path[0]);
@@ -115,7 +118,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
         return termFrequency.getFrequency();
     }
 
-    public void add(string key)
+    public void Add(string key)
     {
         TermFrequency termFrequency = trie.get(key);
         if (termFrequency == null)
@@ -132,21 +135,21 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     //@Override
     public bool saveTxtTo(string path)
     {
-        if ("=".equals(delimeter))
+        if ("=".Equals(delimeter))
         {
             LinkedList<TermFrequency> termFrequencyLinkedList = new LinkedList<TermFrequency>();
             for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
             {
-                termFrequencyLinkedList.add(entry.getValue());
+                termFrequencyLinkedList.Add(entry.getValue());
             }
             return IOUtil.saveCollectionToTxt(termFrequencyLinkedList, path);
         }
         else
         {
-            ArrayList<string> outList = new ArrayList<string>(size());
+            var outList = new List<string>(size());
             for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
             {
-                outList.add(entry.getKey() + delimeter + entry.getValue().getFrequency());
+                outList.Add(entry.getKey() + delimeter + entry.getValue().getFrequency());
             }
             return IOUtil.saveCollectionToTxt(outList, path);
         }
@@ -160,9 +163,9 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
     public bool saveKeyTo(string path)
     {
         LinkedList<string> keyList = new LinkedList<string>();
-        for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
+        foreach (KeyValuePair<string, TermFrequency> entry in trie.entrySet())
         {
-            keyList.add(entry.getKey());
+            keyList.Add(entry.getKey());
         }
         return IOUtil.saveCollectionToTxt(keyList, path);
     }
@@ -171,13 +174,13 @@ public class TFDictionary : SimpleDictionary<TermFrequency> : ISaveAble
      * 按照频率从高到低排序的条目
      * @return
      */
-    public TreeSet<TermFrequency> values()
+    public HashSet<TermFrequency> values()
     {
-        TreeSet<TermFrequency> set = new TreeSet<TermFrequency>(Collections.reverseOrder());
+        HashSet<TermFrequency> set = new HashSet<TermFrequency>(Collections.reverseOrder());
 
         for (KeyValuePair<string, TermFrequency> entry : entrySet())
         {
-            set.add(entry.getValue());
+            set.Add(entry.getValue());
         }
 
         return set;

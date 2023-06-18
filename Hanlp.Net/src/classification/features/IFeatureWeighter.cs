@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.collection.trie.datrie;
+
 namespace com.hankcs.hanlp.classification.features;
 
 

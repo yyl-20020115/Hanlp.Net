@@ -22,13 +22,13 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
 {
     public BaseScorer()
     {
-        storage = new TreeMap<T, Set<string>>();
+        storage = new Dictionary<T, HashSet<string>>();
     }
 
     /**
      * 储存
      */
-    protected Dictionary<T, Set<string>> storage;
+    protected Dictionary<T, HashSet<string>> storage;
     /**
      * 权重
      */
@@ -50,13 +50,13 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
     {
         T key = generateKey(sentence);
         if (key == null) return;
-        Set<string> set = storage.get(key);
+        HashSet<string> set = storage.get(key);
         if (set == null)
         {
             set = new TreeSet<string>();
             storage.put(key, set);
         }
-        set.add(sentence);
+        set.Add(sentence);
     }
 
     /**
@@ -69,10 +69,10 @@ public abstract class BaseScorer<T : ISentenceKey> : IScorer
     //@Override
     public Dictionary<string, Double> computeScore(string outerSentence)
     {
-        TreeMap<string, Double> result = new TreeMap<string, Double>(Collections.reverseOrder());
+        Dictionary<string, Double> result = new Dictionary<string, Double>(Collections.reverseOrder());
         T keyOuter = generateKey(outerSentence);
         if (keyOuter == null) return result;
-        for (KeyValuePair<T, Set<string>> entry : storage.entrySet())
+        for (KeyValuePair<T, HashSet<string>> entry : storage.entrySet())
         {
             T key = entry.getKey();
             Double score = keyOuter.similarity(key);

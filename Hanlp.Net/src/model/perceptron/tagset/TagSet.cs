@@ -32,7 +32,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         this.type = type;
     }
 
-    public int add(string tag)
+    public int Add(string tag)
     {
         //        assertUnlock();
         int id = stringIdMap.get(tag);
@@ -40,7 +40,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         {
             id = stringIdMap.size();
             stringIdMap.put(tag, id);
-            idStringMap.add(tag);
+            idStringMap.Add(tag);
         }
 
         return id;
@@ -128,7 +128,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         for (int i = 0; i < size; i++)
         {
             string tag = byteArray.nextUTF();
-            idStringMap.add(tag);
+            idStringMap.Add(tag);
             stringIdMap.put(tag, i);
         }
         _lock () ;
@@ -143,7 +143,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         for (int i = 0; i < size; i++)
         {
             string tag = _in.readUTF();
-            idStringMap.add(tag);
+            idStringMap.Add(tag);
             stringIdMap.put(tag, i);
         }
         _lock () ;

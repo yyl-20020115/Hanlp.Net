@@ -27,12 +27,12 @@ public class DemoCustomDictionary
     public static void Main(String[] args)
     {
         // 动态增加
-        CustomDictionary.add("攻城狮");
+        CustomDictionary.Add("攻城狮");
         // 强行插入
         CustomDictionary.insert("白富美", "nz 1024");
         // 删除词语（注释掉试试）
-        //        CustomDictionary.remove("攻城狮");
-        Console.WriteLine(CustomDictionary.add("单身狗", "nz 1024 n 1"));
+        //        CustomDictionary.Remove("攻城狮");
+        Console.WriteLine(CustomDictionary.Add("单身狗", "nz 1024 n 1"));
         Console.WriteLine(CustomDictionary.get("单身狗"));
 
         String text = "攻城狮逆袭单身狗，迎娶白富美，走上人生巅峰";  // 怎么可能噗哈哈！

@@ -39,7 +39,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
         //super(cwsModel);
         if (cwsModel.featureMap.tagSet.type != TaskType.CWS)
         {
-            throw new IllegalArgumentException(string.format("错误的模型类型: 传入的不是分词模型，而是 %s 模型", cwsModel.featureMap.tagSet.type));
+            throw new ArgumentException(string.Format("错误的模型类型: 传入的不是分词模型，而是 %s 模型", cwsModel.featureMap.tagSet.type));
         }
         CWSTagSet = (CWSTagSet) cwsModel.featureMap.tagSet;
     }
@@ -83,7 +83,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
         {
             if (tagArray[i] == CWSTagSet.B || tagArray[i] == CWSTagSet.S)
             {
-                output.add(result.ToString());
+                output.Add(result.ToString());
                 result.setLength(0);
             }
             result.Append(text.charAt(i));

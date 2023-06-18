@@ -42,11 +42,11 @@ public class Path
         }
     }
 
-    public void add(Node _lnode, Node _rnode)
+    public void Add(Node _lnode, Node _rnode)
     {
         lnode = _lnode;
         rnode = _rnode;
-        lnode.rpath.add(this);
-        rnode.lpath.add(this);
+        lnode.rpath.Add(this);
+        rnode.lpath.Add(this);
     }
 }

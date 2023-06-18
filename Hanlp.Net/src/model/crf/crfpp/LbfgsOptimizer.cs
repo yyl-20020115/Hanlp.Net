@@ -266,8 +266,8 @@ public class LbfgsOptimizer
     public int init(int n, int m)
     {
         //This is old interface for backword compatibility
-        final int msize = 5;
-        final int size = n;
+        int msize = 5;
+        int size = n;
         iflag_ = 0;
         w_ = new double[size * (2 * msize + 1) + 2 * msize];
         Arrays.fill(w_, 0.0);

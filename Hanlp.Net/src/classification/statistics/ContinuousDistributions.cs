@@ -36,7 +36,7 @@ public class ContinuousDistributions
     {
         if (df <= 0)
         {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
 
         return GammaCdf(x / 2.0, df / 2.0);
@@ -65,7 +65,7 @@ public class ContinuousDistributions
         }
         else
         {
-            y = Math.abs(z) / 2.0;
+            y = Math.Abs(z) / 2.0;
             if (y >= 3.0)
             {
                 p = 1.0;
@@ -110,7 +110,7 @@ public class ContinuousDistributions
     public static double LogGamma(double Z)
     {
         double S = 1.0 + 76.18009173 / Z - 86.50532033 / (Z + 1.0) + 24.01409822 / (Z + 2.0) - 1.231739516 / (Z + 3.0) + 0.00120858003 / (Z + 4.0) - 0.00000536382 / (Z + 5.0);
-        double LG = (Z - 0.5) * Math.log(Z + 4.5) - (Z + 4.5) + Math.log(S * 2.50662827465);
+        double LG = (Z - 0.5) * Math.Log(Z + 4.5) - (Z + 4.5) + Math.Log(S * 2.50662827465);
 
         return LG;
     }
@@ -131,7 +131,7 @@ public class ContinuousDistributions
         double B1 = x;
         double AOLD = 0;
         double N = 0;
-        while (Math.abs((A1 - AOLD) / A1) > .00001)
+        while (Math.Abs((A1 - AOLD) / A1) > .00001)
         {
             AOLD = A1;
             N = N + 1;
@@ -144,7 +144,7 @@ public class ContinuousDistributions
             A1 = A1 / B1;
             B1 = 1;
         }
-        double Prob = Math.exp(A * Math.log(x) - x - LogGamma(A)) * A1;
+        double Prob = Math.Exp(A * Math.Log(x) - x - LogGamma(A)) * A1;
 
         return 1.0 - Prob;
     }
@@ -168,7 +168,7 @@ public class ContinuousDistributions
             G = G + T9;
             ++I;
         }
-        G = G * Math.exp(A * Math.log(x) - x - LogGamma(A));
+        G = G * Math.Exp(A * Math.Log(x) - x - LogGamma(A));
 
         return G;
     }
@@ -185,16 +185,16 @@ public class ContinuousDistributions
     {
         if (x < 0)
         {
-            throw new IllegalArgumentException();
+            throw new ArgumentException();
         }
 
         double GI = 0;
         if (a > 200)
         {
-            double z = (x - a) / Math.sqrt(a);
+            double z = (x - a) / Math.Sqrt(a);
             double y = GaussCdf(z);
-            double b1 = 2 / Math.sqrt(a);
-            double phiz = 0.39894228 * Math.exp(-z * z / 2);
+            double b1 = 2 / Math.Sqrt(a);
+            double phiz = 0.39894228 * Math.Exp(-z * z / 2);
             double w = y - b1 * (z * z - 1) * phiz / 6;  //Edgeworth1
             double b2 = 6 / a;
             int zXor4 = ((int) z) ^ 4;
@@ -238,7 +238,7 @@ public class ContinuousDistributions
             return 0.0;
         }
 
-        chisqval = df / Math.sqrt(p);    /* fair first value */
+        chisqval = df / Math.Sqrt(p);    /* fair first value */
         while ((maxchisq - minchisq) > CHI_EPSILON)
         {
             if (1 - ChisquareCdf(chisqval, df) < p)

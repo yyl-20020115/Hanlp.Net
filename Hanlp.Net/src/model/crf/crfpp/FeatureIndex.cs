@@ -149,7 +149,7 @@ public abstract class FeatureIndex
         StringBuilder sb = new StringBuilder();
         for (string tmp : str.Split("%x", -1))
         {
-            if (tmp.startsWith("U") || tmp.startsWith("B"))
+            if (tmp.StartsWith("U") || tmp.StartsWith("B"))
             {
                 sb.Append(tmp);
             }
@@ -179,13 +179,13 @@ public abstract class FeatureIndex
             string featureID = applyRule(tmpl, curPos, tagger);
             if (featureID == null || featureID.Length == 0)
             {
-                Console.Error.WriteLine("format error");
+                Console.Error.WriteLine("Format error");
                 return false;
             }
             int id = getID(featureID);
             if (id != -1)
             {
-                feature.add(id);
+                feature.Add(id);
             }
         }
         return true;
@@ -203,8 +203,8 @@ public abstract class FeatureIndex
             {
                 return false;
             }
-            feature.add(-1);
-            featureCache.add(feature);
+            feature.Add(-1);
+            featureCache.Add(feature);
             feature = new ArrayList<int>();
         }
         for (int cur = 1; cur < tagger.size(); cur++)
@@ -213,8 +213,8 @@ public abstract class FeatureIndex
             {
                 return false;
             }
-            feature.add(-1);
-            featureCache.add(feature);
+            feature.Add(-1);
+            featureCache.Add(feature);
             feature = new ArrayList<int>();
         }
         return true;
@@ -246,7 +246,7 @@ public abstract class FeatureIndex
                 {
                     Path p = new Path();
                     p.clear();
-                    p.add(tagger.node(cur - 1, j), tagger.node(cur, i));
+                    p.Add(tagger.node(cur - 1, j), tagger.node(cur, i));
                     p.fvector = f;
                 }
             }

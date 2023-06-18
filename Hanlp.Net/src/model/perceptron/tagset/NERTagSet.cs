@@ -8,6 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.perceptron.common;
+
 namespace com.hankcs.hanlp.model.perceptron.tagset;
 
 
@@ -17,63 +20,65 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
  */
 public class NERTagSet : TagSet
 {
-    public final string O_TAG = "O";
-    public final char O_TAG_CHAR = 'O';
-    public final string B_TAG_PREFIX = "B-";
-    public final char B_TAG_CHAR = 'B';
-    public final string M_TAG_PREFIX = "M-";
-    public final string E_TAG_PREFIX = "E-";
-    public final string S_TAG = "S";
-    public final char S_TAG_CHAR = 'S';
-    public final Set<string> nerLabels = new HashSet<string>();
+    public string O_TAG = "O";
+    public char O_TAG_CHAR = 'O';
+    public string B_TAG_PREFIX = "B-";
+    public char B_TAG_CHAR = 'B';
+    public string M_TAG_PREFIX = "M-";
+    public string E_TAG_PREFIX = "E-";
+    public string S_TAG = "S";
+    public char S_TAG_CHAR = 'S';
+    public HashSet<string> nerLabels = new HashSet<string>();
 
     /**
      * 非NER
      */
-    public final int O;
+    public int O;
 
     public NERTagSet()
+        : base(TaskType.NER)
     {
-        super(TaskType.NER);
-        O = add(O_TAG);
+        ;
+        O = Add(O_TAG);
     }
 
-    public NERTagSet(int o, Collection<string> tags)
+    public NERTagSet(int o, ICollection<string> tags)
+        : base(TaskType.NER)
     {
-        super(TaskType.NER);
+        ;
         O = o;
-        for (string tag : tags)
+        foreach (string tag in tags)
         {
-            add(tag);
+            Add(tag);
             string label = NERTagSet.posOf(tag);
             if (label.Length != tag.Length)
-                nerLabels.add(label);
+                nerLabels.Add(label);
         }
     }
 
     public static string posOf(string tag)
     {
-        int index = tag.indexOf('-');
+        int index = tag.IndexOf('-');
         if (index == -1)
         {
             return tag;
         }
 
-        return tag.substring(index + 1);
+        return tag.Substring(index + 1);
     }
 
     //@Override
     public bool load(ByteArray byteArray)
     {
-        super.load(byteArray);
-        nerLabels.clear();
-        for (KeyValuePair<string, int> entry : this)
+        base.load(byteArray);
+        nerLabels.Clear();
+        foreach (KeyValuePair<string, int> entry in this)
         {
-            string tag = entry.getKey();
-            int index = tag.indexOf('-');
+            string tag = entry.Key;
+            int index = tag.IndexOf('-');
             if (index != -1)
             {
-                nerLabels.add(tag.substring(index + 1));
+                nerLabels.Add(tag.Substring(index + 1));
             }
         }
 

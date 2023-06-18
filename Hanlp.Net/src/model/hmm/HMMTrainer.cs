@@ -38,13 +38,13 @@ public abstract class HMMTrainer
 
     public void train(string corpus) 
     {
-        final List<List<string[]>> sequenceList = new LinkedList<List<string[]>>();
+        List<List<string[]>> sequenceList = new LinkedList<List<string[]>>();
         IOUtility.loadInstance(corpus, new InstanceHandler()
         {
             //@Override
             public bool process(Sentence sentence)
             {
-                sequenceList.add(convertToSequence(sentence));
+                sequenceList.Add(convertToSequence(sentence));
                 return false;
             }
         });
@@ -60,11 +60,11 @@ public abstract class HMMTrainer
             {
                 sample[0][i] = vocabulary.idOf(os[0]);
                 assert sample[0][i] != -1;
-                sample[1][i] = tagSet.add(os[1]);
+                sample[1][i] = tagSet.Add(os[1]);
                 assert sample[1][i] != -1;
                 ++i;
             }
-            sampleList.add(sample);
+            sampleList.Add(sample);
         }
 
         model.train(sampleList);

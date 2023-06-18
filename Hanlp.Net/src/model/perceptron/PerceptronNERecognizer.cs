@@ -34,7 +34,7 @@ public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
     {
         if (nerModel.tagSet().type != TaskType.NER)
         {
-            throw new IllegalArgumentException(string.format("错误的模型类型: 传入的不是命名实体识别模型，而是 %s 模型", nerModel.featureMap.tagSet.type));
+            throw new ArgumentException(string.Format("错误的模型类型: 传入的不是命名实体识别模型，而是 %s 模型", nerModel.featureMap.tagSet.type));
         }
         this.tagSet = (NERTagSet) model.tagSet();
     }

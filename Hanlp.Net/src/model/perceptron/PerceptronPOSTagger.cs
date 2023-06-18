@@ -31,7 +31,7 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
     {
         if (model.featureMap.tagSet.type != TaskType.POS)
         {
-            throw new IllegalArgumentException(string.format("错误的模型类型: 传入的不是词性标注模型，而是 %s 模型", model.featureMap.tagSet.type));
+            throw new ArgumentException(string.Format("错误的模型类型: 传入的不是词性标注模型，而是 %s 模型", model.featureMap.tagSet.type));
         }
     }
 

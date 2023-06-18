@@ -25,7 +25,7 @@ public class WordFactory
     public static IWord create(string param)
     {
         if (param == null) return null;
-        if (param.startsWith("[") && !param.startsWith("[/"))
+        if (param.StartsWith("[") && !param.StartsWith("[/"))
         {
             return CompoundWord.create(param);
         }

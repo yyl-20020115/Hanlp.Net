@@ -77,15 +77,15 @@ public class Term
      * 判断Term是否相等
      */
     //@Override
-    public bool equals(Object obj) {
+    public bool Equals(Object obj) {
         if (obj is Term)
         {
             Term term = (Term)obj;
-            if (this.nature == term.nature && this.word.equals(term.word))
+            if (this.nature == term.nature && this.word.Equals(term.word))
             {
                 return true;
             }
         }
-        return super.equals(obj);
+        return super.Equals(obj);
     }
 }

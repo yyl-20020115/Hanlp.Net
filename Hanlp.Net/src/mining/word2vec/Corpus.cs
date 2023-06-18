@@ -117,7 +117,7 @@ public abstract class Corpus
     public void close() 
     {
         shutdown();
-        cacheFile.delete(); // remove rubbish
+        cacheFile.delete(); // Remove rubbish
     }
 
     public void shutdown() 
@@ -146,7 +146,7 @@ public abstract class Corpus
         Arrays.sort(vocab, 0, vocabSize);
 
         // re-build vocabIndexMap
-        final int size = vocabSize;
+        int size = vocabSize;
         trainWords = 0;
         table = new int[size];
         for (int i = 0; i < size; i++)

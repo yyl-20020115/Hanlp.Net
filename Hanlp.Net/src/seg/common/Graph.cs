@@ -50,7 +50,7 @@ public class Graph
      */
     public void connect(int from, int to, double weight)
     {
-        edgesTo[to].add(new EdgeFrom(from, weight, vertexes[from].word + '@' + vertexes[to].word));
+        edgesTo[to].Add(new EdgeFrom(from, weight, vertexes[from].word + '@' + vertexes[to].word));
     }
 
 
@@ -82,7 +82,7 @@ public class Graph
             List<EdgeFrom> edgeFromList = edgesTo[to];
             for (EdgeFrom edgeFrom : edgeFromList)
             {
-                sb.Append(string.format("to:%3d, from:%3d, weight:%05.2f, word:%s\n", to, edgeFrom.from, edgeFrom.weight, edgeFrom.name));
+                sb.Append(string.Format("to:%3d, from:%3d, weight:%05.2f, word:%s\n", to, edgeFrom.from, edgeFrom.weight, edgeFrom.name));
             }
         }
 
@@ -99,7 +99,7 @@ public class Graph
         List<Vertex> vertexList = new LinkedList<Vertex>();
         for (int i : path)
         {
-            vertexList.add(vertexes[i]);
+            vertexList.Add(vertexes[i]);
         }
 
         return vertexList;

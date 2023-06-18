@@ -26,7 +26,7 @@ public abstract class Tagger
         return true;
     }
 
-    public bool add(string[] strArr)
+    public bool Add(string[] strArr)
     {
         return true;
     }
@@ -40,7 +40,7 @@ public abstract class Tagger
         return null;
     }
 
-    public bool add(string str)
+    public bool Add(string str)
     {
         return true;
     }

@@ -195,7 +195,7 @@ public abstract class PerceptronClassifier
             string[] cells = line.Split(",");
             string text = cells[0], label = cells[1];
             List<int> x = extractFeature(text, featureMap);
-            int y = featureMap.tagSet.add(label);
+            int y = featureMap.tagSet.Add(label);
             if (y == 0)
                 y = -1; // 感知机标签约定为±1
             else if (y > 1)

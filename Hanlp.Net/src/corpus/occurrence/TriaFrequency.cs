@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.occurrence;
 
 /**
@@ -21,13 +24,15 @@ public class TriaFrequency : PairFrequency
     public string third;
 
     private TriaFrequency(string term, int frequency)
+        :base(term, frequency)
     {
-        super(term, frequency);
+        ;
     }
 
     private TriaFrequency(string term)
+        : base(term)
     {
-        super(term);
+       ;
     }
 
     /**
@@ -70,7 +75,7 @@ public class TriaFrequency : PairFrequency
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.Append(getKey().replace(Occurrence.LEFT, '←').replace(Occurrence.RIGHT, '→'));
         sb.Append('=');
         sb.Append(" tf=");
@@ -82,6 +87,6 @@ public class TriaFrequency : PairFrequency
         sb.Append(le);
         sb.Append(" re=");
         sb.Append(re);
-        return sb.toString();
+        return sb.ToString();
     }
 }

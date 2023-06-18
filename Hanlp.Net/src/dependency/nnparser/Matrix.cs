@@ -123,7 +123,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         {
             if (A[i].Length != n)
             {
-                throw new IllegalArgumentException("All rows must have the same Length.");
+                throw new ArgumentException("All rows must have the same Length.");
             }
         }
         this.A = A;
@@ -158,7 +158,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         n = (m != 0 ? vals.Length / m : 0);
         if (m * n != vals.Length)
         {
-            throw new IllegalArgumentException("Array Length must be a multiple of m.");
+            throw new ArgumentException("Array Length must be a multiple of m.");
         }
         A = new double[m][n];
         for (int i = 0; i < m; i++)
@@ -196,7 +196,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         {
             if (A[i].Length != n)
             {
-                throw new IllegalArgumentException
+                throw new ArgumentException
                         ("All rows must have the same Length.");
             }
             for (int j = 0; j < n; j++)
@@ -932,7 +932,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
     {
         if (B.m != n)
         {
-            throw new IllegalArgumentException("Matrix inner dimensions must agree.");
+            throw new ArgumentException("Matrix inner dimensions must agree.");
         }
         Matrix X = new Matrix(m, B.n);
         double[][] C = X.getArray();
@@ -1021,7 +1021,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     /**
      * Print the matrix to stdout.   Line the elements up in columns
-     * with a Fortran-like 'Fw.d' style format.
+     * with a Fortran-like 'Fw.d' style Format.
      *
      * @param w Column width.
      * @param d Number of digits after the decimal.
@@ -1034,7 +1034,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     /**
      * Print the matrix to the output stream.   Line the elements up in
-     * columns with a Fortran-like 'Fw.d' style format.
+     * columns with a Fortran-like 'Fw.d' style Format.
      *
      * @param output Output stream.
      * @param w      Column width.
@@ -1043,30 +1043,30 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public void print(PrintWriter output, int w, int d)
     {
-        DecimalFormat format = new DecimalFormat();
-        format.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
-        format.setMinimumIntegerDigits(1);
-        format.setMaximumFractionDigits(d);
-        format.setMinimumFractionDigits(d);
-        format.setGroupingUsed(false);
-        print(output, format, w + 2);
+        DecimalFormat Format = new DecimalFormat();
+        Format.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
+        Format.setMinimumIntegerDigits(1);
+        Format.setMaximumFractionDigits(d);
+        Format.setMinimumFractionDigits(d);
+        Format.setGroupingUsed(false);
+        print(output, Format, w + 2);
     }
 
     /**
      * Print the matrix to stdout.  Line the elements up in columns.
-     * Use the format object, and right justify within columns of width
+     * Use the Format object, and right justify within columns of width
      * characters.
      * Note that is the matrix is to be read back in, you probably will want
      * to use a NumberFormat that is set to US Locale.
      *
-     * @param format A  Formatting object for individual elements.
+     * @param Format A  Formatting object for individual elements.
      * @param width  Field width for each column.
      * @see DecimalFormat#setDecimalFormatSymbols
      */
 
-    public void print(NumberFormat format, int width)
+    public void print(NumberFormat Format, int width)
     {
-        print(new PrintWriter(System._out, true), format, width);
+        print(new PrintWriter(System._out, true), Format, width);
     }
 
     // DecimalFormat is a little disappointing coming from Fortran or C's printf.
@@ -1076,25 +1076,25 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     /**
      * Print the matrix to the output stream.  Line the elements up in columns.
-     * Use the format object, and right justify within columns of width
+     * Use the Format object, and right justify within columns of width
      * characters.
      * Note that is the matrix is to be read back in, you probably will want
      * to use a NumberFormat that is set to US Locale.
      *
      * @param output the output stream.
-     * @param format A formatting object to format the matrix elements
+     * @param Format A formatting object to Format the matrix elements
      * @param width  Column width.
      * @see DecimalFormat#setDecimalFormatSymbols
      */
 
-    public void print(PrintWriter output, NumberFormat format, int width)
+    public void print(PrintWriter output, NumberFormat Format, int width)
     {
         output.println();  // start on new line.
         for (int i = 0; i < m; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                string s = format.format(A[i][j]); // format the number
+                string s = Format.Format(A[i][j]); // Format the number
                 int padding = Math.max(1, width - s.Length); // At _least_ 1 space
                 for (int k = 0; k < padding; k++)
                     output.print(' ');
@@ -1106,7 +1106,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
     }
 
     /**
-     * Read a matrix from a stream.  The format is the same the print method,
+     * Read a matrix from a stream.  The Format is the same the print method,
      * so printed matrices can be read back in (provided they were printed using
      * US Locale).  Elements are separated by
      * whitespace, all the elements for each row appear on a single line,
@@ -1181,7 +1181,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
     {
         if (B.m != m || B.n != n)
         {
-            throw new IllegalArgumentException("Matrix dimensions must agree.");
+            throw new ArgumentException("Matrix dimensions must agree.");
         }
     }
 

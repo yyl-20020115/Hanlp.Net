@@ -1,3 +1,6 @@
+using com.hankcs.hanlp.dictionary.other;
+using System.Text;
+
 namespace com.hankcs.hanlp.classification.tokenizers;
 
 
@@ -11,7 +14,7 @@ public class BigramTokenizer : ITokenizer
         CharTable.normalization(charArray);
 
         // 先拆成字
-        List<int[]> atomList = new LinkedList<int[]>();
+        List<int[]> atomList = new ();
         int start = 0;
         int end = charArray.Length;
         int offsetAtom = start;
@@ -22,7 +25,7 @@ public class BigramTokenizer : ITokenizer
             curType = CharType.get(charArray[offsetAtom]);
             if (preType == CharType.CT_CHINESE)
             {
-                atomList.add(new int[]{start, offsetAtom - start});
+                atomList.Add(new int[]{start, offsetAtom - start});
                 start = offsetAtom;
             }
             else if (curType != preType)
@@ -36,23 +39,23 @@ public class BigramTokenizer : ITokenizer
                         if (curType != CharType.CT_NUM) break;
                     }
                 }
-                if (preType == CharType.CT_NUM || preType == CharType.CT_LETTER) atomList.add(new int[]{start, offsetAtom - start});
+                if (preType == CharType.CT_NUM || preType == CharType.CT_LETTER) atomList.Add(new int[]{start, offsetAtom - start});
                 start = offsetAtom;
             }
             preType = curType;
         }
         if (offsetAtom == end)
-            if (preType == CharType.CT_NUM || preType == CharType.CT_LETTER) atomList.add(new int[]{start, offsetAtom - start});
-        if (atomList.isEmpty()) return new string[0];
+            if (preType == CharType.CT_NUM || preType == CharType.CT_LETTER) atomList.Add(new int[]{start, offsetAtom - start});
+        if (atomList.Count==0) return new string[0];
         // 输出
-        string[] termArray = new string[atomList.size() - 1];
+        string[] termArray = new string[atomList.Count - 1];
         Iterator<int[]> iterator = atomList.iterator();
         int[] pre = iterator.next();
         int p = -1;
         while (iterator.hasNext())
         {
             int[] cur = iterator.next();
-            termArray[++p] = new StringBuilder(pre[1] + cur[1]).Append(charArray, pre[0], pre[1]).Append(charArray, cur[0], cur[1]).toString();
+            termArray[++p] = new StringBuilder(pre[1] + cur[1]).Append(charArray, pre[0], pre[1]).Append(charArray, cur[0], cur[1]).ToString();
             pre = cur;
         }
 

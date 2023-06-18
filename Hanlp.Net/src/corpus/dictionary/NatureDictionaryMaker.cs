@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus.dictionary;
 
 
@@ -19,8 +23,8 @@ namespace com.hankcs.hanlp.corpus.dictionary;
 public class NatureDictionaryMaker : CommonDictionaryMaker
 {
     public NatureDictionaryMaker()
+        :base(null)
     {
-        super(null);
     }
 
     //@Override
@@ -28,13 +32,13 @@ public class NatureDictionaryMaker : CommonDictionaryMaker
     {
         logger.info("开始制作词典");
         // 制作NGram词典
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             IWord pre = null;
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
                 // 制作词性词频词典
-                dictionaryMaker.add(word);
+                dictionaryMaker.Add(word);
                 if (pre != null)
                 {
                     nGramDictionaryMaker.addPair(pre, word);
@@ -68,53 +72,54 @@ public class NatureDictionaryMaker : CommonDictionaryMaker
      */
     static bool makeCoreDictionary(string inPath, string outPath)
     {
-        final DictionaryMaker dictionaryMaker = new DictionaryMaker();
-        final TreeSet<string> labelSet = new TreeSet<string>();
+        DictionaryMaker dictionaryMaker = new DictionaryMaker();
+        HashSet<string> labelSet = new HashSet<string>();
 
-        CorpusLoader.walk(inPath, new CorpusLoader.Handler()
-        {
-            //@Override
-            public void handle(Document document)
-            {
-                for (List<Word> sentence : document.getSimpleSentenceList(true))
-                {
-                    for (Word word : sentence)
-                    {
-                        if (shouldInclude(word))
-                            dictionaryMaker.add(word);
-                    }
-                }
-//                for (List<Word> sentence : document.getSimpleSentenceList(false))
-//                {
-//                    for (Word word : sentence)
-//                    {
-//                        if (shouldInclude(word))
-//                            dictionaryMaker.add(word);
-//                    }
-//                }
-            }
-
-            /**
-             * 是否应当计算这个词语
-             * @param word
-             * @return
-             */
-            bool shouldInclude(Word word)
-            {
-                if ("m".equals(word.label) || "mq".equals(word.label) || "w".equals(word.label) || "t".equals(word.label))
-                {
-                    if (!TextUtility.isAllChinese(word.value)) return false;
-                }
-                else if ("nr".equals(word.label))
-                {
-                    return false;
-                }
-
-                return true;
-            }
-        });
+        CorpusLoader.walk(inPath, new CT());
         if (outPath != null)
         return dictionaryMaker.saveTxtTo(outPath);
         return false;
+    }
+    public class CT: CorpusLoader.Handler
+    {
+        //@Override
+        public void handle(Document document)
+        {
+            foreach (List<Word> sentence in document.getSimpleSentenceList(true))
+            {
+                foreach (Word word in sentence)
+                {
+                    if (shouldInclude(word))
+                        dictionaryMaker.Add(word);
+                }
+            }
+            //                for (List<Word> sentence : document.getSimpleSentenceList(false))
+            //                {
+            //                    for (Word word : sentence)
+            //                    {
+            //                        if (shouldInclude(word))
+            //                            dictionaryMaker.Add(word);
+            //                    }
+            //                }
+        }
+
+        /**
+         * 是否应当计算这个词语
+         * @param word
+         * @return
+         */
+        bool shouldInclude(Word word)
+        {
+            if ("m".Equals(word.label) || "mq".Equals(word.label) || "w".Equals(word.label) || "t".Equals(word.label))
+            {
+                if (!TextUtility.isAllChinese(word.value)) return false;
+            }
+            else if ("nr".Equals(word.label))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

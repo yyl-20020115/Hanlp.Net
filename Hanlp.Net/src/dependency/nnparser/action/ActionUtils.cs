@@ -18,12 +18,12 @@ namespace com.hankcs.hanlp.dependency.nnparser.action;
  */
 public class ActionUtils : ActionType
 {
-    public static bool is_shift(final Action act)
+    public static bool is_shift(Action act)
     {
         return (act.name() == kShift);
     }
 
-    public static bool is_left_arc(final Action act, int[] deprel)
+    public static bool is_left_arc(Action act, int[] deprel)
     {
         if (act.name() == kLeftArc)
         {
@@ -34,7 +34,7 @@ public class ActionUtils : ActionType
         return false;
     }
 
-    public static bool is_right_arc(final Action act, int[] deprel)
+    public static bool is_right_arc(Action act, int[] deprel)
     {
         if (act.name() == kRightArc)
         {
@@ -51,14 +51,14 @@ public class ActionUtils : ActionType
     {
         // The oracle finding algorithm for arcstandard is using a in-order tree
         // searching.
-        int N = heads.size();
+        int N = heads.Count;
         int root = -1;
-        List<List<int>> tree = new ArrayList<List<int>>(N);
+        List<List<int>> tree = new (N);
 
-        actions.clear();
+        actions.Clear();
         for (int i = 0; i < N; ++i)
         {
-            int head = heads.get(i);
+            int head = heads[(i)];
             if (head == -1)
             {
                 if (root == -1)
@@ -67,7 +67,7 @@ public class ActionUtils : ActionType
             }
             else
             {
-                tree.get(head).add(i);
+                tree[(head)].Add(i);
             }
         }
 
@@ -88,19 +88,19 @@ public class ActionUtils : ActionType
             get_oracle_actions_travel(children.get(i), heads, deprels, tree, actions);
         }
 
-        actions.add(ActionFactory.make_shift());
+        actions.Add(ActionFactory.make_shift());
 
-        for (int j = i; j < children.size(); ++j)
+        for (int j = i; j < children.Count; ++j)
         {
             int child = children.get(j);
             get_oracle_actions_travel(child, heads, deprels, tree, actions);
-            actions.add(ActionFactory.make_right_arc (deprels.get(child)));
+            actions.Add(ActionFactory.make_right_arc (deprels.get(child)));
         }
 
         for (int j = i - 1; j >= 0; --j)
         {
             int child = children.get(j);
-            actions.add(ActionFactory.make_left_arc (deprels.get(child)));
+            actions.Add(ActionFactory.make_left_arc (deprels.get(child)));
         }
     }
 
@@ -113,18 +113,18 @@ public class ActionUtils : ActionType
     void get_oracle_actions2(List<int> heads,
                              List<int> deprels,
                              List<Action> actions) {
-        actions.clear();
-        int len = heads.size();
-        List<int> sigma = new ArrayList<int>();
+        actions.Clear();
+        int len = heads.Count;
+        List<int> sigma = new ();
         int beta = 0;
-        List<int> output = new ArrayList<int>(len);
+        List<int> output = new (len);
         for (int i = 0; i < len; i++)
         {
-            output.add(-1);
+            output.Add(-1);
         }
 
         int step = 0;
-        while (!(sigma.size() ==1 && beta == len))
+        while (!(sigma.Count ==1 && beta == len))
         {
             int[] beta_reference = new int[]{beta};
             get_oracle_actions_onestep(heads, deprels, sigma, beta_reference, output, actions);
@@ -158,21 +158,21 @@ public class ActionUtils : ActionType
 
         if (top1 >= 0 && heads.get(top1) == top0)
         {
-            actions.add(ActionFactory.make_left_arc(deprels.get(top1)));
+            actions.Add(ActionFactory.make_left_arc(deprels.get(top1)));
             output.set(top1, top0);
-            sigma.remove(sigma.size() - 1);
+            sigma.Remove(sigma.size() - 1);
             sigma.set(sigma.size() - 1, top0);
         }
         else if (top1 >= 0 && heads.get(top0) == top1 && all_descendents_reduced)
         {
-            actions.add(ActionFactory.make_right_arc(deprels.get(top0)));
+            actions.Add(ActionFactory.make_right_arc(deprels.get(top0)));
             output.set(top0, top1);
-            sigma.remove(sigma.size() - 1);
+            sigma.Remove(sigma.size() - 1);
         }
         else if (beta[0] < heads.size())
         {
-            actions.add(ActionFactory.make_shift ());
-            sigma.add(beta[0]);
+            actions.Add(ActionFactory.make_shift ());
+            sigma.Add(beta[0]);
             ++beta[0];
         }
     }

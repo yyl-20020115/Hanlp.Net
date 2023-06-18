@@ -74,7 +74,7 @@ class AutoBytePool
      * 在末尾加一个值
      * @param value 值
      */
-    void add(byte value)
+    void Add(byte value)
     {
         if (_size == _capacity)
         {
@@ -155,10 +155,11 @@ class AutoBytePool
         byte[] buf = new byte[capacity];
         if (_size > 0)
         {
-            System.arraycopy(_buf, 0, buf, 0, _size);
+            //System.arraycopy(_buf, 0, buf, 0, _size);
+            Array.Copy(_buf,0,buf,0,_size);
         }
         _buf = buf;
-        _capacity = capacity;
+        _capacity = capacity; 
     }
 
     /**

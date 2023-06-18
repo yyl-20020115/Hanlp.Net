@@ -10,8 +10,10 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.tokenizer;
+using com.hankcs.hanlp.utility;
 using System.Text;
 
 namespace com.hankcs.hanlp.corpus.occurrence;
@@ -189,7 +191,7 @@ public class Occurrence
         List<PairFrequency> pairFrequencyList = new List<PairFrequency>(entrySetPair.size());
         for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
-            pairFrequencyList.add(entry.getValue());
+            pairFrequencyList.Add(entry.getValue());
         }
         Collections.sort(pairFrequencyList, new COMP()
         );
@@ -206,13 +208,12 @@ public class Occurrence
 
     public List<PairFrequency> getPhraseByLe()
     {
-        List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
-        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
+        List<PairFrequency> pairFrequencyList = new (entrySetPair.size());
+        foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            pairFrequencyList.add(entry.getValue());
+            pairFrequencyList.Add(entry.getValue());
         }
-        Collections.sort(pairFrequencyList, new COMP2()
-        );
+        Collections.sort(pairFrequencyList, new COMP2());
         return pairFrequencyList;
     }
     public class COMP2 :IComparer<PairFrequency>
@@ -229,7 +230,7 @@ public class Occurrence
         List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
         for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
         {
-            pairFrequencyList.add(entry.getValue());
+            pairFrequencyList.Add(entry.getValue());
         }
         Collections.sort(pairFrequencyList, new COMP3()
         );
@@ -245,13 +246,12 @@ public class Occurrence
     }
     public List<PairFrequency> getPhraseByScore()
     {
-        List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
-        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
+        List<PairFrequency> pairFrequencyList = new (entrySetPair.size());
+        foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            pairFrequencyList.add(entry.getValue());
+            pairFrequencyList.Add(entry.getValue());
         }
-        Collections.sort(pairFrequencyList, new COMP4()
-        );
+        Collections.sort(pairFrequencyList, new COMP4());
         return pairFrequencyList;
     }
     public class COMP4
@@ -266,9 +266,9 @@ public class Occurrence
     public void addAll(List<Term> resultList)
     {
 //        System._out.println(resultList);
-        string[] termList = new string[resultList.size()];
+        string[] termList = new string[resultList.Count];
         int i = 0;
-        for (Term word : resultList)
+        foreach (Term word in resultList)
         {
             termList[i] = word.word;
             ++i;
@@ -285,12 +285,12 @@ public class Occurrence
     public string toString()
     {
          StringBuilder sb = new StringBuilder("二阶共现：\n");
-        for (KeyValuePair<string, PairFrequency> entry : triePair.entrySet())
+        foreach (KeyValuePair<string, PairFrequency> entry in triePair.entrySet())
         {
             sb.Append(entry.getValue()).Append('\n');
         }
         sb.Append("三阶共现：\n");
-        for (KeyValuePair<string, TriaFrequency> entry : trieTria.entrySet())
+        foreach (KeyValuePair<string, TriaFrequency> entry in trieTria.entrySet())
         {
             sb.Append(entry.getValue()).Append('\n');
         }
@@ -299,12 +299,12 @@ public class Occurrence
 
     public double computeMutualInformation(string first, string second)
     {
-        return Math.log(Math.max(Predefine.MIN_PROBABILITY, getPairFrequency(first, second) / (totalPair / 2)) / Math.max(Predefine.MIN_PROBABILITY, (getTermFrequency(first) / totalTerm * getTermFrequency(second) / totalTerm)));
+        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, getPairFrequency(first, second) / (totalPair / 2)) / Math.Max(Predefine.MIN_PROBABILITY, (getTermFrequency(first) / totalTerm * getTermFrequency(second) / totalTerm)));
     }
 
     public double computeMutualInformation(PairFrequency pair)
     {
-        return Math.log(Math.max(Predefine.MIN_PROBABILITY, pair.getValue() / totalPair) / Math.max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
+        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, pair.getValue() / totalPair) / Math.max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
     }
 
     /**

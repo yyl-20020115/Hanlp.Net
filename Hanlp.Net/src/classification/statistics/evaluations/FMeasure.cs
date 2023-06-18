@@ -19,7 +19,7 @@ public class FMeasure : Serializable
     /**
      * 测试样本空间
      */
-    int size;
+    public int size;
     /**
      * 平均准确率
      */
@@ -64,38 +64,38 @@ public class FMeasure : Serializable
     public double speed;
 
     //@Override
-    public string toString()
+    public override string ToString()
     {
         int l = -1;
-        for (string c : catalog)
+        foreach (string c in catalog)
         {
-            l = Math.max(l, c.Length);
+            l = Math.Max(l, c.Length);
         }
          int w = 6;
          StringBuilder sb = new StringBuilder(10000);
 
-        printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".replace('*', char.forDigit(w, 10)), "P", "R", "F1", "A", "");
+        printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".Replace('*', (char)(w-(int)'0'), "P", "R", "F1", "A", ""));
         for (int i = 0; i < catalog.Length; i++)
         {
-            printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").replace('*', char.forDigit(w, 10)),
-                   precision[i] * 100.,
-                   recall[i] * 100.,
-                   f1[i] * 100.,
-                   accuracy[i] * 100.,
+            printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").Replace('*', (char)(w-(int)'0')),
+                   precision[i] * 100.0,
+                   recall[i] * 100.0,
+                   f1[i] * 100.0,
+                   accuracy[i] * 100.0,
                    catalog[i]);
         }
-        printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").replace('*', char.forDigit(w, 10)),
-               average_precision * 100.,
-               average_recall * 100.,
-               average_f1 * 100.,
-               average_accuracy * 100.,
+        printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").Replace('*', (char)(w-(int)'0')),
+               average_precision * 100.0,
+               average_recall * 100.0,
+               average_f1 * 100.0,
+               average_accuracy * 100.0,
                "avg.");
         printf(sb, "data size = %d, speed = %.2f doc/s\n", size, speed);
-        return sb.toString();
+        return sb.ToString();
     }
 
-    private static void printf(StringBuilder sb, string format, Object... args)
+    private static void printf(StringBuilder sb, string Format,params Object[] args)
     {
-        sb.Append(string.format(format, args));
+        sb.Append(string.Format(Format, args));
     }
 }

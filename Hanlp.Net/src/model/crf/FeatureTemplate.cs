@@ -44,9 +44,9 @@ public class FeatureTemplate : ICacheAble
         int start = 0;
         while (matcher.find())
         {
-            featureTemplate.delimiterList.add(template.substring(start, matcher.start()));
+            featureTemplate.delimiterList.Add(template.substring(start, matcher.start()));
             start = matcher.end();
-            featureTemplate.offsetList.add(new int[]{int.parseInt(matcher.group(1)), int.parseInt(matcher.group(2))});
+            featureTemplate.offsetList.Add(new int[]{int.parseInt(matcher.group(1)), int.parseInt(matcher.group(2))});
         }
         return featureTemplate;
     }
@@ -93,13 +93,13 @@ public class FeatureTemplate : ICacheAble
         offsetList = new ArrayList<int[]>(size);
         for (int i = 0; i < size; ++i)
         {
-            offsetList.add(new int[]{byteArray.nextInt(), byteArray.nextInt()});
+            offsetList.Add(new int[]{byteArray.nextInt(), byteArray.nextInt()});
         }
         size = byteArray.nextInt();
         delimiterList = new ArrayList<string>(size);
         for (int i = 0; i < size; ++i)
         {
-            delimiterList.add(byteArray.nextUTF());
+            delimiterList.Add(byteArray.nextUTF());
         }
         return true;
     }
@@ -107,7 +107,7 @@ public class FeatureTemplate : ICacheAble
     //@Override
     public string toString()
     {
-        final StringBuilder sb = new StringBuilder("FeatureTemplate{");
+        StringBuilder sb = new StringBuilder("FeatureTemplate{");
         sb.Append("template='").Append(template).Append('\'');
         sb.Append(", delimiterList=").Append(delimiterList);
         sb.Append('}');

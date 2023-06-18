@@ -30,7 +30,7 @@ public class ActionFactory : ActionType
      * @param rel 依存关系
      * @return
      */
-    public static Action make_left_arc(final int rel)
+    public static Action make_left_arc(int rel)
     {
         return new Action(kLeftArc, rel);
     }
@@ -40,7 +40,7 @@ public class ActionFactory : ActionType
      * @param rel 依存关系
      * @return
      */
-    public static Action make_right_arc(final int rel)
+    public static Action make_right_arc(int rel)
     {
         return new Action(kRightArc, rel);
     }

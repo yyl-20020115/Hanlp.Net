@@ -6,7 +6,7 @@ public abstract class AbstractClosestVectors
 
     static readonly int N = 40;
     protected Scanner scanner;
-    protected final VectorsReader vectorsReader;
+    protected VectorsReader vectorsReader;
 
     protected AbstractClosestVectors(string file)
     {
@@ -31,16 +31,16 @@ public abstract class AbstractClosestVectors
     protected string nextWord()
     {
         string word = scanner.next();
-        return word == null || word.Length == 0 || word.equals("q") ? null : word;
+        return word == null || word.Length == 0 || word.Equals("q") ? null : word;
     }
 
     protected abstract Result getTargetVector();
 
-    final protected void execute() 
+     protected void execute() 
     {
         vectorsReader.readVectorFile();
-        final int words = vectorsReader.getNumWords();
-        final int size = vectorsReader.getSize();
+        int words = vectorsReader.getNumWords();
+        int size = vectorsReader.getSize();
 
         try
         {
@@ -90,7 +90,7 @@ public abstract class AbstractClosestVectors
         }
     }
 
-    protected static class Result
+    protected class Result
     {
 
         float[] vec;

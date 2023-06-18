@@ -72,7 +72,7 @@ public class OrganizationRecognition
             {
                 if (vertex.getAttribute().totalFrequency <= 1000)
                 {
-                    tagList.add(new EnumItem<NT>(NT.F, 1000));
+                    tagList.Add(new EnumItem<NT>(NT.F, 1000));
                     continue;
                 }
             }
@@ -80,13 +80,13 @@ public class OrganizationRecognition
             {
                 EnumItem<NT> ntEnumItem = new EnumItem<NT>(NT.K, 1000);
                 ntEnumItem.addLabel(NT.D, 1000);
-                tagList.add(ntEnumItem);
+                tagList.Add(ntEnumItem);
                 continue;
             }
             else if (nature == m)
             {
                 EnumItem<NT> ntEnumItem = new EnumItem<NT>(NT.M, 1000);
-                tagList.add(ntEnumItem);
+                tagList.Add(ntEnumItem);
                 continue;
             }
 
@@ -95,7 +95,7 @@ public class OrganizationRecognition
             {
                 NTEnumItem = new EnumItem<NT>(NT.Z, OrganizationDictionary.transformMatrixDictionary.getTotalFrequency(NT.Z));
             }
-            tagList.add(NTEnumItem);
+            tagList.Add(NTEnumItem);
 //            line += vertex.realWord.Length;
         }
         return tagList;

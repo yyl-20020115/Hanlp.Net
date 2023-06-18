@@ -69,7 +69,7 @@ public class PersonRecognition
         List<EnumItem<NR>> tagList = new LinkedList<EnumItem<NR>>();
         Iterator<Vertex> iterator = wordSegResult.iterator();
         iterator.next();
-        tagList.add(new EnumItem<NR>(NR.A, NR.K)); //  始##始 A K
+        tagList.Add(new EnumItem<NR>(NR.A, NR.K)); //  始##始 A K
         while (iterator.hasNext())
         {
             Vertex vertex = iterator.next();
@@ -99,7 +99,7 @@ public class PersonRecognition
                     nrEnumItem = new EnumItem<NR>(NR.A, PersonDictionary.transformMatrixDictionary.getTotalFrequency(NR.A));
                 }
             }
-            tagList.add(nrEnumItem);
+            tagList.Add(nrEnumItem);
         }
         return tagList;
     }

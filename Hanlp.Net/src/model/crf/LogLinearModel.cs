@@ -61,7 +61,7 @@ public class LogLinearModel : LinearModel
     public LogLinearModel(string modelFile) 
     {
         super(null, null);
-        if (modelFile.endsWith(BIN_EXT))
+        if (modelFile.EndsWith(BIN_EXT))
         {
             load(modelFile); // model.bin
             return;
@@ -110,7 +110,7 @@ public class LogLinearModel : LinearModel
         string line;
         while ((line = lineIterator.next()).Length != 0)
         {
-            tagSet.add(line);
+            tagSet.Add(line);
         }
         tagSet.type = guessModelType(tagSet);
         switch (tagSet.type)
@@ -125,17 +125,17 @@ public class LogLinearModel : LinearModel
         tagSet.lock();
         this.featureMap = new MutableFeatureMap(tagSet);
         FeatureMap featureMap = this.featureMap;
-        final int sizeOfTagSet = tagSet.size();
-        TreeMap<string, FeatureFunction> featureFunctionMap = new TreeMap<string, FeatureFunction>();  // 构建trie树的时候用
-        TreeMap<int, FeatureFunction> featureFunctionList = new TreeMap<int, FeatureFunction>(); // 读取权值的时候用
+        int sizeOfTagSet = tagSet.size();
+        Dictionary<string, FeatureFunction> featureFunctionMap = new Dictionary<string, FeatureFunction>();  // 构建trie树的时候用
+        Dictionary<int, FeatureFunction> featureFunctionList = new Dictionary<int, FeatureFunction>(); // 读取权值的时候用
         ArrayList<FeatureTemplate> featureTemplateList = new ArrayList<FeatureTemplate>();
         float[][] matrix = null;
         while ((line = lineIterator.next()).Length != 0)
         {
-            if (!"B".equals(line))
+            if (!"B".Equals(line))
             {
                 FeatureTemplate featureTemplate = FeatureTemplate.create(line);
-                featureTemplateList.add(featureTemplate);
+                featureTemplateList.Add(featureTemplate);
             }
             else
             {
@@ -212,7 +212,7 @@ public class LogLinearModel : LinearModel
                 FeatureTemplate template = featureTemplateList.get(tid);
                 Iterator<string> iterator = template.delimiterList.iterator();
                 string header = iterator.next();
-                if (feature.startsWith(header))
+                if (feature.StartsWith(header))
                 {
                     int fid = featureMap.idOf(feature.substring(header.Length) + tid);
 //                    assert id == sizeOfTagSet * sizeOfTagSet + (fid - sizeOfTagSet - 1) * sizeOfTagSet;

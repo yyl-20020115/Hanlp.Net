@@ -59,7 +59,7 @@ public class TextFileCorpus : Corpus
         try
         {
             cache.close();
-            File fixingFile = new File(cacheFile.getAbsolutePath() + ".fixing");
+            File fixingFile = new File(cacheFile + ".fixing");
             cache = new DataOutputStream(new FileOutputStream(fixingFile));
             DataInputStream oldCache = new DataInputStream(new FileInputStream(cacheFile));
             while (oldCache.available() >= 4)
@@ -78,13 +78,13 @@ public class TextFileCorpus : Corpus
             cache.close();
             if (!fixingFile.renameTo(cacheFile))
             {
-                throw new RuntimeException(string.format("moving %s to %s failed", fixingFile.getAbsolutePath(), cacheFile.getName()));
+                throw new RuntimeException(string.Format("moving %s to %s failed", fixingFile, cacheFile.getName()));
             }
             cache = new DataOutputStream(new FileOutputStream(cacheFile));
         }
         catch (IOException e)
         {
-            throw new RuntimeException(string.format("failed to adjust cache file", e));
+            throw new RuntimeException(string.Format("failed to adjust cache file", e));
         }
         table = null;
         vocabSize = j;
@@ -99,10 +99,10 @@ public class TextFileCorpus : Corpus
     public void learnVocab() 
     {
         vocab = new VocabWord[vocabMaxSize];
-        vocabIndexMap = new TreeMap<string, int>();
+        vocabIndexMap = new Dictionary<string, int>();
         vocabSize = 0;
 
-        final File trainFile = new File(config.getInputFile());
+        File trainFile = new File(config.getInputFile());
 
         BufferedReader raf = null;
         FileInputStream fileInputStream = null;
@@ -113,7 +113,7 @@ public class TextFileCorpus : Corpus
         {
             fileInputStream = new FileInputStream(trainFile);
             raf = new BufferedReader(new InputStreamReader(fileInputStream, encoding));
-            cacheFile = File.createTempFile(string.format("corpus_%d", DateTime.Now.Microsecond), ".bin");
+            cacheFile = File.createTempFile(string.Format("corpus_%d", DateTime.Now.Microsecond), ".bin");
             cache = new DataOutputStream(new FileOutputStream(cacheFile));
             while (true)
             {
