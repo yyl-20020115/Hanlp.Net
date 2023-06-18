@@ -8,6 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dictionary.item;
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.dictionary.common;
 
 
@@ -17,16 +20,16 @@ namespace com.hankcs.hanlp.dictionary.common;
  *
  * @author hankcs
  */
-public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumItem<E>>
+public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
 {
     //@Override
-    protected EnumItem<E> createValue(string[] params)
+    protected EnumItem<E> createValue(string[] _params)
     {
-        KeyValuePair<string, KeyValuePair<string, int>[]> args = EnumItem.create(params);
+        KeyValuePair<string, KeyValuePair<string, int>[]> args = EnumItem.create(_params);
         EnumItem<E> nrEnumItem = new EnumItem<E>();
-        for (KeyValuePair<string, int> e : args.getValue())
+        foreach (KeyValuePair<string, int> e in args.getValue())
         {
-            nrEnumItem.labelMap.put(valueOf(e.getKey()), e.getValue());
+            nrEnumItem.labelMap.Add(valueOf(e.getKey()), e.getValue());
         }
         return nrEnumItem;
     }
@@ -62,7 +65,7 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
         }
         E[] nrArray = values();
         int size = byteArray.nextInt();
-        EnumItem<E>[] valueArray = new EnumItem[size];
+        EnumItem<E>[] valueArray = new EnumItem<E>[size];
         for (int i = 0; i < size; ++i)
         {
             int currentSize = byteArray.nextInt();
@@ -71,7 +74,7 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
             {
                 E nr = nrArray[byteArray.nextInt()];
                 int frequency = byteArray.nextInt();
-                item.labelMap.put(nr, frequency);
+                item.labelMap.Add(nr, frequency);
             }
             valueArray[i] = item;
         }
@@ -79,7 +82,7 @@ public abstract class EnumItemDictionary<E : Enum<E>> : CommonDictionary<EnumIte
     }
 
     //@Override
-    protected void saveValue(EnumItem<E> item, DataOutputStream _out) 
+    protected void saveValue(EnumItem<E> item, Stream _out) 
     {
         _out.writeInt(item.labelMap.size());
         for (KeyValuePair<E, int> entry : item.labelMap.entrySet())

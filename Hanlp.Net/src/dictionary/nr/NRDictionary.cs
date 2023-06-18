@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dictionary.item;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary.common;
+
 namespace com.hankcs.hanlp.dictionary.nr;
 
 
@@ -43,6 +47,6 @@ public class NRDictionary : EnumItemDictionary<NR>
     //@Override
     protected void onLoaded(Dictionary<string, EnumItem<NR>> map)
     {
-        map.put(" ", new EnumItem<NR>(NR.K, NR.A)); // txt中不允许出现空格词条，这里补上
+        map.Add(" ", new EnumItem<NR>(NR.K, NR.A)); // txt中不允许出现空格词条，这里补上
     }
 }

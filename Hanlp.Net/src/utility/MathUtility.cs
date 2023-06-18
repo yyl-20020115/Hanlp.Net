@@ -66,7 +66,7 @@ public class MathUtility
         double max = Double.NEGATIVE_INFINITY;
         for (KeyValuePair<string, Double> entry : entrySet)
         {
-            max = Math.max(max, entry.getValue());
+            max = Math.Max(max, entry.getValue());
         }
 
         double sum = 0.0;

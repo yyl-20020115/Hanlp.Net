@@ -143,7 +143,7 @@ public class PersonDictionary
 //            logger.warn("人名识别模式串有bug", pattern, vertexList);
 //            return;
 //        }
-         Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
+         Vertex[] wordArray = vertexList.ToArray();
          int[] offsetArray = new int[wordArray.Length];
         offsetArray[0] = 0;
         for (int i = 1; i < wordArray.Length; ++i)

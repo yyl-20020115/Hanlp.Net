@@ -9,7 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dictionary.common;
+using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.dictionary;
 
@@ -111,7 +114,7 @@ public class CoreSynonymDictionary
      */
     public static List<CommonSynonymDictionary.SynonymItem> convert(List<Term> sentence, bool withUndefinedItem)
     {
-        List<CommonSynonymDictionary.SynonymItem> synonymItemList = new ArrayList<CommonSynonymDictionary.SynonymItem>(sentence.size());
+        List<CommonSynonymDictionary.SynonymItem> synonymItemList = new (sentence.size());
         for (Term term : sentence)
         {
             CommonSynonymDictionary.SynonymItem item = get(term.word);

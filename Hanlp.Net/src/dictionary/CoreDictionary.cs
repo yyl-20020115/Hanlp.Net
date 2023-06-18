@@ -12,6 +12,8 @@
 using com.hankcs.hanlp.collection.trie;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.utility;
+using System.Text;
 
 namespace com.hankcs.hanlp.dictionary;
 
@@ -376,10 +378,10 @@ public class CoreDictionary
             {
                 sb.Append(nature[i]).Append(' ').Append(frequency[i]).Append(' ');
             }
-            return sb.toString();
+            return sb.ToString();
         }
 
-        public void save(DataOutputStream _out) 
+        public void save(Stream _out) 
         {
             _out.writeInt(totalFrequency);
             _out.writeInt(nature.Length);

@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -180,15 +183,15 @@ public class CoreBiGramTableDictionary
 
         try
         {
-            ObjectInputStream in = new ObjectInputStream(IOUtil.newInputStream(path));
-            start = (int[]) in.readObject();
+            ObjectInputStream _in = new ObjectInputStream(IOUtil.newInputStream(path));
+            start = (int[])_in.readObject();
             if (CoreDictionary.trie.size() != start.Length - 1)     // 目前CoreNatureDictionary.ngram.txt的缓存依赖于CoreNatureDictionary.txt的缓存
             {                                                       // 所以这里校验一下二者的一致性，不然可能导致下标越界或者ngram错乱的情况
-                in.close();
+                _in.close();
                 return false;
             }
-            pair = (int[]) in.readObject();
-            in.close();
+            pair = (int[])_in.readObject();
+            _in.close();
         }
         catch (Exception e)
         {

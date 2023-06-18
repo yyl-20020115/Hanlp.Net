@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -18,11 +20,11 @@ namespace com.hankcs.hanlp.dictionary;
  * @param <E> 标签的枚举类型
  * @author hankcs
  */
-public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
+public class TransformMatrixDictionary<E> : TransformMatrix
 {
-    Class<E> enumType;
+    Type enumType;
 
-    public TransformMatrixDictionary(Class<E> enumType)
+    public TransformMatrixDictionary(Type enumType)
     {
         this.enumType = enumType;
     }
@@ -83,7 +85,7 @@ public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
     }
 
     //@Override
-    public string toString()
+    public string ToString()
     {
         StringBuilder sb = new StringBuilder("TransformMatrixDictionary{");
         sb.Append("enumType=").Append(enumType);
@@ -92,7 +94,7 @@ public class TransformMatrixDictionary<E : Enum<E>> : TransformMatrix
         sb.Append(", total=").Append(Arrays.toString(total));
         sb.Append(", totalFrequency=").Append(totalFrequency);
         sb.Append('}');
-        return sb.toString();
+        return sb.ToString();
     }
 
     //@Override

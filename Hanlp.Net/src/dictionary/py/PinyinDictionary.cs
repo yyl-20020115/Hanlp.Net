@@ -153,7 +153,7 @@ public class PinyinDictionary
         return convertToPinyin(text).toArray(new Pinyin[0]);
     }
 
-    public static BaseSearcher getSearcher(char[] charArray, DoubleArrayTrie<Pinyin[]> trie)
+    public static BaseSearcher<Pinyin[]> getSearcher(char[] charArray, DoubleArrayTrie<Pinyin[]> trie)
     {
         return new Searcher(charArray, trie);
     }
@@ -227,7 +227,7 @@ public class PinyinDictionary
         }
 
         //@Override
-        public KeyValuePair<string, Pinyin[]> next()
+        public override KeyValuePair<string, Pinyin[]> next()
         {
             // 保证首次调用找到一个词语
             KeyValuePair<string, Pinyin[]> result = null;

@@ -60,13 +60,13 @@ public class Pair<K,V> : Serializable {
      * @return hash code for this <code>Pair</code>
      */
     //@Override
-    public int hashCode() {
-        // name's hashCode is multiplied by an arbitrary prime number (13)
-        // in order to make sure there is a difference in the hashCode between
+    public int GetHashCode() {
+        // name's GetHashCode is multiplied by an arbitrary prime number (13)
+        // in order to make sure there is a difference in the GetHashCode between
         // these two parameters:
         //  name: a  value: aa
         //  name: aa value: a
-        return key.hashCode() * 13 + (value == null ? 0 : value.hashCode());
+        return key.GetHashCode() * 13 + (value == null ? 0 : value.GetHashCode());
     }
 
     /**

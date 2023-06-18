@@ -32,8 +32,9 @@ public abstract class BaseSearcher<V>
     }
 
     protected BaseSearcher(string text)
+        : this(text.ToCharArray())
     {
-        this(text.ToCharArray());
+       ;
     }
 
     /**

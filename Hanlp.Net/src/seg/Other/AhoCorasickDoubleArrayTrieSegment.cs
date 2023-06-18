@@ -55,9 +55,10 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
      *
      * @ 加载过程中的IO异常
      */
-    public AhoCorasickDoubleArrayTrieSegment(params string[] dictionaryPaths) 
+    public AhoCorasickDoubleArrayTrieSegment(params string[] dictionaryPaths)
+        : this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(IOUtil.loadDictionary(dictionaryPaths)))
     {
-        this(new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>(IOUtil.loadDictionary(dictionaryPaths)));
+       ;
     }
 
     //@Override
@@ -115,7 +116,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         this.trie = trie;
     }
 
-    public AhoCorasickDoubleArrayTrieSegment loadDictionary(string... pathArray)
+    public AhoCorasickDoubleArrayTrieSegment loadDictionary(params string[] pathArray)
     {
         trie = new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>();
         Dictionary<string, CoreDictionary.Attribute> map = null;

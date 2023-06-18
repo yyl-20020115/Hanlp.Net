@@ -10,7 +10,9 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.dictionary.nr;
 
@@ -60,7 +62,7 @@ public class JapanesePersonDictionary
             while ((line = br.readLine()) != null)
             {
                 string[] param = line.Split(" ", 2);
-                map.put(param[0], param[1].charAt(0));
+                map.Add(param[0], param[1][0]);
             }
             br.close();
             logger.info("日本人名词典" + path + "开始构建双数组……");
@@ -88,7 +90,7 @@ public class JapanesePersonDictionary
         {
             DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
             _out.writeInt(map.size());
-            for (char character : map.values())
+            foreach (char character in map.values())
             {
                 _out.writeChar(character);
             }
@@ -166,35 +168,32 @@ public class JapanesePersonDictionary
         }
 
         protected Searcher(string text, DoubleArrayTrie<char> trie)
-            : base(c)
+            : base(text.ToCharArray())
         {
             this.trie = trie;
         }
 
         //@Override
-        public KeyValuePair<string, char> next()
+        public override KeyValuePair<string, char> next()
         {
             // 保证首次调用找到一个词语
-            KeyValuePair<string, char> result = null;
+            KeyValuePair<string, char> result = new();
             while (begin < c.Length)
             {
-                LinkedList<KeyValuePair<string, char>> entryList = trie.commonPrefixSearchWithValue(c, begin);
-                if (entryList.size() == 0)
+                var entryList = trie.commonPrefixSearchWithValue(c, begin);
+                if (entryList.Count == 0)
                 {
                     ++begin;
                 }
                 else
                 {
-                    result = entryList.getLast();
+                    result = entryList[^1];
                     offset = begin;
-                    begin += result.getKey().Length;
+                    begin += result.Key.Length;
                     break;
                 }
             }
-            if (result == null)
-            {
-                return null;
-            }
+
             return result;
         }
     }

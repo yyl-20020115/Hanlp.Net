@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -19,16 +21,9 @@ namespace com.hankcs.hanlp.dictionary;
 public class CoreDictionaryTransformMatrixDictionary
 {
     public static TransformMatrix transformMatrixDictionary;
-    static
+    static CoreDictionaryTransformMatrixDictionary()
     {
-        transformMatrixDictionary = new TransformMatrix(){
-
-            //@Override
-            public int ordinal(string tag)
-            {
-                return Nature.create(tag).ordinal();
-            }
-        };
+        transformMatrixDictionary = new TF();
         long start = DateTime.Now.Microsecond;
         if (!transformMatrixDictionary.load(HanLP.Config.CoreDictionaryTransformMatrixDictionaryPath))
         {
@@ -37,6 +32,16 @@ public class CoreDictionaryTransformMatrixDictionary
         else
         {
             logger.info("加载核心词典词性转移矩阵" + HanLP.Config.CoreDictionaryTransformMatrixDictionaryPath + "成功，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
+        }
+    }
+
+    public class TF
+    {
+
+        //@Override
+        public int ordinal(string tag)
+        {
+            return Nature.create(tag).ordinal();
         }
     }
 }

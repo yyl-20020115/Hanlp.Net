@@ -14,7 +14,7 @@ namespace com.hankcs.hanlp.seg.NShort.Path;
 /**
  * @author hankcs
  */
-public class QueueElement : Comparable<QueueElement>
+public class QueueElement : IComparable<QueueElement>
 {
     /**
      * 边的起点
@@ -47,7 +47,7 @@ public class QueueElement : Comparable<QueueElement>
     }
 
     //@Override
-    public int compareTo(QueueElement other)
+    public int CompareTo(QueueElement other)
     {
         return Double.compare(weight, other.weight);
     }

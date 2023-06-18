@@ -611,7 +611,7 @@ public class MDAG : ICacheAble
             if (equivalenceClassMDAGNodeHashMap.get(currentNode) == currentNode)
                 equivalenceClassMDAGNodeHashMap.Remove(currentNode);
 
-            //The hashCode of an MDAGNode is cached the first time a hash is performed without a cache value present.
+            //The GetHashCode of an MDAGNode is cached the first time a hash is performed without a cache value present.
             //Since we just hashed currentNode, we must clear this regardless of its presence in equivalenceClassMDAGNodeHashMap
             //since we're not actually declaring equivalence class representatives here.
             if (currentNode != null) currentNode.clearStoredHashCode();

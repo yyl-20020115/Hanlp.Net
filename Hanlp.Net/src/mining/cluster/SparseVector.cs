@@ -20,7 +20,7 @@ public class SparseVector : Dictionary<int, double>
     public Double get(Object key)
     {
         Double v = super.get(key);
-        if (v == null) return 0.;
+        if (v == null) return 0.0f;
         return v;
     }
 
@@ -54,7 +54,7 @@ public class SparseVector : Dictionary<int, double>
      */
     double norm()
     {
-        return (double) Math.sqrt(norm_squared());
+        return (double) Math.Sqrt(norm_squared());
     }
 
     /**

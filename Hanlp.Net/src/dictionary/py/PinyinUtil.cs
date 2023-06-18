@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.dictionary.py;
 
 
@@ -43,7 +45,7 @@ public class PinyinUtil
      */
     public static string convertToneNumber2ToneMark(string pinyinStr)
     {
-        string lowerCasePinyinStr = pinyinStr.toLowerCase();
+        string lowerCasePinyinStr = pinyinStr.ToLower();
 
         if (lowerCasePinyinStr.matches("[a-z]*[1-5]?"))
         {
@@ -107,7 +109,7 @@ public class PinyinUtil
 
                     char markedVowel = allMarkedVowelStr.charAt(vowelLocation);
 
-                    StringBuffer resultBuffer = new StringBuffer();
+                    StringBuilder resultBuffer = new StringBuilder();
 
                     resultBuffer.Append(lowerCasePinyinStr.substring(0, indexOfUnmarkedVowel).replaceAll("v",
                                                                                                          "ü"));
@@ -115,7 +117,7 @@ public class PinyinUtil
                     resultBuffer.Append(lowerCasePinyinStr.substring(indexOfUnmarkedVowel + 1,
                                                                      lowerCasePinyinStr.Length - 1).replaceAll("v", "ü"));
 
-                    return resultBuffer.toString();
+                    return resultBuffer.ToString();
 
                 }
                 else
@@ -128,7 +130,7 @@ public class PinyinUtil
             // input string has no any tune number
             {
                 // only replace v with ü (umlat) character
-                return lowerCasePinyinStr.replaceAll("v", "ü");
+                return lowerCasePinyinStr.Replace("v", "ü");
             }
         }
         else
@@ -145,7 +147,7 @@ public class PinyinUtil
      */
     public static Pinyin[] convertList2Array(List<Pinyin> pinyinList)
     {
-        return pinyinList.toArray(new Pinyin[0]);
+        return pinyinList.ToArray();
     }
 
     public static Pinyin removeTone(Pinyin p)
@@ -160,8 +162,8 @@ public class PinyinUtil
      */
     public static List<string> convertPinyinList2TonePinyinList(List<Pinyin> pinyinList)
     {
-        List<string> tonePinyinList = new ArrayList<string>(pinyinList.size());
-        for (Pinyin pinyin : pinyinList)
+        List<string> tonePinyinList = new (pinyinList.size());
+        foreach (Pinyin pinyin in pinyinList)
         {
             tonePinyinList.Add(pinyin.getPinyinWithToneMark());
         }

@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.MDAG;
+
 namespace com.hankcs.hanlp.dictionary.stopword;
 
 
@@ -17,16 +19,16 @@ namespace com.hankcs.hanlp.dictionary.stopword;
 /**
  * @author hankcs
  */
-public class StopWordDictionary : MDAGSet : Filter
+public class StopWordDictionary : MDAGSet , Filter
 {
-    public StopWordDictionary(File file) 
+    public StopWordDictionary(string file) 
+        :base(file)
     {
-        super(file);
     }
 
-    public StopWordDictionary(Collection<string> strCollection)
+    public StopWordDictionary(ICollection<string> strCollection)
+        : base(strCollection)
     {
-        super(strCollection);
     }
 
     public StopWordDictionary()

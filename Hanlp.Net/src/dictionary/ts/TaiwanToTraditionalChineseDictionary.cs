@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.AhoCorasick;
+
 namespace com.hankcs.hanlp.dictionary.ts;
 
 
@@ -21,7 +23,7 @@ namespace com.hankcs.hanlp.dictionary.ts;
 public class TaiwanToTraditionalChineseDictionary : BaseChineseDictionary
 {
     static AhoCorasickDoubleArrayTrie<string> trie = new AhoCorasickDoubleArrayTrie<string>();
-    static
+    static TaiwanToTraditionalChineseDictionary()
     {
         long start = DateTime.Now.Microsecond;
         string datPath = HanLP.Config.tcDictionaryRoot + "tw2t";

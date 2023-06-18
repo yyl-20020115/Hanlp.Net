@@ -319,7 +319,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
     }
 
     //@Override
-    public int compareTo(Cluster<K> o)
+    public int CompareTo(Cluster<K> o)
     {
         return Double.compare(o.sectioned_gain(), sectioned_gain());
     }

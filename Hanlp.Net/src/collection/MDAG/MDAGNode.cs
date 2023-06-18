@@ -517,13 +517,13 @@ public class MDAGNode
      * @return      an int of this node's hash code
      */
     //@Override
-    public int hashCode() {
+    public int GetHashCode() {
         
         if(storedHashCode == null)
         {
             int hash = 7;
             hash = 53 * hash + (this.isAcceptNode ? 1 : 0);
-            hash = 53 * hash + (this.outgoingTransitionTreeMap != null ? this.outgoingTransitionTreeMap.hashCode() : 0);    //recursively hashes the nodes in all the 
+            hash = 53 * hash + (this.outgoingTransitionTreeMap != null ? this.outgoingTransitionTreeMap.GetHashCode() : 0);    //recursively hashes the nodes in all the 
                                                                                                                                 //_transition paths stemming from this node
             storedHashCode = hash;
             return hash;

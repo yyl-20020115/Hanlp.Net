@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.dictionary.common;
+using com.hankcs.hanlp.dictionary.stopword;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -21,7 +28,7 @@ public class CoreSynonymDictionaryEx
 {
     static CommonSynonymDictionaryEx dictionary;
 
-    static
+    static CoreSynonymDictionaryEx()
     {
         try
         {
@@ -58,8 +65,8 @@ public class CoreSynonymDictionaryEx
      */
     public static List<long[]> convert(List<Term> sentence, bool withUndefinedItem)
     {
-        List<long[]> synonymItemList = new ArrayList<long[]>(sentence.size());
-        for (Term term : sentence)
+        List<long[]> synonymItemList = new (sentence.size());
+        foreach (Term term in sentence)
         {
             // 除掉停用词
             if (term.nature == null) continue;

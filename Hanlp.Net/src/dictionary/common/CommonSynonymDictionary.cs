@@ -293,7 +293,7 @@ public class CommonSynonymDictionary
          */
         public static SynonymItem createUndefined(string word)
         {
-            SynonymItem item = new SynonymItem(new Synonym(word, word.hashCode() * 1000000 + long.MAX_VALUE / 3), null, Type.UNDEFINED);
+            SynonymItem item = new SynonymItem(new Synonym(word, word.GetHashCode() * 1000000 + long.MAX_VALUE / 3), null, Type.UNDEFINED);
             return item;
         }
     }

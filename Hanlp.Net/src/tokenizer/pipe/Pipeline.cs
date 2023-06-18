@@ -140,9 +140,9 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public int hashCode()
+    public int GetHashCode()
     {
-        return pipeList.hashCode();
+        return pipeList.GetHashCode();
     }
 
     //@Override

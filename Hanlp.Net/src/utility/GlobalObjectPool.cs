@@ -33,8 +33,9 @@ public class GlobalObjectPool
      * @param <T> 对象类型
      * @return 对象
      */
-    public synchronized static <T> T get(Object id)
+    public  static  T get<T>(Object id)
     {
+        //synchronized
         SoftReference reference = pool.get(id);
         if (reference == null) return null;
         return (T) reference.get();
@@ -55,8 +56,9 @@ public class GlobalObjectPool
     /**
      * 清空全局变量
      */
-    public synchronized static void clear()
+    public  static void clear()
     {
+        //synchronized
         pool.clear();
     }
 }

@@ -43,9 +43,9 @@ public class String2PinyinConverter
             string firstChar = string.valueOf(pinyin.getFirstChar());
             trie.addKeyword(pinyinWithoutTone);
             trie.addKeyword(firstChar);
-            map.put(pinyinWithoutTone, pinyin);
-            map.put(firstChar, pinyin);
-            map.put(pinyin.toString(), pinyin);
+            map.Add(pinyinWithoutTone, pinyin);
+            map.Add(firstChar, pinyin);
+            map.Add(pinyin.ToString(), pinyin);
         }
     }
 
@@ -66,8 +66,8 @@ public class String2PinyinConverter
      */
     public static List<Pinyin> convert(string complexText)
     {
-        List<Pinyin> pinyinList = new LinkedList<Pinyin>();
-        Collection<Token> tokenize = trie.tokenize(complexText);
+        List<Pinyin> pinyinList = new ();
+        ICollection<Token> tokenize = trie.tokenize(complexText);
 //        System._out.println(tokenize);
         for (Token token : tokenize)
         {
@@ -108,7 +108,7 @@ public class String2PinyinConverter
      * @param removeTone
      * @return 一个键值对，键为拼音列表，值为类型（true表示这是一个拼音，false表示这是一个输入法头）
      */
-    public static Pair<List<Pinyin>, List<Boolean>> convert2Pair(string complexText, bool removeTone)
+    public static KeyValuePair<List<Pinyin>, List<Boolean>> convert2Pair(string complexText, bool removeTone)
     {
         List<Pinyin> pinyinList = new LinkedList<Pinyin>();
         List<Boolean> booleanList = new LinkedList<Boolean>();

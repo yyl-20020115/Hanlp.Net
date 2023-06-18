@@ -9,6 +9,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 
@@ -35,7 +36,7 @@ public class URLTokenizer
      */
     public static List<Term> segment(string text)
     {
-        List<Term> termList = new LinkedList<Term>();
+        List<Term> termList = new ();
         Matcher matcher = WEB_URL.matcher(text);
         int begin = 0;
         int end;

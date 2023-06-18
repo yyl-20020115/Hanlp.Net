@@ -46,7 +46,7 @@ public class OrganizationDictionary
     {
         patternMap.put(keyword, keyword);
     }
-    static
+    static OrganizationDictionary()
     {
         long start = DateTime.Now.Microsecond;
         dictionary = new NTDictionary();
@@ -54,7 +54,7 @@ public class OrganizationDictionary
             logger.info(HanLP.Config.OrganizationDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         else
             throw new ArgumentException(HanLP.Config.OrganizationDictionaryPath + "加载失败");
-        transformMatrixDictionary = new TransformMatrixDictionary<NT>(NT.class);
+        transformMatrixDictionary = new TransformMatrixDictionary<NT>(NT.c);
         transformMatrixDictionary.load(HanLP.Config.OrganizationDictionaryTrPath);
         trie = new AhoCorasickDoubleArrayTrie<string>();
         Dictionary<string, string> patternMap = new Dictionary<string, string>();

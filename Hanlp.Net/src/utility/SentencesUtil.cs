@@ -1,3 +1,7 @@
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.seg.common;
+using System.Text;
+
 namespace com.hankcs.hanlp.utility;
 
 
@@ -40,11 +44,11 @@ public class SentencesUtil
 
         StringBuilder sb = new StringBuilder();
 
-        List<string> sentences = new LinkedList<string>();
+        List<string> sentences = new ();
 
         for (int i = 0; i < chars.Length; ++i)
         {
-            if (sb.Length == 0 && (char.isWhitespace(chars[i]) || chars[i] == ' '))
+            if (sb.Length == 0 && (char.IsWhiteSpace(chars[i]) || chars[i] == ' '))
             {
                 continue;
             }
@@ -104,7 +108,7 @@ public class SentencesUtil
 
     private static void insertIntoList(StringBuilder sb, List<string> sentences)
     {
-        string content = sb.toString().trim();
+        string content = sb.ToString().Trim();
         if (content.Length > 0)
         {
             sentences.Add(content);
@@ -120,7 +124,7 @@ public class SentencesUtil
      */
     public static bool hasNature(List<Term> sentence, Nature nature)
     {
-        for (Term term : sentence)
+        foreach (Term term in sentence)
         {
             if (term.nature == nature)
             {

@@ -26,8 +26,9 @@ public class Document<K>
     }
 
     public Document(K id_)
+        : this(id_, new SparseVector())
     {
-        this(id_, new SparseVector());
+       ;
     }
 
     /**
@@ -59,7 +60,7 @@ public class Document<K>
      */
     void add_feature(int key, double value)
     {
-        feature_.put(key, value);
+        feature_.Add(key, value);
     }
 
     /**
@@ -77,7 +78,7 @@ public class Document<K>
      */
     void clear()
     {
-        feature_.clear();
+        feature_.Clear();
     }
 
     /**
@@ -86,7 +87,7 @@ public class Document<K>
      * @param df    document frequencies
      * @param ndocs the number of documents
      */
-    void idf(HashMap<int, int> df, int ndocs)
+    void idf(Dictionary<int, int> df, int ndocs)
     {
         for (KeyValuePair<int, Double> entry : feature_.entrySet())
         {
@@ -97,7 +98,7 @@ public class Document<K>
     }
 
     //@Override
-    public bool Equals(Object o)
+    public override bool Equals(Object o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -108,8 +109,8 @@ public class Document<K>
     }
 
     //@Override
-    public int hashCode()
+    public override int GetHashCode()
     {
-        return id_ != null ? id_.hashCode() : 0;
+        return id_ != null ? id_.GetHashCode() : 0;
     }
 }

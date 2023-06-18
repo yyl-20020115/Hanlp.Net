@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.seg.NShort.Path;
 
 
@@ -166,14 +169,14 @@ public class NShortPath
      */
     public List<int[]> getPaths(int index)
     {
-        assert (index <= N && index >= 0);
+        //assert (index <= N && index >= 0);
 
         Stack<PathNode> stack = new Stack<PathNode>();
         int curNode = vertexCount - 1, curIndex = index;
         QueueElement element;
         PathNode node;
         int[] aPath;
-        List<int[]> result = new ArrayList<int[]>();
+        List<int[]> result = new ();
 
         element = fromArray[curNode - 1][curIndex].GetFirst();
         while (element != null)
@@ -225,7 +228,7 @@ public class NShortPath
      */
     public int[] getBestPath()
     {
-        assert (vertexCount > 2);
+        //assert (vertexCount > 2);
 
         Stack<int> stack = new Stack<int>();
         int curNode = vertexCount - 1, curIndex = 0;
@@ -255,9 +258,9 @@ public class NShortPath
      */
     public List<int[]> getNPaths(int n)
     {
-        List<int[]> result = new ArrayList<int[]>();
+        List<int[]> result = new ();
 
-        n = Math.min(Predefine.MAX_SEGMENT_NUM, n);
+        n = Math.Min(Predefine.MAX_SEGMENT_NUM, n);
         for (int i = 0; i < N && result.size() < n; ++i)
         {
             List<int[]> pathList = getPaths(i);

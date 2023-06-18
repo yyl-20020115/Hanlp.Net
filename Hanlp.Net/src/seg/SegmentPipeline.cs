@@ -185,9 +185,9 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public int hashCode()
+    public int GetHashCode()
     {
-        return pipeList.hashCode();
+        return pipeList.GetHashCode();
     }
 
     //@Override

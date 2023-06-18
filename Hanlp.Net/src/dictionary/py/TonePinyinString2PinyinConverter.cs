@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm.ahocorasick.trie;
+
 namespace com.hankcs.hanlp.dictionary.py;
 
 
@@ -32,7 +34,7 @@ public class TonePinyinString2PinyinConverter
     {
         mapNumberKey = new Dictionary<string, Pinyin>();
         mapKey = new Dictionary<string, Pinyin>();
-        for (Pinyin pinyin : Integer2PinyinConverter.pinyins)
+        foreach (Pinyin pinyin in Integer2PinyinConverter.pinyins)
         {
             mapNumberKey.put(pinyin.toString(), pinyin);
             string pinyinWithToneMark = pinyin.getPinyinWithToneMark();
@@ -85,7 +87,7 @@ public class TonePinyinString2PinyinConverter
      */
     public static List<Pinyin> convert(string tonePinyinText, bool removeNull)
     {
-        List<Pinyin> pinyinList = new LinkedList<Pinyin>();
+        List<Pinyin> pinyinList = new ();
         Collection<Token> tokenize = trie.tokenize(tonePinyinText);
         for (Token token : tokenize)
         {

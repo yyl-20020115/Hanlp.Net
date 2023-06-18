@@ -20,14 +20,10 @@ namespace com.hankcs.hanlp.collection.MDAG;
 public class MDAGSet : MDAG , ISet<string>
 {
 
-    public MDAGSet(string dataFile) 
-    {
-        super(dataFile);
-    }
 
     public MDAGSet(ICollection<string> strCollection)
+        :base(strCollection)
     {
-        super(strCollection);
     }
 
     public MDAGSet()
@@ -35,8 +31,8 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     public MDAGSet(string dictionaryPath) 
+        :base(dictionaryPath)
     {
-        super(dictionaryPath);
     }
 
     //@Override

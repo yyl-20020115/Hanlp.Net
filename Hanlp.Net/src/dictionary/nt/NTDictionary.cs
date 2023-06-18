@@ -9,6 +9,10 @@
  * This source is subject to the LiNSunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dictionary.item;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary.common;
+
 namespace com.hankcs.hanlp.dictionary.nt;
 
 

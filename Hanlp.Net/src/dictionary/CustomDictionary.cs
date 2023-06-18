@@ -63,7 +63,7 @@ public class CustomDictionary
         logger.info("自定义词典开始加载:" + mainPath);
         if (loadDat(mainPath, dat)) return true;
         var map = new Dictionary<string, CoreDictionary.Attribute>();
-        HashSet<Nature> customNatureCollector = new ();
+        HashSet<Nature> customNatureCollector = new();
         try
         {
             //string path[] = HanLP.Config.CustomDictionaryPath;
@@ -160,7 +160,7 @@ public class CustomDictionary
      * @param customNatureCollector 收集用户词性
      * @return
      */
-    public static bool load(string path, Nature defaultNature, Dictionary<string, CoreDictionary.Attribute> map, LinkedHashSet<Nature> customNatureCollector)
+    public static bool load(string path, Nature defaultNature, Dictionary<string, CoreDictionary.Attribute> map, HashSet<Nature> customNatureCollector)
     {
         try
         {
@@ -199,7 +199,7 @@ public class CustomDictionary
                         attribute.totalFrequency += attribute.frequency[i];
                     }
                 }
-//                if (updateAttributeIfExist(param[0], attribute, map, rewriteTable)) continue;
+                //                if (updateAttributeIfExist(param[0], attribute, map, rewriteTable)) continue;
                 map.Add(param[0], attribute);
             }
             br.close();
@@ -498,7 +498,7 @@ public class CustomDictionary
         private LinkedList<KeyValuePair<string, CoreDictionary.Attribute>> entryList;
 
         protected Searcher(char[] c)
-            :base(c)
+            : base(c)
         {
             entryList = new LinkedList<KeyValuePair<string, CoreDictionary.Attribute>>();
         }
@@ -510,7 +510,7 @@ public class CustomDictionary
         }
 
         //@Override
-        public KeyValuePair<string, CoreDictionary.Attribute> next()
+        public override KeyValuePair<string, CoreDictionary.Attribute> next()
         {
             // 保证首次调用找到一个词语
             while (entryList.size() == 0 && begin < c.Length)
@@ -599,8 +599,8 @@ public class CustomDictionary
     {
         if (trie != null)
         {
-             int[] lengthArray = new int[text.Length];
-             CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[text.Length];
+            int[] lengthArray = new int[text.Length];
+            CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[text.Length];
             char[] charArray = text.ToCharArray();
             DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(charArray, 0);
             while (searcher.next())
@@ -608,19 +608,7 @@ public class CustomDictionary
                 lengthArray[searcher.begin] = searcher.Length;
                 attributeArray[searcher.begin] = searcher.value;
             }
-            trie.parseText(charArray, new AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>()
-            {
-                //@Override
-                public void hit(int begin, int end, CoreDictionary.Attribute value)
-                {
-                    int Length = end - begin;
-                    if (Length > lengthArray[begin])
-                    {
-                        lengthArray[begin] = Length;
-                        attributeArray[begin] = value;
-                    }
-                }
-            });
+            trie.parseText(charArray, new HT());
             for (int i = 0; i < charArray.Length;)
             {
                 if (lengthArray[i] == 0)
@@ -637,7 +625,19 @@ public class CustomDictionary
         else
             dat.parseLongestText(text, processor);
     }
-
+    public class HT : AhoCorasickDoubleArrayTrie<string>.IHit<CoreDictionary.Attribute>
+    {
+        //@Override
+        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        {
+            int Length = end - begin;
+            if (Length > lengthArray[begin])
+            {
+                lengthArray[begin] = Length;
+                attributeArray[begin] = value;
+            }
+        }
+    }
     /**
      * 热更新（重新加载）<br>
      * 集群环境（或其他IOAdapter）需要自行删除缓存文件（路径 = HanLP.Config.CustomDictionaryPath[0] + Predefine.BIN_EXT）

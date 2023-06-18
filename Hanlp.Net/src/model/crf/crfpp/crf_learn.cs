@@ -6,33 +6,33 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 /**
  * 对应crf_learn
  *
- * @author zhifac
+ * //author zhifac
  */
 public class crf_learn
 {
     public static class Option
     {
-        @Argument(description = "use features that occur no less than INT(default 1)", alias = "f")
+        //Argument(description = "use features that occur no less than INT(default 1)", alias = "f")
         public int freq = 1;
-        @Argument(description = "set INT for max iterations in LBFGS routine(default 10k)", alias = "m")
+        //Argument(description = "set INT for max iterations in LBFGS routine(default 10k)", alias = "m")
         public  int maxiter = 10000;
-        @Argument(description = "set FLOAT for cost parameter(default 1.0)", alias = "c")
+        //Argument(description = "set FLOAT for cost parameter(default 1.0)", alias = "c")
         public  Double cost = 1.0;
-        @Argument(description = "set FLOAT for termination criterion(default 0.0001)", alias = "e")
+        //Argument(description = "set FLOAT for termination criterion(default 0.0001)", alias = "e")
         public  Double eta = 0.0001;
-        @Argument(description = "convert text model to binary model", alias = "C")
+        //Argument(description = "convert text model to binary model", alias = "C")
         public  Boolean convert = false;
-        @Argument(description = "convert binary model to text model", alias = "T")
+        //Argument(description = "convert binary model to text model", alias = "T")
         public  Boolean convert_to_text = false;
-        @Argument(description = "build also text model file for debugging", alias = "t")
+        //Argument(description = "build also text model file for debugging", alias = "t")
         public  Boolean textmodel = false;
-        @Argument(description = "(CRF|CRF-L1|CRF-L2|MIRA)\", \"select training algorithm", alias = "a")
+        //Argument(description = "(CRF|CRF-L1|CRF-L2|MIRA)\", \"select training algorithm", alias = "a")
         public  string algorithm = "CRF-L2";
-        @Argument(description = "set INT for number of iterations variable needs to be optimal before considered for shrinking. (default 20)", alias = "H")
+        //Argument(description = "set INT for number of iterations variable needs to be optimal before considered for shrinking. (default 20)", alias = "H")
         public  int shrinking_size = 20;
-        @Argument(description = "show this help and exit", alias = "h")
+        //Argument(description = "show this help and exit", alias = "h")
         public  Boolean help = false;
-        @Argument(description = "number of threads(default auto detect)")
+        //Argument(description = "number of threads(default auto detect)")
         public  int thread = Runtime.getRuntime().availableProcessors();
     }
 

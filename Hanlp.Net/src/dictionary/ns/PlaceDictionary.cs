@@ -10,8 +10,10 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.corpus.dictionary.item;
 using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
 using System.Text;
 
 namespace com.hankcs.hanlp.dictionary.ns;
@@ -48,7 +50,7 @@ public class PlaceDictionary
      */
     static readonly CoreDictionary.Attribute ATTRIBUTE = CoreDictionary.get(WORD_ID);
 
-    static
+    static PlaceDictionary()
     {
         long start = DateTime.Now.Microsecond;
         dictionary = new NSDictionary();
@@ -56,14 +58,14 @@ public class PlaceDictionary
             logger.info(HanLP.Config.PlaceDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         else
             throw new ArgumentException(HanLP.Config.PlaceDictionaryPath + "加载失败");
-        transformMatrixDictionary = new TransformMatrixDictionary<NS>(NS.class);
+        transformMatrixDictionary = new TransformMatrixDictionary<NS>(NS.c);
         transformMatrixDictionary.load(HanLP.Config.PlaceDictionaryTrPath);
         trie = new AhoCorasickDoubleArrayTrie<string>();
         Dictionary<string, string> patternMap = new Dictionary<string, string>();
-        patternMap.put("CH", "CH");
-        patternMap.put("CDH", "CDH");
-        patternMap.put("CDEH", "CDEH");
-        patternMap.put("GH", "GH");
+        patternMap.Add("CH", "CH");
+        patternMap.Add("CDH", "CDH");
+        patternMap.Add("CDEH", "CDEH");
+        patternMap.Add("GH", "GH");
         trie.build(patternMap);
     }
 
@@ -78,42 +80,43 @@ public class PlaceDictionary
     public static void parsePattern(List<NS> nsList, List<Vertex> vertexList,  WordNet wordNetOptimum,  WordNet wordNetAll)
     {
 //        ListIterator<Vertex> listIterator = vertexList.listIterator();
-        StringBuilder sbPattern = new StringBuilder(nsList.size());
-        for (NS ns : nsList)
+        var sbPattern = new StringBuilder(nsList.Count);
+        foreach (NS ns in nsList)
         {
-            sbPattern.Append(ns.toString());
+            sbPattern.Append(ns.ToString());
         }
-        string pattern = sbPattern.toString();
-         Vertex[] wordArray = vertexList.toArray(new Vertex[0]);
-        trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<string>()
-        {
-            //@Override
-            public void hit(int begin, int end, string value)
-            {
-                StringBuilder sbName = new StringBuilder();
-                for (int i = begin; i < end; ++i)
-                {
-                    sbName.Append(wordArray[i].realWord);
-                }
-                string name = sbName.toString();
-                // 对一些bad case做出调整
-                if (isBadCase(name)) return;
-
-                // 正式算它是一个名字
-                if (HanLP.Config.DEBUG)
-                {
-                    System._out.printf("识别出地名：%s %s\n", name, value);
-                }
-                int offset = 0;
-                for (int i = 0; i < begin; ++i)
-                {
-                    offset += wordArray[i].realWord.Length;
-                }
-                wordNetOptimum.insert(offset, new Vertex(Predefine.TAG_PLACE, name, ATTRIBUTE, WORD_ID), wordNetAll);
-            }
-        });
+        string pattern = sbPattern.ToString();
+        Vertex[] wordArray = vertexList.ToArray();
+        trie.parseText(pattern, new CT());
     }
+    public class CT:
+        AhoCorasickDoubleArrayTrie<string>.IHit<string>
+    {
+        //@Override
+        public void hit(int begin, int end, string value)
+        {
+            StringBuilder sbName = new StringBuilder();
+            for (int i = begin; i < end; ++i)
+            {
+                sbName.Append(wordArray[i].realWord);
+            }
+            string name = sbName.toString();
+            // 对一些bad case做出调整
+            if (isBadCase(name)) return;
 
+            // 正式算它是一个名字
+            if (HanLP.Config.DEBUG)
+            {
+                System._out.printf("识别出地名：%s %s\n", name, value);
+            }
+            int offset = 0;
+            for (int i = 0; i < begin; ++i)
+            {
+                offset += wordArray[i].realWord.Length;
+            }
+            wordNetOptimum.insert(offset, new Vertex(Predefine.TAG_PLACE, name, ATTRIBUTE, WORD_ID), wordNetAll);
+        }
+    }
     /**
      * 因为任何算法都无法解决100%的问题，总是有一些bad case，这些bad case会以“盖公章 A 1”的形式加入词典中<BR>
      * 这个方法返回是否是bad case
