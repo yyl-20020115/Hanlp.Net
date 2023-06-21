@@ -204,7 +204,7 @@ public class PosTagUtil
     {
         int correct = 0, total = 0;
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(corpus);
-        for (string line : lineIterator)
+        foreach (string line in lineIterator)
         {
             Sentence sentence = Sentence.create(line);
             if (sentence == null) continue;

@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
@@ -26,11 +28,11 @@ public class ImmutableFeatureMap : FeatureMap
         this.featureIdMap = featureIdMap;
     }
 
-    public ImmutableFeatureMap(Set<KeyValuePair<string, int>> entrySet, TagSet tagSet)
+    public ImmutableFeatureMap(HashSet<KeyValuePair<string, int>> entrySet, TagSet tagSet)
     {
         base(tagSet);
-        this.featureIdMap = new HashMap<string, int>();
-        for (KeyValuePair<string, int> entry : entrySet)
+        this.featureIdMap = new ();
+        for (KeyValuePair<string, int> entry in entrySet)
         {
             featureIdMap.Add(entry.Key, entry.Value);
         }
@@ -53,6 +55,6 @@ public class ImmutableFeatureMap : FeatureMap
     //@Override
     public HashSet<KeyValuePair<string, int>> entrySet()
     {
-        return featureIdMap.entrySet();
+        return featureIdMap.ToHashSet();
     }
 }

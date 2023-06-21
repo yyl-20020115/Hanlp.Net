@@ -8,6 +8,11 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.model.perceptron.utility;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.hmm;
 
 
@@ -15,13 +20,14 @@ namespace com.hankcs.hanlp.model.hmm;
 /**
  * @author hankcs
  */
-public class HMMNERecognizer : HMMTrainer : NERecognizer
+public class HMMNERecognizer : HMMTrainer , NERecognizer
 {
     NERTagSet tagSet;
 
     public HMMNERecognizer(HiddenMarkovModel model)
+        : base(model)
     {
-        base(model);
+        ;
         tagSet = new NERTagSet();
         tagSet.nerLabels.Add("nr");
         tagSet.nerLabels.Add("ns");
@@ -29,15 +35,16 @@ public class HMMNERecognizer : HMMTrainer : NERecognizer
     }
 
     public HMMNERecognizer()
+        : this(new FirstOrderHiddenMarkovModel())
     {
-        this(new FirstOrderHiddenMarkovModel());
+       ;
     }
 
     //@Override
-    protected List<string[]> convertToSequence(Sentence sentence)
+    protected override List<string[]> convertToSequence(Sentence sentence)
     {
         List<string[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
-        for (string[] pair : collector)
+    foreach (string[] pair in collector)
         {
             pair[1] = pair[2];
         }
@@ -46,7 +53,7 @@ public class HMMNERecognizer : HMMTrainer : NERecognizer
     }
 
     //@Override
-    protected TagSet getTagSet()
+    protected override TagSet getTagSet()
     {
         return tagSet;
     }

@@ -216,7 +216,7 @@ public class LogLinearModel : LinearModel
             for (int tid = 0; tid < featureTemplateList.size(); tid++)
             {
                 FeatureTemplate template = featureTemplateList.get(tid);
-                Iterator<string> iterator = template.delimiterList.iterator();
+                IEnumerator<string> iterator = template.delimiterList.iterator();
                 string header = iterator.next();
                 if (feature.StartsWith(header))
                 {

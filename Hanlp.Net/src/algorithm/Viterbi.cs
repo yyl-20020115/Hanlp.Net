@@ -250,7 +250,7 @@ public class Viterbi
     {
         int Length = roleTagList.Count - 1;
         List<E> tagList = new List<E>();
-        Iterator<EnumItem<E>> iterator = roleTagList.iterator();
+        IEnumerator<EnumItem<E>> iterator = roleTagList.iterator();
         EnumItem<E> start = iterator.next();
         E pre = start.labelMap.entrySet().iterator().next().Key;
         E perfect_tag = pre;

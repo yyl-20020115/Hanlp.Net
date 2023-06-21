@@ -50,7 +50,7 @@ public class CommonSynonymDictionaryEx
         string line = null;
         try
         {
-            TextReader bw = new TextReader(new InputStreamReader(inputStream, "UTF-8"));
+            TextReader bw = new StreamReader(inputStream, "UTF-8");
             while ((line = bw.ReadLine()) != null)
             {
                 string[] args = line.Split(" ");

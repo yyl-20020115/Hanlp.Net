@@ -183,14 +183,14 @@ public class Document : Serializable
         List<List<Word>> simpleList = new LinkedList<List<Word>>();
         foreach (Sentence sentence in sentenceList)
         {
-            List<Word> wordList = new LinkedList<Word>();
+            List<Word> wordList = new ();
             foreach (IWord word in sentence.wordList)
             {
                 if (word is CompoundWord)
                 {
                     if (labelSet.Contains(word.getLabel()))
                     {
-                        for (Word inner : ((CompoundWord) word).innerList)
+                        foreach (Word inner in ((CompoundWord) word).innerList)
                         {
                             wordList.Add(inner);
                         }

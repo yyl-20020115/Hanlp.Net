@@ -113,7 +113,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
     {
         _out.writeInt(type.ordinal());
         _out.writeInt(size());
-        for (string tag : idStringMap)
+        foreach (string tag in idStringMap)
         {
             _out.writeUTF(tag);
         }

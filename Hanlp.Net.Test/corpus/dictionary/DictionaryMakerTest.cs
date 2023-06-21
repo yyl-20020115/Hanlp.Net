@@ -121,7 +121,7 @@ public class DictionaryMakerTest : TestCase
 //            }
 //        }
 //        DictionaryMaker dictionary = DictionaryMaker.load(HanLP.Config.PersonDictionaryPath);
-//        for (Map.Entry<String, Item> entry : dictionary.entrySet())
+//        for (Map.KeyValuePair<String, Item> entry : dictionary.entrySet())
 //        {
 //            String key = entry.Key;
 //            int dF = entry.Value.getFrequency("D");
@@ -197,7 +197,7 @@ public class DictionaryMakerTest : TestCase
 //        Map<String, int> labelMap = new Dictionary<String, int>();
 //        for (Item item : itemList)
 //        {
-//            for (Map.Entry<String, int> entry : item.labelMap.entrySet())
+//            for (Map.KeyValuePair<String, int> entry : item.labelMap.entrySet())
 //            {
 //                int frequency = labelMap.get(entry.Key);
 //                if (frequency == null) frequency = 0;

@@ -65,10 +65,10 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
                 prev_s = s;
             }
         }
-        for (float[] p : transition_probability)
+        foreach (float[] p in transition_probability)
             normalize(p);
-        for (float[][] pp : transition_probability2)
-            for (float[] p : pp)
+        foreach (float[][] pp in transition_probability2)
+            foreach (float[] p in pp)
                 normalize(p);
     }
 
@@ -111,9 +111,9 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
         base.toLog();
         if (transition_probability2 != null)
         {
-            for (float[][] m : transition_probability2)
+            foreach (float[][] m in transition_probability2)
             {
-                for (float[] v : m)
+                foreach (float[] v in m)
                 {
                     for (int i = 0; i < v.Length; i++)
                     {
@@ -225,9 +225,9 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
     public void unLog()
     {
         base.unLog();
-        for (float[][] m : transition_probability2)
+        foreach (float[][] m in transition_probability2)
         {
-            for (float[] v : m)
+            foreach (float[] v in m)
             {
                 for (int i = 0; i < v.Length; i++)
                 {

@@ -65,7 +65,7 @@ public class CoreSynonymDictionaryEx
      */
     public static List<long[]> convert(List<Term> sentence, bool withUndefinedItem)
     {
-        List<long[]> synonymItemList = new (sentence.size());
+        List<long[]> synonymItemList = new (sentence.Count);
         foreach (Term term in sentence)
         {
             // 除掉停用词

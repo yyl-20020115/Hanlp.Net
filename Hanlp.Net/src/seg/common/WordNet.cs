@@ -114,7 +114,7 @@ public class WordNet
      */
     public void push(int line, Vertex vertex)
     {
-        Iterator<Vertex> iterator = vertexes[line].iterator();
+        IEnumerator<Vertex> iterator = vertexes[line].iterator();
         while (iterator.MoveNext())
         {
             if (iterator.next().realWord.Length == vertex.realWord.Length)

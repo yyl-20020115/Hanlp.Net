@@ -44,13 +44,13 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
     public CoNLLSentence parse(List<Term> termList)
     {
         List<string> posTagList = PosTagUtil.to863(termList);
-        List<string> wordList = new (termList.size());
-        for (Term term : termList)
+        List<string> wordList = new (termList.Count);
+        foreach (Term term in termList)
         {
             wordList.Add(term.word);
         }
-        List<int> heads = new (termList.size());
-        List<string> deprels = new (termList.size());
+        List<int> heads = new (termList.Count);
+        List<string> deprels = new (termList.Count);
         parser_dll.parse(wordList, posTagList, heads, deprels);
 
         CoNLLWord[] wordArray = new CoNLLWord[termList.size()];

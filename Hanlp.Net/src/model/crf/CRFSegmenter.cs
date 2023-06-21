@@ -113,8 +113,8 @@ public class CRFSegmenter : CRFTagger , Segmenter
             List<int> featureVec = new ();
             for (int i = 0; i < featureTemplateArray.Length; i++)
             {
-                Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
+                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                 delimiterIterator.next(); // ignore U0 之类的id
                 while (offsetIterator.MoveNext())
                 {

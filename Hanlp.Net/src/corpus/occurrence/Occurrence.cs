@@ -188,7 +188,7 @@ public class Occurrence
 
     public List<PairFrequency> getPhraseByMi()
     {
-        List<PairFrequency> pairFrequencyList = new List<PairFrequency>(entrySetPair.size());
+        List<PairFrequency> pairFrequencyList = new List<PairFrequency>(entrySetPair.Count);
         foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
             pairFrequencyList.Add(entry.Value);
@@ -207,7 +207,7 @@ public class Occurrence
 
     public List<PairFrequency> getPhraseByLe()
     {
-        List<PairFrequency> pairFrequencyList = new (entrySetPair.size());
+        List<PairFrequency> pairFrequencyList = new (entrySetPair.Count);
         foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
             pairFrequencyList.Add(entry.Value);
@@ -226,7 +226,7 @@ public class Occurrence
 
     public List<PairFrequency> getPhraseByRe()
     {
-        List<PairFrequency> pairFrequencyList = new (entrySetPair.size());
+        List<PairFrequency> pairFrequencyList = new (entrySetPair.Count);
         foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
             pairFrequencyList.Add(entry.Value);

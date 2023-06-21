@@ -94,7 +94,7 @@ public class MDAGNode
         
         //Loop through the nodes in this node's outgoing _transition set, incrementing the number of
         //incoming transitions of each by 1 (to account for this newly created node's outgoing transitions)
-        foreach(Entry<char, MDAGNode> transitionKeyValuePair in outgoingTransitionTreeMap.entrySet())
+        foreach(KeyValuePair<char, MDAGNode> transitionKeyValuePair in outgoingTransitionTreeMap.entrySet())
             transitionKeyValuePair.Value.incomingTransitionCount++;
         /////
     }

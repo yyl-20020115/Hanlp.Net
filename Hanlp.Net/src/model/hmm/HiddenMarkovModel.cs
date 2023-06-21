@@ -143,7 +143,7 @@ public abstract class HiddenMarkovModel
      */
     public void train(ICollection<int[][]> samples)
     {
-        if (samples.isEmpty()) return;
+        if (samples.Count == 0) return;
         int max_state = 0;
         int max_obser = 0;
         foreach (int[][] sample in samples)
@@ -170,7 +170,7 @@ public abstract class HiddenMarkovModel
     protected void estimateEmissionProbability(ICollection<int[][]> samples, int max_state, int max_obser)
     {
         emission_probability = new float[max_state + 1][max_obser + 1];
-        for (int[][] sample : samples)
+        foreach (int[][] sample in samples)
         {
             for (int i = 0; i < sample[0].Length; i++)
             {
@@ -242,7 +242,7 @@ public abstract class HiddenMarkovModel
      */
     public List<int[][]> generate(int minLength, int maxLength, int size)
     {
-        List<int[][]> samples = new ArrayList<int[][]>(size);
+        List<int[][]> samples = new (size);
         for (int i = 0; i < size; i++)
         {
             samples.Add(generate((int) (Math.Floor(Random.Shared.NextDouble() * (maxLength - minLength)) + minLength)));
@@ -257,7 +257,7 @@ public abstract class HiddenMarkovModel
      * @param s 预测状态序列（需预先分配内存）
      * @return 概率的对数，可利用 (float) Math.Exp(maxScore) 还原
      */
-    public abstract float predict(int[] o, int[] s);
+    //public abstract float predict(int[] o, int[] s);
 
     /**
      * 预测（维特比算法）
@@ -266,7 +266,7 @@ public abstract class HiddenMarkovModel
      * @param s 预测状态序列（需预先分配内存）
      * @return 概率的对数，可利用 (float) Math.Exp(maxScore) 还原
      */
-    public float predict(int[] o, int[] s)
+    public virtual float predict(int[] o, int[] s)
     {
         int[] states = new int[s.Length];
         float p = predict(o, states);

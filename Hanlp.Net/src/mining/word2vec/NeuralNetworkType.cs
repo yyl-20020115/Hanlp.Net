@@ -4,13 +4,15 @@ namespace com.hankcs.hanlp.mining.word2vec;
 /**
  * 神经网络类型
  */
-public enum NeuralNetworkType
+public abstract class NeuralNetworkType
 {
-    /**
-     * 更快，对高频词的准确率更高
-     * Faster, slightly better accuracy for frequent words
-     */
-    CBOW()
+        public abstract float getDefaultInitialLearningRate();
+
+/**
+ * 更快，对高频词的准确率更高
+ * Faster, slightly better accuracy for frequent words
+ */
+            CBOW()
             {
                 //@Override
                 public float getDefaultInitialLearningRate()
@@ -21,7 +23,7 @@ public enum NeuralNetworkType
     /**
      * 较慢，对低频词的准确率更高
      */
-    SKIP_GRAM()
+            SKIP_GRAM()
             {
                 //@Override
                 public float getDefaultInitialLearningRate()
@@ -33,5 +35,4 @@ public enum NeuralNetworkType
     /**
      * @return 默认学习率
      */
-    public abstract float getDefaultInitialLearningRate();
 }

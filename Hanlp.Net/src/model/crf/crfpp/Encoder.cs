@@ -24,7 +24,7 @@ public class Encoder
     }
     public static Algorithm fromString(string algorithm)
     {
-        algorithm = algorithm.toLowerCase();
+        algorithm = algorithm.ToLower();
         if (algorithm.Equals("crf") || algorithm.Equals("crf-l2"))
         {
             return Encoder.Algorithm.CRF_L2;
@@ -85,7 +85,7 @@ public class Encoder
             return false;
         }
         EncoderFeatureIndex featureIndex = new EncoderFeatureIndex(threadNum);
-        List<TaggerImpl> x = new ArrayList<TaggerImpl>();
+        List<TaggerImpl> x = new ();
         if (!featureIndex.open(templFile, trainFile))
         {
             Console.Error.WriteLine("Fail to open " + templFile + " " + trainFile);
@@ -231,9 +231,9 @@ public class Encoder
         }
 
         int all = 0;
-        for (int i = 0; i < x.size(); i++)
+        for (int i = 0; i < x.Count; i++)
         {
-            all += x.get(i).size();
+            all += x[i].size();
         }
 
         ExecutorService executor = Executors.newFixedThreadPool(threadNum);
@@ -253,15 +253,15 @@ public class Encoder
 
             for (int i = 1; i < threadNum; i++)
             {
-                threads.get(0).obj += threads.get(i).obj;
-                threads.get(0).err += threads.get(i).err;
-                threads.get(0).zeroone += threads.get(i).zeroone;
+                threads[0].obj += threads[i].obj;
+                threads[0].err += threads[i].err;
+                threads[0].zeroone += threads[i].zeroone;
             }
             for (int i = 1; i < threadNum; i++)
             {
                 for (int k = 0; k < featureIndex.size(); k++)
                 {
-                    threads.get(0).expected[k] += threads.get(i).expected[k];
+                    threads[0].expected[k] += threads[i].expected[k];
                 }
             }
             int numNonZero = 0;
@@ -269,7 +269,7 @@ public class Encoder
             {
                 for (int k = 0; k < featureIndex.size(); k++)
                 {
-                    threads.get(0).obj += Math.Abs(alpha[k] / C);
+                    threads[0].obj += Math.Abs(alpha[k] / C);
                     if (alpha[k] != 0.0)
                     {
                         numNonZero++;
@@ -281,27 +281,27 @@ public class Encoder
                 numNonZero = featureIndex.size();
                 for (int k = 0; k < featureIndex.size(); k++)
                 {
-                    threads.get(0).obj += (alpha[k] * alpha[k] / (2.0 * C));
-                    threads.get(0).expected[k] += alpha[k] / C;
+                    threads[0].obj += (alpha[k] * alpha[k] / (2.0 * C));
+                    threads[0].expected[k] += alpha[k] / C;
                 }
             }
             for (int i = 1; i < threadNum; i++)
             {
                 // try to free some memory
-                threads.get(i).expected = null;
+                threads[i].expected = null;
             }
 
-            double diff = (itr == 0 ? 1.0 : Math.Abs(oldObj - threads.get(0).obj) / oldObj);
+            double diff = (itr == 0 ? 1.0 : Math.Abs(oldObj - threads[0].obj) / oldObj);
             StringBuilder b = new StringBuilder();
             b.Append("iter=").Append(itr);
-            b.Append(" terr=").Append(1.0 * threads.get(0).err / all);
-            b.Append(" serr=").Append(1.0 * threads.get(0).zeroone / x.size());
+            b.Append(" terr=").Append(1.0 * threads[0].err / all);
+            b.Append(" serr=").Append(1.0 * threads[0].zeroone / x.Count);
             b.Append(" act=").Append(numNonZero);
-            b.Append(" obj=").Append(threads.get(0).obj);
+            b.Append(" obj=").Append(threads[0].obj);
             b.Append(" diff=").Append(diff);
             Console.WriteLine(b.ToString());
 
-            oldObj = threads.get(0).obj;
+            oldObj = threads[0].obj;
 
             if (diff < eta)
             {
@@ -473,12 +473,12 @@ public class Encoder
         string trainFile = args[1];
         string modelFile = args[2];
         Encoder enc = new Encoder();
-        long time1 = new Date().getTime();
+        long time1 = new DateTime().Millisecond;
         if (!enc.learn(templFile, trainFile, modelFile, false, 100000, 1, 0.0001, 1.0, 1, 20, Algorithm.CRF_L2))
         {
             Console.Error.WriteLine("error training model");
             return;
         }
-        Console.WriteLine(new Date().getTime() - time1);
+        Console.WriteLine(new DateTime().Millisecond - time1);
     }
 }

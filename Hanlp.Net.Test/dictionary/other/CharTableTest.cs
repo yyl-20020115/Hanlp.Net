@@ -112,7 +112,7 @@ public class CharTableTest : TestCase
 ////        char[] CONVERT = CharTable.CONVERT;
 ////        StringDictionary dictionary = new StringDictionary("=");
 ////        dictionary.load(HanLP.Config.t2sDictionaryPath);
-////        for (Map.Entry<String, String> entry : dictionary.entrySet())
+////        for (Map.KeyValuePair<String, String> entry : dictionary.entrySet())
 ////        {
 ////            String key = entry.Key;
 ////            if (key.Length != 1) continue;

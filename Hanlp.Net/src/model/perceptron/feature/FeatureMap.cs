@@ -68,7 +68,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     {
         tagSet.save(_out);
         _out.writeInt(size());
-        for (KeyValuePair<string, int> entry : entrySet())
+        foreach (KeyValuePair<string, int> entry in entrySet())
         {
             _out.writeUTF(entry.Key);
         }

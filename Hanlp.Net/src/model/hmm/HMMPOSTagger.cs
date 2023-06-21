@@ -8,6 +8,11 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.tokenizer.lexical;
+
 namespace com.hankcs.hanlp.model.hmm;
 
 
@@ -15,19 +20,21 @@ namespace com.hankcs.hanlp.model.hmm;
 /**
  * @author hankcs
  */
-public class HMMPOSTagger : HMMTrainer : POSTagger
+public class HMMPOSTagger : HMMTrainer , POSTagger
 {
     POSTagSet tagSet;
 
     public HMMPOSTagger(HiddenMarkovModel model)
+        : base(model)
     {
-        base(model);
+        ;
         tagSet = new POSTagSet();
     }
 
     public HMMPOSTagger()
+        : base()
     {
-        base();
+       ;
         tagSet = new POSTagSet();
     }
 
@@ -35,22 +42,22 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
     protected List<string[]> convertToSequence(Sentence sentence)
     {
         List<Word> wordList = sentence.toSimpleWordList();
-        List<string[]> xyList = new ArrayList<string[]>(wordList.size());
-        for (Word word : wordList)
+        List<string[]> xyList = new (wordList.Count);
+        foreach (Word word in wordList)
         {
-            xyList.Add(new string[]{word.Value, word.getLabel()});
+            xyList.Add(new string[]{word.Value(), word.getLabel()});
         }
         return xyList;
     }
 
     //@Override
-    protected TagSet getTagSet()
+    protected override TagSet getTagSet()
     {
         return tagSet;
     }
 
     //@Override
-    public string[] tag(string... words)
+    public string[] tag(params string[] words)
     {
         int[] obsArray = new int[words.Length];
         for (int i = 0; i < obsArray.Length; i++)

@@ -48,11 +48,11 @@ public class ImmutableFeatureMDatMap : FeatureMap
         dat = new MutableDoubleArrayTrieInteger(featureIdMap);
     }
 
-    public ImmutableFeatureMDatMap(Set<KeyValuePair<string, int>> featureIdSet, TagSet tagSet)
+    public ImmutableFeatureMDatMap(HashSet<KeyValuePair<string, int>> featureIdSet, TagSet tagSet)
         : base(tagSet)
     {
         dat = new MutableDoubleArrayTrieInteger();
-        for (KeyValuePair<string, int> entry : featureIdSet)
+        for (KeyValuePair<string, int> entry in featureIdSet)
         {
             dat.Add(entry.Key, entry.Value);
         }

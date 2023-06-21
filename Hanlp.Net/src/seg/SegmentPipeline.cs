@@ -87,7 +87,7 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     public List<Term> flow(string input)
     {
         List<IWord> i = first.flow(input);
-        for (Pipe<List<IWord>, List<IWord>> pipe : pipeList)
+        foreach (Pipe<List<IWord>, List<IWord>> pipe in pipeList)
         {
             i = pipe.flow(i);
         }

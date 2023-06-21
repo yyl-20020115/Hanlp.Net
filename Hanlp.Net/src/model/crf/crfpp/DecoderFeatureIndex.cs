@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.corpus.io;
 
 namespace com.hankcs.hanlp.model.crf.crfpp;
@@ -75,7 +76,7 @@ public class DecoderFeatureIndex : FeatureIndex
             }
             osw.Write("\n");
 
-            for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dat)
+            foreach (var pair in dat)
             {
                 osw.Write(pair.Value + " " + pair.Key + "\n");
             }

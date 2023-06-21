@@ -32,7 +32,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //        StringDictionary dictionaryOuter = new StringDictionary("=");
 //        dictionaryOuter.load("D:\\Doc\\语料库\\简繁分歧词表.txt");
 //
-//        for (Map.Entry<String, String> entry : dictionaryOuter.entrySet())
+//        for (Map.KeyValuePair<String, String> entry : dictionaryOuter.entrySet())
 //        {
 //            String t = entry.Key;
 //            String s = entry.Value;
@@ -96,7 +96,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //    private void save(Map<String, String> storage, String path) 
 //    {
 //        TextWriter bw = IOUtil.newBufferedWriter(path);
-//        for (Map.Entry<String, String> entry : storage.entrySet())
+//        for (Map.KeyValuePair<String, String> entry : storage.entrySet())
 //        {
 //            String line = entry.ToString();
 //            int firstBlank = line.IndexOf(' ');
@@ -113,7 +113,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //    private Map<String, HashSet<String>> combine(Map<String, String> s2t, Map<String, String> t2s)
 //    {
 //        Map<String, HashSet<String>> all = new Dictionary<String, HashSet<String>>();
-//        for (Map.Entry<String, String> entry : s2t.entrySet())
+//        for (Map.KeyValuePair<String, String> entry : s2t.entrySet())
 //        {
 //            String key = entry.Key;
 //            HashSet<String> value = all.get(key);
@@ -132,7 +132,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //            }
 //        }
 //
-//        for (Map.Entry<String, String> entry : t2s.entrySet())
+//        for (Map.KeyValuePair<String, String> entry : t2s.entrySet())
 //        {
 //            for (String key : entry.Value.Split(" "))
 //            {

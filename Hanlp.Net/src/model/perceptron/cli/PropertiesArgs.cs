@@ -25,14 +25,14 @@ public class PropertiesArgs
         {
             clazz = target.getClass();
         }
-        for (Field field : clazz.getDeclaredFields())
+        foreach (Field field in clazz.getDeclaredFields())
         {
             processField(target, field, arguments);
         }
         try
         {
             BeanInfo info = Introspector.getBeanInfo(clazz);
-            for (PropertyDescriptor pd : info.getPropertyDescriptors())
+            for (PropertyDescriptor pd in info.getPropertyDescriptors())
             {
                 processProperty(target, pd, arguments);
             }

@@ -354,7 +354,7 @@ public abstract class Segment
         //assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.ToString();
         int Length = vertexList.Count - 2;
         List<Term> resultList = new (Length);
-        Iterator<Vertex> iterator = vertexList.iterator();
+        IEnumerator<Vertex> iterator = vertexList.iterator();
         iterator.next();
         if (offsetEnabled)
         {

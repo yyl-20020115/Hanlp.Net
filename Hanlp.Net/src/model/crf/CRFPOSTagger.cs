@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
 using com.hankcs.hanlp.model.crf.crfpp;
 using com.hankcs.hanlp.model.perceptron;
 using com.hankcs.hanlp.model.perceptron.feature;
@@ -52,13 +54,13 @@ public class CRFPOSTagger : CRFTagger , POSTagger
     protected void convertCorpus(Sentence sentence, TextWriter bw) 
     {
         List<Word> simpleWordList = sentence.toSimpleWordList();
-        List<string> wordList = new (simpleWordList.size());
-        for (Word word : simpleWordList)
+        List<string> wordList = new (simpleWordList.Count);
+        foreach (Word word in simpleWordList)
         {
             wordList.Add(word.value);
         }
         string[] words = wordList.ToArray();
-        Iterator<Word> iterator = simpleWordList.iterator();
+        IEnumerator<Word> iterator = simpleWordList.iterator();
         for (int i = 0; i < words.Length; i++)
         {
             string curWord = words[i];
@@ -140,11 +142,11 @@ public class CRFPOSTagger : CRFTagger , POSTagger
         protected int[] extractFeature(string[] words, FeatureMap featureMap, int position)
         {
             StringBuilder sbFeature = new StringBuilder();
-            List<int> featureVec = new LinkedList<int>();
+            List<int> featureVec = new ();
             for (int i = 0; i < featureTemplateArray.Length; i++)
             {
-                Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
+                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                 delimiterIterator.next(); // ignore U0 之类的id
                 while (offsetIterator.MoveNext())
                 {

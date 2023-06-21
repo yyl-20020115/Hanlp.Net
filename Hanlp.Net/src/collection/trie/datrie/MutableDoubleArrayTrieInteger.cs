@@ -323,7 +323,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             {
                 int base = current - minChild;
                 bool ok = true;
-                for (Iterator<int> it = children.iterator(); it.MoveNext();) // 检查是否每个子节点的位置都空闲（“连续”区间）
+                for (IEnumerator<int> it = children.iterator(); it.MoveNext();) // 检查是否每个子节点的位置都空闲（“连续”区间）
                 {
                     int to = base + it.next();
                     if (to >= getBaseArraySize())
@@ -1272,16 +1272,6 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
                     }
                 }
             }
-        }
-
-        public string key()
-        {
-            return key;
-        }
-
-        public int value()
-        {
-            return value;
         }
 
         public string Key()

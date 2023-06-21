@@ -83,7 +83,7 @@ public class Node
             int idx = fVector.get(i) + y;
             expected[idx] += c;
         }
-        for (Path p : lpath)
+        foreach (Path p in lpath)
         {
             p.calcExpectation(expected, Z, size);
         }

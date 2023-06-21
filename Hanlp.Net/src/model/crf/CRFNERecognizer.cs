@@ -9,10 +9,14 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.model.crf.crfpp;
 using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.model.perceptron.feature;
 using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.model.perceptron.utility;
 using com.hankcs.hanlp.tokenizer.lexical;
+using System.Text;
 
 namespace com.hankcs.hanlp.model.crf;
 
@@ -67,7 +71,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
             bw.Write(tuple[1]);
             bw.Write('\t');
             bw.Write(tuple[2]);
-            bw.newLine();
+            bw.WriteLine();
         }
     }
 
@@ -86,39 +90,41 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
     private NERInstance createInstance(string[] wordArray, string[] posArray)
     {
         FeatureTemplate[] featureTemplateArray = model.getFeatureTemplateArray();
-        return new NERInstance(wordArray, posArray, model.featureMap)
+        return new FT(wordArray, posArray, model.featureMap);
+    }
+
+    public class FT: NERInstance
+    {
+        //@Override
+        protected int[] extractFeature(string[] wordArray, string[] posArray, FeatureMap featureMap, int position)
         {
-            //@Override
-            protected int[] extractFeature(string[] wordArray, string[] posArray, FeatureMap featureMap, int position)
+            StringBuilder sbFeature = new StringBuilder();
+            List<int> featureVec = new ();
+            for (int i = 0; i < featureTemplateArray.Length; i++)
             {
-                StringBuilder sbFeature = new StringBuilder();
-                List<int> featureVec = new LinkedList<int>();
-                for (int i = 0; i < featureTemplateArray.Length; i++)
+                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
+                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                delimiterIterator.next(); // ignore U0 之类的id
+                while (offsetIterator.MoveNext())
                 {
-                    Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                    Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
-                    delimiterIterator.next(); // ignore U0 之类的id
-                    while (offsetIterator.MoveNext())
-                    {
-                        int[] offset = offsetIterator.next();
-                        int t = offset[0] + position;
-                        bool first = offset[1] == 0;
-                        if (t < 0)
-                            sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
-                        else if (t >= wordArray.Length)
-                            sbFeature.Append(FeatureIndex.EOS[t - wordArray.Length]);
-                        else
-                            sbFeature.Append(first ? wordArray[t] : posArray[t]);
-                        if (delimiterIterator.MoveNext())
-                            sbFeature.Append(delimiterIterator.next());
-                        else
-                            sbFeature.Append(i);
-                    }
-                    addFeatureThenClear(sbFeature, featureVec, featureMap);
+                    int[] offset = offsetIterator.next();
+                    int t = offset[0] + position;
+                    bool first = offset[1] == 0;
+                    if (t < 0)
+                        sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
+                    else if (t >= wordArray.Length)
+                        sbFeature.Append(FeatureIndex.EOS[t - wordArray.Length]);
+                    else
+                        sbFeature.Append(first ? wordArray[t] : posArray[t]);
+                    if (delimiterIterator.MoveNext())
+                        sbFeature.Append(delimiterIterator.next());
+                    else
+                        sbFeature.Append(i);
                 }
-                return toFeatureArray(featureVec);
+                addFeatureThenClear(sbFeature, featureVec, featureMap);
             }
-        };
+            return toFeatureArray(featureVec);
+        }
     }
 
     //@Override

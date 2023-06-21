@@ -33,13 +33,13 @@ public class SimplifyNGramDictionary : TestCase
 //            map.Add(param[0], int.valueOf(param[1]));
 //        }
 //        br.Close();
-//        HashSet<Map.Entry<String, int>> entrySet = map.descendingMap().entrySet();
-//        Iterator<Map.Entry<String, int>> iterator = entrySet.iterator();
+//        HashSet<Map.KeyValuePair<String, int>> entrySet = map.descendingMap().entrySet();
+//        IEnumerator<Map.KeyValuePair<String, int>> iterator = entrySet.iterator();
 //        // 第一步去包含
-////        Map.Entry<String, int> pre = new AbstractMap.SimpleEntry<>(" @ ", 1);
+////        Map.KeyValuePair<String, int> pre = new AbstractMap.SimpleEntry<>(" @ ", 1);
 ////        while (iterator.MoveNext())
 ////        {
-////            Map.Entry<String, int> current = iterator.next();
+////            Map.KeyValuePair<String, int> current = iterator.next();
 ////            if (current.Key.Length - current.Key.IndexOf('@') == 2 && pre.Key.IndexOf(current.Key) == 0 && current.Value <= 2)
 ////            {
 ////                Console.WriteLine("应当删除 " + current + " 保留 " + pre);
@@ -51,7 +51,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        iterator = entrySet.iterator();
 ////        while (iterator.MoveNext())
 ////        {
-////            Map.Entry<String, int> current = iterator.next();
+////            Map.KeyValuePair<String, int> current = iterator.next();
 ////            if (current.Key.Length == 3)
 ////            {
 ////                Console.WriteLine("应当删除 " + current);
@@ -61,7 +61,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        iterator = entrySet.iterator();
 ////        while (iterator.MoveNext())
 ////        {
-////            Map.Entry<String, int> current = iterator.next();
+////            Map.KeyValuePair<String, int> current = iterator.next();
 ////            String[] termArray = current.Key.Split("@", 2);
 ////            if (termArray[0].Equals("未##人") && termArray[1].Length < 2)
 ////            {
@@ -73,7 +73,7 @@ public class SimplifyNGramDictionary : TestCase
 ////        iterator = entrySet.iterator();
 ////        while (iterator.MoveNext())
 ////        {
-////            Map.Entry<String, int> current = iterator.next();
+////            Map.KeyValuePair<String, int> current = iterator.next();
 ////            if (current.Key.Contains("未##人") && current.Value < 10)
 ////            {
 ////                Console.WriteLine("删除 " + current.Key);
@@ -86,7 +86,7 @@ public class SimplifyNGramDictionary : TestCase
 //        iterator = entrySet.iterator();
 //        while (iterator.MoveNext())
 //        {
-//            Map.Entry<String, int> current = iterator.next();
+//            Map.KeyValuePair<String, int> current = iterator.next();
 //            if (current.Key.Contains("未##人") && dictionary.getFrequency(current.Key) < 10)
 //            {
 //                Console.WriteLine("删除 " + current.Key);
@@ -95,7 +95,7 @@ public class SimplifyNGramDictionary : TestCase
 //        }
 //        // 输出
 //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(path)));
-//        for (Map.Entry<String, int> entry : map.entrySet())
+//        for (Map.KeyValuePair<String, int> entry : map.entrySet())
 //        {
 //            bw.Write(entry.Key);
 //            bw.Write(' ');
@@ -120,7 +120,7 @@ public class SimplifyNGramDictionary : TestCase
 //            map.Add(param[0], int.valueOf(param[1]));
 //        }
 //        br.Close();
-//        Iterator<String> iterator = map.Keys.iterator();
+//        IEnumerator<String> iterator = map.Keys.iterator();
 //        while (iterator.MoveNext())
 //        {
 //            line = iterator.next();
@@ -133,7 +133,7 @@ public class SimplifyNGramDictionary : TestCase
 //
 //        // 输出
 //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(path), "UTF-8"));
-//        for (Map.Entry<String, int> entry : map.entrySet())
+//        for (Map.KeyValuePair<String, int> entry : map.entrySet())
 //        {
 //            bw.Write(entry.Key);
 //            bw.Write(' ');

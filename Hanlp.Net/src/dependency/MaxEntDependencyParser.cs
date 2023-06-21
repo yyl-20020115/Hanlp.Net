@@ -109,9 +109,9 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         context.Add(nodeArray[from].label + '→' + wordBeforeJ.label + '@' + nodeArray[to].label);
         List<KeyValuePair<string, Double>> pairList = model.predict(context.ToArray());
         KeyValuePair<string, Double> maxPair = new KeyValuePair<string, Double>("null", -1.0);
-//        Console.WriteLine(context);
-//        Console.WriteLine(pairList);
-        for (KeyValuePair<string, Double> pair : pairList)
+        //        Console.WriteLine(context);
+        //        Console.WriteLine(pairList);
+        foreach (KeyValuePair<string, Double> pair in pairList)
         {
             if (pair.Value > maxPair.Value && !"null".Equals(pair.Key))
             {

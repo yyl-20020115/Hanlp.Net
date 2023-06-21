@@ -186,9 +186,9 @@ public class DoubleArrayTrieInteger : Serializable
         for (int i = 0; i < siblings.size(); i++)
             check[begin + siblings.get(i).code] = begin;
 
-        for (int i = 0; i < siblings.size(); i++)
+        for (int i = 0; i < siblings.Count; i++)
         {
-            List<Node> new_siblings = new ArrayList<Node>();
+            List<Node> new_siblings = new ();
 
             if (fetch(siblings.get(i), new_siblings) == 0)
             {
@@ -269,13 +269,13 @@ public class DoubleArrayTrieInteger : Serializable
 
     public int build(List<string> key)
     {
-        return build(key, null, null, key.size());
+        return build(key, null, null, key.Count);
     }
 
     public int build(List<string> _key, int[] _length, int[] _value,
                      int _keySize)
     {
-        if (_keySize > _key.size() || _key == null)
+        if (_keySize > _key.Count || _key == null)
             return 0;
 
         key = _key;
@@ -323,17 +323,17 @@ public class DoubleArrayTrieInteger : Serializable
             childIdxMap.get(check[i]).Add(i);
         }
         Stack<int[]> s = new Stack<int[]>();
-        s.Add(new int[]{1, -1});
+        s.Push(new int[]{1, -1});
 
         List<int> charBuf = new ();
         while (true)
         {
-            int[] pair = s.peek();
+            int[] pair = s.Peek();
             List<int> childList = childIdxMap.get(pair[0]);
-            if (childList == null || (childList.size() - 1) == pair[1])
+            if (childList == null || (childList.Count - 1) == pair[1])
             {
-                s.pop();
-                if (s.empty())
+                s.Pop();
+                if (s.Count==0)
                 {
                     break;
                 }
@@ -350,11 +350,11 @@ public class DoubleArrayTrieInteger : Serializable
             {
                 pair[1]++;
             }
-            int c = (int) childList.get(pair[1]);
+            int c = (int) childList[(pair[1])];
             int code = (c - 1 - pair[0]);
             if (base[c] > 0)
             {
-                s.Add(new int[]{base[c], -1});
+                s.Push(new int[]{base[c], -1});
                 charBuf.Add(code);
                 continue;
             }
@@ -362,10 +362,10 @@ public class DoubleArrayTrieInteger : Serializable
             {
                 if (check[c] == c)
                 {
-                    char[] chars = new char[charBuf.size()];
-                    for (int i = 0; i < charBuf.size(); i++)
+                    char[] chars = new char[charBuf.Count];
+                    for (int i = 0; i < charBuf.Count; i++)
                     {
-                        chars[i] = (char) (int) charBuf.get(i);
+                        chars[i] = (char) (int) charBuf[i];
                     }
                     key.Add(new string(chars));
                     val1.Add(-base[c] - 1);
@@ -373,22 +373,22 @@ public class DoubleArrayTrieInteger : Serializable
                 continue;
             }
         }
-        if (!val1.isEmpty())
+        if (val1.Count == 0)
         {
-            value = new int[val1.size()];
-            for (int i = 0; i < val1.size(); i++)
+            value = new int[val1.Count];
+            for (int i = 0; i < val1.Count; i++)
             {
-                value[i] = val1.get(i);
+                value[i] = val1[i];
             }
         }
     }
 
     public void open(string fileName) 
     {
-        File file = new File(fileName);
+        string file = (fileName);
         size = (int) file.Length / UNIT_SIZE;
         check = new int[size];
-        base = new int[size];
+        _base = new int[size];
 
         Stream _is = null;
         try
@@ -479,7 +479,7 @@ public class DoubleArrayTrieInteger : Serializable
         if (nodePos <= 0)
             nodePos = 0;
 
-        List<int> result = new ArrayList<int>();
+        List<int> result = new ();
 
         char[] keyChars = key.ToCharArray();
 
@@ -525,12 +525,12 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public List<string> Key
+    public List<string> Key()
     {
         return key;
     }
 
-    public int[] Value
+    public int[] Value()
     {
         return value;
     }

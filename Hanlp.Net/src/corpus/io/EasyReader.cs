@@ -86,7 +86,7 @@ public class EasyReader
         int n = 0;
         int totalAddress = 0;
         long start = DateTime.Now.Microsecond;
-        for (File file : files)
+        foreach (File file in files)
         {
             if (size-- == 0) break;
             if (file.isDirectory()) continue;

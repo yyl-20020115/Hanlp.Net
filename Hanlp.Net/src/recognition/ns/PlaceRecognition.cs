@@ -32,8 +32,8 @@ public class PlaceRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            Iterator<Vertex> iterator = pWordSegResult.iterator();
-            for (EnumItem<NS> NSEnumItem : roleTagList)
+            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
+            foreach (EnumItem<NS> NSEnumItem in roleTagList)
             {
                 sbLog.Append('[');
                 sbLog.Append(iterator.next().realWord);
@@ -47,9 +47,9 @@ public class PlaceRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            Iterator<Vertex> iterator = pWordSegResult.iterator();
+            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
             sbLog.Append('[');
-            for (NS NS : NSList)
+            foreach (NS NS in NSList)
             {
                 sbLog.Append(iterator.next().realWord);
                 sbLog.Append('/');

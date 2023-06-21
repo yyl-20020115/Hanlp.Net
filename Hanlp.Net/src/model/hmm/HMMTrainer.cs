@@ -22,8 +22,8 @@ namespace com.hankcs.hanlp.model.hmm;
  */
 public abstract class HMMTrainer
 {
-    HiddenMarkovModel model;
-    Vocabulary vocabulary;
+    public HiddenMarkovModel model;
+    public Vocabulary vocabulary;
 
     public HMMTrainer(HiddenMarkovModel model, Vocabulary vocabulary)
     {
@@ -32,13 +32,15 @@ public abstract class HMMTrainer
     }
 
     public HMMTrainer(HiddenMarkovModel model)
+        : this(model, new Vocabulary())
     {
-        this(model, new Vocabulary());
+        ;
     }
 
     public HMMTrainer()
+        : this(new FirstOrderHiddenMarkovModel())
     {
-        this(new FirstOrderHiddenMarkovModel());
+        ;
     }
 
     public class IH: InstanceHandler
@@ -57,10 +59,10 @@ public abstract class HMMTrainer
 
         TagSet tagSet = getTagSet();
 
-        List<int[][]> sampleList = new (sequenceList.size());
+        List<int[][]> sampleList = new (sequenceList.Count);
         foreach (List<string[]> sequence in sequenceList)
         {
-            int[][] sample = new int[2][sequence.size()];
+            int[][] sample = new int[2][sequence.Count];
             int i = 0;
             foreach (string[] os in sequence)
             {

@@ -559,7 +559,7 @@ public class IOUtil
         }
 
         //@Override
-        public Iterator<string> iterator()
+        public IEnumerator<string> iterator()
         {
             return this;
         }

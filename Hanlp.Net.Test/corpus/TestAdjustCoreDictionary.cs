@@ -25,7 +25,7 @@ public class TestAdjustCoreDictionary : TestCase
 //    public void testGetCompiledWordFromDictionary() 
 //    {
 //        DictionaryMaker dictionaryMaker = DictionaryMaker.load("data/test/CoreNatureDictionary.txt");
-//        for (Map.Entry<String, Item> entry : dictionaryMaker.entrySet())
+//        for (Map.KeyValuePair<String, Item> entry : dictionaryMaker.entrySet())
 //        {
 //            String word = entry.Key;
 //            Item item = entry.Value;
@@ -40,7 +40,7 @@ public class TestAdjustCoreDictionary : TestCase
 //    {
 //        TFDictionary tfDictionary = new TFDictionary();
 //        tfDictionary.load("data/dictionary/CoreNatureDictionary.ngram.txt");
-//        for (Map.Entry<String, TermFrequency> entry : tfDictionary.entrySet())
+//        for (Map.KeyValuePair<String, TermFrequency> entry : tfDictionary.entrySet())
 //        {
 //            String word = entry.Key;
 //            TermFrequency frequency = entry.Value;

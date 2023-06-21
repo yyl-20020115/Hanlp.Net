@@ -75,7 +75,7 @@ public class Lexicon
         string[] wordIdArray = new string[idWord.size()];
         if (idWord.isEmpty()) return wordIdArray;
         int p = -1;
-        Iterator<string> iterator = idWord.iterator();
+        IEnumerator<string> iterator = idWord.iterator();
         while (iterator.MoveNext())
         {
             wordIdArray[++p] = iterator.next();

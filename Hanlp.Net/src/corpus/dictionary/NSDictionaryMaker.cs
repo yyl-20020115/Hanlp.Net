@@ -77,7 +77,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "Z"));
             if (verbose) Console.WriteLine("添加首尾 " + wordList);
             // 标注上文
-            Iterator<IWord> iterator = wordLinkedList.iterator();
+            IEnumerator<IWord> iterator = wordLinkedList.iterator();
             IWord pre = iterator.next();
             while (iterator.MoveNext())
             {

@@ -34,7 +34,7 @@ public class OrganizationRecognitionTest : TestCase
 //    public void testRemoveP() 
 //    {
 //        DictionaryMaker maker = DictionaryMaker.load(HanLP.Config.OrganizationDictionaryPath);
-//        for (Map.Entry<String, Item> entry : maker.entrySet())
+//        for (Map.KeyValuePair<String, Item> entry : maker.entrySet())
 //        {
 //            String word = entry.Key;
 //            Item item = entry.Value;

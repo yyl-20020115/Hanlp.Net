@@ -23,7 +23,7 @@ public class ImmutableFeatureMDatMapTest : TestCase
         Console.WriteLine(featureMap.entrySet().size());
         Console.WriteLine(featureMap.idOf("\u0001/\u00014"));
         Dictionary<String, int> map = new Dictionary<String, int>();
-        for (Map.Entry<String, int> entry : dat.entrySet())
+        for (Map.KeyValuePair<String, int> entry : dat.entrySet())
         {
             map.Add(entry.Key, entry.Value);
             assertEquals(entry.Value.intValue(), dat.get(entry.Key));

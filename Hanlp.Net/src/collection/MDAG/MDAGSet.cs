@@ -55,7 +55,7 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public Iterator<string> iterator()
+    public IEnumerator<string> iterator()
     {
         return getAllStrings().iterator();
     }
@@ -116,7 +116,7 @@ public class MDAGSet : MDAG , ISet<string>
     public bool retainAll<T>(ICollection<T> c)
     {
         bool modified = false;
-        Iterator<string> it = iterator();
+        IEnumerator<string> it = iterator();
         while (it.MoveNext())
         {
             if (!c.Contains(it.next()))
@@ -132,7 +132,7 @@ public class MDAGSet : MDAG , ISet<string>
     public bool removeAll<T>(ICollection<T> c)
     {
         bool modified = false;
-        Iterator it = iterator();
+        IEnumerator it = iterator();
         while (it.MoveNext())
         {
             if (c.Contains(it.next()))

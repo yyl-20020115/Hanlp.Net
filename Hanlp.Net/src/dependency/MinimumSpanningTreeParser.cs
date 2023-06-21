@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm.ahocorasick.trie;
 using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.dependency.CoNll;
 using com.hankcs.hanlp.corpus.tag;
@@ -29,7 +30,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
         if (termList == null || termList.size() == 0) return null;
         termList.Add(0, new Term("##核心##", Nature.begin));
         Node[] nodeArray = new Node[termList.Count];
-        Iterator<Term> iterator = termList.iterator();
+        IEnumerator<Term> iterator = termList.iterator();
         for (int i = 0; i < nodeArray.Length; ++i)
         {
             nodeArray[i] = new Node(iterator.next(), i);

@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.corpus.document.sentence.word;
 using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.model.perceptron.utility;
 using System.Text;
 
 namespace com.hankcs.hanlp.corpus.document.sentence;
@@ -409,7 +410,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     {
         List<Word> wordList = toSimpleWordList();
         string[] wordArray = new string[wordList.size()];
-        Iterator<Word> iterator = wordList.iterator();
+        IEnumerator<Word> iterator = wordList.iterator();
         for (int i = 0; i < wordArray.Length; i++)
         {
             wordArray[i] = iterator.next().value;
@@ -426,7 +427,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     {
         List<Word> wordList = toSimpleWordList();
         string[][] pair = new string[2][wordList.size()];
-        Iterator<Word> iterator = wordList.iterator();
+        IEnumerator<Word> iterator = wordList.iterator();
         for (int i = 0; i < pair[0].Length; i++)
         {
             Word word = iterator.next();
@@ -446,7 +447,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     {
         List<string[]> tupleList = Utility.convertSentenceToNER(this, tagSet);
         string[][] result = new string[3][tupleList.size()];
-        Iterator<string[]> iterator = tupleList.iterator();
+        IEnumerator<string[]> iterator = tupleList.iterator();
         for (int i = 0; i < result[0].Length; i++)
         {
             string[] tuple = iterator.next();

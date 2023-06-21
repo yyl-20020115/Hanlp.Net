@@ -37,7 +37,7 @@ public class DoubleArray : Serializable
     public void build(List<string> keys, int[] values)
     {
         byte[][] byteKey = new byte[keys.size()][];
-        Iterator<string> iteratorKey = keys.iterator();
+        IEnumerator<string> iteratorKey = keys.iterator();
         int i = 0;
         while (iteratorKey.MoveNext())
         {
@@ -138,7 +138,7 @@ public class DoubleArray : Serializable
         int unit = _array[0];
         int nodePos = 0;
 
-        for (byte b : key)
+        foreach (byte b in key)
         {
             // nodePos ^= unit.offset() ^ b
             nodePos ^= ((unit >>> 10) << ((unit & (1 << 9)) >>> 6)) ^ (b & 0xFF);

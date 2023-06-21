@@ -9,6 +9,12 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.dictionary.item;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary.nr;
+using com.hankcs.hanlp.seg.common;
+using System.Text;
+
 namespace com.hankcs.hanlp.recognition.nr;
 
 
@@ -26,8 +32,8 @@ public class PersonRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            Iterator<Vertex> iterator = pWordSegResult.iterator();
-            for (EnumItem<NR> nrEnumItem : roleTagList)
+            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
+            foreach (EnumItem<NR> nrEnumItem in roleTagList)
             {
                 sbLog.Append('[');
                 sbLog.Append(iterator.next().realWord);
@@ -41,9 +47,9 @@ public class PersonRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            Iterator<Vertex> iterator = pWordSegResult.iterator();
+            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
             sbLog.Append('[');
-            for (NR nr : nrList)
+            foreach (NR nr in nrList)
             {
                 sbLog.Append(iterator.next().realWord);
                 sbLog.Append('/');
@@ -66,8 +72,8 @@ public class PersonRecognition
      */
     public static List<EnumItem<NR>> roleObserve(List<Vertex> wordSegResult)
     {
-        List<EnumItem<NR>> tagList = new LinkedList<EnumItem<NR>>();
-        Iterator<Vertex> iterator = wordSegResult.iterator();
+        List<EnumItem<NR>> tagList = new ();
+        IEnumerator<Vertex> iterator = wordSegResult.iterator();
         iterator.next();
         tagList.Add(new EnumItem<NR>(NR.A, NR.K)); //  始##始 A K
         while (iterator.MoveNext())

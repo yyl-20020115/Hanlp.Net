@@ -356,7 +356,7 @@ public class NeuralNetworkParser : ICacheAble
     private static void save_map(Dictionary<int, int> map, Stream _out) 
     {
         _out.writeInt(map.Count);
-        for (KeyValuePair<int, int> entry : map.entrySet())
+        foreach (KeyValuePair<int, int> entry in map)
         {
             _out.writeInt(entry.Key);
             _out.writeInt(entry.Value);

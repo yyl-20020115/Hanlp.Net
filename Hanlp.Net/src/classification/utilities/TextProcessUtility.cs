@@ -32,7 +32,7 @@ public class TextProcessUtility
     {
         List<Term> termList = NotionalTokenizer.segment(text);
         string[] wordArray = new string[termList.size()];
-        Iterator<Term> iterator = termList.iterator();
+        IEnumerator<Term> iterator = termList.iterator();
         for (int i = 0; i < wordArray.Length; i++)
         {
             wordArray[i] = iterator.next().word;

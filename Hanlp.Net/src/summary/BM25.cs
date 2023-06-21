@@ -84,7 +84,8 @@ public class BM25
             Dictionary<string, int> tf = new Dictionary<string, int>();
             foreach (string word in sentence)
             {
-                freq = (!tf.TryGetValue(word,out var freq)  ? 0 : freq) + 1;
+                int freq;
+                freq = (!tf.TryGetValue(word,out freq)  ? 0 : freq) + 1;
                 tf.Add(word, freq);
             }
             f[index] = tf;

@@ -9,6 +9,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.classification.utilities.io;
+using com.hankcs.hanlp.collection.trie;
 using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.dependency.nnparser;
 using com.hankcs.hanlp.model.perceptron.common;
@@ -301,7 +302,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
         DoubleArrayTrie<int> dat = new DoubleArrayTrie<int>();
         dat.build(dictionaryMap);
-        _out.printf("加载完毕，词库总词数：%d，总词频：%d\n", dictionaryMap.size(), dictionaryMap.totalFrequency);
+        _out.printf("加载完毕，词库总词数：%d，总词频：%d\n", dictionaryMap.Count, dictionaryMap.totalFrequency);
 
         return dat;
     }

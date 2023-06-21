@@ -81,7 +81,7 @@ public class DictionaryMaker : ISaveAble
         HashSet<string> labelSet = new ();
         foreach (KeyValuePair<string, Item> entry in entrySet())
         {
-            labelSet.AddRange(entry.Value.labelMap.Keys);
+            labelSet.UnionWith(entry.Value.labelMap.Keys);
         }
 
         return labelSet;
@@ -155,7 +155,7 @@ public class DictionaryMaker : ISaveAble
      */
     public void addAllNotCombine(List<Item> itemList)
     {
-        for (Item item : itemList)
+        foreach (Item item in itemList)
         {
             addNotCombine(item);
         }
@@ -368,9 +368,9 @@ public class DictionaryMaker : ISaveAble
      */
     public static List<Item> normalizeFrequency(List<Item> itemList)
     {
-        for (Item item : itemList)
+        foreach (Item item in itemList)
         {
-            ArrayList<KeyValuePair<string, int>> entryArray = new ArrayList<KeyValuePair<string, int>>(item.labelMap.entrySet());
+            var entryArray = new List<KeyValuePair<string, int>>(item.labelMap.entrySet());
             Collections.sort(entryArray, new CT());
             int index = 1;
             foreach (KeyValuePair<string, int> pair in entryArray)

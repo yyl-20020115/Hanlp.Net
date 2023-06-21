@@ -447,7 +447,7 @@ public abstract class WordBasedSegment : Segment
                 int currentLine = line;
                 while (currentLine < line + vertex.realWord.Length)
                 {
-                    Iterator<Vertex> iterator = wordNetAll.descendingIterator(currentLine);// 这一行的词，逆序遍历保证字典序稳定地由大到小
+                    IEnumerator<Vertex> iterator = wordNetAll.descendingIterator(currentLine);// 这一行的词，逆序遍历保证字典序稳定地由大到小
                     while (iterator.MoveNext())// 这一行的短词
                     {
                         Vertex smallVertex = iterator.next();

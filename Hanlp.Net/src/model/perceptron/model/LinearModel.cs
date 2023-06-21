@@ -9,6 +9,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
 using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.model.perceptron.common;
@@ -195,12 +196,12 @@ public class LinearModel : ICacheAble
 
         if (text)
         {
-            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(modelFile + ".txt"), "UTF-8"));
+            TextWriter bw = (new StreamWriter(IOUtil.newOutputStream(modelFile + ".txt"), "UTF-8"));
             TagSet tagSet = featureMap.tagSet;
-            for (KeyValuePair<string, int> entry : featureIdSet)
+            foreach (KeyValuePair<string, int> entry in featureIdSet)
             {
                 bw.Write(entry.Key);
-                if (featureIdSet.size() == parameter.Length)
+                if (featureIdSet.Count == parameter.Length)
                 {
                     bw.Write("\t");
                     bw.Write(string.valueOf(parameter[entry.Value]));

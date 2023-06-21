@@ -676,7 +676,7 @@ public class TextUtility
 
     public static string join(IEnumerator<string> s, string delimiter)
     {
-        Iterator<CharSequence> iter = s.iterator();
+        IEnumerator<CharSequence> iter = s.iterator();
         if (!iter.MoveNext()) return "";
         StringBuilder buffer = new StringBuilder(iter.next());
         while (iter.MoveNext()) buffer.Append(delimiter).Append(iter.next());

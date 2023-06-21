@@ -131,7 +131,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public Iterator<TermFrequency> iterator()
+    public IEnumerator<TermFrequency> iterator()
     {
         return termFrequencyMap.values().iterator();
     }

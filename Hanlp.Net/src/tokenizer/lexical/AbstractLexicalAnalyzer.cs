@@ -358,8 +358,8 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     offset += word.Length;
                 }
                 string[] posArray = tag(wordArray);
-                Iterator<Term> iterator = termList.GetEnumerator();
-                Iterator<CoreDictionary.Attribute> attributeIterator = attributeList == null ? null : attributeList.GetEnumerator();
+                IEnumerator<Term> iterator = termList.GetEnumerator();
+                IEnumerator<CoreDictionary.Attribute> attributeIterator = attributeList == null ? null : attributeList.GetEnumerator();
                 for (int i = 0; i < posArray.Length; i++)
                 {
                     if (attributeIterator != null && attributeIterator.MoveNext())

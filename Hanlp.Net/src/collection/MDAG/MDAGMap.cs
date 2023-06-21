@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.collection.MDAG;
 
 
@@ -68,7 +70,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
     {
         HashSet<string> stringSet = mdag.getAllStrings();
         List<string> keySet = new List<string>();
-        Iterator<string> iterator = stringSet.iterator();
+        IEnumerator<string> iterator = stringSet.iterator();
         while (iterator.MoveNext())
         {
             string key = iterator.next();
@@ -171,7 +173,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
             return ByteUtil.convertTwoCharToInt(high, low);
         }
 
-        public LinkedList<Entry<string, int>> commonPrefixSearchWithValueIndex(char[] key, int begin)
+        public LinkedList<KeyValuePair<string, int>> commonPrefixSearchWithValueIndex(char[] key, int begin)
         {
             LinkedList<KeyValuePair<string, int>> result = new LinkedList<KeyValuePair<string, int>>();
             if (sourceNode != null)

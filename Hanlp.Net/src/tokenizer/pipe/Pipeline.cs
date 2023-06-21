@@ -68,7 +68,7 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public Iterator<Pipe<M, M>> iterator()
+    public IEnumerator<Pipe<M, M>> iterator()
     {
         return pipeList.iterator();
     }

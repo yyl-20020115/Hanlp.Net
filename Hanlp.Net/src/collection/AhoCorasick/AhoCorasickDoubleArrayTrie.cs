@@ -855,7 +855,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             var emit = targetState.emit();
             if (emit == null || emit.Count == 0) return;
             int[] output = new int[emit.Count];
-            Iterator<int> it = emit.iterator();
+            IEnumerator<int> it = emit.iterator();
             for (int i = 0; i < output.Length; ++i)
             {
                 output[i] = it.next();

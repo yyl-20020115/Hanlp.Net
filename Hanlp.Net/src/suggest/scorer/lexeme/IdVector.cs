@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.suggest.scorer.lexeme;
 
 
@@ -18,13 +22,13 @@ namespace com.hankcs.hanlp.suggest.scorer.lexeme;
  *
  * @author hankcs
  */
-public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
+public class IdVector : IComparable<IdVector>, ISentenceKey<IdVector>
 {
     public List<long[]> idArrayList;
 
     public IdVector(string sentence)
+        :this(CoreSynonymDictionaryEx.convert(IndexTokenizer.segment(sentence), false))
     {
-        this(CoreSynonymDictionaryEx.convert(IndexTokenizer.segment(sentence), false));
     }
 
     public IdVector(List<long[]> idArrayList)
@@ -35,11 +39,11 @@ public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
     //@Override
     public int compareTo(IdVector o)
     {
-        int len1 = idArrayList.size();
-        int len2 = o.idArrayList.size();
+        int len1 = idArrayList.Count;
+        int len2 = o.idArrayList.Count;
         int lim = Math.Min(len1, len2);
-        Iterator<long[]> iterator1 = idArrayList.iterator();
-        Iterator<long[]> iterator2 = o.idArrayList.iterator();
+        IEnumerator<long[]> iterator1 = idArrayList.iterator();
+        IEnumerator<long[]> iterator2 = o.idArrayList.iterator();
 
         int k = 0;
         while (k < lim)
@@ -59,15 +63,15 @@ public class IdVector : Comparable<IdVector>, ISentenceKey<IdVector>
     public Double similarity(IdVector other)
     {
         Double score = 0.0;
-        for (long[] a : idArrayList)
+        foreach (long[] a in idArrayList)
         {
-            for (long[] b : other.idArrayList)
+            foreach (long[] b in other.idArrayList)
             {
                 long distance = ArrayDistance.computeAverageDistance(a, b);
                 score += 1.0 / (0.1 + distance);
             }
         }
 
-        return score / other.idArrayList.size();
+        return score / other.idArrayList.Count;
     }
 }

@@ -41,10 +41,10 @@ public class DictionaryUtil
             br.Close();
 
             TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
-            for (KeyValuePair<string, string> entry : map.entrySet())
+            foreach (KeyValuePair<string, string> entry in map.entrySet())
             {
                 bw.Write(entry.Value);
-                bw.newLine();
+                bw.WriteLine();
             }
             bw.Close();
         }

@@ -103,7 +103,7 @@ public class FileDataSet : AbstractDataSet
         try
         {
             Clear();
-            Iterator<Document> iterator = iterator();
+            IEnumerator<Document> iterator = iterator();
             initCache();
             while (iterator.MoveNext())
             {
@@ -130,7 +130,7 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public Iterator<Document> iterator()
+    public IEnumerator<Document> iterator()
     {
         try
         {
@@ -143,7 +143,7 @@ public class FileDataSet : AbstractDataSet
             throw new RuntimeException(e);
         }
     }
-    public class ST: Iterator<Document>
+    public class ST: IEnumerator<Document>
     {
         //@Override
         public void Remove()

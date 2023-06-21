@@ -42,7 +42,7 @@ public class ComputeAccuracy
         threshold = int.parseInt(argv[1]);
         try
         {
-            f = new TextReader(new InputStreamReader(new FileStream(file_name), "UTF-8"));
+            f = new StreamReader(new FileStream(file_name), "UTF-8");
         }
         catch (FileNotFoundException e)
         {

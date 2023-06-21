@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 class Preconditions

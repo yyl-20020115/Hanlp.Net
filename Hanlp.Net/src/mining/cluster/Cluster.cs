@@ -243,7 +243,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
         double potential = 0.0;
         for (int i = 0; i < documents_.Count; i++)
         {
-            double dist = 1.0 - SparseVector.inner_product(documents_.get(i).feature(), documents_.get(index).feature());
+            double dist = 1.0 - SparseVector.inner_product(documents_[i].feature(), documents_[index].feature());
             potential += dist;
             closest[i] = dist;
         }
@@ -268,7 +268,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
             double new_potential = 0.0;
             for (int i = 0; i < documents_.Count; i++)
             {
-                double dist = 1.0 - SparseVector.inner_product(documents_.get(i).feature(), documents_.get(index).feature());
+                double dist = 1.0 - SparseVector.inner_product(documents_[i].feature(), documents_[index].feature());
                 double min = closest[i];
                 if (dist < min)
                 {
@@ -292,7 +292,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
             return;
 
         sectioned_clusters_ = new (nclusters);
-        List<K> centroids = new (nclusters);
+        List<Document<K>> centroids = new (nclusters);
         // choose_randomly(nclusters, centroids);
         choose_smartly(nclusters, centroids);
         for (int i = 0; i < centroids.Count; i++)
@@ -307,7 +307,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
             int max_index = 0;
             for (int j = 0; j < centroids.Count; j++)
             {
-                double similarity = SparseVector.inner_product(d.feature(), centroids.get(j).feature());
+                double similarity = SparseVector.inner_product(d.feature(), centroids[j].feature());
                 if (max_similarity < similarity)
                 {
                     max_similarity = similarity;

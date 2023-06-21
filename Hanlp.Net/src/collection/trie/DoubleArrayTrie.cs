@@ -350,8 +350,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public int build(HashSet<KeyValuePair<string, V>> entrySet)
     {
-        List<string> keyList = new (entrySet.size());
-        List<V> valueList = new (entrySet.size());
+        List<string> keyList = new (entrySet.Count);
+        List<V> valueList = new (entrySet.Count);
         foreach (KeyValuePair<string, V> entry in entrySet)
         {
             keyList.Add(entry.Key);

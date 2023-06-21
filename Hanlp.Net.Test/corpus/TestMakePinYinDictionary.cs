@@ -30,7 +30,7 @@ public class TestMakePinYinDictionary : TestCase
 ////        Console.WriteLine(dictionaryAnsj.Remove(new SimpleDictionary.Filter()
 ////        {
 ////            //@Override
-////            public bool Remove(Map.Entry entry)
+////            public bool Remove(Map.KeyValuePair entry)
 ////            {
 ////                return entry.Value.ToString().EndsWith("0");
 ////            }
@@ -168,7 +168,7 @@ public class TestMakePinYinDictionary : TestCase
 //        dictionary.load("data/dictionary/pinyin/pinyin.txt");
 //
 //        StringDictionary pyEnumDictionary = new StringDictionary();
-//        for (Map.Entry<String, String> entry : dictionary.entrySet())
+//        for (Map.KeyValuePair<String, String> entry : dictionary.entrySet())
 //        {
 //            String[] args = entry.Value.Split(",");
 //            for (String arg : args)
@@ -181,7 +181,7 @@ public class TestMakePinYinDictionary : TestCase
 //        table.combine(pyEnumDictionary);
 //
 //        StringBuilder sb = new StringBuilder();
-//        for (Map.Entry<String, String> entry : table.entrySet())
+//        for (Map.KeyValuePair<String, String> entry : table.entrySet())
 //        {
 //            sb.append(entry.Key);
 //            sb.append('\n');
@@ -199,7 +199,7 @@ public class TestMakePinYinDictionary : TestCase
 //        dictionary.load("data/dictionary/pinyin/pinyin.txt");
 //
 //        StringDictionary pyEnumDictionary = new StringDictionary();
-//        for (Map.Entry<String, String> entry : dictionary.entrySet())
+//        for (Map.KeyValuePair<String, String> entry : dictionary.entrySet())
 //        {
 //            String[] args = entry.Value.Split(",");
 //            for (String arg : args)
@@ -212,13 +212,13 @@ public class TestMakePinYinDictionary : TestCase
 //        table.load("data/dictionary/pinyin/sm-ym-table.txt");
 //        table.combine(pyEnumDictionary);
 //
-//        Iterator<Map.Entry<String, String>> iterator = table.entrySet().iterator();
-//        Map.Entry<String, String> pre = iterator.next();
+//        IEnumerator<Map.KeyValuePair<String, String>> iterator = table.entrySet().iterator();
+//        Map.KeyValuePair<String, String> pre = iterator.next();
 //        String prePy = pre.Key.substring(0, pre.Key.Length - 1);
 //        String preYd = pre.Key.substring(pre.Key.Length - 1);
 //        while (iterator.MoveNext())
 //        {
-//            Map.Entry<String, String> current = iterator.next();
+//            Map.KeyValuePair<String, String> current = iterator.next();
 //            String currentPy = current.Key.substring(0, current.Key.Length - 1);
 //            String currentYd = current.Key.substring(current.Key.Length - 1);
 //            // handle it
@@ -261,7 +261,7 @@ public class TestMakePinYinDictionary : TestCase
 //        Console.WriteLine(dictionaryAnsj.Remove(new SimpleDictionary.Filter<String>()
 //        {
 //            //@Override
-//            public bool Remove(Map.Entry<String, String> entry)
+//            public bool Remove(Map.KeyValuePair<String, String> entry)
 //            {
 //                String word = entry.Key;
 //                String pinyin = entry.Value;

@@ -45,7 +45,7 @@ public class SuffixDictionaryTest : TestCase
     //    public void testDump() 
     //    {
     //        DictionaryMaker dictionaryMaker = new DictionaryMaker();
-    //        for (Map.Entry<String, int> entry : PlaceSuffixDictionary.dictionary.entrySet())
+    //        for (Map.KeyValuePair<String, int> entry : PlaceSuffixDictionary.dictionary.entrySet())
     //        {
     //            dictionaryMaker.Add(entry.Key, NS.H.ToString());
     //        }

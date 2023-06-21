@@ -100,7 +100,7 @@ public class TfIdf
      * @param <Term>    词语类型
      * @return 一个包含词频的Map的列表
      */
-    public static  Iterable<Dictionary<Term, Double>> tfs<Term>(Iterable<Collection<Term>> documents, TfType type)
+    public static  IEnumerable<Dictionary<Term, Double>> tfs<Term>(IEnumerable<Collection<Term>> documents, TfType type)
     {
         List<Dictionary<Term, Double>> tfs = new ();
         foreach (Collection<Term> document in documents)
@@ -117,7 +117,7 @@ public class TfIdf
      * @param <Term>    词语类型
      * @return 一个包含词频的Map的列表
      */
-    public static  Iterable<Dictionary<Term, Double>> tfs<Term>(Iterable<Collection<Term>> documents)
+    public static  IEnumerable<Dictionary<Term, Double>> tfs<Term>(IEnumerable<Collection<Term>> documents)
     {
         return tfs(documents, TfType.NATURAL);
     }
@@ -131,14 +131,14 @@ public class TfIdf
      * @param <Term>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static  Dictionary<Term, Double> idf<Term>(Iterable<Iterable<Term>> documentVocabularies,
+    public static  Dictionary<Term, Double> idf<Term>(IEnumerable<IEnumerable<Term>> documentVocabularies,
                                                bool smooth, bool addOne)
     {
         Dictionary<Term, int> df = new ();
         int d = smooth ? 1 : 0;
         int a = addOne ? 1 : 0;
         int n = d;
-        foreach (Iterable<Term> documentVocabulary in documentVocabularies)
+        foreach (IEnumerable<Term> documentVocabulary in documentVocabularies)
         {
             n += 1;
             foreach (Term term in documentVocabulary)
@@ -165,7 +165,7 @@ public class TfIdf
      * @param <Term>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static  Dictionary<Term, Double> idf<Term>(Iterable<Iterable<Term>> documentVocabularies)
+    public static  Dictionary<Term, Double> idf<Term>(IEnumerable<IEnumerable<Term>> documentVocabularies)
     {
         return idf(documentVocabularies, true, true);
     }
@@ -182,7 +182,7 @@ public class TfIdf
     public static  Dictionary<Term, Double> tfIdf<Term>(Dictionary<Term, Double> tf, Dictionary<Term, Double> idf,
                                                  Normalization normalization)
     {
-        Dictionary<Term, Double> tfIdf = new HashMap<Term, Double>();
+        Dictionary<Term, Double> tfIdf = new ();
         foreach (Term term in tf.Keys)
         {
             Double TF = tf.get(term);
@@ -230,7 +230,7 @@ public class TfIdf
      * @param <Term> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static Dictionary<Term, Double> idfFromTfs<Term>(Iterable<Dictionary<Term, Double>> tfs, bool smooth, bool addOne)
+    public static Dictionary<Term, Double> idfFromTfs<Term>(IEnumerable<Dictionary<Term, Double>> tfs, bool smooth, bool addOne)
     {
         return idf(new KeySetIterable<Term, Double>(tfs), smooth, addOne);
     }
@@ -242,7 +242,7 @@ public class TfIdf
      * @param <Term> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static  Dictionary<Term, Double> idfFromTfs<Term>(Iterable<Dictionary<Term, Double>> tfs)
+    public static  Dictionary<Term, Double> idfFromTfs<Term>(IEnumerable<Dictionary<Term, Double>> tfs)
     {
         return idfFromTfs(tfs, true, true);
     }
@@ -253,21 +253,21 @@ public class TfIdf
      * @param <KEY>   map 键类型
      * @param <VALUE> map 值类型
      */
-    private class KeySetIterable<KEY, VALUE> : Iterable<Iterable<KEY>>
+    private class KeySetIterable<KEY, VALUE> : IEnumerable<IEnumerable<KEY>>
     {
-        private Iterator<Dictionary<KEY, VALUE>> maps;
+        private IEnumerator<Dictionary<KEY, VALUE>> maps;
 
-        public KeySetIterable(Iterable<Dictionary<KEY, VALUE>> maps)
+        public KeySetIterable(IEnumerable<Dictionary<KEY, VALUE>> maps)
         {
             this.maps = maps.iterator();
         }
 
         //@Override
-        public Iterator<Iterable<KEY>> iterator()
+        public IEnumerator<IEnumerable<KEY>> iterator()
         {
             return new IT();
         }
-        public class IT: Iterator<Iterable<KEY>>
+        public class IT: IEnumerator<IEnumerable<KEY>>
         {
             //@Override
             public bool MoveNext()
@@ -276,7 +276,7 @@ public class TfIdf
             }
 
             //@Override
-            public Iterable<KEY> next()
+            public IEnumerable<KEY> next()
             {
                 return maps.next().Keys;
             }

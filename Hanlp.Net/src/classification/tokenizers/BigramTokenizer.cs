@@ -49,7 +49,7 @@ public class BigramTokenizer : ITokenizer
         if (atomList.Count==0) return new string[0];
         // 输出
         string[] termArray = new string[atomList.Count - 1];
-        Iterator<int[]> iterator = atomList.iterator();
+        IEnumerator<int[]> iterator = atomList.iterator();
         int[] pre = iterator.next();
         int p = -1;
         while (iterator.MoveNext())

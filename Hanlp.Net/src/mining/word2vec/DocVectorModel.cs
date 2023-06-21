@@ -8,6 +8,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
@@ -68,7 +71,7 @@ public class DocVectorModel : AbstractVectorModel<int>
         List<Term> termList = NotionalTokenizer.segment(content);
         Vector result = new Vector(dimension());
         int n = 0;
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             Vector vector = wordVectorModel.vector(term.word);
             if (vector == null)

@@ -67,9 +67,9 @@ public abstract class CommonDictionary<V>
             return false;
         }
         onLoaded(map);
-        HashSet<KeyValuePair<string, V>> entrySet = map.entrySet();
+        HashSet<KeyValuePair<string, V>> entrySet = map.ToHashSet();
         List<string> keyList = new (entrySet.Count);
-        List<V> valueList = new (entrySet.Count));
+        List<V> valueList = new (entrySet.Count);
         foreach (KeyValuePair<string, V> entry in entrySet)
         {
             keyList.Add(entry.Key);

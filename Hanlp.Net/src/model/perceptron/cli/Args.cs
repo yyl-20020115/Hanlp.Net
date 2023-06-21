@@ -103,7 +103,7 @@ public class Args
         if (argument != null)
         {
             bool set = false;
-            for (Iterator<string> i = arguments.iterator(); i.MoveNext(); )
+            for (IEnumerator<string> i = arguments.iterator(); i.MoveNext(); )
             {
                 string arg = i.next();
                 string prefix = argument.prefix();
@@ -195,7 +195,7 @@ public class Args
             if (argument != null)
             {
                 bool set = false;
-                for (Iterator<string> i = arguments.iterator(); i.MoveNext(); )
+                for (IEnumerator<string> i = arguments.iterator(); i.MoveNext(); )
                 {
                     string arg = i.next();
                     string prefix = argument.prefix();
@@ -433,7 +433,7 @@ public class Args
 
     }
 
-    private static Object consumeArgumentValue(string name, Type type, Argument argument, Iterator<string> i)
+    private static Object consumeArgumentValue(string name, Type type, Argument argument, IEnumerator<string> i)
     {
         Object value;
         if (type == Boolean.TYPE || type == Boolean.c)

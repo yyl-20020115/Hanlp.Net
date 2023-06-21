@@ -301,8 +301,8 @@ public class SegmentTest : TestCase
     //        Console.printf("四线程分词速度：%.2f字每秒\n", text.Length / costTime);
     //
     //        assertEquals(termList1.size(), termList2.size());
-    //        Iterator<Term> iterator1 = termList1.iterator();
-    //        Iterator<Term> iterator2 = termList2.iterator();
+    //        IEnumerator<Term> iterator1 = termList1.iterator();
+    //        IEnumerator<Term> iterator2 = termList2.iterator();
     //        while (iterator1.MoveNext())
     //        {
     //            Term term1 = iterator1.next();

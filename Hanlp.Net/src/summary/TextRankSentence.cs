@@ -131,7 +131,7 @@ public class TextRankSentence
         Collection<int> values = top.values();
         size = Math.Min(size, values.size());
         int[] indexArray = new int[size];
-        Iterator<int> it = values.iterator();
+        IEnumerator<int> it = values.iterator();
         for (int i = 0; i < size; ++i)
         {
             indexArray[i] = it.next();

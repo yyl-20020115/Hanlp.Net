@@ -72,7 +72,7 @@ public class CustomDictionaryTest : TestCase
     //    public void testNext() 
     //    {
     //        BaseSearcher searcher = CustomDictionary.getSearcher("都要亲口");
-    //        Map.Entry<String, CoreDictionary.Attribute> entry;
+    //        Map.KeyValuePair<String, CoreDictionary.Attribute> entry;
     //        while ((entry = searcher.next()) != null)
     //        {
     //            int offset = searcher.getOffset();

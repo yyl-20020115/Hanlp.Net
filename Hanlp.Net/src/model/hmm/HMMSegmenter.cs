@@ -9,11 +9,13 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
 using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.model.perceptron.tagset;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.tokenizer.lexical;
+using System.Text;
 
 namespace com.hankcs.hanlp.model.hmm;
 
@@ -46,7 +48,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     }
 
     //@Override
-    public void segment(string text, string normalized, List<string> output)
+    public override void segment(string text, string normalized, List<string> output)
     {
         int[] obsArray = new int[text.Length];
         for (int i = 0; i < obsArray.Length; i++)
@@ -76,8 +78,8 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     //@Override
     protected List<string[]> convertToSequence(Sentence sentence)
     {
-        List<string[]> charList = new LinkedList<string[]>();
-        for (Word w : sentence.toSimpleWordList())
+        List<string[]> charList = new ();
+        foreach (Word w in sentence.toSimpleWordList())
         {
             string word = CharTable.convert(w.value);
             if (word.Length == 1)
@@ -119,7 +121,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
         {
             List<string> wordList = segment(new string(sentence));
             List<Term> termList = new ();
-            for (string word : wordList)
+            foreach (string word in wordList)
             {
                 termList.Add(new Term(word, null));
             }

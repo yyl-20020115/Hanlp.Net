@@ -15,17 +15,17 @@ public class crf_test
     private class Option
     {
         //@Argument(description = "set FILE for model file", alias = "m", required = true)
-        string model;
+        public string model;
         //@Argument(description = "output n-best results", alias = "n")
-        int nbest = 0;
+        public int nbest = 0;
         //@Argument(description = "set INT for verbose level", alias = "v")
-        int verbose = 0;
+        public int verbose = 0;
         //@Argument(description = "set cost factor", alias = "c")
-        Double cost_factor = 1.0;
+        public Double cost_factor = 1.0;
         //@Argument(description = "output file path", alias = "o")
-        string output;
+        public string output;
         //@Argument(description = "show this help and exit", alias = "h")
-        Boolean help = false;
+        public Boolean help = false;
     }
 
     public static bool run(string[] args)

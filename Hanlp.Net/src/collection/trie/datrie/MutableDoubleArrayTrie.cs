@@ -316,7 +316,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public Collection<V> values()
+    public Collection<V> Values()
     {
         return values;
     }
@@ -348,19 +348,19 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         }
 
         //@Override
-        public Iterator<Entry<string, V>> iterator()
+        public IEnumerator<KeyValuePair<string, V>> iterator()
         {
             return new();
         }
 
 
         //@Override
-        public Iterator<Entry<string, V>> iterator()
+        public IEnumerator<KeyValuePair<string, V>> iterator()
         {
             return entrySet().iterator();
         }
 
-        public class ST : Iterator<Entry<string, V>>()
+        public class ST : IEnumerator<KeyValuePair<string, V>>()
         {
             MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
 
@@ -371,7 +371,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
             }
 
             //@Override
-            public Entry<string, V> next()
+            public KeyValuePair<string, V> next()
             {
                 iterator.next();
                 return new AbstractMap.SimpleEntry<string, V>(iterator.key(), values.get(iterator.value()));
@@ -397,7 +397,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         }
 
         //@Override
-        public bool Add<T>(Entry<string, V> stringVEntry)
+        public bool Add<T>(KeyValuePair<string, V> stringVEntry)
         {
             throw new InvalidOperationException();
         }
@@ -415,7 +415,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         }
 
         //@Override
-        public bool AddRange(Collection<Entry<string, V>> c)
+        public bool AddRange(Collection<KeyValuePair<string, V>> c)
         {
             throw new InvalidOperationException();
         }

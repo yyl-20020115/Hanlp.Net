@@ -8,6 +8,8 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.seg.NShort.Path;
+
 namespace com.hankcs.hanlp.seg;
 
 
@@ -53,7 +55,7 @@ public abstract class DictionaryBasedSegment : Segment
                         if (natureArray[j] != null) break;
                     }
                     List<AtomNode> atomNodeList = quickAtomSegment(charArray, i, j);
-                    for (AtomNode atomNode : atomNodeList)
+                    foreach (AtomNode atomNode in atomNodeList)
                     {
                         if (atomNode.sWord.Length >= wordNet[i])
                         {

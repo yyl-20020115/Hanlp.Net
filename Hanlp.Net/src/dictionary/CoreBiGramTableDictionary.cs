@@ -57,7 +57,7 @@ public class CoreBiGramTableDictionary
         var map = new Dictionary<int, Dictionary<int, int>>();
         try
         {
-            br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
             string line;
             int total = 0;
             int maxWordId = CoreDictionary.trie.size();

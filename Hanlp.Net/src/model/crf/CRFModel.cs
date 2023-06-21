@@ -312,7 +312,7 @@ public class CRFModel : ICacheAble
             featureFunction.save(_out);
         }
         featureFunctionTrie.save(_out);
-        _out.writeInt(featureTemplateList.size());
+        _out.writeInt(featureTemplateList.Count);
         foreach (FeatureTemplate featureTemplate in featureTemplateList)
         {
             featureTemplate.save(_out);
