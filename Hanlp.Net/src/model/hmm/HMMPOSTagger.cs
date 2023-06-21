@@ -71,6 +71,6 @@ public class HMMPOSTagger : HMMTrainer : POSTagger
     //@Override
     public string[] tag(List<string> wordList)
     {
-        return tag(wordList.ToArray(new string[0]));
+        return tag(wordList.ToArray());
     }
 }

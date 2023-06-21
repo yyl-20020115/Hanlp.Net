@@ -39,13 +39,13 @@ public class TestMakeCompanyCorpus : TestCase
 //            if (termList.size() == 0) continue;
 //            Term last = termList.get(termList.size() - 1);
 //            last.nature = Nature.nis;
-//            br.write("[");
+//            br.Write("[");
 //            for (Term term : termList)
 //            {
-//                br.write(term.ToString());
-//                if (term != last) br.write(" ");
+//                br.Write(term.ToString());
+//                if (term != last) br.Write(" ");
 //            }
-//            br.write("]/ntc");
+//            br.Write("]/ntc");
 //            br.newLine();
 //            br.flush();
 //        }
@@ -85,7 +85,7 @@ public class TestMakeCompanyCorpus : TestCase
 //                ++id;
 //                count = 0;
 //            }
-//            bw.write(line);
+//            bw.Write(line);
 //            bw.newLine();
 //            ++count;
 //        }

@@ -43,14 +43,14 @@ public class DictionaryUtil
             TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
             for (KeyValuePair<string, string> entry : map.entrySet())
             {
-                bw.write(entry.Value);
+                bw.Write(entry.Value);
                 bw.newLine();
             }
             bw.Close();
         }
         catch (Exception e)
         {
-            //e.printStackTrace();
+            ////e.printStackTrace();
             return false;
         }
 

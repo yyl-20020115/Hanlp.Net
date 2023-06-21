@@ -148,7 +148,7 @@ public abstract class CRFTagger
     {
         TextWriter bw = IOUtil.newBufferedWriter(templatePath);
         string template = getTemplate();
-        bw.write(template);
+        bw.Write(template);
         bw.Close();
     }
 

@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.common;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -18,46 +20,46 @@ namespace com.hankcs.hanlp.model.perceptron;
  */
 public class Main
 {
-    private static class Option
+    public class Option
     {
-        @Argument(description = "任务类型:CWS|POS|NER")
-        TaskType task = TaskType.CWS;
+        //@Argument(description = "任务类型:CWS|POS|NER")
+        public TaskType task = TaskType.CWS;
 
-        @Argument(description = "执行训练任务")
-        bool train;
+        //@Argument(description = "执行训练任务")
+        public bool train;
 
-        @Argument(description = "执行预测任务")
-        bool test;
+        //@Argument(description = "执行预测任务")
+        public bool test;
 
-        @Argument(description = "执行评估任务")
-        bool evaluate;
+        //@Argument(description = "执行评估任务")
+        public bool evaluate;
 
-        @Argument(description = "模型文件路径")
-        string[] model = new string[]{HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath};
+        //@Argument(description = "模型文件路径")
+        public string[] model = new string[]{HanLP.Config.PerceptronCWSModelPath, HanLP.Config.PerceptronPOSModelPath, HanLP.Config.PerceptronNERModelPath};
 
-        @Argument(description = "输入文本路径")
-        string input;
+        //@Argument(description = "输入文本路径")
+        public string input;
 
-        @Argument(description = "结果保存路径")
-        string result;
+        //@Argument(description = "结果保存路径")
+        public string result;
 
-        @Argument(description = "标准分词语料")
-        string gold;
+        //@Argument(description = "标准分词语料")
+        public string gold;
 
-        @Argument(description = "训练集")
-        string reference;
+        //@Argument(description = "训练集")
+        public string reference;
 
-        @Argument(description = "开发集")
-        string development;
+        //@Argument(description = "开发集")
+        public string development;
 
-        @Argument(description = "迭代次数")
-        int iter = 5;
+        //@Argument(description = "迭代次数")
+        public int iter = 5;
 
-        @Argument(description = "模型压缩比率")
+        //@Argument(description = "模型压缩比率")
         Double compressRatio = 0.0;
 
-        @Argument(description = "线程数")
-        int thread = Runtime.getRuntime().availableProcessors();
+        //@Argument(description = "线程数")
+        public int thread = Environment.ProcessorCount;
     }
 
     public static void main(string[] args)
@@ -136,8 +138,8 @@ public class Main
                     line = line.Trim();
                     if (line.Length == 0) continue;
                     Sentence sentence = analyzer.analyze(line);
-                    printer.write(sentence.ToString());
-                    printer.write(lineSeparator);
+                    printer.Write(sentence.ToString());
+                    printer.Write(lineSeparator);
                     if (option.result == null)
                     {
                         printer.flush();
@@ -155,7 +157,7 @@ public class Main
         catch (IOException e)
         {
             Console.Error.WriteLine("发生了IO异常，请检查文件路径");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }

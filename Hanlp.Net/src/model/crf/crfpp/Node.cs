@@ -23,8 +23,8 @@ public class Node
 
     public Node()
     {
-        lpath = new ArrayList<Path>();
-        rpath = new ArrayList<Path>();
+        lpath = new ();
+        rpath = new ();
         Clear();
         bestCost = 0.0;
         prev = null;
@@ -44,7 +44,7 @@ public class Node
         }
         else
         {
-            return vmax + Math.Log(Math.exp(vmin - vmax) + 1.0);
+            return vmax + Math.Log(Math.Exp(vmin - vmax) + 1.0);
         }
     }
 
@@ -63,7 +63,7 @@ public class Node
         beta = 0.0;
         foreach (Path p in rpath)
         {
-            beta = logsumexp(beta, p.cost + p.rnode.beta, p == rpath.get(0));
+            beta = logsumexp(beta, p.cost + p.rnode.beta, p == rpath[(0)]);
         }
         beta += cost;
     }
@@ -77,7 +77,7 @@ public class Node
      */
     public void calcExpectation(double[] expected, double Z, int size)
     {
-        double c = Math.exp(alpha + beta - cost - Z);
+        double c = Math.Exp(alpha + beta - cost - Z);
         for (int i = 0; fVector.get(i) != -1; i++)
         {
             int idx = fVector.get(i) + y;

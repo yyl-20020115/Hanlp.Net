@@ -75,7 +75,7 @@ public class MutableFeatureMap : FeatureMap
 
     public HashSet<string> featureSet()
     {
-        return featureIdMap.keySet();
+        return featureIdMap.Keys;
     }
 
     //@Override

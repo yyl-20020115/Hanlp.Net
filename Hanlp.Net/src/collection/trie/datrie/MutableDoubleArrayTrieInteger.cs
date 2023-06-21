@@ -967,7 +967,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public Iterator<KeyValuePair<string, int>> iterator()
+        public IEnumerator<KeyValuePair<string, int>> iterator()
         {
             return new SI();
         }
@@ -1066,7 +1066,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         return get(key) != -1;
     }
 
-    public HashSet<string> keySet()
+    public HashSet<string> Keys()
     {
         return new HS();
     }
@@ -1116,7 +1116,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             //@Override
             public string next()
             {
-                return iterator.next().key;
+                return iterator.next().key();
             }
             //@Override
             public Object[] ToArray()
@@ -1284,12 +1284,12 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             return value;
         }
 
-        public string Key
+        public string Key()
         {
             return key;
         }
 
-        public int Value
+        public int Value()
         {
             return value;
         }

@@ -200,7 +200,7 @@ public class State
 
     public ICollection<char> getTransitions()
     {
-        return this.success.keySet();
+        return this.success.Keys;
     }
 
     //@Override
@@ -210,7 +210,7 @@ public class State
         sb.Append("depth=").Append(depth);
         sb.Append(", ID=").Append(index);
         sb.Append(", emits=").Append(emits);
-        sb.Append(", success=").Append(success.keySet());
+        sb.Append(", success=").Append(success.Keys);
         sb.Append(", failureID=").Append(failure == null ? "-1" : failure.index);
         sb.Append(", failure=").Append(failure);
         sb.Append('}');

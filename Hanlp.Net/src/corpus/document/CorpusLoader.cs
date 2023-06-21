@@ -28,11 +28,11 @@ public class CorpusLoader
         long start = DateTime.Now.Microsecond;
         List<string> fileList = IOUtil.fileList(folderPath);
         int i = 0;
-        for (File file : fileList)
+        foreach (var file in fileList)
         {
             Console.Write(file);
             Document document = convert2Document(file);
-            Console.WriteLine(" " + ++i + " / " + fileList.size());
+            Console.WriteLine(" " + ++i + " / " + fileList.Count);
             handler.handle(document);
         }
         Console.WriteLine("花费时间%d ms\n", DateTime.Now.Microsecond - start);
@@ -44,10 +44,10 @@ public class CorpusLoader
         List<string> fileList = IOUtil.fileList(folderPath);
         for (int i = 0; i < threadArray.Length - 1; ++i)
         {
-            threadArray[i].fileList = fileList.subList(fileList.size() / threadArray.Length * i, fileList.size() / threadArray.Length * (i + 1));
+            threadArray[i].fileList = fileList.subList(fileList.Count / threadArray.Length * i, fileList.Count / threadArray.Length * (i + 1));
             threadArray[i].start();
         }
-        threadArray[threadArray.Length - 1].fileList = fileList.subList(fileList.size() / threadArray.Length * (threadArray.Length - 1), fileList.size());
+        threadArray[threadArray.Length - 1].fileList = fileList.subList(fileList.Count / threadArray.Length * (threadArray.Length - 1), fileList.size());
         threadArray[threadArray.Length - 1].start();
         foreach (HandlerThread handlerThread in threadArray)
         {
@@ -81,12 +81,12 @@ public class CorpusLoader
         List<string> fileList = IOUtil.fileList(folderPath);
         List<Document> documentList = new ();
         int i = 0;
-        for (File file : fileList)
+        foreach (string file in fileList)
         {
             if (verbose) Console.Write(file);
             Document document = convert2Document(file);
             documentList.Add(document);
-            if (verbose) Console.WriteLine(" " + ++i + " / " + fileList.size());
+            if (verbose) Console.WriteLine(" " + ++i + " / " + fileList.Count);
         }
         if (verbose)
         {
@@ -159,7 +159,7 @@ public class CorpusLoader
 //        }
 //        catch (IOException e)
 //        {
-//            e.printStackTrace();
+//            //e.printStackTrace();
 //        }
 //        return null;
     }
@@ -194,7 +194,7 @@ public class CorpusLoader
             {
                 Console.Write(file);
                 Document document = convert2Document(file);
-                Console.WriteLine(" " + ++i + " / " + fileList.size());
+                Console.WriteLine(" " + ++i + " / " + fileList.Count);
                 handle(document);
             }
             Console.WriteLine("线程#%s 运行完毕，耗时%dms\n", getName(), DateTime.Now.Microsecond - start);

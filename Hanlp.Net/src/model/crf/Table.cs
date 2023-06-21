@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.model.crf;
 
 /**
@@ -28,9 +30,9 @@ public class Table
     {
         if (v == null) return "null";
         StringBuilder sb = new StringBuilder(v.Length * v[0].Length * 2);
-        for (string[] line : v)
+        foreach (string[] line in v)
         {
-            for (string element : line)
+            foreach (string element in line)
             {
                 sb.Append(element).Append('\t');
             }

@@ -111,7 +111,7 @@ public class CoreSynonymDictionaryEx
      */
     public static long[] getLexemeArray(List<CommonSynonymDictionary.SynonymItem> synonymItemList)
     {
-        long[] array = new long[synonymItemList.size()];
+        long[] array = new long[synonymItemList.Count];
         int i = 0;
         foreach (CommonSynonymDictionary.SynonymItem item in synonymItemList)
         {

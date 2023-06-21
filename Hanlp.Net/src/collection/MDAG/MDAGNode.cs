@@ -537,7 +537,7 @@ public class MDAGNode
     {
          StringBuilder sb = new StringBuilder("MDAGNode{");
         sb.Append("isAcceptNode=").Append(isAcceptNode);
-        sb.Append(", outgoingTransitionTreeMap=").Append(outgoingTransitionTreeMap.keySet());
+        sb.Append(", outgoingTransitionTreeMap=").Append(outgoingTransitionTreeMap.Keys);
         sb.Append(", incomingTransitionCount=").Append(incomingTransitionCount);
 //        sb.Append(", transitionSetBeginIndex=").Append(transitionSetBeginIndex);
 //        sb.Append(", storedHashCode=").Append(storedHashCode);

@@ -70,11 +70,11 @@ public class NGramDictionaryMaker
     {
         try
         {
-            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
+            TextWriter bw = (new StreamWriter(IOUtil.newOutputStream(path)));
             foreach (KeyValuePair<string, int> entry in trie)
             {
-                bw.write(entry.Key + " " + entry.Value);
-                bw.newLine();
+                bw.Write(entry.Key + " " + entry.Value);
+                bw.WriteLine();
             }
             bw.Close();
         }

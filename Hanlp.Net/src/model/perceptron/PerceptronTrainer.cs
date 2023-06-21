@@ -206,7 +206,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
                 catch (InterruptedException e)
                 {
                     err.printf("线程同步异常，训练失败\n");
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     return null;
                 }
             }

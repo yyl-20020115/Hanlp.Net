@@ -16,8 +16,8 @@ namespace com.hankcs.hanlp.mining.cluster;
  */
 public class Document<K>
 {
-    K id_;    /// the identifier of a document
-    SparseVector feature_;  /// feature vector of a document
+    public K id_;    /// the identifier of a document
+    public SparseVector feature_;  /// feature vector of a document
 
     public Document(K id_, SparseVector feature_)
     {

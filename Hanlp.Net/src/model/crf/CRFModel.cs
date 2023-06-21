@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -83,21 +87,21 @@ public class CRFModel : ICacheAble
         lineIterator.next();    // blank
         string line;
         int id = 0;
-        CRFModel.tag2id = new HashMap<string, int>();
+        CRFModel.tag2id = new ();
         while ((line = lineIterator.next()).Length != 0)
         {
             CRFModel.tag2id.Add(line, id);
             ++id;
         }
-        CRFModel.id2tag = new string[CRFModel.tag2id.size()];
+        CRFModel.id2tag = new string[CRFModel.tag2id.Count];
         int size = CRFModel.id2tag.Length;
-        foreach (KeyValuePair<string, int> entry in CRFModel.tag2id.entrySet())
+        foreach (KeyValuePair<string, int> entry in CRFModel.tag2id)
         {
             CRFModel.id2tag[entry.Value] = entry.Key;
         }
         Dictionary<string, FeatureFunction> featureFunctionMap = new Dictionary<string, FeatureFunction>();  // 构建trie树的时候用
         Dictionary<int, FeatureFunction> featureFunctionList = new Dictionary<int, FeatureFunction>(); // 读取权值的时候用
-        CRFModel.featureTemplateList = new LinkedList<FeatureTemplate>();
+        CRFModel.featureTemplateList = new ();
         while ((line = lineIterator.next()).Length != 0)
         {
             if (!"B".Equals(line))
@@ -128,7 +132,7 @@ public class CRFModel : ICacheAble
             featureFunctionList.Add(int.parseInt(args[0]), featureFunction);
         }
 
-        foreach (KeyValuePair<int, FeatureFunction> entry in featureFunctionList.entrySet())
+        foreach (KeyValuePair<int, FeatureFunction> entry in featureFunctionList)
         {
             int fid = entry.Key;
             FeatureFunction featureFunction = entry.Value;
@@ -262,10 +266,10 @@ public class CRFModel : ICacheAble
      * @param current
      * @return
      */
-    protected LinkedList<double[]> computeScoreList(Table table, int current)
+    protected List<double[]> computeScoreList(Table table, int current)
     {
-        LinkedList<double[]> scoreList = new LinkedList<double[]>();
-        for (FeatureTemplate featureTemplate : featureTemplateList)
+        List<double[]> scoreList = new ();
+        foreach (FeatureTemplate featureTemplate in featureTemplateList)
         {
             char[] o = featureTemplate.generateParameter(table, current);
             FeatureFunction featureFunction = featureFunctionTrie.get(o);
@@ -297,7 +301,7 @@ public class CRFModel : ICacheAble
     public void save(Stream _out)
     {
         _out.writeInt(id2tag.Length);
-        for (string tag : id2tag)
+        foreach (string tag in id2tag)
         {
             _out.writeUTF(tag);
         }
@@ -318,7 +322,7 @@ public class CRFModel : ICacheAble
             _out.writeInt(matrix.Length);
             foreach (double[] line in matrix)
             {
-                for (double v : line)
+                foreach (double v in line)
                 {
                     _out.writeDouble(v);
                 }
@@ -338,7 +342,7 @@ public class CRFModel : ICacheAble
         {
             int size = byteArray.Next();
             id2tag = new string[size];
-            tag2id = new HashMap<string, int>(size);
+            tag2id = new (size);
             for (int i = 0; i < id2tag.Length; i++)
             {
                 id2tag[i] = byteArray.nextUTF();
@@ -352,7 +356,7 @@ public class CRFModel : ICacheAble
             }
             featureFunctionTrie.load(byteArray, valueArray);
             size = byteArray.Next();
-            featureTemplateList = new ArrayList<FeatureTemplate>(size);
+            featureTemplateList = new (size);
             for (int i = 0; i < size; ++i)
             {
                 FeatureTemplate featureTemplate = new FeatureTemplate();

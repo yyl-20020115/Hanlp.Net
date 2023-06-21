@@ -139,7 +139,7 @@ public class CharTableTest : TestCase
 //        {
 //            if (i != CONVERT[i])
 //            {
-//                bw.write(String.Format("%c=%c\n", i, CONVERT[i]));
+//                bw.Write(String.Format("%c=%c\n", i, CONVERT[i]));
 //            }
 //        }
 //        bw.Close();

@@ -16,8 +16,8 @@ namespace com.hankcs.hanlp.collection.trie.bintrie;
  */
 public class _ValueArray<V>
 {
-    V[] value;
-    int offset;
+    public V[] value;
+    public int offset;
 
     public _ValueArray(V[] value)
     {

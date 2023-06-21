@@ -45,22 +45,22 @@ public class PKU
                 var bw = IOUtil.newBufferedWriter(PKU199801_TRAIN);
                 foreach (String line in all.Take((int) (all.Count * 0.9)))
                 {
-                    bw.write(line);
-                    bw.newLine();
+                    bw.Write(line);
+                    bw.WriteLine();
                 }
                 bw.Close();
 
                 bw = IOUtil.newBufferedWriter(PKU199801_TEST);
                 foreach (String line in all.Skip((int) (all.Count * 0.9)).Take(all.Count))
                 {
-                    bw.write(line);
-                    bw.newLine();
+                    bw.Write(line);
+                    bw.WriteLine();
                 }
                 bw.Close();
             }
             catch (IOException e)
             {
-                //e.printStackTrace();
+                ////e.printStackTrace();
             }
         }
     }

@@ -107,7 +107,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         context.Add(nodeArray[from].compiledWord + '→' + wordBeforeJ.compiledWord + '@' + nodeArray[to].compiledWord);
         context.Add(wordBeforeI.label + '@' + nodeArray[from].label + '→' + nodeArray[to].label);
         context.Add(nodeArray[from].label + '→' + wordBeforeJ.label + '@' + nodeArray[to].label);
-        List<KeyValuePair<string, Double>> pairList = model.predict(context.ToArray(new string[0]));
+        List<KeyValuePair<string, Double>> pairList = model.predict(context.ToArray());
         KeyValuePair<string, Double> maxPair = new KeyValuePair<string, Double>("null", -1.0);
 //        Console.WriteLine(context);
 //        Console.WriteLine(pairList);

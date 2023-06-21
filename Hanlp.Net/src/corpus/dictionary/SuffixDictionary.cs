@@ -49,7 +49,7 @@ public class SuffixDictionary
 
     public void AddRange(string[] total)
     {
-        for (string single : total)
+        foreach (string single in total)
         {
             Add(single);
         }
@@ -105,7 +105,7 @@ public class SuffixDictionary
     public HashSet<KeyValuePair<string, int>> entrySet()
     {
         HashSet<KeyValuePair<string, int>> treeSet = new ();
-        for (KeyValuePair<string, int> entry : trie.entrySet())
+        foreach (KeyValuePair<string, int> entry in trie.entrySet())
         {
             treeSet.Add(new AbstractMap.SimpleEntry<string, int>(reverse(entry.Key), entry.Value));
         }

@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
@@ -38,7 +40,7 @@ public class DecoderFeatureIndex : FeatureIndex
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }
@@ -53,37 +55,37 @@ public class DecoderFeatureIndex : FeatureIndex
                 return false;
             }
             StreamWriter osw = new StreamWriter(IOUtil.newOutputStream(textmodel), "UTF-8");
-            osw.write("version: " + Encoder.MODEL_VERSION + "\n");
-            osw.write("cost-factor: " + costFactor_ + "\n");
-            osw.write("maxid: " + maxid_ + "\n");
-            osw.write("xsize: " + xsize_ + "\n");
-            osw.write("\n");
+            osw.Write("version: " + Encoder.MODEL_VERSION + "\n");
+            osw.Write("cost-factor: " + costFactor_ + "\n");
+            osw.Write("maxid: " + maxid_ + "\n");
+            osw.Write("xsize: " + xsize_ + "\n");
+            osw.Write("\n");
             foreach (string y in y_)
             {
-                osw.write(y + "\n");
+                osw.Write(y + "\n");
             }
-            osw.write("\n");
+            osw.Write("\n");
             foreach (string utempl in unigramTempls_)
             {
-                osw.write(utempl + "\n");
+                osw.Write(utempl + "\n");
             }
             foreach (string bitempl in bigramTempls_)
             {
-                osw.write(bitempl + "\n");
+                osw.Write(bitempl + "\n");
             }
-            osw.write("\n");
+            osw.Write("\n");
 
             for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dat)
             {
-                osw.write(pair.Value + " " + pair.Key + "\n");
+                osw.Write(pair.Value + " " + pair.Key + "\n");
             }
 
-            osw.write("\n");
+            osw.Write("\n");
 
             for (int k = 0; k < maxid_; k++)
             {
                 string val = new DecimalFormat("0.0000000000000000").Format(alpha_[k]);
-                osw.write(val + "\n");
+                osw.Write(val + "\n");
             }
             osw.Close();
             return true;
@@ -188,7 +190,7 @@ public class DecoderFeatureIndex : FeatureIndex
                 {
                 }
             }
-            e.printStackTrace();
+            //e.printStackTrace();
             Console.Error.WriteLine("Error reading " + filename1);
             return false;
         }

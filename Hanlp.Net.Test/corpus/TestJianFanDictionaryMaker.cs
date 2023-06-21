@@ -104,7 +104,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //            {
 //                line = line.substring(0, firstBlank);
 //            }
-//            bw.write(line);
+//            bw.Write(line);
 //            bw.newLine();
 //        }
 //        bw.Close();

@@ -73,7 +73,7 @@ public class MathUtility
         //通过减去最大值防止浮点数溢出
         foreach (KeyValuePair<string, Double> entry in entrySet)
         {
-            Double value = Math.exp(entry.Value - max);
+            Double value = Math.Exp(entry.Value - max);
             entry.setValue(value);
 
             sum += value;

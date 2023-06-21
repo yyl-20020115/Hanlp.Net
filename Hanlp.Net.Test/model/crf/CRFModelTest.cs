@@ -82,36 +82,36 @@ public class CRFModelTest : TestCase
 //                                              }
 //                                              if (word.Length == 1 || compiledString != null)
 //                                              {
-//                                                  bw.write(word);
-//                                                  bw.write('\t');
-//                                                  bw.write('S');
-//                                                  bw.write('\n');
+//                                                  bw.Write(word);
+//                                                  bw.Write('\t');
+//                                                  bw.Write('S');
+//                                                  bw.Write('\n');
 //                                              }
 //                                              else
 //                                              {
-//                                                  bw.write(word[0]);
-//                                                  bw.write('\t');
-//                                                  bw.write('B');
-//                                                  bw.write('\n');
+//                                                  bw.Write(word[0]);
+//                                                  bw.Write('\t');
+//                                                  bw.Write('B');
+//                                                  bw.Write('\n');
 //                                                  for (int i = 1; i < word.Length - 1; ++i)
 //                                                  {
-//                                                      bw.write(word.charAt(i));
-//                                                      bw.write('\t');
-//                                                      bw.write('M');
-//                                                      bw.write('\n');
+//                                                      bw.Write(word.charAt(i));
+//                                                      bw.Write('\t');
+//                                                      bw.Write('M');
+//                                                      bw.Write('\n');
 //                                                  }
-//                                                  bw.write(word.charAt(word.Length - 1));
-//                                                  bw.write('\t');
-//                                                  bw.write('E');
-//                                                  bw.write('\n');
+//                                                  bw.Write(word.charAt(word.Length - 1));
+//                                                  bw.Write('\t');
+//                                                  bw.Write('E');
+//                                                  bw.Write('\n');
 //                                              }
 //                                          }
-//                                          bw.write('\n');
+//                                          bw.Write('\n');
 //                                      }
 //                                  }
 //                                  catch (IOException e)
 //                                  {
-//                                      e.printStackTrace();
+//                                      //e.printStackTrace();
 //                                  }
 //                              }
 //                          }
@@ -166,7 +166,7 @@ public class CRFModelTest : TestCase
 //        while ((line = br.ReadLine()) != null)
 //        {
 //            if (preLength == 0 && line.Length == 0) continue;
-//            bw.write(line);
+//            bw.Write(line);
 //            bw.newLine();
 //            preLength = line.Length;
 //        }

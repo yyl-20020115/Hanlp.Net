@@ -37,7 +37,7 @@ public class CoreStopWordDictionaryTest : TestCase
 //        TextWriter bw = IOUtil.newBufferedWriter(HanLP.Config.CoreStopWordDictionaryPath);
 //        for (String word : dictionary)
 //        {
-//            bw.write(word);
+//            bw.Write(word);
 //            bw.newLine();
 //        }
 //        bw.Close();

@@ -97,9 +97,9 @@ public class SimplifyNGramDictionary : TestCase
 //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(path)));
 //        for (Map.Entry<String, int> entry : map.entrySet())
 //        {
-//            bw.write(entry.Key);
-//            bw.write(' ');
-//            bw.write(String.valueOf(entry.Value));
+//            bw.Write(entry.Key);
+//            bw.Write(' ');
+//            bw.Write(String.valueOf(entry.Value));
 //            bw.newLine();
 //        }
 //        bw.Close();
@@ -135,9 +135,9 @@ public class SimplifyNGramDictionary : TestCase
 //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(path), "UTF-8"));
 //        for (Map.Entry<String, int> entry : map.entrySet())
 //        {
-//            bw.write(entry.Key);
-//            bw.write(' ');
-//            bw.write(String.valueOf(entry.Value));
+//            bw.Write(entry.Key);
+//            bw.Write(' ');
+//            bw.Write(String.valueOf(entry.Value));
 //            bw.newLine();
 //        }
 //        bw.Close();

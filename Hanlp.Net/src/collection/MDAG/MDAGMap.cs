@@ -64,10 +64,10 @@ public class MDAGMap<V> : AbstractMap<string, V>
     }
 
     //@Override
-    public HashSet<string> keySet()
+    public HashSet<string> Keys()
     {
         HashSet<string> stringSet = mdag.getAllStrings();
-        LinkedHashSet<string> keySet = new LinkedHashSet<string>();
+        List<string> keySet = new List<string>();
         Iterator<string> iterator = stringSet.iterator();
         while (iterator.MoveNext())
         {
@@ -121,7 +121,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
 
     public class MDAGForMap : MDAG
     {
-        static readonly char DELIMITER = char.MIN_VALUE;
+        static readonly char DELIMITER = char.MinValue;
 
         public int getValueIndex(string key)
         {
@@ -163,11 +163,11 @@ public class MDAGMap<V> : AbstractMap<string, V>
             // 接下来应该是一条单链路
             Dictionary<char, MDAGNode> outgoingTransitions = targetNode.getOutgoingTransitions();
             //assert outgoingTransitions.size() == 1 : "不是单链！";
-            char high = outgoingTransitions.keySet().iterator().next();
+            char high = outgoingTransitions.Keys.iterator().next();
             targetNode = targetNode.transition(high);
             outgoingTransitions = targetNode.getOutgoingTransitions();
             //assert outgoingTransitions.size() == 1 : "不是单链！";
-            char low = outgoingTransitions.keySet().iterator().next();
+            char low = outgoingTransitions.Keys.iterator().next();
             return ByteUtil.convertTwoCharToInt(high, low);
         }
 

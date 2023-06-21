@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
@@ -8,10 +10,9 @@ public class VectorsReaderTest : TestCase
     [TestMethod]
     public void TestReadVectorFile() 
     {
-        File tempFile = File.createTempFile("hanlp-vector", ".txt");
-        tempFile.deleteOnExit();
+        string tempFile = createTempFile("hanlp-vector", ".txt");
         TextWriter bw = IOUtil.newBufferedWriter(tempFile);
-        bw.write("3 1\n" +
+        bw.Write("3 1\n" +
                      "cat 1.1\n" +
                      " 2.2\n" +
                      "dog 3.3\n"

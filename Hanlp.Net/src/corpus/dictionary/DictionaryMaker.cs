@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.dictionary.item;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
 using System.Text;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
@@ -80,7 +81,7 @@ public class DictionaryMaker : ISaveAble
         HashSet<string> labelSet = new ();
         foreach (KeyValuePair<string, Item> entry in entrySet())
         {
-            labelSet.AddRange(entry.Value.labelMap.keySet());
+            labelSet.AddRange(entry.Value.labelMap.Keys);
         }
 
         return labelSet;
@@ -188,9 +189,9 @@ public class DictionaryMaker : ISaveAble
         return trie.entrySet();
     }
 
-    public HashSet<string> keySet()
+    public HashSet<string> Keys
     {
-        return trie.keySet();
+        return trie.Keys;
     }
 
     /**
@@ -297,8 +298,8 @@ public class DictionaryMaker : ISaveAble
             var entries = trie.entrySet();
             foreach (KeyValuePair<string, Item> entry in entries)
             {
-                bw.write(entry.Value.ToString());
-                bw.newLine();
+                bw.Write(entry.Value.ToString());
+                bw.AppendLine();
             }
             bw.Close();
         }
@@ -344,8 +345,8 @@ public class DictionaryMaker : ISaveAble
             {
                 if (filter.onSave(entry.Value))
                 {
-                    bw.write(entry.Value.ToString());
-                    bw.newLine();
+                    bw.Write(entry.Value.ToString());
+                    bw.AppendLine();
                 }
             }
             bw.Close();

@@ -32,7 +32,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     public CoNLLSentence(List<CoNllLine> lineList)
     {
         CoNllLine[] lineArray = lineList.ToArray();
-        this.word = new CoNLLWord[lineList.size()];
+        this.word = new CoNLLWord[lineList.Count];
         int i = 0;
         foreach(CoNllLine line in lineList)
         {
@@ -103,28 +103,30 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     }
 
     //@Override
-    public Iterator<CoNLLWord> iterator()
+    public IEnumerator<CoNLLWord> iterator()
     {
-        return new Iterator<CoNLLWord>()
+        return new IT();
+    }
+
+    public class IT: IEnumerator<CoNLLWord>
+    {
+        int index;
+        //@Override
+        public bool MoveNext()
         {
-            int index;
-            //@Override
-            public bool MoveNext()
-            {
-                return index < word.Length;
-            }
+            return index < word.Length;
+        }
 
-            //@Override
-            public CoNLLWord next()
-            {
-                return word[index++];
-            }
+        //@Override
+        public CoNLLWord next()
+        {
+            return word[index++];
+        }
 
-            //@Override
-            public void Remove()
-            {
-                throw new InvalidOperationException("CoNLLSentence是只读对象，不允许删除");
-            }
-        };
+        //@Override
+        public void Remove()
+        {
+            throw new InvalidOperationException("CoNLLSentence是只读对象，不允许删除");
+        }
     }
 }

@@ -91,16 +91,16 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
             TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path[0]), "UTF-8"));
             foreach (KeyValuePair<string, TermFrequency> entry in dictionaryMain.trie.entrySet())
             {
-                bw.write(entry.Key);
-                bw.write(' ');
-                bw.write(string.valueOf(entry.Value.Value));
-                bw.newLine();
+                bw.Write(entry.Key);
+                bw.Write(' ');
+                bw.Write(string.valueOf(entry.Value.Value));
+                bw.AppendLine();
             }
             bw.Close();
         }
         catch (Exception e)
         {
-            //e.printStackTrace();
+            ////e.printStackTrace();
             return -1;
         }
 
@@ -179,7 +179,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
     {
         HashSet<TermFrequency> set = new HashSet<TermFrequency>(Collections.reverseOrder());
 
-        for (KeyValuePair<string, TermFrequency> entry : entrySet())
+        foreach (KeyValuePair<string, TermFrequency> entry in entrySet())
         {
             set.Add(entry.Value);
         }

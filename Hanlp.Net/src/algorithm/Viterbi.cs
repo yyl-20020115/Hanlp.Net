@@ -110,7 +110,7 @@ public class Viterbi
     {
         if (Nature.values().Length != transformMatrixDictionary.states.Length)
             transformMatrixDictionary.extend(Nature.values().Length);
-        int Length = vertexList.size() - 1;
+        int Length = vertexList.Count - 1;
         double[][] cost = new double[2][];  // 滚动数组
         var iterator = vertexList.iterator();
         Vertex start = iterator.next();
@@ -180,7 +180,7 @@ public class Viterbi
      */
     public static  List<E> computeEnum<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
-        int Length = roleTagList.size() - 1;
+        int Length = roleTagList.Count - 1;
         List<E> tagList = new (roleTagList.size());
         double[][] cost = new double[2][];  // 滚动数组
         var iterator = roleTagList.iterator();
@@ -207,7 +207,7 @@ public class Viterbi
             int index_i = i & 1;
             int index_i_1 = 1 - index_i;
             EnumItem<E> item = iterator.next();
-            cost[index_i] = new double[item.labelMap.size()];
+            cost[index_i] = new double[item.labelMap.Count];
             double perfect_cost_line = Double.MaxValue;
             int k = 0;
             HashSet<E> curTagSet = item.labelMap;
@@ -234,7 +234,7 @@ public class Viterbi
             tagList.Add(pre);
             preTagSet = curTagSet;
         }
-        tagList.Add(tagList.get(0));    // 对于最后一个##末##
+        tagList.Add(tagList[(0)]);    // 对于最后一个##末##
         return tagList;
     }
 
@@ -248,8 +248,8 @@ public class Viterbi
      */
     public static List<E> computeEnumSimply<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
-        int Length = roleTagList.size() - 1;
-        List<E> tagList = new LinkedList<E>();
+        int Length = roleTagList.Count - 1;
+        List<E> tagList = new List<E>();
         Iterator<EnumItem<E>> iterator = roleTagList.iterator();
         EnumItem<E> start = iterator.next();
         E pre = start.labelMap.entrySet().iterator().next().Key;

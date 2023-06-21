@@ -63,7 +63,7 @@ public class TestUtility
         catch (Exception e)
         {
             Console.Error.WriteLine("数据下载失败，请尝试手动下载 %s 到 %s 。原因如下：\n", url, target);
-            //e.printStackTrace();
+            ////e.printStackTrace();
             Environment.Exit(1);
             return null;
         }
@@ -190,7 +190,7 @@ public class TestUtility
         //// create output directory if it doesn't exist
         //if (!Directory.Exists( dir))Directory.CreateDirectory(dir);
         //FileStream fis;
-        ////buffer for read and write data to file
+        ////buffer for read and Write data to file
         //byte[] buffer = new byte[4096];
         //try
         //{
@@ -233,7 +233,7 @@ public class TestUtility
         //}
         //catch (IOException e)
         //{
-        //    //e.printStackTrace();
+        //    ////e.printStackTrace();
         //}
     }
 }

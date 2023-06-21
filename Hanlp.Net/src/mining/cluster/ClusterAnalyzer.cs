@@ -71,7 +71,7 @@ public class ClusterAnalyzer<K>
                 listIterator.Remove();
             }
         }
-        List<string> wordList = new (termList.size());
+        List<string> wordList = new (termList.Count);
         foreach (Term term in termList)
         {
             wordList.Add(term.word);
@@ -88,7 +88,7 @@ public class ClusterAnalyzer<K>
             Double f = vector.get(id);
             if (f == null)
             {
-                f = 1.;
+                f = 1.0;
                 vector.Add(id, f);
             }
             else
@@ -134,7 +134,7 @@ public class ClusterAnalyzer<K>
     public List<HashSet<K>> kmeans(int nclusters)
     {
         Cluster<K> cluster = new Cluster<K>();
-        foreach (Document<K> document in documents_.values())
+        foreach (Document<K> document in documents_.Values)
         {
             cluster.add_document(document);
         }
@@ -151,7 +151,7 @@ public class ClusterAnalyzer<K>
 
     private List<HashSet<K>> toResult(List<Cluster<K>> clusters_)
     {
-        List<HashSet<K>> result = new (clusters_.size());
+        List<HashSet<K>> result = new (clusters_.Count);
         foreach (Cluster<K> c in clusters_)
         {
             HashSet<K> s = new HashSet<K>();
@@ -274,11 +274,11 @@ public class ClusterAnalyzer<K>
             Collections.shuffle(items);
 
             bool changed = false;
-            for (int[] item : items)
+            foreach (int[] item in items)
             {
                 int cluster_id = item[0];
                 int item_id = item[1];
-                Cluster<K> cluster = clusters.get(cluster_id);
+                Cluster<K> cluster = clusters[(cluster_id)];
                 Document<K> doc = cluster.documents().get(item_id);
                 double value_base = refined_vector_value(cluster.composite_vector(), doc.feature(), -1);
                 double norm_base_moved = Math.Pow(norms[cluster_id], 2) + value_base;
@@ -287,11 +287,11 @@ public class ClusterAnalyzer<K>
                 double eval_max = -1.0;
                 double norm_max = 0.0;
                 int max_index = 0;
-                for (int j = 0; j < clusters.size(); j++)
+                for (int j = 0; j < clusters.Count; j++)
                 {
                     if (cluster_id == j)
                         continue;
-                    Cluster<K> other = clusters.get(j);
+                    Cluster<K> other = clusters[j];
                     double value_target = refined_vector_value(other.composite_vector(), doc.feature(), 1);
                     double norm_target_moved = Math.Pow(norms[j], 2) + value_target;
                     norm_target_moved = norm_target_moved > 0 ? Math.Sqrt(norm_target_moved) : 0.0;
@@ -306,8 +306,8 @@ public class ClusterAnalyzer<K>
                 if (eval_max > 0)
                 {
                     eval_cluster += eval_max;
-                    clusters.get(max_index).add_document(doc);
-                    clusters.get(cluster_id).remove_document(item_id);
+                    clusters[(max_index)].add_document(doc);
+                    clusters[(cluster_id)].remove_document(item_id);
                     norms[cluster_id] = norm_base_moved;
                     norms[max_index] = norm_max;
                     changed = true;
@@ -368,7 +368,7 @@ public class ClusterAnalyzer<K>
 
         ClusterAnalyzer<string> analyzer = new ClusterAnalyzer<string>();
         File[] folders = root.listFiles();
-        if (folders == null) return 1.;
+        if (folders == null) return 1.0;
         logger.start("根目录:%s\n加载中...\n", folderPath);
         int docSize = 0;
         int[] ni = new int[folders.Length];

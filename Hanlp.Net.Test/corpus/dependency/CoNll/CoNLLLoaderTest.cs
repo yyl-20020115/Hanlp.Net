@@ -42,12 +42,12 @@ public class CoNLLLoaderTest : TestCase
 //        {
 //            for (CoNLLWord coNLLWord : coNLLSentence.word)
 //            {
-//                bw.write(coNLLWord.NAME);
-//                bw.write('\t');
-//                bw.write(coNLLWord.CPOSTAG);
-//                bw.write('\t');
-//                bw.write(coNLLWord.POSTAG);
-//                bw.write('\t');
+//                bw.Write(coNLLWord.NAME);
+//                bw.Write('\t');
+//                bw.Write(coNLLWord.CPOSTAG);
+//                bw.Write('\t');
+//                bw.Write(coNLLWord.POSTAG);
+//                bw.Write('\t');
 //                int d = coNLLWord.HEAD.ID - coNLLWord.ID;
 //                int posDistance = 1;
 //                if (d > 0)                          // 在后面
@@ -70,7 +70,7 @@ public class CoNLLLoaderTest : TestCase
 //                        }
 //                    }
 //                }
-//                bw.write((d > 0 ? "+" : "-") + posDistance + "_" + coNLLWord.HEAD.CPOSTAG
+//                bw.Write((d > 0 ? "+" : "-") + posDistance + "_" + coNLLWord.HEAD.CPOSTAG
 ////                                 + "_" + coNLLWord.DEPREL
 //                );
 //                bw.newLine();

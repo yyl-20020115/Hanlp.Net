@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
 using System.Text;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
@@ -50,10 +51,10 @@ public class TMDictionaryMaker : ISaveAble
     public override string ToString()
     {
         HashSet<string> labelSet = new ();
-        foreach (KeyValuePair<string, Dictionary<string, int>> first in transferMatrix.entrySet())
+        foreach (KeyValuePair<string, Dictionary<string, int>> first in transferMatrix)
         {
             labelSet.Add(first.Key);
-            labelSet.AddRange(first.Value.keySet());
+            labelSet.UnionWith(first.Value.Keys);
         }
         StringBuilder sb = new StringBuilder();
         sb.Append(' ');
@@ -86,7 +87,7 @@ public class TMDictionaryMaker : ISaveAble
         try
         {
             TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
-            bw.write(ToString());
+            bw.Write(ToString());
             bw.Close();
         }
         catch (Exception e)

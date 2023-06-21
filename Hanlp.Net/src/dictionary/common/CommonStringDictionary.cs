@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.dictionary.common;
@@ -32,7 +33,7 @@ public class CommonStringDictionary
         string line = null;
         try
         {
-            TextReader bw = new TextReader(new InputStreamReader(IOUtil.newInputStream(path)));
+            TextReader bw = new StreamReader(IOUtil.newInputStream(path));
             while ((line = bw.ReadLine()) != null)
             {
                 trie.Add(line, null);
@@ -52,7 +53,7 @@ public class CommonStringDictionary
         return trie.load(path);
     }
 
-    public HashSet<string> keySet()
+    public HashSet<string> Keys()
     {
         HashSet<string> keySet = new ();
         foreach (KeyValuePair<string, Byte> entry in trie.entrySet())

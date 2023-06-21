@@ -52,7 +52,7 @@ public class ComputeAccuracy
         }
         catch (UnsupportedEncodingException e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             return;
         }
 
@@ -67,7 +67,7 @@ public class ComputeAccuracy
             for (b = 0; b < words; b++)
             {
                 _params = f.ReadLine().Split("\\s");
-                vocab[b] = _params[0].toUpperCase();
+                vocab[b] = _params[0].ToUpper();
                 for (a = 0; a < size; a++)
                 {
                     M[a + b * size] = Double.parseDouble(_params[1 + a]);

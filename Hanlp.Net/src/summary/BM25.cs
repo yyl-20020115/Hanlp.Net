@@ -61,13 +61,13 @@ public class BM25
     public BM25(List<List<string>> docs)
     {
         this.docs = docs;
-        D = docs.size();
+        D = docs.Count;
         foreach (List<string> sentence in docs)
         {
-            avgdl += sentence.size();
+            avgdl += sentence.Count;
         }
         avgdl /= D;
-        f = new Map[D];
+        f = new Dictionary<string, int>[D];
         df = new Dictionary<string, int>();
         idf = new Dictionary<string, Double>();
         init();
@@ -84,8 +84,7 @@ public class BM25
             Dictionary<string, int> tf = new Dictionary<string, int>();
             foreach (string word in sentence)
             {
-                int freq = tf.get(word);
-                freq = (freq == null ? 0 : freq) + 1;
+                freq = (!tf.TryGetValue(word,out var freq)  ? 0 : freq) + 1;
                 tf.Add(word, freq);
             }
             f[index] = tf;
@@ -119,7 +118,7 @@ public class BM25
         foreach (string word in sentence)
         {
             if (!f[index].ContainsKey(word)) continue;
-            int d = docs.get(index).size();
+            int d = docs[(index)].Count;
             int tf = f[index].get(word);
             score += (idf.get(word) * tf * (k1 + 1)
                     / (tf + k1 * (1 - b + b * d

@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+using System.Text;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -27,7 +30,7 @@ public class FeatureTemplate : ICacheAble
     /**
      * 每个部分%x[-2,0]的位移，其中int[0]储存第一个数（-2），int[1]储存第二个数（0）
      */
-    ArrayList<int[]> offsetList;
+    List<int[]> offsetList;
     List<string> delimiterList;
 
     public FeatureTemplate()
@@ -37,10 +40,10 @@ public class FeatureTemplate : ICacheAble
     public static FeatureTemplate create(string template)
     {
         FeatureTemplate featureTemplate = new FeatureTemplate();
-        featureTemplate.delimiterList = new LinkedList<string>();
-        featureTemplate.offsetList = new ArrayList<int[]>(3);
+        featureTemplate.delimiterList = new ();
+        featureTemplate.offsetList = new (3);
         featureTemplate.template = template;
-        Matcher matcher = pattern.matcher(template);
+        var matcher = pattern.matcher(template);
         int start = 0;
         while (matcher.find())
         {
@@ -55,10 +58,10 @@ public class FeatureTemplate : ICacheAble
     {
         StringBuilder sb = new StringBuilder();
         int i = 0;
-        for (string d : delimiterList)
+        foreach (string d in delimiterList)
         {
             sb.Append(d);
-            int[] offset = offsetList.get(i++);
+            int[] offset = offsetList[(i++)];
             sb.Append(table.get(current + offset[0], offset[1]));
         }
 
@@ -72,14 +75,14 @@ public class FeatureTemplate : ICacheAble
     public void save(Stream _out) 
     {
         _out.writeUTF(template);
-        _out.writeInt(offsetList.size());
+        _out.writeInt(offsetList.Count);
         foreach (int[] offset in offsetList)
         {
             _out.writeInt(offset[0]);
             _out.writeInt(offset[1]);
         }
-        _out.writeInt(delimiterList.size());
-        for (string s : delimiterList)
+        _out.writeInt(delimiterList.Count);
+        foreach (string s in delimiterList)
         {
             _out.writeUTF(s);
         }
@@ -90,7 +93,7 @@ public class FeatureTemplate : ICacheAble
     {
         template = byteArray.nextUTF();
         int size = byteArray.Next();
-        offsetList = new ArrayList<int[]>(size);
+        offsetList = new (size);
         for (int i = 0; i < size; ++i)
         {
             offsetList.Add(new int[]{byteArray.Next(), byteArray.Next()});

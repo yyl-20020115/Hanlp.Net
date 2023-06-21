@@ -199,18 +199,18 @@ public class LinearModel : ICacheAble
             TagSet tagSet = featureMap.tagSet;
             for (KeyValuePair<string, int> entry : featureIdSet)
             {
-                bw.write(entry.Key);
+                bw.Write(entry.Key);
                 if (featureIdSet.size() == parameter.Length)
                 {
-                    bw.write("\t");
-                    bw.write(string.valueOf(parameter[entry.Value]));
+                    bw.Write("\t");
+                    bw.Write(string.valueOf(parameter[entry.Value]));
                 }
                 else
                 {
                     for (int i = 0; i < tagSet.size(); ++i)
                     {
-                        bw.write("\t");
-                        bw.write(string.valueOf(parameter[entry.Value * tagSet.size() + i]));
+                        bw.Write("\t");
+                        bw.Write(string.valueOf(parameter[entry.Value * tagSet.size() + i]));
                     }
                 }
                 bw.newLine();

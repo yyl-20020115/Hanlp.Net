@@ -24,7 +24,7 @@ public class FeatureFunction : ICacheAble
     /**
      * 环境参数
      */
-    char[] o;
+    public char[] o;
     /**
      * 标签参数
      */
@@ -33,7 +33,7 @@ public class FeatureFunction : ICacheAble
     /**
      * 权值，按照index对应于tag的id
      */
-    double[] w;
+    public double[] w;
 
     public FeatureFunction(char[] o, int tagSize)
     {
@@ -46,20 +46,21 @@ public class FeatureFunction : ICacheAble
     }
 
     public FeatureFunction(string o, int tagSize)
+        : this(o.ToCharArray(), tagSize)
     {
-        this(o.ToCharArray(), tagSize);
+        ;
     }
 
     //@Override
     public void save(Stream _out)
     {
         _out.writeInt(o.Length);
-        for (char c : o)
+        foreach (char c in o)
         {
             _out.writeChar(c);
         }
         _out.writeInt(w.Length);
-        for (double v : w)
+        foreach (double v in w)
         {
             _out.writeDouble(v);
         }

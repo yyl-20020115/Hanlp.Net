@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.utility;
 using Microsoft.Extensions.Logging;
@@ -59,13 +60,13 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         for (int i = 0; i < chars.Length - 1; ++i)
         {
             // 除了最后一个字外，都是继续
-            branch.addChild(new Node<V>(chars[i], Status.NOT_WORD_1, null));
+            branch.addChild(new Node<V>(chars[i], Status.NOT_WORD_1, default));
             branch = branch.getChild(chars[i]);
         }
         // 最后一个字加入时属性为end
         if (branch.addChild(new Node<V>(chars[chars.Length - 1], Status.WORD_END_3, value)))
         {
-            ++size; // 维护size
+            ++this._size; // 维护size
         }
     }
 
@@ -75,13 +76,13 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         for (int i = 0; i < key.Length - 1; ++i)
         {
             // 除了最后一个字外，都是继续
-            branch.addChild(new Node<V>(key[i], Status.NOT_WORD_1, null));
+            branch.addChild(new Node<V>(key[i], Status.NOT_WORD_1, default));
             branch = branch.getChild(key[i]);
         }
         // 最后一个字加入时属性为end
         if (branch.addChild(new Node<V>(key[key.Length - 1], Status.WORD_END_3, value)))
         {
-            ++size; // 维护size
+            ++this._size; // 维护size
         }
     }
 
@@ -111,9 +112,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         }
         if (branch == null) return;
         // 最后一个字设为undefined
-        if (branch.addChild(new Node<V>(chars[chars.Length - 1], Status.UNDEFINED_0, value)))
+        if (branch.addChild(new Node<V>(chars[^1], Status.UNDEFINED_0, value)))
         {
-            --size;
+            --this._size;
         }
     }
 
@@ -143,7 +144,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
         if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
-        return (V) branch.Value;
+        return (V) branch.Value();
     }
 
     public V get(char[] key)
@@ -158,13 +159,13 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
         if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
-        return (V) branch.Value;
+        return (V) branch.Value();
     }
 
     //@Override
     public V[] getValueArray(V[] a)
     {
-        if (a.Length < size)
+        if (a.Length < _size)
             a = (V[]) java.lang.reflect.Array.newInstance(
                     a.getClass().getComponentType(), size);
         int i = 0;
@@ -196,7 +197,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * 键集合
      * @return
      */
-    public HashSet<string> keySet()
+    public HashSet<string> Keys()
     {
         var keySet = new HashSet<string>();
         foreach (KeyValuePair<string, V> entry in entrySet())
@@ -213,10 +214,10 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param key 查询串
      * @return 键值对
      */
-    public HashSet<KeyValuePair<string, V>> prefixSearch(string key)
+    public HashSet<TrieEntry> prefixSearch(string key)
     {
-        HashSet<KeyValuePair<string, V>> entrySet = new HashSet<KeyValuePair<string, V>>();
-        StringBuilder sb = new StringBuilder(key.substring(0, key.Length - 1));
+        HashSet<TrieEntry> entrySet = new ();
+        StringBuilder sb = new StringBuilder(key[0 .. (key.Length - 1)]);
         BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
         foreach (char aChar in chars)
@@ -249,9 +250,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param begin 开始的下标
      * @return
      */
-    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] chars, int begin)
+    public List<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] chars, int begin)
     {
-        LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
+        List<KeyValuePair<string, V>> result = new ();
         StringBuilder sb = new StringBuilder();
         BaseNode<V> branch = this;
         for (int i = begin; i < chars.Length; ++i)
@@ -262,7 +263,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             sb.Append(aChar);
             if (branch.status == Status.WORD_MIDDLE_2 || branch.status == Status.WORD_END_3)
             {
-                result.Add(new AbstractMap.SimpleEntry<string, V>(sb.ToString(), (V) branch.value));
+                result.Add(new AbstractMap.SimpleEntry<string, V>(sb.ToString(), (V) branch.Value()));
             }
         }
 
@@ -270,7 +271,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     }
 
     //@Override
-    protected bool addChild(BaseNode<V> node)
+    public override bool addChild(BaseNode<V> node)
     {
         bool Add = false;
         char c = node.getChar();
@@ -315,7 +316,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
     public int size()
     {
-        return size;
+        return this._size;
     }
 
     //@Override
@@ -325,7 +326,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     }
 
     //@Override
-    public BaseNode<V> getChild(char c)
+    public override BaseNode<V> getChild(char c)
     {
         return child[c];
     }
@@ -335,7 +336,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         try
         {
             Stream _out = new Stream(IOUtil.newOutputStream(path));
-            for (BaseNode node : child)
+            foreach (BaseNode<V> node in child)
             {
                 if (node == null)
                 {
@@ -411,7 +412,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         byte[] bytes = IOUtil.readBytes(path);
         if (bytes == null) return false;
-        _ValueArray valueArray = new _ValueArray(value);
+        _ValueArray<V> valueArray = new _ValueArray<V>(value);
         ByteArray byteArray = new ByteArray(bytes);
         for (int i = 0; i < child.Length; ++i)
         {
@@ -422,7 +423,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 child[i].walkToLoad(byteArray, valueArray);
             }
         }
-        size = value.Length;
+        _size = value.Length;
 
         return true;
     }
@@ -448,7 +449,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 child[i].walkToLoad(byteArray, valueArray);
             }
         }
-        size = -1;  // 不知道有多少
+        this._size = -1;  // 不知道有多少
 
         return true;
     }
@@ -464,7 +465,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 child[i].walkToLoad(byteArray, valueArray);
             }
         }
-        size = valueArray.value.Length;
+        this._size = valueArray.value.Length;
 
         return true;
     }
@@ -500,7 +501,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     //@Override
     public void readExternal(ObjectInput _in) 
     {
-        size = _in.readInt();
+        this._size = _in.readInt();
         for (int i = 0; i < child.Length; ++i)
         {
             int flag = _in.readInt();
@@ -529,14 +530,14 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             {
                 int to = i + 1;
                 int end = to;
-                V value = state.Value;
+                V value = state.Value();
                 for (; to < Length; ++to)
                 {
                     state = state.transition(text[to]);
                     if (state == null) break;
                     if (state.Value != null)
                     {
-                        value = state.Value;
+                        value = state.Value();
                         end = to + 1;
                     }
                 }
@@ -565,14 +566,14 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             {
                 int to = i + 1;
                 int end = to;
-                V value = state.Value;
+                V value = state.Value();
                 for (; to < Length; ++to)
                 {
                     state = state.transition(text[to]);
                     if (state == null) break;
                     if (state.Value != null)
                     {
-                        value = state.Value;
+                        value = state.Value();
                         end = to + 1;
                     }
                 }
@@ -602,7 +603,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             state = state.transition(text[i]);
             if (state != null)
             {
-                V value = state.Value;
+                V value = state.Value();
                 if (value != null)
                 {
                     processor.hit(begin, i + 1, value);
@@ -634,7 +635,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             state = state.transition(text[i]);
             if (state != null)
             {
-                V value = state.Value;
+                V value = state.Value();
                 if (value != null)
                 {
                     processor.hit(begin, i + 1, value);

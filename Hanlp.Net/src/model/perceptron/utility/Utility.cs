@@ -20,6 +20,7 @@ using com.hankcs.hanlp.model.perceptron.tagset;
 using com.hankcs.hanlp.model.perceptron.utility;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.tokenizer.lexical;
+using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace com.hankcs.hanlp.model.perceptron.utility;
@@ -94,7 +95,7 @@ public class Utility
      */
     public static void convertPKUtoCWS(string inputFolder, string outputFile, int begin, int end)
     {
-        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(outputFile), "UTF-8"));
+        TextWriter bw = new StreamWriter(outputFile,false,Encoding.UTF8);
         CorpusLoader.walk(inputFolder, new CW()
 
         );
@@ -113,25 +114,25 @@ public class Utility
             try
             {
                 List<List<Word>> sentenceList = convertComplexWordToSimpleWord(document.getComplexSentenceList());
-                if (sentenceList.size() == 0) return;
+                if (sentenceList.Count == 0) return;
                 foreach (List<Word> sentence in sentenceList)
                 {
-                    if (sentence.size() == 0) continue;
+                    if (sentence.Count == 0) continue;
                     int index = 0;
                     foreach (IWord iWord in sentence)
                     {
-                        bw.write(iWord.Value);
-                        if (++index != sentence.size())
+                        bw.Write(iWord.Value);
+                        if (++index != sentence.Count)
                         {
-                            bw.write(' ');
+                            bw.Write(' ');
                         }
                     }
-                    bw.newLine();
+                    bw.WriteLine();
                 }
             }
             catch (IOException e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }
@@ -163,25 +164,25 @@ public class Utility
             try
             {
                 List<List<Word>> sentenceList = document.getSimpleSentenceList();
-                if (sentenceList.size() == 0) return;
+                if (sentenceList.Count == 0) return;
                 foreach (List<Word> sentence in sentenceList)
                 {
-                    if (sentence.size() == 0) continue;
+                    if (sentence.Count == 0) continue;
                     int index = 0;
                     foreach (IWord iWord in sentence)
                     {
-                        bw.write(iWord.ToString());
-                        if (++index != sentence.size())
+                        bw.Write(iWord.ToString());
+                        if (++index != sentence.Count)
                         {
-                            bw.write(' ');
+                            bw.Write(' ');
                         }
                     }
-                    bw.newLine();
+                    bw.WriteLine();
                 }
             }
             catch (IOException e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }
@@ -191,10 +192,10 @@ public class Utility
     private static List<List<Word>> convertComplexWordToSimpleWord(List<List<IWord>> document)
     {
         var nerTag = new string[] { "nr", "ns", "nt" };
-        List<List<Word>> output = new ArrayList<List<Word>>(document.size());
+        List<List<Word>> output = new (document.Count);
         foreach (List<IWord> sentence in document)
         {
-            List<Word> s = new(sentence.size());
+            List<Word> s = new(sentence.Count);
             foreach (IWord iWord in sentence)
             {
                 if (iWord is Word)
@@ -236,11 +237,11 @@ public class Utility
 
     public static string[] toWordArray(List<Word> wordList)
     {
-        string[] wordArray = new string[wordList.size()];
+        string[] wordArray = new string[wordList.Count];
         int i = -1;
         foreach (Word word in wordList)
         {
-            wordArray[++i] = word.Value;
+            wordArray[++i] = word.Value();
         }
 
         return wordArray;
@@ -263,7 +264,7 @@ public class Utility
             string[] wordArray = toWordArray(wordList);
             stat[0] += wordArray.Length;
             string text = com.hankcs.hanlp.utility.TextUtility.combine(wordArray);
-            string[] predArray = segmenter.segment(text).ToArray(new string[0]);
+            string[] predArray = segmenter.segment(text).ToArray();
             stat[1] += predArray.Length;
 
             int goldIndex = 0, predIndex = 0;
@@ -460,8 +461,8 @@ public class Utility
 
     public static string[][] reshapeNER(List<string[]> ner)
     {
-        string[] wordArray = new string[ner.size()];
-        string[] posArray = new string[ner.size()];
+        string[] wordArray = new string[ner.Count];
+        string[] posArray = new string[ner.Count];
         string[] nerArray = new string[ner.size()];
         reshapeNER(ner, wordArray, posArray, nerArray);
         return new string[][] { wordArray, posArray, nerArray };
@@ -482,7 +483,7 @@ public class Utility
     public static void printNERScore(Dictionary<string, double[]> scores)
     {
         Console.WriteLine("%4s\t%6s\t%6s\t%6s\n", "NER", "P", "R", "F1");
-        foreach (KeyValuePair<string, double[]> entry in scores.entrySet())
+        foreach (KeyValuePair<string, double[]> entry in scores)
         {
             string type = entry.Key;
             double[] s = entry.Value;

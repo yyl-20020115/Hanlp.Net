@@ -64,7 +64,7 @@ public class TfIdf
         }
         if (type != TfType.NATURAL)
         {
-            foreach (Term term in tf.keySet())
+            foreach (Term term in tf.Keys)
             {
                 switch (type)
                 {
@@ -134,7 +134,7 @@ public class TfIdf
     public static  Dictionary<Term, Double> idf<Term>(Iterable<Iterable<Term>> documentVocabularies,
                                                bool smooth, bool addOne)
     {
-        Dictionary<Term, int> df = new HashMap<Term, int>();
+        Dictionary<Term, int> df = new ();
         int d = smooth ? 1 : 0;
         int a = addOne ? 1 : 0;
         int n = d;
@@ -148,8 +148,8 @@ public class TfIdf
                 df.Add(term, t + 1);
             }
         }
-        Dictionary<Term, Double> idf = new HashMap<Term, Double>();
-        foreach (KeyValuePair<Term, int> e in df.entrySet())
+        Dictionary<Term, Double> idf = new ();
+        foreach (KeyValuePair<Term, int> e in df)
         {
             Term term = e.Key;
             double f = e.Value;
@@ -179,11 +179,11 @@ public class TfIdf
      * @param <Term>        词语类型
      * @return 一个词语->tf-idf的Map
      */
-    public static <Term> Dictionary<Term, Double> tfIdf(Dictionary<Term, Double> tf, Dictionary<Term, Double> idf,
+    public static  Dictionary<Term, Double> tfIdf<Term>(Dictionary<Term, Double> tf, Dictionary<Term, Double> idf,
                                                  Normalization normalization)
     {
         Dictionary<Term, Double> tfIdf = new HashMap<Term, Double>();
-        foreach (Term term in tf.keySet())
+        foreach (Term term in tf.Keys)
         {
             Double TF = tf.get(term);
             if (TF == null) TF = 1.;
@@ -200,7 +200,7 @@ public class TfIdf
             }
             n = Math.Sqrt(n);
 
-            foreach (Term term in tfIdf.keySet())
+            foreach (Term term in tfIdf.Keys)
             {
                 tfIdf.Add(term, tfIdf.get(term) / n);
             }
@@ -216,7 +216,7 @@ public class TfIdf
      * @param <Term> 词语类型
      * @return 一个词语->tf-idf的Map
      */
-    public static <Term> Dictionary<Term, Double> tfIdf(Dictionary<Term, Double> tf, Dictionary<Term, Double> idf)
+    public static  Dictionary<Term, Double> tfIdf<Term>(Dictionary<Term, Double> tf, Dictionary<Term, Double> idf)
     {
         return tfIdf(tf, idf, Normalization.NONE);
     }
@@ -230,7 +230,7 @@ public class TfIdf
      * @param <Term> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <Term> Dictionary<Term, Double> idfFromTfs(Iterable<Dictionary<Term, Double>> tfs, bool smooth, bool addOne)
+    public static Dictionary<Term, Double> idfFromTfs<Term>(Iterable<Dictionary<Term, Double>> tfs, bool smooth, bool addOne)
     {
         return idf(new KeySetIterable<Term, Double>(tfs), smooth, addOne);
     }
@@ -242,7 +242,7 @@ public class TfIdf
      * @param <Term> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <Term> Dictionary<Term, Double> idfFromTfs(Iterable<Dictionary<Term, Double>> tfs)
+    public static  Dictionary<Term, Double> idfFromTfs<Term>(Iterable<Dictionary<Term, Double>> tfs)
     {
         return idfFromTfs(tfs, true, true);
     }
@@ -265,26 +265,27 @@ public class TfIdf
         //@Override
         public Iterator<Iterable<KEY>> iterator()
         {
-            return new Iterator<Iterable<KEY>>()
+            return new IT();
+        }
+        public class IT: Iterator<Iterable<KEY>>
+        {
+            //@Override
+            public bool MoveNext()
             {
-                //@Override
-                public bool MoveNext()
-                {
-                    return maps.MoveNext();
-                }
+                return maps.MoveNext();
+            }
 
-                //@Override
-                public Iterable<KEY> next()
-                {
-                    return maps.next().keySet();
-                }
+            //@Override
+            public Iterable<KEY> next()
+            {
+                return maps.next().Keys;
+            }
 
-                //@Override
-                public void Remove()
-                {
+            //@Override
+            public void Remove()
+            {
 
-                }
-            };
+            }
         }
     }
 }

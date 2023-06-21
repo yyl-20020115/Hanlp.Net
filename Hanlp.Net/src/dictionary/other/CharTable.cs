@@ -54,7 +54,7 @@ public class CharTable
             string line = iterator.next();
             if (line == null) return false;
             if (line.Length != 3) continue;
-            CONVERT[line[0]] = CONVERT[line.charAt(2)];
+            CONVERT[line[0]] = CONVERT[line[(2)]];
         }
         loadSpace();
         logger.info("正在缓存字符正规化表到" + binPath);
@@ -65,7 +65,7 @@ public class CharTable
     
     private static void loadSpace() {
         for (int i = char.MIN_CODE_POINT; i <= char.MAX_CODE_POINT; i++) {
-            if (char.isWhitespace(i) || char.isSpaceChar(i)) {
+            if (char.IsWhiteSpace(i) || char.IsSpaceChar(i)) {
                 CONVERT[i] = ' ';
             }
         }
@@ -77,7 +77,7 @@ public class CharTable
         {
             ObjectInputStream _in = new ObjectInputStream(IOUtil.newInputStream(path));
             CONVERT = (char[]) _in.readObject();
-            in.Close();
+            _in.Close();
         }
         catch (Exception e)
         {

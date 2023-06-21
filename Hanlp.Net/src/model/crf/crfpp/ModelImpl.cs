@@ -36,13 +36,13 @@ public class ModelImpl : Model
 
     private static class Option
     {
-        @Argument(description = "set FILE for model file", alias = "m", required = true)
+        //@Argument(description = "set FILE for model file", alias = "m", required = true)
         string model;
-        @Argument(description = "output n-best results", alias = "n")
+        //@Argument(description = "output n-best results", alias = "n")
         int nbest = 0;
-        @Argument(description = "set INT for verbose level", alias = "v")
+        //@Argument(description = "set INT for verbose level", alias = "v")
         int verbose = 0;
-        @Argument(description = "set cost factor", alias = "c")
+        //@Argument(description = "set cost factor", alias = "c")
         Double cost_factor = 1.0;
     }
 

@@ -61,7 +61,7 @@ public class TfIdfCounter : KeywordExtractor
     public List<string> getKeywords(List<Term> termList, int size)
     {
         List<KeyValuePair<string, Double>> entryList = getKeywordsWithTfIdf(termList, size);
-        List<string> r = new List<string>(entryList.size());
+        List<string> r = new List<string>(entryList.Count);
         foreach (KeyValuePair<string, Double> entry in entryList)
         {
             r.Add(entry.Key);
@@ -95,7 +95,7 @@ public class TfIdfCounter : KeywordExtractor
 
     private static List<string> convert(List<Term> termList)
     {
-        List<string> words = new List<string>(termList.size());
+        List<string> words = new List<string>(termList.Count);
         foreach (Term term in termList)
         {
             words.Add(term.word);
@@ -105,7 +105,7 @@ public class TfIdfCounter : KeywordExtractor
 
     public void Add(List<Term> termList)
     {
-        Add(tfMap.size(), termList);
+        Add(tfMap.Count, termList);
     }
 
     /**
@@ -137,7 +137,7 @@ public class TfIdfCounter : KeywordExtractor
      */
     public int Add(string text)
     {
-        int id = tfMap.size();
+        int id = tfMap.Count;
         Add(id, text);
         return id;
     }
@@ -184,7 +184,7 @@ public class TfIdfCounter : KeywordExtractor
     }
     public HashSet<Object> documents()
     {
-        return tfMap.keySet();
+        return tfMap.Keys;
     }
 
     public Dictionary<Object, Dictionary<string, Double>> getTfMap()
@@ -205,7 +205,7 @@ public class TfIdfCounter : KeywordExtractor
     public Dictionary<string, Double> allTf()
     {
         Dictionary<string, Double> result = new ();
-        foreach (Dictionary<string, Double> d in tfMap.values())
+        foreach (Dictionary<string, Double> d in tfMap.Values)
         {
             foreach (KeyValuePair<string, Double> tf in d.entrySet())
             {

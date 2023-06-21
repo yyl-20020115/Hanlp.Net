@@ -29,15 +29,15 @@ public class DemoPinyinToChinese
         StringDictionary dictionary = new StringDictionary("=");
         dictionary.load(HanLP.Config.PinyinDictionaryPath);
         var map = new Dictionary<String, HashSet<String>>();
-        foreach (var entry in dictionary.keySet())
+        foreach (var entry in dictionary.Keys())
         {
-            String pinyins = entry.Value.replaceAll("[\\d,]", "");
+            String pinyins = entry.Replace("[\\d,]", "");
             if (!map.TryGetValue(pinyins,out var words))
             {
                 words = new HashSet<String>();
                 map.Add(pinyins, words);
             }
-            words.Add(entry.Key);
+            words.Add(entry);
         }
         var words2 = new HashSet<String>();
         words2.Add("绿色");

@@ -101,7 +101,7 @@ public class CoreBiGramTableDictionary
                 Dictionary<int, int> bMap = map.get(i);
                 if (bMap != null)
                 {
-                    for (KeyValuePair<int, int> entry : bMap.entrySet())
+                    foreach (KeyValuePair<int, int> entry in bMap)
                     {
                         int index = offset << 1;
                         pair[index] = entry.Key;

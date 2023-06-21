@@ -86,9 +86,9 @@ public class CharacterBasedGenerativeModel : ICacheAble
                 sentence.Add(new char[]{word[0], 'b'});
                 for (int i = 1; i < word.Length - 1; ++i)
                 {
-                    sentence.Add(new char[]{word.charAt(i), 'm'});
+                    sentence.Add(new char[]{word[i], 'm'});
                 }
-                sentence.Add(new char[]{word.charAt(word.Length - 1), 'e'});
+                sentence.Add(new char[] { word[^1], 'e' });
             }
         }
         // 转换完毕，开始统计
@@ -115,7 +115,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         double tl1 = 0.0;
         double tl2 = 0.0;
         double tl3 = 0.0;
-        foreach (string key in tf.d.keySet())
+        foreach (string key in tf.d.Keys())
         {
             if (key.Length != 6) continue;    // tri samples
             char[][] now = new char[][]
@@ -199,7 +199,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         }
 
         // 第三个字开始，利用TriGram标注
-        double[][] pre = new double[4][4];
+        double[,] pre = new double[4,4];
         for (int i = 2; i < charArray.Length; i++)
         {
             // swap(now, pre)
@@ -214,7 +214,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
                     now[s][t] = -1e20;
                     for (int f = 0; f < 4; ++f)
                     {
-                        double p = pre[f][s] + log_prob(charArray[i - 2], f,
+                        double p = pre[f,s] + log_prob(charArray[i - 2], f,
                                                         charArray[i - 1], s,
                                                         charArray[i],     t);
                         if (p > now[s][t])

@@ -45,14 +45,14 @@ public abstract class CommonDictionary<V>
     {
         trie = new DoubleArrayTrie<V>();
         long start = DateTime.Now.Microsecond;
-        if (loadDat(ByteArray.createByteArray(path + BIN_EXT)))
+        if (loadDat(ByteArray.createByteArray(path + Predefine.BIN_EXT)))
         {
             return true;
         }
         Dictionary<string, V> map = new Dictionary<string, V>();
         try
         {
-            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
             string line;
             while ((line = br.ReadLine()) != null)
             {
@@ -68,8 +68,8 @@ public abstract class CommonDictionary<V>
         }
         onLoaded(map);
         HashSet<KeyValuePair<string, V>> entrySet = map.entrySet();
-        List<string> keyList = new (entrySet.size());
-        List<V> valueList = new (entrySet.size());
+        List<string> keyList = new (entrySet.Count);
+        List<V> valueList = new (entrySet.Count));
         foreach (KeyValuePair<string, V> entry in entrySet)
         {
             keyList.Add(entry.Key);
@@ -114,7 +114,7 @@ public abstract class CommonDictionary<V>
         try
         {
             Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path)));
-            _out.writeInt(valueArray.size());
+            _out.writeInt(valueArray.Count);
             foreach (V item in valueArray)
             {
                 saveValue(item, _out);

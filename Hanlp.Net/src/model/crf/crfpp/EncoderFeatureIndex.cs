@@ -109,7 +109,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 {
                 }
             }
-            e.printStackTrace();
+            //e.printStackTrace();
             Console.Error.WriteLine("Error reading " + filename);
             return false;
         }
@@ -175,7 +175,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 {
                 }
             }
-            e.printStackTrace();
+            //e.printStackTrace();
             Console.Error.WriteLine("Error reading " + filename);
             return false;
         }
@@ -222,42 +222,42 @@ public class EncoderFeatureIndex : FeatureIndex
             if (textModelFile)
             {
                 StreamWriter osw = new StreamWriter(IOUtil.newOutputStream(filename + ".txt"), "UTF-8");
-                osw.write("version: " + Encoder.MODEL_VERSION + "\n");
-                osw.write("cost-factor: " + costFactor_ + "\n");
-                osw.write("maxid: " + maxid_ + "\n");
-                osw.write("xsize: " + xsize_ + "\n");
-                osw.write("\n");
+                osw.Write("version: " + Encoder.MODEL_VERSION + "\n");
+                osw.Write("cost-factor: " + costFactor_ + "\n");
+                osw.Write("maxid: " + maxid_ + "\n");
+                osw.Write("xsize: " + xsize_ + "\n");
+                osw.Write("\n");
                 foreach (string y in y_)
                 {
-                    osw.write(y + "\n");
+                    osw.Write(y + "\n");
                 }
-                osw.write("\n");
+                osw.Write("\n");
                 foreach (string utempl in unigramTempls_)
                 {
-                    osw.write(utempl + "\n");
+                    osw.Write(utempl + "\n");
                 }
                 foreach (string bitempl in bigramTempls_)
                 {
-                    osw.write(bitempl + "\n");
+                    osw.Write(bitempl + "\n");
                 }
-                osw.write("\n");
+                osw.Write("\n");
                 foreach (MutableDoubleArrayTrieInteger.KeyValuePair pair in dic_)
                 {
-                    osw.write(pair.Value + " " + pair.Key + "\n");
+                    osw.Write(pair.Value + " " + pair.Key + "\n");
                 }
-                osw.write("\n");
+                osw.Write("\n");
 
                 for (int k = 0; k < maxid_; k++)
                 {
                     string val = new DecimalFormat("0.0000000000000000").Format(alpha_[k]);
-                    osw.write(val + "\n");
+                    osw.Write(val + "\n");
                 }
                 osw.Close();
             }
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             Console.Error.WriteLine("Error saving model to " + filename);
             return false;
         }
@@ -389,7 +389,7 @@ public class EncoderFeatureIndex : FeatureIndex
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }

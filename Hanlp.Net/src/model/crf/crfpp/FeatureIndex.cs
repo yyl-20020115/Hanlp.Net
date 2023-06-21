@@ -53,18 +53,18 @@ public abstract class FeatureIndex
         if (alphaFloat_ != null)
         {
             float c = 0.0f;
-            for (int i = 0; node.fVector.get(i) != -1; i++)
+            for (int i = 0; node.fVector[i] != -1; i++)
             {
-                c += alphaFloat_[node.fVector.get(i) + node.y];
+                c += alphaFloat_[node.fVector[i] + node.y];
             }
             node.cost = costFactor_ * c;
         }
         else
         {
             double c = 0.0;
-            for (int i = 0; node.fVector.get(i) != -1; i++)
+            for (int i = 0; node.fVector[i] != -1; i++)
             {
-                c += alpha_[node.fVector.get(i) + node.y];
+                c += alpha_[node.fVector[i] + node.y];
             }
             node.cost = costFactor_ * c;
         }
@@ -81,18 +81,18 @@ public abstract class FeatureIndex
         if (alphaFloat_ != null)
         {
             float c = 0.0f;
-            for (int i = 0; path.fvector.get(i) != -1; i++)
+            for (int i = 0; path.fvector[(i)] != -1; i++)
             {
-                c += alphaFloat_[path.fvector.get(i) + path.lnode.y * y_.size() + path.rnode.y];
+                c += alphaFloat_[path.fvector[(i)] + path.lnode.y * y_.Count + path.rnode.y];
             }
             path.cost = costFactor_ * c;
         }
         else
         {
             double c = 0.0;
-            for (int i = 0; path.fvector.get(i) != -1; i++)
+            for (int i = 0; path.fvector[(i)] != -1; i++)
             {
-                c += alpha_[path.fvector.get(i) + path.lnode.y * y_.size() + path.rnode.y];
+                c += alpha_[path.fvector[(i)] + path.lnode.y * y_.Count + path.rnode.y];
             }
             path.cost = costFactor_ * c;
         }
@@ -103,11 +103,11 @@ public abstract class FeatureIndex
         StringBuilder sb = new StringBuilder();
         foreach (string temp in unigramTempls)
         {
-            sb.Append(temp).Append("\n");
+            sb.Append(temp).Append('\n');
         }
         foreach (string temp in bigramTempls)
         {
-            sb.Append(temp).Append("\n");
+            sb.Append(temp).Append('\n');
         }
         return sb.ToString();
     }
@@ -195,9 +195,9 @@ public abstract class FeatureIndex
 
     public bool buildFeatures(TaggerImpl tagger)
     {
-        List<int> feature = new ArrayList<int>();
+        List<int> feature = new ();
         List<List<int>> featureCache = tagger.getFeatureCache_();
-        tagger.setFeature_id_(featureCache.size());
+        tagger.setFeature_id_(featureCache.Count);
 
         for (int cur = 0; cur < tagger.size(); cur++)
         {
@@ -207,7 +207,7 @@ public abstract class FeatureIndex
             }
             feature.Add(-1);
             featureCache.Add(feature);
-            feature = new ArrayList<int>();
+            feature = new ();
         }
         for (int cur = 1; cur < tagger.size(); cur++)
         {
@@ -217,7 +217,7 @@ public abstract class FeatureIndex
             }
             feature.Add(-1);
             featureCache.Add(feature);
-            feature = new ArrayList<int>();
+            feature = new ();
         }
         return true;
     }
@@ -228,8 +228,8 @@ public abstract class FeatureIndex
         List<List<int>> featureCache = tagger.getFeatureCache_();
         for (int cur = 0; cur < tagger.size(); cur++)
         {
-            List<int> f = featureCache.get(fid++);
-            for (int i = 0; i < y_.size(); i++)
+            List<int> f = featureCache[(fid++)];
+            for (int i = 0; i < y_.Count; i++)
             {
                 Node n = new Node();
                 n.Clear();
@@ -242,9 +242,9 @@ public abstract class FeatureIndex
         for (int cur = 1; cur < tagger.size(); cur++)
         {
             List<int> f = featureCache.get(fid++);
-            for (int j = 0; j < y_.size(); j++)
+            for (int j = 0; j < y_.Count; j++)
             {
-                for (int i = 0; i < y_.size(); i++)
+                for (int i = 0; i < y_.Count; i++)
                 {
                     Path p = new Path();
                     p.Clear();
@@ -260,7 +260,7 @@ public abstract class FeatureIndex
         return true;
     }
 
-    public bool open(InputStream stream)
+    public bool open(Stream stream)
     {
         return true;
     }
@@ -277,7 +277,7 @@ public abstract class FeatureIndex
 
     public int ysize()
     {
-        return y_.size();
+        return y_.Count;
     }
 
     public int getMaxid_()

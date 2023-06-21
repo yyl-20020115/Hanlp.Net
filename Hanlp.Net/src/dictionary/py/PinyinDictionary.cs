@@ -52,7 +52,7 @@ public class PinyinDictionary
         StringDictionary dictionary = new StringDictionary("=");
         if (!dictionary.load(path)) return false;
         var map = new Dictionary<string, Pinyin[]>();
-        foreach (KeyValuePair<string, string> entry in dictionary)
+        foreach (KeyValuePair<string, string> entry in dictionary.entrySet())
         {
             string[] args = entry.Value.Split(",");
             Pinyin[] pinyinValue = new Pinyin[args.Length];
@@ -100,7 +100,7 @@ public class PinyinDictionary
     {
         try
         {
-            var _out = new FileStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
+            var _out = new FileStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
             _out.writeInt(entrySet.size());
             foreach (KeyValuePair<string, Pinyin[]> entry in entrySet)
             {

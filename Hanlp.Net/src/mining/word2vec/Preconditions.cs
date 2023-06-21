@@ -54,7 +54,7 @@ class Preconditions
      */
     public static void checkArgument(bool expression,
                                      string errorMessageTemplate,
-                                     Object... errorMessageArgs)
+                                     params object[]  errorMessageArgs)
     {
         if (!expression)
         {
@@ -112,7 +112,7 @@ class Preconditions
      */
     public static void checkState(bool expression,
                                   string errorMessageTemplate,
-                                  Object... errorMessageArgs)
+                                  params object[]  errorMessageArgs)
     {
         if (!expression)
         {
@@ -213,7 +213,7 @@ class Preconditions
      * @param index a user-supplied index identifying an element of an array, list or string
      * @param size  the size of that array, list or string
      * @return the value of {@code index}
-     * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws IndexOutOfRangeException if {@code index} is negative or is not less than {@code size}
      * @  if {@code size} is negative
      */
     public static int checkElementIndex(int index, int size)
@@ -229,7 +229,7 @@ class Preconditions
      * @param size  the size of that array, list or string
      * @param desc  the text to use to describe this index in an error message
      * @return the value of {@code index}
-     * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws IndexOutOfRangeException if {@code index} is negative or is not less than {@code size}
      * @  if {@code size} is negative
      */
     public static int checkElementIndex(
@@ -238,7 +238,7 @@ class Preconditions
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index >= size)
         {
-            throw new IndexOutOfBoundsException(badElementIndex(index, size, desc));
+            throw new IndexOutOfRangeException(badElementIndex(index, size, desc));
         }
         return index;
     }
@@ -266,7 +266,7 @@ class Preconditions
      * @param index a user-supplied index identifying a position in an array, list or string
      * @param size  the size of that array, list or string
      * @return the value of {@code index}
-     * @throws IndexOutOfBoundsException if {@code index} is negative or is greater than {@code size}
+     * @throws IndexOutOfRangeException if {@code index} is negative or is greater than {@code size}
      * @  if {@code size} is negative
      */
     public static int checkPositionIndex(int index, int size)
@@ -282,7 +282,7 @@ class Preconditions
      * @param size  the size of that array, list or string
      * @param desc  the text to use to describe this index in an error message
      * @return the value of {@code index}
-     * @throws IndexOutOfBoundsException if {@code index} is negative or is greater than {@code size}
+     * @throws IndexOutOfRangeException if {@code index} is negative or is greater than {@code size}
      * @  if {@code size} is negative
      */
     public static int checkPositionIndex(int index, int size, string desc)
@@ -290,7 +290,7 @@ class Preconditions
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index > size)
         {
-            throw new IndexOutOfBoundsException(badPositionIndex(index, size, desc));
+            throw new IndexOutOfRangeException(badPositionIndex(index, size, desc));
         }
         return index;
     }
@@ -319,7 +319,7 @@ class Preconditions
      * @param start a user-supplied index identifying a starting position in an array, list or string
      * @param end   a user-supplied index identifying a ending position in an array, list or string
      * @param size  the size of that array, list or string
-     * @throws IndexOutOfBoundsException if either index is negative or is greater than {@code size},
+     * @throws IndexOutOfRangeException if either index is negative or is greater than {@code size},
      *                                   or if {@code end} is less than {@code start}
      * @  if {@code size} is negative
      */
@@ -328,7 +328,7 @@ class Preconditions
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (start < 0 || end < start || end > size)
         {
-            throw new IndexOutOfBoundsException(badPositionIndexes(start, end, size));
+            throw new IndexOutOfRangeException(badPositionIndexes(start, end, size));
         }
     }
 
@@ -357,7 +357,7 @@ class Preconditions
      *                 to strings using {@link string#valueOf(Object)}. Arguments can be null.
      */
     // Note that this is somewhat-improperly used from Verify.java as well.
-    static string Format(string template, Object... args)
+    static string Format(string template, params object[]  args)
     {
         template = string.valueOf(template); // null -> "null"
 

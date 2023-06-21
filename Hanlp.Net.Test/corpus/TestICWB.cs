@@ -33,16 +33,16 @@ public class TestICWB : TestCase
 //            {
 //                if (word.Length == 1)
 //                {
-//                    bw.write(word + "\tS\n");
+//                    bw.Write(word + "\tS\n");
 //                }
 //                else if (word.Length > 1)
 //                {
-//                    bw.write(word[0] + "\tB\n");
+//                    bw.Write(word[0] + "\tB\n");
 //                    for (int i = 1; i < word.Length - 1; ++i)
 //                    {
-//                        bw.write(word.charAt(i) + "\tM\n");
+//                        bw.Write(word.charAt(i) + "\tM\n");
 //                    }
-//                    bw.write(word.charAt(word.Length - 1) + "\tE\n");
+//                    bw.Write(word.charAt(word.Length - 1) + "\tE\n");
 //                }
 //            }
 //            bw.newLine();
@@ -66,15 +66,15 @@ public class TestICWB : TestCase
 //                        for (Word word : wordList)
 //                        {
 //
-//                            bw.write(word.value);
-//                            bw.write(' ');
+//                            bw.Write(word.value);
+//                            bw.Write(' ');
 //
 //                        }
 //                        bw.newLine();
 //                    }
 //                    catch (IOException e)
 //                    {
-//                        e.printStackTrace();
+//                        //e.printStackTrace();
 //                    }
 //                }
 //            }

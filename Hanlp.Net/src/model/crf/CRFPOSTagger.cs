@@ -8,6 +8,13 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.crf.crfpp;
+using com.hankcs.hanlp.model.perceptron;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.tokenizer.lexical;
+using System.Text;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -15,7 +22,7 @@ namespace com.hankcs.hanlp.model.crf;
 /**
  * @author hankcs
  */
-public class CRFPOSTagger : CRFTagger : POSTagger
+public class CRFPOSTagger : CRFTagger , POSTagger
 {
     private PerceptronPOSTagger perceptronPOSTagger;
 
@@ -50,7 +57,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
         {
             wordList.Add(word.value);
         }
-        string[] words = wordList.ToArray(new string[0]);
+        string[] words = wordList.ToArray();
         Iterator<Word> iterator = simpleWordList.iterator();
         for (int i = 0; i < words.Length; i++)
         {
@@ -60,9 +67,9 @@ public class CRFPOSTagger : CRFTagger : POSTagger
             cells[5] = iterator.next().label;
             for (int j = 0; j < cells.Length; j++)
             {
-                bw.write(cells[j]);
+                bw.Write(cells[j]);
                 if (j != cells.Length - 1)
-                    bw.write('\t');
+                    bw.Write('\t');
             }
             bw.newLine();
         }
@@ -105,13 +112,12 @@ public class CRFPOSTagger : CRFTagger : POSTagger
 
     public string[] tag(List<string> wordList)
     {
-        string[] words = new string[wordList.size()];
-        wordList.ToArray(words);
+        varwords = wordList.ToArray();
         return tag(words);
     }
 
     //@Override
-    public string[] tag(string... words)
+    public string[] tag(params string[] words)
     {
         return perceptronPOSTagger.tag(createInstance(words));
     }
@@ -125,38 +131,40 @@ public class CRFPOSTagger : CRFTagger : POSTagger
             extractFeature(words[i], table[i]);
         }
 
-        return new POSInstance(words, model.featureMap)
+        return new CI(words, model.featureMap);
+    }
+    
+    public class CI: POSInstance
+    {
+        //@Override
+        protected int[] extractFeature(string[] words, FeatureMap featureMap, int position)
         {
-            //@Override
-            protected int[] extractFeature(string[] words, FeatureMap featureMap, int position)
+            StringBuilder sbFeature = new StringBuilder();
+            List<int> featureVec = new LinkedList<int>();
+            for (int i = 0; i < featureTemplateArray.Length; i++)
             {
-                StringBuilder sbFeature = new StringBuilder();
-                List<int> featureVec = new LinkedList<int>();
-                for (int i = 0; i < featureTemplateArray.Length; i++)
+                Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
+                Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                delimiterIterator.next(); // ignore U0 之类的id
+                while (offsetIterator.MoveNext())
                 {
-                    Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                    Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
-                    delimiterIterator.next(); // ignore U0 之类的id
-                    while (offsetIterator.MoveNext())
-                    {
-                        int[] offset = offsetIterator.next();
-                        int t = offset[0] + position;
-                        int j = offset[1];
-                        if (t < 0)
-                            sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
-                        else if (t >= words.Length)
-                            sbFeature.Append(FeatureIndex.EOS[t - words.Length]);
-                        else
-                            sbFeature.Append(table[t][j]);
-                        if (delimiterIterator.MoveNext())
-                            sbFeature.Append(delimiterIterator.next());
-                        else
-                            sbFeature.Append(i);
-                    }
-                    addFeatureThenClear(sbFeature, featureVec, featureMap);
+                    int[] offset = offsetIterator.next();
+                    int t = offset[0] + position;
+                    int j = offset[1];
+                    if (t < 0)
+                        sbFeature.Append(FeatureIndex.BOS[-(t + 1)]);
+                    else if (t >= words.Length)
+                        sbFeature.Append(FeatureIndex.EOS[t - words.Length]);
+                    else
+                        sbFeature.Append(table[t][j]);
+                    if (delimiterIterator.MoveNext())
+                        sbFeature.Append(delimiterIterator.next());
+                    else
+                        sbFeature.Append(i);
                 }
-                return toFeatureArray(featureVec);
+                addFeatureThenClear(sbFeature, featureVec, featureMap);
             }
-        };
+            return toFeatureArray(featureVec);
+        }
     }
 }

@@ -16,7 +16,7 @@ using System.Collections.Generic;
  */
 public class Cluster<K> : IComparable<Cluster<K>>
 {
-    List<Document<K>> documents_;          ///< documents
+    public List<Document<K>> documents_;          ///< documents
     SparseVector composite_;                           ///< a composite SparseVector
     SparseVector centroid_;                            ///< a centroid SparseVector
     List<Cluster<K>> sectioned_clusters_;  ///< sectioned clusters
@@ -124,7 +124,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      *
      * @param index the index of vector container of documents
      */
-    void remove_document(int index)
+    public void remove_document(int index)
     {
         var listIterator = documents_.listIterator(index);
         Document<K> document = listIterator.next();
@@ -137,9 +137,9 @@ public class Cluster<K> : IComparable<Cluster<K>>
      *
      * @param doc the pointer of a document object
      */
-    void remove_document(Document<K> doc)
+    public void remove_document(Document<K> doc)
     {
-        for (Document<K> document : documents_)
+        foreach (Document<K> document in documents_)
         {
             if (document.Equals(doc))
             {
@@ -155,7 +155,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      */
     public void refresh()
     {
-        ListIterator<Document<K>> listIterator = documents_.GetEnumerator();
+        var listIterator = documents_.GetEnumerator();
         while (listIterator.MoveNext())
         {
             if (listIterator.next() == null)
@@ -179,7 +179,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
     public void set_sectioned_gain()
     {
         double gain = 0.0f;
-        if (sectioned_gain_ == 0 && sectioned_clusters_.size() > 1)
+        if (sectioned_gain_ == 0 && sectioned_clusters_.Count > 1)
         {
             foreach (Cluster<K> cluster in sectioned_clusters_)
             {
@@ -229,7 +229,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      * @param ndocs 质心数量
      * @param docs  输出到该列表中
      */
-    void choose_smartly(int ndocs, List<Document<K>> docs)
+    public void choose_smartly(int ndocs, List<Document<K>> docs)
     {
         int siz = size();
         double[] closest = new double[siz];
@@ -238,10 +238,10 @@ public class Cluster<K> : IComparable<Cluster<K>>
         int index, count = 0;
 
         index = random.Next(siz);  // initial center
-        docs.Add(documents_.get(index));
+        docs.Add(documents_[(index)]);
         ++count;
         double potential = 0.0;
-        for (int i = 0; i < documents_.size(); i++)
+        for (int i = 0; i < documents_.Count; i++)
         {
             double dist = 1.0 - SparseVector.inner_product(documents_.get(i).feature(), documents_.get(index).feature());
             potential += dist;
@@ -266,7 +266,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
             ++count;
 
             double new_potential = 0.0;
-            for (int i = 0; i < documents_.size(); i++)
+            for (int i = 0; i < documents_.Count; i++)
             {
                 double dist = 1.0 - SparseVector.inner_product(documents_.get(i).feature(), documents_.get(index).feature());
                 double min = closest[i];
@@ -286,7 +286,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      *
      * @param nclusters
      */
-    void section(int nclusters)
+    public void section(int nclusters)
     {
         if (size() < nclusters)
             return;
@@ -314,7 +314,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
                     max_index = j;
                 }
             }
-            sectioned_clusters_.get(max_index).add_document(d);
+            sectioned_clusters_[(max_index)].add_document(d);
         }
     }
 

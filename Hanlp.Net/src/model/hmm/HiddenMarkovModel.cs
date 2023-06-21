@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.model.hmm;
 
 
@@ -53,10 +55,10 @@ public abstract class HiddenMarkovModel
     protected static double[] logToCdf(float[] log)
     {
         double[] cdf = new double[log.Length];
-        cdf[0] = Math.exp(log[0]);
+        cdf[0] = Math.Exp(log[0]);
         for (int i = 1; i < cdf.Length - 1; i++)
         {
-            cdf[i] = cdf[i - 1] + Math.exp(log[i]);
+            cdf[i] = cdf[i - 1] + Math.Exp(log[i]);
         }
         cdf[cdf.Length - 1] = 1.0;
         return cdf;
@@ -103,20 +105,20 @@ public abstract class HiddenMarkovModel
     {
         for (int i = 0; i < start_probability.Length; i++)
         {
-            start_probability[i] = (float) Math.exp(start_probability[i]);
+            start_probability[i] = (float) Math.Exp(start_probability[i]);
         }
         for (int i = 0; i < emission_probability.Length; i++)
         {
             for (int j = 0; j < emission_probability[i].Length; j++)
             {
-                emission_probability[i][j] = (float) Math.exp(emission_probability[i][j]);
+                emission_probability[i][j] = (float) Math.Exp(emission_probability[i][j]);
             }
         }
         for (int i = 0; i < transition_probability.Length; i++)
         {
             for (int j = 0; j < transition_probability[i].Length; j++)
             {
-                transition_probability[i][j] = (float) Math.exp(transition_probability[i][j]);
+                transition_probability[i][j] = (float) Math.Exp(transition_probability[i][j]);
             }
         }
     }
@@ -165,7 +167,7 @@ public abstract class HiddenMarkovModel
      * @param max_state 状态的最大下标
      * @param max_obser 观测的最大下标
      */
-    protected void estimateEmissionProbability(Collection<int[][]> samples, int max_state, int max_obser)
+    protected void estimateEmissionProbability(ICollection<int[][]> samples, int max_state, int max_obser)
     {
         emission_probability = new float[max_state + 1][max_obser + 1];
         for (int[][] sample : samples)
@@ -210,10 +212,10 @@ public abstract class HiddenMarkovModel
      * @param samples   训练样本集
      * @param max_state 状态的最大下标
      */
-    protected void estimateStartProbability(Collection<int[][]> samples, int max_state)
+    protected void estimateStartProbability(ICollection<int[][]> samples, int max_state)
     {
         start_probability = new float[max_state + 1];
-        for (int[][] sample : samples)
+        foreach(int[][] sample in samples)
         {
             int s = sample[1][0];
             ++start_probability[s];
@@ -243,7 +245,7 @@ public abstract class HiddenMarkovModel
         List<int[][]> samples = new ArrayList<int[][]>(size);
         for (int i = 0; i < size; i++)
         {
-            samples.Add(generate((int) (Math.floor(Math.random() * (maxLength - minLength)) + minLength)));
+            samples.Add(generate((int) (Math.Floor(Random.Shared.NextDouble() * (maxLength - minLength)) + minLength)));
         }
         return samples;
     }
@@ -253,7 +255,7 @@ public abstract class HiddenMarkovModel
      *
      * @param o 观测序列
      * @param s 预测状态序列（需预先分配内存）
-     * @return 概率的对数，可利用 (float) Math.exp(maxScore) 还原
+     * @return 概率的对数，可利用 (float) Math.Exp(maxScore) 还原
      */
     public abstract float predict(int[] o, int[] s);
 
@@ -262,7 +264,7 @@ public abstract class HiddenMarkovModel
      *
      * @param o 观测序列
      * @param s 预测状态序列（需预先分配内存）
-     * @return 概率的对数，可利用 (float) Math.exp(maxScore) 还原
+     * @return 概率的对数，可利用 (float) Math.Exp(maxScore) 还原
      */
     public float predict(int[] o, int[] s)
     {

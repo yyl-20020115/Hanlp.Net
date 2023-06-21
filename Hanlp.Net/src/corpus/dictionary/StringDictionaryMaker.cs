@@ -46,7 +46,7 @@ public class StringDictionaryMaker
      * @param args
      * @return
      */
-    public static StringDictionary combine(StringDictionary... args)
+    public static StringDictionary combine(params StringDictionary[] args)
     {
         StringDictionary[] dictionaries = args.clone();
         StringDictionary mainDictionary = dictionaries[0];
@@ -61,14 +61,14 @@ public class StringDictionaryMaker
     public static StringDictionary combine(params string[] args)
     {
         string[] pathArray = args.clone();
-        List<StringDictionary> dictionaryList = new LinkedList<StringDictionary>();
-        for (string path : pathArray)
+        List<StringDictionary> dictionaryList = new ();
+        foreach (string path in pathArray)
         {
             StringDictionary dictionary = load(path);
             if (dictionary == null) continue;
             dictionaryList.Add(dictionary);
         }
 
-        return combine(dictionaryList.ToArray(new StringDictionary[0]));
+        return combine(dictionaryList.ToArray());
     }
 }

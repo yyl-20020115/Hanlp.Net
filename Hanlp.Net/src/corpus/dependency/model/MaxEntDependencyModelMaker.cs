@@ -48,11 +48,11 @@ public class MaxEntDependencyModelMaker
                     // 将特征字符串化
                     foreach (string f in contextList)
                     {
-                        bw.write(f);
-                        bw.write(' ');
+                        bw.Write(f);
+                        bw.Write(' ');
                     }
                     // 事件名称为依存关系
-                    bw.write("" + edgeArray[i][j]);
+                    bw.Write("" + edgeArray[i][j]);
                     bw.newLine();
                 }
             }

@@ -178,7 +178,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public ISet<string> keySet()
+    public ISet<string> Keys
     {
         throw new InvalidOperationException("双数组不支持");
     }

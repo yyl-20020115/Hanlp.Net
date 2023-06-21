@@ -34,7 +34,7 @@ public class Path
      */
     public void calcExpectation(double[] expected, double Z, int size)
     {
-        double c = Math.exp(lnode.alpha + cost + rnode.beta - Z);
+        double c = Math.Exp(lnode.alpha + cost + rnode.beta - Z);
         for (int i = 0; fvector.get(i) != -1; i++)
         {
             int idx = fvector.get(i) + lnode.y * size + rnode.y;

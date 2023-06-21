@@ -8,6 +8,8 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.io;
 using System.Text;
 
 namespace com.hankcs.hanlp.model.trigram.frequency;
@@ -26,16 +28,18 @@ public class Probability : ICacheAble
 
     public Probability()
     {
-        d = new BinTrie<int>(){
-            //@Override
-            public bool load(ByteArray byteArray, _ValueArray valueArray)
-            {
-                BaseNode<int>[] nchild = new BaseNode[child.Length - 1];    // 兼容旧模型
-                Array.Copy(child, 0, nchild, 0, nchild.Length);
-                child = nchild;
-                return base.load(byteArray, valueArray);
-            }
-        };
+        d = new BT();
+    }
+    public class BT:BinTrie<int>
+    {
+        //@Override
+        public bool load(ByteArray byteArray, _ValueArray valueArray)
+        {
+            BaseNode<int>[] nchild = new BaseNode[child.Length - 1];    // 兼容旧模型
+            Array.Copy(child, 0, nchild, 0, nchild.Length);
+            child = nchild;
+            return base.load(byteArray, valueArray);
+        }
     }
 
     public bool exists(string key)
@@ -53,14 +57,14 @@ public class Probability : ICacheAble
         return d.get(key);
     }
 
-    public int get(char[]... keyArray)
+    public int get(params char[][] keyArray)
     {
         int f = get(convert(keyArray));
         if (f == null) return 0;
         return f;
     }
 
-    public int get(char... key)
+    public int get(params char[] key)
     {
         int f = d.get(key);
         if (f == null) return 0;
@@ -74,12 +78,12 @@ public class Probability : ICacheAble
         return f / (double) total;
     }
 
-    public double freq(char[]... keyArray)
+    public double freq(params char[][] keyArray)
     {
         return freq(convert(keyArray));
     }
 
-    public double freq(char... keyArray)
+    public double freq(params char[] keyArray)
     {
         int f = d.get(keyArray);
         if (f == null) f = 0;
@@ -88,7 +92,7 @@ public class Probability : ICacheAble
 
     public HashSet<string> samples()
     {
-        return d.keySet();
+        return d.Keys;
     }
 
     void Add(string key, int value)
@@ -100,7 +104,7 @@ public class Probability : ICacheAble
         total += value;
     }
 
-    void Add(int value, char... key)
+    void Add(int value, params char[] key)
     {
         int f = d.get(key);
         if (f == null) f = 0;
@@ -109,7 +113,7 @@ public class Probability : ICacheAble
         total += value;
     }
 
-    public void Add(int value, char[]... keyArray)
+    public void Add(int value, params char[][] keyArray)
     {
         Add(convert(keyArray), value);
     }
@@ -147,9 +151,9 @@ public class Probability : ICacheAble
         _out.writeInt(total);
         int[] valueArray = d.getValueArray(new int[0]);
         _out.writeInt(valueArray.Length);
-        for (int v : valueArray)
+        foreach (int v in valueArray)
         {
-            _out.writeInt(v);
+            _out.Write(v);
         }
         d.save(_out);
     }

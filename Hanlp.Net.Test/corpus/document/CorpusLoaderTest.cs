@@ -48,8 +48,8 @@ public class CorpusLoaderTest : TestCase
 //                    {
 //                        for (IWord word : sentence)
 //                        {
-//                            bw.write(word.Value);
-//                            bw.write(' ');
+//                            bw.Write(word.Value);
+//                            bw.Write(' ');
 //                        }
 //                        bw.newLine();
 //                    }
@@ -57,7 +57,7 @@ public class CorpusLoaderTest : TestCase
 //                }
 //                catch (Exception e)
 //                {
-//                    e.printStackTrace();
+//                    //e.printStackTrace();
 //                }
 //            }
 //        });
@@ -141,15 +141,15 @@ public class CorpusLoaderTest : TestCase
 //                        {
 //                            if (word.Value.Length > 1 && word.Value[0] == '。')
 //                            {
-//                                bw.write("。/w");
-//                                bw.write(word.Value.substring(1));
-//                                bw.write('/');
-//                                bw.write(word.getLabel());
-//                                bw.write(' ');
+//                                bw.Write("。/w");
+//                                bw.Write(word.Value.substring(1));
+//                                bw.Write('/');
+//                                bw.Write(word.getLabel());
+//                                bw.Write(' ');
 //                                continue;
 //                            }
-//                            bw.write(word.ToString());
-//                            bw.write(' ');
+//                            bw.Write(word.ToString());
+//                            bw.Write(' ');
 //                        }
 //                        bw.newLine();
 //                    }
@@ -157,15 +157,15 @@ public class CorpusLoaderTest : TestCase
 //                }
 //                catch (FileNotFoundException e)
 //                {
-//                    e.printStackTrace();
+//                    //e.printStackTrace();
 //                }
 //                catch (UnsupportedEncodingException e)
 //                {
-//                    e.printStackTrace();
+//                    //e.printStackTrace();
 //                }
 //                catch (IOException e)
 //                {
-//                    e.printStackTrace();
+//                    //e.printStackTrace();
 //                }
 //            }
 //        });

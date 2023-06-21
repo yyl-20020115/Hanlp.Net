@@ -54,28 +54,28 @@ public class CRFSegmenter : CRFTagger , Segmenter
             string word = CharTable.convert(w.value);
             if (word.Length == 1)
             {
-                bw.write(word);
-                bw.write('\t');
-                bw.write('S');
-                bw.write('\n');
+                bw.Write(word);
+                bw.Write('\t');
+                bw.Write('S');
+                bw.Write('\n');
             }
             else
             {
-                bw.write(word[0]);
-                bw.write('\t');
-                bw.write('B');
-                bw.write('\n');
+                bw.Write(word[0]);
+                bw.Write('\t');
+                bw.Write('B');
+                bw.Write('\n');
                 for (int i = 1; i < word.Length - 1; ++i)
                 {
-                    bw.write(word.charAt(i));
-                    bw.write('\t');
-                    bw.write('M');
-                    bw.write('\n');
+                    bw.Write(word.charAt(i));
+                    bw.Write('\t');
+                    bw.Write('M');
+                    bw.Write('\n');
                 }
-                bw.write(word.charAt(word.Length - 1));
-                bw.write('\t');
-                bw.write('E');
-                bw.write('\n');
+                bw.Write(word.charAt(word.Length - 1));
+                bw.Write('\t');
+                bw.Write('E');
+                bw.Write('\n');
             }
         }
     }

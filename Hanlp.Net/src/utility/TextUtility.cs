@@ -33,7 +33,7 @@ public class TextUtility
             catch (UnsupportedEncodingException e)
             {
                 b = str.getBytes();
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             byte b1 = b[0];
             byte b2 = b.Length > 1 ? b[1] : 0;
@@ -108,7 +108,7 @@ public class TextUtility
         //assert str != null;
         for (int i = 0; i < str.Length; i++)
         {
-            if (str.charAt(i) >128)
+            if (str[i] >128)
             {
                 return false;
             }
@@ -127,7 +127,7 @@ public class TextUtility
         if (str != null)
             try
             {
-                int i = new int(str).intValue();
+                int.TryParse(str, out var i);
                 return i;
             }
             catch (NumberFormatException e)
@@ -152,16 +152,16 @@ public class TextUtility
         if ("±+-＋－—".IndexOf(str[0]) != -1)
             i++;
         /** 如果是全角的０１２３４５６７８９ 字符* */
-        while (i < str.Length && "０１２３４５６７８９".IndexOf(str.charAt(i)) != -1)
+        while (i < str.Length && "０１２３４５６７８９".IndexOf(str[i]) != -1)
             i++;
         // Get middle delimiter such as .
         if (i > 0 && i < str.Length)
         {
-            char ch = str.charAt(i);
+            char ch = str[i];
             if ("·∶:，,．.／/".IndexOf(ch) != -1)
             {// 98．1％
                 i++;
-                while (i < str.Length && "０１２３４５６７８９".IndexOf(str.charAt(i)) != -1)
+                while (i < str.Length && "０１２３４５６７８９".IndexOf(str[i]) != -1)
                     i++;
             }
         }
@@ -169,23 +169,23 @@ public class TextUtility
             return true;
 
         /** 如果是半角的0123456789字符* */
-        while (i < str.Length && "0123456789".IndexOf(str.charAt(i)) != -1)
+        while (i < str.Length && "0123456789".IndexOf(str[i]) != -1)
             i++;
         // Get middle delimiter such as .
         if (i > 0 && i < str.Length)
         {
-            char ch = str.charAt(i);
+            char ch = str[i];
             if (',' == ch || '.' == ch || '/' == ch  || ':' == ch || "∶·，．／".IndexOf(ch) != -1)
             {// 98．1％
                 i++;
-                while (i < str.Length && "0123456789".IndexOf(str.charAt(i)) != -1)
+                while (i < str.Length && "0123456789".IndexOf(str[i]) != -1)
                     i++;
             }
         }
 
         if (i < str.Length)
         {
-            if ("百千万亿佰仟%％‰".IndexOf(str.charAt(i)) != -1)
+            if ("百千万亿佰仟%％‰".IndexOf(str[i]) != -1)
                 i++;
         }
         if (i >= str.Length)
@@ -235,7 +235,7 @@ public class TextUtility
     {
         for (int i = 0; i < text.Length; ++i)
         {
-            char c = text.charAt(i);
+            char c = text[i];
             if ((((c < 'a' || c > 'z')) && ((c < 'A' || c > 'Z'))))
             {
                 return false;
@@ -255,7 +255,7 @@ public class TextUtility
     {
         for (int i = 0; i < text.Length; ++i)
         {
-            char c = text.charAt(i);
+            char c = text[i];
             if ((((c < 'a' || c > 'z')) && ((c < 'A' || c > 'Z')) && ((c < '0' || c > '9'))))
             {
                 return false;
@@ -340,7 +340,7 @@ public class TextUtility
             string temp = word + " ";
             for (int i = 0; i < word.Length; i++)
             {
-                string s = temp.substring(i, i + 1);
+                string s = temp[i .. (i + 1)];
                 if (charSet.IndexOf(s) != -1)
                     nCount++;
             }
@@ -441,7 +441,7 @@ public class TextUtility
                 }
                 catch (UnsupportedEncodingException e)
                 {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     Length = s.getBytes().Length;
                 }
                 if (Length != 1)
@@ -475,7 +475,7 @@ public class TextUtility
                 }
                 catch (UnsupportedEncodingException e)
                 {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     Length = s.getBytes().Length;
                 }
                 if (Length != 2)
@@ -595,7 +595,7 @@ public class TextUtility
         int j = 0;
         for (int i = 0; i < leng; i++)
         {
-            if (srcText.charAt(i) == keyword.charAt(j))
+            if (srcText[i] == keyword[j])
             {
                 j++;
                 if (j == keyword.Length)
@@ -667,7 +667,7 @@ public class TextUtility
     public static string combine(params string[] termArray)
     {
         StringBuilder sbSentence = new StringBuilder();
-        for (string word : termArray)
+        foreach (string word in termArray)
         {
             sbSentence.Append(word);
         }

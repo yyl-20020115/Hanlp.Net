@@ -38,7 +38,7 @@ public class CustomDictionaryTest : TestCase
     //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("data/dictionary/CustomDictionary.txt")));
     //        for (String word : fixedDictionary)
     //        {
-    //            bw.write(word);
+    //            bw.Write(word);
     //            bw.newLine();
     //        }
     //        bw.Close();
@@ -63,7 +63,7 @@ public class CustomDictionaryTest : TestCase
     //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("data/dictionary/CustomDictionary.txt")));
     //        for (String word : fixedDictionary)
     //        {
-    //            bw.write(word);
+    //            bw.Write(word);
     //            bw.newLine();
     //        }
     //        bw.Close();

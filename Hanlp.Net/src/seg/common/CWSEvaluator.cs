@@ -196,9 +196,9 @@ public class CWSEvaluator
             int i = 0;
             foreach (Term term in termList)
             {
-                bw.write(term.word);
+                bw.Write(term.word);
                 if (++i != termList.Count)
-                    bw.write("  ");
+                    bw.Write("  ");
             }
             bw.newLine();
         }

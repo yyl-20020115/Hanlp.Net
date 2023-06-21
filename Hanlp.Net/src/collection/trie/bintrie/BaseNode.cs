@@ -28,7 +28,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
     /**
      * 状态数组，方便读取的时候用
      */
-    static readonly Status[] ARRAY_STATUS = Status.values();
+    public static readonly Status[] ARRAY_STATUS = Status.values();
     /**
      * 子节点
      */
@@ -36,7 +36,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
     /**
      * 节点状态
      */
-    protected Status status;
+    public Status status;
     /**
      * 节点代表的字符
      */
@@ -51,7 +51,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         BaseNode<V> cur = this;
         for (int i = begin; i < path.Length; ++i)
         {
-            cur = cur.getChild(path.charAt(i));
+            cur = cur.getChild(path[(i)]);
             if (cur == null || cur.status == Status.UNDEFINED_0) return null;
         }
         return cur;
@@ -86,7 +86,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
      *
      * @return true-新增了节点 false-修改了现有节点
      */
-    protected abstract bool addChild<E>(BaseNode<E> node);
+    public abstract bool addChild(BaseNode<V> node);
 
     /**
      * 是否含有子节点
@@ -94,12 +94,12 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
      * @param c 子节点的char
      * @return 是否含有
      */
-    protected bool hasChild(char c)
+    public bool hasChild(char c)
     {
         return getChild(c) != null;
     }
 
-    protected char getChar()
+    public char getChar()
     {
         return c;
     }
@@ -117,7 +117,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
      *
      * @return 值
      */
-    public V Value
+    public V Value()
     {
         return value;
     }
@@ -165,7 +165,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         return status;
     }
 
-    protected void walk(StringBuilder sb, HashSet<KeyValuePair<string, V>> entrySet)
+    public void walk(StringBuilder sb, HashSet<TrieEntry> entrySet)
     {
         sb.Append(c);
         if (status == Status.WORD_MIDDLE_2 || status == Status.WORD_END_3)
@@ -180,7 +180,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         }
     }
 
-    protected void walkToSave(Stream _out) 
+    public void walkToSave(Stream _out) 
     {
         _out.writeChar(c);
         _out.writeInt(status.ordinal());
@@ -212,7 +212,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         }
     }
 
-    protected void walkToLoad(ByteArray byteArray, _ValueArray<V> valueArray)
+    public void walkToLoad(ByteArray byteArray, _ValueArray<V> valueArray)
     {
         c = byteArray.nextChar();
         status = ARRAY_STATUS[byteArray.Next()];
@@ -221,7 +221,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
             value = valueArray.nextValue();
         }
         int childSize = byteArray.Next();
-        child = new BaseNode[childSize];
+        child = new BaseNode<V>[childSize];
         for (int i = 0; i < childSize; ++i)
         {
             child[i] = new Node<V>();
@@ -276,7 +276,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         //@Override
         public int compareTo(TrieEntry o)
         {
-            return Key.compareTo(o.Key);
+            return Key.CompareTo(o.Key);
         }
     }
 

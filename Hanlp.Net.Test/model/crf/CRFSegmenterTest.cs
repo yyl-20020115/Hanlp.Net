@@ -48,14 +48,14 @@ public class CRFSegmenterTest : TestCase
 //                    for (String term : segmenter.segment(text))
 //                    {
 //
-//                        bw.write(term);
-//                        bw.write(" ");
+//                        bw.Write(term);
+//                        bw.Write(" ");
 //                    }
 //                    bw.newLine();
 //                }
 //                catch (IOException e)
 //                {
-//                    e.printStackTrace();
+//                    //e.printStackTrace();
 //                }
 //                return false;
 //            }

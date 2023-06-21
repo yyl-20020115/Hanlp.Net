@@ -44,7 +44,7 @@ public class TonePinyinString2PinyinConverter
             mapKey.Add(pinyinWithoutTone, tone5);
         }
         trie = new Trie().remainLongest();
-        trie.addAllKeyword(mapKey.keySet());
+        trie.addAllKeyword(mapKey.Keys);
     }
 
     /**

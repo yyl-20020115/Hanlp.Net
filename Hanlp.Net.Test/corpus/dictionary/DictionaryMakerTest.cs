@@ -42,14 +42,14 @@ public class DictionaryMakerTest : TestCase
 //            if (text.Length != Length)
 //            {
 //                TextWriter bw = new TextWriter(new StreamWriter(new FileStream(file)));
-//                bw.write(text);
+//                bw.Write(text);
 //                bw.Close();
 //                Console.WriteLine("修正了" + file);
 //            }
 //        }
 //        catch (Exception e)
 //        {
-//            e.printStackTrace();
+//            //e.printStackTrace();
 //        }
 //    }
 //
@@ -101,7 +101,7 @@ public class DictionaryMakerTest : TestCase
 //                Console.WriteLine(line);
 //                continue;
 //            }
-//            bw.write(line);
+//            bw.Write(line);
 //            bw.newLine();
 //        }
 //        bw.Close();

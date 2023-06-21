@@ -62,11 +62,11 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
         List<string[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
         foreach (string[] tuple in collector)
         {
-            bw.write(tuple[0]);
-            bw.write('\t');
-            bw.write(tuple[1]);
-            bw.write('\t');
-            bw.write(tuple[2]);
+            bw.Write(tuple[0]);
+            bw.Write('\t');
+            bw.Write(tuple[1]);
+            bw.Write('\t');
+            bw.Write(tuple[2]);
             bw.newLine();
         }
     }

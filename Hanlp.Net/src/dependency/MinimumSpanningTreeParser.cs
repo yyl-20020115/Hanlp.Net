@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.dependency;
@@ -27,7 +28,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
     {
         if (termList == null || termList.size() == 0) return null;
         termList.Add(0, new Term("##核心##", Nature.begin));
-        Node[] nodeArray = new Node[termList.size()];
+        Node[] nodeArray = new Node[termList.Count];
         Iterator<Term> iterator = termList.iterator();
         for (int i = 0; i < nodeArray.Length; ++i)
         {
@@ -55,7 +56,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
         // 找虚根的唯一孩子
         float minCostToRoot = float.MaxValue;
         Edge firstEdge = null;
-        Edge[] edgeResult = new Edge[termList.size() - 1];
+        Edge[] edgeResult = new Edge[termList.Count - 1];
         foreach (Edge edge in edges[0])
         {
             if (edge == null) continue;
@@ -78,7 +79,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
 //                Console.WriteLine(p.edge.from + " " + p.edge.to + p.edge.label);
                 edgeResult[p.edge.from - 1] = p.edge;
             }
-            for (Edge e : edges[v])
+            foreach (Edge e in edges[v])
             {
                 if (e == null) continue;
                 if (mincost[e.from] > e.cost)
@@ -88,7 +89,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
                 }
             }
         }
-        CoNLLWord[] wordArray = new CoNLLWord[termList.size() - 1];
+        CoNLLWord[] wordArray = new CoNLLWord[termList.Count - 1];
         for (int i = 0; i < wordArray.Length; ++i)
         {
             wordArray[i] = new CoNLLWord(i + 1, nodeArray[i + 1].word, nodeArray[i + 1].label);

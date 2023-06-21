@@ -26,7 +26,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     /**
      * 双数组值check
      */
-    protected int[] check;
+    protected int[] _check;
     /**
      * 双数组之base
      */
@@ -173,7 +173,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     public void save(Stream _out)
     {
         _out.writeInt(size);
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i <_size; i++)
         {
             _out.writeInt(_base[i]);
             _out.writeInt(check[i]);
@@ -208,7 +208,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     public void save(Stream _out) 
     {
         _out.writeObject(_base);
-        _out.writeObject(check);
+        _out.writeObject(_check);
         _out.writeObject(fail);
         _out.writeObject(output);
         _out.writeObject(l);
@@ -225,7 +225,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     public void load(Stream _in, V[] value)
     {
         _base = (int[]) _in.readObject();
-        check = (int[]) _in.readObject();
+        _check = (int[]) _in.readObject();
         fail = (int[]) _in.readObject();
         output = (int[][]) _in.readObject();
         l = (int[]) _in.readObject();
@@ -244,14 +244,14 @@ public class AhoCorasickDoubleArrayTrie<V>
         if (byteArray == null) return false;
         _size = byteArray.Next();
         _base = new int[_size + 65535];   // 多留一些，防止越界
-        check = new int[_size + 65535];
+        _check = new int[_size + 65535];
         fail = new int[_size + 65535];
         output = new int[_size + 65535][];
         int Length;
         for (int i = 0; i < _size; ++i)
         {
             _base[i] = byteArray.Next();
-            check[i] = byteArray.Next();
+            _check[i] = byteArray.Next();
             fail[i] = byteArray.Next();
             Length = byteArray.Next();
             if (Length == 0) continue;
@@ -431,7 +431,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         int p;
 
         p = b + c + 1;
-        if (b == check[p])
+        if (b == _check[p])
             b = _base[p];
         else
             return -1;
@@ -453,7 +453,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         int p;
 
         p = b + c + 1;
-        if (b != check[p])
+        if (b != _check[p])
         {
             if (nodePos == 0) return 0;
             return -1;
@@ -530,7 +530,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         for (int i = pos; i < len; i++)
         {
             p = b + (int) (keyChars[i]) + 1;
-            if (b == check[p])
+            if (b == _check[p])
                 b = _base[p];
             else
                 return result;
@@ -538,7 +538,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 
         p = b;
         int n = _base[p];
-        if (b == check[p] && n < 0)
+        if (b == _check[p] && n < 0)
         {
             result = -n - 1;
         }
@@ -820,19 +820,19 @@ public class AhoCorasickDoubleArrayTrie<V>
             foreach (State depthOneState in this.rootState.getStates())
             {
                 depthOneState.setFailure(this.rootState, fail);
-                queue.Add(depthOneState);
+                queue.Enqueue(depthOneState);
                 constructOutput(depthOneState);
             }
 
             // 第二步，为深度 > 1 的节点建立failure表，这是一个bfs
-            while (!queue.isEmpty())
+            while (queue.Count>0)
             {
-                State currentState = queue.Remove();
+                State currentState = queue.Dequeue();
 
                 foreach (char transition in currentState.getTransitions())
                 {
                     State targetState = currentState.nextState(transition);
-                    queue.Add(targetState);
+                    queue.Enqueue(targetState);
 
                     State traceFailureState = currentState.failure();
                     while (traceFailureState.nextState(transition) == null)
@@ -853,8 +853,8 @@ public class AhoCorasickDoubleArrayTrie<V>
         private void constructOutput(State targetState)
         {
             var emit = targetState.emit();
-            if (emit == null || emit.size() == 0) return;
-            int[] output = new int[emit.size()];
+            if (emit == null || emit.Count == 0) return;
+            int[] output = new int[emit.Count];
             Iterator<int> it = emit.iterator();
             for (int i = 0; i < output.Length; ++i)
             {
@@ -913,7 +913,7 @@ public class AhoCorasickDoubleArrayTrie<V>
         private int insert(List<KeyValuePair<int, State>> siblings)
         {
             int begin = 0;
-            int pos = Math.Max(siblings.get(0).Key + 1, nextCheckPos) - 1;
+            int pos = Math.Max(siblings[(0)].Key + 1, nextCheckPos) - 1;
             int nonzero_num = 0;
             int first = 0;
 
@@ -929,7 +929,7 @@ public class AhoCorasickDoubleArrayTrie<V>
                 if (allocSize <= pos)
                     resize(pos + 1);
 
-                if (check[pos] != 0)
+                if (_check[pos] != 0)
                 {
                     nonzero_num++;
                     continue;
@@ -940,8 +940,8 @@ public class AhoCorasickDoubleArrayTrie<V>
                     first = 1;
                 }
 
-                begin = pos - siblings.get(0).Key; // 当前位置离第一个兄弟节点的距离
-                if (allocSize <= (begin + siblings.get(siblings.Count - 1).Key))
+                begin = pos - siblings[(0)].Key; // 当前位置离第一个兄弟节点的距离
+                if (allocSize <= (begin + siblings[(siblings.Count - 1)].Key))
                 {
                     // progress can be zero // 防止progress产生除零错误
                     double l = (1.05 > 1.0 * keySize / (progress + 1)) ? 1.05 : 1.0 * keySize / (progress + 1);
@@ -951,9 +951,9 @@ public class AhoCorasickDoubleArrayTrie<V>
                 if (used[begin])
                     continue;
 
-                for (int i = 1; i < siblings.size(); i++)
-                    if (check[begin + siblings.get(i).Key] != 0)
-                        continue outer;
+                for (int i = 1; i < siblings.Count; i++)
+                    if (_check[begin + siblings[(i)].Key] != 0)
+                        goto outer;
 
                 break;
             }
@@ -968,7 +968,7 @@ public class AhoCorasickDoubleArrayTrie<V>
                 nextCheckPos = pos; // 从位置 next_check_pos 开始到 pos 间，如果已占用的空间在95%以上，下次插入节点时，直接从 pos 位置处开始查找
             used[begin] = true;
 
-            size = (size > begin + siblings.get(siblings.Count - 1).Key + 1) ? size : begin + siblings.get(siblings.size() - 1).Key + 1;
+            _size = (_size > begin + siblings.get(siblings.Count - 1).Key + 1) ? size : begin + siblings.get(siblings.size() - 1).Key + 1;
 
             foreach (KeyValuePair<int, State> sibling in siblings)
             {

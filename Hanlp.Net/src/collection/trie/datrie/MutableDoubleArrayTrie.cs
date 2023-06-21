@@ -196,7 +196,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public HashSet<string> keySet()
+    public HashSet<string> Keys()
     {
         return new HashSet<string>();
     }

@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.dictionary.py;
+using System.Text;
+
 namespace com.hankcs.hanlp.suggest.scorer.pinyin;
 
 
@@ -16,7 +20,7 @@ namespace com.hankcs.hanlp.suggest.scorer.pinyin;
 /**
  * @author hankcs
  */
-public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
+public class PinyinKey : IComparable<PinyinKey>, ISentenceKey<PinyinKey>
 {
     /**
      * 句子的拼音
@@ -37,7 +41,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
         pinyinArray = PinyinUtil.convertList2Array(pair.Key);
         List<Boolean> booleanList = pair.Value;
         int pinyinSize = 0;
-        for (Boolean yes : booleanList)
+        foreach (bool yes in booleanList)
         {
             if (yes)
             {
@@ -45,7 +49,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
             }
         }
         int firstCharSize = 0;
-        for (Pinyin pinyin : pinyinArray)
+        foreach (Pinyin pinyin in pinyinArray)
         {
             if (pinyin != Pinyin.none5)
             {
@@ -72,7 +76,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     }
 
     //@Override
-    public int compareTo(PinyinKey o)
+    public int CompareTo(PinyinKey o)
     {
         int len1 = pyOrdinalArray.Length;
         int len2 = o.pyOrdinalArray.Length;
@@ -110,7 +114,7 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
     public int size()
     {
         int Length = 0;
-        for (Pinyin pinyin : pinyinArray)
+        foreach (Pinyin pinyin in pinyinArray)
         {
             if (pinyin != Pinyin.none5) ++Length;
         }

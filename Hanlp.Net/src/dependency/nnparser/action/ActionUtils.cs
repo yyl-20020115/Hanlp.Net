@@ -94,13 +94,13 @@ public class ActionUtils : ActionType
         {
             int child = children[(j)];
             get_oracle_actions_travel(child, heads, deprels, tree, actions);
-            actions.Add(ActionFactory.make_right_arc (deprels.get(child)));
+            actions.Add(ActionFactory.make_right_arc (deprels[(child)]));
         }
 
         for (int j = i - 1; j >= 0; --j)
         {
-            int child = children.get(j);
-            actions.Add(ActionFactory.make_left_arc (deprels.get(child)));
+            int child = children[(j)];
+            actions.Add(ActionFactory.make_left_arc (deprels[(child)]));
         }
     }
 
@@ -139,8 +139,8 @@ public class ActionUtils : ActionType
                                     List<int> output,
                                     List<Action> actions)
     {
-        int top0 = (sigma.Count > 0 ? sigma.get(sigma.Count - 1) : -1);
-        int top1 = (sigma.Count > 1 ? sigma.get(sigma.Count - 2) : -1);
+        int top0 = (sigma.Count > 0 ? sigma[^1] : -1);
+        int top1 = (sigma.Count > 1 ? sigma[^2] : -1);
 
         bool all_descendents_reduced = true;
         if (top0 >= 0)
@@ -158,15 +158,15 @@ public class ActionUtils : ActionType
 
         if (top1 >= 0 && heads[(top1)] == top0)
         {
-            actions.Add(ActionFactory.make_left_arc(deprels[(top1)]);
-            output.set(top1, top0);
+            actions.Add(ActionFactory.make_left_arc(deprels[(top1)]));
+            output[top1]=top0;
             sigma.Remove(sigma.Count - 1);
-            sigma.set(sigma.Count - 1, top0);
+            sigma[^1]= (top0);
         }
-        else if (top1 >= 0 && heads.get(top0) == top1 && all_descendents_reduced)
+        else if (top1 >= 0 && heads[(top0)] == top1 && all_descendents_reduced)
         {
-            actions.Add(ActionFactory.make_right_arc(deprels.get(top0)));
-            output.set(top0, top1);
+            actions.Add(ActionFactory.make_right_arc(deprels[(top0)]));
+            output[top0] = top1;
             sigma.Remove(sigma.Count - 1);
         }
         else if (beta[0] < heads.Count)

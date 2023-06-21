@@ -24,7 +24,7 @@ public class Edge
     /**
      * 节点名字，调试用
      */
-    string name;
+    public string name;
 
     protected Edge(double weight, string name)
     {

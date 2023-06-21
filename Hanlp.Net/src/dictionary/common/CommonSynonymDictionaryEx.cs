@@ -67,13 +67,13 @@ public class CommonSynonymDictionaryEx
                 }
             }
             bw.Close();
-            List<string> keyList = new (treeMap.size());
-            foreach (string key in treeMap.keySet())
+            List<string> keyList = new (treeMap.Count);
+            foreach (string key in treeMap.Keys)
             {
                 keyList.Add(key);
             }
-            List<long[]> valueList = new (treeMap.size());
-            foreach (HashSet<long> idSet in treeMap.values())
+            List<long[]> valueList = new (treeMap.Count);
+            foreach (HashSet<long> idSet in treeMap.Values)
             {
                 valueList.Add(idSet.ToArray());
             }

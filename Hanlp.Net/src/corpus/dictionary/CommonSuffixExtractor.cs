@@ -51,7 +51,7 @@ public class CommonSuffixExtractor
     public List<string> extractSuffix(int Length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
-        foreach (string key in tfDictionary.keySet())
+        foreach (string key in tfDictionary.Keys)
         {
             if (key.Length > Length)
             {
@@ -79,7 +79,7 @@ public class CommonSuffixExtractor
         List<string> suffixList = new (size);
         foreach (TermFrequency termFrequency in suffixTreeSet.values())
         {
-            if (suffixList.size() >= size) break;
+            if (suffixList.Count >= size) break;
             suffixList.Add(termFrequency.Key);
         }
 
@@ -96,17 +96,17 @@ public class CommonSuffixExtractor
     public List<string> extractSuffixByWords(int Length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
-        foreach (string key in tfDictionary.keySet())
+        foreach (string key in tfDictionary.Keys())
         {
             List<Term> termList = StandardTokenizer.segment(key);
-            if (termList.size() > Length)
+            if (termList.Count > Length)
             {
-                suffixTreeSet.Add(combine(termList.subList(termList.size() - Length, termList.size())));
+                suffixTreeSet.Add(combine(termList.subList(termList.Count - Length, termList.Count)));
                 if (extend)
                 {
                     for (int l = 1; l < Length; ++l)
                     {
-                        suffixTreeSet.Add(combine(termList.subList(termList.size() - l, termList.size())));
+                        suffixTreeSet.Add(combine(termList.subList(termList.Count - l, termList.Count)));
                     }
                 }
             }

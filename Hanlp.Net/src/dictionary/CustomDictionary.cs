@@ -92,7 +92,7 @@ public class CustomDictionary
                 bool success = load(p, defaultNature, map, customNatureCollector);
                 if (!success) logger.warning("失败：" + p);
             }
-            if (map.size() == 0)
+            if (map.Count == 0)
             {
                 logger.warning("没有加载到任何词条");
                 map.Add(Predefine.TAG_OTHER, null);     // 当作空白占位符
@@ -104,8 +104,8 @@ public class CustomDictionary
                 // 缓存成dat文件，下次加载会快很多
                 logger.info("正在缓存词典为dat文件……");
                 // 缓存值文件
-                List<CoreDictionary.Attribute> attributeList = new LinkedList<CoreDictionary.Attribute>();
-                for (KeyValuePair<string, CoreDictionary.Attribute> entry : map.entrySet())
+                List<CoreDictionary.Attribute> attributeList = new ();
+                foreach (KeyValuePair<string, CoreDictionary.Attribute> entry in map)
                 {
                     attributeList.Add(entry.Value);
                 }
@@ -115,7 +115,7 @@ public class CustomDictionary
                 {
                     for (int i = Nature.begin.ordinal() + 1; i < Nature.values().Length; ++i)
                     {
-                        customNatureCollector.Add(Nature.values()[i]);
+                        customNatureCollector.Add(Nature.Values()[i]);
                     }
                 }
                 IOUtil.writeCustomNature(_out, customNatureCollector);
@@ -497,14 +497,14 @@ public class CustomDictionary
 
         private LinkedList<KeyValuePair<string, CoreDictionary.Attribute>> entryList;
 
-        protected Searcher(char[] c)
+        public Searcher(char[] c)
             : base(c)
         {
             entryList = new LinkedList<KeyValuePair<string, CoreDictionary.Attribute>>();
         }
 
         protected Searcher(string text)
-            : base(c)
+            : base(text.ToCharArray())
         {
             entryList = new LinkedList<KeyValuePair<string, CoreDictionary.Attribute>>();
         }

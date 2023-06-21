@@ -68,7 +68,7 @@ public class Item : SimpleItem
      */
     public string firstLabel()
     {
-        return labelMap.keySet().iterator().next();
+        return labelMap.Keys.iterator().next();
     }
 
     /**

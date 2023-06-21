@@ -128,7 +128,7 @@ public class IOUtil
         try
         {
             FileChannel fc = new FileStream(path).getChannel();
-            fc.write(ByteBuffer.wrap(content.getBytes()));
+            fc.Write(ByteBuffer.wrap(content.getBytes()));
             fc.Close();
         }
         catch (Exception e)
@@ -403,11 +403,11 @@ public class IOUtil
      * @param path 根目录
      * @return 文件列表
      */
-    public static List<File> fileList(string path)
+    public static List<string> fileList(string path)
     {
-        List<File> fileList = new LinkedList<File>();
-        File folder = new File(path);
-        if (folder.isDirectory())
+        List<string> fileList = new ();
+        string folder = (path);
+        if (Directory.Exists(folder))
             enumerate(folder, fileList);
         else
             fileList.Add(folder); // 兼容路径为文件的情况
@@ -420,7 +420,7 @@ public class IOUtil
      * @param folder   目录
      * @param fileList 储存文件
      */
-    private static void enumerate(File folder, List<File> fileList)
+    private static void enumerate(string folder, List<string> fileList)
     {
         File[] fileArray = folder.listFiles();
         if (fileArray != null)
@@ -575,7 +575,7 @@ public class IOUtil
      */
     public static TextWriter newBufferedWriter(string path) 
     {
-        return new TextWriter(new StreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
+        return new StreamWriter(IOUtil.newOutputStream(path), "UTF-8");
     }
 
     /**
@@ -587,12 +587,12 @@ public class IOUtil
      */
     public static TextReader newBufferedReader(string path) 
     {
-        return new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+        return new StreamReader(IOUtil.newInputStream(path), "UTF-8");
     }
 
     public static TextWriter newBufferedWriter(string path, bool Append) 
     {
-        return new TextWriter(new StreamWriter(new FileStream(path, Append), "UTF-8"));
+        return new StreamWriter(new FileStream(path, Append), "UTF-8");
     }
 
     /**
@@ -601,7 +601,7 @@ public class IOUtil
      * @return
      * @
      */
-    public static InputStream newInputStream(string path) 
+    public static Stream newInputStream(string path) 
     {
         if (IOAdapter == null) return new FileStream(path);
         return IOAdapter.open(path);
@@ -613,7 +613,7 @@ public class IOUtil
      * @return
      * @
      */
-    public static OutputStream newOutputStream(string path) 
+    public static Stream newOutputStream(string path) 
     {
         if (IOAdapter == null) return new FileStream(path);
         return IOAdapter.create(path);
@@ -640,10 +640,10 @@ public class IOUtil
     {
         for (int i = 0; i < _params.Length - 1; i++)
         {
-            bw.write(_params[i]);
-            bw.write('\t');
+            bw.Write(_params[i]);
+            bw.Write('\t');
         }
-        bw.write(_params[_params.Length - 1]);
+        bw.Write(_params[_params.Length - 1]);
     }
 
     /**

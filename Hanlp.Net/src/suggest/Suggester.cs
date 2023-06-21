@@ -10,6 +10,9 @@
  * </copyright>
  */
 using com.hankcs.hanlp.suggest.scorer;
+using com.hankcs.hanlp.suggest.scorer.editdistance;
+using com.hankcs.hanlp.suggest.scorer.lexeme;
+using com.hankcs.hanlp.suggest.scorer.pinyin;
 
 namespace com.hankcs.hanlp.suggest;
 
@@ -41,10 +44,10 @@ public class Suggester : ISuggester
      * 构造一个推荐器
      * @param scorers 打分器
      */
-    public Suggester(BaseScorer... scorers)
+    public Suggester(params BaseScorer[] scorers)
     {
-        scorerList = new ArrayList<BaseScorer>(scorers.Length);
-        for (BaseScorer scorer : scorers)
+        scorerList = new (scorers.Length);
+        foreach (BaseScorer scorer in scorers)
         {
             scorerList.Add(scorer);
         }
@@ -77,18 +80,18 @@ public class Suggester : ISuggester
         {
             Dictionary<string, Double> map = scorer.computeScore(key);
             Double max = max(map);  // 用于正规化一个map
-            foreach (KeyValuePair<string, Double> entry in map.entrySet())
+            foreach (KeyValuePair<string, Double> entry in map)
             {
                 Double score = scoreMap.get(entry.Key);
                 if (score == null) score = 0.0;
                 scoreMap.Add(entry.Key, score / max + entry.Value * scorer.boost);
             }
         }
-        foreach (KeyValuePair<Double, HashSet<string>> entry in sortScoreMap(scoreMap).entrySet())
+        foreach (KeyValuePair<Double, HashSet<string>> entry in sortScoreMap(scoreMap))
         {
             foreach (string sentence in entry.Value)
             {
-                if (resultList.size() >= size) return resultList;
+                if (resultList.Count >= size) return resultList;
                 resultList.Add(sentence);
             }
         }
@@ -101,10 +104,10 @@ public class Suggester : ISuggester
      * @param scoreMap
      * @return
      */
-    private static Dictionary<Double ,Set<string>> sortScoreMap(Dictionary<string, Double> scoreMap)
+    private static Dictionary<Double ,HashSet<string>> sortScoreMap(Dictionary<string, Double> scoreMap)
     {
         Dictionary<Double, HashSet<string>> result = new Dictionary<Double, HashSet<string>>(Collections.reverseOrder());
-        for (KeyValuePair<string, Double> entry : scoreMap.entrySet())
+        foreach (KeyValuePair<string, Double> entry in scoreMap)
         {
             HashSet<string> sentenceSet = result.get(entry.Value);
             if (sentenceSet == null)
@@ -126,7 +129,7 @@ public class Suggester : ISuggester
     private static Double max(Dictionary<string, Double> map)
     {
         Double theMax = 0.0;
-        for (Double v : map.values())
+        foreach (Double v in map.Values)
         {
             theMax = Math.Max(theMax, v);
         }

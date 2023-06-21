@@ -143,10 +143,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             prev = cur;
         }
 
-        if (siblings.size() != 0)
-            siblings.get(siblings.size() - 1).right = parent.right;
+        if (siblings.Count != 0)
+            siblings[(^1)].right = parent.right;
 
-        return siblings.size();
+        return siblings.Count;
     }
 
     /**
@@ -161,7 +161,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             return 0;
 
         int begin = 0;
-        int pos = Math.Max(siblings.get(0).code + 1, nextCheckPos) - 1;
+        int pos = Math.Max(siblings[(0)].code + 1, nextCheckPos) - 1;
         int nonzero_num = 0;
         int first = 0;
 
@@ -673,7 +673,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         }
         catch (Exception e)
         {
-//            e.printStackTrace();
+//            //e.printStackTrace();
             return false;
         }
         return true;
@@ -689,7 +689,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         }
         catch (Exception e)
         {
-//            e.printStackTrace();
+//            //e.printStackTrace();
             return null;
         }
     }

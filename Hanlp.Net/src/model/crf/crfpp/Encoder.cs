@@ -1,3 +1,6 @@
+using com.hankcs.hanlp.corpus.io;
+using System.Text;
+
 namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
@@ -10,6 +13,9 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
 public class Encoder
 {
     public static int MODEL_VERSION = 100;
+
+    public object TimeUnit { get; private set; }
+    public object Executors { get; private set; }
 
     public enum Algorithm
     {
@@ -142,7 +148,7 @@ public class Encoder
         Array.Fill(alpha, 0.0);
         featureIndex.setAlpha_(alpha);
 
-        Console.WriteLine("Number of sentences: " + x.size());
+        Console.WriteLine("Number of sentences: " + x.Count);
         Console.WriteLine("Number of features:  " + featureIndex.size());
         Console.WriteLine("Number of thread(s): " + threadNum);
         Console.WriteLine("Freq:                " + freq);
@@ -212,13 +218,13 @@ public class Encoder
         double oldObj = 1e+37;
         int converge = 0;
         LbfgsOptimizer lbfgs = new LbfgsOptimizer();
-        List<CRFEncoderThread> threads = new ArrayList<CRFEncoderThread>();
+        List<CRFEncoderThread> threads = new List<CRFEncoderThread>();
 
         for (int i = 0; i < threadNum; i++)
         {
             CRFEncoderThread thread = new CRFEncoderThread(alpha.Length);
             thread.start_i = i;
-            thread.size = x.size();
+            thread.size = x.Count;
             thread.threadNum = threadNum;
             thread.x = x;
             threads.Add(thread);
@@ -241,7 +247,7 @@ public class Encoder
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
                 return false;
             }
 
@@ -324,7 +330,7 @@ public class Encoder
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             Console.Error.WriteLine("fail waiting executor to shutdown");
         }
         return true;
@@ -342,7 +348,7 @@ public class Encoder
         int[] shrinkArr = new int[x.size()];
         Array.Fill(shrinkArr, 0);
         List<int> shrink = Arrays.asList(shrinkArr);
-        Double[] upperArr = new Double[x.size()];
+        Double[] upperArr = new Double[x.Count];
         Array.Fill(upperArr, 0.0);
         List<Double> upperBound = Arrays.asList(upperArr);
         Double[] expectArr = new Double[featureIndex.size()];
@@ -354,7 +360,7 @@ public class Encoder
         }
         int converge = 0;
         int all = 0;
-        for (int i = 0; i < x.size(); i++)
+        for (int i = 0; i < x.Count; i++)
         {
             all += x.get(i).size();
         }
@@ -367,14 +373,14 @@ public class Encoder
             int upperActiveSet = 0;
             double maxKktViolation = 0.0;
 
-            for (int i = 0; i < x.size(); i++)
+            for (int i = 0; i < x.Count; i++)
             {
                 if (shrink.get(i) >= shrinkingSize)
                 {
                     continue;
                 }
                 ++activeSet;
-                for (int t = 0; t < expected.size(); t++)
+                for (int t = 0; t < expected.Count; t++)
                 {
                     expected.set(t, 0.0);
                 }
@@ -393,7 +399,7 @@ public class Encoder
                 {
                     shrink.set(i, 0);
                     double s = 0.0;
-                    for (int k = 0; k < expected.size(); k++)
+                    for (int k = 0; k < expected.Count; k++)
                     {
                         s += expected.get(k) * expected.get(k);
                     }
@@ -429,7 +435,7 @@ public class Encoder
             StringBuilder b = new StringBuilder();
             b.Append("iter=").Append(itr);
             b.Append(" terr=").Append(1.0 * err / all);
-            b.Append(" serr=").Append(1.0 * zeroone / x.size());
+            b.Append(" serr=").Append(1.0 * zeroone / x.Count);
             b.Append(" act=").Append(activeSet);
             b.Append(" uact=").Append(upperActiveSet);
             b.Append(" obj=").Append(obj);

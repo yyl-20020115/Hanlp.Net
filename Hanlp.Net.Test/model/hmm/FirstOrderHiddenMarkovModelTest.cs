@@ -76,7 +76,7 @@ public class FirstOrderHiddenMarkovModelTest : TestCase
     public void evaluateModel(FirstOrderHiddenMarkovModel model)
     {
         int[] pred = new int[observations.Length];
-        float prob = (float) Math.exp(model.predict(observations, pred));
+        float prob = (float) Math.Exp(model.predict(observations, pred));
         int[] answer = {Healthy.ordinal(), Healthy.ordinal(), Fever.ordinal()};
         assertEquals(Arrays.ToString(answer), Arrays.ToString(pred));
 //        assertEquals("0.01512", String.Format("%.5f", prob));

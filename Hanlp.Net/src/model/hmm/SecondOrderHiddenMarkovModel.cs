@@ -144,7 +144,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
         if (time == 1)
         {
             int best_s = 0;
-            float max_score = int.MIN_VALUE;
+            float max_score = int.MinValue;
             for (int cur_s = 0; cur_s < max_s; ++cur_s)
             {
                 if (first[cur_s] > max_score)
@@ -181,7 +181,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
             {
                 for (int t = 0; t < max_s; ++t)
                 {
-                    score[s][t] = int.MIN_VALUE;
+                    score[s][t] = int.MinValue;
                     for (int f = 0; f < max_s; ++f)
                     {
                         float p = pre[f][s] + transition_probability2[f][s][t] + emission_probability[t][observation[i]];
@@ -195,7 +195,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
             }
         }
 
-        float max_score = int.MIN_VALUE;
+        float max_score = int.MinValue;
         int best_s = 0, best_t = 0;
         for (int s = 0; s < max_s; s++)
         {
@@ -231,7 +231,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
             {
                 for (int i = 0; i < v.Length; i++)
                 {
-                    v[i] = (float) Math.exp(v[i]);
+                    v[i] = (float) Math.Exp(v[i]);
                 }
             }
         }

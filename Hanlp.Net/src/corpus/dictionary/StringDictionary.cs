@@ -38,7 +38,7 @@ public class StringDictionary : SimpleDictionary<string>
     }
 
     //@Override
-    protected KeyValuePair<string, string> onGenerateEntry(string line)
+    protected override KeyValuePair<string, string> onGenerateEntry(string line)
     {
         string[] paramArray = line.Split(separator, 2);
         if (paramArray.Length != 2)
@@ -58,13 +58,13 @@ public class StringDictionary : SimpleDictionary<string>
     {
         try
         {
-            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
+            TextWriter bw = new StreamWriter(IOUtil.newOutputStream(path));
             foreach (KeyValuePair<string, string> entry in trie.entrySet())
             {
-                bw.write(entry.Key);
-                bw.write(separator);
-                bw.write(entry.Value);
-                bw.newLine();
+                bw.Write(entry.Key);
+                bw.Write(separator);
+                bw.Write(entry.Value);
+                bw.WriteLine();
             }
             bw.Close();
         }
@@ -83,7 +83,7 @@ public class StringDictionary : SimpleDictionary<string>
     public StringDictionary reverse()
     {
         StringDictionary dictionary = new StringDictionary(separator);
-        for (KeyValuePair<string, string> entry : entrySet())
+        foreach (KeyValuePair<string, string> entry in entrySet())
         {
             dictionary.trie.Add(entry.Value, entry.Key);
         }

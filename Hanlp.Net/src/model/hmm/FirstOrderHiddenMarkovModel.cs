@@ -22,13 +22,15 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
      * 创建空白的隐马尔可夫模型以供训练
      */
     public FirstOrderHiddenMarkovModel()
+        : this(null, null, null)
     {
-        this(null, null, null);
+        ;
     }
 
     public FirstOrderHiddenMarkovModel(float[] start_probability, float[][] transition_probability, float[][] emission_probability)
+        : base(start_probability, transition_probability, emission_probability)
     {
-        base(start_probability, transition_probability, emission_probability);
+       ;
         toLog();
     }
 
@@ -76,7 +78,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
             // end of swap
             for (int s = 0; s < max_s; ++s)
             {
-                score[s] = int.MIN_VALUE;
+                score[s] = int.MinValue;
                 for (int f = 0; f < max_s; ++f)
                 {
                     float p = pre[f] + transition_probability[f][s] + emission_probability[s][observation[t]];
@@ -89,7 +91,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
             }
         }
 
-        float max_score = int.MIN_VALUE;
+        float max_score = int.MinValue;
         int best_s = 0;
         for (int s = 0; s < max_s; s++)
         {

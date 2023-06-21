@@ -72,7 +72,7 @@ public class TextRankSentence
     {
         this.docs = docs;
         bm25 = new BM25(docs);
-        D = docs.size();
+        D = docs.Count;
         weight = new double[D][D];
         weight_sum = new double[D];
         vertex = new double[D];
@@ -83,7 +83,7 @@ public class TextRankSentence
     private void solve()
     {
         int cnt = 0;
-        for (List<string> sentence : docs)
+        foreach (List<string> sentence in docs)
         {
             double[] scores = bm25.simAll(sentence);
 //            Console.WriteLine(Arrays.ToString(scores));
@@ -177,13 +177,13 @@ public class TextRankSentence
     static List<string> splitSentence(string document, string sentence_separator)
     {
         List<string> sentences = new ();
-        for (string line : document.Split("[\r\n]"))
+        foreach (string line2 in document.Split("[\r\n]"))
         {
-            line = line.Trim();
+            var line = line2.Trim();
             if (line.Length == 0) continue;
-            for (string sent : line.Split(sentence_separator))		// [，,。:：“”？?！!；;]
+            foreach (string sent2 in line.Split(sentence_separator))		// [，,。:：“”？?！!；;]
             {
-                sent = sent.Trim();
+                var sent = sent2.Trim();
                 if (sent.Length == 0) continue;
                 sentences.Add(sent);
             }

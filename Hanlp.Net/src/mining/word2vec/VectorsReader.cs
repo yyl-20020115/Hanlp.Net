@@ -9,7 +9,7 @@ public class VectorsReader
 {
 
     public Encoding ENCODING = Encoding.UTF8;
-    int words, size;
+    public int words, size;
     public string[] vocab;
     public float[][] matrix;
     string file;

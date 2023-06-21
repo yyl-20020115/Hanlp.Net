@@ -1,4 +1,5 @@
 using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.model.crf.crfpp;
 using System.Text;
 using static com.hankcs.hanlp.model.crf.crfpp.TaggerImpl;
@@ -12,12 +13,12 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
  */
 public class TaggerImpl : Tagger
 {
-    class QueueElement
+    public class QueueElement
     {
-        Node node;
-        QueueElement next;
-        double fx;
-        double gx;
+        public Node node;
+        public QueueElement next;
+        public double fx;
+        public double gx;
     }
 
     public enum Mode
@@ -44,7 +45,7 @@ public class TaggerImpl : Tagger
     List<int> answer_;
     List<int> result_;
     string lastError;
-    PriorityQueue<QueueElement> agenda_;
+    PriorityQueue<QueueElement, QueueElement> agenda_;
     List<List<Double>> penalty_;
     List<List<int>> featureCache_;
 
@@ -70,11 +71,11 @@ public class TaggerImpl : Tagger
 
     public void clearNodes()
     {
-        if (node_ != null && !node_.isEmpty())
+        if (node_ != null && node_.Count>0)
         {
             foreach (List<Node> n in node_)
             {
-                for (int i = 0; i < n.size(); i++)
+                for (int i = 0; i < n.Count; i++)
                 {
                     if (n.get(i) != null)
                     {
@@ -88,9 +89,9 @@ public class TaggerImpl : Tagger
 
     public void setPenalty(int i, int j, double penalty)
     {
-        if (penalty_.isEmpty())
+        if (penalty_.Count == 0)
         {
-            for (int s = 0; s < node_.size(); s++)
+            for (int s = 0; s < node_.Count; s++)
             {
                 List<Double> penaltys = Arrays.asList(new Double[ysize_]);
                 penalty_.Add(penaltys);
@@ -111,18 +112,18 @@ public class TaggerImpl : Tagger
     {
         if (!x_.isEmpty())
         {
-            for (int i = 0; i < x_.size(); i++)
+            for (int i = 0; i < x_.Count; i++)
             {
                 for (int j = 0; j < ysize_; j++)
                 {
-                    node_.get(i).get(j).calcAlpha();
+                    node_[i][j].calcAlpha();
                 }
             }
-            for (int i = x_.size() - 1; i >= 0; i--)
+            for (int i = x_.Count - 1; i >= 0; i--)
             {
                 for (int j = 0; j < ysize_; j++)
                 {
-                    node_.get(i).get(j).calcBeta();
+                    node_[i][j].calcBeta();
                 }
             }
             Z_ = 0.0;
@@ -135,11 +136,11 @@ public class TaggerImpl : Tagger
 
     public void viterbi()
     {
-        for (int i = 0; i < x_.size(); i++)
+        for (int i = 0; i < x_.Count; i++)
         {
             for (int j = 0; j < ysize_; j++)
             {
-                double bestc = -1e37;
+                double best = -1e37;
                 Node best = null;
                 List<Path> lpath = node_.get(i).get(j).lpath;
                 foreach (Path p in lpath)
@@ -157,7 +158,7 @@ public class TaggerImpl : Tagger
         }
         double bestc = -1e37;
         Node best = null;
-        int s = x_.size() - 1;
+        int s = x_.Count - 1;
         for (int j = 0; j < ysize_; j++)
         {
             if (bestc < node_.get(s).get(j).bestCost)
@@ -170,7 +171,7 @@ public class TaggerImpl : Tagger
         {
             result_.set(n.x, n.y);
         }
-        cost_ = -node_.get(x_.size() - 1).get(result_.get(x_.size() - 1)).bestCost;
+        cost_ = -node_.get(x_.Count - 1).get(result_.get(x_.size() - 1)).bestCost;
     }
 
     public void buildLattice()
@@ -178,13 +179,13 @@ public class TaggerImpl : Tagger
         if (!x_.isEmpty())
         {
             feature_index_.rebuildFeatures(this);
-            for (int i = 0; i < x_.size(); i++)
+            for (int i = 0; i < x_.Count; i++)
             {
                 for (int j = 0; j < ysize_; j++)
                 {
                     feature_index_.calcCost(node_.get(i).get(j));
                     List<Path> lpath = node_.get(i).get(j).lpath;
-                    for (Path p : lpath)
+                    foreach (Path p in lpath)
                     {
                         feature_index_.calcCost(p);
                     }
@@ -209,7 +210,7 @@ public class TaggerImpl : Tagger
     {
         if (agenda_ == null)
         {
-            agenda_ = new PriorityQueue<QueueElement>(10, new CT());
+            agenda_ = new PriorityQueue<QueueElement, QueueElement>(10, new CT());
         }
         agenda_.Clear();
         int k = x_.size() - 1;
@@ -418,7 +419,7 @@ public class TaggerImpl : Tagger
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             Console.Error.WriteLine("Error reading stream");
             return ReadStatus.ERROR;
         }
@@ -472,9 +473,9 @@ public class TaggerImpl : Tagger
                     break;
                 }
                 sb.Append("# ").Append(n).Append(" ").Append(prob()).Append("\n");
-                for (int i = 0; i < x_.size(); ++i)
+                for (int i = 0; i < x_.Count; ++i)
                 {
-                    for (string s : x_.get(i))
+                    foreach (string s in x_[(i)])
                     {
                         sb.Append(s).Append('\t');
                     }
@@ -604,7 +605,7 @@ public class TaggerImpl : Tagger
 
     public double prob()
     {
-        return Math.exp(-cost_ - Z_);
+        return Math.Exp(-cost_ - Z_);
     }
 
     public double prob(int i, int j)
@@ -776,7 +777,7 @@ public class TaggerImpl : Tagger
                 n.gx = -p.lnode.cost - p.cost + top.gx;
                 n.fx = -p.lnode.bestCost - p.cost + top.gx;
                 n.next = top;
-                agenda_.Add(n);
+                agenda_.Enqueue(n,n);
             }
         }
         return false;
@@ -801,7 +802,7 @@ public class TaggerImpl : Tagger
 
     private static double toProb(Node n, double Z)
     {
-        return Math.exp(n.alpha + n.beta - n.cost - Z);
+        return Math.Exp(n.alpha + n.beta - n.cost - Z);
     }
 
     public bool open(FeatureIndex featureIndex, int nbest, int vlevel)

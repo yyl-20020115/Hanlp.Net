@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie.bintrie;
+using static com.hankcs.hanlp.corpus.dictionary.DictionaryMaker;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 
@@ -23,7 +24,7 @@ namespace com.hankcs.hanlp.corpus.dictionary;
  */
 public abstract class SimpleDictionary<V>
 {
-    BinTrie<V> trie = new BinTrie<V>();
+    public BinTrie<V> trie = new BinTrie<V>();
 
     public bool load(string path)
     {
@@ -96,9 +97,9 @@ public abstract class SimpleDictionary<V>
      * 键集合
      * @return
      */
-    public HashSet<string> keySet()
+    public HashSet<string> Keys()
     {
-        TreeSet<string> keySet = new TreeSet<string>();
+        var keySet = new HashSet<string>();
 
         foreach (KeyValuePair<string, V> entry in entrySet())
         {
