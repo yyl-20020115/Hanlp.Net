@@ -20,8 +20,8 @@ public class std
     public static void fill<E>(List<E> list, E value)
     {
         if (list == null) return;
-        ListIterator<E> listIterator = list.listIterator();
-        while (listIterator.hasNext()) listIterator.set(value);
+        ListIterator<E> listIterator = list.GetEnumerator();
+        while (listIterator.MoveNext()) listIterator.set(value);
     }
 
     public static List<E> create<E>(int size, E value)

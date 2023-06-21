@@ -46,7 +46,7 @@ public class Document<K>
      *
      * @return the pointer of a feature vector
      */
-    SparseVector feature()
+    public SparseVector feature()
     {
         return feature_;
     }
@@ -89,16 +89,16 @@ public class Document<K>
      */
     void idf(Dictionary<int, int> df, int ndocs)
     {
-        for (KeyValuePair<int, Double> entry : feature_.entrySet())
+        foreach (KeyValuePair<int, Double> entry in feature_)
         {
-            int denom = df.get(entry.getKey());
+            int denom = df.get(entry.Key);
             if (denom == null) denom = 1;
-            entry.setValue((double) (entry.getValue() * Math.log(ndocs / denom)));
+            entry.setValue((double) (entry.Value * Math.Log(ndocs / denom)));
         }
     }
 
     //@Override
-    public override bool Equals(Object o)
+    public override bool Equals(Object? o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

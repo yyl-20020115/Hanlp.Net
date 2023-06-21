@@ -20,12 +20,12 @@ public class ActionUtils : ActionType
 {
     public static bool is_shift(Action act)
     {
-        return (act.name() == kShift);
+        return (act.name() == ActionType.kShift);
     }
 
     public static bool is_left_arc(Action act, int[] deprel)
     {
-        if (act.name() == kLeftArc)
+        if (act.name() == ActionType.kLeftArc)
         {
             deprel[0] = act.rel();
             return true;
@@ -36,7 +36,7 @@ public class ActionUtils : ActionType
 
     public static bool is_right_arc(Action act, int[] deprel)
     {
-        if (act.name() == kRightArc)
+        if (act.name() == ActionType.kRightArc)
         {
             deprel[0] = act.rel();
             return true;
@@ -92,7 +92,7 @@ public class ActionUtils : ActionType
 
         for (int j = i; j < children.Count; ++j)
         {
-            int child = children.get(j);
+            int child = children[(j)];
             get_oracle_actions_travel(child, heads, deprels, tree, actions);
             actions.Add(ActionFactory.make_right_arc (deprels.get(child)));
         }
@@ -139,15 +139,15 @@ public class ActionUtils : ActionType
                                     List<int> output,
                                     List<Action> actions)
     {
-        int top0 = (sigma.size() > 0 ? sigma.get(sigma.size() - 1) : -1);
-        int top1 = (sigma.size() > 1 ? sigma.get(sigma.size() - 2) : -1);
+        int top0 = (sigma.Count > 0 ? sigma.get(sigma.Count - 1) : -1);
+        int top1 = (sigma.Count > 1 ? sigma.get(sigma.Count - 2) : -1);
 
         bool all_descendents_reduced = true;
         if (top0 >= 0)
         {
-            for (int i = 0; i < heads.size(); ++i)
+            for (int i = 0; i < heads.Count; ++i)
             {
-                if (heads.get(i) == top0 && output.get(i) != top0)
+                if (heads[(i)] == top0 && output[(i)] != top0)
                 {
                     // _INFO << i << " " << output[i];
                     all_descendents_reduced = false;
@@ -160,16 +160,16 @@ public class ActionUtils : ActionType
         {
             actions.Add(ActionFactory.make_left_arc(deprels[(top1)]);
             output.set(top1, top0);
-            sigma.Remove(sigma.size() - 1);
-            sigma.set(sigma.size() - 1, top0);
+            sigma.Remove(sigma.Count - 1);
+            sigma.set(sigma.Count - 1, top0);
         }
         else if (top1 >= 0 && heads.get(top0) == top1 && all_descendents_reduced)
         {
             actions.Add(ActionFactory.make_right_arc(deprels.get(top0)));
             output.set(top0, top1);
-            sigma.Remove(sigma.size() - 1);
+            sigma.Remove(sigma.Count - 1);
         }
-        else if (beta[0] < heads.size())
+        else if (beta[0] < heads.Count)
         {
             actions.Add(ActionFactory.make_shift ());
             sigma.Add(beta[0]);

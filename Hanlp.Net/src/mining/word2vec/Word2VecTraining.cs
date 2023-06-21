@@ -40,7 +40,7 @@ class Word2VecTraining
         return config;
     }
 
-    static class TrainModelThread : Thread
+    class TrainModelThread : Thread
     {
         Word2VecTraining vec;
         Corpus corpus;
@@ -111,7 +111,7 @@ class Word2VecTraining
                                               wordCountActual / (float) (cost_time));
                             string etd = Utility.humanTime((long) (cost_time / percent * (1.f - percent)));
                             if (etd.Length > 0) Console.Error.WriteLine("  ETD: %s", etd);
-                            System.err.flush();
+                            Console.Error.Flush();
                         }
                         else
                         {
@@ -133,7 +133,7 @@ class Word2VecTraining
                             // The subsampling randomly discards frequent words while keeping the ranking same
                             if (sample > 0)
                             {
-                                double ran = (Math.sqrt(vocab[word].cn / (sample * trainWords)) + 1) * (sample * trainWords) / vocab[word].cn;
+                                double ran = (Math.Sqrt(vocab[word].cn / (sample * trainWords)) + 1) * (sample * trainWords) / vocab[word].cn;
                                 next_random = nextRandom(next_random);
                                 if (ran < (next_random & 0xFFFF) / (double) 65536) continue;
                             }
@@ -205,8 +205,8 @@ class Word2VecTraining
                                 else
                                 {
                                     next_random = nextRandom(next_random);
-                                    target = table[Math.abs((int) ((next_random >> 16) % TABLE_SIZE))];
-                                    if (target == 0) target = Math.abs((int) (next_random % (vocabSize - 1) + 1));
+                                    target = table[Math.Abs((int) ((next_random >> 16) % TABLE_SIZE))];
+                                    if (target == 0) target = Math.Abs((int) (next_random % (vocabSize - 1) + 1));
                                     if (target == word) continue;
                                     label = 0;
                                 }
@@ -273,8 +273,8 @@ class Word2VecTraining
                                     else
                                     {
                                         next_random = nextRandom(next_random);
-                                        target = table[Math.abs((int) ((next_random >> 16) % TABLE_SIZE))];
-                                        if (target == 0) target = Math.abs((int) (next_random % (vocabSize - 1) + 1));
+                                        target = table[Math.Abs((int) ((next_random >> 16) % TABLE_SIZE))];
+                                        if (target == 0) target = Math.Abs((int) (next_random % (vocabSize - 1) + 1));
                                         if (target == word) continue;
                                         label = 0;
                                     }
@@ -309,7 +309,7 @@ class Word2VecTraining
             lock (vec)
             {
                 vec.threadCount--;
-                vec.notify();
+                vec.Notify();
             }
         }
     }
@@ -366,13 +366,13 @@ class Word2VecTraining
 
         OutputStream os = null;
         Writer w = null;
-        PrintWriter pw = null;
+        TextWriter pw = null;
 
         try
         {
-            os = new FileOutputStream(config.getOutputFile());
-            w = new OutputStreamWriter(os, ENCODING);
-            pw = new PrintWriter(w);
+            os = new FileStream(config.getOutputFile());
+            w = new StreamWriter(os, ENCODING);
+            pw = new TextWriter(w);
 
             // Save the word vectors
             logger.info("now saving the word vectors to the file " + config.getOutputFile());
@@ -389,7 +389,7 @@ class Word2VecTraining
         }
         finally
         {
-            corpus.close();
+            corpus.Close();
             Utility.closeQuietly(pw);
             Utility.closeQuietly(w);
             Utility.closeQuietly(os);
@@ -399,10 +399,10 @@ class Word2VecTraining
     /**
      * Used later for sorting by word counts
      */
-    static class VocabWordComparator : Comparator<VocabWord>
+    class VocabWordComparator : IComparer<VocabWord>
     {
         //////@Override
-        public int compare(VocabWord o1, VocabWord o2)
+        public int Compare(VocabWord o1, VocabWord o2)
         {
             return o2.cn - o1.cn;
         }
@@ -417,17 +417,17 @@ class Word2VecTraining
         table = new int[TABLE_SIZE];
         for (int i = 0; i < vocabSize; i++)
         {
-            trainWordsPow += Math.pow(vocab[i].cn, power);
+            trainWordsPow += Math.Pow(vocab[i].cn, power);
         }
         int i = 0;
-        d1 = Math.pow(vocab[i].cn, power) / (double) trainWordsPow;
+        d1 = Math.Pow(vocab[i].cn, power) / (double) trainWordsPow;
         for (int j = 0; j < TABLE_SIZE; j++)
         {
             table[j] = i;
             if ((double) j / (double) TABLE_SIZE > d1)
             {
                 i++;
-                d1 += Math.pow(vocab[i].cn, power) / (double) trainWordsPow;
+                d1 += Math.Pow(vocab[i].cn, power) / (double) trainWordsPow;
             }
             if (i >= vocabSize)
                 i = vocabSize - 1;

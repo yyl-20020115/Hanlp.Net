@@ -79,7 +79,7 @@ public class PlaceDictionary
      */
     public static void parsePattern(List<NS> nsList, List<Vertex> vertexList,  WordNet wordNetOptimum,  WordNet wordNetAll)
     {
-//        ListIterator<Vertex> listIterator = vertexList.listIterator();
+//        ListIterator<Vertex> listIterator = vertexList.GetEnumerator();
         var sbPattern = new StringBuilder(nsList.Count);
         foreach (NS ns in nsList)
         {
@@ -107,7 +107,7 @@ public class PlaceDictionary
             // 正式算它是一个名字
             if (HanLP.Config.DEBUG)
             {
-                System._out.printf("识别出地名：%s %s\n", name, value);
+                Console.WriteLine("识别出地名：%s %s\n", name, value);
             }
             int offset = 0;
             for (int i = 0; i < begin; ++i)

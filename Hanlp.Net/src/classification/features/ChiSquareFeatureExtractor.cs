@@ -68,7 +68,7 @@ public class ChiSquareFeatureExtractor
                 N10 = N1dot - N11; //N10 是含有该特征却不属于该类目的文档数量
 
                 //基于上述统计数据计算卡方分值
-                chisquareScore = stats.n * Math.pow(N11 * N00 - N10 * N01, 2) / ((N11 + N01) * (N11 + N10) * (N10 + N00) * (N01 + N00));
+                chisquareScore = stats.n * Math.Pow(N11 * N00 - N10 * N01, 2) / ((N11 + N01) * (N11 + N10) * (N10 + N00) * (N01 + N00));
 
                 //如果分数大于临界值则加入特征列表
                 if (chisquareScore >= chisquareCriticalValue)
@@ -76,7 +76,7 @@ public class ChiSquareFeatureExtractor
                     previousScore = selectedFeatures.get(feature);
                     if (previousScore == null || chisquareScore > previousScore)
                     {
-                        selectedFeatures.put(feature, chisquareScore);
+                        selectedFeatures.Add(feature, chisquareScore);
                     }
                 }
             }
@@ -85,31 +85,33 @@ public class ChiSquareFeatureExtractor
         {
             for (int feature = 0; feature < stats.featureCategoryJointCount.Length; feature++)
             {
-                selectedFeatures.put(feature, 0.);
+                selectedFeatures.Add(feature, 0.0);
             }
         }
         if (selectedFeatures.size() > maxSize)
         {
-            MaxHeap<KeyValuePair<int, Double>> maxHeap = new MaxHeap<KeyValuePair<int, Double>>(maxSize, new Comparator<KeyValuePair<int, Double>>()
-            {
-                //@Override
-                public int compare(KeyValuePair<int, Double> o1, KeyValuePair<int, Double> o2)
-                {
-                    return o1.getValue().compareTo(o2.getValue());
-                }
-            });
+            MaxHeap<KeyValuePair<int, Double>> maxHeap = new MaxHeap<KeyValuePair<int, Double>>(maxSize, new CT());
             foreach (KeyValuePair<int, Double> entry in selectedFeatures.entrySet())
             {
                 maxHeap.Add(entry);
             }
             selectedFeatures.Clear();
-            for (KeyValuePair<int, Double> entry : maxHeap)
+            foreach (KeyValuePair<int, Double> entry in maxHeap)
             {
-                selectedFeatures.put(entry.getKey(), entry.getValue());
+                selectedFeatures.Add(entry.Key, entry.Value);
             }
         }
 
         return selectedFeatures;
+    }
+
+    public class CT: IComparer<KeyValuePair<int, Double>>
+    {
+        //@Override
+        public int Compare(KeyValuePair<int, Double> o1, KeyValuePair<int, Double> o2)
+        {
+            return o1.Value.compareTo(o2.Value);
+        }
     }
 
     /**

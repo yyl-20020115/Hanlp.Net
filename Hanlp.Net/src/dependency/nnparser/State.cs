@@ -10,6 +10,8 @@
  * </copyright>
  */
 using com.hankcs.hanlp.dependency.nnparser.action;
+using com.hankcs.hanlp.dependency.nnparser.util;
+using Action = com.hankcs.hanlp.dependency.nnparser.action.Action;
 
 namespace com.hankcs.hanlp.dependency.nnparser;
 
@@ -24,55 +26,55 @@ public class State
     /**
      * 栈
      */
-    List<int> stack;
+    public List<int> stack;
     /**
      * 队列的队首元素（的下标）
      */
-    int buffer;               //! The front word in the buffer.
+    public int buffer;               //! The front word in the buffer.
     /**
      * 上一个状态
      */
-    State previous;    //! The pointer to the previous state.
-    Dependency _ref;    //! The pointer to the dependency tree.
-    double score;             //! The score.
+    public State previous;    //! The pointer to the previous state.
+    public Dependency @ref;    //! The pointer to the dependency tree.
+    public double score;             //! The score.
     /**
      * 上一次动作
      */
-    Action last_action;       //! The last action.
+    public Action last_action;       //! The last action.
 
     /**
      * 栈顶元素
      */
-    int top0;                 //! The top word on the stack.
+    public int top0;                 //! The top word on the stack.
     /**
      * 栈顶元素的下一个元素（全栈第二个元素）
      */
-    int top1;                 //! The second top word on the stack.
-    List<int> heads;   //! Use to record the heads in current state.
-    List<int> deprels; //! The dependency relation cached in state.
+    public int top1;                 //! The second top word on the stack.
+    public List<int> heads;   //! Use to record the heads in current state.
+    public List<int> deprels; //! The dependency relation cached in state.
     /**
      * 当前节点的左孩子数量
      */
-    List<int> nr_left_children;      //! The number of left children in this state.
+    public List<int> nr_left_children;      //! The number of left children in this state.
     /**
      * 当前节点的右孩子数量
      */
-    List<int> nr_right_children;     //! The number of right children in this state.
-    List<int> left_most_child;       //! The left most child for each word in this state.
-    List<int> right_most_child;      //! The right most child for each word in this state.
-    List<int> left_2nd_most_child;   //! The left 2nd-most child for each word in this state.
-    List<int> right_2nd_most_child;  //! The right 2nd-most child for each word in this state.
+    public List<int> nr_right_children;     //! The number of right children in this state.
+    public List<int> left_most_child;       //! The left most child for each word in this state.
+    public List<int> right_most_child;      //! The right most child for each word in this state.
+    public List<int> left_2nd_most_child;   //! The left 2nd-most child for each word in this state.
+    public List<int> right_2nd_most_child;  //! The right 2nd-most child for each word in this state.
 
     public State()
     {
     }
 
-    public State(Dependency _ref)
+    public State(Dependency @ref)
     {
-        this._ref = _ref;
-        stack = new s(_ref.size());
+        this.@ref = @ref;
+        stack = new List<int>(_ref.size());
         Clear();
-        int L = ref.size();
+        int L = @ref.size();
         heads = std.create(L, -1);
         deprels = std.create(L, 0);
         nr_left_children = std.create(L, 0);
@@ -83,7 +85,7 @@ public class State
         right_2nd_most_child = std.create(L, -1);
     }
 
-    void Clear()
+    public void Clear()
     {
         score = 0;
         previous = null;
@@ -101,17 +103,17 @@ public class State
         std.fill(right_2nd_most_child, -1);
     }
 
-    bool can_shift()
+    public bool can_shift()
     {
         return !buffer_empty();
     }
 
-    bool can_left_arc()
+    public bool can_left_arc()
     {
         return stack_size() >= 2;
     }
 
-    bool can_right_arc()
+    public bool can_right_arc()
     {
         return stack_size() >= 2;
     }
@@ -120,9 +122,9 @@ public class State
      * 克隆一个状态到自己
      * @param source 源状态
      */
-    void copy(State source)
+    public void copy(State source)
     {
-        this.ref = source.ref;
+        this.@ref = source.@ref;
         this.score = source.score;
         this.previous = source.previous;
         this.buffer = source.buffer;
@@ -143,9 +145,9 @@ public class State
     /**
      * 更新栈的信息
      */
-    void refresh_stack_information()
+    public void refresh_stack_information()
     {
-        int sz = stack.size();
+        int sz = stack.Count;
         if (0 == sz)
         {
             top0 = -1;
@@ -168,7 +170,7 @@ public class State
      * @param source 右焦点词
      * @return 是否shift成功
      */
-    bool shift(State source)
+    public bool shift(State source)
     {
         if (!source.can_shift())
         {
@@ -185,7 +187,7 @@ public class State
         return true;
     }
 
-    bool left_arc(State source, int deprel)
+    public bool left_arc(State source, int deprel)
     {
         if (!source.can_left_arc())
         {
@@ -223,7 +225,7 @@ public class State
         return true;
     }
 
-    bool right_arc(State source, int deprel)
+    public bool right_arc(State source, int deprel)
     {
         if (!source.can_right_arc())
         {
@@ -256,7 +258,7 @@ public class State
         return true;
     }
 
-    int cost(List<int> gold_heads,
+    public int cost(List<int> gold_heads,
              List<int> gold_deprels)
     {
         List<List<int>> tree = new (gold_heads.size());
@@ -280,7 +282,7 @@ public class State
             sigma_l_mask[sigma_l.get(s)] = true;
         }
 
-        for (int i = buffer; i < ref.size(); ++i)
+        for (int i = buffer; i < @ref.size(); ++i)
         {
             if (gold_heads.get(i) < buffer)
             {
@@ -308,9 +310,9 @@ public class State
         // array_t T(boost.extents[len_l][len_r][len_l+len_r-1]);
         // std.fill( T.origin(), T.origin()+ T.num_elements(), 1024);
         int[][][] T = new int[len_l][len_r][len_l + len_r - 1];
-        for (int[][] one : T)
+        foreach (int[][] one in T)
         {
-            for (int[] two : one)
+            foreach (int[] two in one)
             {
                 for (int i = 0; i < two.Length; i++)
                 {
@@ -395,16 +397,16 @@ public class State
      * 队列是否为空
      * @return
      */
-    bool buffer_empty()
+    public bool buffer_empty()
     {
-        return (this.buffer == this._ref.size());
+        return (this.buffer == this.@ref.size());
     }
 
     /**
      * 栈的大小
      * @return
      */
-    int stack_size()
+    public int stack_size()
     {
         return (this.stack.Count);
     }

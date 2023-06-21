@@ -1,3 +1,6 @@
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.mining.word;
 
 
@@ -17,8 +20,9 @@ public class NewWordDiscover
     private bool filter;
 
     public NewWordDiscover()
+        : this(4, 0.00005f, .4f, 1.2f, false)
     {
-        this(4, 0.00005f, .4f, 1.2f, false);
+        ;
     }
 
     /**
@@ -46,13 +50,13 @@ public class NewWordDiscover
      * @param size   需要提取词语的数量
      * @return 一个词语列表
      */
-    public List<WordInfo> discover(BufferedReader reader, int size) 
+    public List<WordInfo> discover(TextReader reader, int size) 
     {
         string doc;
         Dictionary<string, WordInfo> word_cands = new Dictionary<string, WordInfo>();
         int totalLength = 0;
         Pattern delimiter = Pattern.compile("[\\s\\d,.<>/?:;'\"\\[\\]{}()\\|~!@#$%^&*\\-_=+，。《》、？：；“”‘’｛｝【】（）…￥！—┄－]+");
-        while ((doc = reader.readLine()) != null)
+        while ((doc = reader.ReadLine()) != null)
         {
             doc = delimiter.matcher(doc).replaceAll("\0");
             int docLength = doc.Length;
@@ -61,36 +65,36 @@ public class NewWordDiscover
                 int end = Math.Min(i + 1 + max_word_len, docLength + 1);
                 for (int j = i + 1; j < end; ++j)
                 {
-                    string word = doc.substring(i, j);
+                    string word = doc[i .. j];
                     if (word.IndexOf('\0') >= 0)
                         continue; // 含有分隔符的不认为是词语
                     WordInfo info = word_cands.get(word);
                     if (info == null)
                     {
                         info = new WordInfo(word);
-                        word_cands.put(word, info);
+                        word_cands.Add(word, info);
                     }
-                    info.update(i == 0 ? '\0' : doc.charAt(i - 1), j < docLength ? doc.charAt(j) : '\0');
+                    info.update(i == 0 ? '\0' : doc[(i - 1)], j < docLength ? doc[(j)] : '\0');
                 }
             }
             totalLength += docLength;
         }
 
-        for (WordInfo info : word_cands.values())
+        foreach (WordInfo info in word_cands.Values)
         {
             info.computeProbabilityEntropy(totalLength);
         }
-        for (WordInfo info : word_cands.values())
+        foreach (WordInfo info in word_cands.Values)
         {
             info.computeAggregation(word_cands);
         }
         // 过滤
-        List<WordInfo> wordInfoList = new LinkedList<WordInfo>(word_cands.values());
-        ListIterator<WordInfo> listIterator = wordInfoList.listIterator();
-        while (listIterator.hasNext())
+        List<WordInfo> wordInfoList = new (word_cands.Values);
+        var listIterator = wordInfoList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             WordInfo info = listIterator.next();
-            if (info.text.trim().Length < 2 || info.p < min_freq || info.entropy < min_entropy || info.aggregation < min_aggregation
+            if (info.text.Trim().Length < 2 || info.p < min_freq || info.entropy < min_entropy || info.aggregation < min_aggregation
                 || (filter && LexiconUtility.getFrequency(info.text) > 0)
                 )
             {
@@ -98,18 +102,18 @@ public class NewWordDiscover
             }
         }
         // 按照频率排序
-        MaxHeap<WordInfo> topN = new MaxHeap<WordInfo>(size, new Comparator<WordInfo>()
-        {
-            public int compare(WordInfo o1, WordInfo o2)
-            {
-                return float.compare(o1.p, o2.p);
-            }
-        });
-        topN.addAll(wordInfoList);
+        MaxHeap<WordInfo> topN = new MaxHeap<WordInfo>(size, new COMP());
+        topN.AddRange(wordInfoList);
 
         return topN.ToList();
     }
-
+    public class COMP: IComparer<WordInfo>
+    {
+        public int Compare(WordInfo o1, WordInfo o2)
+        {
+            return (int)Math.Ceiling(o1.p - o2.p);
+        }
+    }
     /**
      * 提取词语
      *
@@ -121,7 +125,7 @@ public class NewWordDiscover
     {
         try
         {
-            return discover(new BufferedReader(new StringReader(doc)), size);
+            return discover(new StringReader(doc), size);
         }
         catch (IOException e)
         {

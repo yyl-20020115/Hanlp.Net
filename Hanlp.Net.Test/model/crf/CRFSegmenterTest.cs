@@ -36,7 +36,7 @@ public class CRFSegmenterTest : TestCase
     {
 //        CRFSegmenter segmenter = new CRFSegmenter(CWS_MODEL_PATH);
 //
-//        BufferedWriter bw = IOUtil.newBufferedWriter("data/test/crf/cws/mdat.txt");
+//        TextWriter bw = IOUtil.newBufferedWriter("data/test/crf/cws/mdat.txt");
 //        IOUtility.loadInstance("data/test/pku98/199801.txt", new InstanceHandler()
 //        {
 //            //@Override
@@ -60,7 +60,7 @@ public class CRFSegmenterTest : TestCase
 //                return false;
 //            }
 //        });
-//        bw.close();
+//        bw.Close();
     }
 
 }

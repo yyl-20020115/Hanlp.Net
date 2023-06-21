@@ -14,7 +14,7 @@ public class MDAGMapTest : TestCase
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/custom/CustomDictionary.txt");
         validKeySet = new ();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             validKeySet.Add(iterator.next().Split("\\s")[0]);
         }
@@ -62,7 +62,7 @@ public class MDAGMapTest : TestCase
 //        BinTrie<int> binTrie = new BinTrie<int>();
 //        for (String key : validKeySet)
 //        {
-//            binTrie.put(key, key.Length);
+//            binTrie.Add(key, key.Length);
 //        }
 //        mdagMap.simplify();
 //        for (String key : validKeySet)

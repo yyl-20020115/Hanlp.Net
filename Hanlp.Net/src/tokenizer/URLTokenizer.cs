@@ -43,11 +43,11 @@ public class URLTokenizer
         while (matcher.find())
         {
             end = matcher.start();
-            termList.addAll(SEGMENT.seg(text.substring(begin, end)));
+            termList.AddRange(SEGMENT.seg(text.substring(begin, end)));
             termList.Add(new Term(matcher.group(), Nature.xu));
             begin = matcher.end();
         }
-        if (begin < text.Length) termList.addAll(SEGMENT.seg(text.substring(begin)));
+        if (begin < text.Length) termList.AddRange(SEGMENT.seg(text.substring(begin)));
 
         return termList;
     }

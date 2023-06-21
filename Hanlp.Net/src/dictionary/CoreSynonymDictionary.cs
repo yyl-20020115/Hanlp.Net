@@ -115,7 +115,7 @@ public class CoreSynonymDictionary
     public static List<CommonSynonymDictionary.SynonymItem> convert(List<Term> sentence, bool withUndefinedItem)
     {
         List<CommonSynonymDictionary.SynonymItem> synonymItemList = new (sentence.size());
-        for (Term term : sentence)
+        foreach (Term term in sentence)
         {
             CommonSynonymDictionary.SynonymItem item = get(term.word);
             if (item == null)
@@ -142,9 +142,9 @@ public class CoreSynonymDictionary
      */
     public static long[] getLexemeArray(List<CommonSynonymDictionary.SynonymItem> synonymItemList)
     {
-        long[] array = new long[synonymItemList.size()];
+        long[] array = new long[synonymItemList.Count];
         int i = 0;
-        for (CommonSynonymDictionary.SynonymItem item : synonymItemList)
+        foreach (CommonSynonymDictionary.SynonymItem item in synonymItemList)
         {
             array[i++] = item.entry.id;
         }

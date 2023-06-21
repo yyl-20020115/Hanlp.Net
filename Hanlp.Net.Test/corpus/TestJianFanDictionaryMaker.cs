@@ -34,8 +34,8 @@ public class TestJianFanDictionaryMaker : TestCase
 //
 //        for (Map.Entry<String, String> entry : dictionaryOuter.entrySet())
 //        {
-//            String t = entry.getKey();
-//            String s = entry.getValue();
+//            String t = entry.Key;
+//            String s = entry.Value;
 //            if (t.Length == 1) continue;
 //            if (HanLP.convertToTraditionalChinese(s).Equals(t)) continue;
 //            dictionaryHanLP.Add(t, s);
@@ -95,7 +95,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //
 //    private void save(Map<String, String> storage, String path) 
 //    {
-//        BufferedWriter bw = IOUtil.newBufferedWriter(path);
+//        TextWriter bw = IOUtil.newBufferedWriter(path);
 //        for (Map.Entry<String, String> entry : storage.entrySet())
 //        {
 //            String line = entry.ToString();
@@ -107,7 +107,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //            bw.write(line);
 //            bw.newLine();
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 //
 //    private Map<String, HashSet<String>> combine(Map<String, String> s2t, Map<String, String> t2s)
@@ -115,14 +115,14 @@ public class TestJianFanDictionaryMaker : TestCase
 //        Map<String, HashSet<String>> all = new Dictionary<String, HashSet<String>>();
 //        for (Map.Entry<String, String> entry : s2t.entrySet())
 //        {
-//            String key = entry.getKey();
+//            String key = entry.Key;
 //            HashSet<String> value = all.get(key);
 //            if (value == null)
 //            {
 //                value = new TreeSet<String>();
-//                all.put(key, value);
+//                all.Add(key, value);
 //            }
-//            for (String v : entry.getValue().Split(" "))
+//            for (String v : entry.Value.Split(" "))
 //            {
 //                if (key.Length == 1 && key.Equals(v))
 //                {
@@ -134,9 +134,9 @@ public class TestJianFanDictionaryMaker : TestCase
 //
 //        for (Map.Entry<String, String> entry : t2s.entrySet())
 //        {
-//            for (String key : entry.getValue().Split(" "))
+//            for (String key : entry.Value.Split(" "))
 //            {
-//                if (key.Length == 1 && key.Equals(entry.getKey()))
+//                if (key.Length == 1 && key.Equals(entry.Key))
 //                {
 //                    continue;
 //                }
@@ -144,10 +144,10 @@ public class TestJianFanDictionaryMaker : TestCase
 //                if (value == null)
 //                {
 //                    value = new TreeSet<String>();
-//                    all.put(key, value);
+//                    all.Add(key, value);
 //                }
 //
-//                value.Add(entry.getKey());
+//                value.Add(entry.Key);
 //            }
 //        }
 //
@@ -159,7 +159,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //        for (String path : pathArray)
 //        {
 //            IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(path);
-//            while (lineIterator.hasNext())
+//            while (lineIterator.MoveNext())
 //            {
 //                String line = lineIterator.next();
 //                String[] args = line.Split(delimiter);
@@ -168,7 +168,7 @@ public class TestJianFanDictionaryMaker : TestCase
 //                    Console.Error.WriteLine(line);
 //                    Environment.Exit(-1);
 //                }
-//                storage.put(args[0], args[1]);
+//                storage.Add(args[0], args[1]);
 //            }
 //        }
 //

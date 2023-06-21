@@ -25,11 +25,11 @@ public class ByteArray
     /**
      * 当前字节数组，不一定是全部字节，可能只是一个片段
      */
-    byte[] bytes;
+    public byte[] bytes;
     /**
      * 当前已读取的字节数，或下一个字节的指针
      */
-    int offset;
+    public int offset;
 
     public ByteArray(byte[] bytes)
     {
@@ -63,7 +63,7 @@ public class ByteArray
      *
      * @return
      */
-    public int nextInt()
+    public int Next()
     {
         int result = ByteUtil.bytesHighFirstToInt(bytes, offset);
         offset += 4;
@@ -120,7 +120,7 @@ public class ByteArray
      */
     public string nextString()
     {
-        char[] buffer = new char[nextInt()];
+        char[] buffer = new char[Next()];
         for (int i = 0; i < buffer.Length; ++i)
         {
             buffer[i] = nextChar();
@@ -244,7 +244,7 @@ public class ByteArray
     /**
      * 通知执行关闭/销毁操作
      */
-    public void close()
+    public void Close()
     {
         bytes = null;
     }
@@ -252,7 +252,7 @@ public class ByteArray
     //@Override
     protected void finalize()
     {
-        // 如果忘记close，则在垃圾回收器释放内存的时候close，总好过完全不close
-        close();
+        // 如果忘记Close，则在垃圾回收器释放内存的时候Close，总好过完全不Close
+        Close();
     }
 }

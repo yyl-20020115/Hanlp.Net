@@ -68,13 +68,13 @@ public class MaxEntModel
      * @param context
      * @return
      */
-    public List<Pair<string, Double>> predict(string[] context)
+    public List<KeyValuePair<string, Double>> predict(string[] context)
     {
-        List<Pair<string, Double>> result = new ArrayList<Pair<string, Double>>(outcomeNames.Length);
+        List<KeyValuePair<string, Double>> result = new ArrayList<KeyValuePair<string, Double>>(outcomeNames.Length);
         double[] p = eval(context);
         for (int i = 0; i < p.Length; ++i)
         {
-            result.Add(new Pair<string, Double>(outcomeNames[i], p[i]));
+            result.Add(new KeyValuePair<string, Double>(outcomeNames[i], p[i]));
         }
         return result;
     }
@@ -122,7 +122,7 @@ public class MaxEntModel
      */
     public double[] eval(string[] context, double[] outsums)
     {
-        assert context != null;
+        //assert context != null;
         int[] scontexts = new int[context.Length];
         for (int i = 0; i < context.Length; i++)
         {
@@ -198,30 +198,30 @@ public class MaxEntModel
         MaxEntModel m = new MaxEntModel();
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            br.readLine();  // type
-            m.correctionConstant = int.parseInt(br.readLine());  // correctionConstant
+            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            Stream _out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            br.ReadLine();  // type
+            m.correctionConstant = int.parseInt(br.ReadLine());  // correctionConstant
             _out.writeInt(m.correctionConstant);
-            m.correctionParam = Double.parseDouble(br.readLine());  // getCorrectionParameter
+            m.correctionParam = Double.parseDouble(br.ReadLine());  // getCorrectionParameter
             _out.writeDouble(m.correctionParam);
             // label
-            int numOutcomes = int.parseInt(br.readLine());
+            int numOutcomes = int.parseInt(br.ReadLine());
             _out.writeInt(numOutcomes);
             string[] outcomeLabels = new string[numOutcomes];
             m.outcomeNames = outcomeLabels;
             for (int i = 0; i < numOutcomes; i++)
             {
-                outcomeLabels[i] = br.readLine();
+                outcomeLabels[i] = br.ReadLine();
                 TextUtility.writeString(outcomeLabels[i], _out);
             }
             // pattern
-            int numOCTypes = int.parseInt(br.readLine());
+            int numOCTypes = int.parseInt(br.ReadLine());
             _out.writeInt(numOCTypes);
             int[][] outcomePatterns = new int[numOCTypes][];
             for (int i = 0; i < numOCTypes; i++)
             {
-                StringTokenizer tok = new StringTokenizer(br.readLine(), " ");
+                StringTokenizer tok = new StringTokenizer(br.ReadLine(), " ");
                 int[] infoInts = new int[tok.countTokens()];
                 _out.writeInt(infoInts.Length);
                 for (int j = 0; tok.hasMoreTokens(); j++)
@@ -232,22 +232,22 @@ public class MaxEntModel
                 outcomePatterns[i] = infoInts;
             }
             // feature
-            int NUM_PREDS = int.parseInt(br.readLine());
+            int NUM_PREDS = int.parseInt(br.ReadLine());
             _out.writeInt(NUM_PREDS);
             string[] predLabels = new string[NUM_PREDS];
             m.pmap = new DoubleArrayTrie<int>();
             var tmpMap = new Dictionary<string, int>();
             for (int i = 0; i < NUM_PREDS; i++)
             {
-                predLabels[i] = br.readLine();
+                predLabels[i] = br.ReadLine();
                 //assert !tmpMap.ContainsKey(predLabels[i]) : "重复的键： " + predLabels[i] + " 请使用 -Dfile.encoding=UTF-8 训练";
                 TextUtility.writeString(predLabels[i], _out);
-                tmpMap.put(predLabels[i], i);
+                tmpMap.Add(predLabels[i], i);
             }
             m.pmap.build(tmpMap);
             foreach (KeyValuePair<string, int> entry in tmpMap.entrySet())
             {
-                _out.writeInt(entry.getValue());
+                _out.writeInt(entry.Value);
             }
             m.pmap.save(_out);
             // params
@@ -265,7 +265,7 @@ public class MaxEntModel
                     double[] contextParameters = new double[outcomePatterns[i].Length - 1];
                     for (int k = 1; k < outcomePatterns[i].Length; k++)
                     {
-                        contextParameters[k - 1] = Double.parseDouble(br.readLine());
+                        contextParameters[k - 1] = Double.parseDouble(br.ReadLine());
                         _out.writeDouble(contextParameters[k - 1]);
                     }
                     _params[pid] = new Context(outcomePattern, contextParameters);
@@ -277,7 +277,7 @@ public class MaxEntModel
             m.prior.setLabels(outcomeLabels);
             // eval
             m.evalParams = new EvalParameters(_params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -295,28 +295,28 @@ public class MaxEntModel
     public static MaxEntModel create(ByteArray byteArray)
     {
         MaxEntModel m = new MaxEntModel();
-        m.correctionConstant = byteArray.nextInt();  // correctionConstant
+        m.correctionConstant = byteArray.Next();  // correctionConstant
         m.correctionParam = byteArray.nextDouble();  // getCorrectionParameter
         // label
-        int numOutcomes = byteArray.nextInt();
+        int numOutcomes = byteArray.Next();
         string[] outcomeLabels = new string[numOutcomes];
         m.outcomeNames = outcomeLabels;
         for (int i = 0; i < numOutcomes; i++) outcomeLabels[i] = byteArray.nextString();
         // pattern
-        int numOCTypes = byteArray.nextInt();
+        int numOCTypes = byteArray.Next();
         int[][] outcomePatterns = new int[numOCTypes][];
         for (int i = 0; i < numOCTypes; i++)
         {
-            int Length = byteArray.nextInt();
+            int Length = byteArray.Next();
             int[] infoInts = new int[Length];
             for (int j = 0; j < Length; j++)
             {
-                infoInts[j] = byteArray.nextInt();
+                infoInts[j] = byteArray.Next();
             }
             outcomePatterns[i] = infoInts;
         }
         // feature
-        int NUM_PREDS = byteArray.nextInt();
+        int NUM_PREDS = byteArray.Next();
         string[] predLabels = new string[NUM_PREDS];
         m.pmap = new DoubleArrayTrie<int>();
         for (int i = 0; i < NUM_PREDS; i++)
@@ -326,7 +326,7 @@ public class MaxEntModel
         int[] v = new int[NUM_PREDS];
         for (int i = 0; i < v.Length; i++)
         {
-            v[i] = byteArray.nextInt();
+            v[i] = byteArray.Next();
         }
         m.pmap.load(byteArray, v);
         // params

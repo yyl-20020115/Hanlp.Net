@@ -5,15 +5,15 @@
 namespace com.hankcs.hanlp.collection.dartsclone;
 
 /**
- * 模拟C++中的pair，也兼容JavaFX中的Pair
+ * 模拟C++中的pair，也兼容JavaFX中的KeyValuePair
  * @author manabe
  */
-public class Pair<T, U>
+public class KeyValuePair<T, U>
 {
     public T first;
     public U second;
 
-    public Pair(T first, U second)
+    public KeyValuePair(T first, U second)
     {
         this.first = first;
         this.second = second;
@@ -24,7 +24,7 @@ public class Pair<T, U>
         return first;
     }
 
-    public T getKey()
+    public T Key
     {
         return first;
     }
@@ -34,7 +34,7 @@ public class Pair<T, U>
         return second;
     }
 
-    public U getValue()
+    public U Value
     {
         return second;
     }

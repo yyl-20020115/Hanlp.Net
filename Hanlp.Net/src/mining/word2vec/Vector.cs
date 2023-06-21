@@ -51,7 +51,7 @@ public class Vector
         {
             ret += elementArray[i] * elementArray[i];
         }
-        return (float) Math.sqrt(ret);
+        return (float) Math.Sqrt(ret);
     }
 
     /**

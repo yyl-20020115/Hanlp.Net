@@ -62,7 +62,7 @@ public class MDAGNode
     /**
      * 当它被计算后的hash值
      */
-    private int storedHashCode = null;
+    private int? storedHashCode = null;
     
     
     
@@ -95,7 +95,7 @@ public class MDAGNode
         //Loop through the nodes in this node's outgoing _transition set, incrementing the number of
         //incoming transitions of each by 1 (to account for this newly created node's outgoing transitions)
         foreach(Entry<char, MDAGNode> transitionKeyValuePair in outgoingTransitionTreeMap.entrySet())
-            transitionKeyValuePair.getValue().incomingTransitionCount++;
+            transitionKeyValuePair.Value.incomingTransitionCount++;
         /////
     }
     
@@ -155,7 +155,7 @@ public class MDAGNode
      */
     public int getOutgoingTransitionCount()
     {
-        return outgoingTransitionTreeMap.size();
+        return outgoingTransitionTreeMap.Count;
     }
     
     
@@ -244,7 +244,7 @@ public class MDAGNode
      */
     public bool hasTransitions()
     {
-        return !outgoingTransitionTreeMap.isEmpty();
+        return outgoingTransitionTreeMap.Count>0;
     }
     
     
@@ -340,7 +340,7 @@ public class MDAGNode
         for(int i = 0; i < numberOfChars && currentNode != null; i++)
         {
             currentNode = currentNode.transition(str.charAt(i));
-            nodeStack.Add(currentNode);
+            nodeStack.Push(currentNode);
         }
         /////
          
@@ -369,8 +369,8 @@ public class MDAGNode
      */
     public void decrementTargetIncomingTransitionCounts()
     {
-        for(Entry<char, MDAGNode> transitionKeyValuePair: outgoingTransitionTreeMap.entrySet())
-            transitionKeyValuePair.getValue().incomingTransitionCount--;
+        foreach(var transitionKeyValuePair in  outgoingTransitionTreeMap)
+            transitionKeyValuePair.Value.incomingTransitionCount--;
     }
     
     
@@ -388,7 +388,7 @@ public class MDAGNode
         oldTargetNode.incomingTransitionCount--;
         newTargetNode.incomingTransitionCount++;
         
-        outgoingTransitionTreeMap.put(letter, newTargetNode);
+        outgoingTransitionTreeMap.Add(letter, newTargetNode);
     }
     
     
@@ -407,7 +407,7 @@ public class MDAGNode
         MDAGNode newTargetNode = new MDAGNode(targetAcceptStateStatus);
         newTargetNode.incomingTransitionCount++;
         
-        outgoingTransitionTreeMap.put(letter, newTargetNode);
+        outgoingTransitionTreeMap.Add(letter, newTargetNode);
         return newTargetNode;
     }
 
@@ -421,7 +421,7 @@ public class MDAGNode
     {
         newTargetNode.incomingTransitionCount++;
 
-        outgoingTransitionTreeMap.put(letter, newTargetNode);
+        outgoingTransitionTreeMap.Add(letter, newTargetNode);
         return newTargetNode;
     }
     
@@ -452,14 +452,14 @@ public class MDAGNode
         Dictionary<char, MDAGNode> outgoingTransitionTreeMap1 = node1.outgoingTransitionTreeMap;
         Dictionary<char, MDAGNode> outgoingTransitionTreeMap2 = node2.outgoingTransitionTreeMap;
         
-        if(outgoingTransitionTreeMap1.size() == outgoingTransitionTreeMap2.size())
+        if(outgoingTransitionTreeMap1.Count == outgoingTransitionTreeMap2.Count)
         {
             //For each _transition in outgoingTransitionTreeMap1, get the identically lableed _transition
             //in outgoingTransitionTreeMap2 (if present), and test the equality of the transitions' target nodes
-            foreach (Entry<char, MDAGNode> transitionKeyValuePair in outgoingTransitionTreeMap1.entrySet())
+            foreach (var transitionKeyValuePair in outgoingTransitionTreeMap1)
             {
-                char currentCharKey = transitionKeyValuePair.getKey();
-                MDAGNode currentTargetNode = transitionKeyValuePair.getValue();
+                char currentCharKey = transitionKeyValuePair.Key;
+                MDAGNode currentTargetNode = transitionKeyValuePair.Value;
                 
                 if(!outgoingTransitionTreeMap2.ContainsKey(currentCharKey) || !outgoingTransitionTreeMap2.get(currentCharKey).Equals(currentTargetNode))
                     return false;
@@ -529,7 +529,7 @@ public class MDAGNode
             return hash;
         }
         else
-            return storedHashCode;
+            return storedHashCode.Value;
     }
 
     //@Override

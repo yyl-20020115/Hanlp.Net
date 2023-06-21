@@ -3,7 +3,9 @@
  * You may modify and redistribute as long as this attribution remains.
  */
 
+using System.Reflection;
 using System.Text;
+using static com.hankcs.hanlp.model.perceptron.cli.Args;
 
 namespace com.hankcs.hanlp.model.perceptron.cli;
 
@@ -50,7 +52,7 @@ public class Args
     public static List<string> parse(Object target, string[] args, bool failOnExtraFlags)
     {
         List<string> arguments = new ();
-        arguments.addAll(Arrays.asList(args));
+        arguments.AddRange(Arrays.asList(args));
         Type clazz;
         if (target is Type)
         {
@@ -101,7 +103,7 @@ public class Args
         if (argument != null)
         {
             bool set = false;
-            for (Iterator<string> i = arguments.iterator(); i.hasNext(); )
+            for (Iterator<string> i = arguments.iterator(); i.MoveNext(); )
             {
                 string arg = i.next();
                 string prefix = argument.prefix();
@@ -144,9 +146,9 @@ public class Args
         {
             Object[] os = (Object[]) field.get(target);
             Object[] vs = (Object[]) getValue(type, value, delimiter);
-            Object[] s = (Object[]) Array.newInstance(type.getComponentType(), os.Length + vs.Length);
-            System.arraycopy(os, 0, s, 0, os.Length);
-            System.arraycopy(vs, 0, s, os.Length, vs.Length);
+            Object[] s = (Object[]) Array.CreateInstance(type.getComponentType(), os.Length + vs.Length);
+            Array.Copy(os, 0, s, 0, os.Length);
+            Array.Copy(vs, 0, s, os.Length, vs.Length);
             field.set(target, s);
         }
         catch (IllegalAccessException iae)
@@ -166,8 +168,8 @@ public class Args
             Object[] os = (Object[]) property.getReadMethod().invoke(target);
             Object[] vs = (Object[]) getValue(type, value, delimiter);
             Object[] s = (Object[]) Array.newInstance(type.getComponentType(), os.Length + vs.Length);
-            System.arraycopy(os, 0, s, 0, os.Length);
-            System.arraycopy(vs, 0, s, os.Length, vs.Length);
+            Array.Copy(os, 0, s, 0, os.Length);
+            Array.Copy(vs, 0, s, os.Length, vs.Length);
             property.getWriteMethod().invoke(target, (Object) s);
         }
         catch (IllegalAccessException iae)
@@ -193,7 +195,7 @@ public class Args
             if (argument != null)
             {
                 bool set = false;
-                for (Iterator<string> i = arguments.iterator(); i.hasNext(); )
+                for (Iterator<string> i = arguments.iterator(); i.MoveNext(); )
                 {
                     string arg = i.next();
                     string prefix = argument.prefix();
@@ -260,7 +262,7 @@ public class Args
         }
         string clazzName = clazz.getName();
         {
-            int index = clazzName.lastIndexOf('$');
+            int index = clazzName.LastIndexOf('$');
             if (index > 0)
             {
                 clazzName = clazzName.substring(0, index);
@@ -415,7 +417,7 @@ public class Args
     private static string getTypeName(Type type)
     {
         string typeName = type.getName();
-        int beginIndex = typeName.lastIndexOf(".");
+        int beginIndex = typeName.LastIndexOf(".");
         typeName = typeName.substring(beginIndex + 1);
         return typeName;
     }
@@ -440,7 +442,7 @@ public class Args
         }
         else
         {
-            if (i.hasNext())
+            if (i.MoveNext())
             {
                 value = i.next();
                 i.Remove();
@@ -568,7 +570,7 @@ public class Args
         }
     }
 
-    public static interface ValueCreator
+    public interface ValueCreator
     {
         /**
          * Creates a value object of the given type using the given string value representation;
@@ -590,36 +592,39 @@ public class Args
      */
     public static ValueCreator byStaticMethodInvocation( Type compatibleType,  string methodName)
     {
-        return new ValueCreator()
-        {
-            public Object createValue(Type type, string value)
-            {
-                Object v = null;
-                if (compatibleType.isAssignableFrom(type))
-                {
-                    try
-                    {
-                        Method m = type.getMethod(methodName, string.s);
-                        return m.invoke(null, value);
-                    }
-                    catch (NoSuchMethodException e)
-                    {
-                        // ignore
-                    }
-                    catch (Exception e)
-                    {
-                        throw new ArgumentException(string.Format("could not invoke %s#%s to create an obejct from %s", type.ToString(), methodName, value));
-                    }
-                }
-                return v;
-            }
-        };
+        return new VC()
+        ;
     }
 
+    public class VC: ValueCreator
+    {
+        public Object createValue(Type type, string value)
+        {
+            Object v = null;
+            if (compatibleType.isAssignableFrom(type))
+            {
+                try
+                {
+                    Method m = type.getMethod(methodName, string.s);
+                    return m.invoke(null, value);
+                }
+                catch (NoSuchMethodException e)
+                {
+                    // ignore
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentException(string.Format("could not invoke %s#%s to create an obejct from %s", type.ToString(), methodName, value));
+                }
+            }
+            return v;
+        }
+    }
     /**
      * {@link ValueCreator} building object using a one arg constructor taking a {@link string} object as parameter
      */
-    public static readonly ValueCreator FROM_STRING_CONSTRUCTOR = new ValueCreator()
+    public static readonly ValueCreator FROM_STRING_CONSTRUCTOR = new VC2();
+    public class VC2 : ValueCreator 
     {
         public Object createValue(Type type, string value)
         {
@@ -641,7 +646,8 @@ public class Args
         }
     };
 
-    public static readonly ValueCreator ENUM_CREATOR = new ValueCreator()
+    public static readonly ValueCreator ENUM_CREATOR = new VC3();
+    public class VC3: ValueCreator
     {
         public Object createValue(Type type, string value)
         {
@@ -654,7 +660,7 @@ public class Args
     };
 
     private static readonly List<ValueCreator> DEFAULT_VALUE_CREATORS = Arrays.asList(Args.FROM_STRING_CONSTRUCTOR, Args.ENUM_CREATOR);
-    private static List<ValueCreator> valueCreators = new ArrayList<ValueCreator>(DEFAULT_VALUE_CREATORS);
+    private static List<ValueCreator> valueCreators = new (DEFAULT_VALUE_CREATORS);
 
     /**
      * Allows external extension of the valiue creators.
@@ -672,6 +678,6 @@ public class Args
     public static void resetValueCreators()
     {
         valueCreators.Clear();
-        valueCreators.addAll(DEFAULT_VALUE_CREATORS);
+        valueCreators.AddRange(DEFAULT_VALUE_CREATORS);
     }
 }

@@ -139,7 +139,7 @@ public class NShortPath
         pEdgeToList = graph.getEdgeListTo(nCurNode);
 
         // Get all the edgesFrom
-        for (EdgeFrom e : pEdgeToList)
+        foreach (EdgeFrom e in pEdgeToList)
         {
             nPreNode = e.from;
             eWeight = e.weight;

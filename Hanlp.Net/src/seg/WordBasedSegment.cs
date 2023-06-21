@@ -49,7 +49,7 @@ public abstract class WordBasedSegment : Segment
 
         //--------------------------------------------------------------------
         // 建造新词网
-        wordNetOptimum.addAll(linkedArray);
+        wordNetOptimum.AddRange(linkedArray);
     }
 
     /**
@@ -85,7 +85,7 @@ public abstract class WordBasedSegment : Segment
 
     static void changeDelimiterPOS(List<Vertex> linkedArray)
     {
-        for (Vertex vertex : linkedArray)
+        foreach (Vertex vertex in linkedArray)
         {
             if (vertex.realWord.Equals("－－") || vertex.realWord.Equals("—") || vertex.realWord.Equals("-"))
             {
@@ -104,10 +104,10 @@ public abstract class WordBasedSegment : Segment
         if (linkedArray.size() < 2)
             return;
 
-        ListIterator<Vertex> listIterator = linkedArray.listIterator();
+        var listIterator = linkedArray.GetEnumerator();
         Vertex next = listIterator.next();
         Vertex current = next;
-        while (listIterator.hasNext())
+        while (listIterator.MoveNext())
         {
             next = listIterator.next();
 //            Console.WriteLine("current:" + current + " next:" + next);
@@ -148,10 +148,10 @@ public abstract class WordBasedSegment : Segment
     {
         if (linkedArray.size() < 2)
             return;
-        ListIterator<Vertex> listIterator = linkedArray.listIterator();
+        var listIterator = linkedArray.GetEnumerator();
         Vertex next = listIterator.next();
         Vertex current = next;
-        while (listIterator.hasNext())
+        while (listIterator.MoveNext())
         {
             next = listIterator.next();
             if (TextUtility.isAllNum(current.realWord) || TextUtility.isAllChineseNum(current.realWord))
@@ -210,7 +210,7 @@ public abstract class WordBasedSegment : Segment
 //        logger.trace("日期识别后：" + Graph.parseResult(linkedArray));
     }
 
-    private static void mergeDate(ListIterator<Vertex> listIterator, Vertex next, Vertex current)
+    private static void mergeDate(IEnumerator<Vertex> listIterator, Vertex next, Vertex current)
     {
         current = Vertex.newTimeInstance(current.realWord + next.realWord);
         listIterator.previous();
@@ -345,10 +345,10 @@ public abstract class WordBasedSegment : Segment
         if (linkedArray.size() < 2)
             return;
 
-        ListIterator<Vertex> listIterator = linkedArray.listIterator();
+        ListIterator<Vertex> listIterator = linkedArray.GetEnumerator();
         Vertex next = listIterator.next();
         Vertex current = next;
-        while (listIterator.hasNext())
+        while (listIterator.MoveNext())
         {
             next = listIterator.next();
 //            Console.WriteLine("current:" + current + " next:" + next);
@@ -430,9 +430,9 @@ public abstract class WordBasedSegment : Segment
      */
     protected List<Term> decorateResultForIndexMode(List<Vertex> vertexList, WordNet wordNetAll)
     {
-        List<Term> termList = new LinkedList<Term>();
+        List<Term> termList = new ();
         int line = 1;
-        ListIterator<Vertex> listIterator = vertexList.listIterator();
+        var listIterator = vertexList.GetEnumerator();
         listIterator.next();
         int Length = vertexList.size() - 2;
         for (int i = 0; i < Length; ++i)
@@ -448,7 +448,7 @@ public abstract class WordBasedSegment : Segment
                 while (currentLine < line + vertex.realWord.Length)
                 {
                     Iterator<Vertex> iterator = wordNetAll.descendingIterator(currentLine);// 这一行的词，逆序遍历保证字典序稳定地由大到小
-                    while (iterator.hasNext())// 这一行的短词
+                    while (iterator.MoveNext())// 这一行的短词
                     {
                         Vertex smallVertex = iterator.next();
                         if (

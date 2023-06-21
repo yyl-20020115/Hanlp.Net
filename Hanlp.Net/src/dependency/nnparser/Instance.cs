@@ -17,18 +17,18 @@ namespace com.hankcs.hanlp.dependency.nnparser;
  */
 public class Instance
 {
-    List<string> raw_forms; //! The original form.
-    List<string> forms;     //! The converted form.
-    List<string> lemmas;    //! The lemmas.
-    List<string> postags;   //! The postags.
-    List<string> cpostags;  //! The cpostags.
+    public List<string> raw_forms; //! The original form.
+    public List<string> forms;     //! The converted form.
+    public List<string> lemmas;    //! The lemmas.
+    public List<string> postags;   //! The postags.
+    public List<string> cpostags;  //! The cpostags.
 
-    List<int> heads;
-    List<int> deprelsidx;
-    List<string> deprels;
-    List<int> predict_heads;
-    List<int> predict_deprelsidx;
-    List<string> predict_deprels;
+    public List<int> heads;
+    public List<int> deprelsidx;
+    public List<string> deprels;
+    public List<int> predict_heads;
+    public List<int> predict_deprelsidx;
+    public List<string> predict_deprels;
 
     public Instance()
     {
@@ -38,26 +38,26 @@ public class Instance
 
     int size()
     {
-        return forms.size();
+        return forms.Count;
     }
 
     bool is_tree()
     {
-        List<List<int>> tree = new (heads.size());
+        List<List<int>> tree = new (heads.Count);
         int root = -1;
-        for (int modifier = 0; modifier < heads.size(); ++modifier)
+        for (int modifier = 0; modifier < heads.Count; ++modifier)
         {
-            int head = heads.get(modifier);
+            int head = heads[(modifier)];
             if (head == -1)
             {
                 root = modifier;
             }
             else
             {
-                tree.get(head).Add(modifier);
+                tree[(head)].Add(modifier);
             }
         }
-        bool[] visited = new bool[heads.size()];
+        bool[] visited = new bool[heads.Count];
         if (!is_tree_travel(root, tree, visited))
         {
             return false;
@@ -80,7 +80,7 @@ public class Instance
             return false;
         }
         visited[now] = true;
-        for (int c = 0; c < tree.get(now).size(); ++c)
+        for (int c = 0; c < tree[(now)].Count; ++c)
         {
             int next = tree.get(now).get(c);
             if (!is_tree_travel(next, tree, visited))
@@ -98,7 +98,7 @@ public class Instance
 
     bool is_non_projective()
     {
-        for (int modifier = 0; modifier < heads.size(); ++modifier)
+        for (int modifier = 0; modifier < heads.Count; ++modifier)
         {
             int head = heads.get(modifier);
             if (head < modifier)
@@ -116,7 +116,7 @@ public class Instance
             {
                 for (int from = modifier + 1; from < head; ++from)
                 {
-                    int to = heads.get(from);
+                    int to = heads[(    from)];
                     if (to < modifier || to > head)
                     {
                         return true;

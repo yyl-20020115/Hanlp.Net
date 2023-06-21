@@ -273,10 +273,10 @@ public class ByteUtil
      * @param uint
      * @
      */
-    public static void writeUnsignedInt(DataOutputStream _out, int uint) 
+    public static void writeUnsignedInt(Stream _out, int _uint) 
     {
-        _out.writeByte((byte) ((uint >>> 8) & 0xFF));
-        _out.writeByte((byte) ((uint >>> 0) & 0xFF));
+        _out.writeByte((byte) ((_uint >>> 8) & 0xFF));
+        _out.writeByte((byte) ((_uint >>> 0) & 0xFF));
     }
 
     public static int convertTwoCharToInt(char high, char low)

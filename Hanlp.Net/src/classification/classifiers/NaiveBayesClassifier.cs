@@ -100,7 +100,7 @@ public class NaiveBayesClassifier : AbstractClassifier
                 {
                     model.logLikelihoods.Add(feature, new ());
                 }
-                model.logLikelihoods.get(feature).put(category, logLikelihood);
+                model.logLikelihoods.get(feature).Add(category, logLikelihood);
             }
         }
         logger._out("贝叶斯统计结束\n");
@@ -191,7 +191,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         foreach (int feature in selectedFeatures.Keys)
         {
             featureCategoryJointCount[++p] = featureData.featureCategoryJointCount[feature];
-            featureData.wordIdTrie.put(wordIdArray[feature], p);
+            featureData.wordIdTrie.Add(wordIdArray[feature], p);
         }
         logger.finish(",选中特征数:%d / %d = %.2f%%\n", featureCategoryJointCount.Length,
                       featureData.featureCategoryJointCount.Length,

@@ -23,11 +23,11 @@ public class FeatureSortItem
 
     public FeatureSortItem(KeyValuePair<string, int> entry, float[] parameter, int tagSetSize)
     {
-        key = entry.getKey();
-        id = entry.getValue();
+        key = entry.Key;
+        id = entry.Value;
         for (int i = 0; i < tagSetSize; ++i)
         {
-            total += Math.abs(parameter[id * tagSetSize + i]);
+            total += Math.Abs(parameter[id * tagSetSize + i]);
         }
     }
 }

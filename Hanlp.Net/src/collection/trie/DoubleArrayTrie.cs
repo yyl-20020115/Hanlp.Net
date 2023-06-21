@@ -87,8 +87,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         int[] check2 = new int[newSize];
         if (allocSize > 0)
         {
-            System.arraycopy(base, 0, base2, 0, allocSize);
-            System.arraycopy(check, 0, check2, 0, allocSize);
+            Array.Copy(base, 0, base2, 0, allocSize);
+            Array.Copy(check, 0, check2, 0, allocSize);
         }
 
         _base = base2;
@@ -354,8 +354,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         List<V> valueList = new (entrySet.size());
         foreach (KeyValuePair<string, V> entry in entrySet)
         {
-            keyList.Add(entry.getKey());
-            valueList.Add(entry.getValue());
+            keyList.Add(entry.Key);
+            valueList.Add(entry.Value);
         }
 
         return build(keyList, valueList);
@@ -428,10 +428,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         check = new int[size];
         _base = new int[size];
 
-        DataInputStream _is = null;
+        Stream _is = null;
         try
         {
-            _is = new DataInputStream(new BufferedInputStream(
+            _is = new Stream(new BufferedInputStream(
                     IOUtil.newInputStream(fileName), BUF_SIZE));
             for (int i = 0; i < size; i++)
             {
@@ -442,23 +442,23 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         finally
         {
             if (_is != null)
-                _is.close();
+                _is.Close();
         }
     }
 
     public bool save(string fileName)
     {
-        DataOutputStream _out;
+        Stream _out;
         try
         {
-            _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(fileName)));
+            _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(fileName)));
             _out.writeInt(size);
             for (int i = 0; i < size; i++)
             {
                 _out.writeInt(_base[i]);
                 _out.writeInt(check[i]);
             }
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -532,13 +532,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public bool load(ByteArray byteArray, V[] value)
     {
         if (byteArray == null) return false;
-        _size = byteArray.nextInt();
+        _size = byteArray.Next();
         _base = new int[_size + 65535];   // 多留一些，防止越界
         check = new int[_size + 65535];
         for (int i = 0; i < _size; i++)
         {
-            _base[i] = byteArray.nextInt();
-            check[i] = byteArray.nextInt();
+            _base[i] = byteArray.Next();
+            check[i] = byteArray.Next();
         }
         v = value;
         used = null;    // 无用的对象,释放掉
@@ -592,8 +592,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         try
         {
-            DataInputStream _in = new DataInputStream(
-                new BufferedInputStream(IOAdapter == null ? new FileInputStream(path) :
+            Stream _in = new Stream(
+                new BufferedInputStream(IOAdapter == null ? new FileStream(path) :
                     IOAdapter.open(path)
             ));
             _size = _in.readInt();
@@ -616,8 +616,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     {
         try
         {
-            FileInputStream fis = new FileInputStream(path);
-            // 1.从FileInputStream对象获取文件通道FileChannel
+            FileStream fis = new FileStream(path);
+            // 1.从FileStream对象获取文件通道FileChannel
             FileChannel channel = fis.getChannel();
             int fileSize = (int) channel.size();
 
@@ -634,8 +634,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             byte[] bytes = byteBuffer.array();
             byteBuffer.Clear();
             // 关闭通道和文件流
-            channel.close();
-            fis.close();
+            channel.Close();
+            fis.Close();
 
             int index = 0;
             _size = ByteUtil.bytesHighFirstToInt(bytes, index);
@@ -684,7 +684,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         ObjectInputStream _in;
         try
         {
-            _in = new ObjectInputStream(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path));
+            _in = new ObjectInputStream(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path));
             return (DoubleArrayTrie<T>) @in.readObject();
         }
         catch (Exception e)
@@ -1016,7 +1016,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         if (a.Length < size)
             a = (V[]) java.lang.reflect.Array.newInstance(
                     a.getClass().getComponentType(), size);
-        System.arraycopy(v, 0, a, 0, size);
+        Array.Copy(v, 0, a, 0, size);
         return a;
     }
 
@@ -1442,11 +1442,11 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 //            Console.Error.WriteLine("释放内存 %d bytes\n", base.Length - size - 65535);
 //        }
         int[] nbase = new int[_size + 65535];
-        System.arraycopy(_base, 0, nbase, 0, size);
+        Array.Copy(_base, 0, nbase, 0, size);
         _base = nbase;
 
         int[] ncheck = new int[_size + 65535];
-        System.arraycopy(check, 0, ncheck, 0, size);
+        Array.Copy(check, 0, ncheck, 0, size);
         check = ncheck;
     }
 

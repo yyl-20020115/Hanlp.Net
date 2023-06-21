@@ -68,7 +68,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
             if (frequency == null)
             {
                 frequency = new TermFrequency(word);
-                termFrequencyMap.put(word, frequency);
+                termFrequencyMap.Add(word, frequency);
             }
             else
             {
@@ -86,7 +86,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     public ICollection<TermFrequency> top(int N)
     {
         MaxHeap<TermFrequency> heap = new MaxHeap<TermFrequency>(N, new CMP());
-        heap.addAll(termFrequencyMap.values());
+        heap.AddRange(termFrequencyMap.values());
         return heap.ToList();
     }
 
@@ -143,7 +143,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public <T> T[] ToArray(T[] a)
+    public  T[] ToArray<T>(T[] a)
     {
         return termFrequencyMap.values().ToArray(a);
     }
@@ -154,7 +154,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
         TermFrequency tf = termFrequencyMap.get(termFrequency.getTerm());
         if (tf == null)
         {
-            termFrequencyMap.put(termFrequency.getKey(), termFrequency);
+            termFrequencyMap.Add(termFrequency.Key, termFrequency);
             return true;
         }
         tf.increase(termFrequency.getFrequency());
@@ -179,7 +179,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool addAll(Collection<TermFrequency> c)
+    public bool AddRange(Collection<TermFrequency> c)
     {
         foreach (TermFrequency termFrequency in c)
         {

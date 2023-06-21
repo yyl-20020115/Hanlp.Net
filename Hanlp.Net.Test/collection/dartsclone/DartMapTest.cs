@@ -17,7 +17,7 @@ public class DartMapTest : TestCase
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.ngram.txt");
         validKeySet = new ();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             validKeySet.Add(iterator.next().Split("\\s")[0]);
         }
@@ -86,7 +86,7 @@ public class DartMapTest : TestCase
 //        Dictionary<String, int> map = new Dictionary<String, int>();
 //        for (String key : validKeySet)
 //        {
-//            map.put(key, key.Length);
+//            map.Add(key, key.Length);
 //        }
 //        trie.build(map);
 //

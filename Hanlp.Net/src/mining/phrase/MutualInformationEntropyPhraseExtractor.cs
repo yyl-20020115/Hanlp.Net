@@ -49,7 +49,7 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
             {
                 Console.WriteLine(sentence);
             }
-            occurrence.addAll(sentence);
+            occurrence.AddRange(sentence);
         }
         occurrence.compute();
         if (HanLP.Config.DEBUG)
@@ -57,27 +57,27 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
             Console.WriteLine(occurrence);
             foreach (PairFrequency phrase in occurrence.getPhraseByMi())
             {
-                Console.Write(phrase.getKey().replace(Occurrence.RIGHT, '→') + "\tmi=" + phrase.mi + " , ");
+                Console.Write(phrase.Key.replace(Occurrence.RIGHT, '→') + "\tmi=" + phrase.mi + " , ");
             }
             Console.WriteLine();
             foreach (PairFrequency phrase in occurrence.getPhraseByLe())
             {
-                Console.Write(phrase.getKey().replace(Occurrence.RIGHT, '→') + "\tle=" + phrase.le + " , ");
+                Console.Write(phrase.Key.replace(Occurrence.RIGHT, '→') + "\tle=" + phrase.le + " , ");
             }
             Console.WriteLine();
             foreach (PairFrequency phrase in occurrence.getPhraseByRe())
             {
-                Console.Write(phrase.getKey().replace(Occurrence.RIGHT, '→') + "\tre=" + phrase.re + " , ");
+                Console.Write(phrase.Key.replace(Occurrence.RIGHT, '→') + "\tre=" + phrase.re + " , ");
             }
             Console.WriteLine();
             foreach (PairFrequency phrase in occurrence.getPhraseByScore())
             {
-                Console.Write(phrase.getKey().replace(Occurrence.RIGHT, '→') + "\tscore=" + phrase.score + " , ");
+                Console.Write(phrase.Key.replace(Occurrence.RIGHT, '→') + "\tscore=" + phrase.score + " , ");
             }
             Console.WriteLine();
         }
 
-        for (PairFrequency phrase in occurrence.getPhraseByScore())
+        foreach (PairFrequency phrase in occurrence.getPhraseByScore())
         {
             if (phraseList.size() == size) break;
             phraseList.Add(phrase.first + phrase.second);

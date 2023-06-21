@@ -14,7 +14,7 @@ public class DoubleArrayTrieTest : TestCase
     {
         var map = new Dictionary<String, String>();
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.mini.txt");
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             String line = iterator.next();
             map.Add(line, line);

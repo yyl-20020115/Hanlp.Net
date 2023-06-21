@@ -11,9 +11,9 @@
  */
 using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.corpus.io;
-using com.hankcs.hanlp.dependency.nnparser;
 using com.hankcs.hanlp.model.perceptron.common;
 using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.tagset;
 using com.hankcs.hanlp.utility;
 
@@ -86,7 +86,7 @@ public class LinearModel : ICacheAble
         );
 
         logger.start("裁剪特征...\n");
-        int logEvery = (int) Math.ceil(featureMap.size() / 10000f);
+        int logEvery = (int) Math.Ceiling(featureMap.size() / 10000f);
         int n = 0;
         foreach (KeyValuePair<string, int> entry in featureIdSet)
         {
@@ -94,7 +94,7 @@ public class LinearModel : ICacheAble
             {
                 logger._out("\r%.2f%% ", MathUtility.percentage(n, featureMap.size()));
             }
-            if (entry.getValue() < tagSet.sizeIncludingBos())
+            if (entry.Value < tagSet.sizeIncludingBos())
             {
                 continue;
             }
@@ -109,7 +109,7 @@ public class LinearModel : ICacheAble
         MutableDoubleArrayTrieInteger mdat = new MutableDoubleArrayTrieInteger();
         foreach (KeyValuePair<string, int> tag in tagSet)
         {
-            mdat.Add("BL=" + tag.getKey());
+            mdat.Add("BL=" + tag.Key);
         }
         mdat.Add("BL=_BL_");
         for (int i = 0; i < tagSet.size() * tagSet.sizeIncludingBos(); i++)
@@ -117,7 +117,7 @@ public class LinearModel : ICacheAble
             parameter[i] = this.parameter[i];
         }
         logger.start("构建双数组trie树...\n");
-        logEvery = (int) Math.Ceil(heap.size() / 10000f);
+        logEvery = (int) Math.Ceiling(heap.size() / 10000f);
         n = 0;
         foreach (FeatureSortItem item in heap)
         {
@@ -126,7 +126,7 @@ public class LinearModel : ICacheAble
                 logger._out("\r%.2f%% ", MathUtility.percentage(n, heap.size()));
             }
             int id = mdat.size();
-            mdat.put(item.key, id);
+            mdat.Add(item.key, id);
             for (int i = 0; i < tagSet.size(); ++i)
             {
                 parameter[id * tagSet.size() + i] = this.parameter[item.id * tagSet.size() + i];
@@ -140,7 +140,7 @@ public class LinearModel : ICacheAble
     public class COMP :IComparer<FeatureSortItem> 
     {
         //@Override
-        public int Compare(FeatureSortItem o1, FeatureSortItem o2)
+        public int Compare(FeatureSortItem? o1, FeatureSortItem? o2)
         {
             return float.Compare(o1.total, o2.total);
         }
@@ -153,9 +153,9 @@ public class LinearModel : ICacheAble
      */
     public void save(string modelFile) 
     {
-        DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
+        Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
         save(_out);
-        _out.close();
+        _out.Close();
     }
 
     /**
@@ -189,33 +189,33 @@ public class LinearModel : ICacheAble
         float[] parameter = this.parameter;
         this.compress(ratio, 1e-3f);
 
-        DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
+        Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
         save(_out);
-        _out.close();
+        _out.Close();
 
         if (text)
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(modelFile + ".txt"), "UTF-8"));
+            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(modelFile + ".txt"), "UTF-8"));
             TagSet tagSet = featureMap.tagSet;
             for (KeyValuePair<string, int> entry : featureIdSet)
             {
-                bw.write(entry.getKey());
+                bw.write(entry.Key);
                 if (featureIdSet.size() == parameter.Length)
                 {
                     bw.write("\t");
-                    bw.write(string.valueOf(parameter[entry.getValue()]));
+                    bw.write(string.valueOf(parameter[entry.Value]));
                 }
                 else
                 {
                     for (int i = 0; i < tagSet.size(); ++i)
                     {
                         bw.write("\t");
-                        bw.write(string.valueOf(parameter[entry.getValue() * tagSet.size() + i]));
+                        bw.write(string.valueOf(parameter[entry.Value * tagSet.size() + i]));
                     }
                 }
                 bw.newLine();
             }
-            bw.close();
+            bw.Close();
         }
     }
 
@@ -303,9 +303,9 @@ public class LinearModel : ICacheAble
                     {
 
                         allFeature[transitionFeatureIndex] = preLabel;
-                        double score = score(allFeature, curLabel);
+                        double score2 = score(allFeature, curLabel);
 
-                        double curScore = scoreMatrix[_i_1][preLabel] + score;
+                        double curScore = scoreMatrix[_i_1][preLabel] + score2;
 
                         if (maxScore < curScore)
                         {
@@ -361,8 +361,8 @@ public class LinearModel : ICacheAble
             }
             else
             {
-                index = index * featureMap.tagSet.size() + currentTag;
-                score += parameter[index];    // 其实就是特征权重的累加
+                var index2 = index * featureMap.tagSet.size() + currentTag;
+                score += parameter[index2];    // 其实就是特征权重的累加
             }
         }
         return score;
@@ -435,9 +435,9 @@ public class LinearModel : ICacheAble
             }
         }
 //        assert !byteArray.hasMore();
-//        byteArray.close();
+//        byteArray.Close();
         if (!byteArray.hasMore())
-            byteArray.close();
+            byteArray.Close();
         return true;
     }
 

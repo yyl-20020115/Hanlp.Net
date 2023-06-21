@@ -32,14 +32,14 @@ public class ImmutableFeatureMap : FeatureMap
         this.featureIdMap = new HashMap<string, int>();
         for (KeyValuePair<string, int> entry : entrySet)
         {
-            featureIdMap.put(entry.getKey(), entry.getValue());
+            featureIdMap.Add(entry.Key, entry.Value);
         }
     }
 
     //@Override
-    public int idOf(string string)
+    public int idOf(string s)
     {
-        int id = featureIdMap.get(string);
+        int id = featureIdMap.get(s);
         if (id == null) return -1;
         return id;
     }

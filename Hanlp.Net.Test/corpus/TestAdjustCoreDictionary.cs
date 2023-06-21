@@ -27,8 +27,8 @@ public class TestAdjustCoreDictionary : TestCase
 //        DictionaryMaker dictionaryMaker = DictionaryMaker.load("data/test/CoreNatureDictionary.txt");
 //        for (Map.Entry<String, Item> entry : dictionaryMaker.entrySet())
 //        {
-//            String word = entry.getKey();
-//            Item item = entry.getValue();
+//            String word = entry.Key;
+//            Item item = entry.Value;
 //            if (word.matches(".##."))
 //            {
 //                Console.WriteLine(item);
@@ -42,8 +42,8 @@ public class TestAdjustCoreDictionary : TestCase
 //        tfDictionary.load("data/dictionary/CoreNatureDictionary.ngram.txt");
 //        for (Map.Entry<String, TermFrequency> entry : tfDictionary.entrySet())
 //        {
-//            String word = entry.getKey();
-//            TermFrequency frequency = entry.getValue();
+//            String word = entry.Key;
+//            TermFrequency frequency = entry.Value;
 //            if (word.Contains("##"))
 //            {
 //                Console.WriteLine(frequency);

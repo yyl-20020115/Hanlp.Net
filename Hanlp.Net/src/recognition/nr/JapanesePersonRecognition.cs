@@ -9,6 +9,14 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.dictionary.nr;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
+using System.Text;
+
 namespace com.hankcs.hanlp.recognition.nr;
 
 

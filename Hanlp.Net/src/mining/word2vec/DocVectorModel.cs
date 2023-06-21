@@ -39,7 +39,7 @@ public class DocVectorModel : AbstractVectorModel<int>
     {
         Vector result = query(content);
         if (result == null) return null;
-        storage.put(id, result);
+        storage.Add(id, result);
         return result;
     }
 

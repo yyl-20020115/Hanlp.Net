@@ -41,7 +41,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         foreach (KeyValuePair<string, V> entry in map)
         {
-            put(entry.Key, entry.Value);
+            Add(entry.Key, entry.Value);
         }
     }
 
@@ -51,7 +51,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param key
      * @param value
      */
-    public void put(string key, V value)
+    public void Add(string key, V value)
     {
         if (key.Length == 0) return;  // 安全起见
         BaseNode<V> branch = this;
@@ -69,7 +69,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         }
     }
 
-    public void put(char[] key, V value)
+    public void Add(char[] key, V value)
     {
         BaseNode<V> branch = this;
         for (int i = 0; i < key.Length - 1; ++i)
@@ -92,7 +92,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      */
     public void set(string key, V value)
     {
-        put(key.ToCharArray(), value);
+        Add(key.ToCharArray(), value);
     }
 
     /**
@@ -143,7 +143,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
         if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
-        return (V) branch.getValue();
+        return (V) branch.Value;
     }
 
     public V get(char[] key)
@@ -158,7 +158,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
         if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
-        return (V) branch.getValue();
+        return (V) branch.Value;
     }
 
     //@Override
@@ -201,7 +201,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         var keySet = new HashSet<string>();
         foreach (KeyValuePair<string, V> entry in entrySet())
         {
-            keySet.Add(entry.getKey());
+            keySet.Add(entry.Key);
         }
 
         return keySet;
@@ -219,7 +219,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         StringBuilder sb = new StringBuilder(key.substring(0, key.Length - 1));
         BaseNode<V> branch = this;
         char[] chars = key.ToCharArray();
-        for (char aChar : chars)
+        foreach (char aChar in chars)
         {
             if (branch == null) return entrySet;
             branch = branch.getChild(aChar);
@@ -302,11 +302,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                     {
                         target.status = Status.WORD_MIDDLE_2;
                     }
-                    if (target.getValue() == null)
+                    if (target.Value == null)
                     {
                         Add = true;
                     }
-                    target.setValue(node.getValue());
+                    target.setValue(node.Value);
                     break;
             }
         }
@@ -347,7 +347,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                     node.walkToSave(_out);
                 }
             }
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -363,7 +363,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         foreach (KeyValuePair<string, V> entry in keyValueMap)
         {
-            put(entry.Key, entry.Value);
+            Add(entry.Key, entry.Value);
         }
         return 0;
     }
@@ -415,7 +415,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         ByteArray byteArray = new ByteArray(bytes);
         for (int i = 0; i < child.Length; ++i)
         {
-            int flag = byteArray.nextInt();
+            int flag = byteArray.Next();
             if (flag == 1)
             {
                 child[i] = new Node<V>();
@@ -441,7 +441,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         ByteArray byteArray = new ByteArray(bytes);
         for (int i = 0; i < child.Length; ++i)
         {
-            int flag = byteArray.nextInt();
+            int flag = byteArray.Next();
             if (flag == 1)
             {
                 child[i] = new Node<V>();
@@ -457,7 +457,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         for (int i = 0; i < child.Length; ++i)
         {
-            int flag = byteArray.nextInt();
+            int flag = byteArray.Next();
             if (flag == 1)
             {
                 child[i] = new Node<V>();
@@ -529,14 +529,14 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             {
                 int to = i + 1;
                 int end = to;
-                V value = state.getValue();
+                V value = state.Value;
                 for (; to < Length; ++to)
                 {
                     state = state.transition(text[to]);
                     if (state == null) break;
-                    if (state.getValue() != null)
+                    if (state.Value != null)
                     {
-                        value = state.getValue();
+                        value = state.Value;
                         end = to + 1;
                     }
                 }
@@ -565,14 +565,14 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             {
                 int to = i + 1;
                 int end = to;
-                V value = state.getValue();
+                V value = state.Value;
                 for (; to < Length; ++to)
                 {
                     state = state.transition(text[to]);
                     if (state == null) break;
-                    if (state.getValue() != null)
+                    if (state.Value != null)
                     {
-                        value = state.getValue();
+                        value = state.Value;
                         end = to + 1;
                     }
                 }
@@ -602,7 +602,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             state = state.transition(text[i]);
             if (state != null)
             {
-                V value = state.getValue();
+                V value = state.Value;
                 if (value != null)
                 {
                     processor.hit(begin, i + 1, value);
@@ -634,7 +634,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             state = state.transition(text[i]);
             if (state != null)
             {
-                V value = state.getValue();
+                V value = state.Value;
                 if (value != null)
                 {
                     processor.hit(begin, i + 1, value);

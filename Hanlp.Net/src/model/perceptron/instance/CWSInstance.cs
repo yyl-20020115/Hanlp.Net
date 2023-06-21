@@ -219,7 +219,7 @@ public class CWSInstance : Instance
         int i = 0;
         foreach (Word word in wordList)
         {
-            termArray[i] = word.getValue();
+            termArray[i] = word.Value;
             ++i;
         }
         return new CWSInstance(termArray, featureMap);

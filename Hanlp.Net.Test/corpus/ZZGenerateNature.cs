@@ -151,7 +151,7 @@ public class ZZGenerateNature : TestCase
 //        int i = 0;
 //        for (String p : params)
 //        {
-//            p = p.trim();
+//            p = p.Trim();
 //            if (p.Length == 0) continue;
 //            Console.print(++i + " ");
 //            Console.WriteLine(p);

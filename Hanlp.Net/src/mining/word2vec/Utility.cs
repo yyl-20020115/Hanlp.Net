@@ -14,7 +14,7 @@ public class Utility
     private static readonly int HOUR = 60 * MINUTE;
     private static readonly int DAY = 24 * HOUR;
 
-    static string humanTime(long ms)
+    public static string humanTime(long ms)
     {
         var text = new StringBuilder();
         if (ms > DAY)
@@ -54,7 +54,7 @@ public class Utility
     {
         try
         {
-            if (c != null) c.close();
+            if (c != null) c.Close();
         }
         catch (IOException ignored)
         {
@@ -68,7 +68,7 @@ public class Utility
     {
         try
         {
-            if (raf != null) raf.close();
+            if (raf != null) raf.Close();
         }
         catch (IOException ignored)
         {
@@ -101,7 +101,7 @@ public class Utility
     {
         try
         {
-            if (os != null) os.close();
+            if (os != null) os.Close();
         }
         catch (IOException ignored)
         {
@@ -112,7 +112,7 @@ public class Utility
     {
         try
         {
-            if (w != null) w.close();
+            if (w != null) w.Close();
         }
         catch (IOException ignored)
         {
@@ -130,7 +130,7 @@ public class Utility
     public static  T[] shrink<T>(T[] from, T[] to)
     {
         //assert to.Length <= from.Length;
-        System.arraycopy(from, 0, to, 0, to.Length);
+        Array.Copy(from, 0, to, 0, to.Length);
         return to;
     }
 }

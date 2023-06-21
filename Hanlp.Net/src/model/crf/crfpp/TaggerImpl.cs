@@ -1,3 +1,8 @@
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.model.crf.crfpp;
+using System.Text;
+using static com.hankcs.hanlp.model.crf.crfpp.TaggerImpl;
+
 namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
@@ -54,20 +59,20 @@ public class TaggerImpl : Tagger
         thread_id_ = 0;
         lastError = null;
         feature_index_ = null;
-        x_ = new ArrayList<List<string>>();
-        node_ = new ArrayList<List<Node>>();
-        answer_ = new ArrayList<int>();
-        result_ = new ArrayList<int>();
+        x_ = new ();
+        node_ = new ();
+        answer_ = new ();
+        result_ = new ();
         agenda_ = null;
-        penalty_ = new ArrayList<List<Double>>();
-        featureCache_ = new ArrayList<List<int>>();
+        penalty_ = new ();
+        featureCache_ = new ();
     }
 
     public void clearNodes()
     {
         if (node_ != null && !node_.isEmpty())
         {
-            for (List<Node> n : node_)
+            foreach (List<Node> n in node_)
             {
                 for (int i = 0; i < n.size(); i++)
                 {
@@ -137,7 +142,7 @@ public class TaggerImpl : Tagger
                 double bestc = -1e37;
                 Node best = null;
                 List<Path> lpath = node_.get(i).get(j).lpath;
-                for (Path p : lpath)
+                foreach (Path p in lpath)
                 {
                     double cost = p.lnode.bestCost + p.cost + node_.get(i).get(j).cost;
                     if (cost > bestc)
@@ -204,13 +209,7 @@ public class TaggerImpl : Tagger
     {
         if (agenda_ == null)
         {
-            agenda_ = new PriorityQueue<QueueElement>(10, new Comparator<QueueElement>()
-            {
-                public int compare(QueueElement o1, QueueElement o2)
-                {
-                    return (int) (o1.fx - o2.fx);
-                }
-            });
+            agenda_ = new PriorityQueue<QueueElement>(10, new CT());
         }
         agenda_.Clear();
         int k = x_.size() - 1;
@@ -225,7 +224,13 @@ public class TaggerImpl : Tagger
         }
         return true;
     }
-
+    public class CT: IComparer<QueueElement>
+    {
+        public int Compare(QueueElement? o1, QueueElement? o2)
+        {
+            return (int)(o1.fx - o2.fx);
+        }
+    }
     public Node node(int i, int j)
     {
         return node_.get(i).get(j);
@@ -282,7 +287,7 @@ public class TaggerImpl : Tagger
             }
             s += node_.get(i).get(answer_.get(i)).cost; //UNIGRAM COST
             List<Path> lpath = node_.get(i).get(answer_.get(i)).lpath;
-            for (Path p : lpath)
+            foreach (Path p in lpath)
             {
                 if (p.lnode.y == answer_.get(p.lnode.x))
                 {
@@ -336,7 +341,7 @@ public class TaggerImpl : Tagger
                 collins.set(idx, collins.get(idx) + 1);
             }
             List<Path> lpath = node_.get(i).get(answer_.get(i)).lpath;
-            for (Path p : lpath)
+            foreach (Path p in lpath)
             {
                 if (p.lnode.y == answer_.get(p.lnode.x))
                 {
@@ -359,7 +364,7 @@ public class TaggerImpl : Tagger
                 collins.set(idx, collins.get(idx) - 1);
             }
             List<Path> lpathR = node_.get(i).get(result_.get(i)).lpath;
-            for (Path p : lpathR)
+            foreach (Path p in lpathR)
             {
                 if (p.lnode.y == result_.get(p.lnode.x))
                 {
@@ -387,7 +392,7 @@ public class TaggerImpl : Tagger
         return true;
     }
 
-    public ReadStatus read(BufferedReader br)
+    public ReadStatus read(TextReader br)
     {
         Clear();
         ReadStatus status = ReadStatus.SUCCESS;
@@ -396,7 +401,7 @@ public class TaggerImpl : Tagger
             string line;
             while (true)
             {
-                if ((line = br.readLine()) == null)
+                if ((line = br.ReadLine()) == null)
                 {
                     return ReadStatus.EOF;
                 }
@@ -433,7 +438,7 @@ public class TaggerImpl : Tagger
             }
             for (int i = 0; i < x_.size(); i++)
             {
-                for (string s : x_.get(i))
+                foreach (string s in x_.get(i))
                 {
                     sb.Append(s);
                     sb.Append("\t");
@@ -516,7 +521,7 @@ public class TaggerImpl : Tagger
         return true;
     }
 
-    public void close()
+    public void Close()
     {
     }
 
@@ -764,7 +769,7 @@ public class TaggerImpl : Tagger
                 cost_ = top.gx;
                 return true;
             }
-            for (Path p : rnode.lpath)
+            foreach (Path p in rnode.lpath)
             {
                 QueueElement n = new QueueElement();
                 n.node = p.lnode;
@@ -998,7 +1003,7 @@ public class TaggerImpl : Tagger
         {
             InputStream fis = IOUtil.newInputStream(args[1]);
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
+            TextReader br = new TextReader(isr);
 
             while (true)
             {
@@ -1023,7 +1028,7 @@ public class TaggerImpl : Tagger
                 }
                 Console.Write(tagger.ToString());
             }
-            br.close();
+            br.Close();
         }
     }
 }

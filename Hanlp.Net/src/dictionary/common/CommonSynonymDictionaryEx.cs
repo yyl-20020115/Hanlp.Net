@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.synonym;
+using System.Text;
+
 namespace com.hankcs.hanlp.dictionary.common;
 
 
@@ -25,7 +30,7 @@ public class CommonSynonymDictionaryEx
     {
     }
 
-    public static CommonSynonymDictionaryEx create(InputStream inputStream)
+    public static CommonSynonymDictionaryEx create(Stream inputStream)
     {
         CommonSynonymDictionaryEx dictionary = new CommonSynonymDictionaryEx();
         if (dictionary.load(inputStream))
@@ -38,39 +43,39 @@ public class CommonSynonymDictionaryEx
         return null;
     }
 
-    public bool load(InputStream inputStream)
+    public bool load(Stream inputStream)
     {
         trie = new DoubleArrayTrie<long[]>();
         Dictionary<string, HashSet<long>> treeMap = new Dictionary<string, HashSet<long>>();
         string line = null;
         try
         {
-            BufferedReader bw = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            while ((line = bw.readLine()) != null)
+            TextReader bw = new TextReader(new InputStreamReader(inputStream, "UTF-8"));
+            while ((line = bw.ReadLine()) != null)
             {
                 string[] args = line.Split(" ");
                 List<Synonym> synonymList = Synonym.create(args);
-                for (Synonym synonym : synonymList)
+                foreach (Synonym synonym in synonymList)
                 {
                     HashSet<long> idSet = treeMap.get(synonym.realWord);
                     if (idSet == null)
                     {
-                        idSet = new TreeSet<long>();
-                        treeMap.put(synonym.realWord, idSet);
+                        idSet = new ();
+                        treeMap.Add(synonym.realWord, idSet);
                     }
                     idSet.Add(synonym.id);
                 }
             }
-            bw.close();
+            bw.Close();
             List<string> keyList = new (treeMap.size());
-            for (string key : treeMap.keySet())
+            foreach (string key in treeMap.keySet())
             {
                 keyList.Add(key);
             }
-            List<long[]> valueList = new ArrayList<long[]>(treeMap.size());
-            for (Set<long> idSet : treeMap.values())
+            List<long[]> valueList = new (treeMap.size());
+            foreach (HashSet<long> idSet in treeMap.values())
             {
-                valueList.Add(idSet.ToArray(new long[0]));
+                valueList.Add(idSet.ToArray());
             }
             int resultCode = trie.build(keyList, valueList);
             if (resultCode != 0)
@@ -111,7 +116,7 @@ public class CommonSynonymDictionaryEx
     /**
      * 词典中的一个条目
      */
-    public static class SynonymItem : Synonym
+    public  class SynonymItem : Synonym
     {
         /**
          * 条目的value，是key的同义词近义词列表
@@ -119,8 +124,9 @@ public class CommonSynonymDictionaryEx
         public Dictionary<string, Synonym> synonymMap;
 
         public SynonymItem(Synonym entry, Dictionary<string, Synonym> synonymMap)
+            : base(entry.realWord, entry.id, entry.type)
         {
-            base(entry.realWord, entry.id, entry.type);
+            ;
             this.synonymMap = synonymMap;
         }
 

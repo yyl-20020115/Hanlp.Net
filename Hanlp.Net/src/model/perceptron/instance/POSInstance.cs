@@ -252,7 +252,7 @@ public class POSInstance : Instance
         int i = 0;
         foreach (Word word in wordList)
         {
-            termArray[i] = word.getValue();
+            termArray[i] = word.Value;
             posArray[i] = word.getLabel();
             ++i;
         }

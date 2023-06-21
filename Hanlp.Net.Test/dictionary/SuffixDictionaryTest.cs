@@ -13,8 +13,8 @@ public class SuffixDictionaryTest : TestCase
     public override void SetUp() 
     {
         base.SetUp();
-        dictionary.addAll(Predefine.POSTFIX_SINGLE);
-        dictionary.addAll(Predefine.POSTFIX_MUTIPLE);
+        dictionary.AddRange(Predefine.POSTFIX_SINGLE);
+        dictionary.AddRange(Predefine.POSTFIX_MUTIPLE);
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ public class SuffixDictionaryTest : TestCase
     //        DictionaryMaker dictionaryMaker = new DictionaryMaker();
     //        for (Map.Entry<String, int> entry : PlaceSuffixDictionary.dictionary.entrySet())
     //        {
-    //            dictionaryMaker.Add(entry.getKey(), NS.H.ToString());
+    //            dictionaryMaker.Add(entry.Key, NS.H.ToString());
     //        }
     //        dictionaryMaker.saveTxtTo("data/dictionary/place/suffix.txt");
     //    }

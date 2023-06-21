@@ -31,7 +31,7 @@ public abstract class Tagger
         return true;
     }
 
-    public void close()
+    public void Close()
     {
     }
 

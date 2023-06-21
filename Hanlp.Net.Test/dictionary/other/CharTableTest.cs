@@ -102,9 +102,9 @@ public class CharTableTest : TestCase
 //                else CONVERT[i] = ' ';
 //            }
 //        }
-//        ObjectOutputStream _out = new ObjectOutputStream(new FileOutputStream(HanLP.Config.CharTablePath));
+//        ObjectOutputStream _out = new ObjectOutputStream(new FileStream(HanLP.Config.CharTablePath));
 //        _out.writeObject(CONVERT);
-//        _out.close();
+//        _out.Close();
 //    }
 //
 //    public void testImportSingleCharFromTraditionalChineseDictionary() 
@@ -114,9 +114,9 @@ public class CharTableTest : TestCase
 ////        dictionary.load(HanLP.Config.t2sDictionaryPath);
 ////        for (Map.Entry<String, String> entry : dictionary.entrySet())
 ////        {
-////            String key = entry.getKey();
+////            String key = entry.Key;
 ////            if (key.Length != 1) continue;
-////            String value = entry.getValue();
+////            String value = entry.Value;
 ////            char t = key[0];
 ////            char s = value[0];
 //////            if (CONVERT[t] != s)
@@ -126,14 +126,14 @@ public class CharTableTest : TestCase
 ////            CONVERT[t] = s;
 ////        }
 ////
-////        ObjectOutputStream _out = new ObjectOutputStream(new FileOutputStream(HanLP.Config.CharTablePath));
+////        ObjectOutputStream _out = new ObjectOutputStream(new FileStream(HanLP.Config.CharTablePath));
 ////        _out.writeObject(CONVERT);
-////        _out.close();
+////        _out.Close();
 //    }
 //
 //    public void testDumpCharTable() 
 //    {
-//        BufferedWriter bw = IOUtil.newBufferedWriter(HanLP.Config.CharTablePath.replace(".bin.yes", ".txt"));
+//        TextWriter bw = IOUtil.newBufferedWriter(HanLP.Config.CharTablePath.replace(".bin.yes", ".txt"));
 //        char[] CONVERT = CharTable.CONVERT;
 //        for (int i = 0; i < CONVERT.Length; i++)
 //        {
@@ -142,7 +142,7 @@ public class CharTableTest : TestCase
 //                bw.write(String.Format("%c=%c\n", i, CONVERT[i]));
 //            }
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 //
 //    public void testLoadCharTableFromTxt() 

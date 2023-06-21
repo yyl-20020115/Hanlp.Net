@@ -70,7 +70,7 @@ public class MaxHeap<E> : IEnumerable<E>
      * 添加许多元素
      * @param collection
      */
-    public MaxHeap<E> addAll(ICollection<E> collection)
+    public MaxHeap<E> AddRange(ICollection<E> collection)
     {
         foreach(var e in collection)
         {

@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.MDAG;
+using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.dictionary.stopword;
 

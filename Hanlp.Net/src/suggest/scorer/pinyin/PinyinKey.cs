@@ -33,9 +33,9 @@ public class PinyinKey : Comparable<PinyinKey>, ISentenceKey<PinyinKey>
 
     public PinyinKey(string sentence)
     {
-        Pair<List<Pinyin>, List<Boolean>> pair = String2PinyinConverter.convert2Pair(sentence, true);
-        pinyinArray = PinyinUtil.convertList2Array(pair.getKey());
-        List<Boolean> booleanList = pair.getValue();
+        KeyValuePair<List<Pinyin>, List<Boolean>> pair = String2PinyinConverter.convert2Pair(sentence, true);
+        pinyinArray = PinyinUtil.convertList2Array(pair.Key);
+        List<Boolean> booleanList = pair.Value;
         int pinyinSize = 0;
         for (Boolean yes : booleanList)
         {

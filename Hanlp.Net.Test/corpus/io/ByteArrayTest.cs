@@ -28,7 +28,7 @@ public class ByteArrayTest : TestCase
         _out.Write(BitConverter.GetBytes(i));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         AssertEquals(d, byteArray.nextDouble());
-        AssertEquals(i, byteArray.nextInt());
+        AssertEquals(i, byteArray.Next());
     }
     [TestMethod]
 
@@ -119,7 +119,7 @@ public class ByteArrayTest : TestCase
         ByteArray byteArray = ByteArrayFileStream.createByteArrayFileStream(DATA_TEST_OUT_BIN);
         while (byteArray.hasMore())
         {
-            Console.WriteLine(byteArray.nextInt());
+            Console.WriteLine(byteArray.Next());
         }
     }
 

@@ -52,18 +52,18 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
     public int combine(TFDictionary dictionary, int limit, bool Add)
     {
         int preSize = trie.size();
-        for (KeyValuePair<string, TermFrequency> entry : dictionary.trie.entrySet())
+        foreach (KeyValuePair<string, TermFrequency> entry in dictionary.trie.entrySet())
         {
-            TermFrequency termFrequency = trie.get(entry.getKey());
+            TermFrequency termFrequency = trie.get(entry.Key);
             if (termFrequency == null)
             {
-                trie.put(entry.getKey(), new TermFrequency(entry.getKey(), Math.Min(limit, entry.getValue().getValue())));
+                trie.Add(entry.Key, new TermFrequency(entry.Key, Math.Min(limit, entry.Value.Value)));
             }
             else
             {
                 if (Add)
                 {
-                    termFrequency.setValue(termFrequency.getValue() + Math.Min(limit, entry.getValue().getValue()));
+                    termFrequency.setValue(termFrequency.Value + Math.Min(limit, entry.Value.Value));
                 }
             }
         }
@@ -88,19 +88,19 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
         }
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path[0]), "UTF-8"));
-            for (KeyValuePair<string, TermFrequency> entry : dictionaryMain.trie.entrySet())
+            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path[0]), "UTF-8"));
+            foreach (KeyValuePair<string, TermFrequency> entry in dictionaryMain.trie.entrySet())
             {
-                bw.write(entry.getKey());
+                bw.write(entry.Key);
                 bw.write(' ');
-                bw.write(string.valueOf(entry.getValue().getValue()));
+                bw.write(string.valueOf(entry.Value.Value));
                 bw.newLine();
             }
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             return -1;
         }
 
@@ -125,7 +125,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
         if (termFrequency == null)
         {
             termFrequency = new TermFrequency(key);
-            trie.put(key, termFrequency);
+            trie.Add(key, termFrequency);
         }
         else
         {
@@ -139,18 +139,18 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
         if ("=".Equals(delimeter))
         {
             LinkedList<TermFrequency> termFrequencyLinkedList = new LinkedList<TermFrequency>();
-            for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
+            foreach (KeyValuePair<string, TermFrequency> entry in trie.entrySet())
             {
-                termFrequencyLinkedList.Add(entry.getValue());
+                termFrequencyLinkedList.Add(entry.Value);
             }
             return IOUtil.saveCollectionToTxt(termFrequencyLinkedList, path);
         }
         else
         {
             var outList = new List<string>(size());
-            for (KeyValuePair<string, TermFrequency> entry : trie.entrySet())
+            foreach (KeyValuePair<string, TermFrequency> entry in trie.entrySet())
             {
-                outList.Add(entry.getKey() + delimeter + entry.getValue().getFrequency());
+                outList.Add(entry.Key + delimeter + entry.Value.getFrequency());
             }
             return IOUtil.saveCollectionToTxt(outList, path);
         }
@@ -166,7 +166,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
         LinkedList<string> keyList = new LinkedList<string>();
         foreach (KeyValuePair<string, TermFrequency> entry in trie.entrySet())
         {
-            keyList.Add(entry.getKey());
+            keyList.Add(entry.Key);
         }
         return IOUtil.saveCollectionToTxt(keyList, path);
     }
@@ -181,7 +181,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
 
         for (KeyValuePair<string, TermFrequency> entry : entrySet())
         {
-            set.Add(entry.getValue());
+            set.Add(entry.Value);
         }
 
         return set;

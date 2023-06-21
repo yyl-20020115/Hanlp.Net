@@ -140,8 +140,8 @@ public class SString : IComparable<SString>
     public SString Add(SString other)
     {
         char[] value = new char[Length + other.Length];
-        System.arraycopy(this.value, b, value, 0, Length);
-        System.arraycopy(other.value, other.b, value, Length, other.Length);
+        Array.Copy(this.value, b, value, 0, Length);
+        Array.Copy(other.value, other.b, value, Length, other.Length);
         b = 0;
         e = Length + other.Length;
         this.value = value;

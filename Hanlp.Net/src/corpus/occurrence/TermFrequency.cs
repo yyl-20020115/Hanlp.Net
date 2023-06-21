@@ -39,18 +39,18 @@ public class TermFrequency : AbstractMap<string,int>.SimpleEntry<string, int> , 
      */
     public int increase(int number)
     {
-        setValue(getValue() + number);
-        return getValue();
+        setValue(Value + number);
+        return Value;
     }
 
     public string getTerm()
     {
-        return getKey();
+        return Key;
     }
 
     public int getFrequency()
     {
-        return getValue();
+        return Value;
     }
 
     /**
@@ -66,7 +66,7 @@ public class TermFrequency : AbstractMap<string,int>.SimpleEntry<string, int> , 
     public int CompareTo(TermFrequency o)
     {
         if (this.getFrequency().CompareTo(o.getFrequency()) == 0) 
-            return getKey().CompareTo(o.getKey());
+            return Key.CompareTo(o.Key);
         return this.getFrequency().CompareTo(o.getFrequency());
     }
 }

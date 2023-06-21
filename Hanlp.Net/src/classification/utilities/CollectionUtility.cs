@@ -33,8 +33,8 @@ public class CollectionUtility
     {
         public int Compare(KeyValuePair<K, V> o1, KeyValuePair<K, V> o2)
         {
-            if (desc) return o2.getValue().compareTo(o1.getValue());
-            return o1.getValue().compareTo(o2.getValue());
+            if (desc) return o2.Value.compareTo(o1.Value);
+            return o1.Value.compareTo(o2.Value);
         }
     }
     public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input)
@@ -71,8 +71,8 @@ public class CollectionUtility
         string[][] output = new string[2][];
         output[0] = new string[(int)(src.Length * rate)];
         output[1] = new string[src.Length - output[0].Length];
-        System.arraycopy(src, 0, output[0], 0, output[0].Length);
-        System.arraycopy(src, output[0].Length, output[1], 0, output[1].Length);
+        Array.Copy(src, 0, output[0], 0, output[0].Length);
+        Array.Copy(src, output[0].Length, output[1], 0, output[1].Length);
         return output;
     }
 

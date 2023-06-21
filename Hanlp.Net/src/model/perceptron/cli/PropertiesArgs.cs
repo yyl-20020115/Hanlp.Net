@@ -45,7 +45,7 @@ public class PropertiesArgs
 
     private static void processField(Object target, Field field, Properties arguments)
     {
-        Argument argument = field.getAnnotation(Argument.class);
+        Argument argument = field.getAnnotation(Argument.s);
         if (argument != null)
         {
             string name = Args.getName(argument, field);
@@ -58,7 +58,7 @@ public class PropertiesArgs
             }
             if (value != null)
             {
-                if (type == Boolean.TYPE || type == Boolean.class)
+                if (type == Boolean.TYPE || type == Boolean.s)
                 {
                     value = true;
                 }
@@ -79,7 +79,7 @@ public class PropertiesArgs
         Method writeMethod = property.getWriteMethod();
         if (writeMethod != null)
         {
-            Argument argument = writeMethod.getAnnotation(Argument.class);
+            Argument argument = writeMethod.getAnnotation(Argument.s);
             if (argument != null)
             {
                 string name = Args.getName(argument, property);
@@ -92,7 +92,7 @@ public class PropertiesArgs
                 if (value != null)
                 {
                     Type type = property.getPropertyType();
-                    if (type == Boolean.TYPE || type == Boolean.class)
+                    if (type == Boolean.TYPE || type == Boolean.s)
                     {
                         value = true;
                     }

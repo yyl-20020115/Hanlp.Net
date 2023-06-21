@@ -36,12 +36,12 @@ public class TonePinyinString2PinyinConverter
         mapKey = new Dictionary<string, Pinyin>();
         foreach (Pinyin pinyin in Integer2PinyinConverter.pinyins)
         {
-            mapNumberKey.put(pinyin.ToString(), pinyin);
+            mapNumberKey.Add(pinyin.ToString(), pinyin);
             string pinyinWithToneMark = pinyin.getPinyinWithToneMark();
             string pinyinWithoutTone = pinyin.getPinyinWithoutTone();
             Pinyin tone5 = String2PinyinConverter.convert2Tone5(pinyin);
-            mapKey.put(pinyinWithToneMark, pinyin);
-            mapKey.put(pinyinWithoutTone, tone5);
+            mapKey.Add(pinyinWithToneMark, pinyin);
+            mapKey.Add(pinyinWithoutTone, tone5);
         }
         trie = new Trie().remainLongest();
         trie.addAllKeyword(mapKey.keySet());
@@ -66,7 +66,7 @@ public class TonePinyinString2PinyinConverter
 
     public static List<Pinyin> convert(string[] pinyinArray)
     {
-        List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.Length);
+        List<Pinyin> pinyinList = new (pinyinArray.Length);
         for (int i = 0; i < pinyinArray.Length; i++)
         {
             pinyinList.Add(mapKey.get(pinyinArray[i]));
@@ -88,8 +88,8 @@ public class TonePinyinString2PinyinConverter
     public static List<Pinyin> convert(string tonePinyinText, bool removeNull)
     {
         List<Pinyin> pinyinList = new ();
-        Collection<Token> tokenize = trie.tokenize(tonePinyinText);
-        for (Token token : tokenize)
+        ICollection<Token> tokenize = trie.tokenize(tonePinyinText);
+        foreach (Token token in tokenize)
         {
             Pinyin pinyin = mapKey.get(token.getFragment());
             if (removeNull && pinyin == null) continue;
@@ -106,7 +106,7 @@ public class TonePinyinString2PinyinConverter
      */
     public static bool valid(string[] pinyinStringArray)
     {
-        for (string p : pinyinStringArray)
+        foreach (string p in pinyinStringArray)
         {
             if (!valid(p)) return false;
         }
@@ -116,8 +116,8 @@ public class TonePinyinString2PinyinConverter
 
     public static List<Pinyin> convertFromToneNumber(string[] pinyinArray)
     {
-        List<Pinyin> pinyinList = new ArrayList<Pinyin>(pinyinArray.Length);
-        for (string py : pinyinArray)
+        List<Pinyin> pinyinList = new (pinyinArray.Length);
+        foreach (string py in pinyinArray)
         {
             pinyinList.Add(convertFromToneNumber(py));
         }

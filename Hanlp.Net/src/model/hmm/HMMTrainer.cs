@@ -8,6 +8,11 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.tagset;
+using com.hankcs.hanlp.model.perceptron.utility;
+
 namespace com.hankcs.hanlp.model.hmm;
 
 
@@ -36,32 +41,33 @@ public abstract class HMMTrainer
         this(new FirstOrderHiddenMarkovModel());
     }
 
+    public class IH: InstanceHandler
+    {
+        //@Override
+        public bool process(Sentence sentence)
+        {
+            sequenceList.Add(convertToSequence(sentence));
+            return false;
+        }
+    }
     public void train(string corpus) 
     {
-        List<List<string[]>> sequenceList = new LinkedList<List<string[]>>();
-        IOUtility.loadInstance(corpus, new InstanceHandler()
-        {
-            //@Override
-            public bool process(Sentence sentence)
-            {
-                sequenceList.Add(convertToSequence(sentence));
-                return false;
-            }
-        });
+        List<List<string[]>> sequenceList = new ();
+        IOUtility.loadInstance(corpus, new IH());
 
         TagSet tagSet = getTagSet();
 
-        List<int[][]> sampleList = new ArrayList<int[][]>(sequenceList.size());
-        for (List<string[]> sequence : sequenceList)
+        List<int[][]> sampleList = new (sequenceList.size());
+        foreach (List<string[]> sequence in sequenceList)
         {
             int[][] sample = new int[2][sequence.size()];
             int i = 0;
-            for (string[] os : sequence)
+            foreach (string[] os in sequence)
             {
                 sample[0][i] = vocabulary.idOf(os[0]);
-                assert sample[0][i] != -1;
+                //assert sample[0][i] != -1;
                 sample[1][i] = tagSet.Add(os[1]);
-                assert sample[1][i] != -1;
+                //assert sample[1][i] != -1;
                 ++i;
             }
             sampleList.Add(sample);

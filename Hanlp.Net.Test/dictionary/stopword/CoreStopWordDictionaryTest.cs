@@ -34,12 +34,12 @@ public class CoreStopWordDictionaryTest : TestCase
 //    public void testRemoveDuplicateEntries() 
 //    {
 //        StopWordDictionary dictionary = new StopWordDictionary(new File(HanLP.Config.CoreStopWordDictionaryPath));
-//        BufferedWriter bw = IOUtil.newBufferedWriter(HanLP.Config.CoreStopWordDictionaryPath);
+//        TextWriter bw = IOUtil.newBufferedWriter(HanLP.Config.CoreStopWordDictionaryPath);
 //        for (String word : dictionary)
 //        {
 //            bw.write(word);
 //            bw.newLine();
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 }

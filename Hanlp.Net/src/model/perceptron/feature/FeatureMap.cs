@@ -70,7 +70,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
         _out.writeInt(size());
         for (KeyValuePair<string, int> entry : entrySet())
         {
-            _out.writeUTF(entry.getKey());
+            _out.writeUTF(entry.Key);
         }
     }
 
@@ -78,7 +78,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     public bool load(ByteArray byteArray)
     {
         loadTagSet(byteArray);
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         for (int i = 0; i < size; i++)
         {
             idOf(byteArray.nextUTF());
@@ -88,7 +88,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
 
     protected void loadTagSet(ByteArray byteArray)
     {
-        TaskType type = TaskType.values()[byteArray.nextInt()];
+        TaskType type = TaskType.values()[byteArray.Next()];
         switch (type)
         {
             case TaskType.CWS:

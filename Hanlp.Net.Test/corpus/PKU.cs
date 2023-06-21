@@ -36,7 +36,7 @@ public class PKU
         {
             List<String> all = new ();
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(PKU199801);
-            while (lineIterator.hasNext())
+            while (lineIterator.MoveNext())
             {
                 all.Add(lineIterator.next());
             }
@@ -48,7 +48,7 @@ public class PKU
                     bw.write(line);
                     bw.newLine();
                 }
-                bw.close();
+                bw.Close();
 
                 bw = IOUtil.newBufferedWriter(PKU199801_TEST);
                 foreach (String line in all.Skip((int) (all.Count * 0.9)).Take(all.Count))
@@ -56,7 +56,7 @@ public class PKU
                     bw.write(line);
                     bw.newLine();
                 }
-                bw.close();
+                bw.Close();
             }
             catch (IOException e)
             {

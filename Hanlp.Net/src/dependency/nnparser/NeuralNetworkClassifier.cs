@@ -125,12 +125,12 @@ public class NeuralNetworkClassifier
         // Initialize the network
         int nrows = hidden_layer_size;
         int ncols = embedding_size * nr_feature_types;
-        W1 = Matrix.random(nrows, ncols).times(Math.sqrt(6. / (nrows + ncols)));
-        b1 = Matrix.random(nrows, 1).times(Math.sqrt(6. / (nrows + ncols)));
+        W1 = Matrix.random(nrows, ncols).times(Math.Sqrt(6. / (nrows + ncols)));
+        b1 = Matrix.random(nrows, 1).times(Math.Sqrt(6. / (nrows + ncols)));
 
         nrows = _nr_classes;  //
         ncols = hidden_layer_size;
-        W2 = Matrix.random(nrows, ncols).times(Math.sqrt(6. / (nrows + ncols)));
+        W2 = Matrix.random(nrows, ncols).times(Math.Sqrt(6. / (nrows + ncols)));
 
         // Initialized the embedding
         nrows = embedding_size;
@@ -160,7 +160,7 @@ public class NeuralNetworkClassifier
         for (int i = 0; i < precomputed_features.size(); ++i)
         {
             int fid = precomputed_features.get(i);
-            encoder.put(fid, rank++);
+            encoder.Add(fid, rank++);
         }
 
         saved = Matrix.zero(hidden_layer_size, encoder.size());

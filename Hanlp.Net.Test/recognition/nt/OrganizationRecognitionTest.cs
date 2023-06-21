@@ -23,7 +23,7 @@ public class OrganizationRecognitionTest : TestCase
 //        HashSet<String> keySet = commonStringDictionary.Keys;
 //        CommonStringDictionary secondDictionary = new CommonStringDictionary();
 //        secondDictionary.load("data/dictionary/organization/outerNT.pattern.txt");
-//        keySet.addAll(secondDictionary.Keys);
+//        keySet.AddRange(secondDictionary.Keys);
 //        for (String pattern : keySet)
 //        {
 //            sb.append("trie.addKeyword(\"" + pattern + "\");\n");
@@ -36,8 +36,8 @@ public class OrganizationRecognitionTest : TestCase
 //        DictionaryMaker maker = DictionaryMaker.load(HanLP.Config.OrganizationDictionaryPath);
 //        for (Map.Entry<String, Item> entry : maker.entrySet())
 //        {
-//            String word = entry.getKey();
-//            Item item = entry.getValue();
+//            String word = entry.Key;
+//            Item item = entry.Value;
 //            CoreDictionary.Attribute attribute = LexiconUtility.getAttribute(word);
 //            if (attribute == null) continue;
 //            if (item.containsLabel("P") && attribute.hasNatureStartsWith("u"))

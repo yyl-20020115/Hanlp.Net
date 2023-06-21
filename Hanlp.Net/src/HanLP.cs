@@ -16,6 +16,8 @@ using com.hankcs.hanlp.dictionary.py;
 using com.hankcs.hanlp.dictionary.ts;
 using com.hankcs.hanlp.mining.phrase;
 using com.hankcs.hanlp.mining.word;
+using com.hankcs.hanlp.model.crf;
+using com.hankcs.hanlp.model.perceptron;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.seg.NShort;
@@ -208,7 +210,7 @@ public class HanLP
                 {
                     p.load(new InputStreamReader(Predefine.HANLP_PROPERTIES_PATH == null ?
                                                      loader.getResourceAsStream("hanlp.properties") :
-                                                     new FileInputStream(Predefine.HANLP_PROPERTIES_PATH)
+                                                     new FileStream(Predefine.HANLP_PROPERTIES_PATH)
                         , "UTF-8"));
                 }
                 catch (Exception e)
@@ -217,7 +219,7 @@ public class HanLP
                     if (HANLP_ROOT == null) HANLP_ROOT = System.getenv("HANLP_ROOT");
                     if (HANLP_ROOT != null)
                     {
-                        HANLP_ROOT = HANLP_ROOT.trim();
+                        HANLP_ROOT = HANLP_ROOT.Trim();
                         p = new Properties();
                         p.setProperty("root", HANLP_ROOT);
                         logger.info("使用环境变量 HANLP_ROOT=" + HANLP_ROOT);
@@ -239,12 +241,12 @@ public class HanLP
                 {
                     if (pathArray[i].StartsWith(" "))
                     {
-                        pathArray[i] = prePath + pathArray[i].trim();
+                        pathArray[i] = prePath + pathArray[i].Trim();
                     }
                     else
                     {
                         pathArray[i] = root + pathArray[i];
-                        int lastSplash = pathArray[i].lastIndexOf('/');
+                        int lastSplash = pathArray[i].LastIndexOf('/');
                         if (lastSplash != -1)
                         {
                             prePath = pathArray[i].substring(0, lastSplash + 1);
@@ -643,7 +645,7 @@ public class HanLP
         {
             throw new ArgumentException(string.Format("非法参数 algorithm == %s", algorithm));
         }
-        algorithm = algorithm.toLowerCase();
+        algorithm = algorithm.ToLower();
         if ("viterbi".Equals(algorithm) || "维特比".Equals(algorithm))
             return new ViterbiSegment();   // Viterbi分词器是目前效率和效果的最佳平衡
         else if ("dat".Equals(algorithm) || "双数组trie树".Equals(algorithm))
@@ -718,7 +720,7 @@ public class HanLP
      * @param size   需要提取词语的数量
      * @return 一个词语列表
      */
-    public static List<WordInfo> extractWords(BufferedReader reader, int size) 
+    public static List<WordInfo> extractWords(TextReader reader, int size) 
     {
         return extractWords(reader, size, false);
     }
@@ -745,7 +747,7 @@ public class HanLP
      * @param newWordsOnly 是否只提取词典中没有的词语
      * @return 一个词语列表
      */
-    public static List<WordInfo> extractWords(BufferedReader reader, int size, bool newWordsOnly) 
+    public static List<WordInfo> extractWords(TextReader reader, int size, bool newWordsOnly) 
     {
         NewWordDiscover discover = new NewWordDiscover(4, 0.0f, .5f, 100f, newWordsOnly);
         return discover.discover(reader, size);
@@ -763,7 +765,7 @@ public class HanLP
      * @param min_aggregation 词语最低互信息
      * @return 一个词语列表
      */
-    public static List<WordInfo> extractWords(BufferedReader reader, int size, bool newWordsOnly, int max_word_len, float min_freq, float min_entropy, float min_aggregation) 
+    public static List<WordInfo> extractWords(TextReader reader, int size, bool newWordsOnly, int max_word_len, float min_freq, float min_entropy, float min_aggregation) 
     {
         NewWordDiscover discover = new NewWordDiscover(max_word_len, min_freq, min_entropy, min_aggregation, newWordsOnly);
         return discover.discover(reader, size);

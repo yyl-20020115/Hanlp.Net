@@ -93,7 +93,7 @@ public class Occurrence
         if (value == null)
         {
             value = new TermFrequency(key);
-            trieSingle.put(key, value);
+            trieSingle.Add(key, value);
         }
         else
         {
@@ -109,7 +109,7 @@ public class Occurrence
         if (value == null)
         {
             value = PairFrequency.create(first, delimiter, second);
-            triePair.put(key, value);
+            triePair.Add(key, value);
         }
         else
         {
@@ -125,7 +125,7 @@ public class Occurrence
         if (value == null)
         {
             value = TriaFrequency.create(first, RIGHT, second, third);
-            trieTria.put(key, value);
+            trieTria.Add(key, value);
         }
         else
         {
@@ -136,7 +136,7 @@ public class Occurrence
         if (value == null)
         {
             value = TriaFrequency.create(second, third, LEFT, first);
-            trieTria.put(key, value);
+            trieTria.Add(key, value);
         }
         else
         {
@@ -154,25 +154,25 @@ public class Occurrence
     {
         TermFrequency termFrequency = trieSingle.get(term);
         if (termFrequency == null) return 0;
-        return termFrequency.getValue();
+        return termFrequency.Value;
     }
 
     public int getPairFrequency(string first, string second)
     {
         TermFrequency termFrequency = triePair.get(first + RIGHT + second);
         if (termFrequency == null) return 0;
-        return termFrequency.getValue();
+        return termFrequency.Value;
     }
 
-    public void addAll(string[] termList)
+    public void AddRange(string[] termList)
     {
-        for (string term : termList)
+        foreach (string term in termList)
         {
             addTerm(term);
         }
 
         string first = null;
-        for (string current : termList)
+        foreach (string current in termList)
         {
             if (first != null)
             {
@@ -189,12 +189,11 @@ public class Occurrence
     public List<PairFrequency> getPhraseByMi()
     {
         List<PairFrequency> pairFrequencyList = new List<PairFrequency>(entrySetPair.size());
-        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
+        foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            pairFrequencyList.Add(entry.getValue());
+            pairFrequencyList.Add(entry.Value);
         }
-        Collections.sort(pairFrequencyList, new COMP()
-        );
+        pairFrequencyList.Sort(new COMP());
         return pairFrequencyList;
     }
     public class COMP:IComparer<PairFrequency>
@@ -211,7 +210,7 @@ public class Occurrence
         List<PairFrequency> pairFrequencyList = new (entrySetPair.size());
         foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            pairFrequencyList.Add(entry.getValue());
+            pairFrequencyList.Add(entry.Value);
         }
         Collections.sort(pairFrequencyList, new COMP2());
         return pairFrequencyList;
@@ -227,13 +226,12 @@ public class Occurrence
 
     public List<PairFrequency> getPhraseByRe()
     {
-        List<PairFrequency> pairFrequencyList = new ArrayList<PairFrequency>(entrySetPair.size());
-        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
+        List<PairFrequency> pairFrequencyList = new (entrySetPair.size());
+        foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            pairFrequencyList.Add(entry.getValue());
+            pairFrequencyList.Add(entry.Value);
         }
-        Collections.sort(pairFrequencyList, new COMP3()
-        );
+        Collections.sort(pairFrequencyList, new COMP3());
         return pairFrequencyList;
     }
     public class COMP3 :IComparer<PairFrequency>
@@ -241,15 +239,15 @@ public class Occurrence
         //@Override
         public int Compare(PairFrequency o1, PairFrequency o2)
         {
-            return -Double.compare(o1.re, o2.re);
+            return -Double.Compare(o1.re, o2.re);
         }
     }
     public List<PairFrequency> getPhraseByScore()
     {
-        List<PairFrequency> pairFrequencyList = new (entrySetPair.size());
+        List<PairFrequency> pairFrequencyList = new (entrySetPair.Count);
         foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            pairFrequencyList.Add(entry.getValue());
+            pairFrequencyList.Add(entry.Value);
         }
         Collections.sort(pairFrequencyList, new COMP4());
         return pairFrequencyList;
@@ -263,7 +261,7 @@ public class Occurrence
         }
     }
 
-    public void addAll(List<Term> resultList)
+    public void AddRange(List<Term> resultList)
     {
 //        Console.WriteLine(resultList);
         string[] termList = new string[resultList.Count];
@@ -273,12 +271,12 @@ public class Occurrence
             termList[i] = word.word;
             ++i;
         }
-        addAll(termList);
+        AddRange(termList);
     }
 
-    public void addAll(string text)
+    public void AddRange(string text)
     {
-        addAll(NotionalTokenizer.segment(text));
+        AddRange(NotionalTokenizer.segment(text));
     }
 
     //@Override
@@ -287,12 +285,12 @@ public class Occurrence
          StringBuilder sb = new StringBuilder("二阶共现：\n");
         foreach (KeyValuePair<string, PairFrequency> entry in triePair.entrySet())
         {
-            sb.Append(entry.getValue()).Append('\n');
+            sb.Append(entry.Value).Append('\n');
         }
         sb.Append("三阶共现：\n");
         foreach (KeyValuePair<string, TriaFrequency> entry in trieTria.entrySet())
         {
-            sb.Append(entry.getValue()).Append('\n');
+            sb.Append(entry.Value).Append('\n');
         }
         return sb.ToString();
     }
@@ -304,7 +302,7 @@ public class Occurrence
 
     public double computeMutualInformation(PairFrequency pair)
     {
-        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, pair.getValue() / totalPair) / Math.Max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
+        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, pair.Value / totalPair) / Math.Max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
     }
 
     /**
@@ -315,7 +313,7 @@ public class Occurrence
      */
     public double computeLeftEntropy(PairFrequency pair)
     {
-        var entrySet = trieTria.prefixSearch(pair.getKey() + LEFT);
+        var entrySet = trieTria.prefixSearch(pair.Key + LEFT);
         return computeEntropy(entrySet);
     }
 
@@ -327,22 +325,22 @@ public class Occurrence
      */
     public double computeRightEntropy(PairFrequency pair)
     {
-        var entrySet = trieTria.prefixSearch(pair.getKey() + RIGHT);
+        var entrySet = trieTria.prefixSearch(pair.Key + RIGHT);
         return computeEntropy(entrySet);
     }
 
     private double computeEntropy(HashSet<KeyValuePair<string, TriaFrequency>> entrySet)
     {
         double totalFrequency = 0;
-        for (KeyValuePair<string, TriaFrequency> entry : entrySet)
+        foreach (KeyValuePair<string, TriaFrequency> entry in entrySet)
         {
-            totalFrequency += entry.getValue().getValue();
+            totalFrequency += entry.Value.Value;
         }
         double le = 0;
-        for (KeyValuePair<string, TriaFrequency> entry : entrySet)
+        foreach (KeyValuePair<string, TriaFrequency> entry in entrySet)
         {
-            double p = entry.getValue().getValue() / totalFrequency;
-            le += -p * Math.log(p);
+            double p = entry.Value.Value / totalFrequency;
+            le += -p * Math.Log(p);
         }
         return le;
     }
@@ -356,9 +354,9 @@ public class Occurrence
         double total_mi = 0;
         double total_le = 0;
         double total_re = 0;
-        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
+        foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            PairFrequency value = entry.getValue();
+            PairFrequency value = entry.Value;
             value.mi = computeMutualInformation(value);
             value.le = computeLeftEntropy(value);
             value.re = computeRightEntropy(value);
@@ -367,9 +365,9 @@ public class Occurrence
             total_re += value.re;
         }
 
-        for (KeyValuePair<string, PairFrequency> entry : entrySetPair)
+        foreach (KeyValuePair<string, PairFrequency> entry in entrySetPair)
         {
-            PairFrequency value = entry.getValue();
+            PairFrequency value = entry.Value;
             value.score = value.mi / total_mi + value.le / total_le+ value.re / total_re;   // 归一化
             value.score *= entrySetPair.size();
         }
@@ -406,7 +404,7 @@ public class Occurrence
 //    public static void main(string[] args)
 //    {
 //        Occurrence occurrence = new Occurrence();
-//        occurrence.addAll("算法工程师\n" +
+//        occurrence.AddRange("算法工程师\n" +
 //                                  "算法（Algorithm）是一系列解决问题的清晰指令，也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。算法工程师就是利用算法处理事物的人。\n" +
 //                                  "\n" +
 //                                  "1职位简介\n" +

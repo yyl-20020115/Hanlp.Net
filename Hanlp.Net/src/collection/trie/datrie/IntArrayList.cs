@@ -76,13 +76,13 @@ public class IntArrayList : Serializable, ICacheAble
         if (!exponentialExpanding)
         {
             int[] newData = new int[this.data.Length + this.linearExpandFactor];
-            System.arraycopy(this.data, 0, newData, 0, this.data.Length);
+            Array.Copy(this.data, 0, newData, 0, this.data.Length);
             this.data = newData;
         }
         else
         {
             int[] newData = new int[(int) (this.data.Length * exponentialExpandFactor)];
-            System.arraycopy(this.data, 0, newData, 0, this.data.Length);
+            Array.Copy(this.data, 0, newData, 0, this.data.Length);
             this.data = newData;
         }
     }
@@ -112,7 +112,7 @@ public class IntArrayList : Serializable, ICacheAble
             return;
         }
         int[] newData = new int[_size];
-        System.arraycopy(this.data, 0, newData, 0, size);
+        Array.Copy(this.data, 0, newData, 0, size);
         this.data = newData;
     }
 
@@ -176,13 +176,13 @@ public class IntArrayList : Serializable, ICacheAble
         {
             return false;
         }
-        _size = byteArray.nextInt();
+        _size = byteArray.Next();
         data = new int[_size];
         for (int i = 0; i < _size; i++)
         {
-            data[i] = byteArray.nextInt();
+            data[i] = byteArray.Next();
         }
-        linearExpandFactor = byteArray.nextInt();
+        linearExpandFactor = byteArray.Next();
         exponentialExpanding = byteArray.nextBoolean();
         exponentialExpandFactor = byteArray.nextDouble();
         return true;

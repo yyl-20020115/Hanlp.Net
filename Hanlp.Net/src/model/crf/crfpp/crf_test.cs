@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
@@ -10,7 +12,7 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
  */
 public class crf_test
 {
-    private static class Option
+    private class Option
     {
         @Argument(description = "set FILE for model file", alias = "m", required = true)
         string model;
@@ -65,16 +67,16 @@ public class crf_test
                 return false;
             }
 
-            OutputStreamWriter osw = null;
+            StreamWriter osw = null;
             if (outputFile != null)
             {
-                osw = new OutputStreamWriter(IOUtil.newOutputStream(outputFile));
+                osw = new StreamWriter(IOUtil.newOutputStream(outputFile));
             }
-            for (string inputFile : restArgs)
+            foreach (string inputFile in restArgs)
             {
                 InputStream fis = IOUtil.newInputStream(inputFile);
                 InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-                BufferedReader br = new BufferedReader(isr);
+                TextReader br = new TextReader(isr);
 
                 while (true)
                 {
@@ -106,11 +108,11 @@ public class crf_test
                 {
                     osw.flush();
                 }
-                br.close();
+                br.Close();
             }
             if (osw != null)
             {
-                osw.close();
+                osw.Close();
             }
         }
         catch (Exception e)

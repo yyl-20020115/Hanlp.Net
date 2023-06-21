@@ -67,11 +67,11 @@ public class Graph
     }
 
     //@Override
-    public string ToString()
+    public override string ToString()
     {
         return "Graph{" +
-                "vertexes=" + Arrays.ToString(vertexes) +
-                ", edgesTo=" + Arrays.ToString(edgesTo) +
+                "vertexes=" + String.Join(',',vertexes) +
+                ", edgesTo=" + String.Join(',',edgesTo) +
                 '}';
     }
 
@@ -98,8 +98,8 @@ public class Graph
      */
     public List<Vertex> parsePath(int[] path)
     {
-        List<Vertex> vertexList = new LinkedList<Vertex>();
-        for (int i : path)
+        List<Vertex> vertexList = new ();
+        foreach (int i in path)
         {
             vertexList.Add(vertexes[i]);
         }

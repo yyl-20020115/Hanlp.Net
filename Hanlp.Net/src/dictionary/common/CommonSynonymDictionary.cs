@@ -10,7 +10,12 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.dependency.CoNll;
 using com.hankcs.hanlp.corpus.synonym;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+using com.hankcs.hanlp.utility;
+using System.Text;
 
 namespace com.hankcs.hanlp.dictionary.common;
 
@@ -53,21 +58,21 @@ public class CommonSynonymDictionary
         string line = null;
         try
         {
-            BufferedReader bw = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            ArrayList<Synonym> synonymList = null;
-            while ((line = bw.readLine()) != null)
+            TextReader bw = new TextReader(new InputStreamReader(inputStream, "UTF-8"));
+            List<Synonym> synonymList = null;
+            while ((line = bw.ReadLine()) != null)
             {
                 string[] args = line.Split(" ");
                 synonymList = Synonym.create(args);
                 char type = args[0].charAt(args[0].Length - 1);
-                for (Synonym synonym : synonymList)
+                foreach (Synonym synonym in synonymList)
                 {
-                    treeMap.put(synonym.realWord, new SynonymItem(synonym, synonymList, type));
+                    treeMap.Add(synonym.realWord, new SynonymItem(synonym, synonymList, type));
                     // 这里稍微做个test
                     //assert synonym.getIdString().StartsWith(line.Split(" ")[0].substring(0, line.Split(" ")[0].Length - 1)) : "词典有问题" + line + synonym.ToString();
                 }
             }
-            bw.close();
+            bw.Close();
             // 获取最大语义id
             if (synonymList != null && synonymList.Count > 0)
             {
@@ -121,13 +126,13 @@ public class CommonSynonymDictionary
 
     public string rewriteQuickly(string text)
     {
-        assert text != null;
+        //assert text != null;
         StringBuilder sbOut = new StringBuilder((int) (text.Length * 1.2));
         string preWord = Predefine.TAG_BIGIN;
         for (int i = 0; i < text.Length; ++i)
         {
             int state = 1;
-            state = trie.transition(text.charAt(i), state);
+            state = trie.transition(text[(i)], state);
             if (state > 0)
             {
                 int start = i;
@@ -136,7 +141,7 @@ public class CommonSynonymDictionary
                 SynonymItem value = null;
                 for (; to < text.Length; ++to)
                 {
-                    state = trie.transition(text.charAt(to), state);
+                    state = trie.transition(text[to], state);
                     if (state < 0) break;
                     SynonymItem output = trie.output(state);
                     if (output != null)
@@ -181,7 +186,7 @@ public class CommonSynonymDictionary
         List<Term> termList = StandardTokenizer.segment(text.ToCharArray());
         StringBuilder sbOut = new StringBuilder((int) (text.Length * 1.2));
         string preWord = Predefine.TAG_BIGIN;
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             SynonymItem synonymItem = get(term.word);
             Synonym synonym;
@@ -246,9 +251,9 @@ public class CommonSynonymDictionary
          */
         public Synonym randomSynonym(Type type, string preWord)
         {
-            ArrayList<Synonym> synonymArrayList = new ArrayList<Synonym>(synonymList);
-            ListIterator<Synonym> listIterator = synonymArrayList.listIterator();
-            if (type != null) while (listIterator.hasNext())
+            var synonymArrayList = new List<Synonym>(synonymList);
+            var listIterator = synonymArrayList.GetEnumerator();
+            if (type != null) while (listIterator.MoveNext())
             {
                 Synonym synonym = listIterator.next();
                 if (synonym.type != type || (preWord != null && CoreBiGramTableDictionary.getBiFrequency(preWord, synonym.realWord) == 0)) listIterator.Remove();

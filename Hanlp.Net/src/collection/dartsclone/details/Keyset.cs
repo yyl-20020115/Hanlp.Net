@@ -85,5 +85,5 @@ public class Keyset
     /**
      * 值
      */
-    private int _values[];
+    private int[] _values;
 }

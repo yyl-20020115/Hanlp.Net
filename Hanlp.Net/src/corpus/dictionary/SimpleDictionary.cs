@@ -29,15 +29,15 @@ public abstract class SimpleDictionary<V>
     {
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path), "UTF-8"));
             string line;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 KeyValuePair<string, V> entry = onGenerateEntry(line);
                 if (entry == null) continue;
-                trie.put(entry.getKey(), entry.getValue());
+                trie.Add(entry.Key, entry.Value);
             }
-            br.close();
+            br.Close();
         }
         catch (Exception e)
         {
@@ -77,10 +77,10 @@ public abstract class SimpleDictionary<V>
             logger.warning("有个词典还没加载");
             return;
         }
-        for (KeyValuePair<string, V> entry : other.trie.entrySet())
+        foreach (KeyValuePair<string, V> entry in other.trie.entrySet())
         {
-            if (trie.ContainsKey(entry.getKey())) continue;
-            trie.put(entry.getKey(), entry.getValue());
+            if (trie.ContainsKey(entry.Key)) continue;
+            trie.Add(entry.Key, entry.Value);
         }
     }
     /**
@@ -100,9 +100,9 @@ public abstract class SimpleDictionary<V>
     {
         TreeSet<string> keySet = new TreeSet<string>();
 
-        for (KeyValuePair<string, V> entry : entrySet())
+        foreach (KeyValuePair<string, V> entry in entrySet())
         {
-            keySet.Add(entry.getKey());
+            keySet.Add(entry.Key);
         }
 
         return keySet;
@@ -116,11 +116,11 @@ public abstract class SimpleDictionary<V>
     public int Remove(Filter filter)
     {
         int size = trie.size();
-        for (KeyValuePair<string, V> entry : entrySet())
+        foreach (KeyValuePair<string, V> entry in entrySet())
         {
             if (filter.Remove(entry))
             {
-                trie.Remove(entry.getKey());
+                trie.Remove(entry.Key);
             }
         }
 
@@ -138,7 +138,7 @@ public abstract class SimpleDictionary<V>
      */
     public void Add(string key, V value)
     {
-        trie.put(key, value);
+        trie.Add(key, value);
     }
 
     public int size()

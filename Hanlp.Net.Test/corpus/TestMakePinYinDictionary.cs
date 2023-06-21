@@ -32,7 +32,7 @@ public class TestMakePinYinDictionary : TestCase
 ////            //@Override
 ////            public bool Remove(Map.Entry entry)
 ////            {
-////                return entry.getValue().ToString().EndsWith("0");
+////                return entry.Value.ToString().EndsWith("0");
 ////            }
 ////        }));
 //
@@ -170,7 +170,7 @@ public class TestMakePinYinDictionary : TestCase
 //        StringDictionary pyEnumDictionary = new StringDictionary();
 //        for (Map.Entry<String, String> entry : dictionary.entrySet())
 //        {
-//            String[] args = entry.getValue().Split(",");
+//            String[] args = entry.Value.Split(",");
 //            for (String arg : args)
 //            {
 //                pyEnumDictionary.Add(arg, arg);
@@ -183,7 +183,7 @@ public class TestMakePinYinDictionary : TestCase
 //        StringBuilder sb = new StringBuilder();
 //        for (Map.Entry<String, String> entry : table.entrySet())
 //        {
-//            sb.append(entry.getKey());
+//            sb.append(entry.Key);
 //            sb.append('\n');
 //        }
 //        IOUtil.saveTxt("data/dictionary/pinyin/py.enum.txt", sb.ToString());
@@ -201,7 +201,7 @@ public class TestMakePinYinDictionary : TestCase
 //        StringDictionary pyEnumDictionary = new StringDictionary();
 //        for (Map.Entry<String, String> entry : dictionary.entrySet())
 //        {
-//            String[] args = entry.getValue().Split(",");
+//            String[] args = entry.Value.Split(",");
 //            for (String arg : args)
 //            {
 //                pyEnumDictionary.Add(arg, arg);
@@ -214,19 +214,19 @@ public class TestMakePinYinDictionary : TestCase
 //
 //        Iterator<Map.Entry<String, String>> iterator = table.entrySet().iterator();
 //        Map.Entry<String, String> pre = iterator.next();
-//        String prePy = pre.getKey().substring(0, pre.getKey().Length - 1);
-//        String preYd = pre.getKey().substring(pre.getKey().Length - 1);
-//        while (iterator.hasNext())
+//        String prePy = pre.Key.substring(0, pre.Key.Length - 1);
+//        String preYd = pre.Key.substring(pre.Key.Length - 1);
+//        while (iterator.MoveNext())
 //        {
 //            Map.Entry<String, String> current = iterator.next();
-//            String currentPy = current.getKey().substring(0, current.getKey().Length - 1);
-//            String currentYd = current.getKey().substring(current.getKey().Length - 1);
+//            String currentPy = current.Key.substring(0, current.Key.Length - 1);
+//            String currentYd = current.Key.substring(current.Key.Length - 1);
 //            // handle it
-//            if (!current.getValue().Contains(","))
+//            if (!current.Value.Contains(","))
 //            {
 //                if (currentPy.Equals(prePy))
 //                {
-//                    table.Add(current.getKey(), pre.getValue().replace(preYd, currentYd));
+//                    table.Add(current.Key, pre.Value.replace(preYd, currentYd));
 //                }
 //                else
 //                {
@@ -263,9 +263,9 @@ public class TestMakePinYinDictionary : TestCase
 //            //@Override
 //            public bool Remove(Map.Entry<String, String> entry)
 //            {
-//                String word = entry.getKey();
-//                String pinyin = entry.getValue();
-//                String[] pinyinStringArray = entry.getValue().Split("[,\\s　]");
+//                String word = entry.Key;
+//                String pinyin = entry.Value;
+//                String[] pinyinStringArray = entry.Value.Split("[,\\s　]");
 //                if (word.Length != pinyinStringArray.Length || !TonePinyinString2PinyinConverter.valid(pinyinStringArray))
 //                {
 //                    Console.WriteLine(entry);

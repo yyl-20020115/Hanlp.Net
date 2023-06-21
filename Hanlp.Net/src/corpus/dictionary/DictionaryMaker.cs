@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.dictionary.item;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using System.Text;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 
@@ -38,11 +39,11 @@ public class DictionaryMaker : ISaveAble
      */
     public void Add(IWord word)
     {
-        Item item = trie.get(word.getValue());
+        Item item = trie.get(word.Value);
         if (item == null)
         {
-            item = new Item(word.getValue(), word.getLabel());
-            trie.put(item.key, item);
+            item = new Item(word.Value, word.getLabel());
+            trie.Add(item.key, item);
         }
         else
         {
@@ -71,7 +72,7 @@ public class DictionaryMaker : ISaveAble
 
     public Item get(IWord word)
     {
-        return get(word.getValue());
+        return get(word.Value);
     }
 
     public HashSet<string> labelSet()
@@ -79,7 +80,7 @@ public class DictionaryMaker : ISaveAble
         HashSet<string> labelSet = new ();
         foreach (KeyValuePair<string, Item> entry in entrySet())
         {
-            labelSet.addAll(entry.getValue().labelMap.keySet());
+            labelSet.AddRange(entry.Value.labelMap.keySet());
         }
 
         return labelSet;
@@ -96,10 +97,10 @@ public class DictionaryMaker : ISaveAble
         List<Item> itemList = new LinkedList<Item>();
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOAdapter == null ? new FileInputStream(path) :
+            TextReader br = new TextReader(new InputStreamReader(IOAdapter == null ? new FileStream(path) :
                                                                                  IOAdapter.open(path), "UTF-8"));
             string line;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 Item item = Item.create(line);
                 if (item == null)
@@ -128,7 +129,7 @@ public class DictionaryMaker : ISaveAble
     public static DictionaryMaker load(string path)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
-        dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(path));
+        dictionaryMaker.AddRange(DictionaryMaker.loadAsItemList(path));
 
         return dictionaryMaker;
     }
@@ -138,9 +139,9 @@ public class DictionaryMaker : ISaveAble
      *
      * @param itemList
      */
-    public void addAll(List<Item> itemList)
+    public void AddRange(List<Item> itemList)
     {
-        for (Item item : itemList)
+        foreach (Item item in itemList)
         {
             Add(item);
         }
@@ -170,7 +171,7 @@ public class DictionaryMaker : ISaveAble
         if (innerItem == null)
         {
             innerItem = item;
-            trie.put(innerItem.key, innerItem);
+            trie.Add(innerItem.key, innerItem);
         }
         else
         {
@@ -203,7 +204,7 @@ public class DictionaryMaker : ISaveAble
         if (innerItem == null)
         {
             innerItem = item;
-            trie.put(innerItem.key, innerItem);
+            trie.Add(innerItem.key, innerItem);
         }
     }
 
@@ -217,8 +218,8 @@ public class DictionaryMaker : ISaveAble
     public static DictionaryMaker combine(string pathA, string pathB)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
-        dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(pathA));
-        dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(pathB));
+        dictionaryMaker.AddRange(DictionaryMaker.loadAsItemList(pathA));
+        dictionaryMaker.AddRange(DictionaryMaker.loadAsItemList(pathB));
 
         return dictionaryMaker;
     }
@@ -232,10 +233,10 @@ public class DictionaryMaker : ISaveAble
     public static DictionaryMaker combine(params string[] pathArray)
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
-        for (string path : pathArray)
+        foreach (string path in pathArray)
         {
             logger.warning("正在处理" + path);
-            dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(path));
+            dictionaryMaker.AddRange(DictionaryMaker.loadAsItemList(path));
         }
         return dictionaryMaker;
     }
@@ -250,7 +251,7 @@ public class DictionaryMaker : ISaveAble
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         logger.info("正在处理主词典" + pathArray[0]);
-        dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(pathArray[0]));
+        dictionaryMaker.AddRange(DictionaryMaker.loadAsItemList(pathArray[0]));
         for (int i = 1; i < pathArray.Length; ++i)
         {
             logger.info("正在处理副词典" + pathArray[i] + "，将执行新词合并模式");
@@ -269,7 +270,7 @@ public class DictionaryMaker : ISaveAble
     {
         DictionaryMaker dictionaryMaker = new DictionaryMaker();
         logger.info("正在处理主词典" + pathArray[0]);
-        dictionaryMaker.addAll(DictionaryMaker.loadAsItemList(pathArray[0]));
+        dictionaryMaker.AddRange(DictionaryMaker.loadAsItemList(pathArray[0]));
         for (int i = 1; i < pathArray.Length; ++i)
         {
             logger.info("正在处理副词典" + pathArray[i] + "，并且过滤已有词典");
@@ -292,14 +293,14 @@ public class DictionaryMaker : ISaveAble
         if (trie.size() == 0) return true;  // 如果没有词条，那也算成功了
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
+            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
             var entries = trie.entrySet();
             foreach (KeyValuePair<string, Item> entry in entries)
             {
                 bw.write(entry.Value.ToString());
                 bw.newLine();
             }
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {
@@ -337,7 +338,7 @@ public class DictionaryMaker : ISaveAble
     {
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
+            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
             var entries = trie.entrySet();
             foreach (KeyValuePair<string, Item> entry in entries)
             {
@@ -347,7 +348,7 @@ public class DictionaryMaker : ISaveAble
                     bw.newLine();
                 }
             }
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {
@@ -373,7 +374,7 @@ public class DictionaryMaker : ISaveAble
             int index = 1;
             foreach (KeyValuePair<string, int> pair in entryArray)
             {
-                item.labelMap.put(pair.getKey(), index);
+                item.labelMap.Add(pair.Key, index);
                 ++index;
             }
         }

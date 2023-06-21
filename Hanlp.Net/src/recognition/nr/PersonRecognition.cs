@@ -35,7 +35,7 @@ public class PersonRecognition
                 sbLog.Append(nrEnumItem);
                 sbLog.Append(']');
             }
-            System._out.printf("人名角色观察：%s\n", sbLog.ToString());
+            Console.WriteLine("人名角色观察：%s\n", sbLog.ToString());
         }
         List<NR> nrList = viterbiComputeSimply(roleTagList);
         if (HanLP.Config.DEBUG)
@@ -52,7 +52,7 @@ public class PersonRecognition
             }
             if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
-            System._out.printf("人名角色标注：%s\n", sbLog.ToString());
+            Console.WriteLine("人名角色标注：%s\n", sbLog.ToString());
         }
 
         PersonDictionary.parsePattern(nrList, pWordSegResult, wordNetOptimum, wordNetAll);
@@ -70,7 +70,7 @@ public class PersonRecognition
         Iterator<Vertex> iterator = wordSegResult.iterator();
         iterator.next();
         tagList.Add(new EnumItem<NR>(NR.A, NR.K)); //  始##始 A K
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             Vertex vertex = iterator.next();
             EnumItem<NR> nrEnumItem = PersonDictionary.dictionary.get(vertex.realWord);
@@ -83,8 +83,8 @@ public class PersonRecognition
                     if (vertex.getAttribute().totalFrequency <= 1000 && vertex.realWord.Length == 2)
                     {
                         nrEnumItem = new EnumItem<NR>();
-                        nrEnumItem.labelMap.put(NR.X, 2); // 认为是三字人名前2个字=双字人名的可能性更高
-                        nrEnumItem.labelMap.put(NR.G, 1);
+                        nrEnumItem.labelMap.Add(NR.X, 2); // 认为是三字人名前2个字=双字人名的可能性更高
+                        nrEnumItem.labelMap.Add(NR.G, 1);
                     }
                     else
                         nrEnumItem = new EnumItem<NR>(NR.A, PersonDictionary.transformMatrixDictionary.getTotalFrequency(NR.A));

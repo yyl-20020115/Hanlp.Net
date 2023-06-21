@@ -44,33 +44,40 @@ public class Viterbi
         }
         ++_max_states_value;
         double[,] V = new double[obs.Length,_max_states_value];
-        int[,] path = new int[_max_states_value,obs.Length];
+        int[][] path = new int[_max_states_value][];
+        for (int s = 0; s < _max_states_value; s++)
+        {
+            path[s] = new int[obs.Length];
+        }
 
         foreach (int y in states)
         {
             V[0,y] = start_p[y] + emit_p[y][obs[0]];
-            path[y,0] = y;
+            path[y][0] = y;
         }
 
         for (int t = 1; t < obs.Length; ++t)
         {
-            int[,] newpath = new int[_max_states_value,obs.Length];
-
+            int[][] newpath = new int[_max_states_value][];
+            for(int s = 0; s < _max_states_value; s++)
+            {
+                newpath[s] = new int[obs.Length];
+            }
             foreach (int y in states)
             {
-                double prob = Double.MaxValue;
-                int state;
+                double prob2 = Double.MaxValue;
+                int state2;
                 foreach (int y0 in states)
                 {
                     double nprob = V[t - 1,y0] + trans_p[y0][y] + emit_p[y][obs[t]];
-                    if (nprob < prob)
+                    if (nprob < prob2)
                     {
-                        prob = nprob;
-                        state = y0;
+                        prob2 = nprob;
+                        state2 = y0;
                         // 记录最大概率
-                        V[t][y] = prob;
+                        V[t,y] = prob2;
                         // 记录路径
-                        System.arraycopy(path[state], 0, newpath[y], 0, t);
+                        Array.Copy(path[state2], 0, newpath[y], 0, t);
                         newpath[y][t] = y;
                     }
                 }
@@ -120,7 +127,7 @@ public class Viterbi
             int curIndex = 0;
             foreach (Nature cur in item.attribute.nature)
             {
-                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.log((item.attribute.frequency[curIndex] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
+                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.Log((item.attribute.frequency[curIndex] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
                 ++j;
                 ++curIndex;
             }
@@ -143,7 +150,7 @@ public class Viterbi
                 int j = 0;
                 foreach (Nature p in preTagSet)
                 {
-                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.ordinal()][cur.ordinal()] - Math.log((item.attribute.frequency[k] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
+                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.ordinal()][cur.ordinal()] - Math.Log((item.attribute.frequency[k] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
                     if (now < cost[index_i][k])
                     {
                         cost[index_i][k] = now;
@@ -178,7 +185,7 @@ public class Viterbi
         double[][] cost = new double[2][];  // 滚动数组
         var iterator = roleTagList.iterator();
         EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.entrySet().iterator().next().getKey();
+        E pre = start.labelMap.entrySet().iterator().next().Key;
         // 第一个是确定的
         tagList.Add(pre);
         // 第二个也可以简单地算出来
@@ -187,12 +194,12 @@ public class Viterbi
             EnumItem<E> item = iterator.next();
             cost[0] = new double[item.labelMap.size()];
             int j = 0;
-            for (E cur : item.labelMap.keySet())
+            foreach (E cur in item.labelMap)
             {
-                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                 ++j;
             }
-            preTagSet = item.labelMap.keySet();
+            preTagSet = item.labelMap;
         }
         // 第三个开始复杂一些
         for (int i = 1; i < Length; ++i)
@@ -203,14 +210,14 @@ public class Viterbi
             cost[index_i] = new double[item.labelMap.size()];
             double perfect_cost_line = Double.MaxValue;
             int k = 0;
-            HashSet<E> curTagSet = item.labelMap.keySet();
+            HashSet<E> curTagSet = item.labelMap;
             foreach (E cur in curTagSet)
             {
                 cost[index_i][k] = Double.MaxValue;
                 int j = 0;
                 foreach (E p in preTagSet)
                 {
-                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.ordinal()][cur.ordinal()] - Math.log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.ordinal()][cur.ordinal()] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                     if (now < cost[index_i][k])
                     {
                         cost[index_i][k] = now;
@@ -245,7 +252,7 @@ public class Viterbi
         List<E> tagList = new LinkedList<E>();
         Iterator<EnumItem<E>> iterator = roleTagList.iterator();
         EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.entrySet().iterator().next().getKey();
+        E pre = start.labelMap.entrySet().iterator().next().Key;
         E perfect_tag = pre;
         // 第一个是确定的
         tagList.Add(pre);
@@ -253,9 +260,9 @@ public class Viterbi
         {
             double perfect_cost = double.MaxValue;
             EnumItem<E> item = iterator.next();
-            foreach (E cur in item.labelMap.keySet())
+            foreach (E cur in item.labelMap)
             {
-                double now = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                double now = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                 if (perfect_cost > now)
                 {
                     perfect_cost = now;

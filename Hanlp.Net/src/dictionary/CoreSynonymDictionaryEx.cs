@@ -113,7 +113,7 @@ public class CoreSynonymDictionaryEx
     {
         long[] array = new long[synonymItemList.size()];
         int i = 0;
-        for (CommonSynonymDictionary.SynonymItem item : synonymItemList)
+        foreach (CommonSynonymDictionary.SynonymItem item in synonymItemList)
         {
             array[i++] = item.entry.id;
         }

@@ -69,11 +69,11 @@ public class FeatureTemplate : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out) 
+    public void save(Stream _out) 
     {
         _out.writeUTF(template);
         _out.writeInt(offsetList.size());
-        for (int[] offset : offsetList)
+        foreach (int[] offset in offsetList)
         {
             _out.writeInt(offset[0]);
             _out.writeInt(offset[1]);
@@ -89,13 +89,13 @@ public class FeatureTemplate : ICacheAble
     public bool load(ByteArray byteArray)
     {
         template = byteArray.nextUTF();
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         offsetList = new ArrayList<int[]>(size);
         for (int i = 0; i < size; ++i)
         {
-            offsetList.Add(new int[]{byteArray.nextInt(), byteArray.nextInt()});
+            offsetList.Add(new int[]{byteArray.Next(), byteArray.Next()});
         }
-        size = byteArray.nextInt();
+        size = byteArray.Next();
         delimiterList = new (size);
         for (int i = 0; i < size; ++i)
         {

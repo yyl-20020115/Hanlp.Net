@@ -91,7 +91,7 @@ public class LongestCommonSubstring
                 ++n;
             }
         }
-//        System._out.printf("from %d of %s and %d of %s, compared for %d times\n", start1, new string(str1), start2, new string(str2), comparisons);
+//        Console.WriteLine("from %d of %s and %d of %s, compared for %d times\n", start1, new string(str1), start2, new string(str2), comparisons);
         return longest;
     }
 

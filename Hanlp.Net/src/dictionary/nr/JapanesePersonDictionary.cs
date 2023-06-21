@@ -56,15 +56,15 @@ public class JapanesePersonDictionary
         if (loadDat()) return true;
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
             Dictionary<string, char> map = new Dictionary<string, char>();
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 string[] param = line.Split(" ", 2);
                 map.Add(param[0], param[1][0]);
             }
-            br.close();
+            br.Close();
             logger.info("日本人名词典" + path + "开始构建双数组……");
             trie.build(map);
             logger.info("日本人名词典" + path + "开始编译DAT文件……");
@@ -88,13 +88,13 @@ public class JapanesePersonDictionary
     {
         try
         {
-            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
+            Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
             _out.writeInt(map.size());
             foreach (char character in map.values())
             {
                 _out.writeChar(character);
             }
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -108,7 +108,7 @@ public class JapanesePersonDictionary
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.VALUE_EXT);
         if (byteArray == null) return false;
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         char[] valueArray = new char[size];
         for (int i = 0; i < valueArray.Length; ++i)
         {

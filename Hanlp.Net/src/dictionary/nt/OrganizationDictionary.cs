@@ -11,7 +11,9 @@
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
 using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.utility;
+using System.Text;
 
 namespace com.hankcs.hanlp.dictionary.nt;
 
@@ -48,7 +50,7 @@ public class OrganizationDictionary
 
     private static void addKeyword(Dictionary<string, string> patternMap, string keyword)
     {
-        patternMap.put(keyword, keyword);
+        patternMap.Add(keyword, keyword);
     }
     static OrganizationDictionary()
     {
@@ -3736,43 +3738,44 @@ public class OrganizationDictionary
      */
     public static void parsePattern(List<NT> ntList, List<Vertex> vertexList, WordNet wordNetOptimum, WordNet wordNetAll)
     {
-//        ListIterator<Vertex> listIterator = vertexList.listIterator();
+//        ListIterator<Vertex> listIterator = vertexList.GetEnumerator();
         StringBuilder sbPattern = new StringBuilder(ntList.size());
-        for (NT nt : ntList)
+        foreach (NT nt in ntList)
         {
             sbPattern.Append(nt.ToString());
         }
         string pattern = sbPattern.ToString();
         Vertex[] wordArray = vertexList.ToArray(new Vertex[0]);
-        trie.parseText(pattern, new AhoCorasickDoubleArrayTrie.IHit<string>()
-        {
-            //@Override
-            public void hit(int begin, int end, string keyword)
-            {
-                StringBuilder sbName = new StringBuilder();
-                for (int i = begin; i < end; ++i)
-                {
-                    sbName.Append(wordArray[i].realWord);
-                }
-                string name = sbName.ToString();
-                // 对一些bad case做出调整
-                if (isBadCase(name)) return;
-
-                // 正式算它是一个名字
-                if (HanLP.Config.DEBUG)
-                {
-                    System._out.printf("识别出机构名：%s %s\n", name, keyword);
-                }
-                int offset = 0;
-                for (int i = 0; i < begin; ++i)
-                {
-                    offset += wordArray[i].realWord.Length;
-                }
-                wordNetOptimum.insert(offset, new Vertex(Predefine.TAG_GROUP, name, ATTRIBUTE, WORD_ID), wordNetAll);
-            }
-        });
+        trie.parseText(pattern, new CT());
     }
 
+    public class CT: AhoCorasickDoubleArrayTrie<string>.IHit<string>
+    {
+        //@Override
+        public void hit(int begin, int end, string keyword)
+        {
+            StringBuilder sbName = new StringBuilder();
+            for (int i = begin; i < end; ++i)
+            {
+                sbName.Append(wordArray[i].realWord);
+            }
+            string name = sbName.ToString();
+            // 对一些bad case做出调整
+            if (isBadCase(name)) return;
+
+            // 正式算它是一个名字
+            if (HanLP.Config.DEBUG)
+            {
+                Console.WriteLine("识别出机构名：%s %s\n", name, keyword);
+            }
+            int offset = 0;
+            for (int i = 0; i < begin; ++i)
+            {
+                offset += wordArray[i].realWord.Length;
+            }
+            wordNetOptimum.insert(offset, new Vertex(Predefine.TAG_GROUP, name, ATTRIBUTE, WORD_ID), wordNetAll);
+        }
+    }
     /**
      * 因为任何算法都无法解决100%的问题，总是有一些bad case，这些bad case会以“单词 Z 1”的形式加入词典中<BR>
      * 这个方法返回是否是bad case
@@ -3782,7 +3785,7 @@ public class OrganizationDictionary
      */
     static bool isBadCase(string name)
     {
-        EnumItem<NT> nrEnumItem = dictionary.get(name);
+        var nrEnumItem = dictionary.get(name);
         if (nrEnumItem == null) return false;
         return nrEnumItem.containsLabel(NT.Z);
     }

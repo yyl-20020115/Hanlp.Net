@@ -22,7 +22,7 @@ public class BinTrieTest : TestCase
         String[] keys = new String[] { "he", "her", "his" };
         foreach (String key in keys)
         {
-            trie.put(key, key);
+            trie.Add(key, key);
         }
         String text = " her4he7his ";
         AhoCorasick.AhoCorasickDoubleArrayTrie<String>.IHit<String> processor = new TestHit() { text = text };
@@ -44,8 +44,8 @@ public class BinTrieTest : TestCase
     public void TestPut()
     {
         BinTrie<bool> trie = new BinTrie<bool>();
-        trie.put("加入", true);
-        trie.put("加入", false);
+        trie.Add("加入", true);
+        trie.Add("加入", false);
 
         AssertEquals(false, trie.get("加入"));
     }
@@ -54,19 +54,19 @@ public class BinTrieTest : TestCase
     public void TestArrayIndexOutOfBoundsException()
     {
         BinTrie<bool> trie = new BinTrie<bool>();
-        trie.put(new char[] { '\uffff' }, true);
+        trie.Add(new char[] { '\uffff' }, true);
     }
 
     [TestMethod]
     public void TestSaveAndLoad()
     {
         BinTrie<int> trie = new BinTrie<int>();
-        trie.put("haha", 0);
-        trie.put("hankcs", 1);
-        trie.put("hello", 2);
-        trie.put("za", 3);
-        trie.put("zb", 4);
-        trie.put("zzz", 5);
+        trie.Add("haha", 0);
+        trie.Add("hankcs", 1);
+        trie.Add("hello", 2);
+        trie.Add("za", 3);
+        trie.Add("zb", 4);
+        trie.Add("zzz", 5);
         AssertTrue(trie.save(DATA_TEST_OUT_BIN));
         trie = new BinTrie<int>();
         int[] value = new int[100];

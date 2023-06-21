@@ -24,13 +24,13 @@ public class KMeansClustering
 
         OutputStream os = null;
         Writer w = null;
-        PrintWriter pw = null;
+        TextWriter pw = null;
 
         try
         {
-            os = new FileOutputStream(outFile);
-            w = new OutputStreamWriter(os, ENCODING);
-            pw = new PrintWriter(w);
+            os = new FileStream(outFile);
+            w = new StreamWriter(os, ENCODING);
+            pw = new TextWriter(w);
 
             // Run K-means on the word vectors
             Console.Error.WriteLine("now computing K-means clustering (K=%d)\n", clcn);
@@ -65,7 +65,7 @@ public class KMeansClustering
                         cent[layer1Size * j + k] /= centcn[j];
                         closev += cent[layer1Size * j + k] * cent[layer1Size * j + k];
                     }
-                    closev = Math.sqrt(closev);
+                    closev = Math.Sqrt(closev);
                     for (int k = 0; k < layer1Size; k++)
                     {
                         cent[layer1Size * j + k] /= closev;

@@ -11,6 +11,7 @@
 using com.hankcs.hanlp.classification.utilities.io;
 using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.dependency.nnparser;
+using com.hankcs.hanlp.model.perceptron.common;
 using com.hankcs.hanlp.model.perceptron.feature;
 using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.model;
@@ -127,7 +128,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
             for (int iter = 1; iter <= maxIteration; iter++)
             {
                 Utility.shuffleArray(instances);
-                for (Instance instance : instances)
+                foreach (Instance instance in instances)
                 {
                     ++current;
                     int[] guessLabel = new int[instance.Length];
@@ -186,7 +187,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
                                                         models[i]);
                         workers[i].start();
                     }
-                    for (TrainingWorker worker : workers)
+                    foreach (TrainingWorker worker in workers)
                     {
                         worker.join();
                     }
@@ -317,26 +318,26 @@ public abstract class PerceptronTrainer : InstanceConsumer
 
     private static void loadWordFromFile(string path, FrequencyMap storage, bool segmented) 
     {
-        BufferedReader br = IOUtility.newBufferedReader(path);
+        TextReader br = IOUtility.newBufferedReader(path);
         string line;
-        while ((line = br.readLine()) != null)
+        while ((line = br.ReadLine()) != null)
         {
             if (segmented)
             {
-                for (string word : IOUtility.readLineToArray(line))
+                foreach (string word in IOUtility.readLineToArray(line))
                 {
                     storage.Add(word);
                 }
             }
             else
             {
-                line = line.trim();
+                line = line.Trim();
                 if (line.Length != 0)
                 {
                     storage.Add(line);
                 }
             }
         }
-        br.close();
+        br.Close();
     }
 }

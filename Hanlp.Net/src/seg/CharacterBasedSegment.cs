@@ -8,6 +8,9 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.seg.common;
+
 namespace com.hankcs.hanlp.seg;
 
 
@@ -41,7 +44,7 @@ public abstract class CharacterBasedSegment : Segment
                 else if (Nature.m == term.nature)
                     attribute = CoreDictionary.get(CoreDictionary.M_WORD_ID);
             }
-            else if (term.word.trim().Length == 0)
+            else if (term.word.Trim().Length == 0)
                 attribute = new CoreDictionary.Attribute(Nature.x);
             else attribute = new CoreDictionary.Attribute(Nature.nz);
         }
@@ -57,7 +60,7 @@ public abstract class CharacterBasedSegment : Segment
     //@Override
     protected List<Term> segSentence(char[] sentence)
     {
-        if (sentence.Length == 0) return Collections.emptyList();
+        if (sentence.Length == 0) return new();
         List<Term> termList = roughSegSentence(sentence);
         if (!(config.ner || config.useCustomDictionary || config.speechTagging))
             return termList;
@@ -66,7 +69,7 @@ public abstract class CharacterBasedSegment : Segment
         {
             Viterbi.compute(vertexList, CoreDictionaryTransformMatrixDictionary.transformMatrixDictionary);
             int i = 0;
-            for (Term term : termList)
+            foreach (Term term in termList)
             {
                 if (term.nature != null) term.nature = vertexList.get(i + 1).guessNature();
                 ++i;
@@ -96,9 +99,9 @@ public abstract class CharacterBasedSegment : Segment
      */
     protected List<Vertex> toVertexList(List<Term> wordList, bool appendStart)
     {
-        ArrayList<Vertex> vertexList = new ArrayList<Vertex>(wordList.size() + 2);
+        var vertexList = new List<Vertex>(wordList.Count + 2);
         if (appendStart) vertexList.Add(Vertex.newB());
-        for (Term word : wordList)
+        foreach (Term word in wordList)
         {
             CoreDictionary.Attribute attribute = guessAttribute(word);
             Vertex vertex = new Vertex(word.word, attribute);

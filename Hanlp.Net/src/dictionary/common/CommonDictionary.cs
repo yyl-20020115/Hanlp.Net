@@ -52,14 +52,14 @@ public abstract class CommonDictionary<V>
         Dictionary<string, V> map = new Dictionary<string, V>();
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 string[] paramArray = line.Split("\\s");
-                map.put(paramArray[0], createValue(paramArray));
+                map.Add(paramArray[0], createValue(paramArray));
             }
-            br.close();
+            br.Close();
         }
         catch (Exception e)
         {
@@ -69,11 +69,11 @@ public abstract class CommonDictionary<V>
         onLoaded(map);
         HashSet<KeyValuePair<string, V>> entrySet = map.entrySet();
         List<string> keyList = new (entrySet.size());
-        List<V> valueList = new ArrayList<V>(entrySet.size());
-        for (KeyValuePair<string, V> entry : entrySet)
+        List<V> valueList = new (entrySet.size());
+        foreach (KeyValuePair<string, V> entry in entrySet)
         {
-            keyList.Add(entry.getKey());
-            valueList.Add(entry.getValue());
+            keyList.Add(entry.Key);
+            valueList.Add(entry.Value);
         }
         int resultCode = trie.build(keyList, valueList);
         if (resultCode != 0)
@@ -113,14 +113,14 @@ public abstract class CommonDictionary<V>
     {
         try
         {
-            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path)));
+            Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path)));
             _out.writeInt(valueArray.size());
-            for (V item : valueArray)
+            foreach (V item in valueArray)
             {
                 saveValue(item, _out);
             }
             trie.save(_out);
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -137,7 +137,7 @@ public abstract class CommonDictionary<V>
      * @param _out
      * @
      */
-    protected abstract void saveValue(V value, DataOutputStream _out) ;
+    protected abstract void saveValue(V value, Stream _out) ;
 
     /**
      * 查询一个单词

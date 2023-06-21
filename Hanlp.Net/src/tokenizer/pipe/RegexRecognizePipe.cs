@@ -41,14 +41,14 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
     //@Override
     public List<IWord> flow(List<IWord> input)
     {
-        ListIterator<IWord> listIterator = input.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<IWord> listIterator = input.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             IWord wordOrSentence = listIterator.next();
             if (wordOrSentence.getLabel() != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
             listIterator.Remove(); // 否则是句子
-            string sentence = wordOrSentence.getValue();
+            string sentence = wordOrSentence.Value;
             var matcher = pattern.matcher(sentence);
             int begin = 0;
             int end;

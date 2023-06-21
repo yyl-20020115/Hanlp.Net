@@ -76,7 +76,7 @@ public class TextProcessUtility
         File root = new File(path);
         File[] folders = root.listFiles();
         if (folders == null) return null;
-        for (File folder : folders)
+        foreach (File folder in folders)
         {
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
@@ -86,7 +86,7 @@ public class TextProcessUtility
             {
                 documents[i] = IOUtil.readTxt(files[i]);
             }
-            dataSet.put(folder.getName(), documents);
+            dataSet.Add(folder.getName(), documents);
         }
 
         return dataSet;
@@ -119,7 +119,7 @@ public class TextProcessUtility
             {
                 documents[i] = readTxt(files[i], charsetName);
             }
-            dataSet.put(folder.getName(), documents);
+            dataSet.Add(folder.getName(), documents);
         }
 
         return dataSet;
@@ -135,7 +135,7 @@ public class TextProcessUtility
         {
             off += len;
         }
-        _is.close();
+        _is.Close();
 
         return new string(targetArray, charsetName);
     }

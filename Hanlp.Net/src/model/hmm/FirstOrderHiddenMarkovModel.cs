@@ -38,7 +38,7 @@ public class FirstOrderHiddenMarkovModel : HiddenMarkovModel
         double[] pi = logToCdf(start_probability);
         double[][] A = logToCdf(transition_probability);
         double[][] B = logToCdf(emission_probability);
-        int xy[][] = new int[2][Length];
+        int[][] xy = new int[2][Length];
         xy[1][0] = drawFrom(pi); // 采样首个隐状态
         xy[0][0] = drawFrom(B[xy[1][0]]); // 根据首个隐状态采样它的显状态
         for (int t = 1; t < Length; t++)

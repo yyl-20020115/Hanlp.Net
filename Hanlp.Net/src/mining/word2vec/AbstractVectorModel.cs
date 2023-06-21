@@ -9,6 +9,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.mining.word2vec;
 using System.Runtime.InteropServices;
 
@@ -79,7 +80,7 @@ public abstract class AbstractVectorModel<K>
      */
     public List<KeyValuePair<K, float>> nearest(K key, int size)
     {
-        Vector vector = storage.get(key);
+        Vector vector = storage[key];
         if (vector == null)
         {
             return new();
@@ -130,9 +131,9 @@ public abstract class AbstractVectorModel<K>
     {
         MaxHeap<KeyValuePair<K, float>> maxHeap = new MaxHeap<KeyValuePair<K, float>>(size, new COMP2<K>());
 
-        for (KeyValuePair<K, Vector> entry in storage.entrySet())
+        foreach (KeyValuePair<K, Vector> entry in storage)
         {
-            maxHeap.Add(new AbstractMap.SimpleEntry<K, float>(entry.getKey(), entry.getValue().cosineForUnitVector(vector)));
+            maxHeap.Add(new AbstractMap<K,float>.SimpleEntry<K, float>(entry.Key, entry.Value.cosineForUnitVector(vector)));
         }
         return maxHeap.ToList();
     }
@@ -141,7 +142,7 @@ public abstract class AbstractVectorModel<K>
         //@Override
         public int Compare(KeyValuePair<K, float> o1, KeyValuePair<K, float> o2)
         {
-            return o1.getValue().compareTo(o2.getValue());
+            return (int)(o1.Value - o2.Value);
         }
     }
     /**
@@ -177,7 +178,7 @@ public abstract class AbstractVectorModel<K>
     {
         if (query == null || query.Length == 0)
         {
-            return Collections.emptyList();
+            return new();
         }
         try
         {
@@ -185,7 +186,7 @@ public abstract class AbstractVectorModel<K>
         }
         catch (Exception e)
         {
-            return Collections.emptyList();
+            return new();
         }
     }
 
@@ -204,7 +205,7 @@ public abstract class AbstractVectorModel<K>
      */
     public int size()
     {
-        return storage.size();
+        return storage.Count;
     }
 
     /**
@@ -218,7 +219,7 @@ public abstract class AbstractVectorModel<K>
         {
             return 0;
         }
-        return storage.values().iterator().next().size();
+        return storage.Values.iterator().next().size();
     }
 
     /**

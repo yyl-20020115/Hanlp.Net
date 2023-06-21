@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.model.crf;
 
 
@@ -49,7 +51,7 @@ public class FeatureFunction : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeInt(o.Length);
         for (char c : o)
@@ -66,13 +68,13 @@ public class FeatureFunction : ICacheAble
     //@Override
     public bool load(ByteArray byteArray)
     {
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         o = new char[size];
         for (int i = 0; i < size; ++i)
         {
             o[i] = byteArray.nextChar();
         }
-        size = byteArray.nextInt();
+        size = byteArray.Next();
         w = new double[size];
         for (int i = 0; i < size; ++i)
         {

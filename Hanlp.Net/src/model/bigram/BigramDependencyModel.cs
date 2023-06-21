@@ -53,7 +53,7 @@ public class BigramDependencyModel
                 continue;
             }
             string dependency = param[1];
-            map.put(param[0], dependency);
+            map.Add(param[0], dependency);
         }
         if (map.size() == 0) return false;
         trie.build(map);
@@ -65,7 +65,7 @@ public class BigramDependencyModel
     {
         ByteArray byteArray = ByteArray.createByteArray(path);
         if (byteArray == null) return false;
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         string[] valueArray = new string[size];
         for (int i = 0; i < valueArray.Length; ++i)
         {
@@ -80,14 +80,14 @@ public class BigramDependencyModel
         // 缓存值文件
         try
         {
-            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path +  ".bi" + Predefine.BIN_EXT));
+            Stream _out = new Stream(IOUtil.newOutputStream(path +  ".bi" + Predefine.BIN_EXT));
             _out.writeInt(dependencyList.size());
             foreach (string dependency in dependencyList)
             {
                 _out.writeUTF(dependency);
             }
             if (!trie.save(_out)) return false;
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {

@@ -25,7 +25,7 @@ public class LexicalAnalyzerPipe : Pipe<List<IWord>, List<IWord>>
     /**
      * 代理的词法分析器
      */
-    protected LexicalAnalyzer analyzer;
+    public LexicalAnalyzer analyzer;
 
     public LexicalAnalyzerPipe(LexicalAnalyzer analyzer)
     {
@@ -35,14 +35,14 @@ public class LexicalAnalyzerPipe : Pipe<List<IWord>, List<IWord>>
     //@Override
     public List<IWord> flow(List<IWord> input)
     {
-        ListIterator<IWord> listIterator = input.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<IWord> listIterator = input.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             IWord wordOrSentence = listIterator.next();
             if (wordOrSentence.getLabel() != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
             listIterator.Remove(); // 否则是句子
-            string sentence = wordOrSentence.getValue();
+            string sentence = wordOrSentence.Value;
             foreach (IWord word in analyzer.analyze(sentence))
             {
                 listIterator.Add(word);

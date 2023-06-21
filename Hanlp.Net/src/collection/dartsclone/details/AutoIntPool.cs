@@ -10,34 +10,34 @@ namespace com.hankcs.hanlp.collection.dartsclone.details;
  *
  * @author
  */
-class AutoIntPool
+public class AutoIntPool
 {
-    int[] getBuffer()
+    public int[] getBuffer()
     {
         return _buf;
     }
 
-    int get(int id)
+    public int get(int id)
     {
         return _buf[id];
     }
 
-    void set(int id, int value)
+    public void set(int id, int value)
     {
         _buf[id] = value;
     }
 
-    bool empty()
+    public bool empty()
     {
         return (_size == 0);
     }
 
-    int size()
+    public int size()
     {
         return _size;
     }
 
-    void Clear()
+    public void Clear()
     {
         resize(0);
         _buf = null;
@@ -45,7 +45,7 @@ class AutoIntPool
         _capacity = 0;
     }
 
-    void Add(int value)
+    public void Add(int value)
     {
         if (_size == _capacity)
         {
@@ -54,12 +54,12 @@ class AutoIntPool
         _buf[_size++] = value;
     }
 
-    void deleteLast()
+    public void deleteLast()
     {
         --_size;
     }
 
-    void resize(int size)
+    public void resize(int size)
     {
         if (size > _capacity)
         {
@@ -80,7 +80,7 @@ class AutoIntPool
         }
     }
 
-    void reserve(int size)
+    public void reserve(int size)
     {
         if (size > _capacity)
         {
@@ -106,7 +106,7 @@ class AutoIntPool
         int[] buf = new int[capacity];
         if (_size > 0)
         {
-           // System.arraycopy(_buf, 0, buf, 0, _size);
+           // Array.Copy(_buf, 0, buf, 0, _size);
             Array.Copy(_buf,0,buf, 0, _size);
         }
         _buf = buf;

@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence.word;
 using System.Text;
 
 namespace com.hankcs.hanlp.corpus.document.sentence.word;
@@ -31,9 +32,9 @@ public class CompoundWord : IWord, IEnumerable<Word>
     public string label;
 
     //@Override
-    public string getValue()
+    public string Value()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb =  new StringBuilder();
         foreach (Word word in innerList)
         {
             sb.Append(word.value);
@@ -63,7 +64,7 @@ public class CompoundWord : IWord, IEnumerable<Word>
     //@Override
     public int Length()
     {
-        return getValue().Length;
+        return Value().Length;
     }
 
     //@Override
@@ -74,13 +75,13 @@ public class CompoundWord : IWord, IEnumerable<Word>
         int i = 1;
         foreach (Word word in innerList)
         {
-            sb.Append(word.getValue());
+            sb.Append(word.Value());
             string label = word.getLabel();
             if (label != null)
             {
                 sb.Append('/').Append(label);
             }
-            if (i != innerList.size())
+            if (i != innerList.Count)
             {
                 sb.Append(' ');
             }
@@ -97,7 +98,7 @@ public class CompoundWord : IWord, IEnumerable<Word>
      */
     public Word toWord()
     {
-        return new Word(getValue(), getLabel());
+        return new Word(Value(), getLabel());
     }
 
     public CompoundWord(List<Word> innerList, string label)
@@ -109,11 +110,11 @@ public class CompoundWord : IWord, IEnumerable<Word>
     public static CompoundWord create(string param)
     {
         if (param == null) return null;
-        int cutIndex = param.lastIndexOf(']');
+        int cutIndex = param.LastIndexOf(']');
         if (cutIndex <= 2 || cutIndex == param.Length - 1) return null;
         string wordParam  = param.substring(1, cutIndex);
-        List<Word> wordList = new LinkedList<Word>();
-        for (string single : wordParam.Split("\\s+"))
+        List<Word> wordList = new ();
+        foreach (string single in wordParam.Split("\\s+"))
         {
             if (single.Length == 0) continue;
             Word word = Word.create(single);
@@ -124,17 +125,17 @@ public class CompoundWord : IWord, IEnumerable<Word>
             }
             wordList.Add(word);
         }
-        string labelParam = param.substring(cutIndex + 1);
+        string labelParam = param.Substring(cutIndex + 1);
         if (labelParam.StartsWith("/"))
         {
-            labelParam = labelParam.substring(1);
+            labelParam = labelParam.Substring(1);
         }
         return new CompoundWord(wordList, labelParam);
     }
 
     //@Override
-    public Iterator<Word> iterator()
+    public IEnumerator<Word> GetEnumerator()
     {
-        return innerList.iterator();
+        return innerList.GetEnumerator();
     }
 }

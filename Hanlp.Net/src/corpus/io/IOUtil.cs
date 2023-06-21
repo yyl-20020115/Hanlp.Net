@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.utility;
 using System.Text;
@@ -36,7 +37,7 @@ public class IOUtil
         {
             ObjectOutputStream oos = new ObjectOutputStream(IOUtil.newOutputStream(path));
             oos.writeObject(o);
-            oos.close();
+            oos.Close();
         }
         catch (IOException e)
         {
@@ -60,7 +61,7 @@ public class IOUtil
         {
             ois = new ObjectInputStream(IOUtil.newInputStream(path));
             Object o = ois.readObject();
-            ois.close();
+            ois.Close();
             return o;
         }
         catch (Exception e)
@@ -82,11 +83,11 @@ public class IOUtil
         if (path == null) return null;
         try
         {
-            InputStream _in = IOAdapter == null ? new FileInputStream(path) :
+            InputStream _in = IOAdapter == null ? new FileStream(path) :
                     IOAdapter.open(path);
             byte[] fileContent = new byte[_in.available()];
             int read = readBytesFromOtherInputStream(_in, fileContent);
-            _in.close();
+            _in.Close();
             // 处理 UTF-8 BOM
             if (read >= 3 && fileContent[0] == -17 && fileContent[1] == -69 && fileContent[2] == -65)
                 return new string(fileContent, 3, fileContent.Length - 3, Encoding.forName("UTF-8"));
@@ -126,9 +127,9 @@ public class IOUtil
     {
         try
         {
-            FileChannel fc = new FileOutputStream(path).getChannel();
+            FileChannel fc = new FileStream(path).getChannel();
             fc.write(ByteBuffer.wrap(content.getBytes()));
-            fc.close();
+            fc.Close();
         }
         catch (Exception e)
         {
@@ -168,7 +169,7 @@ public class IOUtil
             if (IOAdapter == null) return readBytesFromFileInputStream(new FileStream(path));
 
             InputStream _is = IOAdapter.open(path);
-            if (_is is FileInputStream)
+            if (_is is FileStream)
                 return readBytesFromFileInputStream((FileStream)_is);
             else
                 return readBytesFromOtherInputStream(_is);
@@ -191,7 +192,7 @@ public class IOUtil
         {
             off += len;
         }
-        _is.close();
+        _is.Close();
 
         return new string(targetArray, charsetName);
     }
@@ -243,13 +244,13 @@ public class IOUtil
         byteBuffer.flip();
         byte[] bytes = byteBuffer.array();
         byteBuffer.Clear();
-        channel.close();
-        fis.close();
+        channel.Close();
+        fis.Close();
         return bytes;
     }
 
     /**
-     * 将非FileInputStream的某InputStream中的全部数据读入到字节数组中
+     * 将非FileStream的某InputStream中的全部数据读入到字节数组中
      *
      * @param is
      * @return
@@ -309,8 +310,8 @@ public class IOUtil
         bool first = true;
         try
         {
-            BufferedReader bw = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            while ((line = bw.readLine()) != null)
+            TextReader bw = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            while ((line = bw.ReadLine()) != null)
             {
                 if (first)
                 {
@@ -320,7 +321,7 @@ public class IOUtil
                 }
                 result.Add(line);
             }
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {
@@ -344,11 +345,11 @@ public class IOUtil
     public static bool saveEntrySetToTxt(HashSet<KeyValuePair<Object, Object>> entrySet, string path, string separator)
     {
         StringBuilder sbOut = new StringBuilder();
-        for (KeyValuePair<Object, Object> entry : entrySet)
+        foreach (KeyValuePair<Object, Object> entry in entrySet)
         {
-            sbOut.Append(entry.getKey());
+            sbOut.Append(entry.Key);
             sbOut.Append(separator);
-            sbOut.Append(entry.getValue());
+            sbOut.Append(entry.Value);
             sbOut.Append('\n');
         }
         return saveTxt(path, sbOut.ToString());
@@ -361,7 +362,7 @@ public class IOUtil
      */
     public static string dirname(string path)
     {
-        int index = path.lastIndexOf('/');
+        int index = path.LastIndexOf('/');
         if (index == -1) return path;
         return path.substring(0, index + 1);
     }
@@ -424,7 +425,7 @@ public class IOUtil
         File[] fileArray = folder.listFiles();
         if (fileArray != null)
         {
-            for (File file : fileArray)
+            foreach (File file in fileArray)
             {
                 if (file.isFile() && !file.getName().StartsWith(".")) // 过滤隐藏文件
                 {
@@ -443,15 +444,15 @@ public class IOUtil
      */
     public class LineIterator : IEnumerable<string>, IEnumerator<string>
     {
-        BufferedReader bw;
+        TextReader bw;
         string line;
 
-        public LineIterator(BufferedReader bw)
+        public LineIterator(TextReader bw)
         {
             this.bw = bw;
             try
             {
-                line = bw.readLine();
+                line = bw.ReadLine();
                 line = IOUtil.removeUTF8BOM(line);
             }
             catch (IOException e)
@@ -465,8 +466,8 @@ public class IOUtil
         {
             try
             {
-                bw = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-                line = bw.readLine();
+                bw = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+                line = bw.ReadLine();
                 line = IOUtil.removeUTF8BOM(line);
             }
             catch (FileNotFoundException e)
@@ -481,12 +482,12 @@ public class IOUtil
             }
         }
 
-        public void close()
+        public void Close()
         {
             if (bw == null) return;
             try
             {
-                bw.close();
+                bw.Close();
                 bw = null;
             }
             catch (IOException e)
@@ -497,14 +498,14 @@ public class IOUtil
         }
 
         //@Override
-        public bool hasNext()
+        public bool MoveNext()
         {
             if (bw == null) return false;
             if (line == null)
             {
                 try
                 {
-                    bw.close();
+                    bw.Close();
                     bw = null;
                 }
                 catch (IOException e)
@@ -525,12 +526,12 @@ public class IOUtil
             {
                 if (bw != null)
                 {
-                    line = bw.readLine();
+                    line = bw.ReadLine();
                     if (line == null && bw != null)
                     {
                         try
                         {
-                            bw.close();
+                            bw.Close();
                             bw = null;
                         }
                         catch (IOException e)
@@ -565,33 +566,33 @@ public class IOUtil
     }
 
     /**
-     * 创建一个BufferedWriter
+     * 创建一个TextWriter
      *
      * @param path
      * @return
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedWriter newBufferedWriter(string path) 
+    public static TextWriter newBufferedWriter(string path) 
     {
-        return new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
+        return new TextWriter(new StreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
     }
 
     /**
-     * 创建一个BufferedReader
+     * 创建一个TextReader
      * @param path
      * @return
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedReader newBufferedReader(string path) 
+    public static TextReader newBufferedReader(string path) 
     {
-        return new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+        return new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
     }
 
-    public static BufferedWriter newBufferedWriter(string path, bool Append) 
+    public static TextWriter newBufferedWriter(string path, bool Append) 
     {
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, Append), "UTF-8"));
+        return new TextWriter(new StreamWriter(new FileStream(path, Append), "UTF-8"));
     }
 
     /**
@@ -602,7 +603,7 @@ public class IOUtil
      */
     public static InputStream newInputStream(string path) 
     {
-        if (IOAdapter == null) return new FileInputStream(path);
+        if (IOAdapter == null) return new FileStream(path);
         return IOAdapter.open(path);
     }
 
@@ -614,7 +615,7 @@ public class IOUtil
      */
     public static OutputStream newOutputStream(string path) 
     {
-        if (IOAdapter == null) return new FileOutputStream(path);
+        if (IOAdapter == null) return new FileStream(path);
         return IOAdapter.create(path);
     }
 
@@ -626,7 +627,7 @@ public class IOUtil
      */
     public static string getSuffix(string name, string delimiter)
     {
-        return name.substring(name.lastIndexOf(delimiter) + 1);
+        return name.substring(name.LastIndexOf(delimiter) + 1);
     }
 
     /**
@@ -635,7 +636,7 @@ public class IOUtil
      * @param params
      * @
      */
-    public static void writeLine(BufferedWriter bw, params string[] _params) 
+    public static void writeLine(TextWriter bw, params string[] _params) 
     {
         for (int i = 0; i < _params.Length - 1; i++)
         {
@@ -654,11 +655,11 @@ public class IOUtil
     public static Dictionary<string, CoreDictionary.Attribute> loadDictionary(params string[] pathArray) 
     {
         var map = new Dictionary<string, CoreDictionary.Attribute>();
-        for (string path : pathArray)
+        foreach (string path in pathArray)
         {
             File file = new File(path);
             string fileName = file.getName();
-            int natureIndex = fileName.lastIndexOf(' ');
+            int natureIndex = fileName.LastIndexOf(' ');
             Nature defaultNature = Nature.n;
             if (natureIndex > 0)
             {
@@ -669,7 +670,7 @@ public class IOUtil
                     defaultNature = Nature.create(natureString);
                 }
             }
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             loadDictionary(br, map, path.EndsWith(".csv"), defaultNature);
         }
 
@@ -677,12 +678,12 @@ public class IOUtil
     }
 
     /**
-     * 将一个BufferedReader中的词条加载到词典
+     * 将一个TextReader中的词条加载到词典
      * @param br 源
      * @param storage 储存位置
      * @ 异常表示加载失败
      */
-    public static void loadDictionary(BufferedReader br, Dictionary<string, CoreDictionary.Attribute> storage, bool isCSV, Nature defaultNature) 
+    public static void loadDictionary(TextReader br, Dictionary<string, CoreDictionary.Attribute> storage, bool isCSV, Nature defaultNature) 
     {
         string splitter = "\\s";
         if (isCSV)
@@ -691,7 +692,7 @@ public class IOUtil
         }
         string line;
         bool firstLine = true;
-        while ((line = br.readLine()) != null)
+        while ((line = br.ReadLine()) != null)
         {
             if (firstLine)
             {
@@ -716,12 +717,12 @@ public class IOUtil
                     attribute.totalFrequency += attribute.frequency[i];
                 }
             }
-            storage.put(param[0], attribute);
+            storage.Add(param[0], attribute);
         }
-        br.close();
+        br.Close();
     }
 
-    public static void writeCustomNature(DataOutputStream _out, HashSet<Nature> customNatureCollector) 
+    public static void writeCustomNature(Stream _out, HashSet<Nature> customNatureCollector) 
     {
         if (customNatureCollector.size() == 0) return;
         _out.writeInt(-customNatureCollector.size());

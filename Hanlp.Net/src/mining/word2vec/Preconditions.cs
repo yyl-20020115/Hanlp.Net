@@ -127,7 +127,7 @@ class Preconditions
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      */
-    public static <T> T checkNotNull(T reference)
+    public static  T checkNotNull<T>(T reference)
     {
         if (reference == null)
         {
@@ -145,11 +145,11 @@ class Preconditions
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      */
-    public static <T> T checkNotNull(T reference, Object errorMessage)
+    public static T checkNotNull<T>(T reference, Object errorMessage)
     {
         if (reference == null)
         {
-            throw new NullPointerException(string.valueOf(errorMessage));
+            throw new NullReferenceException(string.valueOf(errorMessage));
         }
         return reference;
     }
@@ -168,14 +168,14 @@ class Preconditions
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      */
-    public static <T> T checkNotNull(T reference,
+    public static  T checkNotNull<T>(T reference,
                                      string errorMessageTemplate,
-                                     Object... errorMessageArgs)
+                                     params Object[] errorMessageArgs)
     {
         if (reference == null)
         {
             // If either of these parameters is null, the right thing happens anyway
-            throw new NullPointerException(Format(errorMessageTemplate, errorMessageArgs));
+            throw new NullReferenceException(Format(errorMessageTemplate, errorMessageArgs));
         }
         return reference;
     }

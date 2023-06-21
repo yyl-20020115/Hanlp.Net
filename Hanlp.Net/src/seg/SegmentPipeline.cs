@@ -53,11 +53,11 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
             {
                 if (word.getLabel() == null)
                 {
-                    output.AddRange(_delegate.seg(word.getValue()));
+                    output.AddRange(_delegate.seg(word.Value));
                 }
                 else
                 {
-                    output.Add(new Term(word.getValue(), Nature.create(word.getLabel())));
+                    output.Add(new Term(word.Value, Nature.create(word.getLabel())));
                 }
             }
             return output;
@@ -149,15 +149,15 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public bool addAll(ICollection<Pipe<List<IWord>, List<IWord>>> c)
+    public bool AddRange(ICollection<Pipe<List<IWord>, List<IWord>>> c)
     {
-        return pipeList.addAll(c);
+        return pipeList.AddRange(c);
     }
 
     //@Override
-    public bool addAll(int index, ICollection<Pipe<List<IWord>, List<IWord>>> c)
+    public bool AddRange(int index, ICollection<Pipe<List<IWord>, List<IWord>>> c)
     {
-        return pipeList.addAll(c);
+        return pipeList.AddRange(c);
     }
 
     //@Override
@@ -221,15 +221,15 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public int lastIndexOf(Object o)
+    public int LastIndexOf(Object o)
     {
-        return pipeList.lastIndexOf(o);
+        return pipeList.LastIndexOf(o);
     }
 
     //@Override
-    public ListIterator<Pipe<List<IWord>, List<IWord>>> listIterator()
+    public ListIterator<Pipe<List<IWord>, List<IWord>>> GetEnumerator()
     {
-        return pipeList.listIterator();
+        return pipeList.GetEnumerator();
     }
 
     //@Override

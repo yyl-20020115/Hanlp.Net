@@ -44,7 +44,7 @@ public class parser_dll
         logger.info("加载神经网络依存句法模型[" + modelPath + "]成功，耗时 " + (DateTime.Now.Microsecond - start) + " ms");
         parser.setup_system();
         parser.build_feature_space();
-        GlobalObjectPool.put(modelPath, parser);
+        GlobalObjectPool.Add(modelPath, parser);
     }
 
     /**

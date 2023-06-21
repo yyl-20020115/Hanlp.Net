@@ -9,6 +9,9 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.utility;
 using System.Text;
 
 namespace com.hankcs.hanlp.model.crf;
@@ -93,7 +96,7 @@ public abstract class CRFTagger
         tmpTrain.deleteOnExit();
         convertCorpus(trainFile, tmpTrain);
         trainFile = tmpTrain;
-        System._out.printf("Java效率低，建议安装CRF++，执行下列等价训练命令（不要终止本进程，否则临时语料库和特征模板将被清除）：\n" +
+        Console.WriteLine("Java效率低，建议安装CRF++，执行下列等价训练命令（不要终止本进程，否则临时语料库和特征模板将被清除）：\n" +
                               "crf_learn -m %d -f %d -e %f -c %f -p %d -H %d -a %s -t %s %s %s\n", maxitr, freq, eta,
                           C, threadNum, shrinkingSize, algorithm.ToString().replace('_', '-'),
                           templFile, trainFile, modelFile);
@@ -106,34 +109,35 @@ public abstract class CRFTagger
         convert(modelFile);
     }
 
-    protected abstract void convertCorpus(Sentence sentence, BufferedWriter bw) ;
+    protected abstract void convertCorpus(Sentence sentence, TextWriter bw) ;
 
     protected abstract string getDefaultFeatureTemplate();
 
     public void convertCorpus(string pkuPath, string tsvPath) 
     {
-         BufferedWriter bw = IOUtil.newBufferedWriter(tsvPath);
-        IOUtility.loadInstance(pkuPath, new InstanceHandler()
-        {
-            //@Override
-            public bool process(Sentence sentence)
-            {
-                Utility.normalize(sentence);
-                try
-                {
-                    convertCorpus(sentence, bw);
-                    bw.newLine();
-                }
-                catch (IOException e)
-                {
-                    throw new RuntimeException(e);
-                }
-                return false;
-            }
-        });
-        bw.close();
+         TextWriter bw = IOUtil.newBufferedWriter(tsvPath);
+        IOUtility.loadInstance(pkuPath, new IT());
+        bw.Close();
     }
-
+    public class IT:
+         InstanceHandler
+    {
+        //@Override
+        public bool process(Sentence sentence)
+        {
+            Utility.normalize(sentence);
+            try
+            {
+                convertCorpus(sentence, bw);
+                bw.newLine();
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
+            return false;
+        }
+    }
     /**
      * 导出特征模板
      *
@@ -142,10 +146,10 @@ public abstract class CRFTagger
      */
     public void dumpTemplate(string templatePath) 
     {
-        BufferedWriter bw = IOUtil.newBufferedWriter(templatePath);
+        TextWriter bw = IOUtil.newBufferedWriter(templatePath);
         string template = getTemplate();
         bw.write(template);
-        bw.close();
+        bw.Close();
     }
 
     /**
@@ -159,7 +163,7 @@ public abstract class CRFTagger
         if (model != null && model.getFeatureTemplateArray() != null)
         {
             StringBuilder sbTemplate = new StringBuilder();
-            for (FeatureTemplate featureTemplate : model.getFeatureTemplateArray())
+        foreach (FeatureTemplate featureTemplate in model.getFeatureTemplateArray())
             {
                 sbTemplate.Append(featureTemplate.getTemplate()).Append('\n');
             }

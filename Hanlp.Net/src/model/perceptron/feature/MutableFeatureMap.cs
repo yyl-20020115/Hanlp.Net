@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
@@ -54,13 +56,13 @@ public class MutableFeatureMap : FeatureMap
     }
 
     //@Override
-    public int idOf(string string)
+    public int idOf(string s)
     {
-        int id = featureIdMap.get(string);
+        int id = featureIdMap.get(s);
         if (id == null)
         {
             id = featureIdMap.size();
-            featureIdMap.put(string, id);
+            featureIdMap.Add(s, id);
         }
 
         return id;

@@ -23,7 +23,7 @@ public class ComputeAccuracy
 
     public static void main(string[] argv) 
     {
-        BufferedReader f;
+        TextReader f;
         string st1 = null, st2, st3, st4;
         string[] bestw = new string[N];
         double dist, len;
@@ -42,7 +42,7 @@ public class ComputeAccuracy
         threshold = int.parseInt(argv[1]);
         try
         {
-            f = new BufferedReader(new InputStreamReader(new FileInputStream(file_name), "UTF-8"));
+            f = new TextReader(new InputStreamReader(new FileStream(file_name), "UTF-8"));
         }
         catch (FileNotFoundException e)
         {
@@ -58,7 +58,7 @@ public class ComputeAccuracy
 
         try
         {
-            string[] _params = f.readLine().Split("\\s");
+            string[] _params = f.ReadLine().Split("\\s");
             words = int.parseInt(_params[0]);
             if (words > threshold) words = threshold;
             size = int.parseInt(_params[1]);
@@ -66,7 +66,7 @@ public class ComputeAccuracy
             M = new double[words * size];
             for (b = 0; b < words; b++)
             {
-                _params = f.readLine().Split("\\s");
+                _params = f.ReadLine().Split("\\s");
                 vocab[b] = _params[0].toUpperCase();
                 for (a = 0; a < size; a++)
                 {
@@ -77,26 +77,26 @@ public class ComputeAccuracy
                 len = Math.Sqrt(len);
                 for (a = 0; a < size; a++) M[a + b * size] /= len;
             }
-            f.close();
+            f.Close();
         }
         catch (IOException e)
         {
             printf("IO error\n");
-            System.exit(-2);
+            Environment.Exit(-2);
             return;
         }
         catch (OutOfMemoryError e)
         {
             printf("Cannot allocate memory: %lld MB\n", words * size * 8 / 1048576);
-            System.exit(-3);
+            Environment.Exit(-3);
             return;
         }
 
         TCN = 0;
-        BufferedReader stdin = null;
+        TextReader stdin = null;
         try
         {
-            stdin = new BufferedReader(new InputStreamReader(new FileInputStream(argv[2])));
+            stdin = new TextReader(new InputStreamReader(new FileStream(argv[2])));
         }
         catch (FileNotFoundException e)
         {
@@ -106,7 +106,7 @@ public class ComputeAccuracy
         {
             for (a = 0; a < N; a++) bestd[a] = 0;
             for (a = 0; a < N; a++) bestw[a] = null;
-            string line = stdin.readLine();
+            string line = stdin.ReadLine();
 
             string[] param = null;
             if (line != null && line.Length > 0)
@@ -189,6 +189,6 @@ public class ComputeAccuracy
 
     private static void printf(string Format, params Object[] args)
     {
-        System._out.printf(Format, args);
+        Console.WriteLine(Format, args);
     }
 }

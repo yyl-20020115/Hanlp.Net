@@ -64,7 +64,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
     protected void roleTag(List<List<IWord>> sentenceList)
     {
         int i = 0;
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             Precompiler.compileWithoutNS(wordList);
             if (verbose)
@@ -79,7 +79,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             // 标注上文
             Iterator<IWord> iterator = wordLinkedList.iterator();
             IWord pre = iterator.next();
-            while (iterator.hasNext())
+            while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
@@ -92,7 +92,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             // 标注下文
             iterator = wordLinkedList.descendingIterator();
             pre = iterator.next();
-            while (iterator.hasNext())
+            while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
@@ -106,7 +106,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             iterator = wordLinkedList.iterator();
             IWord first = iterator.next();
             IWord second = iterator.next();
-            while (iterator.hasNext())
+            while (iterator.MoveNext())
             {
                 IWord third = iterator.next();
                 if (first.getLabel().StartsWith("ns") && third.getLabel().StartsWith("ns") && !second.getLabel().StartsWith("ns"))
@@ -121,15 +121,15 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             CorpusUtil.spilt(wordList);
             if (verbose) Console.WriteLine("拆分地名 " + wordList);
             // 处理整个
-            ListIterator<IWord> listIterator = wordLinkedList.listIterator();
-            while (listIterator.hasNext())
+            ListIterator<IWord> listIterator = wordLinkedList.GetEnumerator();
+            while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
                 string label = word.getLabel();
                 if (label.Equals(label.toUpperCase())) continue;
                 if (label.StartsWith("ns"))
                 {
-                    string value = word.getValue();
+                    string value = word.Value;
                     int longestSuffixLength = PlaceSuffixDictionary.dictionary.getLongestSuffixLength(value);
                     int wordLength = value.Length - longestSuffixLength;
                     if (longestSuffixLength == 0 || wordLength == 0)

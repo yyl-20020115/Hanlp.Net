@@ -41,21 +41,21 @@ public class CorpusUtil
     public static IWord compile(IWord word)
     {
         string label = word.getLabel();
-        if ("nr".Equals(label)) return new Word(word.getValue(), TAG_PEOPLE);
-        else if ("m".Equals(label) || "mq".Equals(label)) return new Word(word.getValue(), TAG_NUMBER);
-        else if ("t".Equals(label)) return new Word(word.getValue(), TAG_TIME);
-        else if ("ns".Equals(label)) return new Word(word.getValue(), TAG_PLACE);
+        if ("nr".Equals(label)) return new Word(word.Value, TAG_PEOPLE);
+        else if ("m".Equals(label) || "mq".Equals(label)) return new Word(word.Value, TAG_NUMBER);
+        else if ("t".Equals(label)) return new Word(word.Value, TAG_TIME);
+        else if ("ns".Equals(label)) return new Word(word.Value, TAG_PLACE);
 //        switch (word.getLabel())
 //        {
 //            case "nr":
-//                return new Word(word.getValue(), TAG_PEOPLE);
+//                return new Word(word.Value, TAG_PEOPLE);
 //            case "m":
 //            case "mq":
-//                return new Word(word.getValue(), TAG_NUMBER);
+//                return new Word(word.Value, TAG_NUMBER);
 //            case "t":
-//                return new Word(word.getValue(), TAG_TIME);
+//                return new Word(word.Value, TAG_TIME);
 //            case "ns":
-//                return new Word(word.getValue(), TAG_TIME);
+//                return new Word(word.Value, TAG_TIME);
 //        }
 
         return word;
@@ -79,8 +79,8 @@ public class CorpusUtil
 
     public static List<IWord> spilt(List<IWord> wordList)
     {
-        var listIterator = wordList.listIterator();
-        while (listIterator.hasNext())
+        var listIterator = wordList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             IWord word = listIterator.next();
             if (word is CompoundWord)

@@ -72,13 +72,13 @@ public abstract class BaseScorer<T> : IScorer where T: ISentenceKey<T>
         Dictionary<string, Double> result = new Dictionary<string, Double>(Collections.reverseOrder());
         T keyOuter = generateKey(outerSentence);
         if (keyOuter == null) return result;
-        for (KeyValuePair<T, HashSet<string>> entry : storage.entrySet())
+        foreach (KeyValuePair<T, HashSet<string>> entry in storage.entrySet())
         {
-            T key = entry.getKey();
+            T key = entry.Key;
             Double score = keyOuter.similarity(key);
-            for (string sentence : entry.getValue())
+            foreach (string sentence in entry.Value)
             {
-                result.put(sentence, score);
+                result.Add(sentence, score);
             }
         }
         return result;

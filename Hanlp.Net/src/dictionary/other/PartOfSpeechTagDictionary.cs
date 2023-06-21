@@ -35,7 +35,7 @@ public class PartOfSpeechTagDictionary
     {
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(path);
         iterator.next(); // header
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             string[] args = iterator.next().Split(",");
             if (args.Length < 3) continue;

@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.dictionary.other;
+using com.hankcs.hanlp.seg.NShort.Path;
+using com.hankcs.hanlp.utility;
+using System.Text;
+
 namespace com.hankcs.hanlp.seg.common;
 
 
@@ -22,12 +29,12 @@ public class WordNet
     /**
      * 节点，每一行都是前缀词，跟图的表示方式不同
      */
-    private LinkedList<Vertex> vertexes[];
+    private List<Vertex>[] vertexes;
 
     /**
      * 共有多少个节点
      */
-    int size;
+    int _size;
 
     /**
      * 原始句子
@@ -47,36 +54,37 @@ public class WordNet
      * @param sentence 句子
      */
     public WordNet(string sentence)
+        : this(sentence.ToCharArray())
     {
-        this(sentence.ToCharArray());
+        ;
     }
 
     public WordNet(char[] charArray)
     {
         this.charArray = charArray;
-        vertexes = new LinkedList[charArray.Length + 2];
+        vertexes = new List<Vertex> [charArray.Length + 2];
         for (int i = 0; i < vertexes.Length; ++i)
         {
-            vertexes[i] = new LinkedList<Vertex>();
+            vertexes[i] = new ();
         }
         vertexes[0].Add(Vertex.newB());
         vertexes[vertexes.Length - 1].Add(Vertex.newE());
-        size = 2;
+        _size = 2;
     }
 
     public WordNet(char[] charArray, List<Vertex> vertexList)
     {
         this.charArray = charArray;
-        vertexes = new LinkedList[charArray.Length + 2];
+        vertexes = new List<Vertex>[charArray.Length + 2];
         for (int i = 0; i < vertexes.Length; ++i)
         {
-            vertexes[i] = new LinkedList<Vertex>();
+            vertexes[i] = new ();
         }
         int i = 0;
-        for (Vertex vertex : vertexList)
+        foreach (Vertex vertex in vertexList)
         {
             vertexes[i].Add(vertex);
-            ++size;
+            ++_size;
             i += vertex.realWord.Length;
         }
     }
@@ -89,13 +97,13 @@ public class WordNet
      */
     public void Add(int line, Vertex vertex)
     {
-        for (Vertex oldVertex : vertexes[line])
+        foreach (Vertex oldVertex in vertexes[line])
         {
             // 保证唯一性
             if (oldVertex.realWord.Length == vertex.realWord.Length) return;
         }
         vertexes[line].Add(vertex);
-        ++size;
+        ++_size;
     }
 
     /**
@@ -107,17 +115,17 @@ public class WordNet
     public void push(int line, Vertex vertex)
     {
         Iterator<Vertex> iterator = vertexes[line].iterator();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             if (iterator.next().realWord.Length == vertex.realWord.Length)
             {
                 iterator.Remove();
-                --size;
+                --_size;
                 break;
             }
         }
         vertexes[line].Add(vertex);
-        ++size;
+        ++_size;
     }
 
     /**
@@ -129,26 +137,26 @@ public class WordNet
      */
     public void insert(int line, Vertex vertex, WordNet wordNetAll)
     {
-        for (Vertex oldVertex : vertexes[line])
+        foreach (Vertex oldVertex in vertexes[line])
         {
             // 保证唯一性
             if (oldVertex.realWord.Length == vertex.realWord.Length) return;
         }
         vertexes[line].Add(vertex);
-        ++size;
+        ++_size;
         // 保证这个词语前面直连
         int start = Math.Max(0, line - 5); // 效率起见，只扫描前4行
         for (int l = line - 1; l > start; --l)
         {
-            LinkedList<Vertex> all = wordNetAll.get(l);
+            var all = wordNetAll.get(l);
             if (all.size() <= vertexes[l].size())
                 continue;
-            for (Vertex pre : all)
+            foreach (Vertex pre in all)
             {
                 if (pre.Length + l == line)
                 {
                     vertexes[l].Add(pre);
-                    ++size;
+                    ++_size;
                 }
             }
         }
@@ -167,10 +175,10 @@ public class WordNet
      *
      * @param vertexList
      */
-    public void addAll(List<Vertex> vertexList)
+    public void AddRange(List<Vertex> vertexList)
     {
         int i = 0;
-        for (Vertex vertex : vertexList)
+        foreach (Vertex vertex in vertexList)
         {
             Add(i, vertex);
             i += vertex.realWord.Length;
@@ -194,7 +202,7 @@ public class WordNet
      * @param line 行号
      * @return 逆序迭代器
      */
-    public Iterator<Vertex> descendingIterator(int line)
+    public IEnumerator<Vertex> descendingIterator(int line)
     {
         return vertexes[line].descendingIterator();
     }
@@ -207,8 +215,8 @@ public class WordNet
      */
     public Vertex getFirst(int line)
     {
-        Iterator<Vertex> iterator = vertexes[line].iterator();
-        if (iterator.hasNext()) return iterator.next();
+        var iterator = vertexes[line].GetEnumerator();
+        if (iterator.MoveNext()) return iterator.next();
 
         return null;
     }
@@ -222,7 +230,7 @@ public class WordNet
      */
     public Vertex get(int line, int Length)
     {
-        for (Vertex vertex : vertexes[line])
+        foreach (Vertex vertex in vertexes[line])
         {
             if (vertex.realWord.Length == Length)
             {
@@ -243,7 +251,7 @@ public class WordNet
     {
         // 将原子部分存入m_segGraph
         int offset = 0;
-        for (AtomNode atomNode : atomSegment)//Init the cost array
+        foreach (AtomNode atomNode in atomSegment)//Init the cost array
         {
             string sWord = atomNode.sWord;//init the word
             Nature nature = Nature.n;
@@ -279,7 +287,7 @@ public class WordNet
 
     public int size()
     {
-        return size;
+        return _size;
     }
 
     /**
@@ -291,9 +299,9 @@ public class WordNet
     {
         Vertex[] vertexes = new Vertex[size];
         int i = 0;
-        for (List<Vertex> vertexList : this.vertexes)
+        foreach (List<Vertex> vertexList in this.vertexes)
         {
-            for (Vertex v : vertexList)
+            foreach (Vertex v in vertexList)
             {
                 v.index = i;    // 设置id
                 vertexes[i++] = v;
@@ -315,11 +323,11 @@ public class WordNet
         for (int row = 0; row < vertexes.Length - 1; ++row)
         {
             List<Vertex> vertexListFrom = vertexes[row];
-            for (Vertex from : vertexListFrom)
+            foreach (Vertex from in vertexListFrom)
             {
-                assert from.realWord.Length > 0 : "空节点会导致死循环！";
+                //assert from.realWord.Length > 0 : "空节点会导致死循环！";
                 int toIndex = row + from.realWord.Length;
-                for (Vertex to : vertexes[toIndex])
+                foreach (Vertex to in vertexes[toIndex])
                 {
                     graph.connect(from.index, to.index, MathUtility.calculateWeight(from, to));
                 }
@@ -336,7 +344,7 @@ public class WordNet
 //                '}';
         StringBuilder sb = new StringBuilder();
         int line = 0;
-        for (List<Vertex> vertexList : vertexes)
+        foreach (List<Vertex> vertexList in vertexes)
         {
             sb.Append(string.valueOf(line++) + ':' + vertexList.ToString()).Append("\n");
         }
@@ -351,15 +359,15 @@ public class WordNet
         for (int row = 0; row < vertexes.Length - 1; ++row)
         {
             List<Vertex> vertexListFrom = vertexes[row];
-            ListIterator<Vertex> listIteratorFrom = vertexListFrom.listIterator();
-            while (listIteratorFrom.hasNext())
+            var listIteratorFrom = vertexListFrom.GetEnumerator();
+            while (listIteratorFrom.MoveNext())
             {
                 Vertex from = listIteratorFrom.next();
                 if (from.getNature() == Nature.ns)
                 {
                     int toIndex = row + from.realWord.Length;
-                    ListIterator<Vertex> listIteratorTo = vertexes[toIndex].listIterator();
-                    while (listIteratorTo.hasNext())
+                    var listIteratorTo = vertexes[toIndex].GetEnumerator();
+                    while (listIteratorTo.MoveNext())
                     {
                         Vertex to = listIteratorTo.next();
                         if (to.getNature() == Nature.ns)
@@ -382,11 +390,11 @@ public class WordNet
      */
     public void Clear()
     {
-        for (List<Vertex> vertexList : vertexes)
+        foreach (List<Vertex> vertexList in vertexes)
         {
             vertexList.Clear();
         }
-        size = 0;
+        _size = 0;
     }
 
     /**
@@ -394,9 +402,9 @@ public class WordNet
      */
     public void clean()
     {
-        for (List<Vertex> vertexList : vertexes)
+        foreach (List<Vertex> vertexList in vertexes)
         {
-            for (Vertex vertex : vertexList)
+            foreach (Vertex vertex in vertexList)
             {
                 vertex.from = null;
             }
@@ -408,7 +416,7 @@ public class WordNet
      *
      * @return
      */
-    public LinkedList<Vertex>[] getVertexes()
+    public List<Vertex>[] getVertexes()
     {
         return vertexes;
     }

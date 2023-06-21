@@ -9,10 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.model;
 using com.hankcs.hanlp.model.crf;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
 using System.Text;
 
 namespace com.hankcs.hanlp.seg.CRF;
@@ -55,7 +58,7 @@ public class CRFSegment : CharacterBasedSegment
         }
         else
             logger.info("CRF分词模型加载 " + modelPath + " 成功，耗时 " + (DateTime.Now.Microsecond - start) + " ms");
-        GlobalObjectPool.put(modelPath, crfModel);
+        GlobalObjectPool.Add(modelPath, crfModel);
     }
 
     // 已废弃，请使用功能更丰富、设计更优雅的{@link com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer}。
@@ -67,7 +70,7 @@ public class CRFSegment : CharacterBasedSegment
     //@Override
     protected List<Term> roughSegSentence(char[] sentence)
     {
-        if (sentence.Length == 0) return Collections.emptyList();
+        if (sentence.Length == 0) return new();
         char[] sentenceConverted = CharTable.convert(sentence);
         Table table = new Table();
         table.v = atomSegmentToTable(sentenceConverted);
@@ -284,7 +287,7 @@ public class CRFSegment : CharacterBasedSegment
     {
         if (array.Length == size) return array;
         string[][] nArray = new string[size][];
-        System.arraycopy(array, 0, nArray, 0, size);
+        Array.Copy(array, 0, nArray, 0, size);
         return nArray;
     }
 

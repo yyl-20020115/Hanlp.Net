@@ -118,7 +118,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
         protected override List<Term> segSentence(char[] sentence)
         {
             List<string> wordList = segment(new string(sentence));
-            List<Term> termList = new LinkedList<Term>();
+            List<Term> termList = new ();
             for (string word : wordList)
             {
                 termList.Add(new Term(word, null));

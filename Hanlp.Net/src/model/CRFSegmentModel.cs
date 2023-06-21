@@ -94,7 +94,7 @@ class CRFSegmentModel : CRFModel
         net[0][idE] = -1000.0;
         int[][] from = new int[size][4];
         double[][] maxScoreAt = new double[2][4]; // 滚动数组
-        System.arraycopy(net[0], 0, maxScoreAt[0], 0, 4); // 初始preI=0,  maxScoreAt[preI][pre] = net[0][pre]
+        Array.Copy(net[0], 0, maxScoreAt[0], 0, 4); // 初始preI=0,  maxScoreAt[preI][pre] = net[0][pre]
         int curI = 0;
         for (int i = 1; i < size; ++i)
         {

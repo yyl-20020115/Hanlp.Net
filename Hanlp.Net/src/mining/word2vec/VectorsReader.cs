@@ -25,23 +25,23 @@ public class VectorsReader
 
         InputStream _is = null;
         Reader r = null;
-        BufferedReader br = null;
+        TextReader br = null;
         try
         {
             _is = IOUtil.newInputStream(file);
             r = new InputStreamReader(_is, ENCODING);
-            br = new BufferedReader(r);
+            br = new TextReader(r);
 
-            string line = br.readLine();
-            words = int.parseInt(line.Split("\\s+")[0].trim());
-            size = int.parseInt(line.Split("\\s+")[1].trim());
+            string line = br.ReadLine();
+            words = int.parseInt(line.Split("\\s+")[0].Trim());
+            size = int.parseInt(line.Split("\\s+")[1].Trim());
 
             vocab = new string[words];
             matrix = new float[words][];
 
             for (int i = 0; i < words; i++)
             {
-                line = br.readLine().trim();
+                line = br.ReadLine().Trim();
                 string[] _params = line.Split("\\s+");
                 if (_params.Length != size + 1)
                 {
@@ -58,7 +58,7 @@ public class VectorsReader
                     matrix[i][j] = float.parseFloat(_params[j + 1]);
                     len += matrix[i][j] * matrix[i][j];
                 }
-                len = Math.sqrt(len);
+                len = Math.Sqrt(len);
                 for (int j = 0; j < size; j++)
                 {
                     matrix[i][j] /= len;

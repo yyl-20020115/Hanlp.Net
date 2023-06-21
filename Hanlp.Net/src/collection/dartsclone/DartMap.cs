@@ -99,7 +99,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public bool save(DataOutputStream _out)
+    public bool save(Stream _out)
     {
         return false;
     }
@@ -136,25 +136,25 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
      * @param maxResults
      * @return
      */
-    public List<Pair<string, V>> commonPrefixSearch(string key, int offset, int maxResults)
+    public List<KeyValuePair<string, V>> commonPrefixSearch(string key, int offset, int maxResults)
     {
         byte[] keyBytes = key.GetBytes(utf8);
-        List<Pair<int, int>> pairList = commonPrefixSearch(keyBytes, offset, maxResults);
-        List<Pair<string, V>> resultList = new List<Pair<string, V>>(pairList.Count);
-        foreach (Pair<int, int> pair in pairList)
+        List<KeyValuePair<int, int>> pairList = commonPrefixSearch(keyBytes, offset, maxResults);
+        List<KeyValuePair<string, V>> resultList = new List<KeyValuePair<string, V>>(pairList.Count);
+        foreach (KeyValuePair<int, int> pair in pairList)
         {
-            resultList.Add(new Pair<string, V>(new string(keyBytes, 0, pair.first), valueArray[pair.second]));
+            resultList.Add(new KeyValuePair<string, V>(new string(keyBytes, 0, pair.first), valueArray[pair.second]));
         }
         return resultList;
     }
 
-    public List<Pair<string, V>> commonPrefixSearch(string key)
+    public List<KeyValuePair<string, V>> commonPrefixSearch(string key)
     {
         return commonPrefixSearch(key, 0, int.MaxValue);
     }
 
     //@Override
-    public V put(string key, V value)
+    public V Add(string key, V value)
     {
         throw new InvalidOperationException("双数组不支持增量式插入");
     }

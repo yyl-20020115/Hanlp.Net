@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.dependency.CoNll;
 using com.hankcs.hanlp.model.bigram;
 using com.hankcs.hanlp.seg.common;
@@ -37,12 +38,13 @@ public class WordNatureDependencyParser : MinimumSpanningTreeParser
         model = GlobalObjectPool.get(modelPath);
         if (model != null) return;
         model = new WordNatureDependencyModel(modelPath);
-        GlobalObjectPool.put(modelPath, model);
+        GlobalObjectPool.Add(modelPath, model);
     }
 
     public WordNatureDependencyParser()
+        : this(HanLP.Config.WordNatureModelPath)
     {
-        this(HanLP.Config.WordNatureModelPath);
+        ;
     }
 
     /**

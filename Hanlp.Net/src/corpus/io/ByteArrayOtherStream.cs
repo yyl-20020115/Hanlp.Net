@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.corpus.io;
 
 
@@ -19,25 +21,25 @@ namespace com.hankcs.hanlp.corpus.io;
  */
 public class ByteArrayOtherStream : ByteArrayStream
 {
-    InputStream @is;
+    Stream @is;
 
     public ByteArrayOtherStream(byte[] bytes, int bufferSize)
     {
         base(bytes, bufferSize);
     }
 
-    public ByteArrayOtherStream(byte[] bytes, int bufferSize, InputStream @is)
+    public ByteArrayOtherStream(byte[] bytes, int bufferSize, Stream @is)
     {
         base(bytes, bufferSize);
-        this.@is = @isis;
+        this.@is = @is;
     }
 
     public static ByteArrayOtherStream createByteArrayOtherStream(string path)
     {
         try
         {
-            InputStream @isis = IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path);
-            return createByteArrayOtherStream(is);
+            InputStream @is = IOAdapter == null ? new FileStream(path) : IOAdapter.open(path);
+            return createByteArrayOtherStream(@is);
         }
         catch (Exception e)
         {
@@ -46,18 +48,18 @@ public class ByteArrayOtherStream : ByteArrayStream
         }
     }
 
-    public static ByteArrayOtherStream createByteArrayOtherStream(InputStream is) 
+    public static ByteArrayOtherStream createByteArrayOtherStream(InputStream @is) 
     {
         if (@is == null) return null;
         int size = @is.available();
         size = Math.Max(102400, size); // 有些网络InputStream实现会返回0，直到read的时候才知道到底是不是0
         int bufferSize = Math.Min(1048576, size); // 最终缓冲区在100KB到1MB之间
         byte[] bytes = new byte[bufferSize];
-        if (IOUtil.readBytesFromOtherInputStream(is, bytes) == 0)
+        if (IOUtil.readBytesFromOtherInputStream(@is, bytes) == 0)
         {
             throw new IOException("读取了空文件，或参数InputStream已经到了文件尾部");
         }
-        return new ByteArrayOtherStream(bytes, bufferSize, is);
+        return new ByteArrayOtherStream(bytes, bufferSize, @is);
     }
 
     //@Override
@@ -68,13 +70,13 @@ public class ByteArrayOtherStream : ByteArrayStream
             try
             {
                 int wantedBytes = offset + size - bufferSize; // 实际只需要这么多
-                wantedBytes = Math.Max(wantedBytes, is.available()); // 如果非阻塞IO能读到更多，那越多越好
+                wantedBytes = Math.Max(wantedBytes, @is.available()); // 如果非阻塞IO能读到更多，那越多越好
                 wantedBytes = Math.Min(wantedBytes, offset); // 但不能超过脏区的大小
                 byte[] bytes = new byte[wantedBytes];
-                int readBytes = IOUtil.readBytesFromOtherInputStream(is, bytes);
-                assert readBytes > 0 : "已到达文件尾部！";
-                System.arraycopy(this.bytes, offset, this.bytes, offset - wantedBytes, bufferSize - offset);
-                System.arraycopy(bytes, 0, this.bytes, bufferSize - wantedBytes, wantedBytes);
+                int readBytes = IOUtil.readBytesFromOtherInputStream(@is, bytes);
+                //assert readBytes > 0 : "已到达文件尾部！";
+                Array.Copy(this.bytes, offset, this.bytes, offset - wantedBytes, bufferSize - offset);
+                Array.Copy(bytes, 0, this.bytes, bufferSize - wantedBytes, wantedBytes);
                 offset -= wantedBytes;
             }
             catch (IOException e)
@@ -85,16 +87,16 @@ public class ByteArrayOtherStream : ByteArrayStream
     }
 
     //@Override
-    public void close()
+    public void Close()
     {
-        base.close();
-        if (is == null)
+        base.Close();
+        if (@is == null)
         {
             return;
         }
         try
         {
-            is.close();
+            @is.Close();
         }
         catch (IOException e)
         {

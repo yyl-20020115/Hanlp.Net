@@ -24,10 +24,10 @@ public class TestMakeCompanyCorpus : TestCase
 //    {
 //        DijkstraSegment segment = new DijkstraSegment();
 //        String line = null;
-//        BufferedReader bw = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\Doc\\语料库\\company.dic")));
-//        BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/test/nt/company.txt")));
+//        TextReader bw = new TextReader(new InputStreamReader(new FileStream("D:\\Doc\\语料库\\company.dic")));
+//        TextWriter br = new TextWriter(new StreamWriter(new FileStream("data/test/nt/company.txt")));
 //        int limit = int.MaxValue;
-//        while ((line = bw.readLine()) != null && limit-- > 0)
+//        while ((line = bw.ReadLine()) != null && limit-- > 0)
 //        {
 //            if (line.EndsWith("）")) continue;
 //            if (line.Length < 4) continue;
@@ -49,8 +49,8 @@ public class TestMakeCompanyCorpus : TestCase
 //            br.newLine();
 //            br.flush();
 //        }
-//        bw.close();
-//        br.close();
+//        bw.Close();
+//        br.Close();
 //    }
 //
 //    public void testParse() 
@@ -72,16 +72,16 @@ public class TestMakeCompanyCorpus : TestCase
 //    public void testSplitLargeFile() 
 //    {
 //        String line = null;
-//        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("data/test/nt/company.txt")));
+//        TextReader br = new TextReader(new InputStreamReader(new FileStream("data/test/nt/company.txt")));
 //        int id = 1;
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/test/nt/part/" + id + ".txt")));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("data/test/nt/part/" + id + ".txt")));
 //        int count = 1;
-//        while ((line = br.readLine()) != null)
+//        while ((line = br.ReadLine()) != null)
 //        {
 //            if (count == 1000)
 //            {
-//                bw.close();
-//                bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/test/nt/part/" + id + ".txt")));
+//                bw.Close();
+//                bw = new TextWriter(new StreamWriter(new FileStream("data/test/nt/part/" + id + ".txt")));
 //                ++id;
 //                count = 0;
 //            }
@@ -89,7 +89,7 @@ public class TestMakeCompanyCorpus : TestCase
 //            bw.newLine();
 //            ++count;
 //        }
-//        br.close();
+//        br.Close();
 //    }
 //
 //    public void testCase() 

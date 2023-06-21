@@ -9,6 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.dictionary.common;
 
 
@@ -29,12 +32,12 @@ public class CommonStringDictionary
         string line = null;
         try
         {
-            BufferedReader bw = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path)));
-            while ((line = bw.readLine()) != null)
+            TextReader bw = new TextReader(new InputStreamReader(IOUtil.newInputStream(path)));
+            while ((line = bw.ReadLine()) != null)
             {
-                trie.put(line, null);
+                trie.Add(line, null);
             }
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {
@@ -51,10 +54,10 @@ public class CommonStringDictionary
 
     public HashSet<string> keySet()
     {
-        HashSet<string> keySet = new LinkedHashSet<string>();
-        for (KeyValuePair<string, Byte> entry : trie.entrySet())
+        HashSet<string> keySet = new ();
+        foreach (KeyValuePair<string, Byte> entry in trie.entrySet())
         {
-            keySet.Add(entry.getKey());
+            keySet.Add(entry.Key);
         }
 
         return keySet;

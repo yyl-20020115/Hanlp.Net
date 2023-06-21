@@ -55,11 +55,11 @@ public class Node<V> : BaseNode<V>
                     {
                         target.status = Status.WORD_MIDDLE_2;
                     }
-                    if (target.getValue() == null)
+                    if (target.Value == null)
                     {
                         Add = true;
                     }
-                    target.setValue(node.getValue());
+                    target.setValue(node.Value);
                     break;
             }
         }
@@ -67,8 +67,8 @@ public class Node<V> : BaseNode<V>
         {
             BaseNode<V>[] newChild = new BaseNode<V>[child.Length + 1];
             int insert = -(index + 1);
-            System.arraycopy(child, 0, newChild, 0, insert);
-            System.arraycopy(child, insert, newChild, insert + 1, child.Length - insert);
+            Array.Copy(child, 0, newChild, 0, insert);
+            Array.Copy(child, insert, newChild, insert + 1, child.Length - insert);
             newChild[insert] = node;
             child = newChild;
             Add = true;

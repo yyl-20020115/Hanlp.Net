@@ -42,7 +42,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
     }
 
     //@Override
-    protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
+    protected void convertCorpus(Sentence sentence, TextWriter bw) 
     {
         List<Word> simpleWordList = sentence.toSimpleWordList();
         List<string> wordList = new (simpleWordList.size());
@@ -137,7 +137,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
                     Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                     delimiterIterator.next(); // ignore U0 之类的id
-                    while (offsetIterator.hasNext())
+                    while (offsetIterator.MoveNext())
                     {
                         int[] offset = offsetIterator.next();
                         int t = offset[0] + position;
@@ -148,7 +148,7 @@ public class CRFPOSTagger : CRFTagger : POSTagger
                             sbFeature.Append(FeatureIndex.EOS[t - words.Length]);
                         else
                             sbFeature.Append(table[t][j]);
-                        if (delimiterIterator.hasNext())
+                        if (delimiterIterator.MoveNext())
                             sbFeature.Append(delimiterIterator.next());
                         else
                             sbFeature.Append(i);

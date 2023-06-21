@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.dependency.CoNll;
+using com.hankcs.hanlp.corpus.io;
 
 namespace com.hankcs.hanlp.corpus.dependency.model;
 
@@ -24,12 +25,12 @@ public class MaxEntDependencyModelMaker
 {
     public static bool makeModel(string corpusLoadPath, string modelSavePath) 
     {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(modelSavePath)));
+        TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(modelSavePath)));
         LinkedList<CoNLLSentence> sentenceList = CoNLLLoader.loadSentenceList(corpusLoadPath);
         int id = 1;
         foreach (CoNLLSentence sentence in sentenceList)
         {
-            System._out.printf("%d / %d...", id++, sentenceList.size());
+            Console.WriteLine("%d / %d...", id++, sentenceList.size());
             string[][] edgeArray = sentence.getEdgeArray();
             CoNLLWord[] word = sentence.getWordArrayWithRoot();
             for (int i = 0; i < word.Length; ++i)
@@ -40,12 +41,12 @@ public class MaxEntDependencyModelMaker
                     // 这就是一个边的实例，从i出发，到j，当然它可能存在也可能不存在，不存在取null照样是一个实例
                     List<string> contextList = new ();
                     // 先生成i和j的原子特征
-                    contextList.addAll(generateSingleWordContext(word, i, "i"));
-                    contextList.addAll(generateSingleWordContext(word, j, "j"));
+                    contextList.AddRange(generateSingleWordContext(word, i, "i"));
+                    contextList.AddRange(generateSingleWordContext(word, j, "j"));
                     // 然后生成二元组的特征
-                    contextList.addAll(generateUniContext(word, i, j));
+                    contextList.AddRange(generateUniContext(word, i, j));
                     // 将特征字符串化
-                    for (string f : contextList)
+                    foreach (string f in contextList)
                     {
                         bw.write(f);
                         bw.write(' ');
@@ -57,7 +58,7 @@ public class MaxEntDependencyModelMaker
             }
             Console.WriteLine("done.");
         }
-        bw.close();
+        bw.Close();
         return true;
     }
 

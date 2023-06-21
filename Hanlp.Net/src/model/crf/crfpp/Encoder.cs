@@ -13,25 +13,25 @@ public class Encoder
 
     public enum Algorithm
     {
-        CRF_L2, CRF_L1, MIRA;
+        CRF_L2, CRF_L1, MIRA
 
-        public static Algorithm fromString(string algorithm)
+    }
+    public static Algorithm fromString(string algorithm)
+    {
+        algorithm = algorithm.toLowerCase();
+        if (algorithm.Equals("crf") || algorithm.Equals("crf-l2"))
         {
-            algorithm = algorithm.toLowerCase();
-            if (algorithm.Equals("crf") || algorithm.Equals("crf-l2"))
-            {
-                return Encoder.Algorithm.CRF_L2;
-            }
-            else if (algorithm.Equals("crf-l1"))
-            {
-                return Encoder.Algorithm.CRF_L1;
-            }
-            else if (algorithm.Equals("mira"))
-            {
-                return Encoder.Algorithm.MIRA;
-            }
-            throw new ArgumentException("invalid algorithm: " + algorithm);
+            return Encoder.Algorithm.CRF_L2;
         }
+        else if (algorithm.Equals("crf-l1"))
+        {
+            return Encoder.Algorithm.CRF_L1;
+        }
+        else if (algorithm.Equals("mira"))
+        {
+            return Encoder.Algorithm.MIRA;
+        }
+        throw new ArgumentException("invalid algorithm: " + algorithm);
     }
 
     public Encoder()
@@ -90,11 +90,11 @@ public class Encoder
 //            Console.Error.WriteLine("train file " + trainFile + " does not exist.");
 //            return false;
 //        }
-        BufferedReader br = null;
+        TextReader br = null;
         try
         {
             InputStreamReader isr = new InputStreamReader(IOUtil.newInputStream(trainFile), "UTF-8");
-            br = new BufferedReader(isr);
+            br = new TextReader(isr);
             int lineNo = 0;
             while (true)
             {
@@ -129,7 +129,7 @@ public class Encoder
                     Console.Write(lineNo + ".. ");
                 }
             }
-            br.close();
+            br.Close();
         }
         catch (IOException e)
         {
@@ -263,7 +263,7 @@ public class Encoder
             {
                 for (int k = 0; k < featureIndex.size(); k++)
                 {
-                    threads.get(0).obj += Math.abs(alpha[k] / C);
+                    threads.get(0).obj += Math.Abs(alpha[k] / C);
                     if (alpha[k] != 0.0)
                     {
                         numNonZero++;
@@ -285,7 +285,7 @@ public class Encoder
                 threads.get(i).expected = null;
             }
 
-            double diff = (itr == 0 ? 1.0 : Math.abs(oldObj - threads.get(0).obj) / oldObj);
+            double diff = (itr == 0 ? 1.0 : Math.Abs(oldObj - threads.get(0).obj) / oldObj);
             StringBuilder b = new StringBuilder();
             b.Append("iter=").Append(itr);
             b.Append(" terr=").Append(1.0 * threads.get(0).err / all);

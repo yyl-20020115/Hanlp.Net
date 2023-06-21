@@ -17,7 +17,7 @@ public class MutableDoubleArrayTrieIntegerTest : TestCase
         size = 64;
         for (int i = 0; i < size; ++i)
         {
-            mdat.put(i.ToString(), i);
+            mdat.Add(i.ToString(), i);
         }
     }
     [TestMethod]

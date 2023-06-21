@@ -59,7 +59,7 @@ public class PersonDictionary
         var map = new Dictionary<string, NRPattern>();
         foreach (NRPattern pattern in NRPattern.values())
         {
-            map.put(pattern.ToString(), pattern);
+            map.Add(pattern.ToString(), pattern);
         }
         trie.build(map);
         logger.info(HanLP.Config.PersonDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
@@ -76,7 +76,7 @@ public class PersonDictionary
     public static void parsePattern(List<NR> nrList, List<Vertex> vertexList,  WordNet wordNetOptimum,  WordNet wordNetAll)
     {
         // 拆分UV
-        ListIterator<Vertex> listIterator = vertexList.listIterator();
+        ListIterator<Vertex> listIterator = vertexList.GetEnumerator();
         StringBuilder sbPattern = new StringBuilder(nrList.size());
         NR preNR = NR.A;
         bool backUp = false;
@@ -91,7 +91,7 @@ public class PersonDictionary
                 case U:
                     if (!backUp)
                     {
-                        vertexList = new ArrayList<Vertex>(vertexList);
+                        vertexList = new (vertexList);
                         listIterator = vertexList.listIterator(index);
                         backUp = true;
                     }
@@ -183,7 +183,7 @@ public class PersonDictionary
             // 正式算它是一个名字
             if (HanLP.Config.DEBUG)
             {
-                System._out.printf("识别出人名：%s %s\n", name, value);
+                Console.WriteLine("识别出人名：%s %s\n", name, value);
             }
             int offset = offsetArray[begin];
             wordNetOptimum.insert(offset, new Vertex(Predefine.TAG_PEOPLE, name, ATTRIBUTE, WORD_ID), wordNetAll);

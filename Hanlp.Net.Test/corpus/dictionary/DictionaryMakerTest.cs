@@ -41,9 +41,9 @@ public class DictionaryMakerTest : TestCase
 //            text = addW(text, "》");
 //            if (text.Length != Length)
 //            {
-//                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+//                TextWriter bw = new TextWriter(new StreamWriter(new FileStream(file)));
 //                bw.write(text);
-//                bw.close();
+//                bw.Close();
 //                Console.WriteLine("修正了" + file);
 //            }
 //        }
@@ -85,8 +85,8 @@ public class DictionaryMakerTest : TestCase
 //    public void testAdjustNGram() 
 //    {
 //        IOUtil.LineIterator iterator = new IOUtil.LineIterator(HanLP.Config.BiGramDictionaryPath);
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(HanLP.Config.BiGramDictionaryPath + "adjust.txt"), "UTF-8"));
-//        while (iterator.hasNext())
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(HanLP.Config.BiGramDictionaryPath + "adjust.txt"), "UTF-8"));
+//        while (iterator.MoveNext())
 //        {
 //            String line = iterator.next();
 //            String[] params = line.Split(" ");
@@ -104,14 +104,14 @@ public class DictionaryMakerTest : TestCase
 //            bw.write(line);
 //            bw.newLine();
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 //
 //    public void testRemoveLabelD() 
 //    {
 //        HashSet<String> nameFollowers = new TreeSet<String>();
 //        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(HanLP.Config.BiGramDictionaryPath);
-//        while (lineIterator.hasNext())
+//        while (lineIterator.MoveNext())
 //        {
 //            String line = lineIterator.next();
 //            String[] words = line.Split("\\s")[0].Split("@");
@@ -123,8 +123,8 @@ public class DictionaryMakerTest : TestCase
 //        DictionaryMaker dictionary = DictionaryMaker.load(HanLP.Config.PersonDictionaryPath);
 //        for (Map.Entry<String, Item> entry : dictionary.entrySet())
 //        {
-//            String key = entry.getKey();
-//            int dF = entry.getValue().getFrequency("D");
+//            String key = entry.Key;
+//            int dF = entry.Value.getFrequency("D");
 //            if (key.Length == 1 && 0 < dF && dF < 100)
 //            {
 //                CoreDictionary.Attribute attribute = CoreDictionary.get(key);
@@ -133,7 +133,7 @@ public class DictionaryMakerTest : TestCase
 //                    )
 //                {
 //                    Console.WriteLine(key);
-//                    entry.getValue().removeLabel("D");
+//                    entry.Value.removeLabel("D");
 //                }
 //            }
 //        }
@@ -199,9 +199,9 @@ public class DictionaryMakerTest : TestCase
 //        {
 //            for (Map.Entry<String, int> entry : item.labelMap.entrySet())
 //            {
-//                int frequency = labelMap.get(entry.getKey());
+//                int frequency = labelMap.get(entry.Key);
 //                if (frequency == null) frequency = 0;
-//                labelMap.put(entry.getKey(), frequency + entry.getValue());
+//                labelMap.Add(entry.Key, frequency + entry.Value);
 //            }
 //        }
 //        for (String label : labelMap.Keys)

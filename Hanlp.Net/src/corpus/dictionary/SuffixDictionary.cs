@@ -36,10 +36,10 @@ public class SuffixDictionary
     public void Add(string word)
     {
         word = reverse(word);
-        trie.put(word, word.Length);
+        trie.Add(word, word.Length);
     }
 
-    public void addAll(string total)
+    public void AddRange(string total)
     {
         for (int i = 0; i < total.Length; ++i)
         {
@@ -47,7 +47,7 @@ public class SuffixDictionary
         }
     }
 
-    public void addAll(string[] total)
+    public void AddRange(string[] total)
     {
         for (string single : total)
         {
@@ -90,7 +90,7 @@ public class SuffixDictionary
         word = reverse(word);
         LinkedList<KeyValuePair<string, int>> suffixList = trie.commonPrefixSearchWithValue(word);
         if (suffixList.Count == 0) return 0;
-        return suffixList.getLast().getValue();
+        return suffixList.getLast().Value;
     }
 
     private static string reverse(string word)
@@ -107,7 +107,7 @@ public class SuffixDictionary
         HashSet<KeyValuePair<string, int>> treeSet = new ();
         for (KeyValuePair<string, int> entry : trie.entrySet())
         {
-            treeSet.Add(new AbstractMap.SimpleEntry<string, int>(reverse(entry.getKey()), entry.getValue()));
+            treeSet.Add(new AbstractMap.SimpleEntry<string, int>(reverse(entry.Key), entry.Value));
         }
 
         return treeSet;

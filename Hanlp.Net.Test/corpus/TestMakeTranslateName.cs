@@ -150,8 +150,8 @@ public class TestMakeTranslateName : TestCase
 //    public void testCombineCharAndName() 
 //    {
 //        TreeSet<String> wordSet = new TreeSet<String>();
-//        wordSet.addAll(IOUtil.readLineList("data/dictionary/person/音译用字.txt"));
-//        wordSet.addAll(IOUtil.readLineList("data/dictionary/person/nrf.txt"));
+//        wordSet.AddRange(IOUtil.readLineList("data/dictionary/person/音译用字.txt"));
+//        wordSet.AddRange(IOUtil.readLineList("data/dictionary/person/nrf.txt"));
 //        IOUtil.saveCollectionToTxt(wordSet, "data/dictionary/person/nrf.txt");
 //    }
 }

@@ -126,11 +126,11 @@ public abstract class HiddenMarkovModel
         if (start_probability == null || transition_probability == null || emission_probability == null) return;
         for (int i = 0; i < start_probability.Length; i++)
         {
-            start_probability[i] = (float) Math.log(start_probability[i]);
+            start_probability[i] = (float) Math.Log(start_probability[i]);
             for (int j = 0; j < start_probability.Length; j++)
-                transition_probability[i][j] = (float) Math.log(transition_probability[i][j]);
+                transition_probability[i][j] = (float) Math.Log(transition_probability[i][j]);
             for (int j = 0; j < emission_probability[0].Length; j++)
-                emission_probability[i][j] = (float) Math.log(emission_probability[i][j]);
+                emission_probability[i][j] = (float) Math.Log(emission_probability[i][j]);
         }
     }
 
@@ -139,17 +139,17 @@ public abstract class HiddenMarkovModel
      *
      * @param samples 数据集 int[i][j] i=0为观测，i=1为状态，j为时序轴
      */
-    public void train(Collection<int[][]> samples)
+    public void train(ICollection<int[][]> samples)
     {
         if (samples.isEmpty()) return;
         int max_state = 0;
         int max_obser = 0;
-        for (int[][] sample : samples)
+        foreach (int[][] sample in samples)
         {
             if (sample.Length != 2 || sample[0].Length != sample[1].Length) throw new ArgumentException("非法样本");
-            for (int o : sample[0])
+            foreach (int o in sample[0])
                 max_obser = Math.Max(max_obser, o);
-            for (int s : sample[1])
+            foreach (int s in sample[1])
                 max_state = Math.Max(max_state, s);
         }
         estimateStartProbability(samples, max_state);
@@ -187,10 +187,10 @@ public abstract class HiddenMarkovModel
      * @param samples   训练样本集
      * @param max_state 状态的最大下标，等于N-1
      */
-    protected void estimateTransitionProbability(Collection<int[][]> samples, int max_state)
+    protected void estimateTransitionProbability(ICollection<int[][]> samples, int max_state)
     {
         transition_probability = new float[max_state + 1][max_state + 1];
-        for (int[][] sample : samples)
+        foreach (int[][] sample in samples)
         {
             int prev_s = sample[1][0];
             for (int i = 1; i < sample[0].Length; i++)
@@ -290,7 +290,7 @@ public abstract class HiddenMarkovModel
     {
         float eta = 1e-2f;
         for (int i = 0; i < A.Length; i++)
-            if (Math.abs(A[i] - B[i]) > eta) return false;
+            if (Math.Abs(A[i] - B[i]) > eta) return false;
         return true;
     }
 }

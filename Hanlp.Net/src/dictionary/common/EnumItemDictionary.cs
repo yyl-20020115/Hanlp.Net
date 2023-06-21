@@ -27,9 +27,9 @@ public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
     {
         KeyValuePair<string, KeyValuePair<string, int>[]> args = EnumItem.create(_params);
         EnumItem<E> nrEnumItem = new EnumItem<E>();
-        foreach (KeyValuePair<string, int> e in args.getValue())
+        foreach (KeyValuePair<string, int> e in args.Value)
         {
-            nrEnumItem.labelMap.Add(valueOf(e.getKey()), e.getValue());
+            nrEnumItem.labelMap.Add(valueOf(e.Key), e.Value);
         }
         return nrEnumItem;
     }
@@ -64,16 +64,16 @@ public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
             return null;
         }
         E[] nrArray = values();
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         EnumItem<E>[] valueArray = new EnumItem<E>[size];
         for (int i = 0; i < size; ++i)
         {
-            int currentSize = byteArray.nextInt();
+            int currentSize = byteArray.Next();
             EnumItem<E> item = newItem();
             for (int j = 0; j < currentSize; ++j)
             {
-                E nr = nrArray[byteArray.nextInt()];
-                int frequency = byteArray.nextInt();
+                E nr = nrArray[byteArray.Next()];
+                int frequency = byteArray.Next();
                 item.labelMap.Add(nr, frequency);
             }
             valueArray[i] = item;
@@ -87,8 +87,8 @@ public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
         _out.writeInt(item.labelMap.size());
         for (KeyValuePair<E, int> entry : item.labelMap.entrySet())
         {
-            _out.writeInt(entry.getKey().ordinal());
-            _out.writeInt(entry.getValue());
+            _out.writeInt(entry.Key.ordinal());
+            _out.writeInt(entry.Value);
         }
     }
 }

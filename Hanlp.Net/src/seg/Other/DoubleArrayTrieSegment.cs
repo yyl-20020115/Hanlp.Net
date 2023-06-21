@@ -79,10 +79,10 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
             matchLongest(sentence, wordNet, natureArray, CustomDictionary.dat);
             if (CustomDictionary.trie != null)
             {
-                CustomDictionary.trie.parseLongestText(charArray, new );
+                CustomDictionary.trie.parseLongestText(charArray, new CT());
             }
         }
-        LinkedList<Term> termList = new LinkedList<Term>();
+        LinkedList<Term> termList = new ();
         posTag(charArray, wordNet, natureArray);
         for (int i = 0; i < wordNet.Length; )
         {

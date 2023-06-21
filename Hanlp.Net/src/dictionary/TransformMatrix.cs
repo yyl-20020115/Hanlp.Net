@@ -8,6 +8,8 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.dictionary;
 
 
@@ -53,13 +55,13 @@ public abstract class TransformMatrix
     {
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             // 第一行是矩阵的各个类型
-            string line = br.readLine();
+            string line = br.ReadLine();
             string[] _param = line.Split(",");
             // 为了制表方便，第一个label是废物，所以要抹掉它
             string[] labels = new string[_param.Length - 1];
-            System.arraycopy(_param, 1, labels, 0, labels.Length);
+            Array.Copy(_param, 1, labels, 0, labels.Length);
             int[] ordinaryArray = new int[labels.Length];
             ordinaryMax = 0;
             for (int i = 0; i < ordinaryArray.Length; ++i)
@@ -77,7 +79,7 @@ public abstract class TransformMatrix
                 }
             }
             // 之后就描述了矩阵
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 string[] paramArray = line.Split(",");
                 int currentOrdinary = ordinal(paramArray[0]);
@@ -86,7 +88,7 @@ public abstract class TransformMatrix
                     matrix[currentOrdinary][ordinaryArray[i]] = int.valueOf(paramArray[1 + i]);
                 }
             }
-            br.close();
+            br.Close();
             // 需要统计一下每个标签出现的次数
             total = new int[ordinaryMax];
             for (int j = 0; j < ordinaryMax; ++j)
@@ -114,18 +116,18 @@ public abstract class TransformMatrix
             // 下面计算HMM四元组
             states = ordinaryArray;
             start_probability = new double[ordinaryMax];
-            for (int s : states)
+            foreach (int s in states)
             {
                 double frequency = total[s] + 1e-8;
-                start_probability[s] = -Math.log(frequency / totalFrequency);
+                start_probability[s] = -Math.Log(frequency / totalFrequency);
             }
             transititon_probability = new double[ordinaryMax][ordinaryMax];
-            for (int from : states)
+            foreach (int from in states)
             {
-                for (int to : states)
+                foreach (int to in states)
                 {
                     double frequency = matrix[from][to] + 1e-8;
-                    transititon_probability[from][to] = -Math.log(frequency / total[from]);
+                    transititon_probability[from][to] = -Math.Log(frequency / total[from]);
 //                    Console.WriteLine("from" + NR.values()[from] + " to" + NR.values()[to] + " = " + transititon_probability[from][to]);
                 }
             }
@@ -148,22 +150,22 @@ public abstract class TransformMatrix
         double[][] n_transititon_probability = new double[ordinaryMax][ordinaryMax];
         for (int i = 0; i < transititon_probability.Length; i++)
         {
-            System.arraycopy(transititon_probability[i], 0, n_transititon_probability[i], 0, transititon_probability.Length);
+            Array.Copy(transititon_probability[i], 0, n_transititon_probability[i], 0, transititon_probability.Length);
         }
         transititon_probability = n_transititon_probability;
 
         int[] n_total = new int[ordinaryMax];
-        System.arraycopy(total, 0, n_total, 0, total.Length);
+        Array.Copy(total, 0, n_total, 0, total.Length);
         total = n_total;
 
         double[] n_start_probability = new double[ordinaryMax];
-        System.arraycopy(start_probability, 0, n_start_probability, 0, start_probability.Length);
+        Array.Copy(start_probability, 0, n_start_probability, 0, start_probability.Length);
         start_probability = n_start_probability;
 
         int[][] n_matrix = new int[ordinaryMax][ordinaryMax];
         for (int i = 0; i < matrix.Length; i++)
         {
-            System.arraycopy(matrix[i], 0, n_matrix[i], 0, matrix.Length);
+            Array.Copy(matrix[i], 0, n_matrix[i], 0, matrix.Length);
         }
         matrix = n_matrix;
     }

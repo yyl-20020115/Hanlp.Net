@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.suggest.scorer.editdistance;
 using System.Text;
@@ -132,6 +133,8 @@ public class CommonAhoCorasickSegmentUtil
     }
     public class CT2<V> : AhoCorasickDoubleArrayTrie<V>.IHit<V>
     {
+        private unsafe char* charArray;
+
         //@Override
         public void hit(int begin, int end, V value)
         {

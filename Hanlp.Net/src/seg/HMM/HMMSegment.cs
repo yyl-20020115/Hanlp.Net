@@ -8,6 +8,7 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.model.trigram;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.utility;
@@ -51,14 +52,14 @@ public class HMMSegment : CharacterBasedSegment
             throw new ArgumentException("发生了异常：" + TextUtility.exceptionToString(e));
         }
         logger.info("加载成功，耗时：" + (DateTime.Now.Microsecond - start) + " ms");
-        GlobalObjectPool.put(modelPath, model);
+        GlobalObjectPool.Add(modelPath, model);
     }
 
     //@Override
     protected List<Term> roughSegSentence(char[] sentence)
     {
         char[] tag = model.tag(sentence);
-        List<Term> termList = new LinkedList<Term>();
+        List<Term> termList = new ();
         int offset = 0;
         for (int i = 0; i < tag.Length; offset += 1, ++i)
         {

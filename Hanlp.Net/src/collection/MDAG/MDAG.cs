@@ -93,14 +93,14 @@ public class MDAG : ICacheAble
     //@Override
     public bool load(ByteArray byteArray)
     {
-        int Length = byteArray.nextInt();
+        int Length = byteArray.Next();
         for (int i = 0; i < Length; ++i)
         {
             charTreeSet.Add(byteArray.nextChar());
         }
         simplifiedSourceNode = new SimpleMDAGNode();
         simplifiedSourceNode.load(byteArray);
-        Length = byteArray.nextInt();
+        Length = byteArray.Next();
         mdagDataArray = new SimpleMDAGNode[Length];
         for (int i = 0; i < Length; ++i)
         {
@@ -183,17 +183,17 @@ public class MDAG : ICacheAble
     }
 
     /**
-     * 从一个打开的BufferedReader构造
+     * 从一个打开的TextReader构造
      * @param dataFileBufferedReader
      * @
      */
-    public MDAG(BufferedReader dataFileBufferedReader) 
+    public MDAG(TextReader dataFileBufferedReader) 
     {
         string currentString = "";
         string previousString = "";
 
         //Read all the lines in dataFile and Add the string contained in each to the MDAG.
-        while ((currentString = dataFileBufferedReader.readLine()) != null)
+        while ((currentString = dataFileBufferedReader.ReadLine()) != null)
         {
             int mpsIndex = calculateMinimizationProcessingStartIndex(previousString, currentString);
 
@@ -551,7 +551,7 @@ public class MDAG : ICacheAble
         MDAGNode equivalentNode = equivalenceClassMDAGNodeHashMap.get(relevantTargetNode);
 
         if (equivalentNode == null)  //if there is no node with the same right language as relevantTargetNode
-            equivalenceClassMDAGNodeHashMap.put(relevantTargetNode, relevantTargetNode);
+            equivalenceClassMDAGNodeHashMap.Add(relevantTargetNode, relevantTargetNode);
         else if (equivalentNode != relevantTargetNode)   //if there is another node with the same right language as relevantTargetNode, reassign the
         {                                               //_transition between originNode and relevantTargetNode, to originNode and the node representing the equivalence class of interest
             relevantTargetNode.decrementTargetIncomingTransitionCounts();
@@ -732,8 +732,8 @@ public class MDAG : ICacheAble
         {
             //Use the current _transition's label and target node to create a SimpleMDAGNode
             //(which is a space-saving representation of the _transition), and insert it in to mdagDataArray
-            char transitionLabelChar = transitionKeyValuePair.getKey();
-            MDAGNode transitionTargetNode = transitionKeyValuePair.getValue();
+            char transitionLabelChar = transitionKeyValuePair.Key;
+            MDAGNode transitionTargetNode = transitionKeyValuePair.Value;
             mdagDataArray[pivotIndex] = new SimpleMDAGNode(transitionLabelChar, transitionTargetNode.isAcceptNode(), transitionTargetNode.getOutgoingTransitionCount());
             /////
 
@@ -785,7 +785,7 @@ public class MDAG : ICacheAble
             // 构建注册表
             foreach (MDAGNode mdagNode in toNodeArray)
             {
-                equivalenceClassMDAGNodeHashMap.put(mdagNode, mdagNode);
+                equivalenceClassMDAGNodeHashMap.Add(mdagNode, mdagNode);
             }
             // 扔掉垃圾
             simplifiedSourceNode = null;
@@ -862,8 +862,8 @@ public class MDAG : ICacheAble
         //corresponding Strings in to strHashSet that have the relationship with conditionString denoted by searchCondition
         foreach (var transitionKeyValuePair in transitionTreeMap.entrySet())
         {
-            string newPrefixString = prefixString + transitionKeyValuePair.getKey();
-            MDAGNode currentNode = transitionKeyValuePair.getValue();
+            string newPrefixString = prefixString + transitionKeyValuePair.Key;
+            MDAGNode currentNode = transitionKeyValuePair.Value;
 
             if (currentNode.isAcceptNode() && searchCondition.satisfiesCondition(newPrefixString, searchConditionString))
                 strHashSet.Add(newPrefixString);
@@ -1066,7 +1066,7 @@ public class MDAG : ICacheAble
     }
 
 //    //@Override
-//    public string ToString()
+//    public override string ToString()
 //    {
 //        StringBuilder sb = new StringBuilder("MDAG{");
 //        sb.Append("sourceNode=").Append(sourceNode);

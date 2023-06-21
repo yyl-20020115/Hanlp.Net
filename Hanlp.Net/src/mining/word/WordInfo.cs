@@ -10,11 +10,11 @@ public class WordInfo
     /**
      * 左邻接字集合
      */
-    Dictionary<char, int[]> left;
+    public Dictionary<char, int[]> left;
     /**
      * 右邻接字集合
      */
-    Dictionary<char, int[]> right;
+    public Dictionary<char, int[]> right;
     /**
      * 词语
      */
@@ -23,9 +23,9 @@ public class WordInfo
      * 词频
      */
     public int frequency;
-    float p;
-    float leftEntropy;
-    float rightEntropy;
+    public float p;
+    public float leftEntropy;
+    public float rightEntropy;
     /**
      * 互信息
      */
@@ -35,7 +35,7 @@ public class WordInfo
      */
     public float entropy;
 
-    WordInfo(string text)
+    public WordInfo(string text)
     {
         this.text = text;
         left = new Dictionary<char, int[]>();
@@ -45,11 +45,10 @@ public class WordInfo
 
     private static void increaseFrequency(char c, Dictionary<char, int[]> storage)
     {
-        int[] freq = storage.get(c);
-        if (freq == null)
+        if (!storage.TryGetValue(c,out var freq))
         {
             freq = new int[]{1};
-            storage.put(c, freq);
+            storage.Add(c, freq);
         }
         else
         {
@@ -60,22 +59,22 @@ public class WordInfo
     private float computeEntropy(Dictionary<char, int[]> storage)
     {
         float sum = 0;
-        for (KeyValuePair<char, int[]> entry : storage.entrySet())
+        foreach (KeyValuePair<char, int[]> entry in storage)
         {
-            float p = entry.getValue()[0] / (float) frequency;
-            sum -= p * Math.log(p);
+            float p = entry.Value[0] / (float) frequency;
+            sum -= (float)(p * Math.Log(p));
         }
         return sum;
     }
 
-    void update(char left, char right)
+    public void update(char left, char right)
     {
         ++frequency;
         increaseFrequency(left, this.left);
         increaseFrequency(right, this.right);
     }
 
-    void computeProbabilityEntropy(int Length)
+    public void computeProbabilityEntropy(int Length)
     {
         p = frequency / (float) Length;
         leftEntropy = computeEntropy(left);
@@ -83,17 +82,17 @@ public class WordInfo
         entropy = Math.Min(leftEntropy, rightEntropy);
     }
 
-    void computeAggregation(Dictionary<string, WordInfo> word_cands)
+    public void computeAggregation(Dictionary<string, WordInfo> word_cands)
     {
         if (text.Length == 1)
         {
-            aggregation = (float) Math.sqrt(p);
+            aggregation = (float) Math.Sqrt(p);
             return;
         }
         for (int i = 1; i < text.Length; ++i)
         {
             aggregation = Math.Min(aggregation,
-                                   p / word_cands.get(text.substring(0, i)).p / word_cands.get(text.substring(i)).p);
+                                   p / word_cands[(text[0..i])].p / word_cands[text[i..]].p);
         }
     }
 

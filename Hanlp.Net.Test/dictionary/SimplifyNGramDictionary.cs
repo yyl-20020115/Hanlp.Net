@@ -24,23 +24,23 @@ public class SimplifyNGramDictionary : TestCase
 //    String path = "data/dictionary/CoreNatureDictionary.ngram.txt";
 //    public void testSimplify() 
 //    {
-//        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+//        TextReader br = new TextReader(new InputStreamReader(new FileStream(path)));
 //        Dictionary<String, int> map = new Dictionary<String, int>();
 //        String line;
-//        while ((line = br.readLine()) != null)
+//        while ((line = br.ReadLine()) != null)
 //        {
 //            String[] param = line.Split("\\s");
-//            map.put(param[0], int.valueOf(param[1]));
+//            map.Add(param[0], int.valueOf(param[1]));
 //        }
-//        br.close();
+//        br.Close();
 //        HashSet<Map.Entry<String, int>> entrySet = map.descendingMap().entrySet();
 //        Iterator<Map.Entry<String, int>> iterator = entrySet.iterator();
 //        // 第一步去包含
 ////        Map.Entry<String, int> pre = new AbstractMap.SimpleEntry<>(" @ ", 1);
-////        while (iterator.hasNext())
+////        while (iterator.MoveNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            if (current.getKey().Length - current.getKey().IndexOf('@') == 2 && pre.getKey().IndexOf(current.getKey()) == 0 && current.getValue() <= 2)
+////            if (current.Key.Length - current.Key.IndexOf('@') == 2 && pre.Key.IndexOf(current.Key) == 0 && current.Value <= 2)
 ////            {
 ////                Console.WriteLine("应当删除 " + current + " 保留 " + pre);
 ////                iterator.Remove();
@@ -49,34 +49,34 @@ public class SimplifyNGramDictionary : TestCase
 ////        }
 //        // 第二步，尝试移除“学@家”这样的短共现
 ////        iterator = entrySet.iterator();
-////        while (iterator.hasNext())
+////        while (iterator.MoveNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            if (current.getKey().Length == 3)
+////            if (current.Key.Length == 3)
 ////            {
 ////                Console.WriteLine("应当删除 " + current);
 ////            }
 ////        }
 //        // 第三步，对某些@后面的词语太短了，也移除
 ////        iterator = entrySet.iterator();
-////        while (iterator.hasNext())
+////        while (iterator.MoveNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            String[] termArray = current.getKey().Split("@", 2);
+////            String[] termArray = current.Key.Split("@", 2);
 ////            if (termArray[0].Equals("未##人") && termArray[1].Length < 2)
 ////            {
-////                Console.WriteLine("删除 " + current.getKey());
+////                Console.WriteLine("删除 " + current.Key);
 ////                iterator.Remove();
 ////            }
 ////        }
 //        // 第四步，人名接续对识别产生太多误命中影响，也删除
 ////        iterator = entrySet.iterator();
-////        while (iterator.hasNext())
+////        while (iterator.MoveNext())
 ////        {
 ////            Map.Entry<String, int> current = iterator.next();
-////            if (current.getKey().Contains("未##人") && current.getValue() < 10)
+////            if (current.Key.Contains("未##人") && current.Value < 10)
 ////            {
-////                Console.WriteLine("删除 " + current.getKey());
+////                Console.WriteLine("删除 " + current.Key);
 ////                iterator.Remove();
 ////            }
 ////        }
@@ -84,25 +84,25 @@ public class SimplifyNGramDictionary : TestCase
 //        TFDictionary dictionary = new TFDictionary();
 //        dictionary.load("D:\\JavaProjects\\HanLP\\data\\dictionary\\CoreNatureDictionary.ngram.mini.txt");
 //        iterator = entrySet.iterator();
-//        while (iterator.hasNext())
+//        while (iterator.MoveNext())
 //        {
 //            Map.Entry<String, int> current = iterator.next();
-//            if (current.getKey().Contains("未##人") && dictionary.getFrequency(current.getKey()) < 10)
+//            if (current.Key.Contains("未##人") && dictionary.getFrequency(current.Key) < 10)
 //            {
-//                Console.WriteLine("删除 " + current.getKey());
+//                Console.WriteLine("删除 " + current.Key);
 //                iterator.Remove();
 //            }
 //        }
 //        // 输出
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path)));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(path)));
 //        for (Map.Entry<String, int> entry : map.entrySet())
 //        {
-//            bw.write(entry.getKey());
+//            bw.write(entry.Key);
 //            bw.write(' ');
-//            bw.write(String.valueOf(entry.getValue()));
+//            bw.write(String.valueOf(entry.Value));
 //            bw.newLine();
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 //
 //    /**
@@ -111,17 +111,17 @@ public class SimplifyNGramDictionary : TestCase
 //     */
 //    public void testLoseWeight() 
 //    {
-//        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+//        TextReader br = new TextReader(new InputStreamReader(new FileStream(path), "UTF-8"));
 //        Dictionary<String, int> map = new Dictionary<String, int>();
 //        String line;
-//        while ((line = br.readLine()) != null)
+//        while ((line = br.ReadLine()) != null)
 //        {
 //            String[] param = line.Split(" ");
-//            map.put(param[0], int.valueOf(param[1]));
+//            map.Add(param[0], int.valueOf(param[1]));
 //        }
-//        br.close();
+//        br.Close();
 //        Iterator<String> iterator = map.Keys.iterator();
-//        while (iterator.hasNext())
+//        while (iterator.MoveNext())
 //        {
 //            line = iterator.next();
 //            String[] params = line.Split("@", 2);
@@ -132,14 +132,14 @@ public class SimplifyNGramDictionary : TestCase
 //        }
 //
 //        // 输出
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(path), "UTF-8"));
 //        for (Map.Entry<String, int> entry : map.entrySet())
 //        {
-//            bw.write(entry.getKey());
+//            bw.write(entry.Key);
 //            bw.write(' ');
-//            bw.write(String.valueOf(entry.getValue()));
+//            bw.write(String.valueOf(entry.Value));
 //            bw.newLine();
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 }

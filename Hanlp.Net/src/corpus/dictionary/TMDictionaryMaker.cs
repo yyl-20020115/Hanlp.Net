@@ -39,7 +39,7 @@ public class TMDictionaryMaker : ISaveAble
         if (firstMatrix == null)
         {
             firstMatrix = new ();
-            transferMatrix.put(first, firstMatrix);
+            transferMatrix.Add(first, firstMatrix);
         }
         int frequency = firstMatrix.get(second);
         if (frequency == null) frequency = 0;
@@ -49,26 +49,26 @@ public class TMDictionaryMaker : ISaveAble
     //@Override
     public override string ToString()
     {
-        HashSet<string> labelSet = new TreeSet<string>();
-        for (KeyValuePair<string, Dictionary<string, int>> first : transferMatrix.entrySet())
+        HashSet<string> labelSet = new ();
+        foreach (KeyValuePair<string, Dictionary<string, int>> first in transferMatrix.entrySet())
         {
-            labelSet.Add(first.getKey());
-            labelSet.addAll(first.getValue().keySet());
+            labelSet.Add(first.Key);
+            labelSet.AddRange(first.Value.keySet());
         }
         StringBuilder sb = new StringBuilder();
         sb.Append(' ');
-        for (string key : labelSet)
+        foreach (string key in labelSet)
         {
             sb.Append(',');
             sb.Append(key);
         }
         sb.Append('\n');
-        for (string first : labelSet)
+        foreach (string first in labelSet)
         {
             Dictionary<string, int> firstMatrix = transferMatrix.get(first);
             if (firstMatrix == null) firstMatrix = new ();
             sb.Append(first);
-            for (string second : labelSet)
+            foreach (string second in labelSet)
             {
                 sb.Append(',');
                 int frequency = firstMatrix.get(second);
@@ -85,9 +85,9 @@ public class TMDictionaryMaker : ISaveAble
     {
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
+            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
             bw.write(ToString());
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {

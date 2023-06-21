@@ -62,7 +62,7 @@ public class BM25
     {
         this.docs = docs;
         D = docs.size();
-        for (List<string> sentence : docs)
+        foreach (List<string> sentence in docs)
         {
             avgdl += sentence.size();
         }
@@ -79,30 +79,30 @@ public class BM25
     private void init()
     {
         int index = 0;
-        for (List<string> sentence : docs)
+        foreach (List<string> sentence in docs)
         {
             Dictionary<string, int> tf = new Dictionary<string, int>();
-            for (string word : sentence)
+            foreach (string word in sentence)
             {
                 int freq = tf.get(word);
                 freq = (freq == null ? 0 : freq) + 1;
-                tf.put(word, freq);
+                tf.Add(word, freq);
             }
             f[index] = tf;
-            for (KeyValuePair<string, int> entry : tf.entrySet())
+            foreach (var entry in tf)
             {
-                string word = entry.getKey();
+                string word = entry.Key;
                 int freq = df.get(word);
                 freq = (freq == null ? 0 : freq) + 1;
-                df.put(word, freq);
+                df.Add(word, freq);
             }
             ++index;
         }
-        for (KeyValuePair<string, int> entry : df.entrySet())
+        foreach (var entry in df)
         {
-            string word = entry.getKey();
-            int freq = entry.getValue();
-            idf.put(word, Math.log(D - freq + 0.5) - Math.log(freq + 0.5));
+            string word = entry.Key;
+            int freq = entry.Value;
+            idf.Add(word, Math.Log(D - freq + 0.5) - Math.Log(freq + 0.5));
         }
     }
 
@@ -116,7 +116,7 @@ public class BM25
     public double sim(List<string> sentence, int index)
     {
         double score = 0;
-        for (string word : sentence)
+        foreach (string word in sentence)
         {
             if (!f[index].ContainsKey(word)) continue;
             int d = docs.get(index).size();

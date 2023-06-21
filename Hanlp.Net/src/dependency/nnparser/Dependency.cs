@@ -35,7 +35,7 @@ public class Dependency
         deprels = allocate();
     }
 
-    int size()
+    public int size()
     {
         return forms.Count;
     }

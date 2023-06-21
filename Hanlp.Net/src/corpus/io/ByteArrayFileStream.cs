@@ -32,7 +32,7 @@ public class ByteArrayFileStream : ByteArrayStream
     {
         try
         {
-            FileInputStream fileInputStream = new FileInputStream(path);
+            FileStream fileInputStream = new FileStream(path);
             return createByteArrayFileStream(fileInputStream);
         }
         catch (Exception e)
@@ -42,7 +42,7 @@ public class ByteArrayFileStream : ByteArrayStream
         }
     }
 
-    public static ByteArrayFileStream createByteArrayFileStream(FileInputStream fileInputStream) 
+    public static ByteArrayFileStream createByteArrayFileStream(FileStream fileInputStream) 
     {
         FileChannel channel = fileInputStream.getChannel();
         long size = channel.size();
@@ -50,7 +50,7 @@ public class ByteArrayFileStream : ByteArrayStream
         ByteBuffer byteBuffer = ByteBuffer.allocate(bufferSize);
         if (channel.read(byteBuffer) == size)
         {
-            channel.close();
+            channel.Close();
             channel = null;
         }
         byteBuffer.flip();
@@ -80,14 +80,14 @@ public class ByteArrayFileStream : ByteArrayStream
                 int readBytes = fileChannel.read(byteBuffer);
                 if (readBytes == availableBytes)
                 {
-                    fileChannel.close();
+                    fileChannel.Close();
                     fileChannel = null;
                 }
-                assert readBytes > 0 : "已到达文件尾部！";
+                //assert readBytes > 0 : "已到达文件尾部！";
                 byteBuffer.flip();
                 byte[] bytes = byteBuffer.array();
-                System.arraycopy(this.bytes, offset, this.bytes, offset - readBytes, bufferSize - offset);
-                System.arraycopy(bytes, 0, this.bytes, bufferSize - readBytes, readBytes);
+                Array.Copy(this.bytes, offset, this.bytes, offset - readBytes, bufferSize - offset);
+                Array.Copy(bytes, 0, this.bytes, bufferSize - readBytes, readBytes);
                 offset -= readBytes;
             }
             catch (IOException e)
@@ -98,13 +98,13 @@ public class ByteArrayFileStream : ByteArrayStream
     }
 
     //@Override
-    public void close()
+    public void Close()
     {
-        base.close();
+        base.Close();
         try
         {
             if (fileChannel == null) return;
-            fileChannel.close();
+            fileChannel.Close();
         }
         catch (IOException e)
         {

@@ -104,7 +104,7 @@ public class CharType
         for (int i = 0; i <= char.MaxValue; ++i)
         {
             int type = TextUtility.charType((char) i);
-//            System._out.printf("%d %d\n", i, TextUtility.charType((char) i));
+//            Console.WriteLine("%d %d\n", i, TextUtility.charType((char) i));
             if (type != preType)
             {
                 int[] array = new int[3];
@@ -112,7 +112,7 @@ public class CharType
                 array[1] = i - 1;
                 array[2] = preType;
                 typeList.Add(array);
-//                System._out.printf("%d %d %d\n", array[0], array[1], array[2]);
+//                Console.WriteLine("%d %d %d\n", array[0], array[1], array[2]);
                 preChar = i;
             }
             preType = type;
@@ -125,15 +125,15 @@ public class CharType
             typeList.Add(array);
         }
 //        Console.Write("int[" + typeList.size() + "][3] array = \n");
-        DataOutputStream _out = new DataOutputStream(new FileOutputStream(HanLP.Config.CharTypePath));
+        Stream _out = new Stream(new FileStream(HanLP.Config.CharTypePath));
         foreach (int[] array in typeList)
         {
-//            System._out.printf("%d %d %d\n", array[0], array[1], array[2]);
+//            Console.WriteLine("%d %d %d\n", array[0], array[1], array[2]);
             _out.writeChar(array[0]);
             _out.writeChar(array[1]);
             _out.writeByte(array[2]);
         }
-        _out.close();
+        _out.Close();
         ByteArray byteArray = ByteArray.createByteArray(HanLP.Config.CharTypePath);
         return byteArray;
     }

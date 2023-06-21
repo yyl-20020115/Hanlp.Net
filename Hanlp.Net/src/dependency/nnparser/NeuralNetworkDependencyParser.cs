@@ -30,7 +30,7 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
 
     public NeuralNetworkDependencyParser(Segment segment)
     {
-        super(segment);
+        base(segment);
         parser_dll = new parser_dll();
         setDeprelTranslater(ConfigOption.DEPRL_DESCRIPTION_PATH).enableDeprelTranslator(true);
     }

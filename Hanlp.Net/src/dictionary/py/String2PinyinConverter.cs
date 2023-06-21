@@ -68,8 +68,8 @@ public class String2PinyinConverter
     {
         List<Pinyin> pinyinList = new ();
         ICollection<Token> tokenize = trie.tokenize(complexText);
-//        Console.WriteLine(tokenize);
-        for (Token token : tokenize)
+        //        Console.WriteLine(tokenize);
+        foreach (Token token in tokenize)
         {
             string fragment = token.getFragment();
             if (token.isMatch())
@@ -79,7 +79,7 @@ public class String2PinyinConverter
             }
             else
             {
-                pinyinList.addAll(PinyinDictionary.convertToPinyin(fragment));
+                pinyinList.AddRange(PinyinDictionary.convertToPinyin(fragment));
             }
         }
 
@@ -110,10 +110,10 @@ public class String2PinyinConverter
      */
     public static KeyValuePair<List<Pinyin>, List<Boolean>> convert2Pair(string complexText, bool removeTone)
     {
-        List<Pinyin> pinyinList = new LinkedList<Pinyin>();
-        List<Boolean> booleanList = new LinkedList<Boolean>();
-        Collection<Token> tokenize = trie.tokenize(complexText);
-        for (Token token : tokenize)
+        List<Pinyin> pinyinList = new ();
+        List<Boolean> booleanList = new ();
+        var tokenize = trie.tokenize(complexText);
+        foreach (Token token in tokenize)
         {
             string fragment = token.getFragment();
             if (token.isMatch())
@@ -133,7 +133,7 @@ public class String2PinyinConverter
             else
             {
                 List<Pinyin> pinyinListFragment = PinyinDictionary.convertToPinyin(fragment);
-                pinyinList.addAll(pinyinListFragment);
+                pinyinList.AddRange(pinyinListFragment);
                 for (int i = 0; i < pinyinListFragment.size(); ++i)
                 {
                     booleanList.Add(true);
@@ -141,7 +141,7 @@ public class String2PinyinConverter
             }
         }
         makeToneToTheSame(pinyinList);
-        return new Pair<List<Pinyin>, List<Boolean>>(pinyinList, booleanList);
+        return new KeyValuePair<List<Pinyin>, List<Boolean>>(pinyinList, booleanList);
     }
 
     /**
@@ -174,8 +174,8 @@ public class String2PinyinConverter
      */
     public static List<Pinyin> makeToneToTheSame(List<Pinyin> pinyinList)
     {
-        ListIterator<Pinyin> listIterator = pinyinList.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<Pinyin> listIterator = pinyinList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             listIterator.set(convert2Tone5(listIterator.next()));
         }

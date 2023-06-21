@@ -31,13 +31,13 @@ public class DemoPinyinToChinese
         var map = new Dictionary<String, HashSet<String>>();
         foreach (var entry in dictionary.keySet())
         {
-            String pinyins = entry.getValue().replaceAll("[\\d,]", "");
+            String pinyins = entry.Value.replaceAll("[\\d,]", "");
             if (!map.TryGetValue(pinyins,out var words))
             {
                 words = new HashSet<String>();
                 map.Add(pinyins, words);
             }
-            words.Add(entry.getKey());
+            words.Add(entry.Key);
         }
         var words2 = new HashSet<String>();
         words2.Add("绿色");

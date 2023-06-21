@@ -66,14 +66,14 @@ public class MathUtility
         double max = Double.NEGATIVE_INFINITY;
         foreach (KeyValuePair<string, Double> entry in entrySet)
         {
-            max = Math.Max(max, entry.getValue());
+            max = Math.Max(max, entry.Value);
         }
 
         double sum = 0.0;
         //通过减去最大值防止浮点数溢出
         foreach (KeyValuePair<string, Double> entry in entrySet)
         {
-            Double value = Math.exp(entry.getValue() - max);
+            Double value = Math.exp(entry.Value - max);
             entry.setValue(value);
 
             sum += value;
@@ -83,7 +83,7 @@ public class MathUtility
         {
             foreach (KeyValuePair<string, Double> entry in entrySet)
             {
-                predictionScores.put(entry.getKey(), entry.getValue() / sum);
+                predictionScores.Add(entry.Key, entry.Value / sum);
             }
         }
     }

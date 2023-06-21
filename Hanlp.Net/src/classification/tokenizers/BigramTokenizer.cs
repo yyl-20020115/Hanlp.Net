@@ -52,7 +52,7 @@ public class BigramTokenizer : ITokenizer
         Iterator<int[]> iterator = atomList.iterator();
         int[] pre = iterator.next();
         int p = -1;
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             int[] cur = iterator.next();
             termArray[++p] = new StringBuilder(pre[1] + cur[1]).Append(charArray, pre[0], pre[1]).Append(charArray, cur[0], cur[1]).ToString();

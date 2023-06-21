@@ -39,7 +39,7 @@ public class DoubleArray : Serializable
         byte[][] byteKey = new byte[keys.size()][];
         Iterator<string> iteratorKey = keys.iterator();
         int i = 0;
-        while (iteratorKey.hasNext())
+        while (iteratorKey.MoveNext())
         {
             byteKey[i] = iteratorKey.next().getBytes(utf8);
             ++i;
@@ -59,10 +59,10 @@ public class DoubleArray : Serializable
         int size = (int) (stream.available() / UNIT_SIZE);
         _array = new int[size];
 
-        DataInputStream _in = null;
+        Stream _in = null;
         try
         {
-            _in = new DataInputStream(new BufferedInputStream(
+            _in = new Stream(new BufferedInputStream(
                     stream));
             for (int i = 0; i < size; ++i)
             {
@@ -73,7 +73,7 @@ public class DoubleArray : Serializable
         {
             if (_in != null)
             {
-                in.close();
+                _in.Close();
             }
         }
     }
@@ -86,10 +86,10 @@ public class DoubleArray : Serializable
      */
     public void save(Stream stream) 
     {
-        DataOutputStream _out = null;
+        Stream _out = null;
         try
         {
-            _out = new DataOutputStream(new BufferedOutputStream(
+            _out = new Stream(new BufferedOutputStream(
                     stream));
             for (int i = 0; i < _array.Length; ++i)
             {
@@ -100,7 +100,7 @@ public class DoubleArray : Serializable
         {
             if (_out != null)
             {
-                _out.close();
+                _out.Close();
             }
         }
     }
@@ -110,9 +110,9 @@ public class DoubleArray : Serializable
         _out.writeObject(_array);
     }
 
-    private void readObject(ObjectInputStream in) , ClassNotFoundException
+    private void readObject(ObjectInputStream @in)
     {
-        _array = (int[]) in.readObject();
+        _array = (int[]) _in.readObject();
     }
 
     /**
@@ -169,11 +169,11 @@ public class DoubleArray : Serializable
      * @param maxResults
      * @return found keys and values
      */
-    public List<Pair<int, int>> commonPrefixSearch(byte[] key,
+    public List<KeyValuePair<int, int>> commonPrefixSearch(byte[] key,
                                                            int offset,
                                                            int maxResults)
     {
-        List<Pair<int, int>> result = new ();
+        List<KeyValuePair<int, int>> result = new ();
         int unit = _array[0];
         int nodePos = 0;
         // nodePos ^= unit.offset();
@@ -197,8 +197,8 @@ public class DoubleArray : Serializable
             {
                 if (result.size() < maxResults)
                 {
-                    // result.Add(new Pair<i, _array[nodePos].value());
-                    result.Add(new Pair<int, int>(i + 1, _array[nodePos] & ((1 << 31) - 1)));
+                    // result.Add(new KeyValuePair<i, _array[nodePos].value());
+                    result.Add(new KeyValuePair<int, int>(i + 1, _array[nodePos] & ((1 << 31) - 1)));
                 }
             }
         }

@@ -48,7 +48,7 @@ public class Word : IWord
     public static Word create(string param)
     {
         if (param == null) return null;
-        int cutIndex = param.lastIndexOf('/');
+        int cutIndex = param.LastIndexOf('/');
         if (cutIndex <= 0 || cutIndex == param.Length - 1)
         {
             logger.warning("使用 " + param + "创建单个单词失败");
@@ -59,7 +59,7 @@ public class Word : IWord
     }
 
     ////@Override
-    public string getValue()
+    public string Value()
     {
         return value;
     }

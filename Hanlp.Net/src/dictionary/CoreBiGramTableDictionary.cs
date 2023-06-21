@@ -53,15 +53,15 @@ public class CoreBiGramTableDictionary
     {
         string datPath = HanLP.Config.BiGramDictionaryPath + ".table" + Predefine.BIN_EXT;
         if (loadDat(datPath)) return true;
-        BufferedReader br;
+        TextReader br;
         var map = new Dictionary<int, Dictionary<int, int>>();
         try
         {
-            br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
             int total = 0;
             int maxWordId = CoreDictionary.trie.size();
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 string[] p = line.Split("\\s");
                 string[] twoWord = p[0].Split("@", 2);
@@ -86,12 +86,12 @@ public class CoreBiGramTableDictionary
                 if (biMap == null)
                 {
                     biMap = new Dictionary<int, int>();
-                    map.put(idA, biMap);
+                    map.Add(idA, biMap);
                 }
-                biMap.put(idB, freq);
+                biMap.Add(idB, freq);
                 total += 2;
             }
-            br.close();
+            br.Close();
             start = new int[maxWordId + 1];
             pair = new int[total];  // total是接续的个数*2
             int offset = 0;
@@ -104,8 +104,8 @@ public class CoreBiGramTableDictionary
                     for (KeyValuePair<int, int> entry : bMap.entrySet())
                     {
                         int index = offset << 1;
-                        pair[index] = entry.getKey();
-                        pair[index + 1] = entry.getValue();
+                        pair[index] = entry.Key;
+                        pair[index + 1] = entry.Value;
                         ++offset;
                     }
                 }
@@ -136,7 +136,7 @@ public class CoreBiGramTableDictionary
     {
         try
         {
-//            DataOutputStream _out = new DataOutputStream(new FileOutputStream(path));
+//            Stream _out = new Stream(new FileStream(path));
 //            _out.writeInt(start.Length);
 //            for (int i : start)
 //            {
@@ -147,11 +147,11 @@ public class CoreBiGramTableDictionary
 //            {
 //                _out.writeInt(i);
 //            }
-//            _out.close();
+//            _out.Close();
             ObjectOutputStream _out = new ObjectOutputStream(IOUtil.newOutputStream(path));
             _out.writeObject(start);
             _out.writeObject(pair);
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -167,18 +167,18 @@ public class CoreBiGramTableDictionary
 //        ByteArray byteArray = ByteArray.createByteArray(path);
 //        if (byteArray == null) return false;
 //
-//        int size = byteArray.nextInt(); // 这两个数组从byte转为int竟然要花4秒钟
+//        int size = byteArray.Next(); // 这两个数组从byte转为int竟然要花4秒钟
 //        start = new int[size];
 //        for (int i = 0; i < size; ++i)
 //        {
-//            start[i] = byteArray.nextInt();
+//            start[i] = byteArray.Next();
 //        }
 //
-//        size = byteArray.nextInt();
+//        size = byteArray.Next();
 //        pair = new int[size];
 //        for (int i = 0; i < size; ++i)
 //        {
-//            pair[i] = byteArray.nextInt();
+//            pair[i] = byteArray.Next();
 //        }
 
         try
@@ -187,11 +187,11 @@ public class CoreBiGramTableDictionary
             start = (int[])_in.readObject();
             if (CoreDictionary.trie.size() != start.Length - 1)     // 目前CoreNatureDictionary.ngram.txt的缓存依赖于CoreNatureDictionary.txt的缓存
             {                                                       // 所以这里校验一下二者的一致性，不然可能导致下标越界或者ngram错乱的情况
-                _in.close();
+                _in.Close();
                 return false;
             }
             pair = (int[])_in.readObject();
-            _in.close();
+            _in.Close();
         }
         catch (Exception e)
         {

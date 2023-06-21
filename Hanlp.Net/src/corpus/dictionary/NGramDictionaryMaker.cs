@@ -39,10 +39,10 @@ public class NGramDictionaryMaker
 
     public void addPair(IWord first, IWord second)
     {
-        string combine = first.getValue() + "@" + second.getValue();
+        string combine = first.Value + "@" + second.Value;
         int frequency = trie.get(combine);
         if (frequency == null) frequency = 0;
-        trie.put(combine, frequency + 1);
+        trie.Add(combine, frequency + 1);
         // 同时还要统计标签的转移情况
         tmDictionaryMaker.addPair(first.getLabel(), second.getLabel());
     }
@@ -70,13 +70,13 @@ public class NGramDictionaryMaker
     {
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
+            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
             foreach (KeyValuePair<string, int> entry in trie)
             {
                 bw.write(entry.Key + " " + entry.Value);
                 bw.newLine();
             }
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {

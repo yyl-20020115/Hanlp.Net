@@ -219,15 +219,15 @@ public class TestUtility
         //                    fos.Write(buffer, 0, len);
         //                }
         //                fos.Close();
-        //                //close this ZipEntry
+        //                //Close this ZipEntry
         //                zis.closeEntry();
         //            }
         //        }
         //        ze = zis.getNextEntry();
         //    }
-        //    //close last ZipEntry
+        //    //Close last ZipEntry
         //    zis.closeEntry();
-        //    zis.close();
+        //    zis.Close();
         //    fis.Close();
         //    File.Delete(zipFilePath);
         //}

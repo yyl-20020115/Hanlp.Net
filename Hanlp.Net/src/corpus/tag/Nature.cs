@@ -775,7 +775,7 @@ public class Nature
         idMap.Add(name, ordinal);
         Nature[] extended = new Nature[idMap.Count];
         if (values != null)
-            System.arraycopy(values, 0, extended, 0, values.Length);
+            Array.Copy(values, 0, extended, 0, values.Length);
         extended[ordinal] = this;
         values = extended;
     }

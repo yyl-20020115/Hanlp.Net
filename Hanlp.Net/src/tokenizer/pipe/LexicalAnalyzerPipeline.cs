@@ -67,7 +67,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
      */
     public LexicalAnalyzer getAnalyzer()
     {
-        foreach (Pipe<List<IWord>, List<IWord>> pipe in this)
+        foreach (Pipe<List<IWord>, List<IWord>> pipe in this.GetEnumerator())
         {
             if (pipe is LexicalAnalyzerPipe)
             {

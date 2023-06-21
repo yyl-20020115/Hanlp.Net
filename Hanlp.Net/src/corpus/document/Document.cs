@@ -62,7 +62,7 @@ public class Document : Serializable
         List<IWord> wordList = new ();
         foreach (Sentence sentence in sentenceList)
         {
-            wordList.addAll(sentence.wordList);
+            wordList.AddRange(sentence.wordList);
         }
         return wordList;
     }
@@ -75,7 +75,7 @@ public class Document : Serializable
         {
             if (word is CompoundWord)
             {
-                simpleWordList.addAll(((CompoundWord) word).innerList);
+                simpleWordList.AddRange(((CompoundWord) word).innerList);
             }
             else
             {
@@ -230,7 +230,7 @@ public class Document : Serializable
         List<Sentence> sentenceList = new ();
         foreach (string line in lineIterator)
         {
-            line = line.trim();
+            line = line.Trim();
             if (line.isEmpty()) continue;
             Sentence sentence = Sentence.create(line);
             if (sentence == null)

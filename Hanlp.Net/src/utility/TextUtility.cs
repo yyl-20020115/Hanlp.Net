@@ -564,7 +564,7 @@ public class TextUtility
     public static string exceptionToString(Exception e)
     {
         StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
+        TextWriter pw = new TextWriter(sw);
         e.printStackTrace(pw);
         return sw.ToString();
     }
@@ -677,9 +677,9 @@ public class TextUtility
     public static string join(IEnumerator<string> s, string delimiter)
     {
         Iterator<CharSequence> iter = s.iterator();
-        if (!iter.hasNext()) return "";
+        if (!iter.MoveNext()) return "";
         StringBuilder buffer = new StringBuilder(iter.next());
-        while (iter.hasNext()) buffer.Append(delimiter).Append(iter.next());
+        while (iter.MoveNext()) buffer.Append(delimiter).Append(iter.next());
         return buffer.ToString();
     }
 
@@ -688,7 +688,7 @@ public class TextUtility
         var sb = new StringBuilder(sentence.wordList.Count * 3);
         foreach (IWord word in sentence.wordList)
         {
-            sb.Append(word.getValue());
+            sb.Append(word.Value);
         }
 
         return sb.ToString();
@@ -699,7 +699,7 @@ public class TextUtility
         var sb = new StringBuilder(wordList.Count * 3);
         foreach (IWord word in wordList)
         {
-            sb.Append(word.getValue());
+            sb.Append(word.Value);
         }
 
         return sb.ToString();

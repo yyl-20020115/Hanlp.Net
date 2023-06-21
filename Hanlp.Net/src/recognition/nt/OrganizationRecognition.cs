@@ -9,6 +9,13 @@
  * This source is subject to the LiNTunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.corpus.dictionary.item;
+using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary.nt;
+using com.hankcs.hanlp.seg.common;
+using System.Text;
+
 namespace com.hankcs.hanlp.recognition.nt;
 
 
@@ -27,8 +34,8 @@ public class OrganizationRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            Iterator<Vertex> iterator = pWordSegResult.iterator();
-            for (EnumItem<NT> NTEnumItem : roleTagList)
+            var iterator = pWordSegResult.GetEnumerator();
+            foreach (EnumItem<NT> NTEnumItem in roleTagList)
             {
                 sbLog.Append('[');
                 sbLog.Append(iterator.next().realWord);
@@ -36,15 +43,15 @@ public class OrganizationRecognition
                 sbLog.Append(NTEnumItem);
                 sbLog.Append(']');
             }
-            System._out.printf("机构名角色观察：%s\n", sbLog.ToString());
+            Console.WriteLine("机构名角色观察：%s\n", sbLog.ToString());
         }
         List<NT> NTList = viterbiCompute(roleTagList);
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            Iterator<Vertex> iterator = pWordSegResult.iterator();
+            var iterator = pWordSegResult.GetEnumerator();
             sbLog.Append('[');
-            for (NT NT : NTList)
+            foreach (NT NT in NTList)
             {
                 sbLog.Append(iterator.next().realWord);
                 sbLog.Append('/');
@@ -53,7 +60,7 @@ public class OrganizationRecognition
             }
             if (sbLog.Length > 1) sbLog.delete(sbLog.Length - 2, sbLog.Length);
             sbLog.Append(']');
-            System._out.printf("机构名角色标注：%s\n", sbLog.ToString());
+            Console.WriteLine("机构名角色标注：%s\n", sbLog.ToString());
         }
 
         OrganizationDictionary.parsePattern(NTList, pWordSegResult, wordNetOptimum, wordNetAll);
@@ -62,9 +69,9 @@ public class OrganizationRecognition
 
     public static List<EnumItem<NT>> roleTag(List<Vertex> vertexList, WordNet wordNetAll)
     {
-        List<EnumItem<NT>> tagList = new LinkedList<EnumItem<NT>>();
+        List<EnumItem<NT>> tagList = new ();
         //        int line = 0;
-        for (Vertex vertex : vertexList)
+        foreach (Vertex vertex in vertexList)
         {
             // 构成更长的
             Nature nature = vertex.guessNature();

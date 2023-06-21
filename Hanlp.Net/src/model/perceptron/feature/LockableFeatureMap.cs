@@ -32,7 +32,7 @@ public class LockableFeatureMap : ImmutableFeatureMDatMap
         if (id == -1 && mutable) // 如果不存在该key且处于可写状态
         {
             id = dat.size();
-            dat.put(s, id); // 则为key分配新id
+            dat.Add(s, id); // 则为key分配新id
         }
         return id;
     }

@@ -35,7 +35,7 @@ public class CorpusLoader
             Console.WriteLine(" " + ++i + " / " + fileList.size());
             handler.handle(document);
         }
-        System._out.printf("花费时间%d ms\n", DateTime.Now.Microsecond - start);
+        Console.WriteLine("花费时间%d ms\n", DateTime.Now.Microsecond - start);
     }
 
     public static void walk(string folderPath, HandlerThread[] threadArray)
@@ -49,7 +49,7 @@ public class CorpusLoader
         }
         threadArray[threadArray.Length - 1].fileList = fileList.subList(fileList.size() / threadArray.Length * (threadArray.Length - 1), fileList.size());
         threadArray[threadArray.Length - 1].start();
-        for (HandlerThread handlerThread : threadArray)
+        foreach (HandlerThread handlerThread in threadArray)
         {
             try
             {
@@ -60,7 +60,7 @@ public class CorpusLoader
                 logger.warning("多线程异常" + e);
             }
         }
-        System._out.printf("花费时间%d ms\n", DateTime.Now.Microsecond - start);
+        Console.WriteLine("花费时间%d ms\n", DateTime.Now.Microsecond - start);
     }
 
     public static List<Document> convert2DocumentList(string folderPath)
@@ -91,7 +91,7 @@ public class CorpusLoader
         if (verbose)
         {
             Console.WriteLine(documentList.size());
-            System._out.printf("花费时间%d ms\n", DateTime.Now.Microsecond - start);
+            Console.WriteLine("花费时间%d ms\n", DateTime.Now.Microsecond - start);
         }
         return documentList;
     }
@@ -137,7 +137,7 @@ public class CorpusLoader
         List<List<Word>> simpleList = new ();
         foreach (Document document in documentList)
         {
-            simpleList.addAll(document.getSimpleSentenceList());
+            simpleList.AddRange(document.getSimpleSentenceList());
         }
 
         return simpleList;
@@ -188,16 +188,16 @@ public class CorpusLoader
         public void run()
         {
             long start = DateTime.Now.Microsecond;
-            System._out.printf("线程#%s 开始运行\n", getName());
+            Console.WriteLine("线程#%s 开始运行\n", getName());
             int i = 0;
-            for (File file : fileList)
+            foreach (File file in fileList)
             {
                 Console.Write(file);
                 Document document = convert2Document(file);
                 Console.WriteLine(" " + ++i + " / " + fileList.size());
                 handle(document);
             }
-            System._out.printf("线程#%s 运行完毕，耗时%dms\n", getName(), DateTime.Now.Microsecond - start);
+            Console.WriteLine("线程#%s 运行完毕，耗时%dms\n", getName(), DateTime.Now.Microsecond - start);
         }
     }
 }

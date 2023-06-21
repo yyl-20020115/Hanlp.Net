@@ -54,7 +54,7 @@ public class PinyinDictionary
         var map = new Dictionary<string, Pinyin[]>();
         foreach (KeyValuePair<string, string> entry in dictionary)
         {
-            string[] args = entry.getValue().Split(",");
+            string[] args = entry.Value.Split(",");
             Pinyin[] pinyinValue = new Pinyin[args.Length];
             for (int i = 0; i < pinyinValue.Length; ++i)
             {
@@ -81,15 +81,15 @@ public class PinyinDictionary
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         Pinyin[][] valueArray = new Pinyin[size][];
         for (int i = 0; i < valueArray.Length; ++i)
         {
-            int Length = byteArray.nextInt();
+            int Length = byteArray.Next();
             valueArray[i] = new Pinyin[Length];
             for (int j = 0; j < Length; ++j)
             {
-                valueArray[i][j] = pinyins[byteArray.nextInt()];
+                valueArray[i][j] = pinyins[byteArray.Next()];
             }
         }
         if (!trie.load(byteArray, valueArray)) return false;
@@ -104,7 +104,7 @@ public class PinyinDictionary
             _out.writeInt(entrySet.size());
             foreach (KeyValuePair<string, Pinyin[]> entry in entrySet)
             {
-                Pinyin[] value = entry.getValue();
+                Pinyin[] value = entry.Value;
                 _out.writeInt(value.Length);
                 foreach (Pinyin pinyin in value)
                 {

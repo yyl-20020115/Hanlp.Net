@@ -72,20 +72,20 @@ public class Mcsrch
             return;
         }
 
-        double sgnd = dp * (dx[0] / Math.abs(dx[0]));
+        double sgnd = dp * (dx[0] / Math.Abs(dx[0]));
 
         if (fp > fx[0])
         {
             info[0] = 1;
             bound = true;
             theta = (fx[0] - fp) * 3 / (stp[0] - stx[0]) + dx[0] + dp;
-            d1 = Math.abs(theta);
-            d2 = Math.abs(dx[0]);
+            d1 = Math.Abs(theta);
+            d2 = Math.Abs(dx[0]);
             d1 = Math.Max(d1, d2);
-            d2 = Math.abs(dp);
+            d2 = Math.Abs(dp);
             s = Math.Max(d1, d2);
             d1 = theta / s;
-            gamma = s * Math.sqrt(d1 * d1 - dx[0] / s * (dp / s));
+            gamma = s * Math.Sqrt(d1 * d1 - dx[0] / s * (dp / s));
             if (stp[0] < stx[0])
             {
                 gamma = -gamma;
@@ -98,7 +98,7 @@ public class Mcsrch
                     (stp[0] - stx[0]) + dx[0]) / 2 * (stp[0] - stx[0]);
             d1 = stpc - stx[0];
             d2 = stpq - stx[0];
-            if (Math.abs(d1) < Math.abs(d2))
+            if (Math.Abs(d1) < Math.Abs(d2))
             {
                 stpf = stpc;
             }
@@ -113,13 +113,13 @@ public class Mcsrch
             info[0] = 2;
             bound = false;
             theta = (fx[0] - fp) * 3 / (stp[0] - stx[0]) + dx[0] + dp;
-            d1 = Math.abs(theta);
-            d2 = Math.abs(dx[0]);
+            d1 = Math.Abs(theta);
+            d2 = Math.Abs(dx[0]);
             d1 = Math.Max(d1, d2);
-            d2 = Math.abs(dp);
+            d2 = Math.Abs(dp);
             s = Math.Max(d1, d2);
             d1 = theta / s;
-            gamma = s * Math.sqrt(d1 * d1 - dx[0] / s * (dp / s));
+            gamma = s * Math.Sqrt(d1 * d1 - dx[0] / s * (dp / s));
             if (stp[0] > stx[0])
             {
                 gamma = -gamma;
@@ -131,7 +131,7 @@ public class Mcsrch
             stpq = stp[0] + dp / (dp - dx[0]) * (stx[0] - stp[0]);
             d1 = stpc - stp[0];
             d2 = stpq - stp[0];
-            if (Math.abs(d1) > Math.abs(d2))
+            if (Math.Abs(d1) > Math.Abs(d2))
             {
                 stpf = stpc;
             }
@@ -141,20 +141,20 @@ public class Mcsrch
             }
             brackt[0] = true;
         }
-        else if (Math.abs(dp) < Math.abs(dx[0]))
+        else if (Math.Abs(dp) < Math.Abs(dx[0]))
         {
             info[0] = 3;
             bound = true;
             theta = (fx[0] - fp) * 3 / (stp[0] - stx[0]) + dx[0] + dp;
-            d1 = Math.abs(theta);
-            d2 = Math.abs(dx[0]);
+            d1 = Math.Abs(theta);
+            d2 = Math.Abs(dx[0]);
             d1 = Math.Max(d1, d2);
-            d2 = Math.abs(dp);
+            d2 = Math.Abs(dp);
             s = Math.Max(d1, d2);
             d3 = theta / s;
             d1 = 0.0;
             d2 = d3 * d3 - dx[0] / s * (dp / s);
-            gamma = s * Math.sqrt((Math.Max(d1, d2)));
+            gamma = s * Math.Sqrt((Math.Max(d1, d2)));
             if (stp[0] > stx[0])
             {
                 gamma = -gamma;
@@ -179,7 +179,7 @@ public class Mcsrch
             {
                 d1 = stp[0] - stpc;
                 d2 = stp[0] - stpq;
-                if (Math.abs(d1) < Math.abs(d2))
+                if (Math.Abs(d1) < Math.Abs(d2))
                 {
                     stpf = stpc;
                 }
@@ -192,7 +192,7 @@ public class Mcsrch
             {
                 d1 = stp[0] - stpc;
                 d2 = stp[0] - stpq;
-                if (Math.abs(d1) > Math.abs(d2))
+                if (Math.Abs(d1) > Math.Abs(d2))
                 {
                     stpf = stpc;
                 }
@@ -209,13 +209,13 @@ public class Mcsrch
             if (brackt[0])
             {
                 theta = (fp - fy[0]) * 3 / (sty[0] - stp[0]) + dy[0] + dp;
-                d1 = Math.abs(theta);
-                d2 = Math.abs(dy[0]);
+                d1 = Math.Abs(theta);
+                d2 = Math.Abs(dy[0]);
                 d1 = Math.Max(d1, d2);
-                d2 = Math.abs(dp);
+                d2 = Math.Abs(dp);
                 s = Math.Max(d1, d2);
                 d1 = theta / s;
-                gamma = s * Math.sqrt(d1 * d1 - dy[0] / s * (dp / s));
+                gamma = s * Math.Sqrt(d1 * d1 - dy[0] / s * (dp / s));
                 if (stp[0] > sty[0])
                 {
                     gamma = -gamma;
@@ -378,7 +378,7 @@ public class Mcsrch
             {
                 info[0] = 2;
             }
-            if (f <= ftest1 && Math.abs(dg) <= lb3_1_gtol * (-dginit))
+            if (f <= ftest1 && Math.Abs(dg) <= lb3_1_gtol * (-dginit))
             {
                 info[0] = 1;
             }
@@ -450,13 +450,13 @@ public class Mcsrch
             if (brackt)
             {
                 double d1 = sty - stx;
-                if (Math.abs(d1) >= p66 * width1)
+                if (Math.Abs(d1) >= p66 * width1)
                 {
                     stp[0] = stx + p5 * (sty - stx);
                 }
                 width1 = width;
                 d1 = sty - stx;
-                width = Math.abs(d1);
+                width = Math.Abs(d1);
             }
             firstLoop = false;
         }

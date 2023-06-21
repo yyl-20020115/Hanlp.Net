@@ -101,8 +101,8 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         {
             if (!word.getLabel().Equals("w"))
             {
-                AssertFalse(word.getValue().Contains(" "));
-                AssertFalse(word.getValue().Contains("\t"));
+                AssertFalse(word.Value.Contains(" "));
+                AssertFalse(word.Value.Contains("\t"));
             }
         }
     }

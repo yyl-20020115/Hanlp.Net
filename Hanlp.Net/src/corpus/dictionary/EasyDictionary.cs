@@ -46,12 +46,12 @@ public class EasyDictionary
     {
         logger.info("通用词典开始加载:" + path);
         var map = new Dictionary<string, Attribute>();
-        BufferedReader br = null;
+        TextReader br = null;
         try
         {
-            br = new BufferedReader(new InputStreamReader(IOAdapter == null ? new FileInputStream(path) : IOAdapter.open(path), "UTF-8"));
+            br = new TextReader(new InputStreamReader(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path), "UTF-8"));
             string line;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 string[] param = line.Split("\\s+");
                 int natureCount = (param.Length - 1) / 2;
@@ -62,10 +62,10 @@ public class EasyDictionary
                     attribute.frequency[i] = int.parseInt(param[2 + 2 * i]);
                     attribute.totalFrequency += attribute.frequency[i];
                 }
-                map.put(param[0], attribute);
+                map.Add(param[0], attribute);
             }
             logger.info("通用词典读入词条" + map.size());
-            br.close();
+            br.Close();
         }
         catch (FileNotFoundException e)
         {

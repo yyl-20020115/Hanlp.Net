@@ -30,11 +30,11 @@ public class TranslatedPersonRecognition
     {
         StringBuilder sbName = new StringBuilder();
         int appendTimes = 0;
-        ListIterator<Vertex> listIterator = segResult.listIterator();
+        ListIterator<Vertex> listIterator = segResult.GetEnumerator();
         listIterator.next();
         int line = 1;
         int activeLine = 1;
-        while (listIterator.hasNext())
+        while (listIterator.MoveNext())
         {
             Vertex vertex = listIterator.next();
             if (appendTimes > 0)

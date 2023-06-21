@@ -117,7 +117,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
      *
      * @return 值
      */
-    public V getValue()
+    public V Value
     {
         return value;
     }
@@ -188,7 +188,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         if (child != null) childSize = child.Length;
         _out.writeInt(childSize);
         if (child == null) return;
-        for (BaseNode node : child)
+        foreach (BaseNode<V> node in child)
         {
             node.walkToSave(_out);
         }
@@ -206,7 +206,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         if (child != null) childSize = child.Length;
         _out.writeInt(childSize);
         if (child == null) return;
-        for (BaseNode node : child)
+        foreach (BaseNode<V> node in child)
         {
             node.walkToSave(_out);
         }
@@ -215,12 +215,12 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
     protected void walkToLoad(ByteArray byteArray, _ValueArray<V> valueArray)
     {
         c = byteArray.nextChar();
-        status = ARRAY_STATUS[byteArray.nextInt()];
+        status = ARRAY_STATUS[byteArray.Next()];
         if (status == Status.WORD_END_3 || status == Status.WORD_MIDDLE_2)
         {
             value = valueArray.nextValue();
         }
-        int childSize = byteArray.nextInt();
+        int childSize = byteArray.Next();
         child = new BaseNode[childSize];
         for (int i = 0; i < childSize; ++i)
         {
@@ -276,7 +276,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         //@Override
         public int compareTo(TrieEntry o)
         {
-            return getKey().compareTo(o.getKey());
+            return Key.compareTo(o.Key);
         }
     }
 

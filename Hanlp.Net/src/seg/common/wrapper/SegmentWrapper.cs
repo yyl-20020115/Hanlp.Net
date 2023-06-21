@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.seg.common.wrapper;
 
 
 /**
- * 一个将BufferedReader wrap进来的类
+ * 一个将TextReader wrap进来的类
  *
  * @author hankcs
  */

@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+
 namespace com.hankcs.hanlp.model.perceptron.instance;
 
 

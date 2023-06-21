@@ -9,6 +9,14 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.utilities.io;
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.dependency.nnparser;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.model;
+using Instance = com.hankcs.hanlp.model.perceptron.instance.Instance;
+
 namespace com.hankcs.hanlp.model.perceptron.utility;
 
 
@@ -23,7 +31,7 @@ public class IOUtility : IOUtil
 
     public static string[] readLineToArray(string line)
     {
-        line = line.trim();
+        line = line.Trim();
         if (line.Length == 0) return new string[0];
         return PATTERN_SPACE.Split(line);
     }
@@ -33,36 +41,39 @@ public class IOUtility : IOUtil
         ConsoleLogger logger = new ConsoleLogger();
         int size = 0;
         File root = new File(path);
-        File allFiles[];
+        File[] allFiles;
         if (root.isDirectory())
         {
-            allFiles = root.listFiles(new FileFilter()
-            {
-                //@Override
-                public bool accept(File pathname)
-                {
-                    return pathname.isFile() && pathname.getName().EndsWith(".txt");
-                }
-            });
+            allFiles = root.listFiles();
+            /*
+             * new FileFilter()
+                        {
+                            //@Override
+                            public bool accept(File pathname)
+                            {
+                                return pathname.isFile() && pathname.getName().EndsWith(".txt");
+                            }
+                        }
+             */
         }
         else
         {
             allFiles = new File[]{root};
         }
 
-        for (File file : allFiles)
+        foreach (File file in allFiles)
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(new FileStream(file), "UTF-8"));
             string line;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
-                line = line.trim();
+                line = line.Trim();
                 if (line.Length == 0)
                 {
                     continue;
                 }
                 Sentence sentence = Sentence.create(line);
-                if (sentence.wordList.size() == 0) continue;
+                if (sentence.wordList.Count == 0) continue;
                 ++size;
                 if (size % 1000 == 0)
                 {
@@ -94,7 +105,7 @@ public class IOUtility : IOUtil
 
     public static void evaluate(Instance instance, LinearModel model, int[] stat)
     {
-        int[] predLabel = new int[instance.Length];
+        int[] predLabel = new int[instance.Length()];
         model.viterbiDecode(instance, predLabel);
         stat[0] += instance.tagArray.Length;
         for (int i = 0; i < predLabel.Length; i++)

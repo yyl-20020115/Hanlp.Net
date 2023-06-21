@@ -185,25 +185,25 @@ public class Word2VecTrainer
 //            {
 //                public void corpusLoading(float percent)
 //                {
-//                    System._out.printf("\r加载训练语料：%.2f%%", percent);
+//                    Console.WriteLine("\r加载训练语料：%.2f%%", percent);
 //                }
 //
 //                public void corpusLoaded(int vocWords, int trainWords, int totalWords)
 //                {
 //                    Console.WriteLine();
-//                    System._out.printf("词表大小：%d\n", vocWords);
-//                    System._out.printf("训练词数：%d\n", trainWords);
-//                    System._out.printf("语料词数：%d\n", totalWords);
+//                    Console.WriteLine("词表大小：%d\n", vocWords);
+//                    Console.WriteLine("训练词数：%d\n", trainWords);
+//                    Console.WriteLine("语料词数：%d\n", totalWords);
 //                }
 //
 //                public void training(float alpha, float progress)
 //                {
-//                    System._out.printf("\r学习率：%.6f  进度：%.2f%%", alpha, progress);
+//                    Console.WriteLine("\r学习率：%.6f  进度：%.2f%%", alpha, progress);
 //                    long timeNow = DateTime.Now.Microsecond;
 //                    long costTime = timeNow - timeStart + 1;
 //                    progress /= 100;
 //                    string etd = Utility.humanTime((long) (costTime / progress * (1.f - progress)));
-//                    if (etd.Length > 0) System._out.printf("  剩余时间：%s", etd);
+//                    if (etd.Length > 0) Console.WriteLine("  剩余时间：%s", etd);
 //                    System._out.flush();
 //                }
 //            };
@@ -214,7 +214,7 @@ public class Word2VecTrainer
         {
             model.trainModel();
             Console.WriteLine();
-            System._out.printf("训练结束，一共耗时：%s\n", Utility.humanTime(DateTime.Now.Microsecond - timeStart));
+            Console.WriteLine("训练结束，一共耗时：%s\n", Utility.humanTime(DateTime.Now.Microsecond - timeStart));
             return new WordVectorModel(modelFileName);
         }
         catch (IOException e)

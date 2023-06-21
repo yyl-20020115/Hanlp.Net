@@ -45,7 +45,7 @@ public class Lexicon
         if (id == null)
         {
             id = wordId.size();
-            wordId.put(charArray, id);
+            wordId.Add(charArray, id);
             idWord.Add(word);
             //assert idWord.size() == wordId.size();
         }
@@ -60,8 +60,8 @@ public class Lexicon
 
     public string getWord(int id)
     {
-        assert 0 <= id;
-        assert id <= idWord.size();
+        //assert 0 <= id;
+        //assert id <= idWord.size();
         return idWord.get(id);
     }
 
@@ -76,7 +76,7 @@ public class Lexicon
         if (idWord.isEmpty()) return wordIdArray;
         int p = -1;
         Iterator<string> iterator = idWord.iterator();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             wordIdArray[++p] = iterator.next();
         }

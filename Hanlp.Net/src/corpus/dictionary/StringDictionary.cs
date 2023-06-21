@@ -58,15 +58,15 @@ public class StringDictionary : SimpleDictionary<string>
     {
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(IOUtil.newOutputStream(path)));
-            for (KeyValuePair<string, string> entry : trie.entrySet())
+            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
+            foreach (KeyValuePair<string, string> entry in trie.entrySet())
             {
-                bw.write(entry.getKey());
+                bw.write(entry.Key);
                 bw.write(separator);
-                bw.write(entry.getValue());
+                bw.write(entry.Value);
                 bw.newLine();
             }
-            bw.close();
+            bw.Close();
         }
         catch (Exception e)
         {
@@ -85,7 +85,7 @@ public class StringDictionary : SimpleDictionary<string>
         StringDictionary dictionary = new StringDictionary(separator);
         for (KeyValuePair<string, string> entry : entrySet())
         {
-            dictionary.trie.put(entry.getValue(), entry.getKey());
+            dictionary.trie.Add(entry.Value, entry.Key);
         }
 
         return dictionary;

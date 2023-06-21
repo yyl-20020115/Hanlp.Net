@@ -48,9 +48,9 @@ public class TraditionalChineseTokenizer
     public static List<Term> segment(string text)
     {
         List<Term> termList = new ();
-        for (string sentence : SentencesUtil.toSentenceList(text))
+        foreach (string sentence in SentencesUtil.toSentenceList(text))
         {
-            termList.addAll(segSentence(sentence));
+            termList.AddRange(segSentence(sentence));
         }
 
         return termList;

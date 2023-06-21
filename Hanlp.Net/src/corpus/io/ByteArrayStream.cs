@@ -35,7 +35,7 @@ public abstract class ByteArrayStream : ByteArray
         try
         {
             InputStream @is = IOAdapter.open(path);
-            if (@is is FileInputStream) return ByteArrayFileStream.createByteArrayFileStream((FileInputStream) @is);
+            if (@is is FileStream) return ByteArrayFileStream.createByteArrayFileStream((FileStream) @is);
             return ByteArrayOtherStream.createByteArrayOtherStream(@is);
         }
         catch (IOException e)
@@ -46,10 +46,10 @@ public abstract class ByteArrayStream : ByteArray
     }
 
     //@Override
-    public int nextInt()
+    public int Next()
     {
         ensureAvailableBytes(4);
-        return base.nextInt();
+        return base.Next();
     }
 
     //@Override

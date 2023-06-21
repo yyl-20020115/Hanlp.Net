@@ -20,7 +20,7 @@ public class CRFModelTest : TestCase
 
 //    public void testTestLoadTemplate() 
 //    {
-//        DataOutputStream _out = new DataOutputStream(new FileOutputStream("data/test/_out.bin"));
+//        Stream _out = new Stream(new FileStream("data/test/_out.bin"));
 //        FeatureTemplate featureTemplate = FeatureTemplate.create("U05:%x[-2,0]/%x[-1,0]/%x[0,0]");
 //        featureTemplate.save(_out);
 //        featureTemplate = new FeatureTemplate();
@@ -58,7 +58,7 @@ public class CRFModelTest : TestCase
      */
 //    public void testPrepareCRFTrainingCorpus() 
 //    {
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("e:\\2014.txt"), "UTF-8"));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("e:\\2014.txt"), "UTF-8"));
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs", new CorpusLoader.Handler()
 //                          {
 //                              //@Override
@@ -73,7 +73,7 @@ public class CRFModelTest : TestCase
 //                                          if (sentence.size() == 0) continue;
 //                                          for (IWord iWord : sentence)
 //                                          {
-//                                              String word = iWord.getValue();
+//                                              String word = iWord.Value;
 //                                              String tag = iWord.getLabel();
 //                                              String compiledString = compile(tag);
 //                                              if (compiledString != null)
@@ -117,7 +117,7 @@ public class CRFModelTest : TestCase
 //                          }
 //
 //        );
-//        bw.close();
+//        bw.Close();
 //    }
 
 //    public void testEnglishAndNumber() 
@@ -159,17 +159,17 @@ public class CRFModelTest : TestCase
 //    {
 //        String inputPath = "E:\\2014.txt";
 //        String outputPath = "E:\\2014f.txt";
-//        BufferedReader br = IOUtil.newBufferedReader(inputPath);
-//        BufferedWriter bw = IOUtil.newBufferedWriter(outputPath);
+//        TextReader br = IOUtil.newBufferedReader(inputPath);
+//        TextWriter bw = IOUtil.newBufferedWriter(outputPath);
 //        String line = "";
 //        int preLength = 0;
-//        while ((line = br.readLine()) != null)
+//        while ((line = br.ReadLine()) != null)
 //        {
 //            if (preLength == 0 && line.Length == 0) continue;
 //            bw.write(line);
 //            bw.newLine();
 //            preLength = line.Length;
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 }

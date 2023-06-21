@@ -49,7 +49,7 @@ public class CharTable
             CONVERT[i] = (char) i;
         }
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(path);
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             string line = iterator.next();
             if (line == null) return false;
@@ -77,7 +77,7 @@ public class CharTable
         {
             ObjectInputStream _in = new ObjectInputStream(IOUtil.newInputStream(path));
             CONVERT = (char[]) _in.readObject();
-            in.close();
+            in.Close();
         }
         catch (Exception e)
         {
@@ -122,7 +122,7 @@ public class CharTable
     {
         for (int i = 0; i < charArray.Length; i++)
         {
-            result[i] = CONVERT[charArray.charAt(i)];
+            result[i] = CONVERT[charArray[(i)]];
         }
     }
 
@@ -151,7 +151,7 @@ public class CharTable
                 }
             }
             else
-                word.setValue(word.getValue());
+                word.setValue(word.Value);
         }
     }
 }

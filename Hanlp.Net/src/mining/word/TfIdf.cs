@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.seg.common;
 using System.Collections.ObjectModel;
 
 namespace com.hankcs.hanlp.mining.word;
@@ -49,29 +50,29 @@ public class TfIdf
      *
      * @param document 词袋
      * @param type     词频计算方式
-     * @param <TERM>   词语类型
+     * @param <Term>   词语类型
      * @return 一个包含词频的Map
      */
-    public static <TERM> Dictionary<TERM, Double> tf(Collection<TERM> document, TfType type)
+    public static  Dictionary<Term, Double> tf<Term>(Collection<Term> document, TfType type)
     {
-        Dictionary<TERM, Double> tf = new HashMap<TERM, Double>();
-        foreach (TERM term in document)
+        Dictionary<Term, Double> tf = new ();
+        foreach (Term term in document)
         {
             Double f = tf.get(term);
             if (f == null) f = 0.0;
-            tf.put(term, f + 1);
+            tf.Add(term, f + 1);
         }
         if (type != TfType.NATURAL)
         {
-            foreach (TERM term in tf.keySet())
+            foreach (Term term in tf.keySet())
             {
                 switch (type)
                 {
                     case LOGARITHM:
-                        tf.put(term, 1 + Math.log(tf.get(term)));
+                        tf.Add(term, 1 + Math.Log(tf.get(term)));
                         break;
                     case BOOLEAN:
-                        tf.put(term, tf.get(term) == 0.0 ? 0.0 : 1.0);
+                        tf.Add(term, tf.get(term) == 0.0 ? 0.0 : 1.0);
                         break;
                 }
             }
@@ -83,10 +84,10 @@ public class TfIdf
      * 单文档词频
      *
      * @param document 词袋
-     * @param <TERM>   词语类型
+     * @param <Term>   词语类型
      * @return 一个包含词频的Map
      */
-    public static <TERM> Dictionary<TERM, Double> tf(Collection<TERM> document)
+    public static  Dictionary<Term, Double> tf<Term>(Collection<Term> document)
     {
         return tf(document, TfType.NATURAL);
     }
@@ -96,13 +97,13 @@ public class TfIdf
      *
      * @param documents 多个文档，每个文档都是一个词袋
      * @param type      词频计算方式
-     * @param <TERM>    词语类型
+     * @param <Term>    词语类型
      * @return 一个包含词频的Map的列表
      */
-    public static <TERM> Iterable<Dictionary<TERM, Double>> tfs(Iterable<Collection<TERM>> documents, TfType type)
+    public static  Iterable<Dictionary<Term, Double>> tfs<Term>(Iterable<Collection<Term>> documents, TfType type)
     {
-        List<Dictionary<TERM, Double>> tfs = new ArrayList<Dictionary<TERM, Double>>();
-        foreach (Collection<TERM> document in documents)
+        List<Dictionary<Term, Double>> tfs = new ();
+        foreach (Collection<Term> document in documents)
         {
             tfs.Add(tf(document, type));
         }
@@ -113,10 +114,10 @@ public class TfIdf
      * 多文档词频
      *
      * @param documents 多个文档，每个文档都是一个词袋
-     * @param <TERM>    词语类型
+     * @param <Term>    词语类型
      * @return 一个包含词频的Map的列表
      */
-    public static <TERM> Iterable<Dictionary<TERM, Double>> tfs(Iterable<Collection<TERM>> documents)
+    public static  Iterable<Dictionary<Term, Double>> tfs<Term>(Iterable<Collection<Term>> documents)
     {
         return tfs(documents, TfType.NATURAL);
     }
@@ -127,32 +128,32 @@ public class TfIdf
      * @param documentVocabularies 词表
      * @param smooth               平滑参数，视作额外有一个文档，该文档含有smooth个每个词语
      * @param addOne               tf-idf加一平滑
-     * @param <TERM>               词语类型
+     * @param <Term>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static  Dictionary<TERM, Double> idf<TERM>(Iterable<Iterable<TERM>> documentVocabularies,
+    public static  Dictionary<Term, Double> idf<Term>(Iterable<Iterable<Term>> documentVocabularies,
                                                bool smooth, bool addOne)
     {
-        Dictionary<TERM, int> df = new HashMap<TERM, int>();
+        Dictionary<Term, int> df = new HashMap<Term, int>();
         int d = smooth ? 1 : 0;
         int a = addOne ? 1 : 0;
         int n = d;
-        foreach (Iterable<TERM> documentVocabulary in documentVocabularies)
+        foreach (Iterable<Term> documentVocabulary in documentVocabularies)
         {
             n += 1;
-            foreach (TERM term in documentVocabulary)
+            foreach (Term term in documentVocabulary)
             {
                 int t = df.get(term);
                 if (t == null) t = d;
-                df.put(term, t + 1);
+                df.Add(term, t + 1);
             }
         }
-        Dictionary<TERM, Double> idf = new HashMap<TERM, Double>();
-        foreach (KeyValuePair<TERM, int> e in df.entrySet())
+        Dictionary<Term, Double> idf = new HashMap<Term, Double>();
+        foreach (KeyValuePair<Term, int> e in df.entrySet())
         {
-            TERM term = e.getKey();
-            double f = e.getValue();
-            idf.put(term, Math.log(n / f) + a);
+            Term term = e.Key;
+            double f = e.Value;
+            idf.Add(term, Math.Log(n / f) + a);
         }
         return idf;
     }
@@ -161,10 +162,10 @@ public class TfIdf
      * 平滑处理后的一系列文档的倒排词频
      *
      * @param documentVocabularies 词表
-     * @param <TERM>               词语类型
+     * @param <Term>               词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static  Dictionary<TERM, Double> idf<TERM>(Iterable<Iterable<TERM>> documentVocabularies)
+    public static  Dictionary<Term, Double> idf<Term>(Iterable<Iterable<Term>> documentVocabularies)
     {
         return idf(documentVocabularies, true, true);
     }
@@ -175,20 +176,20 @@ public class TfIdf
      * @param tf            词频
      * @param idf           倒排频率
      * @param normalization 正规化
-     * @param <TERM>        词语类型
+     * @param <Term>        词语类型
      * @return 一个词语->tf-idf的Map
      */
-    public static <TERM> Dictionary<TERM, Double> tfIdf(Dictionary<TERM, Double> tf, Dictionary<TERM, Double> idf,
+    public static <Term> Dictionary<Term, Double> tfIdf(Dictionary<Term, Double> tf, Dictionary<Term, Double> idf,
                                                  Normalization normalization)
     {
-        Dictionary<TERM, Double> tfIdf = new HashMap<TERM, Double>();
-        foreach (TERM term in tf.keySet())
+        Dictionary<Term, Double> tfIdf = new HashMap<Term, Double>();
+        foreach (Term term in tf.keySet())
         {
             Double TF = tf.get(term);
             if (TF == null) TF = 1.;
             Double IDF = idf.get(term);
             if (IDF == null) IDF = 1.;
-            tfIdf.put(term, TF * IDF);
+            tfIdf.Add(term, TF * IDF);
         }
         if (normalization == Normalization.COSINE)
         {
@@ -199,9 +200,9 @@ public class TfIdf
             }
             n = Math.Sqrt(n);
 
-            foreach (TERM term in tfIdf.keySet())
+            foreach (Term term in tfIdf.keySet())
             {
-                tfIdf.put(term, tfIdf.get(term) / n);
+                tfIdf.Add(term, tfIdf.get(term) / n);
             }
         }
         return tfIdf;
@@ -212,10 +213,10 @@ public class TfIdf
      *
      * @param tf     词频
      * @param idf    倒排频率
-     * @param <TERM> 词语类型
+     * @param <Term> 词语类型
      * @return 一个词语->tf-idf的Map
      */
-    public static <TERM> Dictionary<TERM, Double> tfIdf(Dictionary<TERM, Double> tf, Dictionary<TERM, Double> idf)
+    public static <Term> Dictionary<Term, Double> tfIdf(Dictionary<Term, Double> tf, Dictionary<Term, Double> idf)
     {
         return tfIdf(tf, idf, Normalization.NONE);
     }
@@ -226,22 +227,22 @@ public class TfIdf
      * @param tfs    次品集合
      * @param smooth 平滑参数，视作额外有一个文档，该文档含有smooth个每个词语
      * @param addOne tf-idf加一平滑
-     * @param <TERM> 词语类型
+     * @param <Term> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Dictionary<TERM, Double> idfFromTfs(Iterable<Dictionary<TERM, Double>> tfs, bool smooth, bool addOne)
+    public static <Term> Dictionary<Term, Double> idfFromTfs(Iterable<Dictionary<Term, Double>> tfs, bool smooth, bool addOne)
     {
-        return idf(new KeySetIterable<TERM, Double>(tfs), smooth, addOne);
+        return idf(new KeySetIterable<Term, Double>(tfs), smooth, addOne);
     }
 
     /**
      * 从词频集合建立倒排频率（默认平滑词频，且加一平滑tf-idf）
      *
      * @param tfs    次品集合
-     * @param <TERM> 词语类型
+     * @param <Term> 词语类型
      * @return 一个词语->倒排文档的Map
      */
-    public static <TERM> Dictionary<TERM, Double> idfFromTfs(Iterable<Dictionary<TERM, Double>> tfs)
+    public static <Term> Dictionary<Term, Double> idfFromTfs(Iterable<Dictionary<Term, Double>> tfs)
     {
         return idfFromTfs(tfs, true, true);
     }
@@ -267,9 +268,9 @@ public class TfIdf
             return new Iterator<Iterable<KEY>>()
             {
                 //@Override
-                public bool hasNext()
+                public bool MoveNext()
                 {
-                    return maps.hasNext();
+                    return maps.MoveNext();
                 }
 
                 //@Override

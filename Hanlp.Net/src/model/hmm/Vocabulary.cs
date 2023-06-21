@@ -8,6 +8,9 @@
  * This source is subject to Han He. Please contact Han He for more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.model.perceptron.common;
+
 namespace com.hankcs.hanlp.model.hmm;
 
 
@@ -27,21 +30,22 @@ public class Vocabulary : IStringIdMap
     }
 
     public Vocabulary()
+        : this(new BinTrie<int>(), true)
+
     {
-        this(new BinTrie<int>(), true);
-        trie.put("\t", UNK);
+        trie.Add("\t", UNK);
     }
 
     //@Override
-    public int idOf(string string)
+    public int idOf(string s)
     {
-        int id = trie.get(string);
+        int id = trie.get(s);
         if (id == null)
         {
             if (mutable)
             {
                 id = trie.size();
-                trie.put(string, id);
+                trie.Add(s, id);
             }
             else
                 id = UNK;

@@ -16,7 +16,7 @@ public abstract class Model
         return true;
     }
 
-    public bool close()
+    public bool Close()
     {
         return true;
     }

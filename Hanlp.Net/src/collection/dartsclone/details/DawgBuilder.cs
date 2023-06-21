@@ -9,13 +9,13 @@ namespace com.hankcs.hanlp.collection.dartsclone.details;
  * 有向无环字图
  * @author
  */
-class DawgBuilder
+public class DawgBuilder
 {
     /**
      * 根节点id
      * @return 0
      */
-    int root()
+    public int root()
     {
         return 0;
     }
@@ -25,7 +25,7 @@ class DawgBuilder
      * @param id 节点的id
      * @return 孩子的id
      */
-    int child(int id)
+    public int child(int id)
     {
         // return _units.get(id).child();
         return _units.get(id) >>> 2;
@@ -36,7 +36,7 @@ class DawgBuilder
      * @param id 兄弟节点的id
      * @return 下一个兄弟节点的id，或者0表示没有兄弟节点
      */
-    int sibling(int id)
+    public int sibling(int id)
     {
         // return _units.get(id).hasSibling() ? (id + 1) : 0;
         return ((_units.get(id) & 1) == 1) ? (id + 1) : 0;
@@ -47,7 +47,7 @@ class DawgBuilder
      * @param id 节点id
      * @return 节点的值
      */
-    int value(int id)
+    public int value(int id)
     {
         // return _units.get(id).value();
         return _units.get(id) >>> 1;
@@ -58,7 +58,7 @@ class DawgBuilder
      * @param id 节点id
      * @return 是否是叶子节点
      */
-    bool isLeaf(int id)
+    public bool isLeaf(int id)
     {
         return label(id) == 0;
     }
@@ -68,7 +68,7 @@ class DawgBuilder
      * @param id 节点的id
      * @return
      */
-    byte label(int id)
+    public byte label(int id)
     {
         return _labels.get(id);
     }
@@ -78,22 +78,22 @@ class DawgBuilder
      * @param id 节点id
      * @return
      */
-    bool isIntersection(int id)
+    public bool isIntersection(int id)
     {
         return _isIntersections.get(id);
     }
 
-    int intersectionId(int id)
+    public int intersectionId(int id)
     {
         return _isIntersections.rank(id) - 1;
     }
 
-    int numIntersections()
+    public int numIntersections()
     {
         return _isIntersections.numOnes();
     }
 
-    int size()
+    public int size()
     {
         return _units.size();
     }
@@ -101,7 +101,7 @@ class DawgBuilder
     /**
      * 初始化
      */
-    void init()
+    public void init()
     {
         _table.resize(INITIAL_TABLE_SIZE, 0);
 
@@ -114,7 +114,7 @@ class DawgBuilder
         _nodeStack.Add(0);
     }
 
-    void finish()
+    public void finish()
     {
         flush(0);
 
@@ -129,7 +129,7 @@ class DawgBuilder
         _isIntersections.build();
     }
 
-    void insert(byte[] key, int value)
+    public void insert(byte[] key, int value)
     {
         if (value < 0)
         {
@@ -202,7 +202,7 @@ class DawgBuilder
         _nodes.get(id).setValue(value);
     }
 
-    void Clear()
+    public void Clear()
     {
         _nodes.Clear();
         _units.Clear();
@@ -214,15 +214,15 @@ class DawgBuilder
         _numStates = 0;
     }
 
-    static class DawgNode
+    public class DawgNode
     {
-        int child;
-        int sibling;
-        byte label;
-        bool isState;
-        bool hasSibling;
+        public int child;
+        public int sibling;
+        public byte label;
+        public bool isState;
+        public bool hasSibling;
 
-        void reset()
+        public void reset()
         {
             child = 0;
             sibling = 0;
@@ -231,17 +231,17 @@ class DawgBuilder
             hasSibling = false;
         }
 
-        int getValue()
+        public int Value()
         {
             return child;
         }
 
-        void setValue(int value)
+        public void setValue(int value)
         {
             child = value;
         }
 
-        int unit()
+        public int unit()
         {
             if (label == 0)
             {

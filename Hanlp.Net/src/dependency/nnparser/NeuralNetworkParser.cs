@@ -10,8 +10,10 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.dependency.nnparser.action;
 using com.hankcs.hanlp.dependency.nnparser.option;
 using com.hankcs.hanlp.utility;
+using Action = com.hankcs.hanlp.dependency.nnparser.action.Action;
 
 namespace com.hankcs.hanlp.dependency.nnparser;
 
@@ -126,9 +128,9 @@ public class NeuralNetworkParser : ICacheAble
         try
         {
             logger.info("正在缓存" + binPath);
-            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(binPath));
+            Stream _out = new Stream(IOUtil.newOutputStream(binPath));
             save(_out);
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -176,7 +178,7 @@ public class NeuralNetworkParser : ICacheAble
             form_to_cluster = read_map(lineIterator);
         }
 
-        //assert !lineIterator.hasNext() : "文件有残留，可能是读取逻辑不对";
+        //assert !lineIterator.MoveNext() : "文件有残留，可能是读取逻辑不对";
 
         classifier = new NeuralNetworkClassifier(W1, W2, E, b1, saved, precomputation_id_encoder);
         classifier.canonical();
@@ -189,7 +191,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param _out
      * @throws Exception
      */
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         TextUtility.writeString(model_header, _out);
         TextUtility.writeString(root, _out);
@@ -233,9 +235,9 @@ public class NeuralNetworkParser : ICacheAble
         model_header = byteArray.nextString();
         root = byteArray.nextString();
 
-        use_distance = byteArray.nextInt() == 1;
-        use_valency = byteArray.nextInt() == 1;
-        use_cluster = byteArray.nextInt() == 1;
+        use_distance = byteArray.Next() == 1;
+        use_valency = byteArray.Next() == 1;
+        use_cluster = byteArray.Next() == 1;
 
         W1 = new Matrix();
         W1.load(byteArray);
@@ -271,7 +273,7 @@ public class NeuralNetworkParser : ICacheAble
             form_to_cluster = read_map(byteArray);
         }
 
-        assert !byteArray.hasMore() : "文件有残留，可能是读取逻辑不对";
+        //assert !byteArray.hasMore() : "文件有残留，可能是读取逻辑不对";
 
         classifier = new NeuralNetworkClassifier(W1, W2, E, b1, saved, precomputation_id_encoder);
         classifier.canonical();
@@ -285,7 +287,7 @@ public class NeuralNetworkParser : ICacheAble
         int rows = int.valueOf(rc[0]);
         int cols = int.valueOf(rc[1]);
         double[][] valueArray = new double[rows][cols];
-        for (double[] valueRow : valueArray)
+        foreach (double[] valueRow in valueArray)
         {
             string[] args = lineIterator.next().Split("\t");
             for (int i = 0; i < valueRow.Length; i++)
@@ -317,7 +319,7 @@ public class NeuralNetworkParser : ICacheAble
         for (int i = 0; i < size; i++)
         {
             string[] args = lineIterator.next().Split("\t");
-            map.put(args[0], int.valueOf(args[1]));
+            map.Add(args[0], int.valueOf(args[1]));
         }
 
         Alphabet trie = new Alphabet();
@@ -333,7 +335,7 @@ public class NeuralNetworkParser : ICacheAble
         for (int i = 0; i < size; i++)
         {
             string[] args = lineIterator.next().Split("\t");
-            map.put(int.valueOf(args[0]), int.valueOf(args[1]));
+            map.Add(int.valueOf(args[0]), int.valueOf(args[1]));
         }
 
         return map;
@@ -341,23 +343,23 @@ public class NeuralNetworkParser : ICacheAble
 
     private static Dictionary<int, int> read_map(ByteArray byteArray)
     {
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         Dictionary<int, int> map = new HashMap<int, int>();
         for (int i = 0; i < size; i++)
         {
-            map.put(byteArray.nextInt(), byteArray.nextInt());
+            map.Add(byteArray.Next(), byteArray.Next());
         }
 
         return map;
     }
 
-    private static void save_map(Dictionary<int, int> map, DataOutputStream _out) 
+    private static void save_map(Dictionary<int, int> map, Stream _out) 
     {
-        _out.writeInt(map.size());
+        _out.writeInt(map.Count);
         for (KeyValuePair<int, int> entry : map.entrySet())
         {
-            _out.writeInt(entry.getKey());
-            _out.writeInt(entry.getValue());
+            _out.writeInt(entry.Key);
+            _out.writeInt(entry.Value);
         }
     }
 
@@ -368,7 +370,7 @@ public class NeuralNetworkParser : ICacheAble
     {
         system = new TransitionSystem();
         system.set_root_relation(deprels_alphabet.idOf(root));
-        system.set_number_of_relations(deprels_alphabet.size() - 2);
+        system.set_number_of_relations(deprels_alphabet.Count - 2);
     }
 
     /**
@@ -378,15 +380,15 @@ public class NeuralNetworkParser : ICacheAble
     {
         kFormInFeaturespace = 0;
         kNilForm = forms_alphabet.idOf(SpecialOption.NIL);
-        kFeatureSpaceEnd = forms_alphabet.size();
+        kFeatureSpaceEnd = forms_alphabet.Count;
 
         kPostagInFeaturespace = kFeatureSpaceEnd;
         kNilPostag = kFeatureSpaceEnd + postags_alphabet.idOf(SpecialOption.NIL);
-        kFeatureSpaceEnd += postags_alphabet.size();
+        kFeatureSpaceEnd += postags_alphabet.Count;
 
         kDeprelInFeaturespace = kFeatureSpaceEnd;
         kNilDeprel = kFeatureSpaceEnd + deprels_alphabet.idOf(SpecialOption.NIL);
-        kFeatureSpaceEnd += deprels_alphabet.size();
+        kFeatureSpaceEnd += deprels_alphabet.Count;
 
         kDistanceInFeaturespace = kFeatureSpaceEnd;
         kNilDistance = kFeatureSpaceEnd + (use_distance ? 8 : 0);
@@ -400,7 +402,7 @@ public class NeuralNetworkParser : ICacheAble
         if (use_cluster)
         {
             kNilCluster4 = kFeatureSpaceEnd + cluster4_types_alphabet.idOf(SpecialOption.NIL);
-            kFeatureSpaceEnd += cluster4_types_alphabet.size();
+            kFeatureSpaceEnd += cluster4_types_alphabet.Count;
         }
         else
         {
@@ -411,7 +413,7 @@ public class NeuralNetworkParser : ICacheAble
         if (use_cluster)
         {
             kNilCluster6 = kFeatureSpaceEnd + cluster6_types_alphabet.idOf(SpecialOption.NIL);
-            kFeatureSpaceEnd += cluster6_types_alphabet.size();
+            kFeatureSpaceEnd += cluster6_types_alphabet.Count;
         }
         else
         {
@@ -422,7 +424,7 @@ public class NeuralNetworkParser : ICacheAble
         if (use_cluster)
         {
             kNilCluster = kFeatureSpaceEnd + cluster_types_alphabet.idOf(SpecialOption.NIL);
-            kFeatureSpaceEnd += cluster_types_alphabet.size();
+            kFeatureSpaceEnd += cluster_types_alphabet.Count;
         }
         else
         {
@@ -440,7 +442,7 @@ public class NeuralNetworkParser : ICacheAble
     void transduce_instance_to_dependency(Instance data,
                                           Dependency dependency, bool with_dependencies)
     {
-        int L = data.forms.size();
+        int L = data.forms.Count;
         for (int i = 0; i < L; ++i)
         {
             int form = forms_alphabet.idOf(data.forms.get(i));
@@ -473,10 +475,10 @@ public class NeuralNetworkParser : ICacheAble
     {
         if (use_cluster)
         {
-            int L = data.forms.size();
+            int L = data.forms.Count;
             for (int i = 0; i < L; ++i)
             {
-                int form = data.forms.get(i);
+                int form = data.forms[i];
                 cluster4.Add(i == 0 ?
                                      cluster4_types_alphabet.idOf(SpecialOption.ROOT) : form_to_cluster4.get(form));
                 cluster6.Add(i == 0 ?
@@ -497,11 +499,11 @@ public class NeuralNetworkParser : ICacheAble
                  List<string> deprels)
     {
         Dependency dependency = new Dependency();
-        List<int> cluster = new ArrayList<int>(), cluster4 = new ArrayList<int>(), cluster6 = new ArrayList<int>();
+        List<int> cluster = new (), cluster4 = new (), cluster6 = new ();
         transduce_instance_to_dependency(data, dependency, false);
         get_cluster_from_dependency(dependency, cluster4, cluster6, cluster);
 
-        int L = data.forms.size();
+        int L = data.forms.Count;
         State[] states = new State[L * 2];
         for (int i = 0; i < states.Length; i++)
         {
@@ -511,7 +513,7 @@ public class NeuralNetworkParser : ICacheAble
         system.transit(states[0], ActionFactory.make_shift(), states[1]);
         for (int step = 1; step < L * 2 - 1; ++step)
         {
-            List<int> attributes = new ArrayList<int>();
+            List<int> attributes = new ();
             if (use_cluster)
             {
                 get_features(states[step], cluster4, cluster6, cluster, attributes);
@@ -521,14 +523,14 @@ public class NeuralNetworkParser : ICacheAble
                 get_features(states[step], attributes);
             }
 
-            List<Double> scores = new ArrayList<Double>(system.number_of_transitions());
+            List<Double> scores = new (system.number_of_transitions());
             classifier.score(attributes, scores);
 
-            List<Action> possible_actions = new ArrayList<Action>();
+            List<Action> possible_actions = new ();
             system.get_possible_actions(states[step], possible_actions);
 
             int best = -1;
-            for (int j = 0; j < possible_actions.size(); ++j)
+            for (int j = 0; j < possible_actions.Count; ++j)
             {
                 int l = system.transform(possible_actions.get(j));
                 if (best == -1 || scores.get(best) < scores.get(l))
@@ -545,8 +547,8 @@ public class NeuralNetworkParser : ICacheAble
 //        deprels.resize(L);
         for (int i = 0; i < L; ++i)
         {
-            heads.Add(states[L * 2 - 1].heads.get(i));
-            deprels.Add(deprels_alphabet.labelOf(states[L * 2 - 1].deprels.get(i)));
+            heads.Add(states[L * 2 - 1].heads[(i)]);
+            deprels.Add(deprels_alphabet.labelOf(states[L * 2 - 1].deprels[(i)]));
         }
     }
 
@@ -557,12 +559,12 @@ public class NeuralNetworkParser : ICacheAble
      */
     void get_context(State s, Context ctx)
     {
-        ctx.S0 = (s.stack.size() > 0 ? s.stack.get(s.stack.size() - 1) : -1);
-        ctx.S1 = (s.stack.size() > 1 ? s.stack.get(s.stack.size() - 2) : -1);
-        ctx.S2 = (s.stack.size() > 2 ? s.stack.get(s.stack.size() - 3) : -1);
-        ctx.N0 = (s.buffer < s.ref.size() ? s.buffer : -1);
-        ctx.N1 = (s.buffer + 1 < s.ref.size() ? s.buffer + 1 : -1);
-        ctx.N2 = (s.buffer + 2 < s.ref.size() ? s.buffer + 2 : -1);
+        ctx.S0 = (s.stack.Count > 0 ? s.stack.get(s.stack.Count - 1) : -1);
+        ctx.S1 = (s.stack.Count > 1 ? s.stack.get(s.stack.Count - 2) : -1);
+        ctx.S2 = (s.stack.Count > 2 ? s.stack.get(s.stack.Count - 3) : -1);
+        ctx.N0 = (s.buffer < s.@ref.size() ? s.buffer : -1);
+        ctx.N1 = (s.buffer + 1 < s.@ref.size() ? s.buffer + 1 : -1);
+        ctx.N2 = (s.buffer + 2 < s.@ref.size() ? s.buffer + 2 : -1);
 
         ctx.S0L = (ctx.S0 >= 0 ? s.left_most_child.get(ctx.S0) : -1);
         ctx.S0R = (ctx.S0 >= 0 ? s.right_most_child.get(ctx.S0) : -1);
@@ -584,7 +586,7 @@ public class NeuralNetworkParser : ICacheAble
     {
         Context ctx = new Context();
         get_context(s, ctx);
-        get_basic_features(ctx, s.ref.forms, s.ref.postags, s.deprels, features);
+        get_basic_features(ctx, s.@ref.forms, s.@ref.postags, s.deprels, features);
         get_distance_features(ctx, features);
         get_valency_features(ctx, s.nr_left_children, s.nr_right_children, features);
     }
@@ -605,7 +607,7 @@ public class NeuralNetworkParser : ICacheAble
     {
         Context ctx = new Context();
         get_context(s, ctx);
-        get_basic_features(ctx, s.ref.forms, s.ref.postags, s.deprels, features);
+        get_basic_features(ctx, s.@ref.forms, s.@ref.postags, s.deprels, features);
         get_distance_features(ctx, features);
         get_valency_features(ctx, s.nr_left_children, s.nr_right_children, features);
         get_cluster_features(ctx, cluster4, cluster6, cluster, features);

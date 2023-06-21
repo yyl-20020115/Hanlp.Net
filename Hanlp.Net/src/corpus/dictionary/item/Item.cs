@@ -28,7 +28,7 @@ public class Item : SimpleItem
     public Item(string key, string label)
         :this(key)
     {
-        labelMap.put(label, 1);
+        labelMap.Add(label, 1);
     }
 
     public Item(string key)
@@ -41,24 +41,24 @@ public class Item : SimpleItem
     public override string ToString()
     {
         var sb = new StringBuilder(key);
-        ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(labelMap.entrySet());
-        Collections.sort(entries, );
+        List<KeyValuePair<string, int>> entries = new (labelMap.entrySet());
+        Collections.sort(entries, new CT());
         foreach (KeyValuePair<string, int> entry in entries)
         {
             sb.Append(' ');             // 现阶段词典分隔符统一使用空格
-            sb.Append(entry.getKey());
+            sb.Append(entry.Key);
             sb.Append(' ');
-            sb.Append(entry.getValue());
+            sb.Append(entry.Value);
         }
         return sb.ToString();
     }
 
-    public class CT : Comparator<KeyValuePair<string, int>>
+    public class CT : IComparer<KeyValuePair<string, int>>
     {
         //@Override
-        public int compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
+        public int Compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
         {
-            return -o1.getValue().compareTo(o2.getValue());
+            return -o1.Value.compareTo(o2.Value);
         }
     }
 

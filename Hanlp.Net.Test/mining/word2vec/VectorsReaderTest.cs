@@ -10,13 +10,13 @@ public class VectorsReaderTest : TestCase
     {
         File tempFile = File.createTempFile("hanlp-vector", ".txt");
         tempFile.deleteOnExit();
-        BufferedWriter bw = IOUtil.newBufferedWriter(tempFile);
+        TextWriter bw = IOUtil.newBufferedWriter(tempFile);
         bw.write("3 1\n" +
                      "cat 1.1\n" +
                      " 2.2\n" +
                      "dog 3.3\n"
         );
-        bw.close();
+        bw.Close();
 
         VectorsReader reader = new VectorsReader(tempFile);
         reader.readVectorFile();

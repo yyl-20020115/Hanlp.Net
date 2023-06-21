@@ -38,7 +38,7 @@ public class TermOccurrence
         if (value == null)
         {
             value = new TermFrequency(term);
-            trieSingle.put(term, value);
+            trieSingle.Add(term, value);
         }
         else
         {
@@ -47,7 +47,7 @@ public class TermOccurrence
         ++totalTerm;
     }
 
-    public void addAll(List<string> termList)
+    public void AddRange(List<string> termList)
     {
         foreach (string s in termList)
         {

@@ -34,7 +34,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     /**
      * 键值对数量
      */
-    private int size;
+    private int _size;
 
     public MutableDoubleArrayTrieInteger(Dictionary<string, int> stringIntegerMap)
         : this(stringIntegerMap.ToHashSet())
@@ -47,7 +47,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     {
         foreach (KeyValuePair<string, int> entry in entrySet)
         {
-            put(entry.Key, entry.Value);
+            Add(entry.Key, entry.Value);
         }
     }
 
@@ -323,7 +323,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             {
                 int base = current - minChild;
                 bool ok = true;
-                for (Iterator<int> it = children.iterator(); it.hasNext();) // 检查是否每个子节点的位置都空闲（“连续”区间）
+                for (Iterator<int> it = children.iterator(); it.MoveNext();) // 检查是否每个子节点的位置都空闲（“连续”区间）
                 {
                     int to = base + it.next();
                     if (to >= getBaseArraySize())
@@ -358,7 +358,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     private void solveConflict(int parent, int newChild)
     {
         // 找出parent的所有子节点
-        TreeSet<int> children = new TreeSet<int>();
+        var children = new HashSet<int>();
         children.Add(newChild);
         int charsetSize = this.charMap.getCharsetSize();
         for (int c = 0; c < charsetSize; ++c)
@@ -376,7 +376,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         // 移动旧子节点到新的位置
         int newBase = searchFreeBase(children);
         children.Remove(newChild);
-        for (int c : children)
+        foreach (int c in children)
         {
             int child = newBase + c;
             deleteFreeLink(child);
@@ -480,7 +480,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             int[] ids = this.charMap.toIdList(codePoint);
             if (ids.Length == 0)
             {
-                return Collections.emptyList();
+                return new();
             }
             for (int j = 0; j < ids.Length; j++)
             {
@@ -728,7 +728,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      */
     private int transfer(int state, int[] ids)
     {
-        for (int c : ids)
+        foreach (int c in ids)
         {
             if ((getBase(state) + c < getBaseArraySize())
                 && (getCheck(getBase(state) + c) == state))
@@ -792,8 +792,8 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      */
     public int get(string key, int start)
     {
-        assert key != null;
-        assert 0 <= start && start <= key.Length;
+        //assert key != null;
+        //assert 0 <= start && start <= key.Length;
         int state = 1;
         int[] ids = charMap.toIdList(key.substring(start));
         state = transfer(state, ids);
@@ -816,7 +816,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     }
 
     /**
-     * 设置键值 （同put）
+     * 设置键值 （同Add）
      *
      * @param key
      * @param value
@@ -834,7 +834,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      * @param value
      * @return 是否设置成功（失败的原因是键值不合法）
      */
-    public bool put(string key, int value)
+    public bool Add(string key, int value)
     {
         return insert(key, value, true);
     }
@@ -976,9 +976,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             KeyValuePair iterator = MutableDoubleArrayTrieInteger.iterator();
 
             //@Override
-            public bool hasNext()
+            public bool MoveNext()
             {
-                return iterator.hasNext();
+                return iterator.MoveNext();
             }
 
             //@Override
@@ -1030,7 +1030,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public bool addAll(Collection<KeyValuePair<string, int>> c)
+        public bool AddRange(Collection<KeyValuePair<string, int>> c)
         {
             throw new InvalidOperationException();
         }
@@ -1108,9 +1108,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             }
 
             //@Override
-            public bool hasNext()
+            public bool MoveNext()
             {
-                return iterator.hasNext();
+                return iterator.MoveNext();
             }
 
             //@Override
@@ -1149,7 +1149,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             }
 
             //@Override
-            public bool addAll(Collection<string> c)
+            public bool AddRange(Collection<string> c)
             {
                 throw new InvalidOperationException();
             }
@@ -1190,7 +1190,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     //@Override
     public bool load(ByteArray byteArray)
     {
-        _size = byteArray.nextInt();
+        _size = byteArray.Next();
         if (!base.load(byteArray)) return false;
         if (!check.load(byteArray)) return false;
         return true;
@@ -1284,12 +1284,12 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             return value;
         }
 
-        public string getKey()
+        public string Key
         {
             return key;
         }
 
-        public int getValue()
+        public int Value
         {
             return value;
         }
@@ -1303,7 +1303,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public bool hasNext()
+        public bool MoveNext()
         {
             return index < size;
         }

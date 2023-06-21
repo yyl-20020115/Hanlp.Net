@@ -54,7 +54,7 @@ public class ImmutableFeatureMDatMap : FeatureMap
         dat = new MutableDoubleArrayTrieInteger();
         for (KeyValuePair<string, int> entry : featureIdSet)
         {
-            dat.put(entry.getKey(), entry.getValue());
+            dat.Add(entry.Key, entry.Value);
         }
     }
 
@@ -77,7 +77,7 @@ public class ImmutableFeatureMDatMap : FeatureMap
     }
 
     //@Override
-    public void save(DataOutputStream _out) 
+    public void save(Stream _out) 
     {
         tagSet.save(_out);
         dat.save(_out);

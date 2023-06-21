@@ -32,7 +32,7 @@ public abstract class AbstractTrainer
 
         localUsage();
 
-        System.exit(0);
+        Environment.Exit(0);
     }
 
     protected int argPos(string param, string[] args)

@@ -50,10 +50,10 @@ public abstract class Corpus
         {
             vocabMaxSize += 1000;
             VocabWord[] temp = new VocabWord[vocabMaxSize];
-            System.arraycopy(vocab, 0, temp, 0, vocabSize);
+            Array.Copy(vocab, 0, temp, 0, vocabSize);
             vocab = temp;
         }
-        vocabIndexMap.put(word, vocabSize - 1);
+        vocabIndexMap.Add(word, vocabSize - 1);
         return vocabSize - 1;
     }
 
@@ -114,7 +114,7 @@ public abstract class Corpus
     /**
      * Close the corpus and it cannot be read any more.
      */
-    public void close() 
+    public void Close() 
     {
         shutdown();
         cacheFile.delete(); // Remove rubbish
@@ -141,7 +141,7 @@ public abstract class Corpus
     /**
      * Sorts the vocabulary by frequency using word counts
      */
-    void sortVocab()
+    public void sortVocab()
     {
         Arrays.sort(vocab, 0, vocabSize);
 
@@ -169,13 +169,13 @@ public abstract class Corpus
         vocabIndexMap = null;
 
         VocabWord[] nvocab = new VocabWord[vocabSize];
-        System.arraycopy(vocab, 0, nvocab, 0, vocabSize);
+        Array.Copy(vocab, 0, nvocab, 0, vocabSize);
 
     }
 
     void setVocabIndexMap(VocabWord src, int pos)
     {
-//        vocabIndexMap.put(src.word, pos);
+//        vocabIndexMap.Add(src.word, pos);
         trainWords += src.cn;
     }
 
@@ -183,7 +183,7 @@ public abstract class Corpus
      * Create binary Huffman tree using the word counts.
      * Frequent words will have short uniqe binary codes
      */
-    void createBinaryTree()
+    public void createBinaryTree()
     {
         int[] point = new int[VocabWord.MAX_CODE_LENGTH];
         char[] code = new char[VocabWord.MAX_CODE_LENGTH];

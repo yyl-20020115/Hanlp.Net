@@ -9,9 +9,11 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie.datrie;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dictionary.stopword;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.mining.cluster;
 
@@ -44,7 +46,7 @@ public class ClusterAnalyzer<K>
         if (id == -1)
         {
             id = vocabulary.size();
-            vocabulary.put(word, id);
+            vocabulary.Add(word, id);
         }
         return id;
     }
@@ -58,10 +60,10 @@ public class ClusterAnalyzer<K>
     protected List<string> preprocess(string document)
     {
         List<Term> termList = segment.seg(document);
-        ListIterator<Term> listIterator = termList.listIterator();
-        while (listIterator.hasNext())
+        var listIterator = termList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
-            Term term = listIterator.next();
+            Term term = listIterator.Current;
             if (CoreStopWordDictionary.Contains(term.word) ||
                 term.nature.StartsWith("w")
                 )
@@ -87,11 +89,11 @@ public class ClusterAnalyzer<K>
             if (f == null)
             {
                 f = 1.;
-                vector.put(id, f);
+                vector.Add(id, f);
             }
             else
             {
-                vector.put(id, ++f);
+                vector.Add(id, ++f);
             }
         }
         return vector;
@@ -120,7 +122,7 @@ public class ClusterAnalyzer<K>
     {
         SparseVector vector = toVector(document);
         Document<K> d = new Document<K>(id, vector);
-        return documents_.put(id, d);
+        return documents_.Add(id, d);
     }
 
     /**
@@ -132,14 +134,14 @@ public class ClusterAnalyzer<K>
     public List<HashSet<K>> kmeans(int nclusters)
     {
         Cluster<K> cluster = new Cluster<K>();
-        for (Document<K> document : documents_.values())
+        foreach (Document<K> document in documents_.values())
         {
             cluster.add_document(document);
         }
         cluster.section(nclusters);
         refine_clusters(cluster.sectioned_clusters());
-        List<Cluster<K>> clusters_ = new ArrayList<Cluster<K>>(nclusters);
-        for (Cluster<K> s : cluster.sectioned_clusters())
+        List<Cluster<K>> clusters_ = new (nclusters);
+        foreach (Cluster<K> s in cluster.sectioned_clusters())
         {
             s.refresh();
             clusters_.Add(s);
@@ -150,10 +152,10 @@ public class ClusterAnalyzer<K>
     private List<HashSet<K>> toResult(List<Cluster<K>> clusters_)
     {
         List<HashSet<K>> result = new (clusters_.size());
-        for (Cluster<K> c : clusters_)
+        foreach (Cluster<K> c in clusters_)
         {
             HashSet<K> s = new HashSet<K>();
-            for (Document<K> d : c.documents_)
+            foreach (Document<K> d in c.documents_)
             {
                 s.Add(d.id_);
             }
@@ -194,8 +196,8 @@ public class ClusterAnalyzer<K>
     public List<HashSet<K>> repeatedBisection(int nclusters, double limit_eval)
     {
         Cluster<K> cluster = new Cluster<K>();
-        List<Cluster<K>> clusters_ = new ArrayList<Cluster<K>>(nclusters > 0 ? nclusters : 16);
-        for (Document<K> document : documents_.values())
+        List<Cluster<K>> clusters_ = new (nclusters > 0 ? nclusters : 16);
+        foreach (Document<K> document in documents_.values())
         {
             cluster.add_document(document);
         }
@@ -219,14 +221,14 @@ public class ClusterAnalyzer<K>
             que.poll();
             List<Cluster<K>> sectioned = cluster.sectioned_clusters();
 
-            for (Cluster<K> c : sectioned)
+            foreach (Cluster<K> c in sectioned)
             {
                 c.section(2);
                 refine_clusters(c.sectioned_clusters());
                 c.set_sectioned_gain();
                 if (c.sectioned_gain() < limit_eval)
                 {
-                    for (Cluster<K> sub : c.sectioned_clusters())
+                    foreach (Cluster<K> sub in c.sectioned_clusters())
                     {
                         sub.Clear();
                     }
@@ -250,9 +252,9 @@ public class ClusterAnalyzer<K>
      */
     double refine_clusters(List<Cluster<K>> clusters)
     {
-        double[] norms = new double[clusters.size()];
+        double[] norms = new double[clusters.Count];
         int offset = 0;
-        for (Cluster cluster : clusters)
+        foreach (Cluster<K> cluster in clusters)
         {
             norms[offset++] = cluster.composite_vector().norm();
         }
@@ -261,10 +263,10 @@ public class ClusterAnalyzer<K>
         int loop_count = 0;
         while (loop_count++ < NUM_REFINE_LOOP)
         {
-            List<int[]> items = new ArrayList<int[]>(documents_.size());
-            for (int i = 0; i < clusters.size(); i++)
+            List<int[]> items = new (documents_.Count);
+            for (int i = 0; i < clusters.Count; i++)
             {
-                for (int j = 0; j < clusters.get(i).documents().size(); j++)
+                for (int j = 0; j < clusters[(i)].documents().size(); j++)
                 {
                     items.Add(new int[]{i, j});
                 }
@@ -279,8 +281,8 @@ public class ClusterAnalyzer<K>
                 Cluster<K> cluster = clusters.get(cluster_id);
                 Document<K> doc = cluster.documents().get(item_id);
                 double value_base = refined_vector_value(cluster.composite_vector(), doc.feature(), -1);
-                double norm_base_moved = Math.pow(norms[cluster_id], 2) + value_base;
-                norm_base_moved = norm_base_moved > 0 ? Math.sqrt(norm_base_moved) : 0.0;
+                double norm_base_moved = Math.Pow(norms[cluster_id], 2) + value_base;
+                norm_base_moved = norm_base_moved > 0 ? Math.Sqrt(norm_base_moved) : 0.0;
 
                 double eval_max = -1.0;
                 double norm_max = 0.0;
@@ -291,8 +293,8 @@ public class ClusterAnalyzer<K>
                         continue;
                     Cluster<K> other = clusters.get(j);
                     double value_target = refined_vector_value(other.composite_vector(), doc.feature(), 1);
-                    double norm_target_moved = Math.pow(norms[j], 2) + value_target;
-                    norm_target_moved = norm_target_moved > 0 ? Math.sqrt(norm_target_moved) : 0.0;
+                    double norm_target_moved = Math.Pow(norms[j], 2) + value_target;
+                    norm_target_moved = norm_target_moved > 0 ? Math.Sqrt(norm_target_moved) : 0.0;
                     double eval_moved = norm_base_moved + norm_target_moved - norms[cluster_id] - norms[j];
                     if (eval_max < eval_moved)
                     {
@@ -313,7 +315,7 @@ public class ClusterAnalyzer<K>
             }
             if (!changed)
                 break;
-            for (Cluster<K> cluster : clusters)
+            foreach (Cluster<K> cluster in clusters)
             {
                 cluster.refresh();
             }
@@ -332,9 +334,9 @@ public class ClusterAnalyzer<K>
     double refined_vector_value(SparseVector composite, SparseVector vec, int sign)
     {
         double sum = 0.0;
-        for (KeyValuePair<int, Double> entry : vec.entrySet())
+        foreach (KeyValuePair<int, Double> entry in vec)
         {
-            sum += Math.pow(entry.getValue(), 2) + sign * 2 * composite.get(entry.getKey()) * entry.getValue();
+            sum += Math.Pow(entry.Value, 2) + sign * 2 * composite.get(entry.Key) * entry.Value;
         }
         return sum;
     }
@@ -372,7 +374,7 @@ public class ClusterAnalyzer<K>
         int[] ni = new int[folders.Length];
         string[] cat = new string[folders.Length];
         int offset = 0;
-        for (File folder : folders)
+        foreach (File folder in folders)
         {
             if (folder.isFile()) continue;
             File[] files = folder.listFiles();
@@ -383,7 +385,7 @@ public class ClusterAnalyzer<K>
             int b = 0;
             int e = files.Length;
 
-            int logEvery = (int) Math.ceil((e - b) / 10000f);
+            int logEvery = (int) Math.Ceiling((e - b) / 10000f);
             for (int i = b; i < e; i++)
             {
                 analyzer.addDocument(folder.getName() + " " + files[i].getName(), IOUtil.readTxt(files[i]));
@@ -399,25 +401,25 @@ public class ClusterAnalyzer<K>
         }
         logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", folders.Length, docSize);
         logger.start(algorithm + "聚类中...");
-        List<Set<string>> clusterList = algorithm.replaceAll("[-\\s]", "").toLowerCase().Equals("kmeans") ?
+        List<HashSet<string>> clusterList = algorithm.Replace("[-\\s]", "").ToLower().Equals("kmeans") ?
             analyzer.kmeans(ni.Length) : analyzer.repeatedBisection(ni.Length);
         logger.finish(" 完毕。\n");
         double[] fi = new double[ni.Length];
         for (int i = 0; i < ni.Length; i++)
         {
-            for (Set<string> j : clusterList)
+            foreach (HashSet<string> j in clusterList)
             {
                 int nij = 0;
-                for (string d : j)
+                foreach (string d in j)
                 {
                     if (d.StartsWith(cat[i]))
                         ++nij;
                 }
                 if (nij == 0) continue;
-                double p = nij / (double) (j.size());
+                double p = nij / (double) (j.Count);
                 double r = nij / (double) (ni[i]);
-                double f = 2 * p * r / (p + r);
-                fi[i] = Math.Max(fi[i], f);
+                double fx = 2 * p * r / (p + r);
+                fi[i] = Math.Max(fi[i], fx);
             }
         }
         double f = 0;

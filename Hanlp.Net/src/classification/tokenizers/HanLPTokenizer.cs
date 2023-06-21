@@ -25,8 +25,8 @@ public class HanLPTokenizer : ITokenizer
     {
         char[] charArray = text.ToCharArray();
         List<Term> termList = NotionalTokenizer.segment(charArray);
-        ListIterator<Term> listIterator = termList.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<Term> listIterator = termList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             Term term = listIterator.next();
             if (term.word.IndexOf('\u0000') >= 0)

@@ -26,7 +26,7 @@ class AutoBytePool
      * @param id 字节下标
      * @return 字节
      */
-    byte get(int id)
+    public byte get(int id)
     {
         return _buf[id];
     }
@@ -45,7 +45,7 @@ class AutoBytePool
      * 是否为空
      * @return true表示为空
      */
-    bool empty()
+    public bool empty()
     {
         return (_size == 0);
     }
@@ -54,7 +54,7 @@ class AutoBytePool
      * 缓冲区大小
      * @return 大小
      */
-    int size()
+    public int size()
     {
         return _size;
     }
@@ -62,7 +62,7 @@ class AutoBytePool
     /**
      * 清空缓存
      */
-    void Clear()
+    public void Clear()
     {
         resize(0);
         _buf = null;
@@ -95,7 +95,7 @@ class AutoBytePool
      * 重设大小
      * @param size 大小
      */
-    void resize(int size)
+    public void resize(int size)
     {
         if (size > _capacity)
         {
@@ -155,7 +155,7 @@ class AutoBytePool
         byte[] buf = new byte[capacity];
         if (_size > 0)
         {
-            //System.arraycopy(_buf, 0, buf, 0, _size);
+            //Array.Copy(_buf, 0, buf, 0, _size);
             Array.Copy(_buf,0,buf,0,_size);
         }
         _buf = buf;

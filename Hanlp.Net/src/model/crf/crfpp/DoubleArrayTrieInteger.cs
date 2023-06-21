@@ -1,18 +1,20 @@
+
+using com.hankcs.hanlp.corpus.io;
 /**
- * DoubleArrayTrie: Java implementation of Darts (Double-ARray Trie System)
- * <p>
- * <p>
- * Copyright(C) 2001-2007 Taku Kudo &lt;taku@chasen.org&gt;<br />
- * Copyright(C) 2009 MURAWAKI Yugo &lt;murawaki@nlp.kuee.kyoto-u.ac.jp&gt;
- * Copyright(C) 2012 KOMIYA Atsushi &lt;komiya.atsushi@gmail.com&gt;
- * </p>
- * <p>
- * <p>
- * The contents of this file may be used under the terms of either of the GNU
- * Lesser General Public License Version 2.1 or later (the "LGPL"), or the BSD
- * License (the "BSD").
- * </p>
- */
+* DoubleArrayTrie: Java implementation of Darts (Double-ARray Trie System)
+* <p>
+* <p>
+* Copyright(C) 2001-2007 Taku Kudo &lt;taku@chasen.org&gt;<br />
+* Copyright(C) 2009 MURAWAKI Yugo &lt;murawaki@nlp.kuee.kyoto-u.ac.jp&gt;
+* Copyright(C) 2012 KOMIYA Atsushi &lt;komiya.atsushi@gmail.com&gt;
+* </p>
+* <p>
+* <p>
+* The contents of this file may be used under the terms of either of the GNU
+* Lesser General Public License Version 2.1 or later (the "LGPL"), or the BSD
+* License (the "BSD").
+* </p>
+*/
 namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
@@ -27,26 +29,26 @@ public class DoubleArrayTrieInteger : Serializable
     private static int UNIT_SIZE = 8; // size of int + int
     private static readonly long serialVersionUID = -4908582458604586299L;
 
-    private static class Node
+    public class Node
     {
-        int code;
-        int depth;
-        int left;
-        int right;
+        public int code;
+        public int depth;
+        public int left;
+        public int right;
     }
 
     ;
 
-    private int check[];
-    private int base[];
+    private int[] check;
+    private int[] _base;
 
-    private bool used[];
+    private bool[] used;
     private int size;
     private int allocSize;
     private List<string> key;
     private int keySize;
-    private int Length[];
-    private int value[];
+    private int[] Length;
+    private int[] value;
     private int progress;
     private int nextCheckPos;
     // bool no_delete_;
@@ -56,15 +58,15 @@ public class DoubleArrayTrieInteger : Serializable
     {
         int[] base2 = new int[newSize];
         int[] check2 = new int[newSize];
-        bool used2[] = new bool[newSize];
+        bool[] used2 = new bool[newSize];
         if (allocSize > 0)
         {
-            System.arraycopy(base, 0, base2, 0, allocSize);
-            System.arraycopy(check, 0, check2, 0, allocSize);
-            System.arraycopy(used, 0, used2, 0, allocSize);
+            Array.Copy(_base, 0, base2, 0, allocSize);
+            Array.Copy(check, 0, check2, 0, allocSize);
+            Array.Copy(used, 0, used2, 0, allocSize);
         }
 
-        base = base2;
+        _base = base2;
         check = check2;
         used = used2;
 
@@ -213,7 +215,7 @@ public class DoubleArrayTrieInteger : Serializable
     public DoubleArrayTrieInteger()
     {
         check = null;
-        base = null;
+        _base = null;
         used = null;
         size = 0;
         allocSize = 0;
@@ -234,7 +236,7 @@ public class DoubleArrayTrieInteger : Serializable
     {
         // if (! no_delete_)
         check = null;
-        base = null;
+        _base = null;
         used = null;
         allocSize = 0;
         size = 0;
@@ -292,7 +294,7 @@ public class DoubleArrayTrieInteger : Serializable
         root_node.right = keySize;
         root_node.depth = 0;
 
-        List<Node> siblings = new ArrayList<Node>();
+        List<Node> siblings = new ();
         fetch(root_node, siblings);
         insert(siblings);
 
@@ -308,22 +310,22 @@ public class DoubleArrayTrieInteger : Serializable
     public void recoverKeyValue()
     {
         key = new ();
-        List<int> val1 = new ArrayList<int>();
+        List<int> val1 = new ();
         Dictionary<int, List<int>> childIdxMap = new ();
         for (int i = 0; i < check.Length; i++)
         {
             if (check[i] <= 0) continue;
             if (!childIdxMap.ContainsKey(check[i]))
             {
-                List<int> childList = new ArrayList<int>();
-                childIdxMap.put(check[i], childList);
+                List<int> childList = new ();
+                childIdxMap.Add(check[i], childList);
             }
             childIdxMap.get(check[i]).Add(i);
         }
         Stack<int[]> s = new Stack<int[]>();
         s.Add(new int[]{1, -1});
 
-        List<int> charBuf = new ArrayList<int>();
+        List<int> charBuf = new ();
         while (true)
         {
             int[] pair = s.peek();
@@ -388,42 +390,42 @@ public class DoubleArrayTrieInteger : Serializable
         check = new int[size];
         base = new int[size];
 
-        DataInputStream is = null;
+        Stream _is = null;
         try
         {
-            is = new DataInputStream(new BufferedInputStream(
-                new FileInputStream(file), BUF_SIZE));
+            _is = new Stream(new BufferedInputStream(
+                new FileStream(file), BUF_SIZE));
             for (int i = 0; i < size; i++)
             {
-                base[i] = @is.readInt();
+                _base[i] = @is.readInt();
                 check[i] = @is.readInt();
             }
         }
         finally
         {
-            if (is != null)
-                is.close();
+            if (_is != null)
+                _is.Close();
         }
     }
 
     public void save(string fileName) 
     {
-        DataOutputStream _out = null;
+        Stream _out = null;
         try
         {
-            _out = new DataOutputStream(new BufferedOutputStream(
+            _out = new Stream(new BufferedOutputStream(
                 IOUtil.newOutputStream(fileName)));
             for (int i = 0; i < size; i++)
             {
                 _out.writeInt(base[i]);
                 _out.writeInt(check[i]);
             }
-            _out.close();
+            _out.Close();
         }
         finally
         {
             if (_out != null)
-                _out.close();
+                _out.Close();
         }
     }
 
@@ -523,12 +525,12 @@ public class DoubleArrayTrieInteger : Serializable
         }
     }
 
-    public List<string> getKey()
+    public List<string> Key
     {
         return key;
     }
 
-    public int[] getValue()
+    public int[] Value
     {
         return value;
     }
@@ -555,12 +557,12 @@ public class DoubleArrayTrieInteger : Serializable
 
     public int[] getBase()
     {
-        return base;
+        return _base;
     }
 
-    public void setBase(int[] base)
+    public void setBase(int[] _base)
     {
-        this.base = base;
+        this._base = _base;
     }
 
     public int[] getLength()

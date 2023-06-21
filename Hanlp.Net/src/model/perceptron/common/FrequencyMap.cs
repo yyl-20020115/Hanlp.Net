@@ -25,12 +25,12 @@ public class FrequencyMap : Dictionary<string, int>
         int frequency = get(word);
         if (frequency == null)
         {
-            put(word, 1);
+            Add(word, 1);
             return 1;
         }
         else
         {
-            put(word, ++frequency);
+            Add(word, ++frequency);
             return frequency;
         }
     }

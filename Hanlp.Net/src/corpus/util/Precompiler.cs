@@ -104,7 +104,7 @@ public class Precompiler
         foreach (IWord word in wordList)
         {
             if (word.getLabel().StartsWith("ns")) continue;
-            word.setValue(PosTagCompiler.compile(word.getLabel(), word.getValue()));
+            word.setValue(PosTagCompiler.compile(word.getLabel(), word.Value));
 //            switch (word.getLabel())
 //            {
 //                case "nx":
@@ -164,7 +164,7 @@ public class Precompiler
         foreach (IWord word in wordList)
         {
             if (word.getLabel().StartsWith("nt")) continue;
-            word.setValue(PosTagCompiler.compile(word.getLabel(), word.getValue()));
+            word.setValue(PosTagCompiler.compile(word.getLabel(), word.Value));
         }
     }
 }

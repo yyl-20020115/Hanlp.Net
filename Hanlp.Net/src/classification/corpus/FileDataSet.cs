@@ -9,6 +9,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.classification.collections;
 using com.hankcs.hanlp.classification.models;
 
 namespace com.hankcs.hanlp.classification.corpus;
@@ -43,7 +44,7 @@ public class FileDataSet : AbstractDataSet
     private void initCache(File cache) 
     {
         this.cache = cache;
-        _out = new DataOutputStream(new FileOutputStream(cache));
+        _out = new Stream(new FileStream(cache));
     }
 
     private void initCache() 
@@ -76,10 +77,10 @@ public class FileDataSet : AbstractDataSet
         _out.writeInt(document.category);
         HashSet<KeyValuePair<int, int[]>> entrySet = document.tfMap.entrySet();
         _out.writeInt(entrySet.size());
-        for (KeyValuePair<int, int[]> entry : entrySet)
+        foreach (KeyValuePair<int, int[]> entry in entrySet)
         {
-            _out.writeInt(entry.getKey());
-            _out.writeInt(entry.getValue()[0]);
+            _out.writeInt(entry.Key);
+            _out.writeInt(entry.Value[0]);
         }
         ++size;
     }
@@ -104,15 +105,15 @@ public class FileDataSet : AbstractDataSet
             Clear();
             Iterator<Document> iterator = iterator();
             initCache();
-            while (iterator.hasNext())
+            while (iterator.MoveNext())
             {
                 Document document = iterator.next();
                 FrequencyMap<int> tfMap = new FrequencyMap<int>();
-                for (KeyValuePair<int, int[]> entry : document.tfMap.entrySet())
+                foreach (KeyValuePair<int, int[]> entry in document.tfMap.entrySet())
                 {
-                    int feature = entry.getKey();
+                    int feature = entry.Key;
                     if (idMap[feature] == -1) continue;
-                    tfMap.put(idMap[feature], entry.getValue());
+                    tfMap.Add(idMap[feature], entry.Value);
                 }
                 // 检查是否是空白文档
                 if (tfMap.size() == 0) continue;
@@ -133,48 +134,49 @@ public class FileDataSet : AbstractDataSet
     {
         try
         {
-            _out.close();
-            DataInputStream _in  = new DataInputStream(new FileInputStream(cache));
-            return new Iterator<Document>()
-            {
-                //@Override
-                public void Remove()
-                {
-                    throw new RuntimeException("不支持的操作");
-                }
-
-                //@Override
-                public bool hasNext()
-                {
-                    try
-                    {
-                        bool next = in.available() > 0;
-                        if (!next) in.close();
-                        return next;
-                    }
-                    catch (IOException e)
-                    {
-                        throw new RuntimeException(e);
-                    }
-                }
-
-                //@Override
-                public Document next()
-                {
-                    try
-                    {
-                        return new Document(in);
-                    }
-                    catch (IOException e)
-                    {
-                        throw new RuntimeException(e);
-                    }
-                }
-            };
+            _out.Close();
+            Stream _in  = new Stream(new FileStream(cache));
+            return new ST();
         }
         catch (IOException e)
         {
             throw new RuntimeException(e);
+        }
+    }
+    public class ST: Iterator<Document>
+    {
+        //@Override
+        public void Remove()
+        {
+            throw new RuntimeException("不支持的操作");
+        }
+
+        //@Override
+        public bool MoveNext()
+        {
+            try
+            {
+                bool next = @in.available() > 0;
+                if (!next) @in.Close();
+                return next;
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
+        }
+
+        //@Override
+        public Document next()
+        {
+            try
+            {
+                return new Document(@in);
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

@@ -47,10 +47,10 @@ public class GlobalObjectPool
      * @param <T>
      * @return
      */
-    public  static T put<T>(Object id, T value)
+    public  static T Add<T>(Object id, T value)
     {
         //synchronized
-        SoftReference old = pool.put(id, new SoftReference(value));
+        SoftReference old = pool.Add(id, new SoftReference(value));
         return old == null ? null : (T) old.get();
     }
 

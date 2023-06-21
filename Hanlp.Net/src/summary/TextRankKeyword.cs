@@ -1,4 +1,5 @@
 using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.summary;
@@ -66,7 +67,7 @@ public class TextRankKeyword : KeywordExtractor
      */
     public Dictionary<string, float> getTermAndRank(string content)
     {
-        assert content != null;
+        //assert content != null;
         List<Term> termList = defaultSegment.seg(content);
         return getTermAndRank(termList);
     }
@@ -89,9 +90,9 @@ public class TextRankKeyword : KeywordExtractor
     private Dictionary<string, float> top(int size, Dictionary<string, float> map)
     {
         Dictionary<string, float> result = new ();
-        for (KeyValuePair<string, float> entry in new MaxHeap<KeyValuePair<string, float>>(size, new CT()).addAll(map.entrySet()).ToList())
+        foreach (KeyValuePair<string, float> entry in new MaxHeap<KeyValuePair<string, float>>(size, new CT()).AddRange(map.entrySet()).ToList())
         {
-            result.Add(entry.getKey(), entry.getValue());
+            result.Add(entry.Key, entry.Value);
         }
         return result;
     }
@@ -100,7 +101,7 @@ public class TextRankKeyword : KeywordExtractor
         //@Override
         public int Compare(KeyValuePair<string, float> o1, KeyValuePair<string, float> o2)
         {
-            return o1.getValue().compareTo(o2.getValue());
+            return o1.Value.compareTo(o2.Value);
         }
     }
 
@@ -113,7 +114,7 @@ public class TextRankKeyword : KeywordExtractor
     public Dictionary<string, float> getTermAndRank(List<Term> termList)
     {
         List<string> wordList = new (termList.size());
-        for (Term t : termList)
+        foreach (Term t in termList)
         {
             if (shouldInclude(t))
             {
@@ -122,19 +123,19 @@ public class TextRankKeyword : KeywordExtractor
         }
 //        Console.WriteLine(wordList);
         Dictionary<string, HashSet<string>> words = new Dictionary<string, HashSet<string>>();
-        Queue<string> que = new LinkedList<string>();
-        for (string w : wordList)
+        Queue<string> que = new ();
+        foreach (string w in wordList)
         {
             if (!words.ContainsKey(w))
             {
-                words.put(w, new TreeSet<string>());
+                words.Add(w, new HashSet<string>());
             }
             // 复杂度O(n-1)
             if (que.size() >= 5)
             {
                 que.poll();
             }
-            for (string qWord : que)
+            foreach (string qWord in que)
             {
                 if (w.Equals(qWord))
                 {
@@ -147,28 +148,28 @@ public class TextRankKeyword : KeywordExtractor
             que.offer(w);
         }
 //        Console.WriteLine(words);
-        Dictionary<string, float> score = new HashMap<string, float>();
+        Dictionary<string, float> score = new ();
         //依据TF来设置初值
-        for (KeyValuePair<string, HashSet<string>> entry : words.entrySet())
+        foreach (KeyValuePair<string, HashSet<string>> entry in words.entrySet())
         {
-            score.put(entry.getKey(), sigMoid(entry.getValue().size()));
+            score.Add(entry.Key, sigMoid(entry.Value.size()));
         }
         for (int i = 0; i < max_iter; ++i)
         {
-            Dictionary<string, float> m = new HashMap<string, float>();
+            Dictionary<string, float> m = new ();
             float max_diff = 0;
-            for (KeyValuePair<string, HashSet<string>> entry : words.entrySet())
+            foreach (KeyValuePair<string, HashSet<string>> entry in words.entrySet())
             {
-                string key = entry.getKey();
-                HashSet<string> value = entry.getValue();
-                m.put(key, 1 - d);
-                for (string element : value)
+                string key = entry.Key;
+                HashSet<string> value = entry.Value;
+                m.Add(key, 1 - d);
+                foreach (string element in value)
                 {
                     int size = words.get(element).size();
                     if (key.Equals(element) || size == 0) continue;
-                    m.put(key, m.get(key) + d / size * (score.get(element) == null ? 0 : score.get(element)));
+                    m.Add(key, m.get(key) + d / size * (score.get(element) == null ? 0 : score.get(element)));
                 }
-                max_diff = Math.Max(max_diff, Math.abs(m.get(key) - (score.get(key) == null ? 0 : score.get(key))));
+                max_diff = Math.Max(max_diff, Math.Abs(m.get(key) - (score.get(key) == null ? 0 : score.get(key))));
             }
             score = m;
             if (max_diff <= min_diff) break;
@@ -185,17 +186,17 @@ public class TextRankKeyword : KeywordExtractor
      */
     public static float sigMoid(float value)
     {
-        return (float) (1d / (1d + Math.exp(-value)));
+        return (float) (1d / (1d + Math.Exp(-value)));
     }
 
     //@Override
     public List<string> getKeywords(List<Term> termList, int size)
     {
-        HashSet<KeyValuePair<string, float>> entrySet = top(size, getTermAndRank(termList)).entrySet();
-        List<string> result = new (entrySet.size());
-        for (KeyValuePair<string, float> entry : entrySet)
+        HashSet<KeyValuePair<string, float>> entrySet = top(size, getTermAndRank(termList)).Keys;
+        List<string> result = new (entrySet.Count);
+        foreach (KeyValuePair<string, float> entry in entrySet)
         {
-            result.Add(entry.getKey());
+            result.Add(entry.Key);
         }
         return result;
     }

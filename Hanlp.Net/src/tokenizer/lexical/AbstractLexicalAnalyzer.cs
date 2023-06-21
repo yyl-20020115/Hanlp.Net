@@ -48,7 +48,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     static AbstractLexicalAnalyzer()
     {
         typeTable = new byte[CharType.type.Length];
-        System.arraycopy(CharType.type, 0, typeTable, 0, typeTable.Length);
+        Array.Copy(CharType.type, 0, typeTable, 0, typeTable.Length);
         foreach (char c in Predefine.CHINESE_NUMBERS.ToCharArray())
         {
             typeTable[c] = CharType.CT_CHINESE;
@@ -102,7 +102,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             CustomDictionary.parseLongestText(sentence, new CPT());
             if (offset[0] != sentence.Length)
             {
-                segmentAfterRule(sentence.substring(offset[0]), normalized.substring(offset[0]), wordList);
+                segmentAfterRule(sentence.Substring(offset[0]), normalized.Substring(offset[0]), wordList);
             }
         }
         else
@@ -121,9 +121,9 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             }
             while (attributeList.size() < wordList.size())
                 attributeList.Add(null);
-            wordList.Add(sentence.substring(begin, end));
+            wordList.Add( sentence.substring(begin, end));
             attributeList.Add(value);
-            assert wordList.size() == attributeList.size() : "词语列表与属性列表不等长";
+            //assert wordList.size() == attributeList.size() : "词语列表与属性列表不等长";
             offset[0] = end;
         }
     }
@@ -136,7 +136,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             CustomDictionary.parseLongestText(sentence, new Hit());
             if (offset[0] != sentence.Length)
             {
-                segmentAfterRule(sentence.substring(offset[0]), normalized.substring(offset[0]), wordList);
+                segmentAfterRule(sentence.Substring(offset[0]), normalized.Substring(offset[0]), wordList);
             }
         }
         else
@@ -214,7 +214,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             offset += word.Length;
         }
 
-        List<IWord> termList = new (wordList.size());
+        List<IWord> termList = new (wordList.Count);
         if (posTagger != null)
         {
             string[] posArray = tag(wordArray);
@@ -233,7 +233,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 {
                     if (nerArray[i][0] == tagSet.B_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR || nerArray[i][0] == tagSet.O_TAG_CHAR)
                     {
-                        termList.Add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
+                        termList.Add(result.Count > 1 ? new CompoundWord(result, prePos) : result.get(0));
                         result = new ();
                     }
                     result.Add(new Word(wordArray[i], posArray[i]));
@@ -246,15 +246,15 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         prePos = NERTagSet.posOf(nerArray[i]);
                     }
                 }
-                if (result.size() != 0)
+                if (result.Count != 0)
                 {
-                    termList.Add(result.size() > 1 ? new CompoundWord(result, prePos) : result.get(0));
+                    termList.Add(result.Count > 1 ? new CompoundWord(result, prePos) : result.get(0));
                 }
             }
             else
             {
                 overwriteTag(attributeList, posArray);
-                wordList.ToArray(wordArray);
+                wordArray = wordList.ToArray();
                 for (int i = 0; i < wordArray.Length; i++)
                 {
                     termList.Add(new Word(wordArray[i], posArray[i]));
@@ -263,7 +263,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
         else
         {
-            wordList.ToArray(wordArray);
+            wordArray = wordList.ToArray();
             foreach (string word in wordArray)
             {
                 termList.Add(new Word(word, null));
@@ -327,7 +327,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     {
         if (sentence.Length == 0)
         {
-            return Collections.emptyList();
+            return new();
         }
         string original = new string(sentence);
         CharTable.normalization(sentence);
@@ -335,7 +335,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         List<string> wordList = new ();
         List<CoreDictionary.Attribute> attributeList;
         attributeList = segmentWithAttribute(original, normalized, wordList);
-        List<Term> termList = new (wordList.size());
+        List<Term> termList = new (wordList.Count);
         int offset = 0;
         foreach (string word in wordList)
         {
@@ -348,7 +348,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             if (posTagger != null)
             {
-                string[] wordArray = new string[wordList.size()];
+                string[] wordArray = new string[wordList.Count];
                 offset = 0;
                 int id = 0;
                 foreach (string word in wordList)
@@ -358,11 +358,11 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     offset += word.Length;
                 }
                 string[] posArray = tag(wordArray);
-                Iterator<Term> iterator = termList.iterator();
-                Iterator<CoreDictionary.Attribute> attributeIterator = attributeList == null ? null : attributeList.iterator();
+                Iterator<Term> iterator = termList.GetEnumerator();
+                Iterator<CoreDictionary.Attribute> attributeIterator = attributeList == null ? null : attributeList.GetEnumerator();
                 for (int i = 0; i < posArray.Length; i++)
                 {
-                    if (attributeIterator != null && attributeIterator.hasNext())
+                    if (attributeIterator != null && attributeIterator.MoveNext())
                     {
                         CoreDictionary.Attribute attribute = attributeIterator.next();
                         if (attribute != null)
@@ -382,9 +382,9 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         childrenList = new ();
                         iterator = termList.iterator();
                     }
-                    termList = new ArrayList<Term>(termList.size());
+                    termList = new (termList.size());
                     string[] nerArray = recognize(wordArray, posArray);
-                    wordList.ToArray(wordArray);
+                    wordArray = wordList.ToArray();
                     StringBuilder result = new StringBuilder();
                     result.Append(wordArray[0]);
                     if (childrenList != null)
@@ -417,7 +417,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                                 }
                                 childrenList.Clear();
                             }
-                            result.setLength(0);
+                            result.Length=0;
                         }
                         result.Append(wordArray[i]);
                         if (childrenList != null)
@@ -440,7 +440,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         termList.Add(term);
                         if (childrenList != null)
                         {
-                            if (childrenList.size() > 1)
+                            if (childrenList.Count > 1)
                             {
                                 foreach (Term shortTerm in childrenList)
                                 {
@@ -511,17 +511,17 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
         int start = 0;
         int end = start;
-        byte preType = typeTable[normalized.charAt(end)];
+        byte preType = typeTable[normalized[(end)]];
         byte curType;
         while (++end < normalized.Length)
         {
-            curType = typeTable[normalized.charAt(end)];
+            curType = typeTable[normalized[(end)]];
             if (curType != preType)
             {
                 if (preType == CharType.CT_NUM)
                 {
                     // 浮点数识别
-                    if ("，,．.".IndexOf(normalized.charAt(end)) != -1)
+                    if ("，,．.".IndexOf(normalized[(end)]) != -1)
                     {
                         if (end + 1 < normalized.Length)
                         {
@@ -586,8 +586,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      */
     protected static List<CoreDictionary.Attribute> combineWithCustomDictionary(List<string> vertexList)
     {
-        string[] wordNet = new string[vertexList.size()];
-        vertexList.ToArray(wordNet);
+        var wordNet= vertexList.ToArray();
         CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[wordNet.Length];
         // DAT合并
         DoubleArrayTrie<CoreDictionary.Attribute> dat = CustomDictionary.dat;
@@ -630,15 +629,15 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 {
                     int to = i + 1;
                     int end = to;
-                    CoreDictionary.Attribute value = state.getValue();
+                    CoreDictionary.Attribute value = state.Value;
                     for (; to < Length; ++to)
                     {
                         if (wordNet[to] == null) continue;
                         state = state.transition(wordNet[to], 0);
                         if (state == null) break;
-                        if (state.getValue() != null)
+                        if (state.Value != null)
                         {
-                            value = state.getValue();
+                            value = state.Value;
                             end = to + 1;
                         }
                     }

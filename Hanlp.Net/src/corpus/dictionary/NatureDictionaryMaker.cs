@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.corpus.document;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.util;
 using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
@@ -53,10 +54,10 @@ public class NatureDictionaryMaker : CommonDictionaryMaker
     {
         logger.info("开始标注");
         int i = 0;
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             logger.info(++i + " / " + sentenceList.size());
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
                 Precompiler.compile(word);  // 编译为等效字符串
             }

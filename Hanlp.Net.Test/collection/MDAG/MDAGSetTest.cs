@@ -27,7 +27,7 @@ public class MDAGSetTest : TestCase
         DATA_TEST_OUT_BIN = tempFile; 
         IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/custom/CustomDictionary.txt");
         validKeySet = new ();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             validKeySet.Add(iterator.next().Split("\\s")[0]);
         }
@@ -148,7 +148,7 @@ public class MDAGSetTest : TestCase
     //        BinTrie<Boolean> binTrie = new BinTrie<Boolean>();
     //        for (String key : validKeySet)
     //        {
-    //            binTrie.put(key, true);
+    //            binTrie.Add(key, true);
     //        }
     //        long start = DateTime.Now.Microsecond;
     //        for (String key : validKeySet)
@@ -202,7 +202,7 @@ public class MDAGSetTest : TestCase
         validKeySet.Add("he");
         foreach (String key in validKeySet)
         {
-            mdagMap.put(key, key);
+            mdagMap.Add(key, key);
         }
         mdagMap.simplify();
 

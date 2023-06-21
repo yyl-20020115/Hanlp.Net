@@ -56,7 +56,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
         float minCostToRoot = float.MaxValue;
         Edge firstEdge = null;
         Edge[] edgeResult = new Edge[termList.size() - 1];
-        for (Edge edge in edges[0])
+        foreach (Edge edge in edges[0])
         {
             if (edge == null) continue;
             if (minCostToRoot > edge.cost)

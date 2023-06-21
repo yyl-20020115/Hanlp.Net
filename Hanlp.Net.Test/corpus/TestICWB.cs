@@ -25,7 +25,7 @@ public class TestICWB : TestCase
 //
 //    public void testGenerateBMES() 
 //    {
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(PATH + ".bmes.txt")));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(PATH + ".bmes.txt")));
 //        for (String line : IOUtil.readLineListWithLessMemory(PATH))
 //        {
 //            String[] wordArray = line.Split("\\s");
@@ -47,12 +47,12 @@ public class TestICWB : TestCase
 //            }
 //            bw.newLine();
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 //
 //    public void testDumpPeople2014ToBEMS() 
 //    {
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Tools\\CRF++-0.58\\example\\seg_cn\\2014.txt")));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("D:\\Tools\\CRF++-0.58\\example\\seg_cn\\2014.txt")));
 //        CorpusLoader.walk("D:\\JavaProjects\\CorpusToolBox\\data\\2014", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -79,6 +79,6 @@ public class TestICWB : TestCase
 //                }
 //            }
 //        });
-//        bw.close();
+//        bw.Close();
 //    }
 }

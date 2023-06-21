@@ -110,19 +110,19 @@ public class Main
                         return;
                 }
 
-                PrintWriter printer;
+                TextWriter printer;
                 if (option.result == null)
                 {
-                    printer = new PrintWriter(System._out);
+                    printer = new TextWriter(System._out);
                 }
                 else
                 {
-                    printer = new PrintWriter(new File(option.result), "utf-8");
+                    printer = new TextWriter(new File(option.result), "utf-8");
                 }
                 Scanner scanner;
                 if (option.input == null)
                 {
-                    scanner = new Scanner(System.in);
+                    scanner = new Scanner(System.@in);
 //                    Console.Error.WriteLine("请输入文本：");
                 }
                 else
@@ -131,9 +131,9 @@ public class Main
                 }
                 string line;
                 string lineSeparator = System.getProperty("line.separator");
-                while (scanner.hasNext() && (line = scanner.nextLine()) != null)
+                while (scanner.MoveNext() && (line = scanner.nextLine()) != null)
                 {
-                    line = line.trim();
+                    line = line.Trim();
                     if (line.Length == 0) continue;
                     Sentence sentence = analyzer.analyze(line);
                     printer.write(sentence.ToString());
@@ -143,8 +143,8 @@ public class Main
                         printer.flush();
                     }
                 }
-                printer.close();
-                scanner.close();
+                printer.Close();
+                scanner.Close();
             }
         }
         catch (ArgumentException e)

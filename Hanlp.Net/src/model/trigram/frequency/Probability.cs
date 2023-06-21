@@ -8,6 +8,8 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.model.trigram.frequency;
 
 
@@ -29,7 +31,7 @@ public class Probability : ICacheAble
             public bool load(ByteArray byteArray, _ValueArray valueArray)
             {
                 BaseNode<int>[] nchild = new BaseNode[child.Length - 1];    // 兼容旧模型
-                System.arraycopy(child, 0, nchild, 0, nchild.Length);
+                Array.Copy(child, 0, nchild, 0, nchild.Length);
                 child = nchild;
                 return base.load(byteArray, valueArray);
             }
@@ -94,7 +96,7 @@ public class Probability : ICacheAble
         int f = get(key);
         if (f == null) f = 0;
         f += value;
-        d.put(key, f);
+        d.Add(key, f);
         total += value;
     }
 
@@ -103,7 +105,7 @@ public class Probability : ICacheAble
         int f = d.get(key);
         if (f == null) f = 0;
         f += value;
-        d.put(key, f);
+        d.Add(key, f);
         total += value;
     }
 
@@ -112,15 +114,15 @@ public class Probability : ICacheAble
         Add(convert(keyArray), value);
     }
 
-    public void Add(int value, Collection<char[]> keyArray)
+    public void Add(int value, ICollection<char[]> keyArray)
     {
         Add(convert(keyArray), value);
     }
 
-    private string convert(Collection<char[]> keyArray)
+    private string convert(ICollection<char[]> keyArray)
     {
         StringBuilder sbKey = new StringBuilder(keyArray.size() * 2);
-        for (char[] key : keyArray)
+        foreach (char[] key in keyArray)
         {
             sbKey.Append(key[0]);
             sbKey.Append(key[1]);
@@ -128,10 +130,10 @@ public class Probability : ICacheAble
         return sbKey.ToString();
     }
 
-    static private string convert(char[]... keyArray)
+    static private string convert(params char[][] keyArray)
     {
         StringBuilder sbKey = new StringBuilder(keyArray.Length * 2);
-        for (char[] key : keyArray)
+        foreach (char[] key in keyArray)
         {
             sbKey.Append(key[0]);
             sbKey.Append(key[1]);
@@ -140,7 +142,7 @@ public class Probability : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeInt(total);
         int[] valueArray = d.getValueArray(new int[0]);
@@ -155,12 +157,12 @@ public class Probability : ICacheAble
     //@Override
     public bool load(ByteArray byteArray)
     {
-        total = byteArray.nextInt();
-        int size = byteArray.nextInt();
+        total = byteArray.Next();
+        int size = byteArray.Next();
         int[] valueArray = new int[size];
         for (int i = 0; i < valueArray.Length; ++i)
         {
-            valueArray[i] = byteArray.nextInt();
+            valueArray[i] = byteArray.Next();
         }
         d.load(byteArray, valueArray);
         return true;

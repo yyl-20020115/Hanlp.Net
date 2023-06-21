@@ -28,9 +28,9 @@ public class ImmutableFeatureDatMap : FeatureMap
     }
 
     //@Override
-    public int idOf(string string)
+    public int idOf(string s)
     {
-        return dat.exactMatchSearch(string);
+        return dat.exactMatchSearch(s);
     }
 
     //@Override

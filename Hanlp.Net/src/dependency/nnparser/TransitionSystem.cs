@@ -25,12 +25,12 @@ public class TransitionSystem
     /**
      * 所有依存关系的数量
      */
-    int L;
+    public int L;
     /**
      * 根节点label对应的id
      */
-    int R;
-    int D;
+    public int R;
+    public int D;
 
     public TransitionSystem()
     {
@@ -43,7 +43,7 @@ public class TransitionSystem
      * 设置根节点label对应的id
      * @param r
      */
-    void set_root_relation(int r)
+    public void set_root_relation(int r)
     {
         R = r;
     }
@@ -52,7 +52,7 @@ public class TransitionSystem
      * 设置所有依存关系的数量
      * @param l
      */
-    void set_number_of_relations(int l)
+    public void set_number_of_relations(int l)
     {
         L = l;
     }
@@ -62,7 +62,7 @@ public class TransitionSystem
      * @param source 当前状态
      * @param actions 输出可能动作
      */
-    void get_possible_actions(State source,
+    public void get_possible_actions(State source,
                               List<Action> actions)
     {
         if (0 == L || -1 == R)
@@ -104,7 +104,7 @@ public class TransitionSystem
      * @param act 动作
      * @param target 目标状态
      */
-    void transit(State source, Action act, State target)
+    public void transit(State source, Action act, State target)
     {
         int deprel = 0;
         int[] deprel_inference = new int[]{deprel};
@@ -128,18 +128,18 @@ public class TransitionSystem
         }
     }
 
-    List<int> transform(List<Action> actions)
+    public List<int> transform(List<Action> actions)
     {
         List<int> classes = new ArrayList<int>();
         transform(actions, classes);
         return classes;
     }
 
-    void transform(List<Action> actions,
+    public void transform(List<Action> actions,
                    List<int> classes)
     {
         classes.Clear();
-        for (int i = 0; i < actions.size(); ++i)
+        for (int i = 0; i < actions.Count; ++i)
         {
             classes.Add(transform(actions.get(i)));
         }
@@ -150,7 +150,7 @@ public class TransitionSystem
      * @param act 动作
      * @return 动作类型的依存关系id
      */
-    int transform(Action act)
+    public int transform(Action act)
     {
         int deprel = 0;
         int[] deprel_inference = new int[]{deprel};
@@ -180,7 +180,7 @@ public class TransitionSystem
      * @param act 动作类型的依存关系id
      * @return 动作
      */
-    Action transform(int act)
+    public Action transform(int act)
     {
         if (act == 0)
         {
@@ -201,7 +201,7 @@ public class TransitionSystem
         return new Action();
     }
 
-    int number_of_transitions()
+    public int number_of_transitions()
     {
         return L * 2 + 1;
     }

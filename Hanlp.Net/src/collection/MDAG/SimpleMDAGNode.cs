@@ -1,4 +1,5 @@
 
+using com.hankcs.hanlp.corpus.io;
 using System.Text;
 /**
 * MDAG is a Java library capable of constructing character-sequence-storing,
@@ -38,7 +39,7 @@ public class SimpleMDAGNode : ICacheAble
     private char letter;
 
     //The bool denoting the accept state status of this node
-    private bool isAcceptNode;
+    private bool _isAcceptNode;
 
     //The int denoting the size of this node's outgoing _transition set
     private int transitionSetSize;
@@ -57,7 +58,7 @@ public class SimpleMDAGNode : ICacheAble
     public SimpleMDAGNode(char letter, bool isAcceptNode, int transitionSetSize)
     {
         this.letter = letter;
-        this.isAcceptNode = isAcceptNode;
+        this._isAcceptNode = isAcceptNode;
         this.transitionSetSize = transitionSetSize;
         this.transitionSetBeginIndex = 0;           //will be changed for all objects of this type, necessary for dummy root node creation
     }
@@ -86,7 +87,7 @@ public class SimpleMDAGNode : ICacheAble
      */
     public bool isAcceptNode()
     {
-        return isAcceptNode;
+        return _isAcceptNode;
     }
 
 
@@ -304,8 +305,8 @@ public class SimpleMDAGNode : ICacheAble
     {
         letter = byteArray.nextChar();
         isAcceptNode = byteArray.nextByte() == 1;
-        transitionSetBeginIndex = byteArray.nextInt();
-        transitionSetSize = byteArray.nextInt();
+        transitionSetBeginIndex = byteArray.Next();
+        transitionSetSize = byteArray.Next();
         return true;
     }
 }

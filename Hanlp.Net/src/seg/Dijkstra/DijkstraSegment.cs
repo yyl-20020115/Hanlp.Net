@@ -34,7 +34,7 @@ public class DijkstraSegment : WordBasedSegment
         Graph graph = generateBiGraph(wordNetAll);
         if (HanLP.Config.DEBUG)
         {
-            System._out.printf("粗分词图：%s\n", graph.printByTo());
+            Console.WriteLine("粗分词图：%s\n", graph.printByTo());
         }
         List<Vertex> vertexList = dijkstra(graph);
 //        fixResultByRule(vertexList);
@@ -60,7 +60,7 @@ public class DijkstraSegment : WordBasedSegment
         // 实体命名识别
         if (config.ner)
         {
-            wordNetOptimum.addAll(vertexList);
+            wordNetOptimum.AddRange(vertexList);
             int preSize = wordNetOptimum.size();
             if (config.nameRecognize)
             {
@@ -84,7 +84,7 @@ public class DijkstraSegment : WordBasedSegment
                 graph = generateBiGraph(wordNetOptimum);
                 vertexList = dijkstra(graph);
                 wordNetOptimum.Clear();
-                wordNetOptimum.addAll(vertexList);
+                wordNetOptimum.AddRange(vertexList);
                 preSize = wordNetOptimum.size();
                 OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
             }
@@ -94,8 +94,8 @@ public class DijkstraSegment : WordBasedSegment
                 vertexList = dijkstra(graph);
                 if (HanLP.Config.DEBUG)
                 {
-                    System._out.printf("细分词网：\n%s\n", wordNetOptimum);
-                    System._out.printf("细分词图：%s\n", graph.printByTo());
+                    Console.WriteLine("细分词网：\n%s\n", wordNetOptimum);
+                    Console.WriteLine("细分词图：%s\n", graph.printByTo());
                 }
             }
         }

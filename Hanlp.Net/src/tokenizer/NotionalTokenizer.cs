@@ -43,8 +43,8 @@ public class NotionalTokenizer
     public static List<Term> segment(char[] text)
     {
         List<Term> resultList = SEGMENT.seg(text);
-        ListIterator<Term> listIterator = resultList.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<Term> listIterator = resultList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             if (!CoreStopWordDictionary.shouldInclude(listIterator.next()))
             {
@@ -66,8 +66,8 @@ public class NotionalTokenizer
         List<List<Term>> sentenceList = SEGMENT.seg2sentence(text);
         foreach (List<Term> sentence in sentenceList)
         {
-            ListIterator<Term> listIterator = sentence.listIterator();
-            while (listIterator.hasNext())
+            ListIterator<Term> listIterator = sentence.GetEnumerator();
+            while (listIterator.MoveNext())
             {
                 if (!CoreStopWordDictionary.shouldInclude(listIterator.next()))
                 {
@@ -103,13 +103,13 @@ public class NotionalTokenizer
         List<List<Term>> sentenceList = SEGMENT.seg2sentence(text);
         foreach (List<Term> sentence in sentenceList)
         {
-            ListIterator<Term> listIterator = sentence.listIterator();
-            while (listIterator.hasNext())
+            ListIterator<Term> listIterator = sentence.GetEnumerator();
+            while (listIterator.MoveNext())
             {
                 if (filterArrayChain != null)
                 {
                     Term term = listIterator.next();
-                    for (Filter filter in filterArrayChain)
+                    foreach (Filter filter in filterArrayChain)
                     {
                         if (!filter.shouldInclude(term))
                         {

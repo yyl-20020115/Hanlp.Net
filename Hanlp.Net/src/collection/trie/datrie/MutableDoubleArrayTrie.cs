@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.MDAG;
+using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -23,12 +25,11 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
 public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerable<KeyValuePair<string, V>>
 {
     MutableDoubleArrayTrieInteger trie;
-    List<V> values;
+    List<V> values = new();
 
     public MutableDoubleArrayTrie()
     {
         trie = new MutableDoubleArrayTrieInteger();
-        values = new();
     }
 
     public MutableDoubleArrayTrie(Dictionary<string, V> map)
@@ -97,7 +98,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     public string lastKey()
     {
         MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             iterator.next();
         }
@@ -127,7 +128,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     //@Override
     public bool containsValue(Object value)
     {
-        return values.Contains(value);
+        return this.values.Contains(value);
     }
 
     //@Override
@@ -150,7 +151,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public V put(string key, V value)
+    public V Add(string key, V value)
     {
         int id = trie.get(key);
         if (id == -1)
@@ -170,7 +171,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     //@Override
     public V Remove(Object key)
     {
-        if (key == null) return null;
+        if (key == null) return default;
         int id = trie.Remove(key is string ? (string)key : key.ToString());
         if (id == -1)
             return null;
@@ -181,9 +182,9 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     //@Override
     public void putAll(Dictionary<string, V> m)
     {
-        for (var entry : m.entrySet())
+        foreach (var entry in m.entrySet())
         {
-            put(entry.getKey(), entry.getValue());
+            Add(entry.Key, entry.Value);
         }
     }
 
@@ -225,12 +226,15 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         //@Override
         public IEnumerator<string> iterator()
         {
-            return new IEnumerator<string>()
+            return new CT();
+        }
+
+        public class CT : IEnumerator<string>
+        {
+            //@Override
+            public bool MoveNext()
             {
-                    //@Override
-                    public bool hasNext()
-            {
-                return iterator.hasNext();
+                return iterator.MoveNext();
             }
 
             //@Override
@@ -244,191 +248,195 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
             {
                 throw new InvalidOperationException();
             }
-        };
-    }
-
-    //@Override
-    public Object[] ToArray()
-    {
-        return values.ToArray();
-    }
-
-    //@Override
-    public T[] ToArray<T>(T[] a)
-    {
-        return values.ToArray(a);
-    }
-
-    //@Override
-    public bool Add(string s)
-    {
-        throw new InvalidOperationException();
-    }
-
-    //@Override
-    public bool Remove(Object o)
-    {
-        return trie.Remove((string)o) != -1;
-    }
-
-    //@Override
-    public bool containsAll(Collection c)
-    {
-        for (Object o : c)
-        {
-            if (!trie.ContainsKey((string)o))
-                return false;
         }
-        return true;
-    }
-
-    //@Override
-    public bool addAll(Collection<string> c)
-    {
-        throw new InvalidOperationException();
-    }
-
-    //@Override
-    public bool retainAll(Collection c)
-    {
-        throw new InvalidOperationException();
-    }
-
-    //@Override
-    public bool removeAll(Collection c)
-    {
-        bool changed = false;
-        for (Object o : c)
-        {
-            if (!changed)
-                changed = MutableDoubleArrayTrie.Remove(o) != null;
-        }
-        return changed;
-    }
-
-    //@Override
-    public void Clear()
-    {
-        MutableDoubleArrayTrie.this.Clear();
-    }
-}
-
-//@Override
-public Collection<V> values()
-{
-    return values;
-}
-
-//@Override
-public HashSet<Entry<string, V>> entrySet()
-{
-    return new HashSet<Entry<string, V>>()
-    {
-            //@Override
-            public int size()
-    {
-        return trie.size();
-    }
-
-    //@Override
-    public bool isEmpty()
-    {
-        return trie.isEmpty();
-    }
-
-    //@Override
-    public bool Contains(Object o)
-    {
-        throw new InvalidOperationException();
-    }
-
-    //@Override
-    public Iterator<Entry<string, V>> iterator()
-    {
-        return new Iterator<Entry<string, V>>()
-                {
-                    MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
-
         //@Override
-        public bool hasNext()
+        public Object[] ToArray()
         {
-            return iterator.hasNext();
+            return values.ToArray();
         }
 
         //@Override
-        public Entry<string, V> next()
+        public T[] ToArray<T>(T[] a)
         {
-            iterator.next();
-            return new AbstractMap.SimpleEntry<string, V>(iterator.key(), values.get(iterator.value()));
+            return values.ToArray(a);
         }
 
         //@Override
-        public void Remove()
+        public bool Add(string s)
         {
             throw new InvalidOperationException();
         }
-    };
-}
 
-//@Override
-public Object[] ToArray()
-{
-    throw new InvalidOperationException();
-}
+        //@Override
+        public bool Remove(Object o)
+        {
+            return trie.Remove((string)o) != -1;
+        }
 
-//@Override
-public <T> T[] ToArray(T[] a)
-{
-    throw new InvalidOperationException();
-}
+        //@Override
+        public bool containsAll(Collection c)
+        {
+            foreach (Object o in c)
+            {
+                if (!trie.ContainsKey((string)o))
+                    return false;
+            }
+            return true;
+        }
 
-//@Override
-public bool Add(Entry<string, V> stringVEntry)
-{
-    throw new InvalidOperationException();
-}
+        //@Override
+        public bool AddRange(Collection<string> c)
+        {
+            throw new InvalidOperationException();
+        }
 
-//@Override
-public bool Remove(Object o)
-{
-    throw new InvalidOperationException();
-}
+        //@Override
+        public bool retainAll(Collection c)
+        {
+            throw new InvalidOperationException();
+        }
 
-//@Override
-public bool containsAll(Collection c)
-{
-    throw new InvalidOperationException();
-}
+        //@Override
+        public bool removeAll(Collection c)
+        {
+            bool changed = false;
+            foreach (Object o in c)
+            {
+                if (!changed)
+                    changed = MutableDoubleArrayTrie.Remove(o) != null;
+            }
+            return changed;
+        }
 
-//@Override
-public bool addAll(Collection<Entry<string, V>> c)
-{
-    throw new InvalidOperationException();
-}
-
-//@Override
-public bool retainAll(Collection c)
-{
-    throw new InvalidOperationException();
-}
-
-//@Override
-public bool removeAll(Collection c)
-{
-    throw new InvalidOperationException();
-}
-
-//@Override
-public void Clear()
-{
-    MutableDoubleArrayTrie.s.Clear();
-}
-        };
+        //@Override
+        public void Clear()
+        {
+            MutableDoubleArrayTrie.s.Clear();
+        }
     }
 
     //@Override
-    public Iterator<Entry<string, V>> iterator()
-{
-    return entrySet().iterator();
-}
+    public Collection<V> values()
+    {
+        return values;
+    }
+
+    //@Override
+    public HashSet<KeyValuePair<string, V>> entrySet()
+    {
+        return new CT2();
+    }
+
+    public class CT2 : HashSet<KeyValuePair<string, V>>
+    {
+        //@Override
+        public int size()
+        {
+            return trie.size();
+        }
+
+        //@Override
+        public bool isEmpty()
+        {
+            return trie.isEmpty();
+        }
+
+        //@Override
+        public bool Contains(Object o)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public Iterator<Entry<string, V>> iterator()
+        {
+            return new();
+        }
+
+
+        //@Override
+        public Iterator<Entry<string, V>> iterator()
+        {
+            return entrySet().iterator();
+        }
+
+        public class ST : Iterator<Entry<string, V>>()
+        {
+            MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
+
+            //@Override
+            public bool MoveNext()
+            {
+                return iterator.MoveNext();
+            }
+
+            //@Override
+            public Entry<string, V> next()
+            {
+                iterator.next();
+                return new AbstractMap.SimpleEntry<string, V>(iterator.key(), values.get(iterator.value()));
+            }
+
+            //@Override
+            public void Remove()
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+        //@Override
+        public Object[] ToArray()
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public T[] ToArray<T>(T[] a)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public bool Add<T>(Entry<string, V> stringVEntry)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public bool Remove(Object o)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public bool containsAll(Collection c)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public bool AddRange(Collection<Entry<string, V>> c)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public bool retainAll(Collection c)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public bool removeAll(Collection c)
+        {
+            throw new InvalidOperationException();
+        }
+
+        //@Override
+        public void Clear()
+        {
+            MutableDoubleArrayTrie.s.Clear();
+        }
+
+    }
 }

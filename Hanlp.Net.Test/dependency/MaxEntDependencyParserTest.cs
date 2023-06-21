@@ -20,7 +20,7 @@ public class MaxEntDependencyParserTest : TestCase
 //        {
 //            Console.printf("%d / %d...", id++, sentenceList.size());
 //            long start = DateTime.Now.Microsecond;
-//            List<Term> termList = new LinkedList<Term>();
+//            List<Term> termList = new ();
 //            for (CoNLLWord word : sentence.word)
 //            {
 //                termList.Add(new Term(word.LEMMA, Nature.valueOf(word.POSTAG)));

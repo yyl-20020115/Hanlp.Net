@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.corpus.io;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -330,7 +332,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param i Row index.
      * @param j Column index.
      * @return A(i, j)
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws IndexOutOfRangeException
      */
 
     public double get(int i, int j)
@@ -346,7 +348,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param j0 Initial column index
      * @param j1 Final column index
      * @return A(i0:i1, j0:j1)
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public Matrix getMatrix(int i0, int i1, int j0, int j1)
@@ -363,9 +365,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
         return X;
     }
@@ -376,7 +378,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param r Array of row indices.
      * @param c Array of column indices.
      * @return A(r(:), c(:))
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public Matrix getMatrix(int[] r, int[] c)
@@ -393,9 +395,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
         return X;
     }
@@ -407,7 +409,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param i1 Final row index
      * @param c  Array of column indices.
      * @return A(i0:i1, c(:))
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public Matrix getMatrix(int i0, int i1, int[] c)
@@ -424,9 +426,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
         return X;
     }
@@ -438,7 +440,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param j0 Initial column index
      * @param j1 Final column index
      * @return A(r(:), j0:j1)
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public Matrix getMatrix(int[] r, int j0, int j1)
@@ -455,9 +457,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
         return X;
     }
@@ -468,7 +470,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param i Row index.
      * @param j Column index.
      * @param s A(i,j).
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws IndexOutOfRangeException
      */
 
     public void set(int i, int j, double s)
@@ -484,7 +486,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param j0 Initial column index
      * @param j1 Final column index
      * @param X  A(i0:i1,j0:j1)
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public void setMatrix(int i0, int i1, int j0, int j1, Matrix X)
@@ -499,9 +501,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
     }
 
@@ -511,7 +513,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param r Array of row indices.
      * @param c Array of column indices.
      * @param X A(r(:),c(:))
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public void setMatrix(int[] r, int[] c, Matrix X)
@@ -526,9 +528,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
     }
 
@@ -539,7 +541,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param j0 Initial column index
      * @param j1 Final column index
      * @param X  A(r(:),j0:j1)
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public void setMatrix(int[] r, int j0, int j1, Matrix X)
@@ -554,9 +556,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
     }
 
@@ -567,7 +569,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param i1 Final row index
      * @param c  Array of column indices.
      * @param X  A(i0:i1,c(:))
-     * @throws ArrayIndexOutOfBoundsException Submatrix indices
+     * @throws IndexOutOfRangeException Submatrix indices
      */
 
     public void setMatrix(int i0, int i1, int[] c, Matrix X)
@@ -582,9 +584,9 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
                 }
             }
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (IndexOutOfRangeException e)
         {
-            throw new ArrayIndexOutOfBoundsException("Submatrix indices");
+            throw new IndexOutOfRangeException("Submatrix indices");
         }
     }
 
@@ -622,7 +624,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
             double s = 0;
             for (int i = 0; i < m; i++)
             {
-                s += Math.abs(A[i][j]);
+                s += Math.Abs(A[i][j]);
             }
             f = Math.Max(f, s);
         }
@@ -643,7 +645,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
             double s = 0;
             for (int j = 0; j < n; j++)
             {
-                s += Math.abs(A[i][j]);
+                s += Math.Abs(A[i][j]);
             }
             f = Math.Max(f, s);
         }
@@ -1029,7 +1031,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public void print(int w, int d)
     {
-        print(new PrintWriter(System._out, true), w, d);
+        print(new TextWriter(System._out, true), w, d);
     }
 
     /**
@@ -1041,7 +1043,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param d      Number of digits after the decimal.
      */
 
-    public void print(PrintWriter output, int w, int d)
+    public void print(TextWriter output, int w, int d)
     {
         DecimalFormat Format = new DecimalFormat();
         Format.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
@@ -1066,7 +1068,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public void print(NumberFormat Format, int width)
     {
-        print(new PrintWriter(System._out, true), Format, width);
+        print(new TextWriter(System._out, true), Format, width);
     }
 
     // DecimalFormat is a little disappointing coming from Fortran or C's printf.
@@ -1087,7 +1089,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @see DecimalFormat#setDecimalFormatSymbols
      */
 
-    public void print(PrintWriter output, NumberFormat Format, int width)
+    public void print(TextWriter output, NumberFormat Format, int width)
     {
         output.println();  // start on new line.
         for (int i = 0; i < m; i++)
@@ -1115,7 +1117,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      * @param input the input stream.
      */
 
-    public static Matrix read(BufferedReader input)
+    public static Matrix read(TextReader input)
     {
         StreamTokenizer tokenizer = new StreamTokenizer(input);
 
@@ -1235,10 +1237,10 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
      */
     public Matrix row(int i)
     {
-        double[][] X = new double[1][n];
+        double[,] X = new double[1,n];
         for (int j = 0; j < n; j++)
         {
-            X[0][j] = A[i][j];
+            X[0,j] = A[i][j];
         }
         return new Matrix(X);
     }
@@ -1259,7 +1261,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         {
             for (int j = 0; j < n; j++)
             {
-                X[i][j] = Math.pow(A[i][j], 3.);
+                X[i][j] = Math.Pow(A[i][j], 3.);
             }
         }
 
@@ -1277,7 +1279,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         }
     }
 
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeInt(m);
         _out.writeInt(n);
@@ -1292,8 +1294,8 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public bool load(ByteArray byteArray)
     {
-        m = byteArray.nextInt();
-        n = byteArray.nextInt();
+        m = byteArray.Next();
+        n = byteArray.Next();
         A = new double[m][n];
         for (int i = 0; i < m; i++)
         {

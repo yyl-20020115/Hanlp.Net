@@ -101,7 +101,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
 
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(deprelTranslatorPath);
         deprelTranslater = new ();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             string[] args = iterator.next().Split("\\s");
             deprelTranslater.Add(args[0], args[1]);
@@ -110,7 +110,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
         {
             deprelTranslater = null;
         }
-        GlobalObjectPool.put(deprelTranslatorPath, deprelTranslater);
+        GlobalObjectPool.Add(deprelTranslatorPath, deprelTranslater);
 
         return this;
     }

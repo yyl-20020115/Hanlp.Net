@@ -76,7 +76,7 @@ public class ViterbiSegment : WordBasedSegment
 //        Console.WriteLine("构图：" + (DateTime.Now.Microsecond - start));
         if (HanLP.Config.DEBUG)
         {
-            System._out.printf("粗分词网：\n%s\n", wordNetAll);
+            Console.WriteLine("粗分词网：\n%s\n", wordNetAll);
         }
 //        start = DateTime.Now.Microsecond;
         List<Vertex> vertexList = viterbi(wordNetAll);
@@ -127,7 +127,7 @@ public class ViterbiSegment : WordBasedSegment
                 wordNetOptimum.clean();
                 vertexList = viterbi(wordNetOptimum);
                 wordNetOptimum.Clear();
-                wordNetOptimum.addAll(vertexList);
+                wordNetOptimum.AddRange(vertexList);
                 preSize = wordNetOptimum.size();
                 OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
             }
@@ -136,7 +136,7 @@ public class ViterbiSegment : WordBasedSegment
                 vertexList = viterbi(wordNetOptimum);
                 if (HanLP.Config.DEBUG)
                 {
-                    System._out.printf("细分词网：\n%s\n", wordNetOptimum);
+                    Console.WriteLine("细分词网：\n%s\n", wordNetOptimum);
                 }
             }
         }

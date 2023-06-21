@@ -84,7 +84,7 @@ public class PairFrequency : TermFrequency
         sb.Append(second);
         sb.Append('=');
         sb.Append(" tf=");
-        sb.Append(getValue());
+        sb.Append(Value);
         sb.Append(' ');
         sb.Append("mi=");
         sb.Append(mi);

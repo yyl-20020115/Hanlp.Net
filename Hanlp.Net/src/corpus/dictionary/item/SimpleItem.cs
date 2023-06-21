@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dictionary.item;
 
 
@@ -39,7 +41,7 @@ public class SimpleItem
             ++frequency;
         }
 
-        labelMap.put(label, frequency);
+        labelMap.Add(label, frequency);
     }
 
     /**
@@ -59,7 +61,7 @@ public class SimpleItem
             innerFrequency += frequency;
         }
 
-        labelMap.put(label, innerFrequency);
+        labelMap.Add(label, innerFrequency);
     }
 
     /**
@@ -87,23 +89,23 @@ public class SimpleItem
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
-        ArrayList<KeyValuePair<string, int>> entries = new ArrayList<KeyValuePair<string, int>>(labelMap.entrySet());
-        Collections.sort(entries, new CT(());
-        for (KeyValuePair<string, int> entry : entries)
+        var entries = new List<KeyValuePair<string, int>>(labelMap.entrySet());
+        Collections.sort(entries, new CT());
+        foreach (KeyValuePair<string, int> entry in entries)
         {
-            sb.Append(entry.getKey());
+            sb.Append(entry.Key);
             sb.Append(' ');
-            sb.Append(entry.getValue());
+            sb.Append(entry.Value);
             sb.Append(' ');
         }
         return sb.ToString();
     }
-    public class CT : Comparator<KeyValuePair<string, int>>
+    public class CT : IComparer<KeyValuePair<string, int>>
     {
         //@Override
-        public int compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
+        public int Compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
         {
-            return -o1.getValue().compareTo(o2.getValue());
+            return -o1.Value.compareTo(o2.Value);
         }
     }
 
@@ -121,7 +123,7 @@ public class SimpleItem
         int natureCount = (param.Length) / 2;
         for (int i = 0; i < natureCount; ++i)
         {
-            item.labelMap.put(param[2 * i], int.parseInt(param[1 + 2 * i]));
+            item.labelMap.Add(param[2 * i], int.parseInt(param[1 + 2 * i]));
         }
         return item;
     }
@@ -134,7 +136,7 @@ public class SimpleItem
     {
         foreach (KeyValuePair<string, int> entry in other.labelMap.entrySet())
         {
-            addLabel(entry.getKey(), entry.getValue());
+            addLabel(entry.Key, entry.Value);
         }
     }
 
@@ -154,6 +156,6 @@ public class SimpleItem
 
     public string getMostLikelyLabel()
     {
-        return labelMap.entrySet().iterator().next().getKey();
+        return labelMap.entrySet().iterator().next().Key;
     }
 }

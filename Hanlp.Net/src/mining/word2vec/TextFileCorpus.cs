@@ -7,8 +7,8 @@ public class TextFileCorpus : Corpus
     private static readonly int VOCAB_MAX_SIZE = 30000000;
 
     private int minReduce = 1;
-    private BufferedReader raf = null;
-    private DataOutputStream cache;
+    private TextReader raf = null;
+    private Stream cache;
 
     public TextFileCorpus(Config config) 
     {
@@ -58,10 +58,10 @@ public class TextFileCorpus : Corpus
         // adjust the index in the cache
         try
         {
-            cache.close();
+            cache.Close();
             File fixingFile = new File(cacheFile + ".fixing");
-            cache = new DataOutputStream(new FileOutputStream(fixingFile));
-            DataInputStream oldCache = new DataInputStream(new FileInputStream(cacheFile));
+            cache = new Stream(new FileStream(fixingFile));
+            Stream oldCache = new Stream(new FileStream(cacheFile));
             while (oldCache.available() >= 4)
             {
                 int oldId = oldCache.readInt();
@@ -74,13 +74,13 @@ public class TextFileCorpus : Corpus
                 if (id == -4) continue;
                 cache.writeInt(id);
             }
-            oldCache.close();
-            cache.close();
+            oldCache.Close();
+            cache.Close();
             if (!fixingFile.renameTo(cacheFile))
             {
                 throw new RuntimeException(string.Format("moving %s to %s failed", fixingFile, cacheFile.getName()));
             }
-            cache = new DataOutputStream(new FileOutputStream(cacheFile));
+            cache = new Stream(new FileStream(cacheFile));
         }
         catch (IOException e)
         {
@@ -91,7 +91,7 @@ public class TextFileCorpus : Corpus
         vocabIndexMap.Clear();
         for (int i = 0; i < vocabSize; i++)
         {
-            vocabIndexMap.put(vocab[i].word, i);
+            vocabIndexMap.Add(vocab[i].word, i);
         }
         minReduce++;
     }
@@ -104,17 +104,17 @@ public class TextFileCorpus : Corpus
 
         File trainFile = new File(config.getInputFile());
 
-        BufferedReader raf = null;
-        FileInputStream fileInputStream = null;
+        TextReader raf = null;
+        FileStream fileInputStream = null;
         cache = null;
         vocabSize = 0;
         TrainingCallback callback = config.getCallback();
         try
         {
-            fileInputStream = new FileInputStream(trainFile);
-            raf = new BufferedReader(new InputStreamReader(fileInputStream, encoding));
+            fileInputStream = new FileStream(trainFile);
+            raf = new TextReader(new InputStreamReader(fileInputStream, encoding));
             cacheFile = File.createTempFile(string.Format("corpus_%d", DateTime.Now.Microsecond), ".bin");
-            cache = new DataOutputStream(new FileOutputStream(cacheFile));
+            cache = new Stream(new FileStream(cacheFile));
             while (true)
             {
                 string word = readWord(raf);
@@ -179,7 +179,7 @@ public class TextFileCorpus : Corpus
      * @return null if EOF
      * @
      */
-    string readWord(BufferedReader raf) 
+    string readWord(TextReader raf) 
     {
         while (true)
         {
@@ -189,13 +189,13 @@ public class TextFileCorpus : Corpus
                 return wordsBuffer[wbp++];
             }
 
-            string line = raf.readLine();
+            string line = raf.ReadLine();
             if (line == null)
             {      // end of corpus
                 eoc = true;
                 return null;
             }
-            line = line.trim();
+            line = line.Trim();
             if (line.Length == 0)
             {
                 continue;

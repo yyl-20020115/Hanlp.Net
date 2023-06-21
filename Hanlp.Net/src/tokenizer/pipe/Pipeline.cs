@@ -104,15 +104,15 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public bool addAll(Collection<Pipe<M, M>> c)
+    public bool AddRange(Collection<Pipe<M, M>> c)
     {
-        return pipeList.addAll(c);
+        return pipeList.AddRange(c);
     }
 
     //@Override
-    public bool addAll(int index, Collection<Pipe<M, M>> c)
+    public bool AddRange(int index, Collection<Pipe<M, M>> c)
     {
-        return pipeList.addAll(c);
+        return pipeList.AddRange(c);
     }
 
     //@Override
@@ -196,15 +196,15 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public int lastIndexOf(Object o)
+    public int LastIndexOf(Object o)
     {
-        return pipeList.lastIndexOf(o);
+        return pipeList.LastIndexOf(o);
     }
 
     //@Override
-    public ListIterator<Pipe<M, M>> listIterator()
+    public ListIterator<Pipe<M, M>> GetEnumerator()
     {
-        return pipeList.listIterator();
+        return pipeList.GetEnumerator();
     }
 
     //@Override

@@ -35,9 +35,9 @@ public class NRDictionaryMaker : CommonDictionaryMaker
         if (verbose)
             Console.WriteLine("开始制作词典");
         // 将非A的词语保存下来
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
                 if (!word.getLabel().Equals(NR.A.ToString()))
                 {
@@ -46,10 +46,10 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             }
         }
         // 制作NGram词典
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             IWord pre = null;
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
                 if (pre != null)
                 {
@@ -66,7 +66,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
         if (verbose)
             Console.WriteLine("开始标注角色");
         int i = 0;
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             if (verbose)
             {
@@ -75,8 +75,8 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             }
             // 先标注A和K
             IWord pre = new Word("##始##", "begin");
-            ListIterator<IWord> listIterator = wordList.listIterator();
-            while (listIterator.hasNext())
+            var listIterator = wordList.GetEnumerator();
+            while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
                 if (!word.getLabel().Equals(Nature.nr.ToString()))
@@ -108,50 +108,50 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             }
             if (verbose) Console.WriteLine("标注中后 " + wordList);
             // 拆分名字
-            listIterator = wordList.listIterator();
-            while (listIterator.hasNext())
+            listIterator = wordList.GetEnumerator();
+            while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
                 if (word.getLabel().Equals(Nature.nr.ToString()))
                 {
-                    switch (word.getValue().Length)
+                    switch (word.Value.Length)
                     {
                         case 2:
-                            if (word.getValue().StartsWith("大")
-                                    || word.getValue().StartsWith("老")
-                                    || word.getValue().StartsWith("小")
+                            if (word.Value.StartsWith("大")
+                                    || word.Value.StartsWith("老")
+                                    || word.Value.StartsWith("小")
                                     )
                             {
-                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.B.ToString()));
-                                word.setValue(word.getValue().substring(0, 1));
+                                listIterator.Add(new Word(word.Value.substring(1, 2), NR.B.ToString()));
+                                word.setValue(word.Value.substring(0, 1));
                                 word.setLabel(NR.F.ToString());
                             }
-                            else if (word.getValue().EndsWith("哥")
-                                    || word.getValue().EndsWith("公")
-                                    || word.getValue().EndsWith("姐")
-                                    || word.getValue().EndsWith("老")
-                                    || word.getValue().EndsWith("某")
-                                    || word.getValue().EndsWith("嫂")
-                                    || word.getValue().EndsWith("氏")
-                                    || word.getValue().EndsWith("总")
+                            else if (word.Value.EndsWith("哥")
+                                    || word.Value.EndsWith("公")
+                                    || word.Value.EndsWith("姐")
+                                    || word.Value.EndsWith("老")
+                                    || word.Value.EndsWith("某")
+                                    || word.Value.EndsWith("嫂")
+                                    || word.Value.EndsWith("氏")
+                                    || word.Value.EndsWith("总")
                                     )
 
                             {
-                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.G.ToString()));
-                                word.setValue(word.getValue().substring(0, 1));
+                                listIterator.Add(new Word(word.Value.substring(1, 2), NR.G.ToString()));
+                                word.setValue(word.Value.substring(0, 1));
                                 word.setLabel(NR.B.ToString());
                             }
                             else
                             {
-                                listIterator.Add(new Word(word.getValue().substring(1, 2), NR.E.ToString()));
-                                word.setValue(word.getValue().substring(0, 1));
+                                listIterator.Add(new Word(word.Value.substring(1, 2), NR.E.ToString()));
+                                word.setValue(word.Value.substring(0, 1));
                                 word.setLabel(NR.B.ToString());
                             }
                             break;
                         case 3:
-                            listIterator.Add(new Word(word.getValue().substring(1, 2), NR.C.ToString()));
-                            listIterator.Add(new Word(word.getValue().substring(2, 3), NR.D.ToString()));
-                            word.setValue(word.getValue().substring(0, 1));
+                            listIterator.Add(new Word(word.Value.substring(1, 2), NR.C.ToString()));
+                            listIterator.Add(new Word(word.Value.substring(2, 3), NR.D.ToString()));
+                            word.setValue(word.Value.substring(0, 1));
                             word.setLabel(NR.B.ToString());
                             break;
                         default:
@@ -161,14 +161,14 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             }
             if (verbose) Console.WriteLine("姓名拆分 " + wordList);
             // 上文成词
-            listIterator = wordList.listIterator();
+            listIterator = wordList.GetEnumerator();
             pre = new Word("##始##", "begin");
-            while (listIterator.hasNext())
+            while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
                 if (word.getLabel().Equals(NR.B.ToString()))
                 {
-                    string combine = pre.getValue() + word.getValue();
+                    string combine = pre.Value + word.Value;
                     if (dictionary.Contains(combine))
                     {
                         pre.setValue(combine);
@@ -186,7 +186,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.previous();
                 if (word.getLabel().Equals(NR.B.ToString()))
                 {
-                    string combine = word.getValue() + next.getValue();
+                    string combine = word.Value + next.Value;
                     if (dictionary.Contains(combine))
                     {
                         next.setValue(combine);
@@ -199,12 +199,12 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             if (verbose) Console.WriteLine("头部成词 " + wordList);
             // 尾部成词
             pre = new Word("##始##", "begin");
-            while (listIterator.hasNext())
+            while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
                 if (word.getLabel().Equals(NR.D.ToString()))
                 {
-                    string combine = pre.getValue() + word.getValue();
+                    string combine = pre.Value + word.Value;
                     if (dictionary.Contains(combine))
                     {
                         pre.setValue(combine);
@@ -222,7 +222,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 IWord word = listIterator.previous();
                 if (word.getLabel().Equals(NR.D.ToString()))
                 {
-                    string combine = word.getValue() + next.getValue();
+                    string combine = word.Value + next.Value;
                     if (dictionary.Contains(combine))
                     {
                         next.setValue(combine);

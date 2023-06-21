@@ -36,7 +36,7 @@ public class CorpusLoaderTest : TestCase
 //
 //    public void testCombineToTxt() 
 //    {
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Doc\\语料库\\2014_cn.txt"), "UTF-8"));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("D:\\Doc\\语料库\\2014_cn.txt"), "UTF-8"));
 //        CorpusLoader.walk("D:\\Doc\\语料库\\2014_hankcs", new CorpusLoader.Handler()
 //        {
 //            //@Override
@@ -48,7 +48,7 @@ public class CorpusLoaderTest : TestCase
 //                    {
 //                        for (IWord word : sentence)
 //                        {
-//                            bw.write(word.getValue());
+//                            bw.write(word.Value);
 //                            bw.write(' ');
 //                        }
 //                        bw.newLine();
@@ -61,7 +61,7 @@ public class CorpusLoaderTest : TestCase
 //                }
 //            }
 //        });
-//        bw.close();
+//        bw.Close();
 //    }
 //
 //    public void testConvert2SimpleSentenceList() 
@@ -133,16 +133,16 @@ public class CorpusLoaderTest : TestCase
 //            {
 //                try
 //                {
-//                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Doc\\语料库\\2014_hankcs\\" + (++id) + ".txt"), "UTF-8"));
+//                    TextWriter bw = new TextWriter(new StreamWriter(new FileStream("D:\\Doc\\语料库\\2014_hankcs\\" + (++id) + ".txt"), "UTF-8"));
 //                    for (List<IWord> wordList : document.getComplexSentenceList())
 //                    {
 //                        if (wordList.size() == 0) continue;
 //                        for (IWord word : wordList)
 //                        {
-//                            if (word.getValue().Length > 1 && word.getValue()[0] == '。')
+//                            if (word.Value.Length > 1 && word.Value[0] == '。')
 //                            {
 //                                bw.write("。/w");
-//                                bw.write(word.getValue().substring(1));
+//                                bw.write(word.Value.substring(1));
 //                                bw.write('/');
 //                                bw.write(word.getLabel());
 //                                bw.write(' ');
@@ -153,7 +153,7 @@ public class CorpusLoaderTest : TestCase
 //                        }
 //                        bw.newLine();
 //                    }
-//                    bw.close();
+//                    bw.Close();
 //                }
 //                catch (FileNotFoundException e)
 //                {

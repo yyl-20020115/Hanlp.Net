@@ -75,10 +75,10 @@ public class CRFModel : ICacheAble
         // 先尝试从bin加载
         if (CRFModel.load(ByteArray.createByteArray(path + Predefine.BIN_EXT))) return CRFModel;
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(path);
-        if (!lineIterator.hasNext()) return null;
+        if (!lineIterator.MoveNext()) return null;
         logger.info(lineIterator.next());   // verson
         logger.info(lineIterator.next());   // cost-factor
-        int maxid = int.parseInt(lineIterator.next().substring("maxid:".Length).trim());
+        int maxid = int.parseInt(lineIterator.next().substring("maxid:".Length).Trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
         string line;
@@ -86,14 +86,14 @@ public class CRFModel : ICacheAble
         CRFModel.tag2id = new HashMap<string, int>();
         while ((line = lineIterator.next()).Length != 0)
         {
-            CRFModel.tag2id.put(line, id);
+            CRFModel.tag2id.Add(line, id);
             ++id;
         }
         CRFModel.id2tag = new string[CRFModel.tag2id.size()];
         int size = CRFModel.id2tag.Length;
-        for (KeyValuePair<string, int> entry : CRFModel.tag2id.entrySet())
+        foreach (KeyValuePair<string, int> entry in CRFModel.tag2id.entrySet())
         {
-            CRFModel.id2tag[entry.getValue()] = entry.getKey();
+            CRFModel.id2tag[entry.Value] = entry.Key;
         }
         Dictionary<string, FeatureFunction> featureFunctionMap = new Dictionary<string, FeatureFunction>();  // 构建trie树的时候用
         Dictionary<int, FeatureFunction> featureFunctionList = new Dictionary<int, FeatureFunction>(); // 读取权值的时候用
@@ -116,7 +116,7 @@ public class CRFModel : ICacheAble
         {
             string[] args = lineIterator.next().Split(" ", 2);    // 0 B
             b = int.valueOf(args[0]);
-            featureFunctionList.put(b, null);
+            featureFunctionList.Add(b, null);
         }
 
         while ((line = lineIterator.next()).Length != 0)
@@ -124,14 +124,14 @@ public class CRFModel : ICacheAble
             string[] args = line.Split(" ", 2);
             char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, size);
-            featureFunctionMap.put(args[1], featureFunction);
-            featureFunctionList.put(int.parseInt(args[0]), featureFunction);
+            featureFunctionMap.Add(args[1], featureFunction);
+            featureFunctionList.Add(int.parseInt(args[0]), featureFunction);
         }
 
-        for (KeyValuePair<int, FeatureFunction> entry : featureFunctionList.entrySet())
+        foreach (KeyValuePair<int, FeatureFunction> entry in featureFunctionList.entrySet())
         {
-            int fid = entry.getKey();
-            FeatureFunction featureFunction = entry.getValue();
+            int fid = entry.Key;
+            FeatureFunction featureFunction = entry.Value;
             if (fid == b)
             {
                 for (int i = 0; i < size; i++)
@@ -150,20 +150,20 @@ public class CRFModel : ICacheAble
                 }
             }
         }
-        if (lineIterator.hasNext())
+        if (lineIterator.MoveNext())
         {
             logger.warning("文本读取有残留，可能会出问题！" + path);
         }
-        lineIterator.close();
+        lineIterator.Close();
         logger.info("开始构建trie树");
         CRFModel.featureFunctionTrie.build(featureFunctionMap);
         // 缓存bin
         try
         {
             logger.info("开始缓存" + path + Predefine.BIN_EXT);
-            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            Stream _out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
             CRFModel.save(_out);
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -211,7 +211,7 @@ public class CRFModel : ICacheAble
 
         int[][] from = new int[size][tagSize];
         double[][] maxScoreAt = new double[2][tagSize]; // 滚动数组
-        System.arraycopy(net[0], 0, maxScoreAt[0], 0, tagSize); // 初始preI=0,  maxScoreAt[preI][pre] = net[0][pre]
+        Array.Copy(net[0], 0, maxScoreAt[0], 0, tagSize); // 初始preI=0,  maxScoreAt[preI][pre] = net[0][pre]
         int curI = 0;
         for (int i = 1; i < size; ++i)
         {
@@ -286,7 +286,7 @@ public class CRFModel : ICacheAble
     protected static double computeScore(LinkedList<double[]> scoreList, int tag)
     {
         double score = 0;
-        for (double[] w : scoreList)
+        foreach (double[] w in scoreList)
         {
             score += w[tag];
         }
@@ -294,7 +294,7 @@ public class CRFModel : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeInt(id2tag.Length);
         for (string tag : id2tag)
@@ -303,20 +303,20 @@ public class CRFModel : ICacheAble
         }
         FeatureFunction[] valueArray = featureFunctionTrie.getValueArray(new FeatureFunction[0]);
         _out.writeInt(valueArray.Length);
-        for (FeatureFunction featureFunction : valueArray)
+        foreach (FeatureFunction featureFunction in valueArray)
         {
             featureFunction.save(_out);
         }
         featureFunctionTrie.save(_out);
         _out.writeInt(featureTemplateList.size());
-        for (FeatureTemplate featureTemplate : featureTemplateList)
+        foreach (FeatureTemplate featureTemplate in featureTemplateList)
         {
             featureTemplate.save(_out);
         }
         if (matrix != null)
         {
             _out.writeInt(matrix.Length);
-            for (double[] line : matrix)
+            foreach (double[] line in matrix)
             {
                 for (double v : line)
                 {
@@ -336,22 +336,22 @@ public class CRFModel : ICacheAble
         if (byteArray == null) return false;
         try
         {
-            int size = byteArray.nextInt();
+            int size = byteArray.Next();
             id2tag = new string[size];
             tag2id = new HashMap<string, int>(size);
             for (int i = 0; i < id2tag.Length; i++)
             {
                 id2tag[i] = byteArray.nextUTF();
-                tag2id.put(id2tag[i], i);
+                tag2id.Add(id2tag[i], i);
             }
-            FeatureFunction[] valueArray = new FeatureFunction[byteArray.nextInt()];
+            FeatureFunction[] valueArray = new FeatureFunction[byteArray.Next()];
             for (int i = 0; i < valueArray.Length; i++)
             {
                 valueArray[i] = new FeatureFunction();
                 valueArray[i].load(byteArray);
             }
             featureFunctionTrie.load(byteArray, valueArray);
-            size = byteArray.nextInt();
+            size = byteArray.Next();
             featureTemplateList = new ArrayList<FeatureTemplate>(size);
             for (int i = 0; i < size; ++i)
             {
@@ -359,7 +359,7 @@ public class CRFModel : ICacheAble
                 featureTemplate.load(byteArray);
                 featureTemplateList.Add(featureTemplate);
             }
-            size = byteArray.nextInt();
+            size = byteArray.Next();
             if (size == 0) return true;
             matrix = new double[size][size];
             for (int i = 0; i < size; i++)

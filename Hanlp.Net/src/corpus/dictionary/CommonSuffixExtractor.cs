@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.corpus.occurrence;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.tokenizer;
+using System.Text;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 
@@ -50,7 +51,7 @@ public class CommonSuffixExtractor
     public List<string> extractSuffix(int Length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
-        for (string key : tfDictionary.keySet())
+        foreach (string key in tfDictionary.keySet())
         {
             if (key.Length > Length)
             {
@@ -79,7 +80,7 @@ public class CommonSuffixExtractor
         foreach (TermFrequency termFrequency in suffixTreeSet.values())
         {
             if (suffixList.size() >= size) break;
-            suffixList.Add(termFrequency.getKey());
+            suffixList.Add(termFrequency.Key);
         }
 
         return suffixList;
@@ -95,7 +96,7 @@ public class CommonSuffixExtractor
     public List<string> extractSuffixByWords(int Length, int size, bool extend)
     {
         TFDictionary suffixTreeSet = new TFDictionary();
-        for (string key : tfDictionary.keySet())
+        foreach (string key in tfDictionary.keySet())
         {
             List<Term> termList = StandardTokenizer.segment(key);
             if (termList.size() > Length)
@@ -118,7 +119,7 @@ public class CommonSuffixExtractor
     private static string combine(List<Term> termList)
     {
         StringBuilder sbResult = new StringBuilder();
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
             sbResult.Append(term.word);
         }

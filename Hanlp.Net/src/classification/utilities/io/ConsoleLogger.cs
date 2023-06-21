@@ -26,7 +26,7 @@ public class ConsoleLogger : ILogger
 
     public void _out(string Format, params Object[] args)
     {
-        System._out.printf(Format, args);
+        Console.WriteLine(Format, args);
     }
 
     public void err(string Format, params Object[] args)
@@ -42,6 +42,6 @@ public class ConsoleLogger : ILogger
 
     public void finish(string Format, params Object[] args)
     {
-        _out(string.Format("耗时 %d ms", DateTime.Now.Microsecond - start) + Format, args);
+        _out(string.Format("耗时 %d ms", (DateTime.Now.Microsecond - _start) + Format, args));
     }
 }

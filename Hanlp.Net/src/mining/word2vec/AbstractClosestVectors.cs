@@ -36,7 +36,7 @@ public abstract class AbstractClosestVectors
 
     protected abstract Result getTargetVector();
 
-     protected void execute() 
+    protected void execute()
     {
         vectorsReader.readVectorFile();
         int words = vectorsReader.getNumWords();
@@ -51,12 +51,13 @@ public abstract class AbstractClosestVectors
 
                 double[] bestd = new double[N];
                 string[] bestw = new string[N];
-                next_word:
-                for (int i = 0; i < words; i++)
+                int i = 0;
+            next_word:
+                for (; i < words; i++)
                 {
                     foreach (int bi in result.bi)
                     {
-                        if (i == bi) continue next_word;
+                        if (i == bi) goto next_word;
                     }
                     double dist = 0;
                     for (int j = 0; j < size; j++)
@@ -79,22 +80,22 @@ public abstract class AbstractClosestVectors
                     }
                 }
 
-                System._out.printf("\n                                              Word       Cosine cosine\n------------------------------------------------------------------------\n");
+                Console.WriteLine("\n                                              Word       Cosine cosine\n------------------------------------------------------------------------\n");
                 for (int j = 0; j < N; j++)
-                    System._out.printf("%50s\t\t%f\n", bestw[j], bestd[j]);
+                    Console.WriteLine("%50s\t\t%f\n", bestw[j], bestd[j]);
             }
         }
         finally
         {
-            scanner.close();
+            scanner.Close();
         }
     }
 
-    protected class Result
+    public class Result
     {
 
-        float[] vec;
-        int[] bi;
+        public float[] vec;
+        public int[] bi;
 
         public Result(float[] vec, int[] bi)
         {

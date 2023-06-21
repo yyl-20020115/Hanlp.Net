@@ -25,8 +25,8 @@ public class ImmutableFeatureMDatMapTest : TestCase
         Dictionary<String, int> map = new Dictionary<String, int>();
         for (Map.Entry<String, int> entry : dat.entrySet())
         {
-            map.put(entry.getKey(), entry.getValue());
-            assertEquals(entry.getValue().intValue(), dat.get(entry.getKey()));
+            map.Add(entry.Key, entry.Value);
+            assertEquals(entry.Value.intValue(), dat.get(entry.Key));
         }
         Console.WriteLine(map.size());
         assertEquals(dat.size(), map.size());

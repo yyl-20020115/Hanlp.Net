@@ -23,7 +23,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
     MDAGForMap mdag = new MDAGForMap();
 
     //@Override
-    public V put(string key, V value)
+    public V Add(string key, V value)
     {
         V origin = get(key);
         if (origin == null)
@@ -69,7 +69,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         HashSet<string> stringSet = mdag.getAllStrings();
         LinkedHashSet<string> keySet = new LinkedHashSet<string>();
         Iterator<string> iterator = stringSet.iterator();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             string key = iterator.next();
             keySet.Add(key.substring(0, key.Length - 3));
@@ -86,10 +86,10 @@ public class MDAGMap<V> : AbstractMap<string, V>
     public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(char[] key, int begin)
     {
         LinkedList<KeyValuePair<string, int>> valueIndex = mdag.commonPrefixSearchWithValueIndex(key, begin);
-        LinkedList<KeyValuePair<string, V>> entryList = new LinkedList<Entry<string, V>>();
+        LinkedList<KeyValuePair<string, V>> entryList = new ();
         foreach (KeyValuePair<string, int> entry in valueIndex)
         {
-            entryList.Add(new SimpleEntry<string, V>(entry.getKey(), valueList.get(entry.getValue())));
+            entryList.Add(new SimpleEntry<string, V>(entry.Key, valueList.get(entry.Value)));
         }
 
         return entryList;
@@ -162,11 +162,11 @@ public class MDAGMap<V> : AbstractMap<string, V>
             if (targetNode == null) return -1;
             // 接下来应该是一条单链路
             Dictionary<char, MDAGNode> outgoingTransitions = targetNode.getOutgoingTransitions();
-            assert outgoingTransitions.size() == 1 : "不是单链！";
+            //assert outgoingTransitions.size() == 1 : "不是单链！";
             char high = outgoingTransitions.keySet().iterator().next();
             targetNode = targetNode.transition(high);
             outgoingTransitions = targetNode.getOutgoingTransitions();
-            assert outgoingTransitions.size() == 1 : "不是单链！";
+            //assert outgoingTransitions.size() == 1 : "不是单链！";
             char low = outgoingTransitions.keySet().iterator().next();
             return ByteUtil.convertTwoCharToInt(high, low);
         }

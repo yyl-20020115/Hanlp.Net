@@ -86,7 +86,7 @@ public class LexiconUtility
         {
             CustomDictionary.Add(word);
         }
-        CustomDictionary.trie.put(word, attribute);
+        CustomDictionary.trie.Add(word, attribute);
         return true;
     }
 

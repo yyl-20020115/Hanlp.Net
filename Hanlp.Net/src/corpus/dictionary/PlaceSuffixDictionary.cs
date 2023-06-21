@@ -23,7 +23,7 @@ public class PlaceSuffixDictionary
     public static SuffixDictionary dictionary = new SuffixDictionary();
     static PlaceSuffixDictionary()
     {
-        dictionary.addAll(Predefine.POSTFIX_SINGLE);
-        dictionary.addAll(Predefine.POSTFIX_MUTIPLE);
+        dictionary.AddRange(Predefine.POSTFIX_SINGLE);
+        dictionary.AddRange(Predefine.POSTFIX_MUTIPLE);
     }
 }

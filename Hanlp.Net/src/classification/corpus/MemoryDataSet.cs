@@ -61,7 +61,7 @@ public class MemoryDataSet : AbstractDataSet
     public IDataSet shrink(int[] idMap)
     {
         var iterator = iterator();
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             Document document = iterator.next();
             FrequencyMap<int> tfMap = new FrequencyMap<int>();

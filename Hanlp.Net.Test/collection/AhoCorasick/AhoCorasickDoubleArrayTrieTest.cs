@@ -14,7 +14,7 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
         var map = new Dictionary<string, string>();
         IOUtil.LineIterator iterator = new IOUtil.LineIterator(
             "data/dictionary/CoreNatureDictionary.mini.txt");
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             String line = iterator.next().Split("\\s")[0];
             map.Add(line, line);
@@ -53,10 +53,10 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
 //    {
 //        Dictionary<String, String> map = new Dictionary<String, String>();
 //        IOUtil.LineIterator iterator = new IOUtil.LineIterator("data/dictionary/CoreNatureDictionary.txt");
-//        while (iterator.hasNext())
+//        while (iterator.MoveNext())
 //        {
 //            String line = iterator.next().Split("\\s")[0];
-//            map.put(line, line);
+//            map.Add(line, line);
 //        }
 //
 //        Trie trie = new Trie();

@@ -45,7 +45,7 @@ public class LogLinearModel : LinearModel
     public bool load(ByteArray byteArray)
     {
         if (!base.load(byteArray)) return false;
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         featureTemplateArray = new FeatureTemplate[size];
         for (int i = 0; i < size; ++i)
         {
@@ -54,7 +54,7 @@ public class LogLinearModel : LinearModel
             featureTemplateArray[i] = featureTemplate;
         }
         if (!byteArray.hasMore())
-            byteArray.close();
+            byteArray.Close();
         return true;
     }
 
@@ -107,10 +107,10 @@ public class LogLinearModel : LinearModel
     {
         TagSet tagSet = new TagSet(TaskType.CLASSIFICATION);
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(txtFile);
-        if (!lineIterator.hasNext()) throw new IOException("空白文件");
+        if (!lineIterator.MoveNext()) throw new IOException("空白文件");
         logger.info(lineIterator.next());   // verson
         logger.info(lineIterator.next());   // cost-factor
-        int maxid = int.parseInt(lineIterator.next().substring("maxid:".Length).trim());
+        int maxid = int.parseInt(lineIterator.next().substring("maxid:".Length).Trim());
         logger.info(lineIterator.next());   // xsize
         lineIterator.next();    // blank
         string line;
@@ -128,13 +128,13 @@ public class LogLinearModel : LinearModel
                 tagSet = new NERTagSet(tagSet.idOf("O"), tagSet.tags());
                 break;
         }
-        tagSet.lock();
+        tagSet._lock();
         this.featureMap = new MutableFeatureMap(tagSet);
         FeatureMap featureMap = this.featureMap;
         int sizeOfTagSet = tagSet.size();
         Dictionary<string, FeatureFunction> featureFunctionMap = new Dictionary<string, FeatureFunction>();  // 构建trie树的时候用
         Dictionary<int, FeatureFunction> featureFunctionList = new Dictionary<int, FeatureFunction>(); // 读取权值的时候用
-        ArrayList<FeatureTemplate> featureTemplateList = new ArrayList<FeatureTemplate>();
+        List<FeatureTemplate> featureTemplateList = new ();
         float[][] matrix = null;
         while ((line = lineIterator.next()).Length != 0)
         {
@@ -155,7 +155,7 @@ public class LogLinearModel : LinearModel
         {
             string[] args = lineIterator.next().Split(" ", 2);    // 0 B
             b = int.valueOf(args[0]);
-            featureFunctionList.put(b, null);
+            featureFunctionList.Add(b, null);
         }
 
         while ((line = lineIterator.next()).Length != 0)
@@ -163,14 +163,14 @@ public class LogLinearModel : LinearModel
             string[] args = line.Split(" ", 2);
             char[] charArray = args[1].ToCharArray();
             FeatureFunction featureFunction = new FeatureFunction(charArray, sizeOfTagSet);
-            featureFunctionMap.put(args[1], featureFunction);
-            featureFunctionList.put(int.parseInt(args[0]), featureFunction);
+            featureFunctionMap.Add(args[1], featureFunction);
+            featureFunctionList.Add(int.parseInt(args[0]), featureFunction);
         }
 
         foreach (KeyValuePair<int, FeatureFunction> entry in featureFunctionList.entrySet())
         {
-            int fid = entry.getKey();
-            FeatureFunction featureFunction = entry.getValue();
+            int fid = entry.Key;
+            FeatureFunction featureFunction = entry.Value;
             if (fid == b)
             {
                 for (int i = 0; i < sizeOfTagSet; i++)
@@ -189,11 +189,11 @@ public class LogLinearModel : LinearModel
                 }
             }
         }
-        if (lineIterator.hasNext())
+        if (lineIterator.MoveNext())
         {
             logger.warning("文本读取有残留，可能会出问题！" + txtFile);
         }
-        lineIterator.close();
+        lineIterator.Close();
         logger.info("文本读取结束，开始转换模型");
         int transitionFeatureOffset = (sizeOfTagSet + 1) * sizeOfTagSet;
         parameter = new float[transitionFeatureOffset + featureFunctionMap.size() * sizeOfTagSet];
@@ -209,8 +209,8 @@ public class LogLinearModel : LinearModel
         }
         foreach (KeyValuePair<int, FeatureFunction> entry in featureFunctionList.entrySet())
         {
-            int id = entry.getKey();
-            FeatureFunction f = entry.getValue();
+            int id = entry.Key;
+            FeatureFunction f = entry.Value;
             if (f == null) continue;
             string feature = new string(f.o);
             for (int tid = 0; tid < featureTemplateList.size(); tid++)
@@ -230,14 +230,14 @@ public class LogLinearModel : LinearModel
                 }
             }
         }
-        DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(binFile));
+        Stream _out = new Stream(IOUtil.newOutputStream(binFile));
         save(_out);
         _out.writeInt(featureTemplateList.size());
         foreach (FeatureTemplate template in featureTemplateList)
         {
             template.save(_out);
         }
-        _out.close();
+        _out.Close();
     }
 
 

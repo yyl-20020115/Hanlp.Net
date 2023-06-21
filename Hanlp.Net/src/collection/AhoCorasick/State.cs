@@ -31,7 +31,7 @@ public class State
     /**
      * fail 函数，如果没有匹配到，则跳转到此状态。
      */
-    private State failure = null;
+    private State _failure = null;
 
     /**
      * 只要这个状态可达，则记录模式串
@@ -133,7 +133,7 @@ public class State
      */
     public State failure()
     {
-        return this.failure;
+        return this._failure;
     }
 
     /**
@@ -188,17 +188,17 @@ public class State
         if (nextState == null)
         {
             nextState = new State(this.depth + 1);
-            this.success.put(character, nextState);
+            this.success.Add(character, nextState);
         }
         return nextState;
     }
 
-    public Collection<State> getStates()
+    public ICollection<State> getStates()
     {
         return this.success.values();
     }
 
-    public Collection<char> getTransitions()
+    public ICollection<char> getTransitions()
     {
         return this.success.keySet();
     }

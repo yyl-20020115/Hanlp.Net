@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.suggest.scorer;
+
 namespace com.hankcs.hanlp.suggest;
 
 
@@ -51,7 +53,7 @@ public class Suggester : ISuggester
     //@Override
     public void addSentence(string sentence)
     {
-        for (IScorer scorer : scorerList)
+        foreach (IScorer scorer in scorerList)
         {
             scorer.addSentence(sentence);
         }
@@ -60,7 +62,7 @@ public class Suggester : ISuggester
     //@Override
     public void removeAllSentences()
     {
-        for (IScorer scorer : scorerList)
+        foreach (IScorer scorer in scorerList)
         {
             scorer.removeAllSentences();
         }
@@ -71,20 +73,20 @@ public class Suggester : ISuggester
     {
         List<string> resultList = new (size);
         Dictionary<string, Double> scoreMap = new Dictionary<string, Double>();
-        for (BaseScorer scorer : scorerList)
+        foreach (BaseScorer scorer in scorerList)
         {
             Dictionary<string, Double> map = scorer.computeScore(key);
             Double max = max(map);  // 用于正规化一个map
-            for (KeyValuePair<string, Double> entry : map.entrySet())
+            foreach (KeyValuePair<string, Double> entry in map.entrySet())
             {
-                Double score = scoreMap.get(entry.getKey());
+                Double score = scoreMap.get(entry.Key);
                 if (score == null) score = 0.0;
-                scoreMap.put(entry.getKey(), score / max + entry.getValue() * scorer.boost);
+                scoreMap.Add(entry.Key, score / max + entry.Value * scorer.boost);
             }
         }
-        for (KeyValuePair<Double, HashSet<string>> entry : sortScoreMap(scoreMap).entrySet())
+        foreach (KeyValuePair<Double, HashSet<string>> entry in sortScoreMap(scoreMap).entrySet())
         {
-            for (string sentence : entry.getValue())
+            foreach (string sentence in entry.Value)
             {
                 if (resultList.size() >= size) return resultList;
                 resultList.Add(sentence);
@@ -104,13 +106,13 @@ public class Suggester : ISuggester
         Dictionary<Double, HashSet<string>> result = new Dictionary<Double, HashSet<string>>(Collections.reverseOrder());
         for (KeyValuePair<string, Double> entry : scoreMap.entrySet())
         {
-            HashSet<string> sentenceSet = result.get(entry.getValue());
+            HashSet<string> sentenceSet = result.get(entry.Value);
             if (sentenceSet == null)
             {
                 sentenceSet = new HashSet<string>();
-                result.put(entry.getValue(), sentenceSet);
+                result.Add(entry.Value, sentenceSet);
             }
-            sentenceSet.Add(entry.getKey());
+            sentenceSet.Add(entry.Key);
         }
 
         return result;

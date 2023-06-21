@@ -10,6 +10,8 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.AhoCorasick;
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.collection.trie.bintrie;
 using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.dictionary.other;
@@ -199,8 +201,8 @@ public abstract class Segment
     protected static List<Vertex> combineByCustomDictionary(List<Vertex> vertexList, DoubleArrayTrie<CoreDictionary.Attribute> dat)
     {
         //assert vertexList.size() >= 2 : "vertexList至少包含 始##始 和 末##末";
-        Vertex[] wordNet = new Vertex[vertexList.size()];
-        vertexList.ToArray(wordNet);
+        Vertex[] wordNet = 
+        vertexList.ToArray();
         // DAT合并
         int Length = wordNet.Length - 1; // 跳过首尾
         for (int i = 1; i < Length; ++i)
@@ -241,15 +243,15 @@ public abstract class Segment
                 {
                     int to = i + 1;
                     int end = to;
-                    CoreDictionary.Attribute value = state.getValue();
+                    CoreDictionary.Attribute value = state.Value;
                     for (; to < Length; ++to)
                     {
                         if (wordNet[to] == null) continue;
                         state = state.transition(wordNet[to].realWord.ToCharArray(), 0);
                         if (state == null) break;
-                        if (state.getValue() != null)
+                        if (state.Value != null)
                         {
-                            value = state.getValue();
+                            value = state.Value;
                             end = to + 1;
                         }
                     }
@@ -262,7 +264,7 @@ public abstract class Segment
             }
         }
         vertexList.Clear();
-        for (Vertex vertex : wordNet)
+        foreach (Vertex vertex in wordNet)
         {
             if (vertex != null) vertexList.Add(vertex);
         }
@@ -291,7 +293,7 @@ public abstract class Segment
     {
         List<Vertex> outputList = combineByCustomDictionary(vertexList, dat);
         int line = 0;
-        for (Vertex vertex : outputList)
+        foreach (Vertex vertex in outputList)
         {
             int parentLength = vertex.realWord.Length;
             int currentLine = line;
@@ -348,10 +350,10 @@ public abstract class Segment
      */
     protected static List<Term> convert(List<Vertex> vertexList, bool offsetEnabled)
     {
-        assert vertexList != null;
-        assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.ToString();
-        int Length = vertexList.size() - 2;
-        List<Term> resultList = new ArrayList<Term>(Length);
+        //assert vertexList != null;
+        //assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.ToString();
+        int Length = vertexList.Count - 2;
+        List<Term> resultList = new (Length);
         Iterator<Vertex> iterator = vertexList.iterator();
         iterator.next();
         if (offsetEnabled)
@@ -397,17 +399,17 @@ public abstract class Segment
     {
         if (termList.size() < 4) return;
         StringBuilder sbQuantifier = new StringBuilder();
-        ListIterator<Vertex> iterator = termList.listIterator();
+        ListIterator<Vertex> iterator = termList.GetEnumerator();
         iterator.next();
         int line = 1;
-        while (iterator.hasNext())
+        while (iterator.MoveNext())
         {
             Vertex pre = iterator.next();
             if (pre.hasNature(Nature.m))
             {
                 sbQuantifier.Append(pre.realWord);
                 Vertex cur = null;
-                while (iterator.hasNext() && (cur = iterator.next()).hasNature(Nature.m))
+                while (iterator.MoveNext() && (cur = iterator.next()).hasNature(Nature.m))
                 {
                     sbQuantifier.Append(cur.realWord);
                     iterator.Remove();
@@ -432,7 +434,7 @@ public abstract class Segment
                 }
                 if (sbQuantifier.Length != pre.realWord.Length)
                 {
-                    for (Vertex vertex : wordNetAll.get(line + pre.realWord.Length))
+                    foreach (Vertex vertex in wordNetAll.get(line + pre.realWord.Length))
                     {
                         vertex.from = null;
                     }
@@ -440,7 +442,7 @@ public abstract class Segment
                     pre.word = Predefine.TAG_NUMBER;
                     pre.attribute = new CoreDictionary.Attribute(Nature.mq);
                     pre.wordID = CoreDictionary.M_WORD_ID;
-                    sbQuantifier.setLength(0);
+                    sbQuantifier.Length=(0);
                 }
             }
             sbQuantifier.setLength(0);
@@ -460,13 +462,13 @@ public abstract class Segment
     {
         LinkedList<Vertex>[] vertexes = wordNetAll.getVertexes();
         // 将其从wordNet中删除
-        for (Vertex vertex : vertexes[line + Length])
+        foreach (Vertex vertex in vertexes[line + Length])
         {
             if (vertex.from == cur)
                 vertex.from = null;
         }
-        ListIterator<Vertex> iterator = vertexes[line + Length - cur.realWord.Length].listIterator();
-        while (iterator.hasNext())
+        ListIterator<Vertex> iterator = vertexes[line + Length - cur.realWord.Length].GetEnumerator();
+        while (iterator.MoveNext())
         {
             Vertex vertex = iterator.next();
             if (vertex == cur) iterator.Remove();
@@ -490,8 +492,8 @@ public abstract class Segment
         if (config.threadNumber > 1 && charArray.Length > 10000)    // 小文本多线程没意义，反而变慢了
         {
             List<string> sentenceList = SentencesUtil.toSentenceList(charArray);
-            string[] sentenceArray = new string[sentenceList.size()];
-            sentenceList.ToArray(sentenceArray);
+            string[] sentenceArray =
+            sentenceList.ToArray();
             //noinspection unchecked
             List<Term>[] termListArray = new List[sentenceArray.Length];
             int per = sentenceArray.Length / config.threadNumber;
@@ -506,7 +508,7 @@ public abstract class Segment
             threadArray[config.threadNumber - 1].start();
             try
             {
-                for (WorkThread thread : threadArray)
+                foreach (WorkThread thread in threadArray)
                 {
                     thread.join();
                 }
@@ -514,15 +516,15 @@ public abstract class Segment
             catch (InterruptedException e)
             {
                 logger.severe("线程同步异常：" + TextUtility.exceptionToString(e));
-                return Collections.emptyList();
+                return new();
             }
-            List<Term> termList = new LinkedList<Term>();
+            List<Term> termList = new ();
             if (config.offset || config.indexMode > 0)  // 由于分割了句子，所以需要重新校正offset
             {
                 int sentenceOffset = 0;
                 for (int i = 0; i < sentenceArray.Length; ++i)
                 {
-                    for (Term term : termListArray[i])
+                    foreach (Term term in termListArray[i])
                     {
                         term.offset += sentenceOffset;
                         termList.Add(term);
@@ -532,9 +534,9 @@ public abstract class Segment
             }
             else
             {
-                for (List<Term> list : termListArray)
+                foreach (List<Term> list in termListArray)
                 {
-                    termList.addAll(list);
+                    termList.AddRange(list);
                 }
             }
 
@@ -542,7 +544,7 @@ public abstract class Segment
         }
 //        if (text.Length > 10000)  // 针对大文本，先拆成句子，后分词，避免内存峰值太大
 //        {
-//            List<Term> termList = new LinkedList<Term>();
+//            List<Term> termList = new ();
 //            if (config.offset || config.indexMode)
 //            {
 //                int sentenceOffset = 0;
@@ -561,7 +563,7 @@ public abstract class Segment
 //            {
 //                for (string sentence : SentencesUtil.toSentenceList(charArray))
 //                {
-//                    termList.addAll(segSentence(sentence.ToCharArray()));
+//                    termList.AddRange(segSentence(sentence.ToCharArray()));
 //                }
 //            }
 //
@@ -578,7 +580,7 @@ public abstract class Segment
      */
     public List<Term> seg(char[] text)
     {
-        assert text != null;
+        //assert text != null;
         if (HanLP.Config.Normalization)
         {
             CharTable.normalization(text);

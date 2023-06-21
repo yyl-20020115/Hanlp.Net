@@ -66,13 +66,13 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 int j = 0;
                 foreach (Word w in ((CompoundWord) word).innerList)
                 {
-                    sb.Append(w.getValue());
+                    sb.Append(w.Value);
                     if (++j != ((CompoundWord) word).innerList.Count)
                         sb.Append(' ');
                 }
             }
             else
-                sb.Append(word.getValue());
+                sb.Append(word.Value);
             if (i != wordList.Count) sb.Append(' ');
             ++i;
         }
@@ -107,7 +107,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         int offset = 0;
         foreach (IWord word in wordList)
         {
-            //assert text.charAt(offset) == word.getValue()[0];
+            //assert text.charAt(offset) == word.Value[0];
             printWord(word, sb, i, offset, withComment);
             ++i;
             if (word is CompoundWord)
@@ -143,7 +143,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
             word.setLabel(PartOfSpeechTagDictionary.translate(word.getLabel()));
             if (word is CompoundWord)
             {
-                for (Word child : ((CompoundWord) word).innerList)
+                foreach (Word child in ((CompoundWord) word).innerList)
                 {
                     child.setLabel(PartOfSpeechTagDictionary.translate(child.getLabel()));
                 }
@@ -184,7 +184,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
             Length += ((CompoundWord) word).innerList.Count - 1;
         }
         sb.Append(offset).Append(delimiter).Append(offset + Length).Append(delimiter);
-        sb.Append(word.getValue()).Append(endLine);
+        sb.Append(word.Value).Append(endLine);
         string translated = PartOfSpeechTagDictionary.translate(word.getLabel());
         if (withComment && !word.getLabel().Equals(translated))
         {
@@ -256,7 +256,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         int Length = 0;
         foreach (IWord word in this)
         {
-            Length += word.getValue().Length;
+            Length += word.Value.Length;
         }
 
         return Length;
@@ -288,12 +288,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
             {
                 foreach (Word child in ((CompoundWord) word).innerList)
                 {
-                    sb.Append(child.getValue()).Append(delimiter);
+                    sb.Append(child.Value).Append(delimiter);
                 }
             }
             else
             {
-                sb.Append(word.getValue()).Append(delimiter);
+                sb.Append(word.Value).Append(delimiter);
             }
         }
         sb.setLength(sb.Length - delimiter.Length);
@@ -354,8 +354,8 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public ListIterator<IWord> findFirstWordIteratorByLabel(string label)
     {
-        ListIterator<IWord> listIterator = this.wordList.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<IWord> listIterator = this.wordList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             IWord word = listIterator.next();
             if (label.Equals(word.getLabel()))
@@ -389,7 +389,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         {
             if (word is CompoundWord)
             {
-                wordList.addAll(((CompoundWord) word).innerList);
+                wordList.AddRange(((CompoundWord) word).innerList);
             }
             else
             {
@@ -460,13 +460,13 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
 
     public Sentence mergeCompoundWords()
     {
-        ListIterator<IWord> listIterator = wordList.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<IWord> listIterator = wordList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             IWord word = listIterator.next();
             if (word is CompoundWord)
             {
-                listIterator.set(new Word(word.getValue(), word.getLabel()));
+                listIterator.set(new Word(word.Value, word.getLabel()));
             }
         }
         return this;

@@ -61,14 +61,16 @@ public class EasyReader
         File[] files;
         if (rootFile.isDirectory())
         {
-            files = rootFile.listFiles(new FileFilter()
-            {
-                //@Override
-                public bool accept(File pathname)
-                {
-                    return pathname.isFile() && !pathname.getName().EndsWith(".bin");
-                }
-            });
+            files = rootFile.listFiles(new ());
+
+            //FileFilter()
+            //{
+            //    //@Override
+            //    public bool accept(File pathname)
+            //    {
+            //        return pathname.isFile() && !pathname.getName().EndsWith(".bin");
+            //    }
+            //}
             if (files == null)
             {
                 if (rootFile.isFile())
@@ -88,9 +90,9 @@ public class EasyReader
         {
             if (size-- == 0) break;
             if (file.isDirectory()) continue;
-            if (verbose) System._out.printf("正在处理%s, %d / %d\n", file.getName(), ++n, files.Length);
+            if (verbose) Console.WriteLine("正在处理%s, %d / %d\n", file.getName(), ++n, files.Length);
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file);
-            while (lineIterator.hasNext())
+            while (lineIterator.MoveNext())
             {
                 ++totalAddress;
                 string line = lineIterator.next();
@@ -99,7 +101,7 @@ public class EasyReader
             }
         }
         handler.done();
-        if (verbose) System._out.printf("处理了 %.2f 万行，花费了 %.2f min\n", totalAddress / 10000.0, (DateTime.Now.Microsecond - start) / 1000.0 / 60.0);
+        if (verbose) Console.WriteLine("处理了 %.2f 万行，花费了 %.2f min\n", totalAddress / 10000.0, (DateTime.Now.Microsecond - start) / 1000.0 / 60.0);
     }
 
     /**

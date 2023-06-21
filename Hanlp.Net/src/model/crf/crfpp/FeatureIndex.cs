@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.model.crf.crfpp;
 
 
@@ -99,11 +101,11 @@ public abstract class FeatureIndex
     public string makeTempls(List<string> unigramTempls, List<string> bigramTempls)
     {
         StringBuilder sb = new StringBuilder();
-        for (string temp : unigramTempls)
+        foreach (string temp in unigramTempls)
         {
             sb.Append(temp).Append("\n");
         }
-        for (string temp : bigramTempls)
+        foreach (string temp in bigramTempls)
         {
             sb.Append(temp).Append("\n");
         }
@@ -147,7 +149,7 @@ public abstract class FeatureIndex
     public string applyRule(string str, int cur, TaggerImpl tagger)
     {
         StringBuilder sb = new StringBuilder();
-        for (string tmp : str.Split("%x", -1))
+        foreach (string tmp in str.Split("%x", -1))
         {
             if (tmp.StartsWith("U") || tmp.StartsWith("B"))
             {
@@ -156,7 +158,7 @@ public abstract class FeatureIndex
             else if (tmp.Length > 0)
             {
                 string[] tuple = tmp.Split("]");
-                string[] idx = tuple[0].replace("[", "").Split(",");
+                string[] idx = tuple[0].Replace("[", "").Split(",");
                 string r = getIndex(idx, cur, tagger);
                 if (r != null)
                 {
@@ -174,7 +176,7 @@ public abstract class FeatureIndex
 
     private bool buildFeatureFromTempl(List<int> feature, List<string> templs, int curPos, TaggerImpl tagger)
     {
-        for (string tmpl : templs)
+        foreach (string tmpl in templs)
         {
             string featureID = applyRule(tmpl, curPos, tagger);
             if (featureID == null || featureID.Length == 0)

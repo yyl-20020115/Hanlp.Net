@@ -51,7 +51,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         }
         if (model != null)
         {
-            GlobalObjectPool.put(path, model);
+            GlobalObjectPool.Add(path, model);
         }
         string result = model == null ? "失败" : "成功";
         logger.info("最大熵依存句法模型载入" + result + "，耗时" + (DateTime.Now.Microsecond - start) + " ms");
@@ -107,19 +107,19 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
         context.Add(nodeArray[from].compiledWord + '→' + wordBeforeJ.compiledWord + '@' + nodeArray[to].compiledWord);
         context.Add(wordBeforeI.label + '@' + nodeArray[from].label + '→' + nodeArray[to].label);
         context.Add(nodeArray[from].label + '→' + wordBeforeJ.label + '@' + nodeArray[to].label);
-        List<Pair<string, Double>> pairList = model.predict(context.ToArray(new string[0]));
-        Pair<string, Double> maxPair = new Pair<string, Double>("null", -1.0);
+        List<KeyValuePair<string, Double>> pairList = model.predict(context.ToArray(new string[0]));
+        KeyValuePair<string, Double> maxPair = new KeyValuePair<string, Double>("null", -1.0);
 //        Console.WriteLine(context);
 //        Console.WriteLine(pairList);
-        for (Pair<string, Double> pair : pairList)
+        for (KeyValuePair<string, Double> pair : pairList)
         {
-            if (pair.getValue() > maxPair.getValue() && !"null".Equals(pair.getKey()))
+            if (pair.Value > maxPair.Value && !"null".Equals(pair.Key))
             {
                 maxPair = pair;
             }
         }
 //        Console.WriteLine(nodeArray[from].word + "→" + nodeArray[to].word + " : " + maxPair);
 
-        return new Edge(from, to, maxPair.getKey(), (float) - Math.log(maxPair.getValue()));
+        return new Edge(from, to, maxPair.Key, (float) - Math.Log(maxPair.Value));
     }
 }

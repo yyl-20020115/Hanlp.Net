@@ -130,7 +130,7 @@ public abstract class AbstractDataSet : IDataSet
                 e = files.Length;
             }
 
-            int logEvery = (int) Math.ceil((e - b) / 10000f);
+            int logEvery = (int) Math.Ceiling((e - b) / 10000f);
             for (int i = b; i < e; i++)
             {
                 Add(folder.getName(), TextProcessUtility.readTxt(files[i], charsetName));

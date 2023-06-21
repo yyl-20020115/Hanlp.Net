@@ -26,7 +26,7 @@ public class EncoderFeatureIndex : FeatureIndex
         int k = dic_.get(key);
         if (k == -1)
         {
-            dic_.put(key, maxid_);
+            dic_.Add(key, maxid_);
             frequency.Append(1);
             int n = maxid_;
             if (key[0] == 'U')
@@ -73,9 +73,9 @@ public class EncoderFeatureIndex : FeatureIndex
         try
         {
             isr = new InputStreamReader(IOUtil.newInputStream(filename), "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
+            TextReader br = new TextReader(isr);
             string line;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 if (line.Length == 0 || line[0] == ' ' || line[0] == '#')
                 {
@@ -83,18 +83,18 @@ public class EncoderFeatureIndex : FeatureIndex
                 }
                 else if (line[0] == 'U')
                 {
-                    unigramTempls_.Add(line.trim());
+                    unigramTempls_.Add(line.Trim());
                 }
                 else if (line[0] == 'B')
                 {
-                    bigramTempls_.Add(line.trim());
+                    bigramTempls_.Add(line.Trim());
                 }
                 else
                 {
                     Console.Error.WriteLine("unknown type: " + line);
                 }
             }
-            br.close();
+            br.Close();
             templs_ = makeTempls(unigramTempls_, bigramTempls_);
         }
         catch (Exception e)
@@ -103,7 +103,7 @@ public class EncoderFeatureIndex : FeatureIndex
             {
                 try
                 {
-                    isr.close();
+                    isr.Close();
                 }
                 catch (Exception e2)
                 {
@@ -130,9 +130,9 @@ public class EncoderFeatureIndex : FeatureIndex
         try
         {
             isr = new InputStreamReader(IOUtil.newInputStream(filename), "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
+            TextReader br = new TextReader(isr);
             string line;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 if (line.Length == 0)
                 {
@@ -161,7 +161,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 }
             }
             Collections.sort(y_);
-            br.close();
+            br.Close();
         }
         catch (Exception e)
         {
@@ -169,7 +169,7 @@ public class EncoderFeatureIndex : FeatureIndex
             {
                 try
                 {
-                    isr.close();
+                    isr.Close();
                 }
                 catch (Exception e2)
                 {
@@ -217,11 +217,11 @@ public class EncoderFeatureIndex : FeatureIndex
 //            doubleArray.build(keyList, values);
 //            oos.writeObject(doubleArray);
             oos.writeObject(alpha_);
-            oos.close();
+            oos.Close();
 
             if (textModelFile)
             {
-                OutputStreamWriter osw = new OutputStreamWriter(IOUtil.newOutputStream(filename + ".txt"), "UTF-8");
+                StreamWriter osw = new StreamWriter(IOUtil.newOutputStream(filename + ".txt"), "UTF-8");
                 osw.write("version: " + Encoder.MODEL_VERSION + "\n");
                 osw.write("cost-factor: " + costFactor_ + "\n");
                 osw.write("maxid: " + maxid_ + "\n");
@@ -243,7 +243,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 osw.write("\n");
                 foreach (MutableDoubleArrayTrieInteger.KeyValuePair pair in dic_)
                 {
-                    osw.write(pair.getValue() + " " + pair.getKey() + "\n");
+                    osw.write(pair.Value + " " + pair.Key + "\n");
                 }
                 osw.write("\n");
 
@@ -252,7 +252,7 @@ public class EncoderFeatureIndex : FeatureIndex
                     string val = new DecimalFormat("0.0000000000000000").Format(alpha_[k]);
                     osw.write(val + "\n");
                 }
-                osw.close();
+                osw.Close();
             }
         }
         catch (Exception e)
@@ -288,7 +288,7 @@ public class EncoderFeatureIndex : FeatureIndex
             int f = frequency.get(cid);
             if (f >= freq)
             {
-                old2new.put(id, newMaxId);
+                old2new.Add(id, newMaxId);
                 pair.setValue(newMaxId);
                 newMaxId += (key[0] == 'U' ? y_.size() : y_.size() * y_.size());
             }
@@ -308,7 +308,7 @@ public class EncoderFeatureIndex : FeatureIndex
             for (int k = 0; k < featureCache.size(); k++)
             {
                 List<int> featureCacheItem = featureCache.get(k);
-                List<int> newCache = new ArrayList<int>();
+                List<int> newCache = new ();
                 foreach (int it in featureCacheItem)
                 {
                     if (it == -1)
@@ -333,22 +333,22 @@ public class EncoderFeatureIndex : FeatureIndex
         try
         {
             InputStreamReader isr = new InputStreamReader(IOUtil.newInputStream(textmodel), "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
+            TextReader br = new TextReader(isr);
             string line;
 
-            int version = int.valueOf(br.readLine().substring("version: ".Length));
-            costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".Length));
-            maxid_ = int.valueOf(br.readLine().substring("maxid: ".Length));
-            xsize_ = int.valueOf(br.readLine().substring("xsize: ".Length));
+            int version = int.valueOf(br.ReadLine().substring("version: ".Length));
+            costFactor_ = Double.valueOf(br.ReadLine().substring("cost-factor: ".Length));
+            maxid_ = int.valueOf(br.ReadLine().substring("maxid: ".Length));
+            xsize_ = int.valueOf(br.ReadLine().substring("xsize: ".Length));
             Console.WriteLine("Done reading meta-info");
-            br.readLine();
+            br.ReadLine();
 
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 y_.Add(line);
             }
             Console.WriteLine("Done reading labels");
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 if (line.StartsWith("U"))
                 {
@@ -361,19 +361,19 @@ public class EncoderFeatureIndex : FeatureIndex
             }
             Console.WriteLine("Done reading templates");
             dic_ = new MutableDoubleArrayTrieInteger();
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
-                string[] content = line.trim().Split(" ");
+                string[] content = line.Trim().Split(" ");
                 if (content.Length != 2)
                 {
                     Console.Error.WriteLine("feature indices Format error");
                     return false;
                 }
-                dic_.put(content[1], int.valueOf(content[0]));
+                dic_.Add(content[1], int.valueOf(content[0]));
             }
             Console.WriteLine("Done reading feature indices");
             List<Double> alpha = new ArrayList<Double>();
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 alpha.Add(Double.valueOf(line));
             }
@@ -383,7 +383,7 @@ public class EncoderFeatureIndex : FeatureIndex
             {
                 alpha_[i] = alpha.get(i);
             }
-            br.close();
+            br.Close();
             Console.WriteLine("Writing binary model to " + binarymodel);
             return save(binarymodel, false);
         }

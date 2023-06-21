@@ -22,7 +22,7 @@ public class ActionFactory : ActionType
      */
     public static Action make_shift()
     {
-        return new Action(kShift, 0);
+        return new Action(ActionType.kShift, 0);
     }
 
     /**
@@ -32,7 +32,7 @@ public class ActionFactory : ActionType
      */
     public static Action make_left_arc(int rel)
     {
-        return new Action(kLeftArc, rel);
+        return new Action(ActionType.kLeftArc, rel);
     }
 
     /**
@@ -42,6 +42,6 @@ public class ActionFactory : ActionType
      */
     public static Action make_right_arc(int rel)
     {
-        return new Action(kRightArc, rel);
+        return new Action(ActionType.kRightArc, rel);
     }
 }

@@ -9,6 +9,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.model.trigram.frequency;
 
 namespace com.hankcs.hanlp.model.trigram;
@@ -72,10 +73,10 @@ public class CharacterBasedGenerativeModel : ICacheAble
      */
     public void learn(List<Word> wordList)
     {
-        LinkedList<char[]> sentence = new LinkedList<char[]>();
-        for (IWord iWord in wordList)
+        List<char[]> sentence = new ();
+        foreach (IWord iWord in wordList)
         {
-            string word = iWord.getValue();
+            string word = iWord.Value;
             if (word.Length == 1)
             {
                 sentence.Add(new char[]{word[0], 's'});
@@ -98,7 +99,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         tf.Add(2, bos);
         foreach (char[] i in sentence)
         {
-            System.arraycopy(now, 1, now, 0, 2);
+            Array.Copy(now, 1, now, 0, 2);
             now[2] = i;
             tf.Add(1, i);   // uni
             tf.Add(1, now[1], now[2]);   // bi
@@ -161,7 +162,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
         double tri = div(l3 * tf.get(s1,t1, s2,t2, s3,t3), tf.get(s1,t1, s2,t2));
         if (uni + bi + tri == 0)
             return inf;
-        return Math.log(uni + bi + tri);
+        return Math.Log(uni + bi + tri);
     }
 
     /**
@@ -274,7 +275,7 @@ public class CharacterBasedGenerativeModel : ICacheAble
     }
 
     //@Override
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeDouble(l1);
         _out.writeDouble(l2);

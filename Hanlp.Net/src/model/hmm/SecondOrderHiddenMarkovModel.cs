@@ -79,7 +79,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
         double[][] A = logToCdf(transition_probability);
         double[][][] A2 = logToCdf(transition_probability2);
         double[][] B = logToCdf(emission_probability);
-        int os[][] = new int[2][Length];
+        int[][] os = new int[2][Length];
         os[1][0] = drawFrom(pi); // 采样首个隐状态
         os[0][0] = drawFrom(B[os[1][0]]); // 根据首个隐状态采样它的显状态
 
@@ -117,7 +117,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
                 {
                     for (int i = 0; i < v.Length; i++)
                     {
-                        v[i] = (float) Math.log(v[i]);
+                        v[i] = (float) Math.Log(v[i]);
                     }
                 }
             }

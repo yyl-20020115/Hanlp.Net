@@ -25,23 +25,23 @@ public class CustomDictionaryTest : TestCase
      */
     //    public void testRemoveShortWord() 
     //    {
-    //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("data/dictionary/CustomDictionary.txt")));
+    //        TextReader br = new TextReader(new InputStreamReader(new FileStream("data/dictionary/CustomDictionary.txt")));
     //        String line;
     //        HashSet<String> fixedDictionary = new TreeSet<String>();
-    //        while ((line = br.readLine()) != null)
+    //        while ((line = br.ReadLine()) != null)
     //        {
     //            String[] param = line.Split("\\s");
     //            if (param[0].Length == 1 || CoreDictionary.Contains(param[0])) continue;
     //            fixedDictionary.Add(line);
     //        }
-    //        br.close();
-    //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/dictionary/CustomDictionary.txt")));
+    //        br.Close();
+    //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("data/dictionary/CustomDictionary.txt")));
     //        for (String word : fixedDictionary)
     //        {
     //            bw.write(word);
     //            bw.newLine();
     //        }
-    //        bw.close();
+    //        bw.Close();
     //    }
 
     /**
@@ -50,23 +50,23 @@ public class CustomDictionaryTest : TestCase
      */
     //    public void testRemoveNR() 
     //    {
-    //        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("data/dictionary/CustomDictionary.txt")));
+    //        TextReader br = new TextReader(new InputStreamReader(new FileStream("data/dictionary/CustomDictionary.txt")));
     //        String line;
     //        HashSet<String> fixedDictionary = new TreeSet<String>();
-    //        while ((line = br.readLine()) != null)
+    //        while ((line = br.ReadLine()) != null)
     //        {
     //            String[] param = line.Split("\\s");
     //            if (param[1].Equals("nr")) continue;
     //            fixedDictionary.Add(line);
     //        }
-    //        br.close();
-    //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/dictionary/CustomDictionary.txt")));
+    //        br.Close();
+    //        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("data/dictionary/CustomDictionary.txt")));
     //        for (String word : fixedDictionary)
     //        {
     //            bw.write(word);
     //            bw.newLine();
     //        }
-    //        bw.close();
+    //        bw.Close();
     //    }
 
     //    public void testNext() 

@@ -45,9 +45,9 @@ public class Alphabet : ICacheAble
     public int build(Dictionary<string, int> keyValueMap)
     {
         idToLabelMap = new string[keyValueMap.Count];
-        for (KeyValuePair<string, int> entry in keyValueMap.entrySet())
+        foreach (KeyValuePair<string, int> entry in keyValueMap)
         {
-            idToLabelMap[entry.getValue()] = entry.getKey();
+            idToLabelMap[entry.Value] = entry.Key;
         }
         return trie.build(keyValueMap);
     }
@@ -83,16 +83,18 @@ public class Alphabet : ICacheAble
 
     public void save(Stream _out)
     {
-        _out.writeInt(idToLabelMap.Length);
-        for (string value : idToLabelMap)
+        using var writer = new BinaryWriter(_out);
+        writer.Write(idToLabelMap.Length);
+        foreach (string value in idToLabelMap)
         {
             TextUtility.writeString(value, _out);
         }
+
     }
 
     public bool load(ByteArray byteArray)
     {
-        idToLabelMap = new string[byteArray.nextInt()];
+        idToLabelMap = new string[byteArray.Next()];
         var map = new Dictionary<string, int>();
         for (int i = 0; i < idToLabelMap.Length; i++)
         {

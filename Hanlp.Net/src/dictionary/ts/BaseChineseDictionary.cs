@@ -28,35 +28,35 @@ namespace com.hankcs.hanlp.dictionary.ts;
  */
 public class BaseChineseDictionary
 {
-    static void combineChain(Dictionary<string, string> s2t, Dictionary<string, string> t2x)
+    public static void combineChain(Dictionary<string, string> s2t, Dictionary<string, string> t2x)
     {
-        foreach (KeyValuePair<string, string> entry in s2t.entrySet())
+        foreach (KeyValuePair<string, string> entry in s2t)
         {
-            string x = t2x.get(entry.getValue());
+            string x = t2x.get(entry.Value);
             if (x != null)
             {
                 entry.setValue(x);
             }
         }
-        foreach (KeyValuePair<string, string> entry in t2x.entrySet())
+        foreach (KeyValuePair<string, string> entry in t2x)
         {
-            string s = CharTable.convert(entry.getKey());
+            string s = CharTable.convert(entry.Key);
             if (!s2t.ContainsKey(s))
             {
-                s2t.put(s, entry.getValue());
+                s2t.Add(s, entry.Value);
             }
         }
     }
 
-    static void combineReverseChain(Dictionary<string, string> t2s, Dictionary<string, string> tw2t, bool convert)
+    public static void combineReverseChain(Dictionary<string, string> t2s, Dictionary<string, string> tw2t, bool convert)
     {
-        foreach (KeyValuePair<string, string> entry in tw2t.entrySet())
+        foreach (KeyValuePair<string, string> entry in tw2t)
         {
-            string tw = entry.getKey();
-            string s = t2s.get(entry.getValue());
+            string tw = entry.Key;
+            string s = t2s.get(entry.Value);
             if (s == null)
-                s = convert ? CharTable.convert(entry.getValue()) : entry.getValue();
-            t2s.put(tw, s);
+                s = convert ? CharTable.convert(entry.Value) : entry.Value;
+            t2s.Add(tw, s);
         }
     }
 
@@ -67,7 +67,7 @@ public class BaseChineseDictionary
      * @param pathArray 路径
      * @return 是否加载成功
      */
-    static bool load(Dictionary<string, string> storage, bool reverse, params string[] pathArray)
+    public static bool load(Dictionary<string, string> storage, bool reverse, params string[] pathArray)
     {
         StringDictionary dictionary = new StringDictionary("=");
         foreach (string path in pathArray)
@@ -78,7 +78,7 @@ public class BaseChineseDictionary
         HashSet<KeyValuePair<string, string>> entrySet = dictionary.entrySet();
         foreach (KeyValuePair<string, string> entry in entrySet)
         {
-            storage.put(entry.getKey(), entry.getValue());
+            storage.Add(entry.Key, entry.Value);
         }
 
         return true;
@@ -89,7 +89,7 @@ public class BaseChineseDictionary
      * @param trie
      * @return
      */
-    static bool load(string path, AhoCorasickDoubleArrayTrie<string> trie)
+    public static bool load(string path, AhoCorasickDoubleArrayTrie<string> trie)
     {
         return load(path, trie, false);
     }
@@ -101,7 +101,7 @@ public class BaseChineseDictionary
      * @param reverse 是否将其翻转
      * @return
      */
-    static bool load(string path, AhoCorasickDoubleArrayTrie<string> trie, bool reverse)
+    public static bool load(string path, AhoCorasickDoubleArrayTrie<string> trie, bool reverse)
     {
         string datPath = path;
         if (reverse)
@@ -119,11 +119,11 @@ public class BaseChineseDictionary
         return true;
     }
 
-    static bool loadDat(string path, AhoCorasickDoubleArrayTrie<string> trie)
+    public static bool loadDat(string path, AhoCorasickDoubleArrayTrie<string> trie)
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         string[] valueArray = new string[size];
         for (int i = 0; i < valueArray.Length; ++i)
         {
@@ -133,7 +133,7 @@ public class BaseChineseDictionary
         return true;
     }
 
-    static bool saveDat(string path, AhoCorasickDoubleArrayTrie<string> trie, HashSet<KeyValuePair<string, string>> entrySet)
+    public static bool saveDat(string path, AhoCorasickDoubleArrayTrie<string> trie, HashSet<KeyValuePair<string, string>> entrySet)
     {
         if (trie.size() != entrySet.size())
         {
@@ -142,11 +142,11 @@ public class BaseChineseDictionary
         }
         try
         {
-            DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
+            Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
             _out.writeInt(entrySet.size());
             foreach (KeyValuePair<string, string> entry in entrySet)
             {
-                char[] charArray = entry.getValue().ToCharArray();
+                char[] charArray = entry.Value.ToCharArray();
                 _out.writeInt(charArray.Length);
                 foreach (char c in charArray)
                 {
@@ -154,7 +154,7 @@ public class BaseChineseDictionary
                 }
             }
             trie.save(_out);
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -165,7 +165,7 @@ public class BaseChineseDictionary
         return true;
     }
 
-    public static BaseSearcher getSearcher(char[] charArray, DoubleArrayTrie<string> trie)
+    public static BaseSearcher<string> getSearcher(char[] charArray, DoubleArrayTrie<string> trie)
     {
         return new Searcher(charArray, trie);
     }
@@ -186,8 +186,8 @@ public class BaseChineseDictionary
                 sb.Append(charArray[p]);
                 ++p;
             }
-            sb.Append(entry.getValue());
-            p = offset + entry.getKey().Length;
+            sb.Append(entry.Value);
+            p = offset + entry.Key.Length;
         }
         // 补足没查到的词
         while (p < charArray.Length)
@@ -249,13 +249,13 @@ public class BaseChineseDictionary
         }
 
         protected Searcher(string text, DoubleArrayTrie<string> trie)
-        : base(c)
+        : base(text.ToCharArray())
         {
             this.trie = trie;
         }
 
         //@Override
-        public KeyValuePair<string, string> next()
+        public override KeyValuePair<string, string> next()
         {
             // 保证首次调用找到一个词语
             KeyValuePair<string, string> result;
@@ -270,7 +270,7 @@ public class BaseChineseDictionary
                 {
                     result = entryList.getLast();
                     offset = begin;
-                    begin += result.getKey().Length;
+                    begin += result.Key.Length;
                     break;
                 }
             }

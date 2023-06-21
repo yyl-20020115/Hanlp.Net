@@ -44,7 +44,7 @@ public class NShortSegment : WordBasedSegment
             // 实体命名识别
             if (config.ner)
             {
-                wordNetOptimum.addAll(vertexList);
+                wordNetOptimum.AddRange(vertexList);
                 int preSize = wordNetOptimum.size();
                 if (config.nameRecognize)
                 {
@@ -66,7 +66,7 @@ public class NShortSegment : WordBasedSegment
                 {
                     // 层叠隐马模型——生成输出作为下一级隐马输入
                     vertexList = Dijkstra.compute(generateBiGraph(wordNetOptimum));
-                    wordNetOptimum.addAll(vertexList);
+                    wordNetOptimum.AddRange(vertexList);
                     OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
                 }
                 if (!NERexists && preSize != wordNetOptimum.size())
@@ -83,8 +83,8 @@ public class NShortSegment : WordBasedSegment
             vertexList = Dijkstra.compute(graph);
             if (HanLP.Config.DEBUG)
             {
-                System._out.printf("细分词网：\n%s\n", wordNetOptimum);
-                System._out.printf("细分词图：%s\n", graph.printByTo());
+                Console.WriteLine("细分词网：\n%s\n", wordNetOptimum);
+                Console.WriteLine("细分词图：%s\n", graph.printByTo());
             }
         }
 
@@ -136,7 +136,7 @@ public class NShortSegment : WordBasedSegment
 //        logger.trace(graph.ToString());
         if (HanLP.Config.DEBUG)
         {
-            System._out.printf("打印词图：%s\n", graph.printByTo());
+            Console.WriteLine("打印词图：%s\n", graph.printByTo());
         }
         ///////////////N-最短路径////////////////////
         NShortPath nShortPath = new NShortPath(graph, nKind);

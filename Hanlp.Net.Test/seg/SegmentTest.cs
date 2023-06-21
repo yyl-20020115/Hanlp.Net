@@ -303,7 +303,7 @@ public class SegmentTest : TestCase
     //        assertEquals(termList1.size(), termList2.size());
     //        Iterator<Term> iterator1 = termList1.iterator();
     //        Iterator<Term> iterator2 = termList2.iterator();
-    //        while (iterator1.hasNext())
+    //        while (iterator1.MoveNext())
     //        {
     //            Term term1 = iterator1.next();
     //            Term term2 = iterator2.next();

@@ -202,7 +202,7 @@ public class CWSEvaluator
             }
             bw.newLine();
         }
-        bw.close();
+        bw.Close();
         CWSEvaluator.Result result = CWSEvaluator.evaluate(goldFile, outputPath, dictPath);
         return result;
     }
@@ -235,7 +235,7 @@ public class CWSEvaluator
         IOUtil.LineIterator goldIter = new IOUtil.LineIterator(goldFile);
         IOUtil.LineIterator predIter = new IOUtil.LineIterator(predFile);
         CWSEvaluator evaluator = new CWSEvaluator(dictPath);
-        while (goldIter.hasNext() && predIter.hasNext())
+        while (goldIter.MoveNext() && predIter.MoveNext())
         {
             evaluator.compare(goldIter.next(), predIter.next());
         }

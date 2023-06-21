@@ -47,7 +47,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
     }
 
     //@Override
-    protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
+    protected void convertCorpus(Sentence sentence, TextWriter bw) 
     {
         foreach (Word w in sentence.toSimpleWordList())
         {
@@ -116,7 +116,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
                 Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
                 Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                 delimiterIterator.next(); // ignore U0 之类的id
-                while (offsetIterator.hasNext())
+                while (offsetIterator.MoveNext())
                 {
                     int offset = offsetIterator.next()[0] + position;
                     if (offset < 0)
@@ -125,7 +125,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
                         sbFeature.Append(FeatureIndex.EOS[offset - sentence.Length]);
                     else
                         sbFeature.Append(sentence.charAt(offset));
-                    if (delimiterIterator.hasNext())
+                    if (delimiterIterator.MoveNext())
                         sbFeature.Append(delimiterIterator.next());
                     else
                         sbFeature.Append(i);

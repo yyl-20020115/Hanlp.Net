@@ -72,14 +72,14 @@ public class WordVectorModel : AbstractVectorModel<string>
         Vector c = storage.get(C);
         if (a == null || b == null || c == null)
         {
-            return Collections.emptyList();
+            return new();
         }
 
         List<KeyValuePair<string, float>> resultList = nearest(a.minus(b).Add(c), size + 3);
-        ListIterator<KeyValuePair<string, float>> listIterator = resultList.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<KeyValuePair<string, float>> listIterator = resultList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
-            string key = listIterator.next().getKey();
+            string key = listIterator.next().Key;
             if (key.Equals(A) || key.Equals(B) || key.Equals(C))
             {
                 listIterator.Remove();

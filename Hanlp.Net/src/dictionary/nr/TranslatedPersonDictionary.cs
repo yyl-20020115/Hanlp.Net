@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.dictionary.nr;
@@ -43,32 +44,32 @@ public class TranslatedPersonDictionary
         if (loadDat()) return true;
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
             Dictionary<string, Boolean> map = new Dictionary<string, Boolean>();
             Dictionary<char, int> charFrequencyMap = new Dictionary<char, int>();
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
-                map.put(line, true);
+                map.Add(line, true);
                 // 音译人名常用字词典自动生成
-                for (char c : line.ToCharArray())
+                foreach (char c in line.ToCharArray())
                 {
                     // 排除一些过于常用的字
                     if ("不赞".IndexOf(c) >= 0) continue;
                     int f = charFrequencyMap.get(c);
                     if (f == null) f = 0;
-                    charFrequencyMap.put(c, f + 1);
+                    charFrequencyMap.Add(c, f + 1);
                 }
             }
-            br.close();
-            map.put(string.valueOf('·'), true);
-//            map.put(string.valueOf('-'), true);
-//            map.put(string.valueOf('—'), true);
+            br.Close();
+            map.Add(string.valueOf('·'), true);
+//            map.Add(string.valueOf('-'), true);
+//            map.Add(string.valueOf('—'), true);
             // 将常用字也加进去
-            for (KeyValuePair<char, int> entry : charFrequencyMap.entrySet())
+            foreach (KeyValuePair<char, int> entry in charFrequencyMap)
             {
-                if (entry.getValue() < 10) continue;
-                map.put(string.valueOf(entry.getKey()), true);
+                if (entry.Value < 10) continue;
+                map.Add(string.valueOf(entry.Key), true);
             }
             logger.info("音译人名词典" + path + "开始构建双数组……");
             trie.build(map);

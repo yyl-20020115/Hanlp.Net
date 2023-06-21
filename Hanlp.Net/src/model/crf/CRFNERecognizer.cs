@@ -57,7 +57,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
     }
 
     //@Override
-    protected void convertCorpus(Sentence sentence, BufferedWriter bw) 
+    protected void convertCorpus(Sentence sentence, TextWriter bw) 
     {
         List<string[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
         foreach (string[] tuple in collector)
@@ -98,7 +98,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
                     Iterator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
                     Iterator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
                     delimiterIterator.next(); // ignore U0 之类的id
-                    while (offsetIterator.hasNext())
+                    while (offsetIterator.MoveNext())
                     {
                         int[] offset = offsetIterator.next();
                         int t = offset[0] + position;
@@ -109,7 +109,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
                             sbFeature.Append(FeatureIndex.EOS[t - wordArray.Length]);
                         else
                             sbFeature.Append(first ? wordArray[t] : posArray[t]);
-                        if (delimiterIterator.hasNext())
+                        if (delimiterIterator.MoveNext())
                             sbFeature.Append(delimiterIterator.next());
                         else
                             sbFeature.Append(i);

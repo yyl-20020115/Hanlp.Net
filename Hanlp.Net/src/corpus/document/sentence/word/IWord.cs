@@ -22,7 +22,7 @@ public interface IWord : Serializable
      * 获取单词
      * @return
      */
-    string getValue();
+    string Value;
 
     /**
      * 获取标签

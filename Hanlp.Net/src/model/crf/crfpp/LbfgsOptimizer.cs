@@ -84,7 +84,7 @@ public class LbfgsOptimizer
             {
                 w[ispt + i] = -v[i] * diag[i];
             }
-            stp1 = 1.0 / Math.sqrt(Mcsrch.ddot_(size, v, 0, v, 0));
+            stp1 = 1.0 / Math.Sqrt(Mcsrch.ddot_(size, v, 0, v, 0));
         }
 
         // MAIN ITERATION LOOP
@@ -233,8 +233,8 @@ public class LbfgsOptimizer
             ++point;
             if (point == msize) point = 0;
 
-            double gnorm = Math.sqrt(Mcsrch.ddot_(size, v, 0, v, 0));
-            double xnorm = Math.Max(1.0, Math.sqrt(Mcsrch.ddot_(size, x, 0, x, 0)));
+            double gnorm = Math.Sqrt(Mcsrch.ddot_(size, v, 0, v, 0));
+            double xnorm = Math.Max(1.0, Math.Sqrt(Mcsrch.ddot_(size, x, 0, x, 0)));
             if (gnorm / xnorm <= Mcsrch.eps)
             {
                 return 0; // OK terminated

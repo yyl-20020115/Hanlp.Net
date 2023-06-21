@@ -39,7 +39,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         if (id == null)
         {
             id = stringIdMap.size();
-            stringIdMap.put(tag, id);
+            stringIdMap.Add(tag, id);
             idStringMap.Add(tag);
         }
 
@@ -109,7 +109,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         return allTags;
     }
 
-    public void save(DataOutputStream _out)
+    public void save(Stream _out)
     {
         _out.writeInt(type.ordinal());
         _out.writeInt(size());
@@ -124,18 +124,18 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
     {
         idStringMap.Clear();
         stringIdMap.Clear();
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         for (int i = 0; i < size; i++)
         {
             string tag = byteArray.nextUTF();
             idStringMap.Add(tag);
-            stringIdMap.put(tag, i);
+            stringIdMap.Add(tag, i);
         }
         _lock () ;
         return true;
     }
 
-    public void load(DataInputStream _in)
+    public void load(Stream _in)
     {
         idStringMap.Clear();
         stringIdMap.Clear();
@@ -144,7 +144,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         {
             string tag = _in.readUTF();
             idStringMap.Add(tag);
-            stringIdMap.put(tag, i);
+            stringIdMap.Add(tag, i);
         }
         _lock () ;
     }

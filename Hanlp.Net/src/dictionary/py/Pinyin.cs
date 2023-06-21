@@ -1477,8 +1477,7 @@ public class Pinyin
     public static readonly Pinyin zuo5 = new(Shengmu.z, Yunmu.uo, 5, "zuo", "zuo", Head.z, 'z');
     public static readonly Pinyin none5 = new(Shengmu.none, Yunmu.none, 5, "none", "none", Head.none, ' ');
 
-    ;
-
+    
     /**
      * 构造一个拼音
      * @param shengmu 声母

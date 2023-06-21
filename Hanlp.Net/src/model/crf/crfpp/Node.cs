@@ -44,14 +44,14 @@ public class Node
         }
         else
         {
-            return vmax + Math.log(Math.exp(vmin - vmax) + 1.0);
+            return vmax + Math.Log(Math.exp(vmin - vmax) + 1.0);
         }
     }
 
     public void calcAlpha()
     {
         alpha = 0.0;
-        for (Path p : lpath)
+        foreach (Path p in lpath)
         {
             alpha = logsumexp(alpha, p.cost + p.lnode.alpha, p == lpath.get(0));
         }
@@ -61,7 +61,7 @@ public class Node
     public void calcBeta()
     {
         beta = 0.0;
-        for (Path p : rpath)
+        foreach (Path p in rpath)
         {
             beta = logsumexp(beta, p.cost + p.rnode.beta, p == rpath.get(0));
         }

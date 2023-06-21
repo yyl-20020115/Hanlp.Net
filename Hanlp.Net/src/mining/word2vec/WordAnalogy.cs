@@ -13,8 +13,8 @@ public class WordAnalogy : AbstractClosestVectors
     static void usage()
     {
         Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE Contains word projections in the text Format\n",
-                          WordAnalogy.class.getName());
-        System.exit(0);
+                          WordAnalogy.s.getName());
+        Environment.Exit(0);
     }
 
     public static void main(string[] args) 
@@ -41,13 +41,13 @@ public class WordAnalogy : AbstractClosestVectors
                     if (input[k].Equals(vectorsReader.getWord(i)))
                     {
                         bi[k] = i;
-                        System._out.printf("\nWord: %s  Position in vocabulary: %d\n", input[k], bi[k]);
+                        Console.WriteLine("\nWord: %s  Position in vocabulary: %d\n", input[k], bi[k]);
                         found++;
                     }
                 }
                 if (found == k)
                 {
-                    System._out.printf("%s : Out of dictionary word!\n", input[k]);
+                    Console.WriteLine("%s : Out of dictionary word!\n", input[k]);
                 }
             }
             if (found < input.Length)
@@ -64,7 +64,7 @@ public class WordAnalogy : AbstractClosestVectors
                 len += vec[j] * vec[j];
             }
 
-            len = Math.sqrt(len);
+            len = Math.Sqrt(len);
             for (int i = 0; i < size; i++)
             {
                 vec[i] /= len;

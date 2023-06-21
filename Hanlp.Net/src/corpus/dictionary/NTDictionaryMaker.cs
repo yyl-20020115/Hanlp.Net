@@ -13,6 +13,7 @@ using com.hankcs.hanlp.corpus.document.sentence.word;
 using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.corpus.util;
 using com.hankcs.hanlp.utility;
+using System.Text;
 
 namespace com.hankcs.hanlp.corpus.dictionary;
 
@@ -34,11 +35,11 @@ public class NTDictionaryMaker : CommonDictionaryMaker
     //@Override
     protected void addToDictionary(List<List<IWord>> sentenceList)
     {
-//        logger.warning("开始制作词典");
+        //        logger.warning("开始制作词典");
         // 将非A的词语保存下来
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
                 if (!word.getLabel().Equals(NT.Z.ToString()))
                 {
@@ -47,10 +48,10 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             }
         }
         // 制作NGram词典
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             IWord pre = null;
-            for (IWord word : wordList)
+            foreach (IWord word in wordList)
             {
                 if (pre != null)
                 {
@@ -65,7 +66,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
     protected void roleTag(List<List<IWord>> sentenceList)
     {
         int i = 0;
-        for (List<IWord> wordList : sentenceList)
+        foreach (List<IWord> wordList in sentenceList)
         {
             Precompiler.compileWithoutNT(wordList);
             if (verbose)
@@ -80,7 +81,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             // 标注上文
             Iterator<IWord> iterator = wordLinkedList.iterator();
             IWord pre = iterator.next();
-            while (iterator.hasNext())
+            while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("nt") && !pre.getLabel().StartsWith("nt"))
@@ -93,7 +94,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             // 标注下文
             iterator = wordLinkedList.descendingIterator();
             pre = iterator.next();
-            while (iterator.hasNext())
+            while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
                 if (current.getLabel().StartsWith("nt") && !pre.getLabel().StartsWith("nt"))
@@ -108,7 +109,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 iterator = wordLinkedList.iterator();
                 IWord first = iterator.next();
                 IWord second = iterator.next();
-                while (iterator.hasNext())
+                while (iterator.MoveNext())
                 {
                     IWord third = iterator.next();
                     if (first.getLabel().StartsWith("nt") && third.getLabel().StartsWith("nt") && !second.getLabel().StartsWith("nt"))
@@ -121,8 +122,8 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 if (verbose) Console.WriteLine("标注中间 " + wordList);
             }
             // 处理整个
-            ListIterator<IWord> listIterator = wordLinkedList.listIterator();
-            while (listIterator.hasNext())
+            ListIterator<IWord> listIterator = wordLinkedList.GetEnumerator();
+            while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
                 string label = word.getLabel();
@@ -135,7 +136,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                     {
                         listIterator.Remove();
                         Word last = null;
-                        for (Word inner : ((CompoundWord) word).innerList)
+                        foreach (Word inner in ((CompoundWord) word).innerList)
                         {
                             last = inner;
                             string innerLabel = inner.label;

@@ -1,14 +1,16 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
-public class VocabWord implements Comparable<VocabWord>
+public class VocabWord : IComparable<VocabWord>
 {
 
     public static readonly int MAX_CODE_LENGTH = 40;
 
-    int cn, codelen;
-    int[] point;
-    string word;
-    char[] code;
+    public int cn, codelen;
+    public int[] point;
+    public string word;
+    public char[] code;
 
     public VocabWord(string word)
     {
@@ -45,7 +47,7 @@ public class VocabWord implements Comparable<VocabWord>
     }
 
     //@Override
-    public int compareTo(VocabWord that)
+    public int CompareTo(VocabWord that)
     {
         return that.cn - this.cn;
     }

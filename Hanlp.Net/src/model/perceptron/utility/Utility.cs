@@ -12,11 +12,14 @@
 using com.hankcs.hanlp.corpus.document;
 using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.model.perceptron;
 using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.tagset;
 using com.hankcs.hanlp.model.perceptron.utility;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.tokenizer.lexical;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace com.hankcs.hanlp.model.perceptron.utility;
@@ -54,7 +57,7 @@ public class Utility
         Random rnd = new Random();
         for (int i = ar.Length - 1; i > 0; i--)
         {
-            int index = rnd.nextInt(i + 1);
+            int index = rnd.Next(i + 1);
             // Simple swap
             int a = ar[index];
             ar[index] = ar[i];
@@ -67,7 +70,7 @@ public class Utility
         Random rnd = new Random();
         for (int i = ar.Length - 1; i > 0; i--)
         {
-            int index = rnd.nextInt(i + 1);
+            int index = rnd.Next(i + 1);
             // Simple swap
             T a = ar[index];
             ar[index] = ar[i];
@@ -91,11 +94,11 @@ public class Utility
      */
     public static void convertPKUtoCWS(string inputFolder, string outputFile, int begin, int end)
     {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
+        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(outputFile), "UTF-8"));
         CorpusLoader.walk(inputFolder, new CW()
 
         );
-        bw.close();
+        bw.Close();
     }
 
     public class CW : CorpusLoader.Handler
@@ -117,7 +120,7 @@ public class Utility
                     int index = 0;
                     foreach (IWord iWord in sentence)
                     {
-                        bw.write(iWord.getValue());
+                        bw.write(iWord.Value);
                         if (++index != sentence.size())
                         {
                             bw.write(' ');
@@ -144,9 +147,9 @@ public class Utility
      */
     public static void convertPKUtoPOS(string inputFolder, string outputFile, int begin, int end)
     {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
+        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(outputFile), "UTF-8"));
         CorpusLoader.walk(inputFolder, new());
-        bw.close();
+        bw.Close();
     }
     public class CL : CorpusLoader.Handler
     {
@@ -191,7 +194,7 @@ public class Utility
         List<List<Word>> output = new ArrayList<List<Word>>(document.size());
         foreach (List<IWord> sentence in document)
         {
-            List<Word> s = new (sentence.size());
+            List<Word> s = new(sentence.size());
             foreach (IWord iWord in sentence)
             {
                 if (iWord is Word)
@@ -200,7 +203,7 @@ public class Utility
                 }
                 else if (isNer(iWord, nerTag))
                 {
-                    s.Add(new Word(iWord.getValue(), iWord.getLabel()));
+                    s.Add(new Word(iWord.Value, iWord.getLabel()));
                 }
                 else
                 {
@@ -237,7 +240,7 @@ public class Utility
         int i = -1;
         foreach (Word word in wordList)
         {
-            wordArray[++i] = word.getValue();
+            wordArray[++i] = word.Value;
         }
 
         return wordArray;
@@ -248,10 +251,13 @@ public class Utility
         // int goldTotal = 0, predTotal = 0, correct = 0;
         int[] stat = new int[3];
         Array.Fill(stat, 0);
-        IOUtility.loadInstance(developFile, new InstanceHandler()
-        {
-            //@Override
-            public bool process(Sentence sentence)
+        IOUtility.loadInstance(developFile, new LI());
+        return stat;
+    }
+    public class LI : InstanceHandler
+    {
+        //@Override
+        public bool process(Sentence sentence)
         {
             List<Word> wordList = sentence.toSimpleWordList();
             string[] wordArray = toWordArray(wordList);
@@ -297,192 +303,190 @@ public class Utility
 
             return false;
         }
-    });
-return stat;
     }
 
-/**
- * 将句子转换为 （单词，词性，NER标签）三元组
- *
- * @param sentence
- * @param tagSet
- * @return
- */
-public static List<string[]> convertSentenceToNER(Sentence sentence, NERTagSet tagSet)
-{
-    List<string[]> collector = new LinkedList<string[]>();
-    HashSet<string> nerLabels = tagSet.nerLabels;
-    foreach(IWord word in sentence.wordList)
+    /**
+     * 将句子转换为 （单词，词性，NER标签）三元组
+     *
+     * @param sentence
+     * @param tagSet
+     * @return
+     */
+    public static List<string[]> convertSentenceToNER(Sentence sentence, NERTagSet tagSet)
     {
-        if (word is CompoundWord)
+        List<string[]> collector = new();
+        HashSet<string> nerLabels = tagSet.nerLabels;
+        foreach (IWord word in sentence.wordList)
         {
-            List<Word> wordList = ((CompoundWord)word).innerList;
-            Word[] words = wordList.ToArray(new Word[0]);
-
-            if (nerLabels.Contains(word.getLabel()))
+            if (word is CompoundWord)
             {
-                collector.Add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
-                for (int i = 1; i < words.Length - 1; i++)
+                List<Word> wordList = ((CompoundWord)word).innerList;
+                Word[] words = wordList.ToArray();
+
+                if (nerLabels.Contains(word.getLabel()))
                 {
-                    collector.Add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
-                }
-                collector.Add(new string[]{words[words.Length - 1].value, words[words.Length - 1].label,
+                    collector.Add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
+                    for (int i = 1; i < words.Length - 1; i++)
+                    {
+                        collector.Add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
+                    }
+                    collector.Add(new string[]{words[words.Length - 1].value, words[words.Length - 1].label,
                         tagSet.E_TAG_PREFIX + word.getLabel()});
+                }
+                else
+                {
+                    foreach (Word w in words)
+                    {
+                        collector.Add(new string[] { w.value, w.label, tagSet.O_TAG });
+                    }
+                }
             }
             else
             {
-                foreach (Word w in words)
+                if (nerLabels.Contains(word.getLabel()))
                 {
-                    collector.Add(new string[] { w.value, w.label, tagSet.O_TAG });
+                    // 单个实体
+                    collector.Add(new string[] { word.Value, word.getLabel(), tagSet.S_TAG });
+                }
+                else
+                {
+                    collector.Add(new string[] { word.Value, word.getLabel(), tagSet.O_TAG });
                 }
             }
         }
-        else
+        return collector;
+    }
+
+    public static void normalize(Sentence sentence)
+    {
+        foreach (IWord word in sentence.wordList)
         {
-            if (nerLabels.Contains(word.getLabel()))
+            if (word is CompoundWord)
             {
-                // 单个实体
-                collector.Add(new string[] { word.getValue(), word.getLabel(), tagSet.S_TAG });
+                foreach (Word child in ((CompoundWord)word).innerList)
+                {
+                    child.setValue(CharTable.convert(child.Value));
+                }
             }
             else
             {
-                collector.Add(new string[] { word.getValue(), word.getLabel(), tagSet.O_TAG });
+                word.setValue(CharTable.convert(word.Value));
             }
         }
     }
-    return collector;
-}
 
-public static void normalize(Sentence sentence)
-{
-    foreach (IWord word in sentence.wordList)
+    public static Dictionary<string, double[]> evaluateNER(NERecognizer recognizer, string goldFile)
     {
-        if (word is CompoundWord)
+        Dictionary<string, double[]> scores = new Dictionary<string, double[]>();
+        double[] avg = new double[] { 0, 0, 0 };
+        scores.Add("avg.", avg);
+        NERTagSet tagSet = recognizer.getNERTagSet();
+        IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(goldFile);
+        foreach (string line_ in lineIterator)
         {
-            for (Word child in ((CompoundWord)word).innerList)
+            string line = line_.Trim();
+            if (line.isEmpty()) continue;
+            Sentence sentence = Sentence.create(line);
+            if (sentence == null) continue;
+            string[][] table = reshapeNER(convertSentenceToNER(sentence, tagSet));
+            HashSet<string> pred = combineNER(recognizer.recognize(table[0], table[1]), tagSet);
+            HashSet<string> gold = combineNER(table[2], tagSet);
+            foreach (string p in pred)
             {
-                child.setValue(CharTable.convert(child.getValue()));
+                string type = p.Split("\t")[2];
+                double[] s = scores.get(type);
+                if (s == null)
+                {
+                    s = new double[] { 0, 0, 0 };
+                    scores.Add(type, s);
+                }
+                if (gold.Contains(p))
+                {
+                    ++s[2]; // 正确识别该类命名实体数
+                    ++avg[2];
+                }
+                ++s[0]; // 识别出该类命名实体总数
+                ++avg[0];
             }
-        }
-        else
-        {
-            word.setValue(CharTable.convert(word.getValue()));
-        }
-    }
-}
-
-public static Dictionary<string, double[]> evaluateNER(NERecognizer recognizer, string goldFile)
-{
-    Dictionary<string, double[]> scores = new Dictionary<string, double[]>();
-    double[] avg = new double[] { 0, 0, 0 };
-    scores.put("avg.", avg);
-    NERTagSet tagSet = recognizer.getNERTagSet();
-    IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(goldFile);
-    for (string line in lineIterator)
-    {
-        line = line.trim();
-        if (line.isEmpty()) continue;
-        Sentence sentence = Sentence.create(line);
-        if (sentence == null) continue;
-        string[][] table = reshapeNER(convertSentenceToNER(sentence, tagSet));
-        HashSet<string> pred = combineNER(recognizer.recognize(table[0], table[1]), tagSet);
-        HashSet<string> gold = combineNER(table[2], tagSet);
-        for (string p in pred)
-        {
-            string type = p.Split("\t")[2];
-            double[] s = scores.get(type);
-            if (s == null)
+            foreach (string g in gold)
             {
-                s = new double[] { 0, 0, 0 };
-                scores.put(type, s);
+                string type = g.Split("\t")[2];
+                double[] s = scores.get(type);
+                if (s == null)
+                {
+                    s = new double[] { 0, 0, 0 };
+                    scores.Add(type, s);
+                }
+                ++s[1]; // 该类命名实体总数
+                ++avg[1];
             }
-            if (gold.Contains(p))
+        }
+        foreach (double[] s in scores.values())
+        {
+            if (s[2] == 0)
             {
-                ++s[2]; // 正确识别该类命名实体数
-                ++avg[2];
+                s[0] = 0;
+                s[1] = 0;
+                continue;
             }
-            ++s[0]; // 识别出该类命名实体总数
-            ++avg[0];
+            s[1] = s[2] / s[1] * 100; // R=正确识别该类命名实体数/该类命名实体总数×100%
+            s[0] = s[2] / s[0] * 100; // P=正确识别该类命名实体数/识别出该类命名实体总数×100%
+            s[2] = 2 * s[0] * s[1] / (s[0] + s[1]);
         }
-        foreach (string g in gold)
+        return scores;
+    }
+
+    public static HashSet<string> combineNER(string[] nerArray, NERTagSet tagSet)
+    {
+        HashSet<string> result = new HashSet<string>();
+        int begin = 0;
+        string prePos = NERTagSet.posOf(nerArray[0]);
+        for (int i = 1; i < nerArray.Length; i++)
         {
-            string type = g.Split("\t")[2];
-            double[] s = scores.get(type);
-            if (s == null)
+            if (nerArray[i][0] == tagSet.B_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR || nerArray[i][0] == tagSet.O_TAG_CHAR)
             {
-                s = new double[] { 0, 0, 0 };
-                scores.put(type, s);
+                if (i - begin > 1)
+                    result.Add(string.Format("%d\t%d\t%s", begin, i, prePos));
+                begin = i;
             }
-            ++s[1]; // 该类命名实体总数
-            ++avg[1];
+            prePos = NERTagSet.posOf(nerArray[i]);
         }
-    }
-    for (double[] s in scores.values())
-    {
-        if (s[2] == 0)
+        if (nerArray.Length - 1 - begin > 1)
         {
-            s[0] = 0;
-            s[1] = 0;
-            continue;
+            result.Add(string.Format("%d\t%d\t%s", begin, nerArray.Length, prePos));
         }
-        s[1] = s[2] / s[1] * 100; // R=正确识别该类命名实体数/该类命名实体总数×100%
-        s[0] = s[2] / s[0] * 100; // P=正确识别该类命名实体数/识别出该类命名实体总数×100%
-        s[2] = 2 * s[0] * s[1] / (s[0] + s[1]);
+        return result;
     }
-    return scores;
-}
 
-public static HashSet<string> combineNER(string[] nerArray, NERTagSet tagSet)
-{
-    HashSet<string> result = new HashSet<string>();
-    int begin = 0;
-    string prePos = NERTagSet.posOf(nerArray[0]);
-    for (int i = 1; i < nerArray.Length; i++)
+    public static string[][] reshapeNER(List<string[]> ner)
     {
-        if (nerArray[i][0] == tagSet.B_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR || nerArray[i][0] == tagSet.O_TAG_CHAR)
+        string[] wordArray = new string[ner.size()];
+        string[] posArray = new string[ner.size()];
+        string[] nerArray = new string[ner.size()];
+        reshapeNER(ner, wordArray, posArray, nerArray);
+        return new string[][] { wordArray, posArray, nerArray };
+    }
+
+    public static void reshapeNER(List<string[]> collector, string[] wordArray, string[] posArray, string[] tagArray)
+    {
+        int i = 0;
+        foreach (string[] tuple in collector)
         {
-            if (i - begin > 1)
-                result.Add(string.Format("%d\t%d\t%s", begin, i, prePos));
-            begin = i;
+            wordArray[i] = tuple[0];
+            posArray[i] = tuple[1];
+            tagArray[i] = tuple[2];
+            ++i;
         }
-        prePos = NERTagSet.posOf(nerArray[i]);
     }
-    if (nerArray.Length - 1 - begin > 1)
-    {
-        result.Add(string.Format("%d\t%d\t%s", begin, nerArray.Length, prePos));
-    }
-    return result;
-}
 
-public static string[][] reshapeNER(List<string[]> ner)
-{
-    string[] wordArray = new string[ner.size()];
-    string[] posArray = new string[ner.size()];
-    string[] nerArray = new string[ner.size()];
-    reshapeNER(ner, wordArray, posArray, nerArray);
-    return new string[][] { wordArray, posArray, nerArray };
-}
-
-public static void reshapeNER(List<string[]> collector, string[] wordArray, string[] posArray, string[] tagArray)
-{
-    int i = 0;
-    for (string[] tuple in collector)
+    public static void printNERScore(Dictionary<string, double[]> scores)
     {
-        wordArray[i] = tuple[0];
-        posArray[i] = tuple[1];
-        tagArray[i] = tuple[2];
-        ++i;
+        Console.WriteLine("%4s\t%6s\t%6s\t%6s\n", "NER", "P", "R", "F1");
+        foreach (KeyValuePair<string, double[]> entry in scores.entrySet())
+        {
+            string type = entry.Key;
+            double[] s = entry.Value;
+            Console.WriteLine("%4s\t%6.2f\t%6.2f\t%6.2f\n", type, s[0], s[1], s[2]);
+        }
     }
-}
-
-public static void printNERScore(Dictionary<string, double[]> scores)
-{
-    System._out.printf("%4s\t%6s\t%6s\t%6s\n", "NER", "P", "R", "F1");
-    for (KeyValuePair<string, double[]> entry in scores.entrySet())
-    {
-        string type = entry.getKey();
-        double[] s = entry.getValue();
-        System._out.printf("%4s\t%6.2f\t%6.2f\t%6.2f\n", type, s[0], s[1], s[2]);
-    }
-}
 }

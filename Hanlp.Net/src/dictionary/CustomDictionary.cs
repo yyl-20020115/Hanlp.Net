@@ -72,7 +72,7 @@ public class CustomDictionary
                 Nature defaultNature = Nature.n;
                 File file = new File(p);
                 string fileName = file.getName();
-                int cut = fileName.lastIndexOf(' ');
+                int cut = fileName.LastIndexOf(' ');
                 if (cut > 0)
                 {
                     // 有默认词性
@@ -95,7 +95,7 @@ public class CustomDictionary
             if (map.size() == 0)
             {
                 logger.warning("没有加载到任何词条");
-                map.put(Predefine.TAG_OTHER, null);     // 当作空白占位符
+                map.Add(Predefine.TAG_OTHER, null);     // 当作空白占位符
             }
             logger.info("正在构建DoubleArrayTrie……");
             dat.build(map);
@@ -107,9 +107,9 @@ public class CustomDictionary
                 List<CoreDictionary.Attribute> attributeList = new LinkedList<CoreDictionary.Attribute>();
                 for (KeyValuePair<string, CoreDictionary.Attribute> entry : map.entrySet())
                 {
-                    attributeList.Add(entry.getValue());
+                    attributeList.Add(entry.Value);
                 }
-                DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(mainPath + Predefine.BIN_EXT)));
+                Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(mainPath + Predefine.BIN_EXT)));
                 // 缓存用户词性
                 if (customNatureCollector.isEmpty()) // 热更新
                 {
@@ -121,12 +121,12 @@ public class CustomDictionary
                 IOUtil.writeCustomNature(_out, customNatureCollector);
                 // 缓存正文
                 _out.writeInt(attributeList.size());
-                for (CoreDictionary.Attribute attribute : attributeList)
+                foreach (CoreDictionary.Attribute attribute in attributeList)
                 {
                     attribute.save(_out);
                 }
                 dat.save(_out);
-                _out.close();
+                _out.Close();
             }
         }
         catch (FileNotFoundException e)
@@ -169,10 +169,10 @@ public class CustomDictionary
             {
                 splitter = ",";
             }
-            BufferedReader br = new BufferedReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
             string line;
             bool firstLine = true;
-            while ((line = br.readLine()) != null)
+            while ((line = br.ReadLine()) != null)
             {
                 if (firstLine)
                 {
@@ -202,7 +202,7 @@ public class CustomDictionary
                 //                if (updateAttributeIfExist(param[0], attribute, map, rewriteTable)) continue;
                 map.Add(param[0], attribute);
             }
-            br.close();
+            br.Close();
         }
         catch (Exception e)
         {
@@ -292,7 +292,7 @@ public class CustomDictionary
         if (att == null) return false;
         if (dat.set(word, att)) return true;
         if (trie == null) trie = new BinTrie<CoreDictionary.Attribute>();
-        trie.put(word, att);
+        trie.Add(word, att);
         return true;
     }
 
@@ -330,28 +330,28 @@ public class CustomDictionary
             }
             ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
             if (byteArray == null) return false;
-            int size = byteArray.nextInt();
+            int size = byteArray.Next();
             if (size < 0)   // 一种兼容措施,当size小于零表示文件头部储存了-size个用户词性
             {
                 while (++size <= 0)
                 {
                     Nature.create(byteArray.nextString());
                 }
-                size = byteArray.nextInt();
+                size = byteArray.Next();
             }
             CoreDictionary.Attribute[] attributes = new CoreDictionary.Attribute[size];
             Nature[] natureIndexArray = Nature.values();
             for (int i = 0; i < size; ++i)
             {
                 // 第一个是全部频次，第二个是词性个数
-                int currentTotalFrequency = byteArray.nextInt();
-                int Length = byteArray.nextInt();
+                int currentTotalFrequency = byteArray.Next();
+                int Length = byteArray.Next();
                 attributes[i] = new CoreDictionary.Attribute(Length);
                 attributes[i].totalFrequency = currentTotalFrequency;
                 for (int j = 0; j < Length; ++j)
                 {
-                    attributes[i].nature[j] = natureIndexArray[byteArray.nextInt()];
-                    attributes[i].frequency[j] = byteArray.nextInt();
+                    attributes[i].nature[j] = natureIndexArray[byteArray.Next()];
+                    attributes[i].frequency[j] = byteArray.Next();
                 }
             }
             if (!dat.load(byteArray, attributes)) return false;
@@ -387,7 +387,7 @@ public class CustomDictionary
         {
             File f = new File(p);
             string fileName = f.getName();
-            int cut = fileName.lastIndexOf(' ');
+            int cut = fileName.LastIndexOf(' ');
             if (cut > 0)
             {
                 p = f.getParent() + File.separator + fileName.substring(0, cut);
@@ -579,7 +579,7 @@ public class CustomDictionary
             while ((entry = searcher.next()) != null)
             {
                 offset = searcher.getOffset();
-                processor.hit(offset, offset + entry.getKey().Length, entry.getValue());
+                processor.hit(offset, offset + entry.Key.Length, entry.Value);
             }
         }
         DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(text, 0);

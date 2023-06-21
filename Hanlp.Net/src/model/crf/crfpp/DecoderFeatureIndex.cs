@@ -33,7 +33,7 @@ public class DecoderFeatureIndex : FeatureIndex
             bigramTempls_ = (List<string>) ois.readObject();
             dat = (MutableDoubleArrayTrieInteger) ois.readObject();
             alpha_ = (double[]) ois.readObject();
-            ois.close();
+            ois.Close();
             return true;
         }
         catch (Exception e)
@@ -52,22 +52,22 @@ public class DecoderFeatureIndex : FeatureIndex
                 Console.Error.WriteLine("Fail to read binary model " + binarymodel);
                 return false;
             }
-            OutputStreamWriter osw = new OutputStreamWriter(IOUtil.newOutputStream(textmodel), "UTF-8");
+            StreamWriter osw = new StreamWriter(IOUtil.newOutputStream(textmodel), "UTF-8");
             osw.write("version: " + Encoder.MODEL_VERSION + "\n");
             osw.write("cost-factor: " + costFactor_ + "\n");
             osw.write("maxid: " + maxid_ + "\n");
             osw.write("xsize: " + xsize_ + "\n");
             osw.write("\n");
-            for (string y : y_)
+            foreach (string y in y_)
             {
                 osw.write(y + "\n");
             }
             osw.write("\n");
-            for (string utempl : unigramTempls_)
+            foreach (string utempl in unigramTempls_)
             {
                 osw.write(utempl + "\n");
             }
-            for (string bitempl : bigramTempls_)
+            foreach (string bitempl in bigramTempls_)
             {
                 osw.write(bitempl + "\n");
             }
@@ -75,7 +75,7 @@ public class DecoderFeatureIndex : FeatureIndex
 
             for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dat)
             {
-                osw.write(pair.getValue() + " " + pair.getKey() + "\n");
+                osw.write(pair.Value + " " + pair.Key + "\n");
             }
 
             osw.write("\n");
@@ -85,7 +85,7 @@ public class DecoderFeatureIndex : FeatureIndex
                 string val = new DecimalFormat("0.0000000000000000").Format(alpha_[k]);
                 osw.write(val + "\n");
             }
-            osw.close();
+            osw.Close();
             return true;
         }
         catch (Exception e)
@@ -115,22 +115,22 @@ public class DecoderFeatureIndex : FeatureIndex
             }
 
             isr = new InputStreamReader(IOUtil.newInputStream(filename1), "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
+            TextReader br = new TextReader(isr);
             string line;
 
-            int version = int.valueOf(br.readLine().substring("version: ".Length));
-            costFactor_ = Double.valueOf(br.readLine().substring("cost-factor: ".Length));
-            maxid_ = int.valueOf(br.readLine().substring("maxid: ".Length));
-            xsize_ = int.valueOf(br.readLine().substring("xsize: ".Length));
+            int version = int.valueOf(br.ReadLine().substring("version: ".Length));
+            costFactor_ = Double.valueOf(br.ReadLine().substring("cost-factor: ".Length));
+            maxid_ = int.valueOf(br.ReadLine().substring("maxid: ".Length));
+            xsize_ = int.valueOf(br.ReadLine().substring("xsize: ".Length));
             Console.WriteLine("Done reading meta-info");
-            br.readLine();
+            br.ReadLine();
 
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 y_.Add(line);
             }
             Console.WriteLine("Done reading labels");
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 if (line.StartsWith("U"))
                 {
@@ -142,13 +142,13 @@ public class DecoderFeatureIndex : FeatureIndex
                 }
             }
             Console.WriteLine("Done reading templates");
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
-                string[] content = line.trim().Split(" ");
-                dat.put(content[1], int.valueOf(content[0]));
+                string[] content = line.Trim().Split(" ");
+                dat.Add(content[1], int.valueOf(content[0]));
             }
             List<Double> alpha = new ArrayList<Double>();
-            while ((line = br.readLine()) != null && line.Length > 0)
+            while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 alpha.Add(Double.valueOf(line));
             }
@@ -158,7 +158,7 @@ public class DecoderFeatureIndex : FeatureIndex
             {
                 alpha_[i] = alpha.get(i);
             }
-            br.close();
+            br.Close();
 
             if (cacheBinModel)
             {
@@ -173,7 +173,7 @@ public class DecoderFeatureIndex : FeatureIndex
                 oos.writeObject(bigramTempls_);
                 oos.writeObject(dat);
                 oos.writeObject(alpha_);
-                oos.close();
+                oos.Close();
             }
         }
         catch (Exception e)
@@ -182,7 +182,7 @@ public class DecoderFeatureIndex : FeatureIndex
             {
                 try
                 {
-                    isr.close();
+                    isr.Close();
                 }
                 catch (Exception e2)
                 {

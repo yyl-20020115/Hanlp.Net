@@ -103,9 +103,9 @@ public class Document : BagOfWordsDocument
 //        sb.Append('\n');
 //        for (KeyValuePair<int, int[]> entry : tfMap.entrySet())
 //        {
-//            sb.Append(lexicon.getWord(entry.getKey()));
+//            sb.Append(lexicon.getWord(entry.Key));
 //            sb.Append('\t');
-//            sb.Append(entry.getValue()[0]);
+//            sb.Append(entry.Value[0]);
 //            sb.Append('\n');
 //        }
 //        return sb.ToString();

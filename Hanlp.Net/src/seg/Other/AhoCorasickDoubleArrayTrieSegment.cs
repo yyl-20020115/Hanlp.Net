@@ -67,7 +67,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         if (trie == null)
         {
             logger.warning("还未加载任何词典");
-            return Collections.emptyList();
+            return new();
         }
          int[] wordNet = new int[sentence.Length];
         Array.Fill(wordNet, 1);

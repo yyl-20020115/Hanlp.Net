@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Text;
+
 namespace com.hankcs.hanlp.corpus.dependency.CoNll;
 
 
@@ -36,7 +38,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
         {
             word[i++] = new CoNLLWord(line);
         }
-        for (CoNLLWord nllWord : word)
+        foreach (CoNLLWord nllWord in word)
         {
             int head = int.parseInt(lineArray[nllWord.ID - 1].value[6]) - 1;
             if (head != -1)
@@ -59,7 +61,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder(word.Length * 50);
-        for (CoNLLWord word : this.word)
+        foreach (CoNLLWord word in this.word)
         {
             sb.Append(word);
             sb.Append('\n');
@@ -90,7 +92,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     {
         CoNLLWord[] wordArray = new CoNLLWord[word.Length + 1];
         wordArray[0] = CoNLLWord.ROOT;
-        System.arraycopy(word, 0, wordArray, 1, word.Length);
+        Array.Copy(word, 0, wordArray, 1, word.Length);
 
         return wordArray;
     }
@@ -107,7 +109,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
         {
             int index;
             //@Override
-            public bool hasNext()
+            public bool MoveNext()
             {
                 return index < word.Length;
             }

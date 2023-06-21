@@ -33,9 +33,9 @@ public class CoreStopWordDictionary
             try
             {
                 dictionary = new StopWordDictionary(HanLP.Config.CoreStopWordDictionaryPath);
-                DataOutputStream _out = new DataOutputStream(new BufferedOutputStream(IOUtil.newOutputStream(HanLP.Config.CoreStopWordDictionaryPath + Predefine.BIN_EXT)));
+                Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(HanLP.Config.CoreStopWordDictionaryPath + Predefine.BIN_EXT)));
                 dictionary.save(_out);
-                _out.close();
+                _out.Close();
             }
             catch (Exception e)
             {
@@ -145,8 +145,8 @@ public class CoreStopWordDictionary
      */
     public static void apply(List<Term> termList)
     {
-        ListIterator<Term> listIterator = termList.listIterator();
-        while (listIterator.hasNext())
+        ListIterator<Term> listIterator = termList.GetEnumerator();
+        while (listIterator.MoveNext())
         {
             if (shouldRemove(listIterator.next())) listIterator.Remove();
         }

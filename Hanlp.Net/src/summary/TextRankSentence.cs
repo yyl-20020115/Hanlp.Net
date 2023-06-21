@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary.stopword;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.summary;
 
 
@@ -99,7 +104,7 @@ public class TextRankSentence
                     if (j == i || weight_sum[j] == 0) continue;
                     m[i] += (d * weight[j][i] / weight_sum[j] * vertex[j]);
                 }
-                double diff = Math.abs(m[i] - vertex[i]);
+                double diff = Math.Abs(m[i] - vertex[i]);
                 if (diff > max_diff)
                 {
                     max_diff = diff;
@@ -111,7 +116,7 @@ public class TextRankSentence
         // 我们来排个序吧
         for (int i = 0; i < D; ++i)
         {
-            top.put(vertex[i], i);
+            top.Add(vertex[i], i);
         }
     }
 
@@ -143,7 +148,7 @@ public class TextRankSentence
     private static double sum(double[] array)
     {
         double total = 0;
-        for (double v : array)
+        foreach (double v in array)
         {
             total += v;
         }
@@ -174,11 +179,11 @@ public class TextRankSentence
         List<string> sentences = new ();
         for (string line : document.Split("[\r\n]"))
         {
-            line = line.trim();
+            line = line.Trim();
             if (line.Length == 0) continue;
             for (string sent : line.Split(sentence_separator))		// [，,。:：“”？?！!；;]
             {
-                sent = sent.trim();
+                sent = sent.Trim();
                 if (sent.Length == 0) continue;
                 sentences.Add(sent);
             }
@@ -195,12 +200,12 @@ public class TextRankSentence
      */
     private static List<List<string>> convertSentenceListToDocument(List<string> sentenceList)
     {
-        List<List<string>> docs = new ArrayList<List<string>>(sentenceList.size());
-        for (string sentence : sentenceList)
+        List<List<string>> docs = new (sentenceList.Count);
+        foreach (string sentence in sentenceList)
         {
             List<Term> termList = StandardTokenizer.segment(sentence.ToCharArray());
-            List<string> wordList = new LinkedList<string>();
-            for (Term term : termList)
+            List<string> wordList = new ();
+            foreach (Term term in termList)
             {
                 if (CoreStopWordDictionary.shouldInclude(term))
                 {
@@ -238,8 +243,8 @@ public class TextRankSentence
         List<List<string>> docs = convertSentenceListToDocument(sentenceList);
         TextRankSentence textRank = new TextRankSentence(docs);
         int[] topSentence = textRank.getTopSentence(size);
-        List<string> resultList = new LinkedList<string>();
-        for (int i : topSentence)
+        List<string> resultList = new ();
+        foreach (int i in topSentence)
         {
             resultList.Add(sentenceList.get(i));
         }
@@ -270,15 +275,15 @@ public class TextRankSentence
     {
         List<string> sentenceList = splitSentence(document, sentence_separator);
 
-        int sentence_count = sentenceList.size();
+        int sentence_count = sentenceList.Count;
         int document_length = document.Length;
         int sentence_length_avg = document_length / sentence_count;
         int size = max_length / sentence_length_avg + 1;
         List<List<string>> docs = convertSentenceListToDocument(sentenceList);
         TextRankSentence textRank = new TextRankSentence(docs);
         int[] topSentence = textRank.getTopSentence(size);
-        List<string> resultList = new LinkedList<string>();
-        for (int i : topSentence)
+        List<string> resultList = new ();
+        foreach (int i in topSentence)
         {
             resultList.Add(sentenceList.get(i));
         }
@@ -290,22 +295,25 @@ public class TextRankSentence
 
     private static List<string> permutation(List<string> resultList, List<string> sentenceList)
     {
-        Collections.sort(resultList, new Comparator<string>() {
-            //@Override
-            public int compare(string o1, string o2) {
-                int num1 = sentenceList.IndexOf(o1);
-                int num2 = sentenceList.IndexOf(o2);
-                return num1.compareTo(num2);
-            }
-        });
+        Collections.sort(resultList, new ST());
         return resultList;
     }
 
+    public class ST : IComparer<string>
+    {
+        //@Override
+        public int Compare(string o1, string o2)
+        {
+            int num1 = sentenceList.IndexOf(o1);
+            int num2 = sentenceList.IndexOf(o2);
+            return num1.compareTo(num2);
+        }
+    }
     private static List<string> pick_sentences(List<string> resultList, int max_length)
     {
         List<string> summary = new ();
         int count = 0;
-        for (string result : resultList) {
+        foreach(string result in resultList) {
             if (count + result.Length <= max_length) {
                 summary.Add(result);
                 count += result.Length;

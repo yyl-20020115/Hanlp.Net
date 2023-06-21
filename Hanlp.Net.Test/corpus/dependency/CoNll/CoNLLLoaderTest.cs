@@ -36,7 +36,7 @@ public class CoNLLLoaderTest : TestCase
 //     */
 //    public void testMakeCRF() 
 //    {
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:\\Tools\\CRF++-0.58\\example\\dependency\\dev.txt")));
+//        TextWriter bw = new TextWriter(new StreamWriter(new FileStream("D:\\Tools\\CRF++-0.58\\example\\dependency\\dev.txt")));
 //        LinkedList<CoNLLSentence> coNLLSentences = CoNLLLoader.loadSentenceList("D:\\Doc\\语料库\\依存分析训练数据\\THU\\dev.conll.fixed.txt");
 //        for (CoNLLSentence coNLLSentence : coNLLSentences)
 //        {
@@ -77,7 +77,7 @@ public class CoNLLLoaderTest : TestCase
 //            }
 //            bw.newLine();
 //        }
-//        bw.close();
+//        bw.Close();
 //    }
 //
 //    /**

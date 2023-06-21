@@ -9,6 +9,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.algorithm;
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.summary;
@@ -47,7 +48,7 @@ public class TfIdfCounter : KeywordExtractor
     {
         ;
         this.filterStopWord = filterStopWord;
-        tfMap = new HashMap<Object, Dictionary<string, Double>>();
+        tfMap = new ();
     }
 
     public TfIdfCounter(Segment defaultSegment)
@@ -63,7 +64,7 @@ public class TfIdfCounter : KeywordExtractor
         List<string> r = new List<string>(entryList.size());
         foreach (KeyValuePair<string, Double> entry in entryList)
         {
-            r.Add(entry.getKey());
+            r.Add(entry.Key);
         }
 
         return r;
@@ -88,7 +89,7 @@ public class TfIdfCounter : KeywordExtractor
     {
         List<string> words = convert(termList);
         Dictionary<string, Double> tf = TfIdf.tf(words);
-        tfMap.put(id, tf);
+        tfMap.Add(id, tf);
         idf = null;
     }
 
@@ -147,8 +148,8 @@ public class TfIdfCounter : KeywordExtractor
         tfidfMap = new (idf.size());
         foreach (KeyValuePair<Object, Dictionary<string, Double>> entry in tfMap.entrySet())
         {
-            Dictionary<string, Double> tfidf = TfIdf.tfIdf(entry.getValue(), idf);
-            tfidfMap.put(entry.getKey(), tfidf);
+            Dictionary<string, Double> tfidf = TfIdf.tfIdf(entry.Value, idf);
+            tfidfMap.Add(entry.Key, tfidf);
         }
         return tfidfMap;
     }
@@ -170,7 +171,7 @@ public class TfIdfCounter : KeywordExtractor
     private List<KeyValuePair<string, Double>> topN(Dictionary<string, Double> tfidfs, int size)
     {
         MaxHeap<KeyValuePair<string, Double>> heap = new MaxHeap<KeyValuePair<string, Double>>(size, new CT());
-        heap.addAll(tfidfs.entrySet());
+        heap.AddRange(tfidfs.entrySet());
         return heap.ToList();
     }
     public class CT: IComparer<KeyValuePair<string, Double>>()
@@ -178,7 +179,7 @@ public class TfIdfCounter : KeywordExtractor
         //@Override
         public int Compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
         {
-            return o1.getValue().compareTo(o2.getValue());
+            return o1.Value.CompareTo(o2.Value);
         }
     }
     public HashSet<Object> documents()
@@ -208,14 +209,14 @@ public class TfIdfCounter : KeywordExtractor
         {
             foreach (KeyValuePair<string, Double> tf in d.entrySet())
             {
-                Double f = result.get(tf.getKey());
+                Double f = result.get(tf.Key);
                 if (f == null)
                 {
-                    result.put(tf.getKey(), tf.getValue());
+                    result.Add(tf.Key, tf.Value);
                 }
                 else
                 {
-                    result.put(tf.getKey(), f + tf.getValue());
+                    result.Add(tf.Key, f + tf.Value);
                 }
             }
         }
@@ -225,7 +226,7 @@ public class TfIdfCounter : KeywordExtractor
 
     private static List<KeyValuePair<string, Double>> sort(Dictionary<string, Double> map)
     {
-        List<KeyValuePair<string, Double>> list = new (map.entrySet());
+        List<KeyValuePair<string, Double>> list = new (map.ToHashSet());
         Collections.sort(list, new CN());
 
         return list;
@@ -235,15 +236,15 @@ public class TfIdfCounter : KeywordExtractor
         //@Override
         public int Compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
         {
-            return o2.getValue().compareTo(o1.getValue());
+            return o2.Value.compareTo(o1.Value);
         }
     }
     private static List<KeyValuePair<string, int>> doubleToInteger(List<KeyValuePair<string, Double>> list)
     {
-        List<KeyValuePair<string, int>> result = new ArrayList<KeyValuePair<string, int>>(list.size());
+        List<KeyValuePair<string, int>> result = new (list.size());
         foreach (KeyValuePair<string, Double> entry in list)
         {
-            result.Add(new AbstractMap.SimpleEntry<string, int>(entry.getKey(), entry.getValue().intValue()));
+            result.Add(new AbstractMap.SimpleEntry<string, int>(entry.Key, entry.Value.intValue()));
         }
 
         return result;

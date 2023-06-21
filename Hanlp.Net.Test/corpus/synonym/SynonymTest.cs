@@ -44,7 +44,7 @@ public class SynonymTest : TestCase
 //
 //    public void testDictionaryEx() 
 //    {
-//        CommonSynonymDictionaryEx dictionaryEx = CommonSynonymDictionaryEx.create(new FileInputStream("data/dictionary/synonym/CoreSynonym.txt"));
+//        CommonSynonymDictionaryEx dictionaryEx = CommonSynonymDictionaryEx.create(new FileStream("data/dictionary/synonym/CoreSynonym.txt"));
 //        String[] array = new String[]
 //            {
 //                "香蕉",

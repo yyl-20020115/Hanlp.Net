@@ -9,6 +9,13 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.dependency.model;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.dependency.common;
+using com.hankcs.hanlp.utility;
+
 namespace com.hankcs.hanlp.model.bigram;
 
 
@@ -41,12 +48,12 @@ public class WordNatureDependencyModel
         if (loadDat(path)) return true;
         Dictionary<string, Attribute> map = new Dictionary<string, Attribute>();
         Dictionary<string, int> tagMap = new Dictionary<string, int>();
-        for (string line : IOUtil.readLineListWithLessMemory(path))
+        foreach (string line in IOUtil.readLineListWithLessMemory(path))
         {
             string[] param = line.Split(" ");
             if (param[0].EndsWith("@"))
             {
-                tagMap.put(param[0], int.parseInt(param[2]));
+                tagMap.Add(param[0], int.parseInt(param[2]));
                 continue;
             }
             int natureCount = (param.Length - 1) / 2;
@@ -56,19 +63,19 @@ public class WordNatureDependencyModel
                 attribute.dependencyRelation[i] = param[1 + 2 * i];
                 attribute.p[i] = int.parseInt(param[2 + 2 * i]);
             }
-            map.put(param[0], attribute);
+            map.Add(param[0], attribute);
         }
         if (map.size() == 0) return false;
         // 为它们计算概率
-        for (KeyValuePair<string, Attribute> entry : map.entrySet())
+        foreach (KeyValuePair<string, Attribute> entry in map.entrySet())
         {
-            string key = entry.getKey();
+            string key = entry.Key;
             string[] param = key.Split("@", 2);
-            Attribute attribute = entry.getValue();
+            Attribute attribute = entry.Value;
             int total = tagMap.get(param[0] + "@");
             for (int i = 0; i < attribute.p.Length; ++i)
             {
-                attribute.p[i] = (float) -Math.log(attribute.p[i] / total);
+                attribute.p[i] = (float) -Math.Log(attribute.p[i] / total);
             }
             // 必须降低平滑处理的权重
             float boost = 1.0f;
@@ -91,20 +98,20 @@ public class WordNatureDependencyModel
 
     bool saveDat(string path, Dictionary<string, Attribute> map)
     {
-        Collection<Attribute> attributeList = map.values();
+        var attributeList = map.values();
         // 缓存值文件
         try
         {
-            DataOutputStream _out = new DataOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            Stream _out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
             _out.writeInt(attributeList.size());
-            for (Attribute attribute : attributeList)
+            foreach (Attribute attribute in attributeList)
             {
                 _out.writeInt(attribute.p.Length);
                 for (int i = 0; i < attribute.p.Length; ++i)
                 {
                     char[] charArray = attribute.dependencyRelation[i].ToCharArray();
                     _out.writeInt(charArray.Length);
-                    for (char c : charArray)
+                    foreach (char c in charArray)
                     {
                         _out.writeChar(c);
                     }
@@ -112,7 +119,7 @@ public class WordNatureDependencyModel
                 }
             }
             if (!trie.save(_out)) return false;
-            _out.close();
+            _out.Close();
         }
         catch (Exception e)
         {
@@ -126,11 +133,11 @@ public class WordNatureDependencyModel
     {
         ByteArray byteArray = ByteArray.createByteArray(path + Predefine.BIN_EXT);
         if (byteArray == null) return false;
-        int size = byteArray.nextInt();
+        int size = byteArray.Next();
         Attribute[] attributeArray = new Attribute[size];
         for (int i = 0; i < attributeArray.Length; ++i)
         {
-            int Length = byteArray.nextInt();
+            int Length = byteArray.Next();
             Attribute attribute = new Attribute(Length);
             for (int j = 0; j < attribute.dependencyRelation.Length; ++j)
             {
@@ -156,6 +163,10 @@ public class WordNatureDependencyModel
      */
     public Edge getEdge(Node from, Node to)
     {
+        if (from is null)
+        {
+            throw new ArgumentNullException(nameof(from));
+        }
         // 首先尝试词+词
         Attribute attribute = get(from.compiledWord, to.compiledWord);
         if (attribute == null) attribute = get(from.compiledWord, WordNatureWeightModelMaker.wrapTag(to.label));
@@ -177,9 +188,9 @@ public class WordNatureDependencyModel
         return get(from + "@" + to);
     }
 
-    static class Attribute
+    class Attribute
     {
-        static Attribute NULL = new Attribute("未知", 10000.0f);
+        public static Attribute NULL = new Attribute("未知", 10000.0f);
         /**
          * 依存关系
          */

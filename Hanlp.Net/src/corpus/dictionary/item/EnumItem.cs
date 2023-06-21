@@ -36,7 +36,7 @@ public class EnumItem<E>
     public EnumItem(E label, int frequency)
     {
         this();
-        labelMap.put(label, frequency);
+        labelMap.Add(label, frequency);
     }
 
     /**
@@ -46,9 +46,9 @@ public class EnumItem<E>
     public EnumItem(params E[] labels)
     {
         this();
-        for (E label : labels)
+        foreach (E label in labels)
         {
-            labelMap.put(label, 1);
+            labelMap.Add(label, 1);
         }
     }
 
@@ -64,7 +64,7 @@ public class EnumItem<E>
             ++frequency;
         }
 
-        labelMap.put(label, frequency);
+        labelMap.Add(label, frequency);
     }
 
     public void addLabel(E label, int frequency)
@@ -79,7 +79,7 @@ public class EnumItem<E>
             innerFrequency += frequency;
         }
 
-        labelMap.put(label, innerFrequency);
+        labelMap.Add(label, innerFrequency);
     }
 
     public bool containsLabel(E label)
@@ -102,9 +102,9 @@ public class EnumItem<E>
         Collections.sort(entries, new ST<int>());
         foreach (KeyValuePair<E, int> entry in entries)
         {
-            sb.Append(entry.getKey());
+            sb.Append(entry.Key);
             sb.Append(' ');
-            sb.Append(entry.getValue());
+            sb.Append(entry.Value);
             sb.Append(' ');
         }
         return sb.ToString();

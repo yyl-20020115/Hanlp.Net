@@ -96,17 +96,17 @@ public class MDAGSet : MDAG , ISet<string>
     //@Override
     public bool containsAll(ICollection c)
     {
-        for (Object e : c)
+        foreach (Object e in c)
             if (!Contains(e))
                 return false;
         return true;
     }
 
     //@Override
-    public bool addAll(ICollection<string> c)
+    public bool AddRange(ICollection<string> c)
     {
         bool modified = false;
-        for (string e : c)
+        foreach (string e in c)
             if (Add(e))
                 modified = true;
         return modified;
@@ -117,7 +117,7 @@ public class MDAGSet : MDAG , ISet<string>
     {
         bool modified = false;
         Iterator<string> it = iterator();
-        while (it.hasNext())
+        while (it.MoveNext())
         {
             if (!c.Contains(it.next()))
             {
@@ -133,7 +133,7 @@ public class MDAGSet : MDAG , ISet<string>
     {
         bool modified = false;
         Iterator it = iterator();
-        while (it.hasNext())
+        while (it.MoveNext())
         {
             if (c.Contains(it.next()))
             {
