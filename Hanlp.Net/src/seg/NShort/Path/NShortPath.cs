@@ -195,10 +195,10 @@ public class NShortPath
             }
 
             // -------------- 输出路径 --------------
-            PathNode[] nArray = new PathNode[stack.size()];
-            for (int i = 0; i < stack.size(); ++i)
+            PathNode[] nArray = new PathNode[stack.Count];
+            for (int i = 0; i < stack.Count; ++i)
             {
-                nArray[i] = stack.get(stack.size() - i - 1);
+                nArray[i] = stack.get(stack.Count - i - 1);
             }
             aPath = new int[nArray.Length];
 
@@ -214,7 +214,7 @@ public class NShortPath
                 curNode = node.from;
                 curIndex = node.index;
 
-            } while (curNode < 1 || (stack.size() != 0 && !fromArray[curNode - 1][curIndex].CanGetNext()));
+            } while (curNode < 1 || (stack.Count != 0 && !fromArray[curNode - 1][curIndex].CanGetNext()));
 
             element = fromArray[curNode - 1][curIndex].GetNext();
         }
@@ -261,12 +261,12 @@ public class NShortPath
         List<int[]> result = new ();
 
         n = Math.Min(Predefine.MAX_SEGMENT_NUM, n);
-        for (int i = 0; i < N && result.size() < n; ++i)
+        for (int i = 0; i < N && result.Count < n; ++i)
         {
             List<int[]> pathList = getPaths(i);
             foreach (int[] path in pathList)
             {
-                if (result.size() == n) break;
+                if (result.Count == n) break;
                 result.Add(path);
             }
         }

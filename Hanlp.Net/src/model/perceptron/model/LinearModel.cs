@@ -49,7 +49,7 @@ public class LinearModel : ICacheAble
     public LinearModel(FeatureMap featureMap)
     {
         this.featureMap = featureMap;
-        parameter = new float[featureMap.size() * featureMap.tagSet.size()];
+        parameter = new float[featureMap.Count * featureMap.tagSet.Count];
     }
 
     public LinearModel(string modelFile) 
@@ -82,55 +82,55 @@ public class LinearModel : ICacheAble
         var featureIdSet = featureMap.entrySet();
         TagSet tagSet = featureMap.tagSet;
         MaxHeap<FeatureSortItem> heap = new MaxHeap<FeatureSortItem>(
-            (int) ((featureIdSet.size() - tagSet.sizeIncludingBos()) * (1.0f - ratio)),
+            (int) ((featureIdSet.Count - tagSet.sizeIncludingBos()) * (1.0f - ratio)),
             new COMP()
         );
 
         logger.start("裁剪特征...\n");
-        int logEvery = (int) Math.Ceiling(featureMap.size() / 10000f);
+        int logEvery = (int) Math.Ceiling(featureMap.Count / 10000f);
         int n = 0;
         foreach (KeyValuePair<string, int> entry in featureIdSet)
         {
-            if (++n % logEvery == 0 || n == featureMap.size())
+            if (++n % logEvery == 0 || n == featureMap.Count)
             {
-                logger._out("\r%.2f%% ", MathUtility.percentage(n, featureMap.size()));
+                logger._out("\r%.2f%% ", MathUtility.percentage(n, featureMap.Count));
             }
             if (entry.Value < tagSet.sizeIncludingBos())
             {
                 continue;
             }
-            FeatureSortItem item = new FeatureSortItem(entry, this.parameter, tagSet.size());
+            FeatureSortItem item = new FeatureSortItem(entry, this.parameter, tagSet.Count);
             if (item.total < threshold) continue;
             heap.Add(item);
         }
         logger.finish("\n裁剪完毕\n");
 
-        int size = heap.size() + tagSet.sizeIncludingBos();
-        float[] parameter = new float[size * tagSet.size()];
+        int size = heap.Count + tagSet.sizeIncludingBos();
+        float[] parameter = new float[size * tagSet.Count];
         MutableDoubleArrayTrieInteger mdat = new MutableDoubleArrayTrieInteger();
         foreach (KeyValuePair<string, int> tag in tagSet)
         {
             mdat.Add("BL=" + tag.Key);
         }
         mdat.Add("BL=_BL_");
-        for (int i = 0; i < tagSet.size() * tagSet.sizeIncludingBos(); i++)
+        for (int i = 0; i < tagSet.Count * tagSet.sizeIncludingBos(); i++)
         {
             parameter[i] = this.parameter[i];
         }
         logger.start("构建双数组trie树...\n");
-        logEvery = (int) Math.Ceiling(heap.size() / 10000f);
+        logEvery = (int) Math.Ceiling(heap.Count / 10000f);
         n = 0;
         foreach (FeatureSortItem item in heap)
         {
-            if (++n % logEvery == 0 || n == heap.size())
+            if (++n % logEvery == 0 || n == heap.Count)
             {
-                logger._out("\r%.2f%% ", MathUtility.percentage(n, heap.size()));
+                logger._out("\r%.2f%% ", MathUtility.percentage(n, heap.Count));
             }
-            int id = mdat.size();
+            int id = mdat.Count;
             mdat.Add(item.key, id);
-            for (int i = 0; i < tagSet.size(); ++i)
+            for (int i = 0; i < tagSet.Count; ++i)
             {
-                parameter[id * tagSet.size() + i] = this.parameter[item.id * tagSet.size() + i];
+                parameter[id * tagSet.Count + i] = this.parameter[item.id * tagSet.Count + i];
             }
         }
         logger.finish("\n构建完毕\n");
@@ -152,9 +152,9 @@ public class LinearModel : ICacheAble
      * @param modelFile
      * @
      */
-    public void save(string modelFile) 
+    public virtual void save(string modelFile) 
     {
-        Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
+        Stream _out = IOUtil.newOutputStream(modelFile);
         save(_out);
         _out.Close();
     }
@@ -166,12 +166,12 @@ public class LinearModel : ICacheAble
      * @param ratio     压缩比c（压缩掉的体积，压缩后体积变为1-c）
      * @
      */
-    public void save(string modelFile,  double ratio) 
+    public virtual void save(string modelFile,  double ratio) 
     {
         save(modelFile, featureMap.entrySet(), ratio);
     }
 
-    public void save(string modelFile, HashSet<KeyValuePair<string, int>> featureIdSet, double ratio) 
+    public virtual void save(string modelFile, HashSet<KeyValuePair<string, int>> featureIdSet, double ratio) 
     {
         save(modelFile, featureIdSet, ratio, false);
     }
@@ -185,12 +185,12 @@ public class LinearModel : ICacheAble
      * @param text         是否输出文本以供调试
      * @
      */
-    public void save(string modelFile, HashSet<KeyValuePair<string, int>> featureIdSet, double ratio, bool text) 
+    public virtual void save(string modelFile, HashSet<KeyValuePair<string, int>> featureIdSet, double ratio, bool text) 
     {
         float[] parameter = this.parameter;
         this.compress(ratio, 1e-3f);
 
-        Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(modelFile)));
+        Stream _out = IOUtil.newOutputStream(modelFile);
         save(_out);
         _out.Close();
 
@@ -208,13 +208,13 @@ public class LinearModel : ICacheAble
                 }
                 else
                 {
-                    for (int i = 0; i < tagSet.size(); ++i)
+                    for (int i = 0; i < tagSet.Count; ++i)
                     {
                         bw.Write("\t");
-                        bw.Write(string.valueOf(parameter[entry.Value * tagSet.size() + i]));
+                        bw.Write(string.valueOf(parameter[entry.Value * tagSet.Count + i]));
                     }
                 }
-                bw.newLine();
+                bw.WriteLine();
             }
             bw.Close();
         }
@@ -226,7 +226,7 @@ public class LinearModel : ICacheAble
      * @param x 特征向量
      * @param y 正确答案
      */
-    public void update(ICollection<int> x, int y)
+    public virtual void update(ICollection<int> x, int y)
     {
         //assert y == 1 || y == -1 : "感知机的标签y必须是±1";
         foreach (int f in x)
@@ -239,7 +239,7 @@ public class LinearModel : ICacheAble
      * @param x 特征向量
      * @return sign(wx)
      */
-    public int decode(ICollection<int> x)
+    public virtual int decode(ICollection<int> x)
     {
         float y = 0;
         foreach (int f in x)
@@ -253,7 +253,7 @@ public class LinearModel : ICacheAble
      * @param instance 实例
      * @return
      */
-    public double viterbiDecode(Instance instance)
+    public virtual double viterbiDecode(Instance instance)
     {
         return viterbiDecode(instance, instance.tagArray);
     }
@@ -265,7 +265,7 @@ public class LinearModel : ICacheAble
      * @param guessLabel 输出标签
      * @return
      */
-    public double viterbiDecode(Instance instance, int[] guessLabel)
+    public virtual double viterbiDecode(Instance instance, int[] guessLabel)
     {
          int[] allLabel = featureMap.allLabels();
          int bos = featureMap.bosTag();
@@ -347,7 +347,7 @@ public class LinearModel : ICacheAble
      * @param featureVector 压缩形式的特征id构成的特征向量
      * @return
      */
-    public double score(int[] featureVector, int currentTag)
+    public virtual double score(int[] featureVector, int currentTag)
     {
         double score = 0;
         foreach (int index in featureVector)
@@ -356,13 +356,13 @@ public class LinearModel : ICacheAble
             {
                 continue;
             }
-            else if (index < -1 || index >= featureMap.size())
+            else if (index < -1 || index >= featureMap.Count)
             {
                 throw new ArgumentException("在打分时传入了非法的下标");
             }
             else
             {
-                var index2 = index * featureMap.tagSet.size() + currentTag;
+                var index2 = index * featureMap.tagSet.Count + currentTag;
                 score += parameter[index2];    // 其实就是特征权重的累加
             }
         }
@@ -375,7 +375,7 @@ public class LinearModel : ICacheAble
      * @param modelFile
      * @
      */
-    public void load(string modelFile) 
+    public virtual void load(string modelFile) 
     {
         if (HanLP.Config.DEBUG)
             logger.start("加载 %s ... ", modelFile);
@@ -388,13 +388,13 @@ public class LinearModel : ICacheAble
             logger.finish(" 加载完毕\n");
     }
 
-    public TagSet tagSet()
+    public virtual TagSet tagSet()
     {
         return featureMap.tagSet;
     }
 
     //@Override
-    public void save(Stream _out) 
+    public virtual void save(Stream _out) 
     {
         if (!(featureMap is ImmutableFeatureMDatMap))
         {
@@ -408,13 +408,13 @@ public class LinearModel : ICacheAble
     }
 
     //@Override
-    public bool load(ByteArray byteArray)
+    public virtual bool load(ByteArray byteArray)
     {
         if (byteArray == null)
             return false;
         featureMap = new ImmutableFeatureMDatMap();
         featureMap.load(byteArray);
-        int size = featureMap.size();
+        int size = featureMap.Count;
         TagSet tagSet = featureMap.tagSet;
         if (tagSet.type == TaskType.CLASSIFICATION)
         {
@@ -426,12 +426,12 @@ public class LinearModel : ICacheAble
         }
         else
         {
-            parameter = new float[size * tagSet.size()];
+            parameter = new float[size * tagSet.Count];
             for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < tagSet.size(); ++j)
+                for (int j = 0; j < tagSet.Count; ++j)
                 {
-                    parameter[i * tagSet.size() + j] = byteArray.nextFloat();
+                    parameter[i * tagSet.Count + j] = byteArray.nextFloat();
                 }
             }
         }
@@ -442,7 +442,7 @@ public class LinearModel : ICacheAble
         return true;
     }
 
-    public TaskType taskType()
+    public virtual TaskType taskType()
     {
         return featureMap.tagSet.type;
     }

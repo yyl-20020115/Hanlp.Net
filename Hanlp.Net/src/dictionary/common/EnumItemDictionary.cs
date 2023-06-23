@@ -84,8 +84,8 @@ public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
     //@Override
     protected void saveValue(EnumItem<E> item, Stream _out) 
     {
-        _out.writeInt(item.labelMap.size());
-        foreach (KeyValuePair<E, int> entry in item.labelMap.entrySet())
+        _out.writeInt(item.labelMap.Count);
+        foreach (KeyValuePair<E, int> entry in item.labelMap)
         {
             _out.writeInt(entry.Key.ordinal());
             _out.writeInt(entry.Value);

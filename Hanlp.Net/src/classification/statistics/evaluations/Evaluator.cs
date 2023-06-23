@@ -47,9 +47,9 @@ public class Evaluator
         }
         time = DateTime.Now.Microsecond - time;
 
-        FMeasure result = calculate(c, testingDataSet.size(), TP, TP_FP, TP_FN);
+        FMeasure result = calculate(c, testingDataSet.Count, TP, TP_FP, TP_FN);
         result.catalog = testingDataSet.getCatalog().ToArray();
-        result.speed = result.size / (time / 1000.0);
+        result.speed = result.Count / (time / 1000.0);
 
         return result;
     }
@@ -75,12 +75,12 @@ public class Evaluator
         double[] f1 = new double[c];
         double[] accuracy = new double[c];
         FMeasure result = new FMeasure();
-        result.size = size;
+        result.Count = size;
 
         for (int i = 0; i < c; i++)
         {
-            double TN = result.size - TP_FP[i] - (TP_FN[i] - TP[i]);
-            accuracy[i] = (TP[i] + TN) / result.size;
+            double TN = result.Count - TP_FP[i] - (TP_FN[i] - TP[i]);
+            accuracy[i] = (TP[i] + TN) / result.Count;
             if (TP[i] != 0)
             {
                 precision[i] = TP[i] / TP_FP[i];
@@ -98,7 +98,7 @@ public class Evaluator
         result.average_recall = MathUtility.average(recall);
         result.average_f1 = 2 * result.average_precision * result.average_recall
                 / (result.average_precision + result.average_recall);
-        result.average_accuracy /= (double) result.size;
+        result.average_accuracy /= (double) result.Count;
         result.accuracy = accuracy;
         result.precision = precision;
         result.recall = recall;

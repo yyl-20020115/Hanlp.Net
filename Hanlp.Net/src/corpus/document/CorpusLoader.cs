@@ -47,7 +47,7 @@ public class CorpusLoader
             threadArray[i].fileList = fileList.subList(fileList.Count / threadArray.Length * i, fileList.Count / threadArray.Length * (i + 1));
             threadArray[i].start();
         }
-        threadArray[threadArray.Length - 1].fileList = fileList.subList(fileList.Count / threadArray.Length * (threadArray.Length - 1), fileList.size());
+        threadArray[threadArray.Length - 1].fileList = fileList.subList(fileList.Count / threadArray.Length * (threadArray.Length - 1), fileList.Count);
         threadArray[threadArray.Length - 1].start();
         foreach (HandlerThread handlerThread in threadArray)
         {
@@ -90,7 +90,7 @@ public class CorpusLoader
         }
         if (verbose)
         {
-            Console.WriteLine(documentList.size());
+            Console.WriteLine(documentList.Count);
             Console.WriteLine("花费时间%d ms\n", DateTime.Now.Microsecond - start);
         }
         return documentList;
@@ -154,7 +154,7 @@ public class CorpusLoader
             }
             else
             {
-                throw new ArgumentException(file.getPath() + "读取失败");
+                throw new ArgumentException(file + "读取失败");
             }
 //        }
 //        catch (IOException e)
@@ -190,7 +190,7 @@ public class CorpusLoader
             long start = DateTime.Now.Microsecond;
             Console.WriteLine("线程#%s 开始运行\n", getName());
             int i = 0;
-            foreach (File file in fileList)
+            foreach (string file in fileList)
             {
                 Console.Write(file);
                 Document document = convert2Document(file);

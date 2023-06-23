@@ -37,13 +37,13 @@ public class BaseFeatureData
     {
         Catalog catalog = dataSet.getCatalog();
         Lexicon lexicon = dataSet.getLexicon();
-        n = dataSet.size();
-        featureCategoryJointCount = new int[lexicon.size()][];
-        for(int i = 0; i < lexicon.size(); i++)
+        n = dataSet.Count;
+        featureCategoryJointCount = new int[lexicon.Count][];
+        for(int i = 0; i < lexicon.Count; i++)
         {
-            featureCategoryJointCount[i]=new int[ catalog.size()];
+            featureCategoryJointCount[i]=new int[ catalog.Count];
         }
-        categoryCounts = new int[catalog.size()];
+        categoryCounts = new int[catalog.Count];
 
         // 执行统计
         foreach (Document document in dataSet)

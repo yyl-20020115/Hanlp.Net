@@ -96,7 +96,7 @@ public class ComputeAccuracy
         TextReader stdin = null;
         try
         {
-            stdin = new TextReader(new InputStreamReader(new FileStream(argv[2])));
+            stdin = new StreamReader(argv[2]);
         }
         catch (FileNotFoundException e)
         {

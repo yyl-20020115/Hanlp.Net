@@ -37,13 +37,13 @@ public class IdVector : IComparable<IdVector>, ISentenceKey<IdVector>
     }
 
     //@Override
-    public int compareTo(IdVector o)
+    public virtual int CompareTo(IdVector? o)
     {
         int len1 = idArrayList.Count;
         int len2 = o.idArrayList.Count;
         int lim = Math.Min(len1, len2);
-        IEnumerator<long[]> iterator1 = idArrayList.iterator();
-        IEnumerator<long[]> iterator2 = o.idArrayList.iterator();
+        IEnumerator<long[]> iterator1 = idArrayList.GetEnumerator();
+        IEnumerator<long[]> iterator2 = o.idArrayList.GetEnumerator();
 
         int k = 0;
         while (k < lim)
@@ -60,9 +60,9 @@ public class IdVector : IComparable<IdVector>, ISentenceKey<IdVector>
     }
 
     //@Override
-    public Double similarity(IdVector other)
+    public double similarity(IdVector other)
     {
-        Double score = 0.0;
+        double score = 0.0;
         foreach (long[] a in idArrayList)
         {
             foreach (long[] b in other.idArrayList)

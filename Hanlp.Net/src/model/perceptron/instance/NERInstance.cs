@@ -12,6 +12,7 @@ using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.mining.word2vec;
 using com.hankcs.hanlp.model.perceptron.feature;
 using com.hankcs.hanlp.model.perceptron.tagset;
+using System.Text;
 
 namespace com.hankcs.hanlp.model.perceptron.instance;
 
@@ -58,7 +59,7 @@ public class NERInstance : Instance
      */
     protected int[] extractFeature(string[] wordArray, string[] posArray, FeatureMap featureMap, int position)
     {
-        List<int> featVec = new ArrayList<int>();
+        List<int> featVec = new ();
 
         string pre2Word = position >= 2 ? wordArray[position - 2] : "_B_";
         string preWord = position >= 1 ? wordArray[position - 1] : "_B_";
@@ -107,9 +108,9 @@ public class NERInstance : Instance
 
         NERTagSet tagSet = (NERTagSet) featureMap.tagSet;
         List<string[]> collector = Utility.convertSentenceToNER(sentence, tagSet);
-        string[] wordArray = new string[collector.size()];
-        string[] posArray = new string[collector.size()];
-        string[] tagArray = new string[collector.size()];
+        string[] wordArray = new string[collector.Count];
+        string[] posArray = new string[collector.Count];
+        string[] tagArray = new string[collector.Count];
         Utility.reshapeNER(collector, wordArray, posArray, tagArray);
         return new NERInstance(wordArray, posArray, tagArray, tagSet, featureMap);
     }

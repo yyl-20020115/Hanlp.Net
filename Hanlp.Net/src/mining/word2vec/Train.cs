@@ -11,7 +11,7 @@ public class Train : AbstractTrainer
         paramDesc("-input <file>", "Use text data from <file> to train the model");
         Console.Error.WriteLine("\nExamples:\n");
         Console.Error.WriteLine("java %s -input corpus.txt -output vectors.txt -size 200 -window 5 -sample 0.0001 -negative 5 -hs 0 -binary -cbow 1 -iter 3\n\n",
-                          Train.s.getName());
+                          Train.s.Name);
     }
 
     void execute(string[] args) 

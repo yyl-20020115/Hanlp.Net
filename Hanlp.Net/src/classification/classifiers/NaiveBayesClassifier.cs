@@ -48,7 +48,7 @@ public class NaiveBayesClassifier : AbstractClassifier
 
     public void train(IDataSet dataSet)
     {
-        logger._out("原始数据集大小:%d\n", dataSet.size());
+        logger._out("原始数据集大小:%d\n", dataSet.Count);
         //选择最佳特征
         BaseFeatureData featureData = selectFeatures(dataSet);
 
@@ -184,7 +184,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         Dictionary<int, Double> selectedFeatures = chiSquareFeatureExtractor.chi_square(featureData);
 
         //从统计数据中删掉无用的特征并重建特征映射表
-        int[][] featureCategoryJointCount = new int[selectedFeatures.size()][];
+        int[][] featureCategoryJointCount = new int[selectedFeatures.Count][];
         featureData.wordIdTrie = new BinTrie<int>();
         string[] wordIdArray = dataSet.getLexicon().getWordIdArray();
         int p = -1;

@@ -113,7 +113,7 @@ public class TextRankKeyword : KeywordExtractor
      */
     public Dictionary<string, float> getTermAndRank(List<Term> termList)
     {
-        List<string> wordList = new (termList.size());
+        List<string> wordList = new (termList.Count);
         foreach (Term t in termList)
         {
             if (shouldInclude(t))
@@ -131,7 +131,7 @@ public class TextRankKeyword : KeywordExtractor
                 words.Add(w, new HashSet<string>());
             }
             // 复杂度O(n-1)
-            if (que.size() >= 5)
+            if (que.Count >= 5)
             {
                 que.poll();
             }
@@ -150,22 +150,22 @@ public class TextRankKeyword : KeywordExtractor
 //        Console.WriteLine(words);
         Dictionary<string, float> score = new ();
         //依据TF来设置初值
-        foreach (KeyValuePair<string, HashSet<string>> entry in words.entrySet())
+        foreach (KeyValuePair<string, HashSet<string>> entry in words)
         {
-            score.Add(entry.Key, sigMoid(entry.Value.size()));
+            score.Add(entry.Key, sigMoid(entry.Value.Count));
         }
         for (int i = 0; i < max_iter; ++i)
         {
             Dictionary<string, float> m = new ();
             float max_diff = 0;
-            foreach (KeyValuePair<string, HashSet<string>> entry in words.entrySet())
+            foreach (KeyValuePair<string, HashSet<string>> entry in words)
             {
                 string key = entry.Key;
                 HashSet<string> value = entry.Value;
                 m.Add(key, 1 - d);
                 foreach (string element in value)
                 {
-                    int size = words.get(element).size();
+                    int size = words.get(element).Count;
                     if (key.Equals(element) || size == 0) continue;
                     m.Add(key, m.get(key) + d / size * (score.get(element) == null ? 0 : score.get(element)));
                 }

@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
 using com.hankcs.hanlp.collection.AhoCorasick;
 using com.hankcs.hanlp.collection.trie;
 using com.hankcs.hanlp.corpus.tag;
@@ -101,7 +102,7 @@ public abstract class WordBasedSegment : Segment
     //====================================================================
     private static void splitMiddleSlashFromDigitalWords(List<Vertex> linkedArray)
     {
-        if (linkedArray.size() < 2)
+        if (linkedArray.Count < 2)
             return;
 
         var listIterator = linkedArray.GetEnumerator();
@@ -146,14 +147,15 @@ public abstract class WordBasedSegment : Segment
     //====================================================================
     private static void checkDateElements(List<Vertex> linkedArray)
     {
-        if (linkedArray.size() < 2)
+        if (linkedArray.Count < 2)
             return;
         var listIterator = linkedArray.GetEnumerator();
-        Vertex next = listIterator.next();
+        listIterator.MoveNext();
+        Vertex next = listIterator.Current;
         Vertex current = next;
         while (listIterator.MoveNext())
         {
-            next = listIterator.next();
+            next = listIterator.Current;
             if (TextUtility.isAllNum(current.realWord) || TextUtility.isAllChineseNum(current.realWord))
             {
                 //===== 1、如果当前词是数字，下一个词是“月、日、时、分、秒、月份”中的一个，则合并且当前词词性是时间
@@ -270,7 +272,7 @@ public abstract class WordBasedSegment : Segment
         // TODO: 使用一系列正则表达式将句子中的完整成分（百分比、日期、电子邮件、URL等）预先提取出来
         //==============================================================================================
 
-        char[] charArray = sSentence.substring(start, end).ToCharArray();
+        char[] charArray = sSentence[start .. end].ToCharArray();
         int[] charTypeArray = new int[charArray.Length];
 
         // 生成对应单个汉字的字符类型数组
@@ -342,10 +344,10 @@ public abstract class WordBasedSegment : Segment
      */
     private static void mergeContinueNumIntoOne(List<Vertex> linkedArray)
     {
-        if (linkedArray.size() < 2)
+        if (linkedArray.Count < 2)
             return;
 
-        ListIterator<Vertex> listIterator = linkedArray.GetEnumerator();
+        IEnumerator<Vertex> listIterator = linkedArray.GetEnumerator();
         Vertex next = listIterator.next();
         Vertex current = next;
         while (listIterator.MoveNext())
@@ -434,7 +436,7 @@ public abstract class WordBasedSegment : Segment
         int line = 1;
         var listIterator = vertexList.GetEnumerator();
         listIterator.next();
-        int Length = vertexList.size() - 2;
+        int Length = vertexList.C - 2;
         for (int i = 0; i < Length; ++i)
         {
             Vertex vertex = listIterator.next();
@@ -480,6 +482,7 @@ public abstract class WordBasedSegment : Segment
      */
     protected static void speechTagging(List<Vertex> vertexList)
     {
+        
         Viterbi.compute(vertexList, CoreDictionaryTransformMatrixDictionary.transformMatrixDictionary);
     }
 }

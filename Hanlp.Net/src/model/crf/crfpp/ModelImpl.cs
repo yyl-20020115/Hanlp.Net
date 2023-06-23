@@ -65,7 +65,7 @@ public class ModelImpl : Model
         return open(model, nbest, vlevel, costFactor);
     }
 
-    public bool open(InputStream stream, int nbest, int vlevel, double costFactor)
+    public bool open(Stream stream, int nbest, int vlevel, double costFactor)
     {
         featureIndex_ = new DecoderFeatureIndex();
         nbest_ = nbest;
@@ -81,7 +81,7 @@ public class ModelImpl : Model
     {
         try
         {
-            InputStream stream = IOUtil.newInputStream(model);
+            Stream stream = IOUtil.newInputStream(model);
             return open(stream, nbest, vlevel, costFactor);
         }
         catch (Exception e)

@@ -68,7 +68,7 @@ public class Item : SimpleItem
      */
     public string firstLabel()
     {
-        return labelMap.Keys.iterator().next();
+        return labelMap.Keys.GetEnumerator().next();
     }
 
     /**

@@ -141,7 +141,7 @@ public class TransitionSystem
         classes.Clear();
         for (int i = 0; i < actions.Count; ++i)
         {
-            classes.Add(transform(actions.get(i)));
+            classes.Add(transform(actions[i]));
         }
     }
 

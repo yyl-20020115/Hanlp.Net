@@ -134,7 +134,7 @@ public class String2PinyinConverter
             {
                 List<Pinyin> pinyinListFragment = PinyinDictionary.convertToPinyin(fragment);
                 pinyinList.AddRange(pinyinListFragment);
-                for (int i = 0; i < pinyinListFragment.size(); ++i)
+                for (int i = 0; i < pinyinListFragment.Count; ++i)
                 {
                     booleanList.Add(true);
                 }
@@ -174,7 +174,7 @@ public class String2PinyinConverter
      */
     public static List<Pinyin> makeToneToTheSame(List<Pinyin> pinyinList)
     {
-        ListIterator<Pinyin> listIterator = pinyinList.GetEnumerator();
+        IEnumerator<Pinyin> listIterator = pinyinList.GetEnumerator();
         while (listIterator.MoveNext())
         {
             listIterator.set(convert2Tone5(listIterator.next()));

@@ -45,7 +45,7 @@ public class Catalog : Serializable
         {
             id = categoryId.Count;
             categoryId.Add(category, id);
-            //assert idCategory.size() == id;
+            //assert idCategory.Count == id;
             idCategory.Add(category);
         }
 
@@ -60,15 +60,12 @@ public class Catalog : Serializable
     public string getCategory(int id)
     {
         //assert 0 <= id;
-        //assert id < idCategory.size();
+        //assert id < idCategory.Count;
 
         return idCategory[id];
     }
 
-    public int size()
-    {
-        return idCategory.Count;
-    }
+    public int Count=> idCategory.Count;
 
     public string[] ToArray()
     {

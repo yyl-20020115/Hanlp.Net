@@ -86,7 +86,7 @@ public class TMDictionaryMaker : ISaveAble
     {
         try
         {
-            TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path)));
+            TextWriter bw = new StreamWriter(IOUtil.newOutputStream(path));
             bw.Write(ToString());
             bw.Close();
         }

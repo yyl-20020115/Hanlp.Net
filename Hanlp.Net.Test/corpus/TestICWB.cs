@@ -40,7 +40,7 @@ public class TestICWB : TestCase
 //                    bw.Write(word[0] + "\tB\n");
 //                    for (int i = 1; i < word.Length - 1; ++i)
 //                    {
-//                        bw.Write(word.charAt(i) + "\tM\n");
+//                        bw.Write(word[i] + "\tM\n");
 //                    }
 //                    bw.Write(word.charAt(word.Length - 1) + "\tE\n");
 //                }

@@ -145,7 +145,7 @@ public class CoreStopWordDictionary
      */
     public static void apply(List<Term> termList)
     {
-        ListIterator<Term> listIterator = termList.GetEnumerator();
+        IEnumerator<Term> listIterator = termList.GetEnumerator();
         while (listIterator.MoveNext())
         {
             if (shouldRemove(listIterator.next())) listIterator.Remove();

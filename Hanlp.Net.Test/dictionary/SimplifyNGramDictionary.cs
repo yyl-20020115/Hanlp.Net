@@ -34,7 +34,7 @@ public class SimplifyNGramDictionary : TestCase
 //        }
 //        br.Close();
 //        HashSet<Map.KeyValuePair<String, int>> entrySet = map.descendingMap().entrySet();
-//        IEnumerator<Map.KeyValuePair<String, int>> iterator = entrySet.iterator();
+//        IEnumerator<Map.KeyValuePair<String, int>> iterator = entrySet.GetEnumerator();
 //        // 第一步去包含
 ////        Map.KeyValuePair<String, int> pre = new AbstractMap.SimpleEntry<>(" @ ", 1);
 ////        while (iterator.MoveNext())
@@ -48,7 +48,7 @@ public class SimplifyNGramDictionary : TestCase
 ////            pre = current;
 ////        }
 //        // 第二步，尝试移除“学@家”这样的短共现
-////        iterator = entrySet.iterator();
+////        iterator = entrySet.GetEnumerator();
 ////        while (iterator.MoveNext())
 ////        {
 ////            Map.KeyValuePair<String, int> current = iterator.next();
@@ -58,7 +58,7 @@ public class SimplifyNGramDictionary : TestCase
 ////            }
 ////        }
 //        // 第三步，对某些@后面的词语太短了，也移除
-////        iterator = entrySet.iterator();
+////        iterator = entrySet.GetEnumerator();
 ////        while (iterator.MoveNext())
 ////        {
 ////            Map.KeyValuePair<String, int> current = iterator.next();
@@ -70,7 +70,7 @@ public class SimplifyNGramDictionary : TestCase
 ////            }
 ////        }
 //        // 第四步，人名接续对识别产生太多误命中影响，也删除
-////        iterator = entrySet.iterator();
+////        iterator = entrySet.GetEnumerator();
 ////        while (iterator.MoveNext())
 ////        {
 ////            Map.KeyValuePair<String, int> current = iterator.next();
@@ -83,7 +83,7 @@ public class SimplifyNGramDictionary : TestCase
 //        // 对人名的终极调优
 //        TFDictionary dictionary = new TFDictionary();
 //        dictionary.load("D:\\JavaProjects\\HanLP\\data\\dictionary\\CoreNatureDictionary.ngram.mini.txt");
-//        iterator = entrySet.iterator();
+//        iterator = entrySet.GetEnumerator();
 //        while (iterator.MoveNext())
 //        {
 //            Map.KeyValuePair<String, int> current = iterator.next();
@@ -120,7 +120,7 @@ public class SimplifyNGramDictionary : TestCase
 //            map.Add(param[0], int.valueOf(param[1]));
 //        }
 //        br.Close();
-//        IEnumerator<String> iterator = map.Keys.iterator();
+//        IEnumerator<String> iterator = map.Keys.GetEnumerator();
 //        while (iterator.MoveNext())
 //        {
 //            line = iterator.next();

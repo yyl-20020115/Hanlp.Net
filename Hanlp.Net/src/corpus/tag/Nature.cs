@@ -771,7 +771,7 @@ public class Nature
         if (idMap == null) idMap = new ();
         //assert !idMap.ContainsKey(name);
         this.name = name;
-        ordinal = idMap.size();
+        ordinal = idMap.Count;
         idMap.Add(name, ordinal);
         Nature[] extended = new Nature[idMap.Count];
         if (values != null)

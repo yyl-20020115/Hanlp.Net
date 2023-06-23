@@ -23,7 +23,7 @@ public class VectorsReader
     {
         logger.info(string.Format("reading %s file. please wait...\n", file));
 
-        InputStream _is = null;
+        Stream _is = null;
         Reader r = null;
         TextReader br = null;
         try

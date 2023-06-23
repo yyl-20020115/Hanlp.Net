@@ -89,7 +89,7 @@ public abstract class KeywordExtractor
 
     protected void filter(List<Term> termList)
     {
-        ListIterator<Term> listIterator = termList.GetEnumerator();
+        IEnumerator<Term> listIterator = termList.GetEnumerator();
         while (listIterator.MoveNext())
         {
             if (!shouldInclude(listIterator.next()))

@@ -78,7 +78,7 @@ public class TextFileCorpus : Corpus
             cache.Close();
             if (!fixingFile.renameTo(cacheFile))
             {
-                throw new RuntimeException(string.Format("moving %s to %s failed", fixingFile, cacheFile.getName()));
+                throw new RuntimeException(string.Format("moving %s to %s failed", fixingFile, cacheFile.Name));
             }
             cache = new Stream(new FileStream(cacheFile));
         }

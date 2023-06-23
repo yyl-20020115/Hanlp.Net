@@ -38,7 +38,7 @@ public class MDAGNode
     /**
      * 是否是终止状态
      */
-    private bool isAcceptNode;
+    private bool _isAcceptNode;
     
     //The Dictionary to contain entries that represent a _transition (label and target node)
     /**
@@ -74,7 +74,7 @@ public class MDAGNode
      */
     public MDAGNode(bool isAcceptNode)
     {
-        this.isAcceptNode = isAcceptNode;     
+        this._isAcceptNode = isAcceptNode;     
         outgoingTransitionTreeMap = new Dictionary<char, MDAGNode>();
     }
 
@@ -89,7 +89,7 @@ public class MDAGNode
      */
     private MDAGNode(MDAGNode node)
     {
-        isAcceptNode = node.isAcceptNode;
+        _isAcceptNode = node._isAcceptNode;
         outgoingTransitionTreeMap = new Dictionary<char, MDAGNode>(node.outgoingTransitionTreeMap);
         
         //Loop through the nodes in this node's outgoing _transition set, incrementing the number of
@@ -192,7 +192,7 @@ public class MDAGNode
      */
     public bool isAcceptNode()
     {
-        return isAcceptNode;
+        return _isAcceptNode;
     }
     
     
@@ -279,7 +279,7 @@ public class MDAGNode
         //Iteratively _transition through the MDAG using the chars in str
         for(int i = 0; i < charCount; i++)
         {
-            currentNode = currentNode.transition(str.charAt(i));
+            currentNode = currentNode.transition(str[i]);
             if(currentNode == null) break;
         }
         /////
@@ -339,7 +339,7 @@ public class MDAGNode
         //putting each encountered node in nodeStack
         for(int i = 0; i < numberOfChars && currentNode != null; i++)
         {
-            currentNode = currentNode.transition(str.charAt(i));
+            currentNode = currentNode.transition(str[i]);
             nodeStack.Push(currentNode);
         }
         /////
@@ -499,7 +499,7 @@ public class MDAGNode
     {
         bool areEqual = (this == obj);
         
-        if(!areEqual && obj != null && obj.getClass().Equals(MDAGNode.s))
+        if(!areEqual && obj != null && obj is MDAGNode)
         {
             MDAGNode node = (MDAGNode)obj;
             areEqual = (isAcceptNode == node.isAcceptNode && haveSameTransitions(this, node));

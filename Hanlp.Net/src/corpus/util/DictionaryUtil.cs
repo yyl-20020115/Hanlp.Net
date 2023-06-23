@@ -29,7 +29,7 @@ public class DictionaryUtil
     {
         try
         {
-            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
             Dictionary map = new ();
             string line;
 

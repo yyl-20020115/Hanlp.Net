@@ -62,7 +62,7 @@ public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
 
     public string[] recognize(NERInstance instance)
     {
-        instance.tagArray = new int[instance.size()];
+        instance.tagArray = new int[instance.Count];
         model.viterbiDecode(instance);
 
         return instance.tags(tagSet);

@@ -55,7 +55,7 @@ public class JapanesePersonRecognition
                 {
                     insertName(sbName.ToString(), activeLine, wordNetOptimum, wordNetAll);
                 }
-                sbName.setLength(0);
+                sbName.Length=0;
                 appendTimes = 0;
             }
             if (appendTimes == 0)
@@ -80,7 +80,7 @@ public class JapanesePersonRecognition
                     {
                         insertName(sbName.ToString(), activeLine, wordNetOptimum, wordNetAll);
                     }
-                    sbName.setLength(0);
+                    sbName.Length=0;
                     appendTimes = 0;
                 }
             }

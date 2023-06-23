@@ -41,7 +41,7 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
     //@Override
     public List<IWord> flow(List<IWord> input)
     {
-        ListIterator<IWord> listIterator = input.GetEnumerator();
+        IEnumerator<IWord> listIterator = input.GetEnumerator();
         while (listIterator.MoveNext())
         {
             IWord wordOrSentence = listIterator.next();

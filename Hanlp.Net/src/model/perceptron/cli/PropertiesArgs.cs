@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace com.hankcs.hanlp.model.perceptron.cli;
 
 
@@ -32,7 +34,7 @@ public class PropertiesArgs
         try
         {
             BeanInfo info = Introspector.getBeanInfo(clazz);
-            for (PropertyDescriptor pd in info.getPropertyDescriptors())
+            foreach (PropertyInfo pd in info.getPropertyDescriptors())
             {
                 processProperty(target, pd, arguments);
             }
@@ -74,9 +76,9 @@ public class PropertiesArgs
         }
     }
 
-    private static void processProperty(Object target, PropertyDescriptor property, Properties arguments)
+    private static void processProperty(Object target, PropertyInfo property, Properties arguments)
     {
-        Method writeMethod = property.getWriteMethod();
+        MethodInfo writeMethod = property.getWriteMethod();
         if (writeMethod != null)
         {
             Argument argument = writeMethod.getAnnotation(Argument.s);

@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace com.hankcs.hanlp.mining.word2vec;
 
 
@@ -12,7 +14,7 @@ public abstract class Corpus
     protected VocabWord[] vocab;
     protected Dictionary<string, int> vocabIndexMap;
     protected bool eoc = true;    // end of corpus
-    protected Encoding encoding = Encoding.forName("UTF-8");
+    protected Encoding encoding = Encoding.UTF8;
     protected int[] table;
 
     public Corpus(Config config) 

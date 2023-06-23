@@ -55,7 +55,7 @@ public abstract class TransformMatrix
     {
         try
         {
-            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br =new StreamReader(IOUtil.newInputStream(path), "UTF-8");
             // 第一行是矩阵的各个类型
             string line = br.ReadLine();
             string[] _param = line.Split(",");

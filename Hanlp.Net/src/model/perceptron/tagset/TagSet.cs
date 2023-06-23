@@ -22,7 +22,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
 {
     private Dictionary<string, int> stringIdMap;
     private List<string> idStringMap;
-    private int[] allTags;
+    private int[] _allTags;
     public TaskType type;
 
     public TagSet(TaskType type)
@@ -38,7 +38,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         int id = stringIdMap.get(tag);
         if (id == null)
         {
-            id = stringIdMap.size();
+            id = stringIdMap.Count;
             stringIdMap.Add(tag, id);
             idStringMap.Add(tag);
         }
@@ -46,26 +46,23 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         return id;
     }
 
-    public int size()
-    {
-        return stringIdMap.size();
-    }
+    public int Count=> stringIdMap.Count;
 
     public int sizeIncludingBos()
     {
-        return size() + 1;
+        return Count + 1;
     }
 
     public int bosId()
     {
-        return size();
+        return Count;
     }
 
     public void _lock()
     {
         //        assertUnlock();
-        allTags = new int[size()];
-        for (int i = 0; i < size(); i++)
+        allTags = new int[Count];
+        for (int i = 0; i < Count; i++)
         {
             allTags[i] = i;
         }
@@ -94,9 +91,9 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
     }
 
     //@Override
-    public IEnumerator<KeyValuePair<string, int>> iterator()
+    public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
     {
-        return stringIdMap.entrySet().iterator();
+        return stringIdMap.entrySet().GetEnumerator();
     }
 
     /**
@@ -106,13 +103,13 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
      */
     public int[] allTags()
     {
-        return allTags;
+        return _allTags;
     }
 
     public void save(Stream _out)
     {
         _out.writeInt(type.ordinal());
-        _out.writeInt(size());
+        _out.writeInt(Count);
         foreach (string tag in idStringMap)
         {
             _out.writeUTF(tag);

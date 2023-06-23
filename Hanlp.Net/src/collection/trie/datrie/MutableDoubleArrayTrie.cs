@@ -50,7 +50,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     public override string ToString()
     {
         var sb = new StringBuilder("MutableDoubleArrayTrie{");
-        sb.Append("size=").Append(size()).Append(',');
+        sb.Append("size=").Append(Count).Append(',');
         sb.Append("allocated=").Append(trie.getBaseArraySize()).Append(',');
         sb.Append('}');
         return sb.ToString();
@@ -91,13 +91,13 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     //@Override
     public string firstKey()
     {
-        return trie.iterator().key();
+        return trie.GetEnumerator().key();
     }
 
     //@Override
     public string lastKey()
     {
-        MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
+        MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.GetEnumerator();
         while (iterator.MoveNext())
         {
             iterator.next();
@@ -106,10 +106,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     }
 
     //@Override
-    public int size()
-    {
-        return trie.size();
-    }
+    public int Count=> trie.Count;
 
     //@Override
     public bool isEmpty()
@@ -156,7 +153,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         int id = trie.get(key);
         if (id == -1)
         {
-            trie.set(key, values.size());
+            trie.set(key, values.Count);
             values.Add(value);
             return null;
         }
@@ -203,13 +200,10 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
 
     public class HS : HashSet<string>
     {
-        MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
+        MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.GetEnumerator();
 
         //@Override
-        public int size()
-        {
-            return trie.size();
-        }
+        public int Count=> trie.Count;
 
         //@Override
         public bool isEmpty()
@@ -224,7 +218,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         }
 
         //@Override
-        public IEnumerator<string> iterator()
+        public IEnumerator<string> GetEnumerator()
         {
             return new CT();
         }
@@ -330,10 +324,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     public class CT2 : HashSet<KeyValuePair<string, V>>
     {
         //@Override
-        public int size()
-        {
-            return trie.size();
-        }
+        public int Count=> trie.Count;
 
         //@Override
         public bool isEmpty()
@@ -348,21 +339,21 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         }
 
         //@Override
-        public IEnumerator<KeyValuePair<string, V>> iterator()
+        public IEnumerator<KeyValuePair<string, V>> GetEnumerator()
         {
             return new();
         }
 
 
         //@Override
-        public IEnumerator<KeyValuePair<string, V>> iterator()
+        public IEnumerator<KeyValuePair<string, V>> GetEnumerator()
         {
-            return entrySet().iterator();
+            return entrySet().GetEnumerator();
         }
 
         public class ST : IEnumerator<KeyValuePair<string, V>>()
         {
-            MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.iterator();
+            MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.GetEnumerator();
 
             //@Override
             public bool MoveNext()

@@ -156,6 +156,6 @@ public class SimpleItem
 
     public string getMostLikelyLabel()
     {
-        return labelMap.entrySet().iterator().next().Key;
+        return labelMap.entrySet().GetEnumerator().next().Key;
     }
 }

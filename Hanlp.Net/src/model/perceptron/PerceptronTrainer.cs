@@ -18,6 +18,7 @@ using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.model;
 using com.hankcs.hanlp.model.perceptron.tagset;
 using com.hankcs.hanlp.model.perceptron.utility;
+using Instance = com.hankcs.hanlp.model.perceptron.instance.Instance;
 
 namespace com.hankcs.hanlp.model.perceptron;
 
@@ -112,7 +113,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         logger.start("开始加载训练集...\n");
         Instance[] instances = loadTrainInstances(trainingFile, mutableFeatureMap);
         tagSet._lock();
-        logger.finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.Length, mutableFeatureMap.size() * tagSet.size());
+        logger.finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.Length, mutableFeatureMap.Count * tagSet.Count);
 
         // 开始训练
         ImmutableFeatureMap immutableFeatureMap = new ImmutableFeatureMap(mutableFeatureMap.featureIdMap, tagSet);
@@ -141,11 +142,11 @@ public abstract class PerceptronTrainer : InstanceConsumer
                         int[] predFeature = new int[featureVector.Length];
                         for (int j = 0; j < featureVector.Length - 1; j++)
                         {
-                            goldFeature[j] = featureVector[j] * tagSet.size() + instance.tagArray[i];
-                            predFeature[j] = featureVector[j] * tagSet.size() + guessLabel[i];
+                            goldFeature[j] = featureVector[j] * tagSet.Count + instance.tagArray[i];
+                            predFeature[j] = featureVector[j] * tagSet.Count + guessLabel[i];
                         }
-                        goldFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.size() + instance.tagArray[i];
-                        predFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.size() + guessLabel[i];
+                        goldFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.Count + instance.tagArray[i];
+                        predFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.Count + guessLabel[i];
                         model.update(goldFeature, predFeature, total, timestamp, current);
                     }
                 }
@@ -260,7 +261,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         {
             for (int s = start; s < end; ++s)
             {
-                Instance instance = instances[s];
+                var instance = instances[s];
                 model.update(instance);
             }
 //            _out.printf("Finished [%d,%d)\n", start, end);
@@ -269,10 +270,9 @@ public abstract class PerceptronTrainer : InstanceConsumer
 
     protected Instance[] loadTrainInstances(string trainingFile,  MutableFeatureMap mutableFeatureMap) 
     {
-        List<Instance> instanceList = new LinkedList<Instance>();
+        List<Instance> instanceList = new ();
         IOUtility.loadInstance(trainingFile, new Ins());
-        Instance[] instances = new Instance[instanceList.size()];
-        instanceList.ToArray(instances);
+        var instances =  instanceList.ToArray();
         return instances;
     }
 
@@ -282,7 +282,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         public bool process(Sentence sentence)
         {
             Utility.normalize(sentence);
-            instanceList.Add(PerceptronTrainer.this.createInstance(sentence, mutableFeatureMap));
+            instanceList.Add(PerceptronTrainer.s.createInstance(sentence, mutableFeatureMap));
             return false;
         }
     }

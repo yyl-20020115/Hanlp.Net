@@ -148,7 +148,7 @@ public class Utility
      */
     public static void convertPKUtoPOS(string inputFolder, string outputFile, int begin, int end)
     {
-        TextWriter bw = new TextWriter(new StreamWriter(new FileStream(outputFile), "UTF-8"));
+        TextWriter bw = new StreamWriter(new FileStream(outputFile), "UTF-8");
         CorpusLoader.walk(inputFolder, new());
         bw.Close();
     }
@@ -422,7 +422,7 @@ public class Utility
                 ++avg[1];
             }
         }
-        foreach (double[] s in scores.values())
+        foreach (double[] s in scores.Values)
         {
             if (s[2] == 0)
             {
@@ -463,7 +463,7 @@ public class Utility
     {
         string[] wordArray = new string[ner.Count];
         string[] posArray = new string[ner.Count];
-        string[] nerArray = new string[ner.size()];
+        string[] nerArray = new string[ner.Count];
         reshapeNER(ner, wordArray, posArray, nerArray);
         return new string[][] { wordArray, posArray, nerArray };
     }

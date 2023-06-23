@@ -119,7 +119,7 @@ public class Main
                 }
                 else
                 {
-                    printer = new TextWriter(new File(option.result), "utf-8");
+                    printer = new TextWriter(new string(option.result), "utf-8");
                 }
                 Scanner scanner;
                 if (option.input == null)
@@ -129,7 +129,7 @@ public class Main
                 }
                 else
                 {
-                    scanner = new Scanner(new File(option.input), "utf-8");
+                    scanner = new Scanner(new string(option.input), "utf-8");
                 }
                 string line;
                 string lineSeparator = System.getProperty("line.separator");

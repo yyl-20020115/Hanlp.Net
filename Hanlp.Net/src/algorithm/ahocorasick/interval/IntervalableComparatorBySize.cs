@@ -9,7 +9,7 @@ public class IntervalableComparatorBySize : IComparer<Intervalable>
 {
     public int Compare(Intervalable? intervalable, Intervalable? intervalable2)
     {
-        int comparison = intervalable2.size() - intervalable.size();
+        int comparison = intervalable2.Count - intervalable.Count;
         if (comparison == 0)
         {
             comparison = intervalable.getStart() - intervalable2.getStart();

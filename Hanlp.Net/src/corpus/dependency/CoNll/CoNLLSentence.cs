@@ -103,7 +103,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
     }
 
     //@Override
-    public IEnumerator<CoNLLWord> iterator()
+    public IEnumerator<CoNLLWord> GetEnumerator()
     {
         return new IT();
     }

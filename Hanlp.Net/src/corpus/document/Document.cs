@@ -180,7 +180,7 @@ public class Document : Serializable
      */
     public List<List<Word>> getSimpleSentenceList(HashSet<string> labelSet)
     {
-        List<List<Word>> simpleList = new LinkedList<List<Word>>();
+        List<List<Word>> simpleList = new List<List<Word>>();
         foreach (Sentence sentence in sentenceList)
         {
             List<Word> wordList = new ();
@@ -224,7 +224,7 @@ public class Document : Serializable
         return sb.ToString();
     }
 
-    public static Document create(File file)
+    public static Document create(string file)
     {
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file);
         List<Sentence> sentenceList = new ();

@@ -77,9 +77,9 @@ public class TaggerImpl : Tagger
             {
                 for (int i = 0; i < n.Count; i++)
                 {
-                    if (n.get(i) != null)
+                    if (n[i] != null)
                     {
-                        n.get(i).Clear();
+                        n[i].Clear();
                         n.set(i, null);
                     }
                 }
@@ -97,12 +97,12 @@ public class TaggerImpl : Tagger
                 penalty_.Add(penaltys);
             }
         }
-        penalty_.get(i).set(j, penalty);
+        penalty_[i].set(j, penalty);
     }
 
     public double penalty(int i, int j)
     {
-        return penalty_.isEmpty() ? 0.0 : penalty_.get(i).get(j);
+        return penalty_.isEmpty() ? 0.0 : penalty_[i].get(j);
     }
 
     /**
@@ -142,18 +142,18 @@ public class TaggerImpl : Tagger
             {
                 double best = -1e37;
                 Node best = null;
-                List<Path> lpath = node_.get(i).get(j).lpath;
+                List<Path> lpath = node_[i].get(j).lpath;
                 foreach (Path p in lpath)
                 {
-                    double cost = p.lnode.bestCost + p.cost + node_.get(i).get(j).cost;
+                    double cost = p.lnode.bestCost + p.cost + node_[i].get(j).cost;
                     if (cost > bestc)
                     {
                         bestc = cost;
                         best = p.lnode;
                     }
                 }
-                node_.get(i).get(j).prev = best;
-                node_.get(i).get(j).bestCost = best != null ? bestc : node_.get(i).get(j).cost;
+                node_[i].get(j).prev = best;
+                node_[i].get(j).bestCost = best != null ? bestc : node_[i].get(j).cost;
             }
         }
         double bestc = -1e37;
@@ -171,7 +171,7 @@ public class TaggerImpl : Tagger
         {
             result_.set(n.x, n.y);
         }
-        cost_ = -node_.get(x_.Count - 1).get(result_.get(x_.size() - 1)).bestCost;
+        cost_ = -node_.get(x_.Count - 1).get(result_.get(x_.Count - 1)).bestCost;
     }
 
     public void buildLattice()
@@ -183,8 +183,8 @@ public class TaggerImpl : Tagger
             {
                 for (int j = 0; j < ysize_; j++)
                 {
-                    feature_index_.calcCost(node_.get(i).get(j));
-                    List<Path> lpath = node_.get(i).get(j).lpath;
+                    feature_index_.calcCost(node_[i].get(j));
+                    List<Path> lpath = node_[i].get(j).lpath;
                     foreach (Path p in lpath)
                     {
                         feature_index_.calcCost(p);
@@ -195,11 +195,11 @@ public class TaggerImpl : Tagger
             // Add penalty for Dual decomposition.
             if (!penalty_.isEmpty())
             {
-                for (int i = 0; i < x_.size(); i++)
+                for (int i = 0; i < x_.Count; i++)
                 {
                     for (int j = 0; j < ysize_; j++)
                     {
-                        node_.get(i).get(j).cost += penalty_.get(i).get(j);
+                        node_[i].get(j).cost += penalty_[i].get(j);
                     }
                 }
             }
@@ -213,13 +213,13 @@ public class TaggerImpl : Tagger
             agenda_ = new PriorityQueue<QueueElement, QueueElement>(10, new CT());
         }
         agenda_.Clear();
-        int k = x_.size() - 1;
+        int k = x_.Count - 1;
         for (int i = 0; i < ysize_; i++)
         {
             QueueElement eos = new QueueElement();
-            eos.node = node_.get(k).get(i);
-            eos.fx = -node_.get(k).get(i).bestCost;
-            eos.gx = -node_.get(k).get(i).cost;
+            eos.node = node_.get(k)[i];
+            eos.fx = -node_.get(k)[i].bestCost;
+            eos.gx = -node_.get(k)[i].cost;
             eos.next = null;
             agenda_.Add(eos);
         }
@@ -234,20 +234,20 @@ public class TaggerImpl : Tagger
     }
     public Node node(int i, int j)
     {
-        return node_.get(i).get(j);
+        return node_[i].get(j);
     }
 
     public void set_node(Node n, int i, int j)
     {
-        node_.get(i).set(j, n);
+        node_[i].set(j, n);
     }
 
     public int eval()
     {
         int err = 0;
-        for (int i = 0; i < x_.size(); i++)
+        for (int i = 0; i < x_.Count; i++)
         {
-            if (!answer_.get(i).Equals(result_.get(i)))
+            if (!answer_[i].Equals(result_[i]))
             {
                 err++;
             }
@@ -271,23 +271,23 @@ public class TaggerImpl : Tagger
         forwardbackward();
         double s = 0.0;
 
-        for (int i = 0; i < x_.size(); i++)
+        for (int i = 0; i < x_.Count; i++)
         {
             for (int j = 0; j < ysize_; j++)
             {
-                node_.get(i).get(j).calcExpectation(expected, Z_, ysize_);
+                node_[i].get(j).calcExpectation(expected, Z_, ysize_);
             }
         }
-        for (int i = 0; i < x_.size(); i++)
+        for (int i = 0; i < x_.Count; i++)
         {
-            List<int> fvector = node_.get(i).get(answer_.get(i)).fVector;
+            List<int> fvector = node_[i].get(answer_[i]).fVector;
             for (int j = 0; fvector.get(j) != -1; j++)
             {
-                int idx = fvector.get(j) + answer_.get(i);
+                int idx = fvector.get(j) + answer_[i];
                 expected[idx]--;
             }
-            s += node_.get(i).get(answer_.get(i)).cost; //UNIGRAM COST
-            List<Path> lpath = node_.get(i).get(answer_.get(i)).lpath;
+            s += node_[i].get(answer_[i]).cost; //UNIGRAM COST
+            List<Path> lpath = node_[i].get(answer_[i]).lpath;
             foreach (Path p in lpath)
             {
                 if (p.lnode.y == answer_.get(p.lnode.x))
@@ -318,30 +318,30 @@ public class TaggerImpl : Tagger
         double s = 0.0;
 
         int num = 0;
-        for (int i = 0; i < x_.size(); i++)
+        for (int i = 0; i < x_.Count; i++)
         {
-            if (answer_.get(i).Equals(result_.get(i)))
+            if (answer_[i].Equals(result_[i]))
             {
                 num++;
             }
         }
-        if (num == x_.size())
+        if (num == x_.Count)
         {
             // if correct parse, do not run forward + backward
             return 0.0;
         }
 
-        for (int i = 0; i < x_.size(); i++)
+        for (int i = 0; i < x_.Count; i++)
         {
             // answer
-            s += node_.get(i).get(answer_.get(i)).cost;
-            List<int> fvector = node_.get(i).get(answer_.get(i)).fVector;
+            s += node_[i].get(answer_[i]).cost;
+            List<int> fvector = node_[i].get(answer_[i]).fVector;
             for (int k = 0; fvector.get(k) != -1; k++)
             {
-                int idx = fvector.get(k) + answer_.get(i);
+                int idx = fvector.get(k) + answer_[i];
                 collins.set(idx, collins.get(idx) + 1);
             }
-            List<Path> lpath = node_.get(i).get(answer_.get(i)).lpath;
+            List<Path> lpath = node_[i].get(answer_[i]).lpath;
             foreach (Path p in lpath)
             {
                 if (p.lnode.y == answer_.get(p.lnode.x))
@@ -349,7 +349,7 @@ public class TaggerImpl : Tagger
                     for (int j = 0; p.fvector.get(j) != -1; j++)
                     {
                         int idx = p.fvector.get(j) + p.lnode.y * ysize_ + p.rnode.y;
-                        collins.set(idx, collins.get(i) + 1);
+                        collins.set(idx, collins[i] + 1);
                     }
                     s += p.cost;
                     break;
@@ -357,14 +357,14 @@ public class TaggerImpl : Tagger
             }
 
             // result
-            s -= node_.get(i).get(result_.get(i)).cost;
-            List<int> fvectorR = node_.get(i).get(result_.get(i)).fVector;
+            s -= node_[i].get(result_[i]).cost;
+            List<int> fvectorR = node_[i].get(result_[i]).fVector;
             for (int k = 0; fvectorR.get(k) != -1; k++)
             {
-                int idx = fvector.get(k) + result_.get(i);
+                int idx = fvector.get(k) + result_[i];
                 collins.set(idx, collins.get(idx) - 1);
             }
-            List<Path> lpathR = node_.get(i).get(result_.get(i)).lpath;
+            List<Path> lpathR = node_[i].get(result_[i]).lpath;
             foreach (Path p in lpathR)
             {
                 if (p.lnode.y == result_.get(p.lnode.x))
@@ -372,7 +372,7 @@ public class TaggerImpl : Tagger
                     for (int j = 0; p.fvector.get(j) != -1; j++)
                     {
                         int idx = p.fvector.get(j) + p.lnode.y * ysize_ + p.rnode.y;
-                        collins.set(idx, collins.get(i) - 1);
+                        collins.set(idx, collins[i] - 1);
                     }
                     s -= p.cost;
                     break;
@@ -437,9 +437,9 @@ public class TaggerImpl : Tagger
                 sb.Append(prob());
                 sb.Append("\n");
             }
-            for (int i = 0; i < x_.size(); i++)
+            for (int i = 0; i < x_.Count; i++)
             {
-                foreach (string s in x_.get(i))
+                foreach (string s in x_[i])
                 {
                     sb.Append(s);
                     sb.Append("\t");
@@ -578,10 +578,7 @@ public class TaggerImpl : Tagger
         this.featureCache_ = featureCache_;
     }
 
-    public int size()
-    {
-        return x_.size();
-    }
+    public int Count=> x_.Count;
 
     public int xsize()
     {
@@ -590,7 +587,7 @@ public class TaggerImpl : Tagger
 
     public int dsize()
     {
-        return feature_index_.size();
+        return feature_index_.Count;
     }
 
     public float[] weightVector()
@@ -610,92 +607,92 @@ public class TaggerImpl : Tagger
 
     public double prob(int i, int j)
     {
-        return toProb(node_.get(i).get(j), Z_);
+        return toProb(node_[i].get(j), Z_);
     }
 
     public double prob(int i)
     {
-        return toProb(node_.get(i).get(result_.get(i)), Z_);
+        return toProb(node_[i].get(result_[i]), Z_);
     }
 
     public double alpha(int i, int j)
     {
-        return node_.get(i).get(j).alpha;
+        return node_[i].get(j).alpha;
     }
 
     public double beta(int i, int j)
     {
-        return node_.get(i).get(j).beta;
+        return node_[i].get(j).beta;
     }
 
     public double emissionCost(int i, int j)
     {
-        return node_.get(i).get(j).cost;
+        return node_[i].get(j).cost;
     }
 
     public double nextTransitionCost(int i, int j, int k)
     {
-        return node_.get(i).get(j).rpath.get(k).cost;
+        return node_[i].get(j).rpath.get(k).cost;
     }
 
     public double prevTransitionCost(int i, int j, int k)
     {
-        return node_.get(i).get(j).lpath.get(k).cost;
+        return node_[i].get(j).lpath.get(k).cost;
     }
 
     public double bestCost(int i, int j)
     {
-        return node_.get(i).get(j).bestCost;
+        return node_[i].get(j).bestCost;
     }
 
     public List<int> emissionVector(int i, int j)
     {
-        return node_.get(i).get(j).fVector;
+        return node_[i].get(j).fVector;
     }
 
     public List<int> nextTransitionVector(int i, int j, int k)
     {
-        return node_.get(i).get(j).rpath.get(k).fvector;
+        return node_[i].get(j).rpath.get(k).fvector;
     }
 
     public List<int> prevTransitionVector(int i, int j, int k)
     {
-        return node_.get(i).get(j).lpath.get(k).fvector;
+        return node_[i].get(j).lpath.get(k).fvector;
     }
 
     public int answer(int i)
     {
-        return answer_.get(i);
+        return answer_[i];
     }
 
     public int result(int i)
     {
-        return result_.get(i);
+        return result_[i];
     }
 
     public int y(int i)
     {
-        return result_.get(i);
+        return result_[i];
     }
 
     public string yname(int i)
     {
-        return feature_index_.getY_().get(i);
+        return feature_index_.getY_()[i];
     }
 
     public string y2(int i)
     {
-        return yname(result_.get(i));
+        return yname(result_[i]);
     }
 
     public string x(int i, int j)
     {
-        return x_.get(i).get(j);
+        return x_[i].get(j);
     }
 
     public List<string> x(int i)
     {
-        return x_.get(i);
+        return x_[i];
     }
 
     public string parse(string s)
@@ -825,7 +822,7 @@ public class TaggerImpl : Tagger
         return true;
     }
 
-    public bool open(InputStream stream, int nbest, int vlevel, double costFactor)
+    public bool open(Stream stream, int nbest, int vlevel, double costFactor)
     {
         if (costFactor <= 0.0)
         {
@@ -983,7 +980,7 @@ public class TaggerImpl : Tagger
         }
 
         TaggerImpl tagger = new TaggerImpl(Mode.TEST);
-        InputStream stream = null;
+        Stream stream = null;
         try
         {
             stream = IOUtil.newInputStream(args[0]);
@@ -1002,7 +999,7 @@ public class TaggerImpl : Tagger
 
         if (args.Length >= 2)
         {
-            InputStream fis = IOUtil.newInputStream(args[1]);
+            Stream fis = IOUtil.newInputStream(args[1]);
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
             TextReader br = new TextReader(isr);
 

@@ -22,7 +22,7 @@ public class PinyinScorer : BaseScorer<PinyinKey>
     protected PinyinKey generateKey(string sentence)
     {
         PinyinKey pinyinKey = new PinyinKey(sentence);
-        if (pinyinKey.size() == 0) return null;
+        if (pinyinKey.Count == 0) return null;
         return pinyinKey;
     }
 }

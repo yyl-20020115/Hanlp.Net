@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dependency.nnparser.option;
+
 namespace com.hankcs.hanlp.dependency.nnparser;
 
 
@@ -138,11 +140,11 @@ public class NeuralNetworkClassifier
 
         E = Matrix.random(nrows, ncols).times(opt.init_range);
 
-        for (int i = 0; i < embeddings.size(); ++i)
+        for (int i = 0; i < embeddings.Count; ++i)
         {
-            List<Double> embedding = embeddings.get(i);
+            List<Double> embedding = embeddings[i];
             int id = embedding.get(0).intValue();
-            for (int j = 1; j < embedding.size(); ++j)
+            for (int j = 1; j < embedding.Count; ++j)
             {
                 E.set(j - 1, id, embedding.get(j));
             }
@@ -157,14 +159,14 @@ public class NeuralNetworkClassifier
         Dictionary<int, int> encoder = precomputation_id_encoder;
         int rank = 0;
 
-        for (int i = 0; i < precomputed_features.size(); ++i)
+        for (int i = 0; i < precomputed_features.Count; ++i)
         {
-            int fid = precomputed_features.get(i);
+            int fid = precomputed_features[i];
             encoder.Add(fid, rank++);
         }
 
-        saved = Matrix.zero(hidden_layer_size, encoder.size());
-        grad_saved = Matrix.zero(hidden_layer_size, encoder.size());
+        saved = Matrix.zero(hidden_layer_size, encoder.Count);
+        grad_saved = Matrix.zero(hidden_layer_size, encoder.Count);
 
         //
         initialize_gradient_histories();
@@ -218,13 +220,13 @@ public class NeuralNetworkClassifier
     void score(List<int> attributes,
                List<Double> retval)
     {
-        Map <int,int >   encoder = precomputation_id_encoder;
+        var   encoder = precomputation_id_encoder;
         // arma.vec hidden_layer = arma.zeros<arma.vec>(hidden_layer_size);
         Matrix hidden_layer = Matrix.zero(hidden_layer_size, 1);
 
-        for (int i = 0, off = 0; i < attributes.size(); ++i, off += embedding_size)
+        for (int i = 0, off = 0; i < attributes.Count; ++i, off += embedding_size)
         {
-            int aid = attributes.get(i);
+            int aid = attributes[i];
             int fid = aid * nr_feature_types + i;
             int rep = encoder.get(fid);
             if (rep != null)
@@ -312,7 +314,7 @@ public class NeuralNetworkClassifier
 //        for (List < Sample >.final_iterator sample = begin;
 //        sample != end;
 //        ++sample){
-//        for (int i = 0; i < sample -> attributes.size(); ++i)
+//        for (int i = 0; i < sample -> attributes.Count; ++i)
 //        {
 //            int fid = sample -> attributes[i] * nr_feature_types + i;
 //            if (encoder.find(fid) != encoder.end())
@@ -322,7 +324,7 @@ public class NeuralNetworkClassifier
 //        }
 //    }
 //        // INFO_LOG("classifier: percentage of necessary precomputation: %lf%%",
-//        // (double)retval.size() / encoder.size() * 100);
+//        // (double)retval.Count / encoder.Count * 100);
 //    }
 
 //    void precomputing(Set<int> precomputed_features)
@@ -350,7 +352,7 @@ public class NeuralNetworkClassifier
 //        int off = (fid % nr_feature_types) * embedding_size;
 //        saved.col(rank) = W1.block(0, off, hidden_layer_size, embedding_size) * E.col(aid);
 //    }
-//        // INFO_LOG("classifier: precomputed %d", features.size());
+//        // INFO_LOG("classifier: precomputed %d", features.Count);
 //    }
 
 //    void compute_gradient(
@@ -376,13 +378,13 @@ public class NeuralNetworkClassifier
 //        List <int> attributes = sample -> attributes;
 //        List <double> classes = sample -> classes;
 //
-//        Matrix Y = Matrix.Map(   classes[0], classes.size());
+//        Matrix Y = Matrix.Map(   classes[0], classes.Count);
 //        Matrix _ = (Eigen.ArrayXd.Random (hidden_layer_size) > mask_prob).select(
 //                Matrix.Ones (hidden_layer_size),
 //                Matrix.zero(hidden_layer_size));
 //        Matrix hidden_layer = Matrix.zero(hidden_layer_size);
 //
-//        for (int i = 0, off = 0; i < attributes.size(); ++i, off += embedding_size)
+//        for (int i = 0, off = 0; i < attributes.Count; ++i, off += embedding_size)
 //        {
 //            int aid = attributes[i];
 //            int fid = aid * nr_feature_types + i;
@@ -442,7 +444,7 @@ public class NeuralNetworkClassifier
 //
 //        grad_b1 += grad_hidden_layer;
 //
-//        for (int i = 0, off = 0; i < attributes.size(); ++i, off += embedding_size)
+//        for (int i = 0, off = 0; i < attributes.Count; ++i, off += embedding_size)
 //        {
 //            int aid = attributes[i];
 //            int fid = aid * nr_feature_types + i;
@@ -526,7 +528,7 @@ public class NeuralNetworkClassifier
         INFO_LOG("classifier: b1(%d)", b1.rows());
         INFO_LOG("classifier: W2(%d,%d)", W2.rows(), W2.cols());
         INFO_LOG("classifier: saved(%d,%d)", saved.rows(), saved.cols());
-        INFO_LOG("classifier: precomputed size=%d", precomputation_id_encoder.size());
+        INFO_LOG("classifier: precomputed size=%d", precomputation_id_encoder.Count);
         INFO_LOG("classifier: hidden layer size=%d", hidden_layer_size);
         INFO_LOG("classifier: embedding size=%d", embedding_size);
         INFO_LOG("classifier: number of classes=%d", nr_classes);

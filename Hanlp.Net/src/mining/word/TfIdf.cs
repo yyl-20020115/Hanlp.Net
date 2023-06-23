@@ -68,10 +68,10 @@ public class TfIdf
             {
                 switch (type)
                 {
-                    case LOGARITHM:
+                    case TfType.LOGARITHM:
                         tf.Add(term, 1 + Math.Log(tf.get(term)));
                         break;
-                    case BOOLEAN:
+                    case TfType.BOOLEAN:
                         tf.Add(term, tf.get(term) == 0.0 ? 0.0 : 1.0);
                         break;
                 }
@@ -143,8 +143,7 @@ public class TfIdf
             n += 1;
             foreach (Term term in documentVocabulary)
             {
-                int t = df.get(term);
-                if (t == null) t = d;
+                if (!df.TryGetValue(term,out var t)) t = d;
                 df.Add(term, t + 1);
             }
         }
@@ -259,11 +258,11 @@ public class TfIdf
 
         public KeySetIterable(IEnumerable<Dictionary<KEY, VALUE>> maps)
         {
-            this.maps = maps.iterator();
+            this.maps = maps.GetEnumerator();
         }
 
         //@Override
-        public IEnumerator<IEnumerable<KEY>> iterator()
+        public IEnumerator<IEnumerable<KEY>> GetEnumerator()
         {
             return new IT();
         }

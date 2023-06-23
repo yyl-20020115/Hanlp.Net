@@ -70,7 +70,7 @@ public class MaxEntModel
      */
     public List<KeyValuePair<string, Double>> predict(string[] context)
     {
-        List<KeyValuePair<string, Double>> result = new ArrayList<KeyValuePair<string, Double>>(outcomeNames.Length);
+        List<KeyValuePair<string, Double>> result = new (outcomeNames.Length);
         double[] p = eval(context);
         for (int i = 0; i < p.Length; ++i)
         {
@@ -198,8 +198,8 @@ public class MaxEntModel
         MaxEntModel m = new MaxEntModel();
         try
         {
-            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
-            Stream _out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            TextReader br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
+            Stream _out = (IOUtil.newOutputStream(path + Predefine.BIN_EXT));
             br.ReadLine();  // type
             m.correctionConstant = int.parseInt(br.ReadLine());  // correctionConstant
             _out.writeInt(m.correctionConstant);

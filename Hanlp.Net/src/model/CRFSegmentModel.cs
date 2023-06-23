@@ -9,6 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.crf;
+
 namespace com.hankcs.hanlp.model;
 
 
@@ -39,8 +43,9 @@ class CRFSegmentModel : CRFModel
      * @param featureFunctionTrie
      */
     public CRFSegmentModel(ITrie<FeatureFunction> featureFunctionTrie)
+        : base(featureFunctionTrie)
     {
-        base(featureFunctionTrie);
+        ;
     }
 
     /**
@@ -75,7 +80,7 @@ class CRFSegmentModel : CRFModel
     //@Override
     public void tag(Table table)
     {
-        int size = table.size();
+        int size = table.Count;
         if (size == 1)
         {
             table.setLast(0, "S");
@@ -84,7 +89,7 @@ class CRFSegmentModel : CRFModel
         double[][] net = new double[size][4];
         for (int i = 0; i < size; ++i)
         {
-            LinkedList<double[]> scoreList = computeScoreList(table, i);
+            List<double[]> scoreList = computeScoreList(table, i);
             for (int tag = 0; tag < 4; ++tag)
             {
                 net[i][tag] = computeScore(scoreList, tag);

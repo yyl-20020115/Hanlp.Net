@@ -45,7 +45,7 @@ public abstract class Tagger
         return true;
     }
 
-    public int size()
+    public int Count
     {
         return 0;
     }

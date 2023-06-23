@@ -6,24 +6,25 @@ public class WordAnalogy : AbstractClosestVectors
 {
 
     protected WordAnalogy(string file)
+        : base(file)
     {
-        base(file);
+        ;
     }
 
-    static void usage()
+    static void Usage()
     {
         Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE Contains word projections in the text Format\n",
-                          WordAnalogy.s.getName());
+                          typeof(WordAnalogy).Name);
         Environment.Exit(0);
     }
 
-    public static void main(string[] args) 
+    public static void Main(string[] args) 
     {
         if (args.Length < 1) usage();
         new WordAnalogy(args[0]).execute();
     }
 
-    protected Result getTargetVector()
+    protected override Result getTargetVector()
     {
         int words = vectorsReader.getNumWords();
         int size = vectorsReader.getSize();
@@ -67,7 +68,7 @@ public class WordAnalogy : AbstractClosestVectors
             len = Math.Sqrt(len);
             for (int i = 0; i < size; i++)
             {
-                vec[i] /= len;
+                vec[i] = (float)(vec[i]/len);
             }
 
             return new Result(vec, bi);

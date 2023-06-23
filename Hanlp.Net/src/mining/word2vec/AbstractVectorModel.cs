@@ -24,7 +24,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
  */
 public abstract class AbstractVectorModel<K>
 {
-    Dictionary<K, Vector> storage;
+    public Dictionary<K, Vector> storage;
 
     public AbstractVectorModel(Dictionary<K, Vector> storage)
     {
@@ -203,10 +203,7 @@ public abstract class AbstractVectorModel<K>
      *
      * @return
      */
-    public int size()
-    {
-        return storage.Count;
-    }
+    public int Count=> storage.Count;
 
     /**
      * 模型中的词向量维度
@@ -219,7 +216,7 @@ public abstract class AbstractVectorModel<K>
         {
             return 0;
         }
-        return storage.Values.iterator().next().size();
+        return storage.Values.GetEnumerator().next().Count;
     }
 
     /**

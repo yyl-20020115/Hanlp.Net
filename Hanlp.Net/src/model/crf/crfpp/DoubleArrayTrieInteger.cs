@@ -37,8 +37,6 @@ public class DoubleArrayTrieInteger : Serializable
         public int right;
     }
 
-    ;
-
     private int[] check;
     private int[] _base;
 
@@ -82,14 +80,14 @@ public class DoubleArrayTrieInteger : Serializable
 
         for (int i = parent.left; i < parent.right; i++)
         {
-            if ((Length != null ? Length[i] : key.get(i).Length) < parent.depth)
+            if ((Length != null ? Length[i] : key[i].Length) < parent.depth)
                 continue;
 
-            string tmp = key.get(i);
+            string tmp = key[i];
 
             int cur = 0;
             if ((Length != null ? Length[i] : tmp.Length) != parent.depth)
-                cur = (int) tmp.charAt(parent.depth) + 1;
+                cur = (int) tmp[parent.depth] + 1;
 
             if (prev > cur)
             {
@@ -97,14 +95,14 @@ public class DoubleArrayTrieInteger : Serializable
                 return 0;
             }
 
-            if (cur != prev || siblings.size() == 0)
+            if (cur != prev || siblings.Count == 0)
             {
                 Node tmp_node = new Node();
                 tmp_node.depth = parent.depth + 1;
                 tmp_node.code = cur;
                 tmp_node.left = i;
-                if (siblings.size() != 0)
-                    siblings.get(siblings.size() - 1).right = i;
+                if (siblings.Count != 0)
+                    siblings[(^1)].right = i;
 
                 siblings.Add(tmp_node);
             }
@@ -112,10 +110,10 @@ public class DoubleArrayTrieInteger : Serializable
             prev = cur;
         }
 
-        if (siblings.size() != 0)
-            siblings.get(siblings.size() - 1).right = parent.right;
+        if (siblings.Count != 0)
+            siblings[^1].right = parent.right;
 
-        return siblings.size();
+        return siblings.Count;
     }
 
     private int insert(List<Node> siblings)
@@ -124,7 +122,7 @@ public class DoubleArrayTrieInteger : Serializable
             return 0;
 
         int begin = 0;
-        int pos = ((siblings.get(0).code + 1 > nextCheckPos) ? siblings.get(0).code + 1
+        int pos = ((siblings[(0)].code + 1 > nextCheckPos) ? siblings[(0)].code + 1
             : nextCheckPos) - 1;
         int nonzero_num = 0;
         int first = 0;
@@ -151,8 +149,8 @@ public class DoubleArrayTrieInteger : Serializable
                 first = 1;
             }
 
-            begin = pos - siblings.get(0).code;
-            if (allocSize <= (begin + siblings.get(siblings.size() - 1).code))
+            begin = pos - siblings[(0)].code;
+            if (allocSize <= (begin + siblings[(siblings.Count - 1)].code))
             {
                 // progress can be zero
                 double l = (1.05 > 1.0 * keySize / (progress + 1)) ? 1.05 : 1.0
@@ -163,9 +161,9 @@ public class DoubleArrayTrieInteger : Serializable
             if (used[begin])
                 continue;
 
-            for (int i = 1; i < siblings.size(); i++)
-                if (check[begin + siblings.get(i).code] != 0)
-                    continue outer;
+            for (int i = 1; i < siblings.Count; i++)
+                if (check[begin + siblings[(i)].code] != 0)
+                    goto outer;
 
             break;
         }
@@ -180,22 +178,22 @@ public class DoubleArrayTrieInteger : Serializable
             nextCheckPos = pos;
 
         used[begin] = true;
-        size = (size > begin + siblings.get(siblings.size() - 1).code + 1) ? size
-            : begin + siblings.get(siblings.size() - 1).code + 1;
+        size = (size > begin + siblings[^1].code + 1) ? size
+            : begin + siblings[^1].code + 1;
 
-        for (int i = 0; i < siblings.size(); i++)
-            check[begin + siblings.get(i).code] = begin;
+        for (int i = 0; i < siblings.Count; i++)
+            check[begin + siblings[(i)].code] = begin;
 
         for (int i = 0; i < siblings.Count; i++)
         {
             List<Node> new_siblings = new ();
 
-            if (fetch(siblings.get(i), new_siblings) == 0)
+            if (fetch(siblings[(i)], new_siblings) == 0)
             {
-                base[begin + siblings.get(i).code] = (value != null) ? (-value[siblings
-                    .get(i).left] - 1) : (-siblings.get(i).left - 1);
+                base[begin + siblings[(i)].code] = (value != null) ? (-value[siblings
+                    [(i)].left] - 1) : (-siblings[(i)].left - 1);
 
-                if (value != null && (-value[siblings.get(i).left] - 1) >= 0)
+                if (value != null && (-value[siblings[(i)].left] - 1) >= 0)
                 {
                     error_ = -2;
                     return 0;
@@ -206,7 +204,7 @@ public class DoubleArrayTrieInteger : Serializable
             else
             {
                 int h = insert(new_siblings);
-                base[begin + siblings.get(i).code] = h;
+                base[begin + siblings[(i)].code] = h;
             }
         }
         return begin;
@@ -320,7 +318,7 @@ public class DoubleArrayTrieInteger : Serializable
                 List<int> childList = new ();
                 childIdxMap.Add(check[i], childList);
             }
-            childIdxMap.get(check[i]).Add(i);
+            childIdxMap[(check[i])].Add(i);
         }
         Stack<int[]> s = new Stack<int[]>();
         s.Push(new int[]{1, -1});
@@ -329,8 +327,8 @@ public class DoubleArrayTrieInteger : Serializable
         while (true)
         {
             int[] pair = s.Peek();
-            List<int> childList = childIdxMap.get(pair[0]);
-            if (childList == null || (childList.Count - 1) == pair[1])
+            //List<int> childList = childIdxMap.get(pair[0]);
+            if (!childIdxMap.TryGetValue(pair[0],out var childList) || (childList.Count - 1) == pair[1])
             {
                 s.Pop();
                 if (s.Count==0)
@@ -339,9 +337,9 @@ public class DoubleArrayTrieInteger : Serializable
                 }
                 else
                 {
-                    if (!charBuf.isEmpty())
+                    if (charBuf.Count>0)
                     {
-                        charBuf.Remove(charBuf.size() - 1);
+                        charBuf.Remove(charBuf.Count - 1);
                     }
                     continue;
                 }
@@ -390,11 +388,10 @@ public class DoubleArrayTrieInteger : Serializable
         check = new int[size];
         _base = new int[size];
 
-        Stream _is = null;
+        Stream @is = null;
         try
         {
-            _is = new Stream(new BufferedInputStream(
-                new FileStream(file), BUF_SIZE));
+            @is =  new FileStream(file);
             for (int i = 0; i < size; i++)
             {
                 _base[i] = @is.readInt();
@@ -403,8 +400,8 @@ public class DoubleArrayTrieInteger : Serializable
         }
         finally
         {
-            if (_is != null)
-                _is.Close();
+            if (@is != null)
+                @is.Close();
         }
     }
 
@@ -413,8 +410,8 @@ public class DoubleArrayTrieInteger : Serializable
         Stream _out = null;
         try
         {
-            _out = new Stream(new BufferedOutputStream(
-                IOUtil.newOutputStream(fileName)));
+            _out = new 
+                IOUtil.newOutputStream(fileName);
             for (int i = 0; i < size; i++)
             {
                 _out.writeInt(base[i]);
@@ -445,20 +442,20 @@ public class DoubleArrayTrieInteger : Serializable
 
         char[] keyChars = key.ToCharArray();
 
-        int b = base[nodePos];
+        int b = _base[nodePos];
         int p;
 
         for (int i = pos; i < len; i++)
         {
             p = b + (int) (keyChars[i]) + 1;
             if (b == check[p])
-                b = base[p];
+                b = _base[p];
             else
                 return result;
         }
 
         p = b;
-        int n = base[p];
+        int n = _base[p];
         if (b == check[p] && n < 0)
         {
             result = -n - 1;
@@ -490,7 +487,7 @@ public class DoubleArrayTrieInteger : Serializable
         for (int i = pos; i < len; i++)
         {
             p = b;
-            n = base[p];
+            n = _base[p];
 
             if (b == check[p] && n < 0)
             {
@@ -505,7 +502,7 @@ public class DoubleArrayTrieInteger : Serializable
         }
 
         p = b;
-        n = base[p];
+        n = _base[p];
 
         if (b == check[p] && n < 0)
         {

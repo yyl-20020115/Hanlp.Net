@@ -60,8 +60,5 @@ public class Table
         v[x][v[x].Length - 1] = t;
     }
 
-    public int size()
-    {
-        return v.Length;
-    }
+    public int Count=> v.Length;
 }

@@ -92,9 +92,9 @@ public class State
      */
     public int getLargestValueId()
     {
-        if (emits == null || emits.size() == 0) return null;
+        if (emits == null || emits.Count == 0) return null;
 
-        return emits.iterator().next();
+        return emits.GetEnumerator().next();
     }
 
     /**
@@ -142,7 +142,7 @@ public class State
      */
     public void setFailure(State failState, int[] fail)
     {
-        this.failure = failState;
+        this._failure = failState;
         fail[index] = failState.index;
     }
 
@@ -195,7 +195,7 @@ public class State
 
     public ICollection<State> getStates()
     {
-        return this.success.values();
+        return this.success.Values;
     }
 
     public ICollection<char> getTransitions()

@@ -15,6 +15,7 @@ using com.hankcs.hanlp.corpus.dependency.model;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.dependency.common;
 using com.hankcs.hanlp.utility;
+using System.Text;
 
 namespace com.hankcs.hanlp.model.bigram;
 
@@ -65,9 +66,9 @@ public class WordNatureDependencyModel
             }
             map.Add(param[0], attribute);
         }
-        if (map.size() == 0) return false;
+        if (map.Count == 0) return false;
         // 为它们计算概率
-        foreach (KeyValuePair<string, Attribute> entry in map.entrySet())
+        foreach (KeyValuePair<string, Attribute> entry in map)
         {
             string key = entry.Key;
             string[] param = key.Split("@", 2);
@@ -103,7 +104,7 @@ public class WordNatureDependencyModel
         try
         {
             Stream _out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            _out.writeInt(attributeList.size());
+            _out.writeInt(attributeList.Count);
             foreach (Attribute attribute in attributeList)
             {
                 _out.writeInt(attribute.p.Length);

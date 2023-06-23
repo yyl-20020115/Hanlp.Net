@@ -78,9 +78,9 @@ public class Node
     public void calcExpectation(double[] expected, double Z, int size)
     {
         double c = Math.Exp(alpha + beta - cost - Z);
-        for (int i = 0; fVector.get(i) != -1; i++)
+        for (int i = 0; fVector[i] != -1; i++)
         {
-            int idx = fVector.get(i) + y;
+            int idx = fVector[i] + y;
             expected[idx] += c;
         }
         foreach (Path p in lpath)

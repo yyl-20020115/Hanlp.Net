@@ -60,7 +60,7 @@ public class CoreBiGramTableDictionary
             br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
             string line;
             int total = 0;
-            int maxWordId = CoreDictionary.trie.size();
+            int maxWordId = CoreDictionary.trie.Count;
             while ((line = br.ReadLine()) != null)
             {
                 string[] p = line.Split("\\s");
@@ -98,7 +98,7 @@ public class CoreBiGramTableDictionary
 
             for (int i = 0; i < maxWordId; ++i)
             {
-                Dictionary<int, int> bMap = map.get(i);
+                Dictionary<int, int> bMap = map[i];
                 if (bMap != null)
                 {
                     foreach (KeyValuePair<int, int> entry in bMap)
@@ -148,7 +148,7 @@ public class CoreBiGramTableDictionary
 //                _out.writeInt(i);
 //            }
 //            _out.Close();
-            ObjectOutputStream _out = new ObjectOutputStream(IOUtil.newOutputStream(path));
+            Stream _out = new Stream(IOUtil.newOutputStream(path));
             _out.writeObject(start);
             _out.writeObject(pair);
             _out.Close();
@@ -183,9 +183,9 @@ public class CoreBiGramTableDictionary
 
         try
         {
-            ObjectInputStream _in = new ObjectInputStream(IOUtil.newInputStream(path));
+            Stream _in = (IOUtil.newInputStream(path));
             start = (int[])_in.readObject();
-            if (CoreDictionary.trie.size() != start.Length - 1)     // 目前CoreNatureDictionary.ngram.txt的缓存依赖于CoreNatureDictionary.txt的缓存
+            if (CoreDictionary.trie.Count != start.Length - 1)     // 目前CoreNatureDictionary.ngram.txt的缓存依赖于CoreNatureDictionary.txt的缓存
             {                                                       // 所以这里校验一下二者的一致性，不然可能导致下标越界或者ngram错乱的情况
                 _in.Close();
                 return false;

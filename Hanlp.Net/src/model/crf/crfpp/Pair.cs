@@ -15,7 +15,7 @@ public class KeyValuePair<K,V> : Serializable {
      * Gets the key for this pair.
      * @return key for this pair
      */
-    public K Key { return key; }
+    public K Key() { return key; }
 
     /**
      * Value of this this <code>KeyValuePair</code>.
@@ -26,7 +26,7 @@ public class KeyValuePair<K,V> : Serializable {
      * Gets the value for this pair.
      * @return value for this pair
      */
-    public V Value { return value; }
+    public V Value() { return value; }
 
     /**
      * Creates a new pair

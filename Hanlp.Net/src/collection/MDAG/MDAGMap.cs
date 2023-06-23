@@ -31,7 +31,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         if (origin == null)
         {
             valueList.Add(value);
-            char[] twoChar = ByteUtil.convertIntToTwoChar(valueList.size() - 1);
+            char[] twoChar = ByteUtil.convertIntToTwoChar(valueList.Count - 1);
             mdag.addString(key + MDAGForMap.DELIMITER + twoChar[0] + twoChar[1]);
         }
         return origin;
@@ -45,7 +45,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         {
             return valueList.get(valueIndex);
         }
-        return null;
+        return default;
     }
 
     public V get(string key)
@@ -55,7 +55,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
         {
             return valueList.get(valueIndex);
         }
-        return null;
+        return default;
     }
 
     //@Override
@@ -70,7 +70,7 @@ public class MDAGMap<V> : AbstractMap<string, V>
     {
         HashSet<string> stringSet = mdag.getAllStrings();
         List<string> keySet = new List<string>();
-        IEnumerator<string> iterator = stringSet.iterator();
+        IEnumerator<string> iterator = stringSet.GetEnumerator();
         while (iterator.MoveNext())
         {
             string key = iterator.next();
@@ -164,18 +164,18 @@ public class MDAGMap<V> : AbstractMap<string, V>
             if (targetNode == null) return -1;
             // 接下来应该是一条单链路
             Dictionary<char, MDAGNode> outgoingTransitions = targetNode.getOutgoingTransitions();
-            //assert outgoingTransitions.size() == 1 : "不是单链！";
-            char high = outgoingTransitions.Keys.iterator().next();
+            //assert outgoingTransitions.Count == 1 : "不是单链！";
+            char high = outgoingTransitions.Keys.GetEnumerator().next();
             targetNode = targetNode.transition(high);
             outgoingTransitions = targetNode.getOutgoingTransitions();
-            //assert outgoingTransitions.size() == 1 : "不是单链！";
-            char low = outgoingTransitions.Keys.iterator().next();
+            //assert outgoingTransitions.Count == 1 : "不是单链！";
+            char low = outgoingTransitions.Keys.GetEnumerator().next();
             return ByteUtil.convertTwoCharToInt(high, low);
         }
 
-        public LinkedList<KeyValuePair<string, int>> commonPrefixSearchWithValueIndex(char[] key, int begin)
+        public List<KeyValuePair<string, int>> commonPrefixSearchWithValueIndex(char[] key, int begin)
         {
-            LinkedList<KeyValuePair<string, int>> result = new LinkedList<KeyValuePair<string, int>>();
+            List<KeyValuePair<string, int>> result = new ();
             if (sourceNode != null)
             {
                 int charCount = key.Length;

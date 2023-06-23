@@ -84,9 +84,9 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
             if (tagArray[i] == CWSTagSet.B || tagArray[i] == CWSTagSet.S)
             {
                 output.Add(result.ToString());
-                result.setLength(0);
+                result.Length=0;
             }
-            result.Append(text.charAt(i));
+            result.Append(text[i]);
         }
         if (result.Length != 0)
         {

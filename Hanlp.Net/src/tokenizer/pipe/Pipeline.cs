@@ -50,7 +50,7 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public int size()
+    public int Count
     {
         return pipeList.Count;
     }
@@ -68,9 +68,9 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public IEnumerator<Pipe<M, M>> iterator()
+    public IEnumerator<Pipe<M, M>> GetEnumerator()
     {
-        return pipeList.iterator();
+        return pipeList.GetEnumerator();
     }
 
     //@Override
@@ -202,13 +202,13 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public ListIterator<Pipe<M, M>> GetEnumerator()
+    public IEnumerator<Pipe<M, M>> GetEnumerator()
     {
         return pipeList.GetEnumerator();
     }
 
     //@Override
-    public ListIterator<Pipe<M, M>> listIterator(int index)
+    public IEnumerator<Pipe<M, M>> listIterator(int index)
     {
         return pipeList.listIterator(index);
     }

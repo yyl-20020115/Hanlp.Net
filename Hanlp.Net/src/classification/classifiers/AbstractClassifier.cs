@@ -75,7 +75,7 @@ public abstract class AbstractClassifier : IClassifier
     {
         IDataSet dataSet = new MemoryDataSet();
         logger.start("正在构造训练数据集...");
-        int total = trainingDataSet.size();
+        int total = trainingDataSet.Count;
         int cur = 0;
         foreach (KeyValuePair<string, string[]> entry in trainingDataSet)
         {

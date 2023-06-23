@@ -35,7 +35,7 @@ public class IOUtil
     {
         try
         {
-            ObjectOutputStream oos = new ObjectOutputStream(IOUtil.newOutputStream(path));
+            Stream oos = new Stream(IOUtil.newOutputStream(path));
             oos.writeObject(o);
             oos.Close();
         }
@@ -56,10 +56,10 @@ public class IOUtil
      */
     public static Object readObjectFrom(string path)
     {
-        ObjectInputStream ois = null;
+        Stream ois = null;
         try
         {
-            ois = new ObjectInputStream(IOUtil.newInputStream(path));
+            ois = new Stream(IOUtil.newInputStream(path));
             Object o = ois.readObject();
             ois.Close();
             return o;
@@ -83,7 +83,7 @@ public class IOUtil
         if (path == null) return null;
         try
         {
-            InputStream _in = IOAdapter == null ? new FileStream(path) :
+            Stream _in = IOAdapter == null ? new FileStream(path) :
                     IOAdapter.open(path);
             byte[] fileContent = new byte[_in.available()];
             int read = readBytesFromOtherInputStream(_in, fileContent);
@@ -168,7 +168,7 @@ public class IOUtil
         {
             if (IOAdapter == null) return readBytesFromFileInputStream(new FileStream(path));
 
-            InputStream _is = IOAdapter.open(path);
+            Stream _is = IOAdapter.open(path);
             if (_is is FileStream)
                 return readBytesFromFileInputStream((FileStream)_is);
             else
@@ -184,7 +184,7 @@ public class IOUtil
 
     public static string readTxt(string file, string charsetName) 
     {
-        InputStream _is = IOAdapter.open(file);
+        Stream _is = IOAdapter.open(file);
         byte[] targetArray = new byte[_is.available()];
         int len;
         int off = 0;
@@ -238,7 +238,7 @@ public class IOUtil
     private static byte[] readBytesFromFileInputStream(FileStream fis) 
     {
         FileChannel channel = fis.getChannel();
-        int fileSize = (int) channel.size();
+        int fileSize = (int) channel.Count;
         ByteBuffer byteBuffer = ByteBuffer.allocate(fileSize);
         channel.read(byteBuffer);
         byteBuffer.flip();
@@ -250,7 +250,7 @@ public class IOUtil
     }
 
     /**
-     * 将非FileStream的某InputStream中的全部数据读入到字节数组中
+     * 将非FileStream的某Stream中的全部数据读入到字节数组中
      *
      * @param is
      * @return
@@ -264,7 +264,7 @@ public class IOUtil
     }
 
     /**
-     * 从InputStream读取指定长度的字节出来
+     * 从Stream读取指定长度的字节出来
      * @param is 流
      * @param targetArray output
      * @return 实际读取了多少字节，返回0表示遇到了文件尾部
@@ -379,7 +379,8 @@ public class IOUtil
      */
     public static bool deleteFile(string path)
     {
-        return new File(path).delete();
+        File.Delete(path);// new File(path).delete();
+        return true;
     }
 
     /**
@@ -427,7 +428,7 @@ public class IOUtil
         {
             foreach (File file in fileArray)
             {
-                if (file.isFile() && !file.getName().StartsWith(".")) // 过滤隐藏文件
+                if (file.isFile() && !file.Name.StartsWith(".")) // 过滤隐藏文件
                 {
                     fileList.Add(file);
                 }
@@ -559,7 +560,7 @@ public class IOUtil
         }
 
         //@Override
-        public IEnumerator<string> iterator()
+        public IEnumerator<string> GetEnumerator()
         {
             return this;
         }
@@ -657,20 +658,20 @@ public class IOUtil
         var map = new Dictionary<string, CoreDictionary.Attribute>();
         foreach (string path in pathArray)
         {
-            File file = new File(path);
-            string fileName = file.getName();
+            string file = (path);
+            string fileName = Path.GetFileName(file);
             int natureIndex = fileName.LastIndexOf(' ');
             Nature defaultNature = Nature.n;
             if (natureIndex > 0)
             {
-                string natureString = fileName.substring(natureIndex + 1);
+                string natureString = fileName[(natureIndex + 1)..];
                 path = file.getParent() + File.separator + fileName.substring(0, natureIndex);
                 if (natureString.Length > 0 && !natureString.EndsWith(".txt") && !natureString.EndsWith(".csv"))
                 {
                     defaultNature = Nature.create(natureString);
                 }
             }
-            TextReader br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            TextReader br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
             loadDictionary(br, map, path.EndsWith(".csv"), defaultNature);
         }
 
@@ -724,8 +725,8 @@ public class IOUtil
 
     public static void writeCustomNature(Stream _out, HashSet<Nature> customNatureCollector) 
     {
-        if (customNatureCollector.size() == 0) return;
-        _out.writeInt(-customNatureCollector.size());
+        if (customNatureCollector.Count == 0) return;
+        _out.writeInt(-customNatureCollector.Count);
         foreach (Nature nature in customNatureCollector)
         {
             TextUtility.writeString(nature.ToString(), _out);

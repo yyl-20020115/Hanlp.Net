@@ -171,7 +171,7 @@ public class Trie
         var emitMapStart = new Dictionary<int, Emit>();
         foreach (Emit emit in collectedEmits)
         {
-            if (!emitMapStart.TryGetValue(emit.getStart(),out var pre) || (pre.size() < emit.size()))
+            if (!emitMapStart.TryGetValue(emit.getStart(),out var pre) || (pre.Count < emit.Count))
             {
                 emitMapStart.Add(emit.getStart(), emit);
             }
@@ -185,7 +185,7 @@ public class Trie
         var emitMapEnd = new Dictionary<int, Emit>();
         foreach (Emit emit in emitMapStart.Values)
         {
-            if (!emitMapEnd.TryGetValue(emit.getEnd(),out var pre) || pre.size() < emit.size())
+            if (!emitMapEnd.TryGetValue(emit.getEnd(),out var pre) || pre.Count < emit.Count)
             {
                 emitMapEnd.Add(emit.getEnd(), emit);
             }

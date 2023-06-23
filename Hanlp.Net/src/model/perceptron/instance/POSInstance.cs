@@ -165,16 +165,16 @@ public class POSInstance : Instance
 
 //        for (int i = 0; i < curWord.Length; i++)
 //        {
-//            string prefix = curWord.substring(0, 1) + curWord.charAt(i) + "";
+//            string prefix = curWord.substring(0, 1) + curWord[i] + "";
 //            addFeature("p2f=" + prefix, featVec, featureMap);
-//            string suffix = curWord.substring(curWord.Length - 1) + curWord.charAt(i) + "";
+//            string suffix = curWord.substring(curWord.Length - 1) + curWord[i] + "";
 //            addFeature("s2f=" + suffix, featVec, featureMap);
 
-//            if ((i < curWord.Length - 1) && (curWord.charAt(i) == curWord.charAt(i + 1)))
+//            if ((i < curWord.Length - 1) && (curWord[i] == curWord.charAt(i + 1)))
 //            {
 //                addFeature("dulC=" + curWord.substring(i, i + 1), featVec, featureMap);
 //            }
-//            if ((i < curWord.Length - 2) && (curWord.charAt(i) == curWord.charAt(i + 2)))
+//            if ((i < curWord.Length - 2) && (curWord[i] == curWord.charAt(i + 2)))
 //            {
 //                addFeature("dul2C=" + curWord.substring(i, i + 1), featVec, featureMap);
 //            }
@@ -183,7 +183,7 @@ public class POSInstance : Instance
 //        bool isDigit = true;
 //        for (int i = 0; i < curWord.Length; i++)
 //        {
-//            if (CharType.get(curWord.charAt(i)) != CharType.CT_NUM)
+//            if (CharType.get(curWord[i]) != CharType.CT_NUM)
 //            {
 //                isDigit = false;
 //                break;
@@ -197,7 +197,7 @@ public class POSInstance : Instance
 //        bool isPunt = true;
 //        for (int i = 0; i < curWord.Length; i++)
 //        {
-//            if (!CharType.punctSet.Contains(curWord.charAt(i) + ""))
+//            if (!CharType.punctSet.Contains(curWord[i] + ""))
 //            {
 //                isPunt = false;
 //                break;
@@ -211,7 +211,7 @@ public class POSInstance : Instance
 //        bool isLetter = true;
 //        for (int i = 0; i < curWord.Length; i++)
 //        {
-//            if (CharType.get(curWord.charAt(i)) != CharType.CT_LETTER)
+//            if (CharType.get(curWord[i]) != CharType.CT_LETTER)
 //            {
 //                isLetter = false;
 //                break;

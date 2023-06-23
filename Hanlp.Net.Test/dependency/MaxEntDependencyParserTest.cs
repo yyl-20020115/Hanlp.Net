@@ -18,7 +18,7 @@ public class MaxEntDependencyParserTest : TestCase
 //        int id = 1;
 //        for (CoNLLSentence sentence : sentenceList)
 //        {
-//            Console.printf("%d / %d...", id++, sentenceList.size());
+//            Console.printf("%d / %d...", id++, sentenceList.Count);
 //            long start = DateTime.Now.Microsecond;
 //            List<Term> termList = new ();
 //            for (CoNLLWord word : sentence.word)

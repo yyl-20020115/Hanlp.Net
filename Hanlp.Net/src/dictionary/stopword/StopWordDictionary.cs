@@ -36,11 +36,6 @@ public class StopWordDictionary : MDAGSet , Filter
     {
     }
 
-    public StopWordDictionary(string stopWordDictionaryPath) 
-    {
-        base(stopWordDictionaryPath);
-    }
-
     //@Override
     public bool shouldInclude(Term term)
     {

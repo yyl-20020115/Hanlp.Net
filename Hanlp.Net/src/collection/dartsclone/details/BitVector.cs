@@ -68,10 +68,7 @@ class BitVector
      * 大小
      * @return
      */
-    int size()
-    {
-        return _size;
-    }
+    int Count => _size;
 
     /**
      * 在末尾追加
@@ -90,13 +87,13 @@ class BitVector
      */
     void build()
     {
-        _ranks = new int[_units.size()];
+        _ranks = new int[_units.Count];
 
         _numOnes = 0;
-        for (int i = 0; i < _units.size(); ++i)
+        for (int i = 0; i < _units.Count; ++i)
         {
             _ranks[i] = _numOnes;
-            _numOnes += popCount(_units.get(i));
+            _numOnes += popCount(_units[i]);
         }
     }
 

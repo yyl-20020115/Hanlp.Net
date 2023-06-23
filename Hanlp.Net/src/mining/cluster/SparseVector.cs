@@ -103,7 +103,7 @@ public class SparseVector : Dictionary<int, double>
     //    double euclid_distance_squared(const Vector &vec1, const Vector &vec2)
     //{
     //    HashMap<VecKey, bool>::type done;
-    //    init_hash_map(VECTOR_EMPTY_KEY, done, vec1.size());
+    //    init_hash_map(VECTOR_EMPTY_KEY, done, vec1.Count);
     //    VecHashMap::const_iterator it1, it2;
     //    double dist = 0;
     //    for (it1 = vec1.hash_map()->begin(); it1 != vec1.hash_map()->end(); ++it1)

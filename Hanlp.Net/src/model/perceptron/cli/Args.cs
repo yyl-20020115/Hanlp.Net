@@ -64,7 +64,7 @@ public class Args
             try
             {
                 BeanInfo info = Introspector.getBeanInfo(clazz);
-                foreach (PropertyDescriptor pd in info.getPropertyDescriptors())
+                foreach (PropertyInfo pd in info.getPropertyDescriptors())
                 {
                     processProperty(target, pd, arguments);
                 }
@@ -103,7 +103,7 @@ public class Args
         if (argument != null)
         {
             bool set = false;
-            for (IEnumerator<string> i = arguments.iterator(); i.MoveNext(); )
+            for (IEnumerator<string> i = arguments.GetEnumerator(); i.MoveNext(); )
             {
                 string arg = i.next();
                 string prefix = argument.prefix();
@@ -157,11 +157,11 @@ public class Args
         }
         catch (NoSuchMethodException e)
         {
-            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.Name + " that takes a string", e);
         }
     }
 
-    private static void addPropertyArgument(Type type, PropertyDescriptor property, Object target, Object value, string delimiter)
+    private static void addPropertyArgument(Type type, PropertyInfo property, Object target, Object value, string delimiter)
     {
         try
         {
@@ -178,7 +178,7 @@ public class Args
         }
         catch (NoSuchMethodException e)
         {
-            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.Name + " that takes a string", e);
         }
         catch (InvocationTargetException e)
         {
@@ -186,16 +186,16 @@ public class Args
         }
     }
 
-    private static void processProperty(Object target, PropertyDescriptor property, List<string> arguments)
+    private static void processProperty(Object target, PropertyInfo property, List<string> arguments)
     {
-        Method writeMethod = property.getWriteMethod();
+        MethodInfo writeMethod = property.getWriteMethod();
         if (writeMethod != null)
         {
             Argument argument = writeMethod.getAnnotation(Argument.c);
             if (argument != null)
             {
                 bool set = false;
-                for (IEnumerator<string> i = arguments.iterator(); i.MoveNext(); )
+                for (IEnumerator<string> i = arguments.GetEnumerator(); i.MoveNext(); )
                 {
                     string arg = i.next();
                     string prefix = argument.prefix();
@@ -246,10 +246,10 @@ public class Args
     /**
      * Generate usage information based on the target annotations.
      *
-     * @param errStream A {@link PrintStream} to print the usage information to.
+     * @param errStream A {@link Stream} to print the usage information to.
      * @param target    An instance or class.
      */
-    public static void usage(PrintStream errStream, Object target)
+    public static void usage(Stream errStream, Object target)
     {
         Type clazz;
         if (target is Type)
@@ -260,7 +260,7 @@ public class Args
         {
             clazz = target.getClass();
         }
-        string clazzName = clazz.getName();
+        string clazzName = clazz.Name;
         {
             int index = clazzName.LastIndexOf('$');
             if (index > 0)
@@ -279,7 +279,7 @@ public class Args
         try
         {
             BeanInfo info = Introspector.getBeanInfo(clazz);
-            foreach (PropertyDescriptor pd in info.getPropertyDescriptors())
+            foreach (PropertyInfo pd in info.getPropertyDescriptors())
             {
                 propertyUsage(errStream, target, pd);
             }
@@ -290,7 +290,7 @@ public class Args
         }
     }
 
-    private static void fieldUsage(PrintStream errStream, Object target, Field field)
+    private static void fieldUsage(Stream errStream, Object target, Field field)
     {
         Argument argument = field.getAnnotation(Argument.s);
         if (argument != null)
@@ -314,9 +314,9 @@ public class Args
         }
     }
 
-    private static void propertyUsage(PrintStream errStream, Object target, PropertyDescriptor field)
+    private static void propertyUsage(Stream errStream, Object target, PropertyInfo field)
     {
-        Method writeMethod = field.getWriteMethod();
+        MethodInfo writeMethod = field.getWriteMethod();
         if (writeMethod != null)
         {
             Argument argument = writeMethod.getAnnotation(Argument.c);
@@ -329,7 +329,7 @@ public class Args
                 string description = argument.description();
                 try
                 {
-                    Method readMethod = field.getReadMethod();
+                    MethodInfo readMethod = field.getReadMethod();
                     Object defaultValue;
                     if (readMethod == null)
                     {
@@ -355,7 +355,7 @@ public class Args
 
     }
 
-    private static void propertyUsage(PrintStream errStream, string prefix, string name, string alias, Type type, string delimiter, string description, Object defaultValue)
+    private static void propertyUsage(Stream errStream, string prefix, string name, string alias, Type type, string delimiter, string description, Object defaultValue)
     {
         StringBuilder sb = new StringBuilder("  ");
         sb.Append(prefix);
@@ -395,7 +395,7 @@ public class Args
                 sb.Append(" (");
                 if (type.isArray())
                 {
-                    List<Object> list = new ArrayList<Object>();
+                    List<Object> list = new ();
                     int len = Array.getLength(defaultValue);
                     for (int i = 0; i < len; i++)
                     {
@@ -416,18 +416,18 @@ public class Args
 
     private static string getTypeName(Type type)
     {
-        string typeName = type.getName();
+        string typeName = type.Name;
         int beginIndex = typeName.LastIndexOf(".");
         typeName = typeName.substring(beginIndex + 1);
         return typeName;
     }
 
-    static string getName(Argument argument, PropertyDescriptor property)
+    public static string getName(Argument argument, PropertyInfo property)
     {
         string name = argument.value();
         if (name.Equals(""))
         {
-            name = property.getName();
+            name = property.Name;
         }
         return name;
 
@@ -455,7 +455,7 @@ public class Args
         return value;
     }
 
-    static void setProperty(Type type, PropertyDescriptor property, Object target, Object value, string delimiter)
+    public static void setProperty(Type type, PropertyInfo property, Object target, Object value, string delimiter)
     {
         try
         {
@@ -468,7 +468,7 @@ public class Args
         }
         catch (NoSuchMethodException e)
         {
-            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.Name + " that takes a string", e);
         }
         catch (InvocationTargetException e)
         {
@@ -476,7 +476,7 @@ public class Args
         }
     }
 
-    static string getAlias(Argument argument)
+    public static string getAlias(Argument argument)
     {
         string alias = argument.alias();
         if (alias.Equals(""))
@@ -491,12 +491,12 @@ public class Args
         string name = argument.value();
         if (name.Equals(""))
         {
-            name = field.getName();
+            name = field.Name;
         }
         return name;
     }
 
-    static void setField(Type type, Field field, Object target, Object value, string delimiter)
+    public static void setField(Type type, Field field, Object target, Object value, string delimiter)
     {
         makeAccessible(field);
         try
@@ -510,7 +510,7 @@ public class Args
         }
         catch (NoSuchMethodException e)
         {
-            throw new ArgumentException("Could not find constructor in class " + type.getName() + " that takes a string", e);
+            throw new ArgumentException("Could not find constructor in class " + type.Name + " that takes a string", e);
         }
     }
 
@@ -560,9 +560,8 @@ public class Args
 
     private static void makeAccessible(AccessibleObject ao)
     {
-        if (ao is Member)
+        if (ao is MemberInfo member)
         {
-            Member member = (Member) ao;
             if (!Modifier.isPublic(member.getModifiers()))
             {
                 ao.setAccessible(true);
@@ -605,7 +604,7 @@ public class Args
             {
                 try
                 {
-                    Method m = type.getMethod(methodName, string.s);
+                    MethodInfo m = type.getMethod(methodName, string.s);
                     return m.invoke(null, value);
                 }
                 catch (NoSuchMethodException e)
@@ -631,7 +630,7 @@ public class Args
             Object v = null;
             try
             {
-                Constructor init = type.getDeclaredConstructor(string.s);
+                ConstructorInfo init = type.getDeclaredConstructor(string.s);
                 v = init.newInstance(value);
             }
             catch (NoSuchMethodException e)
@@ -640,7 +639,7 @@ public class Args
             }
             catch (Exception e)
             {
-                throw new ArgumentException("Failed to convertPKUtoCWS " + value + " to type " + type.getName(), e);
+                throw new ArgumentException("Failed to convertPKUtoCWS " + value + " to type " + type.Name, e);
             }
             return v;
         }

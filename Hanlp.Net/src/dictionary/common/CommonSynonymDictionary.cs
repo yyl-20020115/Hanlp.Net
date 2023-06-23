@@ -40,7 +40,7 @@ public class CommonSynonymDictionary
     {
     }
 
-    public static CommonSynonymDictionary create(InputStream inputStream)
+    public static CommonSynonymDictionary create(Stream inputStream)
     {
         CommonSynonymDictionary dictionary = new CommonSynonymDictionary();
         if (dictionary.load(inputStream))
@@ -51,7 +51,7 @@ public class CommonSynonymDictionary
         return null;
     }
 
-    public bool load(InputStream inputStream)
+    public bool load(Stream inputStream)
     {
         trie = new DoubleArrayTrie<SynonymItem>();
         Dictionary<string, SynonymItem> treeMap = new Dictionary<string, SynonymItem>();
@@ -167,14 +167,14 @@ public class CommonSynonymDictionary
                 }
                 else
                 {
-                    preWord = string.valueOf(text.charAt(i));
-                    sbOut.Append(text.charAt(i));
+                    preWord = string.valueOf(text[i]);
+                    sbOut.Append(text[i]);
                 }
             }
             else
             {
-                preWord = string.valueOf(text.charAt(i));
-                sbOut.Append(text.charAt(i));
+                preWord = string.valueOf(text[i]);
+                sbOut.Append(text[i]);
             }
         }
 

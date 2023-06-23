@@ -6,24 +6,25 @@ public class Distance : AbstractClosestVectors
 {
 
     public Distance(string file)
+        : base(file)
     {
-        base(file);
+       ;
     }
 
     static void usage()
     {
         Console.Error.WriteLine("Usage: java %s <FILE>\nwhere FILE Contains word projections in the text Format\n",
-                          Distance.c.getName());
+                          typeof(Distance).Name);
         Environment.Exit(0);
     }
 
-    public static void main(string[] args) 
+    public static void Main(string[] args) 
     {
         if (args.Length < 1) usage();
         new Distance(args[0]).execute();
     }
 
-    protected Result getTargetVector()
+    protected override Result getTargetVector()
     {
         int words = vectorsReader.getNumWords();
         int size = vectorsReader.getSize();
@@ -58,7 +59,7 @@ public class Distance : AbstractClosestVectors
             len = Math.Sqrt(len);
             for (int i = 0; i < size; i++)
             {
-                vec[i] /= len;
+                vec[i] = (float)(vec[i]/len);
             }
 
             return new Result(vec, new int[]{bi});

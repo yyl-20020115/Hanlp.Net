@@ -32,10 +32,7 @@ public class AutoIntPool
         return (_size == 0);
     }
 
-    public int size()
-    {
-        return _size;
-    }
+    public int Count => _size;
 
     public void Clear()
     {

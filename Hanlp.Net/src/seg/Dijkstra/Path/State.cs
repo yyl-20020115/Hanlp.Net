@@ -28,7 +28,7 @@ public class State : IComparable<State>
     //@Override
     public int CompareTo(State o)
     {
-        return Double.compare(cost, o.cost);
+        return Math.Sign(cost, o.cost);
     }
 
     public State(double cost, int vertex)

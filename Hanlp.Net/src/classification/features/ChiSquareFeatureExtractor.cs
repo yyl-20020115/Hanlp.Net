@@ -81,14 +81,14 @@ public class ChiSquareFeatureExtractor
                 }
             }
         }
-        if (selectedFeatures.size() == 0) // 当特征全部无法通过卡方检测时，取全集作为特征
+        if (selectedFeatures.Count == 0) // 当特征全部无法通过卡方检测时，取全集作为特征
         {
             for (int feature = 0; feature < stats.featureCategoryJointCount.Length; feature++)
             {
                 selectedFeatures.Add(feature, 0.0);
             }
         }
-        if (selectedFeatures.size() > maxSize)
+        if (selectedFeatures.Count > maxSize)
         {
             MaxHeap<KeyValuePair<int, Double>> maxHeap = new MaxHeap<KeyValuePair<int, Double>>(maxSize, new CT());
             foreach (KeyValuePair<int, Double> entry in selectedFeatures.entrySet())

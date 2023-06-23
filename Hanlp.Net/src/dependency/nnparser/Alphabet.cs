@@ -78,7 +78,7 @@ public class Alphabet : ICacheAble
      */
     public int size()
     {
-        return trie.size();
+        return trie.Count;
     }
 
     public void save(Stream _out)

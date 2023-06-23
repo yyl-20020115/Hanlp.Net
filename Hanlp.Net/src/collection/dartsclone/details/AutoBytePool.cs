@@ -30,7 +30,7 @@ class AutoBytePool
     {
         return _buf[id];
     }
-
+    public byte this[int id]=>this.get(id);
     /**
      * 设置值
      * @param id 下标
@@ -54,10 +54,7 @@ class AutoBytePool
      * 缓冲区大小
      * @return 大小
      */
-    public int size()
-    {
-        return _size;
-    }
+    public int Count => _size;
 
     /**
      * 清空缓存

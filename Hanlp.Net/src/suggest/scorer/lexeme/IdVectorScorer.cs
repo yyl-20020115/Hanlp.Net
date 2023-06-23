@@ -22,7 +22,7 @@ public class IdVectorScorer : BaseScorer<IdVector>
     protected IdVector generateKey(string sentence)
     {
         IdVector idVector = new IdVector(sentence);
-        if (idVector.idArrayList.size() == 0) return null;
+        if (idVector.idArrayList.Count == 0) return null;
         return idVector;
     }
 }

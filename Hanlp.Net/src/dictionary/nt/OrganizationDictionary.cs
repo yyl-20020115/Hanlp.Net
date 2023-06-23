@@ -3738,8 +3738,8 @@ public class OrganizationDictionary
      */
     public static void parsePattern(List<NT> ntList, List<Vertex> vertexList, WordNet wordNetOptimum, WordNet wordNetAll)
     {
-//        ListIterator<Vertex> listIterator = vertexList.GetEnumerator();
-        StringBuilder sbPattern = new StringBuilder(ntList.size());
+//        IEnumerator<Vertex> listIterator = vertexList.GetEnumerator();
+        StringBuilder sbPattern = new StringBuilder(ntList.Count);
         foreach (NT nt in ntList)
         {
             sbPattern.Append(nt.ToString());

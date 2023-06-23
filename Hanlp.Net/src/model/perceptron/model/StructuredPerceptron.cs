@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron.model;
 
 
@@ -71,11 +74,11 @@ public class StructuredPerceptron : LinearModel
             int[] predFeature = new int[featureVector.Length]; // 实际预测时激活的特征
             for (int j = 0; j < featureVector.Length - 1; j++)
             {
-                goldFeature[j] = featureVector[j] * tagSet.size() + instance.tagArray[i];
-                predFeature[j] = featureVector[j] * tagSet.size() + guessLabel[i];
+                goldFeature[j] = featureVector[j] * tagSet.Count + instance.tagArray[i];
+                predFeature[j] = featureVector[j] * tagSet.Count + guessLabel[i];
             }
-            goldFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.size() + instance.tagArray[i];
-            predFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.size() + guessLabel[i];
+            goldFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : instance.tagArray[i - 1]) * tagSet.Count + instance.tagArray[i];
+            predFeature[featureVector.Length - 1] = (i == 0 ? tagSet.bosId() : guessLabel[i - 1]) * tagSet.Count + guessLabel[i];
             update(goldFeature, predFeature);
         }
     }

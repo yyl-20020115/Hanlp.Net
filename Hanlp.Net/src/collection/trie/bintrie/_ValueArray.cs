@@ -32,7 +32,7 @@ public class _ValueArray<V>
     /**
      * 仅仅给子类用，不要用
      */
-    protected _ValueArray()
+    public _ValueArray()
     {
     }
 

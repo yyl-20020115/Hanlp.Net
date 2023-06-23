@@ -90,11 +90,11 @@ public class PinyinUtil
                 {
                     for (int i = lowerCasePinyinStr.Length - 1; i >= 0; i--)
                     {
-                        if (string.valueOf(lowerCasePinyinStr.charAt(i)).matches(
+                        if (string.valueOf(lowerCasePinyinStr[i]).matches(
                                 "[" + allUnmarkedVowelStr + "]"))
                         {
                             indexOfUnmarkedVowel = i;
-                            unmarkedVowel = lowerCasePinyinStr.charAt(i);
+                            unmarkedVowel = lowerCasePinyinStr[i];
                             break;
                         }
                     }
@@ -162,7 +162,7 @@ public class PinyinUtil
      */
     public static List<string> convertPinyinList2TonePinyinList(List<Pinyin> pinyinList)
     {
-        List<string> tonePinyinList = new (pinyinList.size());
+        List<string> tonePinyinList = new (pinyinList.Count);
         foreach (Pinyin pinyin in pinyinList)
         {
             tonePinyinList.Add(pinyin.getPinyinWithToneMark());

@@ -23,8 +23,9 @@ public class ByteArrayFileStream : ByteArrayStream
     private FileChannel fileChannel;
 
     public ByteArrayFileStream(byte[] bytes, int bufferSize, FileChannel fileChannel)
+        : base(bytes, bufferSize)
     {
-        base(bytes, bufferSize);
+        ;
         this.fileChannel = fileChannel;
     }
 
@@ -45,7 +46,7 @@ public class ByteArrayFileStream : ByteArrayStream
     public static ByteArrayFileStream createByteArrayFileStream(FileStream fileInputStream) 
     {
         FileChannel channel = fileInputStream.getChannel();
-        long size = channel.size();
+        long size = channel.Count;
         int bufferSize = (int) Math.Min(1048576, size);
         ByteBuffer byteBuffer = ByteBuffer.allocate(bufferSize);
         if (channel.read(byteBuffer) == size)
@@ -75,7 +76,7 @@ public class ByteArrayFileStream : ByteArrayStream
         {
             try
             {
-                int availableBytes = (int) (fileChannel.size() - fileChannel.position());
+                int availableBytes = (int) (fileChannel.Count - fileChannel.position());
                 ByteBuffer byteBuffer = ByteBuffer.allocate(Math.Min(availableBytes, offset));
                 int readBytes = fileChannel.read(byteBuffer);
                 if (readBytes == availableBytes)

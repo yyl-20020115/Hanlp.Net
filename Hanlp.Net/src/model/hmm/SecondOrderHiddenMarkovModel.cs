@@ -29,13 +29,15 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
      * @param emission_probability   观测概率矩阵
      */
     private SecondOrderHiddenMarkovModel(float[] start_probability, float[][] transition_probability, float[][] emission_probability)
+        : base(start_probability, transition_probability, emission_probability)
     {
-        base(start_probability, transition_probability, emission_probability);
+        ;
     }
 
     public SecondOrderHiddenMarkovModel(float[] start_probability, float[][] transition_probability, float[][] emission_probability, float[][][] transition_probability2)
+        : this(start_probability, transition_probability, emission_probability)
     {
-        this(start_probability, transition_probability, emission_probability);
+        ;
         this.transition_probability2 = transition_probability2;
         toLog();
     }
@@ -50,7 +52,7 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
     {
         transition_probability = new float[max_state + 1][max_state + 1];
         transition_probability2 = new float[max_state + 1][max_state + 1][max_state + 1];
-        for (int[][] sample : samples)
+        foreach (int[][] sample in samples)
         {
             int prev_s = sample[1][0];
             int prev_prev_s = -1;

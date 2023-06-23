@@ -27,8 +27,9 @@ public class HMMSegment : CharacterBasedSegment
     CharacterBasedGenerativeModel model;
 
     public HMMSegment()
+        : this(HanLP.Config.HMMSegmentModelPath)
     {
-        this(HanLP.Config.HMMSegmentModelPath);
+        ;
     }
 
     public HMMSegment(string modelPath)

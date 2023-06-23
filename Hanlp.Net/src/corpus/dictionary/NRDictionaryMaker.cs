@@ -70,7 +70,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
         {
             if (verbose)
             {
-                Console.WriteLine(++i + " / " + sentenceList.size());
+                Console.WriteLine(++i + " / " + sentenceList.Count);
                 Console.WriteLine("原始语料 " + wordList);
             }
             // 先标注A和K
@@ -233,7 +233,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                 next = word;
             }
             if (verbose) Console.WriteLine("头部成词 " + wordList);
-            LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
+            List<IWord> wordLinkedList = (List<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, "S"));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "A"));
             if (verbose) Console.WriteLine("添加首尾 " + wordList);

@@ -144,12 +144,12 @@ public class Encoder
         }
         featureIndex.shrink(freq, x);
 
-        double[] alpha = new double[featureIndex.size()];
+        double[] alpha = new double[featureIndex.Count];
         Array.Fill(alpha, 0.0);
         featureIndex.setAlpha_(alpha);
 
         Console.WriteLine("Number of sentences: " + x.Count);
-        Console.WriteLine("Number of features:  " + featureIndex.size());
+        Console.WriteLine("Number of features:  " + featureIndex.Count);
         Console.WriteLine("Number of thread(s): " + threadNum);
         Console.WriteLine("Freq:                " + freq);
         Console.WriteLine("eta:                 " + eta);
@@ -233,7 +233,7 @@ public class Encoder
         int all = 0;
         for (int i = 0; i < x.Count; i++)
         {
-            all += x[i].size();
+            all += x[i].Count;
         }
 
         ExecutorService executor = Executors.newFixedThreadPool(threadNum);
@@ -259,7 +259,7 @@ public class Encoder
             }
             for (int i = 1; i < threadNum; i++)
             {
-                for (int k = 0; k < featureIndex.size(); k++)
+                for (int k = 0; k < featureIndex.Count; k++)
                 {
                     threads[0].expected[k] += threads[i].expected[k];
                 }
@@ -267,7 +267,7 @@ public class Encoder
             int numNonZero = 0;
             if (orthant)
             {
-                for (int k = 0; k < featureIndex.size(); k++)
+                for (int k = 0; k < featureIndex.Count; k++)
                 {
                     threads[0].obj += Math.Abs(alpha[k] / C);
                     if (alpha[k] != 0.0)
@@ -278,8 +278,8 @@ public class Encoder
             }
             else
             {
-                numNonZero = featureIndex.size();
-                for (int k = 0; k < featureIndex.size(); k++)
+                numNonZero = featureIndex.Count;
+                for (int k = 0; k < featureIndex.Count; k++)
                 {
                     threads[0].obj += (alpha[k] * alpha[k] / (2.0 * C));
                     threads[0].expected[k] += alpha[k] / C;
@@ -317,7 +317,7 @@ public class Encoder
                 break;
             }
 
-            int ret = lbfgs.optimize(featureIndex.size(), alpha, threads.get(0).obj, threads.get(0).expected, orthant, C);
+            int ret = lbfgs.optimize(featureIndex.Count, alpha, threads.get(0).obj, threads.get(0).expected, orthant, C);
             if (ret <= 0)
             {
                 return false;
@@ -345,13 +345,13 @@ public class Encoder
                            int shrinkingSize,
                            int threadNum)
     {
-        int[] shrinkArr = new int[x.size()];
+        int[] shrinkArr = new int[x.Count];
         Array.Fill(shrinkArr, 0);
         List<int> shrink = Arrays.asList(shrinkArr);
         Double[] upperArr = new Double[x.Count];
         Array.Fill(upperArr, 0.0);
         List<Double> upperBound = Arrays.asList(upperArr);
-        Double[] expectArr = new Double[featureIndex.size()];
+        Double[] expectArr = new Double[featureIndex.Count];
         List<Double> expected = Arrays.asList(expectArr);
 
         if (threadNum > 1)
@@ -362,7 +362,7 @@ public class Encoder
         int all = 0;
         for (int i = 0; i < x.Count; i++)
         {
-            all += x.get(i).size();
+            all += x[i].Count;
         }
 
         for (int itr = 0; itr < maxItr; itr++)
@@ -375,7 +375,7 @@ public class Encoder
 
             for (int i = 0; i < x.Count; i++)
             {
-                if (shrink.get(i) >= shrinkingSize)
+                if (shrink[i] >= shrinkingSize)
                 {
                     continue;
                 }
@@ -384,8 +384,8 @@ public class Encoder
                 {
                     expected.set(t, 0.0);
                 }
-                double costDiff = x.get(i).collins(expected);
-                int errorNum = x.get(i).eval();
+                double costDiff = x[i].collins(expected);
+                int errorNum = x[i].eval();
                 err += errorNum;
                 if (errorNum != 0)
                 {
@@ -393,7 +393,7 @@ public class Encoder
                 }
                 if (errorNum == 0)
                 {
-                    shrink.set(i, shrink.get(i) + 1);
+                    shrink.set(i, shrink[i] + 1);
                 }
                 else
                 {
@@ -405,9 +405,9 @@ public class Encoder
                     }
                     double mu = Math.Max(0.0, (errorNum - costDiff) / s);
 
-                    if (upperBound.get(i) + mu > C)
+                    if (upperBound[i] + mu > C)
                     {
-                        mu = C - upperBound.get(i);
+                        mu = C - upperBound[i];
                         upperActiveSet++;
                     }
                     else
@@ -417,9 +417,9 @@ public class Encoder
 
                     if (mu > 1e-10)
                     {
-                        upperBound.set(i, upperBound.get(i) + mu);
-                        upperBound.set(i, Math.Min(C, upperBound.get(i)));
-                        for (int k = 0; k < expected.size(); k++)
+                        upperBound.set(i, upperBound[i] + mu);
+                        upperBound.set(i, Math.Min(C, upperBound[i]));
+                        for (int k = 0; k < expected.Count; k++)
                         {
                             alpha[k] += mu * expected.get(k);
                         }
@@ -427,7 +427,7 @@ public class Encoder
                 }
             }
             double obj = 0.0;
-            for (int i = 0; i < featureIndex.size(); i++)
+            for (int i = 0; i < featureIndex.Count; i++)
             {
                 obj += alpha[i] * alpha[i];
             }
@@ -444,7 +444,7 @@ public class Encoder
 
             if (maxKktViolation <= 0.0)
             {
-                for (int i = 0; i < shrink.size(); i++)
+                for (int i = 0; i < shrink.Count; i++)
                 {
                     shrink.set(i, 0);
                 }

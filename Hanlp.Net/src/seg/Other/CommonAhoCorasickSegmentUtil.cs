@@ -48,8 +48,8 @@ public class CommonAhoCorasickSegmentUtil
      */
     public static LinkedList<ResultTerm<V>> segment<V>(char[] charArray, AhoCorasickDoubleArrayTrie<V> trie)
     {
-        LinkedList<ResultTerm<V>> termList = new LinkedList<ResultTerm<V>>();
-        ResultTerm<V>[] wordNet = new ResultTerm[charArray.Length];
+        List<ResultTerm<V>> termList = new List<ResultTerm<V>>();
+        ResultTerm<V>[] wordNet = new ResultTerm<V>[charArray.Length];
         trie.parseText(charArray, new CT<char>());
         for (int i = 0; i < charArray.Length;)
         {

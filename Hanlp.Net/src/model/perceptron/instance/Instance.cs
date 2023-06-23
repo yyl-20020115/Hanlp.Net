@@ -46,10 +46,7 @@ public class Instance
         return featureMatrix[position];
     }
 
-    public int Length()
-    {
-        return tagArray.Length;
-    }
+    public int Length => tagArray.Length;
 
     protected static void addFeature(string rawFeature, List<int> featureVector, FeatureMap featureMap)
     {
@@ -101,7 +98,7 @@ public class Instance
      *
      * @return
      */
-    public int size()
+    public int Count
     {
         return featureMatrix.Length;
     }

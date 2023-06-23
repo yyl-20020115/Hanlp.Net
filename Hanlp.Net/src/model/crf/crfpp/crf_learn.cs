@@ -10,30 +10,30 @@ namespace com.hankcs.hanlp.model.crf.crfpp;
  */
 public class crf_learn
 {
-    public static class Option
+    public class Option
     {
         //Argument(description = "use features that occur no less than INT(default 1)", alias = "f")
-        public const int freq = 1;
+        public int freq = 1;
         //Argument(description = "set INT for max iterations in LBFGS routine(default 10k)", alias = "m")
-        public const int maxiter = 10000;
+        public int maxiter = 10000;
         //Argument(description = "set FLOAT for cost parameter(default 1.0)", alias = "c")
-        public const Double cost = 1.0;
+        public Double cost = 1.0;
         //Argument(description = "set FLOAT for termination criterion(default 0.0001)", alias = "e")
-        public const Double eta = 0.0001;
+        public Double eta = 0.0001;
         //Argument(description = "convert text model to binary model", alias = "C")
-        public const Boolean convert = false;
+        public Boolean convert = false;
         //Argument(description = "convert binary model to text model", alias = "T")
-        public const Boolean convert_to_text = false;
+        public Boolean convert_to_text = false;
         //Argument(description = "build also text model file for debugging", alias = "t")
-        public const Boolean textmodel = false;
+        public Boolean textmodel = false;
         //Argument(description = "(CRF|CRF-L1|CRF-L2|MIRA)\", \"select training algorithm", alias = "a")
-        public const string algorithm = "CRF-L2";
+        public string algorithm = "CRF-L2";
         //Argument(description = "set INT for number of iterations variable needs to be optimal before considered for shrinking. (default 20)", alias = "H")
-        public const int shrinking_size = 20;
+        public int shrinking_size = 20;
         //Argument(description = "show this help and exit", alias = "h")
-        public const Boolean help = false;
+        public Boolean help = false;
         //Argument(description = "number of threads(default auto detect)")
-        public static readonly int thread = Environment.ProcessorCount;
+        public int thread = Environment.ProcessorCount;
     }
 
     public static bool run(string args)

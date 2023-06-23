@@ -136,7 +136,7 @@ public class CorpusLoaderTest : TestCase
 //                    TextWriter bw = new TextWriter(new StreamWriter(new FileStream("D:\\Doc\\语料库\\2014_hankcs\\" + (++id) + ".txt"), "UTF-8"));
 //                    for (List<IWord> wordList : document.getComplexSentenceList())
 //                    {
-//                        if (wordList.size() == 0) continue;
+//                        if (wordList.Count == 0) continue;
 //                        for (IWord word : wordList)
 //                        {
 //                            if (word.Value.Length > 1 && word.Value[0] == '。')

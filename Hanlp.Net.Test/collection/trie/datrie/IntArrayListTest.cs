@@ -23,7 +23,7 @@ public class IntArrayListTest : TestCase
         array.load(ByteArray.createByteArray(tempFile));
         for (int i = 0; i < 64; ++i)
         {
-            AssertEquals(i, array.get(i)); 
+            AssertEquals(i, array[i]); 
         }
     }
 }

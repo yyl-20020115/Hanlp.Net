@@ -49,7 +49,7 @@ public class EasyDictionary
         TextReader br = null;
         try
         {
-            br = new TextReader(new InputStreamReader(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path), "UTF-8"));
+            br = new StreamReader(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path), "UTF-8");
             string line;
             while ((line = br.ReadLine()) != null)
             {
@@ -64,7 +64,7 @@ public class EasyDictionary
                 }
                 map.Add(param[0], attribute);
             }
-            logger.info("通用词典读入词条" + map.size());
+            logger.info("通用词典读入词条" + map.Count);
             br.Close();
         }
         catch (FileNotFoundException e)
@@ -79,7 +79,7 @@ public class EasyDictionary
         }
 
         logger.info("通用词典DAT构建结果:" + trie.build(map));
-        logger.info("通用词典加载成功:" + trie.size() +"个词条" );
+        logger.info("通用词典加载成功:" + trie.Count +"个词条" );
         return true;
     }
 
@@ -122,18 +122,18 @@ public class EasyDictionary
         public KeyValuePair<string, Attribute> next()
         {
             // 保证首次调用找到一个词语
-            while (entryList.size() == 0 && begin < c.Length)
+            while (entryList.Count == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;
             }
             // 之后调用仅在缓存用完的时候调用一次
-            if (entryList.size() == 0 && begin < c.Length)
+            if (entryList.Count == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;
             }
-            if (entryList.size() == 0)
+            if (entryList.Count == 0)
             {
                 return null;
             }

@@ -55,7 +55,7 @@ public class crf_test
         TaggerImpl tagger = new TaggerImpl(TaggerImpl.Mode.TEST);
         try
         {
-            InputStream stream = IOUtil.newInputStream(model);
+            Stream stream = IOUtil.newInputStream(model);
             if (!tagger.open(stream, nbest, vlevel, costFactor))
             {
                 Console.Error.WriteLine("open error");
@@ -74,7 +74,7 @@ public class crf_test
             }
             foreach (string inputFile in restArgs)
             {
-                InputStream fis = IOUtil.newInputStream(inputFile);
+                Stream fis = IOUtil.newInputStream(inputFile);
                 InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
                 TextReader br = new TextReader(isr);
 

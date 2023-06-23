@@ -68,10 +68,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      *
      * @return the size of this cluster
      */
-    int size()
-    {
-        return documents_.Count;
-    }
+    int Count=> documents_.Count;
 
     /**
      * Get the pointer of a centroid vector.
@@ -206,7 +203,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
 //    void choose_randomly(int ndocs, List<Document > docs)
 //{
 //    HashMap<int, bool>.type choosed;
-//    int siz = size();
+//    int siz = Count;
 //    init_hash_map(siz, choosed, ndocs);
 //    if (siz < ndocs)
 //        ndocs = siz;
@@ -231,7 +228,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      */
     public void choose_smartly(int ndocs, List<Document<K>> docs)
     {
-        int siz = size();
+        int siz = Count;
         double[] closest = new double[siz];
         if (siz < ndocs)
             ndocs = siz;
@@ -288,7 +285,7 @@ public class Cluster<K> : IComparable<Cluster<K>>
      */
     public void section(int nclusters)
     {
-        if (size() < nclusters)
+        if (Count < nclusters)
             return;
 
         sectioned_clusters_ = new (nclusters);
@@ -321,6 +318,6 @@ public class Cluster<K> : IComparable<Cluster<K>>
     //@Override
     public int CompareTo(Cluster<K> o)
     {
-        return Double.compare(o.sectioned_gain(), sectioned_gain());
+        return Math.Sign(o.sectioned_gain(), sectioned_gain());
     }
 }

@@ -114,7 +114,7 @@ public class CoreSynonymDictionary
      */
     public static List<CommonSynonymDictionary.SynonymItem> convert(List<Term> sentence, bool withUndefinedItem)
     {
-        List<CommonSynonymDictionary.SynonymItem> synonymItemList = new (sentence.size());
+        List<CommonSynonymDictionary.SynonymItem> synonymItemList = new (sentence.Count);
         foreach (Term term in sentence)
         {
             CommonSynonymDictionary.SynonymItem item = get(term.word);

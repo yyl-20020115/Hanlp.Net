@@ -119,11 +119,11 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             {
                 segmentAfterRule(sentence.substring(offset[0], begin), normalized.substring(offset[0], begin), wordList);
             }
-            while (attributeList.size() < wordList.size())
+            while (attributeList.Count < wordList.Count)
                 attributeList.Add(null);
             wordList.Add( sentence.substring(begin, end));
             attributeList.Add(value);
-            //assert wordList.size() == attributeList.size() : "词语列表与属性列表不等长";
+            //assert wordList.Count == attributeList.Count : "词语列表与属性列表不等长";
             offset[0] = end;
         }
     }
@@ -341,7 +341,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             Term term = new Term(word, null);
             term.offset = offset;
-            offset += term.Length;
+            offset += term.Length();
             termList.Add(term);
         }
         if (config.speechTagging)
@@ -380,9 +380,9 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     if (config.isIndexMode())
                     {
                         childrenList = new ();
-                        iterator = termList.iterator();
+                        iterator = termList.GetEnumerator();
                     }
-                    termList = new (termList.size());
+                    termList = new (termList.Count);
                     string[] nerArray = recognize(wordArray, posArray);
                     wordArray = wordList.ToArray();
                     StringBuilder result = new StringBuilder();
@@ -409,7 +409,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                                 {
                                     foreach (Term shortTerm in childrenList)
                                     {
-                                        if (shortTerm.Length >= config.indexMode)
+                                        if (shortTerm.Length() >= config.indexMode)
                                         {
                                             termList.Add(shortTerm);
                                         }
@@ -444,7 +444,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                             {
                                 foreach (Term shortTerm in childrenList)
                                 {
-                                    if (shortTerm.Length >= config.indexMode)
+                                    if (shortTerm.Length() >= config.indexMode)
                                     {
                                         termList.Add(shortTerm);
                                     }
@@ -487,11 +487,11 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     {
         if (preType == CharType.CT_CHINESE)
         {
-            segmenter.segment(sentence.substring(start, end), normalized.substring(start, end), wordList);
+            segmenter.segment(sentence[start .. end], normalized[start .. end], wordList);
         }
         else
         {
-            wordList.Add(sentence.substring(start, end));
+            wordList.Add(sentence[start .. end]);
         }
     }
 
@@ -525,13 +525,13 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     {
                         if (end + 1 < normalized.Length)
                         {
-                            if (typeTable[normalized.charAt(end + 1)] == CharType.CT_NUM)
+                            if (typeTable[normalized[(end + 1)]] == CharType.CT_NUM)
                             {
                                 continue;
                             }
                         }
                     }
-                    else if ("年月日时分秒".IndexOf(normalized.charAt(end)) != -1)
+                    else if ("年月日时分秒".IndexOf(normalized[(end)]) != -1)
                     {
                         preType = curType; // 交给统计分词
                         continue;
@@ -629,7 +629,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 {
                     int to = i + 1;
                     int end = to;
-                    CoreDictionary.Attribute value = state.Value;
+                    CoreDictionary.Attribute value = state.Value();
                     for (; to < Length; ++to)
                     {
                         if (wordNet[to] == null) continue;
@@ -637,7 +637,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         if (state == null) break;
                         if (state.Value != null)
                         {
-                            value = state.Value;
+                            value = state.Value();
                             end = to + 1;
                         }
                     }

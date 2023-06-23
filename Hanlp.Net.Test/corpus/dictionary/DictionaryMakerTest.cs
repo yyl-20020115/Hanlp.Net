@@ -208,7 +208,7 @@ public class DictionaryMakerTest : TestCase
 //        {
 //            Console.WriteLine(label);
 //        }
-//        Console.WriteLine(labelMap.size());
+//        Console.WriteLine(labelMap.Count);
 //    }
 //
 //    public void testLoadEasyDictionary() 

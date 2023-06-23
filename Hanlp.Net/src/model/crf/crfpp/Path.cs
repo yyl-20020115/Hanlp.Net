@@ -35,9 +35,9 @@ public class Path
     public void calcExpectation(double[] expected, double Z, int size)
     {
         double c = Math.Exp(lnode.alpha + cost + rnode.beta - Z);
-        for (int i = 0; fvector.get(i) != -1; i++)
+        for (int i = 0; fvector[i] != -1; i++)
         {
-            int idx = fvector.get(i) + lnode.y * size + rnode.y;
+            int idx = fvector[i] + lnode.y * size + rnode.y;
             expected[idx] += c;
         }
     }

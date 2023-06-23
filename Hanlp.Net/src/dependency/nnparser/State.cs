@@ -72,9 +72,9 @@ public class State
     public State(Dependency @ref)
     {
         this.@ref = @ref;
-        stack = new List<int>(_ref.size());
+        stack = new List<int>(_ref.Count);
         Clear();
-        int L = @ref.size();
+        int L = @ref.Count;
         heads = std.create(L, -1);
         deprels = std.create(L, 0);
         nr_left_children = std.create(L, 0);
@@ -195,8 +195,8 @@ public class State
         }
 
         this.copy(source);
-        stack.Remove(stack.size() - 1);
-        stack.set(stack.size() - 1, top0);
+        stack.Remove(stack.Count - 1);
+        stack.set(stack.Count - 1, top0);
 
         heads.set(top1, top0);
         deprels.set(top1, deprel);
@@ -261,10 +261,10 @@ public class State
     public int cost(List<int> gold_heads,
              List<int> gold_deprels)
     {
-        List<List<int>> tree = new (gold_heads.size());
-        for (int i = 0; i < gold_heads.size(); ++i)
+        List<List<int>> tree = new (gold_heads.Count);
+        for (int i = 0; i < gold_heads.Count; ++i)
         {
-            int h = gold_heads.get(i);
+            int h = gold_heads[i];
             if (h >= 0)
             {
                 tree.get(h).Add(i);
@@ -273,26 +273,26 @@ public class State
 
         List<int> sigma_l = stack;
         List<int> sigma_r = new ();
-        sigma_r.Add(stack.get(stack.size() - 1));
+        sigma_r.Add(stack.get(stack.Count - 1));
 
-        bool[] sigma_l_mask = new bool[gold_heads.size()];
-        bool[] sigma_r_mask = new bool[gold_heads.size()];
-        for (int s = 0; s < sigma_l.size(); ++s)
+        bool[] sigma_l_mask = new bool[gold_heads.Count];
+        bool[] sigma_r_mask = new bool[gold_heads.Count];
+        for (int s = 0; s < sigma_l.Count; ++s)
         {
             sigma_l_mask[sigma_l.get(s)] = true;
         }
 
-        for (int i = buffer; i < @ref.size(); ++i)
+        for (int i = buffer; i < @ref.Count; ++i)
         {
-            if (gold_heads.get(i) < buffer)
+            if (gold_heads[i] < buffer)
             {
                 sigma_r.Add(i);
                 sigma_r_mask[i] = true;
                 continue;
             }
 
-            List<int> node = tree.get(i);
-            for (int d = 0; d < node.size(); ++d)
+            List<int> node = tree[i];
+            for (int d = 0; d < node.Count; ++d)
             {
                 if (sigma_l_mask[node.get(d)] || sigma_r_mask[node.get(d)])
                 {
@@ -303,8 +303,8 @@ public class State
             }
         }
 
-        int len_l = sigma_l.size();
-        int len_r = sigma_r.size();
+        int len_l = sigma_l.Count;
+        int len_r = sigma_r.Count;
 
         // typedef boost.multi_array<int, 3> array_t;
         // array_t T(boost.extents[len_l][len_r][len_l+len_r-1]);
@@ -378,13 +378,13 @@ public class State
         int penalty = 0;
         for (int i = 0; i < buffer; ++i)
         {
-            if (heads.get(i) != -1)
+            if (heads[i] != -1)
             {
-                if (heads.get(i) != gold_heads.get(i))
+                if (heads[i] != gold_heads[i])
                 {
                     penalty += 2;
                 }
-                else if (deprels.get(i) != gold_deprels.get(i))
+                else if (deprels[i] != gold_deprels[i])
                 {
                     penalty += 1;
                 }
@@ -399,7 +399,7 @@ public class State
      */
     public bool buffer_empty()
     {
-        return (this.buffer == this.@ref.size());
+        return (this.buffer == this.@ref.Count);
     }
 
     /**

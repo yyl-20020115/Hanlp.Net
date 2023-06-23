@@ -14,6 +14,7 @@ using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.model.perceptron.tagset;
 using com.hankcs.hanlp.model.perceptron.utility;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace com.hankcs.hanlp.corpus.document.sentence;
 
@@ -40,7 +41,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     //@Override
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(size() * 4);
+        StringBuilder sb = new StringBuilder(Count * 4);
         int i = 1;
         foreach (IWord word in wordList)
         {
@@ -58,7 +59,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public string toStringWithoutLabels()
     {
-        StringBuilder sb = new StringBuilder(size() * 4);
+        StringBuilder sb = new StringBuilder(Count * 4);
         int i = 1;
         foreach (IWord word in wordList)
         {
@@ -100,10 +101,10 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public string toStandoff(bool withComment)
     {
-        StringBuilder sb = new StringBuilder(size() * 4);
+        StringBuilder sb = new StringBuilder(Count * 4);
         string delimiter = " ";
-        string text = text(delimiter);
-        sb.Append(text).Append('\n');
+        string text2 = text(delimiter);
+        sb.Append(text2).Append('\n');
         int i = 1;
         int offset = 0;
         foreach (IWord word in wordList)
@@ -179,7 +180,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         char endLine = '\n';
         sb.Append('T').Append(id).Append(delimiter);
         sb.Append(word.getLabel()).Append(delimiter);
-        int Length = word.Length;
+        int Length = word.Length();
         if (word is CompoundWord)
         {
             Length += ((CompoundWord) word).innerList.Count - 1;
@@ -208,12 +209,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
             return null;
         }
         param = param.Trim();
-        if (param.isEmpty())
+        if (param.Length == 0)
         {
             return null;
         }
-        Pattern pattern = Pattern.compile("(\\[(([^\\s]+/[0-9a-zA-Z]+)\\s+)+?([^\\s]+/[0-9a-zA-Z]+)]/?[0-9a-zA-Z]+)|([^\\s]+/[0-9a-zA-Z]+)");
-        Matcher matcher = pattern.matcher(param);
+        var pattern = new Regex("(\\[(([^\\s]+/[0-9a-zA-Z]+)\\s+)+?([^\\s]+/[0-9a-zA-Z]+)]/?[0-9a-zA-Z]+)|([^\\s]+/[0-9a-zA-Z]+)");
+        var matcher = pattern.matcher(param);
         List<IWord> wordList = new ();
         while (matcher.find())
         {
@@ -242,7 +243,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public int size()
+    public int Count
     {
         return wordList.Count;
     }
@@ -282,7 +283,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     public string text(string delimiter)
     {
         if (delimiter == null) delimiter = "";
-        StringBuilder sb = new StringBuilder(size() * 3);
+        StringBuilder sb = new StringBuilder(Count * 3);
         foreach (IWord word in this)
         {
             if (word is CompoundWord)
@@ -303,9 +304,9 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     }
 
     //@Override
-    public IEnumerator<IWord> iterator()
+    public IEnumerator<IWord> GetEnumerator()
     {
-        return wordList.iterator();
+        return wordList.GetEnumerator();
     }
 
     /**
@@ -353,12 +354,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      * @param label
      * @return
      */
-    public ListIterator<IWord> findFirstWordIteratorByLabel(string label)
+    public IEnumerator<IWord> findFirstWordIteratorByLabel(string label)
     {
-        ListIterator<IWord> listIterator = this.wordList.GetEnumerator();
+        var listIterator = this.wordList.GetEnumerator();
         while (listIterator.MoveNext())
         {
-            IWord word = listIterator.next();
+            IWord word = listIterator.Current;
             if (label.Equals(word.getLabel()))
             {
                 return listIterator;
@@ -409,11 +410,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     public string[] toWordArray()
     {
         List<Word> wordList = toSimpleWordList();
-        string[] wordArray = new string[wordList.size()];
-        IEnumerator<Word> iterator = wordList.iterator();
+        string[] wordArray = new string[wordList.Count];
+        IEnumerator<Word> iterator = wordList.GetEnumerator();
         for (int i = 0; i < wordArray.Length; i++)
         {
-            wordArray[i] = iterator.next().value;
+            iterator.MoveNext();
+            wordArray[i] = iterator.Current.value;
         }
         return wordArray;
     }
@@ -426,11 +428,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     public string[][] toWordTagArray()
     {
         List<Word> wordList = toSimpleWordList();
-        string[][] pair = new string[2][wordList.size()];
-        IEnumerator<Word> iterator = wordList.iterator();
+        string[][] pair = new string[2][wordList.Count];
+        IEnumerator<Word> iterator = wordList.GetEnumerator();
         for (int i = 0; i < pair[0].Length; i++)
         {
-            Word word = iterator.next();
+            iterator.MoveNext();
+            Word word = iterator.Current;
             pair[0][i] = word.value;
             pair[1][i] = word.label;
         }
@@ -446,11 +449,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     public string[][] toWordTagNerArray(NERTagSet tagSet)
     {
         List<string[]> tupleList = Utility.convertSentenceToNER(this, tagSet);
-        string[][] result = new string[3][tupleList.size()];
-        IEnumerator<string[]> iterator = tupleList.iterator();
+        string[][] result = new string[3][tupleList.Count];
+        var iterator = tupleList.GetEnumerator();
         for (int i = 0; i < result[0].Length; i++)
         {
-            string[] tuple = iterator.next();
+            iterator.MoveNext();
+            string[] tuple = iterator.Current;
             for (int j = 0; j < 3; ++j)
             {
                 result[j][i] = tuple[j];
@@ -461,7 +465,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
 
     public Sentence mergeCompoundWords()
     {
-        ListIterator<IWord> listIterator = wordList.GetEnumerator();
+        IEnumerator<IWord> listIterator = wordList.GetEnumerator();
         while (listIterator.MoveNext())
         {
             IWord word = listIterator.next();

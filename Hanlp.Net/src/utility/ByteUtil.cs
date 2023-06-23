@@ -73,7 +73,7 @@ public class ByteUtil
         l |= ((long) bytes[6 + start] << 8) & 0xFF00L;
         l |= (long) bytes[7 + start] & 0xFFL;
 
-        return Double.longBitsToDouble(l);
+        return BitConverter.Int64BitsToDouble(l);// Double.longBitsToDouble(l);
     }
 
     /**

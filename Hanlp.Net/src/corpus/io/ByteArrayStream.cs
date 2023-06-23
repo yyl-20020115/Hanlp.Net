@@ -34,7 +34,7 @@ public abstract class ByteArrayStream : ByteArray
 
         try
         {
-            InputStream @is = IOAdapter.open(path);
+            Stream @is = IOAdapter.open(path);
             if (@is is FileStream) return ByteArrayFileStream.createByteArrayFileStream((FileStream) @is);
             return ByteArrayOtherStream.createByteArrayOtherStream(@is);
         }

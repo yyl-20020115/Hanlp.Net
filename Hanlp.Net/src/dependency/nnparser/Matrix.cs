@@ -1143,7 +1143,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         }
         while (tokenizer.nextToken() == StreamTokenizer.TT_WORD);
 
-        int n = vD.size();  // Now we've got the number of columns!
+        int n = vD.Count;  // Now we've got the number of columns!
         double[] row = new double[n];
         for (int j = 0; j < n; j++)  // extract the elements of the 1st row.
             row[j] = vD.elementAt(j).doubleValue();
@@ -1157,14 +1157,14 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
             do
             {
                 if (j >= n) throw new java.io.IOException
-                        ("Row " + v.size() + " is too long.");
+                        ("Row " + v.Count + " is too long.");
                 row[j++] = Double.valueOf(tokenizer.sval).doubleValue();
             }
             while (tokenizer.nextToken() == StreamTokenizer.TT_WORD);
             if (j < n) throw new java.io.IOException
-                    ("Row " + v.size() + " is too short.");
+                    ("Row " + v.Count + " is too short.");
         }
-        int m = v.size();  // Now we've got the number of rows.
+        int m = v.Count;  // Now we've got the number of rows.
         double[][] A = new double[m][];
         v.copyInto(A);  // copy the rows _out of the vector
         return new Matrix(A);

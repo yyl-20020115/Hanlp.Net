@@ -62,16 +62,16 @@ public class parser_dll
         inst.forms.Add(SpecialOption.ROOT);
         inst.postags.Add(SpecialOption.ROOT);
 
-        for (int i = 0; i < words.size(); i++)
+        for (int i = 0; i < words.Count; i++)
         {
-            inst.forms.Add(words.get(i));
-            inst.postags.Add(postags.get(i));
+            inst.forms.Add(words[i]);
+            inst.postags.Add(postags[i]);
         }
 
         parser.predict(inst, heads, deprels);
         heads.Remove(0);
         deprels.Remove(0);
 
-        return heads.size();
+        return heads.Count;
     }
 }

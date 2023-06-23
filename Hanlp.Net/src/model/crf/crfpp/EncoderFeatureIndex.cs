@@ -31,12 +31,12 @@ public class EncoderFeatureIndex : FeatureIndex
             int n = maxid_;
             if (key[0] == 'U')
             {
-                maxid_ += y_.size();
+                maxid_ += y_.Count;
             }
             else
             {
                 bId = n;
-                maxid_ += y_.size() * y_.size();
+                maxid_ += y_.Count * y_.Count;
             }
             return n;
         }
@@ -53,11 +53,11 @@ public class EncoderFeatureIndex : FeatureIndex
     {
         if (id <= bId)
         {
-            return id / y_.size();
+            return id / y_.Count;
         }
         else
         {
-            return id / y_.size() - y_.size() + 1;
+            return id / y_.Count - y_.Count + 1;
         }
     }
 
@@ -192,7 +192,7 @@ public class EncoderFeatureIndex : FeatureIndex
     {
         try
         {
-            ObjectOutputStream oos = new ObjectOutputStream(IOUtil.newOutputStream(filename));
+            Stream oos = new Stream(IOUtil.newOutputStream(filename));
             oos.writeObject(Encoder.MODEL_VERSION);
             oos.writeObject(costFactor_);
             oos.writeObject(maxid_);
@@ -205,8 +205,8 @@ public class EncoderFeatureIndex : FeatureIndex
             oos.writeObject(unigramTempls_);
             oos.writeObject(bigramTempls_);
             oos.writeObject(dic_);
-//            List<string> keyList = new (dic_.size());
-//            int[] values = new int[dic_.size()];
+//            List<string> keyList = new (dic_.Count);
+//            int[] values = new int[dic_.Count];
 //            int i = 0;
 //            for (MutableDoubleArrayTrieInteger.KeyValuePair pair : dic_)
 //            {
@@ -277,20 +277,20 @@ public class EncoderFeatureIndex : FeatureIndex
         }
         int newMaxId = 0;
         Dictionary<int, int> old2new = new Dictionary<int, int>();
-        List<string> deletedKeys = new (dic_.size() / 8);
-        List<KeyValuePair<string, int>> l = new LinkedList<KeyValuePair<string, int>>(dic_.entrySet());
+        List<string> deletedKeys = new (dic_.Count / 8);
+        List<KeyValuePair<string, int>> l = new (dic_.entrySet());
         // update dictionary in key order, to make result compatible with crfpp
         foreach(MutableDoubleArrayTrieInteger.KeyValuePair pair in dic_)
         {
-            string key = pair.key();
-            int id = pair.value();
+            string key = pair.Key();
+            int id = pair.Value();
             int cid = continuousId(id);
             int f = frequency.get(cid);
             if (f >= freq)
             {
                 old2new.Add(id, newMaxId);
                 pair.setValue(newMaxId);
-                newMaxId += (key[0] == 'U' ? y_.size() : y_.size() * y_.size());
+                newMaxId += (key[0] == 'U' ? y_.Count : y_.Count * y_.Count);
             }
             else
             {
@@ -305,7 +305,7 @@ public class EncoderFeatureIndex : FeatureIndex
         foreach (TaggerImpl tagger in taggers)
         {
             List<List<int>> featureCache = tagger.getFeatureCache_();
-            for (int k = 0; k < featureCache.size(); k++)
+            for (int k = 0; k < featureCache.Count; k++)
             {
                 List<int> featureCacheItem = featureCache.get(k);
                 List<int> newCache = new ();
@@ -372,16 +372,16 @@ public class EncoderFeatureIndex : FeatureIndex
                 dic_.Add(content[1], int.valueOf(content[0]));
             }
             Console.WriteLine("Done reading feature indices");
-            List<Double> alpha = new ArrayList<Double>();
+            List<Double> alpha = new ();
             while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 alpha.Add(Double.valueOf(line));
             }
             Console.WriteLine("Done reading weights");
-            alpha_ = new double[alpha.size()];
-            for (int i = 0; i < alpha.size(); i++)
+            alpha_ = new double[alpha.Count];
+            for (int i = 0; i < alpha.Count; i++)
             {
-                alpha_[i] = alpha.get(i);
+                alpha_[i] = alpha[(i)];
             }
             br.Close();
             Console.WriteLine("Writing binary model to " + binarymodel);
@@ -394,7 +394,7 @@ public class EncoderFeatureIndex : FeatureIndex
         }
     }
 
-    public static void main(string[] args)
+    public static void Main(string[] args)
     {
         if (args.Length < 2)
         {

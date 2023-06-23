@@ -87,7 +87,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         int[] check2 = new int[newSize];
         if (allocSize > 0)
         {
-            Array.Copy(base, 0, base2, 0, allocSize);
+            Array.Copy(_base, 0, base2, 0, allocSize);
             Array.Copy(check, 0, check2, 0, allocSize);
         }
 
@@ -113,10 +113,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         for (int i = parent.left; i < parent.right; i++)
         {
-            if ((Length != null ? Length[i] : key.get(i).Length) < parent.depth)
+            if ((Length != null ? Length[i] : key[i].Length) < parent.depth)
                 continue;
 
-            string tmp = key.get(i);
+            string tmp = key[i];
 
             int cur = 0;
             if ((Length != null ? Length[i] : tmp.Length) != parent.depth)
@@ -128,14 +128,14 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
                 return 0;
             }
 
-            if (cur != prev || siblings.size() == 0)
+            if (cur != prev || siblings.Count == 0)
             {
                 Node tmp_node = new Node();
                 tmp_node.depth = parent.depth + 1;
                 tmp_node.code = cur;
                 tmp_node.left = i;
-                if (siblings.size() != 0)
-                    siblings.get(siblings.size() - 1).right = i;
+                if (siblings.Count != 0)
+                    siblings.get(siblings.Count - 1).right = i;
 
                 siblings.Add(tmp_node);
             }
@@ -189,9 +189,9 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             }
 
             begin = pos - siblings.get(0).code; // 当前位置离第一个兄弟节点的距离
-            if (allocSize <= (begin + siblings.get(siblings.size() - 1).code))
+            if (allocSize <= (begin + siblings.get(siblings.Count - 1).code))
             {
-                resize(begin + siblings.get(siblings.size() - 1).code + char.MaxValue);
+                resize(begin + siblings.get(siblings.Count - 1).code + char.MaxValue);
             }
 
             //if (used[begin])
@@ -200,8 +200,8 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             	continue;
             }
 
-            for (int i = 1; i < siblings.size(); i++)
-                if (check[begin + siblings.get(i).code] != 0)
+            for (int i = 1; i < siblings.Count; i++)
+                if (check[begin + siblings[i].code] != 0)
                     continue outer;
 
             break;
@@ -219,26 +219,26 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         //used[begin] = true;
         used.set(begin);
         
-        _size = (_size > begin + siblings.get(siblings.size() - 1).code + 1) ? size
-                : begin + siblings.get(siblings.size() - 1).code + 1;
+        _size = (_size > begin + siblings.get(siblings.Count - 1).code + 1) ? size
+                : begin + siblings.get(siblings.Count - 1).code + 1;
 
-        for (int i = 0; i < siblings.size(); i++)
+        for (int i = 0; i < siblings.Count; i++)
         {
-            check[begin + siblings.get(i).code] = begin;
+            check[begin + siblings[i].code] = begin;
 //            Console.WriteLine(this);
         }
 
-        for (int i = 0; i < siblings.size(); i++)
+        for (int i = 0; i < siblings.Count; i++)
         {
             List<Node> new_siblings = new ();
 
-            if (fetch(siblings.get(i), new_siblings) == 0)  // 一个词的终止且不为其他词的前缀
+            if (fetch(siblings[i], new_siblings) == 0)  // 一个词的终止且不为其他词的前缀
             {
-                _base[begin + siblings.get(i).code] = (value != null) ? (-value[siblings
-                        .get(i).left] - 1) : (-siblings.get(i).left - 1);
+                _base[begin + siblings[i].code] = (value != null) ? (-value[siblings
+                        [i].left] - 1) : (-siblings[i].left - 1);
 //                Console.WriteLine(this);
 
-                if (value != null && (-value[siblings.get(i).left] - 1) >= 0)
+                if (value != null && (-value[siblings[i].left] - 1) >= 0)
                 {
                     error_ = -2;
                     return 0;
@@ -251,7 +251,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             else
             {
                 int h = insert(new_siblings);   // dfs
-                base[begin + siblings.get(i).code] = h;
+                base[begin + siblings[i].code] = h;
 //                Console.WriteLine(this);
             }
         }
@@ -328,16 +328,16 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public int build(List<string> key, List<V> value)
     {
-        //assert key.size() == value.size() : "键的个数与值的个数不一样！";
-        //assert key.size() > 0 : "键值个数为0！";
+        //assert key.Count == value.Count : "键的个数与值的个数不一样！";
+        //assert key.Count > 0 : "键值个数为0！";
         v = (V[]) value.ToArray();
         return build(key, null, null, key.Count);
     }
 
     public int build(List<string> key, V[] value)
     {
-        //assert key.size() == value.Length : "键的个数与值的个数不一样！";
-        //assert key.size() > 0 : "键值个数为0！";
+        //assert key.Count == value.Length : "键的个数与值的个数不一样！";
+        //assert key.Count > 0 : "键值个数为0！";
         v = value;
         return build(key, null, null, key.Count);
     }
@@ -370,7 +370,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     public int build(Dictionary<string, V> keyValueMap)
     {
         //assert keyValueMap != null;
-        var entrySet = keyValueMap.entrySet();
+        var entrySet = keyValueMap.ToHashSet();
         return build(entrySet);
     }
 
@@ -380,13 +380,13 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @param _key     值set，必须字典序
      * @param _length  对应每个key的长度，留空动态获取
      * @param _value   每个key对应的值，留空使用key的下标作为值
-     * @param _keySize key的长度，应该设为_key.size
+     * @param _keySize key的长度，应该设为_key.Count
      * @return 是否出错
      */
     public int build(List<string> _key, int[] _length, int[] _value,
                      int _keySize)
     {
-        if (_key == null || _keySize > _key.size())
+        if (_key == null || _keySize > _key.Count)
             return 0;
 
         // progress_func_ = progress_func;
@@ -431,8 +431,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         Stream _is = null;
         try
         {
-            _is = new Stream(new BufferedInputStream(
-                    IOUtil.newInputStream(fileName), BUF_SIZE));
+            _is = IOUtil.newInputStream(fileName);//, BUF_SIZE;
             for (int i = 0; i < size; i++)
             {
                 _base[i] = _is.readInt();
@@ -619,7 +618,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
             FileStream fis = new FileStream(path);
             // 1.从FileStream对象获取文件通道FileChannel
             FileChannel channel = fis.getChannel();
-            int fileSize = (int) channel.size();
+            int fileSize = (int) channel.Count;
 
             // 2.从通道读取文件内容
             ByteBuffer byteBuffer = ByteBuffer.allocate(fileSize);
@@ -665,10 +664,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      */
     public bool serializeTo(string path)
     {
-        ObjectOutputStream _out = null;
+        Stream _out = null;
         try
         {
-            _out = new ObjectOutputStream(IOUtil.newOutputStream(path));
+            _out = (IOUtil.newOutputStream(path));
             _out.writeObject(this);
         }
         catch (Exception e)
@@ -681,10 +680,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
     public static  DoubleArrayTrie<T> unSerialize<T>(string path)
     {
-        ObjectInputStream _in;
+        Stream _in;
         try
         {
-            _in = new ObjectInputStream(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path));
+            _in = new Stream(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path));
             return (DoubleArrayTrie<T>) @in.readObject();
         }
         catch (Exception e)
@@ -719,7 +718,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         for (int i = pos; i < len; i++)
         {
-            p = b + (int) (key.charAt(i)) + 1;
+            p = b + (int) (key[i]) + 1;
             if (b == check[p])
                 b = _base[p];
             else
@@ -823,10 +822,10 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      * @return 键值对列表
      * @deprecated 最好用优化版的
      */
-    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
+    public List<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
     {
         int len = key.Length;
-        LinkedList<KeyValuePair<string, V>> result = new LinkedList<KeyValuePair<string, V>>();
+        List<KeyValuePair<string, V>> result = new List<KeyValuePair<string, V>>();
         char[] keyChars = key.ToCharArray();
         int b = _base[0];
         int n;
@@ -945,10 +944,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
      *
      * @return
      */
-    public int size()
-    {
-        return v.Length;
-    }
+    public int Count => v.Length;
 
     /**
      * 获取check数组引用，不要修改check
@@ -1074,7 +1070,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
         for (int i = 0; i < path.Length; ++i)
         {
-            p = b + (int) (path.charAt(i)) + 1;
+            p = b + (int) (path[i]) + 1;
             if (b == check[p])
                 b = _base[p];
             else
@@ -1170,7 +1166,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
         {
             this.charArray = charArray;
             i = offset;
-            last = base[0];
+            last = _base[0];
             arrayLength = charArray.Length;
             // A trick，如果文本长度为0的话，调用next()时，会带来越界的问题。
             // 所以我要在第一次调用next()的时候触发begin == arrayLength进而返回false。

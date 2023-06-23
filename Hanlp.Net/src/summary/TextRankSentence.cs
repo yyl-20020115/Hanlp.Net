@@ -128,10 +128,10 @@ public class TextRankSentence
      */
     public int[] getTopSentence(int size)
     {
-        Collection<int> values = top.values();
-        size = Math.Min(size, values.size());
+        var values = top.Values;
+        size = Math.Min(size, values.Count);
         int[] indexArray = new int[size];
-        IEnumerator<int> it = values.iterator();
+        IEnumerator<int> it = values.GetEnumerator();
         for (int i = 0; i < size; ++i)
         {
             indexArray[i] = it.next();
@@ -246,7 +246,7 @@ public class TextRankSentence
         List<string> resultList = new ();
         foreach (int i in topSentence)
         {
-            resultList.Add(sentenceList.get(i));
+            resultList.Add(sentenceList[i]);
         }
         return resultList;
     }
@@ -285,7 +285,7 @@ public class TextRankSentence
         List<string> resultList = new ();
         foreach (int i in topSentence)
         {
-            resultList.Add(sentenceList.get(i));
+            resultList.Add(sentenceList[i]);
         }
 
         resultList = permutation(resultList, sentenceList);

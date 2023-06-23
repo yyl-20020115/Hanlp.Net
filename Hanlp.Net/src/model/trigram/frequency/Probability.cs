@@ -33,9 +33,9 @@ public class Probability : ICacheAble
     public class BT:BinTrie<int>
     {
         //@Override
-        public bool load(ByteArray byteArray, _ValueArray valueArray)
+        public bool load(ByteArray byteArray, _ValueArray<int> valueArray)
         {
-            BaseNode<int>[] nchild = new BaseNode[child.Length - 1];    // 兼容旧模型
+            BaseNode<int>[] nchild = new BaseNode<int>[child.Length - 1];    // 兼容旧模型
             Array.Copy(child, 0, nchild, 0, nchild.Length);
             child = nchild;
             return base.load(byteArray, valueArray);
@@ -92,7 +92,7 @@ public class Probability : ICacheAble
 
     public HashSet<string> samples()
     {
-        return d.Keys;
+        return d.Keys();
     }
 
     void Add(string key, int value)
@@ -125,7 +125,7 @@ public class Probability : ICacheAble
 
     private string convert(ICollection<char[]> keyArray)
     {
-        StringBuilder sbKey = new StringBuilder(keyArray.size() * 2);
+        StringBuilder sbKey = new StringBuilder(keyArray.Count * 2);
         foreach (char[] key in keyArray)
         {
             sbKey.Append(key[0]);
@@ -148,12 +148,13 @@ public class Probability : ICacheAble
     //@Override
     public void save(Stream _out)
     {
-        _out.writeInt(total);
+        using var st = new BinaryWriter(_out);
+        st.Write(total);
         int[] valueArray = d.getValueArray(new int[0]);
-        _out.writeInt(valueArray.Length);
+        st.Write(valueArray.Length);
         foreach (int v in valueArray)
         {
-            _out.Write(v);
+            st.Write(v);
         }
         d.save(_out);
     }

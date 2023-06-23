@@ -37,10 +37,10 @@ public class Graph
     {
         int size = vertexes.Length;
         this.vertexes = vertexes;
-        edgesTo = new List[size];
+        edgesTo = new List<EdgeFrom>[size];
         for (int i = 0; i < size; ++i)
         {
-            edgesTo[i] = new LinkedList<EdgeFrom>();
+            edgesTo[i] = new List<EdgeFrom>();
         }
     }
 
@@ -114,15 +114,15 @@ public class Graph
      */
     public static string parseResult(List<Vertex> path)
     {
-        if (path.size() < 2)
+        if (path.Count < 2)
         {
             throw new RuntimeException("路径节点数小于2:" + path);
         }
         StringBuffer sb = new StringBuffer();
 
-        for (int i = 1; i < path.size() - 1; ++i)
+        for (int i = 1; i < path.Count - 1; ++i)
         {
-            Vertex v = path.get(i);
+            Vertex v = path[i];
             sb.Append(v.getRealWord() + " ");
         }
 

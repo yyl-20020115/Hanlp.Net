@@ -93,10 +93,7 @@ public class DawgBuilder
         return _isIntersections.numOnes();
     }
 
-    public int size()
-    {
-        return _units.size();
-    }
+    public int Count=> _units.Count;
 
     /**
      * 初始化
@@ -253,18 +250,18 @@ public class DawgBuilder
 
     private void flush(int id)
     {
-        while (_nodeStack.get(_nodeStack.size() - 1) != id)
+        while (_nodeStack.get(_nodeStack.Count - 1) != id)
         {
-            int nodeId = _nodeStack.get(_nodeStack.size() - 1);
+            int nodeId = _nodeStack.get(_nodeStack.Count - 1);
             _nodeStack.deleteLast();
 
-            if (_numStates >= _table.size() - (_table.size() >>> 2))
+            if (_numStates >= _table.Count - (_table.Count >>> 2))
             {
                 expandTable();
             }
 
             int numSiblings = 0;
-            for (int i = nodeId; i != 0; i = _nodes.get(i).sibling)
+            for (int i = nodeId; i != 0; i = _nodes[i].sibling)
             {
                 ++numSiblings;
             }
@@ -285,10 +282,10 @@ public class DawgBuilder
                 {
                     unitId = appendUnit();
                 }
-                for (int i = nodeId; i != 0; i = _nodes.get(i).sibling)
+                for (int i = nodeId; i != 0; i = _nodes[i].sibling)
                 {
-                    _units.set(unitId, _nodes.get(i).unit());
-                    _labels.set(unitId, _nodes.get(i).label);
+                    _units.set(unitId, _nodes[i].unit());
+                    _labels.set(unitId, _nodes[i].label);
                     --unitId;
                 }
                 matchId = unitId + 1;
@@ -298,24 +295,24 @@ public class DawgBuilder
 
             for (int i = nodeId, next; i != 0; i = next)
             {
-                next = _nodes.get(i).sibling;
+                next = _nodes[i].sibling;
                 freeNode(i);
             }
 
-            _nodes.get(_nodeStack.get(_nodeStack.size() - 1)).child = matchId;
+            _nodes.get(_nodeStack.get(_nodeStack.Count - 1)).child = matchId;
         }
         _nodeStack.deleteLast();
     }
 
     private void expandTable()
     {
-        int tableSize = _table.size() << 1;
+        int tableSize = _table.Count << 1;
         _table.Clear();
         _table.resize(tableSize, 0);
 
-        for (int id = 1; id < _units.size(); ++id)
+        for (int id = 1; id < _units.Count; ++id)
         {
-//            if (_labels.get(i) == 0 || _units.get(id).isState)) {
+//            if (_labels[i] == 0 || _units.get(id).isState)) {
             if (_labels.get(id) == 0 || (_units.get(id) & 2) == 2)
             {
                 int[] ret = findUnit(id);
@@ -328,13 +325,13 @@ public class DawgBuilder
     private int[] findUnit(int id)
     {
         int[] ret = new int[2];
-        int hashId = hashUnit(id) % _table.size();
-        for (; ; hashId = (hashId + 1) % _table.size())
+        int hashId = hashUnit(id) % _table.Count;
+        for (; ; hashId = (hashId + 1) % _table.Count)
         {
             // Remainder adjustment.
             if (hashId < 0)
             {
-                hashId += _table.size();
+                hashId += _table.Count;
             }
             int unitId = _table.get(hashId);
             if (unitId == 0)
@@ -351,13 +348,13 @@ public class DawgBuilder
     private int[] findNode(int nodeId)
     {
         int[] ret = new int[2];
-        int hashId = hashNode(nodeId) % _table.size();
-        for (; ; hashId = (hashId + 1) % _table.size())
+        int hashId = hashNode(nodeId) % _table.Count;
+        for (; ; hashId = (hashId + 1) % _table.Count)
         {
             // Remainder adjustment
             if (hashId < 0)
             {
-                hashId += _table.size();
+                hashId += _table.Count;
             }
             int unitId = _table.get(hashId);
             if (unitId == 0)
@@ -379,7 +376,7 @@ public class DawgBuilder
     private bool areEqual(int nodeId, int unitId)
     {
         for (int i = _nodes.get(nodeId).sibling; i != 0;
-             i = _nodes.get(i).sibling)
+             i = _nodes[i].sibling)
         {
 //            if (_units.get(unitId).hasSibling() == false) {
             if ((_units.get(unitId) & 1) != 1)
@@ -394,11 +391,11 @@ public class DawgBuilder
             return false;
         }
 
-        for (int i = nodeId; i != 0; i = _nodes.get(i).sibling, --unitId)
+        for (int i = nodeId; i != 0; i = _nodes[i].sibling, --unitId)
         {
-//            if (_nodes.get(i) != _units.get(unitId).unit() ||
-            if (_nodes.get(i).unit() != _units.get(unitId) ||
-                    _nodes.get(i).label != _labels.get(unitId))
+//            if (_nodes[i] != _units.get(unitId).unit() ||
+            if (_nodes[i].unit() != _units.get(unitId) ||
+                    _nodes[i].label != _labels.get(unitId))
             {
                 return false;
             }
@@ -443,7 +440,7 @@ public class DawgBuilder
         _units.Add(0);
         _labels.Add((byte) 0);
 
-        return _isIntersections.size() - 1;
+        return _isIntersections.Count - 1;
     }
 
     private int appendNode()
@@ -451,12 +448,12 @@ public class DawgBuilder
         int id;
         if (_recycleBin.empty())
         {
-            id = _nodes.size();
+            id = _nodes.Count;
             _nodes.Add(new DawgNode());
         }
         else
         {
-            id = _recycleBin.get(_recycleBin.size() - 1);
+            id = _recycleBin.get(_recycleBin.Count - 1);
             _nodes.get(id).reset();
             _recycleBin.deleteLast();
         }
@@ -480,7 +477,7 @@ public class DawgBuilder
     }
 
     private static readonly int INITIAL_TABLE_SIZE = 1 << 10;
-    private ArrayList<DawgNode> _nodes = new ArrayList<DawgNode>();
+    private List<DawgNode> _nodes = new ();
     private AutoIntPool _units = new AutoIntPool();
     private AutoBytePool _labels = new AutoBytePool();
     private BitVector _isIntersections = new BitVector();

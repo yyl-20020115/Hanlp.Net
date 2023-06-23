@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.recognition.nr;
 using com.hankcs.hanlp.recognition.nt;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.seg.Dijkstra.Path;
 
 namespace com.hankcs.hanlp.seg.Dijkstra;
 
@@ -61,7 +62,7 @@ public class DijkstraSegment : WordBasedSegment
         if (config.ner)
         {
             wordNetOptimum.AddRange(vertexList);
-            int preSize = wordNetOptimum.size();
+            int preSize = wordNetOptimum.Count;
             if (config.nameRecognize)
             {
                 PersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
@@ -85,10 +86,10 @@ public class DijkstraSegment : WordBasedSegment
                 vertexList = dijkstra(graph);
                 wordNetOptimum.Clear();
                 wordNetOptimum.AddRange(vertexList);
-                preSize = wordNetOptimum.size();
+                preSize = wordNetOptimum.Count;
                 OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
             }
-            if (wordNetOptimum.size() != preSize)
+            if (wordNetOptimum.Count != preSize)
             {
                 graph = generateBiGraph(wordNetOptimum);
                 vertexList = dijkstra(graph);
@@ -130,7 +131,7 @@ public class DijkstraSegment : WordBasedSegment
         d[d.Length - 1] = 0;
         int[] path = new int[vertexes.Length];
         Array.Fill(path, -1);
-        PriorityQueue<State> que = new PriorityQueue<State>();
+        PriorityQueue<State,State> que = new ();
         que.Add(new State(0, vertexes.Length - 1));
         while (!que.isEmpty())
         {

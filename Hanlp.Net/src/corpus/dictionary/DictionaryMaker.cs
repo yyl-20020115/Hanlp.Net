@@ -189,9 +189,9 @@ public class DictionaryMaker : ISaveAble
         return trie.entrySet();
     }
 
-    public HashSet<string> Keys
+    public HashSet<string> Keys()
     {
-        return trie.Keys;
+        return trie.Keys();
     }
 
     /**
@@ -284,14 +284,14 @@ public class DictionaryMaker : ISaveAble
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder("词条数量：");
-        sb.Append(trie.size());
+        sb.Append(trie.Count);
         return sb.ToString();
     }
 
     //@Override
     public bool saveTxtTo(string path)
     {
-        if (trie.size() == 0) return true;  // 如果没有词条，那也算成功了
+        if (trie.Count == 0) return true;  // 如果没有词条，那也算成功了
         try
         {
             TextWriter bw = new TextWriter(new StreamWriter(IOUtil.newOutputStream(path), "UTF-8"));
@@ -386,7 +386,7 @@ public class DictionaryMaker : ISaveAble
         //@Override
         public int Compare(KeyValuePair<string, int> o1, KeyValuePair<string, int> o2)
         {
-            return o1.Value.compareTo(o2.Value);
+            return Math.Sign(o1.Value - o2.Value);// o1.Value.compareTo(o2.Value);
         }
     }
 }

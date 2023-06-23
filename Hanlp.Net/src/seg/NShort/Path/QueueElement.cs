@@ -49,6 +49,6 @@ public class QueueElement : IComparable<QueueElement>
     //@Override
     public int CompareTo(QueueElement other)
     {
-        return Double.compare(weight, other.weight);
+        return Math.Sign(weight - other.weight);
     }
 }

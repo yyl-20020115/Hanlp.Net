@@ -36,11 +36,7 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public int size()
-    {
-        return getAllStrings().size();
-    }
-
+    public int Count => getAllStrings().Count;
     //@Override
     public bool isEmpty()
     {
@@ -50,14 +46,14 @@ public class MDAGSet : MDAG , ISet<string>
     //@Override
     public bool Contains(Object o)
     {
-        if (o.getClass() != string.s) return false;
+        if (o is not string) return false;
         return Contains((string) o);
     }
 
     //@Override
-    public IEnumerator<string> iterator()
+    public IEnumerator<string> GetEnumerator()
     {
-        return getAllStrings().iterator();
+        return getAllStrings().GetEnumerator();
     }
 
     //@Override
@@ -82,9 +78,9 @@ public class MDAGSet : MDAG , ISet<string>
     //@Override
     public bool Remove(Object o)
     {
-        if (o.getClass() == string.s)
+        if (o is string s)
         {
-            removeString((string) o);
+            removeString(s);
         }
         else
         {
@@ -116,7 +112,7 @@ public class MDAGSet : MDAG , ISet<string>
     public bool retainAll<T>(ICollection<T> c)
     {
         bool modified = false;
-        IEnumerator<string> it = iterator();
+        IEnumerator<string> it = GetEnumerator();
         while (it.MoveNext())
         {
             if (!c.Contains(it.next()))
@@ -132,7 +128,7 @@ public class MDAGSet : MDAG , ISet<string>
     public bool removeAll<T>(ICollection<T> c)
     {
         bool modified = false;
-        IEnumerator it = iterator();
+        IEnumerator it = GetEnumerator();
         while (it.MoveNext())
         {
             if (c.Contains(it.next()))

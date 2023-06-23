@@ -23,33 +23,33 @@ public class ImmutableFeatureMap : FeatureMap
     public Dictionary<string, int> featureIdMap;
 
     public ImmutableFeatureMap(Dictionary<string, int> featureIdMap, TagSet tagSet)
+        : base(tagSet)
     {
-        base(tagSet);
+        ;
         this.featureIdMap = featureIdMap;
     }
 
     public ImmutableFeatureMap(HashSet<KeyValuePair<string, int>> entrySet, TagSet tagSet)
+        : base(tagSet)
     {
-        base(tagSet);
+        ;
         this.featureIdMap = new ();
-        for (KeyValuePair<string, int> entry in entrySet)
+        foreach (KeyValuePair<string, int> entry in entrySet)
         {
             featureIdMap.Add(entry.Key, entry.Value);
         }
     }
 
     //@Override
-    public int idOf(string s)
+    public override int idOf(string s)
     {
-        int id = featureIdMap.get(s);
-        if (id == null) return -1;
-        return id;
+        return !featureIdMap.TryGetValue(s,out var id) ? -1 : id;
     }
 
     //@Override
-    public int size()
+    public override int Count
     {
-        return featureIdMap.size();
+        return featureIdMap.Count;
     }
 
     //@Override

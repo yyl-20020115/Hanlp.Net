@@ -79,7 +79,7 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
     //@Override
     public string[] tag(List<string> wordList)
     {
-        string[] termArray = new string[wordList.size()];
+        string[] termArray = new string[wordList.Count];
         wordList.ToArray(termArray);
         return tag(termArray);
     }

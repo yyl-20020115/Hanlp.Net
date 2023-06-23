@@ -144,9 +144,9 @@ public class TfIdfCounter : KeywordExtractor
 
     public Dictionary<Object, Dictionary<string, Double>> compute()
     {
-        idf = TfIdf.idfFromTfs(tfMap.values());
-        tfidfMap = new (idf.size());
-        foreach (KeyValuePair<Object, Dictionary<string, Double>> entry in tfMap.entrySet())
+        idf = TfIdf.idfFromTfs(tfMap.Values);
+        tfidfMap = new (idf.Count);
+        foreach (KeyValuePair<Object, Dictionary<string, Double>> entry in tfMap)
         {
             Dictionary<string, Double> tfidf = TfIdf.tfIdf(entry.Value, idf);
             tfidfMap.Add(entry.Key, tfidf);
@@ -171,10 +171,10 @@ public class TfIdfCounter : KeywordExtractor
     private List<KeyValuePair<string, Double>> topN(Dictionary<string, Double> tfidfs, int size)
     {
         MaxHeap<KeyValuePair<string, Double>> heap = new MaxHeap<KeyValuePair<string, Double>>(size, new CT());
-        heap.AddRange(tfidfs.entrySet());
+        heap.AddRange(tfidfs);
         return heap.ToList();
     }
-    public class CT: IComparer<KeyValuePair<string, Double>>()
+    public class CT: IComparer<KeyValuePair<string, Double>>
     {
         //@Override
         public int Compare(KeyValuePair<string, Double> o1, KeyValuePair<string, Double> o2)
@@ -241,7 +241,7 @@ public class TfIdfCounter : KeywordExtractor
     }
     private static List<KeyValuePair<string, int>> doubleToInteger(List<KeyValuePair<string, Double>> list)
     {
-        List<KeyValuePair<string, int>> result = new (list.size());
+        List<KeyValuePair<string, int>> result = new (list.Count);
         foreach (KeyValuePair<string, Double> entry in list)
         {
             result.Add(new AbstractMap.SimpleEntry<string, int>(entry.Key, entry.Value.intValue()));

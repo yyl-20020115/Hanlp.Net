@@ -76,8 +76,8 @@ public class PersonDictionary
     public static void parsePattern(List<NR> nrList, List<Vertex> vertexList,  WordNet wordNetOptimum,  WordNet wordNetAll)
     {
         // 拆分UV
-        ListIterator<Vertex> listIterator = vertexList.GetEnumerator();
-        StringBuilder sbPattern = new StringBuilder(nrList.size());
+        IEnumerator<Vertex> listIterator = vertexList.GetEnumerator();
+        StringBuilder sbPattern = new StringBuilder(nrList.Count);
         NR preNR = NR.A;
         bool backUp = false;
         int index = 0;
@@ -138,7 +138,7 @@ public class PersonDictionary
         string pattern = sbPattern.ToString();
 //        logger.trace("模式串：{}", pattern);
 //        logger.trace("对应串：{}", vertexList);
-//        if (pattern.Length != vertexList.size())
+//        if (pattern.Length != vertexList.Count)
 //        {
 //            logger.warn("人名识别模式串有bug", pattern, vertexList);
 //            return;

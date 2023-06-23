@@ -102,7 +102,7 @@ public class CharTableTest : TestCase
 //                else CONVERT[i] = ' ';
 //            }
 //        }
-//        ObjectOutputStream _out = new ObjectOutputStream(new FileStream(HanLP.Config.CharTablePath));
+//        Stream _out = new Stream(new FileStream(HanLP.Config.CharTablePath));
 //        _out.writeObject(CONVERT);
 //        _out.Close();
 //    }
@@ -126,7 +126,7 @@ public class CharTableTest : TestCase
 ////            CONVERT[t] = s;
 ////        }
 ////
-////        ObjectOutputStream _out = new ObjectOutputStream(new FileStream(HanLP.Config.CharTablePath));
+////        Stream _out = new Stream(new FileStream(HanLP.Config.CharTablePath));
 ////        _out.writeObject(CONVERT);
 ////        _out.Close();
 //    }

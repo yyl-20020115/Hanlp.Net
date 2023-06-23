@@ -82,7 +82,7 @@ public abstract class CommonDictionary<V>
             return false;
         }
         logger.info(path + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
-        saveDat(path + BIN_EXT, valueList);
+        saveDat(path + Predefine.BIN_EXT, valueList);
         return true;
     }
 
@@ -113,7 +113,7 @@ public abstract class CommonDictionary<V>
     {
         try
         {
-            Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path)));
+            Stream _out = IOUtil.newOutputStream(path);
             _out.writeInt(valueArray.Count);
             foreach (V item in valueArray)
             {
@@ -166,10 +166,7 @@ public abstract class CommonDictionary<V>
      *
      * @return
      */
-    public int size()
-    {
-        return trie.size();
-    }
+    public int Count=> trie.Count;
 
     /**
      * 从一行词典条目创建值

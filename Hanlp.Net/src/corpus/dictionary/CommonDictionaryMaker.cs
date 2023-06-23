@@ -25,15 +25,15 @@ public abstract class CommonDictionaryMaker : ISaveAble
     /**
      * 语料库中的单词
      */
-    EasyDictionary dictionary;
+    public EasyDictionary dictionary;
     /**
      * 输出词典
      */
-    DictionaryMaker dictionaryMaker;
+    public DictionaryMaker dictionaryMaker;
     /**
      * 2元文法词典
      */
-    NGramDictionaryMaker nGramDictionaryMaker;
+    public NGramDictionaryMaker nGramDictionaryMaker;
 
     public CommonDictionaryMaker(EasyDictionary dictionary)
     {
@@ -108,7 +108,7 @@ public abstract class CommonDictionaryMaker : ISaveAble
             {
                 compatibleList.Add(new List<IWord>(wordList));
             }
-            CommonDictionaryMaker.compute(compatibleList);
+            CommonDictionaryMaker.s.compute(compatibleList);
         }
     }
     /**

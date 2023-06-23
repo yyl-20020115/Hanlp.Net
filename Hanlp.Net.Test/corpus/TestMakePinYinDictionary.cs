@@ -212,7 +212,7 @@ public class TestMakePinYinDictionary : TestCase
 //        table.load("data/dictionary/pinyin/sm-ym-table.txt");
 //        table.combine(pyEnumDictionary);
 //
-//        IEnumerator<Map.KeyValuePair<String, String>> iterator = table.entrySet().iterator();
+//        IEnumerator<Map.KeyValuePair<String, String>> iterator = table.entrySet().GetEnumerator();
 //        Map.KeyValuePair<String, String> pre = iterator.next();
 //        String prePy = pre.Key.substring(0, pre.Key.Length - 1);
 //        String preYd = pre.Key.substring(pre.Key.Length - 1);

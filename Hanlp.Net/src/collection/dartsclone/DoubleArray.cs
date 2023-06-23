@@ -36,8 +36,8 @@ public class DoubleArray : Serializable
 
     public void build(List<string> keys, int[] values)
     {
-        byte[][] byteKey = new byte[keys.size()][];
-        IEnumerator<string> iteratorKey = keys.iterator();
+        byte[][] byteKey = new byte[keys.Count][];
+        IEnumerator<string> iteratorKey = keys.GetEnumerator();
         int i = 0;
         while (iteratorKey.MoveNext())
         {
@@ -89,8 +89,8 @@ public class DoubleArray : Serializable
         Stream _out = null;
         try
         {
-            _out = new Stream(new BufferedOutputStream(
-                    stream));
+            _out = 
+                    stream;
             for (int i = 0; i < _array.Length; ++i)
             {
                 _out.writeInt(_array[i]);
@@ -105,12 +105,12 @@ public class DoubleArray : Serializable
         }
     }
 
-    private void writeObject(ObjectOutputStream _out) 
+    private void writeObject(Stream _out) 
     {
         _out.writeObject(_array);
     }
 
-    private void readObject(ObjectInputStream @in)
+    private void readObject(Stream @in)
     {
         _array = (int[]) _in.readObject();
     }
@@ -195,7 +195,7 @@ public class DoubleArray : Serializable
             // if (unit.has_leaf()) {
             if (((unit >>> 8) & 1) == 1)
             {
-                if (result.size() < maxResults)
+                if (result.Count < maxResults)
                 {
                     // result.Add(new KeyValuePair<i, _array[nodePos].value());
                     result.Add(new KeyValuePair<int, int>(i + 1, _array[nodePos] & ((1 << 31) - 1)));
@@ -210,10 +210,7 @@ public class DoubleArray : Serializable
      *
      * @return
      */
-    public int size()
-    {
-        return _array.Length;
-    }
+    public int Count=> _array.Length;
 
     private static readonly int UNIT_SIZE = 4; // sizeof(int)
     private int[] _array;

@@ -118,7 +118,7 @@ public class TestUtility
 //            else
 //            {
 //                // extracts file name from URL
-//                fileName = (httpConn.getURL().getPath()).getName();
+//                fileName = (httpConn.getURL().getPath()).Name;
 //            }
 
 ////            Console.WriteLine("Content-Type = " + contentType);
@@ -199,7 +199,7 @@ public class TestUtility
         //    ZipEntry ze = zis.getNextEntry();
         //    while (ze != null)
         //    {
-        //        String fileName = ze.getName();
+        //        String fileName = ze.Name;
         //        var newFile = (destDir + Path.DirectorySeparatorChar + fileName);
         //        if (overwrite || !File.Exists(newFile))
         //        {

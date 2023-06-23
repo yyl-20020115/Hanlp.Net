@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.corpus.document;
 using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.corpus.util;
 using com.hankcs.hanlp.utility;
 
@@ -56,12 +57,12 @@ public class NatureDictionaryMaker : CommonDictionaryMaker
         int i = 0;
         foreach (List<IWord> wordList in sentenceList)
         {
-            logger.info(++i + " / " + sentenceList.size());
+            logger.info(++i + " / " + sentenceList.Count);
             foreach (IWord word in wordList)
             {
                 Precompiler.compile(word);  // 编译为等效字符串
             }
-            LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
+            LinkedList<IWord> wordLinkedList = (List<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, Nature.begin.ToString()));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, Nature.end.ToString()));
         }

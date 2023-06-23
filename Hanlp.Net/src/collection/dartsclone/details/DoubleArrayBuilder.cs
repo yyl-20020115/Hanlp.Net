@@ -32,8 +32,8 @@ public class DoubleArrayBuilder
 
     public int[] copy()
     {
-        int[] ret = new int[_units.size()];
-        Array.Copy(_units.getBuffer(), 0, ret, 0, _units.size());
+        int[] ret = new int[_units.Count];
+        Array.Copy(_units.getBuffer(), 0, ret, 0, _units.Count);
         return ret;
     }
 
@@ -55,17 +55,17 @@ public class DoubleArrayBuilder
 
     private static readonly int OFFSET_MASK = (1 << 31) | (1 << 8) | 0xFF;
 
-    class DoubleArrayBuilderExtraUnit
+    public class DoubleArrayBuilderExtraUnit
     {
-        int prev;
-        int next;
-        bool isFixed;
-        bool isUsed;
+        public int prev;
+        public int next;
+        public bool isFixed;
+        public bool isUsed;
     }
 
     private int numBlocks()
     {
-        return _units.size() / BLOCK_SIZE;
+        return _units.Count / BLOCK_SIZE;
     }
 
     private DoubleArrayBuilderExtraUnit extras(int id)
@@ -91,7 +91,7 @@ public class DoubleArrayBuilder
     private void buildFromDawg(DawgBuilder dawg)
     {
         int numUnits = 1;
-        while (numUnits < dawg.size())
+        while (numUnits < dawg.Count)
         {
             numUnits <<= 1;
         }
@@ -195,9 +195,9 @@ public class DoubleArrayBuilder
                         : (newId << 2) | (1 << 9);
 
         dawgChildId = dawg.child(dawgId);
-        for (int i = 0; i < _labels.size(); ++i)
+        for (int i = 0; i < _labels.Count; ++i)
         {
-            int dictChildId = offset ^ (_labels.get(i) & 0xFF);
+            int dictChildId = offset ^ (_labels[i] & 0xFF);
             reserveId(dictChildId);
             units = _units.getBuffer();
 
@@ -212,7 +212,7 @@ public class DoubleArrayBuilder
             {
                 // units[dictChildId].setLabel(_labels[i]);
                 units[dictChildId] = (units[dictChildId] & ~0xFF)
-                        | (_labels.get(i) & 0xFF);
+                        | (_labels[i] & 0xFF);
             }
 
             dawgChildId = dawg.sibling(dawgChildId);
@@ -324,9 +324,9 @@ public class DoubleArrayBuilder
             {
                 _labels.Add(label);
             }
-            else if (label != _labels.get(_labels.size() - 1))
+            else if (label != _labels.get(_labels.Count - 1))
             {
-                if ((label & 0xFF) < (_labels.get(_labels.size() - 1) & 0xFF))
+                if ((label & 0xFF) < (_labels.get(_labels.Count - 1) & 0xFF))
                 {
                     throw new ArgumentException(
                             "failed to build double-array: wrong key order");
@@ -345,12 +345,12 @@ public class DoubleArrayBuilder
                         ? newId << 10
                         : (newId << 2) | (1 << 9);
 
-        for (int i = 0; i < _labels.size(); ++i)
+        for (int i = 0; i < _labels.Count; ++i)
         {
-            int dictChildId = offset ^ (_labels.get(i) & 0xFF);
+            int dictChildId = offset ^ (_labels[i] & 0xFF);
             reserveId(dictChildId);
             units = _units.getBuffer();
-            if (_labels.get(i) == 0)
+            if (_labels[i] == 0)
             {
                 // units[dictId].setHasLeaf(true);
                 units[dictId] |= 1 << 8;
@@ -361,7 +361,7 @@ public class DoubleArrayBuilder
             {
                 // units[dictChildId].setLabel(_labels[i]);
                 units[dictChildId] = (units[dictChildId] & ~0xFF)
-                        | (_labels.get(i) & 0xFF);
+                        | (_labels[i] & 0xFF);
             }
         }
         extras(offset).isUsed = true;
@@ -371,9 +371,9 @@ public class DoubleArrayBuilder
 
     int findValidOffset(int id)
     {
-        if (_extrasHead >= _units.size())
+        if (_extrasHead >= _units.Count)
         {
-            return _units.size() | (id & LOWER_MASK);
+            return _units.Count | (id & LOWER_MASK);
         }
 
         int unfixedId = _extrasHead;
@@ -387,7 +387,7 @@ public class DoubleArrayBuilder
             unfixedId = extras(unfixedId).next;
         }
         while (unfixedId != _extrasHead);
-        return _units.size() | (id & LOWER_MASK);
+        return _units.Count | (id & LOWER_MASK);
     }
 
     bool isValidOffset(int id, int offset)
@@ -403,9 +403,9 @@ public class DoubleArrayBuilder
             return false;
         }
 
-        for (int i = 1; i < _labels.size(); ++i)
+        for (int i = 1; i < _labels.Count; ++i)
         {
-            if (extras(offset ^ (_labels.get(i) & 0xFF)).isFixed)
+            if (extras(offset ^ (_labels[i] & 0xFF)).isFixed)
             {
                 return false;
             }
@@ -416,7 +416,7 @@ public class DoubleArrayBuilder
 
     void reserveId(int id)
     {
-        if (id >= _units.size())
+        if (id >= _units.Count)
         {
             expandUnits();
         }
@@ -426,7 +426,7 @@ public class DoubleArrayBuilder
             _extrasHead = extras(id).next;
             if (_extrasHead == id)
             {
-                _extrasHead = _units.size();
+                _extrasHead = _units.Count;
             }
         }
         extras(extras(id).prev).next = extras(id).next;
@@ -436,7 +436,7 @@ public class DoubleArrayBuilder
 
     void expandUnits()
     {
-        int srcNumUnits = _units.size();
+        int srcNumUnits = _units.Count;
         int srcNumBlocks = numBlocks();
 
         int destNumUnits = srcNumUnits + BLOCK_SIZE;

@@ -63,8 +63,9 @@ public class CRFSegment : CharacterBasedSegment
 
     // 已废弃，请使用功能更丰富、设计更优雅的{@link com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer}。
     public CRFSegment()
+        : this(HanLP.Config.CRFSegmentModelPath)
     {
-        this(HanLP.Config.CRFSegmentModelPath);
+        ;
     }
 
     //@Override
@@ -142,7 +143,7 @@ public class CRFSegment : CharacterBasedSegment
                 if (i == maxLen)
                 {
                     atomList.Add(sbAtom.ToString());
-                    sbAtom.setLength(0);
+                    sbAtom.Length=0;
                     break;
                 }
                 char c = sentence[++i];
@@ -152,13 +153,13 @@ public class CRFSegment : CharacterBasedSegment
                     if (i == maxLen)
                     {
                         atomList.Add(sbAtom.ToString());
-                        sbAtom.setLength(0);
+                        sbAtom.Length=0;
                         break _out;
                     }
                     c = sentence[++i];
                 }
                 atomList.Add(sbAtom.ToString());
-                sbAtom.setLength(0);
+                sbAtom.Length=0;
                 --i;
             }
             else if (CharacterHelper.isEnglishLetter(sentence[i]))
@@ -167,7 +168,7 @@ public class CRFSegment : CharacterBasedSegment
                 if (i == maxLen)
                 {
                     atomList.Add(sbAtom.ToString());
-                    sbAtom.setLength(0);
+                    sbAtom.Length=0;
                     break;
                 }
                 char c = sentence[++i];
@@ -177,13 +178,13 @@ public class CRFSegment : CharacterBasedSegment
                     if (i == maxLen)
                     {
                         atomList.Add(sbAtom.ToString());
-                        sbAtom.setLength(0);
+                        sbAtom.Length=0;
                         break _out;
                     }
                     c = sentence[++i];
                 }
                 atomList.Add(sbAtom.ToString());
-                sbAtom.setLength(0);
+                sbAtom.Length=0;
                 --i;
             }
             else
@@ -212,7 +213,7 @@ public class CRFSegment : CharacterBasedSegment
                     table[size][0] = "M";
                     table[size][1] = sbAtom.ToString();
                     ++size;
-                    sbAtom.setLength(0);
+                    sbAtom.Length=0;
                     break;
                 }
                 char c = sentence[++i];
@@ -224,7 +225,7 @@ public class CRFSegment : CharacterBasedSegment
                         table[size][0] = "M";
                         table[size][1] = sbAtom.ToString();
                         ++size;
-                        sbAtom.setLength(0);
+                        sbAtom.Length=0;
                         break _out;
                     }
                     c = sentence[++i];
@@ -232,7 +233,7 @@ public class CRFSegment : CharacterBasedSegment
                 table[size][0] = "M";
                 table[size][1] = sbAtom.ToString();
                 ++size;
-                sbAtom.setLength(0);
+                sbAtom.Length=0;
                 --i;
             }
             else if (CharacterHelper.isEnglishLetter(sentence[i]) || sentence[i] == ' ')
@@ -243,7 +244,7 @@ public class CRFSegment : CharacterBasedSegment
                     table[size][0] = "W";
                     table[size][1] = sbAtom.ToString();
                     ++size;
-                    sbAtom.setLength(0);
+                    sbAtom.Length=0;
                     break;
                 }
                 char c = sentence[++i];
@@ -255,7 +256,7 @@ public class CRFSegment : CharacterBasedSegment
                         table[size][0] = "W";
                         table[size][1] = sbAtom.ToString();
                         ++size;
-                        sbAtom.setLength(0);
+                        sbAtom.Length=0;
                         break _out;
                     }
                     c = sentence[++i];
@@ -263,7 +264,7 @@ public class CRFSegment : CharacterBasedSegment
                 table[size][0] = "W";
                 table[size][1] = sbAtom.ToString();
                 ++size;
-                sbAtom.setLength(0);
+                sbAtom.Length=0;
                 --i;
             }
             else

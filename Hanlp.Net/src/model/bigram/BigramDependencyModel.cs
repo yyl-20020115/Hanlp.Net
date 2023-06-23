@@ -55,7 +55,7 @@ public class BigramDependencyModel
             string dependency = param[1];
             map.Add(param[0], dependency);
         }
-        if (map.size() == 0) return false;
+        if (map.Count == 0) return false;
         trie.build(map);
         if (!saveDat(path, map)) logger.warning("缓存" + path + Predefine.BIN_EXT + "失败");
         return true;
@@ -81,7 +81,7 @@ public class BigramDependencyModel
         try
         {
             Stream _out = new Stream(IOUtil.newOutputStream(path +  ".bi" + Predefine.BIN_EXT));
-            _out.writeInt(dependencyList.size());
+            _out.writeInt(dependencyList.Count);
             foreach (string dependency in dependencyList)
             {
                 _out.writeUTF(dependency);

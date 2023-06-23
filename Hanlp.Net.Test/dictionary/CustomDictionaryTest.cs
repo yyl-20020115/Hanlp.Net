@@ -117,7 +117,7 @@ public class CustomDictionaryTest : TestCase
     //            {
     //                if (suffixSet.Contains(item.key.charAt(item.key.Length - 1))) return true;
     //                List<Term> termList = segment.seg(item.key);
-    //                if (termList.size() == 1 && termList.get(0).nature == Nature.nr)
+    //                if (termList.Count == 1 && termList.get(0).nature == Nature.nr)
     //                {
     //                    Console.WriteLine(item);
     //                    return false;

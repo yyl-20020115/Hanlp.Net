@@ -136,9 +136,9 @@ public abstract class FeatureIndex
         {
             return BOS[-pos - 1];
         }
-        else if (pos >= tagger.size())
+        else if (pos >= tagger.Count)
         {
-            return EOS[pos - tagger.size()];
+            return EOS[pos - tagger.Count];
         }
         else
         {
@@ -199,7 +199,7 @@ public abstract class FeatureIndex
         List<List<int>> featureCache = tagger.getFeatureCache_();
         tagger.setFeature_id_(featureCache.Count);
 
-        for (int cur = 0; cur < tagger.size(); cur++)
+        for (int cur = 0; cur < tagger.Count; cur++)
         {
             if (!buildFeatureFromTempl(feature, unigramTempls_, cur, tagger))
             {
@@ -209,7 +209,7 @@ public abstract class FeatureIndex
             featureCache.Add(feature);
             feature = new ();
         }
-        for (int cur = 1; cur < tagger.size(); cur++)
+        for (int cur = 1; cur < tagger.Count; cur++)
         {
             if (!buildFeatureFromTempl(feature, bigramTempls_, cur, tagger))
             {
@@ -226,7 +226,7 @@ public abstract class FeatureIndex
     {
         int fid = tagger.getFeature_id_();
         List<List<int>> featureCache = tagger.getFeatureCache_();
-        for (int cur = 0; cur < tagger.size(); cur++)
+        for (int cur = 0; cur < tagger.Count; cur++)
         {
             List<int> f = featureCache[(fid++)];
             for (int i = 0; i < y_.Count; i++)
@@ -239,7 +239,7 @@ public abstract class FeatureIndex
                 tagger.set_node(n, cur, i);
             }
         }
-        for (int cur = 1; cur < tagger.size(); cur++)
+        for (int cur = 1; cur < tagger.Count; cur++)
         {
             List<int> f = featureCache.get(fid++);
             for (int j = 0; j < y_.Count; j++)
@@ -270,10 +270,7 @@ public abstract class FeatureIndex
 
     }
 
-    public int size()
-    {
-        return getMaxid_();
-    }
+    public int Count=> getMaxid_();
 
     public int ysize()
     {

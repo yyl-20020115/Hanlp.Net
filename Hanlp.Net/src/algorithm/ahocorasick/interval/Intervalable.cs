@@ -22,6 +22,6 @@ public interface Intervalable : IComparable
      * 长度
      * @return
      */
-    int size();
+    int Count;
 
 }

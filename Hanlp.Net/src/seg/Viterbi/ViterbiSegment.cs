@@ -104,7 +104,7 @@ public class ViterbiSegment : WordBasedSegment
         if (config.ner)
         {
             WordNet wordNetOptimum = new WordNet(sentence, vertexList);
-            int preSize = wordNetOptimum.size();
+            int preSize = wordNetOptimum.Count;
             if (config.nameRecognize)
             {
                 PersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
@@ -128,10 +128,10 @@ public class ViterbiSegment : WordBasedSegment
                 vertexList = viterbi(wordNetOptimum);
                 wordNetOptimum.Clear();
                 wordNetOptimum.AddRange(vertexList);
-                preSize = wordNetOptimum.size();
+                preSize = wordNetOptimum.Count;
                 OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
             }
-            if (wordNetOptimum.size() != preSize)
+            if (wordNetOptimum.Count != preSize)
             {
                 vertexList = viterbi(wordNetOptimum);
                 if (HanLP.Config.DEBUG)
@@ -159,15 +159,15 @@ public class ViterbiSegment : WordBasedSegment
     private static List<Vertex> viterbi(WordNet wordNet)
     {
         // 避免生成对象，优化速度
-        LinkedList<Vertex>[] nodes = wordNet.getVertexes();
-        LinkedList<Vertex> vertexList = new LinkedList<Vertex>();
+        List<Vertex>[] nodes = wordNet.getVertexes();
+        List<Vertex> vertexList = new ();
         foreach (Vertex node in nodes[1])
         {
             node.updateFrom(nodes[0].getFirst());
         }
         for (int i = 1; i < nodes.Length - 1; ++i)
         {
-            LinkedList<Vertex> nodeArray = nodes[i];
+            List<Vertex> nodeArray = nodes[i];
             if (nodeArray == null) continue;
             foreach (Vertex node in nodeArray)
             {

@@ -61,7 +61,7 @@ public class PinyinKey : IComparable<PinyinKey>, ISentenceKey<PinyinKey>
         firstCharArray = new char[firstCharSize];
         pinyinSize = 0;
         firstCharSize = 0;
-        IEnumerator<Boolean> iterator = booleanList.iterator();
+        IEnumerator<Boolean> iterator = booleanList.GetEnumerator();
         for (int i = 0; i < pinyinArray.Length; ++i)
         {
             if (iterator.next())
@@ -111,15 +111,18 @@ public class PinyinKey : IComparable<PinyinKey>, ISentenceKey<PinyinKey>
      * 拼音的个数
      * @return
      */
-    public int size()
+    public int Count
     {
-        int Length = 0;
-        foreach (Pinyin pinyin in pinyinArray)
+        get
         {
-            if (pinyin != Pinyin.none5) ++Length;
-        }
+            int Length = 0;
+            foreach (Pinyin pinyin in pinyinArray)
+            {
+                if (pinyin != Pinyin.none5) ++Length;
+            }
 
-        return Length;
+            return Length;
+        }
     }
 
     //@Override

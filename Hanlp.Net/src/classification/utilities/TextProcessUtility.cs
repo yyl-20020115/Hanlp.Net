@@ -31,8 +31,8 @@ public class TextProcessUtility
     public static string[] extractKeywords(string text)
     {
         List<Term> termList = NotionalTokenizer.segment(text);
-        string[] wordArray = new string[termList.size()];
-        IEnumerator<Term> iterator = termList.iterator();
+        string[] wordArray = new string[termList.Count];
+        IEnumerator<Term> iterator = termList.GetEnumerator();
         for (int i = 0; i < wordArray.Length; i++)
         {
             wordArray[i] = iterator.next().word;
@@ -73,20 +73,20 @@ public class TextProcessUtility
     public static Dictionary<string, string[]> loadCorpus(string path)
     {
         Dictionary<string, string[]> dataSet = new ();
-        File root = new File(path);
-        File[] folders = root.listFiles();
+        string root = new string(path);
+        string[] folders = root.listFiles();
         if (folders == null) return null;
-        foreach (File folder in folders)
+        foreach (string folder in folders)
         {
             if (folder.isFile()) continue;
-            File[] files = folder.listFiles();
+            string[] files = folder.listFiles();
             if (files == null) continue;
             string[] documents = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
                 documents[i] = IOUtil.readTxt(files[i]);
             }
-            dataSet.Add(folder.getName(), documents);
+            dataSet.Add(folder.Name, documents);
         }
 
         return dataSet;
@@ -101,33 +101,33 @@ public class TextProcessUtility
     public static Dictionary<string, string[]> loadCorpusWithException(string folderPath, string charsetName) 
     {
         if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
-        File root = new File(folderPath);
+        string root = new string(folderPath);
         if (!root.exists()) throw new ArgumentException(string.Format("目录 %s 不存在", root));
         if (!root.isDirectory())
             throw new ArgumentException(string.Format("目录 %s 不是一个目录", root));
 
         Dictionary<string, string[]> dataSet = new Dictionary<string, string[]>();
-        File[] folders = root.listFiles();
+        string[] folders = root.listFiles();
         if (folders == null) return null;
-        foreach (File folder in folders)
+        foreach (string folder in folders)
         {
             if (folder.isFile()) continue;
-            File[] files = folder.listFiles();
+            string[] files = folder.listFiles();
             if (files == null) continue;
             string[] documents = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
                 documents[i] = readTxt(files[i], charsetName);
             }
-            dataSet.Add(folder.getName(), documents);
+            dataSet.Add(folder.Name, documents);
         }
 
         return dataSet;
     }
 
-    public static string readTxt(File file, string charsetName) 
+    public static string readTxt(string file, string charsetName) 
     {
-        Stream _is = new Stream(file);
+        Stream _is = new FileStream(file);
         byte[] targetArray = new byte[_is.available()];
         int len;
         int off = 0;

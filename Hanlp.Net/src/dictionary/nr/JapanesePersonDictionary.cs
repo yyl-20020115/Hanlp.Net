@@ -89,7 +89,7 @@ public class JapanesePersonDictionary
         try
         {
             Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
-            _out.writeInt(map.size());
+            _out.writeInt(map.Count);
             foreach (char character in map.values())
             {
                 _out.writeChar(character);

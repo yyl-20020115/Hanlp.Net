@@ -48,7 +48,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     }
 
     //@Override
-    public override void segment(string text, string normalized, List<string> output)
+    public void segment(string text, string normalized, List<string> output)
     {
         int[] obsArray = new int[text.Length];
         for (int i = 0; i < obsArray.Length; i++)
@@ -65,9 +65,9 @@ public class HMMSegmenter : HMMTrainer , Segmenter
             if (tagArray[i] == tagSet.B || tagArray[i] == tagSet.S)
             {
                 output.Add(result.ToString());
-                result.setLength(0);
+                result.Length=0;
             }
-            result.Append(text.charAt(i));
+            result.Append(text[i]);
         }
         if (result.Length != 0)
         {
@@ -100,7 +100,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     }
 
     //@Override
-    protected TagSet getTagSet()
+    protected override TagSet getTagSet()
     {
         return tagSet;
     }

@@ -30,7 +30,7 @@ public abstract class SimpleDictionary<V>
     {
         try
         {
-            TextReader br = new TextReader(new InputStreamReader(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path), "UTF-8"));
+            TextReader br = new StreamReader(IOAdapter == null ? new FileStream(path) : IOAdapter.open(path), "UTF-8");
             string line;
             while ((line = br.ReadLine()) != null)
             {
@@ -116,7 +116,7 @@ public abstract class SimpleDictionary<V>
      */
     public int Remove(Filter filter)
     {
-        int size = trie.size();
+        int size = trie.Count;
         foreach (KeyValuePair<string, V> entry in entrySet())
         {
             if (filter.Remove(entry))
@@ -125,7 +125,7 @@ public abstract class SimpleDictionary<V>
             }
         }
 
-        return size - trie.size();
+        return size - trie.Count;
     }
 
     public interface Filter<V>
@@ -142,8 +142,5 @@ public abstract class SimpleDictionary<V>
         trie.Add(key, value);
     }
 
-    public int size()
-    {
-        return trie.size();
-    }
+    public int Count=> trie.Count;
 }

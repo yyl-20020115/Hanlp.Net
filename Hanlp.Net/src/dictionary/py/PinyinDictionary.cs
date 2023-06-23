@@ -101,7 +101,7 @@ public class PinyinDictionary
         try
         {
             var _out = new FileStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            _out.writeInt(entrySet.size());
+            _out.writeInt(entrySet.Count);
             foreach (KeyValuePair<string, Pinyin[]> entry in entrySet)
             {
                 Pinyin[] value = entry.Value;
@@ -234,7 +234,7 @@ public class PinyinDictionary
             while (begin < c.Length)
             {
                 List<KeyValuePair<string, Pinyin[]>> entryList = trie.commonPrefixSearchWithValue(c, begin);
-                if (entryList.size() == 0)
+                if (entryList.Count == 0)
                 {
                     ++begin;
                 }

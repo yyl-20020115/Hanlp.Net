@@ -20,7 +20,7 @@ public class std
     public static void fill<E>(List<E> list, E value)
     {
         if (list == null) return;
-        ListIterator<E> listIterator = list.GetEnumerator();
+        IEnumerator<E> listIterator = list.GetEnumerator();
         while (listIterator.MoveNext()) listIterator.set(value);
     }
 
@@ -37,8 +37,8 @@ public class std
 
     public static E pop_back<E>(List<E> list)
     {
-        E back = list.get(list.size() - 1);
-        list.Remove(list.size() - 1);
+        E back = list[(list.Count - 1)];
+        list.Remove(list.Count - 1);
         return back;
     }
 }

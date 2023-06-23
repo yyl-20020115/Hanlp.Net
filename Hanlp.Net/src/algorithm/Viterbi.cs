@@ -112,7 +112,7 @@ public class Viterbi
             transformMatrixDictionary.extend(Nature.values().Length);
         int Length = vertexList.Count - 1;
         double[][] cost = new double[2][];  // 滚动数组
-        var iterator = vertexList.iterator();
+        var iterator = vertexList.GetEnumerator();
         Vertex start = iterator.next();
         Nature pre = start.attribute.nature[0];
         // 第一个是确定的
@@ -181,18 +181,18 @@ public class Viterbi
     public static  List<E> computeEnum<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
     {
         int Length = roleTagList.Count - 1;
-        List<E> tagList = new (roleTagList.size());
+        List<E> tagList = new (roleTagList.Count);
         double[][] cost = new double[2][];  // 滚动数组
-        var iterator = roleTagList.iterator();
+        var iterator = roleTagList.GetEnumerator();
         EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.entrySet().iterator().next().Key;
+        E pre = start.labelMap.entrySet().GetEnumerator().next().Key;
         // 第一个是确定的
         tagList.Add(pre);
         // 第二个也可以简单地算出来
         HashSet<E> preTagSet;
         {
             EnumItem<E> item = iterator.next();
-            cost[0] = new double[item.labelMap.size()];
+            cost[0] = new double[item.labelMap.Count];
             int j = 0;
             foreach (E cur in item.labelMap)
             {
@@ -250,9 +250,9 @@ public class Viterbi
     {
         int Length = roleTagList.Count - 1;
         List<E> tagList = new List<E>();
-        IEnumerator<EnumItem<E>> iterator = roleTagList.iterator();
+        IEnumerator<EnumItem<E>> iterator = roleTagList.GetEnumerator();
         EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.entrySet().iterator().next().Key;
+        E pre = start.labelMap.entrySet().GetEnumerator().next().Key;
         E perfect_tag = pre;
         // 第一个是确定的
         tagList.Add(pre);

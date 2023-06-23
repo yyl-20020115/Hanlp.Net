@@ -22,16 +22,16 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
  */
 public abstract class FeatureMap : IStringIdMap, ICacheAble
 {
-    public abstract int size();
+    public abstract int Count { get; }
 
-    public int[] allLabels()
+    public virtual int[] allLabels()
     {
         return tagSet.allTags();
     }
 
-    public int bosTag()
+    public virtual int bosTag()
     {
-        return tagSet.size();
+        return tagSet.Count;
     }
 
     public TagSet tagSet;
@@ -64,7 +64,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     }
 
     //@Override
-    public void save(Stream _out) 
+    public virtual void save(Stream _out) 
     {
         tagSet.save(_out);
         _out.writeInt(size());
@@ -75,7 +75,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     }
 
     //@Override
-    public bool load(ByteArray byteArray)
+    public virtual bool load(ByteArray byteArray)
     {
         loadTagSet(byteArray);
         int size = byteArray.Next();
@@ -86,7 +86,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
         return true;
     }
 
-    protected void loadTagSet(ByteArray byteArray)
+    protected virtual void loadTagSet(ByteArray byteArray)
     {
         TaskType type = TaskType.values()[byteArray.Next()];
         switch (type)
@@ -107,7 +107,7 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
         tagSet.load(byteArray);
     }
 
-    public int idOf(string s)
+    public virtual int idOf(string s)
     {
         throw new NotImplementedException();
     }

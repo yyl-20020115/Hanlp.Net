@@ -184,7 +184,7 @@ public class CRFModel : ICacheAble
      */
     public void tag(Table table)
     {
-        int size = table.size();
+        int size = table.Count;
         if (size == 0) return;
         int tagSize = id2tag.Length;
         double[][] net = new double[size][tagSize];
@@ -287,7 +287,7 @@ public class CRFModel : ICacheAble
      * @param tag
      * @return
      */
-    protected static double computeScore(LinkedList<double[]> scoreList, int tag)
+    protected static double computeScore(List<double[]> scoreList, int tag)
     {
         double score = 0;
         foreach (double[] w in scoreList)

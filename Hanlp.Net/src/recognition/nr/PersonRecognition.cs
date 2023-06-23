@@ -32,7 +32,7 @@ public class PersonRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
+            IEnumerator<Vertex> iterator = pWordSegResult.GetEnumerator();
             foreach (EnumItem<NR> nrEnumItem in roleTagList)
             {
                 sbLog.Append('[');
@@ -47,7 +47,7 @@ public class PersonRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
+            IEnumerator<Vertex> iterator = pWordSegResult.GetEnumerator();
             sbLog.Append('[');
             foreach (NR nr in nrList)
             {
@@ -73,7 +73,7 @@ public class PersonRecognition
     public static List<EnumItem<NR>> roleObserve(List<Vertex> wordSegResult)
     {
         List<EnumItem<NR>> tagList = new ();
-        IEnumerator<Vertex> iterator = wordSegResult.iterator();
+        IEnumerator<Vertex> iterator = wordSegResult.GetEnumerator();
         iterator.next();
         tagList.Add(new EnumItem<NR>(NR.A, NR.K)); //  始##始 A K
         while (iterator.MoveNext())

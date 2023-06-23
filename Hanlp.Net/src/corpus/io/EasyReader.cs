@@ -57,8 +57,8 @@ public class EasyReader
      */
     public void read(LineHandler handler, int size)
     {
-        File rootFile = new File(root);
-        File[] files;
+        string rootFile = new string(root);
+        string[] files;
         if (rootFile.isDirectory())
         {
             files = rootFile.listFiles(new ());
@@ -66,31 +66,31 @@ public class EasyReader
             //FileFilter()
             //{
             //    //@Override
-            //    public bool accept(File pathname)
+            //    public bool accept(string pathname)
             //    {
-            //        return pathname.isFile() && !pathname.getName().EndsWith(".bin");
+            //        return pathname.isFile() && !pathname.Name.EndsWith(".bin");
             //    }
             //}
             if (files == null)
             {
                 if (rootFile.isFile())
-                    files = new File[]{rootFile};
+                    files = new string[]{rootFile};
                 else return;
             }
         }
         else
         {
-            files = new File[]{rootFile};
+            files = new string[]{rootFile};
         }
 
         int n = 0;
         int totalAddress = 0;
         long start = DateTime.Now.Microsecond;
-        foreach (File file in files)
+        foreach (string file in files)
         {
             if (size-- == 0) break;
             if (file.isDirectory()) continue;
-            if (verbose) Console.WriteLine("正在处理%s, %d / %d\n", file.getName(), ++n, files.Length);
+            if (verbose) Console.WriteLine("正在处理%s, %d / %d\n", file.Name, ++n, files.Length);
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(file);
             while (lineIterator.MoveNext())
             {

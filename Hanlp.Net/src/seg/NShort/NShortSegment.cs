@@ -13,6 +13,7 @@ using com.hankcs.hanlp.recognition.nr;
 using com.hankcs.hanlp.recognition.ns;
 using com.hankcs.hanlp.recognition.nt;
 using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.seg.NShort.Path;
 
 namespace com.hankcs.hanlp.seg.NShort;
 
@@ -35,7 +36,7 @@ public class NShortSegment : WordBasedSegment
         // 粗分
         List<List<Vertex>> coarseResult = biSegment(sentence, 2, wordNetOptimum, wordNetAll);
         bool NERexists = false;
-        foreach (List<Vertex> vertexList in coarseResult)
+        foreach (var vertexList in coarseResult)
         {
             if (HanLP.Config.DEBUG)
             {
@@ -45,7 +46,7 @@ public class NShortSegment : WordBasedSegment
             if (config.ner)
             {
                 wordNetOptimum.AddRange(vertexList);
-                int preSize = wordNetOptimum.size();
+                int preSize = wordNetOptimum.Count;
                 if (config.nameRecognize)
                 {
                     PersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
@@ -69,7 +70,7 @@ public class NShortSegment : WordBasedSegment
                     wordNetOptimum.AddRange(vertexList);
                     OrganizationRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
                 }
-                if (!NERexists && preSize != wordNetOptimum.size())
+                if (!NERexists && preSize != wordNetOptimum.Count)
                 {
                     NERexists = true;
                 }
@@ -126,10 +127,10 @@ public class NShortSegment : WordBasedSegment
      */
     public List<List<Vertex>> biSegment(char[] sSentence, int nKind, WordNet wordNetOptimum, WordNet wordNetAll)
     {
-        List<List<Vertex>> coarseResult = new LinkedList<List<Vertex>>();
+        List<List<Vertex>> coarseResult = new ();
         ////////////////生成词网////////////////////
         generateWordNet(wordNetAll);
-//        logger.trace("词网大小：" + wordNetAll.size());
+//        logger.trace("词网大小：" + wordNetAll.Count);
 //        logger.trace("打印词网：\n" + wordNetAll);
         ///////////////生成词图////////////////////
         Graph graph = generateBiGraph(wordNetAll);
@@ -141,7 +142,7 @@ public class NShortSegment : WordBasedSegment
         ///////////////N-最短路径////////////////////
         NShortPath nShortPath = new NShortPath(graph, nKind);
         List<int[]> spResult = nShortPath.getNPaths(nKind * 2);
-        if (spResult.size() == 0)
+        if (spResult.Count == 0)
         {
             throw new RuntimeException(nKind + "-最短路径求解失败，请检查上面的词网是否存在负圈或悬孤节点");
         }

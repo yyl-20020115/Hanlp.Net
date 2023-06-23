@@ -32,7 +32,7 @@ public class PlaceRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
+            IEnumerator<Vertex> iterator = pWordSegResult.GetEnumerator();
             foreach (EnumItem<NS> NSEnumItem in roleTagList)
             {
                 sbLog.Append('[');
@@ -47,7 +47,7 @@ public class PlaceRecognition
         if (HanLP.Config.DEBUG)
         {
             StringBuilder sbLog = new StringBuilder();
-            IEnumerator<Vertex> iterator = pWordSegResult.iterator();
+            IEnumerator<Vertex> iterator = pWordSegResult.GetEnumerator();
             sbLog.Append('[');
             foreach (NS NS in NSList)
             {
@@ -67,8 +67,8 @@ public class PlaceRecognition
 
     public static List<EnumItem<NS>> roleTag(List<Vertex> vertexList, WordNet wordNetAll)
     {
-        List<EnumItem<NS>> tagList = new LinkedList<EnumItem<NS>>();
-        ListIterator<Vertex> listIterator = vertexList.GetEnumerator();
+        List<EnumItem<NS>> tagList = new List<EnumItem<NS>>();
+        var listIterator = vertexList.GetEnumerator();
 //        int line = 0;
         while (listIterator.MoveNext())
         {

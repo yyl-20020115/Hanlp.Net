@@ -9,7 +9,6 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-using static com.hankcs.hanlp.collection.trie.bintrie.BaseNode<V>;
 
 namespace com.hankcs.hanlp.collection.trie.bintrie;
 
@@ -96,7 +95,7 @@ public class Node<V> : BaseNode<V>
     public override BaseNode<V> getChild(char c)
     {
         if (child == null) return null;
-        int index = ArrayTool.binarySearch(child, c);
+        int index = Array.BinarySearch(child, c);
         if (index < 0) return null;
 
         return child[index];

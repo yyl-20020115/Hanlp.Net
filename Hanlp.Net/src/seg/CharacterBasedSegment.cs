@@ -8,6 +8,7 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.dictionary;
 using com.hankcs.hanlp.seg.common;
 
@@ -58,7 +59,7 @@ public abstract class CharacterBasedSegment : Segment
      * 分词、词性标注联合模型则直接重载segSentence
      */
     //@Override
-    protected List<Term> segSentence(char[] sentence)
+    protected override List<Term> segSentence(char[] sentence)
     {
         if (sentence.Length == 0) return new();
         List<Term> termList = roughSegSentence(sentence);
@@ -71,7 +72,7 @@ public abstract class CharacterBasedSegment : Segment
             int i = 0;
             foreach (Term term in termList)
             {
-                if (term.nature != null) term.nature = vertexList.get(i + 1).guessNature();
+                if (term.nature != null) term.nature = vertexList[i+1].guessNature();
                 ++i;
             }
         }

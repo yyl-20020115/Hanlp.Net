@@ -45,7 +45,7 @@ public class ClusterAnalyzer<K>
         int id = vocabulary.get(word);
         if (id == -1)
         {
-            id = vocabulary.size();
+            id = vocabulary.Count;
             vocabulary.Add(word, id);
         }
         return id;
@@ -211,10 +211,10 @@ public class ClusterAnalyzer<K>
 
         while (!que.isEmpty())
         {
-            if (nclusters > 0 && que.size() >= nclusters)
+            if (nclusters > 0 && que.Count >= nclusters)
                 break;
             cluster = que.peek();
-            if (cluster.sectioned_clusters().size() < 1)
+            if (cluster.sectioned_clusters().Count < 1)
                 break;
             if (limit_eval > 0 && cluster.sectioned_gain() < limit_eval)
                 break;
@@ -266,7 +266,7 @@ public class ClusterAnalyzer<K>
             List<int[]> items = new (documents_.Count);
             for (int i = 0; i < clusters.Count; i++)
             {
-                for (int j = 0; j < clusters[(i)].documents().size(); j++)
+                for (int j = 0; j < clusters[(i)].documents().Count; j++)
                 {
                     items.Add(new int[]{i, j});
                 }
@@ -361,13 +361,13 @@ public class ClusterAnalyzer<K>
     public static double evaluate(string folderPath, string algorithm)
     {
         if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
-        File root = new File(folderPath);
+        string root = (folderPath);
         if (!root.exists()) throw new ArgumentException(string.Format("目录 %s 不存在", root));
         if (!root.isDirectory())
             throw new ArgumentException(string.Format("目录 %s 不是一个目录", root));
 
         ClusterAnalyzer<string> analyzer = new ClusterAnalyzer<string>();
-        File[] folders = root.listFiles();
+        string[] folders = root.listFiles();
         if (folders == null) return 1.0;
         logger.start("根目录:%s\n加载中...\n", folderPath);
         int docSize = 0;
@@ -377,9 +377,9 @@ public class ClusterAnalyzer<K>
         foreach (File folder in folders)
         {
             if (folder.isFile()) continue;
-            File[] files = folder.listFiles();
+            string[] files = folder.listFiles();
             if (files == null) continue;
-            string category = folder.getName();
+            string category = folder.Name;
             cat[offset] = category;
             logger._out("[%s]...", category);
             int b = 0;
@@ -388,7 +388,7 @@ public class ClusterAnalyzer<K>
             int logEvery = (int) Math.Ceiling((e - b) / 10000f);
             for (int i = b; i < e; i++)
             {
-                analyzer.addDocument(folder.getName() + " " + files[i].getName(), IOUtil.readTxt(files[i]));
+                analyzer.addDocument(folder.Name + " " + files[i].Name, IOUtil.readTxt(files[i]));
                 if (i % logEvery == 0)
                 {
                     logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));

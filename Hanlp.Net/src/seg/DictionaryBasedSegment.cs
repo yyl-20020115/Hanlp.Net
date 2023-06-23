@@ -8,6 +8,7 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.tag;
 using com.hankcs.hanlp.seg.NShort.Path;
 
 namespace com.hankcs.hanlp.seg;

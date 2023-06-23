@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.model.crf;
 
 
 /**
- * 特征函数，其实是tag.size个特征函数的集合
+ * 特征函数，其实是tag.Count个特征函数的集合
  * @author hankcs
  */
 public class FeatureFunction : ICacheAble

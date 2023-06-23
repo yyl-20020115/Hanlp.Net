@@ -29,13 +29,15 @@ public class CRFPOSTagger : CRFTagger , POSTagger
     private PerceptronPOSTagger perceptronPOSTagger;
 
     public CRFPOSTagger() 
+        : this(HanLP.Config.CRFPOSModelPath)
     {
-        this(HanLP.Config.CRFPOSModelPath);
+        ;
     }
 
     public CRFPOSTagger(string modelPath) 
+        : base(modelPath)
     {
-        base(modelPath);
+        ;
         if (modelPath != null)
         {
             perceptronPOSTagger = new PerceptronPOSTagger(this.model);
@@ -60,7 +62,7 @@ public class CRFPOSTagger : CRFTagger , POSTagger
             wordList.Add(word.value);
         }
         string[] words = wordList.ToArray();
-        IEnumerator<Word> iterator = simpleWordList.iterator();
+        IEnumerator<Word> iterator = simpleWordList.GetEnumerator();
         for (int i = 0; i < words.Length; i++)
         {
             string curWord = words[i];
@@ -73,7 +75,7 @@ public class CRFPOSTagger : CRFTagger , POSTagger
                 if (j != cells.Length - 1)
                     bw.Write('\t');
             }
-            bw.newLine();
+            bw.WriteLine();
         }
     }
 
@@ -86,11 +88,11 @@ public class CRFPOSTagger : CRFTagger , POSTagger
     {
         int Length = curWord.Length;
         cells[0] = curWord;
-        cells[1] = curWord.substring(0, 1);
-        cells[2] = Length > 1 ? curWord.substring(0, 2) : "_";
+        cells[1] = curWord[..1];
+        cells[2] = Length > 1 ? curWord[..2] : "_";
         // Length > 2 ? curWord.substring(0, 3) : "<>"
-        cells[3] = curWord.substring(Length - 1);
-        cells[4] = Length > 1 ? curWord.substring(Length - 2) : "_";
+        cells[3] = curWord[(Length - 1)..];
+        cells[4] = Length > 1 ? curWord[(Length - 2)..] : "_";
         // Length > 2 ? curWord.substring(Length - 3) : "<>"
     }
 
@@ -145,8 +147,8 @@ public class CRFPOSTagger : CRFTagger , POSTagger
             List<int> featureVec = new ();
             for (int i = 0; i < featureTemplateArray.Length; i++)
             {
-                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.GetEnumerator();
+                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.GetEnumerator();
                 delimiterIterator.next(); // ignore U0 之类的id
                 while (offsetIterator.MoveNext())
                 {

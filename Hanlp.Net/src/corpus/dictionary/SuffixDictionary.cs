@@ -9,6 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.collection.trie.bintrie;
 using System.Text;
 
@@ -88,7 +89,7 @@ public class SuffixDictionary
     public int getLongestSuffixLength(string word)
     {
         word = reverse(word);
-        LinkedList<KeyValuePair<string, int>> suffixList = trie.commonPrefixSearchWithValue(word);
+        List<KeyValuePair<string, int>> suffixList = trie.commonPrefixSearchWithValue(word);
         if (suffixList.Count == 0) return 0;
         return suffixList.getLast().Value;
     }

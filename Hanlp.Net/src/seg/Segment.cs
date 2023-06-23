@@ -200,7 +200,7 @@ public abstract class Segment
      */
     protected static List<Vertex> combineByCustomDictionary(List<Vertex> vertexList, DoubleArrayTrie<CoreDictionary.Attribute> dat)
     {
-        //assert vertexList.size() >= 2 : "vertexList至少包含 始##始 和 末##末";
+        //assert vertexList.Count >= 2 : "vertexList至少包含 始##始 和 末##末";
         Vertex[] wordNet = 
         vertexList.ToArray();
         // DAT合并
@@ -243,7 +243,7 @@ public abstract class Segment
                 {
                     int to = i + 1;
                     int end = to;
-                    CoreDictionary.Attribute value = state.Value;
+                    CoreDictionary.Attribute value = state.Value();
                     for (; to < Length; ++to)
                     {
                         if (wordNet[to] == null) continue;
@@ -251,7 +251,7 @@ public abstract class Segment
                         if (state == null) break;
                         if (state.Value != null)
                         {
-                            value = state.Value;
+                            value = state.Value();
                             end = to + 1;
                         }
                     }
@@ -351,10 +351,10 @@ public abstract class Segment
     protected static List<Term> convert(List<Vertex> vertexList, bool offsetEnabled)
     {
         //assert vertexList != null;
-        //assert vertexList.size() >= 2 : "这条路径不应当短于2" + vertexList.ToString();
+        //assert vertexList.Count >= 2 : "这条路径不应当短于2" + vertexList.ToString();
         int Length = vertexList.Count - 2;
         List<Term> resultList = new (Length);
-        IEnumerator<Vertex> iterator = vertexList.iterator();
+        IEnumerator<Vertex> iterator = vertexList.GetEnumerator();
         iterator.next();
         if (offsetEnabled)
         {
@@ -397,9 +397,9 @@ public abstract class Segment
      */
     protected void mergeNumberQuantifier(List<Vertex> termList, WordNet wordNetAll, Config config)
     {
-        if (termList.size() < 4) return;
+        if (termList.Count < 4) return;
         StringBuilder sbQuantifier = new StringBuilder();
-        ListIterator<Vertex> iterator = termList.GetEnumerator();
+        IEnumerator<Vertex> iterator = termList.GetEnumerator();
         iterator.next();
         int line = 1;
         while (iterator.MoveNext())
@@ -445,7 +445,7 @@ public abstract class Segment
                     sbQuantifier.Length=(0);
                 }
             }
-            sbQuantifier.setLength(0);
+            sbQuantifier.Length=0;
             line += pre.realWord.Length;
         }
 //        Console.WriteLine(wordNetAll);
@@ -460,14 +460,14 @@ public abstract class Segment
      */
     private static void removeFromWordNet(Vertex cur, WordNet wordNetAll, int line, int Length)
     {
-        LinkedList<Vertex>[] vertexes = wordNetAll.getVertexes();
+        List<Vertex>[] vertexes = wordNetAll.getVertexes();
         // 将其从wordNet中删除
         foreach (Vertex vertex in vertexes[line + Length])
         {
             if (vertex.from == cur)
                 vertex.from = null;
         }
-        ListIterator<Vertex> iterator = vertexes[line + Length - cur.realWord.Length].GetEnumerator();
+        IEnumerator<Vertex> iterator = vertexes[line + Length - cur.realWord.Length].GetEnumerator();
         while (iterator.MoveNext())
         {
             Vertex vertex = iterator.next();
@@ -495,7 +495,7 @@ public abstract class Segment
             string[] sentenceArray =
             sentenceList.ToArray();
             //noinspection unchecked
-            List<Term>[] termListArray = new List[sentenceArray.Length];
+            List<Term>[] termListArray = new List<Term>[sentenceArray.Length];
             int per = sentenceArray.Length / config.threadNumber;
             WorkThread[] threadArray = new WorkThread[config.threadNumber];
             for (int i = 0; i < config.threadNumber - 1; ++i)

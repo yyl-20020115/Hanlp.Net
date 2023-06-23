@@ -105,47 +105,47 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
      */
     public ICollection<TermFrequency> all()
     {
-        return termFrequencyMap.values();
+        return termFrequencyMap.Values;
     }
 
     //@Override
-    public int size()
+    public int Count
     {
-        return termFrequencyMap.size();
+        return termFrequencyMap.Count;
     }
 
     //@Override
     public bool isEmpty()
     {
-        return termFrequencyMap.isEmpty();
+        return termFrequencyMap.Count == 0;
     }
 
     //@Override
     public bool Contains(Object o)
     {
-        if (o is string)
-            return termFrequencyMap.ContainsKey(o);
-        else if (o is TermFrequency)
-            return termFrequencyMap.containsValue(o);
+        if (o is string s)
+            return termFrequencyMap.ContainsKey(s);
+        else if (o is TermFrequency t)
+            return termFrequencyMap.ContainsValue(t);
         return false;
     }
 
     //@Override
-    public IEnumerator<TermFrequency> iterator()
+    public IEnumerator<TermFrequency> GetEnumerator()
     {
-        return termFrequencyMap.values().iterator();
+        return termFrequencyMap.Values.GetEnumerator();
     }
 
     //@Override
     public Object[] ToArray()
     {
-        return termFrequencyMap.values().ToArray();
+        return termFrequencyMap.Values.ToArray();
     }
 
     //@Override
     public  T[] ToArray<T>(T[] a)
     {
-        return termFrequencyMap.values().ToArray(a);
+        return termFrequencyMap.Values.ToArray();
     }
 
     //@Override
@@ -202,7 +202,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     //@Override
     public bool retainAll(Collection c)
     {
-        return termFrequencyMap.values().retainAll(c);
+        return termFrequencyMap.Values.retainAll(c);
     }
 
     //@Override
@@ -224,7 +224,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
         Clear();
         Add(termList);
         Collection<TermFrequency> topN = top(size);
-        List<string> r = new (topN.size());
+        List<string> r = new (topN.Count);
         foreach (TermFrequency termFrequency in topN)
         {
             r.Add(termFrequency.getTerm());
@@ -248,6 +248,6 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     public override string ToString()
     {
         int max = 100;
-        return top(Math.Min(max, size())).ToString();
+        return top(Math.Min(max, Count)).ToString();
     }
 }

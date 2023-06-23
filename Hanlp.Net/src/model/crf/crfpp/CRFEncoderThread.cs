@@ -37,9 +37,9 @@ public class CRFEncoderThread : Callable<int>
         Array.Fill(expected, 0.0);
         for (int i = start_i; i < size; i = i + threadNum)
         {
-            obj += x.get(i).gradient(expected);
-            int errorNum = x.get(i).eval();
-            x.get(i).clearNodes();
+            obj += x[i].gradient(expected);
+            int errorNum = x[i].eval();
+            x[i].clearNodes();
             err += errorNum;
             if (errorNum != 0)
             {

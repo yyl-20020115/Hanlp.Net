@@ -51,7 +51,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
      */
     public int combine(TFDictionary dictionary, int limit, bool Add)
     {
-        int preSize = trie.size();
+        int preSize = trie.Count;
         foreach (KeyValuePair<string, TermFrequency> entry in dictionary.trie.entrySet())
         {
             TermFrequency termFrequency = trie.get(entry.Key);
@@ -67,7 +67,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
                 }
             }
         }
-        return trie.size() - preSize;
+        return trie.Count - preSize;
     }
 
     /**
@@ -79,7 +79,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
     {
         TFDictionary dictionaryMain = new TFDictionary();
         dictionaryMain.load(path[0]);
-        int preSize = dictionaryMain.trie.size();
+        int preSize = dictionaryMain.trie.Count;
         for (int i = 1; i < path.Length; ++i)
         {
             TFDictionary dictionary = new TFDictionary();
@@ -104,7 +104,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
             return -1;
         }
 
-        return dictionaryMain.trie.size() - preSize;
+        return dictionaryMain.trie.Count - preSize;
     }
 
     /**
@@ -147,7 +147,7 @@ public class TFDictionary : SimpleDictionary<TermFrequency> , ISaveAble
         }
         else
         {
-            var outList = new List<string>(size());
+            var outList = new List<string>(Count);
             foreach (KeyValuePair<string, TermFrequency> entry in trie.entrySet())
             {
                 outList.Add(entry.Key + delimeter + entry.Value.getFrequency());

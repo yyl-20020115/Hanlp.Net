@@ -48,7 +48,7 @@ public class CustomDictionary
         }
         else
         {
-            logger.info("自定义词典加载成功:" + dat.size() + "个词条，耗时" + (DateTime.Now.Microsecond - start) + "ms");
+            logger.info("自定义词典加载成功:" + dat.Count + "个词条，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         }
     }
 
@@ -70,8 +70,8 @@ public class CustomDictionary
             foreach (string p in path)
             {
                 Nature defaultNature = Nature.n;
-                File file = new File(p);
-                string fileName = file.getName();
+                string file = (p);
+                string fileName = file.Name;
                 int cut = fileName.LastIndexOf(' ');
                 if (cut > 0)
                 {
@@ -120,7 +120,7 @@ public class CustomDictionary
                 }
                 IOUtil.writeCustomNature(_out, customNatureCollector);
                 // 缓存正文
-                _out.writeInt(attributeList.size());
+                _out.writeInt(attributeList.Count);
                 foreach (CoreDictionary.Attribute attribute in attributeList)
                 {
                     attribute.save(_out);
@@ -371,12 +371,12 @@ public class CustomDictionary
     private static bool isDicNeedUpdate(string mainPath, string[] path)
     {
         if (HanLP.Config.IOAdapter != null &&
-            !HanLP.Config.IOAdapter.getClass().getName().Contains("com.hankcs.hanlp.corpus.io.FileIOAdapter"))
+            !HanLP.Config.IOAdapter.getClass().Name.Contains("com.hankcs.hanlp.corpus.io.FileIOAdapter"))
         {
             return false;
         }
         string binPath = mainPath + Predefine.BIN_EXT;
-        File binFile = new File(binPath);
+        string binFile = (binPath);
         if (!binFile.exists())
         {
             return true;
@@ -385,14 +385,14 @@ public class CustomDictionary
         //string path[] = HanLP.Config.CustomDictionaryPath;
         foreach (string p in path)
         {
-            File f = new File(p);
-            string fileName = f.getName();
+            string f = (p);
+            string fileName = f.Name;
             int cut = fileName.LastIndexOf(' ');
             if (cut > 0)
             {
                 p = f.getParent() + File.separator + fileName.substring(0, cut);
             }
-            f = new File(p);
+            f = (p);
             if (f.exists() && f.lastModified() > lastModified)
             {
                 IOUtil.deleteFile(binPath); // 删掉缓存
@@ -437,7 +437,7 @@ public class CustomDictionary
      * @param key
      * @return
      */
-    public static LinkedList<KeyValuePair<string, CoreDictionary.Attribute>> commonPrefixSearch(string key)
+    public static List<KeyValuePair<string, CoreDictionary.Attribute>> commonPrefixSearch(string key)
     {
         return trie.commonPrefixSearchWithValue(key);
     }
@@ -483,7 +483,7 @@ public class CustomDictionary
      * @param charArray 文本
      * @return 查询者
      */
-    public static BaseSearcher getSearcher(char[] charArray)
+    public static BaseSearcher<CoreDictionary.Attribute> getSearcher(char[] charArray)
     {
         return new Searcher(charArray);
     }
@@ -495,36 +495,36 @@ public class CustomDictionary
          */
         int begin;
 
-        private LinkedList<KeyValuePair<string, CoreDictionary.Attribute>> entryList;
+        private List<KeyValuePair<string, CoreDictionary.Attribute>> entryList;
 
         public Searcher(char[] c)
             : base(c)
         {
-            entryList = new LinkedList<KeyValuePair<string, CoreDictionary.Attribute>>();
+            entryList = new ();
         }
 
         protected Searcher(string text)
             : base(text.ToCharArray())
         {
-            entryList = new LinkedList<KeyValuePair<string, CoreDictionary.Attribute>>();
+            entryList = new List<KeyValuePair<string, CoreDictionary.Attribute>>();
         }
 
         //@Override
         public override KeyValuePair<string, CoreDictionary.Attribute> next()
         {
             // 保证首次调用找到一个词语
-            while (entryList.size() == 0 && begin < c.Length)
+            while (entryList.Count == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;
             }
             // 之后调用仅在缓存用完的时候调用一次
-            if (entryList.size() == 0 && begin < c.Length)
+            if (entryList.Count == 0 && begin < c.Length)
             {
                 entryList = trie.commonPrefixSearchWithValue(c, begin);
                 ++begin;
             }
-            if (entryList.size() == 0)
+            if (entryList.Count == 0)
             {
                 return null;
             }
@@ -573,7 +573,7 @@ public class CustomDictionary
     {
         if (trie != null)
         {
-            BaseSearcher searcher = CustomDictionary.getSearcher(text);
+            var searcher = CustomDictionary.getSearcher(text);
             int offset;
             KeyValuePair<string, CoreDictionary.Attribute> entry;
             while ((entry = searcher.next()) != null)
@@ -582,10 +582,12 @@ public class CustomDictionary
                 processor.hit(offset, offset + entry.Key.Length, entry.Value);
             }
         }
-        DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(text, 0);
-        while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
+            DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(text, 0);
+            while (searcher.next())
+            {
+                processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
+            }
         }
     }
 

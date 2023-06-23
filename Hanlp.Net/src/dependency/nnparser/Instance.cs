@@ -36,7 +36,7 @@ public class Instance
         postags = new ();
     }
 
-    int size()
+    int Count
     {
         return forms.Count;
     }

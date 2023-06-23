@@ -67,10 +67,10 @@ public class CRFModelTest : TestCase
 //                                  try
 //                                  {
 //                                      List<List<Word>> sentenceList = document.getSimpleSentenceList();
-//                                      if (sentenceList.size() == 0) return;
+//                                      if (sentenceList.Count == 0) return;
 //                                      for (List<Word> sentence : sentenceList)
 //                                      {
-//                                          if (sentence.size() == 0) continue;
+//                                          if (sentence.Count == 0) continue;
 //                                          for (IWord iWord : sentence)
 //                                          {
 //                                              String word = iWord.Value;
@@ -95,7 +95,7 @@ public class CRFModelTest : TestCase
 //                                                  bw.Write('\n');
 //                                                  for (int i = 1; i < word.Length - 1; ++i)
 //                                                  {
-//                                                      bw.Write(word.charAt(i));
+//                                                      bw.Write(word[i]);
 //                                                      bw.Write('\t');
 //                                                      bw.Write('M');
 //                                                      bw.Write('\n');
@@ -148,7 +148,7 @@ public class CRFModelTest : TestCase
         table.v = new String[text.Length][2];
         for (int i = 0; i < text.Length; i++)
         {
-            table.v[i][0] = String.valueOf(text.charAt(i));
+            table.v[i][0] = String.valueOf(text[i]);
         }
 
         model.tag(table);

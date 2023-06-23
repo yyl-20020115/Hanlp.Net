@@ -97,7 +97,7 @@ public class Document : BagOfWordsDocument
     //    //@Override
 //    public override string ToString()
 //    {
-//        StringBuilder sb = new StringBuilder(tfMap.size() * 5);
+//        StringBuilder sb = new StringBuilder(tfMap.Count * 5);
 //        sb.Append('《').Append(base.ToString()).Append('》').Append('\t');
 //        sb.Append(catalog.getCategory(category));
 //        sb.Append('\n');

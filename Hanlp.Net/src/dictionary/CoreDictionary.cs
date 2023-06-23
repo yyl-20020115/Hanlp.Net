@@ -40,7 +40,7 @@ public class CoreDictionary
         }
         else
         {
-            logger.info(path + "加载成功，" + trie.size() + "个词条，耗时" + (DateTime.Now.Microsecond - start) + "ms");
+            logger.info(path + "加载成功，" + trie.Count + "个词条，耗时" + (DateTime.Now.Microsecond - start) + "ms");
         }
     }
 
@@ -61,7 +61,7 @@ public class CoreDictionary
         TextReader br = null;
         try
         {
-            br = new TextReader(new InputStreamReader(IOUtil.newInputStream(path), "UTF-8"));
+            br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
             string line;
             int MAX_FREQUENCY = 0;
             long start = DateTime.Now.Microsecond;
@@ -79,15 +79,15 @@ public class CoreDictionary
                 map.Add(param[0], attribute);
                 MAX_FREQUENCY += attribute.totalFrequency;
             }
-            logger.info("核心词典读入词条" + map.size() + " 全部频次" + MAX_FREQUENCY + "，耗时" + (DateTime.Now.Microsecond - start) + "ms");
+            logger.info("核心词典读入词条" + map.Count + " 全部频次" + MAX_FREQUENCY + "，耗时" + (DateTime.Now.Microsecond - start) + "ms");
             br.Close();
             trie.build(map);
-            logger.info("核心词典加载成功:" + trie.size() + "个词条，下面将写入缓存……");
+            logger.info("核心词典加载成功:" + trie.Count + "个词条，下面将写入缓存……");
             try
             {
                 Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
                 ICollection<CoreDictionary.Attribute> attributeList = map.values();
-                _out.writeInt(attributeList.size());
+                _out.writeInt(attributeList.Count);
                 foreach (CoreDictionary.Attribute attribute in attributeList)
                 {
                     _out.writeInt(attribute.totalFrequency);

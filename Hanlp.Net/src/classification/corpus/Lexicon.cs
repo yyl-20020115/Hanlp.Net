@@ -44,10 +44,10 @@ public class Lexicon
         int id = wordId.get(charArray);
         if (id == null)
         {
-            id = wordId.size();
+            id = wordId.Count;
             wordId.Add(charArray, id);
             idWord.Add(word);
-            //assert idWord.size() == wordId.size();
+            //assert idWord.Count == wordId.Count;
         }
 
         return id;
@@ -61,24 +61,24 @@ public class Lexicon
     public string getWord(int id)
     {
         //assert 0 <= id;
-        //assert id <= idWord.size();
-        return idWord.get(id);
+        //assert id <= idWord.Count;
+        return idWord[id];
     }
 
     public int size()
     {
-        return idWord.size();
+        return idWord.Count;
     }
 
     public string[] getWordIdArray()
     {
-        string[] wordIdArray = new string[idWord.size()];
-        if (idWord.isEmpty()) return wordIdArray;
+        string[] wordIdArray = new string[idWord.Count];
+        if (idWord.Count==0) return wordIdArray;
         int p = -1;
-        IEnumerator<string> iterator = idWord.iterator();
+        IEnumerator<string> iterator = idWord.GetEnumerator();
         while (iterator.MoveNext())
         {
-            wordIdArray[++p] = iterator.next();
+            wordIdArray[++p] = iterator.Current;
         }
 
         return wordIdArray;

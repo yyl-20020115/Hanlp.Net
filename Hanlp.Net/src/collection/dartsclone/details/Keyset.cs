@@ -25,7 +25,7 @@ public class Keyset
      * keyset的容量
      * @return
      */
-    int numKeys()
+    public int numKeys()
     {
         return _keys.Length;
     }

@@ -67,7 +67,7 @@ public class CRFSegmenter : CRFTagger , Segmenter
                 bw.Write('\n');
                 for (int i = 1; i < word.Length - 1; ++i)
                 {
-                    bw.Write(word.charAt(i));
+                    bw.Write(word[i]);
                     bw.Write('\t');
                     bw.Write('M');
                     bw.Write('\n');
@@ -113,8 +113,8 @@ public class CRFSegmenter : CRFTagger , Segmenter
             List<int> featureVec = new ();
             for (int i = 0; i < featureTemplateArray.Length; i++)
             {
-                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.GetEnumerator();
+                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.GetEnumerator();
                 delimiterIterator.next(); // ignore U0 之类的id
                 while (offsetIterator.MoveNext())
                 {

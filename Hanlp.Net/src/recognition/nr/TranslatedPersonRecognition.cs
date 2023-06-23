@@ -30,7 +30,7 @@ public class TranslatedPersonRecognition
     {
         StringBuilder sbName = new StringBuilder();
         int appendTimes = 0;
-        ListIterator<Vertex> listIterator = segResult.GetEnumerator();
+        IEnumerator<Vertex> listIterator = segResult.GetEnumerator();
         listIterator.next();
         int line = 1;
         int activeLine = 1;
@@ -55,7 +55,7 @@ public class TranslatedPersonRecognition
                         }
                         wordNetOptimum.insert(activeLine, new Vertex(Predefine.TAG_PEOPLE, sbName.ToString(), new CoreDictionary.Attribute(Nature.nrf), WORD_ID), wordNetAll);
                     }
-                    sbName.setLength(0);
+                    sbName.Length=0;
                     appendTimes = 0;
                 }
             }

@@ -31,7 +31,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
     }
 
     //@Override
-    protected void addToDictionary(List<List<IWord>> sentenceList)
+    protected override void addToDictionary(List<List<IWord>> sentenceList)
     {
 //        logger.warning("开始制作词典");
         // 将非A的词语保存下来
@@ -61,7 +61,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
     }
 
     //@Override
-    protected void roleTag(List<List<IWord>> sentenceList)
+    protected override void roleTag(List<List<IWord>> sentenceList)
     {
         int i = 0;
         foreach (List<IWord> wordList in sentenceList)
@@ -69,15 +69,15 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             Precompiler.compileWithoutNS(wordList);
             if (verbose)
             {
-                Console.Write(++i + " / " + sentenceList.size() + " ");
+                Console.Write(++i + " / " + sentenceList.Count + " ");
                 Console.WriteLine("原始语料 " + wordList);
             }
-            LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
+            List<IWord> wordLinkedList = (List<IWord>) wordList;
             wordLinkedList.addFirst(new Word(Predefine.TAG_BIGIN, "S"));
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "Z"));
             if (verbose) Console.WriteLine("添加首尾 " + wordList);
             // 标注上文
-            IEnumerator<IWord> iterator = wordLinkedList.iterator();
+            IEnumerator<IWord> iterator = wordLinkedList.GetEnumerator();
             IWord pre = iterator.next();
             while (iterator.MoveNext())
             {
@@ -103,7 +103,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             }
             if (verbose) Console.WriteLine("标注下文 " + wordList);
             // 标注中间
-            iterator = wordLinkedList.iterator();
+            iterator = wordLinkedList.GetEnumerator();
             IWord first = iterator.next();
             IWord second = iterator.next();
             while (iterator.MoveNext())
@@ -121,12 +121,12 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             CorpusUtil.spilt(wordList);
             if (verbose) Console.WriteLine("拆分地名 " + wordList);
             // 处理整个
-            ListIterator<IWord> listIterator = wordLinkedList.GetEnumerator();
+            var listIterator = wordLinkedList.GetEnumerator();
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
                 string label = word.getLabel();
-                if (label.Equals(label.toUpperCase())) continue;
+                if (label.Equals(label.ToUpper())) continue;
                 if (label.StartsWith("ns"))
                 {
                     string value = word.Value;

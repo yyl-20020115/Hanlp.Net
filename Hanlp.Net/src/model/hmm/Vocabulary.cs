@@ -44,7 +44,7 @@ public class Vocabulary : IStringIdMap
         {
             if (mutable)
             {
-                id = trie.size();
+                id = trie.Count;
                 trie.Add(s, id);
             }
             else

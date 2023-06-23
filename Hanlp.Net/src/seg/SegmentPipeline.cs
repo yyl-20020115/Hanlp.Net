@@ -95,15 +95,12 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public int size()
-    {
-        return pipeList.size();
-    }
+    public int Count=> pipeList.Count;
 
     //@Override
     public bool isEmpty()
     {
-        return pipeList.isEmpty();
+        return pipeList.Count==0;
     }
 
     //@Override
@@ -113,9 +110,9 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public IEnumerator<Pipe<List<IWord>, List<IWord>>> iterator()
+    public IEnumerator<Pipe<List<IWord>, List<IWord>>> GetEnumerator()
     {
-        return pipeList.iterator();
+        return pipeList.GetEnumerator();
     }
 
     //@Override
@@ -205,7 +202,7 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     //@Override
     public void Add(int index, Pipe<List<IWord>, List<IWord>> element)
     {
-        pipeList.Add(index, element);
+        pipeList.Insert(index, element);
     }
 
     //@Override
@@ -227,7 +224,7 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public ListIterator<Pipe<List<IWord>, List<IWord>>> GetEnumerator()
+    public IEnumerator<Pipe<List<IWord>, List<IWord>>> GetEnumerator()
     {
         return pipeList.GetEnumerator();
     }

@@ -237,7 +237,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
      * @param key 键
      * @return 键值对列表
      */
-    public LinkedList<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
+    public List<KeyValuePair<string, V>> commonPrefixSearchWithValue(string key)
     {
         char[] chars = key.ToCharArray();
         return commonPrefixSearchWithValue(chars, 0);
@@ -314,7 +314,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         return Add;
     }
 
-    public int size()
+    public int Count
     {
         return this._size;
     }
@@ -335,7 +335,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         try
         {
-            Stream _out = new Stream(IOUtil.newOutputStream(path));
+            Stream _out = (IOUtil.newOutputStream(path));
             foreach (BaseNode<V> node in child)
             {
                 if (node == null)
@@ -438,7 +438,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         byte[] bytes = IOUtil.readBytes(path);
         if (bytes == null) return false;
-        _ValueArray valueArray = new _EmptyValueArray();
+        _ValueArray<V> valueArray = new _EmptyValueArray<V>();
         ByteArray byteArray = new ByteArray(bytes);
         for (int i = 0; i < child.Length; ++i)
         {
@@ -454,7 +454,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         return true;
     }
 
-    public bool load(ByteArray byteArray, _ValueArray valueArray)
+    public bool load(ByteArray byteArray, _ValueArray<V> valueArray)
     {
         for (int i = 0; i < child.Length; ++i)
         {
@@ -475,9 +475,9 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         return load(byteArray, newValueArray().setValue(value));
     }
 
-    public _ValueArray newValueArray()
+    public _ValueArray<V> newValueArray()
     {
-        return new _ValueArray();
+        return new _ValueArray<V>();
     }
 
     //@Override

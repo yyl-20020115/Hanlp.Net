@@ -27,9 +27,9 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
     //@Override
     public CoNLLSentence parse(List<Term> termList)
     {
-        if (termList == null || termList.size() == 0) return null;
-        termList.Add(0, new Term("##核心##", Nature.begin));
-        Node[] nodeArray = new Node[termList.Count];
+        if (termList == null || termList.Count == 0) return null;
+        termList.Insert(0, new Term("##核心##", Nature.begin));
+        Node<Term>[] nodeArray = new Node<Term>[termList.Count];
         IEnumerator<Term> iterator = termList.iterator();
         for (int i = 0; i < nodeArray.Length; ++i)
         {
@@ -109,5 +109,5 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
         return new CoNLLSentence(wordArray);
     }
 
-    protected abstract Edge makeEdge(Node[] nodeArray, int from, int to);
+    protected abstract Edge makeEdge(Node<ValueTask>[] nodeArray, int from, int to);
 }

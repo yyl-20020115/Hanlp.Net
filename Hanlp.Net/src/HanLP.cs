@@ -25,6 +25,8 @@ using com.hankcs.hanlp.seg.Other;
 using com.hankcs.hanlp.seg.Viterbi;
 using com.hankcs.hanlp.summary;
 using com.hankcs.hanlp.tokenizer;
+using com.hankcs.hanlp.utility;
+using System.Reflection;
 using System.Text;
 
 namespace com.hankcs.hanlp;
@@ -208,7 +210,7 @@ public class HanLP
                 }
                 try
                 {
-                    p.load(new InputStreamReader(Predefine.HANLP_PROPERTIES_PATH == null ?
+                    p.load(new StreamReader(Predefine.HANLP_PROPERTIES_PATH == null ?
                                                      loader.getResourceAsStream("hanlp.properties") :
                                                      new FileStream(Predefine.HANLP_PROPERTIES_PATH)
                         , "UTF-8"));
@@ -285,7 +287,7 @@ public class HanLP
                     try
                     {
                         Type clazz = Type.forName(ioAdapterClassName);
-                        Constructor ctor = clazz.getConstructor();
+                        ConstructorInfo ctor = clazz.getConstructor();
                         Object instance = ctor.newInstance();
                         if (instance != null) IOAdapter = (IIOAdapter) instance;
                     }
@@ -545,7 +547,7 @@ public class HanLP
     public static string convertToPinyinString(string text, string separator, bool remainNone)
     {
         List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, true);
-        int Length = pinyinList.size();
+        int Length = pinyinList.Count;
         StringBuilder sb = new StringBuilder(Length * (5 + separator.Length));
         int i = 1;
         foreach (Pinyin pinyin in pinyinList)
@@ -587,7 +589,7 @@ public class HanLP
     public static string convertToPinyinFirstCharString(string text, string separator, bool remainNone)
     {
         List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, remainNone);
-        int Length = pinyinList.size();
+        int Length = pinyinList.Count;
         StringBuilder sb = new StringBuilder(Length * (1 + separator.Length));
         int i = 1;
         foreach (Pinyin pinyin in pinyinList)

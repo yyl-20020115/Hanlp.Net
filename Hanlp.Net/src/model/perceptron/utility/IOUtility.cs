@@ -40,8 +40,8 @@ public class IOUtility : IOUtil
     {
         ConsoleLogger logger = new ConsoleLogger();
         int size = 0;
-        File root = new File(path);
-        File[] allFiles;
+        string root = new string(path);
+        string[] allFiles;
         if (root.isDirectory())
         {
             allFiles = root.listFiles();
@@ -49,21 +49,21 @@ public class IOUtility : IOUtil
              * new FileFilter()
                         {
                             //@Override
-                            public bool accept(File pathname)
+                            public bool accept(string pathname)
                             {
-                                return pathname.isFile() && pathname.getName().EndsWith(".txt");
+                                return pathname.isFile() && pathname.Name.EndsWith(".txt");
                             }
                         }
              */
         }
         else
         {
-            allFiles = new File[]{root};
+            allFiles = new string[]{root};
         }
 
-        foreach (File file in allFiles)
+        foreach (string file in allFiles)
         {
-            TextReader br = new TextReader(new InputStreamReader(new FileStream(file), "UTF-8"));
+            TextReader br = new StreamReader(file, "UTF-8");
             string line;
             while ((line = br.ReadLine()) != null)
             {
@@ -97,7 +97,7 @@ public class IOUtility : IOUtil
             if (i % 100 == 0 || i == instances.Length - 1)
             {
                 Console.Error.WriteLine("%c进度: %.2f%%", 13, (i + 1) / (float) instances.Length * 100);
-                System.err.flush();
+                Console.Error.Flush();
             }
         }
         return new double[]{stat[1] / (double) stat[0] * 100};

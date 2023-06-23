@@ -27,15 +27,16 @@ public class MutableFeatureMap : FeatureMap
     // trie4j 3411
 
     public MutableFeatureMap(TagSet tagSet)
+        : base(tagSet, true)
     {
-        base(tagSet, true);
+        ;
         featureIdMap = new Dictionary<string, int>();
         addTransitionFeatures(tagSet);
     }
 
     private void addTransitionFeatures(TagSet tagSet)
     {
-        for (int i = 0; i < tagSet.size(); i++)
+        for (int i = 0; i < tagSet.Count; i++)
         {
             idOf("BL=" + tagSet.stringOf(i));
         }
@@ -43,50 +44,45 @@ public class MutableFeatureMap : FeatureMap
     }
 
     public MutableFeatureMap(TagSet tagSet, Dictionary<string, int> featureIdMap)
+        : base(tagSet)
     {
-        base(tagSet);
+       ;
         this.featureIdMap = featureIdMap;
         addTransitionFeatures(tagSet);
     }
 
     //@Override
-    public HashSet<KeyValuePair<string, int>> entrySet()
+    public override HashSet<KeyValuePair<string, int>> entrySet()
     {
-        return featureIdMap.entrySet();
+        return featureIdMap.ToHashSet();
     }
 
     //@Override
-    public int idOf(string s)
+    public override int idOf(string s)
     {
-        int id = featureIdMap.get(s);
-        if (id == null)
+        if (!featureIdMap.TryGetValue(s,out var id))
         {
-            id = featureIdMap.size();
-            featureIdMap.Add(s, id);
+            featureIdMap.Add(s, id = featureIdMap.Count);
         }
-
         return id;
     }
 
-    public int size()
-    {
-        return featureIdMap.size();
-    }
+    public int Count=> featureIdMap.Count;
 
     public HashSet<string> featureSet()
     {
-        return featureIdMap.Keys;
+        return featureIdMap.Keys.ToHashSet();
     }
 
     //@Override
-    public int[] allLabels()
+    public virtual int[] allLabels()
     {
         return tagSet.allTags();
     }
 
     //@Override
-    public int bosTag()
+    public virtual int bosTag()
     {
-        return tagSet.size();
+        return tagSet.Count;
     }
 }

@@ -33,15 +33,15 @@ public class FileDataSet : AbstractDataSet
 
     public FileDataSet(AbstractModel model) 
     {
-        this(model, File.createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
+        this(model, createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
-    public FileDataSet(File cache) 
+    public FileDataSet(string cache) 
     {
         initCache(cache);
     }
 
-    private void initCache(File cache) 
+    private void initCache(string cache) 
     {
         this.cache = cache;
         _out = new Stream(new FileStream(cache));
@@ -49,12 +49,12 @@ public class FileDataSet : AbstractDataSet
 
     private void initCache() 
     {
-        initCache(File.createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
+        initCache(createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     public FileDataSet() 
     {
-        this(File.createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
+        this(createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
 
     //@Override
@@ -76,7 +76,7 @@ public class FileDataSet : AbstractDataSet
     {
         _out.writeInt(document.category);
         HashSet<KeyValuePair<int, int[]>> entrySet = document.tfMap.entrySet();
-        _out.writeInt(entrySet.size());
+        _out.writeInt(entrySet.Count);
         foreach (KeyValuePair<int, int[]> entry in entrySet)
         {
             _out.writeInt(entry.Key);
@@ -86,10 +86,7 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public int size()
-    {
-        return size;
-    }
+    public int Count => this.size;
 
     //@Override
     public void Clear()
@@ -103,7 +100,7 @@ public class FileDataSet : AbstractDataSet
         try
         {
             Clear();
-            IEnumerator<Document> iterator = iterator();
+            IEnumerator<Document> iterator = GetEnumerator();
             initCache();
             while (iterator.MoveNext())
             {
@@ -116,7 +113,7 @@ public class FileDataSet : AbstractDataSet
                     tfMap.Add(idMap[feature], entry.Value);
                 }
                 // 检查是否是空白文档
-                if (tfMap.size() == 0) continue;
+                if (tfMap.Count == 0) continue;
                 document.tfMap = tfMap;
                 Add(document);
             }
@@ -130,12 +127,12 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public IEnumerator<Document> iterator()
+    public IEnumerator<Document> GetEnumerator()
     {
         try
         {
             _out.Close();
-            Stream _in  = new Stream(new FileStream(cache));
+            Stream _in  = (new FileStream(cache));
             return new ST();
         }
         catch (IOException e)

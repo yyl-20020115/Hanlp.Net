@@ -331,7 +331,7 @@ public class NeuralNetworkParser : ICacheAble
     private static Dictionary<int, int> read_map(IOUtil.LineIterator lineIterator)
     {
         int size = int.valueOf(lineIterator.next());
-        Dictionary<int, int> map = new HashMap<int, int>();
+        Dictionary<int, int> map = new ();
         for (int i = 0; i < size; i++)
         {
             string[] args = lineIterator.next().Split("\t");
@@ -344,7 +344,7 @@ public class NeuralNetworkParser : ICacheAble
     private static Dictionary<int, int> read_map(ByteArray byteArray)
     {
         int size = byteArray.Next();
-        Dictionary<int, int> map = new HashMap<int, int>();
+        Dictionary<int, int> map = new ();
         for (int i = 0; i < size; i++)
         {
             map.Add(byteArray.Next(), byteArray.Next());
@@ -445,18 +445,18 @@ public class NeuralNetworkParser : ICacheAble
         int L = data.forms.Count;
         for (int i = 0; i < L; ++i)
         {
-            int form = forms_alphabet.idOf(data.forms.get(i));
+            int form = forms_alphabet.idOf(data.forms[i]);
             if (form == null)
             {
                 form = forms_alphabet.idOf(SpecialOption.UNKNOWN);
             }
-            int postag = postags_alphabet.idOf(data.postags.get(i));
+            int postag = postags_alphabet.idOf(data.postags[i]);
             if (postag == null) postag = postags_alphabet.idOf(SpecialOption.UNKNOWN);
-            int deprel = (with_dependencies ? deprels_alphabet.idOf(data.deprels.get(i)) : -1);
+            int deprel = (with_dependencies ? deprels_alphabet.idOf(data.deprels[i]) : -1);
 
             dependency.forms.Add(form);
             dependency.postags.Add(postag);
-            dependency.heads.Add(with_dependencies ? data.heads.get(i) : -1);
+            dependency.heads.Add(with_dependencies ? data.heads[i] : -1);
             dependency.deprels.Add(with_dependencies ? deprel : -1);
         }
     }
@@ -562,9 +562,9 @@ public class NeuralNetworkParser : ICacheAble
         ctx.S0 = (s.stack.Count > 0 ? s.stack.get(s.stack.Count - 1) : -1);
         ctx.S1 = (s.stack.Count > 1 ? s.stack.get(s.stack.Count - 2) : -1);
         ctx.S2 = (s.stack.Count > 2 ? s.stack.get(s.stack.Count - 3) : -1);
-        ctx.N0 = (s.buffer < s.@ref.size() ? s.buffer : -1);
-        ctx.N1 = (s.buffer + 1 < s.@ref.size() ? s.buffer + 1 : -1);
-        ctx.N2 = (s.buffer + 2 < s.@ref.size() ? s.buffer + 2 : -1);
+        ctx.N0 = (s.buffer < s.@ref.Count ? s.buffer : -1);
+        ctx.N1 = (s.buffer + 1 < s.@ref.Count ? s.buffer + 1 : -1);
+        ctx.N2 = (s.buffer + 2 < s.@ref.Count ? s.buffer + 2 : -1);
 
         ctx.S0L = (ctx.S0 >= 0 ? s.left_most_child.get(ctx.S0) : -1);
         ctx.S0R = (ctx.S0 >= 0 ? s.right_most_child.get(ctx.S0) : -1);

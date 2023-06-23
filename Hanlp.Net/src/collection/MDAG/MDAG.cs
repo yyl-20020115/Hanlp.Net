@@ -77,7 +77,7 @@ public class MDAG : ICacheAble
     public void save(Stream _out)
     {
         simplify();
-        _out.writeInt(charTreeSet.size());
+        _out.writeInt(charTreeSet.Count);
         foreach (var character in charTreeSet)
         {
             _out.writeChar(character);
@@ -343,14 +343,14 @@ public class MDAG : ICacheAble
         while (!transitionPathNodeStack.isEmpty())
         {
             MDAGNode currentNode = transitionPathNodeStack.peek();
-            if (currentNode.getOutgoingTransitions().size() <= 1 && !currentNode.isAcceptNode())
+            if (currentNode.getOutgoingTransitions().Count <= 1 && !currentNode.isAcceptNode())
                 transitionPathNodeStack.pop();
             else
                 break;
         }
         /////
 
-        return (transitionPathNodeStack.capacity() - transitionPathNodeStack.size());
+        return (transitionPathNodeStack.capacity() - transitionPathNodeStack.Count);
     }
 
 
@@ -468,7 +468,7 @@ public class MDAG : ICacheAble
         //labeled with the current processing char, or there are no more characters to process. 
         for (int i = 0; i < numberOfChars; i++, onePastPrefixEndIndex++)
         {
-            char currentChar = str.charAt(i);
+            char currentChar = str[i];
             if (currentNode.hasOutgoingTransition(currentChar))
                 currentNode = currentNode.transition(currentChar);
             else
@@ -580,7 +580,7 @@ public class MDAG : ICacheAble
             // a _transition path corresponding to it from originNode
             for (int i = 0; i < charCount; i++, transitionCount++)
             {
-                char currentChar = str.charAt(i);
+                char currentChar = str[i];
                 bool isLastChar = (i == charCount - 1);
                 currentNode = currentNode.addOutgoingTransition(currentChar, isLastChar);
 
@@ -607,7 +607,7 @@ public class MDAG : ICacheAble
 
         for (int i = 0; i < charCount; i++)
         {
-            currentNode = currentNode.transition(str.charAt(i));
+            currentNode = currentNode.transition(str[i]);
             if (equivalenceClassMDAGNodeHashMap.get(currentNode) == currentNode)
                 equivalenceClassMDAGNodeHashMap.Remove(currentNode);
 

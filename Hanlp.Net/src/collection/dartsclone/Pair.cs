@@ -24,7 +24,7 @@ public class KeyValuePair<T, U>
         return first;
     }
 
-    public T Key
+    public T Key()
     {
         return first;
     }
@@ -34,7 +34,7 @@ public class KeyValuePair<T, U>
         return second;
     }
 
-    public U Value
+    public U Value()
     {
         return second;
     }

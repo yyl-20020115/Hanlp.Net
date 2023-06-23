@@ -202,7 +202,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     /**
      * 持久化
      *
-     * @param _out 一个ObjectOutputStream
+     * @param _out 一个Stream
      * @ 可能的IO异常
      */
     public void save(Stream _out) 
@@ -217,7 +217,7 @@ public class AhoCorasickDoubleArrayTrie<V>
     /**
      * 载入
      *
-     * @param in    一个ObjectInputStream
+     * @param in    一个Stream
      * @param value 值（持久化的时候并没有持久化值，现在需要额外提供）
      * @
      * @throws ClassNotFoundException
@@ -855,7 +855,7 @@ public class AhoCorasickDoubleArrayTrie<V>
             var emit = targetState.emit();
             if (emit == null || emit.Count == 0) return;
             int[] output = new int[emit.Count];
-            IEnumerator<int> it = emit.iterator();
+            IEnumerator<int> it = emit.GetEnumerator();
             for (int i = 0; i < output.Length; ++i)
             {
                 output[i] = it.next();
@@ -968,7 +968,7 @@ public class AhoCorasickDoubleArrayTrie<V>
                 nextCheckPos = pos; // 从位置 next_check_pos 开始到 pos 间，如果已占用的空间在95%以上，下次插入节点时，直接从 pos 位置处开始查找
             used[begin] = true;
 
-            _size = (_size > begin + siblings.get(siblings.Count - 1).Key + 1) ? size : begin + siblings.get(siblings.size() - 1).Key + 1;
+            _size = (_size > begin + siblings.get(siblings.Count - 1).Key + 1) ? size : begin + siblings.get(siblings.Count - 1).Key + 1;
 
             foreach (KeyValuePair<int, State> sibling in siblings)
             {
@@ -977,7 +977,7 @@ public class AhoCorasickDoubleArrayTrie<V>
 
             foreach (KeyValuePair<int, State> sibling in siblings)
             {
-                List<KeyValuePair<int, State>> new_siblings = new (sibling.Value.getSuccess().entrySet().size() + 1);
+                List<KeyValuePair<int, State>> new_siblings = new (sibling.Value.getSuccess().entrySet().Count + 1);
 
                 if (fetch(sibling.Value, new_siblings) == 0)  // 一个词的终止且不为其他词的前缀，其实就是叶子节点
                 {

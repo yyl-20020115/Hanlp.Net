@@ -102,8 +102,8 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
             List<int> featureVec = new ();
             for (int i = 0; i < featureTemplateArray.Length; i++)
             {
-                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.iterator();
-                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.iterator();
+                IEnumerator<int[]> offsetIterator = featureTemplateArray[i].offsetList.GetEnumerator();
+                IEnumerator<string> delimiterIterator = featureTemplateArray[i].delimiterList.GetEnumerator();
                 delimiterIterator.next(); // ignore U0 之类的id
                 while (offsetIterator.MoveNext())
                 {

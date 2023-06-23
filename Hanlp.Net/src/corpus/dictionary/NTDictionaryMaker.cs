@@ -71,7 +71,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             Precompiler.compileWithoutNT(wordList);
             if (verbose)
             {
-                Console.Write(++i + " / " + sentenceList.size() + " ");
+                Console.Write(++i + " / " + sentenceList.Count + " ");
                 Console.WriteLine("原始语料 " + wordList);
             }
             LinkedList<IWord> wordLinkedList = (LinkedList<IWord>) wordList;
@@ -79,7 +79,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             wordLinkedList.addLast(new Word(Predefine.TAG_END, "Z"));
             if (verbose) Console.WriteLine("添加首尾 " + wordList);
             // 标注上文
-            IEnumerator<IWord> iterator = wordLinkedList.iterator();
+            IEnumerator<IWord> iterator = wordLinkedList.GetEnumerator();
             IWord pre = iterator.next();
             while (iterator.MoveNext())
             {
@@ -106,7 +106,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             if (verbose) Console.WriteLine("标注下文 " + wordList);
             // 标注中间
             {
-                iterator = wordLinkedList.iterator();
+                iterator = wordLinkedList.GetEnumerator();
                 IWord first = iterator.next();
                 IWord second = iterator.next();
                 while (iterator.MoveNext())
@@ -122,7 +122,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 if (verbose) Console.WriteLine("标注中间 " + wordList);
             }
             // 处理整个
-            ListIterator<IWord> listIterator = wordLinkedList.GetEnumerator();
+            IEnumerator<IWord> listIterator = wordLinkedList.GetEnumerator();
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
@@ -231,7 +231,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                         sbPattern.deleteCharAt(sbPattern.Length - 1);
                         sbPattern.Append(last.label);
                         tfDictionary.Add(sbPattern.ToString());
-                        sbPattern.setLength(0);
+                        sbPattern.Length=0;
                     }
                 }
                 else

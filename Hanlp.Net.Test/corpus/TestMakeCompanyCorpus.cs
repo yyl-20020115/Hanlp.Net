@@ -36,8 +36,8 @@ public class TestMakeCompanyCorpus : TestCase
 //                continue;
 //            }
 //            List<Term> termList = segment.seg(line);
-//            if (termList.size() == 0) continue;
-//            Term last = termList.get(termList.size() - 1);
+//            if (termList.Count == 0) continue;
+//            Term last = termList.get(termList.Count - 1);
 //            last.nature = Nature.nis;
 //            br.Write("[");
 //            for (Term term : termList)

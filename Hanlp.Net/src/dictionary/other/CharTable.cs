@@ -75,7 +75,7 @@ public class CharTable
     {
         try
         {
-            ObjectInputStream _in = new ObjectInputStream(IOUtil.newInputStream(path));
+            Stream _in = new Stream(IOUtil.newInputStream(path));
             CONVERT = (char[]) _in.readObject();
             _in.Close();
         }

@@ -116,10 +116,7 @@ public class IntArrayList : Serializable, ICacheAble
         this.data = newData;
     }
 
-    public int size()
-    {
-        return this._size;
-    }
+    public int Count => this._size;
 
     public int getLinearExpandFactor()
     {
@@ -135,7 +132,7 @@ public class IntArrayList : Serializable, ICacheAble
     {
         return this.data[index];
     }
-
+    public int this[int index]=>this.get(index);
     public void removeLast()
     {
         --_size;
@@ -159,7 +156,7 @@ public class IntArrayList : Serializable, ICacheAble
     //@Override
     public void save(Stream _out) 
     {
-        _out.writeInt(size);
+        _out.writeInt(_size);
         for (int i = 0; i < _size; i++)
         {
             _out.writeInt(data[i]);

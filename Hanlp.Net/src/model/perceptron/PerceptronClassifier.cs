@@ -52,7 +52,7 @@ public abstract class PerceptronClassifier
      */
     private static LinearModel trainNaivePerceptron(Instance[] instanceList, FeatureMap featureMap, int maxIteration)
     {
-        LinearModel model = new LinearModel(featureMap, new float[featureMap.size()]);
+        LinearModel model = new LinearModel(featureMap, new float[featureMap.Count]);
         for (int it = 0; it < maxIteration; ++it)
         {
             Utility.shuffleArray(instanceList);
@@ -74,9 +74,9 @@ public abstract class PerceptronClassifier
      */
     private static LinearModel trainAveragedPerceptron(Instance[] instanceList, FeatureMap featureMap, int maxIteration)
     {
-        float[] parameter = new float[featureMap.size()];
-        double[] sum = new double[featureMap.size()];
-        int[] time = new int[featureMap.size()];
+        float[] parameter = new float[featureMap.Count];
+        double[] sum = new double[featureMap.Count];
+        int[] time = new int[featureMap.Count];
 
         AveragedPerceptron model = new AveragedPerceptron(featureMap, parameter);
         int t = 0;

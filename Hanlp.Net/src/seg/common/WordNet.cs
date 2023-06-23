@@ -114,7 +114,7 @@ public class WordNet
      */
     public void push(int line, Vertex vertex)
     {
-        IEnumerator<Vertex> iterator = vertexes[line].iterator();
+        IEnumerator<Vertex> iterator = vertexes[line].GetEnumerator();
         while (iterator.MoveNext())
         {
             if (iterator.next().realWord.Length == vertex.realWord.Length)
@@ -149,11 +149,11 @@ public class WordNet
         for (int l = line - 1; l > start; --l)
         {
             var all = wordNetAll.get(l);
-            if (all.size() <= vertexes[l].size())
+            if (all.Count <= vertexes[l].Count)
                 continue;
             foreach (Vertex pre in all)
             {
-                if (pre.Length + l == line)
+                if (pre.Length() + l == line)
                 {
                     vertexes[l].Add(pre);
                     ++_size;
@@ -163,9 +163,9 @@ public class WordNet
         // 保证这个词语后面直连
         int l = line + vertex.realWord.Length;
         LinkedList<Vertex> targetLine = wordNetAll.get(l);
-        if (vertexes[l].size() == 0 && targetLine.size() != 0) // 有时候vertexes里面的词语已经经过用户词典合并，造成数量更少
+        if (vertexes[l].Count == 0 && targetLine.Count != 0) // 有时候vertexes里面的词语已经经过用户词典合并，造成数量更少
         {
-            size += targetLine.size();
+            _size += targetLine.Count;
             vertexes[l] = targetLine;
         }
     }
@@ -285,10 +285,7 @@ public class WordNet
         }
     }
 
-    public int size()
-    {
-        return _size;
-    }
+    public int Count=> _size;
 
     /**
      * 获取顶点数组
@@ -297,7 +294,7 @@ public class WordNet
      */
     private Vertex[] getVertexesLineFirst()
     {
-        Vertex[] vertexes = new Vertex[size];
+        Vertex[] vertexes = new Vertex[_size];
         int i = 0;
         foreach (List<Vertex> vertexList in this.vertexes)
         {

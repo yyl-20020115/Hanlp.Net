@@ -42,7 +42,7 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
     {
         List<string> phraseList = new();
         Occurrence occurrence = new Occurrence();
-        Filter[] filterChain = new[];
+        Filter[] filterChain = new Filter[];
         foreach (List<Term> sentence in NotionalTokenizer.seg2sentence(text, filterChain))
         {
             if (HanLP.Config.DEBUG)
@@ -79,7 +79,7 @@ public class MutualInformationEntropyPhraseExtractor : IPhraseExtractor
 
         foreach (PairFrequency phrase in occurrence.getPhraseByScore())
         {
-            if (phraseList.size() == size) break;
+            if (phraseList.Count == size) break;
             phraseList.Add(phrase.first + phrase.second);
         }
         return phraseList;

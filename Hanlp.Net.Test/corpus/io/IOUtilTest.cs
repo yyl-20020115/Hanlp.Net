@@ -28,7 +28,7 @@ public class IOUtilTest : TestCase
     //        int realAvailable = base.available();
     //        if (realAvailable > 0)
     //        {
-    //            return 2048; // 模拟某些网络InputStream
+    //            return 2048; // 模拟某些网络Stream
     //        }
     //        return realAvailable;
     //    }

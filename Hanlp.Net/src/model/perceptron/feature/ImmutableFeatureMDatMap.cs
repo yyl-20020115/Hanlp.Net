@@ -52,22 +52,22 @@ public class ImmutableFeatureMDatMap : FeatureMap
         : base(tagSet)
     {
         dat = new MutableDoubleArrayTrieInteger();
-        for (KeyValuePair<string, int> entry in featureIdSet)
+        foreach (KeyValuePair<string, int> entry in featureIdSet)
         {
             dat.Add(entry.Key, entry.Value);
         }
     }
 
     //@Override
-    public int idOf(string s)
+    public override int idOf(string s)
     {
         return dat.get(s);
     }
 
     //@Override
-    public int size()
+    public override int size()
     {
-        return dat.size();
+        return dat.Count;
     }
 
     //@Override
@@ -77,14 +77,14 @@ public class ImmutableFeatureMDatMap : FeatureMap
     }
 
     //@Override
-    public void save(Stream _out) 
+    public override void save(Stream _out) 
     {
         tagSet.save(_out);
         dat.save(_out);
     }
 
     //@Override
-    public bool load(ByteArray byteArray)
+    public override bool load(ByteArray byteArray)
     {
         loadTagSet(byteArray);
         return dat.load(byteArray);

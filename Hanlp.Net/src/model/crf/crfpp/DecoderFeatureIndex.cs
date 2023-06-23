@@ -22,11 +22,11 @@ public class DecoderFeatureIndex : FeatureIndex
         return dat.get(key);
     }
 
-    public bool open(InputStream stream)
+    public bool open(Stream stream)
     {
         try
         {
-            ObjectInputStream ois = new ObjectInputStream(stream);
+            Stream ois = new Stream(stream);
             int version = (int) ois.readObject();
             costFactor_ = (Double) ois.readObject();
             maxid_ = (int) ois.readObject();
@@ -150,23 +150,23 @@ public class DecoderFeatureIndex : FeatureIndex
                 string[] content = line.Trim().Split(" ");
                 dat.Add(content[1], int.valueOf(content[0]));
             }
-            List<Double> alpha = new ArrayList<Double>();
+            List<Double> alpha = new ();
             while ((line = br.ReadLine()) != null && line.Length > 0)
             {
                 alpha.Add(Double.valueOf(line));
             }
             Console.WriteLine("Done reading weights");
-            alpha_ = new double[alpha.size()];
-            for (int i = 0; i < alpha.size(); i++)
+            alpha_ = new double[alpha.Count];
+            for (int i = 0; i < alpha.Count; i++)
             {
-                alpha_[i] = alpha.get(i);
+                alpha_[i] = alpha[i];
             }
             br.Close();
 
             if (cacheBinModel)
             {
                 Console.WriteLine("Writing binary model to " + binFileName);
-                ObjectOutputStream oos = new ObjectOutputStream(IOUtil.newOutputStream(binFileName));
+                Stream oos = new Stream(IOUtil.newOutputStream(binFileName));
                 oos.writeObject(version);
                 oos.writeObject(costFactor_);
                 oos.writeObject(maxid_);

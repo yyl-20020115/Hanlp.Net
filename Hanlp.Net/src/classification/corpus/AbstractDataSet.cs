@@ -108,15 +108,15 @@ public abstract class AbstractDataSet : IDataSet
             throw new ArgumentException(string.Format("目录 %s 不是一个目录", root));
         if (percentage > 1.0 || percentage < -1.0) throw new ArgumentException("percentage 的绝对值必须介于[0, 1]之间");
 
-        File[] folders = root.listFiles();
+        string[] folders = root.listFiles();
         if (folders == null) return null;
         logger.start("模式:%s\n文本编码:%s\n根目录:%s\n加载中...\n", testingDataSet ? "测试集" : "训练集", charsetName, folderPath);
-        foreach (File folder in folders)
+        foreach (string folder in folders)
         {
             if (folder.isFile()) continue;
-            File[] files = folder.listFiles();
+            string[] files = folder.listFiles();
             if (files == null) continue;
-            string category = folder.getName();
+            string category = folder.Name;
             logger._out("[%s]...", category);
             int b, e;
             if (percentage > 0)
@@ -133,7 +133,7 @@ public abstract class AbstractDataSet : IDataSet
             int logEvery = (int) Math.Ceiling((e - b) / 10000f);
             for (int i = b; i < e; i++)
             {
-                Add(folder.getName(), TextProcessUtility.readTxt(files[i], charsetName));
+                Add(folder.Name, TextProcessUtility.readTxt(files[i], charsetName));
                 if (i % logEvery == 0)
                 {
                     logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
@@ -141,7 +141,7 @@ public abstract class AbstractDataSet : IDataSet
             }
             logger._out(" %d 篇文档\n", e - b);
         }
-        logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", getCatalog().size(), size());
+        logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", getCatalog().Count, Count);
         return this;
     }
 

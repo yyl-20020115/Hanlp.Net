@@ -135,15 +135,15 @@ public class BaseChineseDictionary
 
     public static bool saveDat(string path, AhoCorasickDoubleArrayTrie<string> trie, HashSet<KeyValuePair<string, string>> entrySet)
     {
-        if (trie.size() != entrySet.size())
+        if (trie.Count != entrySet.Count)
         {
             logger.warning("键值对不匹配");
             return false;
         }
         try
         {
-            Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
-            _out.writeInt(entrySet.size());
+            Stream _out = (IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            _out.writeInt(entrySet.Count);
             foreach (KeyValuePair<string, string> entry in entrySet)
             {
                 char[] charArray = entry.Value.ToCharArray();
@@ -262,7 +262,7 @@ public class BaseChineseDictionary
             while (begin < c.Length)
             {
                 LinkedList<KeyValuePair<string, string>> entryList = trie.commonPrefixSearchWithValue(c, begin);
-                if (entryList.size() == 0)
+                if (entryList.Count == 0)
                 {
                     ++begin;
                 }

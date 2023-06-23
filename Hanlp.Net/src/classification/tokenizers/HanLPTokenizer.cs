@@ -25,7 +25,7 @@ public class HanLPTokenizer : ITokenizer
     {
         char[] charArray = text.ToCharArray();
         List<Term> termList = NotionalTokenizer.segment(charArray);
-        ListIterator<Term> listIterator = termList.GetEnumerator();
+        IEnumerator<Term> listIterator = termList.GetEnumerator();
         while (listIterator.MoveNext())
         {
             Term term = listIterator.next();

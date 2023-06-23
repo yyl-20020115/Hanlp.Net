@@ -79,7 +79,7 @@ public class PlaceDictionary
      */
     public static void parsePattern(List<NS> nsList, List<Vertex> vertexList,  WordNet wordNetOptimum,  WordNet wordNetAll)
     {
-//        ListIterator<Vertex> listIterator = vertexList.GetEnumerator();
+//        IEnumerator<Vertex> listIterator = vertexList.GetEnumerator();
         var sbPattern = new StringBuilder(nsList.Count);
         foreach (NS ns in nsList)
         {

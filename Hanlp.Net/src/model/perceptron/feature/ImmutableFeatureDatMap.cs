@@ -9,6 +9,9 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron.feature;
 
 
@@ -21,26 +24,24 @@ public class ImmutableFeatureDatMap : FeatureMap
     DoubleArrayTrie<int> dat;
 
     public ImmutableFeatureDatMap(Dictionary<string, int> featureIdMap, TagSet tagSet)
+        : base(tagSet)
     {
-        base(tagSet);
+       ;
         dat = new DoubleArrayTrie<int>();
         dat.build(featureIdMap);
     }
 
     //@Override
-    public int idOf(string s)
+    public override int idOf(string s)
     {
         return dat.exactMatchSearch(s);
     }
 
     //@Override
-    public int size()
-    {
-        return dat.size();
-    }
+    public override int Count=> dat.Count;
 
     //@Override
-    public HashSet<KeyValuePair<string, int>> entrySet()
+    public override HashSet<KeyValuePair<string, int>> entrySet()
     {
         throw new InvalidOperationException("这份DAT实现不支持遍历");
     }

@@ -67,7 +67,7 @@ public class MDAGMapTest : TestCase
 //        mdagMap.simplify();
 //        for (String key : validKeySet)
 //        {
-//            assertEquals(binTrie.commonPrefixSearchWithValue(key).size(), mdagMap.commonPrefixSearchWithValue(key).size());
+//            assertEquals(binTrie.commonPrefixSearchWithValue(key).Count, mdagMap.commonPrefixSearchWithValue(key).Count);
 //        }
 //
 //        long start;

@@ -108,7 +108,7 @@ public class SegmentTest : TestCase
         String text = "中华人民共和国在哪里";
 //        for (int i = 0; i < text.Length; ++i)
 //        {
-//            Console.print(text.charAt(i) + "" + i + " ");
+//            Console.print(text[i] + "" + i + " ");
 //        }
 //        Console.WriteLine();
         List<Term> termList = IndexTokenizer.segment(text);
@@ -300,9 +300,9 @@ public class SegmentTest : TestCase
     //        costTime = (DateTime.Now.Microsecond - start) / (double) 1000;
     //        Console.printf("四线程分词速度：%.2f字每秒\n", text.Length / costTime);
     //
-    //        assertEquals(termList1.size(), termList2.size());
-    //        IEnumerator<Term> iterator1 = termList1.iterator();
-    //        IEnumerator<Term> iterator2 = termList2.iterator();
+    //        assertEquals(termList1.Count, termList2.Count);
+    //        IEnumerator<Term> iterator1 = termList1.GetEnumerator();
+    //        IEnumerator<Term> iterator2 = termList2.GetEnumerator();
     //        while (iterator1.MoveNext())
     //        {
     //            Term term1 = iterator1.next();

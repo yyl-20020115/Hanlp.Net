@@ -46,10 +46,7 @@ public class MemoryDataSet : AbstractDataSet
         return document;
     }
     //@Override
-    public int size()
-    {
-        return documentList.Count;
-    }
+    public int Count=> documentList.Count;
 
     //@Override
     public void Clear()
@@ -60,7 +57,7 @@ public class MemoryDataSet : AbstractDataSet
     //@Override
     public IDataSet shrink(int[] idMap)
     {
-        var iterator = iterator();
+        var iterator = GetEnumerator();
         while (iterator.MoveNext())
         {
             Document document = iterator.next();
@@ -79,7 +76,7 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public IEnumerator<Document> iterator()
+    public IEnumerator<Document> GetEnumerator()
     {
         return documentList.GetEnumerator();
     }

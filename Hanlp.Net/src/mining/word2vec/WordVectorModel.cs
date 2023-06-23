@@ -76,7 +76,7 @@ public class WordVectorModel : AbstractVectorModel<string>
         }
 
         List<KeyValuePair<string, float>> resultList = nearest(a.minus(b).Add(c), size + 3);
-        ListIterator<KeyValuePair<string, float>> listIterator = resultList.GetEnumerator();
+        IEnumerator<KeyValuePair<string, float>> listIterator = resultList.GetEnumerator();
         while (listIterator.MoveNext())
         {
             string key = listIterator.next().Key;
@@ -86,7 +86,7 @@ public class WordVectorModel : AbstractVectorModel<string>
             }
         }
 
-        if (resultList.size() > size)
+        if (resultList.Count > size)
         {
             resultList = resultList.subList(0, size);
         }

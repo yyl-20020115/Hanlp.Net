@@ -96,13 +96,10 @@ public class MaxHeap<E> : IEnumerable<E>
     }
 
     //@Override
-    public IEnumerator<E> iterator()
+    public IEnumerator<E> GetEnumerator()
     {
         return queue.GetEnumerator()();
     }
 
-    public int size()
-    {
-        return queue.Count;
-    }
+    public int Count => queue.Count;
 }

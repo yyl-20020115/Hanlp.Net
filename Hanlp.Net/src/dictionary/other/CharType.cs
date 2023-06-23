@@ -124,7 +124,7 @@ public class CharType
             array[2] = preType;
             typeList.Add(array);
         }
-//        Console.Write("int[" + typeList.size() + "][3] array = \n");
+//        Console.Write("int[" + typeList.Count + "][3] array = \n");
         Stream _out = new Stream(new FileStream(HanLP.Config.CharTypePath));
         foreach (int[] array in typeList)
         {

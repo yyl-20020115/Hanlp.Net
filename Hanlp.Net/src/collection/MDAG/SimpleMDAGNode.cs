@@ -211,7 +211,7 @@ public class SimpleMDAGNode : ICacheAble
         //Iteratively _transition through the MDAG using the chars in str
         for(int i = 0; i < numberOfChars; i++)
         {
-            currentNode = currentNode.transition(mdagDataArray, str.charAt(i));
+            currentNode = currentNode.transition(mdagDataArray, str[i]);
             if(currentNode == null) break;
         }
         /////
@@ -304,7 +304,7 @@ public class SimpleMDAGNode : ICacheAble
     public bool load(ByteArray byteArray)
     {
         letter = byteArray.nextChar();
-        isAcceptNode = byteArray.nextByte() == 1;
+        _isAcceptNode = byteArray.nextByte() == 1;
         transitionSetBeginIndex = byteArray.Next();
         transitionSetSize = byteArray.Next();
         return true;

@@ -29,7 +29,7 @@ public class Interval : Intervalable
 
     public int getEnd() => this.end;
 
-    public int size() => end - start + 1;
+    public int Count => end - start + 1;
 
     /**
      * 是否与另一个区间交叉（有一部分重叠）

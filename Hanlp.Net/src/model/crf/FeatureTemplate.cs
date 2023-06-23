@@ -11,6 +11,7 @@
  */
 using com.hankcs.hanlp.corpus.io;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace com.hankcs.hanlp.model.crf;
 
@@ -25,13 +26,13 @@ public class FeatureTemplate : ICacheAble
     /**
      * 用来解析模板的正则表达式
      */
-    static readonly Pattern pattern = Pattern.compile("%x\\[(-?\\d*),(\\d*)]");
+    static readonly Regex pattern = new("%x\\[(-?\\d*),(\\d*)]");
     string template;
     /**
      * 每个部分%x[-2,0]的位移，其中int[0]储存第一个数（-2），int[1]储存第二个数（0）
      */
-    List<int[]> offsetList;
-    List<string> delimiterList;
+    public List<int[]> offsetList;
+    public List<string> delimiterList;
 
     public FeatureTemplate()
     {
@@ -49,7 +50,8 @@ public class FeatureTemplate : ICacheAble
         {
             featureTemplate.delimiterList.Add(template.substring(start, matcher.start()));
             start = matcher.end();
-            featureTemplate.offsetList.Add(new int[]{int.parseInt(matcher.group(1)), int.parseInt(matcher.group(2))});
+            featureTemplate.offsetList.Add(new int[]{int.parseInt(matcher.group(1)), 
+                int.parseInt(matcher.group(2))});
         }
         return featureTemplate;
     }

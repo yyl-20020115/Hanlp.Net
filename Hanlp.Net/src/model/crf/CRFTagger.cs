@@ -10,6 +10,7 @@
  */
 using com.hankcs.hanlp.corpus.document.sentence;
 using com.hankcs.hanlp.corpus.io;
+using com.hankcs.hanlp.model.crf.crfpp;
 using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.utility;
 using System.Text;
@@ -86,13 +87,13 @@ public abstract class CRFTagger
                       Encoder.Algorithm algorithm) 
     {
         string templFile = null;
-        File tmpTemplate = File.createTempFile("crfpp-template-" + new Date().getTime(), ".txt");
+        string tmpTemplate = string.createTempFile("crfpp-template-" + new DateTime().getTime(), ".txt");
         tmpTemplate.deleteOnExit();
         templFile = tmpTemplate;
         string template = getDefaultFeatureTemplate();
         IOUtil.saveTxt(templFile, template);
 
-        File tmpTrain = File.createTempFile("crfpp-train-" + new Date().getTime(), ".txt");
+        string tmpTrain = string.createTempFile("crfpp-train-" + new DateTime().getTime(), ".txt");
         tmpTrain.deleteOnExit();
         convertCorpus(trainFile, tmpTrain);
         trainFile = tmpTrain;

@@ -220,7 +220,7 @@ public class Occurrence
         //@Override
         public int Compare(PairFrequency o1, PairFrequency o2)
         {
-            return -double.compare(o1.le, o2.le);
+            return -Math.Sign(o1.le-o2.le);// -double.Compare(o1.le, o2.le);
         }
     }
 
@@ -302,7 +302,7 @@ public class Occurrence
 
     public double computeMutualInformation(PairFrequency pair)
     {
-        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, pair.Value / totalPair) / Math.Max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
+        return Math.Log(Math.Max(Predefine.MIN_PROBABILITY, pair.Value() / totalPair) / Math.Max(Predefine.MIN_PROBABILITY, (CoreDictionary.getTermFrequency(pair.first) / (double) CoreDictionary.totalFrequency * CoreDictionary.getTermFrequency(pair.second) / (double) CoreDictionary.totalFrequency)));
     }
 
     /**
@@ -369,7 +369,7 @@ public class Occurrence
         {
             PairFrequency value = entry.Value;
             value.score = value.mi / total_mi + value.le / total_le+ value.re / total_re;   // 归一化
-            value.score *= entrySetPair.size();
+            value.score *= entrySetPair.Count;
         }
     }
 

@@ -38,7 +38,7 @@ public class ByteArrayOtherStream : ByteArrayStream
     {
         try
         {
-            InputStream @is = IOAdapter == null ? new FileStream(path) : IOAdapter.open(path);
+            Stream @is = IOAdapter == null ? new FileStream(path) : IOAdapter.open(path);
             return createByteArrayOtherStream(@is);
         }
         catch (Exception e)
@@ -48,16 +48,16 @@ public class ByteArrayOtherStream : ByteArrayStream
         }
     }
 
-    public static ByteArrayOtherStream createByteArrayOtherStream(InputStream @is) 
+    public static ByteArrayOtherStream createByteArrayOtherStream(Stream @is) 
     {
         if (@is == null) return null;
         int size = @is.available();
-        size = Math.Max(102400, size); // 有些网络InputStream实现会返回0，直到read的时候才知道到底是不是0
+        size = Math.Max(102400, size); // 有些网络Stream实现会返回0，直到read的时候才知道到底是不是0
         int bufferSize = Math.Min(1048576, size); // 最终缓冲区在100KB到1MB之间
         byte[] bytes = new byte[bufferSize];
         if (IOUtil.readBytesFromOtherInputStream(@is, bytes) == 0)
         {
-            throw new IOException("读取了空文件，或参数InputStream已经到了文件尾部");
+            throw new IOException("读取了空文件，或参数Stream已经到了文件尾部");
         }
         return new ByteArrayOtherStream(bytes, bufferSize, @is);
     }

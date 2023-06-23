@@ -37,7 +37,7 @@ public class MDAGSetTest : TestCase
 
     public void TestSize()
     {
-        AssertEquals(validKeySet.Count, mdagSet.size());
+        AssertEquals(validKeySet.Count, mdagSet.Count);
     }
     [TestMethod]
 
