@@ -43,12 +43,13 @@ public class SecondOrderHiddenMarkovModel : HiddenMarkovModel
     }
 
     public SecondOrderHiddenMarkovModel()
+        : this(null, null, null, null)
     {
-        this(null, null, null, null);
+        ;
     }
 
     //@Override
-    protected void estimateTransitionProbability(Collection<int[][]> samples, int max_state)
+    protected void estimateTransitionProbability(ICollection<int[][]> samples, int max_state)
     {
         transition_probability = new float[max_state + 1][max_state + 1];
         transition_probability2 = new float[max_state + 1][max_state + 1][max_state + 1];
