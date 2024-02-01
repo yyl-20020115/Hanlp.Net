@@ -1,3 +1,12 @@
+NOTICE: 
+This work has not been completed!
+I've no enough time for now to continue.
+
+Please do not star it before I made the final goal.
+
+BR,
+Yilin
+
 HanLP: Han Language Processing
 =====
 
