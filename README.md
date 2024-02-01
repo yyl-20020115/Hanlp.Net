@@ -1,4 +1,4 @@
-NOTIE: 
+NOTICE: 
 This work has not been completed!
 I've no enough time for now to continue.
 
