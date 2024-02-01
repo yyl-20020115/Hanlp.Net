@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.seg.common;
 
@@ -58,10 +59,7 @@ public class Term
      * 长度
      * @return
      */
-    public int Length()
-    {
-        return word.Length;
-    }
+    public int Length => word.Length;
 
     /**
      * 获取本词语在HanLP词库中的频次

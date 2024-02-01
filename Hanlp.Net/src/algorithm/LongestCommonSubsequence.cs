@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.algorithm;
  */
 public class LongestCommonSubsequence
 {
-    public static int compute(char[] str1, char[] str2)
+    public static int Compute(char[] str1, char[] str2)
     {
         int substringLength1 = str1.Length;
         int substringLength2 = str2.Length;
@@ -58,8 +58,8 @@ public class LongestCommonSubsequence
         return opt[0, 0];
     }
 
-    public static int compute(string str1, string str2)
+    public static int Compute(string str1, string str2)
     {
-        return compute(str1.ToCharArray(), str2.ToCharArray());
+        return Compute(str1.ToCharArray(), str2.ToCharArray());
     }
 }

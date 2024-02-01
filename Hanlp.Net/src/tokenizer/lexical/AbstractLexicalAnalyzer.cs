@@ -341,7 +341,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         {
             Term term = new Term(word, null);
             term.offset = offset;
-            offset += term.Length();
+            offset += term.Length;
             termList.Add(term);
         }
         if (config.speechTagging)
@@ -401,7 +401,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         {
                             Term term = new Term(result.ToString(), Nature.create(prePos));
                             term.offset = offset;
-                            offset += term.Length();
+                            offset += term.Length;
                             termList.Add(term);
                             if (childrenList != null)
                             {
@@ -409,7 +409,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                                 {
                                     foreach (Term shortTerm in childrenList)
                                     {
-                                        if (shortTerm.Length() >= config.indexMode)
+                                        if (shortTerm.Length >= config.indexMode)
                                         {
                                             termList.Add(shortTerm);
                                         }
@@ -444,7 +444,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                             {
                                 foreach (Term shortTerm in childrenList)
                                 {
-                                    if (shortTerm.Length() >= config.indexMode)
+                                    if (shortTerm.Length >= config.indexMode)
                                     {
                                         termList.Add(shortTerm);
                                     }

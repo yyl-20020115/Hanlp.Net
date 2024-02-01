@@ -1,5 +1,8 @@
 using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
 using com.hankcs.hanlp.corpus.tag;
+using com.hankcs.hanlp.dictionary;
+using com.hankcs.hanlp.dictionary.other;
 using com.hankcs.hanlp.seg.common;
 
 namespace com.hankcs.hanlp.model.perceptron;
@@ -23,7 +26,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         foreach (Term term in analyzer.seg("张三丰，刘五郎，黄三元，张一楠，王三强，丁一楠，李四光，闻一多，赵一楠，李四"))
         {
             if (term.nature == Nature.w) continue;
-            assertEquals(Nature.nr, term.nature);
+            AssertEquals(Nature.nr, term.nature);
         }
     }
     [TestMethod]
@@ -51,7 +54,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     [TestMethod]
     public void testCustomNature() 
     {
-        assertTrue(CustomDictionary.insert("饿了么", "ntc 1"));
+        AssertTrue(CustomDictionary.insert("饿了么", "ntc 1"));
         analyzer.enableCustomDictionaryForcing(true);
         AssertEquals("美团/n 与/p 饿了么/ntc 争夺/v 外卖/v 市场/n", analyzer.analyze("美团与饿了么争夺外卖市场").ToString());
     }
@@ -62,9 +65,9 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         String text = "来到美国纽约现代艺术博物馆参观";
         List<Term> termList = analyzer.seg(text);
         AssertEquals("[来到/v, 美国纽约现代艺术博物馆/ns, 美国/ns, 纽约/ns, 现代/t, 艺术/n, 博物馆/n, 参观/v]", termList.ToString());
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
-            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length));
+            AssertEquals(term.word, text.Substring(term.offset, term.Length));
         }
         analyzer.enableIndexMode(false);
     }
@@ -74,9 +77,9 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         analyzer.enableIndexMode(false);
         String text = "来到美国纽约现代艺术博物馆参观";
         List<Term> termList = analyzer.seg(text);
-        for (Term term : termList)
+        foreach (Term term in termList)
         {
-            assertEquals(term.word, text.substring(term.offset, term.offset + term.Length));
+            AssertEquals(term.word, text.Substring(term.offset, term.Length));
         }
     }
     [TestMethod]
@@ -97,7 +100,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         CharTable.CONVERT[' '] = '!';
         CharTable.CONVERT['\t'] = '!';
         Sentence sentence = analyzer.analyze("\"你好， 我想知道： 风是从哪里来; \t雷是从哪里来； 雨是从哪里来？\"");
-        for (IWord word : sentence)
+        foreach (IWord word in sentence)
         {
             if (!word.getLabel().Equals("w"))
             {

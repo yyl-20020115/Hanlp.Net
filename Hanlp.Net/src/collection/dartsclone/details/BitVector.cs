@@ -8,14 +8,14 @@ namespace com.hankcs.hanlp.collection.dartsclone.details;
  * Bit向量，类似于C++中的bitset
  * @author
  */
-class BitVector
+public class BitVector
 {
     /**
      * 获取某一位的比特
      * @param id 位
      * @return 比特是1还是0
      */
-    bool get(int id)
+    public bool get(int id)
     {
         return (_units.get(id / UNIT_SIZE) >>> (id % UNIT_SIZE) & 1) == 1;
     }
@@ -25,7 +25,7 @@ class BitVector
      * @param id 位
      * @param bit 比特
      */
-    void set(int id, bool bit)
+    public void set(int id, bool bit)
     {
         if (bit)
         {
@@ -39,7 +39,7 @@ class BitVector
      * @param id
      * @return
      */
-    int rank(int id)
+    public int rank(int id)
     {
         int unit_id = id / UNIT_SIZE;
         return _ranks[unit_id] + popCount(_units.get(unit_id)
@@ -50,7 +50,7 @@ class BitVector
      * 是否为空
      * @return
      */
-    bool empty()
+    public bool empty()
     {
         return _units.empty();
     }
@@ -59,7 +59,7 @@ class BitVector
      * 1的数量
      * @return
      */
-    int numOnes()
+    public int numOnes()
     {
         return _numOnes;
     }
@@ -68,12 +68,12 @@ class BitVector
      * 大小
      * @return
      */
-    int Count => _size;
+    public int Count => _size;
 
     /**
      * 在末尾追加
      */
-    void Append()
+    public void Append()
     {
         if ((_size % UNIT_SIZE) == 0)
         {
@@ -85,7 +85,7 @@ class BitVector
     /**
      * 构建
      */
-    void build()
+    public void build()
     {
         _ranks = new int[_units.Count];
 
@@ -118,8 +118,8 @@ class BitVector
      */
     private static int popCount(int unit)
     {
-        unit = ((unit & 0xAAAAAAAA) >>> 1) + (unit & 0x55555555);
-        unit = ((unit & 0xCCCCCCCC) >>> 2) + (unit & 0x33333333);
+        unit = (int)((unit & 0xAAAAAAAA) >>> 1) + (unit & 0x55555555);
+        unit = (int)((unit & 0xCCCCCCCC) >>> 2) + (unit & 0x33333333);
         unit = ((unit >>> 4) + unit) & 0x0F0F0F0F;
         unit += unit >>> 8;
         unit += unit >>> 16;

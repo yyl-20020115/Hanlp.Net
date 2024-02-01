@@ -22,13 +22,13 @@ public class TrieTest : TestCase
             map.Add(key, key);
         }
         var trie = new Trie();
-        trie.addAllKeyword(map.Keys);
+        trie.AddAllKeyword(map.Keys);
         foreach (var key in keyArray)
         {
-            AssertTrue(trie.hasKeyword(key));
+            AssertTrue(trie.HasKeyword(key));
         }
-        AssertTrue(trie.hasKeyword("ushers"));
-        AssertFalse(trie.hasKeyword("构建耗时"));
+        AssertTrue(trie.HasKeyword("ushers"));
+        AssertFalse(trie.HasKeyword("构建耗时"));
     }
     [TestMethod]
     public void TestParseText()

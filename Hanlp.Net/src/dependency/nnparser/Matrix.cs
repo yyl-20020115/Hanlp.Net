@@ -1,4 +1,5 @@
 using com.hankcs.hanlp.corpus.io;
+using System.Runtime.Serialization;
 
 namespace com.hankcs.hanlp.dependency.nnparser;
 
@@ -47,7 +48,7 @@ namespace com.hankcs.hanlp.dependency.nnparser;
  * @version 5 August 1998
  */
 
-public class Matrix : Cloneable, java.io.Serializable, ICacheAble
+public class Matrix : Cloneable, ISerializable, ICacheAble
 {
 
 /* ------------------------
@@ -992,7 +993,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         {
             for (int j = 0; j < n; j++)
             {
-                X[i][j] = Math.random();
+                X[i][j] =  Math.Random();
             }
         }
         return A;
@@ -1031,7 +1032,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public void print(int w, int d)
     {
-        print(new TextWriter(System._out, true), w, d);
+        print(new TextWriter(Console.Out, true), w, d);
     }
 
     /**
@@ -1068,7 +1069,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
 
     public void print(NumberFormat Format, int width)
     {
-        print(new TextWriter(System._out, true), Format, width);
+        print(new TextWriter(Console.Out, true), Format, width);
     }
 
     // DecimalFormat is a little disappointing coming from Fortran or C's printf.
@@ -1131,7 +1132,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         tokenizer.wordChars(0, 255);
         tokenizer.whitespaceChars(0, ' ');
         tokenizer.eolIsSignificant(true);
-        java.util.Vector<Double> vD = new java.util.Vector<Double>();
+        Vector<Double> vD = new java.util.Vector<Double>();
 
         // Ignore initial empty lines
         while (tokenizer.nextToken() == StreamTokenizer.TT_EOL) ;
@@ -1261,7 +1262,7 @@ public class Matrix : Cloneable, java.io.Serializable, ICacheAble
         {
             for (int j = 0; j < n; j++)
             {
-                X[i][j] = Math.Pow(A[i][j], 3.);
+                X[i][j] = Math.Pow(A[i][j], 3.0);
             }
         }
 

@@ -26,7 +26,7 @@ namespace com.hankcs.hanlp.collection.trie;
 /**
  * 双数组Trie树
  */
-public class DoubleArrayTrie<V> : Serializable, ITrie<V>
+public class DoubleArrayTrie<V> : ITrie<V>
 {
     private  static int BUF_SIZE = 16384;
     private  static int UNIT_SIZE = 8; // size of int + int
@@ -59,7 +59,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
     /**
      * base 和 check 的大小
      */
-    protected int size;
+    protected int _size;
     private int allocSize;
     private List<string> key;
     private int keySize;
@@ -202,7 +202,7 @@ public class DoubleArrayTrie<V> : Serializable, ITrie<V>
 
             for (int i = 1; i < siblings.Count; i++)
                 if (check[begin + siblings[i].code] != 0)
-                    continue outer;
+                    goto outer;
 
             break;
         }

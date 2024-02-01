@@ -10,18 +10,18 @@ public interface Intervalable : IComparable
      * 起点
      * @return
      */
-    int getStart();
+    int Start { get; }
 
     /**
      * 终点
      * @return
      */
-    int getEnd();
+    int End { get; }
 
     /**
      * 长度
      * @return
      */
-    int Count;
+    int Count { get; }
 
 }

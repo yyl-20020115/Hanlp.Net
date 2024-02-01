@@ -98,7 +98,7 @@ public class Instance
      *
      * @return
      */
-    public int Count
+    public int Count()
     {
         return featureMatrix.Length;
     }

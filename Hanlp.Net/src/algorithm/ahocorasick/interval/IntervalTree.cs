@@ -28,7 +28,7 @@ public class IntervalTree
      * @param intervals
      * @return
      */
-    public List<Intervalable> removeOverlaps(List<Intervalable> intervals)
+    public List<Intervalable> RemoveOverlaps(List<Intervalable> intervals)
     {
         // 排序，按照先大小后左端点的顺序
         intervals.Sort(new IntervalableComparatorBySize());
@@ -43,7 +43,7 @@ public class IntervalTree
             }
 
             // 否则就移除它
-            removeIntervals.UnionWith(findOverlaps(interval));
+            removeIntervals.UnionWith(FindOverlaps(interval));
         }
 
         // 移除所有的重叠区间
@@ -64,9 +64,6 @@ public class IntervalTree
      * @param interval 与这个区间重叠
      * @return 重叠的区间列表
      */
-    public List<Intervalable> findOverlaps(Intervalable interval)
-    {
-        return rootNode.findOverlaps(interval);
-    }
+    public List<Intervalable> FindOverlaps(Intervalable interval) => rootNode.FindOverlaps(interval);
 
 }

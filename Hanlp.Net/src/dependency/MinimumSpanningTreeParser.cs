@@ -30,7 +30,7 @@ public abstract class MinimumSpanningTreeParser : AbstractDependencyParser
         if (termList == null || termList.Count == 0) return null;
         termList.Insert(0, new Term("##核心##", Nature.begin));
         Node<Term>[] nodeArray = new Node<Term>[termList.Count];
-        IEnumerator<Term> iterator = termList.iterator();
+        IEnumerator<Term> iterator = termList.GetEnumerator();
         for (int i = 0; i < nodeArray.Length; ++i)
         {
             nodeArray[i] = new Node(iterator.next(), i);

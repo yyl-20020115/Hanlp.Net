@@ -24,7 +24,7 @@ namespace com.hankcs.hanlp.model;
  */
 //  * @deprecated 已废弃，请使用功能更丰富、设计更优雅的{@link com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer}。
 
-class CRFSegmentModel : CRFModel
+public class CRFSegmentModel : CRFModel
 {
     private int idM;
     private int idE;

@@ -43,8 +43,8 @@ public class TonePinyinString2PinyinConverter
             mapKey.Add(pinyinWithToneMark, pinyin);
             mapKey.Add(pinyinWithoutTone, tone5);
         }
-        trie = new Trie().remainLongest();
-        trie.addAllKeyword(mapKey.Keys);
+        trie = new Trie().RemainLongest();
+        trie.AddAllKeyword(mapKey.Keys);
     }
 
     /**
@@ -88,10 +88,10 @@ public class TonePinyinString2PinyinConverter
     public static List<Pinyin> convert(string tonePinyinText, bool removeNull)
     {
         List<Pinyin> pinyinList = new ();
-        ICollection<Token> tokenize = trie.tokenize(tonePinyinText);
+        ICollection<Token> tokenize = trie.Tokenize(tonePinyinText);
         foreach (Token token in tokenize)
         {
-            Pinyin pinyin = mapKey.get(token.getFragment());
+            Pinyin pinyin = mapKey.get(token.Fragment);
             if (removeNull && pinyin == null) continue;
             pinyinList.Add(pinyin);
         }

@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.mining.word2vec;
 public abstract class Corpus
 {
 
-    protected File cacheFile;
+    protected string cacheFile;
     protected Config config;
     protected int trainWords = 0;
     protected int vocabSize;

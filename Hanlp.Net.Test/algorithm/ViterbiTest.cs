@@ -50,7 +50,7 @@ public class ViterbiTest : TestCase
                 emission_probability[i][j] = -Math.Log(emission_probability[i][j]);
             }
         }
-        int[] result = Viterbi.compute(observations, states, start_probability, transititon_probability, emission_probability);
+        int[] result = Viterbi.Compute(observations, states, start_probability, transititon_probability, emission_probability);
         foreach (int r in result)
         {
 //            Console.print(Weather.values()[r] + " ");

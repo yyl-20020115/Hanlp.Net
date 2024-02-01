@@ -47,7 +47,7 @@ public class ImmutableFeatureMap : FeatureMap
     }
 
     //@Override
-    public override int Count
+    public override int Count()
     {
         return featureIdMap.Count;
     }

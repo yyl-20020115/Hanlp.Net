@@ -110,7 +110,7 @@ public class CommonSynonymDictionaryEx
         long[] itemB = get(b);
         if (itemB == null) return long.MaxValue / 3;
 
-        return ArrayDistance.computeAverageDistance(itemA, itemB);
+        return ArrayDistance.ComputeAverageDistance(itemA, itemB);
     }
 
     /**

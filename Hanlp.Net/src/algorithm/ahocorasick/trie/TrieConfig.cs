@@ -20,18 +20,10 @@ public class TrieConfig
      *
      * @return
      */
-    public bool isAllowOverlaps()
-    {
-        return allowOverlaps;
-    }
-
     /**
-     * 设置是否允许重叠
-     *
-     * @param allowOverlaps
-     */
-    public void setAllowOverlaps(bool allowOverlaps)
-    {
-        this.allowOverlaps = allowOverlaps;
-    }
+ * 设置是否允许重叠
+ *
+ * @param allowOverlaps
+ */
+    public bool AllowOverlaps { get => allowOverlaps; set => this.allowOverlaps = value; }
 }

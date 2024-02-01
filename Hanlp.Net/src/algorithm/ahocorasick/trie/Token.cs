@@ -15,14 +15,11 @@ public abstract class Token
         this.fragment = fragment;
     }
 
-    public string getFragment()
-    {
-        return this.fragment;
-    }
+    public string Fragment => this.fragment;
 
-    public abstract bool isMatch();
+    public abstract bool IsMatch { get; }
 
-    public abstract Emit getEmit();
+    public abstract Emit Emit { get; }
 
-    public override string ToString() => $"{fragment}/{isMatch()}";
+    public override string ToString() => $"{fragment}/{IsMatch}";
 }

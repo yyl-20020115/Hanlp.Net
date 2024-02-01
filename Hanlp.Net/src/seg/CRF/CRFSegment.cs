@@ -69,7 +69,7 @@ public class CRFSegment : CharacterBasedSegment
     }
 
     //@Override
-    protected List<Term> roughSegSentence(char[] sentence)
+    protected override List<Term> roughSegSentence(char[] sentence)
     {
         if (sentence.Length == 0) return new();
         char[] sentenceConverted = CharTable.convert(sentence);

@@ -185,15 +185,15 @@ public class TfIdf
         foreach (Term term in tf.Keys)
         {
             Double TF = tf.get(term);
-            if (TF == null) TF = 1.;
+            if (TF == null) TF = 1.0;
             Double IDF = idf.get(term);
-            if (IDF == null) IDF = 1.;
+            if (IDF == null) IDF = 1.0;
             tfIdf.Add(term, TF * IDF);
         }
         if (normalization == Normalization.COSINE)
         {
             double n = 0.0;
-            foreach (double x in tfIdf.values())
+            foreach (double x in tfIdf.Values)
             {
                 n += x * x;
             }

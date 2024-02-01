@@ -23,7 +23,7 @@ public class ArrayCompare
      * @param arrayB
      * @return
      */
-    public static int compare(long[] arrayA, long[] arrayB)
+    public static int Compare(long[] arrayA, long[] arrayB)
     {
         int len1 = arrayA.Length;
         int len2 = arrayB.Length;

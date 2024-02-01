@@ -103,8 +103,8 @@ public class PinyinKey : IComparable<PinyinKey>, ISentenceKey<PinyinKey>
     {
         int firstCharArrayLength = firstCharArray.Length + 1;
         return
-                1.0 / (EditDistance.compute(pyOrdinalArray, other.pyOrdinalArray) + 1) +
-                (double)LongestCommonSubstring.compute(firstCharArray, other.firstCharArray) / firstCharArrayLength;
+                1.0 / (EditDistance.Compute(pyOrdinalArray, other.pyOrdinalArray) + 1) +
+                (double)LongestCommonSubstring.Compute(firstCharArray, other.firstCharArray) / firstCharArrayLength;
     }
 
     /**

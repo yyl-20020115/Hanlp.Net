@@ -21,17 +21,17 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
         }
 
         Trie trie = new Trie();
-        trie.addAllKeyword(map.Keys);
+        trie.AddAllKeyword(map.Keys);
         AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
         act.build(map);
 
         foreach (String key in map.Keys)
         {
-            var emits = trie.parseText(key);
+            var emits = trie.ParseText(key);
             var otherSet = new HashSet<String>();
             foreach (Emit emit in emits)
             {
-                otherSet.Add(emit.getKeyword() + emit.getEnd());
+                otherSet.Add(emit.Keyword + emit.End);
             }
 
             var entries = act.parseText(key);

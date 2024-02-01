@@ -51,10 +51,10 @@ public class FirstOrderHiddenMarkovModelTest : TestCase
     public void testGenerate() 
     {
         FirstOrderHiddenMarkovModel givenModel = new FirstOrderHiddenMarkovModel(start_probability, transition_probability, emission_probability);
-        for (int[][] sample : givenModel.generate(3, 5, 2))
+        foreach (int[][] sample in givenModel.generate(3, 5, 2))
         {
             for (int t = 0; t < sample[0].Length; t++)
-                Console.printf("%s/%s ", Feel.values()[sample[0][t]], Status.values()[sample[1][t]]);
+                Console.WriteLine("%s/%s ", Feel.values()[sample[0][t]], Status.values()[sample[1][t]]);
             Console.WriteLine();
         }
     }

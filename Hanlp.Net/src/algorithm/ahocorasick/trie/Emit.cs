@@ -29,13 +29,7 @@ public class Emit : Interval, Intervalable
      * 获取对应的模式串
      * @return 模式串
      */
-    public string getKeyword()
-    {
-        return this.keyword;
-    }
+    public string Keyword => this.keyword;
 
-    public override string ToString()
-    {
-        return base.ToString() + "=" + this.keyword;
-    }
+    public override string ToString() => base.ToString() + "=" + this.keyword;
 }

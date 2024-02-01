@@ -22,7 +22,7 @@ namespace com.hankcs.hanlp.model.perceptron.feature;
  */
 public class ImmutableFeatureMDatMap : FeatureMap
 {
-    MutableDoubleArrayTrieInteger dat;
+    public MutableDoubleArrayTrieInteger dat;
 
     public ImmutableFeatureMDatMap()
         :base()

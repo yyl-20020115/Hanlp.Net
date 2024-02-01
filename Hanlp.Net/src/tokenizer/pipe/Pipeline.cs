@@ -50,7 +50,7 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public int Count
+    public override int Count()
     {
         return pipeList.Count;
     }
@@ -98,31 +98,31 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public bool containsAll(Collection c)
+    public bool containsAll(ICollection c)
     {
         return pipeList.containsAll(c);
     }
 
     //@Override
-    public bool AddRange(Collection<Pipe<M, M>> c)
+    public bool AddRange(ICollection<Pipe<M, M>> c)
     {
         return pipeList.AddRange(c);
     }
 
     //@Override
-    public bool AddRange(int index, Collection<Pipe<M, M>> c)
+    public bool AddRange(int index, ICollection<Pipe<M, M>> c)
     {
         return pipeList.AddRange(c);
     }
 
     //@Override
-    public bool removeAll(Collection c)
+    public bool removeAll(ICollection c)
     {
         return pipeList.removeAll(c);
     }
 
     //@Override
-    public bool retainAll(Collection c)
+    public bool retainAll(ICollection c)
     {
         return pipeList.retainAll(c);
     }

@@ -33,7 +33,7 @@ public class String2PinyinConverter
     static String2PinyinConverter()
     {
         // TODO:什么时候有空了升级到双数组吧
-        trie = new Trie().remainLongest();
+        trie = new Trie().RemainLongest();
         map = new Dictionary<string, Pinyin>();
         int end = Pinyin.none5.ordinal();
         for (int i = 0; i < end; ++i)
@@ -41,8 +41,8 @@ public class String2PinyinConverter
             Pinyin pinyin = Integer2PinyinConverter.pinyins[i];
             string pinyinWithoutTone = pinyin.getPinyinWithoutTone();
             string firstChar = string.valueOf(pinyin.getFirstChar());
-            trie.addKeyword(pinyinWithoutTone);
-            trie.addKeyword(firstChar);
+            trie.AddKeyword(pinyinWithoutTone);
+            trie.AddKeyword(firstChar);
             map.Add(pinyinWithoutTone, pinyin);
             map.Add(firstChar, pinyin);
             map.Add(pinyin.ToString(), pinyin);
@@ -67,12 +67,12 @@ public class String2PinyinConverter
     public static List<Pinyin> convert(string complexText)
     {
         List<Pinyin> pinyinList = new ();
-        ICollection<Token> tokenize = trie.tokenize(complexText);
+        ICollection<Token> tokenize = trie.Tokenize(complexText);
         //        Console.WriteLine(tokenize);
         foreach (Token token in tokenize)
         {
-            string fragment = token.getFragment();
-            if (token.isMatch())
+            string fragment = token.Fragment;
+            if (token.IsMatch)
             {
                 // 是拼音或拼音的一部分，用map转
                 pinyinList.Add(convertSingle(fragment));
@@ -112,11 +112,11 @@ public class String2PinyinConverter
     {
         List<Pinyin> pinyinList = new ();
         List<Boolean> booleanList = new ();
-        var tokenize = trie.tokenize(complexText);
+        var tokenize = trie.Tokenize(complexText);
         foreach (Token token in tokenize)
         {
-            string fragment = token.getFragment();
-            if (token.isMatch())
+            string fragment = token.Fragment;
+            if (token.IsMatch)
             {
                 // 是拼音或拼音的一部分，用map转
                 Pinyin pinyin = convertSingle(fragment);

@@ -109,10 +109,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public int Count
-    {
-        return termFrequencyMap.Count;
-    }
+    public int Count=> termFrequencyMap.Count;
 
     //@Override
     public bool isEmpty()

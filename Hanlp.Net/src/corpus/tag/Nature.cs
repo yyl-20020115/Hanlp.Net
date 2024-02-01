@@ -762,7 +762,7 @@ public class Nature
     public static readonly Nature begin = new Nature("begin");
 
     private static Dictionary<string, int> idMap;
-    private static Nature[] values;
+    public static Nature[] values;
     private int ordinal;
     private string name;
 

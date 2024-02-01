@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.model.perceptron.model;
 
 namespace com.hankcs.hanlp.model.perceptron.feature;
@@ -23,10 +24,10 @@ public class ImmutableFeatureMDatMapTest : TestCase
         Console.WriteLine(featureMap.entrySet().Count);
         Console.WriteLine(featureMap.idOf("\u0001/\u00014"));
         Dictionary<String, int> map = new Dictionary<String, int>();
-        for (var entry in dat)
+        foreach (var entry in dat.entrySet())
         {
             map.Add(entry.Key, entry.Value);
-            AssertEquals(entry.Value.intValue(), dat.get(entry.Key));
+            AssertEquals(entry.Value, dat.get(entry.Key));
         }
         Console.WriteLine(map.Count);
         AssertEquals(dat.Count, map.Count);

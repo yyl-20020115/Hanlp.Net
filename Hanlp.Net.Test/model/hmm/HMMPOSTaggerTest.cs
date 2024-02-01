@@ -1,3 +1,4 @@
+using com.hankcs.hanlp.model.perceptron;
 using com.hankcs.hanlp.tokenizer.lexical;
 
 namespace com.hankcs.hanlp.model.hmm;

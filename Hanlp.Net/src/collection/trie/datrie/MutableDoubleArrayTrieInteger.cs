@@ -1,8 +1,10 @@
 using com.hankcs.hanlp.classification.tokenizers;
 using com.hankcs.hanlp.collection.MDAG;
 using com.hankcs.hanlp.corpus.io;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace com.hankcs.hanlp.collection.trie.datrie;
 
@@ -946,7 +948,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     public class ST : HashSet<KeyValuePair<string, int>>
     {
         //@Override
-        public int Count => MutableDoubleArrayTrieInteger.Count;
+        public int Count() => MutableDoubleArrayTrieInteger.Count;
 
         //@Override
         public bool isEmpty()
@@ -985,7 +987,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             public KeyValuePair<string, int> next()
             {
                 iterator.next();
-                return new AbstractMap.SimpleEntry<string, int>(iterator.key, iterator.value);
+                return new AbstractMap.SimpleEntry<string, int>(iterator.Key, iterator.Value);
             }
         }
         //@Override
@@ -1018,19 +1020,19 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
 
         //@Override
-        public bool containsAll(Collection c)
+        public bool containsAll(ICollection c)
         {
             throw new InvalidOperationException();
         }
 
         //@Override
-        public bool AddRange(Collection<KeyValuePair<string, int>> c)
+        public bool AddRange(ICollection<KeyValuePair<string, int>> c)
         {
             throw new InvalidOperationException();
         }
 
         //@Override
-        public bool retainAll(Collection c)
+        public bool retainAll(ICollection c)
         {
             throw new InvalidOperationException();
         }
@@ -1068,7 +1070,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
     public class HS : HashSet<string>
     {
         //@Override
-        public int Count => MutableDoubleArrayTrieInteger.Count
+        public int Count() => MutableDoubleArrayTrieInteger.Count();
 
         //@Override
         public bool isEmpty()
@@ -1107,7 +1109,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
             //@Override
             public string next()
             {
-                return iterator.next().key();
+                return iterator.next().Key();
             }
             //@Override
             public Object[] ToArray()
@@ -1189,9 +1191,9 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
 
     private void writeObject(Stream _out)
     {
-        _out.writeInt(size);
-        _out.writeObject(_base);
-        _out.writeObject(check);
+        _out.Write(_size);
+        _out.Write(_base);
+        _out.Write(check);
     }
 
     private void readObject(Stream _in)

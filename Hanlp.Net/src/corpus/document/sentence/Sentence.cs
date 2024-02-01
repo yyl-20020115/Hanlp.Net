@@ -41,7 +41,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     //@Override
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(Count * 4);
+        StringBuilder sb = new StringBuilder(Count() * 4);
         int i = 1;
         foreach (IWord word in wordList)
         {
@@ -59,7 +59,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public string toStringWithoutLabels()
     {
-        StringBuilder sb = new StringBuilder(Count * 4);
+        StringBuilder sb = new StringBuilder(Count() * 4);
         int i = 1;
         foreach (IWord word in wordList)
         {
@@ -101,7 +101,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      */
     public string toStandoff(bool withComment)
     {
-        StringBuilder sb = new StringBuilder(Count * 4);
+        StringBuilder sb = new StringBuilder(Count() * 4);
         string delimiter = " ";
         string text2 = text(delimiter);
         sb.Append(text2).Append('\n');
@@ -243,7 +243,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
      *
      * @return
      */
-    public int Count
+    public int Count()
     {
         return wordList.Count;
     }
@@ -283,7 +283,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     public string text(string delimiter)
     {
         if (delimiter == null) delimiter = "";
-        StringBuilder sb = new StringBuilder(Count * 3);
+        StringBuilder sb = new StringBuilder(Count() * 3);
         foreach (IWord word in this)
         {
             if (word is CompoundWord)
@@ -298,7 +298,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 sb.Append(word.Value).Append(delimiter);
             }
         }
-        sb.setLength(sb.Length - delimiter.Length);
+        sb.Length=(sb.Length - delimiter.Length);
 
         return sb.ToString();
     }

@@ -41,7 +41,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         /**
          * 模型
          */
-        LinearModel model;
+        public LinearModel model;
         /**
          * 精确率(Precision), 召回率(Recall)和F1-Measure<br>
          * 中文参考：https://blog.argcv.com/articles/1036.c

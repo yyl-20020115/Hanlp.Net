@@ -39,18 +39,18 @@ public class IntervalNode
      */
     public IntervalNode(List<Intervalable> intervals)
     {
-        this.point = determineMedian(intervals);
+        this.point = DetermineMedian(intervals);
 
         var toLeft = new List<Intervalable>();  // 以中点为界靠左的区间
         var toRight = new List<Intervalable>(); // 靠右的区间
 
         foreach (var interval in intervals)
         {
-            if (interval.getEnd() < this.point)
+            if (interval.End < this.point)
             {
                 toLeft.Add(interval);
             }
-            else if (interval.getStart() > this.point)
+            else if (interval.Start > this.point)
             {
                 toRight.Add(interval);
             }
@@ -75,14 +75,14 @@ public class IntervalNode
      * @param intervals 区间集合
      * @return 中点坐标
      */
-    public int determineMedian(List<Intervalable> intervals)
+    public int DetermineMedian(List<Intervalable> intervals)
     {
         int start = -1;
         int end = -1;
         foreach (var interval in intervals)
         {
-            int currentStart = interval.getStart();
-            int currentEnd = interval.getEnd();
+            int currentStart = interval.Start;
+            int currentEnd = interval.End;
             if (start == -1 || currentStart < start)
             {
                 start = currentStart;
@@ -100,29 +100,29 @@ public class IntervalNode
      * @param interval
      * @return
      */
-    public List<Intervalable> findOverlaps(Intervalable interval)
+    public List<Intervalable> FindOverlaps(Intervalable interval)
     {
 
-        List<Intervalable> overlaps = new List<Intervalable>();
+        List<Intervalable> overlaps = new();
 
-        if (this.point < interval.getStart())
+        if (this.point < interval.Start)
         {
             // 右边找找
-            addToOverlaps(interval, overlaps, findOverlappingRanges(this.right, interval));
-            addToOverlaps(interval, overlaps, checkForOverlapsToTheRight(interval));
+            AddToOverlaps(interval, overlaps, FindOverlappingRanges(this.right, interval));
+            AddToOverlaps(interval, overlaps, CheckForOverlapsToTheRight(interval));
         }
-        else if (this.point > interval.getEnd())
+        else if (this.point > interval.End)
         {
             // 左边找找
-            addToOverlaps(interval, overlaps, findOverlappingRanges(this.left, interval));
-            addToOverlaps(interval, overlaps, checkForOverlapsToTheLeft(interval));
+            AddToOverlaps(interval, overlaps, FindOverlappingRanges(this.left, interval));
+            AddToOverlaps(interval, overlaps, CheckForOverlapsToTheLeft(interval));
         }
         else
         {
             // 否则在当前区间
-            addToOverlaps(interval, overlaps, this.intervals);
-            addToOverlaps(interval, overlaps, findOverlappingRanges(this.left, interval));
-            addToOverlaps(interval, overlaps, findOverlappingRanges(this.right, interval));
+            AddToOverlaps(interval, overlaps, this.intervals);
+            AddToOverlaps(interval, overlaps, FindOverlappingRanges(this.left, interval));
+            AddToOverlaps(interval, overlaps, FindOverlappingRanges(this.right, interval));
         }
 
         return overlaps;
@@ -134,7 +134,7 @@ public class IntervalNode
      * @param overlaps 重叠区间列表
      * @param newOverlaps 希望将这些区间加入
      */
-    protected void addToOverlaps(Intervalable interval, List<Intervalable> overlaps, List<Intervalable> newOverlaps)
+    protected void AddToOverlaps(Intervalable interval, List<Intervalable> overlaps, List<Intervalable> newOverlaps)
     {
         foreach (var currentInterval in newOverlaps)
         {
@@ -150,20 +150,14 @@ public class IntervalNode
      * @param interval
      * @return
      */
-    protected List<Intervalable> checkForOverlapsToTheLeft(Intervalable interval)
-    {
-        return checkForOverlaps(interval, Direction.LEFT);
-    }
+    protected List<Intervalable> CheckForOverlapsToTheLeft(Intervalable interval) => CheckForOverlaps(interval, Direction.LEFT);
 
     /**
      * 往右边寻找重叠
      * @param interval
      * @return
      */
-    protected List<Intervalable> checkForOverlapsToTheRight(Intervalable interval)
-    {
-        return checkForOverlaps(interval, Direction.RIGHT);
-    }
+    protected List<Intervalable> CheckForOverlapsToTheRight(Intervalable interval) => CheckForOverlaps(interval, Direction.RIGHT);
 
     /**
      * 寻找重叠
@@ -171,7 +165,7 @@ public class IntervalNode
      * @param direction 方向，表明重叠区间在interval的左边还是右边
      * @return
      */
-    protected List<Intervalable> checkForOverlaps(Intervalable interval, Direction direction)
+    protected List<Intervalable> CheckForOverlaps(Intervalable interval, Direction direction)
     {
         List<Intervalable> overlaps = new List<Intervalable>();
         foreach (Intervalable currentInterval in this.intervals)
@@ -179,13 +173,13 @@ public class IntervalNode
             switch (direction)
             {
                 case Direction.LEFT:
-                    if (currentInterval.getStart() <= interval.getEnd())
+                    if (currentInterval.Start <= interval.End)
                     {
                         overlaps.Add(currentInterval);
                     }
                     break;
                 case Direction.RIGHT:
-                    if (currentInterval.getEnd() >= interval.getStart())
+                    if (currentInterval.End >= interval.Start)
                     {
                         overlaps.Add(currentInterval);
                     }
@@ -202,9 +196,9 @@ public class IntervalNode
      * @param interval
      * @return
      */
-    protected static List<Intervalable> findOverlappingRanges(IntervalNode node, Intervalable interval)
+    protected static List<Intervalable> FindOverlappingRanges(IntervalNode node, Intervalable interval)
     {
-        return node != null ? node.findOverlaps(interval) : new();
+        return node != null ? node.FindOverlaps(interval) : new();
     }
 
 }

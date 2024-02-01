@@ -178,7 +178,7 @@ public class NaiveBayesClassifier : AbstractClassifier
 
         logger.start("使用卡方检测选择特征中...");
         //FeatureStats对象包含文档中所有特征及其统计信息
-        BaseFeatureData featureData = chiSquareFeatureExtractor.extractBasicFeatureData(dataSet); //执行统计
+        BaseFeatureData featureData = ChiSquareFeatureExtractor.extractBasicFeatureData(dataSet); //执行统计
 
         //我们传入这些统计信息到特征选择算法中，得到特征与其分值
         Dictionary<int, Double> selectedFeatures = chiSquareFeatureExtractor.chi_square(featureData);

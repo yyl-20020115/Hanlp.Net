@@ -143,7 +143,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
         if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
-        if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
+        if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return default;
         return (V) branch.Value();
     }
 
@@ -158,7 +158,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
 
         if (branch == null) return default;
         // 下面这句可以保证只有成词的节点被返回
-        if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return null;
+        if (!(branch.status == Status.WORD_END_3 || branch.status == Status.WORD_MIDDLE_2)) return default;
         return (V) branch.Value();
     }
 
@@ -166,8 +166,10 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public V[] getValueArray(V[] a)
     {
         if (a.Length < _size)
-            a = (V[]) java.lang.reflect.Array.newInstance(
+        {
+            a = (V[])Array.NewInstance(
                     a.getClass().getComponentType(), size);
+        }
         int i = 0;
         foreach (KeyValuePair<string, V> entry in this)
         {
@@ -184,7 +186,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     public HashSet<KeyValuePair<string, V>> entrySet()
     {
         HashSet<KeyValuePair<string, V>> entrySet = new ();
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
         foreach (BaseNode<V> node in child)
         {
             if (node == null) continue;
@@ -263,7 +265,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             sb.Append(aChar);
             if (branch.status == Status.WORD_MIDDLE_2 || branch.status == Status.WORD_END_3)
             {
-                result.Add(new AbstractMap.SimpleEntry<string, V>(sb.ToString(), (V) branch.Value()));
+                result.Add(new AbstractMap<string,V>.SimpleEntry<string, V>(sb.ToString(), (V) branch.Value()));
             }
         }
 
@@ -314,7 +316,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         return Add;
     }
 
-    public int Count
+    public int Count()
     {
         return this._size;
     }
@@ -340,11 +342,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             {
                 if (node == null)
                 {
-                    _out.writeInt(0);
+                    _out.Write(0);
                 }
                 else
                 {
-                    _out.writeInt(1);
+                    _out.Write(1);
                     node.walkToSave(_out);
                 }
             }
@@ -383,11 +385,11 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             {
                 if (node == null)
                 {
-                    _out.writeInt(0);
+                    _out.Write(0);
                 }
                 else
                 {
-                    _out.writeInt(1);
+                    _out.Write(1);
                     node.walkToSave(_out);
                 }
             }

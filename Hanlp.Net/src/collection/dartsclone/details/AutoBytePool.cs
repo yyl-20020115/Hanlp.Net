@@ -36,7 +36,7 @@ class AutoBytePool
      * @param id 下标
      * @param value 值
      */
-    void set(int id, byte value)
+    public void set(int id, byte value)
     {
         _buf[id] = value;
     }
@@ -71,7 +71,7 @@ class AutoBytePool
      * 在末尾加一个值
      * @param value 值
      */
-    void Add(byte value)
+    public void Add(byte value)
     {
         if (_size == _capacity)
         {

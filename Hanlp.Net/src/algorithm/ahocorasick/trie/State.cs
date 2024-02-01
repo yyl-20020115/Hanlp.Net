@@ -40,7 +40,7 @@ public class State
     /**
      * goto 表，也称转移函数。根据字符串的下一个字符转移到下一个状态
      */
-    private Dictionary<char, State> success = new ();
+    private Dictionary<char, State> success = new();
 
     /**
      * 构造深度为0的节点
@@ -63,16 +63,13 @@ public class State
      * 获取节点深度
      * @return
      */
-    public int getDepth()
-    {
-        return this.depth;
-    }
+    public int Depth => this.depth;
 
     /**
      * 添加一个匹配到的模式串（这个状态对应着这个模式串)
      * @param keyword
      */
-    public void addEmit(string keyword)
+    public void AddEmit(string keyword)
     {
         if (this.emits == null)
         {
@@ -85,11 +82,11 @@ public class State
      * 添加一些匹配到的模式串
      * @param emits
      */
-    public void addEmit(ICollection<string> emits)
+    public void AddEmit(ICollection<string> emits)
     {
         foreach (string emit in emits)
         {
-            addEmit(emit);
+            AddEmit(emit);
         }
     }
 
@@ -97,28 +94,17 @@ public class State
      * 获取这个节点代表的模式串（们）
      * @return
      */
-    public ICollection<string> emit()
-    {
-        return this.emits == null ? new() : this.emits;
-    }
+    public ICollection<string> Emit() => this.emits == null ? new() : this.emits;
 
     /**
      * 获取failure状态
      * @return
      */
-    public State failure()
-    {
-        return this._failure;
-    }
-
     /**
-     * 设置failure状态
-     * @param failState
-     */
-    public void setFailure(State failState)
-    {
-        this._failure = failState;
-    }
+ * 设置failure状态
+ * @param failState
+ */
+    public State Failure { get => this._failure; set => this._failure = value; }
 
     /**
      * 转移到下一个状态
@@ -126,7 +112,7 @@ public class State
      * @param ignoreRootState 是否忽略根节点，如果是根节点自己调用则应该是true，否则为false
      * @return 转移结果
      */
-    private State nextState(char character, bool ignoreRootState)
+    private State NextState(char character, bool ignoreRootState)
     {
         if (this.success.TryGetValue(character,out var nextState)&& !ignoreRootState && nextState == null && this.depth == 0)
         {
@@ -140,24 +126,18 @@ public class State
      * @param character
      * @return
      */
-    public State nextState(char character)
-    {
-        return nextState(character, false);
-    }
+    public State NextState(char character) => NextState(character, false);
 
     /**
      * 按照character转移，任何节点转移失败会返回null
      * @param character
      * @return
      */
-    public State nextStateIgnoreRootState(char character)
-    {
-        return nextState(character, true);
-    }
+    public State NextStateIgnoreRootState(char character) => NextState(character, true);
 
-    public State addState(char character)
+    public State AddState(char character)
     {
-        State nextState = nextStateIgnoreRootState(character);
+        var nextState = NextStateIgnoreRootState(character);
         if (nextState == null)
         {
             nextState = new State(this.depth + 1);
@@ -166,15 +146,9 @@ public class State
         return nextState;
     }
 
-    public ICollection<State> getStates()
-    {
-        return this.success.Values;
-    }
+    public ICollection<State> States => this.success.Values;
 
-    public ICollection<char> getTransitions()
-    {
-        return this.success.Keys;
-    }
+    public ICollection<char> Transitions => this.success.Keys;
 
     public override string ToString()
     {

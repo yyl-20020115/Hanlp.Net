@@ -1,3 +1,5 @@
+using com.hankcs.hanlp.collection.trie.bintrie;
+using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.utility;
 
 namespace com.hankcs.hanlp.model.crf;
@@ -145,10 +147,10 @@ public class CRFModelTest : TestCase
 
         Table table = new Table();
         String text = "人民生活进一步改善了";
-        table.v = new String[text.Length][2];
+        table.v = new String[text.Length][];
         for (int i = 0; i < text.Length; i++)
         {
-            table.v[i][0] = String.valueOf(text[i]);
+            table.v[i][0] = text[i].ToString();
         }
 
         model.tag(table);

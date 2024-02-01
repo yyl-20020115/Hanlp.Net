@@ -12,7 +12,7 @@ public class IntervalableComparatorBySize : IComparer<Intervalable>
         int comparison = intervalable2.Count - intervalable.Count;
         if (comparison == 0)
         {
-            comparison = intervalable.getStart() - intervalable2.getStart();
+            comparison = intervalable.Start - intervalable2.Start;
         }
         return comparison;
     }

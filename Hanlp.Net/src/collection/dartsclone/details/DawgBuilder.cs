@@ -107,7 +107,7 @@ public class DawgBuilder
 
         _numStates = 1;
 
-        _nodes.get(0).label = (byte) 0xFF;
+        _nodes[0].label = (byte) 0xFF;
         _nodeStack.Add(0);
     }
 
@@ -115,8 +115,8 @@ public class DawgBuilder
     {
         flush(0);
 
-        _units.set(0, _nodes.get(0).unit());
-        _labels.set(0, _nodes.get(0).label);
+        _units.set(0, _nodes[0].unit());
+        _labels.set(0, _nodes[0].label);
 
         _nodes.Clear();
         _table.Clear();
@@ -150,14 +150,14 @@ public class DawgBuilder
                 break;
             }
 
-            byte keyLabel = keyPos < key.Length ? key[keyPos] : 0;
+            byte keyLabel = keyPos < key.Length ? key[keyPos] : (byte)0;
             if (keyPos < key.Length && keyLabel == 0)
             {
                 throw new ArgumentException(
                         "failed to insert key: invalid null character");
             }
 
-            byte unitLabel = _nodes.get(childId).label;
+            byte unitLabel = _nodes[childId].label;
             if ((keyLabel & 0xFF) < (unitLabel & 0xFF))
             {
                 throw new ArgumentException(
@@ -425,10 +425,10 @@ public class DawgBuilder
     private int hashNode(int id)
     {
         int hashValue = 0;
-        for (; id != 0; id = _nodes.get(id).sibling)
+        for (; id != 0; id = _nodes[(id)].sibling)
         {
-            int unit = _nodes.get(id).unit();
-            byte label = _nodes.get(id).label;
+            int unit = _nodes[(id)].unit();
+            byte label = _nodes[(id)].label;
             hashValue ^= hash(((label & 0xFF) << 24) ^ unit);
         }
         return hashValue;

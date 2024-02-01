@@ -39,12 +39,12 @@ public class Trie
     public Trie(ICollection<string> keywords)
         :this()
     {
-        addAllKeyword(keywords);
+        AddAllKeyword(keywords);
     }
 
-    public Trie removeOverlaps()
+    public Trie RemoveOverlaps()
     {
-        this.trieConfig.setAllowOverlaps(false);
+        this.trieConfig.        AllowOverlaps = false;
         return this;
     }
 
@@ -52,13 +52,13 @@ public class Trie
      * 只保留最长匹配
      * @return
      */
-    public Trie remainLongest()
+    public Trie RemainLongest()
     {
         this.trieConfig.remainLongest = true;
         return this;
     }
 
-    public void addKeyword(string keyword)
+    public void AddKeyword(string keyword)
     {
         if (keyword == null || keyword.Length == 0)
         {
@@ -67,16 +67,16 @@ public class Trie
         State currentState = this.rootState;
         foreach (char character in keyword.ToCharArray())
         {
-            currentState = currentState.addState(character);
+            currentState = currentState.AddState(character);
         }
-        currentState.addEmit(keyword);
+        currentState.AddEmit(keyword);
     }
 
-    public void addAllKeyword(ICollection<string> keywordSet)
+    public void AddAllKeyword(ICollection<string> keywordSet)
     {
         foreach (string keyword in keywordSet)
         {
-            addKeyword(keyword);
+            AddKeyword(keyword);
         }
     }
 
@@ -86,43 +86,43 @@ public class Trie
      * @param text 待分词文本
      * @return
      */
-    public ICollection<Token> tokenize(string text)
+    public ICollection<Token> Tokenize(string text)
     {
 
         List<Token> tokens = new ();
 
-        var collectedEmits = parseText(text);
+        var collectedEmits = ParseText(text);
         // 下面是最长分词的关键
         var intervalTree = new IntervalTree((List<Intervalable>)collectedEmits);
-        intervalTree.removeOverlaps((List<Intervalable>) collectedEmits);
+        intervalTree.RemoveOverlaps((List<Intervalable>) collectedEmits);
         // 移除结束
 
         int lastCollectedPosition = -1;
         foreach (Emit emit in collectedEmits)
         {
-            if (emit.getStart() - lastCollectedPosition > 1)
+            if (emit.Start - lastCollectedPosition > 1)
             {
-                tokens.Add(createFragment(emit, text, lastCollectedPosition));
+                tokens.Add(CreateFragment(emit, text, lastCollectedPosition));
             }
-            tokens.Add(createMatch(emit, text));
-            lastCollectedPosition = emit.getEnd();
+            tokens.Add(CreateMatch(emit, text));
+            lastCollectedPosition = emit.End;
         }
         if (text.Length - lastCollectedPosition > 1)
         {
-            tokens.Add(createFragment(null, text, lastCollectedPosition));
+            tokens.Add(CreateFragment(null, text, lastCollectedPosition));
         }
 
         return tokens;
     }
 
-    private Token createFragment(Emit emit, string text, int lastCollectedPosition)
+    private Token CreateFragment(Emit emit, string text, int lastCollectedPosition)
     {
-        return new FragmentToken(text[(lastCollectedPosition + 1)..(emit == null ? text.Length : emit.getStart())]);
+        return new FragmentToken(text[(lastCollectedPosition + 1)..(emit == null ? text.Length : emit.Start)]);
     }
 
-    private Token createMatch(Emit emit, string text)
+    private Token CreateMatch(Emit emit, string text)
     {
-        return new MatchToken(text[emit.getStart().. (emit.getEnd() + 1)], emit);
+        return new MatchToken(text[emit.Start.. (emit.End + 1)], emit);
     }
 
     /**
@@ -132,30 +132,30 @@ public class Trie
      * @return 匹配到的模式串
      */
     
-    public ICollection<Emit> parseText(string text)
+    public ICollection<Emit> ParseText(string text)
     {
-        checkForConstructedFailureStates();
+        CheckForConstructedFailureStates();
 
         int position = 0;
         State currentState = this.rootState;
         List<Emit> collectedEmits = new ();
         for (int i = 0; i < text.Length; ++i)
         {
-            currentState = getState(currentState, text[i]);
-            storeEmits(position, currentState, collectedEmits);
+            currentState = GetState(currentState, text[i]);
+            StoreEmits(position, currentState, collectedEmits);
             ++position;
         }
 
-        if (!trieConfig.isAllowOverlaps())
+        if (!trieConfig.AllowOverlaps)
         {
             var vs = collectedEmits.Cast<Intervalable>().ToList();
             IntervalTree intervalTree = new IntervalTree(vs);
-            intervalTree.removeOverlaps(vs);
+            intervalTree.RemoveOverlaps(vs);
         }
 
         if (trieConfig.remainLongest)
         {
-            remainLongest(collectedEmits);
+            RemainLongest(collectedEmits);
         }
 
         return collectedEmits;
@@ -165,15 +165,15 @@ public class Trie
      * 只保留最长词
      * @param collectedEmits
      */
-    private static void remainLongest(List<Emit> collectedEmits)
+    private static void RemainLongest(List<Emit> collectedEmits)
     {
         if (collectedEmits.Count < 2) return;
         var emitMapStart = new Dictionary<int, Emit>();
         foreach (Emit emit in collectedEmits)
         {
-            if (!emitMapStart.TryGetValue(emit.getStart(),out var pre) || (pre.Count < emit.Count))
+            if (!emitMapStart.TryGetValue(emit.Start,out var pre) || (pre.Count < emit.Count))
             {
-                emitMapStart.Add(emit.getStart(), emit);
+                emitMapStart.Add(emit.Start, emit);
             }
         }
         if (emitMapStart.Count < 2)
@@ -185,9 +185,9 @@ public class Trie
         var emitMapEnd = new Dictionary<int, Emit>();
         foreach (Emit emit in emitMapStart.Values)
         {
-            if (!emitMapEnd.TryGetValue(emit.getEnd(),out var pre) || pre.Count < emit.Count)
+            if (!emitMapEnd.TryGetValue(emit.End,out var pre) || pre.Count < emit.Count)
             {
-                emitMapEnd.Add(emit.getEnd(), emit);
+                emitMapEnd.Add(emit.End, emit);
             }
         }
 
@@ -203,13 +203,13 @@ public class Trie
      * @param character    接受字符
      * @return 跳转结果
      */
-    private static State getState(State currentState, char character)
+    private static State GetState(State currentState, char character)
     {
-        State newCurrentState = currentState.nextState(character);  // 先按success跳转
+        State newCurrentState = currentState.NextState(character);  // 先按success跳转
         while (newCurrentState == null) // 跳转失败的话，按failure跳转
         {
-            currentState = currentState.failure();
-            newCurrentState = currentState.nextState(character);
+            currentState = currentState.Failure;
+            newCurrentState = currentState.NextState(character);
         }
         return newCurrentState;
     }
@@ -217,25 +217,25 @@ public class Trie
     /**
      * 检查是否建立了failure表
      */
-    private void checkForConstructedFailureStates()
+    private void CheckForConstructedFailureStates()
     {
         if (!this.failureStatesConstructed)
         {
-            constructFailureStates();
+            ConstructFailureStates();
         }
     }
 
     /**
      * 建立failure表
      */
-    private void constructFailureStates()
+    private void ConstructFailureStates()
     {
         Queue<State> queue = new ();
 
         // 第一步，将深度为1的节点的failure设为根节点
-        foreach (State depthOneState in this.rootState.getStates())
+        foreach (State depthOneState in this.rootState.States)
         {
-            depthOneState.setFailure(this.rootState);
+            depthOneState.            Failure = this.rootState;
             queue.Enqueue(depthOneState);
         }
         this.failureStatesConstructed = true;
@@ -245,36 +245,36 @@ public class Trie
         {
             State currentState = queue.Dequeue();
 
-            foreach (char transition in currentState.getTransitions())
+            foreach (char transition in currentState.Transitions)
             {
-                State targetState = currentState.nextState(transition);
+                State targetState = currentState.NextState(transition);
                 queue.Enqueue(targetState);
 
-                State traceFailureState = currentState.failure();
-                while (traceFailureState.nextState(transition) == null)
+                State traceFailureState = currentState.Failure;
+                while (traceFailureState.NextState(transition) == null)
                 {
-                    traceFailureState = traceFailureState.failure();
+                    traceFailureState = traceFailureState.Failure;
                 }
-                State newFailureState = traceFailureState.nextState(transition);
-                targetState.setFailure(newFailureState);
-                targetState.addEmit(newFailureState.emit());
+                State newFailureState = traceFailureState.NextState(transition);
+                targetState.                Failure = newFailureState;
+                targetState.AddEmit(newFailureState.Emit());
             }
         }
     }
 
-    public void dfs(IWalker walker)
+    public void DFS(IWalker walker)
     {
-        checkForConstructedFailureStates();
-        dfs(rootState, "", walker);
+        CheckForConstructedFailureStates();
+        DFS(rootState, "", walker);
     }
 
-    private void dfs(State currentState, string path, IWalker walker)
+    private void DFS(State currentState, string path, IWalker walker)
     {
-        walker.meet(path, currentState);
-        foreach (char transition in currentState.getTransitions())
+        walker.Meet(path, currentState);
+        foreach (char transition in currentState.Transitions)
         {
-            State targetState = currentState.nextState(transition);
-            dfs(targetState, path + transition, walker);
+            State targetState = currentState.NextState(transition);
+            DFS(targetState, path + transition, walker);
         }
     }
 
@@ -286,7 +286,7 @@ public class Trie
          * @param path
          * @param state
          */
-        void meet(string path, State state);
+        void Meet(string path, State state);
     }
 
     /**
@@ -296,9 +296,9 @@ public class Trie
      * @param currentState   当前状态
      * @param collectedEmits 保存位置
      */
-    private static void storeEmits(int position, State currentState, List<Emit> collectedEmits)
+    private static void StoreEmits(int position, State currentState, List<Emit> collectedEmits)
     {
-        var emits = currentState.emit();
+        var emits = currentState.Emit();
         if (emits != null && emits.Count>0)
         {
             foreach (string emit in emits)
@@ -314,15 +314,15 @@ public class Trie
      * @param text 待匹配的文本
      * @return 文本包含模式時回傳true
      */
-    public bool hasKeyword(string text)
+    public bool HasKeyword(string text)
     {
-        checkForConstructedFailureStates();
+        CheckForConstructedFailureStates();
 
         State currentState = this.rootState;
         for (int i = 0; i < text.Length; ++i)
         {
-        	State nextState = getState(currentState, text[(i)]);
-            if (nextState != null && nextState != currentState && nextState.emit().Count != 0) {
+        	State nextState = GetState(currentState, text[(i)]);
+            if (nextState != null && nextState != currentState && nextState.Emit().Count != 0) {
                 return true;
             }
             currentState = nextState;

@@ -505,15 +505,15 @@ public abstract class Segment
                 threadArray[i].start();
             }
             threadArray[config.threadNumber - 1] = new WorkThread(sentenceArray, termListArray, (config.threadNumber - 1) * per, sentenceArray.Length);
-            threadArray[config.threadNumber - 1].start();
+            threadArray[config.threadNumber - 1].Start();
             try
             {
                 foreach (WorkThread thread in threadArray)
                 {
-                    thread.join();
+                    thread.Join();
                 }
             }
-            catch (InterruptedException e)
+            catch (Exception e)
             {
                 logger.severe("线程同步异常：" + TextUtility.exceptionToString(e));
                 return new();

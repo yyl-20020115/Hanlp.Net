@@ -9,6 +9,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using System.Collections;
+
 namespace com.hankcs.hanlp.algorithm;
 
 
@@ -36,7 +38,7 @@ public class MaxHeap<E> : IEnumerable<E>
     public MaxHeap(int maxSize, IComparer<E> comparator)
     {
         if (maxSize <= 0)
-            throw new ArgumentException();
+            throw new ArgumentException(nameof(maxSize));
         this.maxSize = maxSize;
         this.queue = new PriorityQueue<E,E>(maxSize, comparator);
     }
@@ -98,7 +100,13 @@ public class MaxHeap<E> : IEnumerable<E>
     //@Override
     public IEnumerator<E> GetEnumerator()
     {
-        return queue.GetEnumerator()();
+        //TODO:
+        return new List<E>(queue.UnorderedItems.ToArray()).GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        throw new NotImplementedException();
     }
 
     public int Count => queue.Count;

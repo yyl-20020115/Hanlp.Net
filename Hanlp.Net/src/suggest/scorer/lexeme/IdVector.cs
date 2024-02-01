@@ -50,9 +50,9 @@ public class IdVector : IComparable<IdVector>, ISentenceKey<IdVector>
         {
             long[] c1 = iterator1.next();
             long[] c2 = iterator2.next();
-            if (ArrayDistance.computeMinimumDistance(c1, c2) != 0)
+            if (ArrayDistance.ComputeMinimumDistance(c1, c2) != 0)
             {
-                return ArrayCompare.compare(c1, c2);
+                return ArrayCompare.Compare(c1, c2);
             }
             ++k;
         }
@@ -67,7 +67,7 @@ public class IdVector : IComparable<IdVector>, ISentenceKey<IdVector>
         {
             foreach (long[] b in other.idArrayList)
             {
-                long distance = ArrayDistance.computeAverageDistance(a, b);
+                long distance = ArrayDistance.ComputeAverageDistance(a, b);
                 score += 1.0 / (0.1 + distance);
             }
         }

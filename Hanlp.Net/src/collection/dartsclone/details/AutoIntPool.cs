@@ -21,6 +21,7 @@ public class AutoIntPool
     {
         return _buf[id];
     }
+    public int this[int id] => this._buf[id];
 
     public void set(int id, int value)
     {

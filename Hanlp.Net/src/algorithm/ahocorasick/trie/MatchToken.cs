@@ -14,14 +14,8 @@ public class MatchToken : Token
         this.emit = emit;
     }
 
-    public override bool isMatch()
-    {
-        return true;
-    }
+    public override bool IsMatch => true;
 
-    public override Emit getEmit()
-    {
-        return this.emit;
-    }
+    public override Emit Emit => this.emit;
 
 }

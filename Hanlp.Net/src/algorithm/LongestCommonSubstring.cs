@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.algorithm;
  */
 public class LongestCommonSubstring
 {
-    public static int compute(char[] str1, char[] str2)
+    public static int Compute(char[] str1, char[] str2)
     {
         int size1 = str1.Length;
         int size2 = str2.Length;
@@ -95,8 +95,5 @@ public class LongestCommonSubstring
         return longest;
     }
 
-    public static int compute(string str1, string str2)
-    {
-        return compute(str1.ToCharArray(), str2.ToCharArray());
-    }
+    public static int Compute(string str1, string str2) => Compute(str1.ToCharArray(), str2.ToCharArray());
 }

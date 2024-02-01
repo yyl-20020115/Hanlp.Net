@@ -29,7 +29,7 @@ public class Vector
         Array.Fill(elementArray, 0);
     }
 
-    public int Count
+    public int Count()
     {
         return elementArray.Length;
     }
@@ -37,7 +37,7 @@ public class Vector
     public float dot(Vector other)
     {
         float ret = 0.0f;
-        for (int i = 0; i < Count; ++i)
+        for (int i = 0; i < Count(); ++i)
         {
             ret += elementArray[i] * other.elementArray[i];
         }
@@ -47,7 +47,7 @@ public class Vector
     public float norm()
     {
         float ret = 0.0f;
-        for (int i = 0; i < Count; ++i)
+        for (int i = 0; i < Count(); ++i)
         {
             ret += elementArray[i] * elementArray[i];
         }
@@ -79,7 +79,7 @@ public class Vector
 
     public Vector minus(Vector other)
     {
-        float[] result = new float[Count];
+        float[] result = new float[Count()];
         for (int i = 0; i < result.Length; i++)
         {
             result[i] = elementArray[i] - other.elementArray[i];
@@ -89,7 +89,7 @@ public class Vector
 
     public Vector Add(Vector other)
     {
-        float[] result = new float[Count];
+        float[] result = new float[Count()];
         for (int i = 0; i < result.Length; i++)
         {
             result[i] = elementArray[i] + other.elementArray[i];

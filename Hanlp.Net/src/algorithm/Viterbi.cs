@@ -35,7 +35,7 @@ public class Viterbi
      * @param emit_p  发射概率 （隐状态表现为显状态的概率）
      * @return 最可能的序列
      */
-    public static int[] compute(int[] obs, int[] states, double[] start_p, double[][] trans_p, double[][] emit_p)
+    public static int[] Compute(int[] obs, int[] states, double[] start_p, double[][] trans_p, double[][] emit_p)
     {
         int _max_states_value = 0;
         foreach (int s in states)
@@ -108,12 +108,13 @@ public class Viterbi
      */
     public static void compute(List<Vertex> vertexList, TransformMatrix transformMatrixDictionary)
     {
-        if (Nature.values().Length != transformMatrixDictionary.states.Length)
-            transformMatrixDictionary.extend(Nature.values().Length);
+        if (Nature.values.Length != transformMatrixDictionary.states.Length)
+            transformMatrixDictionary.extend(Nature.values.Length);
         int Length = vertexList.Count - 1;
         double[][] cost = new double[2][];  // 滚动数组
         var iterator = vertexList.GetEnumerator();
-        Vertex start = iterator.next();
+        iterator.MoveNext();
+        Vertex start = iterator.Current;//.next();
         Nature pre = start.attribute.nature[0];
         // 第一个是确定的
 //        start.confirmNature(pre);
@@ -121,7 +122,8 @@ public class Viterbi
         Vertex preItem;
         Nature[] preTagSet;
         {
-            Vertex item = iterator.next();
+            iterator.MoveNext();
+            Vertex item = iterator.Current;//.next();
             cost[0] = new double[item.attribute.nature.Length];
             int j = 0;
             int curIndex = 0;

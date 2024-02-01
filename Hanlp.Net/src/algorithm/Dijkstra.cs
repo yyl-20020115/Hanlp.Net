@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.algorithm;
  */
 public class Dijkstra
 {
-    public static List<Vertex> compute(Graph graph)
+    public static List<Vertex> Compute(Graph graph)
     {
         List<Vertex> resultList = new ();
         Vertex[] vertexes = graph.getVertexes();

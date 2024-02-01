@@ -8,13 +8,7 @@ public class FragmentToken : Token
     {
     }
 
-    public override bool isMatch()
-    {
-        return false;
-    }
+    public override bool IsMatch => false;
 
-    public override Emit getEmit()
-    {
-        return null;
-    }
+    public override Emit Emit => null;
 }

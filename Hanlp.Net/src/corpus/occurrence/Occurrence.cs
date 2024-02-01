@@ -201,7 +201,7 @@ public class Occurrence
         //@Override
         public int Compare(PairFrequency o1, PairFrequency o2)
         {
-            return -Double.compare(o1.mi, o2.mi);
+            return -Math.Sign(o1.mi, o2.mi);
         }
     }
 
@@ -257,7 +257,7 @@ public class Occurrence
         //@Override
         public int Compare(PairFrequency o1, PairFrequency o2)
         {
-            return -Double.compare(o1.score, o2.score);
+            return -Math.Sign(o1.score, o2.score);
         }
     }
 

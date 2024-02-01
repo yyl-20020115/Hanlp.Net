@@ -123,11 +123,11 @@ public class CoreSynonymDictionaryEx
 
     public long distance(List<CommonSynonymDictionary.SynonymItem> synonymItemListA, List<CommonSynonymDictionary.SynonymItem> synonymItemListB)
     {
-        return EditDistance.compute(synonymItemListA, synonymItemListB);
+        return EditDistance.Compute(synonymItemListA, synonymItemListB);
     }
 
     public long distance(long[] arrayA, long[] arrayB)
     {
-        return EditDistance.compute(arrayA, arrayB);
+        return EditDistance.Compute(arrayA, arrayB);
     }
 }

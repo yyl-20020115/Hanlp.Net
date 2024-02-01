@@ -20,14 +20,14 @@ using System.Collections.Generic;
  */
 public class ArrayDistance
 {
-    public static long computeMinimumDistance(HashSet<long> setA, HashSet<long> setB)
+    public static long ComputeMinimumDistance(HashSet<long> setA, HashSet<long> setB)
     {
         long[] arrayA = setA.ToArray();
         long[] arrayB = setB.ToArray();
-       return computeMinimumDistance(arrayA, arrayB);
+       return ComputeMinimumDistance(arrayA, arrayB);
     }
 
-    public static long computeMinimumDistance(long[] arrayA, long[] arrayB)
+    public static long ComputeMinimumDistance(long[] arrayA, long[] arrayB)
     {
         int aIndex = 0;
         int bIndex = 0;
@@ -55,7 +55,7 @@ public class ArrayDistance
         return min;
     }
 
-    public static long computeAverageDistance(long[] arrayA, long[] arrayB)
+    public static long ComputeAverageDistance(long[] arrayA, long[] arrayB)
     {
         long totalA = 0L;
         long totalB = 0L;

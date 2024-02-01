@@ -45,7 +45,7 @@ public abstract class Tagger
         return true;
     }
 
-    public int Count
+    public int Count()
     {
         return 0;
     }
@@ -190,7 +190,7 @@ public abstract class Tagger
         return "";
     }
 
-    public override string ToString(string result, int size)
+    public string ToString(string result, int size)
     {
         return "";
     }

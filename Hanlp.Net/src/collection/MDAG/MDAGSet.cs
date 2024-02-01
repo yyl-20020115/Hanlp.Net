@@ -57,7 +57,7 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public Object[] ToArray()
+    public string[] ToArray()
     {
         return getAllStrings().ToArray();
     }

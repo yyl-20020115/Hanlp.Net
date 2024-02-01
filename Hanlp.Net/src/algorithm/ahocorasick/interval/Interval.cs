@@ -25,9 +25,9 @@ public class Interval : Intervalable
         this.end = end;
     }
 
-    public int getStart() => this.start;
+    public int Start => this.start;
 
-    public int getEnd() => this.end;
+    public int End => this.end;
 
     public int Count => end - start + 1;
 
@@ -36,22 +36,21 @@ public class Interval : Intervalable
      * @param other
      * @return
      */
-    public bool overlapsWith(Interval other) 
-        => this.start <= other.getEnd() &&
-                this.end >= other.getStart();
+    public bool OverlapsWith(Interval other)
+        => this.start <= other.End &&
+                this.end >= other.Start;
 
     /**
      * 区间是否覆盖了这个点
      * @param point
      * @return
      */
-    public bool overlapsWith(int point) 
-        => this.start <= point && point <= this.end;
+    public bool OverlapsWith(int point) => this.start <= point && point <= this.end;
 
     ////@Override
     public override bool Equals(object? o)
-        => o is Intervalable other && this.start == other.getStart() &&
-                this.end == other.getEnd();
+        => o is Intervalable other && this.start == other.Start &&
+                this.end == other.End;
 
     ////@Override
     public override int GetHashCode() => (start % 100) + this.end % 100;
@@ -59,12 +58,17 @@ public class Interval : Intervalable
     ////@Override
     public int CompareTo(object? o)
     {
-        if (o is Intervalable other)
+        switch (o)
         {
-            int comparison = this.start - other.getStart();
-            return comparison != 0 ? comparison : this.end - other.getEnd();
+            case Intervalable other:
+                {
+                    int comparison = start - other.Start;
+                    return comparison != 0 ? comparison : end - other.End;
+                }
+
+            default:
+                return -1;
         }
-        return -1;
     }
 
     public override string ToString() => this.start + ":" + this.end;

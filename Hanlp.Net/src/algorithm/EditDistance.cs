@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.algorithm;
  */
 public class EditDistance
 {
-    public static long compute(List<CommonSynonymDictionary.SynonymItem> synonymItemListA, List<CommonSynonymDictionary.SynonymItem> synonymItemListB)
+    public static long Compute(List<CommonSynonymDictionary.SynonymItem> synonymItemListA, List<CommonSynonymDictionary.SynonymItem> synonymItemListB)
     {
         long[] arrayA = new long[synonymItemListA.Count];
         long[] arrayB = new long[synonymItemListB.Count];
@@ -35,10 +35,10 @@ public class EditDistance
         {
             arrayB[i++] = item.entry.id;
         }
-        return compute(arrayA, arrayB);
+        return Compute(arrayA, arrayB);
     }
 
-    public static long compute(long[] arrayA, long[] arrayB)
+    public static long Compute(long[] arrayA, long[] arrayB)
     {
         int m = arrayA.Length;
         int n = arrayB.Length;
@@ -80,7 +80,7 @@ public class EditDistance
         return d[m, n];
     }
 
-    public static int compute(int[] arrayA, int[] arrayB)
+    public static int Compute(int[] arrayA, int[] arrayB)
     {
         int m = arrayA.Length;
         int n = arrayB.Length;
@@ -129,9 +129,9 @@ public class EditDistance
      * @param b 串B
      * @return 它们之间的距离
      */
-    public static int compute(string a, string b)
+    public static int Compute(string a, string b)
     {
-        return ed(a, b);
+        return Ed(a, b);
     }
 
     /**
@@ -141,7 +141,7 @@ public class EditDistance
      * @param rightWord 串B
      * @return 它们之间的距离
      */
-    public static int ed(string wrongWord, string rightWord)
+    public static int Ed(string wrongWord, string rightWord)
     {
         int m = wrongWord.Length;
         int n = rightWord.Length;
@@ -189,7 +189,7 @@ public class EditDistance
      * @param rightWord 串B
      * @return 它们之间的距离
      */
-    public static int compute(char[] wrongWord, char[] rightWord)
+    public static int Compute(char[] wrongWord, char[] rightWord)
     {
         int m = wrongWord.Length;
         int n = rightWord.Length;
