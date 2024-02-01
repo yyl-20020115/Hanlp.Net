@@ -76,7 +76,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
      */
     public static CoNLLSentence compute(string sentence)
     {
-        return new MaxEntDependencyParser().parse(sentence);
+        return new MaxEntDependencyParser().Parse(sentence);
     }
 
     //@Override

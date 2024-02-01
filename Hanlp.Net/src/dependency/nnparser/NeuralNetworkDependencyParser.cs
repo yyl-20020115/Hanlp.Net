@@ -32,7 +32,7 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
     {
         base(segment);
         parser_dll = new parser_dll();
-        setDeprelTranslater(ConfigOption.DEPRL_DESCRIPTION_PATH).enableDeprelTranslator(true);
+        setDeprelTranslater(ConfigOption.DEPRL_DESCRIPTION_PATH).EnableDeprelTranslator(true);
     }
 
     public NeuralNetworkDependencyParser()
@@ -91,6 +91,6 @@ public class NeuralNetworkDependencyParser : AbstractDependencyParser
      */
     public static CoNLLSentence compute(string sentence)
     {
-        return new NeuralNetworkDependencyParser().parse(sentence);
+        return new NeuralNetworkDependencyParser().Parse(sentence);
     }
 }

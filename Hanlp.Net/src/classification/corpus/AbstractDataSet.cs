@@ -13,6 +13,7 @@ using com.hankcs.hanlp.classification.models;
 using com.hankcs.hanlp.classification.tokenizers;
 using com.hankcs.hanlp.classification.utilities;
 using com.hankcs.hanlp.utility;
+using System.Collections;
 
 namespace com.hankcs.hanlp.classification.corpus;
 
@@ -89,6 +90,8 @@ public abstract class AbstractDataSet : IDataSet
     //@Override
     public bool IsTestingDataSet => testingDataSet;
 
+    public abstract int Count { get; }
+
     //@Override
     public IDataSet Load(string folderPath, string charsetName, double percentage)
     {
@@ -155,4 +158,12 @@ public abstract class AbstractDataSet : IDataSet
         return this;
     }
     public abstract Document Add(string category, string text);
+    public abstract void Clear();
+    public abstract IDataSet Shrink(int[] idMap);
+    public abstract IEnumerator<Document> GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        throw new NotImplementedException();
+    }
 }

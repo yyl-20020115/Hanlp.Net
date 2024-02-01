@@ -43,20 +43,21 @@ public abstract class AbstractDependencyParser : IDependencyParser
     }
 
     public AbstractDependencyParser()
+        : this(NLPTokenizer.ANALYZER)
     {
-        this(NLPTokenizer.ANALYZER);
+       
     }
 
     //@Override
-    public CoNLLSentence parse(string sentence)
+    public CoNLLSentence Parse(string sentence)
     {
         //assert sentence != null;
-        CoNLLSentence output = parse(segment.seg(sentence.ToCharArray()));
+        CoNLLSentence output = Parse(segment.seg(sentence.ToCharArray()));
         if (enableDeprelTranslater && deprelTranslater != null)
         {
             foreach (CoNLLWord word in output)
             {
-                string translatedDeprel = deprelTranslater.get(word.DEPREL);
+                string translatedDeprel = deprelTranslater[(word.DEPREL)];
                 word.DEPREL = translatedDeprel;
             }
         }
@@ -64,26 +65,26 @@ public abstract class AbstractDependencyParser : IDependencyParser
     }
 
     //@Override
-    public Segment getSegment()
+    public Segment GetSegment()
     {
         return segment;
     }
 
     //@Override
-    public IDependencyParser setSegment(Segment segment)
+    public IDependencyParser SetSegment(Segment segment)
     {
         this.segment = segment;
         return this;
     }
 
     //@Override
-    public Dictionary<string, string> getDeprelTranslator()
+    public Dictionary<string, string> GetDeprelTranslator()
     {
         return deprelTranslater;
     }
 
     //@Override
-    public IDependencyParser setDeprelTranslator(Dictionary<string, string> deprelTranslator)
+    public IDependencyParser SetDeprelTranslator(Dictionary<string, string> deprelTranslator)
     {
         this.deprelTranslater = deprelTranslator;
         return this;
@@ -116,7 +117,7 @@ public abstract class AbstractDependencyParser : IDependencyParser
     }
 
     //@Override
-    public IDependencyParser enableDeprelTranslator(bool enable)
+    public IDependencyParser EnableDeprelTranslator(bool enable)
     {
         enableDeprelTranslater = enable;
         return this;

@@ -66,7 +66,7 @@ public class WordNatureDependencyParser : MinimumSpanningTreeParser
      */
     public static CoNLLSentence compute(string sentence)
     {
-        return new WordNatureDependencyParser().parse(sentence);
+        return new WordNatureDependencyParser().Parse(sentence);
     }
 
     //@Override

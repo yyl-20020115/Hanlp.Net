@@ -30,7 +30,7 @@ public interface IDependencyParser
      * @param termList 句子，可以是任何具有词性标注功能的分词器的分词结果
      * @return CoNLL格式的依存句法树
      */
-    CoNLLSentence parse(List<Term> termList);
+    CoNLLSentence Parse(List<Term> termList);
 
     /**
      * 分析句子的依存句法
@@ -38,39 +38,39 @@ public interface IDependencyParser
      * @param sentence 句子
      * @return CoNLL格式的依存句法树
      */
-    CoNLLSentence parse(string sentence);
+    CoNLLSentence Parse(string sentence);
 
     /**
      * 获取Parser使用的分词器
      *
      * @return
      */
-    Segment getSegment();
+    Segment GetSegment();
 
     /**
      * 设置Parser使用的分词器
      *
      * @param segment
      */
-    IDependencyParser setSegment(Segment segment);
+    IDependencyParser SetSegment(Segment segment);
 
     /**
      * 获取依存关系映射表
      *
      * @return
      */
-    Dictionary<string, string> getDeprelTranslator();
+    Dictionary<string, string> GetDeprelTranslator();
 
     /**
      * 设置依存关系映射表
      *
      * @param deprelTranslator
      */
-    IDependencyParser setDeprelTranslator(Dictionary<string, string> deprelTranslator);
+    IDependencyParser SetDeprelTranslator(Dictionary<string, string> deprelTranslator);
 
     /**
      * 依存关系自动转换开关
      * @param enable
      */
-    IDependencyParser enableDeprelTranslator(bool enable);
+    IDependencyParser EnableDeprelTranslator(bool enable);
 }
