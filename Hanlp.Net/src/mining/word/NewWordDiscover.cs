@@ -1,5 +1,6 @@
 using com.hankcs.hanlp.algorithm;
 using com.hankcs.hanlp.utility;
+using System.Text.RegularExpressions;
 
 namespace com.hankcs.hanlp.mining.word;
 
@@ -55,7 +56,7 @@ public class NewWordDiscover
         string doc;
         Dictionary<string, WordInfo> word_cands = new Dictionary<string, WordInfo>();
         int totalLength = 0;
-        Pattern delimiter = Pattern.compile("[\\s\\d,.<>/?:;'\"\\[\\]{}()\\|~!@#$%^&*\\-_=+，。《》、？：；“”‘’｛｝【】（）…￥！—┄－]+");
+        Regex delimiter = new Regex("[\\s\\d,.<>/?:;'\"\\[\\]{}()\\|~!@#$%^&*\\-_=+，。《》、？：；“”‘’｛｝【】（）…￥！—┄－]+");
         while ((doc = reader.ReadLine()) != null)
         {
             doc = delimiter.matcher(doc).replaceAll("\0");

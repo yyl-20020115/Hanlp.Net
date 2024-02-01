@@ -111,7 +111,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     //@Override
     public bool isEmpty()
     {
-        return trie.isEmpty();
+        return trie.isEmpty;
     }
 
     //@Override
@@ -208,7 +208,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
         //@Override
         public bool isEmpty()
         {
-            return trie.isEmpty();
+            return trie.isEmpty;
         }
 
         //@Override
@@ -324,12 +324,12 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
     public class CT2 : HashSet<KeyValuePair<string, V>>
     {
         //@Override
-        public int Count=> trie.Count;
+        public new int Count=> trie.Count;
 
         //@Override
         public bool isEmpty()
         {
-            return trie.isEmpty();
+            return trie.isEmpty;
         }
 
         //@Override

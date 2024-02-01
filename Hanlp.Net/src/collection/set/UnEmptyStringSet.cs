@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.collection.set;
 public class UnEmptyStringSet : HashSet<string>
 {
     //@Override
-    public bool Add(string s)
+    public new bool Add(string s)
     {
         if (s.Trim().Length == 0) return false;
 

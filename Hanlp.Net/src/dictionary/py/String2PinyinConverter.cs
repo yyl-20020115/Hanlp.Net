@@ -35,7 +35,7 @@ public class String2PinyinConverter
         // TODO:什么时候有空了升级到双数组吧
         trie = new Trie().RemainLongest();
         map = new Dictionary<string, Pinyin>();
-        int end = Pinyin.none5.ordinal();
+        int end = Pinyin.none5.Ordinal;
         for (int i = 0; i < end; ++i)
         {
             Pinyin pinyin = Integer2PinyinConverter.pinyins[i];

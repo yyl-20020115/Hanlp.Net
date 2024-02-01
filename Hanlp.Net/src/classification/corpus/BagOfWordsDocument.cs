@@ -35,7 +35,7 @@ public class BagOfWordsDocument : ITermFrequencyHolder
         tfMap = new FrequencyMap<int>();
     }
 
-    public FrequencyMap<int> getTfMap()
+    public FrequencyMap<int> GetTfMap()
     {
         return tfMap;
     }

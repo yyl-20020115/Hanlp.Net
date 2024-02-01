@@ -10,6 +10,8 @@
  * </copyright>
  */
 
+using com.hankcs.hanlp.collection.trie.bintrie.util;
+
 namespace com.hankcs.hanlp.collection.trie.bintrie;
 
 
@@ -35,7 +37,7 @@ public class Node<V> : BaseNode<V>
             BaseNode<V> target = child[index];
             switch (node.status)
             {
-                case UNDEFINED_0:
+                case Status.UNDEFINED_0:
                     if (target.status != Status.NOT_WORD_1)
                     {
                         target.status = Status.NOT_WORD_1;
@@ -43,13 +45,13 @@ public class Node<V> : BaseNode<V>
                         Add = true;
                     }
                     break;
-                case NOT_WORD_1:
+                case Status.NOT_WORD_1:
                     if (target.status == Status.WORD_END_3)
                     {
                         target.status = Status.WORD_MIDDLE_2;
                     }
                     break;
-                case WORD_END_3:
+                case Status.WORD_END_3:
                     if (target.status != Status.WORD_END_3)
                     {
                         target.status = Status.WORD_MIDDLE_2;

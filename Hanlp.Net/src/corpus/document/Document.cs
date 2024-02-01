@@ -39,7 +39,7 @@ public class Document : Serializable
 
     public static Document create(string param)
     {
-        var pattern = Pattern.compile(".+?((。/w)|(！/w )|(？/w )|\\n|$)");
+        var pattern = Regex.compile(".+?((。/w)|(！/w )|(？/w )|\\n|$)");
         var matcher = pattern.matcher(param);
         List<Sentence> sentenceList = new ();
         while (matcher.find())

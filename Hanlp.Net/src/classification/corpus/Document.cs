@@ -49,7 +49,7 @@ public class Document : BagOfWordsDocument
         // 统计词频
         for (int i = 0; i < tokenArray.Length; i++)
         {
-            tfMap.Add(lexicon.addWord(tokenArray[i]));
+            tfMap.Add(lexicon.AddWord(tokenArray[i]));
         }
     }
 

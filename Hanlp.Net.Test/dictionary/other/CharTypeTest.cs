@@ -29,9 +29,9 @@ public class CharTypeTest : TestCase
 
     public void TestTab() 
     {
-        AssertTrue(TextUtility.CharType('\t') == CharType.CT_DELIMITER);
-        AssertTrue(TextUtility.CharType('\r') == CharType.CT_DELIMITER);
-        AssertTrue(TextUtility.CharType('\0') == CharType.CT_DELIMITER);
+        AssertTrue(TextUtility.GetCharType('\t') == CharType.CT_DELIMITER);
+        AssertTrue(TextUtility.GetCharType('\r') == CharType.CT_DELIMITER);
+        AssertTrue(TextUtility.GetCharType('\0') == CharType.CT_DELIMITER);
 
 //        Console.WriteLine(HanLP.segment("\t"));
     }

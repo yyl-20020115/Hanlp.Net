@@ -109,7 +109,7 @@ public class AtomNode
                 word = Predefine.TAG_CLUSTER;
                 break;
             case CharType.CT_SINGLE://12021-2129-3121
-//                if (Pattern.compile("^(-?\\d+)(\\.\\d+)?$").matcher(word).matches())//匹配浮点数
+//                if (Regex.compile("^(-?\\d+)(\\.\\d+)?$").matcher(word).matches())//匹配浮点数
 //                {
 //                    nature = Nature.m;
 //                    word = Predefine.TAG_NUMBER;

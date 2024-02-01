@@ -27,7 +27,7 @@ namespace com.hankcs.hanlp.model.perceptron.utility;
  */
 public class IOUtility : IOUtil
 {
-    private static Pattern PATTERN_SPACE = Pattern.compile("\\s+");
+    private static Regex PATTERN_SPACE = Regex.compile("\\s+");
 
     public static string[] readLineToArray(string line)
     {

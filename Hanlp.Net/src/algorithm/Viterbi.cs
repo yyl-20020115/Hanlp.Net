@@ -129,7 +129,7 @@ public class Viterbi
             int curIndex = 0;
             foreach (Nature cur in item.attribute.nature)
             {
-                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.attribute.frequency[curIndex] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
+                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.attribute.frequency[curIndex] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.Ordinal));
                 ++j;
                 ++curIndex;
             }
@@ -153,7 +153,7 @@ public class Viterbi
                 int j = 0;
                 foreach (Nature p in preTagSet)
                 {
-                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.Ordinal][cur.Ordinal] - Math.Log((item.attribute.frequency[k] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
+                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.Ordinal][cur.Ordinal] - Math.Log((item.attribute.frequency[k] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.Ordinal));
                     if (now < cost[index_i][k])
                     {
                         cost[index_i][k] = now;
@@ -187,14 +187,18 @@ public class Viterbi
         List<E> tagList = new (roleTagList.Count);
         double[][] cost = new double[2][];  // 滚动数组
         var iterator = roleTagList.GetEnumerator();
-        EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.Keys.GetEnumerator().next().Key;
+        iterator.MoveNext();
+        EnumItem<E> start = iterator.Current;
+        var ex = start.labelMap.Keys.GetEnumerator();
+        ex.MoveNext();
+        E pre = ex.Current;
         // 第一个是确定的
         tagList.Add(pre);
         // 第二个也可以简单地算出来
         HashSet<E> preTagSet;
         {
-            EnumItem<E> item = iterator.next();
+            iterator.MoveNext();
+            EnumItem<E> item = iterator.Current;
             cost[0] = new double[item.labelMap.Count];
             int j = 0;
             foreach (E cur in item.labelMap.ToArray())
@@ -220,7 +224,7 @@ public class Viterbi
                 int j = 0;
                 foreach (E p in preTagSet)
                 {
-                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.ordinal()][cur.ordinal()] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.Ordinal][cur.Ordinal] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                     if (now < cost[index_i][k])
                     {
                         cost[index_i][k] = now;
@@ -265,7 +269,7 @@ public class Viterbi
             EnumItem<E> item = iterator.next();
             foreach (E cur in item.labelMap)
             {
-                double now = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                double now = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                 if (perfect_cost > now)
                 {
                     perfect_cost = now;

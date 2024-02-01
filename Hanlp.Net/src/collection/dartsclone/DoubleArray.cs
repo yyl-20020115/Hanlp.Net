@@ -41,7 +41,7 @@ public class DoubleArray : Serializable
         int i = 0;
         while (iteratorKey.MoveNext())
         {
-            byteKey[i] = iteratorKey.next().getBytes(utf8);
+            byteKey[i] = iteratorKey.Current.getBytes(utf8);
             ++i;
         }
         build(byteKey, values);

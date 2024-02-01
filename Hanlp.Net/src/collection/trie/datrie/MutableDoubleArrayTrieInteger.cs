@@ -415,10 +415,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
      */
     public int Count => this._size;
 
-    public bool isEmpty()
-    {
-        return _size == 0;
-    }
+    public bool isEmpty => _size == 0;
 
     /**
      * 覆盖模式添加
@@ -953,7 +950,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         //@Override
         public bool isEmpty()
         {
-            return MutableDoubleArrayTrieInteger.isEmpty();
+            return MutableDoubleArrayTrieInteger.isEmpty;
         }
 
         //@Override
@@ -1075,7 +1072,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         //@Override
         public bool isEmpty()
         {
-            return MutableDoubleArrayTrieInteger.isEmpty();
+            return MutableDoubleArrayTrieInteger.isEmpty;
         }
 
         //@Override

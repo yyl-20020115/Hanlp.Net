@@ -55,7 +55,7 @@ public class TransformMatrixDictionary<E> : TransformMatrix
      */
     public int getFrequency(E from, E to)
     {
-        return matrix[from.ordinal()][to.ordinal()];
+        return matrix[from.Ordinal][to.Ordinal];
     }
 
     /**
@@ -66,7 +66,7 @@ public class TransformMatrixDictionary<E> : TransformMatrix
      */
     public int getTotalFrequency(E e)
     {
-        return total[e.ordinal()];
+        return total[e.Ordinal];
     }
 
     /**
@@ -100,6 +100,6 @@ public class TransformMatrixDictionary<E> : TransformMatrix
     //@Override
     public int ordinal(string tag)
     {
-        return Enum.valueOf(enumType, tag).ordinal();
+        return Enum.valueOf(enumType, tag).Ordinal;
     }
 }

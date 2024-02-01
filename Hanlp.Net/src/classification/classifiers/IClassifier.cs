@@ -29,7 +29,7 @@ public interface IClassifier
      * @param enable
      * @return
      */
-    IClassifier enableProbability(bool enable);
+    IClassifier EnableProbability(bool enable);
 
     /**
      * 预测分类
@@ -39,7 +39,7 @@ public interface IClassifier
      * @ 参数错误
      * @throws InvalidOperationException    未训练模型
      */
-    Dictionary<string, double> predict(string text) ;
+    Dictionary<string, double> Predict(string text);
 
     /**
      * 预测分类
@@ -55,7 +55,7 @@ public interface IClassifier
      * @
      * @throws InvalidOperationException
      */
-    double[] categorize(Document document) ;
+    double[] Categorize(Document document);
 
     /**
      * 预测最可能的分类
@@ -64,7 +64,7 @@ public interface IClassifier
      * @
      * @throws InvalidOperationException
      */
-    int label(Document document) ;
+    int Label(Document document) ;
 
     /**
      * 预测最可能的分类
@@ -73,7 +73,7 @@ public interface IClassifier
      * @
      * @throws InvalidOperationException
      */
-    string classify(string text) ;
+    string Classify(string text);
 
     /**
      * 预测最可能的分类
@@ -82,14 +82,14 @@ public interface IClassifier
      * @
      * @throws InvalidOperationException
      */
-    string classify(Document document) ;
+    string Classify(Document document) ;
 
     /**
      * 训练模型
      *
      * @param trainingDataSet 训练数据集,用Map储存.键是分类名,值是一个数组,数组中每个元素都是一篇文档的内容.
      */
-    void train(Dictionary<string, string[]> trainingDataSet) ;
+    void Train(Dictionary<string, string[]> trainingDataSet) ;
 
     /**
      * 训练模型
@@ -108,7 +108,7 @@ public interface IClassifier
      * @param charsetName 文件编码
      * @ 任何可能的IO异常
      */
-    void train(string folderPath, string charsetName) ;
+    void Train(string folderPath, string charsetName) ;
 
     /**
      * 用UTF-8编码的语料训练模型
@@ -126,18 +126,18 @@ public interface IClassifier
      *                    文件不一定需要用数字命名,也不需要以txt作为后缀名,但一定需要是文本文件.
      * @ 任何可能的IO异常
      */
-    void train(string folderPath) ;
+    void Train(string folderPath) ;
 
     /**
      * 训练模型
      * @param dataSet 训练数据集
      * @ 当数据集为空时,将抛出此异常
      */
-    void train(IDataSet dataSet) ;
+    void Train(IDataSet dataSet) ;
 
     /**
      * 获取训练后的模型,可用于序列化保存或预测.
      * @return 模型,null表示未训练
      */
-    AbstractModel getModel();
+    AbstractModel GetModel();
 }

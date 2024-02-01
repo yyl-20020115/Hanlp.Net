@@ -9,6 +9,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.collection.trie.datrie;
 using System.Text;
 
 namespace com.hankcs.hanlp.classification.statistics.evaluations;
@@ -72,7 +73,7 @@ public class FMeasure : Serializable
             l = Math.Max(l, c.Length);
         }
          int w = 6;
-         StringBuilder sb = new StringBuilder(10000);
+         var sb = new StringBuilder(10000);
 
         printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".Replace('*', (char)(w-(int)'0'), "P", "R", "F1", "A", ""));
         for (int i = 0; i < catalog.Length; i++)

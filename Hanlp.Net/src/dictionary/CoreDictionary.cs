@@ -94,7 +94,7 @@ public class CoreDictionary
                     _out.writeInt(attribute.nature.Length);
                     for (int i = 0; i < attribute.nature.Length; ++i)
                     {
-                        _out.writeInt(attribute.nature[i].ordinal());
+                        _out.writeInt(attribute.nature[i].Ordinal);
                         _out.writeInt(attribute.frequency[i]);
                     }
                 }
@@ -387,7 +387,7 @@ public class CoreDictionary
             _out.writeInt(nature.Length);
             for (int i = 0; i < nature.Length; ++i)
             {
-                _out.writeInt(nature[i].ordinal());
+                _out.writeInt(nature[i].Ordinal);
                 _out.writeInt(frequency[i]);
             }
         }

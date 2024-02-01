@@ -53,12 +53,13 @@ public class FileDataSet : AbstractDataSet
     }
 
     public FileDataSet() 
+        : this(createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"))
     {
-        this(createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
+        ;
     }
 
     //@Override
-    public Document Add(string category, string text)
+    public override Document Add(string category, string text)
     {
         Document document = convert(category, text);
         try

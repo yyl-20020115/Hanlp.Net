@@ -183,7 +183,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
     public void walkToSave(Stream _out) 
     {
         _out.writeChar(c);
-        _out.writeInt(status.ordinal());
+        _out.writeInt(status.Ordinal);
         int childSize = 0;
         if (child != null) childSize = child.Length;
         _out.writeInt(childSize);
@@ -197,7 +197,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
     protected void walkToSave(ObjectOutput _out) 
     {
         _out.writeChar(c);
-        _out.writeInt(status.ordinal());
+        _out.writeInt(status.Ordinal);
         if (status == Status.WORD_END_3 || status == Status.WORD_MIDDLE_2)
         {
             _out.writeObject(value);
@@ -266,7 +266,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         WORD_END_3,
     }
 
-    public class TrieEntry : AbstractMap.SimpleEntry<string, V> , IComparable<TrieEntry>
+    public class TrieEntry : AbstractMap<string,V>.SimpleEntry<string, V> , IComparable<TrieEntry>
     {
         public TrieEntry(string key, V value)
             : base(key, value)

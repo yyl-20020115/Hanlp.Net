@@ -60,7 +60,7 @@ public class MemoryDataSet : AbstractDataSet
         var iterator = GetEnumerator();
         while (iterator.MoveNext())
         {
-            Document document = iterator.next();
+            Document document = iterator.Current;
             FrequencyMap<int> tfMap = new FrequencyMap<int>();
             foreach (KeyValuePair<int, int[]> entry in document.tfMap)
             {

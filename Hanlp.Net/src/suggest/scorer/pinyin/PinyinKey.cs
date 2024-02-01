@@ -66,7 +66,7 @@ public class PinyinKey : IComparable<PinyinKey>, ISentenceKey<PinyinKey>
         {
             if (iterator.Current)
             {
-                pyOrdinalArray[pinyinSize++] = pinyinArray[i].ordinal();
+                pyOrdinalArray[pinyinSize++] = pinyinArray[i].Ordinal;
             }
             if (pinyinArray[i] != Pinyin.none5)
             {

@@ -92,7 +92,7 @@ public class ChiSquareFeatureExtractor
         if (selectedFeatures.Count > maxSize)
         {
             MaxHeap<KeyValuePair<int, Double>> maxHeap = new MaxHeap<KeyValuePair<int, Double>>(maxSize, new CT());
-            foreach (KeyValuePair<int, Double> entry in selectedFeatures.Keys)
+            foreach (KeyValuePair<int, Double> entry in selectedFeatures)
             {
                 maxHeap.Add(entry);
             }

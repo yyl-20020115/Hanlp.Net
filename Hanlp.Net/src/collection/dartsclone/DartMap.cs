@@ -45,10 +45,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public override bool isEmpty()
-    {
-        return this.valueArray.Length == 0;
-    }
+    public override bool isEmpty => this.valueArray.Length == 0;
 
     //@Override
     public override bool ContainsKey(Object key)

@@ -38,7 +38,7 @@ public class NaiveBayesClassifierTest : TestCase
         NaiveBayesClassifier naiveBayesClassifier = new NaiveBayesClassifier();
         long start = DateTime.Now.Microsecond;
         Console.WriteLine("开始训练...");
-        naiveBayesClassifier.train(trainingDataSet);
+        naiveBayesClassifier.Train(trainingDataSet);
         Console.WriteLine("训练耗时：{0} ms\n", DateTime.Now.Microsecond - start);
         // 将模型保存
         IOUtil.saveObjectTo(naiveBayesClassifier.getNaiveBayesModel(), MODEL_PATH);
@@ -57,16 +57,16 @@ public class NaiveBayesClassifierTest : TestCase
         // 预测单个文档
         String path = CORPUS_FOLDER + "/体育/0004.txt";
         String text = IOUtil.readTxt(path);
-        String label = naiveBayesClassifier.classify(text);
+        String label = naiveBayesClassifier.Classify(text);
         String title = text.Split("\\n")[0].Replace("\\s", "");
         Console.WriteLine("《{0}》 属于分类 【{1}】\n", title, label);
         text = "2016年中国铁路完成固定资产投资将达8000亿元";
         title = text;
-        label = naiveBayesClassifier.classify(text);
+        label = naiveBayesClassifier.Classify(text);
         Console.WriteLine("《{0}》 属于分类 【{1}】\n", title, label);
         text = "国安2016赛季年票开售比赛场次减少套票却上涨";
         title = text;
-        label = naiveBayesClassifier.classify(text);
+        label = naiveBayesClassifier.Classify(text);
         Console.WriteLine("《{0}》 属于分类 【{1}】\n", title, label);
         // 对将训练集作为测试，计算准确率
         int totalDocuments = 0;
@@ -82,7 +82,7 @@ public class NaiveBayesClassifierTest : TestCase
             totalDocuments += documents.Length;
             foreach (String document in documents)
             {
-                if (category.Equals(naiveBayesClassifier.classify(document))) ++rightDocuments;
+                if (category.Equals(naiveBayesClassifier.Classify(document))) ++rightDocuments;
             }
         }
         Console.WriteLine("准确率 {0} / {1} = {2}%\n速度 {3} 文档/秒", 

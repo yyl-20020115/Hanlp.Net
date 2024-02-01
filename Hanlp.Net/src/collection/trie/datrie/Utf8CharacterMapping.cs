@@ -6,7 +6,7 @@ namespace com.hankcs.hanlp.collection.trie.datrie;
 /**
  * UTF-8编码到int的映射
  */
-public class Utf8CharacterMapping : CharacterMapping, Serializable
+public class Utf8CharacterMapping : CharacterMapping//, Serializable
 {
     private static readonly long serialVersionUID = -6529481088518753872L;
     private static readonly int N = 256;

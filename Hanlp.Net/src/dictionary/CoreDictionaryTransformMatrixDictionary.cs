@@ -41,7 +41,7 @@ public class CoreDictionaryTransformMatrixDictionary
         //@Override
         public int ordinal(string tag)
         {
-            return Nature.create(tag).ordinal();
+            return Nature.create(tag).Ordinal;
         }
     }
 }

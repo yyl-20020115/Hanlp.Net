@@ -38,7 +38,7 @@ public class TraditionalChineseTokenizer
         foreach (Term term in termList)
         {
             term.offset = offset;
-            term.word = text.substring(offset, offset + term.Length);
+            term.word = text.Substring(offset, term.Length);
             offset += term.Length;
         }
 

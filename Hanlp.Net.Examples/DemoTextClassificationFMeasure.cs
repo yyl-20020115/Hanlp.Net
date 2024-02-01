@@ -36,8 +36,8 @@ public class DemoTextClassificationFMeasure
             setTokenizer(new HanLPTokenizer()).                               // 支持不同的ITokenizer，详见源码中的文档
             load(CORPUS_FOLDER, "UTF-8", 0.9);               // 前90%作为训练集
         IClassifier classifier = new NaiveBayesClassifier();
-        classifier.train(trainingCorpus);
-        IDataSet testingCorpus = new MemoryDataSet(classifier.getModel()).
+        classifier.Train(trainingCorpus);
+        IDataSet testingCorpus = new MemoryDataSet(classifier.GetModel()).
             load(CORPUS_FOLDER, "UTF-8", -0.1);        // 后10%作为测试集
         // 计算准确率
         FMeasure result = Evaluator.evaluate(classifier, testingCorpus);

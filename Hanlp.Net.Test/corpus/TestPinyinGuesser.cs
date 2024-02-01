@@ -39,7 +39,7 @@ public class TestPinyinGuesser : TestCase
 //        for (Pinyin pinyin : PinyinDictionary.pinyins)
 //        {
 //            Console.printf("Pinyin.%s,", convert(pinyin));
-//            assertEquals(convert(pinyin), tone2tone1[pinyin.ordinal()]);
+//            assertEquals(convert(pinyin), tone2tone1[pinyin.Ordinal]);
 //        }
 //    }
 //

@@ -31,13 +31,13 @@ public class NTDictionary : EnumItemDictionary<NT>
     }
 
     //@Override
-    protected NT[] values()
+    protected override NT[] values()
     {
         return NT.values();
     }
 
     //@Override
-    protected EnumItem<NT> newItem()
+    protected override EnumItem<NT> newItem()
     {
         return new EnumItem<NT>();
     }

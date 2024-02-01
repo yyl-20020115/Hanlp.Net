@@ -24,7 +24,7 @@ public class _ValueArray<V>
         this.value = value;
     }
 
-    public V nextValue()
+    public virtual V nextValue()
     {
         return value[offset++];
     }
@@ -36,7 +36,7 @@ public class _ValueArray<V>
     {
     }
 
-    public _ValueArray<V> setValue(V[] value)
+    public virtual _ValueArray<V> setValue(V[] value)
     {
         this.value = value;
         return this;

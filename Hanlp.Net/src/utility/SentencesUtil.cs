@@ -51,6 +51,7 @@ public class SentencesUtil
             }
 
             sb.Append(chars[i]);
+            if (chars[i] == '；' && !shortest) continue;
             switch (chars[i])
             {
                 case '.':
@@ -75,10 +76,6 @@ public class SentencesUtil
                 case ',':
                 case ';':
                 case '；':
-                    if (!shortest)
-                    {
-                        continue;
-                    }
                 case ' ':
                 case '	':
                 case ' ':

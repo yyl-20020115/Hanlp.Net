@@ -110,7 +110,7 @@ public class TestMakeTranslateName : TestCase
 //    public void testMakeDictionary() 
 //    {
 //        HashSet<String> wordSet = new TreeSet<String>();
-//        Pattern pattern = Pattern.compile("^[a-zA-Z]+ *(\\[.*?])? *([\\u4E00-\\u9FA5]+) ?[:：。]");
+//        Regex pattern = Regex.compile("^[a-zA-Z]+ *(\\[.*?])? *([\\u4E00-\\u9FA5]+) ?[:：。]");
 //        int found = 0;
 //        for (String line : IOUtil.readLineList("D:\\Doc\\语料库\\英语姓名词典.txt"))
 //        {
@@ -127,7 +127,7 @@ public class TestMakeTranslateName : TestCase
 //
 //    public void testRegex() 
 //    {
-//        Pattern pattern = Pattern.compile("^[a-zA-Z]+ (\\[.*?])? ?([\\u4E00-\\u9FA5]+) ?[:：。]");
+//        Regex pattern = Regex.compile("^[a-zA-Z]+ (\\[.*?])? ?([\\u4E00-\\u9FA5]+) ?[:：。]");
 //        String text = "Adey 阿迪：Adam的昵称，英格兰人姓氏 \n" +
 //                "Adkin 阿德金:Adarn的昵称，英格兰人姓氏。 \n" +
 //                "Adkins 阿德金斯:取自父名，源自Adkin,含义“阿德金之子”(son of Adkin)，英格兰人姓氏 \n" +

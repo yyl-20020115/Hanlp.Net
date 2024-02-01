@@ -108,7 +108,7 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
 
     public void save(Stream _out)
     {
-        _out.writeInt(type.ordinal());
+        _out.writeInt(type.Ordinal);
         _out.writeInt(Count);
         foreach (string tag in idStringMap)
         {

@@ -29,14 +29,14 @@ public class Evaluator
 
     public static FMeasure evaluate(IClassifier classifier, IDataSet testingDataSet)
     {
-        int c = classifier.getModel().catalog.Length;
+        int c = classifier.GetModel().catalog.Length;
         double[] TP_FP = new double[c]; // 判定为某个类别的数量
         double[] TP_FN = new double[c]; // 某个类别的样本数量
         double[] TP = new double[c];    // 判定为某个类别且判断正确的数量
         double time = DateTime.Now.Microsecond;
         foreach (Document document in testingDataSet)
         {
-            int _out = classifier.label(document);
+            int _out = classifier.Label(document);
             int key = document.category;
             ++TP_FP[_out];
             ++TP_FN[key];
@@ -49,14 +49,14 @@ public class Evaluator
 
         FMeasure result = calculate(c, testingDataSet.Count, TP, TP_FP, TP_FN);
         result.catalog = testingDataSet.getCatalog().ToArray();
-        result.speed = result.Count / (time / 1000.0);
+        result.speed = result.size / (time / 1000.0);
 
         return result;
     }
 
     public static FMeasure evaluate(IClassifier classifier, Dictionary<string, string[]> testingDataSet)
     {
-        return evaluate(classifier, new MemoryDataSet(classifier.getModel()).Add(testingDataSet));
+        return evaluate(classifier, new MemoryDataSet(classifier.GetModel()).Add(testingDataSet));
     }
 
     /**
@@ -75,12 +75,12 @@ public class Evaluator
         double[] f1 = new double[c];
         double[] accuracy = new double[c];
         FMeasure result = new FMeasure();
-        result.Count = size;
+        result.size = size;
 
         for (int i = 0; i < c; i++)
         {
-            double TN = result.Count - TP_FP[i] - (TP_FN[i] - TP[i]);
-            accuracy[i] = (TP[i] + TN) / result.Count;
+            double TN = result.size - TP_FP[i] - (TP_FN[i] - TP[i]);
+            accuracy[i] = (TP[i] + TN) / result.size;
             if (TP[i] != 0)
             {
                 precision[i] = TP[i] / TP_FP[i];
@@ -98,7 +98,7 @@ public class Evaluator
         result.average_recall = MathUtility.average(recall);
         result.average_f1 = 2 * result.average_precision * result.average_recall
                 / (result.average_precision + result.average_recall);
-        result.average_accuracy /= (double) result.Count;
+        result.average_accuracy /= (double) result.size;
         result.accuracy = accuracy;
         result.precision = precision;
         result.recall = recall;

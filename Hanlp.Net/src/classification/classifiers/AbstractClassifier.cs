@@ -27,7 +27,7 @@ namespace com.hankcs.hanlp.classification.classifiers;
 public abstract class AbstractClassifier : IClassifier
 {
     //@Override
-    public IClassifier enableProbability(bool enable)
+    public IClassifier EnableProbability(bool enable)
     {
         return this;
     }
@@ -36,7 +36,7 @@ public abstract class AbstractClassifier : IClassifier
      * 是否计算概率
      */
     public bool configProbabilityEnabled = true;
-    public abstract AbstractModel getModel();
+    public abstract AbstractModel GetModel();
 
     /**
      * 使用一个训练出来的分类器来预测分类
@@ -47,7 +47,7 @@ public abstract class AbstractClassifier : IClassifier
      * @throws InvalidOperationException
      */
     //@Override
-    public string classify(string text) 
+    public string Classify(string text) 
     {
         Dictionary<string, Double> scoreMap = predict(text);
 
@@ -55,7 +55,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public string classify(Document document) 
+    public string Classify(Document document) 
     {
         Dictionary<string, Double> scoreMap = predict(document);
 
@@ -63,7 +63,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(string folderPath, string charsetName) 
+    public void Train(string folderPath, string charsetName) 
     {
         IDataSet dataSet = new MemoryDataSet();
         dataSet.load(folderPath, charsetName);
@@ -71,7 +71,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(Dictionary<string, string[]> trainingDataSet) 
+    public void Train(Dictionary<string, string[]> trainingDataSet) 
     {
         IDataSet dataSet = new MemoryDataSet();
         logger.start("正在构造训练数据集...");
@@ -93,15 +93,15 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public void train(string folderPath) 
+    public void Train(string folderPath) 
     {
-        train(folderPath, "UTF-8");
+        Train(folderPath, "UTF-8");
     }
 
     //@Override
     public Dictionary<string, Double> predict(Document document)
     {
-        var model = getModel();
+        var model = GetModel();
         if (model == null)
         {
             throw new InvalidOperationException("未训练模型！无法执行预测！");
@@ -121,9 +121,9 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public int label(Document document) 
+    public int Label(Document document) 
     {
-        AbstractModel model = getModel();
+        AbstractModel model = GetModel();
         if (model == null)
         {
             throw new InvalidOperationException("未训练模型！无法执行预测！");

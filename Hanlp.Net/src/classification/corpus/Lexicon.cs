@@ -37,7 +37,7 @@ public class Lexicon
         wordId = wordIdTrie;
     }
 
-    public int addWord(string word)
+    public int AddWord(string word)
     {
         //assert word != null;
         char[] charArray = word.ToCharArray();
@@ -53,24 +53,16 @@ public class Lexicon
         return id;
     }
 
-    public int getId(string word)
-    {
-        return wordId.get(word);
-    }
+    public int GetId(string word) => wordId.get(word);
 
-    public string getWord(int id)
-    {
+    public string GetWord(int id) =>
         //assert 0 <= id;
         //assert id <= idWord.Count;
-        return idWord[id];
-    }
+        idWord[id];
 
-    public int size()
-    {
-        return idWord.Count;
-    }
+    public int Count => idWord.Count;
 
-    public string[] getWordIdArray()
+    public string[] GetWordIdArray()
     {
         string[] wordIdArray = new string[idWord.Count];
         if (idWord.Count==0) return wordIdArray;

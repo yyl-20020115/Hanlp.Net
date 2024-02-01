@@ -14,7 +14,7 @@ public class TfIdfFeatureWeighter : IFeatureWeighter
         this.df = df;
     }
 
-    public double weight(int feature, int tf)
+    public double Weight(int feature, int tf)
     {
         if (feature >= df.Length) Console.Error.WriteLine(feature);
         return Math.Log10(tf + 1) * (Math.Log10((double) numDocs / df[feature] + 1));    // 一种改进的tf*idf计算方式;

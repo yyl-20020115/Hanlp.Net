@@ -87,7 +87,7 @@ public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
         _out.writeInt(item.labelMap.Count);
         foreach (KeyValuePair<E, int> entry in item.labelMap)
         {
-            _out.writeInt(entry.Key.ordinal());
+            _out.writeInt(entry.Key.Ordinal);
             _out.writeInt(entry.Value);
         }
     }

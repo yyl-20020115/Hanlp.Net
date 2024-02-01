@@ -284,7 +284,7 @@ public class DictionaryMaker : ISaveAble
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder("词条数量：");
-        sb.Append(trie.Count);
+        sb.Append(trie.        Count);
         return sb.ToString();
     }
 

@@ -316,10 +316,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
         return Add;
     }
 
-    public int Count()
-    {
-        return this._size;
-    }
+    public int Count => this._size;
 
     //@Override
     protected char getChar()

@@ -62,8 +62,8 @@ public class MathUtility
      */
     public static void normalizeExp(Dictionary<string, Double> predictionScores)
     {
-        HashSet<KeyValuePair<string, Double>> entrySet = predictionScores.entrySet();
-        double max = Double.NEGATIVE_INFINITY;
+        HashSet<KeyValuePair<string, Double>> entrySet = predictionScores.ToHashSet();
+        double max = Double.NegativeInfinity;
         foreach (KeyValuePair<string, Double> entry in entrySet)
         {
             max = Math.Max(max, entry.Value);
@@ -90,7 +90,7 @@ public class MathUtility
 
     public static void normalizeExp(double[] predictionScores)
     {
-        double max = Double.NEGATIVE_INFINITY;
+        double max = Double.NegativeInfinity;
         foreach (double value in predictionScores)
         {
             max = Math.Max(max, value);

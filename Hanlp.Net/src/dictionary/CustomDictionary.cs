@@ -113,7 +113,7 @@ public class CustomDictionary
                 // 缓存用户词性
                 if (customNatureCollector.isEmpty()) // 热更新
                 {
-                    for (int i = Nature.begin.ordinal() + 1; i < Nature.values().Length; ++i)
+                    for (int i = Nature.begin.Ordinal + 1; i < Nature.values().Length; ++i)
                     {
                         customNatureCollector.Add(Nature.Values[i]);
                     }

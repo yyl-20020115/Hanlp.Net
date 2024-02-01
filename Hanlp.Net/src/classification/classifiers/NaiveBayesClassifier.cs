@@ -109,7 +109,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         model.wordIdTrie = featureData.wordIdTrie;
     }
 
-    public override AbstractModel getModel()
+    public override AbstractModel GetModel()
     {
         return model;
     }
@@ -157,7 +157,7 @@ public class NaiveBayesClassifier : AbstractClassifier
 
                 occurrences = entry2.Value[0]; //获取其在文档中的频次
 
-                logprob += occurrences * model.logLikelihoods.get(feature).get(category); //将对数似然乘上频次
+                logprob += occurrences * model.logLikelihoods[(feature)][(category)]; //将对数似然乘上频次
             }
             predictionScores[category] = logprob;
         }
@@ -186,7 +186,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         //从统计数据中删掉无用的特征并重建特征映射表
         int[][] featureCategoryJointCount = new int[selectedFeatures.Count][];
         featureData.wordIdTrie = new BinTrie<int>();
-        string[] wordIdArray = dataSet.getLexicon().getWordIdArray();
+        string[] wordIdArray = dataSet.getLexicon().GetWordIdArray();
         int p = -1;
         foreach (int feature in selectedFeatures.Keys)
         {

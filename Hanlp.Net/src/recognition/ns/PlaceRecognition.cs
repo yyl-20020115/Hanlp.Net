@@ -82,7 +82,7 @@ public class PlaceRecognition
 //                if (longestSuffixLength != 0 && wordLength != 0)
 //                {
 //                    listIterator.Remove();
-//                    for (int l = 0, tag = NS.D.ordinal(); l < wordLength; ++l, ++tag)
+//                    for (int l = 0, tag = NS.D.Ordinal; l < wordLength; ++l, ++tag)
 //                    {
 //                        listIterator.Add(wordNetAll.getFirst(line + l));
 //                        tagList.Add(new EnumItem<>(NS.values()[tag], 1000));

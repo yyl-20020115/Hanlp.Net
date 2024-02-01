@@ -48,7 +48,7 @@ public class DemoTextClassification
 
     private static void predict(IClassifier classifier, String text)
     {
-        Console.Write("《{0}》 属于分类 【{1}】\n", text, classifier.classify(text));
+        Console.Write("《{0}》 属于分类 【{1}】\n", text, classifier.Classify(text));
     }
 
     private static NaiveBayesModel trainOrLoadModel() 
@@ -65,8 +65,8 @@ public class DemoTextClassification
         }
 
         IClassifier classifier = new NaiveBayesClassifier(); // 创建分类器，更高级的功能请参考IClassifier的接口定义
-        classifier.train(CORPUS_FOLDER);                     // 训练后的模型支持持久化，下次就不必训练了
-        model = (NaiveBayesModel) classifier.getModel();
+        classifier.Train(CORPUS_FOLDER);                     // 训练后的模型支持持久化，下次就不必训练了
+        model = (NaiveBayesModel) classifier.GetModel();
         IOUtil.saveObjectTo(model, MODEL_PATH);
         return model;
     }

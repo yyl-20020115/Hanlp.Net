@@ -144,7 +144,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                         listIterator.Add(new Word(value.substring(wordLength), NS.H.ToString()));
                         continue;
                     }
-                    for (int l = 1, tag = NS.C.ordinal(); l <= wordLength; ++l, ++tag)
+                    for (int l = 1, tag = NS.C.Ordinal; l <= wordLength; ++l, ++tag)
                     {
                         listIterator.Add(new Word(value.substring(l - 1, l), NS.values()[tag].ToString()));
                     }

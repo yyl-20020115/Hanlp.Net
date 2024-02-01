@@ -7,7 +7,7 @@ namespace com.hankcs.hanlp.classification.features;
 /**
  * 词权重计算
  */
-public interface IFeatureWeighter //: ISerializable
+public interface IFeatureWeighter
 {
     /**
      * 计算权重
@@ -15,5 +15,5 @@ public interface IFeatureWeighter //: ISerializable
      * @param feature 词的id
      * @return 权重
      */
-    double weight(int feature, int tf);
+    double Weight(int feature, int tf);
 }

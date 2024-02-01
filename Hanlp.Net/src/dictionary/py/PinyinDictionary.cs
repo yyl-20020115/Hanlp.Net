@@ -108,7 +108,7 @@ public class PinyinDictionary
                 _out.writeInt(value.Length);
                 foreach (Pinyin pinyin in value)
                 {
-                    _out.writeInt(pinyin.ordinal());
+                    _out.writeInt(pinyin.Ordinal);
                 }
             }
             trie.save(_out);

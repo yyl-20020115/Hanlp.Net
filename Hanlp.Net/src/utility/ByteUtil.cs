@@ -51,7 +51,7 @@ public class ByteUtil
      */
     public static double bytesToDouble(byte[] b)
     {
-        return Double.longBitsToDouble(bytesToLong(b));
+        return BitConverter.ToDouble(bytesToLong(b));
     }
 
     /**
@@ -113,7 +113,7 @@ public class ByteUtil
      */
     public static long bytesToLong(byte[] b)
     {
-        long l = ((long) b[0] << 56) & 0xFF00000000000000L;
+        long l = ((long) b[0] << 56) & unchecked((long)0xFF00000000000000L);
         // 如果不强制转换为long，那么默认会当作int，导致最高32位丢失
         l |= ((long) b[1] << 48) & 0xFF000000000000L;
         l |= ((long) b[2] << 40) & 0xFF0000000000L;

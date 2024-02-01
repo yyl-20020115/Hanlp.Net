@@ -32,7 +32,7 @@ public class DemoSentimentAnalysis
     public static void Main(String[] args) 
     {
         IClassifier classifier = new NaiveBayesClassifier(); // 创建分类器，更高级的功能请参考IClassifier的接口定义
-        classifier.train(CORPUS_FOLDER);                     // 训练后的模型支持持久化，下次就不必训练了
+        classifier.Train(CORPUS_FOLDER);                     // 训练后的模型支持持久化，下次就不必训练了
         predict(classifier, "前台客房服务态度非常好！早餐很丰富，房价很干净。再接再厉！");
         predict(classifier, "结果大失所望，灯光昏暗，空间极其狭小，床垫质量恶劣，房间还伴着一股霉味。");
         predict(classifier, "可利用文本分类实现情感分析，效果还行");
@@ -40,7 +40,7 @@ public class DemoSentimentAnalysis
 
     private static void predict(IClassifier classifier, String text)
     {
-        Console.Write("《{0}》 情感极性是 【{1}】\n", text, classifier.classify(text));
+        Console.Write("《{0}》 情感极性是 【{1}】\n", text, classifier.Classify(text));
     }
 
     static DemoSentimentAnalysis()

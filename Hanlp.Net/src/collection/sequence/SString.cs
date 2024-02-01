@@ -79,10 +79,7 @@ public class SString : IComparable<SString>
     }
 
     //@Override
-    public int Length()
-    {
-        return e - b;
-    }
+    public int Length => e - b;
 
     //@Override
     public char charAt(int index)
@@ -127,7 +124,8 @@ public class SString : IComparable<SString>
 
     public char[] ToCharArray()
     {
-        return Arrays.copyOfRange(value, b, e);
+
+        return  Arrays.copyOfRange(value, b, e);
     }
 
     public static SString valueOf(char word)
@@ -140,8 +138,8 @@ public class SString : IComparable<SString>
     public SString Add(SString other)
     {
         char[] value = new char[Length + other.Length];
-        Array.Copy(this.value, b, value, 0, Length);
-        Array.Copy(other.value, other.b, value, Length, other.Length);
+        Array.Copy(this.value, b, value, 0,         Length);
+        Array.Copy(other.value, other.b, value,         Length, other.        Length);
         b = 0;
         e = Length + other.Length;
         this.value = value;
