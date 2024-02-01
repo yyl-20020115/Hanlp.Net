@@ -40,8 +40,8 @@ public interface IDataSet : IEnumerable<Document>
      * @
      * @
      */
-    IDataSet load(string folderPath) ;
-    IDataSet load(string folderPath, double rate) ;
+    IDataSet Load(string folderPath) ;
+    IDataSet Load(string folderPath, double rate) ;
 
     /**
      * 加载数据集
@@ -62,8 +62,8 @@ public interface IDataSet : IEnumerable<Document>
      * @
      * @
      */
-    IDataSet load(string folderPath, string charsetName) ;
-    IDataSet load(string folderPath, string charsetName, double percentage) ;
+    IDataSet Load(string folderPath, string charsetName) ;
+    IDataSet Load(string folderPath, string charsetName, double percentage) ;
 
     /**
      * 往训练集中加入一个文档
@@ -81,7 +81,7 @@ public interface IDataSet : IEnumerable<Document>
      * @param text
      * @return
      */
-    Document convert(string category, string text);
+    Document Convert(string category, string text);
 
     /**
      * 设置分词器
@@ -89,7 +89,7 @@ public interface IDataSet : IEnumerable<Document>
      * @param tokenizer
      * @return
      */
-    IDataSet setTokenizer(ITokenizer tokenizer);
+    IDataSet SetTokenizer(ITokenizer tokenizer);
 
     /**
      * 数据集的样本大小
@@ -103,21 +103,21 @@ public interface IDataSet : IEnumerable<Document>
      *
      * @return
      */
-    ITokenizer getTokenizer();
+    ITokenizer GetTokenizer();
 
     /**
      * 获取类目表
      *
      * @return
      */
-    Catalog getCatalog();
+    Catalog Catalog { get; }
 
     /**
      * 获取词表
      *
      * @return
      */
-    Lexicon getLexicon();
+    Lexicon Lexicon { get; }
 
     /**
      * 清空数据集
@@ -129,11 +129,11 @@ public interface IDataSet : IEnumerable<Document>
      *
      * @return
      */
-    bool isTestingDataSet();
+    bool IsTestingDataSet { get; }
 
     IDataSet Add(Dictionary<string, string[]> testingDataSet);
 
-    IDataSet shrink(int[] idMap);
+    IDataSet Shrink(int[] idMap);
 
 //    /**
 //     * 分割数据集

@@ -61,7 +61,7 @@ public class PersonDictionary
         {
             map.Add(pattern.ToString(), pattern);
         }
-        trie.build(map);
+        trie.Build(map);
         logger.info(HanLP.Config.PersonDictionaryPath + "加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");
     }
 
@@ -150,12 +150,12 @@ public class PersonDictionary
         {
             offsetArray[i] = offsetArray[i - 1] + wordArray[i - 1].realWord.Length;
         }
-        trie.parseText(pattern, new CT());
+        trie.ParseText(pattern, new CT());
     }
     public class CT : AhoCorasickDoubleArrayTrie<NRPattern>.IHit<NRPattern>
     {
         //@Override
-        public void hit(int begin, int end, NRPattern value)
+        public void Hit(int begin, int end, NRPattern value)
         {
             //            logger.trace("匹配到：{}", keyword);
             StringBuilder sbName = new StringBuilder();

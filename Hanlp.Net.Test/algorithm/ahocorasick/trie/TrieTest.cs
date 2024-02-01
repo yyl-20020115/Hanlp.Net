@@ -46,10 +46,10 @@ public class TrieTest : TestCase
             map.Add(key, key);
         }
         AhoCorasickDoubleArrayTrie<string> act = new AhoCorasickDoubleArrayTrie<string>();
-        act.build(map);
+        act.Build(map);
         //        act.debug();
         String text = "uhers";
-        act.parseText(text, new TestHit(text));
+        act.ParseText(text, new TestHit(text));
     }
     public class TestHit : TestCase, AhoCorasickDoubleArrayTrie<string>.IHit<string>
     {
@@ -58,7 +58,7 @@ public class TrieTest : TestCase
         {
             this.text = text;
         }
-        public void hit(int begin, int end, String value)
+        public void Hit(int begin, int end, String value)
         {
             //                Console.printf("[%d:%d]=%s\n", begin, end, value);
             AssertEquals(value, text[begin..end]);

@@ -75,7 +75,7 @@ public class CommonAhoCorasickSegmentUtil
     public class CT<V> : AhoCorasickDoubleArrayTrie<V>.IHit<V>
     {
         //@Override
-        public void hit(int begin, int end, V value)
+        public void Hit(int begin, int end, V value)
         {
             if (wordNet[begin] == null || wordNet[begin].word.Length < end - begin)
             {
@@ -136,7 +136,7 @@ public class CommonAhoCorasickSegmentUtil
         private unsafe char* charArray;
 
         //@Override
-        public void hit(int begin, int end, V value)
+        public void Hit(int begin, int end, V value)
         {
             if (wordNet[end] == null || wordNet[end].word.Length < end - begin)
             {

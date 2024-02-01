@@ -35,17 +35,11 @@ public class BagOfWordsDocument : ITermFrequencyHolder
         tfMap = new FrequencyMap<int>();
     }
 
-    public FrequencyMap<int> GetTfMap()
-    {
-        return tfMap;
-    }
+    public FrequencyMap<int> TfMap => tfMap;
 
     /**
      * 是否为空(文档中没有任何词)
      * @return
      */
-    public bool isEmpty()
-    {
-        return tfMap.Count>0;
-    }
+    public bool IsEmpty => tfMap.Count > 0;
 }

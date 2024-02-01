@@ -1346,7 +1346,7 @@ public class DoubleArrayTrie<V> : ITrie<V>
         Searcher searcher = getSearcher(text, 0);
         while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
+            processor.Hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
         }
     }
 
@@ -1371,7 +1371,7 @@ public class DoubleArrayTrie<V> : ITrie<V>
         LongestSearcher searcher = getLongestSearcher(text, 0);
         while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
+            processor.Hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
         }
     }
 

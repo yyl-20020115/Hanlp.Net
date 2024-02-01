@@ -235,7 +235,7 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         }
         if (maxSize >= LEAF_BIT)
         {
-            throw new RuntimeException("Double Array Trie size exceeds absolute threshold");
+            throw new InvalidOperationException("Double Array Trie size exceeds absolute threshold");
         }
         for (int i = curSize; i <= maxSize; ++i)
         {

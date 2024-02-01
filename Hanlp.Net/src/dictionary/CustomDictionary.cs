@@ -560,7 +560,7 @@ public class CustomDictionary
         DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(text, 0);
         while (searcher.next())
         {
-            processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
+            processor.Hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
         }
     }
 
@@ -579,14 +579,14 @@ public class CustomDictionary
             while ((entry = searcher.next()) != null)
             {
                 offset = searcher.getOffset();
-                processor.hit(offset, offset + entry.Key.Length, entry.Value);
+                processor.Hit(offset, offset + entry.Key.Length, entry.Value);
             }
         }
         {
             DoubleArrayTrie<CoreDictionary.Attribute>.Searcher searcher = dat.getSearcher(text, 0);
             while (searcher.next())
             {
-                processor.hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
+                processor.Hit(searcher.begin, searcher.begin + searcher.Length, searcher.value);
             }
         }
     }
@@ -619,7 +619,7 @@ public class CustomDictionary
                 }
                 else
                 {
-                    processor.hit(i, i + lengthArray[i], attributeArray[i]);
+                    processor.Hit(i, i + lengthArray[i], attributeArray[i]);
                     i += lengthArray[i];
                 }
             }
@@ -630,7 +630,7 @@ public class CustomDictionary
     public class HT : AhoCorasickDoubleArrayTrie<string>.IHit<CoreDictionary.Attribute>
     {
         //@Override
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             int Length = end - begin;
             if (Length > lengthArray[begin])

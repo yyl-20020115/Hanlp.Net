@@ -61,7 +61,7 @@ public class DemoCustomDictionary
         {
             this.charArray = chars;
         }
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             Console.WriteLine("[{0}:{1}]={2} {3}\n", begin, end, new String(charArray, begin, end - begin), value);
         }

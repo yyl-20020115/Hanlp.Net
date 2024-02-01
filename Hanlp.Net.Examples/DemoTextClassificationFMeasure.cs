@@ -33,14 +33,14 @@ public class DemoTextClassificationFMeasure
     public static void Main(String[] args) 
     {
         IDataSet trainingCorpus = new FileDataSet().                          // FileDataSet省内存，可加载大规模数据集
-            setTokenizer(new HanLPTokenizer()).                               // 支持不同的ITokenizer，详见源码中的文档
-            load(CORPUS_FOLDER, "UTF-8", 0.9);               // 前90%作为训练集
+            SetTokenizer(new HanLPTokenizer()).                               // 支持不同的ITokenizer，详见源码中的文档
+            Load(CORPUS_FOLDER, "UTF-8", 0.9);               // 前90%作为训练集
         IClassifier classifier = new NaiveBayesClassifier();
         classifier.Train(trainingCorpus);
         IDataSet testingCorpus = new MemoryDataSet(classifier.GetModel()).
-            load(CORPUS_FOLDER, "UTF-8", -0.1);        // 后10%作为测试集
+            Load(CORPUS_FOLDER, "UTF-8", -0.1);        // 后10%作为测试集
         // 计算准确率
-        FMeasure result = Evaluator.evaluate(classifier, testingCorpus);
+        FMeasure result = Evaluator.Evaluate(classifier, testingCorpus);
         Console.WriteLine(result);
         // 搜狗文本分类语料库上的准确率与速度（两种不同的ITokenizer）
         // ITokenizer         F1      速度

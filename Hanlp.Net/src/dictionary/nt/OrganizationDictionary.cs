@@ -3725,7 +3725,7 @@ public class OrganizationDictionary
         addKeyword(patternMap, "WJCCD");
         addKeyword(patternMap, "WPWJD");
         addKeyword(patternMap, "WWIWWCWD");
-        trie.build(patternMap);
+        trie.Build(patternMap);
     }
 
     /**
@@ -3746,13 +3746,13 @@ public class OrganizationDictionary
         }
         string pattern = sbPattern.ToString();
         Vertex[] wordArray = vertexList.ToArray(new Vertex[0]);
-        trie.parseText(pattern, new CT());
+        trie.ParseText(pattern, new CT());
     }
 
     public class CT: AhoCorasickDoubleArrayTrie<string>.IHit<string>
     {
         //@Override
-        public void hit(int begin, int end, string keyword)
+        public void Hit(int begin, int end, string keyword)
         {
             StringBuilder sbName = new StringBuilder();
             for (int i = begin; i < end; ++i)

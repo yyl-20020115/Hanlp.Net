@@ -75,27 +75,27 @@ public class FMeasure : Serializable
          int w = 6;
          var sb = new StringBuilder(10000);
 
-        printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".Replace('*', (char)(w-(int)'0'), "P", "R", "F1", "A", ""));
+        Printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".Replace('*', (char)(w-(int)'0'), "P", "R", "F1", "A", ""));
         for (int i = 0; i < catalog.Length; i++)
         {
-            printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").Replace('*', (char)(w-(int)'0')),
+            Printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").Replace('*', (char)(w-(int)'0')),
                    precision[i] * 100.0,
                    recall[i] * 100.0,
                    f1[i] * 100.0,
                    accuracy[i] * 100.0,
                    catalog[i]);
         }
-        printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").Replace('*', (char)(w-(int)'0')),
+        Printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").Replace('*', (char)(w-(int)'0')),
                average_precision * 100.0,
                average_recall * 100.0,
                average_f1 * 100.0,
                average_accuracy * 100.0,
                "avg.");
-        printf(sb, "data size = %d, speed = %.2f doc/s\n", size, speed);
+        Printf(sb, "data size = %d, speed = %.2f doc/s\n", size, speed);
         return sb.ToString();
     }
 
-    private static void printf(StringBuilder sb, string Format,params Object[] args)
+    private static void Printf(StringBuilder sb, string Format, params Object[] args)
     {
         sb.Append(string.Format(Format, args));
     }

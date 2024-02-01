@@ -259,14 +259,14 @@ public class Viterbi
         List<E> tagList = new List<E>();
         IEnumerator<EnumItem<E>> iterator = roleTagList.GetEnumerator();
         EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.entrySet().GetEnumerator().next().Key;
+        E pre = start.labelMap.GetEnumerator().next().Key;
         E perfect_tag = pre;
         // 第一个是确定的
         tagList.Add(pre);
-        for (int i = 0; i < Length; ++i)
+        for (int i = 0; i < Length && iterator.MoveNext(); ++i)
         {
             double perfect_cost = double.MaxValue;
-            EnumItem<E> item = iterator.next();
+            EnumItem<E> item = iterator.Current;
             foreach (E cur in item.labelMap)
             {
                 double now = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));

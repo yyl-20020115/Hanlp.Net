@@ -72,7 +72,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
          int[] wordNet = new int[sentence.Length];
         Array.Fill(wordNet, 1);
          Nature[] natureArray = config.speechTagging ? new Nature[sentence.Length] : null;
-        trie.parseText(sentence, new CT());
+        trie.ParseText(sentence, new CT());
         List<Term> termList = new ();
         posTag(sentence, wordNet, natureArray);
         for (int i = 0; i < wordNet.Length; )
@@ -87,7 +87,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
     public class CT: AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
         //@Override
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             int Length = end - begin;
             if (Length > wordNet[begin])
@@ -131,7 +131,7 @@ public class AhoCorasickDoubleArrayTrieSegment : DictionaryBasedSegment
         }
         if (map != null && !map.isEmpty())
         {
-            trie.build(map);
+            trie.Build(map);
         }
 
         return this;

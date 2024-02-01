@@ -25,7 +25,7 @@ public class NaiveBayesClassifierTest : TestCase
     {
         if (trainingDataSet != null) return;
         Console.WriteLine("正在从 {0} 中加载分类语料...\n", CORPUS_FOLDER);
-        trainingDataSet = TextProcessUtility.loadCorpus(CORPUS_FOLDER);
+        trainingDataSet = TextProcessUtility.LoadCorpus(CORPUS_FOLDER);
         foreach (var entry in trainingDataSet)
         {
             Console.WriteLine("{0} : {1} 个文档\n", entry.Key, entry.Value.Length);

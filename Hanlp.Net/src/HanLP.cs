@@ -662,7 +662,7 @@ public class HanLP
             catch (IOException e)
             {
                 logger.warning("CRF模型加载失败");
-                throw new RuntimeException(e);
+                throw new InvalidOperationException(e);
             }
         else if ("perceptron".Equals(algorithm) || "感知机".Equals(algorithm))
         {
@@ -673,7 +673,7 @@ public class HanLP
             catch (IOException e)
             {
                 logger.warning("感知机模型加载失败");
-                throw new RuntimeException(e);
+                throw new InvalidOperationException(e);
             }
         }
         throw new ArgumentException(string.Format("非法参数 algorithm == %s", algorithm));

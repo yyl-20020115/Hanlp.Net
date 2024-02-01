@@ -411,7 +411,7 @@ public class SegmentTest : TestCase
         dictionary.Add("特别", "副词");
         dictionary.Add("方便", "形容词");
         AhoCorasickDoubleArrayTrie<String> acdat = new AhoCorasickDoubleArrayTrie<String>();
-        acdat.build(dictionary);
+        acdat.Build(dictionary);
         LinkedList<ResultTerm<String>> termList =
             CommonAhoCorasickSegmentUtil.segment("HanLP是不是特别方便？", acdat);
 //        Console.WriteLine(termList);

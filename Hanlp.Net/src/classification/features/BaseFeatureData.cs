@@ -35,8 +35,8 @@ public class BaseFeatureData
      */
     public BaseFeatureData(IDataSet dataSet)
     {
-        Catalog catalog = dataSet.getCatalog();
-        Lexicon lexicon = dataSet.getLexicon();
+        Catalog catalog = dataSet.Catalog;
+        Lexicon lexicon = dataSet.Lexicon;
         n = dataSet.Count;
         featureCategoryJointCount = new int[lexicon.Count][];
         for(int i = 0; i < lexicon.Count; i++)

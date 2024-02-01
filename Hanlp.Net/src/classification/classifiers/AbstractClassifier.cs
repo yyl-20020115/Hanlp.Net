@@ -27,10 +27,7 @@ namespace com.hankcs.hanlp.classification.classifiers;
 public abstract class AbstractClassifier : IClassifier
 {
     //@Override
-    public IClassifier EnableProbability(bool enable)
-    {
-        return this;
-    }
+    public IClassifier EnableProbability(bool enable) => this;
 
     /**
      * 是否计算概率
@@ -49,24 +46,24 @@ public abstract class AbstractClassifier : IClassifier
     //@Override
     public string Classify(string text) 
     {
-        Dictionary<string, Double> scoreMap = predict(text);
+        Dictionary<string, Double> scoreMap = Predict(text);
 
-        return CollectionUtility.max(scoreMap);
+        return CollectionUtility.Max(scoreMap);
     }
 
     //@Override
     public string Classify(Document document) 
     {
-        Dictionary<string, Double> scoreMap = predict(document);
+        Dictionary<string, Double> scoreMap = Predict(document);
 
-        return CollectionUtility.max(scoreMap);
+        return CollectionUtility.Max(scoreMap);
     }
 
     //@Override
     public void Train(string folderPath, string charsetName) 
     {
         IDataSet dataSet = new MemoryDataSet();
-        dataSet.load(folderPath, charsetName);
+        dataSet.Load(folderPath, charsetName);
         train(dataSet);
     }
 
@@ -89,7 +86,7 @@ public abstract class AbstractClassifier : IClassifier
             logger._out("%.2f%%...", MathUtility.percentage(cur, total));
         }
         logger.finish(" 加载完毕\n");
-        train(dataSet);
+        Train(dataSet);
     }
 
     //@Override
@@ -99,7 +96,7 @@ public abstract class AbstractClassifier : IClassifier
     }
 
     //@Override
-    public Dictionary<string, Double> predict(Document document)
+    public Dictionary<string, Double> Predict(Document document)
     {
         var model = GetModel();
         if (model == null)
@@ -111,7 +108,7 @@ public abstract class AbstractClassifier : IClassifier
             throw new InvalidOperationException("参数 text == null");
         }
 
-        double[] probs = categorize(document);
+        double[] probs = Categorize(document);
         Dictionary<string, Double> scoreMap = new ();
         for (int i = 0; i < probs.Length; i++)
         {
@@ -133,7 +130,7 @@ public abstract class AbstractClassifier : IClassifier
             throw new InvalidOperationException("参数 text == null");
         }
 
-        double[] probs = categorize(document);
+        double[] probs = Categorize(document);
         double max = double.NegativeInfinity;
         int best = -1;
         for (int i = 0; i < probs.Length; i++)
@@ -146,4 +143,8 @@ public abstract class AbstractClassifier : IClassifier
         }
         return best;
     }
+
+    public abstract Dictionary<string, double> Predict(string text);
+    public abstract double[] Categorize(Document document);
+    public abstract void Train(IDataSet dataSet);
 }

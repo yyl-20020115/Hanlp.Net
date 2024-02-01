@@ -39,7 +39,7 @@ public class Catalog : Serializable
         }
     }
 
-    public int addCategory(string category)
+    public int AddCategory(string category)
     {
         if (!categoryId.TryGetValue(category,out var id))
         {
@@ -52,23 +52,15 @@ public class Catalog : Serializable
         return id;
     }
 
-    public int getId(string category)
-    {
-        return categoryId.TryGetValue(category,out var id)?id:-1;
-    }
+    public int GetId(string category) => categoryId.TryGetValue(category, out var id) ? id : -1;
 
-    public string getCategory(int id)
-    {
+    public string GetCategory(int id) =>
         //assert 0 <= id;
         //assert id < idCategory.Count;
 
-        return idCategory[id];
-    }
+        idCategory[id];
 
     public int Count=> idCategory.Count;
 
-    public string[] ToArray()
-    {
-        return idCategory.ToArray();
-    }
+    public string[] ToArray() => idCategory.ToArray();
 }

@@ -113,7 +113,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     public class CPT : AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
         //@Override
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             if (begin != offset[0])
             {
@@ -147,7 +147,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     public class Hit : AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
         //@Override
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             if (begin != offset[0])
             {

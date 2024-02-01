@@ -33,7 +33,7 @@ public class BinTrieTest : TestCase
     {
         public string text;
         //@Override
-        public void hit(int begin, int end, String value)
+        public void Hit(int begin, int end, String value)
         {
             //                Console.printf("[%d, %d)=%s\n", begin, end, value);
             AssertEquals(value, text[begin .. end]);

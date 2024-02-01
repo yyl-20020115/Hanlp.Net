@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.classification.tokenizers;
  */
 public class HanLPTokenizer : ITokenizer
 {
-    public string[] segment(string text)
+    public string[] Segment(string text)
     {
         char[] charArray = text.ToCharArray();
         List<Term> termList = NotionalTokenizer.segment(charArray);

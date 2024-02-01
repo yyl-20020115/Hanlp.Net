@@ -39,7 +39,7 @@ public class TaiwanToHongKongChineseDictionary : BaseChineseDictionary
                 throw new ArgumentException("台湾繁体转香港繁体词典加载失败");
             }
             combineReverseChain(t2hk, tw2t, false);
-            trie.build(t2hk);
+            trie.Build(t2hk);
             saveDat(datPath, trie, t2hk.entrySet());
         }
         logger.info("台湾繁体转香港繁体词典加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");

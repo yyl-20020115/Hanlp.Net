@@ -51,55 +51,46 @@ public abstract class AbstractDataSet : IDataSet
         lexicon = new Lexicon();
     }
 
-    public IDataSet setTokenizer(ITokenizer tokenizer)
-    {
-        this.tokenizer = tokenizer;
-        return this;
-    }
 
-    public Document convert(string category, string text)
+    public Document Convert(string category, string text)
     {
-        string[] tokenArray = tokenizer.segment(text);
+        string[] tokenArray = tokenizer.Segment(text);
         return testingDataSet ?
                 new Document(catalog.categoryId, lexicon.wordId, category, tokenArray) :
                 new Document(catalog, lexicon, category, tokenArray);
     }
 
-    public ITokenizer getTokenizer()
+    public ITokenizer GetTokenizer()
     {
         return tokenizer;
     }
-
-    public Catalog getCatalog()
+    public IDataSet SetTokenizer(ITokenizer tokenizer)
     {
-        return catalog;
+        this.tokenizer = tokenizer;
+        return this;
     }
 
-    public Lexicon getLexicon()
+    public Catalog Catalog => catalog;
+
+    public Lexicon Lexicon => lexicon;
+
+    //@Override
+    public IDataSet Load(string folderPath, string charsetName) 
     {
-        return lexicon;
+        return Load(folderPath, charsetName, 1.0);
     }
 
     //@Override
-    public IDataSet load(string folderPath, string charsetName) 
+    public IDataSet Load(string folderPath) 
     {
-        return load(folderPath, charsetName, 1.0);
+        return Load(folderPath, "UTF-8");
     }
 
     //@Override
-    public IDataSet load(string folderPath) 
-    {
-        return load(folderPath, "UTF-8");
-    }
+    public bool IsTestingDataSet => testingDataSet;
 
     //@Override
-    public bool isTestingDataSet()
-    {
-        return testingDataSet;
-    }
-
-    //@Override
-    public IDataSet load(string folderPath, string charsetName, double percentage)
+    public IDataSet Load(string folderPath, string charsetName, double percentage)
     {
         if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
         string root = (folderPath);
@@ -133,7 +124,7 @@ public abstract class AbstractDataSet : IDataSet
             int logEvery = (int) Math.Ceiling((e - b) / 10000f);
             for (int i = b; i < e; i++)
             {
-                Add(folder.Name, TextProcessUtility.readTxt(files[i], charsetName));
+                Add(folder.Name, TextProcessUtility.ReadTxt(files[i], charsetName));
                 if (i % logEvery == 0)
                 {
                     logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
@@ -141,12 +132,12 @@ public abstract class AbstractDataSet : IDataSet
             }
             logger._out(" %d 篇文档\n", e - b);
         }
-        logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", getCatalog().Count, Count);
+        logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", Catalog.Count, Count);
         return this;
     }
 
     //@Override
-    public IDataSet load(string folderPath, double rate)
+    public IDataSet Load(string folderPath, double rate)
     {
         return null;
     }

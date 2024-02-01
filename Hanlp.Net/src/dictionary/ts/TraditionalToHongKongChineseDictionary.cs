@@ -34,7 +34,7 @@ public class TraditionalToHongKongChineseDictionary : BaseChineseDictionary
             {
                 throw new ArgumentException("繁体转香港繁体加载失败");
             }
-            trie.build(t2hk);
+            trie.Build(t2hk);
             saveDat(datPath, trie, t2hk.entrySet());
         }
         logger.info("繁体转香港繁体加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");

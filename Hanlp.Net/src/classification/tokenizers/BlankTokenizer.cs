@@ -17,8 +17,5 @@ namespace com.hankcs.hanlp.classification.tokenizers;
  */
 public class BlankTokenizer : ITokenizer
 {
-    public string[] segment(string text)
-    {
-        return text.Split("\\s");
-    }
+    public string[] Segment(string text) => text.Split("\\s");
 }

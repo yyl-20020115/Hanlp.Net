@@ -152,7 +152,7 @@ public class EncoderFeatureIndex : FeatureIndex
                 {
                     string msg = "inconsistent column size: " + max_size +
                         " " + cols.Length + " " + filename;
-                    throw new RuntimeException(msg);
+                    throw new InvalidOperationException(msg);
                 }
                 xsize_ = cols.Length - 1;
                 if (y_.IndexOf(cols[max_size - 1]) == -1)

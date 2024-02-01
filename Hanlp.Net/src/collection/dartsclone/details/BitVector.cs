@@ -15,10 +15,7 @@ public class BitVector
      * @param id 位
      * @return 比特是1还是0
      */
-    public bool get(int id)
-    {
-        return (_units.get(id / UNIT_SIZE) >>> (id % UNIT_SIZE) & 1) == 1;
-    }
+    public bool Get(int id) => (_units.Get(id / UNIT_SIZE) >>> (id % UNIT_SIZE) & 1) == 1;
 
     /**
      * 设置某一位的比特
@@ -29,7 +26,7 @@ public class BitVector
     {
         if (bit)
         {
-            _units.set(id / UNIT_SIZE, _units.get(id / UNIT_SIZE)
+            _units.Set(id / UNIT_SIZE, _units.Get(id / UNIT_SIZE)
                     | 1 << (id % UNIT_SIZE));
         }
     }
@@ -42,7 +39,7 @@ public class BitVector
     public int rank(int id)
     {
         int unit_id = id / UNIT_SIZE;
-        return _ranks[unit_id] + popCount(_units.get(unit_id)
+        return _ranks[unit_id] + popCount(_units.Get(unit_id)
                                                   & (~0 >>> (UNIT_SIZE - (id % UNIT_SIZE) - 1)));
     }
 
@@ -52,7 +49,7 @@ public class BitVector
      */
     public bool empty()
     {
-        return _units.empty();
+        return _units.IsEmpty;
     }
 
     /**

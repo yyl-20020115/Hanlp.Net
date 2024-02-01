@@ -71,7 +71,7 @@ public class PinyinDictionary
             }
             map.Add(entry.Key, pinyinValue);
         }
-        trie.build(map);
+        trie.Build(map);
         logger.info("正在缓存双数组" + path);
         saveDat(path, trie, map.ToHashSet());
         return true;
@@ -92,7 +92,7 @@ public class PinyinDictionary
                 valueArray[i][j] = pinyins[byteArray.Next()];
             }
         }
-        if (!trie.load(byteArray, valueArray)) return false;
+        if (!trie.Load(byteArray, valueArray)) return false;
         return true;
     }
 
@@ -111,7 +111,7 @@ public class PinyinDictionary
                     _out.writeInt(pinyin.Ordinal);
                 }
             }
-            trie.save(_out);
+            trie.Save(_out);
             _out.Close();
         }
         catch (Exception e)
@@ -125,7 +125,7 @@ public class PinyinDictionary
 
     public static Pinyin[] get(string key)
     {
-        return trie.get(key);
+        return trie.Get(key);
     }
 
     /**
@@ -172,7 +172,7 @@ public class PinyinDictionary
     protected static List<Pinyin> segLongest(char[] charArray, AhoCorasickDoubleArrayTrie<Pinyin[]> trie, bool remainNone)
     {
         Pinyin[][] wordNet = new Pinyin[charArray.Length][];
-        trie.parseText(charArray, new CT());
+        trie.ParseText(charArray, new CT());
         List<Pinyin> pinyinList = new (charArray.Length);
         for (int offset = 0; offset < wordNet.Length; )
         {
@@ -196,7 +196,7 @@ public class PinyinDictionary
     public class CT: AhoCorasickDoubleArrayTrie<Pinyin[]>.IHit<Pinyin[]>
     {
         //@Override
-        public void hit(int begin, int end, Pinyin[] value)
+        public void Hit(int begin, int end, Pinyin[] value)
         {
             int Length = end - begin;
             if (wordNet[begin] == null || Length > wordNet[begin].Length)

@@ -37,7 +37,7 @@ public class HongKongToSimplifiedChineseDictionary : BaseChineseDictionary
                 throw new ArgumentException("香港繁体转简体加载失败");
             }
             combineReverseChain(t2s, hk2t, true);
-            trie.build(t2s);
+            trie.Build(t2s);
             saveDat(datPath, trie, t2s.entrySet());
         }
         logger.info("香港繁体转简体加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");

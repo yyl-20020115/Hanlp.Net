@@ -17,11 +17,11 @@ namespace com.hankcs.hanlp.classification.utilities;
  */
 public class CollectionUtility
 {
-    public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input, bool desc)
+    public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input, bool desc) where V:IComparable<V>
     {
         var output = new Dictionary<K, V>(input.Count);
         var entryList = new List<KeyValuePair<K, V>>(input.Count);
-        Collections.sort(entryList,new ST<K,V>());
+        entryList.Sort(new ST<K,V>());
         foreach (KeyValuePair<K, V> entry in entryList)
         {
             output.Add(entry.Key, entry.Value);
@@ -29,7 +29,7 @@ public class CollectionUtility
 
         return output;
     }
-    public class ST<K,V> : IComparer<KeyValuePair<K, V>>
+    public class ST<K,V> : IComparer<KeyValuePair<K, V>> where V:IComparable<V>
     {
         public int Compare(KeyValuePair<K, V> o1, KeyValuePair<K, V> o2)
         {
@@ -37,12 +37,9 @@ public class CollectionUtility
             return o1.Value.CompareTo(o2.Value);
         }
     }
-    public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input)
-    {
-        return sortMapByValue(input, true);
-    }
+    public static Dictionary<K, V> SortMapByValue<K, V>(Dictionary<K, V> input) => sortMapByValue(input, true);
 
-    public static string max(Dictionary<string, Double> scoreMap)
+    public static string Max(Dictionary<string, Double> scoreMap)
     {
         double max = double.NegativeInfinity;
         string best = null;
@@ -65,7 +62,7 @@ public class CollectionUtility
      * @param rate 第一个数组所占的比例
      * @return 两个数组
      */
-    public static string[][] spiltArray(string[] src, double rate)
+    public static string[][] SpiltArray(string[] src, double rate)
     {
         //assert 0 <= rate && rate <= 1;
         string[][] output = new string[2][];
@@ -82,13 +79,13 @@ public class CollectionUtility
      * @param rate
      * @return
      */
-    public static Dictionary<string, string[]> splitMap(Dictionary<string, string[]> src, double rate)
+    public static Dictionary<string, string[]> SplitMap(Dictionary<string, string[]> src, double rate)
     {
         //assert 0 <= rate && rate <= 1;
         Dictionary<string, string[]> output = new ();
         foreach (KeyValuePair<string, string[]> entry in src)
         {
-            string[][] array = spiltArray(entry.Value, rate);
+            string[][] array = SpiltArray(entry.Value, rate);
             output.Add(entry.Key, array[0]);
             entry.setValue(array[1]);
         }

@@ -542,7 +542,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 }
                 if (value != null)
                 {
-                    processor.hit(i, end, value);
+                    processor.Hit(i, end, value);
                     i = end - 1;
                 }
             }
@@ -578,7 +578,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 }
                 if (value != null)
                 {
-                    processor.hit(i, end, value);
+                    processor.Hit(i, end, value);
                     i = end - 1;
                 }
             }
@@ -605,7 +605,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 V value = state.Value();
                 if (value != null)
                 {
-                    processor.hit(begin, i + 1, value);
+                    processor.Hit(begin, i + 1, value);
                 }
             }
             else
@@ -637,7 +637,7 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
                 V value = state.Value();
                 if (value != null)
                 {
-                    processor.hit(begin, i + 1, value);
+                    processor.Hit(begin, i + 1, value);
                 }
             }
             else

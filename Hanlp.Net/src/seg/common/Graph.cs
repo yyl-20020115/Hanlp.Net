@@ -117,7 +117,7 @@ public class Graph
     {
         if (path.Count < 2)
         {
-            throw new RuntimeException("路径节点数小于2:" + path);
+            throw new InvalidOperationException("路径节点数小于2:" + path);
         }
         StringBuilder sb = new StringBuilder();
 

@@ -9,8 +9,6 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-using com.hankcs.hanlp.collection.trie.datrie;
-
 namespace com.hankcs.hanlp.classification.tokenizers;
 
 
@@ -19,5 +17,5 @@ namespace com.hankcs.hanlp.classification.tokenizers;
  */
 public interface ITokenizer //: ISerializable
 {
-    string[] segment(string text);
+    string[] Segment(string text);
 }

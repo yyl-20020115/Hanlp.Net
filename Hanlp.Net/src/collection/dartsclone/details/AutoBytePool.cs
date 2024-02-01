@@ -16,27 +16,24 @@ class AutoBytePool
      * 获取缓冲区
      * @return 缓冲区
      */
-    byte[] getBuffer()
-    {
-        return _buf;
-    }
+    byte[] Buffer => _buf;
 
     /**
      * 取字节
      * @param id 字节下标
      * @return 字节
      */
-    public byte get(int id)
+    public byte Get(int id)
     {
         return _buf[id];
     }
-    public byte this[int id]=>this.get(id);
+    public byte this[int id]=>this.Get(id);
     /**
      * 设置值
      * @param id 下标
      * @param value 值
      */
-    public void set(int id, byte value)
+    public void Set(int id, byte value)
     {
         _buf[id] = value;
     }
@@ -45,10 +42,7 @@ class AutoBytePool
      * 是否为空
      * @return true表示为空
      */
-    public bool empty()
-    {
-        return (_size == 0);
-    }
+    public bool IsEmpty => (_size == 0);
 
     /**
      * 缓冲区大小
@@ -61,7 +55,7 @@ class AutoBytePool
      */
     public void Clear()
     {
-        resize(0);
+        Resize(0);
         _buf = null;
         _size = 0;
         _capacity = 0;
@@ -75,7 +69,7 @@ class AutoBytePool
     {
         if (_size == _capacity)
         {
-            resizeBuf(_size + 1);
+            ResizeBuffer(_size + 1);
         }
         _buf[_size++] = value;
     }
@@ -92,11 +86,11 @@ class AutoBytePool
      * 重设大小
      * @param size 大小
      */
-    public void resize(int size)
+    public void Resize(int size)
     {
         if (size > _capacity)
         {
-            resizeBuf(size);
+            ResizeBuffer(size);
         }
         _size = size;
     }
@@ -106,11 +100,11 @@ class AutoBytePool
      * @param size 大小
      * @param value 值
      */
-    void resize(int size, byte value)
+    void Resize(int size, byte value)
     {
         if (size > _capacity)
         {
-            resizeBuf(size);
+            ResizeBuffer(size);
         }
         while (_size < size)
         {
@@ -122,11 +116,11 @@ class AutoBytePool
      * 增加容量
      * @param size 容量
      */
-    void reserve(int size)
+    void Reserve(int size)
     {
         if (size > _capacity)
         {
-            resizeBuf(size);
+            ResizeBuffer(size);
         }
     }
 
@@ -134,7 +128,7 @@ class AutoBytePool
      * 设置缓冲区大小
      * @param size 大小
      */
-    private void resizeBuf(int size)
+    private void ResizeBuffer(int size)
     {
         int capacity;
         if (size >= _capacity * 2)

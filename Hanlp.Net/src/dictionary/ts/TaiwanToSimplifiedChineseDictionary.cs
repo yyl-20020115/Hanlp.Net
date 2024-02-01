@@ -35,7 +35,7 @@ public class TaiwanToSimplifiedChineseDictionary : BaseChineseDictionary
                 throw new ArgumentException("台湾繁体转简体词典加载失败");
             }
             combineReverseChain(t2s, tw2t, true);
-            trie.build(t2s);
+            trie.Build(t2s);
             saveDat(datPath, trie, t2s.entrySet());
         }
         logger.info("台湾繁体转简体词典加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");

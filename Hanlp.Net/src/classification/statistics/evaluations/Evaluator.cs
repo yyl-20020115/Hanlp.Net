@@ -27,7 +27,7 @@ public class Evaluator
     {
     }
 
-    public static FMeasure evaluate(IClassifier classifier, IDataSet testingDataSet)
+    public static FMeasure Evaluate(IClassifier classifier, IDataSet testingDataSet)
     {
         int c = classifier.GetModel().catalog.Length;
         double[] TP_FP = new double[c]; // 判定为某个类别的数量
@@ -47,16 +47,16 @@ public class Evaluator
         }
         time = DateTime.Now.Microsecond - time;
 
-        FMeasure result = calculate(c, testingDataSet.Count, TP, TP_FP, TP_FN);
-        result.catalog = testingDataSet.getCatalog().ToArray();
+        FMeasure result = Calculate(c, testingDataSet.Count, TP, TP_FP, TP_FN);
+        result.catalog = testingDataSet.Catalog.ToArray();
         result.speed = result.size / (time / 1000.0);
 
         return result;
     }
 
-    public static FMeasure evaluate(IClassifier classifier, Dictionary<string, string[]> testingDataSet)
+    public static FMeasure Evaluate(IClassifier classifier, Dictionary<string, string[]> testingDataSet)
     {
-        return evaluate(classifier, new MemoryDataSet(classifier.GetModel()).Add(testingDataSet));
+        return Evaluate(classifier, new MemoryDataSet(classifier.GetModel()).Add(testingDataSet));
     }
 
     /**
@@ -68,7 +68,7 @@ public class Evaluator
      * @param TP_FN 某个类别的样本数量
      * @return
      */
-    private static FMeasure calculate(int c, int size, double[] TP, double[] TP_FP, double[] TP_FN)
+    private static FMeasure Calculate(int c, int size, double[] TP, double[] TP_FP, double[] TP_FN)
     {
         double[] precision = new double[c];
         double[] recall = new double[c];

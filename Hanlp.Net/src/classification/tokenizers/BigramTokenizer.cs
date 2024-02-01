@@ -7,7 +7,7 @@ namespace com.hankcs.hanlp.classification.tokenizers;
 
 public class BigramTokenizer : ITokenizer
 {
-    public string[] segment(string text)
+    public string[] Segment(string text)
     {
         if (text.Length == 0) return new string[0];
         char[] charArray = text.ToCharArray();

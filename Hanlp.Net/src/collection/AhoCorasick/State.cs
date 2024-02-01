@@ -68,16 +68,13 @@ public class State
      * 获取节点深度
      * @return
      */
-    public int getDepth()
-    {
-        return this.depth;
-    }
+    public int Depth => this.depth;
 
     /**
      * 添加一个匹配到的模式串（这个状态对应着这个模式串)
      * @param keyword
      */
-    public void addEmit(int keyword)
+    public void AddEmit(int keyword)
     {
         if (this.emits == null)
         {
@@ -90,22 +87,25 @@ public class State
      * 获取最大的值
      * @return
      */
-    public int getLargestValueId()
+    public int LargestValueId
     {
-        if (emits == null || emits.Count == 0) return null;
+        get
+        {
+            if (emits == null || emits.Count == 0) return null;
 
-        return emits.GetEnumerator().next();
+            return emits.GetEnumerator().next();
+        }
     }
 
     /**
      * 添加一些匹配到的模式串
      * @param emits
      */
-    public void addEmit(ICollection<int> emits)
+    public void AddEmit(ICollection<int> emits)
     {
         foreach (int emit in emits)
         {
-            addEmit(emit);
+            AddEmit(emit);
         }
     }
 
@@ -113,7 +113,7 @@ public class State
      * 获取这个节点代表的模式串（们）
      * @return
      */
-    public ICollection<int> emit()
+    public ICollection<int> Emit()
     {
         return this.emits == null ? new() : this.emits;
     }
@@ -122,25 +122,19 @@ public class State
      * 是否是终止状态
      * @return
      */
-    public bool isAcceptable()
-    {
-        return this.depth > 0 && this.emits != null;
-    }
+    public bool IsAcceptable => this.depth > 0 && this.emits != null;
 
     /**
      * 获取failure状态
      * @return
      */
-    public State failure()
-    {
-        return this._failure;
-    }
+    public State Failure => this._failure;
 
     /**
      * 设置failure状态
      * @param failState
      */
-    public void setFailure(State failState, int[] fail)
+    public void SetFailure(State failState, int[] fail)
     {
         this._failure = failState;
         fail[index] = failState.index;
@@ -152,9 +146,9 @@ public class State
      * @param ignoreRootState 是否忽略根节点，如果是根节点自己调用则应该是true，否则为false
      * @return 转移结果
      */
-    private State nextState(char character, bool ignoreRootState)
+    private State NextState(char character, bool ignoreRootState)
     {
-        State nextState = this.success.get(character);
+        State nextState = this.success[(character)];
         if (!ignoreRootState && nextState == null && this.depth == 0)
         {
             nextState = this;
@@ -167,9 +161,9 @@ public class State
      * @param character
      * @return
      */
-    public State nextState(char character)
+    public State NextState(char character)
     {
-        return nextState(character, false);
+        return NextState(character, false);
     }
 
     /**
@@ -177,14 +171,14 @@ public class State
      * @param character
      * @return
      */
-    public State nextStateIgnoreRootState(char character)
+    public State NextStateIgnoreRootState(char character)
     {
-        return nextState(character, true);
+        return NextState(character, true);
     }
 
-    public State addState(char character)
+    public State AddState(char character)
     {
-        State nextState = nextStateIgnoreRootState(character);
+        State nextState = NextStateIgnoreRootState(character);
         if (nextState == null)
         {
             nextState = new State(this.depth + 1);
@@ -193,15 +187,9 @@ public class State
         return nextState;
     }
 
-    public ICollection<State> getStates()
-    {
-        return this.success.Values;
-    }
+    public ICollection<State> States => this.success.Values;
 
-    public ICollection<char> getTransitions()
-    {
-        return this.success.Keys;
-    }
+    public ICollection<char> Transitions => this.success.Keys;
 
     //@Override
     public override string ToString()
@@ -211,8 +199,8 @@ public class State
         sb.Append(", ID=").Append(index);
         sb.Append(", emits=").Append(emits);
         sb.Append(", success=").Append(success.Keys);
-        sb.Append(", failureID=").Append(failure == null ? "-1" : failure.index);
-        sb.Append(", failure=").Append(failure);
+        sb.Append(", failureID=").Append(        Failure== null ? "-1" :         Failure.index);
+        sb.Append(", failure=").Append(        Failure);
         sb.Append('}');
         return sb.ToString();
     }
@@ -221,18 +209,7 @@ public class State
      * 获取goto表
      * @return
      */
-    public Dictionary<char, State> getSuccess()
-    {
-        return success;
-    }
+    public Dictionary<char, State> Success => success;
 
-    public int getIndex()
-    {
-        return index;
-    }
-
-    public void setIndex(int index)
-    {
-        this.index = index;
-    }
+    public int Index { get => index; set => this.index = value; }
 }

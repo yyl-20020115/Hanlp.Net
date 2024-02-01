@@ -49,6 +49,6 @@ public class SimplifiedChineseDictionary : BaseChineseDictionary
 
     public static string getTraditionalChinese(string simplifiedChinese)
     {
-        return trie.get(simplifiedChinese);
+        return trie.Get(simplifiedChinese);
     }
 }

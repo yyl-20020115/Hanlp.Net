@@ -46,7 +46,7 @@ public class DemoPinyinToChinese
 
         // 1.5.2及以下版本
         AhoCorasickDoubleArrayTrie<HashSet<String>> trie = new AhoCorasickDoubleArrayTrie<HashSet<String>>();
-        trie.build(map);
+        trie.Build(map);
         Console.WriteLine(CommonAhoCorasickSegmentUtil.segment("renmenrenweiyalujiangbujianlvse", trie));
 
         // 1.5.3及以上版本

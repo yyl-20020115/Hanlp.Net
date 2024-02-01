@@ -28,26 +28,27 @@ public class FileDataSet : AbstractDataSet
     public FileDataSet(AbstractModel model, string cache) 
         :base(model)
     {
-        initCache(cache);
+        InitCache(cache);
     }
 
     public FileDataSet(AbstractModel model) 
+        : this(model, createTempFile(DateTime.Now.Microsecond.ToString(), ".dat"))
     {
-        this(model, createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
+        ;
     }
 
     public FileDataSet(string cache) 
     {
-        initCache(cache);
+        InitCache(cache);
     }
 
-    private void initCache(string cache) 
+    private void InitCache(string cache) 
     {
         this.cache = cache;
         _out = new Stream(new FileStream(cache));
     }
 
-    private void initCache() 
+    private void InitCache() 
     {
         initCache(createTempFile(string.valueOf(DateTime.Now.Microsecond), ".dat"));
     }
@@ -61,14 +62,14 @@ public class FileDataSet : AbstractDataSet
     //@Override
     public override Document Add(string category, string text)
     {
-        Document document = convert(category, text);
+        Document document = Convert(category, text);
         try
         {
             Add(document);
         }
         catch (IOException e)
         {
-            throw new RuntimeException(e);
+            throw new InvalidOperationException(e.Message,e);
         }
         return document;
     }
@@ -96,13 +97,13 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public IDataSet shrink(int[] idMap)
+    public IDataSet Shrink(int[] idMap)
     {
         try
         {
             Clear();
             IEnumerator<Document> iterator = GetEnumerator();
-            initCache();
+            InitCache();
             while (iterator.MoveNext())
             {
                 Document document = iterator.next();
@@ -121,7 +122,7 @@ public class FileDataSet : AbstractDataSet
         }
         catch (IOException e)
         {
-            throw new RuntimeException(e);
+            throw new InvalidOperationException(e);
         }
 
         return this;
@@ -138,7 +139,7 @@ public class FileDataSet : AbstractDataSet
         }
         catch (IOException e)
         {
-            throw new RuntimeException(e);
+            throw new InvalidOperationException(e);
         }
     }
     public class ST: IEnumerator<Document>
@@ -146,7 +147,7 @@ public class FileDataSet : AbstractDataSet
         //@Override
         public void Remove()
         {
-            throw new RuntimeException("不支持的操作");
+            throw new InvalidOperationException("不支持的操作");
         }
 
         //@Override
@@ -160,7 +161,7 @@ public class FileDataSet : AbstractDataSet
             }
             catch (IOException e)
             {
-                throw new RuntimeException(e);
+                throw new InvalidOperationException(e);
             }
         }
 
@@ -173,7 +174,7 @@ public class FileDataSet : AbstractDataSet
             }
             catch (IOException e)
             {
-                throw new RuntimeException(e);
+                throw new InvalidOperationException(e);
             }
         }
     }

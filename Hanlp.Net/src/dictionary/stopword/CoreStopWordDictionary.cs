@@ -40,7 +40,7 @@ public class CoreStopWordDictionary
             catch (Exception e)
             {
                 logger.severe("载入停用词词典" + HanLP.Config.CoreStopWordDictionaryPath + "失败"  + TextUtility.exceptionToString(e));
-                throw new RuntimeException("载入停用词词典" + HanLP.Config.CoreStopWordDictionaryPath + "失败");
+                throw new InvalidOperationException("载入停用词词典" + HanLP.Config.CoreStopWordDictionaryPath + "失败");
             }
         }
         else

@@ -34,7 +34,7 @@ public class TraditionalToTaiwanChineseDictionary : BaseChineseDictionary
             {
                 throw new ArgumentException("繁体转台湾繁体加载失败");
             }
-            trie.build(t2tw);
+            trie.Build(t2tw);
             saveDat(datPath, trie, t2tw.entrySet());
         }
         logger.info("繁体转台湾繁体加载成功，耗时" + (DateTime.Now.Microsecond - start) + "ms");

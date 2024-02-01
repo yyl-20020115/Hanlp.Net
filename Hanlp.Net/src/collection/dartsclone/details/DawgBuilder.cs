@@ -28,7 +28,7 @@ public class DawgBuilder
     public int child(int id)
     {
         // return _units.get(id).child();
-        return _units.get(id) >>> 2;
+        return _units.Get(id) >>> 2;
     }
 
     /**
@@ -39,7 +39,7 @@ public class DawgBuilder
     public int sibling(int id)
     {
         // return _units.get(id).hasSibling() ? (id + 1) : 0;
-        return ((_units.get(id) & 1) == 1) ? (id + 1) : 0;
+        return ((_units.Get(id) & 1) == 1) ? (id + 1) : 0;
     }
 
     /**
@@ -50,7 +50,7 @@ public class DawgBuilder
     public int value(int id)
     {
         // return _units.get(id).value();
-        return _units.get(id) >>> 1;
+        return _units.Get(id) >>> 1;
     }
 
     /**
@@ -70,7 +70,7 @@ public class DawgBuilder
      */
     public byte label(int id)
     {
-        return _labels.get(id);
+        return _labels.Get(id);
     }
 
     /**
@@ -80,7 +80,7 @@ public class DawgBuilder
      */
     public bool isIntersection(int id)
     {
-        return _isIntersections.get(id);
+        return _isIntersections.Get(id);
     }
 
     public int intersectionId(int id)
@@ -100,7 +100,7 @@ public class DawgBuilder
      */
     public void init()
     {
-        _table.resize(INITIAL_TABLE_SIZE, 0);
+        _table.Resize(INITIAL_TABLE_SIZE, 0);
 
         appendNode();
         appendUnit();
@@ -115,8 +115,8 @@ public class DawgBuilder
     {
         flush(0);
 
-        _units.set(0, _nodes[0].unit());
-        _labels.set(0, _nodes[0].label);
+        _units.Set(0, _nodes[0].unit());
+        _labels.Set(0, _nodes[0].label);
 
         _nodes.Clear();
         _table.Clear();
@@ -250,9 +250,9 @@ public class DawgBuilder
 
     private void flush(int id)
     {
-        while (_nodeStack.get(_nodeStack.Count - 1) != id)
+        while (_nodeStack.Get(_nodeStack.Count - 1) != id)
         {
-            int nodeId = _nodeStack.get(_nodeStack.Count - 1);
+            int nodeId = _nodeStack.Get(_nodeStack.Count - 1);
             _nodeStack.deleteLast();
 
             if (_numStates >= _table.Count - (_table.Count >>> 2))
@@ -284,12 +284,12 @@ public class DawgBuilder
                 }
                 for (int i = nodeId; i != 0; i = _nodes[i].sibling)
                 {
-                    _units.set(unitId, _nodes[i].unit());
-                    _labels.set(unitId, _nodes[i].label);
+                    _units.Set(unitId, _nodes[i].unit());
+                    _labels.Set(unitId, _nodes[i].label);
                     --unitId;
                 }
                 matchId = unitId + 1;
-                _table.set(hashId, matchId);
+                _table.Set(hashId, matchId);
                 ++_numStates;
             }
 
@@ -299,7 +299,7 @@ public class DawgBuilder
                 freeNode(i);
             }
 
-            _nodes.get(_nodeStack.get(_nodeStack.Count - 1)).child = matchId;
+            _nodes.get(_nodeStack.Get(_nodeStack.Count - 1)).child = matchId;
         }
         _nodeStack.deleteLast();
     }
@@ -308,16 +308,16 @@ public class DawgBuilder
     {
         int tableSize = _table.Count << 1;
         _table.Clear();
-        _table.resize(tableSize, 0);
+        _table.Resize(tableSize, 0);
 
         for (int id = 1; id < _units.Count; ++id)
         {
 //            if (_labels[i] == 0 || _units.get(id).isState)) {
-            if (_labels.get(id) == 0 || (_units.get(id) & 2) == 2)
+            if (_labels.Get(id) == 0 || (_units.Get(id) & 2) == 2)
             {
                 int[] ret = findUnit(id);
                 int hashId = ret[1];
-                _table.set(hashId, id);
+                _table.Set(hashId, id);
             }
         }
     }
@@ -333,7 +333,7 @@ public class DawgBuilder
             {
                 hashId += _table.Count;
             }
-            int unitId = _table.get(hashId);
+            int unitId = _table.Get(hashId);
             if (unitId == 0)
             {
                 break;
@@ -356,7 +356,7 @@ public class DawgBuilder
             {
                 hashId += _table.Count;
             }
-            int unitId = _table.get(hashId);
+            int unitId = _table.Get(hashId);
             if (unitId == 0)
             {
                 break;
@@ -379,14 +379,14 @@ public class DawgBuilder
              i = _nodes[i].sibling)
         {
 //            if (_units.get(unitId).hasSibling() == false) {
-            if ((_units.get(unitId) & 1) != 1)
+            if ((_units.Get(unitId) & 1) != 1)
             {
                 return false;
             }
             ++unitId;
         }
 //        if (_units.get(unitId).hasSibling() == true) {
-        if ((_units.get(unitId) & 1) == 1)
+        if ((_units.Get(unitId) & 1) == 1)
         {
             return false;
         }
@@ -394,8 +394,8 @@ public class DawgBuilder
         for (int i = nodeId; i != 0; i = _nodes[i].sibling, --unitId)
         {
 //            if (_nodes[i] != _units.get(unitId).unit() ||
-            if (_nodes[i].unit() != _units.get(unitId) ||
-                    _nodes[i].label != _labels.get(unitId))
+            if (_nodes[i].unit() != _units.Get(unitId) ||
+                    _nodes[i].label != _labels.Get(unitId))
             {
                 return false;
             }
@@ -409,12 +409,12 @@ public class DawgBuilder
         for (; id != 0; ++id)
         {
 //            int unit = _units.get(id).unit();
-            int unit = _units.get(id);
-            byte label = _labels.get(id);
+            int unit = _units.Get(id);
+            byte label = _labels.Get(id);
             hashValue ^= hash(((label & 0xFF) << 24) ^ unit);
 
 //            if (_units.get(id).hasSibling() == false) {
-            if ((_units.get(id) & 1) != 1)
+            if ((_units.Get(id) & 1) != 1)
             {
                 break;
             }
@@ -446,14 +446,14 @@ public class DawgBuilder
     private int appendNode()
     {
         int id;
-        if (_recycleBin.empty())
+        if (_recycleBin.IsEmpty)
         {
             id = _nodes.Count;
             _nodes.Add(new DawgNode());
         }
         else
         {
-            id = _recycleBin.get(_recycleBin.Count - 1);
+            id = _recycleBin.Get(_recycleBin.Count - 1);
             _nodes.get(id).reset();
             _recycleBin.deleteLast();
         }

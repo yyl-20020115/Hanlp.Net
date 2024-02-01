@@ -19,5 +19,5 @@ namespace com.hankcs.hanlp.classification.corpus;
  */
 public interface ITermFrequencyHolder
 {
-    FrequencyMap<int> GetTfMap();
+    FrequencyMap<int> TfMap { get; }
 }

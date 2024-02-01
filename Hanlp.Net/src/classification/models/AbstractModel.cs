@@ -11,7 +11,6 @@
  */
 using com.hankcs.hanlp.classification.tokenizers;
 using com.hankcs.hanlp.collection.trie.bintrie;
-using System.Runtime.Serialization;
 
 //namespace com.hankcs.hanlp.classification.models;
 

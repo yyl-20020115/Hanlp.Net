@@ -12,32 +12,20 @@ namespace com.hankcs.hanlp.collection.dartsclone.details;
  */
 public class AutoIntPool
 {
-    public int[] getBuffer()
-    {
-        return _buf;
-    }
+    public int[] Buffer => _buf;
 
-    public int get(int id)
-    {
-        return _buf[id];
-    }
+    public int Get(int id) => _buf[id];
     public int this[int id] => this._buf[id];
 
-    public void set(int id, int value)
-    {
-        _buf[id] = value;
-    }
+    public void Set(int id, int value) => _buf[id] = value;
 
-    public bool empty()
-    {
-        return (_size == 0);
-    }
+    public bool IsEmpty => (_size == 0);
 
     public int Count => _size;
 
     public void Clear()
     {
-        resize(0);
+        Resize(0);
         _buf = null;
         _size = 0;
         _capacity = 0;
@@ -47,7 +35,7 @@ public class AutoIntPool
     {
         if (_size == _capacity)
         {
-            resizeBuf(_size + 1);
+            ResizeBuf(_size + 1);
         }
         _buf[_size++] = value;
     }
@@ -57,20 +45,20 @@ public class AutoIntPool
         --_size;
     }
 
-    public void resize(int size)
+    public void Resize(int size)
     {
         if (size > _capacity)
         {
-            resizeBuf(size);
+            ResizeBuf(size);
         }
         _size = size;
     }
 
-    void resize(int size, int value)
+    void Resize(int size, int value)
     {
         if (size > _capacity)
         {
-            resizeBuf(size);
+            ResizeBuf(size);
         }
         while (_size < size)
         {
@@ -78,15 +66,15 @@ public class AutoIntPool
         }
     }
 
-    public void reserve(int size)
+    public void Reserve(int size)
     {
         if (size > _capacity)
         {
-            resizeBuf(size);
+            ResizeBuf(size);
         }
     }
 
-    private void resizeBuf(int size)
+    private void ResizeBuf(int size)
     {
         int capacity;
         if (size >= _capacity * 2)

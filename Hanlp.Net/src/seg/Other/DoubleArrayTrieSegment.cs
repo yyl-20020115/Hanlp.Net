@@ -97,7 +97,7 @@ public class DoubleArrayTrieSegment : DictionaryBasedSegment
     public class CT: AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
         //@Override
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             int Length = end - begin;
             if (Length > wordNet[begin])

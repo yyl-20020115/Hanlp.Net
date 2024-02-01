@@ -144,7 +144,7 @@ public class NShortSegment : WordBasedSegment
         List<int[]> spResult = nShortPath.getNPaths(nKind * 2);
         if (spResult.Count == 0)
         {
-            throw new RuntimeException(nKind + "-最短路径求解失败，请检查上面的词网是否存在负圈或悬孤节点");
+            throw new InvalidOperationException(nKind + "-最短路径求解失败，请检查上面的词网是否存在负圈或悬孤节点");
         }
         //        logger.trace(nKind + "-最短路径");
         //        for (int[] path : spResult)

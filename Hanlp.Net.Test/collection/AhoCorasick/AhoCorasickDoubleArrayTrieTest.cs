@@ -23,7 +23,7 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
         Trie trie = new Trie();
         trie.AddAllKeyword(map.Keys);
         AhoCorasickDoubleArrayTrie<String> act = new AhoCorasickDoubleArrayTrie<String>();
-        act.build(map);
+        act.Build(map);
 
         foreach (String key in map.Keys)
         {
@@ -34,7 +34,7 @@ public class AhoCorasickDoubleArrayTrieTest : TestCase
                 otherSet.Add(emit.Keyword + emit.End);
             }
 
-            var entries = act.parseText(key);
+            var entries = act.ParseText(key);
             var mySet = new HashSet<String>();
             foreach (AhoCorasickDoubleArrayTrie<String>.Hit<String> entry in entries)
             {

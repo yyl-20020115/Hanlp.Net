@@ -45,7 +45,7 @@ public class Document : BagOfWordsDocument
         //        this.lexicon = lexicon;
 
         // 将其转为数组类型，方便处理
-        this.category = catalog.addCategory(category);
+        this.category = catalog.AddCategory(category);
         // 统计词频
         for (int i = 0; i < tokenArray.Length; i++)
         {

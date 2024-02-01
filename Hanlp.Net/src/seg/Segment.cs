@@ -308,7 +308,7 @@ public abstract class Segment
     public class CT: AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
         //@Override
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             if (end - begin == parentLength) return;
             wordNetAll.Add(currentLine + begin, new Vertex(vertex.realWord.substring(begin, end), value));

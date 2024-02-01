@@ -17,7 +17,7 @@ public class TextProcessUtility
      * @param text
      * @return
      */
-    public static string preprocess(string text)
+    public static string Preprocess(string text)
     {
         return text.Replace("\\p{P}", " ").Replace("\\s+", " ").ToLower();
     }
@@ -28,14 +28,14 @@ public class TextProcessUtility
      * @param text
      * @return
      */
-    public static string[] extractKeywords(string text)
+    public static string[] ExtractKeywords(string text)
     {
         List<Term> termList = NotionalTokenizer.segment(text);
         string[] wordArray = new string[termList.Count];
         IEnumerator<Term> iterator = termList.GetEnumerator();
-        for (int i = 0; i < wordArray.Length; i++)
+        for (int i = 0; i < wordArray.Length && iterator.MoveNext(); i++)
         {
-            wordArray[i] = iterator.next().word;
+            wordArray[i] = iterator.Current.word;
         }
         return wordArray;
     }
@@ -46,14 +46,14 @@ public class TextProcessUtility
      * @param keywordArray
      * @return
      */
-    public static Dictionary<string, int> getKeywordCounts(string[] keywordArray)
+    public static Dictionary<string, int> GetKeywordCounts(string[] keywordArray)
     {
         Dictionary<string, int> counts = new ();
 
         int counter;
         for (int i = 0; i < keywordArray.Length; ++i)
         {
-            counter = counts.get(keywordArray[i]);
+            counter = counts[(keywordArray[i])];
             if (counter == null)
             {
                 counter = 0;
@@ -70,7 +70,7 @@ public class TextProcessUtility
      * @param path
      * @return
      */
-    public static Dictionary<string, string[]> loadCorpus(string path)
+    public static Dictionary<string, string[]> LoadCorpus(string path)
     {
         Dictionary<string, string[]> dataSet = new ();
         string root = new string(path);
@@ -98,7 +98,7 @@ public class TextProcessUtility
      * @param folderPath
      * @return
      */
-    public static Dictionary<string, string[]> loadCorpusWithException(string folderPath, string charsetName) 
+    public static Dictionary<string, string[]> LoadCorpusWithException(string folderPath, string charsetName) 
     {
         if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
         string root = new string(folderPath);
@@ -117,7 +117,7 @@ public class TextProcessUtility
             string[] documents = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                documents[i] = readTxt(files[i], charsetName);
+                documents[i] = ReadTxt(files[i], charsetName);
             }
             dataSet.Add(folder.Name, documents);
         }
@@ -125,7 +125,7 @@ public class TextProcessUtility
         return dataSet;
     }
 
-    public static string readTxt(string file, string charsetName) 
+    public static string ReadTxt(string file, string charsetName) 
     {
         Stream _is = new FileStream(file);
         byte[] targetArray = new byte[_is.available()];
@@ -140,8 +140,8 @@ public class TextProcessUtility
         return new string(targetArray, charsetName);
     }
 
-    public static Dictionary<string, string[]> loadCorpusWithException(string corpusPath) 
+    public static Dictionary<string, string[]> LoadCorpusWithException(string corpusPath) 
     {
-        return loadCorpusWithException(corpusPath, "UTF-8");
+        return LoadCorpusWithException(corpusPath, "UTF-8");
     }
 }

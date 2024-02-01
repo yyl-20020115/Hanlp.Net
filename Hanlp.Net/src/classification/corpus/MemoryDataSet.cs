@@ -41,7 +41,7 @@ public class MemoryDataSet : AbstractDataSet
     public override Document Add(string category, string text)
     {
         if (editMode) return null;
-        Document document = convert(category, text);
+        Document document = Convert(category, text);
         documentList.Add(document);
         return document;
     }
@@ -55,7 +55,7 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public IDataSet shrink(int[] idMap)
+    public IDataSet Shrink(int[] idMap)
     {
         var iterator = GetEnumerator();
         while (iterator.MoveNext())
@@ -76,8 +76,5 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public IEnumerator<Document> GetEnumerator()
-    {
-        return documentList.GetEnumerator();
-    }
+    public IEnumerator<Document> GetEnumerator() => documentList.GetEnumerator();
 }

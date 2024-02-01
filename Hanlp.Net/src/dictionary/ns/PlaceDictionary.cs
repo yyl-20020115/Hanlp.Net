@@ -66,7 +66,7 @@ public class PlaceDictionary
         patternMap.Add("CDH", "CDH");
         patternMap.Add("CDEH", "CDEH");
         patternMap.Add("GH", "GH");
-        trie.build(patternMap);
+        trie.Build(patternMap);
     }
 
     /**
@@ -87,13 +87,13 @@ public class PlaceDictionary
         }
         string pattern = sbPattern.ToString();
         Vertex[] wordArray = vertexList.ToArray();
-        trie.parseText(pattern, new CT());
+        trie.ParseText(pattern, new CT());
     }
     public class CT:
         AhoCorasickDoubleArrayTrie<string>.IHit<string>
     {
         //@Override
-        public void hit(int begin, int end, string value)
+        public void Hit(int begin, int end, string value)
         {
             StringBuilder sbName = new StringBuilder();
             for (int i = begin; i < end; ++i)

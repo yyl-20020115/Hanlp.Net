@@ -113,7 +113,7 @@ public class BaseChineseDictionary
         var map = new Dictionary<string, string>();
         if (!load(map, reverse, path)) return false;
         logger.info("正在构建AhoCorasickDoubleArrayTrie，来源：" + path);
-        trie.build(map);
+        trie.Build(map);
         logger.info("正在缓存双数组" + datPath);
         saveDat(datPath, trie, map.entrySet());
         return true;
@@ -129,7 +129,7 @@ public class BaseChineseDictionary
         {
             valueArray[i] = byteArray.nextString();
         }
-        trie.load(byteArray, valueArray);
+        trie.Load(byteArray, valueArray);
         return true;
     }
 
@@ -153,7 +153,7 @@ public class BaseChineseDictionary
                     _out.writeChar(c);
                 }
             }
-            trie.save(_out);
+            trie.Save(_out);
             _out.Close();
         }
         catch (Exception e)
@@ -202,7 +202,7 @@ public class BaseChineseDictionary
     {
          string[] wordNet = new string[charArray.Length];
          int[] lengthNet = new int[charArray.Length];
-        trie.parseText(charArray, new ST());
+        trie.ParseText(charArray, new ST());
         var sb = new StringBuilder(charArray.Length);
         for (int offset = 0; offset < wordNet.Length; )
         {
@@ -220,7 +220,7 @@ public class BaseChineseDictionary
     public class ST: AhoCorasickDoubleArrayTrie<string>.IHit<string>
     {
         //@Override
-        public void hit(int begin, int end, string value)
+        public void Hit(int begin, int end, string value)
         {
             int Length = end - begin;
             if (Length > lengthNet[begin])

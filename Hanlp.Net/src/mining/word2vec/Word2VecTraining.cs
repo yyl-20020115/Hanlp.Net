@@ -303,7 +303,7 @@ class Word2VecTraining
             }
             catch (IOException e)
             {
-                throw new RuntimeException(e);
+                throw new InvalidOperationException(e);
             }
             // exit from thread
             lock (vec)

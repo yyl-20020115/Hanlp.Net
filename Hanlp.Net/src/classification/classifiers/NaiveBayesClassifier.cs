@@ -46,11 +46,11 @@ public class NaiveBayesClassifier : AbstractClassifier
         return model;
     }
 
-    public void train(IDataSet dataSet)
+    public override void Train(IDataSet dataSet)
     {
         logger._out("原始数据集大小:%d\n", dataSet.Count);
         //选择最佳特征
-        BaseFeatureData featureData = selectFeatures(dataSet);
+        BaseFeatureData featureData = SelectFeatures(dataSet);
 
         //初始化分类器所用的数据
         model = new NaiveBayesModel();
@@ -95,17 +95,17 @@ public class NaiveBayesClassifier : AbstractClassifier
 
                 count = featureCategoryCounts[category];
 
-                logLikelihood = Math.Log((count + 1.0) / (featureOccurrencesInCategory.get(category) + model.d));
+                logLikelihood = Math.Log((count + 1.0) / (featureOccurrencesInCategory[(category)] + model.d));
                 if (!model.logLikelihoods.ContainsKey(feature))
                 {
                     model.logLikelihoods.Add(feature, new ());
                 }
-                model.logLikelihoods.get(feature).Add(category, logLikelihood);
+                model.logLikelihoods[(feature)].Add(category, logLikelihood);
             }
         }
         logger._out("贝叶斯统计结束\n");
-        model.catalog = dataSet.getCatalog().ToArray();
-        model.tokenizer = dataSet.getTokenizer();
+        model.catalog = dataSet.Catalog.ToArray();
+        model.tokenizer = dataSet.GetTokenizer();
         model.wordIdTrie = featureData.wordIdTrie;
     }
 
@@ -114,7 +114,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         return model;
     }
 
-    public Dictionary<string, Double> predict(string text) 
+    public override Dictionary<string, Double> Predict(string text) 
     {
         if (model == null)
         {
@@ -126,13 +126,13 @@ public class NaiveBayesClassifier : AbstractClassifier
         }
 
         //分词，创建文档
-        Document doc = new Document(model.wordIdTrie, model.tokenizer.segment(text));
+        Document doc = new Document(model.wordIdTrie, model.tokenizer.Segment(text));
 
-        return predict(doc);
+        return Predict(doc);
     }
 
     //@Override
-    public double[] categorize(Document document) 
+    public override double[] Categorize(Document document) 
     {
         int category;
         int feature;
@@ -172,21 +172,21 @@ public class NaiveBayesClassifier : AbstractClassifier
      * @param dataSet
      * @return
      */
-    protected BaseFeatureData selectFeatures(IDataSet dataSet)
+    protected BaseFeatureData SelectFeatures(IDataSet dataSet)
     {
         ChiSquareFeatureExtractor chiSquareFeatureExtractor = new ChiSquareFeatureExtractor();
 
         logger.start("使用卡方检测选择特征中...");
         //FeatureStats对象包含文档中所有特征及其统计信息
-        BaseFeatureData featureData = ChiSquareFeatureExtractor.extractBasicFeatureData(dataSet); //执行统计
+        BaseFeatureData featureData = ChiSquareFeatureExtractor.ExtractBasicFeatureData(dataSet); //执行统计
 
         //我们传入这些统计信息到特征选择算法中，得到特征与其分值
-        Dictionary<int, Double> selectedFeatures = chiSquareFeatureExtractor.chi_square(featureData);
+        Dictionary<int, Double> selectedFeatures = chiSquareFeatureExtractor.ChiSquare(featureData);
 
         //从统计数据中删掉无用的特征并重建特征映射表
         int[][] featureCategoryJointCount = new int[selectedFeatures.Count][];
         featureData.wordIdTrie = new BinTrie<int>();
-        string[] wordIdArray = dataSet.getLexicon().GetWordIdArray();
+        string[] wordIdArray = dataSet.Lexicon.GetWordIdArray();
         int p = -1;
         foreach (int feature in selectedFeatures.Keys)
         {

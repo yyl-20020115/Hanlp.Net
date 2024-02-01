@@ -46,7 +46,7 @@ public interface IClassifier
      * @param document
      * @return
      */
-    Dictionary<string, double> predict(Document document) ;
+    Dictionary<string, double> Predict(Document document) ;
 
     /**
      * 预测分类

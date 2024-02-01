@@ -258,7 +258,7 @@ public abstract class WordBasedSegment : Segment
     {
         if (end < start)
         {
-            throw new RuntimeException("start=" + start + " < end=" + end);
+            throw new InvalidOperationException("start=" + start + " < end=" + end);
         }
         List<AtomNode> atomSegment = new ();
         int pCur = 0, nCurType, nNextType;
@@ -418,7 +418,7 @@ public abstract class WordBasedSegment : Segment
     public class ST: AhoCorasickDoubleArrayTrie<CoreDictionary.Attribute>.IHit<CoreDictionary.Attribute>
     {
         //@Override
-        public void hit(int begin, int end, CoreDictionary.Attribute value)
+        public void Hit(int begin, int end, CoreDictionary.Attribute value)
         {
             wordNetStorage.Add(begin + 1, new Vertex(new string(charArray, begin, end - begin), value));
         }

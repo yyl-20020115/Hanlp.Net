@@ -25,9 +25,9 @@ public class ChiSquareFeatureExtractor
      * @param dataSet
      * @return
      */
-    public static BaseFeatureData extractBasicFeatureData(IDataSet dataSet)
+    public static BaseFeatureData ExtractBasicFeatureData(IDataSet dataSet)
     {
-        BaseFeatureData stats = new BaseFeatureData(dataSet);
+        var stats = new BaseFeatureData(dataSet);
         return stats;
     }
 
@@ -38,7 +38,7 @@ public class ChiSquareFeatureExtractor
      * @param stats
      * @return
      */
-    public Dictionary<int, Double> chi_square(BaseFeatureData stats)
+    public Dictionary<int, Double> ChiSquare(BaseFeatureData stats)
     {
         Dictionary<int, Double> selectedFeatures = new ();
 
@@ -120,29 +120,18 @@ public class ChiSquareFeatureExtractor
      *
      * @return
      */
-    public double getChisquareCriticalValue()
-    {
-        return chisquareCriticalValue;
-    }
-
     /**
-     * 设置卡方临界值
-     *
-     * @param chisquareCriticalValue
-     */
-    public void setChisquareCriticalValue(double chisquareCriticalValue)
-    {
-        this.chisquareCriticalValue = chisquareCriticalValue;
-    }
+ * 设置卡方临界值
+ *
+ * @param chisquareCriticalValue
+ */
+    public double ChisquareCriticalValue { get => chisquareCriticalValue; set => this.chisquareCriticalValue = value; }
 
-    public ChiSquareFeatureExtractor setALevel(double aLevel)
+    public ChiSquareFeatureExtractor SetALevel(double aLevel)
     {
         chisquareCriticalValue = ContinuousDistributions.ChisquareInverseCdf(aLevel, 1);
         return this;
     }
 
-    public double getALevel()
-    {
-        return ContinuousDistributions.ChisquareCdf(chisquareCriticalValue, 1);
-    }
+    public double getALevel() => ContinuousDistributions.ChisquareCdf(chisquareCriticalValue, 1);
 }

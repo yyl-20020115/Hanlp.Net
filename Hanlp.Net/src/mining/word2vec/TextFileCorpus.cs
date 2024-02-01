@@ -78,13 +78,13 @@ public class TextFileCorpus : Corpus
             cache.Close();
             if (!fixingFile.renameTo(cacheFile))
             {
-                throw new RuntimeException(string.Format("moving %s to %s failed", fixingFile, cacheFile.Name));
+                throw new InvalidOperationException(string.Format("moving %s to %s failed", fixingFile, cacheFile.Name));
             }
             cache = new Stream(new FileStream(cacheFile));
         }
         catch (IOException e)
         {
-            throw new RuntimeException(string.Format("failed to adjust cache file", e));
+            throw new InvalidOperationException(string.Format("failed to adjust cache file", e));
         }
         table = null;
         vocabSize = j;
