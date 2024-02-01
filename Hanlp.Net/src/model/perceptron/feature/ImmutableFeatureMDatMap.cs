@@ -65,13 +65,10 @@ public class ImmutableFeatureMDatMap : FeatureMap
     }
 
     //@Override
-    public override int size()
-    {
-        return dat.Count;
-    }
+    public override int Count => dat.Count;
 
     //@Override
-    public HashSet<KeyValuePair<string, int>> entrySet()
+    public override HashSet<KeyValuePair<string, int>> entrySet()
     {
         return dat.entrySet();
     }

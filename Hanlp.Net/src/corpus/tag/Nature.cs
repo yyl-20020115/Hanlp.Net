@@ -761,11 +761,10 @@ public class Nature
      */
     public static readonly Nature begin = new Nature("begin");
 
-    private static Dictionary<string, int> idMap;
-    public static Nature[] values;
+    private static Dictionary<string, int> idMap = new Dictionary<string, int>();
+    public static List<Nature> values = new();
     private int ordinal;
     private string name;
-
     private Nature(string name)
     {
         if (idMap == null) idMap = new ();
@@ -773,11 +772,12 @@ public class Nature
         this.name = name;
         ordinal = idMap.Count;
         idMap.Add(name, ordinal);
-        Nature[] extended = new Nature[idMap.Count];
-        if (values != null)
-            Array.Copy(values, 0, extended, 0, values.Length);
-        extended[ordinal] = this;
-        values = extended;
+        values.Add(this);
+        //Nature[] extended = new Nature[idMap.Count];
+        //if (values != null)
+        //    Array.Copy(values, 0, extended, 0, values.Length);
+        //extended[ordinal] = this;
+        //values = extended;
     }
 
     /**
@@ -787,10 +787,7 @@ public class Nature
      * @param prefix 前缀
      * @return 是否以该前缀开头
      */
-    public bool StartsWith(string prefix)
-    {
-        return name.StartsWith(prefix);
-    }
+    public bool StartsWith(string prefix) => name.StartsWith(prefix);
 
     /**
      * 词性是否以该前缀开头<br>
@@ -799,10 +796,7 @@ public class Nature
      * @param prefix 前缀
      * @return 是否以该前缀开头
      */
-    public bool StartsWith(char prefix)
-    {
-        return name[0] == prefix;
-    }
+    public bool StartsWith(char prefix) => name[0] == prefix;
 
     /**
      * 词性的首字母<br>
@@ -810,10 +804,7 @@ public class Nature
      *
      * @return
      */
-    public char firstChar()
-    {
-        return name[0];
-    }
+    public char FirstChar => name[0];
 
     /**
      * 安全地将字符串类型的词性转为Enum类型，如果未定义该词性，则返回null
@@ -823,7 +814,7 @@ public class Nature
      */
     public static Nature fromString(string name)
     {
-        int id = idMap.get(name);
+        int id = idMap[name];
         if (id == null)
             return null;
         return values[id];
@@ -849,13 +840,7 @@ public class Nature
         return name;
     }
 
-    public int Ordinal()
-    {
-        return ordinal;
-    }
+    public int Ordinal => ordinal;
 
-    public static Nature[] Values()
-    {
-        return values;
-    }
+    public static List<Nature> Values => values;
 }

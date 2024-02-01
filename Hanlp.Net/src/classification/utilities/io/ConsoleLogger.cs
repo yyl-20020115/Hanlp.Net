@@ -24,24 +24,24 @@ public class ConsoleLogger : ILogger
     public static ILogger logger = new ConsoleLogger();
     long _start;
 
-    public void _out(string Format, params Object[] args)
+    public void Out(string Format, params Object[] args)
     {
         Console.WriteLine(Format, args);
     }
 
-    public void err(string Format, params Object[] args)
+    public void Err(string Format, params Object[] args)
     {
         Console.Error.WriteLine(Format, args);
     }
 
-    public void start(string Format, params Object[] args)
+    public void Start(string Format, params Object[] args)
     {
-        _out(Format, args);
+        Out(Format, args);
         _start = DateTime.Now.Microsecond;
     }
 
-    public void finish(string Format, params Object[] args)
+    public void Finish(string Format, params Object[] args)
     {
-        _out(string.Format("耗时 %d ms", (DateTime.Now.Microsecond - _start) + Format, args));
+        Out(string.Format("耗时 %d ms", (DateTime.Now.Microsecond - _start) + Format, args));
     }
 }

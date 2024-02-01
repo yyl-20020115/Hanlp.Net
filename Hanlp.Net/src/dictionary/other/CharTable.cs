@@ -151,7 +151,7 @@ public class CharTable
                 }
             }
             else
-                word.setValue(word.Value);
+                word.                Value = word.Value;
         }
     }
 }

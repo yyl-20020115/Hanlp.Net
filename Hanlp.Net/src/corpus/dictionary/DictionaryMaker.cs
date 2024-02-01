@@ -43,12 +43,12 @@ public class DictionaryMaker : ISaveAble
         Item item = trie.get(word.Value);
         if (item == null)
         {
-            item = new Item(word.Value, word.getLabel());
+            item = new Item(word.Value, word.Label);
             trie.Add(item.key, item);
         }
         else
         {
-            item.addLabel(word.getLabel());
+            item.addLabel(word.Label);
         }
     }
 

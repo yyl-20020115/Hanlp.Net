@@ -21,7 +21,7 @@ namespace com.hankcs.hanlp.seg;
 /**
  * @author hankcs
  */
-public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List<IWord>, List<IWord>>>
+public class SegmentPipeline : Segment, Pipe<string, List<Term>>, IList<Pipe<List<IWord>, List<IWord>>>
 {
     Pipe<string, List<IWord>> first;
     Pipe<List<IWord>, List<Term>> last;
@@ -46,18 +46,18 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     public class Pipe2 : Pipe<List<IWord>, List<Term>>
     {
         //@Override
-        public List<Term> flow(List<IWord> input)
+        public override List<Term> flow(List<IWord> input)
         {
             List<Term> output = new (input.Count);
             foreach (IWord word in input)
             {
-                if (word.getLabel() == null)
+                if (word.Label == null)
                 {
                     output.AddRange(_delegate.seg(word.Value));
                 }
                 else
                 {
-                    output.Add(new Term(word.Value, Nature.create(word.getLabel())));
+                    output.Add(new Term(word.Value, Nature.create(word.Label)));
                 }
             }
             return output;
@@ -72,7 +72,7 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
 
 
     //@Override
-    protected List<Term> segSentence(char[] sentence)
+    protected override List<Term> segSentence(char[] sentence)
     {
         return seg(new string(sentence));
     }
@@ -224,7 +224,7 @@ public class SegmentPipeline : Segment, Pipe<string, List<Term>>, List<Pipe<List
     }
 
     //@Override
-    public IEnumerator<Pipe<List<IWord>, List<IWord>>> GetEnumerator()
+    public override IEnumerator<Pipe<List<IWord>, List<IWord>>> GetEnumerator()
     {
         return pipeList.GetEnumerator();
     }

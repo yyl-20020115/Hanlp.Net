@@ -43,42 +43,42 @@ public class DemoPinyin
         Console.Write("拼音（符号音调）,");
         foreach (Pinyin pinyin in pinyinList)
         {
-            Console.Write("{0},", pinyin.getPinyinWithToneMark());
+            Console.Write("{0},", pinyin.PinyinWithToneMark);
         }
         Console.WriteLine();
 
         Console.Write("拼音（无音调）,");
         foreach (Pinyin pinyin in pinyinList)
         {
-            Console.Write("{0},", pinyin.getPinyinWithoutTone());
+            Console.Write("{0},", pinyin.PinyinWithoutTone);
         }
         Console.WriteLine();
 
         Console.Write("声调,");
         foreach (Pinyin pinyin in pinyinList)
         {
-            Console.Write("{0},", pinyin.getTone());
+            Console.Write("{0},", pinyin.Tone);
         }
         Console.WriteLine();
 
         Console.Write("声母,");
         foreach (Pinyin pinyin in pinyinList)
         {
-            Console.Write("{0},", pinyin.getShengmu());
+            Console.Write("{0},", pinyin.Shengmu);
         }
         Console.WriteLine();
 
         Console.Write("韵母,");
         foreach (Pinyin pinyin in pinyinList)
         {
-            Console.Write("{0},", pinyin.getYunmu());
+            Console.Write("{0},", pinyin.Yunmu);
         }
         Console.WriteLine();
 
         Console.Write("输入法头,");
         foreach (Pinyin pinyin in pinyinList)
         {
-            Console.Write("{0},", pinyin.getHead());
+            Console.Write("{0},", pinyin.Head);
         }
         Console.WriteLine();
 

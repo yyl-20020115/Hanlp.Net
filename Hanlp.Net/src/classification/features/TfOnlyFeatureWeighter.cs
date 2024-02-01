@@ -5,8 +5,5 @@ namespace com.hankcs.hanlp.classification.features;
  */
 public class TfOnlyFeatureWeighter : IFeatureWeighter
 {
-    public double weight(int feature, int tf)
-    {
-        return tf;
-    }
+    public double weight(int feature, int tf) => tf;
 }

@@ -9,7 +9,7 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-using Microsoft.Extensions.Logging;
+using com.hankcs.hanlp.classification.utilities.io;
 using System.Text.RegularExpressions;
 
 namespace com.hankcs.hanlp.utility;
@@ -112,7 +112,7 @@ public class Predefine
     /**
      * 日志组件
      */
-    public static Logger logger = Logger.getLogger("HanLP");
+    public static ILogger logger = Logger.getLogger("HanLP");
     static Predefine()
     {
         logger.setLevel(Level.WARNING);

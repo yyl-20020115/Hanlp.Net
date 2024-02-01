@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.classification.collections;
  * 统计词频的Map
  * @author hankcs
  */
-public class FrequencyMap<K> : Dictionary<K, int[]>
+public class FrequencyMap<K> : Dictionary<K, int[]> where K :notnull
 {
     /**
      * 增加一个词的词频

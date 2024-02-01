@@ -204,7 +204,7 @@ public class Utility
                 }
                 else if (isNer(iWord, nerTag))
                 {
-                    s.Add(new Word(iWord.Value, iWord.getLabel()));
+                    s.Add(new Word(iWord.Value, iWord.Label));
                 }
                 else
                 {
@@ -225,9 +225,9 @@ public class Utility
     {
         foreach (string tag in nerTag)
         {
-            if (word.getLabel().StartsWith(tag))
+            if (word.Label.StartsWith(tag))
             {
-                word.setLabel(tag);
+                word.                Label = tag;
                 return true;
             }
         }
@@ -241,7 +241,7 @@ public class Utility
         int i = -1;
         foreach (Word word in wordList)
         {
-            wordArray[++i] = word.Value();
+            wordArray[++i] = word.Value;
         }
 
         return wordArray;
@@ -324,15 +324,15 @@ public class Utility
                 List<Word> wordList = ((CompoundWord)word).innerList;
                 Word[] words = wordList.ToArray();
 
-                if (nerLabels.Contains(word.getLabel()))
+                if (nerLabels.Contains(word.Label))
                 {
-                    collector.Add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.getLabel() });
+                    collector.Add(new string[] { words[0].value, words[0].label, tagSet.B_TAG_PREFIX + word.Label });
                     for (int i = 1; i < words.Length - 1; i++)
                     {
-                        collector.Add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.getLabel() });
+                        collector.Add(new string[] { words[i].value, words[i].label, tagSet.M_TAG_PREFIX + word.Label });
                     }
                     collector.Add(new string[]{words[words.Length - 1].value, words[words.Length - 1].label,
-                        tagSet.E_TAG_PREFIX + word.getLabel()});
+                        tagSet.E_TAG_PREFIX + word.Label});
                 }
                 else
                 {
@@ -344,14 +344,14 @@ public class Utility
             }
             else
             {
-                if (nerLabels.Contains(word.getLabel()))
+                if (nerLabels.Contains(word.Label))
                 {
                     // 单个实体
-                    collector.Add(new string[] { word.Value, word.getLabel(), tagSet.S_TAG });
+                    collector.Add(new string[] { word.Value, word.Label, tagSet.S_TAG });
                 }
                 else
                 {
-                    collector.Add(new string[] { word.Value, word.getLabel(), tagSet.O_TAG });
+                    collector.Add(new string[] { word.Value, word.Label, tagSet.O_TAG });
                 }
             }
         }
@@ -366,12 +366,12 @@ public class Utility
             {
                 foreach (Word child in ((CompoundWord)word).innerList)
                 {
-                    child.setValue(CharTable.convert(child.Value));
+                    child.                    Value = CharTable.convert(child.Value);
                 }
             }
             else
             {
-                word.setValue(CharTable.convert(word.Value));
+                word.                Value = CharTable.convert(word.Value);
             }
         }
     }

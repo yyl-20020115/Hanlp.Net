@@ -163,7 +163,7 @@ public class ViterbiSegment : WordBasedSegment
         List<Vertex> vertexList = new ();
         foreach (Vertex node in nodes[1])
         {
-            node.updateFrom(nodes[0].getFirst());
+            node.updateFrom(nodes[0].First());
         }
         for (int i = 1; i < nodes.Length - 1; ++i)
         {

@@ -77,7 +77,7 @@ public class IOUtility : IOUtil
                 ++size;
                 if (size % 1000 == 0)
                 {
-                    logger.err("%c语料: %dk...", 13, size / 1000);
+                    logger.Err("%c语料: %dk...", 13, size / 1000);
                 }
                 // debug
 //                if (size == 100) break;

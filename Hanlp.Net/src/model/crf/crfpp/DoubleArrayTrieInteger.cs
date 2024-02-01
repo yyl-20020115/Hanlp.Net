@@ -1,4 +1,5 @@
 
+using com.hankcs.hanlp.collection.trie.datrie;
 using com.hankcs.hanlp.corpus.io;
 /**
 * DoubleArrayTrie: Java implementation of Darts (Double-ARray Trie System)

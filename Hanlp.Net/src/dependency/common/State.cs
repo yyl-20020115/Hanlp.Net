@@ -30,6 +30,6 @@ public class State : IComparable<State>
     //@Override
     public int CompareTo(State o)
     {
-        return float.compare(cost, o.cost);
+        return cost.CompareTo(o.cost);
     }
 }

@@ -29,8 +29,5 @@ public class ResultTerm<V>
     }
 
     //@Override
-    public override string ToString()
-    {
-        return word + '/' + label;
-    }
+    public override string ToString() => word + '/' + label;
 }

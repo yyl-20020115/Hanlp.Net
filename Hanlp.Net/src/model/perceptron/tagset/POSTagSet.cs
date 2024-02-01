@@ -8,6 +8,8 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.model.perceptron.common;
+
 namespace com.hankcs.hanlp.model.perceptron.tagset;
 
 
@@ -18,7 +20,7 @@ namespace com.hankcs.hanlp.model.perceptron.tagset;
 public class POSTagSet : TagSet
 {
     public POSTagSet()
+        : base(TaskType.POS)
     {
-        base(TaskType.POS);
     }
 }

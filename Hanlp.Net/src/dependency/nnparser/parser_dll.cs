@@ -26,8 +26,9 @@ public class parser_dll
     private NeuralNetworkParser parser;
 
     public parser_dll()
+        : this(ConfigOption.PATH)
     {
-        this(ConfigOption.PATH);
+        ;
     }
 
     public parser_dll(string modelPath)

@@ -1204,6 +1204,16 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         charMap = new Utf8CharacterMapping();
     }
 
+    IEnumerator<KeyValuePair<string, int>> IEnumerable<KeyValuePair<string, int>>.GetEnumerator()
+    {
+        throw new NotImplementedException();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        throw new NotImplementedException();
+    }
+
     //    /**
     //     * 遍历时无法删除
     //     *

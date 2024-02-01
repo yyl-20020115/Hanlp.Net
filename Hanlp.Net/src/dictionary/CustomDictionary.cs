@@ -115,7 +115,7 @@ public class CustomDictionary
                 {
                     for (int i = Nature.begin.ordinal() + 1; i < Nature.values().Length; ++i)
                     {
-                        customNatureCollector.Add(Nature.Values()[i]);
+                        customNatureCollector.Add(Nature.Values[i]);
                     }
                 }
                 IOUtil.writeCustomNature(_out, customNatureCollector);

@@ -21,7 +21,7 @@ using System.Runtime.Serialization;
  * 所有文本分类模型的基类,包含基本的需要序列化的数据
  * @author hankcs
  */
-public class AbstractModel : ISerializable
+public class AbstractModel //: ISerializable
 {
     /**
      * 类目表

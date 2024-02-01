@@ -20,8 +20,8 @@ public class EdgeFrom : Edge
     public int from;
 
     public EdgeFrom(int from, double weight, string name)
+        : base(weight, name)
     {
-        base(weight, name);
         this.from = from;
     }
 

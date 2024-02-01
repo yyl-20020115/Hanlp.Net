@@ -37,8 +37,8 @@ public class TonePinyinString2PinyinConverter
         foreach (Pinyin pinyin in Integer2PinyinConverter.pinyins)
         {
             mapNumberKey.Add(pinyin.ToString(), pinyin);
-            string pinyinWithToneMark = pinyin.getPinyinWithToneMark();
-            string pinyinWithoutTone = pinyin.getPinyinWithoutTone();
+            string pinyinWithToneMark = pinyin.PinyinWithToneMark;
+            string pinyinWithoutTone = pinyin.PinyinWithoutTone;
             Pinyin tone5 = String2PinyinConverter.convert2Tone5(pinyin);
             mapKey.Add(pinyinWithToneMark, pinyin);
             mapKey.Add(pinyinWithoutTone, tone5);
@@ -61,7 +61,7 @@ public class TonePinyinString2PinyinConverter
 
     public static Pinyin convertFromToneNumber(string singlePinyin)
     {
-        return mapNumberKey.get(singlePinyin);
+        return mapNumberKey[(singlePinyin)];
     }
 
     public static List<Pinyin> convert(string[] pinyinArray)
@@ -69,7 +69,7 @@ public class TonePinyinString2PinyinConverter
         List<Pinyin> pinyinList = new (pinyinArray.Length);
         for (int i = 0; i < pinyinArray.Length; i++)
         {
-            pinyinList.Add(mapKey.get(pinyinArray[i]));
+            pinyinList.Add(mapKey[pinyinArray[i]]);
         }
 
         return pinyinList;
@@ -77,7 +77,7 @@ public class TonePinyinString2PinyinConverter
 
     public static Pinyin convert(string singlePinyin)
     {
-        return mapKey.get(singlePinyin);
+        return mapKey[(singlePinyin)];
     }
 
     /**
@@ -91,7 +91,7 @@ public class TonePinyinString2PinyinConverter
         ICollection<Token> tokenize = trie.Tokenize(tonePinyinText);
         foreach (Token token in tokenize)
         {
-            Pinyin pinyin = mapKey.get(token.Fragment);
+            Pinyin pinyin = mapKey[token.Fragment];
             if (removeNull && pinyin == null) continue;
             pinyinList.Add(pinyin);
         }

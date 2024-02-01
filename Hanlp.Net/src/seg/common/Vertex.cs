@@ -268,7 +268,7 @@ public class Vertex
      */
     public bool confirmNature(Nature nature, bool updateWord)
     {
-        switch (nature.firstChar())
+        switch (nature.FirstChar)
         {
 
             case 'm':

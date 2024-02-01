@@ -37,7 +37,7 @@ public interface IClassifier
      * @param text 文本
      * @return 所有分类对应的分值(或概率, 需要enableProbability)
      * @ 参数错误
-     * @throws IllegalStateException    未训练模型
+     * @throws InvalidOperationException    未训练模型
      */
     Dictionary<string, double> predict(string text) ;
 
@@ -53,7 +53,7 @@ public interface IClassifier
      * @param document
      * @return
      * @
-     * @throws IllegalStateException
+     * @throws InvalidOperationException
      */
     double[] categorize(Document document) ;
 
@@ -62,7 +62,7 @@ public interface IClassifier
      * @param document
      * @return
      * @
-     * @throws IllegalStateException
+     * @throws InvalidOperationException
      */
     int label(Document document) ;
 
@@ -71,7 +71,7 @@ public interface IClassifier
      * @param text 文本
      * @return 最可能的分类
      * @
-     * @throws IllegalStateException
+     * @throws InvalidOperationException
      */
     string classify(string text) ;
 
@@ -80,7 +80,7 @@ public interface IClassifier
      * @param document 一个结构化的文档(注意!这是一个底层数据结构,请谨慎操作)
      * @return 最可能的分类
      * @
-     * @throws IllegalStateException
+     * @throws InvalidOperationException
      */
     string classify(Document document) ;
 

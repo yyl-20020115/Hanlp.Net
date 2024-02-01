@@ -20,7 +20,7 @@ public class ImmutableFeatureMDatMapTest : TestCase
         LinearModel model = new LinearModel(HanLP.Config.PerceptronCWSModelPath);
         ImmutableFeatureMDatMap featureMap = (ImmutableFeatureMDatMap) model.featureMap;
         MutableDoubleArrayTrieInteger dat = featureMap.dat;
-        Console.WriteLine(featureMap.Count);
+        Console.WriteLine(featureMap.        Count);
         Console.WriteLine(featureMap.entrySet().Count);
         Console.WriteLine(featureMap.idOf("\u0001/\u00014"));
         Dictionary<String, int> map = new Dictionary<String, int>();

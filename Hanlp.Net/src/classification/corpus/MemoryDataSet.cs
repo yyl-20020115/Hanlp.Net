@@ -38,7 +38,7 @@ public class MemoryDataSet : AbstractDataSet
     }
 
     //@Override
-    public Document Add(string category, string text)
+    public override Document Add(string category, string text)
     {
         if (editMode) return null;
         Document document = convert(category, text);

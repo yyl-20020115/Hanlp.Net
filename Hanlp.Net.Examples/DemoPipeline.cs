@@ -48,8 +48,8 @@ public class DemoPipeline
         {
             foreach (IWord word in input)
             {
-                if ("nx".Equals(word.getLabel()))
-                    word.setLabel("字母");
+                if ("nx".Equals(word.Label))
+                    word.                    Label = "字母";
             }
             return input;
         }

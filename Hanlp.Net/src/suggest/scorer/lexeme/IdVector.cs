@@ -48,8 +48,10 @@ public class IdVector : IComparable<IdVector>, ISentenceKey<IdVector>
         int k = 0;
         while (k < lim)
         {
-            long[] c1 = iterator1.next();
-            long[] c2 = iterator2.next();
+            iterator1.MoveNext();
+            iterator2.MoveNext();
+            long[] c1 = iterator1.Current;
+            long[] c2 = iterator2.Current;
             if (ArrayDistance.ComputeMinimumDistance(c1, c2) != 0)
             {
                 return ArrayCompare.Compare(c1, c2);

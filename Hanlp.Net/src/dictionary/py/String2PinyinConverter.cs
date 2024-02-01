@@ -39,8 +39,8 @@ public class String2PinyinConverter
         for (int i = 0; i < end; ++i)
         {
             Pinyin pinyin = Integer2PinyinConverter.pinyins[i];
-            string pinyinWithoutTone = pinyin.getPinyinWithoutTone();
-            string firstChar = string.valueOf(pinyin.getFirstChar());
+            string pinyinWithoutTone = pinyin.PinyinWithoutTone;
+            string firstChar = string.valueOf(pinyin.FirstChar);
             trie.AddKeyword(pinyinWithoutTone);
             trie.AddKeyword(firstChar);
             map.Add(pinyinWithoutTone, pinyin);
@@ -121,7 +121,7 @@ public class String2PinyinConverter
                 // 是拼音或拼音的一部分，用map转
                 Pinyin pinyin = convertSingle(fragment);
                 pinyinList.Add(pinyin);
-                if (fragment.Length == pinyin.getPinyinWithoutTone().Length)
+                if (fragment.Length == pinyin.PinyinWithoutTone.Length)
                 {
                     booleanList.Add(true);
                 }
@@ -164,7 +164,7 @@ public class String2PinyinConverter
      */
     public static Pinyin convert2Tone5(Pinyin p)
     {
-        return tone2tone5[p.ordinal()];
+        return tone2tone5[p.Ordinal];
     }
 
     /**

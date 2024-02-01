@@ -17,10 +17,7 @@ public class SentencesUtil
      * @param content
      * @return
      */
-    public static List<string> toSentenceList(string content)
-    {
-        return toSentenceList(content.ToCharArray(), true);
-    }
+    public static List<string> ToSentenceList(string content) => toSentenceList(content.ToCharArray(), true);
 
     /**
      * 文本分句

@@ -39,7 +39,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
         {
             foreach (IWord word in wordList)
             {
-                if (!word.getLabel().Equals(NS.Z.ToString()))
+                if (!word.Label.Equals(NS.Z.ToString()))
                 {
                     dictionaryMaker.Add(word);
                 }
@@ -82,9 +82,9 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
-                if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
+                if (current.Label.StartsWith("ns") && !pre.Label.StartsWith("ns"))
                 {
-                    pre.setLabel(NS.A.ToString());
+                    pre.                    Label = NS.A.ToString();
                 }
                 pre = current;
             }
@@ -95,9 +95,9 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
-                if (current.getLabel().StartsWith("ns") && !pre.getLabel().StartsWith("ns"))
+                if (current.Label.StartsWith("ns") && !pre.Label.StartsWith("ns"))
                 {
-                    pre.setLabel(NS.B.ToString());
+                    pre.                    Label = NS.B.ToString();
                 }
                 pre = current;
             }
@@ -109,9 +109,9 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (iterator.MoveNext())
             {
                 IWord third = iterator.next();
-                if (first.getLabel().StartsWith("ns") && third.getLabel().StartsWith("ns") && !second.getLabel().StartsWith("ns"))
+                if (first.Label.StartsWith("ns") && third.Label.StartsWith("ns") && !second.Label.StartsWith("ns"))
                 {
-                    second.setLabel(NS.X.ToString());
+                    second.                    Label = NS.X.ToString();
                 }
                 first = second;
                 second = third;
@@ -125,7 +125,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
-                string label = word.getLabel();
+                string label = word.Label;
                 if (label.Equals(label.ToUpper())) continue;
                 if (label.StartsWith("ns"))
                 {
@@ -134,7 +134,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                     int wordLength = value.Length - longestSuffixLength;
                     if (longestSuffixLength == 0 || wordLength == 0)
                     {
-                        word.setLabel(NS.G.ToString());
+                        word.                        Label = NS.G.ToString();
                         continue;
                     }
                     listIterator.Remove();
@@ -152,7 +152,7 @@ public class NSDictionaryMaker : CommonDictionaryMaker
                 }
                 else
                 {
-                    word.setLabel(NS.Z.ToString());
+                    word.                    Label = NS.Z.ToString();
                 }
             }
             if (verbose) Console.WriteLine("处理整个 " + wordList);

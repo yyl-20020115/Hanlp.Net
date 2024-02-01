@@ -44,7 +44,7 @@ public class NGramDictionaryMaker
         if (frequency == null) frequency = 0;
         trie.Add(combine, frequency + 1);
         // 同时还要统计标签的转移情况
-        tmDictionaryMaker.addPair(first.getLabel(), second.getLabel());
+        tmDictionaryMaker.addPair(first.Label, second.Label);
     }
 
     /**

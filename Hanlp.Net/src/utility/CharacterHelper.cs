@@ -26,6 +26,8 @@ public class CharacterHelper
 
     public static bool isCJKCharacter(char input)
     {
+        //TODO:fix
+#if false
         char.UnicodeBlock ub = char.UnicodeBlock.of(input);
         if (ub == char.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
                 || ub == char.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
@@ -48,6 +50,8 @@ public class CharacterHelper
         {
             return false;
         }
+#endif
+        return false;
         //其他的CJK标点符号，可以不做处理
         //|| ub == char.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
         //|| ub == char.UnicodeBlock.GENERAL_PUNCTUATION
@@ -74,7 +78,7 @@ public class CharacterHelper
         }
         else if (input >= 'A' && input <= 'Z')
         {
-            input += 32;
+            input = (char)(input + 32);
         }
 
         return input;

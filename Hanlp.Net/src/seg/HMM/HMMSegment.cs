@@ -57,7 +57,7 @@ public class HMMSegment : CharacterBasedSegment
     }
 
     //@Override
-    protected List<Term> roughSegSentence(char[] sentence)
+    protected override List<Term> roughSegSentence(char[] sentence)
     {
         char[] tag = model.tag(sentence);
         List<Term> termList = new ();

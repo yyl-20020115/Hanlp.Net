@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.mining.word2vec;
+using System.Text;
 
 namespace com.hankcs.hanlp.seg.common;
 
@@ -77,7 +78,7 @@ public class Graph
 
     public string printByTo()
     {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.Append("========按终点打印========\n");
         for (int to = 0; to < edgesTo.Length; ++to)
         {
@@ -118,7 +119,7 @@ public class Graph
         {
             throw new RuntimeException("路径节点数小于2:" + path);
         }
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 1; i < path.Count - 1; ++i)
         {

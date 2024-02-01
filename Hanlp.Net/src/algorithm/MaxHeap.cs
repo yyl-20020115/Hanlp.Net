@@ -101,12 +101,23 @@ public class MaxHeap<E> : IEnumerable<E>
     public IEnumerator<E> GetEnumerator()
     {
         //TODO:
-        return new List<E>(queue.UnorderedItems.ToArray()).GetEnumerator();
+        //NOTICE: CHECK
+        PriorityQueue<E,E> target = new System.Collections.Generic.PriorityQueue<E,E>();
+        List<E> list = new List<E>();
+        while (queue.Count > 0)
+        {
+            var v = queue.Dequeue();
+            list.Add(v);
+            target.Enqueue(v,v);
+        }
+        this.queue = target;
+
+        return list.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        throw new NotImplementedException();
+        return this.GetEnumerator();
     }
 
     public int Count => queue.Count;

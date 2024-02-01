@@ -18,7 +18,7 @@ namespace com.hankcs.hanlp.classification.corpus;
  * 类目名称和id的对应关系
  * @author hankcs
  */
-public class Catalog : Serializable
+public class Catalog //: Serializable
 {
     public Dictionary<string, int> categoryId;
     public List<string> idCategory;

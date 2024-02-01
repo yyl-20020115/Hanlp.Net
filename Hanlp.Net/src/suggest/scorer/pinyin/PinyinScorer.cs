@@ -19,7 +19,7 @@ namespace com.hankcs.hanlp.suggest.scorer.pinyin;
 public class PinyinScorer : BaseScorer<PinyinKey>
 {
     //@Override
-    protected PinyinKey generateKey(string sentence)
+    protected override PinyinKey generateKey(string sentence)
     {
         PinyinKey pinyinKey = new PinyinKey(sentence);
         if (pinyinKey.Count == 0) return null;

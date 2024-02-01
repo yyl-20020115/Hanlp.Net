@@ -17,7 +17,7 @@ namespace com.hankcs.hanlp.classification.tokenizers;
 /**
  * @author hankcs
  */
-public interface ITokenizer : Serializable
+public interface ITokenizer //: ISerializable
 {
     string[] segment(string text);
 }

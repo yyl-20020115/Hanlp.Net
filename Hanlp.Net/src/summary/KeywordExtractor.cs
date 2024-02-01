@@ -9,6 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.dictionary.stopword;
+using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
+using com.hankcs.hanlp.tokenizer;
+
 namespace com.hankcs.hanlp.summary;
 
 
@@ -31,8 +36,9 @@ public abstract class KeywordExtractor
     }
 
     public KeywordExtractor()
+        : this(StandardTokenizer.SEGMENT)
     {
-        this(StandardTokenizer.SEGMENT);
+        ;
     }
 
     /**
@@ -92,8 +98,11 @@ public abstract class KeywordExtractor
         IEnumerator<Term> listIterator = termList.GetEnumerator();
         while (listIterator.MoveNext())
         {
-            if (!shouldInclude(listIterator.next()))
+            if (listIterator.MoveNext() && !shouldInclude(listIterator.Current))
+            {
+                //TODO:?
                 listIterator.Remove();
+            }
         }
     }
 

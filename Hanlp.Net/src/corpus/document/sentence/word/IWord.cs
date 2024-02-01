@@ -16,35 +16,27 @@ namespace com.hankcs.hanlp.corpus.document.sentence.word;
  * 词语接口
  * @author hankcs
  */
-public interface IWord : Serializable
+public interface IWord// : Serializable
 {
     /**
      * 获取单词
      * @return
      */
-    string Value;
+    string Value { get; }
 
     /**
      * 获取标签
      * @return
      */
-    string getLabel();
-
     /**
-     * 设置标签
-     * @param label
-     */
-    void setLabel(string label);
-
-    /**
-     * 设置单词
-     * @param value
-     */
-    void setValue(string value);
+ * 设置标签
+ * @param label
+ */
+    string Label { get; set; }
 
     /**
      * 单词长度
      * @return
      */
-    int Length();
+    int Length { get; }
 }

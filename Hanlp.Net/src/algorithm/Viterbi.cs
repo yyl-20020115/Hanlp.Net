@@ -106,10 +106,10 @@ public class Viterbi
      * @param vertexList                包含Vertex.B节点的路径
      * @param transformMatrixDictionary 词典对应的转移矩阵
      */
-    public static void compute(List<Vertex> vertexList, TransformMatrix transformMatrixDictionary)
+    public static void Compute(List<Vertex> vertexList, TransformMatrix transformMatrixDictionary)
     {
-        if (Nature.values.Length != transformMatrixDictionary.states.Length)
-            transformMatrixDictionary.extend(Nature.values.Length);
+        if (Nature.values.Count != transformMatrixDictionary.states.Length)
+            transformMatrixDictionary.extend(Nature.values.Count);
         int Length = vertexList.Count - 1;
         double[][] cost = new double[2][];  // 滚动数组
         var iterator = vertexList.GetEnumerator();
@@ -129,7 +129,7 @@ public class Viterbi
             int curIndex = 0;
             foreach (Nature cur in item.attribute.nature)
             {
-                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.Log((item.attribute.frequency[curIndex] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
+                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.attribute.frequency[curIndex] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
                 ++j;
                 ++curIndex;
             }
@@ -141,7 +141,8 @@ public class Viterbi
         {
             int index_i = i & 1;
             int index_i_1 = 1 - index_i;
-            Vertex item = iterator.next();
+            iterator.MoveNext();
+            Vertex item = iterator.Current;
             cost[index_i] = new double[item.attribute.nature.Length];
             double perfect_cost_line = Double.MaxValue;
             int k = 0;
@@ -152,7 +153,7 @@ public class Viterbi
                 int j = 0;
                 foreach (Nature p in preTagSet)
                 {
-                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.ordinal()][cur.ordinal()] - Math.Log((item.attribute.frequency[k] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
+                    double now = cost[index_i_1][j] + transformMatrixDictionary.transititon_probability[p.Ordinal][cur.Ordinal] - Math.Log((item.attribute.frequency[k] + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.ordinal()));
                     if (now < cost[index_i][k])
                     {
                         cost[index_i][k] = now;
@@ -187,7 +188,7 @@ public class Viterbi
         double[][] cost = new double[2][];  // 滚动数组
         var iterator = roleTagList.GetEnumerator();
         EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.entrySet().GetEnumerator().next().Key;
+        E pre = start.labelMap.Keys.GetEnumerator().next().Key;
         // 第一个是确定的
         tagList.Add(pre);
         // 第二个也可以简单地算出来
@@ -196,9 +197,9 @@ public class Viterbi
             EnumItem<E> item = iterator.next();
             cost[0] = new double[item.labelMap.Count];
             int j = 0;
-            foreach (E cur in item.labelMap)
+            foreach (E cur in item.labelMap.ToArray())
             {
-                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.ordinal()][cur.ordinal()] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                 ++j;
             }
             preTagSet = item.labelMap;

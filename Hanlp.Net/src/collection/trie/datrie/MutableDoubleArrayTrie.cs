@@ -351,7 +351,7 @@ public class MutableDoubleArrayTrie<V> : SortedDictionary<string, V>, IEnumerabl
             return entrySet().GetEnumerator();
         }
 
-        public class ST : IEnumerator<KeyValuePair<string, V>>()
+        public class ST : IEnumerator<KeyValuePair<string, V>>
         {
             MutableDoubleArrayTrieInteger.KeyValuePair iterator = trie.GetEnumerator();
 

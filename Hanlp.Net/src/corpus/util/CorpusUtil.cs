@@ -40,7 +40,7 @@ public class CorpusUtil
      */
     public static IWord compile(IWord word)
     {
-        string label = word.getLabel();
+        string label = word.Label;
         if ("nr".Equals(label)) return new Word(word.Value, TAG_PEOPLE);
         else if ("m".Equals(label) || "mq".Equals(label)) return new Word(word.Value, TAG_NUMBER);
         else if ("t".Equals(label)) return new Word(word.Value, TAG_TIME);

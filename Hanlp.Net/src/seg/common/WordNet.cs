@@ -80,12 +80,12 @@ public class WordNet
         {
             vertexes[i] = new ();
         }
-        int i = 0;
+        int i2 = 0;
         foreach (Vertex vertex in vertexList)
         {
-            vertexes[i].Add(vertex);
+            vertexes[i2].Add(vertex);
             ++_size;
-            i += vertex.realWord.Length;
+            i2 += vertex.realWord.Length;
         }
     }
 

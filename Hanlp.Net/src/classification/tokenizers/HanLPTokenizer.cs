@@ -28,9 +28,10 @@ public class HanLPTokenizer : ITokenizer
         IEnumerator<Term> listIterator = termList.GetEnumerator();
         while (listIterator.MoveNext())
         {
-            Term term = listIterator.next();
+            Term term = listIterator.Current;
             if (term.word.IndexOf('\u0000') >= 0)
             {
+                //TODO:
                 listIterator.Remove();
             }
         }

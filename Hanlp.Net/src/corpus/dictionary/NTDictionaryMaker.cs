@@ -33,7 +33,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
     }
 
     //@Override
-    protected void addToDictionary(List<List<IWord>> sentenceList)
+    protected override void addToDictionary(List<List<IWord>> sentenceList)
     {
         //        logger.warning("开始制作词典");
         // 将非A的词语保存下来
@@ -41,7 +41,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
         {
             foreach (IWord word in wordList)
             {
-                if (!word.getLabel().Equals(NT.Z.ToString()))
+                if (!word.Label.Equals(NT.Z.ToString()))
                 {
                     dictionaryMaker.Add(word);
                 }
@@ -84,9 +84,9 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
-                if (current.getLabel().StartsWith("nt") && !pre.getLabel().StartsWith("nt"))
+                if (current.Label.StartsWith("nt") && !pre.Label.StartsWith("nt"))
                 {
-                    pre.setLabel(NT.A.ToString());
+                    pre.                    Label = NT.A.ToString();
                 }
                 pre = current;
             }
@@ -97,9 +97,9 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             while (iterator.MoveNext())
             {
                 IWord current = iterator.next();
-                if (current.getLabel().StartsWith("nt") && !pre.getLabel().StartsWith("nt"))
+                if (current.Label.StartsWith("nt") && !pre.Label.StartsWith("nt"))
                 {
-                    pre.setLabel(NT.B.ToString());
+                    pre.                    Label = NT.B.ToString();
                 }
                 pre = current;
             }
@@ -112,9 +112,9 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 while (iterator.MoveNext())
                 {
                     IWord third = iterator.next();
-                    if (first.getLabel().StartsWith("nt") && third.getLabel().StartsWith("nt") && !second.getLabel().StartsWith("nt"))
+                    if (first.Label.StartsWith("nt") && third.Label.StartsWith("nt") && !second.Label.StartsWith("nt"))
                     {
-                        second.setLabel(NT.X.ToString());
+                        second.                        Label = NT.X.ToString();
                     }
                     first = second;
                     second = third;
@@ -126,7 +126,7 @@ public class NTDictionaryMaker : CommonDictionaryMaker
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
-                string label = word.getLabel();
+                string label = word.Label;
                 if (label.Equals(label.toUpperCase())) continue;
                 if (label.StartsWith("nt"))
                 {
@@ -142,8 +142,8 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                             string innerLabel = inner.label;
                             if (innerLabel.StartsWith("ns"))
                             {
-                                inner.setValue(Predefine.TAG_PLACE);
-                                inner.setLabel(NT.G.ToString());
+                                inner.                                Value = Predefine.TAG_PLACE;
+                                inner.                                Label = NT.G.ToString();
                                 listIterator.Add(inner);
                                 sbPattern.Append(inner.label);
                             }
@@ -236,12 +236,12 @@ public class NTDictionaryMaker : CommonDictionaryMaker
                 }
                 else
                 {
-                    word.setLabel(NT.K.ToString());
+                    word.                    Label = NT.K.ToString();
                 }
             }
             else
             {
-                word.setLabel(NT.Z.ToString());
+                word.                Label = NT.Z.ToString();
             }
         }
         if (verbose) Console.WriteLine("处理整个 " + wordList);

@@ -253,7 +253,7 @@ public class POSInstance : Instance
         foreach (Word word in wordList)
         {
             termArray[i] = word.Value;
-            posArray[i] = word.getLabel();
+            posArray[i] = word.Label;
             ++i;
         }
         return new POSInstance(termArray, posArray, featureMap);

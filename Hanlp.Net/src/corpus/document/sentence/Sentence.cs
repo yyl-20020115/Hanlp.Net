@@ -118,7 +118,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
                 foreach (Word child in ((CompoundWord) word).innerList)
                 {
                     printWord(child, sb, i, offsetChild, withComment);
-                    offsetChild += child.Length();
+                    offsetChild += child.Length;
                     offsetChild += delimiter.Length;
                     ++i;
                 }
@@ -128,7 +128,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
             {
                 offset += delimiter.Length;
             }
-            offset += word.Length();
+            offset += word.Length;
         }
         return sb.ToString();
     }
@@ -142,12 +142,12 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     {
         foreach (IWord word in wordList)
         {
-            word.setLabel(PartOfSpeechTagDictionary.translate(word.getLabel()));
+            word.            Label = PartOfSpeechTagDictionary.translate(word.Label);
             if (word is CompoundWord)
             {
                 foreach (Word child in ((CompoundWord) word).innerList)
                 {
-                    child.setLabel(PartOfSpeechTagDictionary.translate(child.getLabel()));
+                    child.                    Label = PartOfSpeechTagDictionary.translate(child.Label);
                 }
             }
         }
@@ -164,7 +164,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         foreach (IWord word in wordList)
         {
             if (word is CompoundWord)
-                word.setLabel(PartOfSpeechTagDictionary.translate(word.getLabel()));
+                word.                Label = PartOfSpeechTagDictionary.translate(word.Label);
         }
         return this;
     }
@@ -179,16 +179,16 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         char delimiter = '\t';
         char endLine = '\n';
         sb.Append('T').Append(id).Append(delimiter);
-        sb.Append(word.getLabel()).Append(delimiter);
-        int Length = word.Length();
+        sb.Append(word.Label).Append(delimiter);
+        int Length = word.Length;
         if (word is CompoundWord)
         {
             Length += ((CompoundWord) word).innerList.Count - 1;
         }
         sb.Append(offset).Append(delimiter).Append(offset + Length).Append(delimiter);
         sb.Append(word.Value).Append(endLine);
-        string translated = PartOfSpeechTagDictionary.translate(word.getLabel());
-        if (withComment && !word.getLabel().Equals(translated))
+        string translated = PartOfSpeechTagDictionary.translate(word.Label);
+        if (withComment && !word.Label.Equals(translated))
         {
             sb.Append('#').Append(id).Append(delimiter).Append("AnnotatorNotes").Append(delimiter)
                 .Append('T').Append(id).Append(delimiter).Append(translated)
@@ -320,7 +320,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         List<IWord> wordList = new ();
         foreach (IWord word in this)
         {
-            if (label.Equals(word.getLabel()))
+            if (label.Equals(word.Label))
             {
                 wordList.Add(word);
             }
@@ -338,7 +338,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
     {
         foreach (IWord word in this)
         {
-            if (label.Equals(word.getLabel()))
+            if (label.Equals(word.Label))
             {
                 return word;
             }
@@ -360,7 +360,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
         while (listIterator.MoveNext())
         {
             IWord word = listIterator.Current;
-            if (label.Equals(word.getLabel()))
+            if (label.Equals(word.Label))
             {
                 return listIterator;
             }
@@ -471,7 +471,7 @@ public class Sentence : /*Serializable,*/ IEnumerable<IWord>
             IWord word = listIterator.next();
             if (word is CompoundWord)
             {
-                listIterator.set(new Word(word.Value, word.getLabel()));
+                listIterator.set(new Word(word.Value, word.Label));
             }
         }
         return this;

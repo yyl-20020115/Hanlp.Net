@@ -25,8 +25,9 @@ public class TextRankKeyword : KeywordExtractor
     static float min_diff = 0.001f;
 
     public TextRankKeyword(Segment defaultSegment)
+        : base(defaultSegment)
     {
-        base(defaultSegment);
+        ;
     }
 
     public TextRankKeyword()
@@ -101,7 +102,7 @@ public class TextRankKeyword : KeywordExtractor
         //@Override
         public int Compare(KeyValuePair<string, float> o1, KeyValuePair<string, float> o2)
         {
-            return o1.Value.compareTo(o2.Value);
+            return o1.Value.CompareTo(o2.Value);
         }
     }
 
@@ -142,8 +143,8 @@ public class TextRankKeyword : KeywordExtractor
                     continue;
                 }
                 //既然是邻居,那么关系是相互的,遍历一遍即可
-                words.get(w).Add(qWord);
-                words.get(qWord).Add(w);
+                words[(w)].Add(qWord);
+                words[(qWord)].Add(w);
             }
             que.offer(w);
         }
@@ -165,11 +166,11 @@ public class TextRankKeyword : KeywordExtractor
                 m.Add(key, 1 - d);
                 foreach (string element in value)
                 {
-                    int size = words.get(element).Count;
+                    int size = words[(element)].Count;
                     if (key.Equals(element) || size == 0) continue;
-                    m.Add(key, m.get(key) + d / size * (score.get(element) == null ? 0 : score.get(element)));
+                    m.Add(key, m[(key)] + d / size * (score[(element)] == null ? 0 : score[(element)]));
                 }
-                max_diff = Math.Max(max_diff, Math.Abs(m.get(key) - (score.get(key) == null ? 0 : score.get(key))));
+                max_diff = Math.Max(max_diff, Math.Abs(m[(key)] - (score[(key)] == null ? 0 : score[(key)])));
             }
             score = m;
             if (max_diff <= min_diff) break;

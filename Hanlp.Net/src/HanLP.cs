@@ -557,7 +557,7 @@ public class HanLP
             {
                 sb.Append(text.charAt(i - 1));
             }
-            else sb.Append(pinyin.getPinyinWithoutTone());
+            else sb.Append(pinyin.PinyinWithoutTone);
             if (i < Length)
             {
                 sb.Append(separator);
@@ -594,7 +594,7 @@ public class HanLP
         int i = 1;
         foreach (Pinyin pinyin in pinyinList)
         {
-            sb.Append(pinyin.getFirstChar());
+            sb.Append(pinyin.FirstChar);
             if (i < Length)
             {
                 sb.Append(separator);

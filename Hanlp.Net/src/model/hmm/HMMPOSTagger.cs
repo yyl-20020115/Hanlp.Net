@@ -45,7 +45,7 @@ public class HMMPOSTagger : HMMTrainer , POSTagger
         List<string[]> xyList = new (wordList.Count);
         foreach (Word word in wordList)
         {
-            xyList.Add(new string[]{word.Value(), word.getLabel()});
+            xyList.Add(new string[]{word.Value, word.Label});
         }
         return xyList;
     }

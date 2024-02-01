@@ -50,7 +50,7 @@ public abstract class BaseScorer<T> : IScorer where T: ISentenceKey<T>
     {
         T key = generateKey(sentence);
         if (key == null) return;
-        HashSet<string> set = storage.get(key);
+        HashSet<string> set = storage[(key)];
         if (set == null)
         {
             set = new ();

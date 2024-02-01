@@ -50,16 +50,10 @@ public class Pipeline<I, M, O> : List<Pipe<M, M>>, Pipe<I, O>
     }
 
     //@Override
-    public override int Count()
-    {
-        return pipeList.Count;
-    }
+    public override int Count => pipeList.Count;
 
     //@Override
-    public bool isEmpty()
-    {
-        return pipeList.isEmpty();
-    }
+    public bool isEmpty() => pipeList.isEmpty();
 
     //@Override
     public bool Contains(Object o)

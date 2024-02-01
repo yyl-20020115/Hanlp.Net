@@ -27,7 +27,7 @@ public class NRDictionary : EnumItemDictionary<NR>
 {
 
     //@Override
-    protected NR valueOf(string name)
+    protected override NR valueOf(string name)
     {
         return NR.valueOf(name);
     }

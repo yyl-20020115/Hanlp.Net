@@ -10,17 +10,14 @@ namespace com.hankcs.hanlp.utility;
 public class TextUtility
 {
 
-    public static int charType(char c)
-    {
-        return charType(string.valueOf(c));
-    }
+    public static int CharType(char c) => CharType(c.ToString());
 
     /**
      * 判断字符类型
      * @param str
      * @return
      */
-    public static int charType(string str)
+    public static int CharType(string str)
     {
         if (str != null && str.Length > 0)
         {
@@ -30,13 +27,13 @@ public class TextUtility
             {
                 b = str.getBytes("GBK");
             }
-            catch (UnsupportedEncodingException e)
+            catch (Exception e)
             {
-                b = str.getBytes();
+                b = str.ToCharArray()[0];
                 //e.printStackTrace();
             }
             byte b1 = b[0];
-            byte b2 = b.Length > 1 ? b[1] : 0;
+            byte b2 = b.Length > 1 ? b[1] : (byte)0;
             int ub1 = getUnsigned(b1);
             int ub2 = getUnsigned(b2);
             if (ub1 < 128)
@@ -74,7 +71,7 @@ public class TextUtility
      */
     public static bool isAllChinese(string str)
     {
-        return str.matches("[\\u4E00-\\u9FA5]+");
+        return str.Matches("[\\u4E00-\\u9FA5]+");
     }
     /**
      * 是否全部不是中文

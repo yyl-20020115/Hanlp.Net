@@ -110,10 +110,10 @@ public abstract class PerceptronTrainer : InstanceConsumer
         TagSet tagSet = createTagSet();
         MutableFeatureMap mutableFeatureMap = new MutableFeatureMap(tagSet);
         ConsoleLogger logger = new ConsoleLogger();
-        logger.start("开始加载训练集...\n");
+        logger.Start("开始加载训练集...\n");
         Instance[] instances = loadTrainInstances(trainingFile, mutableFeatureMap);
         tagSet._lock();
-        logger.finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.Length, mutableFeatureMap.Count * tagSet.Count);
+        logger.Finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.Length, mutableFeatureMap.Count * tagSet.Count);
 
         // 开始训练
         ImmutableFeatureMap immutableFeatureMap = new ImmutableFeatureMap(mutableFeatureMap.featureIdMap, tagSet);
@@ -161,9 +161,9 @@ public abstract class PerceptronTrainer : InstanceConsumer
             accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
             _out.print("AP - ");
             printAccuracy(accuracy);
-            logger.start("以压缩比 %.2f 保存模型到 %s ... ", compressRatio, modelFile);
+            logger.Start("以压缩比 %.2f 保存模型到 %s ... ", compressRatio, modelFile);
             model.save(modelFile, immutableFeatureMap.featureIdMap.entrySet(), compressRatio);
-            logger.finish(" 保存完毕\n");
+            logger.Finish(" 保存完毕\n");
             if (compressRatio == 0) return new Result(model, accuracy);
         }
         else
@@ -212,9 +212,9 @@ public abstract class PerceptronTrainer : InstanceConsumer
                     return null;
                 }
             }
-            logger.start("以压缩比 %.2f 保存模型到 %s ... ", compressRatio, modelFile);
+            logger.Start("以压缩比 %.2f 保存模型到 %s ... ", compressRatio, modelFile);
             models[0].save(modelFile, immutableFeatureMap.featureIdMap.entrySet(), compressRatio, HanLP.Config.DEBUG);
-            logger.finish(" 保存完毕\n");
+            logger.Finish(" 保存完毕\n");
             if (compressRatio == 0) return new Result(models[0], accuracy);
         }
 

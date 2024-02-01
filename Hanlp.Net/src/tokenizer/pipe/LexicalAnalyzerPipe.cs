@@ -39,7 +39,7 @@ public class LexicalAnalyzerPipe : Pipe<List<IWord>, List<IWord>>
         while (listIterator.MoveNext())
         {
             IWord wordOrSentence = listIterator.next();
-            if (wordOrSentence.getLabel() != null)
+            if (wordOrSentence.Label != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
             listIterator.Remove(); // 否则是句子
             string sentence = wordOrSentence.Value;

@@ -104,7 +104,7 @@ public class CRFSegment : CharacterBasedSegment
                     if (i == table.v.Length)
                     {
                         termList.Add(new Term(new string(sentence, begin, offset - begin), toDefaultNature(table.v[i][0])));
-                        break OUTER;
+                        goto OUTER;
                     }
                     else
                         termList.Add(new Term(new string(sentence, begin, offset - begin + table.v[i][1].Length), toDefaultNature(table.v[i][0])));
@@ -117,6 +117,7 @@ public class CRFSegment : CharacterBasedSegment
                 break;
             }
         }
+        OUTER_EXIT:
         return termList;
     }
 
@@ -154,7 +155,7 @@ public class CRFSegment : CharacterBasedSegment
                     {
                         atomList.Add(sbAtom.ToString());
                         sbAtom.Length=0;
-                        break _out;
+                        goto _out_exit;
                     }
                     c = sentence[++i];
                 }
@@ -179,7 +180,7 @@ public class CRFSegment : CharacterBasedSegment
                     {
                         atomList.Add(sbAtom.ToString());
                         sbAtom.Length=0;
-                        break _out;
+                        goto _out_exit;
                     }
                     c = sentence[++i];
                 }
@@ -189,16 +190,20 @@ public class CRFSegment : CharacterBasedSegment
             }
             else
             {
-                atomList.Add(string.valueOf(sentence[i]));
+                atomList.Add(sentence[i].ToString());
             }
         }
-
+        _out_exit:
         return atomList;
     }
 
     public static string[][] atomSegmentToTable(char[] sentence)
     {
-        string[][] table = new string[sentence.Length][3];
+        string[][] table = new string[sentence.Length][];
+        for(int i = 0; i < sentence.Length; i++)
+        {
+            table[i] = new string[3];
+        }
         int size = 0;
         int maxLen = sentence.Length - 1;
         StringBuilder sbAtom = new StringBuilder();
@@ -226,7 +231,7 @@ public class CRFSegment : CharacterBasedSegment
                         table[size][1] = sbAtom.ToString();
                         ++size;
                         sbAtom.Length=0;
-                        break _out;
+                        goto _out_exit;
                     }
                     c = sentence[++i];
                 }
@@ -257,7 +262,7 @@ public class CRFSegment : CharacterBasedSegment
                         table[size][1] = sbAtom.ToString();
                         ++size;
                         sbAtom.Length=0;
-                        break _out;
+                        goto _out_exit;
                     }
                     c = sentence[++i];
                 }
@@ -269,11 +274,11 @@ public class CRFSegment : CharacterBasedSegment
             }
             else
             {
-                table[size][0] = table[size][1] = string.valueOf(sentence[i]);
+                table[size][0] = table[size][1] = sentence[i].ToString();
                 ++size;
             }
         }
-
+        _out_exit:
         return resizeArray(table, size);
     }
 

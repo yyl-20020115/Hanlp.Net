@@ -200,7 +200,7 @@ public class CWSEvaluator
                 if (++i != termList.Count)
                     bw.Write("  ");
             }
-            bw.newLine();
+            bw.WriteLine();
         }
         bw.Close();
         CWSEvaluator.Result result = CWSEvaluator.evaluate(goldFile, outputPath, dictPath);

@@ -10,6 +10,7 @@
  * </copyright>
  */
 using com.hankcs.hanlp.recognition.nr;
+using com.hankcs.hanlp.recognition.ns;
 using com.hankcs.hanlp.recognition.nt;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.seg.Dijkstra.Path;
@@ -25,7 +26,7 @@ namespace com.hankcs.hanlp.seg.Dijkstra;
 public class DijkstraSegment : WordBasedSegment
 {
     //@Override
-    public List<Term> segSentence(char[] sentence)
+    public override List<Term> segSentence(char[] sentence)
     {
         WordNet wordNetOptimum = new WordNet(sentence);
         WordNet wordNetAll = new WordNet(wordNetOptimum.charArray);

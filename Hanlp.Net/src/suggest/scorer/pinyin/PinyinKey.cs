@@ -62,15 +62,15 @@ public class PinyinKey : IComparable<PinyinKey>, ISentenceKey<PinyinKey>
         pinyinSize = 0;
         firstCharSize = 0;
         IEnumerator<Boolean> iterator = booleanList.GetEnumerator();
-        for (int i = 0; i < pinyinArray.Length; ++i)
+        for (int i = 0; i < pinyinArray.Length &&iterator.MoveNext(); ++i)
         {
-            if (iterator.next())
+            if (iterator.Current)
             {
                 pyOrdinalArray[pinyinSize++] = pinyinArray[i].ordinal();
             }
             if (pinyinArray[i] != Pinyin.none5)
             {
-                firstCharArray[firstCharSize++] = pinyinArray[i].getFirstChar();
+                firstCharArray[firstCharSize++] = pinyinArray[i].FirstChar;
             }
         }
     }

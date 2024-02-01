@@ -50,11 +50,12 @@ public class BigramTokenizer : ITokenizer
         // 输出
         string[] termArray = new string[atomList.Count - 1];
         IEnumerator<int[]> iterator = atomList.GetEnumerator();
-        int[] pre = iterator.next();
+        iterator.MoveNext();
+        int[] pre = iterator.Current;
         int p = -1;
         while (iterator.MoveNext())
         {
-            int[] cur = iterator.next();
+            int[] cur = iterator.Current;
             termArray[++p] = new StringBuilder(pre[1] + cur[1]).Append(charArray, pre[0], pre[1]).Append(charArray, cur[0], cur[1]).ToString();
             pre = cur;
         }

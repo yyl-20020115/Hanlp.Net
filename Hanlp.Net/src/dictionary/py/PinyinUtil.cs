@@ -165,7 +165,7 @@ public class PinyinUtil
         List<string> tonePinyinList = new (pinyinList.Count);
         foreach (Pinyin pinyin in pinyinList)
         {
-            tonePinyinList.Add(pinyin.getPinyinWithToneMark());
+            tonePinyinList.Add(pinyin.PinyinWithToneMark);
         }
 
         return tonePinyinList;

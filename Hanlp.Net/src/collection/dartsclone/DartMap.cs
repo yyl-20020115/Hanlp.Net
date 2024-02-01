@@ -45,13 +45,13 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public bool isEmpty()
+    public override bool isEmpty()
     {
         return this.valueArray.Length == 0;
     }
 
     //@Override
-    public bool ContainsKey(Object key)
+    public override bool ContainsKey(Object key)
     {
         return ContainsKey(key.ToString());
     }

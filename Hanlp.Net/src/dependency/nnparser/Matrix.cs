@@ -1275,7 +1275,7 @@ public class Matrix : Cloneable, ISerializable, ICacheAble
         {
             for (int j = 0; j < n; j++)
             {
-                A[i][j] = 0.;
+                A[i][j] = 0.0;
             }
         }
     }

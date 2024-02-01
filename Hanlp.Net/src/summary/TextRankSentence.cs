@@ -132,9 +132,9 @@ public class TextRankSentence
         size = Math.Min(size, values.Count);
         int[] indexArray = new int[size];
         IEnumerator<int> it = values.GetEnumerator();
-        for (int i = 0; i < size; ++i)
+        for (int i = 0; i < size && it.MoveNext(); ++i)
         {
-            indexArray[i] = it.next();
+            indexArray[i] = it.Current;
         }
         return indexArray;
     }

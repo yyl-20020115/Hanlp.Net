@@ -33,6 +33,10 @@ public class Document : Serializable
         this.sentenceList = sentenceList;
     }
 
+    public Document()
+    {
+    }
+
     public static Document create(string param)
     {
         var pattern = Pattern.compile(".+?((。/w)|(！/w )|(？/w )|\\n|$)");
@@ -188,7 +192,7 @@ public class Document : Serializable
             {
                 if (word is CompoundWord)
                 {
-                    if (labelSet.Contains(word.getLabel()))
+                    if (labelSet.Contains(word.Label))
                     {
                         foreach (Word inner in ((CompoundWord) word).innerList)
                         {

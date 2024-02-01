@@ -1535,71 +1535,47 @@ public class Pinyin
      * 获取声母
      * @return
      */
-    public Shengmu getShengmu()
-    {
-        return shengmu;
-    }
+    public Shengmu Shengmu => shengmu;
 
     /**
      * 获取韵母
      * @return
      */
-    public Yunmu getYunmu()
-    {
-        return yunmu;
-    }
+    public Yunmu Yunmu => yunmu;
 
     /**
      * 获取声调
      * @return
      */
-    public int getTone()
-    {
-        return tone;
-    }
+    public int Tone => tone;
 
     /**
      * 获取带音调的拼音
      * @return
      */
-    public string getPinyinWithToneMark()
-    {
-        return pinyinWithToneMark;
-    }
+    public string PinyinWithToneMark => pinyinWithToneMark;
 
     /**
      * 获取纯字母的拼音
      * @return
      */
-    public string getPinyinWithoutTone()
-    {
-        return pinyinWithoutTone;
-    }
+    public string PinyinWithoutTone => pinyinWithoutTone;
 
     /**
      * 获取输入法头
      * @return
      */
-    public string getHeadString()
-    {
-        return head.ToString();
-    }
+    public string HeadString => head.ToString();
 
     /**
      * 获取输入法头
      * @return
      */
-    public Head getHead()
-    {
-        return head;
-    }
+    public Head Head => head;
 
     /**
      * 获取首字母
      * @return
      */
-    public char getFirstChar()
-    {
-        return firstChar;
-    }
+    public char FirstChar => firstChar;
 }

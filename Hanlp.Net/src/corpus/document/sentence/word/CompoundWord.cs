@@ -43,29 +43,11 @@ public class CompoundWord : IWord, IEnumerable<Word>
     }
 
     //@Override
-    public string getLabel()
-    {
-        return label;
-    }
+    //@Override
+    public string Label { get => label; set => this.label = value; }
 
     //@Override
-    public void setLabel(string label)
-    {
-        this.label = label;
-    }
-
-    //@Override
-    public void setValue(string value)
-    {
-        innerList.Clear();
-        innerList.Add(new Word(value, label));
-    }
-
-    //@Override
-    public int Length()
-    {
-        return Value().Length;
-    }
+    public int Length => Value().Length;
 
     //@Override
     public override string ToString()
@@ -75,8 +57,8 @@ public class CompoundWord : IWord, IEnumerable<Word>
         int i = 1;
         foreach (Word word in innerList)
         {
-            sb.Append(word.Value());
-            string label = word.getLabel();
+            sb.Append(word.Value);
+            string label = word.Label;
             if (label != null)
             {
                 sb.Append('/').Append(label);
@@ -98,7 +80,7 @@ public class CompoundWord : IWord, IEnumerable<Word>
      */
     public Word toWord()
     {
-        return new Word(Value(), getLabel());
+        return new Word(Value(), Label);
     }
 
     public CompoundWord(List<Word> innerList, string label)

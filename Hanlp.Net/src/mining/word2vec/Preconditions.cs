@@ -51,7 +51,7 @@ class Preconditions
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
      *                             are converted to strings using {@link string#valueOf(Object)}.
      * @ if {@code expression} is false
-     * @throws NullPointerException     if the check fails and either {@code errorMessageTemplate} or
+     * @throws NullReferenceException     if the check fails and either {@code errorMessageTemplate} or
      *                                  {@code errorMessageArgs} is null (don't let this happen)
      */
     public static void checkArgument(bool expression,
@@ -69,13 +69,13 @@ class Preconditions
      * involving any parameters to the calling method.
      *
      * @param expression a bool expression
-     * @throws IllegalStateException if {@code expression} is false
+     * @throws InvalidOperationException if {@code expression} is false
      */
     public static void checkState(bool expression)
     {
         if (!expression)
         {
-            throw new IllegalStateException();
+            throw new InvalidOperationException();
         }
     }
 
@@ -86,13 +86,13 @@ class Preconditions
      * @param expression   a bool expression
      * @param errorMessage the exception message to use if the check fails; will be converted to a
      *                     string using {@link string#valueOf(Object)}
-     * @throws IllegalStateException if {@code expression} is false
+     * @throws InvalidOperationException if {@code expression} is false
      */
     public static void checkState(bool expression, Object errorMessage)
     {
         if (!expression)
         {
-            throw new IllegalStateException(string.valueOf(errorMessage));
+            throw new InvalidOperationException(errorMessage.ToString());
         }
     }
 
@@ -108,8 +108,8 @@ class Preconditions
      *                             in square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
      *                             are converted to strings using {@link string#valueOf(Object)}.
-     * @throws IllegalStateException if {@code expression} is false
-     * @throws NullPointerException  if the check fails and either {@code errorMessageTemplate} or
+     * @throws InvalidOperationException if {@code expression} is false
+     * @throws NullReferenceException  if the check fails and either {@code errorMessageTemplate} or
      *                               {@code errorMessageArgs} is null (don't let this happen)
      */
     public static void checkState(bool expression,
@@ -118,7 +118,7 @@ class Preconditions
     {
         if (!expression)
         {
-            throw new IllegalStateException(Format(errorMessageTemplate, errorMessageArgs));
+            throw new InvalidOperationException(Format(errorMessageTemplate, errorMessageArgs));
         }
     }
 
@@ -127,13 +127,13 @@ class Preconditions
      *
      * @param reference an object reference
      * @return the non-null reference that was validated
-     * @throws NullPointerException if {@code reference} is null
+     * @throws NullReferenceException if {@code reference} is null
      */
     public static  T checkNotNull<T>(T reference)
     {
         if (reference == null)
         {
-            throw new NullPointerException();
+            throw new NullReferenceException();
         }
         return reference;
     }
@@ -145,7 +145,7 @@ class Preconditions
      * @param errorMessage the exception message to use if the check fails; will be converted to a
      *                     string using {@link string#valueOf(Object)}
      * @return the non-null reference that was validated
-     * @throws NullPointerException if {@code reference} is null
+     * @throws NullReferenceException if {@code reference} is null
      */
     public static T checkNotNull<T>(T reference, Object errorMessage)
     {
@@ -168,7 +168,7 @@ class Preconditions
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
      *                             are converted to strings using {@link string#valueOf(Object)}.
      * @return the non-null reference that was validated
-     * @throws NullPointerException if {@code reference} is null
+     * @throws NullReferenceException if {@code reference} is null
      */
     public static  T checkNotNull<T>(T reference,
                                      string errorMessageTemplate,
@@ -361,7 +361,7 @@ class Preconditions
     // Note that this is somewhat-improperly used from Verify.java as well.
     static string Format(string template, params object[]  args)
     {
-        template = string.valueOf(template); // null -> "null"
+        template = template??"null"; // null -> "null"
 
         // start substituting the arguments into the '%s' placeholders
         StringBuilder builder = new StringBuilder(template.Length + 16 * args.Length);

@@ -82,7 +82,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
-            throw new IllegalStateException("流水线中没有LexicalAnalyzerPipe");
+            throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
         analyzer.segment(sentence, normalized, wordList);
     }
 
@@ -91,7 +91,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
-            throw new IllegalStateException("流水线中没有LexicalAnalyzerPipe");
+            throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
         return analyzer.segment(sentence);
     }
 
@@ -100,7 +100,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
-            throw new IllegalStateException("流水线中没有LexicalAnalyzerPipe");
+            throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
         return analyzer.recognize(wordArray, posArray);
     }
 
@@ -109,7 +109,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
-            throw new IllegalStateException("流水线中没有LexicalAnalyzerPipe");
+            throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
         return analyzer.tag(words);
     }
 
@@ -118,7 +118,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
-            throw new IllegalStateException("流水线中没有LexicalAnalyzerPipe");
+            throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
         return analyzer.tag(wordList);
     }
 
@@ -127,7 +127,7 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
-            throw new IllegalStateException("流水线中没有LexicalAnalyzerPipe");
+            throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
         return analyzer.getNERTagSet();
     }
 

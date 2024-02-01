@@ -144,7 +144,7 @@ public class CWSInstance : Instance
 //        addFeature("cT=" + CharType.get(sentence.charAt(position)), featureVec, featureMap);
 //
 //        //char type trigram feature
-//        StringBuffer trigram = new StringBuffer();
+//        StringBuilder trigram = new StringBuilder();
 //
 //        if (position > 0)
 //            trigram.Append(CharType.get(sentence.charAt(position - 1)));

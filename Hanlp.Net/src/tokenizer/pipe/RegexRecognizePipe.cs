@@ -44,8 +44,8 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
         IEnumerator<IWord> listIterator = input.GetEnumerator();
         while (listIterator.MoveNext())
         {
-            IWord wordOrSentence = listIterator.next();
-            if (wordOrSentence.getLabel() != null)
+            IWord wordOrSentence = listIterator.Current;
+            if (wordOrSentence.Label != null)
                 continue; // 这是别的管道已经处理过的单词，跳过
             listIterator.Remove(); // 否则是句子
             string sentence = wordOrSentence.Value;
@@ -55,11 +55,12 @@ public class RegexRecognizePipe : Pipe<List<IWord>, List<IWord>>
             while (matcher.find())
             {
                 end = matcher.start();
-                listIterator.Add(new Word(sentence.substring(begin, end), null)); // 未拦截的部分
+                listIterator.Add(new Word(sentence.Substring(begin, end), null)); // 未拦截的部分
                 listIterator.Add(new Word(matcher.group(), label)); // 拦截到的部分
                 begin = matcher.end();
             }
-            if (begin < sentence.Length) listIterator.Add(new Word(sentence.substring(begin), null));
+            if (begin < sentence.Length) 
+                listIterator.Add(new Word(sentence.Substring(begin), null));
         }
         return input;
     }

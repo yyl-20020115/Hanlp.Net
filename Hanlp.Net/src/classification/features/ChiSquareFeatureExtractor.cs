@@ -1,5 +1,6 @@
 using com.hankcs.hanlp.algorithm;
 using com.hankcs.hanlp.classification.corpus;
+using com.hankcs.hanlp.classification.statistics;
 
 namespace com.hankcs.hanlp.classification.features;
 
@@ -73,7 +74,7 @@ public class ChiSquareFeatureExtractor
                 //如果分数大于临界值则加入特征列表
                 if (chisquareScore >= chisquareCriticalValue)
                 {
-                    previousScore = selectedFeatures.get(feature);
+                    previousScore = selectedFeatures[(feature)];
                     if (previousScore == null || chisquareScore > previousScore)
                     {
                         selectedFeatures.Add(feature, chisquareScore);
@@ -91,7 +92,7 @@ public class ChiSquareFeatureExtractor
         if (selectedFeatures.Count > maxSize)
         {
             MaxHeap<KeyValuePair<int, Double>> maxHeap = new MaxHeap<KeyValuePair<int, Double>>(maxSize, new CT());
-            foreach (KeyValuePair<int, Double> entry in selectedFeatures.entrySet())
+            foreach (KeyValuePair<int, Double> entry in selectedFeatures.Keys)
             {
                 maxHeap.Add(entry);
             }
@@ -110,7 +111,7 @@ public class ChiSquareFeatureExtractor
         //@Override
         public int Compare(KeyValuePair<int, Double> o1, KeyValuePair<int, Double> o2)
         {
-            return o1.Value.compareTo(o2.Value);
+            return o1.Value.CompareTo(o2.Value);
         }
     }
 

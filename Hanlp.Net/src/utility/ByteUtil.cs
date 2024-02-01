@@ -97,7 +97,7 @@ public class ByteUtil
      */
     public static int bytesToInt(byte[] b)
     {
-        int i = (b[0] << 24) & 0xFF000000;
+        int i = (int)((b[0] << 24) & 0xFF000000);
         i |= (b[1] << 16) & 0xFF0000;
         i |= (b[2] << 8) & 0xFF00;
         i |= b[3] & 0xFF;

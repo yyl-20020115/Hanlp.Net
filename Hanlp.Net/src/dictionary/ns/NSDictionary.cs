@@ -25,19 +25,19 @@ namespace com.hankcs.hanlp.dictionary.ns;
 public class NSDictionary : EnumItemDictionary<NS>
 {
     //@Override
-    protected NS valueOf(string name)
+    protected override NS valueOf(string name)
     {
         return NS.valueOf(name);
     }
 
     //@Override
-    protected NS[] values()
+    protected override NS[] values()
     {
         return NS.values();
     }
 
     //@Override
-    protected EnumItem<NS> newItem()
+    protected override EnumItem<NS> newItem()
     {
         return new EnumItem<NS>();
     }

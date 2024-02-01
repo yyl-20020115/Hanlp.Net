@@ -96,7 +96,7 @@ public interface IDataSet : IEnumerable<Document>
      *
      * @return
      */
-    int Count;
+    int Count { get; }
 
     /**
      * 获取分词器

@@ -9,6 +9,15 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.corpus.document.sentence;
+using com.hankcs.hanlp.corpus.document.sentence.word;
+using com.hankcs.hanlp.dependency.nnparser;
+using com.hankcs.hanlp.mining.word2vec;
+using com.hankcs.hanlp.model.perceptron.feature;
+using com.hankcs.hanlp.model.perceptron.instance;
+using com.hankcs.hanlp.model.perceptron.model;
+using com.hankcs.hanlp.model.perceptron.tagset;
+
 namespace com.hankcs.hanlp.model.perceptron;
 
 
@@ -21,13 +30,13 @@ namespace com.hankcs.hanlp.model.perceptron;
 public class CWSTrainer : PerceptronTrainer
 {
     //@Override
-    protected TagSet createTagSet()
+    protected override TagSet createTagSet()
     {
         return new CWSTagSet();
     }
 
     //@Override
-    protected Instance createInstance(Sentence sentence, FeatureMap mutableFeatureMap)
+    protected override Instance createInstance(Sentence sentence, FeatureMap mutableFeatureMap)
     {
         List<Word> wordList = sentence.toSimpleWordList();
         string[] termArray = Utility.toWordArray(wordList);
@@ -36,7 +45,7 @@ public class CWSTrainer : PerceptronTrainer
     }
 
     //@Override
-    public double[] evaluate(string developFile, LinearModel model) 
+    public override double[] evaluate(string developFile, LinearModel model) 
     {
         PerceptronSegmenter segmenter = new PerceptronSegmenter(model);
         double[] prf = Utility.prf(Utility.evaluateCWS(developFile, segmenter));

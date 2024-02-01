@@ -59,32 +59,13 @@ public class Word : IWord
     }
 
     ////@Override
-    public string Value()
-    {
-        return value;
-    }
+    //@Override
+    public string Value { get => value; set => this.value = value; }
 
     //@Override
-    public string getLabel()
-    {
-        return label;
-    }
+    //@Override
+    public string Label { get => label; set => this.label = value; }
 
     //@Override
-    public void setLabel(string label)
-    {
-        this.label = label;
-    }
-
-    //@Override
-    public void setValue(string value)
-    {
-        this.value = value;
-    }
-
-    //@Override
-    public int Length()
-    {
-        return value.Length;
-    }
+    public int Length => value.Length;
 }

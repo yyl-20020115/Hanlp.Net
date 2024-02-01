@@ -23,7 +23,7 @@ namespace com.hankcs.hanlp.dictionary.common;
 public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
 {
     //@Override
-    protected EnumItem<E> createValue(string[] _params)
+    protected override EnumItem<E> createValue(string[] _params)
     {
         KeyValuePair<string, KeyValuePair<string, int>[]> args = EnumItem.create(_params);
         EnumItem<E> nrEnumItem = new EnumItem<E>();
@@ -57,7 +57,7 @@ public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
     protected abstract EnumItem<E> newItem();
 
     //@Override
-    protected EnumItem<E>[] loadValueArray(ByteArray byteArray)
+    protected override EnumItem<E>[] loadValueArray(ByteArray byteArray)
     {
         if (byteArray == null)
         {

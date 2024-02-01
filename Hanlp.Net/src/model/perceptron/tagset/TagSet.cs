@@ -72,20 +72,20 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
     //    {
     //        if (allTags != null)
     //        {
-    //            throw new IllegalStateException("标注集已锁定，无法修改");
+    //            throw new InvalidOperationException("标注集已锁定，无法修改");
     //        }
     //    }
 
     //@Override
     public string stringOf(int id)
     {
-        return idStringMap.get(id);
+        return idStringMap[(id)];
     }
 
     //@Override
     public int idOf(string s)
     {
-        int id = stringIdMap.get(s);
+        int id = stringIdMap[(s)];
         if (id == null) id = -1;
         return id;
     }

@@ -103,7 +103,7 @@ public class CharType
         List<int[]> typeList = new ();
         for (int i = 0; i <= char.MaxValue; ++i)
         {
-            int type = TextUtility.charType((char) i);
+            int type = TextUtility.CharType((char) i);
 //            Console.WriteLine("%d %d\n", i, TextUtility.charType((char) i));
             if (type != preType)
             {

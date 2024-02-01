@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using com.hankcs.hanlp.algorithm;
+
 namespace com.hankcs.hanlp.suggest.scorer.editdistance;
 
 
@@ -51,7 +53,7 @@ public class CharArray : IComparable<CharArray>, ISentenceKey<CharArray>
     //@Override
     public Double similarity(CharArray other)
     {
-        int distance = EditDistance.compute(this.value, other.value) + 1;
+        int distance = EditDistance.Compute(this.value, other.value) + 1;
         return 1.0 / distance;
     }
 }

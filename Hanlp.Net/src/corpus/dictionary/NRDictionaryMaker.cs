@@ -39,7 +39,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
         {
             foreach (IWord word in wordList)
             {
-                if (!word.getLabel().Equals(NR.A.ToString()))
+                if (!word.Label.Equals(NR.A.ToString()))
                 {
                     dictionaryMaker.Add(word);
                 }
@@ -79,15 +79,15 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
-                if (!word.getLabel().Equals(Nature.nr.ToString()))
+                if (!word.Label.Equals(Nature.nr.ToString()))
                 {
-                    word.setLabel(NR.A.ToString());
+                    word.                    Label = NR.A.ToString();
                 }
                 else
                 {
-                    if (!pre.getLabel().Equals(Nature.nr.ToString()))
+                    if (!pre.Label.Equals(Nature.nr.ToString()))
                     {
-                        pre.setLabel(NR.K.ToString());
+                        pre.                        Label = NR.K.ToString();
                     }
                 }
                 pre = word;
@@ -98,11 +98,11 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.hasPrevious())
             {
                 IWord word = listIterator.previous();
-                if (word.getLabel().Equals(Nature.nr.ToString()))
+                if (word.Label.Equals(Nature.nr.ToString()))
                 {
-                    string label = next.getLabel();
-                    if (label.Equals("A")) next.setLabel("L");
-                    else if (label.Equals("K")) next.setLabel("M");
+                    string label = next.Label;
+                    if (label.Equals("A")) next.Label = "L";
+                    else if (label.Equals("K")) next.Label = "M";
                 }
                 next = word;
             }
@@ -112,7 +112,7 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
-                if (word.getLabel().Equals(Nature.nr.ToString()))
+                if (word.Label.Equals(Nature.nr.ToString()))
                 {
                     switch (word.Value.Length)
                     {
@@ -123,8 +123,8 @@ public class NRDictionaryMaker : CommonDictionaryMaker
                                     )
                             {
                                 listIterator.Add(new Word(word.Value.substring(1, 2), NR.B.ToString()));
-                                word.setValue(word.Value.substring(0, 1));
-                                word.setLabel(NR.F.ToString());
+                                word.                                Value = word.Value.substring(0, 1);
+                                word.                                Label = NR.F.ToString();
                             }
                             else if (word.Value.EndsWith("哥")
                                     || word.Value.EndsWith("公")
@@ -138,24 +138,24 @@ public class NRDictionaryMaker : CommonDictionaryMaker
 
                             {
                                 listIterator.Add(new Word(word.Value.substring(1, 2), NR.G.ToString()));
-                                word.setValue(word.Value.substring(0, 1));
-                                word.setLabel(NR.B.ToString());
+                                word.                                Value = word.Value.substring(0, 1);
+                                word.                                Label = NR.B.ToString();
                             }
                             else
                             {
                                 listIterator.Add(new Word(word.Value.substring(1, 2), NR.E.ToString()));
-                                word.setValue(word.Value.substring(0, 1));
-                                word.setLabel(NR.B.ToString());
+                                word.                                Value = word.Value.substring(0, 1);
+                                word.                                Label = NR.B.ToString();
                             }
                             break;
                         case 3:
                             listIterator.Add(new Word(word.Value.substring(1, 2), NR.C.ToString()));
                             listIterator.Add(new Word(word.Value.substring(2, 3), NR.D.ToString()));
-                            word.setValue(word.Value.substring(0, 1));
-                            word.setLabel(NR.B.ToString());
+                            word.                            Value = word.Value.substring(0, 1);
+                            word.                            Label = NR.B.ToString();
                             break;
                         default:
-                            word.setLabel(NR.A.ToString()); // 非中国人名
+                            word.                            Label = NR.A.ToString(); // 非中国人名
                     }
                 }
             }
@@ -166,13 +166,13 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
-                if (word.getLabel().Equals(NR.B.ToString()))
+                if (word.Label.Equals(NR.B.ToString()))
                 {
                     string combine = pre.Value + word.Value;
                     if (dictionary.Contains(combine))
                     {
-                        pre.setValue(combine);
-                        pre.setLabel("U");
+                        pre.                        Value = combine;
+                        pre.                        Label = "U";
                         listIterator.Remove();
                     }
                 }
@@ -184,13 +184,13 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.hasPrevious())
             {
                 IWord word = listIterator.previous();
-                if (word.getLabel().Equals(NR.B.ToString()))
+                if (word.Label.Equals(NR.B.ToString()))
                 {
                     string combine = word.Value + next.Value;
                     if (dictionary.Contains(combine))
                     {
-                        next.setValue(combine);
-                        next.setLabel(next.getLabel().Equals(NR.C.ToString()) ? NR.X.ToString() : NR.Y.ToString());
+                        next.                        Value = combine;
+                        next.                        Label = next.Label.Equals(NR.C.ToString()) ? NR.X.ToString() : NR.Y.ToString();
                         listIterator.Remove();
                     }
                 }
@@ -202,13 +202,13 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.MoveNext())
             {
                 IWord word = listIterator.next();
-                if (word.getLabel().Equals(NR.D.ToString()))
+                if (word.Label.Equals(NR.D.ToString()))
                 {
                     string combine = pre.Value + word.Value;
                     if (dictionary.Contains(combine))
                     {
-                        pre.setValue(combine);
-                        pre.setLabel(NR.Z.ToString());
+                        pre.                        Value = combine;
+                        pre.                        Label = NR.Z.ToString();
                         listIterator.Remove();
                     }
                 }
@@ -220,13 +220,13 @@ public class NRDictionaryMaker : CommonDictionaryMaker
             while (listIterator.hasPrevious())
             {
                 IWord word = listIterator.previous();
-                if (word.getLabel().Equals(NR.D.ToString()))
+                if (word.Label.Equals(NR.D.ToString()))
                 {
                     string combine = word.Value + next.Value;
                     if (dictionary.Contains(combine))
                     {
-                        next.setValue(combine);
-                        next.setLabel(NR.V.ToString());
+                        next.                        Value = combine;
+                        next.                        Label = NR.V.ToString();
                         listIterator.Remove();
                     }
                 }

@@ -495,7 +495,7 @@ public class NeuralNetworkParser : ICacheAble
      * @param heads 依存指向的储存位置
      * @param deprels 依存关系的储存位置
      */
-    void predict(Instance data, List<int> heads,
+    public void predict(Instance data, List<int> heads,
                  List<string> deprels)
     {
         Dependency dependency = new Dependency();

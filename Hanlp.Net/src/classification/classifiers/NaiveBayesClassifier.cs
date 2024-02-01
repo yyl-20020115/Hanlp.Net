@@ -109,7 +109,7 @@ public class NaiveBayesClassifier : AbstractClassifier
         model.wordIdTrie = featureData.wordIdTrie;
     }
 
-    public AbstractModel getModel()
+    public override AbstractModel getModel()
     {
         return model;
     }

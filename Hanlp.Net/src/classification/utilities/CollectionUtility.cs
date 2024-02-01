@@ -33,8 +33,8 @@ public class CollectionUtility
     {
         public int Compare(KeyValuePair<K, V> o1, KeyValuePair<K, V> o2)
         {
-            if (desc) return o2.Value.compareTo(o1.Value);
-            return o1.Value.compareTo(o2.Value);
+            if (desc) return o2.Value.CompareTo(o1.Value);
+            return o1.Value.CompareTo(o2.Value);
         }
     }
     public static Dictionary<K, V> sortMapByValue<K, V>(Dictionary<K, V> input)

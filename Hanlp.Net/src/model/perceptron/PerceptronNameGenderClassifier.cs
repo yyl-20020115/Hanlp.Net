@@ -37,7 +37,7 @@ public class PerceptronNameGenderClassifier : PerceptronClassifier
     }
 
     //@Override
-    protected List<int> extractFeature(string text, FeatureMap featureMap)
+    protected override List<int> extractFeature(string text, FeatureMap featureMap)
     {
         List<int> featureList = new ();
         string givenName = extractGivenName(text);

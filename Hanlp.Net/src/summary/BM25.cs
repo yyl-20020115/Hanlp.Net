@@ -92,7 +92,7 @@ public class BM25
             foreach (var entry in tf)
             {
                 string word = entry.Key;
-                int freq = df.get(word);
+                int freq = df[word];
                 freq = (freq == null ? 0 : freq) + 1;
                 df.Add(word, freq);
             }
@@ -120,8 +120,8 @@ public class BM25
         {
             if (!f[index].ContainsKey(word)) continue;
             int d = docs[(index)].Count;
-            int tf = f[index].get(word);
-            score += (idf.get(word) * tf * (k1 + 1)
+            int tf = f[index][word];
+            score += (idf[word] * tf * (k1 + 1)
                     / (tf + k1 * (1 - b + b * d
                                                 / avgdl)));
         }

@@ -44,7 +44,7 @@ public abstract class AbstractClassifier : IClassifier
      * @param text
      * @return
      * @
-     * @throws IllegalStateException
+     * @throws InvalidOperationException
      */
     //@Override
     public string classify(string text) 

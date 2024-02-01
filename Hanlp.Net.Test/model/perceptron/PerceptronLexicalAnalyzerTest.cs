@@ -102,7 +102,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         Sentence sentence = analyzer.analyze("\"你好， 我想知道： 风是从哪里来; \t雷是从哪里来； 雨是从哪里来？\"");
         foreach (IWord word in sentence)
         {
-            if (!word.getLabel().Equals("w"))
+            if (!word.Label.Equals("w"))
             {
                 AssertFalse(word.Value.Contains(" "));
                 AssertFalse(word.Value.Contains("\t"));
