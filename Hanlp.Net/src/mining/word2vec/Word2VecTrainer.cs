@@ -204,7 +204,7 @@ public class Word2VecTrainer
 //                    progress /= 100;
 //                    string etd = Utility.humanTime((long) (costTime / progress * (1.f - progress)));
 //                    if (etd.Length > 0) Console.WriteLine("  剩余时间：%s", etd);
-//                    System._out.flush();
+//                    System.Out.flush();
 //                }
 //            };
 //        }

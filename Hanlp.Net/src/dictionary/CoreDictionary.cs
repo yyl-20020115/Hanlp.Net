@@ -85,21 +85,21 @@ public class CoreDictionary
             logger.info("核心词典加载成功:" + trie.Count + "个词条，下面将写入缓存……");
             try
             {
-                Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
+                Stream Out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT)));
                 ICollection<CoreDictionary.Attribute> attributeList = map.values();
-                _out.writeInt(attributeList.Count);
+                Out.writeInt(attributeList.Count);
                 foreach (CoreDictionary.Attribute attribute in attributeList)
                 {
-                    _out.writeInt(attribute.totalFrequency);
-                    _out.writeInt(attribute.nature.Length);
+                    Out.writeInt(attribute.totalFrequency);
+                    Out.writeInt(attribute.nature.Length);
                     for (int i = 0; i < attribute.nature.Length; ++i)
                     {
-                        _out.writeInt(attribute.nature[i].Ordinal);
-                        _out.writeInt(attribute.frequency[i]);
+                        Out.writeInt(attribute.nature[i].Ordinal);
+                        Out.writeInt(attribute.frequency[i]);
                     }
                 }
-                trie.save(_out);
-                _out.Close();
+                trie.save(Out);
+                Out.Close();
             }
             catch (Exception e)
             {
@@ -381,14 +381,14 @@ public class CoreDictionary
             return sb.ToString();
         }
 
-        public void save(Stream _out) 
+        public void save(Stream Out) 
         {
-            _out.writeInt(totalFrequency);
-            _out.writeInt(nature.Length);
+            Out.writeInt(totalFrequency);
+            Out.writeInt(nature.Length);
             for (int i = 0; i < nature.Length; ++i)
             {
-                _out.writeInt(nature[i].Ordinal);
-                _out.writeInt(frequency[i]);
+                Out.writeInt(nature[i].Ordinal);
+                Out.writeInt(frequency[i]);
             }
         }
     }

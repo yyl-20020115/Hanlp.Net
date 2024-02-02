@@ -408,22 +408,22 @@ public class DoubleArrayTrieInteger : Serializable
 
     public void save(string fileName) 
     {
-        Stream _out = null;
+        Stream Out = null;
         try
         {
-            _out = new 
+            Out = new 
                 IOUtil.newOutputStream(fileName);
             for (int i = 0; i < size; i++)
             {
-                _out.writeInt(base[i]);
-                _out.writeInt(check[i]);
+                Out.writeInt(base[i]);
+                Out.writeInt(check[i]);
             }
-            _out.Close();
+            Out.Close();
         }
         finally
         {
-            if (_out != null)
-                _out.Close();
+            if (Out != null)
+                Out.Close();
         }
     }
 

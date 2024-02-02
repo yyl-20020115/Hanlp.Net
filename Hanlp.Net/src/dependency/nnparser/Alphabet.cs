@@ -81,13 +81,13 @@ public class Alphabet : ICacheAble
         return trie.Count;
     }
 
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        using var writer = new BinaryWriter(_out);
+        using var writer = new BinaryWriter(Out);
         writer.Write(idToLabelMap.Length);
         foreach (string value in idToLabelMap)
         {
-            TextUtility.writeString(value, _out);
+            TextUtility.writeString(value, Out);
         }
 
     }

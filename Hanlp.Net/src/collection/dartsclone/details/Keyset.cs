@@ -25,20 +25,14 @@ public class Keyset
      * keyset的容量
      * @return
      */
-    public int numKeys()
-    {
-        return _keys.Length;
-    }
+    public int NumKeys => _keys.Length;
 
     /**
      * 根据id获取key
      * @param id
      * @return
      */
-    byte[] getKey(int id)
-    {
-        return _keys[id];
-    }
+    public byte[] GetKey(int id) => _keys[id];
 
     /**
      * 获取某个key的某一个字节
@@ -46,7 +40,7 @@ public class Keyset
      * @param byteId 字节的下标（第几个字节）
      * @return 字节，返回0表示越界了
      */
-    byte getKeyByte(int keyId, int byteId)
+    public byte GetKeyByte(int keyId, int byteId)
     {
         if (byteId >= _keys[keyId].Length)
         {
@@ -59,19 +53,16 @@ public class Keyset
      * 是否含有值
      * @return
      */
-    bool hasValues()
-    {
-        return _values != null;
-    }
+     public bool HasValues => _values != null;
 
     /**
      * 根据下标获取值
      * @param id
      * @return
      */
-    int getValue(int id)
+    public int GetValue(int id)
     {
-        if (hasValues())
+        if (HasValues)
         {
             return _values[id];
         }
@@ -81,9 +72,9 @@ public class Keyset
     /**
      * 键
      */
-    private byte[][] _keys;
+    private readonly byte[][] _keys;
     /**
      * 值
      */
-    private int[] _values;
+    private readonly int[] _values;
 }

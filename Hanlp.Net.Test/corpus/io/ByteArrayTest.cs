@@ -21,11 +21,11 @@ public class ByteArrayTest : TestCase
 
     public void TestReadDouble() 
     {
-        var _out = new FileStream(DATA_TEST_OUT_BIN, FileMode.Create);
+        var Out = new FileStream(DATA_TEST_OUT_BIN, FileMode.Create);
         double d = 0.123456789;
-        _out.Write(BitConverter.GetBytes(d));
+        Out.Write(BitConverter.GetBytes(d));
         int i = 3389;
-        _out.Write(BitConverter.GetBytes(i));
+        Out.Write(BitConverter.GetBytes(i));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         AssertEquals(d, byteArray.nextDouble());
         AssertEquals(i, byteArray.Next());
@@ -34,9 +34,9 @@ public class ByteArrayTest : TestCase
 
     public void TestReadUTF() 
     {
-        var _out = (new FileStream(DATA_TEST_OUT_BIN, FileMode.Create));
+        var Out = (new FileStream(DATA_TEST_OUT_BIN, FileMode.Create));
         String utf = "hankcs你好123";
-        _out.Write(Encoding.UTF8.GetBytes(utf));
+        Out.Write(Encoding.UTF8.GetBytes(utf));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         AssertEquals(utf, byteArray.nextUTF());
     }
@@ -44,10 +44,10 @@ public class ByteArrayTest : TestCase
 
     public void TestReadUnsignedShort() 
     {
-        var _out = (new FileStream(DATA_TEST_OUT_BIN,FileMode.Create));
+        var Out = (new FileStream(DATA_TEST_OUT_BIN,FileMode.Create));
         int utflen = 123;
-        _out.WriteByte((byte) ((utflen >>> 8) & 0xFF));
-        _out.WriteByte((byte) ((utflen >>> 0) & 0xFF));
+        Out.WriteByte((byte) ((utflen >>> 8) & 0xFF));
+        Out.WriteByte((byte) ((utflen >>> 0) & 0xFF));
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
         AssertEquals(utflen, byteArray.nextUnsignedShort());
     }
@@ -68,9 +68,9 @@ public class ByteArrayTest : TestCase
     public void TestNextBoolean()
     {
         var fs = new FileStream(tempFile, FileMode.Create);
-        var _out = new BinaryWriter(fs);
-        _out.Write(true);
-        _out.Write(false);
+        var Out = new BinaryWriter(fs);
+        Out.Write(true);
+        Out.Write(false);
         fs.Close();
         ByteArray byteArray = ByteArray.createByteArray(tempFile);
         AssertNotNull(byteArray);
@@ -83,13 +83,13 @@ public class ByteArrayTest : TestCase
     public void TestWriteAndRead()
     {
         var fs = new FileStream(DATA_TEST_OUT_BIN, FileMode.Create);
-        var _out = new BinaryWriter(fs);
-        _out.Write('H');
-        _out.Write('e');
-        _out.Write('l');
-        _out.Write('l');
-        _out.Write('o');
-        _out.Close();
+        var Out = new BinaryWriter(fs);
+        Out.Write('H');
+        Out.Write('e');
+        Out.Write('l');
+        Out.Write('l');
+        Out.Write('o');
+        Out.Close();
         fs.Close();
 
         ByteArray byteArray = ByteArray.createByteArray(DATA_TEST_OUT_BIN);
@@ -104,12 +104,12 @@ public class ByteArrayTest : TestCase
     public void TestWriteBigFile() 
     {
         var fs = new FileStream(DATA_TEST_OUT_BIN, FileMode.Create);
-        var _out = new BinaryWriter(fs);
+        var Out = new BinaryWriter(fs);
         for (int i = 0; i < 10000; i++)
         {
-            _out.Write(i);
+            Out.Write(i);
         }
-        _out.Close();
+        Out.Close();
         fs.Close();
     }
     [TestMethod]

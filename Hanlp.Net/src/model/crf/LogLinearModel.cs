@@ -234,14 +234,14 @@ public class LogLinearModel : LinearModel
                 }
             }
         }
-        Stream _out = (IOUtil.newOutputStream(binFile));
-        save(_out);
-        _out.writeInt(featureTemplateList.Count);
+        Stream Out = (IOUtil.newOutputStream(binFile));
+        save(Out);
+        Out.writeInt(featureTemplateList.Count);
         foreach (FeatureTemplate template in featureTemplateList)
         {
-            template.save(_out);
+            template.save(Out);
         }
-        _out.Close();
+        Out.Close();
     }
 
 

@@ -275,12 +275,12 @@ public class CharacterBasedGenerativeModel : ICacheAble
     }
 
     //@Override
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        _out.writeDouble(l1);
-        _out.writeDouble(l2);
-        _out.writeDouble(l3);
-        tf.save(_out);
+        Out.writeDouble(l1);
+        Out.writeDouble(l2);
+        Out.writeDouble(l3);
+        tf.save(Out);
     }
 
     //@Override

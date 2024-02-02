@@ -142,19 +142,19 @@ public class BaseChineseDictionary
         }
         try
         {
-            Stream _out = (IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            _out.writeInt(entrySet.Count);
+            Stream Out = (IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            Out.writeInt(entrySet.Count);
             foreach (KeyValuePair<string, string> entry in entrySet)
             {
                 char[] charArray = entry.Value.ToCharArray();
-                _out.writeInt(charArray.Length);
+                Out.writeInt(charArray.Length);
                 foreach (char c in charArray)
                 {
-                    _out.writeChar(c);
+                    Out.writeChar(c);
                 }
             }
-            trie.Save(_out);
-            _out.Close();
+            trie.Save(Out);
+            Out.Close();
         }
         catch (Exception e)
         {

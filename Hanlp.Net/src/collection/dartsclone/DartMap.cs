@@ -32,7 +32,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
             indexArray[i] = i;
         }
         this.valueArray = valueArray;
-        build(keyList, indexArray);
+        Build(keyList, indexArray);
     }
 
     public DartMap(Dictionary<string, V> map)
@@ -45,10 +45,10 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
     }
 
     //@Override
-    public override bool isEmpty => this.valueArray.Length == 0;
+    public bool IsEmpty => this.valueArray.Length == 0;
 
     //@Override
-    public override bool ContainsKey(Object key)
+    public bool ContainsKey(Object key)
     {
         return ContainsKey(key.ToString());
     }
@@ -91,12 +91,12 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
             keyList.Add(entry.Key);
             ++i;
         }
-        build(keyList, indexArray);
+        Build(keyList, indexArray);
         return 0;
     }
 
     //@Override
-    public bool save(Stream _out)
+    public bool save(Stream Out)
     {
         return false;
     }
@@ -133,7 +133,7 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
      * @param maxResults
      * @return
      */
-    public List<KeyValuePair<string, V>> commonPrefixSearch(string key, int offset, int maxResults)
+    public List<KeyValuePair<string, V>> CommonPrefixSearch(string key, int offset, int maxResults)
     {
         byte[] keyBytes = key.GetBytes(utf8);
         List<KeyValuePair<int, int>> pairList = commonPrefixSearch(keyBytes, offset, maxResults);
@@ -145,9 +145,9 @@ public class DartMap<V> : DoubleArray,  IDictionary<string, V>, ITrie<V>
         return resultList;
     }
 
-    public List<KeyValuePair<string, V>> commonPrefixSearch(string key)
+    public List<KeyValuePair<string, V>> CommonPrefixSearch(string key)
     {
-        return commonPrefixSearch(key, 0, int.MaxValue);
+        return CommonPrefixSearch(key, 0, int.MaxValue);
     }
 
     //@Override

@@ -74,19 +74,19 @@ public class FeatureTemplate : ICacheAble
     }
 
     //@Override
-    public void save(Stream _out) 
+    public void save(Stream Out) 
     {
-        _out.writeUTF(template);
-        _out.writeInt(offsetList.Count);
+        Out.writeUTF(template);
+        Out.writeInt(offsetList.Count);
         foreach (int[] offset in offsetList)
         {
-            _out.writeInt(offset[0]);
-            _out.writeInt(offset[1]);
+            Out.writeInt(offset[0]);
+            Out.writeInt(offset[1]);
         }
-        _out.writeInt(delimiterList.Count);
+        Out.writeInt(delimiterList.Count);
         foreach (string s in delimiterList)
         {
-            _out.writeUTF(s);
+            Out.writeUTF(s);
         }
     }
 

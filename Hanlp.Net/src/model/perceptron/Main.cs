@@ -91,7 +91,7 @@ public class Main
             else if (option.evaluate)
             {
                 double[] prf = trainer.evaluate(option.gold, option.model[0]);
-                _out.printf("Performance - P:%.2f R:%.2f F:%.2f\n", prf[0], prf[1], prf[2]);
+                Out.printf("Performance - P:%.2f R:%.2f F:%.2f\n", prf[0], prf[1], prf[2]);
             }
             else
             {
@@ -116,7 +116,7 @@ public class Main
                 TextWriter printer;
                 if (option.result == null)
                 {
-                    printer = new TextWriter(System._out);
+                    printer = new TextWriter(System.Out);
                 }
                 else
                 {

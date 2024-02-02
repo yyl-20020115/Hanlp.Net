@@ -19,13 +19,13 @@ namespace com.hankcs.hanlp.corpus.dictionary.item;
  * 对标签-频次的封装
  * @author hankcs
  */
-public class EnumItem<E>
+public class EnumItem<E> where E : Enum
 {
     public Dictionary<E, int> labelMap;
 
     public EnumItem()
     {
-        labelMap = new ();
+        labelMap = new();
     }
 
     /**
@@ -34,8 +34,8 @@ public class EnumItem<E>
      * @param frequency
      */
     public EnumItem(E label, int frequency)
+        : this()
     {
-        this();
         labelMap.Add(label, frequency);
     }
 
@@ -44,8 +44,8 @@ public class EnumItem<E>
      * @param labels
      */
     public EnumItem(params E[] labels)
+        : this()
     {
-        this();
         foreach (E label in labels)
         {
             labelMap.Add(label, 1);
@@ -54,7 +54,7 @@ public class EnumItem<E>
 
     public void addLabel(E label)
     {
-        int frequency = labelMap.get(label);
+        int frequency = labelMap[(label)];
         if (frequency == null)
         {
             frequency = 1;
@@ -69,7 +69,7 @@ public class EnumItem<E>
 
     public void addLabel(E label, int frequency)
     {
-        int innerFrequency = labelMap.get(label);
+        int innerFrequency = labelMap[(label)];
         if (innerFrequency == null)
         {
             innerFrequency = frequency;
@@ -89,7 +89,7 @@ public class EnumItem<E>
 
     public int getFrequency(E label)
     {
-        int frequency = labelMap.get(label);
+        int frequency = labelMap[(label)];
         if (frequency == null) return 0;
         return frequency;
     }
@@ -97,9 +97,9 @@ public class EnumItem<E>
     //@Override
     public override string ToString()
     {
-         StringBuilder sb = new StringBuilder();
-        var entries = new List<KeyValuePair<E, int>>(labelMap.entrySet());
-        Collections.sort(entries, new ST<int>());
+        var sb = new StringBuilder();
+        var entries = new List<KeyValuePair<E, int>>(labelMap);
+        entries.Sort(new ST<E>());
         foreach (KeyValuePair<E, int> entry in entries)
         {
             sb.Append(entry.Key);
@@ -109,31 +109,29 @@ public class EnumItem<E>
         }
         return sb.ToString();
     }
-    public class ST<E> : IComparer<KeyValuePair<E, int>>
+    public class ST<E> : IComparer<KeyValuePair<E, int>> where E : Enum
     {
         //@Override
-        public int Compare(KeyValuePair<E, int> o1, KeyValuePair<E, int> o2)
-        {
-            return -o1.Value.compareTo(o2.Value);
-        }
+        public int Compare(KeyValuePair<E, int> o1, KeyValuePair<E, int> o2) => -o1.Value.CompareTo(o2.Value);
     }
-    public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string param)
+    public static KeyValuePair<string, KeyValuePair<string, int>[]>? Create(string param)
     {
         if (param == null) return null;
         string[] array = param.Split(" ");
-        return create(array);
+        return Create(array);
     }
 
-    
-    public static KeyValuePair<string, KeyValuePair<string, int>[]> create(string[] param)
+
+    public static KeyValuePair<string, KeyValuePair<string, E>[]>? Create(string[] param)
     {
         if (param.Length % 2 == 0) return null;
         int natureCount = (param.Length - 1) / 2;
-        KeyValuePair<string, int>[] entries = (KeyValuePair<string, int>[]) Array.newInstance(KeyValuePair.c, natureCount);
+        KeyValuePair<string, int>[] entries = (KeyValuePair<string, E>[])Array.newInstance(KeyValuePair.c, natureCount);
         for (int i = 0; i < natureCount; ++i)
         {
-            entries[i] = new AbstractMap.SimpleEntry<string, int>(param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
+            entries[i] = new AbstractMap<string, E>.SimpleEntry<string, E>
+                (param[1 + 2 * i], int.parseInt(param[2 + 2 * i]));
         }
-        return new AbstractMap.SimpleEntry<string, KeyValuePair<string, int>[]>(param[0], entries);
+        return new AbstractMap<string, E>.SimpleEntry<string, KeyValuePair<string, E>[]>(param[0], entries);
     }
 }

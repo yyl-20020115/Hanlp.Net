@@ -33,9 +33,9 @@ public class CoreStopWordDictionary
             try
             {
                 dictionary = new StopWordDictionary(HanLP.Config.CoreStopWordDictionaryPath);
-                Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(HanLP.Config.CoreStopWordDictionaryPath + Predefine.BIN_EXT)));
-                dictionary.save(_out);
-                _out.Close();
+                Stream Out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(HanLP.Config.CoreStopWordDictionaryPath + Predefine.BIN_EXT)));
+                dictionary.save(Out);
+                Out.Close();
             }
             catch (Exception e)
             {

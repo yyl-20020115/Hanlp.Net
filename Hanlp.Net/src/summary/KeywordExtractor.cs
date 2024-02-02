@@ -47,7 +47,7 @@ public abstract class KeywordExtractor
      * @param term
      * @return 是否应当
      */
-    protected bool shouldInclude(Term term)
+    protected bool ShouldInclude(Term term)
     {
         // 除掉停用词
         return CoreStopWordDictionary.shouldInclude(term);
@@ -59,13 +59,13 @@ public abstract class KeywordExtractor
      * @param segment 任何开启了词性标注的分词器
      * @return 自己
      */
-    public KeywordExtractor setSegment(Segment segment)
+    public KeywordExtractor SetSegment(Segment segment)
     {
         defaultSegment = segment;
         return this;
     }
 
-    public Segment getSegment()
+    public Segment GetSegment()
     {
         return defaultSegment;
     }
@@ -77,9 +77,9 @@ public abstract class KeywordExtractor
      * @param size     需要几个关键词
      * @return
      */
-    public List<string> getKeywords(string document, int size)
+    public List<string> GetKeywords(string document, int size)
     {
-        return getKeywords(defaultSegment.seg(document), size);
+        return GetKeywords(defaultSegment.seg(document), size);
     }
 
     /**
@@ -88,9 +88,9 @@ public abstract class KeywordExtractor
      * @param document 文章
      * @return
      */
-    public List<string> getKeywords(string document)
+    public List<string> GetKeywords(string document)
     {
-        return getKeywords(defaultSegment.seg(document), 10);
+        return GetKeywords(defaultSegment.seg(document), 10);
     }
 
     protected void filter(List<Term> termList)
@@ -98,7 +98,7 @@ public abstract class KeywordExtractor
         IEnumerator<Term> listIterator = termList.GetEnumerator();
         while (listIterator.MoveNext())
         {
-            if (listIterator.MoveNext() && !shouldInclude(listIterator.Current))
+            if (listIterator.MoveNext() && !ShouldInclude(listIterator.Current))
             {
                 //TODO:?
                 listIterator.Remove();
@@ -106,5 +106,5 @@ public abstract class KeywordExtractor
         }
     }
 
-    abstract public List<string> getKeywords(List<Term> termList, int size);
+    abstract public List<string> GetKeywords(List<Term> termList, int size);
 }

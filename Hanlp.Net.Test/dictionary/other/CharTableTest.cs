@@ -102,9 +102,9 @@ public class CharTableTest : TestCase
 //                else CONVERT[i] = ' ';
 //            }
 //        }
-//        Stream _out = new Stream(new FileStream(HanLP.Config.CharTablePath));
-//        _out.writeObject(CONVERT);
-//        _out.Close();
+//        Stream Out = new Stream(new FileStream(HanLP.Config.CharTablePath));
+//        Out.writeObject(CONVERT);
+//        Out.Close();
 //    }
 //
 //    public void testImportSingleCharFromTraditionalChineseDictionary() 
@@ -126,9 +126,9 @@ public class CharTableTest : TestCase
 ////            CONVERT[t] = s;
 ////        }
 ////
-////        Stream _out = new Stream(new FileStream(HanLP.Config.CharTablePath));
-////        _out.writeObject(CONVERT);
-////        _out.Close();
+////        Stream Out = new Stream(new FileStream(HanLP.Config.CharTablePath));
+////        Out.writeObject(CONVERT);
+////        Out.Close();
 //    }
 //
 //    public void testDumpCharTable() 

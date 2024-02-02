@@ -17,7 +17,7 @@ public class DoubleArrayBuilder
      */
     public void build(Keyset keyset)
     {
-        if (keyset.hasValues())
+        if (keyset.HasValues)
         {
             DawgBuilder dawgBuilder = new DawgBuilder();
             buildDawg(keyset, dawgBuilder);
@@ -81,9 +81,9 @@ public class DoubleArrayBuilder
     private void buildDawg(Keyset keyset, DawgBuilder dawgBuilder)
     {
         dawgBuilder.init();
-        for (int i = 0; i < keyset.numKeys(); ++i)
+        for (int i = 0; i < keyset.NumKeys; ++i)
         {
-            dawgBuilder.insert(keyset.getKey(i), keyset.getValue(i));
+            dawgBuilder.insert(keyset.GetKey(i), keyset.GetValue(i));
         }
         dawgBuilder.finish();
     }
@@ -225,7 +225,7 @@ public class DoubleArrayBuilder
     private void buildFromKeyset(Keyset keyset)
     {
         int numUnits = 1;
-        while (numUnits < keyset.numKeys())
+        while (numUnits < keyset.NumKeys)
         {
             numUnits <<= 1;
         }
@@ -246,9 +246,9 @@ public class DoubleArrayBuilder
         // units[0].setLabel(0);
         units[0] &= ~0xFF;
 
-        if (keyset.numKeys() > 0)
+        if (keyset.NumKeys > 0)
         {
-            buildFromKeyset(keyset, 0, keyset.numKeys(), 0, 0);
+            buildFromKeyset(keyset, 0, keyset.NumKeys, 0, 0);
         }
 
         fixAllBlocks();
@@ -264,7 +264,7 @@ public class DoubleArrayBuilder
 
         while (begin < end)
         {
-            if (keyset.getKeyByte(begin, depth) != 0)
+            if (keyset.GetKeyByte(begin, depth) != 0)
             {
                 break;
             }
@@ -276,16 +276,16 @@ public class DoubleArrayBuilder
         }
 
         int lastBegin = begin;
-        byte lastLabel = keyset.getKeyByte(begin, depth);
+        byte lastLabel = keyset.GetKeyByte(begin, depth);
         while (++begin < end)
         {
-            byte label = keyset.getKeyByte(begin, depth);
+            byte label = keyset.GetKeyByte(begin, depth);
             if (label != lastLabel)
             {
                 buildFromKeyset(keyset, lastBegin, begin, depth + 1,
                                 offset ^ (lastLabel & 0xFF));
                 lastBegin = begin;
-                lastLabel = keyset.getKeyByte(begin, depth);
+                lastLabel = keyset.GetKeyByte(begin, depth);
             }
         }
         buildFromKeyset(keyset, lastBegin, end, depth + 1, offset ^ (lastLabel & 0xFF));
@@ -299,16 +299,16 @@ public class DoubleArrayBuilder
         int value = -1;
         for (int i = begin; i < end; ++i)
         {
-            byte label = keyset.getKeyByte(i, depth);
+            byte label = keyset.GetKeyByte(i, depth);
             if (label == 0)
             {
-                if (depth < keyset.getKey(i).Length)
+                if (depth < keyset.GetKey(i).Length)
                 {
                     throw new ArgumentException(
                             "failed to build double-array: " +
                                     "invalid null character");
                 }
-                else if (keyset.getValue(i) < 0)
+                else if (keyset.GetValue(i) < 0)
                 {
                     throw new ArgumentException(
                             "failed to build double-array: negative value");
@@ -316,7 +316,7 @@ public class DoubleArrayBuilder
 
                 if (value == -1)
                 {
-                    value = keyset.getValue(i);
+                    value = keyset.GetValue(i);
                 }
             }
 

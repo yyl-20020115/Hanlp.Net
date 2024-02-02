@@ -381,7 +381,7 @@ public class ClusterAnalyzer<K>
             if (files == null) continue;
             string category = folder.Name;
             cat[offset] = category;
-            logger._out("[%s]...", category);
+            logger.Out("[%s]...", category);
             int b = 0;
             int e = files.Length;
 
@@ -391,12 +391,12 @@ public class ClusterAnalyzer<K>
                 analyzer.addDocument(folder.Name + " " + files[i].Name, IOUtil.readTxt(files[i]));
                 if (i % logEvery == 0)
                 {
-                    logger._out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
+                    logger.Out("%c[%s]...%.2f%%", 13, category, MathUtility.percentage(i - b + 1, e - b));
                 }
                 ++docSize;
                 ++ni[offset];
             }
-            logger._out(" %d 篇文档\n", e - b);
+            logger.Out(" %d 篇文档\n", e - b);
             ++offset;
         }
         logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", folders.Length, docSize);

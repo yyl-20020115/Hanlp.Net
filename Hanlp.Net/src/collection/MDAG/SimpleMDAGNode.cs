@@ -292,12 +292,12 @@ public class SimpleMDAGNode : ICacheAble
     }
 
     //@Override
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        _out.writeChar(letter);
-        _out.writeByte(isAcceptNode ? 1 : 0);
-        _out.writeInt(transitionSetBeginIndex);
-        _out.writeInt(transitionSetSize);
+        Out.writeChar(letter);
+        Out.writeByte(isAcceptNode ? 1 : 0);
+        Out.writeInt(transitionSetBeginIndex);
+        Out.writeInt(transitionSetSize);
     }
 
     //@Override

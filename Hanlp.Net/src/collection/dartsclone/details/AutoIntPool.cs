@@ -54,7 +54,7 @@ public class AutoIntPool
         _size = size;
     }
 
-    void Resize(int size, int value)
+    public void Resize(int size, int value)
     {
         if (size > _capacity)
         {

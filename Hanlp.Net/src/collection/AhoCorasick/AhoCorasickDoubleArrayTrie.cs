@@ -168,51 +168,51 @@ public class AhoCorasickDoubleArrayTrie<V>
     /**
      * 持久化
      *
-     * @param _out 一个Stream
+     * @param Out 一个Stream
      * @throws Exception 可能的IO异常等
      */
-    public void Save(Stream _out)
+    public void Save(Stream Out)
     {
-        _out.writeInt(        Size);
+        Out.writeInt(        Size);
         for (int i = 0; i <_size; i++)
         {
-            _out.writeInt(_base[i]);
-            _out.writeInt(check[i]);
-            _out.writeInt(fail[i]);
+            Out.writeInt(_base[i]);
+            Out.writeInt(check[i]);
+            Out.writeInt(fail[i]);
             int[] output = this.output[i];
             if (output == null)
             {
-                _out.writeInt(0);
+                Out.writeInt(0);
             }
             else
             {
-                _out.writeInt(output.Length);
+                Out.writeInt(output.Length);
                 foreach (int o in output)
                 {
-                    _out.writeInt(o);
+                    Out.writeInt(o);
                 }
             }
         }
-        _out.writeInt(l.Length);
+        Out.writeInt(l.Length);
         foreach (int Length in l)
         {
-            _out.writeInt(Length);
+            Out.writeInt(Length);
         }
     }
 
     /**
      * 持久化
      *
-     * @param _out 一个Stream
+     * @param Out 一个Stream
      * @ 可能的IO异常
      */
-    public void Save(Stream _out)
+    public void Save(Stream Out)
     {
-        _out.writeObject(_base);
-        _out.writeObject(_check);
-        _out.writeObject(fail);
-        _out.writeObject(output);
-        _out.writeObject(l);
+        Out.writeObject(_base);
+        Out.writeObject(_check);
+        Out.writeObject(fail);
+        Out.writeObject(output);
+        Out.writeObject(l);
     }
 
     /**

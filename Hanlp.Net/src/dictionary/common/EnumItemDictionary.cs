@@ -82,13 +82,13 @@ public abstract class EnumItemDictionary<E> : CommonDictionary<EnumItem<E>>
     }
 
     //@Override
-    protected void saveValue(EnumItem<E> item, Stream _out) 
+    protected void saveValue(EnumItem<E> item, Stream Out) 
     {
-        _out.writeInt(item.labelMap.Count);
+        Out.writeInt(item.labelMap.Count);
         foreach (KeyValuePair<E, int> entry in item.labelMap)
         {
-            _out.writeInt(entry.Key.Ordinal);
-            _out.writeInt(entry.Value);
+            Out.writeInt(entry.Key.Ordinal);
+            Out.writeInt(entry.Value);
         }
     }
 }

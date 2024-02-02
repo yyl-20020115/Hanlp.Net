@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.classification.corpus;
 using com.hankcs.hanlp.classification.models;
 using com.hankcs.hanlp.classification.utilities;
+using com.hankcs.hanlp.classification.utilities.io;
 using com.hankcs.hanlp.corpus.document;
 using com.hankcs.hanlp.utility;
 using Document = com.hankcs.hanlp.classification.corpus.Document;
@@ -26,6 +27,7 @@ namespace com.hankcs.hanlp.classification.classifiers;
  */
 public abstract class AbstractClassifier : IClassifier
 {
+    protected ILogger logger;
     //@Override
     public IClassifier EnableProbability(bool enable) => this;
 
@@ -77,13 +79,13 @@ public abstract class AbstractClassifier : IClassifier
         foreach (KeyValuePair<string, string[]> entry in trainingDataSet)
         {
             string category = entry.Key;
-            logger._out("[%s]...", category);
+            logger.Out("[%s]...", category);
             foreach (string doc in entry.Value)
             {
                 dataSet.Add(category, doc);
             }
             ++cur;
-            logger._out("%.2f%%...", MathUtility.percentage(cur, total));
+            logger.Out("%.2f%%...", MathUtility.percentage(cur, total));
         }
         logger.finish(" 加载完毕\n");
         Train(dataSet);

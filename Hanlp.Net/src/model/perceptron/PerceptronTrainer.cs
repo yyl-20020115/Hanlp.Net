@@ -150,13 +150,13 @@ public abstract class PerceptronTrainer : InstanceConsumer
 
                 // 在开发集上校验
                 accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
-                _out.printf("Iter#%d - ", iter);
+                Out.printf("Iter#%d - ", iter);
                 PrintAccuracy(accuracy);
             }
             // 平均
             model.average(total, timestamp, current);
             accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
-            _out.print("AP - ");
+            Out.print("AP - ");
             PrintAccuracy(accuracy);
             logger.Start("以压缩比 %.2f 保存模型到 %s ... ", compressRatio, modelFile);
             model.save(modelFile, immutableFeatureMap.featureIdMap.entrySet(), compressRatio);
@@ -199,7 +199,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
                         models[0].parameter[j] /= threadNum;
                     }
                     accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, models[0]) : evaluate(developFile, models[0]);
-                    _out.printf("Iter#%d - ", iter);
+                    Out.printf("Iter#%d - ", iter);
                     PrintAccuracy(accuracy);
                 }
                 catch (Exception e)
@@ -219,7 +219,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         if (compressRatio > 0)
         {
             accuracy = evaluate(developFile, model);
-            _out.printf("\n%.2f compressed model - ", compressRatio);
+            Out.printf("\n%.2f compressed model - ", compressRatio);
             PrintAccuracy(accuracy);
         }
 
@@ -230,11 +230,11 @@ public abstract class PerceptronTrainer : InstanceConsumer
     {
         if (accuracy.Length == 3)
         {
-            _out.printf("P:%.2f R:%.2f F:%.2f\n", accuracy[0], accuracy[1], accuracy[2]);
+            Out.printf("P:%.2f R:%.2f F:%.2f\n", accuracy[0], accuracy[1], accuracy[2]);
         }
         else
         {
-            _out.printf("P:%.2f\n", accuracy[0]);
+            Out.printf("P:%.2f\n", accuracy[0]);
         }
     }
 
@@ -261,7 +261,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
                 var instance = instances[s];
                 model.update(instance);
             }
-//            _out.printf("Finished [%d,%d)\n", start, end);
+//            Out.printf("Finished [%d,%d)\n", start, end);
         }
     }
 
@@ -289,17 +289,17 @@ public abstract class PerceptronTrainer : InstanceConsumer
         FrequencyMap dictionaryMap = new FrequencyMap();
         if (dictionaryFile == null)
         {
-            _out.printf("从训练文件%s中统计词库...\n", trainingFile);
+            Out.printf("从训练文件%s中统计词库...\n", trainingFile);
             LoadWordFromFile(trainingFile, dictionaryMap, true);
         }
         else
         {
-            _out.printf("从外部词典%s中加载词库...\n", trainingFile);
+            Out.printf("从外部词典%s中加载词库...\n", trainingFile);
             LoadWordFromFile(dictionaryFile, dictionaryMap, false);
         }
         DoubleArrayTrie<int> dat = new DoubleArrayTrie<int>();
         dat.build(dictionaryMap);
-        _out.printf("加载完毕，词库总词数：%d，总词频：%d\n", dictionaryMap.Count, dictionaryMap.totalFrequency);
+        Out.printf("加载完毕，词库总词数：%d，总词频：%d\n", dictionaryMap.Count, dictionaryMap.totalFrequency);
 
         return dat;
     }

@@ -127,7 +127,7 @@ class Word2VecTraining
                         {
                             word = corpus.readWordIndex();
                             if (word == -2) break;                // EOF
-                            if (word == -1) continue;             // Filtered _out
+                            if (word == -1) continue;             // Filtered Out
                             word_count++;
                             if (word == -3) break;                // End of sentence
                             // The subsampling randomly discards frequent words while keeping the ranking same

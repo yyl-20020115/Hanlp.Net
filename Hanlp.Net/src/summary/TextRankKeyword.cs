@@ -45,7 +45,7 @@ public class TextRankKeyword : KeywordExtractor
     {
         TextRankKeyword textRankKeyword = new TextRankKeyword();
 
-        return textRankKeyword.getKeywords(document, size);
+        return textRankKeyword.GetKeywords(document, size);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TextRankKeyword : KeywordExtractor
      */
     public List<string> getKeyword(string content)
     {
-        return getKeywords(content);
+        return GetKeywords(content);
     }
 
     /**
@@ -117,7 +117,7 @@ public class TextRankKeyword : KeywordExtractor
         List<string> wordList = new (termList.Count);
         foreach (Term t in termList)
         {
-            if (shouldInclude(t))
+            if (ShouldInclude(t))
             {
                 wordList.Add(t.word);
             }

@@ -1073,7 +1073,7 @@ public class Matrix : Cloneable, ISerializable, ICacheAble
     }
 
     // DecimalFormat is a little disappointing coming from Fortran or C's printf.
-    // Since it doesn't pad on the left, the elements will come _out different
+    // Since it doesn't pad on the left, the elements will come Out different
     // widths.  Consequently, we'll pass the desired column width in as an
     // argument and do the extra padding ourselves.
 
@@ -1167,7 +1167,7 @@ public class Matrix : Cloneable, ISerializable, ICacheAble
         }
         int m = v.Count;  // Now we've got the number of rows.
         double[][] A = new double[m][];
-        v.copyInto(A);  // copy the rows _out of the vector
+        v.copyInto(A);  // copy the rows Out of the vector
         return new Matrix(A);
     }
 
@@ -1280,15 +1280,15 @@ public class Matrix : Cloneable, ISerializable, ICacheAble
         }
     }
 
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        _out.writeInt(m);
-        _out.writeInt(n);
+        Out.writeInt(m);
+        Out.writeInt(n);
         for (int i = 0; i < m; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                _out.writeDouble(A[i][j]);
+                Out.writeDouble(A[i][j]);
             }
         }
     }

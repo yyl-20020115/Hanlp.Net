@@ -18,6 +18,6 @@ public class TfIdfCounterTest : TestCase
             Console.WriteLine(id + " : " + counter.getKeywordsOf(id, 3));
         }
 
-        Console.WriteLine(counter.getKeywords("奥运会反兴奋剂", 2));
+        Console.WriteLine(counter.GetKeywords("奥运会反兴奋剂", 2));
     }
 }

@@ -100,19 +100,19 @@ public class PinyinDictionary
     {
         try
         {
-            var _out = new FileStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            _out.writeInt(entrySet.Count);
+            var Out = new FileStream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            Out.writeInt(entrySet.Count);
             foreach (KeyValuePair<string, Pinyin[]> entry in entrySet)
             {
                 Pinyin[] value = entry.Value;
-                _out.writeInt(value.Length);
+                Out.writeInt(value.Length);
                 foreach (Pinyin pinyin in value)
                 {
-                    _out.writeInt(pinyin.Ordinal);
+                    Out.writeInt(pinyin.Ordinal);
                 }
             }
-            trie.Save(_out);
-            _out.Close();
+            trie.Save(Out);
+            Out.Close();
         }
         catch (Exception e)
         {

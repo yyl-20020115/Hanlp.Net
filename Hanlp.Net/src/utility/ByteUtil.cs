@@ -269,14 +269,14 @@ public class ByteUtil
 
     /**
      * 无符号整型输出
-     * @param _out
+     * @param Out
      * @param uint
      * @
      */
-    public static void writeUnsignedInt(Stream _out, int _uint) 
+    public static void writeUnsignedInt(Stream Out, int _uint) 
     {
-        _out.writeByte((byte) ((_uint >>> 8) & 0xFF));
-        _out.writeByte((byte) ((_uint >>> 0) & 0xFF));
+        Out.writeByte((byte) ((_uint >>> 8) & 0xFF));
+        Out.writeByte((byte) ((_uint >>> 0) & 0xFF));
     }
 
     public static int convertTwoCharToInt(char high, char low)

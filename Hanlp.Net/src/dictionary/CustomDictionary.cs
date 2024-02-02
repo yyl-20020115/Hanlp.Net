@@ -109,7 +109,7 @@ public class CustomDictionary
                 {
                     attributeList.Add(entry.Value);
                 }
-                Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(mainPath + Predefine.BIN_EXT)));
+                Stream Out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(mainPath + Predefine.BIN_EXT)));
                 // 缓存用户词性
                 if (customNatureCollector.isEmpty()) // 热更新
                 {
@@ -118,15 +118,15 @@ public class CustomDictionary
                         customNatureCollector.Add(Nature.Values[i]);
                     }
                 }
-                IOUtil.writeCustomNature(_out, customNatureCollector);
+                IOUtil.writeCustomNature(Out, customNatureCollector);
                 // 缓存正文
-                _out.writeInt(attributeList.Count);
+                Out.writeInt(attributeList.Count);
                 foreach (CoreDictionary.Attribute attribute in attributeList)
                 {
-                    attribute.save(_out);
+                    attribute.save(Out);
                 }
-                dat.save(_out);
-                _out.Close();
+                dat.save(Out);
+                Out.Close();
             }
         }
         catch (FileNotFoundException e)

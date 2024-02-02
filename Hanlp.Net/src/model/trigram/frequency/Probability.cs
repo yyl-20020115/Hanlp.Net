@@ -146,9 +146,9 @@ public class Probability : ICacheAble
     }
 
     //@Override
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        using var st = new BinaryWriter(_out);
+        using var st = new BinaryWriter(Out);
         st.Write(total);
         int[] valueArray = d.getValueArray(new int[0]);
         st.Write(valueArray.Length);
@@ -156,7 +156,7 @@ public class Probability : ICacheAble
         {
             st.Write(v);
         }
-        d.save(_out);
+        d.save(Out);
     }
 
     //@Override

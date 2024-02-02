@@ -334,20 +334,20 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     {
         try
         {
-            Stream _out = (IOUtil.newOutputStream(path));
+            Stream Out = (IOUtil.newOutputStream(path));
             foreach (BaseNode<V> node in child)
             {
                 if (node == null)
                 {
-                    _out.Write(0);
+                    Out.Write(0);
                 }
                 else
                 {
-                    _out.Write(1);
-                    node.walkToSave(_out);
+                    Out.Write(1);
+                    node.walkToSave(Out);
                 }
             }
-            _out.Close();
+            Out.Close();
         }
         catch (Exception e)
         {
@@ -371,10 +371,10 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     /**
      * 保存到二进制输出流
      *
-     * @param _out
+     * @param Out
      * @return
      */
-    public bool save(Stream _out)
+    public bool save(Stream Out)
     {
         try
         {
@@ -382,18 +382,18 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
             {
                 if (node == null)
                 {
-                    _out.Write(0);
+                    Out.Write(0);
                 }
                 else
                 {
-                    _out.Write(1);
-                    node.walkToSave(_out);
+                    Out.Write(1);
+                    node.walkToSave(Out);
                 }
             }
         }
         catch (Exception e)
         {
-            Logger.warning("保存到" + _out + "失败" + TextUtility.exceptionToString(e));
+            Logger.warning("保存到" + Out + "失败" + TextUtility.exceptionToString(e));
             return false;
         }
 
@@ -480,19 +480,19 @@ public class BinTrie<V> : BaseNode<V> , ITrie<V>//, Externalizable
     }
 
     //@Override
-    public void writeExternal(ObjectOutput _out) 
+    public void writeExternal(ObjectOutput Out) 
     {
-        _out.writeInt(size);
+        Out.writeInt(size);
         foreach (BaseNode<V> node in child)
         {
             if (node == null)
             {
-                _out.writeInt(0);
+                Out.writeInt(0);
             }
             else
             {
-                _out.writeInt(1);
-                node.walkToSave(_out);
+                Out.writeInt(1);
+                node.walkToSave(Out);
             }
         }
     }

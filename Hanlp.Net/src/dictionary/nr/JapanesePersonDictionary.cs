@@ -88,13 +88,13 @@ public class JapanesePersonDictionary
     {
         try
         {
-            Stream _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
-            _out.writeInt(map.Count);
+            Stream Out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(path + Predefine.VALUE_EXT)));
+            Out.writeInt(map.Count);
             foreach (char character in map.values())
             {
-                _out.writeChar(character);
+                Out.writeChar(character);
             }
-            _out.Close();
+            Out.Close();
         }
         catch (Exception e)
         {

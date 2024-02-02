@@ -125,15 +125,15 @@ public class CharType
             typeList.Add(array);
         }
 //        Console.Write("int[" + typeList.Count + "][3] array = \n");
-        Stream _out = new Stream(new FileStream(HanLP.Config.CharTypePath));
+        Stream Out = new Stream(new FileStream(HanLP.Config.CharTypePath));
         foreach (int[] array in typeList)
         {
 //            Console.WriteLine("%d %d %d\n", array[0], array[1], array[2]);
-            _out.writeChar(array[0]);
-            _out.writeChar(array[1]);
-            _out.writeByte(array[2]);
+            Out.writeChar(array[0]);
+            Out.writeChar(array[1]);
+            Out.writeByte(array[2]);
         }
-        _out.Close();
+        Out.Close();
         ByteArray byteArray = ByteArray.createByteArray(HanLP.Config.CharTypePath);
         return byteArray;
     }

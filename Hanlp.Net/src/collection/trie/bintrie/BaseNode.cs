@@ -180,35 +180,35 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
         }
     }
 
-    public void walkToSave(Stream _out) 
+    public void walkToSave(Stream Out) 
     {
-        _out.writeChar(c);
-        _out.writeInt(status.Ordinal);
+        Out.writeChar(c);
+        Out.writeInt(status.Ordinal);
         int childSize = 0;
         if (child != null) childSize = child.Length;
-        _out.writeInt(childSize);
+        Out.writeInt(childSize);
         if (child == null) return;
         foreach (BaseNode<V> node in child)
         {
-            node.walkToSave(_out);
+            node.walkToSave(Out);
         }
     }
 
-    protected void walkToSave(ObjectOutput _out) 
+    protected void walkToSave(ObjectOutput Out) 
     {
-        _out.writeChar(c);
-        _out.writeInt(status.Ordinal);
+        Out.writeChar(c);
+        Out.writeInt(status.Ordinal);
         if (status == Status.WORD_END_3 || status == Status.WORD_MIDDLE_2)
         {
-            _out.writeObject(value);
+            Out.writeObject(value);
         }
         int childSize = 0;
         if (child != null) childSize = child.Length;
-        _out.writeInt(childSize);
+        Out.writeInt(childSize);
         if (child == null) return;
         foreach (BaseNode<V> node in child)
         {
-            node.walkToSave(_out);
+            node.walkToSave(Out);
         }
     }
 

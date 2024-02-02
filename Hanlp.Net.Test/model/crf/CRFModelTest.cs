@@ -22,11 +22,11 @@ public class CRFModelTest : TestCase
 
 //    public void testTestLoadTemplate() 
 //    {
-//        Stream _out = new Stream(new FileStream("data/test/_out.bin"));
+//        Stream Out = new Stream(new FileStream("data/test/Out.bin"));
 //        FeatureTemplate featureTemplate = FeatureTemplate.create("U05:%x[-2,0]/%x[-1,0]/%x[0,0]");
-//        featureTemplate.save(_out);
+//        featureTemplate.save(Out);
 //        featureTemplate = new FeatureTemplate();
-//        featureTemplate.load(ByteArray.createByteArray("data/test/_out.bin"));
+//        featureTemplate.load(ByteArray.createByteArray("data/test/Out.bin"));
 //        Console.WriteLine(featureTemplate);
 //    }
 

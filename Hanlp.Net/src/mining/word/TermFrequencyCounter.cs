@@ -13,6 +13,7 @@ using com.hankcs.hanlp.corpus.occurrence;
 using com.hankcs.hanlp.seg;
 using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.summary;
+using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
 
 namespace com.hankcs.hanlp.mining.word;
@@ -93,29 +94,20 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     public class CMP : IComparer<TermFrequency>
     {
         //@Override
-        public int Compare(TermFrequency o1, TermFrequency o2)
-        {
-            return o1.compareTo(o2);
-        }
+        public int Compare(TermFrequency o1, TermFrequency o2) => o1.CompareTo(o2);
     }
     /**
      * 所有词汇的频次
      *
      * @return
      */
-    public ICollection<TermFrequency> all()
-    {
-        return termFrequencyMap.Values;
-    }
+    public ICollection<TermFrequency> All() => termFrequencyMap.Values;
 
     //@Override
     public int Count=> termFrequencyMap.Count;
 
     //@Override
-    public bool isEmpty()
-    {
-        return termFrequencyMap.Count == 0;
-    }
+    public bool IsEmpty => termFrequencyMap.Count == 0;
 
     //@Override
     public bool Contains(Object o)
@@ -128,10 +120,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public IEnumerator<TermFrequency> GetEnumerator()
-    {
-        return termFrequencyMap.Values.GetEnumerator();
-    }
+    public IEnumerator<TermFrequency> GetEnumerator() => termFrequencyMap.Values.GetEnumerator();
 
     //@Override
     public Object[] ToArray()
@@ -165,7 +154,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool containsAll(Collection c)
+    public bool ContainsAll(Collection c)
     {
         foreach (Object o in c)
         {
@@ -186,7 +175,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool removeAll(Collection c)
+    public bool RemoveAll(Collection c)
     {
         foreach (Object o in c)
         {
@@ -197,9 +186,9 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
     }
 
     //@Override
-    public bool retainAll(Collection c)
+    public bool RetainAll(Collection c)
     {
-        return termFrequencyMap.Values.retainAll(c);
+        return termFrequencyMap.Values.RetainAll(c);
     }
 
     //@Override
@@ -238,7 +227,7 @@ public class TermFrequencyCounter : KeywordExtractor , ICollection<TermFrequency
      */
     public static List<string> getKeywordList(string document, int size)
     {
-        return new TermFrequencyCounter().getKeywords(document, size);
+        return new TermFrequencyCounter().GetKeywords(document, size);
     }
 
     //@Override

@@ -723,13 +723,13 @@ public class IOUtil
         br.Close();
     }
 
-    public static void writeCustomNature(Stream _out, HashSet<Nature> customNatureCollector) 
+    public static void writeCustomNature(Stream Out, HashSet<Nature> customNatureCollector) 
     {
         if (customNatureCollector.Count == 0) return;
-        _out.writeInt(-customNatureCollector.Count);
+        Out.writeInt(-customNatureCollector.Count);
         foreach (Nature nature in customNatureCollector)
         {
-            TextUtility.writeString(nature.ToString(), _out);
+            TextUtility.writeString(nature.ToString(), Out);
         }
     }
 

@@ -447,17 +447,17 @@ public class DoubleArrayTrie<V> : ITrie<V>
 
     public bool save(string fileName)
     {
-        Stream _out;
+        Stream Out;
         try
         {
-            _out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(fileName)));
-            _out.writeInt(size);
+            Out = new Stream(new BufferedOutputStream(IOUtil.newOutputStream(fileName)));
+            Out.writeInt(size);
             for (int i = 0; i < size; i++)
             {
-                _out.writeInt(_base[i]);
-                _out.writeInt(check[i]);
+                Out.writeInt(_base[i]);
+                Out.writeInt(check[i]);
             }
-            _out.Close();
+            Out.Close();
         }
         catch (Exception e)
         {
@@ -470,18 +470,18 @@ public class DoubleArrayTrie<V> : ITrie<V>
     /**
      * 将base和check保存下来
      *
-     * @param _out
+     * @param Out
      * @return
      */
-    public bool save(Stream _out)
+    public bool save(Stream Out)
     {
         try
         {
-            _out.writeInt(size);
+            Out.writeInt(size);
             for (int i = 0; i < _size; i++)
             {
-                _out.writeInt(_base[i]);
-                _out.writeInt(check[i]);
+                Out.writeInt(_base[i]);
+                Out.writeInt(check[i]);
             }
         }
         catch (Exception e)
@@ -492,10 +492,10 @@ public class DoubleArrayTrie<V> : ITrie<V>
         return true;
     }
 
-    public void save(Stream _out) 
+    public void save(Stream Out) 
     {
-        _out.writeObject(_base);
-        _out.writeObject(check);
+        Out.writeObject(_base);
+        Out.writeObject(check);
     }
 
     /**
@@ -664,11 +664,11 @@ public class DoubleArrayTrie<V> : ITrie<V>
      */
     public bool serializeTo(string path)
     {
-        Stream _out = null;
+        Stream Out = null;
         try
         {
-            _out = (IOUtil.newOutputStream(path));
-            _out.writeObject(this);
+            Out = (IOUtil.newOutputStream(path));
+            Out.writeObject(this);
         }
         catch (Exception e)
         {

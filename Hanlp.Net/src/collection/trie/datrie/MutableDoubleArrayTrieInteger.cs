@@ -1166,15 +1166,15 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
 
 
     //@Override
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
         if (!(charMap is Utf8CharacterMapping))
         {
             logger.warning("将来需要在构造的时候传入 " + charMap.getClass());
         }
-        _out.writeInt(size);
-        _base.save(_out);
-        check.save(_out);
+        Out.writeInt(size);
+        _base.save(Out);
+        check.save(Out);
     }
 
     //@Override
@@ -1186,11 +1186,11 @@ public class MutableDoubleArrayTrieInteger : Serializable, IEnumerable<KeyValueP
         return true;
     }
 
-    private void writeObject(Stream _out)
+    private void writeObject(Stream Out)
     {
-        _out.Write(_size);
-        _out.Write(_base);
-        _out.Write(check);
+        Out.Write(_size);
+        Out.Write(_base);
+        Out.Write(check);
     }
 
     private void readObject(Stream _in)

@@ -93,7 +93,7 @@ public class LinearModel : ICacheAble
         {
             if (++n % logEvery == 0 || n == featureMap.Count)
             {
-                logger._out("\r%.2f%% ", MathUtility.percentage(n, featureMap.Count));
+                logger.Out("\r%.2f%% ", MathUtility.percentage(n, featureMap.Count));
             }
             if (entry.Value < tagSet.sizeIncludingBos())
             {
@@ -124,7 +124,7 @@ public class LinearModel : ICacheAble
         {
             if (++n % logEvery == 0 || n == heap.Count)
             {
-                logger._out("\r%.2f%% ", MathUtility.percentage(n, heap.Count));
+                logger.Out("\r%.2f%% ", MathUtility.percentage(n, heap.Count));
             }
             int id = mdat.Count;
             mdat.Add(item.key, id);
@@ -154,9 +154,9 @@ public class LinearModel : ICacheAble
      */
     public virtual void save(string modelFile) 
     {
-        Stream _out = IOUtil.newOutputStream(modelFile);
-        save(_out);
-        _out.Close();
+        Stream Out = IOUtil.newOutputStream(modelFile);
+        save(Out);
+        Out.Close();
     }
 
     /**
@@ -190,9 +190,9 @@ public class LinearModel : ICacheAble
         float[] parameter = this.parameter;
         this.compress(ratio, 1e-3f);
 
-        Stream _out = IOUtil.newOutputStream(modelFile);
-        save(_out);
-        _out.Close();
+        Stream Out = IOUtil.newOutputStream(modelFile);
+        save(Out);
+        Out.Close();
 
         if (text)
         {
@@ -394,16 +394,16 @@ public class LinearModel : ICacheAble
     }
 
     //@Override
-    public virtual void save(Stream _out) 
+    public virtual void save(Stream Out) 
     {
         if (!(featureMap is ImmutableFeatureMDatMap))
         {
             featureMap = new ImmutableFeatureMDatMap(featureMap.entrySet(), tagSet());
         }
-        featureMap.save(_out);
+        featureMap.save(Out);
         foreach (float aParameter in this.parameter)
         {
-            _out.writeFloat(aParameter);
+            Out.writeFloat(aParameter);
         }
     }
 

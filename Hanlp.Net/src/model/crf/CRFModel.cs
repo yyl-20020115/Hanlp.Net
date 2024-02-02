@@ -165,9 +165,9 @@ public class CRFModel : ICacheAble
         try
         {
             logger.info("开始缓存" + path + Predefine.BIN_EXT);
-            Stream _out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            CRFModel.save(_out);
-            _out.Close();
+            Stream Out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            CRFModel.save(Out);
+            Out.Close();
         }
         catch (Exception e)
         {
@@ -298,39 +298,39 @@ public class CRFModel : ICacheAble
     }
 
     //@Override
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        _out.writeInt(id2tag.Length);
+        Out.writeInt(id2tag.Length);
         foreach (string tag in id2tag)
         {
-            _out.writeUTF(tag);
+            Out.writeUTF(tag);
         }
         FeatureFunction[] valueArray = featureFunctionTrie.getValueArray(new FeatureFunction[0]);
-        _out.writeInt(valueArray.Length);
+        Out.writeInt(valueArray.Length);
         foreach (FeatureFunction featureFunction in valueArray)
         {
-            featureFunction.save(_out);
+            featureFunction.save(Out);
         }
-        featureFunctionTrie.save(_out);
-        _out.writeInt(featureTemplateList.Count);
+        featureFunctionTrie.save(Out);
+        Out.writeInt(featureTemplateList.Count);
         foreach (FeatureTemplate featureTemplate in featureTemplateList)
         {
-            featureTemplate.save(_out);
+            featureTemplate.save(Out);
         }
         if (matrix != null)
         {
-            _out.writeInt(matrix.Length);
+            Out.writeInt(matrix.Length);
             foreach (double[] line in matrix)
             {
                 foreach (double v in line)
                 {
-                    _out.writeDouble(v);
+                    Out.writeDouble(v);
                 }
             }
         }
         else
         {
-            _out.writeInt(0);
+            Out.writeInt(0);
         }
     }
 

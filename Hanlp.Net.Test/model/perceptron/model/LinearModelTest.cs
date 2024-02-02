@@ -13,6 +13,6 @@ public class LinearModelTest : TestCase
 //        double[] prf = trainer.evaluate("icwb2-data/mini/pku_development.txt",
 //                                                              model
 //        );
-//        _out.printf("Performance - P:%.2f R:%.2f F:%.2f\n", prf[0], prf[1], prf[2]);
+//        Out.printf("Performance - P:%.2f R:%.2f F:%.2f\n", prf[0], prf[1], prf[2]);
 //    }
 }

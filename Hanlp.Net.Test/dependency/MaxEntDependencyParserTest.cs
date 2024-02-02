@@ -25,8 +25,8 @@ public class MaxEntDependencyParserTest : TestCase
 //            {
 //                termList.Add(new Term(word.LEMMA, Nature.valueOf(word.POSTAG)));
 //            }
-//            CoNLLSentence _out = CRFDependencyParser.compute(termList);
-//            evaluator.e(sentence, _out);
+//            CoNLLSentence Out = CRFDependencyParser.compute(termList);
+//            evaluator.e(sentence, Out);
 //            Console.WriteLine("done in " + (DateTime.Now.Microsecond - start) + " ms.");
 //        }
 //        Console.WriteLine(evaluator);

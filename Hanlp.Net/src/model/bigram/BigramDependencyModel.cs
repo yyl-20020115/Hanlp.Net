@@ -80,14 +80,14 @@ public class BigramDependencyModel
         // 缓存值文件
         try
         {
-            Stream _out = new Stream(IOUtil.newOutputStream(path +  ".bi" + Predefine.BIN_EXT));
-            _out.writeInt(dependencyList.Count);
+            Stream Out = new Stream(IOUtil.newOutputStream(path +  ".bi" + Predefine.BIN_EXT));
+            Out.writeInt(dependencyList.Count);
             foreach (string dependency in dependencyList)
             {
-                _out.writeUTF(dependency);
+                Out.writeUTF(dependency);
             }
-            if (!trie.save(_out)) return false;
-            _out.Close();
+            if (!trie.save(Out)) return false;
+            Out.Close();
         }
         catch (Exception e)
         {

@@ -103,24 +103,24 @@ public class WordNatureDependencyModel
         // 缓存值文件
         try
         {
-            Stream _out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
-            _out.writeInt(attributeList.Count);
+            Stream Out = new Stream(IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            Out.writeInt(attributeList.Count);
             foreach (Attribute attribute in attributeList)
             {
-                _out.writeInt(attribute.p.Length);
+                Out.writeInt(attribute.p.Length);
                 for (int i = 0; i < attribute.p.Length; ++i)
                 {
                     char[] charArray = attribute.dependencyRelation[i].ToCharArray();
-                    _out.writeInt(charArray.Length);
+                    Out.writeInt(charArray.Length);
                     foreach (char c in charArray)
                     {
-                        _out.writeChar(c);
+                        Out.writeChar(c);
                     }
-                    _out.writeFloat(attribute.p[i]);
+                    Out.writeFloat(attribute.p[i]);
                 }
             }
-            if (!trie.save(_out)) return false;
-            _out.Close();
+            if (!trie.save(Out)) return false;
+            Out.Close();
         }
         catch (Exception e)
         {

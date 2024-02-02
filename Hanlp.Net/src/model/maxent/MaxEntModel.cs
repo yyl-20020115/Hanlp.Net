@@ -199,41 +199,41 @@ public class MaxEntModel
         try
         {
             TextReader br = new StreamReader(IOUtil.newInputStream(path), "UTF-8");
-            Stream _out = (IOUtil.newOutputStream(path + Predefine.BIN_EXT));
+            Stream Out = (IOUtil.newOutputStream(path + Predefine.BIN_EXT));
             br.ReadLine();  // type
             m.correctionConstant = int.parseInt(br.ReadLine());  // correctionConstant
-            _out.writeInt(m.correctionConstant);
+            Out.writeInt(m.correctionConstant);
             m.correctionParam = Double.parseDouble(br.ReadLine());  // getCorrectionParameter
-            _out.writeDouble(m.correctionParam);
+            Out.writeDouble(m.correctionParam);
             // label
             int numOutcomes = int.parseInt(br.ReadLine());
-            _out.writeInt(numOutcomes);
+            Out.writeInt(numOutcomes);
             string[] outcomeLabels = new string[numOutcomes];
             m.outcomeNames = outcomeLabels;
             for (int i = 0; i < numOutcomes; i++)
             {
                 outcomeLabels[i] = br.ReadLine();
-                TextUtility.writeString(outcomeLabels[i], _out);
+                TextUtility.writeString(outcomeLabels[i], Out);
             }
             // pattern
             int numOCTypes = int.parseInt(br.ReadLine());
-            _out.writeInt(numOCTypes);
+            Out.writeInt(numOCTypes);
             int[][] outcomePatterns = new int[numOCTypes][];
             for (int i = 0; i < numOCTypes; i++)
             {
                 StringTokenizer tok = new StringTokenizer(br.ReadLine(), " ");
                 int[] infoInts = new int[tok.countTokens()];
-                _out.writeInt(infoInts.Length);
+                Out.writeInt(infoInts.Length);
                 for (int j = 0; tok.hasMoreTokens(); j++)
                 {
                     infoInts[j] = int.parseInt(tok.nextToken());
-                    _out.writeInt(infoInts[j]);
+                    Out.writeInt(infoInts[j]);
                 }
                 outcomePatterns[i] = infoInts;
             }
             // feature
             int NUM_PREDS = int.parseInt(br.ReadLine());
-            _out.writeInt(NUM_PREDS);
+            Out.writeInt(NUM_PREDS);
             string[] predLabels = new string[NUM_PREDS];
             m.pmap = new DoubleArrayTrie<int>();
             var tmpMap = new Dictionary<string, int>();
@@ -241,15 +241,15 @@ public class MaxEntModel
             {
                 predLabels[i] = br.ReadLine();
                 //assert !tmpMap.ContainsKey(predLabels[i]) : "重复的键： " + predLabels[i] + " 请使用 -Dfile.encoding=UTF-8 训练";
-                TextUtility.writeString(predLabels[i], _out);
+                TextUtility.writeString(predLabels[i], Out);
                 tmpMap.Add(predLabels[i], i);
             }
             m.pmap.build(tmpMap);
             foreach (KeyValuePair<string, int> entry in tmpMap.entrySet())
             {
-                _out.writeInt(entry.Value);
+                Out.writeInt(entry.Value);
             }
-            m.pmap.save(_out);
+            m.pmap.save(Out);
             // params
             Context[] _params = new Context[NUM_PREDS];
             int pid = 0;
@@ -266,7 +266,7 @@ public class MaxEntModel
                     for (int k = 1; k < outcomePatterns[i].Length; k++)
                     {
                         contextParameters[k - 1] = Double.parseDouble(br.ReadLine());
-                        _out.writeDouble(contextParameters[k - 1]);
+                        Out.writeDouble(contextParameters[k - 1]);
                     }
                     _params[pid] = new Context(outcomePattern, contextParameters);
                     pid++;
@@ -277,7 +277,7 @@ public class MaxEntModel
             m.prior.setLabels(outcomeLabels);
             // eval
             m.evalParams = new EvalParameters(_params, m.correctionParam, m.correctionConstant, outcomeLabels.Length);
-            _out.Close();
+            Out.Close();
         }
         catch (Exception e)
         {

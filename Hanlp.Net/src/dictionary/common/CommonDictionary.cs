@@ -113,14 +113,14 @@ public abstract class CommonDictionary<V>
     {
         try
         {
-            Stream _out = IOUtil.newOutputStream(path);
-            _out.writeInt(valueArray.Count);
+            Stream Out = IOUtil.newOutputStream(path);
+            Out.writeInt(valueArray.Count);
             foreach (V item in valueArray)
             {
-                saveValue(item, _out);
+                saveValue(item, Out);
             }
-            trie.save(_out);
-            _out.Close();
+            trie.save(Out);
+            Out.Close();
         }
         catch (Exception e)
         {
@@ -134,10 +134,10 @@ public abstract class CommonDictionary<V>
      * 保存单个值到流中
      *
      * @param value
-     * @param _out
+     * @param Out
      * @
      */
-    protected abstract void saveValue(V value, Stream _out) ;
+    protected abstract void saveValue(V value, Stream Out) ;
 
     /**
      * 查询一个单词

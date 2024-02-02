@@ -74,19 +74,19 @@ public class MDAG : ICacheAble
     protected int transitionCount;
 
     //@Override
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
         simplify();
-        _out.writeInt(charTreeSet.Count);
+        Out.writeInt(charTreeSet.Count);
         foreach (var character in charTreeSet)
         {
-            _out.writeChar(character);
+            Out.writeChar(character);
         }
-        simplifiedSourceNode.save(_out);
-        _out.writeInt(mdagDataArray.Length);
+        simplifiedSourceNode.save(Out);
+        Out.writeInt(mdagDataArray.Length);
         foreach (SimpleMDAGNode simpleMDAGNode in mdagDataArray)
         {
-            simpleMDAGNode.save(_out);
+            simpleMDAGNode.save(Out);
         }
     }
 
@@ -174,7 +174,7 @@ public class MDAG : ICacheAble
      *
      * @param dataFile a {@link java.io.File} representation of a file
      *                 containing the Strings that the MDAG will contain
-     * @throws java.io.IOException if {@code datafile} cannot be opened, or a read operation on it cannot be carried _out
+     * @throws java.io.IOException if {@code datafile} cannot be opened, or a read operation on it cannot be carried Out
      */
     public MDAG(File dataFile)
         : this(IOUtil.newBufferedReader(dataFile.getPath()))

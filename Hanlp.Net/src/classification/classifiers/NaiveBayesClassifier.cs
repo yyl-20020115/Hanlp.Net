@@ -48,7 +48,7 @@ public class NaiveBayesClassifier : AbstractClassifier
 
     public override void Train(IDataSet dataSet)
     {
-        logger._out("原始数据集大小:%d\n", dataSet.Count);
+        logger.Out("原始数据集大小:%d\n", dataSet.Count);
         //选择最佳特征
         BaseFeatureData featureData = SelectFeatures(dataSet);
 
@@ -103,7 +103,7 @@ public class NaiveBayesClassifier : AbstractClassifier
                 model.logLikelihoods[(feature)].Add(category, logLikelihood);
             }
         }
-        logger._out("贝叶斯统计结束\n");
+        logger.Out("贝叶斯统计结束\n");
         model.catalog = dataSet.Catalog.ToArray();
         model.tokenizer = dataSet.GetTokenizer();
         model.wordIdTrie = featureData.wordIdTrie;
@@ -176,7 +176,7 @@ public class NaiveBayesClassifier : AbstractClassifier
     {
         ChiSquareFeatureExtractor chiSquareFeatureExtractor = new ChiSquareFeatureExtractor();
 
-        logger.start("使用卡方检测选择特征中...");
+        logger.Start("使用卡方检测选择特征中...");
         //FeatureStats对象包含文档中所有特征及其统计信息
         BaseFeatureData featureData = ChiSquareFeatureExtractor.ExtractBasicFeatureData(dataSet); //执行统计
 
@@ -193,7 +193,7 @@ public class NaiveBayesClassifier : AbstractClassifier
             featureCategoryJointCount[++p] = featureData.featureCategoryJointCount[feature];
             featureData.wordIdTrie.Add(wordIdArray[feature], p);
         }
-        logger.finish(",选中特征数:%d / %d = %.2f%%\n", featureCategoryJointCount.Length,
+        logger.Finish(",选中特征数:%d / %d = %.2f%%\n", featureCategoryJointCount.Length,
                       featureData.featureCategoryJointCount.Length,
                       featureCategoryJointCount.Length / (double)featureData.featureCategoryJointCount.Length * 100.0);
         featureData.featureCategoryJointCount = featureCategoryJointCount;

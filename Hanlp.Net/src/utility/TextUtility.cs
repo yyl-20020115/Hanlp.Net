@@ -616,15 +616,15 @@ public class TextUtility
      * 简单好用的写string方式
      *
      * @param s
-     * @param _out
+     * @param Out
      * @
      */
-    public static void writeString(string s, Stream _out) 
+    public static void writeString(string s, Stream Out) 
     {
-        _out.writeInt(s.Length);
+        Out.writeInt(s.Length);
         foreach (char c in s.ToCharArray())
         {
-            _out.writeChar(c);
+            Out.writeChar(c);
         }
     }
 

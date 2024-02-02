@@ -36,13 +36,13 @@ public class Evaluator
         double time = DateTime.Now.Microsecond;
         foreach (Document document in testingDataSet)
         {
-            int _out = classifier.Label(document);
+            int Out = classifier.Label(document);
             int key = document.category;
-            ++TP_FP[_out];
+            ++TP_FP[Out];
             ++TP_FN[key];
-            if (key == _out)
+            if (key == Out)
             {
-                ++TP[_out];
+                ++TP[Out];
             }
         }
         time = DateTime.Now.Microsecond - time;

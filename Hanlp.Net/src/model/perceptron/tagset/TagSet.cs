@@ -106,13 +106,13 @@ public class TagSet : IIdStringMap, IStringIdMap, IEnumerable<KeyValuePair<strin
         return _allTags;
     }
 
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        _out.writeInt(type.Ordinal);
-        _out.writeInt(Count);
+        Out.writeInt(type.Ordinal);
+        Out.writeInt(Count);
         foreach (string tag in idStringMap)
         {
-            _out.writeUTF(tag);
+            Out.writeUTF(tag);
         }
     }
 

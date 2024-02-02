@@ -22,7 +22,7 @@ namespace com.hankcs.hanlp.collection.trie;
 public interface ITrie<V>
 {
     int build(Dictionary<string, V> keyValueMap);
-    bool save(Stream _out);
+    bool save(Stream Out);
     bool load(ByteArray byteArray, V[] value);
     V get(char[] key);
     V get(string key);

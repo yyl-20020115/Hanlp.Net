@@ -135,7 +135,7 @@ public class CRFSegment : CharacterBasedSegment
         List<string> atomList = new (sentence.Length);
         int maxLen = sentence.Length - 1;
         StringBuilder sbAtom = new StringBuilder();
-        _out:
+        Out:
         for (int i = 0; i < sentence.Length; i++)
         {
             if (sentence[i] >= '0' && sentence[i] <= '9')
@@ -207,7 +207,7 @@ public class CRFSegment : CharacterBasedSegment
         int size = 0;
         int maxLen = sentence.Length - 1;
         StringBuilder sbAtom = new StringBuilder();
-        _out:
+        Out:
         for (int i = 0; i < sentence.Length; i++)
         {
             if (sentence[i] >= '0' && sentence[i] <= '9')

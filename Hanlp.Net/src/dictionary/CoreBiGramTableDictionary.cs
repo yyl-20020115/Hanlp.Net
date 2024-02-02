@@ -136,22 +136,22 @@ public class CoreBiGramTableDictionary
     {
         try
         {
-//            Stream _out = new Stream(new FileStream(path));
-//            _out.writeInt(start.Length);
+//            Stream Out = new Stream(new FileStream(path));
+//            Out.writeInt(start.Length);
 //            for (int i : start)
 //            {
-//                _out.writeInt(i);
+//                Out.writeInt(i);
 //            }
-//            _out.writeInt(pair.Length);
+//            Out.writeInt(pair.Length);
 //            for (int i : pair)
 //            {
-//                _out.writeInt(i);
+//                Out.writeInt(i);
 //            }
-//            _out.Close();
-            Stream _out = new Stream(IOUtil.newOutputStream(path));
-            _out.writeObject(start);
-            _out.writeObject(pair);
-            _out.Close();
+//            Out.Close();
+            Stream Out = new Stream(IOUtil.newOutputStream(path));
+            Out.writeObject(start);
+            Out.writeObject(pair);
+            Out.Close();
         }
         catch (Exception e)
         {

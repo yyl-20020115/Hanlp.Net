@@ -154,16 +154,16 @@ public class IntArrayList : Serializable, ICacheAble
     }
 
     //@Override
-    public void save(Stream _out) 
+    public void save(Stream Out) 
     {
-        _out.writeInt(_size);
+        Out.writeInt(_size);
         for (int i = 0; i < _size; i++)
         {
-            _out.writeInt(data[i]);
+            Out.writeInt(data[i]);
         }
-        _out.writeInt(linearExpandFactor);
-        _out.writeBoolean(exponentialExpanding);
-        _out.writeDouble(exponentialExpandFactor);
+        Out.writeInt(linearExpandFactor);
+        Out.writeBoolean(exponentialExpanding);
+        Out.writeDouble(exponentialExpandFactor);
     }
 
     //@Override
@@ -185,14 +185,14 @@ public class IntArrayList : Serializable, ICacheAble
         return true;
     }
 
-    private void writeObject(Stream _out) 
+    private void writeObject(Stream Out) 
     {
         loseWeight();
-        _out.writeInt(size);
-        _out.writeObject(data);
-        _out.writeInt(linearExpandFactor);
-        _out.writeBoolean(exponentialExpanding);
-        _out.writeDouble(exponentialExpandFactor);
+        Out.writeInt(size);
+        Out.writeObject(data);
+        Out.writeInt(linearExpandFactor);
+        Out.writeBoolean(exponentialExpanding);
+        Out.writeDouble(exponentialExpandFactor);
     }
 
     private void readObject(Stream _in)

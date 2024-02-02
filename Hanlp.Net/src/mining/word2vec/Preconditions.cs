@@ -380,7 +380,7 @@ class Preconditions
         }
         builder.Append(template.substring(templateStart));
 
-        // if we run _out of placeholders, Append the extra args in square braces
+        // if we run Out of placeholders, Append the extra args in square braces
         if (i < args.Length)
         {
             builder.Append(" [");

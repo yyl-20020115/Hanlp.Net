@@ -64,13 +64,13 @@ public abstract class FeatureMap : IStringIdMap, ICacheAble
     }
 
     //@Override
-    public virtual void save(Stream _out) 
+    public virtual void save(Stream Out) 
     {
-        tagSet.save(_out);
-        _out.writeInt(size());
+        tagSet.save(Out);
+        Out.writeInt(size());
         foreach (KeyValuePair<string, int> entry in entrySet())
         {
-            _out.writeUTF(entry.Key);
+            Out.writeUTF(entry.Key);
         }
     }
 

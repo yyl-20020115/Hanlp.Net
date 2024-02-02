@@ -128,9 +128,9 @@ public class NeuralNetworkParser : ICacheAble
         try
         {
             logger.info("正在缓存" + binPath);
-            Stream _out = new Stream(IOUtil.newOutputStream(binPath));
-            save(_out);
-            _out.Close();
+            Stream Out = new Stream(IOUtil.newOutputStream(binPath));
+            save(Out);
+            Out.Close();
         }
         catch (Exception e)
         {
@@ -188,39 +188,39 @@ public class NeuralNetworkParser : ICacheAble
 
     /**
      * 保存到磁盘
-     * @param _out
+     * @param Out
      * @throws Exception
      */
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        TextUtility.writeString(model_header, _out);
-        TextUtility.writeString(root, _out);
+        TextUtility.writeString(model_header, Out);
+        TextUtility.writeString(root, Out);
 
-        _out.writeInt(use_distance ? 1 : 0);
-        _out.writeInt(use_valency ? 1 : 0);
-        _out.writeInt(use_cluster ? 1 : 0);
+        Out.writeInt(use_distance ? 1 : 0);
+        Out.writeInt(use_valency ? 1 : 0);
+        Out.writeInt(use_cluster ? 1 : 0);
 
-        W1.save(_out);
-        W2.save(_out);
-        E.save(_out);
-        b1.save(_out);
-        saved.save(_out);
+        W1.save(Out);
+        W2.save(Out);
+        E.save(Out);
+        b1.save(Out);
+        saved.save(Out);
 
-        forms_alphabet.save(_out);
-        postags_alphabet.save(_out);
-        deprels_alphabet.save(_out);
+        forms_alphabet.save(Out);
+        postags_alphabet.save(Out);
+        deprels_alphabet.save(Out);
 
-        save_map(precomputation_id_encoder, _out);
+        save_map(precomputation_id_encoder, Out);
 
         if (use_cluster)
         {
-            cluster4_types_alphabet.save(_out);
-            cluster6_types_alphabet.save(_out);
-            cluster_types_alphabet.save(_out);
+            cluster4_types_alphabet.save(Out);
+            cluster6_types_alphabet.save(Out);
+            cluster_types_alphabet.save(Out);
 
-            save_map(form_to_cluster4, _out);
-            save_map(form_to_cluster6 , _out);
-            save_map(form_to_cluster , _out);
+            save_map(form_to_cluster4, Out);
+            save_map(form_to_cluster6 , Out);
+            save_map(form_to_cluster , Out);
         }
     }
 
@@ -353,13 +353,13 @@ public class NeuralNetworkParser : ICacheAble
         return map;
     }
 
-    private static void save_map(Dictionary<int, int> map, Stream _out) 
+    private static void save_map(Dictionary<int, int> map, Stream Out) 
     {
-        _out.writeInt(map.Count);
+        Out.writeInt(map.Count);
         foreach (KeyValuePair<int, int> entry in map)
         {
-            _out.writeInt(entry.Key);
-            _out.writeInt(entry.Value);
+            Out.writeInt(entry.Key);
+            Out.writeInt(entry.Value);
         }
     }
 

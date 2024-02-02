@@ -20,9 +20,9 @@ public class CharacterBasedGenerativeModelTest : TestCase
 //            }
 //        });
 //        model.train();
-////        Stream _out = new Stream(new FileStream(HanLP.Config.HMMSegmentModelPath));
-////        model.save(_out);
-////        _out.Close();
+////        Stream Out = new Stream(new FileStream(HanLP.Config.HMMSegmentModelPath));
+////        model.save(Out);
+////        Out.Close();
 ////        model.load(ByteArray.createByteArray(HanLP.Config.HMMSegmentModelPath));
 //        String text = "中国领土";
 //        char[] charArray = text.ToCharArray();

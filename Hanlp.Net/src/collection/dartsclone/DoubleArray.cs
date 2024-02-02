@@ -15,7 +15,7 @@ namespace com.hankcs.hanlp.collection.dartsclone;
  *
  * @author manabe
  */
-public class DoubleArray : Serializable
+public class DoubleArray //: ISerializable
 {
     static Encoding utf8 = Encoding.UTF8;
 
@@ -25,7 +25,7 @@ public class DoubleArray : Serializable
      * @param keys   字节形式的键
      * @param values 值
      */
-    public void build(byte[][] keys, int[] values)
+    public void Build(byte[][] keys, int[] values)
     {
         Keyset keyset = new Keyset(keys, values);
         DoubleArrayBuilder builder = new DoubleArrayBuilder();
@@ -34,7 +34,7 @@ public class DoubleArray : Serializable
         _array = builder.copy();
     }
 
-    public void build(List<string> keys, int[] values)
+    public void Build(List<string> keys, int[] values)
     {
         byte[][] byteKey = new byte[keys.Count][];
         IEnumerator<string> iteratorKey = keys.GetEnumerator();
@@ -44,7 +44,7 @@ public class DoubleArray : Serializable
             byteKey[i] = iteratorKey.Current.getBytes(utf8);
             ++i;
         }
-        build(byteKey, values);
+        Build(byteKey, values);
     }
 
     /**
@@ -53,7 +53,7 @@ public class DoubleArray : Serializable
      * @param stream
      * @throws java.io.IOException
      */
-    public void open(Stream stream) 
+    public void Open(Stream stream)
     {
 
         int size = (int) (stream.available() / UNIT_SIZE);
@@ -84,30 +84,30 @@ public class DoubleArray : Serializable
      * @param stream
      * @throws java.io.IOException
      */
-    public void save(Stream stream) 
+    public void Save(Stream stream) 
     {
-        Stream _out = null;
+        Stream Out = null;
         try
         {
-            _out = 
+            Out = 
                     stream;
             for (int i = 0; i < _array.Length; ++i)
             {
-                _out.writeInt(_array[i]);
+                Out.Write(_array[i]);
             }
         }
         finally
         {
-            if (_out != null)
+            if (Out != null)
             {
-                _out.Close();
+                Out.Close();
             }
         }
     }
 
-    private void writeObject(Stream _out) 
+    private void writeObject(Stream Out) 
     {
-        _out.writeObject(_array);
+        Out.writeObject(_array);
     }
 
     private void readObject(Stream @in)

@@ -181,7 +181,8 @@ public class Viterbi
      * @param <E>                       EnumItem的具体类型
      * @return 预测结果
      */
-    public static  List<E> computeEnum<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
+    public static List<E> ComputeEnum<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
+        where E: Enum
     {
         int Length = roleTagList.Count - 1;
         List<E> tagList = new (roleTagList.Count);
@@ -201,23 +202,23 @@ public class Viterbi
             EnumItem<E> item = iterator.Current;
             cost[0] = new double[item.labelMap.Count];
             int j = 0;
-            foreach (E cur in item.labelMap.ToArray())
+            foreach (var cur in item.labelMap.ToArray())
             {
-                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                cost[0][j] = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Value] - Math.Log((item.getFrequency(cur.Value) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur.Value));
                 ++j;
             }
-            preTagSet = item.labelMap;
+            preTagSet = item.labelMap.Keys.ToHashSet();
         }
         // 第三个开始复杂一些
-        for (int i = 1; i < Length; ++i)
+        for (int i = 1; i < Length && iterator.MoveNext(); ++i)
         {
             int index_i = i & 1;
             int index_i_1 = 1 - index_i;
-            EnumItem<E> item = iterator.next();
+            EnumItem<E> item = iterator.Current;
             cost[index_i] = new double[item.labelMap.Count];
             double perfect_cost_line = Double.MaxValue;
             int k = 0;
-            HashSet<E> curTagSet = item.labelMap;
+            HashSet<E> curTagSet = item.labelMap.Keys.ToHashSet();
             foreach (E cur in curTagSet)
             {
                 cost[index_i][k] = Double.MaxValue;
@@ -254,12 +255,15 @@ public class Viterbi
      * @return 预测结果
      */
     public static List<E> computeEnumSimply<E>(List<EnumItem<E>> roleTagList, TransformMatrixDictionary<E> transformMatrixDictionary)
+        where E:Enum
     {
         int Length = roleTagList.Count - 1;
         List<E> tagList = new List<E>();
         IEnumerator<EnumItem<E>> iterator = roleTagList.GetEnumerator();
-        EnumItem<E> start = iterator.next();
-        E pre = start.labelMap.GetEnumerator().next().Key;
+        iterator.MoveNext();
+        EnumItem<E> start = iterator.Current;
+        iterator.MoveNext();
+        E pre = start.labelMap.GetEnumerator().Current.Key;
         E perfect_tag = pre;
         // 第一个是确定的
         tagList.Add(pre);
@@ -267,9 +271,10 @@ public class Viterbi
         {
             double perfect_cost = double.MaxValue;
             EnumItem<E> item = iterator.Current;
-            foreach (E cur in item.labelMap)
+            foreach (E cur in item.labelMap.Keys)
             {
-                double now = transformMatrixDictionary.transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
+                double now = transformMatrixDictionary
+                    .transititon_probability[pre.Ordinal][cur.Ordinal] - Math.Log((item.getFrequency(cur) + 1e-8) / transformMatrixDictionary.getTotalFrequency(cur));
                 if (perfect_cost > now)
                 {
                     perfect_cost = now;

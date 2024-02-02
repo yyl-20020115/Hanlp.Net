@@ -52,17 +52,17 @@ public class FeatureFunction : ICacheAble
     }
 
     //@Override
-    public void save(Stream _out)
+    public void save(Stream Out)
     {
-        _out.writeInt(o.Length);
+        Out.writeInt(o.Length);
         foreach (char c in o)
         {
-            _out.writeChar(c);
+            Out.writeChar(c);
         }
-        _out.writeInt(w.Length);
+        Out.writeInt(w.Length);
         foreach (double v in w)
         {
-            _out.writeDouble(v);
+            Out.writeDouble(v);
         }
     }
 

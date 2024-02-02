@@ -22,7 +22,7 @@ namespace com.hankcs.hanlp.classification.corpus;
 public class FileDataSet : AbstractDataSet
 {
     string cache;
-    Stream _out;
+    Stream Out;
     int size;
 
     public FileDataSet(AbstractModel model, string cache) 
@@ -45,7 +45,7 @@ public class FileDataSet : AbstractDataSet
     private void InitCache(string cache) 
     {
         this.cache = cache;
-        _out = new Stream(new FileStream(cache));
+        Out = new Stream(new FileStream(cache));
     }
 
     private void InitCache() 
@@ -76,13 +76,13 @@ public class FileDataSet : AbstractDataSet
 
     private void Add(Document document) 
     {
-        _out.writeInt(document.category);
+        Out.writeInt(document.category);
         HashSet<KeyValuePair<int, int[]>> entrySet = document.tfMap.entrySet();
-        _out.writeInt(entrySet.Count);
+        Out.writeInt(entrySet.Count);
         foreach (KeyValuePair<int, int[]> entry in entrySet)
         {
-            _out.writeInt(entry.Key);
-            _out.writeInt(entry.Value[0]);
+            Out.writeInt(entry.Key);
+            Out.writeInt(entry.Value[0]);
         }
         ++size;
     }
@@ -133,7 +133,7 @@ public class FileDataSet : AbstractDataSet
     {
         try
         {
-            _out.Close();
+            Out.Close();
             Stream _in  = (new FileStream(cache));
             return new ST();
         }
