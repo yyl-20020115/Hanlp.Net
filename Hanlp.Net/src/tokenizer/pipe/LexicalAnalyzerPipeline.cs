@@ -78,61 +78,61 @@ public class LexicalAnalyzerPipeline : Pipeline<string, List<IWord>, List<IWord>
     }
 
     //@Override
-    public void segment(string sentence, string normalized, List<string> wordList)
+    public void Segment(string sentence, string normalized, List<string> wordList)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
             throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
-        analyzer.segment(sentence, normalized, wordList);
+        analyzer.Segment(sentence, normalized, wordList);
     }
 
     //@Override
-    public List<string> segment(string sentence)
+    public List<string> Segment(string sentence)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
             throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
-        return analyzer.segment(sentence);
+        return analyzer.Segment(sentence);
     }
 
     //@Override
-    public string[] recognize(string[] wordArray, string[] posArray)
+    public string[] Recognize(string[] wordArray, string[] posArray)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
             throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
-        return analyzer.recognize(wordArray, posArray);
+        return analyzer.Recognize(wordArray, posArray);
     }
 
     //@Override
-    public string[] tag(params string[] words)
+    public string[] Tag(params string[] words)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
             throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
-        return analyzer.tag(words);
+        return analyzer.Tag(words);
     }
 
     //@Override
-    public string[] tag(List<string> wordList)
+    public string[] Tag(List<string> wordList)
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
             throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
-        return analyzer.tag(wordList);
+        return analyzer.Tag(wordList);
     }
 
     //@Override
-    public NERTagSet getNERTagSet()
+    public NERTagSet GetNERTagSet()
     {
         LexicalAnalyzer analyzer = getAnalyzer();
         if (analyzer == null)
             throw new InvalidOperationException("流水线中没有LexicalAnalyzerPipe");
-        return analyzer.getNERTagSet();
+        return analyzer.GetNERTagSet();
     }
 
     //@Override
-    public Sentence analyze(string sentence)
+    public Sentence Analyze(string sentence)
     {
         return new Sentence(flow(sentence));
     }

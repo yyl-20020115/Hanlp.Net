@@ -73,7 +73,7 @@ public class CoNLLSentence : IEnumerable<CoNLLWord>
      * 获取边的列表，edge[i][j]表示id为i的词语与j存在一条依存关系为该值的边，否则为null
      * @return
      */
-    public string[][] getEdgeArray()
+    public string[][] GetEdgeArray()
     {
         string[][] edge = new string[word.Length + 1][word.Length + 1];
         foreach (CoNLLWord coNLLWord in word)

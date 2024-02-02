@@ -29,7 +29,7 @@ public abstract class CharacterBasedSegment : Segment
      * @param term
      * @return
      */
-    public static CoreDictionary.Attribute guessAttribute(Term term)
+    public static CoreDictionary.Attribute GuessAttribute(Term term)
     {
         CoreDictionary.Attribute attribute = CoreDictionary.get(term.word);
         if (attribute == null)
@@ -104,7 +104,7 @@ public abstract class CharacterBasedSegment : Segment
         if (appendStart) vertexList.Add(Vertex.newB());
         foreach (Term word in wordList)
         {
-            CoreDictionary.Attribute attribute = guessAttribute(word);
+            CoreDictionary.Attribute attribute = GuessAttribute(word);
             Vertex vertex = new Vertex(word.word, attribute);
             vertexList.Add(vertex);
         }

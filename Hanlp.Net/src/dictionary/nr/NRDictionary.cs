@@ -33,19 +33,19 @@ public class NRDictionary : EnumItemDictionary<NR>
     }
 
     //@Override
-    protected NR[] values()
+    protected override NR[] values()
     {
         return NR.values();
     }
 
     //@Override
-    protected EnumItem<NR> newItem()
+    protected override EnumItem<NR> newItem()
     {
         return new EnumItem<NR>();
     }
 
     //@Override
-    protected void onLoaded(Dictionary<string, EnumItem<NR>> map)
+    protected void OnLoaded(Dictionary<string, EnumItem<NR>> map)
     {
         map.Add(" ", new EnumItem<NR>(NR.K, NR.A)); // txt中不允许出现空格词条，这里补上
     }

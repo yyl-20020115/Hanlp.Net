@@ -40,15 +40,15 @@ public class HMMSegmenter : HMMTrainer , Segmenter
     }
 
     //@Override
-    public List<string> segment(string text)
+    public List<string> Segment(string text)
     {
         List<string> wordList = new ();
-        segment(text, CharTable.convert(text), wordList);
+        Segment(text, CharTable.convert(text), wordList);
         return wordList;
     }
 
     //@Override
-    public void segment(string text, string normalized, List<string> output)
+    public void Segment(string text, string normalized, List<string> output)
     {
         int[] obsArray = new int[text.Length];
         for (int i = 0; i < obsArray.Length; i++)
@@ -119,7 +119,7 @@ public class HMMSegmenter : HMMTrainer , Segmenter
         //@Override
         protected override List<Term> segSentence(char[] sentence)
         {
-            List<string> wordList = segment(new string(sentence));
+            List<string> wordList = Segment(new string(sentence));
             List<Term> termList = new ();
             foreach (string word in wordList)
             {

@@ -59,7 +59,7 @@ public class HMMNERecognizer : HMMTrainer , NERecognizer
     }
 
     //@Override
-    public string[] recognize(string[] wordArray, string[] posArray)
+    public string[] Recognize(string[] wordArray, string[] posArray)
     {
         int[] obsArray = new int[wordArray.Length];
         for (int i = 0; i < obsArray.Length; i++)
@@ -78,7 +78,7 @@ public class HMMNERecognizer : HMMTrainer , NERecognizer
     }
 
     //@Override
-    public NERTagSet getNERTagSet()
+    public NERTagSet GetNERTagSet()
     {
         return tagSet;
     }

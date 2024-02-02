@@ -39,7 +39,7 @@ public class DemoPipeline
         analyzer.addFirst(new RegexRecognizePipe(EMAIL, "【邮件】"));
         analyzer.addLast(new PL()); // 自己写个管道也并非难事
         String text = "HanLP的项目地址是https://github.com/hankcs/HanLP，联系邮箱abc@def.com";
-        Console.WriteLine(analyzer.analyze(text));
+        Console.WriteLine(analyzer.Analyze(text));
     }
 
     public class PL : Pipe<List<IWord>, List<IWord>>

@@ -12,6 +12,7 @@
 using com.hankcs.hanlp.corpus.dependency.CoNll;
 using com.hankcs.hanlp.corpus.io;
 using com.hankcs.hanlp.seg;
+using com.hankcs.hanlp.seg.common;
 using com.hankcs.hanlp.tokenizer;
 using com.hankcs.hanlp.utility;
 
@@ -122,4 +123,6 @@ public abstract class AbstractDependencyParser : IDependencyParser
         enableDeprelTranslater = enable;
         return this;
     }
+
+    public abstract CoNLLSentence Parse(List<Term> termList);
 }

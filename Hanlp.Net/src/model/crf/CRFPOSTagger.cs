@@ -114,14 +114,14 @@ public class CRFPOSTagger : CRFTagger , POSTagger
             "B";
     }
 
-    public string[] tag(List<string> wordList)
+    public string[] Tag(List<string> wordList)
     {
         varwords = wordList.ToArray();
         return tag(words);
     }
 
     //@Override
-    public string[] tag(params string[] words)
+    public string[] Tag(params string[] words)
     {
         return perceptronPOSTagger.tag(createInstance(words));
     }

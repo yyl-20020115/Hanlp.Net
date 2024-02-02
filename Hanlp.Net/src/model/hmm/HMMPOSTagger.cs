@@ -57,7 +57,7 @@ public class HMMPOSTagger : HMMTrainer , POSTagger
     }
 
     //@Override
-    public string[] tag(params string[] words)
+    public string[] Tag(params string[] words)
     {
         int[] obsArray = new int[words.Length];
         for (int i = 0; i < obsArray.Length; i++)
@@ -76,8 +76,8 @@ public class HMMPOSTagger : HMMTrainer , POSTagger
     }
 
     //@Override
-    public string[] tag(List<string> wordList)
+    public string[] Tag(List<string> wordList)
     {
-        return tag(wordList.ToArray());
+        return Tag(wordList.ToArray());
     }
 }

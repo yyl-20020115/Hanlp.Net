@@ -18,13 +18,13 @@ public class PerceptronSegmenterTest : TestCase
     [TestMethod]
     public void TestEmptyString() 
     {
-        segmenter.segment("");
+        segmenter.Segment("");
     }
     [TestMethod]
     public void TestNRF() 
     {
         String text = "他们确保了唐纳德·特朗普在总统大选中获胜。";
-        List<String> wordList = segmenter.segment(text);
+        List<String> wordList = segmenter.Segment(text);
         AssertTrue(wordList.Contains("唐纳德·特朗普"));
     }
     [TestMethod]

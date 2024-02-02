@@ -94,7 +94,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param wordList      储存单词列表
      * @param attributeList 储存用户词典中的词性，设为null表示不查询用户词典
      */
-    protected void segment(string sentence, string normalized, List<string> wordList, List<CoreDictionary.Attribute> attributeList)
+    protected void Segment(string sentence, string normalized, List<string> wordList, List<CoreDictionary.Attribute> attributeList)
     {
         if (attributeList != null)
         {
@@ -128,7 +128,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
     }
     //@Override
-    public void segment(string sentence, string normalized, List<string> wordList)
+    public void Segment(string sentence, string normalized, List<string> wordList)
     {
         if (config.useCustomDictionary)
         {
@@ -164,37 +164,34 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param sentence
      * @return
      */
-    public List<string> segment(string sentence)
+    public List<string> Segment(string sentence)
     {
-        return segment(sentence, CharTable.convert(sentence));
+        return Segment(sentence, CharTable.convert(sentence));
     }
 
     //@Override
-    public string[] recognize(string[] wordArray, string[] posArray)
+    public string[] Recognize(string[] wordArray, string[] posArray)
     {
-        return neRecognizer.recognize(wordArray, posArray);
+        return neRecognizer.Recognize(wordArray, posArray);
     }
 
     //@Override
-    public string[] tag(params string[] words)
+    public string[] Tag(params string[] words)
     {
-        return posTagger.tag(words);
+        return posTagger.Tag(words);
     }
 
     //@Override
-    public string[] tag(List<string> wordList)
+    public string[] Tag(List<string> wordList)
     {
-        return posTagger.tag(wordList);
+        return posTagger.Tag(wordList);
     }
 
     //@Override
-    public NERTagSet getNERTagSet()
-    {
-        return neRecognizer.getNERTagSet();
-    }
+    public NERTagSet GetNERTagSet() => neRecognizer.GetNERTagSet();
 
     //@Override
-    public Sentence analyze(string sentence)
+    public Sentence Analyze(string sentence)
     {
         if (sentence.Length==0)
         {
@@ -202,14 +199,14 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         }
         string normalized = CharTable.convert(sentence);
         List<string> wordList = new ();
-        List<CoreDictionary.Attribute> attributeList = segmentWithAttribute(sentence, normalized, wordList);
+        List<CoreDictionary.Attribute> attributeList = SegmentWithAttribute(sentence, normalized, wordList);
 
         string[] wordArray = new string[wordList.Count];
         int offset = 0;
         int id = 0;
         foreach (string word in wordList)
         {
-            wordArray[id] = normalized.substring(offset, offset + word.Length);
+            wordArray[id] = normalized.Substring(offset, word.Length);
             ++id;
             offset += word.Length;
         }
@@ -217,18 +214,18 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         List<IWord> termList = new (wordList.Count);
         if (posTagger != null)
         {
-            string[] posArray = tag(wordArray);
+            string[] posArray = Tag(wordArray);
             if (neRecognizer != null)
             {
-                string[] nerArray = neRecognizer.recognize(wordArray, posArray);
-                overwriteTag(attributeList, posArray);
+                string[] nerArray = neRecognizer.Recognize(wordArray, posArray);
+                OverwriteTag(attributeList, posArray);
                 wordList.ToArray(wordArray);
 
                 List<Word> result = new ();
                 result.Add(new Word(wordArray[0], posArray[0]));
                 string prePos = posArray[0];
 
-                NERTagSet tagSet = getNERTagSet();
+                NERTagSet tagSet = GetNERTagSet();
                 for (int i = 1; i < nerArray.Length; i++)
                 {
                     if (nerArray[i][0] == tagSet.B_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR || nerArray[i][0] == tagSet.O_TAG_CHAR)
@@ -253,7 +250,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             }
             else
             {
-                overwriteTag(attributeList, posArray);
+                OverwriteTag(attributeList, posArray);
                 wordArray = wordList.ToArray();
                 for (int i = 0; i < wordArray.Length; i++)
                 {
@@ -273,7 +270,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         return new Sentence(termList);
     }
 
-    private void overwriteTag(List<CoreDictionary.Attribute> attributeList, string[] posArray)
+    private void OverwriteTag(List<CoreDictionary.Attribute> attributeList, string[] posArray)
     {
         int id;
         if (attributeList != null)
@@ -295,10 +292,10 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param normalized
      * @return
      */
-    public List<string> segment( string sentence,  string normalized)
+    public List<string> Segment( string sentence,  string normalized)
     {
          List<string> wordList = new ();
-        segment(sentence, normalized, wordList);
+        Segment(sentence, normalized, wordList);
         return wordList;
     }
 
@@ -311,19 +308,16 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @return true 表示接受
      * @deprecated 自1.6.7起废弃，强制模式下为最长匹配，否则按分词结果合并
      */
-    protected bool acceptCustomWord(int begin, int end, CoreDictionary.Attribute value)
+    protected bool AcceptCustomWord(int begin, int end, CoreDictionary.Attribute value)
     {
         return config.forceCustomDictionary || (end - begin >= 4 && !value.hasNatureStartsWith("nr") && !value.hasNatureStartsWith("ns") && !value.hasNatureStartsWith("nt"));
     }
 
     //@Override
-    protected List<Term> roughSegSentence(char[] sentence)
-    {
-        return null;
-    }
+    protected List<Term> RoughSegSentence(char[] sentence) => null;
 
     //@Override
-    protected List<Term> segSentence(char[] sentence)
+    protected List<Term> SegSentences(char[] sentence)
     {
         if (sentence.Length == 0)
         {
@@ -334,7 +328,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
         string normalized = new string(sentence);
         List<string> wordList = new ();
         List<CoreDictionary.Attribute> attributeList;
-        attributeList = segmentWithAttribute(original, normalized, wordList);
+        attributeList = SegmentWithAttribute(original, normalized, wordList);
         List<Term> termList = new (wordList.Count);
         int offset = 0;
         foreach (string word in wordList)
@@ -357,7 +351,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     ++id;
                     offset += word.Length;
                 }
-                string[] posArray = tag(wordArray);
+                string[] posArray = Tag(wordArray);
                 IEnumerator<Term> iterator = termList.GetEnumerator();
                 IEnumerator<CoreDictionary.Attribute> attributeIterator = attributeList == null ? null : attributeList.GetEnumerator();
                 for (int i = 0; i < posArray.Length; i++)
@@ -383,7 +377,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         iterator = termList.GetEnumerator();
                     }
                     termList = new (termList.Count);
-                    string[] nerArray = recognize(wordArray, posArray);
+                    string[] nerArray = Recognize(wordArray, posArray);
                     wordArray = wordList.ToArray();
                     StringBuilder result = new StringBuilder();
                     result.Append(wordArray[0]);
@@ -396,7 +390,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
 
                     for (int i = 1; i < nerArray.Length; i++)
                     {
-                        NERTagSet tagSet = getNERTagSet();
+                        NERTagSet tagSet = GetNERTagSet();
                         if (nerArray[i][0] == tagSet.B_TAG_CHAR || nerArray[i][0] == tagSet.S_TAG_CHAR || nerArray[i][0] == tagSet.O_TAG_CHAR)
                         {
                             Term term = new Term(result.ToString(), Nature.create(prePos));
@@ -483,11 +477,11 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param preType
      * @param wordList
      */
-    private void pushPiece(string sentence, string normalized, int start, int end, byte preType, List<string> wordList)
+    private void PushPiece(string sentence, string normalized, int start, int end, byte preType, List<string> wordList)
     {
         if (preType == CharType.CT_CHINESE)
         {
-            segmenter.segment(sentence[start .. end], normalized[start .. end], wordList);
+            segmenter.Segment(sentence[start .. end], normalized[start .. end], wordList);
         }
         else
         {
@@ -506,7 +500,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
     {
         if (!_enableRuleBasedSegment)
         {
-            segmenter.segment(sentence, normalized, wordList);
+            segmenter.Segment(sentence, normalized, wordList);
             return;
         }
         int start = 0;
@@ -537,13 +531,13 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                         continue;
                     }
                 }
-                pushPiece(sentence, normalized, start, end, preType, wordList);
+                PushPiece(sentence, normalized, start, end, preType, wordList);
                 start = end;
             }
             preType = curType;
         }
         if (end == normalized.Length)
-            pushPiece(sentence, normalized, start, end, preType, wordList);
+            PushPiece(sentence, normalized, start, end, preType, wordList);
     }
 
     /**
@@ -554,7 +548,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param wordList
      * @return
      */
-    private List<CoreDictionary.Attribute> segmentWithAttribute(string original, string normalized, List<string> wordList)
+    private List<CoreDictionary.Attribute> SegmentWithAttribute(string original, string normalized, List<string> wordList)
     {
         List<CoreDictionary.Attribute> attributeList;
         if (config.useCustomDictionary)
@@ -562,12 +556,12 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
             if (config.forceCustomDictionary)
             {
                 attributeList = new ();
-                segment(original, normalized, wordList, attributeList);
+                Segment(original, normalized, wordList, attributeList);
             }
             else
             {
                 segmentAfterRule(original, normalized, wordList);
-                attributeList = combineWithCustomDictionary(wordList);
+                attributeList = CombineWithCustomDictionary(wordList);
             }
         }
         else
@@ -584,7 +578,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param vertexList 粗分结果
      * @return 合并后的结果
      */
-    protected static List<CoreDictionary.Attribute> combineWithCustomDictionary(List<string> vertexList)
+    protected static List<CoreDictionary.Attribute> CombineWithCustomDictionary(List<string> vertexList)
     {
         var wordNet= vertexList.ToArray();
         CoreDictionary.Attribute[] attributeArray = new CoreDictionary.Attribute[wordNet.Length];
@@ -613,7 +607,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                 }
                 if (value != null)
                 {
-                    combineWords(wordNet, i, end, attributeArray, value);
+                    CombineWords(wordNet, i, end, attributeArray, value);
                     i = end - 1;
                 }
             }
@@ -643,7 +637,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
                     }
                     if (value != null)
                     {
-                        combineWords(wordNet, i, end, attributeArray, value);
+                        CombineWords(wordNet, i, end, attributeArray, value);
                         i = end - 1;
                     }
                 }
@@ -670,7 +664,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param end     结束下标（不包含）
      * @param value   新的属性
      */
-    private static void combineWords(string[] wordNet, int start, int end, CoreDictionary.Attribute[] attributeArray, CoreDictionary.Attribute value)
+    private static void CombineWords(string[] wordNet, int start, int end, CoreDictionary.Attribute[] attributeArray, CoreDictionary.Attribute value)
     {
         if (start + 1 != end)   // 小优化，如果只有一个词，那就不需要合并，直接应用新属性
         {
@@ -692,7 +686,7 @@ public class AbstractLexicalAnalyzer : CharacterBasedSegment, LexicalAnalyzer
      * @param enableRuleBasedSegment 是否激活
      * @return 词法分析器对象
      */
-    public AbstractLexicalAnalyzer enableRuleBasedSegment(bool enableRuleBasedSegment)
+    public AbstractLexicalAnalyzer EnableRuleBasedSegment(bool enableRuleBasedSegment)
     {
         this._enableRuleBasedSegment = enableRuleBasedSegment;
         return this;

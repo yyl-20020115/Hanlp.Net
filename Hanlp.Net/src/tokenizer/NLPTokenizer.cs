@@ -78,7 +78,7 @@ public class NLPTokenizer
      */
     public static Sentence analyze(string sentence)
     {
-        return ANALYZER.analyze(sentence);
+        return ANALYZER.Analyze(sentence);
     }
 
     /**

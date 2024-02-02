@@ -33,13 +33,13 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     public void TestLearn() 
     {
         analyzer.learn("我/r 在/p 浙江/ns 金华/ns 出生/v");
-        AssertTrue(analyzer.analyze("我在浙江金华出生").ToString().Contains("金华/ns"));
-        AssertTrue(analyzer.analyze("我的名字叫金华").ToString().Contains("金华/nr"));
+        AssertTrue(analyzer.Analyze("我在浙江金华出生").ToString().Contains("金华/ns"));
+        AssertTrue(analyzer.Analyze("我的名字叫金华").ToString().Contains("金华/nr"));
     }
     [TestMethod]
     public void TestEmptyInput() 
     {
-        analyzer.segment("");
+        analyzer.Segment("");
         analyzer.seg("");
     }
     [TestMethod]
@@ -49,14 +49,14 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         AssertTrue(CustomDictionary.Contains("一字长蛇阵"));
         String text = "张飞摆出一字长蛇阵如入无人之境，孙权惊呆了";
 //        Console.WriteLine(analyzer.analyze(text));
-        AssertTrue(analyzer.analyze(text).ToString().Contains(" 一字长蛇阵/"));
+        AssertTrue(analyzer.Analyze(text).ToString().Contains(" 一字长蛇阵/"));
     }
     [TestMethod]
     public void testCustomNature() 
     {
         AssertTrue(CustomDictionary.insert("饿了么", "ntc 1"));
         analyzer.enableCustomDictionaryForcing(true);
-        AssertEquals("美团/n 与/p 饿了么/ntc 争夺/v 外卖/v 市场/n", analyzer.analyze("美团与饿了么争夺外卖市场").ToString());
+        AssertEquals("美团/n 与/p 饿了么/ntc 争夺/v 外卖/v 市场/n", analyzer.Analyze("美团与饿了么争夺外卖市场").ToString());
     }
     [TestMethod]
     public void testIndexMode() 
@@ -87,7 +87,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     {
         analyzer.enableCustomDictionary(false);
         String text = "來到美國紐約現代藝術博物館參觀?";
-        Sentence sentence = analyzer.analyze(text);
+        Sentence sentence = analyzer.Analyze(text);
 //        Console.WriteLine(sentence);
         AssertEquals("來到/v [美國/ns 紐約/ns 現代/t 藝術/n 博物館/n]/ns 參觀/v ?/w", sentence.ToString());
         List<Term> termList = analyzer.seg(text);
@@ -99,7 +99,7 @@ public class PerceptronLexicalAnalyzerTest : TestCase
     {
         CharTable.CONVERT[' '] = '!';
         CharTable.CONVERT['\t'] = '!';
-        Sentence sentence = analyzer.analyze("\"你好， 我想知道： 风是从哪里来; \t雷是从哪里来； 雨是从哪里来？\"");
+        Sentence sentence = analyzer.Analyze("\"你好， 我想知道： 风是从哪里来; \t雷是从哪里来； 雨是从哪里来？\"");
         foreach (IWord word in sentence)
         {
             if (!word.Label.Equals("w"))
@@ -116,15 +116,15 @@ public class PerceptronLexicalAnalyzerTest : TestCase
         CustomDictionary.insert("川普", "NRF 1");
 
         analyzer.enableCustomDictionaryForcing(false);
-        Console.WriteLine(analyzer.analyze(text));
+        Console.WriteLine(analyzer.Analyze(text));
 
         analyzer.enableCustomDictionaryForcing(true);
-        Console.WriteLine(analyzer.analyze(text));
+        Console.WriteLine(analyzer.Analyze(text));
     }
     [TestMethod]
     public void testRules() 
     {
-        analyzer.enableRuleBasedSegment(true);
-        Console.WriteLine(analyzer.analyze("これは微软公司於1975年由比爾·蓋茲和保羅·艾倫創立，18年啟動以智慧雲端、前端為導向的大改組。"));
+        analyzer.EnableRuleBasedSegment(true);
+        Console.WriteLine(analyzer.Analyze("これは微软公司於1975年由比爾·蓋茲和保羅·艾倫創立，18年啟動以智慧雲端、前端為導向的大改組。"));
     }
 }

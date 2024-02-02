@@ -28,7 +28,7 @@ public class CRFSegmenterTest : TestCase
     public void TestLoad() 
     {
         CRFSegmenter segmenter = new CRFSegmenter("data/test/converted.txt");
-        List<String> wordList = segmenter.segment("商品和服务");
+        List<String> wordList = segmenter.Segment("商品和服务");
         Console.WriteLine(wordList);
     }
     [TestMethod]

@@ -24,22 +24,23 @@ public class ByteArrayOtherStream : ByteArrayStream
     Stream @is;
 
     public ByteArrayOtherStream(byte[] bytes, int bufferSize)
+        : base(bytes, bufferSize)
     {
-        base(bytes, bufferSize);
+      
     }
 
     public ByteArrayOtherStream(byte[] bytes, int bufferSize, Stream @is)
+        : base(bytes, bufferSize)
     {
-        base(bytes, bufferSize);
         this.@is = @is;
     }
 
-    public static ByteArrayOtherStream createByteArrayOtherStream(string path)
+    public static ByteArrayOtherStream CreateByteArrayOtherStream(string path)
     {
         try
         {
             Stream @is = IOAdapter == null ? new FileStream(path) : IOAdapter.open(path);
-            return createByteArrayOtherStream(@is);
+            return CreateByteArrayOtherStream(@is);
         }
         catch (Exception e)
         {
@@ -48,7 +49,7 @@ public class ByteArrayOtherStream : ByteArrayStream
         }
     }
 
-    public static ByteArrayOtherStream createByteArrayOtherStream(Stream @is) 
+    public static ByteArrayOtherStream CreateByteArrayOtherStream(Stream @is)
     {
         if (@is == null) return null;
         int size = @is.available();
@@ -63,7 +64,7 @@ public class ByteArrayOtherStream : ByteArrayStream
     }
 
     //@Override
-    protected void ensureAvailableBytes(int size)
+    protected void EnsureAvailableBytes(int size)
     {
         if (offset + size > bufferSize)
         {

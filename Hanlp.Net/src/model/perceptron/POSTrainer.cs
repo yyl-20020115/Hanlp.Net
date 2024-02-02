@@ -13,6 +13,7 @@ using com.hankcs.hanlp.dependency.nnparser;
 using com.hankcs.hanlp.model.perceptron.feature;
 using com.hankcs.hanlp.model.perceptron.instance;
 using com.hankcs.hanlp.model.perceptron.tagset;
+using System.Diagnostics.Tracing;
 
 namespace com.hankcs.hanlp.model.perceptron;
 
@@ -36,9 +37,9 @@ public class POSTrainer : PerceptronTrainer
     }
 
     //@Override
-    public Result train(string trainingFile, string developFile, string modelFile) 
+    public Result Train(string trainingFile, string developFile, string modelFile) 
     {
         // 词性标注模型压缩会显著降低效果
-        return train(trainingFile, developFile, modelFile, 0, 10, Runtime.getRuntime().availableProcessors());
+        return Train(trainingFile, developFile, modelFile, 0, 10, 0);
     }
 }

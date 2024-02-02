@@ -49,7 +49,7 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
         else
         {
             perceptronNERecognizer = new PerceptronNERecognizer(this.model);
-            tagSet = perceptronNERecognizer.getNERTagSet();
+            tagSet = perceptronNERecognizer.GetNERTagSet();
         }
     }
 
@@ -76,13 +76,13 @@ public class CRFNERecognizer : CRFTagger , NERecognizer
     }
 
     //@Override
-    public string[] recognize(string[] wordArray, string[] posArray)
+    public string[] Recognize(string[] wordArray, string[] posArray)
     {
         return perceptronNERecognizer.recognize(createInstance(wordArray, posArray));
     }
 
     //@Override
-    public NERTagSet getNERTagSet()
+    public NERTagSet GetNERTagSet()
     {
         return tagSet;
     }

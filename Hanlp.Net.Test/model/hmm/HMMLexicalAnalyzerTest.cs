@@ -16,6 +16,6 @@ public class HMMLexicalAnalyzerTest : TestCase
         HMMNERecognizer recognizer = new HMMNERecognizer();
         recognizer.train(CORPUS_PATH);
         HMMLexicalAnalyzer analyzer = new HMMLexicalAnalyzer(segmenter, tagger, recognizer);
-        Console.WriteLine(analyzer.analyze("我的希望是希望人们幸福"));
+        Console.WriteLine(analyzer.Analyze("我的希望是希望人们幸福"));
     }
 }

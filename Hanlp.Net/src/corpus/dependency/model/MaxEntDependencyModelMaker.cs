@@ -31,7 +31,7 @@ public class MaxEntDependencyModelMaker
         foreach (CoNLLSentence sentence in sentenceList)
         {
             Console.WriteLine("%d / %d...", id++, sentenceList.Count);
-            string[][] edgeArray = sentence.getEdgeArray();
+            string[][] edgeArray = sentence.GetEdgeArray();
             CoNLLWord[] word = sentence.getWordArrayWithRoot();
             for (int i = 0; i < word.Length; ++i)
             {

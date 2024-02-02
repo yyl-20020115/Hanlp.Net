@@ -24,7 +24,7 @@ public interface POSTagger
      * @param words 单词
      * @return 词性数组
      */
-    string[] tag(params string[] words);
+    string[] Tag(params string[] words);
 
     /**
      * 词性标注
@@ -32,5 +32,5 @@ public interface POSTagger
      * @param wordList 单词
      * @return 词性数组
      */
-    string[] tag(List<string> wordList);
+    string[] Tag(List<string> wordList);
 }

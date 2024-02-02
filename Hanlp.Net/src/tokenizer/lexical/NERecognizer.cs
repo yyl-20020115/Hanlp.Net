@@ -27,7 +27,7 @@ public interface NERecognizer
      * @param posArray  词性
      * @return BMES-NER标签
      */
-    string[] recognize(string[] wordArray, string[] posArray);
+    string[] Recognize(string[] wordArray, string[] posArray);
 
-    NERTagSet getNERTagSet();
+    NERTagSet GetNERTagSet();
 }

@@ -85,7 +85,7 @@ public class Main
             }
             if (option.train)
             {
-                trainer.train(option.reference, option.development, option.model[0], option.compressRatio,
+                trainer.Train(option.reference, option.development, option.model[0], option.compressRatio,
                               option.iter, option.thread);
             }
             else if (option.evaluate)
@@ -138,7 +138,7 @@ public class Main
                 {
                     line = line.Trim();
                     if (line.Length == 0) continue;
-                    Sentence sentence = analyzer.analyze(line);
+                    Sentence sentence = analyzer.Analyze(line);
                     printer.Write(sentence.ToString());
                     printer.Write(lineSeparator);
                     if (option.result == null)

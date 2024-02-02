@@ -9,6 +9,6 @@ public class PerceptronTaggerTest : TestCase
     public void TestEmptyInput() 
     {
         PerceptronPOSTagger tagger = new PerceptronPOSTagger();
-        tagger.tag(new List<String>());
+        tagger.Tag(new List<String>());
     }
 }

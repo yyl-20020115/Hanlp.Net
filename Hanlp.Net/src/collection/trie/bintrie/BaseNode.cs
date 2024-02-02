@@ -274,7 +274,7 @@ public abstract class BaseNode<V> : IComparable<BaseNode<V>>
            ;
         }
         //@Override
-        public int compareTo(TrieEntry o)
+        public int CompareTo(TrieEntry o)
         {
             return Key.CompareTo(o.Key);
         }

@@ -381,7 +381,7 @@ public class Utility
         Dictionary<string, double[]> scores = new Dictionary<string, double[]>();
         double[] avg = new double[] { 0, 0, 0 };
         scores.Add("avg.", avg);
-        NERTagSet tagSet = recognizer.getNERTagSet();
+        NERTagSet tagSet = recognizer.GetNERTagSet();
         IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(goldFile);
         foreach (string line_ in lineIterator)
         {
@@ -390,7 +390,7 @@ public class Utility
             Sentence sentence = Sentence.create(line);
             if (sentence == null) continue;
             string[][] table = reshapeNER(convertSentenceToNER(sentence, tagSet));
-            HashSet<string> pred = combineNER(recognizer.recognize(table[0], table[1]), tagSet);
+            HashSet<string> pred = combineNER(recognizer.Recognize(table[0], table[1]), tagSet);
             HashSet<string> gold = combineNER(table[2], tagSet);
             foreach (string p in pred)
             {

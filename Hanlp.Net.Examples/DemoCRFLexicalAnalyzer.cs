@@ -34,7 +34,7 @@ public class DemoCRFLexicalAnalyzer : TestUtility
         };
         foreach (String sentence in tests)
         {
-            Console.WriteLine(analyzer.analyze(sentence));
+            Console.WriteLine(analyzer.Analyze(sentence));
 //            Console.WriteLine(analyzer.seg(sentence));
         }
     }

@@ -24,6 +24,6 @@ public interface Segmenter
      * @param text 文本
      * @return 词语
      */
-    List<string> segment(string text);
-    void segment(string text, string normalized, List<string> output);
+    List<string> Segment(string text);
+    void Segment(string text, string normalized, List<string> output);
 }

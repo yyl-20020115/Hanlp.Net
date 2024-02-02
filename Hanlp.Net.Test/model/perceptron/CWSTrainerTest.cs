@@ -16,7 +16,7 @@ public class CWSTrainerTest : TestCase
     {
         HanLP.Config.enableDebug();
         PerceptronTrainer trainer = new CWSTrainer();
-        PerceptronTrainer.Result result = trainer.train(
+        PerceptronTrainer.Result result = trainer.Train(
                 "data/test/pku98/199801.txt",
                 Config.CWS_MODEL_FILE
         );
@@ -24,7 +24,7 @@ public class CWSTrainerTest : TestCase
         PerceptronSegmenter segmenter = new PerceptronSegmenter(result.model);
         // 也可以用
 //        Segment segmenter = new AveragedPerceptronSegment(POS_MODEL_FILE);
-        Console.WriteLine(segmenter.segment("商品和服务?"));
+        Console.WriteLine(segmenter.Segment("商品和服务?"));
     }
 
     [TestMethod]
@@ -32,7 +32,7 @@ public class CWSTrainerTest : TestCase
     {
         PerceptronSegmenter segmenter = new PerceptronSegmenter(Config.CWS_MODEL_FILE);
         segmenter.learn("下雨天 地面 积水");
-        Console.WriteLine(segmenter.segment("下雨天地面积水分外严重"));
+        Console.WriteLine(segmenter.Segment("下雨天地面积水分外严重"));
     }
 
     [TestMethod]
@@ -45,7 +45,7 @@ public class CWSTrainerTest : TestCase
     public void TestCWSandPOSandNER() 
     {
         PerceptronLexicalAnalyzer segmenter = new PerceptronLexicalAnalyzer(Config.CWS_MODEL_FILE, Config.POS_MODEL_FILE, Config.NER_MODEL_FILE);
-        Sentence sentence = segmenter.analyze(SENTENCE);
+        Sentence sentence = segmenter.Analyze(SENTENCE);
         Console.WriteLine(sentence);
         Console.WriteLine(segmenter.seg(SENTENCE));
         foreach(IWord word in sentence)

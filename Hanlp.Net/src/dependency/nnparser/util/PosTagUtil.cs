@@ -209,7 +209,7 @@ public class PosTagUtil
             Sentence sentence = Sentence.create(line);
             if (sentence == null) continue;
             string[][] wordTagArray = sentence.toWordTagArray();
-            string[] prediction = tagger.tag(wordTagArray[0]);
+            string[] prediction = tagger.Tag(wordTagArray[0]);
             //assert prediction.Length == wordTagArray[1].Length;
             total += prediction.Length;
             for (int i = 0; i < prediction.Length; i++)

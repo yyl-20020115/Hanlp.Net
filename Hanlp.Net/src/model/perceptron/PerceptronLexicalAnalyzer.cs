@@ -110,7 +110,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
     public void segment(string text, List<string> output)
     {
         string normalized = CharTable.convert(text);
-        segment(text, normalized, output);
+        Segment(text, normalized, output);
     }
 
     /**
@@ -125,7 +125,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
         {
             throw new ArgumentException("未提供词性标注模型");
         }
-        return tag(wordList);
+        return Tag(wordList);
     }
 
     /**
@@ -141,7 +141,7 @@ public class PerceptronLexicalAnalyzer : AbstractLexicalAnalyzer
         {
             throw new ArgumentException("未提供命名实体识别模型");
         }
-        return recognize(wordArray, posArray);
+        return Recognize(wordArray, posArray);
     }
 
     /**

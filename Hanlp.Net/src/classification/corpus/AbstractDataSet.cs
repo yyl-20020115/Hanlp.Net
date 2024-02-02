@@ -162,8 +162,5 @@ public abstract class AbstractDataSet : IDataSet
     public abstract IDataSet Shrink(int[] idMap);
     public abstract IEnumerator<Document> GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        throw new NotImplementedException();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 }

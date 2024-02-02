@@ -19,6 +19,6 @@ public class DemoTrainPOS
     public static void Main(String[] args)
     {
         PerceptronTrainer trainer = new POSTrainer();
-        trainer.train("data/test/pku98/199801.txt", Config.POS_MODEL_FILE);
+        trainer.Train("data/test/pku98/199801.txt", Config.POS_MODEL_FILE);
     }
 }

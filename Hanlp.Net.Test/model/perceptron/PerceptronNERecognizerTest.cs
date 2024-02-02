@@ -8,6 +8,6 @@ public class PerceptronNERecognizerTest : TestCase
     public void TestEmptyInput() 
     {
         PerceptronNERecognizer recognizer = new PerceptronNERecognizer();
-        recognizer.recognize(new String[0], new String[0]);
+        recognizer.Recognize(new String[0], new String[0]);
     }
 }

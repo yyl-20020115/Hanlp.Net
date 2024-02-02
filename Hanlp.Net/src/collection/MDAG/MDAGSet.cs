@@ -9,6 +9,8 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
+using System.Collections;
+
 namespace com.hankcs.hanlp.collection.MDAG;
 
 
@@ -38,10 +40,7 @@ public class MDAGSet : MDAG , ISet<string>
     //@Override
     public int Count => getAllStrings().Count;
     //@Override
-    public bool isEmpty()
-    {
-        return this.equivalenceClassMDAGNodeHashMap.Count != 0;
-    }
+    public bool IsEmpty => this.equivalenceClassMDAGNodeHashMap.Count != 0;
 
     //@Override
     public bool Contains(Object o)
@@ -90,7 +89,7 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public bool containsAll(ICollection c)
+    public bool ContainsAll(ICollection c)
     {
         foreach (Object e in c)
             if (!Contains(e))
@@ -109,7 +108,7 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public bool retainAll<T>(ICollection<T> c)
+    public bool RetainAll<T>(ICollection<T> c)
     {
         bool modified = false;
         IEnumerator<string> it = GetEnumerator();
@@ -125,7 +124,7 @@ public class MDAGSet : MDAG , ISet<string>
     }
 
     //@Override
-    public bool removeAll<T>(ICollection<T> c)
+    public bool RemoveAll<T>(ICollection<T> c)
     {
         bool modified = false;
         IEnumerator it = GetEnumerator();

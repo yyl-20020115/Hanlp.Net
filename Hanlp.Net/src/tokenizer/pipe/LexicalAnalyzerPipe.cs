@@ -43,7 +43,7 @@ public class LexicalAnalyzerPipe : Pipe<List<IWord>, List<IWord>>
                 continue; // 这是别的管道已经处理过的单词，跳过
             listIterator.Remove(); // 否则是句子
             string sentence = wordOrSentence.Value;
-            foreach (IWord word in analyzer.analyze(sentence))
+            foreach (IWord word in analyzer.Analyze(sentence))
             {
                 listIterator.Add(word);
             }

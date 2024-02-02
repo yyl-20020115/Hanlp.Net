@@ -11,29 +11,29 @@ public class CacheCorpus : Corpus
     private RandomAccessFile raf;
 
     public CacheCorpus(Corpus cloneSrc) 
+        : base(cloneSrc)
     {
-        base(cloneSrc);
         raf = new RandomAccessFile(((TextFileCorpus) cloneSrc).cacheFile, "r");
     }
 
     //@Override
-    public string nextWord() 
+    public string NextWord() 
     {
         return null;
     }
 
     //@Override
-    public int readWordIndex() 
+    public int ReadWordIndex() 
     {
-        int id = nextId();
+        int id = NextId();
         while (id == -4)
         {
-            id = nextId();
+            id = NextId();
         }
         return id;
     }
 
-    private int nextId() 
+    private int NextId() 
     {
         if (raf.Length - raf.getFilePointer() >= 4)
         {
@@ -45,7 +45,7 @@ public class CacheCorpus : Corpus
     }
 
     //@Override
-    public void rewind(int numThreads, int id) 
+    public void Rewind(int numThreads, int id) 
     {
         base.rewind(numThreads, id);
         raf.seek(raf.Length / 4 / numThreads * id * 4);   // spilt by id, not by bytes

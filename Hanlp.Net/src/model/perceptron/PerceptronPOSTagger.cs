@@ -56,7 +56,7 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
      * @return
      */
     //@Override
-    public string[] tag(params string[] words)
+    public string[] Tag(params string[] words)
     {
         POSInstance instance = new POSInstance(words, model.featureMap);
         return tag(instance);
@@ -77,11 +77,11 @@ public class PerceptronPOSTagger : PerceptronTagger , POSTagger
      * @return
      */
     //@Override
-    public string[] tag(List<string> wordList)
+    public string[] Tag(List<string> wordList)
     {
         string[] termArray = new string[wordList.Count];
         wordList.ToArray(termArray);
-        return tag(termArray);
+        return Tag(termArray);
     }
 
     /**

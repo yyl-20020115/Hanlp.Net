@@ -54,7 +54,7 @@ public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
     {
     }
 
-    public string[] recognize(string[] wordArray, string[] posArray)
+    public string[] Recognize(string[] wordArray, string[] posArray)
     {
         NERInstance instance = new NERInstance(wordArray, posArray, model.featureMap);
         return recognize(instance);
@@ -69,7 +69,7 @@ public class PerceptronNERecognizer : PerceptronTagger , NERecognizer
     }
 
     //@Override
-    public NERTagSet getNERTagSet()
+    public NERTagSet GetNERTagSet()
     {
         return tagSet;
     }

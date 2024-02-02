@@ -61,10 +61,10 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
     public void segment(string text, List<string> output)
     {
         string normalized = normalize(text);
-        segment(text, normalized, output);
+        Segment(text, normalized, output);
     }
 
-    public void segment(string text, string normalized, List<string> output)
+    public void Segment(string text, string normalized, List<string> output)
     {
         if (text.isEmpty()) return;
         Instance instance = new CWSInstance(normalized, model.featureMap);
@@ -94,7 +94,7 @@ public class PerceptronSegmenter : PerceptronTagger , Segmenter
         }
     }
 
-    public List<string> segment(string sentence)
+    public List<string> Segment(string sentence)
     {
         List<string> result = new ();
         segment(sentence, result);

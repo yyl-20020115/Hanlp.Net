@@ -22,7 +22,7 @@ public class DemoTrainNER
     public static void Main(String[] args)
     {
         PerceptronTrainer trainer = new NERTrainer();
-        trainer.train("data/test/pku98/199801.txt", Config.NER_MODEL_FILE);
+        trainer.Train("data/test/pku98/199801.txt", Config.NER_MODEL_FILE);
     }
 
     public static void trainYourNER()

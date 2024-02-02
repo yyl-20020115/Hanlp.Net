@@ -63,7 +63,7 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
      * @param termList 句子，可以是任何具有词性标注功能的分词器的分词结果
      * @return CoNLL格式的依存句法树
      */
-    public static CoNLLSentence compute(List<Term> termList)
+    public static CoNLLSentence Compute(List<Term> termList)
     {
         return new MaxEntDependencyParser().parse(termList);
     }
@@ -74,13 +74,13 @@ public class MaxEntDependencyParser : MinimumSpanningTreeParser
      * @param sentence 句子
      * @return CoNLL格式的依存句法树
      */
-    public static CoNLLSentence compute(string sentence)
+    public static CoNLLSentence Compute(string sentence)
     {
         return new MaxEntDependencyParser().Parse(sentence);
     }
 
     //@Override
-    protected Edge makeEdge(Node[] nodeArray, int from, int to)
+    protected Edge MakeEdge(Node[] nodeArray, int from, int to)
     {
         LinkedList<string> context = new LinkedList<string>();
         int index = from;

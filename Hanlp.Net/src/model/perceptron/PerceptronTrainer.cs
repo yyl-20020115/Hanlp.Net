@@ -59,7 +59,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
          *
          * @return
          */
-        public double getAccuracy()
+        public double GetAccuracy()
         {
             if (prf.Length == 3)
             {
@@ -73,10 +73,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
          *
          * @return
          */
-        public LinearModel getModel()
-        {
-            return model;
-        }
+        public LinearModel Model => model;
     }
 
     /**
@@ -98,7 +95,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
      * @return 一个包含模型和精度的结构
      * @
      */
-    public Result train(string trainingFile, string developFile,
+    public Result Train(string trainingFile, string developFile,
                         string modelFile,  double compressRatio,
                          int maxIteration,  int threadNum) 
     {
@@ -111,7 +108,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         MutableFeatureMap mutableFeatureMap = new MutableFeatureMap(tagSet);
         ConsoleLogger logger = new ConsoleLogger();
         logger.Start("开始加载训练集...\n");
-        Instance[] instances = loadTrainInstances(trainingFile, mutableFeatureMap);
+        Instance[] instances = LoadTrainInstances(trainingFile, mutableFeatureMap);
         tagSet._lock();
         logger.Finish("\n加载完毕，实例一共%d句，特征总数%d\n", instances.Length, mutableFeatureMap.Count * tagSet.Count);
 
@@ -154,13 +151,13 @@ public abstract class PerceptronTrainer : InstanceConsumer
                 // 在开发集上校验
                 accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
                 _out.printf("Iter#%d - ", iter);
-                printAccuracy(accuracy);
+                PrintAccuracy(accuracy);
             }
             // 平均
             model.average(total, timestamp, current);
             accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, model) : evaluate(developFile, model);
             _out.print("AP - ");
-            printAccuracy(accuracy);
+            PrintAccuracy(accuracy);
             logger.Start("以压缩比 %.2f 保存模型到 %s ... ", compressRatio, modelFile);
             model.save(modelFile, immutableFeatureMap.featureIdMap.entrySet(), compressRatio);
             logger.Finish(" 保存完毕\n");
@@ -203,9 +200,9 @@ public abstract class PerceptronTrainer : InstanceConsumer
                     }
                     accuracy = trainingFile.Equals(developFile) ? IOUtility.evaluate(instances, models[0]) : evaluate(developFile, models[0]);
                     _out.printf("Iter#%d - ", iter);
-                    printAccuracy(accuracy);
+                    PrintAccuracy(accuracy);
                 }
-                catch (InterruptedException e)
+                catch (Exception e)
                 {
                     err.printf("线程同步异常，训练失败\n");
                     //e.printStackTrace();
@@ -223,13 +220,13 @@ public abstract class PerceptronTrainer : InstanceConsumer
         {
             accuracy = evaluate(developFile, model);
             _out.printf("\n%.2f compressed model - ", compressRatio);
-            printAccuracy(accuracy);
+            PrintAccuracy(accuracy);
         }
 
         return new Result(model, accuracy);
     }
 
-    private void printAccuracy(double[] accuracy)
+    private void PrintAccuracy(double[] accuracy)
     {
         if (accuracy.Length == 3)
         {
@@ -241,7 +238,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
     }
 
-    private class TrainingWorker : Thread
+    private class TrainingWorker// : Thread
     {
         private Instance[] instances;
         private int start;
@@ -268,7 +265,7 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
     }
 
-    protected Instance[] loadTrainInstances(string trainingFile,  MutableFeatureMap mutableFeatureMap) 
+    protected Instance[] LoadTrainInstances(string trainingFile,  MutableFeatureMap mutableFeatureMap) 
     {
         List<Instance> instanceList = new ();
         IOUtility.loadInstance(trainingFile, new Ins());
@@ -287,18 +284,18 @@ public abstract class PerceptronTrainer : InstanceConsumer
         }
     }
 
-    private static DoubleArrayTrie<int> loadDictionary(string trainingFile, string dictionaryFile) 
+    private static DoubleArrayTrie<int> LoadDictionary(string trainingFile, string dictionaryFile) 
     {
         FrequencyMap dictionaryMap = new FrequencyMap();
         if (dictionaryFile == null)
         {
             _out.printf("从训练文件%s中统计词库...\n", trainingFile);
-            loadWordFromFile(trainingFile, dictionaryMap, true);
+            LoadWordFromFile(trainingFile, dictionaryMap, true);
         }
         else
         {
             _out.printf("从外部词典%s中加载词库...\n", trainingFile);
-            loadWordFromFile(dictionaryFile, dictionaryMap, false);
+            LoadWordFromFile(dictionaryFile, dictionaryMap, false);
         }
         DoubleArrayTrie<int> dat = new DoubleArrayTrie<int>();
         dat.build(dictionaryMap);
@@ -307,17 +304,17 @@ public abstract class PerceptronTrainer : InstanceConsumer
         return dat;
     }
 
-    public Result train(string trainingFile, string modelFile) 
+    public Result Train(string trainingFile, string modelFile) 
     {
-        return train(trainingFile, trainingFile, modelFile);
+        return Train(trainingFile, trainingFile, modelFile);
     }
 
-    public Result train(string trainingFile, string developFile, string modelFile) 
+    public Result Train(string trainingFile, string developFile, string modelFile) 
     {
         return train(trainingFile, developFile, modelFile, 0.1, 50, Runtime.getRuntime().availableProcessors());
     }
 
-    private static void loadWordFromFile(string path, FrequencyMap storage, bool segmented) 
+    private static void LoadWordFromFile(string path, FrequencyMap storage, bool segmented) 
     {
         TextReader br = IOUtility.newBufferedReader(path);
         string line;

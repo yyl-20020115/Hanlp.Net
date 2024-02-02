@@ -80,16 +80,16 @@ public class CRFSegmenter : CRFTagger , Segmenter
         }
     }
 
-    public List<string> segment(string text)
+    public List<string> Segment(string text)
     {
         List<string> wordList = new ();
-        segment(text, CharTable.convert(text), wordList);
+        Segment(text, CharTable.convert(text), wordList);
 
         return wordList;
     }
 
     //@Override
-    public void segment(string text, string normalized, List<string> wordList)
+    public void Segment(string text, string normalized, List<string> wordList)
     {
         perceptronSegmenter.segment(text, createInstance(normalized), wordList);
     }
