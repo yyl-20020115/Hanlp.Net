@@ -197,7 +197,7 @@ public class HanLP
          */
         public static IIOAdapter IOAdapter;
 
-        static HanLP()
+        static void HanLP()
         {
             // 自动读取配置
             //Properties p = new Properties();
@@ -251,7 +251,7 @@ public class HanLP
                         int lastSplash = pathArray[i].LastIndexOf('/');
                         if (lastSplash != -1)
                         {
-                            prePath = pathArray[i].substring(0, lastSplash + 1);
+                            prePath = pathArray[i].Substring(0, lastSplash + 1);
                         }
                     }
                 }
@@ -311,9 +311,9 @@ public class HanLP
             }
             catch (Exception e)
             {
-                if (new File("data/dictionary/CoreNatureDictionary.tr.txt").isFile())
+                if (File.Exists("data/dictionary/CoreNatureDictionary.tr.txt"))
                 {
-                    logger.info("使用当前目录下的data");
+                    logger.Info("使用当前目录下的data");
                 }
                 else
                 {
@@ -327,7 +327,7 @@ public class HanLP
                         string classPath = (string) System.getProperties().get("java.class.path");
                         if (classPath != null)
                         {
-                            foreach (string path in classPath.Split(File.pathSeparator))
+                            foreach (string path in classPath.Split(Path.PathSeparator))
                             {
                                 if (new File(path).isDirectory())
                                 {

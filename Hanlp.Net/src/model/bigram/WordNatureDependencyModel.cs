@@ -189,7 +189,7 @@ public class WordNatureDependencyModel
         return get(from + "@" + to);
     }
 
-    class Attribute
+    public class Attribute
     {
         public static Attribute NULL = new Attribute("未知", 10000.0f);
         /**

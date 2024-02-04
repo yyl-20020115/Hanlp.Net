@@ -112,10 +112,10 @@ public class Predefine
     /**
      * 日志组件
      */
-    public static ILogger logger = Logger.getLogger("HanLP");
+    public static ILogger logger = Logger.GetLogger("HanLP");
     static Predefine()
     {
-        logger.setLevel(Level.WARNING);
+        logger.SetLevel(Level.WARNING);
     }
 
     /**

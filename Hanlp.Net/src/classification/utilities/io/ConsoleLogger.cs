@@ -16,7 +16,7 @@ namespace com.hankcs.hanlp.classification.utilities.io;
  *
  * @author hankcs
  */
-public class ConsoleLogger : ILogger
+public class ConsoleLogger :Logger, ILogger
 {
     /**
      * 默认日志
@@ -43,5 +43,11 @@ public class ConsoleLogger : ILogger
     public void Finish(string Format, params Object[] args)
     {
         Out(string.Format("耗时 %d ms", (DateTime.Now.Microsecond - _start) + Format, args));
+    }
+
+    private Level level;
+    public void SetLevel(Level level)
+    {
+       this.level = level;
     }
 }

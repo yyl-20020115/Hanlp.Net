@@ -75,7 +75,8 @@ public class FMeasure : Serializable
          int w = 6;
          var sb = new StringBuilder(10000);
 
-        Printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n".Replace('*', (char)(w-(int)'0'), "P", "R", "F1", "A", ""));
+        Printf(sb, "%*s\t%*s\t%*s\t%*s\t%*s%n"
+            .Replace('*', (char)(w-(int)'0')), "P", "R", "F1", "A", "");
         for (int i = 0; i < catalog.Length; i++)
         {
             Printf(sb, ("%*.2f\t%*.2f\t%*.2f\t%*.2f\t%"+l+"s%n").Replace('*', (char)(w-(int)'0')),

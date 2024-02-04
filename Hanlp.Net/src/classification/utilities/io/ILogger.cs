@@ -11,6 +11,11 @@
  */
 namespace com.hankcs.hanlp.classification.utilities.io;
 
+public enum Level
+{
+    WARNING,
+    Error
+}
 /**
  * 一个简单的日志接口
  * @author hankcs
@@ -21,4 +26,39 @@ public interface ILogger
     void Err(string Format, params Object[] args);
     void Start(string Format, params Object[] args);
     void Finish(string Format, params Object[] args);
+
+    void SetLevel(Level level);
+}
+
+public class Logger : ILogger
+{
+    public static Logger GetLogger(string name)
+    {
+        return new Logger();
+    }
+
+    public virtual void Err(string Format, params object[] args)
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void Finish(string Format, params object[] args)
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void Out(string Format, params object[] args)
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void SetLevel(Level level)
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void Start(string Format, params object[] args)
+    {
+        throw new NotImplementedException();
+    }
 }

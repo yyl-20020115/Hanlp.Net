@@ -87,7 +87,7 @@ public class CollectionUtility
         {
             string[][] array = SpiltArray(entry.Value, rate);
             output.Add(entry.Key, array[0]);
-            entry.setValue(array[1]);
+            entry.SetValue(array[1]);
         }
 
         return output;

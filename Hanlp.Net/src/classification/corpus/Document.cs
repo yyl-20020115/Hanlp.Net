@@ -86,6 +86,7 @@ public class Document : BagOfWordsDocument
     public Document(Stream _in) 
     {
         category = _in.readInt();
+       
         int size = _in.readInt();
         tfMap = new FrequencyMap<int>();
         for (int i = 0; i < size; i++)

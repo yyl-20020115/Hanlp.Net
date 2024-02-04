@@ -674,10 +674,10 @@ public class TextUtility
 
     public static string join(IEnumerator<string> s, string delimiter)
     {
-        IEnumerator<CharSequence> iter = s.GetEnumerator();
+        IEnumerator<char> iter = s.GetEnumerator();
         if (!iter.MoveNext()) return "";
-        StringBuilder buffer = new StringBuilder(iter.next());
-        while (iter.MoveNext()) buffer.Append(delimiter).Append(iter.next());
+        StringBuilder buffer = new StringBuilder(iter.Current);
+        while (iter.MoveNext()) buffer.Append(delimiter).Append(iter.Current);
         return buffer.ToString();
     }
 

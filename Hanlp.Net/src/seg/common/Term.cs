@@ -67,7 +67,7 @@ public class Term
      */
     public int getFrequency()
     {
-        return LexiconUtility.getFrequency(word);
+        return LexiconUtility.GetFrequency(word);
     }
 
 

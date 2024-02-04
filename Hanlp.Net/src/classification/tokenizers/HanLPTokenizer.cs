@@ -26,18 +26,23 @@ public class HanLPTokenizer : ITokenizer
         char[] charArray = text.ToCharArray();
         List<Term> termList = NotionalTokenizer.segment(charArray);
         IEnumerator<Term> listIterator = termList.GetEnumerator();
+        List<Term> result = new List<Term>();
         while (listIterator.MoveNext())
         {
             Term term = listIterator.Current;
             if (term.word.IndexOf('\u0000') >= 0)
             {
                 //TODO:
-                listIterator.Remove();
+                //listIterator.Remove();
+            }
+            else
+            {
+                result.Add(term);
             }
         }
-        string[] termArray = new string[termList.Count];
+        string[] termArray = new string[result.Count];
         int p = -1;
-        foreach (Term term in termList)
+        foreach (Term term in result)
         {
             termArray[++p] = term.word;
         }

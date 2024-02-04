@@ -30,7 +30,7 @@ public class LexiconUtility
      * @param word 单词
      * @return 包含词性与频次的信息
      */
-    public static CoreDictionary.Attribute getAttribute(string word)
+    public static CoreDictionary.Attribute GetAttribute(string word)
     {
         CoreDictionary.Attribute attribute = CoreDictionary.get(word);
         if (attribute != null) return attribute;
@@ -44,7 +44,7 @@ public class LexiconUtility
      */
     public static bool Contains(string word)
     {
-        return getAttribute(word) != null;
+        return GetAttribute(word) != null;
     }
 
     /**
@@ -53,9 +53,9 @@ public class LexiconUtility
      * @param term 单词
      * @return 包含词性与频次的信息
      */
-    public static CoreDictionary.Attribute getAttribute(Term term)
+    public static CoreDictionary.Attribute GetAttribute(Term term)
     {
-        return getAttribute(term.word);
+        return GetAttribute(term.word);
     }
 
     /**
@@ -63,9 +63,9 @@ public class LexiconUtility
      * @param word
      * @return
      */
-    public static int getFrequency(string word)
+    public static int GetFrequency(string word)
     {
-        CoreDictionary.Attribute attribute = getAttribute(word);
+        CoreDictionary.Attribute attribute = GetAttribute(word);
         if (attribute == null) return 0;
         return attribute.totalFrequency;
     }
@@ -76,7 +76,7 @@ public class LexiconUtility
      * @param attribute
      * @return
      */
-    public static bool setAttribute(string word, CoreDictionary.Attribute attribute)
+    public static bool SetAttribute(string word, CoreDictionary.Attribute attribute)
     {
         if (attribute == null) return false;
 
@@ -96,13 +96,13 @@ public class LexiconUtility
      * @param natures
      * @return
      */
-    public static bool setAttribute(string word, params Nature[] natures)
+    public static bool SetAttribute(string word, params Nature[] natures)
     {
         if (natures == null) return false;
 
         CoreDictionary.Attribute attribute = new CoreDictionary.Attribute(natures, new int[natures.Length]);
         System.Array.Fill(attribute.frequency, 1);
-        return setAttribute(word, attribute);
+        return SetAttribute(word, attribute);
     }
 
     /**
@@ -111,7 +111,7 @@ public class LexiconUtility
      * @param natures
      * @return
      */
-    public static bool setAttribute(string word, params string[] natures)
+    public static bool SetAttribute(string word, params string[] natures)
     {
         if (natures == null) return false;
 
@@ -121,7 +121,7 @@ public class LexiconUtility
             natureArray[i] = Nature.create(natures[i]);
         }
 
-        return setAttribute(word, natureArray);
+        return SetAttribute(word, natureArray);
     }
 
 
@@ -131,10 +131,10 @@ public class LexiconUtility
      * @param natureWithFrequency
      * @return
      */
-    public static bool setAttribute(string word, string natureWithFrequency)
+    public static bool SetAttribute(string word, string natureWithFrequency)
     {
         CoreDictionary.Attribute attribute = CoreDictionary.Attribute.create(natureWithFrequency);
-        return setAttribute(word, attribute);
+        return SetAttribute(word, attribute);
     }
 
     /**
@@ -143,7 +143,7 @@ public class LexiconUtility
      * @param customNatureCollector 一个收集集合
      * @return 转换结果
      */
-    public static Nature convertStringToNature(string name, HashSet<Nature> customNatureCollector)
+    public static Nature ConvertStringToNature(string name, HashSet<Nature> customNatureCollector)
     {
         Nature nature = Nature.fromString(name);
         if (nature == null)
@@ -159,8 +159,8 @@ public class LexiconUtility
      * @param name 词性名称
      * @return 转换结果
      */
-    public static Nature convertStringToNature(string name)
+    public static Nature ConvertStringToNature(string name)
     {
-        return convertStringToNature(name, null);
+        return ConvertStringToNature(name, null);
     }
 }

@@ -96,7 +96,7 @@ public class NewWordDiscover
         {
             WordInfo info = listIterator.next();
             if (info.text.Trim().Length < 2 || info.p < min_freq || info.entropy < min_entropy || info.aggregation < min_aggregation
-                || (filter && LexiconUtility.getFrequency(info.text) > 0)
+                || (filter && LexiconUtility.GetFrequency(info.text) > 0)
                 )
             {
                 listIterator.Remove();

@@ -40,7 +40,7 @@ class Word2VecTraining
         return config;
     }
 
-    class TrainModelThread : Thread
+    class TrainModelThread //: Thread
     {
         Word2VecTraining vec;
         Corpus corpus;

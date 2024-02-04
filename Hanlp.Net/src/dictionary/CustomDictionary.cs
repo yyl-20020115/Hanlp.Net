@@ -80,7 +80,7 @@ public class CustomDictionary
                     p = file.getParent() + File.separator + fileName.substring(0, cut);
                     try
                     {
-                        defaultNature = LexiconUtility.convertStringToNature(nature, customNatureCollector);
+                        defaultNature = LexiconUtility.ConvertStringToNature(nature, customNatureCollector);
                     }
                     catch (Exception e)
                     {
@@ -194,7 +194,7 @@ public class CustomDictionary
                     attribute = new CoreDictionary.Attribute(natureCount);
                     for (int i = 0; i < natureCount; ++i)
                     {
-                        attribute.nature[i] = LexiconUtility.convertStringToNature(param[1 + 2 * i], customNatureCollector);
+                        attribute.nature[i] = LexiconUtility.ConvertStringToNature(param[1 + 2 * i], customNatureCollector);
                         attribute.frequency[i] = int.parseInt(param[2 + 2 * i]);
                         attribute.totalFrequency += attribute.frequency[i];
                     }

@@ -66,14 +66,14 @@ public abstract class AbstractClassifier : IClassifier
     {
         IDataSet dataSet = new MemoryDataSet();
         dataSet.Load(folderPath, charsetName);
-        train(dataSet);
+        Train(dataSet);
     }
 
     //@Override
     public void Train(Dictionary<string, string[]> trainingDataSet) 
     {
         IDataSet dataSet = new MemoryDataSet();
-        logger.start("正在构造训练数据集...");
+        logger.Start("正在构造训练数据集...");
         int total = trainingDataSet.Count;
         int cur = 0;
         foreach (KeyValuePair<string, string[]> entry in trainingDataSet)
@@ -87,7 +87,7 @@ public abstract class AbstractClassifier : IClassifier
             ++cur;
             logger.Out("%.2f%%...", MathUtility.percentage(cur, total));
         }
-        logger.finish(" 加载完毕\n");
+        logger.Finish(" 加载完毕\n");
         Train(dataSet);
     }
 

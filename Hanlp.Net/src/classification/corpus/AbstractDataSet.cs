@@ -97,14 +97,14 @@ public abstract class AbstractDataSet : IDataSet
     {
         if (folderPath == null) throw new ArgumentException("参数 folderPath == null");
         string root = (folderPath);
-        if (!root.exists()) throw new ArgumentException(string.Format("目录 %s 不存在", root));
+        if (!Directory.Exists(root)) throw new ArgumentException(string.Format("目录 %s 不存在", root));
         if (!root.isDirectory())
             throw new ArgumentException(string.Format("目录 %s 不是一个目录", root));
         if (percentage > 1.0 || percentage < -1.0) throw new ArgumentException("percentage 的绝对值必须介于[0, 1]之间");
 
         string[] folders = root.listFiles();
         if (folders == null) return null;
-        logger.start("模式:%s\n文本编码:%s\n根目录:%s\n加载中...\n", testingDataSet ? "测试集" : "训练集", charsetName, folderPath);
+        logger.Start("模式:%s\n文本编码:%s\n根目录:%s\n加载中...\n", testingDataSet ? "测试集" : "训练集", charsetName, folderPath);
         foreach (string folder in folders)
         {
             if (folder.isFile()) continue;
@@ -135,7 +135,7 @@ public abstract class AbstractDataSet : IDataSet
             }
             logger.Out(" %d 篇文档\n", e - b);
         }
-        logger.finish(" 加载了 %d 个类目,共 %d 篇文档\n", Catalog.Count, Count);
+        logger.Finish(" 加载了 %d 个类目,共 %d 篇文档\n", Catalog.Count, Count);
         return this;
     }
 

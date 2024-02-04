@@ -21,6 +21,7 @@ namespace com.hankcs.hanlp.classification.corpus;
  */
 public class FileDataSet : AbstractDataSet
 {
+    
     string cache;
     Stream Out;
     int size;
@@ -88,16 +89,16 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public int Count => this.size;
+    public override int Count => this.size;
 
     //@Override
-    public void Clear()
+    public override void Clear()
     {
         size = 0;
     }
 
     //@Override
-    public IDataSet Shrink(int[] idMap)
+    public override IDataSet Shrink(int[] idMap)
     {
         try
         {
@@ -129,7 +130,7 @@ public class FileDataSet : AbstractDataSet
     }
 
     //@Override
-    public IEnumerator<Document> GetEnumerator()
+    public override IEnumerator<Document> GetEnumerator()
     {
         try
         {
@@ -166,7 +167,7 @@ public class FileDataSet : AbstractDataSet
         }
 
         //@Override
-        public Document next()
+        public override Document next()
         {
             try
             {
